@@ -19,7 +19,8 @@ P0 setup ─► P1 core engine ─► P2 QA ─► P3 performance ─► P4 soun
   - The performance layer (`songmap/perform/`) is moved but not wired in yet (P3).
   - `drop`/`stop` currently remove the notes that start inside the span; P4 adds mute masks.
   - Motif transforms and the event types other than impact/riser/zaps/drop/stop are validated and exported to `cues.json`, and render from P3/P4.
-  - Pitch is float MIDI end to end. Chord symbols, keys and `rel:` still assume 12 steps per octave, which P10 needs to lift.
+  - Pitch is float MIDI end to end, and all pitch-class math goes through `songmap/theory/tuning.py` (`steps_per_octave`, 12 for now).
+  - `^`/`v` prefixes are reserved for P10's sixth-step accidentals: the parsers reject them with a message that says so.
 
 ---
 

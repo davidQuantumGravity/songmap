@@ -7,6 +7,7 @@ from dataclasses import dataclass
 
 from ..parse.errors import NotationError
 from .keys import LETTER
+from .tuning import centered, pc_semitones, reject_microtone_prefix
 
 
 QUALITY = {
@@ -23,12 +24,13 @@ _CHORD = re.compile(r"([A-G])([#b]?)(" + "|".join(sorted((q for q in QUALITY if 
 
 def parse_chord(sym: str) -> tuple[int, tuple, int]:
     """'F#m7/C#' -> (root pc, intervals, bass pc)."""
+    reject_microtone_prefix(sym.strip(), "chord")
     m = _CHORD.fullmatch(sym.strip())
     if not m:
         raise NotationError(f"chord '{sym}' not understood; qualities: {', '.join(q or 'maj' for q in QUALITY)}")
     acc = {"#": 1, "b": -1, "": 0}
-    root = (LETTER[m[1].lower()] + acc[m[2]]) % 12
-    bass = (LETTER[m[4].lower()] + acc[m[5]]) % 12 if m[4] else root
+    root = pc_semitones(LETTER[m[1].lower()] + acc[m[2]])
+    bass = pc_semitones(LETTER[m[4].lower()] + acc[m[5]]) if m[4] else root
     return root, QUALITY[m[3] or ""], bass
 
 
@@ -41,7 +43,7 @@ NO_CHORD = ("N.C.", "NC", "N.C")
 @dataclass(frozen=True)
 class Chord:
     symbol: str
-    root: int            # pitch class
+    root: int            # pitch class in semitones (float once microtones exist)
     intervals: tuple
     bass: int            # pitch class (slash chords)
 
@@ -52,7 +54,7 @@ class Chord:
 
     def home_root(self, tonic: int) -> int:
         """Root MIDI note nearest the key's home tonic (within -6..+5 semitones)."""
-        return tonic + (self.root - tonic + 6) % 12 - 6
+        return tonic + centered(self.root - tonic)
 
     def tones(self, tonic: int) -> tuple:
         """Root-position close voicing on the home root."""

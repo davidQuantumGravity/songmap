@@ -82,6 +82,7 @@ class Song:
     tempo: float = 120.0
     meter: tuple[int, int] = (4, 4)
     key: str = "C major"
+    tuning: str = "12edo"         # pitch grid (theory/tuning.py); 36edo arrives with P10
     fps: int = 30
     seed: int = 7
     tail_seconds: float = 3.0

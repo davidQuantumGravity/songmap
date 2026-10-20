@@ -25,6 +25,7 @@ from ..parse.steps import parse_steps
 from ..perform.pipeline import parse_shape, shape_at
 from ..theory.harmony import HarmonyTimeline, build_harmony, parse_progression
 from ..theory.keys import tonic_midi
+from ..theory.tuning import octaves
 from .ensemble import Ensemble
 from .styles import Style, get_style
 from .timeline import SectionSpan, Timeline
@@ -184,7 +185,7 @@ def _resolve_rel(ctx: _Ctx, e: Ev, beat: float, oct_: int) -> tuple | None:
     chord = ctx.harm.chord_at(beat)
     if chord is None:
         return None
-    root = chord.home_root(ctx.tonic) + 12 * oct_
+    root = chord.home_root(ctx.tonic) + octaves(oct_)
     return tuple(rel_to_midi(t, o, chord.intervals, root) for t, o in e.rel)
 
 
@@ -300,7 +301,7 @@ def _hold(ctx, sec, span, role, style, p_oct, patch) -> list[XEv]:
     for h in ctx.harm.changes(span.start, span.end):
         if h.chord is None:
             continue
-        root = h.chord.home_root(ctx.tonic) + 12 * oct_
+        root = h.chord.home_root(ctx.tonic) + octaves(oct_)
         for e in evs:
             pitches = tuple(rel_to_midi(t, o, h.chord.intervals, root) for t, o in e.rel)
             x = _from_ev(role, e, h.start + e.beat, pitches, sec.name, gate=style.get("gate"), patch=patch,
@@ -336,7 +337,7 @@ def _arp(ctx, sec, span, role, style, spec, p_oct, patch) -> list[XEv]:
                 continue
             tones = chord.tones(ctx.tonic)
             idx = int(order[s % len(order)])
-            m = tones[idx % len(tones)] + 12 * (oct_ + idx // len(tones))
+            m = tones[idx % len(tones)] + octaves(oct_ + idx // len(tones))
             pan = float(lfo.get("depth", 0)) * math.sin(s * float(lfo.get("rate", 0)))
             out.append(XEv(role, b, step, (m,), 0.62, length=length, pan=pan, params=dict(params), patch=patch,
                            gain_db=float(style.get("gain_db", 0)), section=sec.name))
@@ -356,7 +357,7 @@ def _motifs(ctx, sec, span, role, refs, p_oct) -> list[XEv]:
                 if span.start - 1e-9 <= b < span.end - 1e-9:
                     pitches = _resolve_rel(ctx, e, b, p_oct)
                     if pitches is not None:
-                        out.append(_from_ev(role, e, b, [p + 12 * p_oct * (not e.rel) for p in pitches], sec.name,
+                        out.append(_from_ev(role, e, b, [p + octaves(p_oct) * (not e.rel) for p in pitches], sec.name,
                                             tags=frozenset(e.tags | {f"motif:{ref}"})))
     else:                              # mixed lengths: play them in order from the section start
         base, k = span.start, 0
@@ -367,7 +368,7 @@ def _motifs(ctx, sec, span, role, refs, p_oct) -> list[XEv]:
                 if b < span.end - 1e-9:
                     pitches = _resolve_rel(ctx, e, b, p_oct)
                     if pitches is not None:
-                        out.append(_from_ev(role, e, b, [p + 12 * p_oct * (not e.rel) for p in pitches], sec.name,
+                        out.append(_from_ev(role, e, b, [p + octaves(p_oct) * (not e.rel) for p in pitches], sec.name,
                                             tags=frozenset(e.tags | {f"motif:{ref}"})))
             base += lens[k % len(mots)]
             k += 1
@@ -389,7 +390,7 @@ def _inline(ctx, sec, span, role, spec, p_oct) -> list[XEv]:
             if b < span.end - 1e-9:
                 pitches = _resolve_rel(ctx, e, b, p_oct)
                 if pitches is not None:
-                    out.append(_from_ev(role, e, b, [p + 12 * p_oct * (not e.rel) for p in pitches], sec.name))
+                    out.append(_from_ev(role, e, b, [p + octaves(p_oct) * (not e.rel) for p in pitches], sec.name))
         base += L
     return out
 

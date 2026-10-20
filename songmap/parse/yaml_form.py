@@ -20,7 +20,7 @@ from .errors import NotationError, SongError, did_you_mean
 from .notes import _DEG_TOK, _PITCH_TOK, _REL_TOK
 
 VERSION = "0.2"
-TOP_KEYS = ("songmap", "title", "tempo", "meter", "key", "fps", "seed", "tail_seconds", "mood", "video",
+TOP_KEYS = ("songmap", "title", "tempo", "meter", "key", "tuning", "fps", "seed", "tail_seconds", "mood", "video",
             "instruments", "groove", "parts_feel", "harmony", "motifs", "sections", "events", "cues", "mix",
             "returns", "master", "qa")
 SECTION_KEYS = ("name", "bars", "parts", "like", "add", "drop", "harmony", "dyn", "feel", "tempo", "key")
@@ -254,6 +254,12 @@ def from_raw(raw: dict, file: str | None = None) -> Song:
         parse_key(s.key)
     except NotationError as e:
         raise SongError(str(e), file=file) from None
+    if "tuning" in raw:
+        from ..theory.tuning import parse_tuning
+        try:
+            s.tuning = parse_tuning(raw["tuning"]).name
+        except ValueError as e:
+            raise SongError(str(e), file=file) from None
     s.fps = int(_num(raw.get("fps", s.fps), "fps", file))
     s.seed = int(raw.get("seed", s.seed))
     s.tail_seconds = _num(raw.get("tail_seconds", s.tail_seconds), "tail_seconds", file, positive=False)

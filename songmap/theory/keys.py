@@ -1,9 +1,11 @@
-"""Keys, modes, scale degrees and letter pitches."""
+"""Keys, modes, scale degrees and letter pitches. Intervals are semitones; pitch-class math goes
+through theory/tuning.py so a finer grid (36edo, P10) does not touch this file."""
 from __future__ import annotations
 
 import re
 
 from ..parse.errors import NotationError
+from .tuning import OCTAVE, centered, octaves, pc_semitones, reject_microtone_prefix
 
 
 LETTER = {"c": 0, "d": 2, "e": 4, "f": 5, "g": 7, "a": 9, "b": 11}
@@ -20,10 +22,11 @@ MODES = {
 
 def parse_key(key: str) -> tuple[int, tuple]:
     """'E minor' | 'Em' | 'D dorian' | 'F#' -> (tonic pitch class, scale intervals)."""
+    reject_microtone_prefix(key.strip(), "key")
     m = re.fullmatch(r"\s*([A-Ga-g])([#b]?)\s*(m(?!aj)|[a-z_]+)?\s*", key)
     if not m:
         raise NotationError(f"key '{key}' not understood; write e.g. 'E minor', 'Em', 'D dorian'")
-    pc = (LETTER[m[1].lower()] + {"#": 1, "b": -1, "": 0}[m[2]]) % 12
+    pc = pc_semitones(LETTER[m[1].lower()] + {"#": 1, "b": -1, "": 0}[m[2]])
     mode = {"m": "minor", None: "major"}.get(m[3], m[3])
     if mode not in MODES:
         raise NotationError(f"unknown mode '{mode}' in key '{key}'; valid: {', '.join(MODES)}")
@@ -33,14 +36,15 @@ def parse_key(key: str) -> tuple[int, tuple]:
 def degree_to_midi(deg: int, key: str, octave: int = 4, alter: int = 0) -> int:
     tonic, scale = parse_key(key)
     o, i = divmod(deg, 7)
-    return 12 * (octave + 1) + tonic + scale[i] + 12 * o + alter
+    return octaves(octave + 1) + tonic + scale[i] + octaves(o) + alter
 
 
 def letter_to_midi(tok: str, octave: int = 4) -> int:
     m = re.fullmatch(r"([a-g])(#|b)?([+-]*)", tok)
     if not m:
         raise NotationError(f"bad pitch '{tok}'")
-    return 12 * (octave + 1) + LETTER[m[1]] + {"#": 1, "b": -1, None: 0}[m[2]] + 12 * (m[3].count("+") - m[3].count("-"))
+    return (octaves(octave + 1) + LETTER[m[1]] + {"#": 1, "b": -1, None: 0}[m[2]]
+            + octaves(m[3].count("+") - m[3].count("-")))
 
 
 def tonic_midi(key: str) -> int:
@@ -50,4 +54,4 @@ def tonic_midi(key: str) -> int:
     `rel:` patterns placed relative to it reproduce the original voicings exactly.
     """
     pc, _ = parse_key(key)
-    return 60 + (pc + 6) % 12 - 6
+    return 5 * OCTAVE + centered(pc)

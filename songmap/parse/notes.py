@@ -27,6 +27,7 @@ import re
 from dataclasses import dataclass, field
 
 from ..theory.keys import LETTER, MODES, degree_to_midi, letter_to_midi, parse_key
+from ..theory.tuning import DEFAULT as TUNING_12, OCTAVE, Tuning, octaves, reject_microtone_prefix
 from .errors import NotationError
 
 
@@ -120,21 +121,23 @@ def rel_degree(tok: str) -> tuple[int, int]:
     return n, alter
 
 
-def rel_to_midi(tok: str, octs: int, intervals: tuple, root_midi: int) -> int:
+def rel_to_midi(tok: str, octs: int, intervals: tuple, root_midi: float, tuning: Tuning = TUNING_12) -> float:
     """Resolve one rel token against a chord: its own 3rd/5th/7th when it has one, else diatonic."""
     n, alter = rel_degree(tok)
-    compound = 12 if n > 7 else 0
+    compound = OCTAVE if n > 7 else 0
     base = n - 7 if n > 7 else n
     if base == 1:
         semis = 0
     elif alter:
         semis = _REL_NATURAL[base] + alter
     else:
-        have = {i % 12 for i in intervals}
-        semis = next((c for c in _REL_CLASS[base] if c in have), None)
+        have = {tuning.pc(i) for i in intervals}
+        semis = next((c for c in _REL_CLASS[base] if tuning.pc(c) in have), None)
+        if semis is not None:     # the chord's own tone, exactly as the chord spells it
+            semis = next(i % OCTAVE for i in intervals if tuning.pc(i) == tuning.pc(semis))
         if semis is None:
-            semis = 10 if base == 7 and 3 in have else _REL_NATURAL[base]
-    return root_midi + semis + compound + 12 * octs
+            semis = 10 if base == 7 and tuning.pc(3) in have else _REL_NATURAL[base]
+    return root_midi + semis + compound + octaves(octs)
 
 
 def parse_motif(text: str, *, deg: bool = False, rel: bool = False, key: str = "C major", octave: int = 4,
@@ -181,6 +184,7 @@ def parse_motif(text: str, *, deg: bool = False, rel: bool = False, key: str = "
         if raw in ("<", ">"):
             ramps.append((len(evs), level, raw))
             continue
+        reject_microtone_prefix(raw, name)
         m = tok_re.match(raw)
         if not m:
             hint = ("rel tokens look like R8, R+, 5/8, b7, [R,3,5]1" if rel else
