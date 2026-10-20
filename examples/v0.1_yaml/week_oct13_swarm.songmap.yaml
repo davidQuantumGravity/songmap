@@ -1,0 +1,42 @@
+# Port of the Video B soundtrack (The Swarm, 2:03) from reference/synth_v0.py
+title: Week of Oct 13 — The Swarm
+tempo: 120
+meter: 4/4
+key: E minor
+fps: 30
+mood: techno
+tail_seconds: 3
+
+harmony:
+  default: [Em, C, G, D]
+  chord_bars: 2
+
+motifs:            # scale degrees in E minor (0 = E)
+  m1: {deg: "0 -3 0 2 | 1/2 0/2"}
+  m2: {deg: "-2 -3 -2 0 | -1/2. -3"}
+  m3: {deg: "2 0 2 4 | 3/2 2/2"}
+  m4: {deg: "1/4. 0/8 -1/2 | -3/1"}
+
+sections:
+  - {name: terminal, bars: 4,  parts: {arp: dark, fx: ticks, bass: sub}}
+  - {name: swarm_in, bars: 4,  parts: {drums: four_floor, bass: eighths, arp: dark, fx: ticks}}
+  - {name: goals,    bars: 8,  parts: {drums: full+fill, bass: eighths, arp: up, pad: warm}}
+  - {name: who,      bars: 2,  parts: {pad: dark, fx: ticks}}
+  - {name: agents,   bars: 16, parts: {drums: full+fill, bass: eighths, arp: up, pad: warm, lead: [m1, m2, m3, m4]}}
+  - {name: so_what,  bars: 2,  parts: {pad: warm, arp: dark, fx: ticks, bass: sub}}
+  - {name: output,   bars: 16, parts: {drums: full+fill+hats16, bass: eighths, arp: up, pad: warm, lead: [m1, m2, m3, m4], fx: ticks}}
+  - {name: guardrails, bars: 4, parts: {pad: warm, arp: dark, bass: sub}}
+  - {name: summary,  bars: 2,  parts: {pad: warm, arp: up}}
+  - {name: end_card, bars: 2,  parts: {pad: dark}}
+
+events:
+  - {at: swarm_in, type: impact}
+  - {at: goals, type: riser, bars: 1}
+  - {at: agents, type: impact}
+  - {at: agents, type: riser, bars: 2}
+  - {at: "agents+8", type: riser, bars: 1}
+  - {at: output, type: impact}
+  - {at: output, type: riser, bars: 2}
+  - {at: "output+8", type: riser, bars: 1}
+  - {at: summary, type: impact}
+  - {at: end_card, type: impact}

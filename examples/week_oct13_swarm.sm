@@ -1,0 +1,22 @@
+# The Swarm (2:03), faithful v0.2 port of the original Oct-13 track. Compact form.
+song "Week of Oct 13 — The Swarm" 120 4/4 Em fps=30 mood=techno tail=3 seed=7 video=WeekSwarm:3690
+inst kick=kick/punchy bass=bass(cutoff=700) arp=pluck pad=pad lead=lead
+groove swing=.5 hum=3,2,.03
+chords Em C G D /2
+motif m1 deg oct=5 "0 -3 0 2 | 1/2 0"
+motif m2 deg oct=5 "-2 -3 -2 0 | -1/2. -3/4"
+motif m3 deg oct=5 "2 0 2 4 | 3/2 2"
+motif m4 deg oct=5 "1/4. 0/8 -1/2 | -3/1"
+# name    bars | parts                                              | events
+terminal    4 | arp:dark fx:ticks bass:sub
+swarm_in    4 | drums:four_floor bass:8ths arp:dark fx:ticks         | !impact
+goals       8 | drums:full+fill bass:8ths arp:up pad:warm             | !riser:1
+who         2 | pad:dark fx:ticks
+agents     16 | like=goals lead:m1,m2,m3,m4                           | !impact !riser:2 !riser:1@+8
+so_what     2 | pad:warm arp:dark fx:ticks bass:sub
+output     16 | like=agents drums:full+fill+hats16 fx:ticks           | !impact !riser:2 !riser:1@+8
+guardrails  4 | pad:warm arp:dark bass:sub
+summary     2 | pad:warm arp:up                                       | !impact
+end_card    2 | pad:dark                                              | !impact
+mix bass -2 sc=.5 | pad -6 sc=.35 hall=.35 | arp -8 hall=.3 | lead -4 hall=.35
+qa lufs=-14 contrast=who<agents:6,so_what<output:6

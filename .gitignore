@@ -1,0 +1,12 @@
+build/
+out/
+*.wav
+!tests/golden/*.wav
+__pycache__/
+.venv/
+node_modules/
+.pytest_cache/
+*.egg-info/
+# large binary sources: recoverable from the weekly_videos folder (see README)
+assets/**/*.mp3
+assets/**/*.mp4
