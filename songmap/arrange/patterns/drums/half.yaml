@@ -1,0 +1,10 @@
+# synth_v0 `halfkick halfsnare hats`: half-time. Kick on 1 and the "and" of 3, snare+clap on 3.
+style: half
+role: drums
+bars: 1
+steps: {kick: "x.........x.....", snare: "........x.......", clap: "........x.......", hat: "-.x.-.x.-.x.-.x."}
+mods:
+  fill: {every: 8, last_bar: {fill: {steps: "........xxxxxxxx", vel: [0.44, 0.50, 0.55, 0.61, 0.65, 0.70, 0.75, 0.79]}}}
+  hats16: {add: {hat16: "--x---x---x---x-"}}
+  open: {set: {hat: "-...-...-...-...", ohat: "..x...x...x...x."}}
+  ghosts: {add: {snare: ".o.....o..o....o"}}

@@ -1,0 +1,4 @@
+instrument: lead
+description: synth_v0 lead - five saws +-20 cents, delayed 7-cent vibrato, 5 kHz low-pass
+tags: [synth_v0]
+params: {voices: 5, detune: 20, cutoff: 5000, res: 0.707, attack: 0.01, decay: 0.15, sustain: 0.75, release: 0.12, vib_rate: 5.5, vib_depth: 7, vib_delay: 0.15, glide: 0.06, breath: 0.0, rr: 0.1}

@@ -1,0 +1,56 @@
+"""Rewrite tests/golden/*.json: the expanded event-list fingerprint of every example song.
+
+    python tools/update_golden.py
+
+Run it only for an intentional change to what the examples play, and commit the new golden
+files in the same commit (ENGINE.md §8). tests/test_golden.py fails loudly otherwise.
+"""
+from __future__ import annotations
+
+import glob
+import json
+import os
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
+
+from songmap.arrange.expand import expand  # noqa: E402
+from songmap.parse import yaml_form  # noqa: E402
+
+GOLDEN = os.path.join(ROOT, "tests", "golden")
+
+
+def songs() -> list[str]:
+    return sorted(glob.glob(os.path.join(ROOT, "examples", "*_yaml", "*.yaml")))
+
+
+def snapshot(path: str) -> dict:
+    arr = expand(yaml_form.load(path))
+    tl = arr.timeline
+    return {
+        "song": os.path.relpath(path, ROOT).replace(os.sep, "/"),
+        "digest": arr.digest(),
+        "counts": dict(sorted(arr.counts().items())),
+        "frames": tl.frames,
+        "sections": {s.name: tl.beat_to_frame(s.start) for s in tl.sections},
+    }
+
+
+def golden_name(path: str) -> str:
+    folder = os.path.basename(os.path.dirname(path)).replace("_yaml", "")
+    return f"{folder}_{os.path.basename(path).split('.')[0]}.json"
+
+
+def main():
+    os.makedirs(GOLDEN, exist_ok=True)
+    for p in songs():
+        out = os.path.join(GOLDEN, golden_name(p))
+        with open(out, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(snapshot(p), f, indent=1)
+            f.write("\n")
+        print("wrote", os.path.relpath(out, ROOT))
+
+
+if __name__ == "__main__":
+    main()

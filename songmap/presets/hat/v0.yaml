@@ -1,0 +1,4 @@
+instrument: hat
+description: synth_v0 closed hat - high-passed noise, 0.1 s
+tags: [synth_v0]
+params: {decay: 0.1, metal: 0.15, hp: 7000, color: 10000, rr: 0.2}

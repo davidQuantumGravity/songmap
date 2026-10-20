@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "songmap-gui",
+      "runtimeExecutable": ".venv/Scripts/songmap.exe",
+      "runtimeArgs": ["gui", "--port", "8765"],
+      "port": 8765
+    }
+  ]
+}

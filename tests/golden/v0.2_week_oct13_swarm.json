@@ -1,0 +1,25 @@
+{
+ "song": "examples/v0.2_yaml/week_oct13_swarm.songmap.yaml",
+ "digest": "fe4ba61ffb894472e838f3a0501f2578bd98453ad79547136968e5697b435283",
+ "counts": {
+  "arp": 896,
+  "bass": 362,
+  "drums": 984,
+  "fx": 238,
+  "lead": 88,
+  "pad": 26
+ },
+ "frames": 3690,
+ "sections": {
+  "terminal": 0,
+  "swarm_in": 240,
+  "goals": 480,
+  "who": 960,
+  "agents": 1080,
+  "so_what": 2040,
+  "output": 2160,
+  "guardrails": 3120,
+  "summary": 3360,
+  "end_card": 3480
+ }
+}

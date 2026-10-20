@@ -1,0 +1,4 @@
+instrument: kick
+description: synth_v0 kick - 155->45 Hz sweep, ~1 s body, raw noise click, tanh drive
+tags: [synth_v0, techno]
+params: {tune: 45, sweep: 21.4, sweep_time: 0.045, decay: 0.99, click: 0.3, click_tone: 3500, drive: 1.6, rr: 0.1}

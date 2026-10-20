@@ -1,0 +1,28 @@
+{
+ "song": "examples/v0.1_yaml/week_oct13_bench.songmap.yaml",
+ "digest": "13cdc217df3ca6c77ae3957b031283e6492d531cd41c055d0ef119413372a1ee",
+ "counts": {
+  "arp": 1072,
+  "bass": 385,
+  "drums": 1184,
+  "fx": 110,
+  "lead": 87,
+  "pad": 37
+ },
+ "frames": 4530,
+ "sections": {
+  "cold_open": 0,
+  "pulser": 240,
+  "chain_test": 420,
+  "problem": 780,
+  "fixes": 960,
+  "dashboard": 1320,
+  "sim_break": 2040,
+  "fields_a": 2160,
+  "fields_b": 2640,
+  "big_break": 3120,
+  "thruster": 3240,
+  "summary": 4200,
+  "end_card": 4320
+ }
+}

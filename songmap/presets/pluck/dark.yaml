@@ -1,0 +1,5 @@
+instrument: pluck
+base: v0
+description: synth_v0 dark arp - the v0 pluck held at 1500 Hz
+tags: [synth_v0, dark]
+params: {cutoff: 1500}

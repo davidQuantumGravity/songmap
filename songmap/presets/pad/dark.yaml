@@ -1,0 +1,5 @@
+instrument: pad
+base: warm
+description: synth_v0 dark pad - the warm pad with the filter at 0.45x (810 Hz)
+tags: [synth_v0, dark]
+params: {cutoff: 810}

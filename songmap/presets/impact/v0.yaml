@@ -1,0 +1,4 @@
+instrument: impact
+description: synth_v0 impact - 100->30 Hz boom, low noise and a long crash, 3 s
+tags: [synth_v0]
+params: {decay: 3.0, boom: 1.0, crash: 0.25}

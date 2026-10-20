@@ -1,0 +1,11 @@
+# synth_v0 `arp`: 16th plucks on the chord tones, brightening over each 8-bar phrase.
+# `order` indexes the chord tones and wraps up an octave (index 3 = root + 12). Songs may override it.
+style: up
+role: arp
+grid: 16
+order: [0, 1, 2, 3, 2, 1, 4, 2]
+oct: 1
+len: 0.4                     # beats: synth_v0 plucks ring 0.2 s, over the next 16th
+pan_lfo: {depth: 0.35, rate: 0.8}       # pan = depth * sin(step * rate)
+brightness_ramp: {over: 8, param: cutoff, from: 2500, to: 5500}   # bars counted from the song start
+preset: pluck/v0

@@ -1,0 +1,4 @@
+instrument: clap
+description: synth_v0 clap - four bursts 11 ms apart, 0.9-6 kHz
+tags: [synth_v0]
+params: {bursts: 4, spread: 0.011, decay: 0.53, center: 2300, q: 0.5, rr: 0.2}

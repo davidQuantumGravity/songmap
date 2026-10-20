@@ -1,0 +1,132 @@
+"""songmap command line.
+
+    songmap check  song.yaml                 parse, validate, expand; prints a summary or precise errors
+    songmap render song.yaml [-o build/x]    song.wav (24-bit), stems/, cues.json, qa.json, render.log
+    songmap migrate old.yaml [-o new.yaml]   rewrite a v0.1 song map as v0.2
+
+Exit codes: 0 ok, 1 song error, 2 usage error.
+"""
+from __future__ import annotations
+
+import argparse
+import os
+import sys
+
+from . import __version__
+from .parse.errors import NotationError, SongError
+
+
+def _load(path: str):
+    ext = os.path.splitext(path)[1].lower()
+    if ext == ".sm":
+        raise SongError("the compact .sm parser arrives in P6", file=path,
+                        suggestion="use the YAML form (examples/v0.2_yaml/) for now")
+    from .parse import yaml_form
+    return yaml_form.load(path)
+
+
+def _summary(arr) -> str:
+    tl, song = arr.timeline, arr.song
+    m, s = divmod(tl.seconds, 60)
+    lines = [f"ok: {song.title}",
+             f"  {len(tl.sections)} sections, {tl.total_bars:g} bars at {song.tempo:g} BPM {song.meter[0]}/{song.meter[1]}, "
+             f"{int(m)}:{s:05.2f} ({tl.frames} frames @ {tl.fps} fps)",
+             f"  parts: " + ", ".join(f"{p} {n}" for p, n in arr.counts().items()),
+             f"  events: {len(arr.events)}   digest {arr.digest()[:16]}"]
+    return "\n".join(lines)
+
+
+def _video_check(arr) -> list[str]:
+    v = arr.song.video or {}
+    if "frames" not in v:
+        return []
+    want, got = int(v["frames"]), arr.timeline.frames
+    if want == got:
+        return []
+    per_bar = arr.timeline.beat_to_frame(arr.timeline.bpb)
+    msg = f"song is {got} frames but video {v.get('composition', '')} is {want} ({got - want:+d})"
+    if abs(got - want) > per_bar:
+        raise SongError(msg, file=arr.song.file, suggestion="check section bars and tail_seconds")
+    return [msg]
+
+
+def cmd_check(args) -> int:
+    from .arrange.expand import expand
+    song = _load(args.song)
+    arr = expand(song)
+    arr.ensemble.check(song.parts())
+    warnings = list(song.warnings) + arr.warnings + _video_check(arr)
+    if song.mood:
+        warnings.append(f"mood '{song.mood}': mood presets arrive in P4; using the default (synth_v0) ensemble")
+    if not arr.timeline.whole_frame_beats():
+        warnings.append(f"60*fps/tempo is not an integer: beats do not land on whole video frames")
+    print(_summary(arr))
+    for w in warnings:
+        print(f"  warning: {w}")
+    return 0
+
+
+def cmd_render(args) -> int:
+    from .render import render, write_outputs
+    song = _load(args.song)
+    out = args.out or os.path.join("build", os.path.splitext(os.path.basename(args.song))[0].split(".")[0])
+    r = render(song, master_mode=args.master, log=print)
+    paths = write_outputs(r, out, stems=not args.no_stems)
+    print(_summary(r.arrangement))
+    for w in list(song.warnings) + r.arrangement.warnings + _video_check(r.arrangement):
+        print(f"  warning: {w}")
+    print(f"wrote {paths['song']}, {paths['cues']}, {paths['qa']}" + (", stems/" if "stems" in paths else ""))
+    return 0
+
+
+def cmd_migrate(args) -> int:
+    from .parse import yaml_form
+    raw = yaml_form.load_raw(args.song)
+    if not yaml_form.is_v01(raw):
+        print(f"{args.song} is already v{raw['songmap']}; nothing to do", file=sys.stderr)
+        return 0
+    new, notes = yaml_form.migrate(raw)
+    text = yaml_form.dump(new, yaml_form.leading_comments(args.song))
+    yaml_form.from_raw(yaml_form.load_raw_text(text), file=args.out or "<migrated>")   # must parse as v0.2
+    if args.out:
+        os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
+        with open(args.out, "w", encoding="utf-8", newline="\n") as f:
+            f.write(text)
+        print(f"wrote {args.out}", file=sys.stderr)
+    else:
+        sys.stdout.write(text)
+    for n in notes:
+        print(f"  {n}", file=sys.stderr)
+    return 0
+
+
+def main(argv=None) -> int:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
+    ap = argparse.ArgumentParser(prog="songmap", description="SongMap: song maps -> audio, stems and frame-accurate cues")
+    ap.add_argument("--version", action="version", version=f"songmap {__version__}")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    p = sub.add_parser("check", help="parse, validate and expand a song map (fast, no audio)")
+    p.add_argument("song")
+    p.set_defaults(fn=cmd_check)
+    p = sub.add_parser("render", help="render song.wav, stems/, cues.json, qa.json")
+    p.add_argument("song")
+    p.add_argument("-o", "--out", help="output folder (default build/<song>)")
+    p.add_argument("--no-stems", action="store_true", help="skip stems/*.wav")
+    p.add_argument("--master", choices=["standard", "legacy"], help="override the song's master")
+    p.set_defaults(fn=cmd_render)
+    p = sub.add_parser("migrate", help="rewrite a v0.1 song map as v0.2")
+    p.add_argument("song")
+    p.add_argument("-o", "--out", help="write here instead of stdout")
+    p.set_defaults(fn=cmd_migrate)
+    args = ap.parse_args(argv)
+    try:
+        return args.fn(args)
+    except (SongError, NotationError) as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

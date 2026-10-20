@@ -10,8 +10,16 @@ P0 setup ─► P1 core engine ─► P2 QA ─► P3 performance ─► P4 soun
 
 **Status (2026-10-20):**
 - Design docs are v0.2.
-- `reference/sketch_v1/` has tested reference code for DSP, 14 instruments, notation, performance, mixing, LUFS and QA (43 tests passing, plus a demo render).
-- No `songmap/` package yet.
+- **P0 and P1 are done.**
+  - The sketch now lives in the `songmap/` package, and its 43 tests run from `tests/`.
+  - The engine parses, expands, renders and exports the three Oct-13 ports (`examples/v0.2_yaml/`).
+  - Those ports match synth_v0 note for note, with frame-exact sections and per-section loudness r = 0.999 against the original audio.
+  - 114 tests pass.
+- **P1 notes for later phases:**
+  - The performance layer (`songmap/perform/`) is moved but not wired in yet (P3).
+  - `drop`/`stop` currently remove the notes that start inside the span; P4 adds mute masks.
+  - Motif transforms and the event types other than impact/riser/zaps/drop/stop are validated and exported to `cues.json`, and render from P3/P4.
+  - Pitch is float MIDI end to end. Chord symbols, keys and `rel:` still assume 12 steps per octave, which P10 needs to lift.
 
 ---
 

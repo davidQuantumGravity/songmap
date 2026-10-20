@@ -101,6 +101,10 @@ All four sit behind the same `Instrument` contract, so a song swaps backends by 
 | 2026-10-20 | Styles are data (patterns/*.yaml); instruments declare a `PARAMS` schema that drives the GUI, validation and LLM context |
 | 2026-10-20 | 48 kHz internal rate (video delivery); numba for per-sample kernels; stable seeds via crc32 |
 | 2026-10-20 | GUI = FastAPI + React/TS front-end over the same engine (no JS DSP) |
+| 2026-10-20 | (P1) Chord register: a chord's root sits nearest the key's home tonic, and the tonic sits nearest middle C. This reproduces every synth_v0 voicing |
+| 2026-10-20 | (P1) The default progression and motif blocks loop from beat 0, not from each section, and a chord that crosses a section boundary is not re-struck. This is what synth_v0 did |
+| 2026-10-20 | (P1) v0.1 songs migrate to `master: legacy` (synth_v0's normalize + tanh), because that master is what rendered them |
+| 2026-10-20 | (P1) The default ensemble is the synth_v0 port. Its levels are calibrated against synth_v0's own voices and stems (`tools/calibrate_v0.py`, `port_check.py --stems`) |
 
 ## 8. Open questions
 

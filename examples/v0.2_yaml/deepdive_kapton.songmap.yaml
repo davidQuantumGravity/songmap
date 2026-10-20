@@ -1,0 +1,57 @@
+# Deep Dive — Inside the 56 Movies (5:03): faithful v0.2 port of the original track (synth_v0 track C, 150 bars).
+# Written by `songmap migrate examples/v0.1_yaml/deepdive_kapton.songmap.yaml`, then given the details
+# synth_v0 played that v0.1 never wrote down (tests/test_port.py checks every note against synth_v0):
+#   - this song's own arp order and darker bass filter (600 Hz);
+#   - open hats (+open) in `coverage`.
+songmap: 0.2
+title: "Deep Dive — Inside the 56 Movies"
+tempo: 120
+meter: "4/4"
+key: "A minor"
+fps: 30
+seed: 7
+mood: documentary
+tail_seconds: 3
+video: {composition: DeepDive, frames: 9090}
+
+instruments:
+  bass: {cutoff: 600}
+
+harmony:
+  default: [Am, F, C, G]
+  chord_bars: 2
+
+motifs:            # scale degrees in A minor (0 = A4)
+  m1: {deg: "4/2 2/2 | 4/4 5 4/2"}
+  m2: {deg: "2/2 0/2 | 2/1"}
+  m3: {deg: "4/2 6/2 | 7/2 6/2"}
+  m4: {deg: "5/2. 4/4 | 1/1"}
+
+x-arp:
+  up: &up {style: up, order: [0, 2, 4, 2, 1, 3, 2, 4]}
+  dark: &dark {style: dark, order: [0, 2, 4, 2, 1, 3, 2, 4]}
+
+sections:
+  - {name: title, bars: 6, parts: {pad: dark, bass: sub}}
+  - {name: setup, bars: 22, parts: {drums: half_kick, pad: warm, arp: *dark, bass: sub}}
+  - {name: movies_a, bars: 38, parts: {drums: four_floor, bass: eighths, pad: warm, arp: *up}}
+  - {name: coverage, bars: 18, like: movies_a, add: {drums: full+open}}
+  - {name: barrier, bars: 22, parts: {drums: half, bass: sub, pad: warm, arp: *dark}}
+  - {name: findings, bars: 16, like: movies_a, add: {drums: full, lead: [m1, m2, m3, m4]}}
+  - {name: limits, bars: 16, like: setup}
+  - {name: next, bars: 8, like: findings}
+  - {name: outro, bars: 4, parts: {pad: dark}}
+
+events:
+  - {at: setup, type: impact}
+  - {at: movies_a, type: impact}
+  - {at: movies_a, type: riser, bars: 2}
+  - {at: coverage, type: riser, bars: 1}
+  - {at: barrier, type: impact}
+  - {at: findings, type: impact}
+  - {at: findings, type: riser, bars: 2}
+  - {at: next, type: impact}
+  - {at: next, type: riser, bars: 2}
+  - {at: outro, type: impact}
+
+master: legacy        # synth_v0's normalize + tanh, for the port check

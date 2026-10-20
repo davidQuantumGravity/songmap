@@ -1,0 +1,8 @@
+# synth_v0 `pad darkpad`: the same chords through a closed filter (cutoff x 0.45).
+style: dark
+role: pad
+hold: chord
+rel: "[R,3,5]"
+oct: 1
+gate: 0.85
+preset: pad/dark

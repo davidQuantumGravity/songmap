@@ -2,8 +2,12 @@
 
 **Status (2026-10-20):**
 - Design v0.2 is complete.
-- **Tested reference code** for the hard parts lives in `reference/sketch_v1/`: band-limited DSP, 14 velocity-sensitive instruments, the note and dynamics language, the performance layer, mixing, BS.1770 loudness and QA. It has 43 tests and a demo render.
-- The `songmap` package itself is next ([ROADMAP.md](ROADMAP.md) P0–P1).
+- **P0 and P1 are done.** The `songmap` package parses YAML song maps (v0.2, and v0.1 with migration), expands them against the harmony timeline with styles-as-data, renders WAV, stems and `cues.json`, and has the `check`, `render` and `migrate` commands.
+- The three Oct-13 tracks are ported in `examples/v0.2_yaml/`:
+  - every note matches the synth_v0 original;
+  - section boundaries are frame-exact against the videos;
+  - per-section loudness correlates 0.999 with the original audio.
+- 114 tests pass, including the 43 moved from the sketch and golden event-list hashes. Next: P2 (QA) and P3 (performance layer).
 
 ## The idea
 
@@ -59,33 +63,40 @@ Drums can be step strings: `"X..x..x.|X.ox.x.r"`.
 
 ```
 Music/
-├── README.md · ROADMAP.md
+├── README.md · ROADMAP.md · pyproject.toml
 ├── docs/                         ← the documents above
+├── songmap/                      ← the engine (layout in docs/ENGINE.md §2)
+│   ├── cli.py  model.py  render.py
+│   ├── parse/                    ← yaml_form (v0.2 + v0.1 migration), notes (letter/deg/rel), steps, positions
+│   ├── theory/                   ← keys, harmony (progressions, harmony timeline), voicing
+│   ├── arrange/                  ← timeline, styles + patterns/*.yaml, expand, events, ensemble + defaults.yaml
+│   ├── instruments/              ← contract, registry, presets loader, dsp/ and 16 instruments
+│   ├── presets/                  ← <instrument>/<name>.yaml (the synth_v0 voices: kick/v0, pad/warm, ...)
+│   ├── perform/  mix/  export/   ← performance layer (wired in P3), mixing/mastering, wav/cues/qa
+├── tests/                        ← pytest; golden/ holds event-list hashes of every example
+├── tools/                        ← port_check, v0_oracle (synth_v0's own notes), calibrate_v0, update_golden, demo
 ├── examples/
-│   ├── week_oct13_swarm.sm       ← faithful v0.2 ports of the original tracks (compact form)
-│   ├── week_oct13_bench.sm
-│   ├── deepdive_kapton.sm
-│   └── v0.1_yaml/                ← the original v0.1 YAML ports
+│   ├── v0.2_yaml/                ← faithful v0.2 ports of the three Oct-13 tracks (render these)
+│   ├── v0.1_yaml/                ← the original v0.1 YAML ports (still load, with a deprecation warning)
+│   └── *.sm                      ← the same ports in compact form (parser arrives in P6)
+├── assets/oct13/                 ← recovered Oct-13 sources: Remotion project, synth.py, original audio (P0)
 └── reference/
-    ├── synth_v0.py               ← the original prototype (made the Oct-13 tracks)
-    └── sketch_v1/                ← tested reference code for the new engine
-        ├── dsp.py  instruments.py  notation.py  perform.py  mix.py
-        ├── demo.py               ← end-to-end render + instrument gallery
-        └── test_sketch.py
+    └── synth_v0.py               ← the original prototype (made the Oct-13 tracks)
 ```
 
-**Source assets** for the Oct-13 videos (rendered MP4s, MP3s, and the Remotion + synth source tarball) are in `C:\Users\chest\Documents\Physics\APEC\Monday Meetings\weekly_videos\`. ROADMAP P0 copies them into `assets/`.
+**Source assets** for the Oct-13 videos (rendered MP4s, MP3s, and the Remotion + synth source tarball) are in `C:\Users\chest\Documents\Physics\APEC\Monday Meetings\weekly_videos\`. P0 copied them into `assets/oct13/`. The MP3s are not committed; the extracted WAVs are git-ignored.
 
-## Try the sketch
+## Try it
 
 ```bash
-cd reference/sketch_v1
-pip install numpy scipy numba pytest
-python -m pytest -q          # 43 tests
-python demo.py               # out/demo.wav (8 bars: drums, bass, pad, guitar, piano) + out/gallery.wav
+python -m venv .venv && .venv/Scripts/pip install -e .[dev,gui]
+songmap check  examples/v0.2_yaml/week_oct13_swarm.songmap.yaml
+songmap render examples/v0.2_yaml/week_oct13_swarm.songmap.yaml -o build/swarm   # ~4 s
+songmap migrate examples/v0.1_yaml/week_oct13_swarm.songmap.yaml                 # v0.1 -> v0.2 on stdout
+python -m pytest -q                       # 114 tests (-m "not port" skips the 30 s render-vs-original checks)
+python tools/port_check.py --stems        # notes vs synth_v0, loudness vs the original audio, per-part levels
+python tools/demo.py                      # out/demo.wav + out/gallery.wav (every instrument at p, mf, ff)
 ```
-
-`out/gallery.wav` plays every instrument at p, mf and ff, so you can hear velocity change the timbre.
 
 **Running the original prototype:**
 
@@ -93,4 +104,4 @@ python demo.py               # out/demo.wav (8 bars: drums, bass, pad, guitar, p
 NBARS=74 python reference/synth_v0.py A
 ```
 
-Use `$env:NBARS=74; python …` in PowerShell. The script's output path is hard-coded; P1 replaces it entirely.
+Use `$env:NBARS=74; python …` in PowerShell. The script's output path is hard-coded. `tools/v0_oracle.py` runs its `build()` with the instruments stubbed out to list every note it plays.

@@ -1,0 +1,7 @@
+# synth_v0 `ticks`: a tick on every beat plus random 16ths (35%), scattered across the stereo field.
+style: ticks
+role: fx
+bars: 1
+steps: {tick: "x...x...x...x..."}
+chance: {tick: {steps: ".xxx.xxx.xxx.xxx", p: 0.35}}
+pan_random: 0.7

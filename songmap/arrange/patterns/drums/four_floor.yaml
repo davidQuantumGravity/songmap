@@ -1,0 +1,12 @@
+# synth_v0 `kick` + `hats`: four-on-the-floor with 8th hats (louder off-beats).
+style: four_floor
+role: drums
+bars: 1
+steps: {kick: "x...x...x...x...", hat: "-.x.-.x.-.x.-.x."}
+mods:
+  # synth_v0 `fill`: on the last bar of every 8 (counted from the song start), a 16th snare roll
+  # from beat 3 that crescendos (gain 0.18 -> 0.46 against the backbeat 0.45).
+  fill: {every: 8, last_bar: {fill: {steps: "........xxxxxxxx", vel: [0.44, 0.50, 0.55, 0.61, 0.65, 0.70, 0.75, 0.79]}}}
+  hats16: {add: {hat16: "--x---x---x---x-"}}          # synth_v0 `hats16` (accent on the 3rd 16th of each beat)
+  open: {set: {hat: "-...-...-...-...", ohat: "..x...x...x...x."}}   # synth_v0 `openhat`: off-beat hats open
+  ghosts: {add: {snare: ".o.....o..o....o"}}

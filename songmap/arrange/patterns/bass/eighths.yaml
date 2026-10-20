@@ -1,0 +1,7 @@
+# synth_v0 `bass`: chord-root 8ths with an octave bounce (root two octaves down, then one).
+style: eighths
+role: bass
+aliases: [8ths]
+rel: "R8 R+ R R+ R R+ R R+"
+oct: -2
+gate: 0.9

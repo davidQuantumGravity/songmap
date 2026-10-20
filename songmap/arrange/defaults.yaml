@@ -1,0 +1,49 @@
+# The default ensemble and mix: a port of synth_v0, the engine that made the Oct-13 tracks.
+# A song's `instruments:`, `mix:` and `returns:` blocks override these per part (kits per piece).
+# Mood presets (P4) will replace this file per song.
+#
+# Levels: synth_v0's per-voice gains converted to dB, then corrected for the difference in
+# level between each synth_v0 voice and the engine instrument that replaces it
+# (tools/calibrate_v0.py prints the corrections).
+
+instruments:
+  drums:
+    kit:
+      kick:  {use: kick/v0, gain_db: 2.1}           # synth_v0 0.95
+      snare: {use: snare/v0, gain_db: 2.3}          # 0.45
+      clap:  {use: clap/v0, gain_db: -6.6}           # 0.35
+      fill:  {use: snare/v0, gain_db: 2.2}          # the fill roll's own velocities carry 0.18 -> 0.46
+      hat:   {use: hat/v0, gain_db: -7.6, pan: 0.25}      # 0.16 off-beats ('x'), 0.10 on-beats ('-')
+      ohat:  {use: hat/v0_open, gain_db: -6.4, pan: 0.25}
+      hat16: {use: hat/v0, gain_db: -10.9, pan: -0.3}      # 0.11 / 0.07
+  bass: {use: bass/v0, gain_db: -4.3}                # 0.32
+  pad:  {use: pad/warm, gain_db: -17.3}              # 0.5 over (notes x 4 saws)
+  arp:  {use: pluck/v0, gain_db: -10.9}              # 0.13
+  lead: {use: lead/v0, gain_db: -18.2}               # 0.16
+  fx:
+    kit:
+      riser:  {use: riser/v0, gain_db: -8.9}         # 0.35
+      impact: {use: impact/v0, gain_db: -3.5}        # 0.75
+      zap:    {use: zap/v0, gain_db: -8.9}           # 0.25
+      tick:   {use: tick/v0, gain_db: -16.5}         # 0.12
+
+# synth_v0 ducked bass, pad, arp and lead on every kick (1 - 0.6 e^(-14 t)) and gave pad, arp,
+# lead and fx a 2.06 s reverb (dry + wet). Part faders hold the in-context corrections
+# (overlapping notes, sidechain, reverb) measured against synth_v0's own stems by
+# `python tools/port_check.py --stems` (median over the sections where the part plays).
+mix:
+  drums: {gain_db: 0}
+  bass:  {gain_db: -1.7, sidechain: {from: kick, depth: 0.6, release: 0.214, attack: 0.0005}}
+  pad:   {gain_db: 1.4, send: {hall: 0.35}, sidechain: {from: kick, depth: 0.6, release: 0.214, attack: 0.0005}}
+  arp:   {gain_db: 2.5, send: {hall: 0.3}, sidechain: {from: kick, depth: 0.6, release: 0.214, attack: 0.0005}}
+  lead:  {gain_db: 1.2, send: {hall: 0.35}, sidechain: {from: kick, depth: 0.6, release: 0.214, attack: 0.0005}}
+  fx:    {gain_db: 0, send: {hall: 0.3}}
+
+returns:
+  hall: {type: reverb, seconds: 2.06, predelay: 0.0, damping: 0.3, early: 0}
+
+# Kit lanes a kit may not define fall back to these pieces.
+kit_fallback: {fill: snare, hat16: hat, ohat: hat, ghost: snare, rim: snare}
+
+# Parts without an instrument entry use the instrument of the same name, or this.
+part_fallback: {keys: keys, piano: keys, gtr: string_pluck, guitar: string_pluck, organ: organ, epiano: epiano}

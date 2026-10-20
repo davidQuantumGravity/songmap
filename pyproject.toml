@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "songmap"
+version = "0.2.0"
+description = "Compact, expressive, LLM-friendly soundtracks for videos: song maps -> audio, MIDI and frame-accurate cues"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["numpy", "scipy", "numba", "pyyaml", "mido", "matplotlib"]
+
+[project.optional-dependencies]
+gui = ["fastapi", "uvicorn"]
+plugin = ["dawdreamer"]
+sampler = ["soundfile"]
+dev = ["pytest"]
+
+[project.scripts]
+songmap = "songmap.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["songmap*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["port: renders the Oct-13 ports and compares them with the original audio (needs assets/oct13, ~30 s)"]

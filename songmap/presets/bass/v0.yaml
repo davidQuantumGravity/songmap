@@ -1,0 +1,4 @@
+instrument: bass
+description: synth_v0 bass - saw + sub sine, static 2-pole low-pass, tanh drive
+tags: [synth_v0, techno]
+params: {saw: 1.0, square: 0.0, sub: 0.8, cutoff: 900, res: 0.707, env_amt: 0.0, attack: 0.004, decay: 0.12, sustain: 0.7, release: 0.04, drive: 1.4, glide: 0.0, rr: 0.1}

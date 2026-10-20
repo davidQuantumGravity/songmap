@@ -1,0 +1,24 @@
+{
+ "song": "examples/v0.1_yaml/deepdive_kapton.songmap.yaml",
+ "digest": "563370a70e67c6e93291b9c7672faa3f9e917f5c7cdf2440fcec44dd63ddba03",
+ "counts": {
+  "arp": 2240,
+  "bass": 706,
+  "drums": 1772,
+  "fx": 10,
+  "lead": 45,
+  "pad": 75
+ },
+ "frames": 9090,
+ "sections": {
+  "title": 0,
+  "setup": 360,
+  "movies_a": 1680,
+  "coverage": 3960,
+  "barrier": 5040,
+  "findings": 6360,
+  "limits": 7320,
+  "next": 8280,
+  "outro": 8760
+ }
+}

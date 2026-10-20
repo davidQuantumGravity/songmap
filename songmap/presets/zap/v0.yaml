@@ -1,0 +1,4 @@
+instrument: zap
+description: synth_v0 zap - square chirp from f0 down to 80 Hz
+tags: [synth_v0]
+params: {f0: 2400, floor: 80, sweep: 14, length: 0.35, t60: 0.77, cutoff: 6000}

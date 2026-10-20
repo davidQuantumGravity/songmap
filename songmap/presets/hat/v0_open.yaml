@@ -1,0 +1,5 @@
+instrument: hat
+base: v0
+description: synth_v0 open hat - the same noise left ringing
+tags: [synth_v0]
+params: {decay: 0.4}

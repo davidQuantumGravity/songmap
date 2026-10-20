@@ -2,17 +2,21 @@
 
 ## 1. Status of the code
 
-| Piece | Where now | Tested | Moves to (Phase) |
-|---|---|---|---|
-| Band-limited oscillators, SVF with per-sample cutoff, envelopes, EQ, drive, Karplus-Strong, modal bank, ping-pong delay | [reference/sketch_v1/dsp.py](../reference/sketch_v1/dsp.py) | ✅ aliasing, KS pitch at 4 notes, SVF sweep | `songmap/dsp/` (P1) |
-| `Param`/`Note`/`Instrument` contract, registry, `describe()`, 14 instruments | [instruments.py](../reference/sketch_v1/instruments.py) | ✅ every instrument renders; velocity→timbre for 9; schema is JSON; bad param name → suggestion | `songmap/instruments/` (P1) |
-| Motif language, step strings, chords, keys, bar checks | [notation.py](../reference/sketch_v1/notation.py) | ✅ sticky durations, marks, ghosts, hairpins, deg mode, bar-check error text | `songmap/parse/notes.py` (P1) |
-| Performance pipeline, groove templates, voice leading | [perform.py](../reference/sketch_v1/perform.py) | ✅ seeded, crescendo shaping, swing, smooth C→F | `songmap/perform/` (P3) |
-| Buses, reverb IR, compressor, sidechain, limiter, BS.1770 LUFS, true peak, master, QA | [mix.py](../reference/sketch_v1/mix.py) | ✅ EBU 3341 case 1 (−23.0 LUFS), limiter ceiling, master hits −14 | `songmap/mix/`, `songmap/export/qa.py` (P2/P4) |
-| End-to-end 8-bar render + instrument gallery | [demo.py](../reference/sketch_v1/demo.py) | renders 23 s in about 5.7 s; bit-identical across runs | becomes `songmap/render.py` (P1) |
-| Original prototype | [reference/synth_v0.py](../reference/synth_v0.py) | — | reference only |
+The sketch (`reference/sketch_v1/`) was moved into the package in P1, definition by definition, and its 43 tests into `tests/`. `tools/demo.py` still renders the same `demo.wav`, bit for bit.
 
-Run `cd reference/sketch_v1 && python -m pytest -q` (43 tests) and `python demo.py` (writes `out/demo.wav` and `out/gallery.wav`).
+| Piece | Where now | Tested |
+|---|---|---|
+| Band-limited oscillators, SVF with per-sample cutoff, envelopes, EQ, drive, Karplus-Strong, modal bank, ping-pong delay | `songmap/instruments/dsp/` (core, osc, env, filters, physical, fx) | ✅ aliasing, KS pitch at 4 notes, SVF sweep |
+| `Param`/`Note`/`Instrument` contract, registry, `describe()`, presets, 16 instruments (+ `zap`, `tick` from synth_v0) | `songmap/instruments/` (base, presets, drums/ bass/ synth/ strings/ keys/ fx/) | ✅ every instrument renders; velocity→timbre for 9; schema is JSON; bad param name → suggestion |
+| Note language (letter, deg and chord-relative `rel:` modes), step strings, keys, chord symbols | `songmap/parse/notes.py`, `steps.py`, `songmap/theory/keys.py`, `harmony.py` | ✅ sticky durations, marks, ghosts, hairpins, deg and rel modes, bar-check error text |
+| Positions, tempo map, progressions + harmony timeline | `songmap/parse/positions.py`, `songmap/arrange/timeline.py`, `songmap/theory/harmony.py` | ✅ all position forms, frame snapping, synth_v0 chord registers |
+| YAML parser with v0.1 migration; styles as data; expansion; events; ensemble defaults | `songmap/parse/yaml_form.py`, `songmap/arrange/` | ✅ inheritance, errors with line + suggestion, every style, golden hashes |
+| Performance pipeline, groove templates, voice leading | `songmap/perform/`, `songmap/theory/voicing.py` | ✅ seeded, crescendo shaping, swing, smooth C→F (wired into render in P3) |
+| Buses, reverb IR, compressor, sidechain, limiter, BS.1770 LUFS, true peak, master + synth_v0's legacy master, QA | `songmap/mix/`, `songmap/export/qa.py` | ✅ EBU 3341 case 1 (−23.0 LUFS), limiter ceiling, master hits −14 |
+| Render, 24-bit WAV, stems, `cues.json` (+ validator), CLI | `songmap/render.py`, `songmap/export/`, `songmap/cli.py` | ✅ deterministic renders, cues validation, CLI |
+| Original prototype | [reference/synth_v0.py](../reference/synth_v0.py) | the port check runs it as an oracle (`tools/v0_oracle.py`) |
+
+Run `python -m pytest -q` (114 tests) and `python tools/port_check.py --stems`.
 
 **Lessons from building the sketch** (now design rules):
 - Seeds must come from a **stable hash** (`zlib.crc32` of names). Python's `hash()` is randomized per process, and an early demo was not reproducible because of it.

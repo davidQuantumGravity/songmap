@@ -1,0 +1,8 @@
+# synth_v0 `subbass`: one long, dark chord root per bar.
+style: sub
+role: bass
+rel: "R1"
+oct: -2
+gate: 0.98
+preset: bass/sub          # applies only its own params (cutoff 300)
+gain_db: 0.8              # synth_v0 played the sub at 0.35 vs 0.32 for the 8ths

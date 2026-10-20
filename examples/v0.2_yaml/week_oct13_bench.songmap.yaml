@@ -1,0 +1,63 @@
+# Bench / Fields / Thruster (2:31): faithful v0.2 port of the original Oct-13 track (synth_v0 track A, 74 bars).
+# Written by `songmap migrate examples/v0.1_yaml/week_oct13_bench.songmap.yaml`, then given the details
+# synth_v0 played that v0.1 never wrote down (tests/test_port.py checks every note against synth_v0):
+#   - the melody sits in octave 5 (deg 0 = D5);
+#   - open hats (+open) under the lead sections;
+#   - bars 0-1 are pad and sub only: the ticks and dark arp enter at bar 2 with the zaps.
+songmap: 0.2
+title: "Week of Oct 13 — Bench / Fields / Thruster"
+tempo: 120
+meter: "4/4"
+key: "D minor"
+fps: 30
+seed: 7
+mood: cinematic
+tail_seconds: 3
+video: {composition: WeekBench, frames: 4530}
+
+harmony:
+  default: [Dm, Bb, F, C]
+  chord_bars: 2
+
+motifs:
+  m1: {deg: "4/4. 3/8 2/4 4 | 7/2 6/4 4", octave: 5}
+  m2: {deg: "3/4. 2/8 1/4 3 | 5/2. 4/4", octave: 5}
+  m3: {deg: "2 4 6 7 | 9/2 7/4 6", octave: 5}
+  m4: {deg: "6/4. 5/8 4/2 | 6 4", octave: 5}
+
+sections:
+  - {name: cold_open, bars: 4, parts: {pad: dark, bass: sub, fx: ticks, arp: dark}}
+  - {name: pulser, bars: 3, parts: {drums: full, bass: eighths, pad: warm, arp: up}}
+  - {name: chain_test, bars: 6, parts: {drums: half, bass: sub, pad: warm, arp: dark}}
+  - {name: problem, bars: 3, parts: {pad: dark, bass: sub, fx: ticks}}
+  - {name: fixes, bars: 6, parts: {drums: full+fill, bass: eighths, pad: warm, arp: up}}
+  - {name: dashboard, bars: 12, like: fixes, add: {drums: full+fill+open, lead: [m1, m2, m3, m4]}}
+  - {name: sim_break, bars: 2, parts: {pad: warm, arp: dark, fx: ticks}}
+  - {name: fields_a, bars: 8, like: chain_test}
+  - {name: fields_b, bars: 8, like: fixes}
+  - {name: big_break, bars: 2, like: problem}
+  - {name: thruster, bars: 16, like: dashboard, add: {drums: full+fill+hats16+open}}
+  - {name: summary, bars: 2, parts: {pad: warm, arp: up, bass: sub}}
+  - {name: end_card, bars: 2, parts: {pad: dark}}
+
+events:
+  - {at: 0, type: drop, bars: 2, keep: [pad, bass]}
+  - {at: 2, type: zaps, count: 6}
+  - {at: pulser, type: impact}
+  - {at: pulser, type: riser, bars: 2}
+  - {at: chain_test, type: zaps, count: 4}
+  - {at: problem, type: impact}
+  - {at: problem, type: zaps, count: 6}
+  - {at: fixes, type: impact}
+  - {at: fixes, type: riser, bars: 2}
+  - {at: dashboard, type: riser, bars: 1}
+  - {at: fields_a, type: impact}
+  - {at: fields_a, type: riser, bars: 2}
+  - {at: fields_b, type: riser, bars: 1}
+  - {at: thruster, type: impact}
+  - {at: thruster, type: riser, bars: 2}
+  - {at: thruster+8, type: riser, bars: 1}
+  - {at: summary, type: impact}
+  - {at: end_card, type: impact}
+
+master: legacy        # synth_v0's normalize + tanh, for the port check

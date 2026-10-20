@@ -1,0 +1,9 @@
+# synth_v0 `arpdark`: the same figure with the filter held closed.
+style: dark
+role: arp
+grid: 16
+order: [0, 1, 2, 3, 2, 1, 4, 2]
+oct: 1
+len: 0.4
+pan_lfo: {depth: 0.35, rate: 0.8}
+preset: pluck/dark

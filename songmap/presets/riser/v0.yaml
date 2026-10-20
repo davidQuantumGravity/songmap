@@ -1,0 +1,4 @@
+instrument: riser
+description: synth_v0 riser - band-passed noise sweeping 300 Hz -> 9.3 kHz over a rising sine
+tags: [synth_v0]
+params: {start: 300, end: 9300, tone: 0.25, curve: 2.2}

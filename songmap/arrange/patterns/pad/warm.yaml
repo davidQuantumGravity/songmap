@@ -1,0 +1,9 @@
+# synth_v0 `pad`: a root-position triad an octave above the home register, struck on each
+# chord change and held for the whole chord (a section that starts mid-chord lets it ring on).
+style: warm
+role: pad
+hold: chord
+rel: "[R,3,5]"
+oct: 1
+gate: 0.85
+preset: pad/warm

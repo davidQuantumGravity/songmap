@@ -1,0 +1,4 @@
+instrument: pad
+description: synth_v0 pad - four detuned saws per note through an 1800 Hz low-pass, slow swell
+tags: [synth_v0, warm]
+params: {voices: 4, detune: 14, drift: 0, cutoff: 1800, res: 0.707, lfo_depth: 0, attack: 0.35, decay: 0.3, sustain: 0.85, release: 0.6, width: 0.5, vel_cutoff: 0.5, rr: 0.1}

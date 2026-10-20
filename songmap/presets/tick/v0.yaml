@@ -1,0 +1,4 @@
+instrument: tick
+description: synth_v0 tick - 3.2 kHz sine ping, 30 ms
+tags: [synth_v0]
+params: {tone: 3200, t60: 0.031, length: 0.03}

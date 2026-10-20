@@ -1,0 +1,5 @@
+instrument: bass
+base: v0
+description: synth_v0 sub bass - the v0 bass with the filter nearly closed
+tags: [synth_v0, sub]
+params: {cutoff: 300}
