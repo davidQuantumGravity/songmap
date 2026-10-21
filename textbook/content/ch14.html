@@ -1,0 +1,312 @@
+<section id="four-part">
+<h2>Four-part writing</h2>
+<div class="layer hear">
+<p>A chord progression is usually heard as a series of chords. But each chord is played or sung by several voices,
+and each voice has its own path from chord to chord. <b>Voice leading</b> is the art of those paths. Listen to a
+six-chord progression in four parts: first the lowest voice alone, then the highest, then all four together.</p>
+<audio-ex src="hymn_voices" caption="The bass alone (it leaps by thirds and fourths), the soprano alone (it holds, steps and makes one small skip), then all four voices."></audio-ex>
+<p>On its own the bass sounds like a series of strong leaps, the skeleton of the harmony. The soprano sounds like a
+small melody: E, E, F, F, D, C. The inner voices barely move. Together they make a smooth, singing whole in which you
+can still follow any single line if you try.</p>
+</div>
+<div class="layer understand">
+<p><b>Four-part writing</b> (often called SATB, for soprano, alto, tenor, bass) is the classic laboratory for voice
+leading. Its model is the chorale harmonization of the Baroque, above all J. S. Bach's several hundred four-part
+chorales, which were collected and published after his death. The conventions taught in harmony courses are a
+distillation of that style, and they are worth learning even for music that ignores them, because they make the
+forces between voices audible.</p>
+<p>The progression above is I–vi–IV–ii–V–I in C major (C, Am, F, Dm, G, C):</p>
+<table>
+<tr><th>Voice</th><th>I</th><th>vi</th><th>IV</th><th>ii</th><th>V</th><th>I</th><th>Motion</th></tr>
+<tr><td>Soprano</td><td>E5</td><td>E5</td><td>F5</td><td>F5</td><td>D5</td><td>C5</td><td>holds, steps and one skip (F → D); ends 2 → 1</td></tr>
+<tr><td>Alto</td><td>G4</td><td>A4</td><td>A4</td><td>A4</td><td>G4</td><td>E4</td><td>steps, one skip</td></tr>
+<tr><td>Tenor</td><td>C4</td><td>C4</td><td>C4</td><td>D4</td><td>B3</td><td>C4</td><td>common tone C, leading tone B → C</td></tr>
+<tr><td>Bass</td><td>C3</td><td>A2</td><td>F2</td><td>D2</td><td>G2</td><td>C3</td><td>roots: falling thirds, then up a fourth twice</td></tr>
+</table>
+<pianoroll edo="12" notes="C3 C4 G4 E5 ; A2 C4 A4 E5 ; F2 C4 A4 F5 ; D2 D4 A4 F5 ; G2 B3 G4 D5 ; C3 C4 E4 C5" labels="I ; vi ; IV ; ii ; V ; I" title="The hymn in four parts"></pianoroll>
+<p>The conventions at work here:</p>
+<ul>
+<li><b>Ranges.</b> Each part stays in a singable range. Textbooks give slightly different limits; roughly, soprano
+C4–G5, alto G3–D5, tenor C3–G4, bass E2–C4.</li>
+<li><b>Spacing.</b> Adjacent upper voices (soprano–alto, alto–tenor) stay within an octave of each other. The bass
+may be farther from the tenor. Wide gaps between upper voices thin the sound.</li>
+<li><b>Doubling.</b> A triad has three notes and four voices, so one note is doubled. In root position the root is
+the usual choice (C in the first chord, A in the second). The leading tone is not doubled, because it has a single
+strong destination, and two voices going there would move in octaves.</li>
+<li><b>Common tones and steps.</b> A note shared by two chords is usually kept in the same voice (the tenor's C over
+the first three chords). Other voices move to the nearest available note.</li>
+<li><b>The bass is different.</b> It carries the roots or the inversions, and it may leap; the upper voices move
+little. This division of labour is why the progression sounds both strong and smooth.</li>
+</ul>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> A <b>voicing</b> of a chord in $v$ voices is an ordered tuple of pitches
+$X = (x_1, \dots, x_v)$ with $x_1 \le x_2 \le \dots \le x_v$ (bass first). A <b>voice leading</b> from $X$ to $Y$
+assigns each voice of $X$ a note of $Y$; in four-part writing it is simply the pair $(X, Y)$ read voice by voice,
+with displacement vector $Y - X$.</p>
+<p>For the progression above the displacement vectors (bass, tenor, alto, soprano, in semitones) are</p>
+$$(-3, 0, +2, 0),\ (-4, 0, 0, +1),\ (-3, +2, 0, 0),\ (+5, -3, -2, -3),\ (+5, +1, -3, -2).$$
+<p>The upper three voices move by at most 3 semitones at every change, and in total 19 semitones over five changes;
+the bass alone moves 20.</p>
+</div>
+</section>
+
+<section id="rules">
+<h2>The classical rules and their reasons</h2>
+<div class="layer hear">
+<p>The most famous rule of voice leading forbids <b>parallel fifths and octaves</b>: two voices a fifth (or an
+octave) apart should not both move to another fifth (or octave). Listen to I–IV–V–I twice. The first time the voices
+move independently. The second time each chord is simply the previous one shifted bodily, so pairs of voices travel
+in fifths and octaves together.</p>
+<audio-ex src="parallels" caption="Independent voices, then parallel root-position blocks: the second version sounds fuller but hollower, as if fewer voices were playing."></audio-ex>
+<pianoroll edo="12" notes="C3 G3 E4 C5 ; F2 A3 F4 C5 ; G2 G3 D4 B4 ; C3 G3 E4 C5 ; C3 G3 C4 E4 ; F3 C4 F4 A4 ; G3 D4 G4 B4 ; C4 G4 C5 E5" labels="I ; IV ; V ; I ; I (block) ; IV ; V ; I" title="Independent voices, then parallel blocks"></pianoroll>
+<p>The block version is not ugly. It is the sound of a lot of rock guitar and of medieval organum. But the four
+voices stop sounding like four people. Now listen to one melody with a second voice added in four different ways.</p>
+<audio-ex src="fusion" caption="The melody with parallel octaves, parallel fifths, parallel thirds, and a contrary-motion line. The octaves and fifths nearly melt into the melody; the thirds and the contrary line stay separate."></audio-ex>
+<p>With octaves the second voice almost disappears: it sounds like a change of tone colour. With fifths it is
+audible but fused, like an organ stop. With thirds you hear two voices in a duet. With contrary motion you hear two
+independent lines.</p>
+</div>
+<div class="layer understand">
+<p>The traditional rules for common-practice part writing can be grouped by what they protect.</p>
+<table>
+<tr><th>Rule</th><th>What it protects</th></tr>
+<tr><td>No parallel fifths or octaves (or unisons) between any two voices</td><td>independence of voices</td></tr>
+<tr><td>No "hidden" (direct) fifths or octaves between the outer voices, unless the soprano moves by step</td><td>independence of the two most audible voices</td></tr>
+<tr><td>Avoid voice crossing and overlap</td><td>each voice stays its own stream</td></tr>
+<tr><td>Prefer steps and common tones; avoid augmented intervals in a line</td><td>each line is easy to follow and sing</td></tr>
+<tr><td>Resolve the leading tone up and a chordal seventh down</td><td>tendency tones reach their goals (<a href="ch:ch12#why-resolve">Chapter 12</a>)</td></tr>
+<tr><td>Double the root of a root-position triad, not the leading tone</td><td>balance, and avoiding octaves at resolutions</td></tr>
+</table>
+<p>A <b>hidden</b> (or direct) fifth or octave is reached by similar motion: both voices move in the same direction
+into a perfect interval, without having been in one before. The first version of the example ends with one: bass
+G2 → C3 up and soprano B4 → C5 up, arriving at an octave. It is allowed by the usual rule because the soprano moves by
+a half step.</p>
+<p><b>Why these rules?</b> Most of them follow from how the auditory system groups sounds, as David Huron argued in
+"Tone and voice: a derivation of the rules of voice-leading from perceptual principles" (2001). The central ideas:</p>
+<ul>
+<li><b>Tonal fusion.</b> Two tones an octave apart, and to a lesser degree a fifth apart, tend to be heard as one
+richer tone. Carl Stumpf studied this "fusion" (<i>Verschmelzung</i>) in the late nineteenth century and found the
+octave fuses most, then the fifth, then the fourth, then thirds and sixths. The derive layer shows the acoustic
+reason. A single perfect interval between two voices is fine; it is <i>staying</i> fused that merges them.</li>
+<li><b>Co-modulation.</b> Sounds that change together are grouped together. Two voices moving in the same direction
+by the same amount, in parallel, are a strong cue that they belong to one source. Parallel motion in a fusing
+interval is the strongest merging cue of all, which is exactly what the rule forbids.</li>
+<li><b>Pitch proximity.</b> A voice that moves by step stays one stream (<a href="ch:ch13#steps-leaps">Chapter 13</a>).
+Crossing voices invites the ear to follow pitch instead of voice, and to swap the lines.</li>
+</ul>
+<p>So the rules are not laws of nature. They are what you do <i>if</i> you want several independent voices. When a
+style wants fused, thickened lines, it does the opposite. Early medieval <b>organum</b> (9th–10th centuries) sang a
+chant melody with a second voice in parallel fourths or fifths. Organ <b>mixture</b> stops add several ranks of pipes
+sounding octaves and fifths (such as the twelfth and the fifteenth) above every note, so that whole chords move in parallel fifths and octaves and fuse into one
+bright timbre (<a href="ch:ch17#blend">Chapter 17</a>). Debussy's parallel chords and the guitar "power chord" are
+other examples.</p>
+<aside class="box history"><b>The textbook rules.</b> Prohibitions of parallel perfect consonances are found in
+counterpoint treatises from the late Middle Ages onward and were codified in Johann Joseph Fux's <i>Gradus ad
+Parnassum</i> (1725), discussed in <a href="ch:ch15#species">Chapter 15</a>. They describe a style (roughly 1500–1900
+choral and keyboard writing), not every music.</aside>
+</div>
+<div class="layer derive">
+<p><b>Theorem (coinciding partials).</b> Let two tones have ideal harmonic spectra, with partials at
+$f, 2f, 3f, \dots$ and $g, 2g, 3g, \dots$, and let $g/f = p/q$ in lowest terms. Then the $n$-th partial of the upper
+tone coincides with a partial of the lower tone if and only if $q$ divides $n$. So, in the long run, a fraction
+$1/q$ of the upper tone's partials coincide with the lower tone's.</p>
+<p><i>Proof.</i> $n g = n (p/q) f$ is an integer multiple of $f$ exactly when $q \mid np$; since $\gcd(p, q) = 1$, this
+holds exactly when $q \mid n$. ∎</p>
+<table>
+<tr><th>Interval</th><th>Ratio</th><th>Fraction of upper partials that coincide</th></tr>
+<tr><td>octave</td><td>2/1</td><td>1 (all of them)</td></tr>
+<tr><td>twelfth (octave + fifth)</td><td>3/1</td><td>1</td></tr>
+<tr><td>fifth</td><td>3/2</td><td>1/2</td></tr>
+<tr><td>fourth</td><td>4/3</td><td>1/3</td></tr>
+<tr><td>major sixth</td><td>5/3</td><td>1/3</td></tr>
+<tr><td>major third</td><td>5/4</td><td>1/4</td></tr>
+<tr><td>minor third</td><td>6/5</td><td>1/5</td></tr>
+</table>
+<p>The upper tone of an octave adds no new partial frequencies at all; it only reinforces the even partials of the
+lower tone. That is the acoustic core of fusion, and the ordering octave, fifth, fourth, thirds matches Stumpf's.
+(In 12-ET the ratios are approximate, so "coincide" means "lie within a few cents", close enough to fuse; the
+perceptual strength of fusion is a measurement, not a theorem.)</p>
+<p><b>Detecting parallels.</b> For voices $i &lt; j$ with pitches $x_i, x_j$ moving to $y_i, y_j$, the pair moves in
+parallel perfect intervals when $(x_j - x_i) \bmod 12 = (y_j - y_i) \bmod 12 \in \{0, 7\}$ and $y_i - x_i$ and
+$y_j - x_j$ are nonzero with the same sign. A script applying this test to all six voice pairs finds none in the
+hymn and in the first version of the I–IV–V–I example, and six in the block version (bass–tenor fifths and
+bass–alto octaves at each of its three changes).</p>
+</div>
+</section>
+
+<section id="distance">
+<h2>Smoothness as distance</h2>
+<div class="layer hear">
+<p>What makes voice leading smooth? Mostly, that voices move as little as possible. Listen to the same six chords
+twice in three voices. The first time each chord is played in root position in whatever register it lands. The second
+time each voice moves to the nearest note of the next chord.</p>
+<audio-ex src="smooth_jumpy" caption="C Am F Dm G C as jumping root-position blocks, then with each voice moving to the nearest chord tone."></audio-ex>
+<p>The jumpy version is a list of chords. The smooth version is a texture: you hear three lines gently rising and
+falling, and the chords seem to grow out of each other.</p>
+</div>
+<div class="layer understand">
+<p>We can measure smoothness by adding up how far the voices move. In the jumpy version (C4 E4 G4, A4 C5 E5,
+F3 A3 C4, D4 F4 A4, G3 B3 D4, C5 E5 G5), the voices move 26, 47, 26, 20 and 51 semitones: <b>170</b> in all. In the
+smooth version (G3 C4 E4, A3 C4 E4, A3 C4 F4, A3 D4 F4, B3 D4 G4, C4 E4 G4), they move 2, 1, 2, 4 and 3 semitones:
+<b>12</b> in all.</p>
+<pianoroll edo="12" notes="C4 E4 G4 ; A4 C5 E5 ; F3 A3 C4 ; D4 F4 A4 ; G3 B3 D4 ; C5 E5 G5" labels="C ; Am ; F ; Dm ; G ; C" title="Jumpy: 170 semitones of motion"></pianoroll>
+<pianoroll edo="12" notes="G3 C4 E4 ; A3 C4 E4 ; A3 C4 F4 ; A3 D4 F4 ; B3 D4 G4 ; C4 E4 G4" labels="C ; Am ; F ; Dm ; G ; C" title="Smooth: 12 semitones of motion"></pianoroll>
+<p>The smooth version is in fact the best possible: no voice leading between these chords can do better at any
+step. This kind of measurement gives a precise sense of which chords are "close". From a C major triad, the
+smallest total motion (in pitch classes, so octaves don't count) to each major and minor triad is:</p>
+<table>
+<tr><th>Semitones moved</th><th>Triads</th></tr>
+<tr><td>0</td><td>C</td></tr>
+<tr><td>1</td><td>Cm, Em</td></tr>
+<tr><td>2</td><td>A♭, Am, C♯m, E, Fm</td></tr>
+<tr><td>3</td><td>A, A♭m, B, C♯, E♭, F, G</td></tr>
+<tr><td>4</td><td>Bm, E♭m, Gm</td></tr>
+<tr><td>5</td><td>B♭m, Dm, F♯m</td></tr>
+<tr><td>6</td><td>B♭, D, F♯</td></tr>
+</table>
+<p>Some results are surprising. The dominant G and subdominant F are 3 semitones away, while the chromatic mediants
+A♭ and E are only 2 (C E G → C E♭ A♭ moves E down and G up, a half step each). The parallel minor Cm and the mediant Em
+are a single semitone away: these are the neo-Riemannian moves P and L of <a href="ch:ch10#neo-riemannian">Chapter
+10</a>. Voice-leading distance and harmonic function are different things. Function says where a chord wants to go;
+distance says how cheaply the voices can get there. Much of the expressive power of Romantic harmony comes from
+chords that are functionally far but close in voice leading (<a href="ch:ch18#parsimony">Chapter 18</a>).</p>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> For chords $X = (x_1, \dots, x_n)$ and $Y$ with the same number of notes, a voice leading is a
+bijection $\sigma$ from the notes of $X$ to the notes of $Y$, and its <b>size</b> is a norm of the displacement
+vector. Common choices:</p>
+$$\|d\|_1 = \sum_i |d_i| \ \text{(total motion)},\qquad \|d\|_2 = \Big(\sum_i d_i^2\Big)^{1/2},\qquad \|d\|_\infty = \max_i |d_i|\ \text{(largest move)}.$$
+<p>In pitch-class space, each $d_i$ is taken as the shortest signed distance mod 12, in $[-6, 6]$. The
+<b>voice-leading distance</b> $D(X, Y)$ is the minimum size over all bijections. For triads there are $3! = 6$
+bijections, so $D$ is computed by checking them all.</p>
+<p><b>Example.</b> $D_1(\mathrm{C}, \mathrm{A}\flat) = 2$, realized by C → C, E → E♭, G → A♭, displacement
+$(0, -1, +1)$. $D_1(\mathrm{C}, \mathrm{F}) = 3$: C → C, E → F, G → A, displacement $(0, +1, +2)$. The table above
+lists $D_1$ from C major to all 24 major and minor triads (exhaustive computation).</p>
+<p><b>Optimality of the smooth example.</b> The minimal $D_1$ for C → Am → F → Dm → G → C is $(2, 1, 2, 4, 3)$, and the
+smooth voicing achieves exactly these values at every step, so its total, 12, is the minimum.</p>
+<p>The norms disagree on some comparisons, which is why voice-leading theory usually states results for a whole
+family of norms at once. $L_1$ counts total effort; $L_\infty$ asks that no single voice jump far.</p>
+</div>
+</section>
+
+<section id="geometry">
+<h2>The geometry of voice leading</h2>
+<div class="layer hear">
+<p>If chords can be close or far, they live in a space. One chord sits at the centre of the space of three-note
+chords: the augmented triad, C E G♯, made of three equal major thirds. Move any one of its notes by one semitone and
+you land on a major or a minor triad. Listen to the augmented triad going to six different chords, each time with one
+voice moving a half step.</p>
+<audio-ex src="augmented_hub" caption="C E G♯ resolves to C, Am, E, C♯m, A♭ and Fm: each time a single voice moves one semitone."></audio-ex>
+<p>The augmented triad sounds suspended, belonging to no key in particular. That ambiguity is the sound of being at
+the centre: it is equally close to six different destinations.</p>
+</div>
+<div class="layer understand">
+<p>Here are the six resolutions written out. Each moves exactly one note of C E G♯ by one semitone.</p>
+<table>
+<tr><th>Voice that moves</th><th>Result</th><th>Quality</th></tr>
+<tr><td>G♯ → G</td><td>C E G</td><td>C major</td></tr>
+<tr><td>G♯ → A</td><td>C E A</td><td>A minor</td></tr>
+<tr><td>C → B</td><td>B E G♯</td><td>E major</td></tr>
+<tr><td>C → C♯</td><td>C♯ E G♯</td><td>C♯ minor</td></tr>
+<tr><td>E → E♭</td><td>C E♭ G♯ (= A♭ C E♭)</td><td>A♭ major</td></tr>
+<tr><td>E → F</td><td>C F G♯ (= F A♭ C)</td><td>F minor</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 E4 G#4 ; C4 E4 G4 ; C4 E4 A4 ; B3 E4 G#4 ; C#4 E4 G#4 ; C4 Eb4 G#4 ; C4 F4 G#4" labels="Caug ; C ; Am ; E ; C♯m ; A♭ ; Fm" title="The augmented hub"></pianoroll>
+<pc-circle edo="12" marks="0 4 8" title="C E G♯: three equal thirds, the most even triad"></pc-circle>
+<p>Dmitri Tymoczko made this picture precise in "The Geometry of Musical Chords" (<i>Science</i>, 2006) and <i>A
+Geometry of Music</i> (2011), and with Clifton Callender and Ian Quinn in "Generalized voice-leading spaces"
+(<i>Science</i>, 2008). The idea: an unordered
+chord of $n$ notes, with octaves ignored, is a point in a space, and a voice leading is a path in that space. The
+spaces have a beautiful shape:</p>
+<ul>
+<li><b>Two-note chords</b> form a <b>Möbius strip</b>. Its edge is made of unisons (C–C, C♯–C♯, …), and running
+around its middle are the tritones (C–F♯, …), the most even dyads.</li>
+<li><b>Three-note chords</b> form a twisted triangular prism. The <b>augmented triads</b>, the perfectly even ones,
+run along its central axis. Major and minor triads lie close around them, which is why each augmented triad is one
+semitone from six of them. Chords with doubled notes lie on the boundary.</li>
+</ul>
+<p>The consonant chords of tonal music are <b>nearly even</b>: they divide the octave almost equally (C E G divides it
+into 4 + 3 + 5 semitones). Nearly even chords lie near the centre of chord space, so they can be connected to many
+other chords by small motions. Tymoczko argues that this, together with acoustic consonance, is why they became the
+building blocks of Western harmony. Jack Douthett and Peter Steinbach drew the network of these single-semitone moves
+among major, minor and augmented triads as a graph they called "Cube Dance" (1998).</p>
+<aside class="mirror">36-ET adds points between the 12-ET chords, and the golden triad sits in a special place among
+them. On a common root, Cg = (C + Cm + Caug)/3 voice by voice: it is the <b>centroid</b> of the triangle formed by
+major, minor and augmented in this space, and it is only 2 sixth-steps from C, 3 from Cm and 3 from Caug. The passing
+chords of the golden system lie on <b>straight lines</b> between Western chords: the half step is split into three
+sixth-steps, and the passing chords are the points one third and two thirds of the way along
+(<a href="ch:ch27#subchromatic">Chapter 27</a>, <a href="ch:ch28#uneven">Chapter 28</a>).</aside>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 Eb4 G4 ; C4 E4 G#4 ; C4 vE4 ^G4" labels="C ; Cm ; Caug ; Cg (centroid)" title="Cg as the centroid of C, Cm and Caug"></pianoroll>
+<p>Listen to V → I twice: first directly, then with each half step in the upper voices split into three sixth-steps.
+The leading tone B rises B → ^B → vC → C and D rises D → vE♭ → ^E♭ → E, while the Gs are held (two upper voices and the bass).</p>
+<audio-ex src="split_semitone" caption="G to C/G directly, then G – vE♭T13/G – vCg/G – C/G: the two moving voices glide up in sixth-tone steps."></audio-ex>
+<pianoroll edo="36" notes="G3 B3 D4 G4 ; G3 ^B3 vEb4 G4 ; G3 vC4 ^Eb4 G4 ; G3 C4 E4 G4" labels="G ; vE♭T13/G ; vCg/G ; C/G" title="V → I on the strict path: the half steps split into thirds"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>Chord spaces (statement).</b> Model pitch classes as points of the circle $\mathbb{R}/12\mathbb{Z}$, allowing
+any real value. An ordered $n$-note chord is a point of the torus $T^n = (\mathbb{R}/12\mathbb{Z})^n$; forgetting the
+order means dividing by the symmetric group $S_n$ that permutes coordinates. The space of unordered $n$-note chords
+is the quotient $T^n / S_n$, an <b>orbifold</b>. For $n = 2$ it is a Möbius strip whose boundary is the diagonal
+$x_1 = x_2$ (unisons); for $n = 3$ it is a triangular prism whose top and bottom faces are identified with a twist of
+one third of a turn. Proofs are in Tymoczko (2006) and Callender, Quinn and Tymoczko, "Generalized voice-leading
+spaces" (<i>Science</i>, 2008).</p>
+<p><b>The dyad case, sketched.</b> Write a dyad with $x_1 \le x_2 \le x_1 + 12$ and use the coordinates
+$s = x_1 + x_2$ and $d = x_2 - x_1 \in [0, 12]$. Transposing both notes by an octave changes $s$ by 24 and leaves $d$
+alone, so $s$ is taken mod 24. The same dyad can also be written as $(x_2, x_1 + 12)$, with coordinates
+$(s + 12, 12 - d)$. So the space is the strip $0 \le s \le 12$, $0 \le d \le 12$, with the edge $s = 12$ glued to the
+edge $s = 0$ after the flip $d \mapsto 12 - d$: a Möbius strip. Its boundary, $d = 0$ glued to $d = 12$, is the circle of
+unisons, and the line $d = 6$, which the flip maps to itself, is the circle of tritones. ∎ (sketch)</p>
+<p><b>The augmented hub (theorem, by enumeration).</b> Each augmented triad is at $L_1$ distance 1 from exactly six
+major and minor triads, three major and three minor, as tabulated. Conversely each major or minor triad is at distance 1
+from exactly one augmented triad (C E G → C E G♯ by G → G♯; A C E → G♯ C E by A → G♯). So the 4 augmented triads, 12 major and 12 minor triads form a graph in which each
+augmented triad has degree 6 and each major or minor triad has exactly one augmented neighbour.</p>
+<p><b>Straight lines and averages.</b> In the space of ordered voicings $\mathbb{R}^n$, the voice leading
+$X \to Y$ is the segment $X + t(Y - X)$, $0 \le t \le 1$. The points at $t = 1/3$ and $t = 2/3$ are
+$(2X + Y)/3$ and $(X + 2Y)/3$. When every voice moves by a whole number of semitones, these points have
+coordinates in multiples of 1/3 semitone, so they lie on the 36-ET grid. This is the uniform sub-chromatic path of
+<a href="ch:ch27#uniform-path">Chapter 27</a>: in the example above,
+$X = (\mathrm{G3}, \mathrm{B3}, \mathrm{D4}, \mathrm{G4})$, $Y = (\mathrm{G3}, \mathrm{C4}, \mathrm{E4}, \mathrm{G4})$,
+$Y - X = (0, +1, +2, 0)$ semitones, and the two passing chords move the inner voices by $(+1/3, +2/3)$ and
+$(+2/3, +4/3)$ semitones.</p>
+</div>
+</section>
+
+<div class="exercise">
+<p><b>Exercise 14.1 (listening).</b> In the "parallel and contrary" example, rank the four versions by how clearly you
+hear two separate voices. Compare your ranking with the coinciding-partials table.</p>
+<details class="answer"><summary>Answer</summary><p>Most listeners hear the contrary-motion version as most
+independent and the octaves as least: octaves (all partials coincide), fifths (half), thirds (about a fifth or a
+quarter), contrary motion (changing intervals, no co-modulation). The ranking is a perceptual measurement and varies
+somewhat with timbre and loudness.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 14.2.</b> Find the parallel perfect intervals in this progression (bass, tenor, alto, soprano):
+C3 E3 G3 C4 → D3 F3 A3 D4.</p>
+<pianoroll edo="12" notes="C3 E3 G3 C4 ; D3 F3 A3 D4" labels="C ; Dm" title="Exercise 14.2"></pianoroll>
+<details class="answer"><summary>Answer</summary><p>Every voice rises a whole step, so every pair moves in
+parallel; the question is which intervals are perfect. Bass–tenor C3–E3 (M3) → D3–F3 (m3): fine. Bass–alto C3–G3 (P5) → D3–A3 (P5): parallel fifths. Bass–soprano C3–C4 (P8) → D3–D4 (P8):
+parallel octaves. Tenor–alto E3–G3 (m3) → F3–A3 (M3): fine. Tenor–soprano E3–C4 (m6) → F3–D4 (M6): fine. Alto–soprano
+G3–C4 (P4) → A3–D4 (P4): parallel fourths, allowed between upper voices in this style.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 14.3.</b> Compute $D_1$ from C major to E major and give a voice leading that realizes it.</p>
+<details class="answer"><summary>Answer</summary><p>C E G → B E G♯: C → B (−1), E → E (0), G → G♯ (+1). Total 2.
+It is minimal because the two chords share only one note, E, so at least two voices must move, each by at least a
+semitone.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 14.4 (proof).</b> Using the coinciding-partials theorem, show that the fraction of coinciding upper
+partials for a just interval $p/q$ depends only on $q$, and explain why the twelfth (3/1) fuses as strongly as the
+octave by this measure.</p>
+<details class="answer"><summary>Answer</summary><p>The $n$-th upper partial coincides iff $q \mid n$, a condition
+independent of $p$. For 3/1, $q = 1$, so every partial of the upper tone ($3f, 6f, 9f, \dots$, where $f$ is the lower
+fundamental) coincides with a lower partial. This is why organ builders can add a pipe at the twelfth to a
+fundamental stop and hear a single, brighter tone.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 14.5.</b> Check that the golden triad Cg = C vE ^G is the voice-by-voice average of C, Cm and Caug,
+in sixth-steps above C.</p>
+<details class="answer"><summary>Answer</summary><p>C = (0, 12, 21), Cm = (0, 9, 21), Caug = (0, 12, 24).
+The average is $(0, (12 + 9 + 12)/3, (21 + 21 + 24)/3) = (0, 11, 22)$, which is C vE ^G.</p></details>
+</div>

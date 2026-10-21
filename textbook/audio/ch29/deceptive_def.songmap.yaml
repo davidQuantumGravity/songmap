@@ -1,0 +1,17 @@
+# Ch. 29: the deceptive cadence V -> vi, plain and then golden (System 2): G - vAbg - Abg - Am.
+songmap: 0.2
+title: "The golden deceptive cadence"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2.5
+instruments: {organ: clean/organ, low: clean/bass}
+motifs:
+  bassline: {notes: "=mf g--1 | a--1 | a--1 | r1 | g--1 | vab--2 ab-- | a--1 | a--1"}
+mix: {organ: {gain_db: -6}, low: {gain_db: -5}}
+sections:
+  - {name: dec, bars: 8, harmony: "G:1 Am:2 N.C.:1 G:1 ~g:0.5 ~g:0.5 Am:2",
+     parts: {organ: {style: hold, voices: 3, range: [55, 77]}, low: {motifs: [bassline]}}}
+master: clean

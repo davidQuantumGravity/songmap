@@ -1,0 +1,19 @@
+# Cmaj7, C7, Cm7, Cm7b5, Cdim7, Cm(maj7), Caug(maj7), each over a C bass.
+songmap: 0.2
+title: "Seven seventh chords on C"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {up: clean/organ, low: clean/bass}
+mix: {up: {gain_db: -6, send: {hall: 0.25}}, low: {gain_db: -5}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 4
+    parts:
+      up: {notes: "=mp [c,e,g,b]2 [c,e,g,bb]2 [c,eb,g,bb]2 [c,eb,gb,bb]2 [c,eb,gb,a]2 [c,eb,g,b]2 [c,e,g#,b]2 r2"}
+      low: {notes: "=mp c-2 c-2 c-2 c-2 c-2 c-2 c-2 r2"}
+master: clean

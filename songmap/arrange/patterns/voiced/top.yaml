@@ -1,0 +1,9 @@
+# The soprano of the hold voicing as a melody line, sub-chromatic passing tones included.
+style: top
+voiced: true
+voices: 4
+range: [50, 74]
+voice: top
+oct: 1
+gate: 0.95
+vel: 0.6

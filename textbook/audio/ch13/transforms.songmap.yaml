@@ -1,0 +1,19 @@
+# A four-note motif and its classical transformations (written out note by note):
+# original, inversion (diatonic, around C), retrograde, retrograde inversion, augmentation.
+songmap: 0.2
+title: "Original, inversion, retrograde, augmentation"
+tempo: 92
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 13
+tail_seconds: 1.5
+instruments: {lead: clean/keys}
+mix: {lead: {gain_db: -3, send: {hall: 0.2}}}
+returns: {hall: {type: reverb, seconds: 1.8, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: forms
+    bars: 10
+    parts:
+      lead: {notes: "=mf c4. d8 f4 e | r1 | c4. b-8 g-4 a- | r1 | e4 f d8 c4. | r1 | a-4 g- b-8 c4. | r1 | c2. d4 | f2 e"}
+master: clean

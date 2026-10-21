@@ -1,0 +1,22 @@
+# A 13-bar phrase built as 8 + 5 (consecutive Fibonacci numbers): eight bars of rising line and
+# crescendo to a peak at the start of bar 9 (8/13 = 0.615 of the way through), then five bars of
+# descent and diminuendo. A constructed demonstration, not a perceptual claim.
+songmap: 0.2
+title: "Eight plus five"
+tempo: 100
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 16
+tail_seconds: 3
+instruments: {lead: clean/lead, keys: clean/keys, bass: clean/bass}
+mix: {lead: {gain_db: -2, send: {hall: 0.25}}, keys: {gain_db: -8, send: {hall: 0.25}}, bass: {gain_db: -6}}
+returns: {hall: {type: reverb, seconds: 2.2, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: arc
+    bars: 13
+    parts:
+      lead: {notes: "=pp < c4 e g e | c e a e | c f a c+ | b- d g d+ | c g c+ e+ | e a c+ e+ | f a d+ f+ | g b d+ g+ | =ff a+1 | > g+4 e+ c+ g | f+ d+ a f | d+ b g f | =pp e2 c"}
+      keys: {notes: "=pp < [e-,g-,c]1 | [e-,a-,c] | [f-,a-,c] | [d-,g-,b-] | [e-,g-,c] | [e-,a-,c] | [f-,a-,d] | [d-,g-,b-] | =ff [f-,a-,c] | > [e-,g-,c] | [f-,a-,d] | [d-,g-,b-] | =pp [e-,g-,c]"}
+      bass: {notes: "=pp < c--1 | a-- | f-- | g-- | c-- | a-- | d-- | g-- | =ff f-- | > c-- | d-- | g-- | =pp c--"}
+master: clean

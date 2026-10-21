@@ -1,0 +1,276 @@
+<section id="additive">
+<h2>Additive synthesis</h2>
+<div class="layer hear">
+<p>Every tone in this book's examples was built from nothing but sine waves. Listen to one being assembled. A pure sine
+at 220 Hz sounds first: smooth, colorless, a little hollow. Then, once a second, another sine joins at the next whole
+multiple of the frequency, 440, 660, 880 Hz and so on, each softer than the last. The pitch never changes, but the tone
+grows brighter and buzzier until, with eight partials, it begins to resemble a reedy organ stop. Finally the same eight
+partials return with their upper members much softer: the same pitch, a rounder color.</p>
+<audio-ex src="additive_build" caption="Partials 1 to 8 of 220 Hz enter one per second with amplitudes 1/k (the tone brightens toward a sawtooth-like buzz), then the same eight with amplitudes 1/k² (rounder)."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Building tones from sines.</b> Fourier's idea (<a href="ch:ch02#fourier">Chapter 2</a>) says that a steady periodic
+tone is a sum of sines at whole multiples of its fundamental. <b>Additive synthesis</b> runs the idea backwards: choose
+the frequencies and amplitudes of the partials, add the sines, and you have the tone. It is the most transparent way to
+make sound: every component is known exactly, and nothing is present that was not put there.</p>
+<p>The <code>clean</code> instrument that renders this book's audio is an additive synthesizer with a handful of
+controls:</p>
+<table>
+<tr><th>Control</th><th>Effect</th></tr>
+<tr><td><code>partials</code></td><td>how many partials (1 = a pure sine)</td></tr>
+<tr><td><code>rolloff</code></td><td>partial $k$ has amplitude $k^{-\text{rolloff}}$: 1 is sawtooth-like and bright, 2 is soft</td></tr>
+<tr><td><code>even</code></td><td>weight of the even harmonics (0 = odd harmonics only, a clarinet-like color)</td></tr>
+<tr><td><code>spectrum</code></td><td>which frequency ratios: harmonic (1, 2, 3, …), golden ($2^m\varphi^n$, §37.3) or odd (1, 3, 5, …)</td></tr>
+<tr><td><code>attack</code>, <code>release</code></td><td>raised-cosine fade-in and fade-out times (§37.2)</td></tr>
+<tr><td><code>decay</code>, <code>damp</code></td><td>for struck sounds: how long the fundamental takes to fade by 60 dB, and how much faster the higher partials fade</td></tr>
+<tr><td><code>vel_bright</code></td><td>harder notes get a lower rolloff, i.e. a brighter tone</td></tr>
+<tr><td><code>pan</code></td><td>a fixed stereo position</td></tr>
+</table>
+<p>The presets used in this book are settings of these controls:</p>
+<table>
+<tr><th>Preset</th><th>Partials</th><th>Rolloff</th><th>Spectrum</th><th>Envelope</th></tr>
+<tr><td><code>clean/sine</code></td><td>1</td><td>–</td><td>–</td><td>attack 0.03 s, release 0.4 s</td></tr>
+<tr><td><code>clean/organ</code></td><td>8</td><td>1.2</td><td>harmonic</td><td>sustains while held; attack 0.04 s, release 0.35 s</td></tr>
+<tr><td><code>clean/keys</code></td><td>12</td><td>1.5</td><td>harmonic</td><td>struck: decay 5 s, damp 0.35</td></tr>
+<tr><td><code>clean/bass</code></td><td>6</td><td>1.6</td><td>harmonic</td><td>struck: decay 3 s, damp 0.3</td></tr>
+<tr><td><code>clean/lead</code></td><td>6</td><td>1.3</td><td>harmonic, even 0.5</td><td>struck: decay 2.5 s</td></tr>
+<tr><td><code>clean/glass</code></td><td>10</td><td>1.3</td><td>golden</td><td>struck bell: decay 6 s, damp 0.25</td></tr>
+<tr><td><code>clean/golden_pad</code></td><td>10</td><td>1.4</td><td>golden</td><td>sustained: attack 2.5 s, release 3 s</td></tr>
+</table>
+<p>A rolloff of 1 means each doubling of the partial number halves the amplitude, a slope of about −6 dB per octave of
+the spectrum; a rolloff of 2 gives −12 dB per octave. The sawtooth wave has rolloff exactly 1, which is why the first
+part of the example drifts toward a buzz.</p>
+</div>
+<div class="layer derive">
+<p><b>The clean tone.</b> For a note of fundamental $f_0$ and velocity $v$, with partial ratios $r_1 &lt; r_2 &lt; \dots$
+(harmonic: $r_k = k$), the instrument computes</p>
+$$x(t) = \frac{E(t)\,G(v)}{\sum_{k=1}^{K} k^{-\rho}}\ \sum_{k=1}^{K} a_k \sin\!\big(2\pi f_0 r_k t + \phi_k\big)\, e^{-6.9078\, t / T_k},$$
+<p>where</p>
+<ul>
+<li>$a_k = k^{-\rho}$ (times the <code>even</code> weight for even harmonic $k$), with $\rho = \max(\text{rolloff} - \text{vel\_bright}\cdot(v - 0.7),\ 0)$;</li>
+<li>$\phi_k = \pi k^2 / K$ are fixed phases (§37.2);</li>
+<li>$T_k = \text{decay}/(1 + \text{damp}\,(k-1))$, and the decay factor is omitted when decay is 0 (sustained tones); since
+$\ln 1000 = 6.9078$, partial $k$ is 60 dB down after $T_k$ seconds;</li>
+<li>$E(t)$ is the raised-cosine envelope and $G(v)$ a velocity gain;</li>
+<li>partials at or above $0.45\times 48\,000 = 21\,600$ Hz are skipped, to stay below the Nyquist frequency (24 kHz) and
+avoid aliasing.</li>
+</ul>
+<p><b>No clipping by construction (theorem).</b> Each term is at most $a_k$ in absolute value, so by the triangle inequality
+the inner sum is at most $\sum a_k \le \sum k^{-\rho}$, and $|x(t)| \le E(t)\,G(v)$. The normalization makes the loudest
+possible alignment of the partials fit exactly.</p>
+<p><b>The sawtooth.</b> The Fourier series of a sawtooth of period $1/f_0$ is
+$\frac{2}{\pi}\sum_{k\ge1} \frac{(-1)^{k+1}}{k}\sin(2\pi k f_0 t)$: amplitudes $1/k$, i.e. rolloff 1.</p>
+</div>
+</section>
+
+<section id="clean">
+<h2>Clean, stable tones</h2>
+<div class="layer hear">
+<p>Two things are easy to get wrong when building a tone from scratch, and both matter for hearing harmony precisely.
+First, the edges. A tone that switches on and off instantly clicks; a short straight ramp still ticks; a smooth
+raised-cosine fade is silent. Listen to the same short note with each.</p>
+<audio-ex src="envelopes" caption="The same 0.5 s tone four times each with an abrupt gate (clicks), a 5 ms linear ramp (soft ticks) and a 30 ms raised-cosine ramp (clean)."></audio-ex>
+<p>Second, stability. Many synthesizer sounds are made "warm" by letting each voice drift slightly in pitch and wobble
+with vibrato. That is pleasant in a pop mix, but it destroys exactly what this book listens to. The example plays an
+exact golden seventh twice: once with every partial perfectly steady, so its beats at about 6, 7.6, 9.4 and 12.3 per
+second interlock in a clear pattern; and once with a few cents of slow drift and a gentle vibrato on each voice. The
+beat pattern dissolves into a generic shimmer.</p>
+<audio-ex src="drift" caption="Exact close-voiced Cg7 on 110 Hz: first perfectly stable (the golden beat pattern is clear), then with a few cents of slow drift and ±10-cent vibrato per voice (the pattern smears)."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>What "clean" means.</b> The clean instrument has, by design, no vibrato, no pitch drift, no detuned copies, no
+chorus, no noise, no filter and no saturation. Every partial is an exact sine at a fixed frequency. As a result, any
+beating in a chord comes only from the tuning of its notes, and any roughness only from the interaction of their partials.
+When the book says "listen to the beats of the golden seventh", the beats are the chord's, not the synthesizer's.</p>
+<p><b>Edges: raised-cosine envelopes.</b> Each note fades in and out along half a cosine curve,
+$\tfrac12 - \tfrac12\cos(\pi t/t_a)$, instead of a straight line. The curve starts and ends with zero slope, so the
+waveform never has a corner, and corners are what the ear hears as clicks.</p>
+<p><b>Fixed phases.</b> Each partial starts at a fixed phase, $\pi k^2/K$, a formula due to Manfred Schroeder (1970). It
+has two purposes: it avoids randomness (the same file always renders to the same samples), and it avoids starting
+every partial at its peak at once. Schroeder's formula was designed to minimize the <i>crest factor</i> (peak over
+RMS level) of a sum of equal-amplitude partials. For the falling spectra of real presets its advantage is small or absent,
+as this measurement shows:</p>
+<table>
+<tr><th>Spectrum</th><th>all sine phase</th><th>all cosine phase</th><th>Schroeder</th><th>random (average of 20)</th></tr>
+<tr><td>8 equal partials</td><td>9.75 dB</td><td>12.04 dB</td><td><b>5.53 dB</b></td><td>8.34 dB</td></tr>
+<tr><td>16 equal partials</td><td>12.52 dB</td><td>15.05 dB</td><td><b>5.62 dB</b></td><td>8.36 dB</td></tr>
+<tr><td>8 partials, rolloff 1.2 (organ)</td><td><b>4.52 dB</b></td><td>9.07 dB</td><td>6.58 dB</td><td>5.98 dB</td></tr>
+<tr><td>12 partials, rolloff 1.5 (keys)</td><td><b>3.11 dB</b></td><td>8.44 dB</td><td>6.14 dB</td><td>5.21 dB</td></tr>
+</table>
+<p>(A single sine has a crest factor of 3.01 dB.) The phases of steady low partials are largely inaudible, so the choice
+affects headroom rather than color; what the clean instruments really need from the phases is that they are fixed.</p>
+<p><b>Why drift destroys beats.</b> A beat is a slow, regular change in the phase relation of two nearly equal partials.
+If the partials themselves wander in frequency by as much as the beat rate, the relation is no longer regular. In the
+drifting example, the 8th partial of the 110 Hz voice (880 Hz) swings by about ±5 Hz under a ±10-cent vibrato,
+comparable to the beat rates of 6–12 Hz. Measured on the envelope of the rendered signal, the strongest beat component
+in the 3–30 Hz band stands about 1,100 times above the median for the stable chord, and only about 46 times for the
+drifting one.</p>
+</div>
+<div class="layer derive">
+<p><b>Crest factor.</b> $\mathrm{CF} = 20\log_{10}\big(\max|x| / \sqrt{\overline{x^2}}\big)$. A single sine has
+$\mathrm{CF} = 20\log_{10}\sqrt2 = 3.01$ dB. For $K$ equal partials all starting at their peak (cosine phase) the peak is
+$K$ times one amplitude while the RMS is $\sqrt{K/2}$ times it, so $\mathrm{CF} = 10\log_{10}(2K)$: 12.04 dB for $K = 8$,
+15.05 dB for $K = 16$, as measured.</p>
+<p><b>Smoothness and clicks (theorem).</b> The spectrum of an envelope edge decays with frequency according to how smooth
+the edge is. If the envelope jumps (an abrupt gate), its spectrum falls as $1/f$, about −6 dB per octave, and spreads
+energy far above the tone: a click. If it is continuous with a corner (a linear ramp), the spectrum falls as $1/f^2$,
+−12 dB per octave. If it and its slope are continuous (the raised cosine, whose derivative
+$\tfrac{\pi}{2t_a}\sin(\pi t/t_a)$ is zero at both ends), the spectrum falls as $1/f^3$, −18 dB per octave, and the edge
+is inaudible at ordinary ramp times.</p>
+<p><b>Drift in numbers.</b> A pitch change of $c$ cents multiplies every frequency by $2^{c/1200}$. For partial $k$ of
+fundamental $f_0$ the frequency moves by $k f_0 (2^{c/1200} - 1)$: for $k = 8$, $f_0 = 110$ Hz and $c = 10$, that is
+5.10 Hz, against 0.64 Hz for the fundamental. Upper partials carry the beats, and upper partials drift the most.</p>
+</div>
+</section>
+
+<section id="golden-timbres">
+<h2>Designing golden timbres</h2>
+<div class="layer hear">
+<p>A harmonic tone puts its partials at 1, 2, 3, 4 times the fundamental. Nothing forces that choice on a synthesizer.
+The next example builds a tone whose partials are golden: the fundamental, then φ times it, then twice it, then φ², and so
+on. It does not sound like an ordinary instrument: more like a bell or a struck glass, with a slightly unearthly ring.</p>
+<audio-ex src="golden_partials" caption="A golden spectrum built partial by partial on 220 Hz: ratios 1, φ, 2, φ², 2φ, 4, φ³, 2φ², 4φ, φ⁴, one per second."></audio-ex>
+<p>Now the experiment that matters. A just major triad and an exact golden triad, first on a harmonic tone, then on the
+golden tone. On the harmonic tone, the major triad is the calm one and the golden triad shimmers uneasily. On the golden
+tone, the roles reverse: the golden triad becomes smooth and still, and the major triad is the one that sounds rough.</p>
+<audio-ex src="two_spectra" caption="On C4, exact ratios: major 4:5:6 then golden 1 : 2/φ : 4/φ² on a harmonic spectrum; then the same two chords on a golden spectrum. Listen for which chord is calm in each pair."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>The golden spectrum.</b> The clean instrument's golden mode uses the frequency ratios $2^m\varphi^n$ ($m, n \ge 0$),
+sorted by size. The first ten:</p>
+<table>
+<tr><th>rank $k$</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+<tr><td>ratio</td><td>1</td><td>φ</td><td>2</td><td>φ²</td><td>2φ</td><td>4</td><td>φ³</td><td>2φ²</td><td>4φ</td><td>φ⁴</td></tr>
+<tr><td>value</td><td>1</td><td>1.618</td><td>2</td><td>2.618</td><td>3.236</td><td>4</td><td>4.236</td><td>5.236</td><td>6.472</td><td>6.854</td></tr>
+<tr><td>cents</td><td>0</td><td>833.09</td><td>1200</td><td>1666.18</td><td>2033.09</td><td>2400</td><td>2499.27</td><td>2866.18</td><td>3233.09</td><td>3332.36</td></tr>
+</table>
+<figure class="svgfig"><svg class="fig" viewBox="0 0 640 245" role="img" aria-label="Harmonic and golden spectra, ten partials each"><text x="60" y="16" class="t">Ten partials, amplitude k^-1.3, log-frequency axis (ratio to the fundamental)</text><line x1="60" y1="100" x2="620" y2="100" stroke="var(--line)"/><text x="54" y="96" text-anchor="end" class="lab">harmonic</text><line x1="60.0" y1="100" x2="60.0" y2="36.0" stroke="currentColor" stroke-width="3"/><text x="60.0" y="113" text-anchor="middle" class="lab">1</text><line x1="221.9" y1="100" x2="221.9" y2="74.0" stroke="currentColor" stroke-width="3"/><text x="221.9" y="113" text-anchor="middle" class="lab">2</text><line x1="316.6" y1="100" x2="316.6" y2="84.7" stroke="currentColor" stroke-width="3"/><text x="316.6" y="113" text-anchor="middle" class="lab">3</text><line x1="383.8" y1="100" x2="383.8" y2="89.4" stroke="currentColor" stroke-width="3"/><text x="383.8" y="113" text-anchor="middle" class="lab">4</text><line x1="435.9" y1="100" x2="435.9" y2="92.1" stroke="currentColor" stroke-width="3"/><text x="435.9" y="113" text-anchor="middle" class="lab">5</text><line x1="478.4" y1="100" x2="478.4" y2="93.8" stroke="currentColor" stroke-width="3"/><text x="478.4" y="113" text-anchor="middle" class="lab">6</text><line x1="514.4" y1="100" x2="514.4" y2="94.9" stroke="currentColor" stroke-width="3"/><text x="514.4" y="113" text-anchor="middle" class="lab">7</text><line x1="545.6" y1="100" x2="545.6" y2="95.7" stroke="currentColor" stroke-width="3"/><text x="545.6" y="113" text-anchor="middle" class="lab">8</text><line x1="573.1" y1="100" x2="573.1" y2="96.3" stroke="currentColor" stroke-width="3"/><text x="573.1" y="113" text-anchor="middle" class="lab">9</text><line x1="597.7" y1="100" x2="597.7" y2="96.8" stroke="currentColor" stroke-width="3"/><text x="597.7" y="113" text-anchor="middle" class="lab">10</text><line x1="60" y1="200" x2="620" y2="200" stroke="var(--line)"/><text x="54" y="196" text-anchor="end" class="lab">golden</text><line x1="60.0" y1="200" x2="60.0" y2="136.0" stroke="var(--gold)" stroke-width="3"/><text x="60.0" y="213" text-anchor="middle" class="lab">1</text><line x1="172.4" y1="200" x2="172.4" y2="174.0" stroke="var(--gold)" stroke-width="3"/><text x="172.4" y="224" text-anchor="middle" class="lab">1.62</text><line x1="221.9" y1="200" x2="221.9" y2="184.7" stroke="var(--gold)" stroke-width="3"/><text x="221.9" y="213" text-anchor="middle" class="lab">2</text><line x1="284.8" y1="200" x2="284.8" y2="189.4" stroke="var(--gold)" stroke-width="3"/><text x="284.8" y="224" text-anchor="middle" class="lab">2.62</text><line x1="334.3" y1="200" x2="334.3" y2="192.1" stroke="var(--gold)" stroke-width="3"/><text x="334.3" y="213" text-anchor="middle" class="lab">3.24</text><line x1="383.8" y1="200" x2="383.8" y2="193.8" stroke="var(--gold)" stroke-width="3"/><text x="383.8" y="224" text-anchor="middle" class="lab">4</text><line x1="397.1" y1="200" x2="397.1" y2="194.9" stroke="var(--gold)" stroke-width="3"/><text x="397.1" y="213" text-anchor="middle" class="lab">4.24</text><line x1="446.6" y1="200" x2="446.6" y2="195.7" stroke="var(--gold)" stroke-width="3"/><text x="446.6" y="224" text-anchor="middle" class="lab">5.24</text><line x1="496.1" y1="200" x2="496.1" y2="196.3" stroke="var(--gold)" stroke-width="3"/><text x="496.1" y="213" text-anchor="middle" class="lab">6.47</text><line x1="509.5" y1="200" x2="509.5" y2="196.8" stroke="var(--gold)" stroke-width="3"/><text x="509.5" y="224" text-anchor="middle" class="lab">6.85</text></svg><figcaption>Ten partials of a harmonic tone (top) and a golden tone (bottom), on a
+logarithmic frequency axis. The golden tone keeps the octaves 1, 2, 4 and fills the gaps with golden sixths.</figcaption></figure>
+<p><b>Why it works: matching timbre to tuning.</b> William Sethares (<i>Tuning, Timbre, Spectrum, Scale</i>, 1998)
+showed how to choose a timbre so that a given tuning's intervals become smooth: put the partials where the intervals'
+other partials will land. Golden chords are built from golden intervals, so a golden spectrum lines the partials up.
+The count below is exact (computed for ten partials per tone, exact ratios):</p>
+<table>
+<tr><th>Chord</th><th>harmonic spectrum: exact coincidences / near misses (&lt; 60 c)</th><th>golden spectrum: exact / near</th></tr>
+<tr><td>just major 4:5:6</td><td>6 / 2</td><td>0 / 12</td></tr>
+<tr><td>just minor 10:12:15</td><td>6 / 2</td><td>0 / 12</td></tr>
+<tr><td>golden 1 : 2/φ : 4/φ²</td><td>0 / 9</td><td>12 / 0</td></tr>
+</table>
+<p>Coincident partials fuse; near misses beat and make roughness. On the golden spectrum the golden triad has twelve exact
+coincidences and no near misses at all, while the major triad has none and twelve near misses. The Sethares roughness
+model gives the same verdict in numbers, on C4 (<a href="ch:ch26#golden-spectra">Chapter 26</a>): with harmonic overtones
+major 1.32 and golden 1.50; with golden overtones golden <b>2.08</b> against major 3.17 and minor 3.26. That is the
+<b>timbre flip</b>: timbre decides which world is at rest.</p>
+<p><b>Designing your own.</b> A golden timbre has the same other controls as any clean tone. A golden bell
+(<code>clean/glass</code>) uses ten golden partials, rolloff 1.3 and a 6 s decay with the upper partials fading faster; a
+golden pad (<code>clean/golden_pad</code>) uses rolloff 1.4 and a slow 2.5 s attack. Fewer partials make a purer, more
+flute-like golden tone; a lower rolloff a brighter, more metallic one. The essential choice is the set of ratios.</p>
+</div>
+<div class="layer derive">
+<p><b>Coincidence theorem (exact tuning).</b> Let the chord be $1 : 2/\varphi : 4/\varphi^2$ on a golden spectrum
+$\{2^m\varphi^n\}$. A partial of the golden third is $\tfrac{2}{\varphi}\cdot 2^m\varphi^n = 2^{m+1}\varphi^{n-1}$, which is a
+partial of the root whenever $n \ge 1$. A partial of the golden fifth is $\tfrac{4}{\varphi^2}\cdot 2^m\varphi^n =
+2^{m+2}\varphi^{n-2}$, a root partial whenever $n \ge 2$. So most partials of the upper notes land exactly on partials of
+the root (with a finite set of partials, those near the top of the list may have no partner).</p>
+<p><b>The major third never coincides (theorem).</b> A coincidence between the root and a just third would need
+$2^a\varphi^b = 5/4$ for integers $a, b$. If $b \ne 0$, $\varphi^b = F_b\varphi + F_{b-1}$ (with Fibonacci numbers extended to
+negative indices) is irrational, so $2^a\varphi^b$ is irrational; if $b = 0$, $2^a = 5/4$ is impossible. The same argument
+excludes 3/2 and 6/5. On a golden spectrum, rational intervals other than octaves never fuse.</p>
+<p><b>In 36-ET.</b> The 36-ET golden third is 0.24 c flat of $2/\varphi$, so its exact coincidences become near
+coincidences: at a partial frequency of 1 kHz the two partials differ by $1000\,(2^{0.24/1200} - 1) = 0.14$ Hz, a beat
+every seven seconds, heard as a slow breathing rather than roughness.</p>
+</div>
+</section>
+
+<section id="mixing">
+<h2>Mixing for clarity</h2>
+<div class="layer hear">
+<p>The last stage of making a track, mixing and mastering, usually adds processing: compression to even out loudness,
+limiting and saturation to make it louder and denser. This book's audio uses none of it, and the example shows why. First,
+two pure tones beating six times a second, clean and then through a fast compressor matched to the same loudness: the
+compressor follows the beat and pushes its peaks down, so the beat becomes shallower. Then a pure major third, clean and
+then through a saturation curve: new pitches appear that were never played, a fifth below and a fourth above.</p>
+<audio-ex src="processing" caption="A 6 Hz beat (220 + 226 Hz) clean, then fast-compressed: the beat gets shallower. A just major third (440 + 550 Hz) clean, then saturated: new tones at 330 and 660 Hz appear."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Gain staging.</b> In a SongMap song, each part has a gain in decibels (<code>gain_db</code>) and an optional send to a
+hall reverb (<code>send: {hall: 0.3}</code>). For dry demonstrations the examples omit the reverb; for musical examples a
+send of 0.2–0.4 adds space without blurring the harmony. Balance is set by these gains, not by processing.</p>
+<p><b>Two masters.</b> SongMap has a mastering chain for video soundtracks and a clean one for listening experiments:</p>
+<table>
+<tr><th></th><th><code>master: clean</code> (this book)</th><th>default master (video soundtracks)</th></tr>
+<tr><td>EQ</td><td>none</td><td>low shelf −12 dB at 30 Hz</td></tr>
+<tr><td>compression</td><td>none</td><td>gentle glue: 2:1 above −20 dB, attack 30 ms, release 200 ms</td></tr>
+<tr><td>loudness</td><td>none</td><td>normalized to −14 LUFS (ITU-R BS.1770)</td></tr>
+<tr><td>limiting</td><td>none</td><td>look-ahead limiter, then true peak trimmed to −1 dBTP</td></tr>
+<tr><td>level</td><td>peak scaled to −1 dBFS</td><td>as above</td></tr>
+</table>
+<p><b>What processing does to designed sound (measurements).</b> The example's numbers:</p>
+<ul>
+<li><b>Compression.</b> The 6 Hz beat of 220 + 226 Hz has a depth of about 15.8 dB (95th against 10th percentile of
+its 10 ms RMS envelope). A fast compressor (threshold −30 dB, 8:1, attack 2 ms, release 40 ms) reduces it to about
+9.9 dB. A slow glue setting like the default master's barely changes it (about 15.2 dB with 3:1, 30 ms, 200 ms).</li>
+<li><b>Saturation.</b> The tanh curve used by the project's original prototype master (drive 1.6) turns 440 + 550 Hz into
+a signal with components at 330 Hz and 660 Hz about 20 dB below the notes. These are real combination tones created by
+the processor, not by the ear, and they would contaminate exactly the experiments of
+<a href="ch:ch26#combination-tones">Chapter 26</a>.</li>
+</ul>
+<p>So the clean master does one thing: it scales the whole mix so that its highest peak sits at −1 dBFS, leaving every
+partial and every beat as the instruments made them.</p>
+<p><b>Loudness for comparisons.</b> Because the clean master normalizes peaks, not loudness, two examples can differ in
+perceived loudness. When loudness matters, as in the blind comparisons of <a href="ch:ch34#testing">Chapter 34</a>, the
+excerpts are matched by measured loudness: SongMap's QA report computes integrated loudness by the ITU-R BS.1770 method.</p>
+</div>
+<div class="layer derive">
+<p><b>The clean master.</b> $y = x \cdot 10^{-1/20} / \max_{t,c}|x_c(t)|$, a single gain for the whole file.</p>
+<p><b>BS.1770 integrated loudness</b> (as implemented in SongMap's QA, at 48 kHz):</p>
+<ol>
+<li><b>K-weighting.</b> Each channel passes through two second-order filters: a high-frequency shelf boost of about 4 dB and a
+high-pass that discounts the lowest frequencies, modeling the ear's sensitivity.</li>
+<li><b>Blocks.</b> Mean squares $z_{c,j}$ of the weighted channels over 400 ms blocks, overlapping by 75% (a new block every
+100 ms). Block loudness $\ell_j = -0.691 + 10\log_{10}\sum_c G_c z_{c,j}$, with $G_c = 1$ for left and right.</li>
+<li><b>Gating.</b> Discard blocks below −70 LUFS (absolute gate); compute the mean of the rest; discard blocks more than
+10 LU below that mean (relative gate).</li>
+<li><b>Integrated loudness</b> $= -0.691 + 10\log_{10}$ of the mean of $\sum_c G_c z_{c,j}$ over the surviving blocks, in
+LUFS.</li>
+</ol>
+<p>Matching two excerpts to loudness $L^\ast$ multiplies each by $10^{(L^\ast - L)/20}$.</p>
+<p><b>Where the new tones come from (theorem).</b> For small inputs $\tanh u = u - u^3/3 + \dots$. With
+$u = a\cos\omega_1 t + b\cos\omega_2 t$, the cube contains the terms $\tfrac34 a^2 b\cos\big((2\omega_1 - \omega_2)t\big)$ and
+$\tfrac34 a b^2\cos\big((2\omega_2 - \omega_1)t\big)$. Any odd-order nonlinearity therefore creates the third-order
+intermodulation tones $2f_1 - f_2$ and $2f_2 - f_1$: for 440 and 550 Hz, exactly 330 and 660 Hz.</p>
+</div>
+<h3>Exercises</h3>
+<div class="exercise">
+<p><b>Exercise 37.1 (calculation).</b> A clean tone has 8 harmonic partials with rolloff 2. What fraction of its normalization
+sum does the fundamental contribute?</p>
+<details class="answer"><summary>Answer</summary><p>$\sum_{k=1}^{8} k^{-2} = 1.5274$, so the fundamental's share is
+$1/1.5274 = 0.655$, about two thirds.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 37.2 (listening).</b> In the envelopes example, which edge is louder as a click, the start or the end of
+the abrupt note? Why might they differ?</p>
+<details class="answer"><summary>Answer</summary><p>They can differ because the click's size depends on the waveform's value at
+the moment of the jump: a jump from or to a value near zero clicks less than a jump near a peak. A raised-cosine edge
+removes the jump whatever the phase.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 37.3 (proof).</b> Show that on a golden spectrum the golden seventh $8/\varphi^3$ above a root has partials
+$2^{m+3}\varphi^{n-3}$, and say which of them coincide with root partials.</p>
+<details class="answer"><summary>Answer</summary><p>$\tfrac{8}{\varphi^3}\cdot 2^m\varphi^n = 2^{m+3}\varphi^{n-3}$. It is a root
+partial (of the form $2^{m'}\varphi^{n'}$ with $n' \ge 0$) exactly when $n \ge 3$.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 37.4 (calculation).</b> Two tones of 300 and 400 Hz pass through a saturator. At which frequencies do the
+third-order intermodulation tones appear, and what musical relation do they have to the input?</p>
+<details class="answer"><summary>Answer</summary><p>$2\cdot 300 - 400 = 200$ Hz and $2\cdot 400 - 300 = 500$ Hz. With the input
+a fourth (4:3), the new tones make the frequencies 200, 300, 400, 500 Hz: harmonics 2–5 of 100 Hz.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 37.5 (design).</b> You want a golden pad on which the golden seventh chord is as smooth as possible. Which
+setting matters most: the attack, the rolloff, or the spectrum? Why?</p>
+<details class="answer"><summary>Answer</summary><p>The spectrum: golden partials make the chord's partials coincide exactly
+(§37.3). Rolloff changes how much the upper partials, and their few near misses, contribute; attack changes only the
+onset.</p></details>
+</div>
+</section>

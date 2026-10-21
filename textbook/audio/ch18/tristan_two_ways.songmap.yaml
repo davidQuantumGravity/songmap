@@ -1,0 +1,17 @@
+# ch18: the same four pitch classes F B D# G#, resolved two ways:
+# (1) to E7 (as in Tristan), (2) respelled F Ab Cb Eb = a half-diminished ii7 in Eb minor, to Bb7 and Ebm.
+songmap: 0.2
+title: "One chord, two meanings"
+tempo: 60
+meter: "4/4"
+key: "A minor"
+tuning: 12edo
+seed: 18
+tail_seconds: 3
+instruments: {organ: clean/organ}
+mix: {organ: {gain_db: -5, send: {hall: 0.25}}}
+sections:
+  - {name: as_tristan, bars: 2, parts: {organ: {notes: "[f-,b-,d#,g#]2 [f-,b-,d#,a]2 | [e-,g#-,d,b]1"}}}
+  - {name: rest1, bars: 1, parts: {organ: {notes: "r1"}}}
+  - {name: as_iihalfdim, bars: 2, parts: {organ: {notes: "[f-,b-,d#,g#]2 [f-,a#-,d,g#]2 | [d#-,a#-,d#,f#]1"}}}
+master: clean

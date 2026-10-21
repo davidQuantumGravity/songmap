@@ -1,0 +1,18 @@
+# Ch. 8, near and far keys: a phrase in C major, the same phrase in G major (one fifth away, six
+# common tones), C again, then F# major (six fifths away, two common tones: B and E#=F).
+songmap: 0.2
+title: "A near key and a far key"
+tempo: 100
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 4
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix: {organ: {gain_db: -6}, low: {gain_db: -6}}
+sections:
+  - {name: c1, bars: 3, harmony: "C:0.5 Am:0.5 F:0.5 G:0.5 C:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+  - {name: g,  bars: 3, harmony: "G:0.5 Em:0.5 C:0.5 D:0.5 G:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+  - {name: c2, bars: 3, harmony: "C:0.5 Am:0.5 F:0.5 G:0.5 C:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+  - {name: fs, bars: 3, harmony: "F#:0.5 D#m:0.5 B:0.5 C#:0.5 F#:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+master: clean

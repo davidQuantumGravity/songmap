@@ -1,0 +1,23 @@
+# ch31: the asymmetry. Rational home (harmonic organ): Cg is a natural passing chord between
+# C and Ab. Golden home (golden-spectrum pad): a Western chord cannot pass between golden
+# chords on a uniform path; it can only visit and return (Cg - C - Cg).
+songmap: 0.2
+title: "Passing in one world, visiting in the other"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 310
+tail_seconds: 3
+instruments:
+  organ: clean/organ
+  low: clean/bass
+  gpad: clean/golden_pad
+mix:
+  organ: {gain_db: -6, send: {hall: 0.2}}
+  low: {gain_db: -6}
+  gpad: {gain_db: -6, send: {hall: 0.3}}
+sections:
+  - {name: rational_home, bars: 4, harmony: "C:1.5 Cg:0.5 Ab:2 Ab:1.5 Cg:0.5 C:2", parts: {organ: hold, low: {style: roots, role: bass}}}
+  - {name: golden_home, bars: 4, harmony: "Cg:1.5 C:0.5 Cg:2 Cg:1.5 C:0.5 Cg:2", parts: {gpad: hold}}
+master: clean

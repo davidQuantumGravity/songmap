@@ -1,0 +1,19 @@
+# ch33: multiplication maps. In Z12, M7 sends the cluster C C# D to C D G. In Z36, M11 sends the
+# sixth-step cluster C ^C vC# to the golden triad C vE ^G; M11 again gives bronze C ^E vA
+# (M11 squared = M13); a third M11 returns a cluster (M11 cubed = inversion).
+songmap: 0.2
+title: "The golden transform M11"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 331
+tail_seconds: 3
+instruments: {organ: clean/organ}
+motifs:
+  maps: {notes: "[c,c#,d]1 | [c,d,g]1 | [c,^c,vc#]1 | [c,ve,^g]1 | [c,^e,va]1 | [^b-,vc,c]1", octave: 4}
+mix:
+  organ: {gain_db: -5, send: {hall: 0.15}}
+sections:
+  - {name: maps, bars: 6, harmony: "N.C.:6", parts: {organ: {motifs: [maps]}}}
+master: clean

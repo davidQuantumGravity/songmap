@@ -1,0 +1,18 @@
+# G -> C; G7 -> C; the tritone B-F alone resolving in to C-E; F-B resolving out to E-C.
+songmap: 0.2
+title: "The tritone of the dominant seventh"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {up: clean/organ}
+mix: {up: {gain_db: -6, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 4
+    parts:
+      up: {notes: "=mp [g--,g-,b-,d]2 [c-,g-,c,e]2 [g--,g-,b-,f]2 [c-,g-,c,e]2 [b-,f]2 [c,e]2 [f-,b-]2 [e-,c]2"}
+master: clean

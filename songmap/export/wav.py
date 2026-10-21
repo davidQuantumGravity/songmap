@@ -40,3 +40,15 @@ def read_wav(path: str) -> tuple[int, np.ndarray]:
     if x.dtype.kind == "i":
         x = x / float(np.iinfo(x.dtype).max + 1)
     return sr, x.reshape(len(x), -1).astype(float)
+
+
+def write_mp3(path: str, wav_path: str, quality: int = 2) -> str:
+    """Encode an existing WAV to MP3 with ffmpeg (libmp3lame VBR; quality 0 best .. 9 smallest)."""
+    import shutil
+    import subprocess
+    exe = shutil.which("ffmpeg")
+    if not exe:
+        raise RuntimeError("ffmpeg not found on PATH; install it to write MP3s (WAV output is unaffected)")
+    subprocess.run([exe, "-y", "-loglevel", "error", "-i", wav_path, "-codec:a", "libmp3lame", "-q:a", str(quality), path],
+                   check=True)
+    return path

@@ -1,0 +1,26 @@
+# Ch. 27: the three motion classes on the path C -> Cg -> ^EbT13 -> Ab.
+# Root C holds; the third E falls (E vE ^Eb Eb); the fifth G rises (G ^G vAb Ab). Then all three together.
+songmap: 0.2
+title: "Hold, falling, rising"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2.5
+instruments: {organ: clean/organ}
+motifs:
+  hold:  {notes: "=mf c4 c c c"}
+  fall:  {notes: "=mf e4 ve ^eb eb"}
+  rise:  {notes: "=mf g4 ^g vab ab"}
+  all:   {notes: "=mf [c,e,g]2 [c,ve,^g]4 [c,^eb,vab] | [c,eb,ab]1"}
+mix: {organ: {gain_db: -6}}
+sections:
+  - {name: hold, bars: 1, parts: {organ: {motifs: [hold]}}}
+  - {name: gap1, bars: 1, parts: {}}
+  - {name: fall, bars: 1, parts: {organ: {motifs: [fall]}}}
+  - {name: gap2, bars: 1, parts: {}}
+  - {name: rise, bars: 1, parts: {organ: {motifs: [rise]}}}
+  - {name: gap3, bars: 1, parts: {}}
+  - {name: all, bars: 2, parts: {organ: {motifs: [all]}}}
+master: clean

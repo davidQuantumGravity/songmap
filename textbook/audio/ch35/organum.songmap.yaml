@@ -1,0 +1,26 @@
+# Parallel organum (a D-mode phrase written for this book, not a real chant):
+#   1. the principal voice alone (monophony, as in chant)
+#   2. with an organal voice a perfect fourth below, in strict parallel motion
+#   3. with an organal voice a perfect fifth below
+# (12-ET here; the medieval Pythagorean fourths and fifths differ from these by under 2 cents.)
+songmap: 0.2
+title: "Parallel organum at the fourth and the fifth"
+tempo: 96
+meter: "4/4"
+key: "D dorian"
+tuning: 12edo
+seed: 35
+tail_seconds: 2.5
+instruments:
+  vox: {use: clean/organ, attack: 0.06, release: 0.3}
+  org: {use: clean/organ, attack: 0.06, release: 0.3}
+motifs:
+  chant:  "d4 f g a | a2 g4 f | g f e2 | d1"
+  fourth: "a-4 c d e | e2 d4 c | d c b-2 | a-1"
+  fifth:  "g-4 bb- c d | d2 c4 bb- | c bb- a-2 | g-1"
+sections:
+  - {name: alone, bars: 4, parts: {vox: {motifs: [chant]}}}
+  - {name: fourth, bars: 4, parts: {vox: {motifs: [chant]}, org: {motifs: [fourth]}}}
+  - {name: fifth, bars: 4, parts: {vox: {motifs: [chant]}, org: {motifs: [fifth]}}}
+mix: {vox: {gain_db: -5}, org: {gain_db: -7}}
+master: clean

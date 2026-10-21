@@ -25,7 +25,7 @@ from ..parse.steps import parse_steps
 from ..perform.pipeline import parse_shape, shape_at
 from ..theory.harmony import HarmonyTimeline, build_harmony, parse_progression
 from ..theory.keys import tonic_midi
-from ..theory.tuning import octaves
+from ..theory.tuning import on_grid, octaves, parse_tuning
 from .ensemble import Ensemble
 from .styles import Style, get_style
 from .timeline import SectionSpan, Timeline
@@ -145,8 +145,10 @@ class _Ctx:
         self.ens = Ensemble(song)
         self.bpb = song.beats_per_bar
         self.tonic = tonic_midi(song.key)
+        self.tuning = parse_tuning(song.tuning)
         self.warnings: list[str] = []
         self._motif_cache: dict = {}
+        self._voicing_cache: dict = {}
         self._warned: set = set()
 
     def warn_once(self, key, msg):
@@ -186,7 +188,7 @@ def _resolve_rel(ctx: _Ctx, e: Ev, beat: float, oct_: int) -> tuple | None:
     if chord is None:
         return None
     root = chord.home_root(ctx.tonic) + octaves(oct_)
-    return tuple(rel_to_midi(t, o, chord.intervals, root) for t, o in e.rel)
+    return tuple(rel_to_midi(t, o, chord.intervals, root, ctx.tuning) for t, o in e.rel)
 
 
 def _from_ev(part, e: Ev, beat, pitches, sec, **kw) -> "XEv":
@@ -303,11 +305,93 @@ def _hold(ctx, sec, span, role, style, p_oct, patch) -> list[XEv]:
             continue
         root = h.chord.home_root(ctx.tonic) + octaves(oct_)
         for e in evs:
-            pitches = tuple(rel_to_midi(t, o, h.chord.intervals, root) for t, o in e.rel)
+            pitches = tuple(rel_to_midi(t, o, h.chord.intervals, root, ctx.tuning) for t, o in e.rel)
             x = _from_ev(role, e, h.start + e.beat, pitches, sec.name, gate=style.get("gate"), patch=patch,
                          gain_db=float(style.get("gain_db", 0)))
             x.dur = h.end - h.start
             out.append(x)
+    return out
+
+
+def _voicings(ctx: _Ctx, voices: int, lo: float, hi: float) -> dict:
+    """Voice-led voicing for every chord change of the song (shared by all parts with the same
+    settings, so a `voice: top` melody is exactly the soprano of the `voiced` chords)."""
+    from ..theory.voicing import voice_lead
+    key = (voices, lo, hi)
+    if key not in ctx._voicing_cache:
+        out, prev, shifts = {}, None, {}
+        for sp in ctx.harm.spans:
+            if sp.chord is None:
+                prev = None
+                continue
+            if not sp.onset and prev is not None:
+                out[sp.start] = prev
+                continue
+            if sp.chord.lines is not None and voices in (3, 4):
+                # a golden passing path: play the engine's own lines, moved by whole octaves (one shift
+                # for the whole run, fixed by its first chord) toward the middle of the part's range
+                if sp.chord.run not in shifts:
+                    shifts[sp.chord.run] = 12 * round(((lo + hi) / 2 - sum(sp.chord.lines[1:]) / 3) / 12)
+                v = tuple(p + shifts[sp.chord.run] for p in sp.chord.lines[4 - voices:])
+                out[sp.start] = v
+                prev = v
+                continue
+            v = voice_lead(prev, sp.chord.home_root(ctx.tonic), sp.chord.intervals, lo, hi, voices, ctx.tuning)
+            out[sp.start] = v
+            prev = v
+        ctx._voicing_cache[key] = out
+    return ctx._voicing_cache[key]
+
+
+def _voiced(ctx, sec, span, role, style, spec, p_oct, patch) -> list[XEv]:
+    o = {**style.data, **{k: v for k, v in spec.opts.items() if k in ("voices", "range", "rhythm", "voice", "vel")}}
+    voices = int(o.get("voices", 4))
+    lo, hi = (float(x) for x in o.get("range", [52, 76]))
+    rhythm = o.get("rhythm")
+    which = o.get("voice", "all")
+    vel = float(o.get("vel", 0.62))
+    accent = float(style.get("accent", 1.0))
+    oct_ = int(style.get("oct", 0)) + p_oct
+    vmap = _voicings(ctx, voices, lo, hi)
+    out = []
+    for sp in ctx.harm.spans:
+        if sp.chord is None or sp.end <= span.start + 1e-9 or sp.start >= span.end - 1e-9:
+            continue
+        v = vmap.get(sp.start)
+        if v is None:
+            continue
+        a, z = max(sp.start, span.start), min(sp.end, span.end)
+        if which == "top":
+            pitches = (v[-1],)
+        elif which == "bottom":
+            pitches = (v[0],)
+        elif which == "upper":
+            pitches = tuple(v[1:])
+        elif isinstance(which, int) or str(which).lstrip("-").isdigit():
+            pitches = (v[int(which)],)
+        else:
+            pitches = tuple(v)
+        if style.get("bass_note") and abs(sp.chord.bass - sp.chord.root) > 1e-9:
+            b = sp.chord.home_root(ctx.tonic) + ((sp.chord.bass - sp.chord.root) % 12) - 12
+            pitches = (b,) + pitches
+        pitches = tuple(p + octaves(oct_) for p in pitches)
+        hits = [a]
+        if rhythm:
+            bar = str(rhythm).replace(" ", "")
+            stepb = ctx.bpb / len(bar)
+            t = math.floor((a + 1e-9) / ctx.bpb) * ctx.bpb
+            while t < z - 1e-9:
+                for i, c in enumerate(bar):
+                    hb = t + i * stepb
+                    if a + 1e-9 < hb < z - 1e-9 and c not in ".-":
+                        hits.append(hb)
+                t += ctx.bpb
+        hits = sorted(set(round(h, 9) for h in hits))
+        for k, h in enumerate(hits):
+            end = hits[k + 1] if k + 1 < len(hits) else z
+            out.append(XEv(role, h, end - h, pitches, min(1.0, vel * (accent if k == 0 else 1.0)),
+                           gate=style.get("gate"), patch=patch, gain_db=float(style.get("gain_db", 0)),
+                           section=sec.name))
     return out
 
 
@@ -417,6 +501,8 @@ def _expand_part(ctx: _Ctx, sec, span: SectionSpan, role: str, spec) -> list[XEv
             return _rel_figure(ctx, sec, span, role, style, p_oct, patch)
         if style.shape == "hold":
             return _hold(ctx, sec, span, role, style, p_oct, patch)
+        if style.shape == "voiced":
+            return _voiced(ctx, sec, span, role, style, spec, p_oct, patch)
         return _arp(ctx, sec, span, role, style, spec, p_oct, patch)
     if spec.steps:
         if not is_kit:
@@ -475,4 +561,23 @@ def expand(song: Song) -> Arrangement:
     apply_mutes(parts, mutes)
     for p in parts:
         parts[p].sort(key=lambda e: (e.beat, e.piece or "", e.pitches))
+    _check_grid(song, ctx, parts)
     return Arrangement(song, ctx.tl, ctx.harm, ctx.ens, dict(parts), resolved, ctx.warnings)
+
+
+def _check_grid(song: Song, ctx: "_Ctx", parts) -> None:
+    """Every pitch must sit on the song's tuning grid; microtones need `tuning: 36edo`."""
+    for sp in ctx.harm.spans:
+        c = sp.chord
+        if c is not None and not all(on_grid(c.root + i, ctx.tuning) for i in (0, *c.intervals)):
+            raise SongError(f"chord {c.symbol} at beat {sp.start:g} is off the {ctx.tuning.name} grid",
+                            file=song.file, suggestion="golden/silver chords, sixth-step roots and alterations "
+                                                       "need `tuning: 36edo`")
+    for role, evs in parts.items():
+        for e in evs:
+            for m in e.pitches:
+                if not on_grid(m, ctx.tuning):
+                    raise SongError(f"part {role}: pitch {m:.3f} at beat {e.beat:g} is off the {ctx.tuning.name} grid",
+                                    file=song.file, section=e.section,
+                                    suggestion="sixth-step accidentals (^ v), golden/silver chords and golden "
+                                               "scales need `tuning: 36edo`")

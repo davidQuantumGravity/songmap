@@ -1,0 +1,4 @@
+instrument: clean
+description: "Pure sine tone; the reference for hearing beats and difference tones"
+tags: [clean, sine, reference]
+params: {partials: 1, attack: 0.03, release: 0.4}

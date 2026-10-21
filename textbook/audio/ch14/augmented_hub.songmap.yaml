@@ -1,0 +1,18 @@
+# The augmented triad C E G# and its six neighbours, each reached by moving one voice one semitone:
+# C (G#->G), Am (G#->A), E (C->B), C#m (C->C#), Ab (E->Eb), Fm (E->F).
+songmap: 0.2
+title: "The augmented hub"
+tempo: 88
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 14
+tail_seconds: 2.5
+instruments: {organ: clean/organ}
+mix: {organ: {gain_db: -5, send: {hall: 0.2}}}
+returns: {hall: {type: reverb, seconds: 2.0, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: hub
+    bars: 6
+    parts: {organ: {notes: "=mf [c,e,g#]4 [c,e,g]2. | [c,e,g#]4 [c,e,a]2. | [c,e,g#]4 [b-,e,g#]2. | [c,e,g#]4 [c#,e,g#]2. | [c,e,g#]4 [c,eb,g#]2. | [c,e,g#]4 [c,f,g#]2."}}
+master: clean

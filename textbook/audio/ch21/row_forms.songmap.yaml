@@ -1,0 +1,17 @@
+# ch21: the four basic forms of the row: P0, I0 (inversion), R0 (retrograde), RI0 (retrograde inversion).
+songmap: 0.2
+title: "Prime, inversion, retrograde, retrograde inversion"
+tempo: 120
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 21
+tail_seconds: 2
+instruments: {keys: clean/keys}
+mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+sections:
+  - {name: p0, bars: 2, parts: {keys: {notes: "c8 e a bb f eb f# c# d b g ab4"}}}
+  - {name: i0, bars: 2, parts: {keys: {notes: "c8 ab eb d g a f# b bb c# f e4"}}}
+  - {name: r0, bars: 2, parts: {keys: {notes: "ab8 g b d c# f# eb f bb a e c4"}}}
+  - {name: ri0, bars: 2, parts: {keys: {notes: "e8 f c# bb b f# a g d eb ab c4"}}}
+master: clean

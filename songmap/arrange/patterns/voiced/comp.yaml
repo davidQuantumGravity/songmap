@@ -1,0 +1,9 @@
+# Voice-led chords on a comping rhythm (1, and-of-2, 3, and-of-4) plus every chord change.
+style: comp
+voiced: true
+voices: 4
+range: [50, 74]
+rhythm: "x..x.x..x..x.x.."
+gate: 0.8
+accent: 1.15
+vel: 0.55

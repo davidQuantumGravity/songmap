@@ -1,0 +1,16 @@
+# ch21: the same row twice: first plainly in one octave, then spread over registers, with some notes grouped
+# as chords (E A; B C# D) and a varied rhythm. The order of pitch classes is unchanged.
+songmap: 0.2
+title: "One row, two surfaces"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 21
+tail_seconds: 3
+instruments: {keys: clean/keys}
+mix: {keys: {gain_db: -4, send: {hall: 0.3}}}
+sections:
+  - {name: plain, bars: 2, parts: {keys: {notes: "c8 e a bb f eb f# c# d b g ab4"}}}
+  - {name: texture, bars: 3, parts: {keys: {notes: "=mp c+8' r8 [e-,a-]4 r8 =f bb+8' =p f8 eb | =mf f#--2 [b,c#+,d+]4 =p g-4 | =pp ab1"}}}
+master: clean

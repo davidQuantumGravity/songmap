@@ -1,0 +1,16 @@
+# Ch. 27: the equal-third line on C: diminished (9), silver (10), golden (11), augmented (12), bronze (13).
+songmap: 0.2
+title: "The equal-third line"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2.5
+instruments: {organ: clean/organ}
+motifs:
+  line: {notes: "=mf [c,eb,f#]2 [c,^eb,vg] | [c,ve,^g]2 [c,e,g#] | [c,^e,va]1"}
+mix: {organ: {gain_db: -6}}
+sections:
+  - {name: line, bars: 3, parts: {organ: {motifs: [line]}}}
+master: clean

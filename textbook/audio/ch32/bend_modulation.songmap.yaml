@@ -1,0 +1,23 @@
+# ch32: from C major into C golden7 by bending. Cmaj7 -> Cg7 keeps C and B (the only notes
+# C major and C golden7 share) and bends the inner voices: E down and G up a sixth-step.
+# Then the golden pad takes over and a bell plays in golden7.
+songmap: 0.2
+title: "Bending into the golden world"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 325
+tail_seconds: 4
+instruments: {organ: clean/organ, gpad: clean/golden_pad, bell: clean/glass}
+motifs:
+  g7: {deg: "-1/4 0 2 4 | 6/2 7/2", octave: 5, key: "C golden7"}
+mix:
+  organ: {gain_db: -6, send: {hall: 0.2}}
+  gpad: {gain_db: -8, send: {hall: 0.3}}
+  bell: {gain_db: -6, send: {hall: 0.3}}
+sections:
+  - {name: rational, bars: 4, harmony: "C:1 F:1 G7:1 Cmaj7:1", parts: {organ: hold}}
+  - {name: bend, bars: 2, harmony: "Cmaj7:1 Cg7:1", parts: {organ: hold}}
+  - {name: golden, bars: 4, harmony: "Cg7:2 Cg:2", parts: {gpad: hold, bell: {motifs: [g7]}}}
+master: clean

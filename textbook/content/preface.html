@@ -1,0 +1,236 @@
+<section id="discovery">
+<h2>A scale from the golden ratio</h2>
+<p>Years ago, I discovered that a new musical scale could be built from the golden ratio.</p>
+<p>To see why that is strange, start with the numbers harmony is made of. They are the simplest numbers
+there are. The octave is the frequency ratio 2/1 and the perfect fifth is 3/2: they are the first steps of
+the harmonic series, the intervals between its first, second and third harmonics
+(<a href="ch:ch02#intervals-in-series">Chapter 2</a>). Simple ratios make simple patterns in time. Two tones
+an octave apart realign after every single cycle of the lower tone; two tones a fifth apart realign after
+every two cycles of the lower tone, while the upper one completes three. Their sum repeats exactly, over and
+over, and many of their overtones coincide, which is a large part of why we hear these intervals as the
+smoothest and most fused (<a href="ch:ch03#harmonicity">Chapter 3</a>).</p>
+<p>There is a precise way to measure how simple a number is: its <b>continued fraction</b>. Write the
+number as a whole number plus a remainder, write the remainder as one over something, and repeat with that
+something. For a ratio of whole numbers the process stops after finitely many steps; for an irrational
+number it never stops. The octave and the fifth stop at once:</p>
+$$2 = [2], \qquad \frac32 = 1 + \frac12 = [1; 2].$$
+<p>At the other extreme stands the golden ratio, $\varphi = (1+\sqrt5)/2 \approx 1.618$. It obeys
+$\varphi = 1 + 1/\varphi$, and substituting that equation into itself forever gives a continued fraction made
+of nothing but ones:</p>
+$$\varphi = 1 + \cfrac{1}{1 + \cfrac{1}{1 + \cfrac{1}{1+\cdots}}} = [1; 1, 1, 1, \ldots].$$
+<p>It never ends, and every term is the smallest a term can be. Large terms are what let a fraction
+approximate a number well: $\pi = [3; 7, 15, 1, 292, \ldots]$, and the 292 is why $355/113$ is within
+0.0000003 of $\pi$. A tail of ones is the opposite. In 1891 Adolf Hurwitz proved that every irrational number
+$x$ has infinitely many fractions $p/q$ closer to it than $1/(\sqrt5\,q^2)$, and that $\sqrt5$ cannot be
+replaced by anything larger, because for $\varphi$ a larger constant fails. In this precise sense $\varphi$ is
+the hardest of all numbers to approximate by fractions, which is why it is often called the <b>most
+irrational number</b>. (The numbers whose continued fractions end in an unbroken tail of ones share the
+record.) This is a theorem, not a figure of speech.</p>
+<p>Now comes the paradox. Cut that endless fraction of ones short, and the fractions you get are these:</p>
+<table>
+<tr><th>Stop after</th><th>Fraction</th><th>Interval</th><th>Cents</th><th>Distance from φ</th></tr>
+<tr><td>$[1]$</td><td>1/1</td><td>unison</td><td>0.00</td><td>833.09 c narrow</td></tr>
+<tr><td>$[1; 1]$</td><td>2/1</td><td>octave</td><td>1200.00</td><td>366.91 c wide</td></tr>
+<tr><td>$[1; 1, 1]$</td><td>3/2</td><td>perfect fifth</td><td>701.96</td><td>131.14 c narrow</td></tr>
+<tr><td>$[1; 1, 1, 1]$</td><td>5/3</td><td>major sixth</td><td>884.36</td><td>51.27 c wide</td></tr>
+<tr><td>$[1; 1, 1, 1, 1]$</td><td>8/5</td><td>minor sixth</td><td>813.69</td><td>19.40 c narrow</td></tr>
+<tr><td>$[1; 1, 1, 1, 1, 1]$</td><td>13/8</td><td></td><td>840.53</td><td>7.44 c wide</td></tr>
+<tr><td>$[1; 1, 1, 1, 1, 1, 1]$</td><td>21/13</td><td></td><td>830.25</td><td>2.84 c narrow</td></tr>
+<tr><td>never</td><td>φ</td><td><b>golden sixth</b></td><td>833.09</td><td>0</td></tr>
+</table>
+<p>These are ratios of consecutive Fibonacci numbers (1, 1, 2, 3, 5, 8, 13, 21, …), and they are the best
+fractional approximations of φ there are. The first of them are the unison, the octave, the perfect fifth,
+the major sixth and the minor sixth: intervals found among the first eight harmonics, and ones that centuries
+of practice have called consonant. (The octave and the fifth can be written with ones alone because
+$[1; 1] = 1 + 1/1 = 2$ and $[1; 1, 1] = 1 + 1/2$.) So the most irrational number is approached by the same
+staircase of fractions that harmony climbs. Each step overshoots or undershoots by less than the one before,
+by a factor that settles toward $\varphi^2 \approx 2.618$, and the waves of each step take longer to realign:
+after 1, 2, 3, 5, 8 and 13 cycles of the lower tone. At the top of the staircase, which is never reached,
+they never realign at all.</p>
+<p>I like to describe this, as a metaphor, as a kind of alchemy. The alchemists sought a philosopher's
+stone that would turn base metal into gold. Here the transformation runs between two kinds of gold: the
+rational gold of the simplest ratios, prized since antiquity, and the irrational gold of φ, which
+those same ratios approach forever and never reach. If tuning has a philosopher's stone, it lies at the end
+of an infinite staircase of fractions. That is poetry; the staircase itself is mathematics, and every number
+on it can be checked. Listen to it: each interval below is one step up the staircase, and the last is the
+golden ratio itself. (The piano rolls in this preface show the nearest notes of 36-ET, the tuning introduced
+below, which has three notes to every semitone; ^ and v mark a third of a semitone up or down.)</p>
+<audio-ex src="fibonacci_staircase" caption="Middle C with a second note at 2/1, 3/2, 5/3, 8/5, 13/8 and 21/13, then exactly φ: the upper note swings above and below, by less each time, until the last steps are hard to tell apart."></audio-ex>
+<pianoroll edo="36" notes="C4 C5 ; C4 G4 ; C4 A4 ; C4 Ab4 ; C4 ^Ab4 ; C4 ^Ab4 ; C4 ^Ab4" labels="2/1 ; 3/2 ; 5/3 ; 8/5 ; 13/8 ; 21/13 ; φ" title="The Fibonacci staircase on C4, nearest 36-ET notes (13/8, 21/13 and φ all round to ^A♭)"></pianoroll>
+<p>φ as an interval, 833.09 cents, is a sixth a little wider than a minor sixth (800 cents) and narrower than
+a major sixth (900 cents). I started calling it the <b>golden sixth</b>. Turned upside down within the
+octave, it becomes $2/\varphi \approx 1.236$, a third of 366.91 cents: wider than a minor third, narrower than
+a major one. That is the <b>golden third</b>.</p>
+<p>Then I stacked two golden thirds on top of each other. The triad that came out, with frequencies in
+the proportion $1 : 2/\varphi : 4/\varphi^2$, sounded decent and mysterious to me. It was better than a
+diminished chord, perhaps even angelic. Here is that path in sound: the golden sixth, the golden third,
+the golden triad, then an ordinary diminished triad for comparison, then the golden triad once more.</p>
+<audio-ex src="golden_triad" caption="Exact golden ratios on middle C: the golden sixth, the golden third, the golden triad; then a 12-ET diminished triad, then the golden triad again. Compare how the two three-note chords settle."></audio-ex>
+<pianoroll edo="36" notes="C4 ^Ab4 ; C4 vE4 ; C4 vE4 ^G4 ; C4 Eb4 Gb4 ; C4 vE4 ^G4" labels="sixth ; third ; golden ; dim ; golden" title="The example at its nearest 36-ET notes (the golden notes sound exactly)"></pianoroll>
+<p>A chord is not yet a scale. Building a scale starts with an old idea. The scale that tradition
+attributes to Pythagoras rests on a near coincidence: twelve perfect fifths almost equal seven octaves. A fifth multiplies a frequency
+by 3/2, so twelve of them multiply it by $(3/2)^{12} \approx 129.75$, while seven octaves multiply it by
+$2^7 = 128$. Stack fifths, fold them back into one octave, stop once you have twelve notes, and you have the
+chromatic scale (<a href="ch:ch05#stacking">Chapter 5</a>).</p>
+<p>The golden sixth has a near coincidence of its own. Thirteen golden sixths come very close to
+nine octaves: $\varphi^{13} \approx 521.0$, against $2^9 = 512$. So a <b>golden Pythagorean scale</b>
+with 13 notes can be defined exactly the way Pythagoras' 12-note scale is: stack the generator, fold into
+the octave, stop when you nearly come home. The small overshoot, the <b>golden comma</b> of 30.17 cents,
+plays the same role as the Pythagorean comma of 23.46 cents. (How well a stack of golden sixths closes on
+the octave is governed not by φ's all-ones continued fraction but by a different number, the golden sixth's
+size as a fraction of an octave, whose continued fraction is not all ones;
+<a href="ch:ch23#phi">Chapter 23</a> keeps the two questions apart.)</p>
+<table>
+<tr><th></th><th>Pythagorean</th><th>Golden Pythagorean</th></tr>
+<tr><td>Generator</td><td>fifth 3/2 = 701.96 c</td><td>golden sixth φ = 833.09 c</td></tr>
+<tr><td>Near coincidence</td><td>12 fifths ≈ 7 octaves</td><td>13 golden sixths ≈ 9 octaves</td></tr>
+<tr><td>Comma</td><td>$(3/2)^{12}/2^7$ = 23.46 c</td><td>$\varphi^{13}/2^9$ = 30.17 c</td></tr>
+<tr><td>Scale</td><td>12 notes</td><td>13 notes (golden13)</td></tr>
+</table>
+<p>The full construction, with its two kinds of semitone and its smaller scales (including a seven-note
+golden "diatonic"), is in <a href="ch:ch23#chain">Chapter 23</a>.</p>
+</section>
+
+<section id="averaging">
+<h2>Between major and minor</h2>
+<p>Then I realized something about where the golden third sits. It lies between a major third and a
+minor third, and not halfway: almost exactly two thirds of the way toward major. The golden third is,
+very nearly, <b>two parts major third and one part minor third</b>. The arithmetic is short. A major
+third is 400 cents and a minor third 300, so two thirds major plus one third minor is
+$\tfrac23\cdot 400 + \tfrac13\cdot 300 \approx 366.67$ cents, only 0.24 cents from the golden third's
+366.91. The golden fifth (two golden thirds, 733.82 cents) behaves the same way: it is very nearly two
+parts perfect fifth (700 cents) and one part augmented fifth (800 cents), which gives 733.33.</p>
+<p>That observation turned out to be the seed of everything else in this book. Stated as a rule, it is
+the <b>averaging principle</b>: the golden triad on C, written <b>Cg</b>, is the average of three
+familiar triads on the same root, C major, C minor and C augmented, taken voice by voice:</p>
+<p style="text-align:center"><b>Cg = (C + Cm + Caug) / 3</b>.</p>
+<p>The roots are all C. The thirds are major, minor and major, and their average is the golden third.
+The fifths are perfect, perfect and augmented, and their average is the golden fifth. Listen to the three
+parents, then to their average, then to the golden triad moving between C major and C minor.</p>
+<audio-ex src="between" caption="C major, C minor, C augmented, then their average Cg; then C – Cg – Cm – Cg – C. Follow the top voice (the third) and the tenor (the fifth): Cg is where they meet in between."></audio-ex>
+<pianoroll edo="36" notes="C3 G3 C4 E4 ; C3 G3 C4 Eb4 ; C3 Ab3 C4 E4 ; C3 ^G3 C4 vE4" labels="C ; Cm ; Caug ; Cg" title="Three parents and their average"></pianoroll>
+<p>In the tuning this book uses, 36-tone equal temperament (36-ET), the octave is divided into 36 equal
+<b>sixth-steps</b> of 33.33 cents each, a third of a semitone. Counted in sixth-steps above C, the major
+third is 12, the minor third 9, the perfect fifth 21 and the augmented fifth 24. The averages come out
+as whole numbers: the third is $(12+12+9)/3 = 11$ and the fifth is $(21+21+24)/3 = 22$. So in 36-ET the
+golden triad is exactly C, a note one sixth-step below E (written vE), and a note one sixth-step above
+G (written ^G). The same averaging with the dark triads, C major, C minor and C diminished, gives a
+second new chord, the <b>silver</b> triad. Chapter 25 develops the principle in full
+(<a href="ch:ch25#averaging">The averaging principle</a>).</p>
+</section>
+
+<section id="unification">
+<h2>36-ET: three Western systems and the golden one</h2>
+<p>Pythagorean tuning has a practical problem: its comma never goes away, so some keys sound sweet and
+others sour. The eventual Western answer was <b>equal temperament</b>, which divides the octave into 12
+equal semitones and spreads the comma evenly over all the fifths. Each fifth comes out about 2 cents
+narrow, and in exchange every key is the same. Just as equal temperament approximates Pythagoras' scale,
+<b>36-ET approximates the 13-note golden Pythagorean scale</b>. Its golden sixth is 25 sixth-steps,
+833.33 cents, within 0.24 cents of the exact 833.09. Across the whole 13-note scale, centred on C, no
+note is more than about one and a half cents from its exact golden value.
+(Equal temperament has its own history, told in <a href="ch:ch07#equal">Chapter 7</a>.)</p>
+<p>Something else came with this choice. Because 36 is three times 12, 36-ET contains ordinary 12-ET
+exactly, and alongside it two more complete copies, one shifted up a sixth-step and one shifted down. I
+call these the three <b>layers</b>. That gives a tonal system with three copies of standard Western
+harmony, every chord and key you know, plus the golden chords that thread between them. A golden triad
+always has exactly one note on each layer: in Cg, the C is on the ordinary layer, ^G on the upper one
+and vE on the lower one.</p>
+<pc-circle edo="36" marks="0 3 6 8 11 14 17 19 22 25 28 30 33" title="golden13 on C inside the 36 pitch classes of 36-ET"></pc-circle>
+<p>Not only can we now change key between different golden Pythagorean scales, all of these scales
+also unify with that triple Western system. The golden13 scale has 36 distinct transpositions, and
+36-ET also carries 72 ordinary major and minor keys, 24 on each layer. Chapter 24 explains the notation
+and the key system (<a href="ch:ch24#keys">The key system</a>).</p>
+<aside class="box history">Dividing the octave into sixth-tones is not new. Ferruccio Busoni, in
+<i>Sketch of a New Esthetic of Music</i> (1907), proposed dividing the whole tone into thirds and
+combining two such series, which amounts to 36-ET, and Alois Hába composed in quarter-, third- and
+sixth-tones in the 1920s and 1930s. What is new here is the reason for 36: it is the tuning that both
+closes the golden chain and contains 12-ET. See <a href="ch:ch22#microtonal">the microtonal
+pioneers</a> and <a href="ch:ch24#why-36">Why 36</a>.</aside>
+</section>
+
+<section id="why-now">
+<h2>Why now: exploring with a machine</h2>
+<p>For years, I lacked the motivation to explore the system much further than a few basic MIDI files
+and a notebook scribbled with chord progressions that I had never heard. It was a whole new palette of
+sound that I conjectured should sound "good", based on mathematics whose intuition runs against
+intuition. Rational ratios sound good, so the most irrational number should sound bad! Music is
+built on symmetry, yet the major chord stacks a major third and a minor third asymmetrically, while the
+symmetric diminished chord, two equal minor thirds, is the most dissonant of the common triads. The truth
+is more subtle than either slogan, and perhaps golden tones are here to stay.</p>
+<p>Then I realized that with AI I could simply teach a machine my notions of music theory, and explore
+mathematically every tasteful chord transition allowed by the rules of voice leading, harmony, melody and
+counterpoint. It could then derive new chord progressions. It could write code to create synthesizers
+and drums. It could write music from scratch in my new tonal system, the <b>golden tonal system</b>.
+With AI, I am empowered to forge paths into a new realm of microtonal music that tastefully extends
+standard Western harmony with new colors. I could have sat down and worked it out in under 40 hours at
+any point over the past decade, but I never did. Now it takes a few minutes of human time and a few
+hours of computation.</p>
+<p>Here is one result: a lullaby whose phrases all end on the golden cadence that the voice leading
+itself picks out between the dominant and the tonic.</p>
+<audio-ref file="P01b_lullaby_in_gold.mp3" caption="A lullaby that ends every phrase on the golden six-four: listen at each phrase ending for the quick golden chords just before the tonic arrives."></audio-ref>
+<p>A machine is fast, but speed is not trust. Every number in this book was computed by code, every
+theorem was proved or checked exhaustively, and every measurement says which model it depends on. The
+division of labor, and what a machine cannot judge, is the subject of
+<a href="ch:ch39#verification">Chapter 39</a>.</p>
+</section>
+
+<section id="origins">
+<h2>Origins: bliss, brain waves and an argument</h2>
+<p>It is worth telling how I came to this scale in the first place, because it did not start with
+music theory. It started with someone claiming that bliss occurs when the brain is in a state of
+harmony, with its brain waves in the golden ratio to one another. When I asked a neuroscientist about
+this, he said, angrily, that it was the worst idea he had heard, since harmonics (rational ratios) lead
+to states of epilepsy. A seizure does involve abnormally synchronized brain activity, so his worry was
+about locking: rhythms in simple ratios fall into step with one another.</p>
+<p>That argument stayed with me, and it pointed the other way too. Tones in golden ratio never fall
+into step. Because φ is irrational, they never realign into a common period, and because φ is provably
+the hardest number to approximate by fractions (Hurwitz, 1891), it is the ratio that resists
+near-realignment most. Irrational ratios sounding together
+make their overtones beat restlessly against one another, and golden chords are <b>measurably among the least stable
+chords</b>: with ordinary instrument tones, a standard roughness model (Sethares') rates the golden triad rougher
+than major, minor and augmented triads, though smoother than the diminished triad.</p>
+<table>
+<tr><th>Triad on C4</th><th>major</th><th>minor</th><th>augmented</th><th>golden</th><th>diminished</th></tr>
+<tr><td>Roughness, harmonic tones</td><td>1.32</td><td>1.34</td><td>1.45</td><td><b>1.50</b></td><td>1.67</td></tr>
+</table>
+<p>That does not make them bad. It means they are meant to be <b>passing chords</b>, and that is how
+most of this book uses them: as colors between familiar chords. With a different kind of tone, built
+from golden rather than harmonic overtones, the ranking flips and the golden triad becomes the smoothest
+chord measured (<a href="ch:ch26#timbre-flip">the timbre flip</a>).</p>
+<p>And in life, we are always passing through different states of mind. Perhaps it helps to have the
+chaotic activation energy of unstable overtones in our brain? If binaural beats can draw the brain toward
+particular frequencies, then perhaps a new musical system can induce states of bliss, or inspire others
+to find the best way to do it. Even if all of this is wrong, it led, by happy accident, to a new form of
+art based on mathematical principles.</p>
+<aside class="box note"><b>What is established and what is not.</b> That φ is the hardest number to
+approximate by fractions is a <i>theorem</i>. The roughness figures above are <i>measurements</i>: they
+depend on a model of hearing and on the tone color. The idea that golden harmony could encourage a
+blissful state is my <i>hypothesis</i>, the motivation for this work, not an established result. Research
+on binaural beats is mixed (a 2019 meta-analysis found small effects on anxiety, memory and attention),
+and a published hypothesis that brain-rhythm bands are spaced near the golden ratio (Pletzer, Kerschbaum
+and Klimesch, 2010) remains a hypothesis. <a href="ch:ch34#conjecture">Chapter 34</a> states the
+conjecture carefully and <a href="ch:ch34#testing">proposes how to test it</a>.</aside>
+</section>
+
+<section id="ears">
+<h2>The evolving ear</h2>
+<p>Yes, golden harmony is dissonant. But considering its irrational foundation, it is remarkable, in my
+opinion, that it sounds as good as it does. It is foreign to our ears, and foreign is not the same as
+wrong.</p>
+<p>Our ears have changed before. In the ninth and tenth centuries, singers of early medieval
+<i>organum</i> added a second voice to a chant melody in parallel fourths and fifths. To those ears, the
+major triad, which we now hear as the very picture of rest, would probably have sounded strange. Over the
+centuries listeners learned to hear thirds as consonances, then sevenths and ninths as colors, and today
+we even hear polyrhythms in pop music from time to time. The human ear has evolved to take in more
+complex structures over time. In the future, our ears may evolve to enjoy more sophisticated music with a
+wider emotional range. This example compresses that history into half a minute: parallel fifths, then
+triads, then the same triads with golden passing chords.</p>
+<audio-ex src="ears" caption="Parallel fifths in the style of early organum; then C–F–G–C in triads; then the same cadence with golden passing chords. Listen for the short sliding chords between the familiar ones."></audio-ex>
+<p>Chapter 35 tells that story properly, from organum to extended harmony
+(<a href="ch:ch35#organum">Organum and the perfect consonances</a>), and asks whether golden tones
+could be a next color (<a href="ch:ch35#next-color">A next color</a>).</p>
+<p>When I first drafted this preface, I closed by wishing I could attach an mp3 file so you could hear
+what I meant. The audio examples throughout this book are that wish fulfilled: every idea you read
+about, you can also hear.</p>
+<p style="text-align:right"><i>David Chester</i><br>October 2026</p>
+</section>

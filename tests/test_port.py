@@ -7,6 +7,7 @@
 """
 import json
 import os
+import sys
 
 import pytest
 
@@ -39,8 +40,13 @@ def test_every_note_matches_synth_v0(port):
     assert pc.compare_params(arr, pc.SONGS[name][0]) == []
 
 
-@pytest.mark.parametrize("path", sorted(
-    os.path.join(dp, f) for dp, _, fs in os.walk(os.path.join(ROOT, "examples")) for f in fs if f.endswith(".yaml")))
+def _locked_songs():
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    import update_golden
+    return update_golden.songs()
+
+
+@pytest.mark.parametrize("path", _locked_songs())
 def test_golden_event_hashes(path):
     import update_golden
     golden = os.path.join(update_golden.GOLDEN, update_golden.golden_name(path))

@@ -1,0 +1,18 @@
+# Reading, notation: a 12-ET C major triad, then the same letters bent by ^ and v (C vE ^G = Cg).
+songmap: 0.2
+title: "C E G, then C vE ^G"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2
+instruments: {organ: clean/organ}
+mix: {organ: {gain_db: -6}}
+sections:
+  - name: compare
+    bars: 4
+    harmony: "N.C.:4"
+    parts:
+      organ: {notes: "c4 e g r | [c,e,g]1 | c4 ve ^g r | [c,ve,^g]1"}
+master: clean

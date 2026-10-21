@@ -1,0 +1,8 @@
+# Four-part voice-led chords, struck on each chord change and held until the next.
+# Voice leading is the smoothest motion in the song's tuning: in 36edo the passing chords of a
+# progression (~g placeholders) come out as the sub-chromatic lines of docs/GOLDEN_THEORY.md.
+style: hold
+voiced: true
+voices: 4
+range: [50, 74]
+gate: 1.0

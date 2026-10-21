@@ -1,0 +1,18 @@
+# Ch. 6, modes: one tune written in scale degrees (0 = tonic), played in C Ionian, C Dorian,
+# C Phrygian and C Mixolydian over a C drone. Only the key changes; the degree numbers are the same.
+songmap: 0.2
+title: "One tune, four modes"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {lead: clean/lead, drone: clean/organ}
+mix: {lead: {gain_db: -5}, drone: {gain_db: -12}}
+sections:
+  - {name: ionian,     bars: 2, key: "C ionian",     harmony: "N.C.:2", parts: {lead: {deg: "0/8 1 2 4 5/4 4/8 2 | 1/4 -1 0/2"}, drone: {notes: "[c-,g-]1 | [c-,g-]1"}}}
+  - {name: dorian,     bars: 2, key: "C dorian",     harmony: "N.C.:2", parts: {lead: {deg: "0/8 1 2 4 5/4 4/8 2 | 1/4 -1 0/2"}, drone: {notes: "[c-,g-]1 | [c-,g-]1"}}}
+  - {name: phrygian,   bars: 2, key: "C phrygian",   harmony: "N.C.:2", parts: {lead: {deg: "0/8 1 2 4 5/4 4/8 2 | 1/4 -1 0/2"}, drone: {notes: "[c-,g-]1 | [c-,g-]1"}}}
+  - {name: mixolydian, bars: 2, key: "C mixolydian", harmony: "N.C.:2", parts: {lead: {deg: "0/8 1 2 4 5/4 4/8 2 | 1/4 -1 0/2"}, drone: {notes: "[c-,g-]1 | [c-,g-]1"}}}
+master: clean

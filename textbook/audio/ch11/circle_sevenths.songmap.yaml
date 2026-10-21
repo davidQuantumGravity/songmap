@@ -1,0 +1,21 @@
+# iii7 vi7 ii7 V7 Imaj7: roots fall by fifths E A D G C.
+songmap: 0.2
+title: "Falling fifths with sevenths"
+tempo: 88
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {chords: clean/organ, bass: clean/bass, lead: clean/lead}
+mix: {chords: {gain_db: -7, send: {hall: 0.25}}, bass: {gain_db: -4}, lead: {gain_db: -5, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 6
+    harmony: "Em7:1 Am7:1 Dm7:1 G7:1 Cmaj7:2"
+    parts:
+      chords: hold
+      bass: {style: roots, role: bass}
+      lead: top
+master: clean

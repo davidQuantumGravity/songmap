@@ -1,0 +1,337 @@
+<section id="circle-progressions">
+<h2>Circle progressions</h2>
+<div class="layer hear">
+<p>Some progressions seem to roll downhill by themselves. Start on E minor and let each chord's root fall a
+fifth: E to A, A to D, D to G, G to C. Every chord prepares the next, the way V prepares I, and the whole chain
+feels inevitable. With seventh chords the effect is even stronger, and it is one of the main engines of jazz
+standards and Baroque sequences alike.</p>
+<audio-ex src="circle_sevenths" caption="Em7, Am7, Dm7, G7, Cmaj7: each root falls a fifth, as V falls to I, until the last chord arrives home."></audio-ex>
+<pianoroll edo="12" notes="E3 G3 B3 D4 ; A2 G3 C4 E4 ; D3 F3 A3 C4 ; G2 F3 B3 D4 ; C3 E3 G3 B3" labels="Em7 ; Am7 ; Dm7 ; G7 ; Cmaj7" title="Falling fifths: each seventh falls to the next third"></pianoroll>
+<p>Keep falling by fifths inside the key and you pass through all seven diatonic chords before you come home,
+with one slightly odd step on the way: F to B diminished.</p>
+<audio-ex src="diatonic_circle" caption="The diatonic circle of fifths: C, F, B diminished, E minor, A minor, D minor, G, C."></audio-ex>
+</div>
+<div class="layer understand">
+<p>A <b>circle progression</b> is a progression whose roots move by falling fifths (equivalently, rising
+fourths). The model is V → I: the root of each chord is a fifth above the root of the next, so each chord can
+act like a dominant of its successor.</p>
+<p><b>The diatonic circle.</b> Inside C major, falling fifths from C visit</p>
+<p style="text-align:center">C → F → B → E → A → D → G → C &nbsp; (I → IV → vii° → iii → vi → ii → V → I)</p>
+<p>Six of the seven steps are perfect fifths; F → B is a diminished fifth (6 semitones), because the key has only
+one tritone. The second half of the chain, vi – ii – V – I (or iii – vi – ii – V – I), is the backbone of
+countless endings.</p>
+<pc-circle edo="12" marks="0 2 4 5 7 9 11" path="0 5 11 4 9 2 7 0" title="Roots of the diatonic circle on the chromatic circle"></pc-circle>
+<p><b>Why it flows.</b> Two triads a fifth apart share one note (the root of the first is the fifth of the
+second), and the other voices move by step. With seventh chords there is an extra pull: the seventh of each
+chord falls by step to the third of the next. In Dm7 → G7 the seventh C falls to B; in G7 → Cmaj7 the seventh F
+falls to E. A chain of sevenths is therefore a chain of small resolutions, each of which creates the next
+dissonance.</p>
+<p><b>Sequences.</b> When a short pattern repeats at successively lower pitch levels, the result is a
+<b>sequence</b>. The circle of fifths is a favorite harmonic plan for sequences in Baroque music, and the
+same chain of ii7 – V7 – I motions, often moving through several keys, is a staple of jazz.</p>
+<aside class="mirror">The golden system has its own circle. Stepping the golden triad's root by a golden third
+(11 sixth-steps) walks through all 36 golden triads, Cg → vEg → ^Gg → Bg → …, keeping two notes each time and
+moving one voice by a semitone, exactly as falling fifths keep one note and move the others by step. See
+<a href="ch:ch31#circle">the golden circle</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Proposition.</b> Falling fifths within a diatonic scale visit all seven degrees before returning, and
+exactly one of the seven steps is a diminished fifth.</p>
+<p><b>Proof.</b> In scale-degree numbers ($\mathbb{Z}_7$), a falling fifth is $-4 \equiv +3$. Since
+$\gcd(3, 7) = 1$, repeated steps of 3 visit every degree. In semitones the seven fifths of the scale (C–G, D–A,
+E–B, F–C, G–D, A–E, B–F) are perfect (7) except B–F (6); in any listing of the chain, each appears once, so the
+roots travel $6 \cdot 7 + 6 = 48$ semitones, exactly four octaves. $\square$</p>
+<p><b>Sevenths resolve by step.</b> Count in scale degrees mod 7. A chord on degree $j$ has its seventh on $j + 6 \equiv j - 1$. The next chord of the chain is on $j + 3$, and its third is on $j + 5 \equiv j - 2$. So the seventh of each chord lies one scale step above the third of the next, and falls to it by step (a semitone or a whole tone). $\square$</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 11.1.</b> Write the root sequence of a falling-fifth chain of dominant seventh chords starting on
+E7, and say after how many chords it returns to E7. Why does this chain leave the key, unlike the diatonic
+circle?</p>
+<details class="answer"><summary>Answer</summary><p>E7 A7 D7 G7 C7 F7 B♭7 E♭7 A♭7 D♭7 G♭7 B7, then E7: twelve
+chords, because 5 (a rising fourth) generates $\mathbb{Z}_{12}$. Dominant sevenths keep their quality at every
+step, so they need chromatic notes; the diatonic circle instead uses each chord of the key, changing quality as
+it goes, and closes after seven.</p></details>
+</div>
+</section>
+
+<section id="common">
+<h2>The common progressions</h2>
+<div class="layer hear">
+<p>A handful of chord patterns carry an enormous amount of music. You may recognize these three within a bar or two: the four-chord pattern of modern pop, the "doo-wop" loop of 1950s ballads, and the descending
+Andalusian line of flamenco.</p>
+<audio-ex src="common_progressions" caption="I–V–vi–IV (C, G, Am, F), then I–vi–IV–V (C, Am, F, G), then the Andalusian descent in A minor (Am, G, F, E)."></audio-ex>
+<p>Two more are the grammar of whole genres: the twelve-bar blues, built from three dominant seventh chords, and
+the ii–V–I of jazz, the falling-fifth chain in its shortest form.</p>
+<audio-ex src="blues" caption="A twelve-bar blues in C. The changes arrive in bars 2, 3, 5, 7, 9, 10, 11 and 12: listen for the pull back to C7 each time."></audio-ex>
+<audio-ex src="ii_V_I" caption="Dm7, G7, Cmaj7; the same again twice as fast; then a turnaround Em7, A7, Dm7, G7 that leads back to the beginning."></audio-ex>
+</div>
+<div class="layer understand">
+<table>
+<tr><th>Name</th><th>Roman numerals</th><th>In C (or A minor)</th><th>Typical setting</th></tr>
+<tr><td>authentic phrase</td><td>I – IV – V – I</td><td>C F G C</td><td>hymns, folk, classical</td></tr>
+<tr><td>"pop axis"</td><td>I – V – vi – IV</td><td>C G Am F</td><td>pop and rock; its rotation vi – IV – I – V is also common</td></tr>
+<tr><td>"doo-wop" or "'50s"</td><td>I – vi – IV – V</td><td>C Am F G</td><td>1950s ballads</td></tr>
+<tr><td>jazz cadence</td><td>ii7 – V7 – Imaj7</td><td>Dm7 G7 Cmaj7</td><td>jazz standards</td></tr>
+<tr><td>circle descent</td><td>iii – vi – ii – V – I</td><td>Em Am Dm G C</td><td>Baroque sequences, standards</td></tr>
+<tr><td>twelve-bar blues</td><td>I7 IV7 I7 I7 | IV7 IV7 I7 I7 | V7 IV7 I7 V7</td><td>C7 F7 C7 C7 | F7 F7 C7 C7 | G7 F7 C7 G7</td><td>blues, early rock and roll</td></tr>
+<tr><td>Andalusian</td><td>i – ♭VII – ♭VI – V</td><td>Am G F E</td><td>flamenco, many minor-key songs</td></tr>
+<tr><td>Mixolydian</td><td>I – ♭VII – IV – I</td><td>C B♭ F C</td><td>rock</td></tr>
+<tr><td>Pachelbel</td><td>I – V – vi – iii – IV – I – IV – V</td><td>C G Am Em F C F G</td><td>Johann Pachelbel's Canon in D (late 17th century; the exact date is unknown)</td></tr>
+<tr><td>"royal road"</td><td>IVmaj7 – V7 – iii7 – vi</td><td>Fmaj7 G7 Em7 Am</td><td>Japanese pop</td></tr>
+</table>
+<p>(The blues in the example uses the common "quick change" variant, with IV7 in the second bar.) Notice what
+these progressions share. All of them are built from the T – S – D families of
+<a href="ch:ch10#tonic">Chapter 10</a>, and most of them alternate root motions by fifth with motions by third
+or step. The blues shows how flexible function is: its I7 is a dominant seventh chord
+that is nevertheless heard as home, and its V7 often moves to IV7, a "backward" motion that classical harmony
+avoids.</p>
+<p><b>Smoothness.</b> Measured as the smallest total motion of three voices (semitones moved per change, every
+voice choosing its nearest note), one full cycle of I–V–vi–IV costs 3 + 5 + 1 + 3 = 12 semitones, I–vi–IV–V
+2 + 1 + 6 + 3 = 12, and I–IV–V–I 3 + 6 + 3 = 12. The step IV → V (6) is the largest: the roots are a step apart, the chords share no note, and all three voices move a whole tone. ii → V costs only 4, one reason ii so often takes IV's place before V.</p>
+<pianoroll edo="12" notes="C4 E4 G4 ; B3 D4 G4 ; C4 E4 A4 ; C4 F4 A4 ; C4 E4 G4" labels="I ; V ; vi ; IV ; I" title="I–V–vi–IV with the smallest motions: 3 + 5 + 1 + 3"></pianoroll>
+<aside class="mirror">Every progression here has golden versions in 36-ET, in which golden passing chords are
+inserted where the passing-chord theorems allow. In the pop axis, for example, the step G → Am can pass through the two golden chords of the golden deceptive cadence, C – G – vA♭g – A♭g – Am – F (the generated dictionary of <a href="ch:ch28#dictionary">Chapter 28</a> gives a fuller version with passing chords in every change); the Andalusian becomes the
+<b>golden Andalusian</b>, Am – A♭g – vA♭g – G – ^F♯g – vF♯g – F – vF – ^E – E. See
+<a href="ch:ch29#staircase">the golden staircase and the Andalusian</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Rotations.</b> A looping progression has no first chord in itself; the starting point is set by phrasing
+and by where the tonic falls. I–V–vi–IV and vi–IV–I–V are rotations of the same cycle, and so are I–vi–IV–V and
+IV–V–I–vi. The two cycles are not rotations of each other: their root motions (in semitones, mod 12) are
+$(+7, +2, +8, +7)$ and $(+9, +8, +2, +5)$.</p>
+<p><b>Voice-leading cost.</b> For triads $X$ and $Y$ in three voices, the cost is
+$\min_\sigma \sum_i |x_i - y_{\sigma(i)}|$, each difference taken as the shortest distance mod 12. The values
+quoted above were computed this way over all six assignments $\sigma$. For example
+V → vi (G B D → A C E) costs 5: G → A, B → C, D → E.</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 11.2 (listening).</b> In the first example, the Andalusian section ends on E major in A minor.
+Is that ending a full stop, a comma or a surprise, in the terms of Chapter 10?</p>
+<details class="answer"><summary>Answer</summary><p>E is V of A minor, so the phrase ends with a half cadence: a
+comma. The E major chord contains G♯, the leading tone of A minor, which is why the loop wants to start over on
+A minor.</p></details>
+</div>
+</section>
+
+<section id="secondary">
+<h2>Secondary dominants</h2>
+<div class="layer hear">
+<p>Any major or minor chord of a key can be made to sound, for a moment, like a little home of its own. The trick
+is to put its dominant in front of it. In C major, E7 before A minor makes A minor sound like a brief arrival;
+A7 before D minor does the same for D minor; D7 before G makes G sound like a tonic. Chain them and the music
+gains momentum without ever leaving C.</p>
+<audio-ex src="secondary" caption="C, E7, A minor, A7, D minor, D7, G7, C. Each secondary dominant (E7, A7, D7) borrows one note from outside the key (G-sharp, C-sharp, F-sharp) and resolves like a dominant."></audio-ex>
+<pianoroll edo="12" notes="G3 C4 E4 ; G#3 B3 D4 E4 ; A3 C4 E4 ; A3 C#4 E4 G4 ; A3 D4 F4 ; A3 C4 D4 F#4 ; G3 B3 D4 F4 ; G3 C4 E4" labels="C ; E7 ; Am ; A7 ; Dm ; D7 ; G7 ; C" title="A chain of secondary dominants"></pianoroll>
+</div>
+<div class="layer understand">
+<p>A <b>secondary dominant</b> is the dominant (V or V7) of a chord other than the tonic, written V/x ("five of
+x"). Playing it before x and resolving into x is called <b>tonicization</b>: x is treated briefly as a tonic,
+without a real change of key.</p>
+<table>
+<tr><th>Target</th><th>Secondary dominant</th><th>Notes</th><th>Note outside C major</th></tr>
+<tr><td>ii (Dm)</td><td>V7/ii = A7</td><td>A C♯ E G</td><td>C♯ (leading tone of D)</td></tr>
+<tr><td>iii (Em)</td><td>V7/iii = B7</td><td>B D♯ F♯ A</td><td>D♯ and F♯</td></tr>
+<tr><td>IV (F)</td><td>V7/IV = C7</td><td>C E G B♭</td><td>B♭ (the seventh)</td></tr>
+<tr><td>V (G)</td><td>V7/V = D7</td><td>D F♯ A C</td><td>F♯ (leading tone of G)</td></tr>
+<tr><td>vi (Am)</td><td>V7/vi = E7</td><td>E G♯ B D</td><td>G♯ (leading tone of A)</td></tr>
+</table>
+<p>There is no V/vii°, because a diminished triad cannot act as a tonic. Secondary leading-tone chords work the
+same way: vii°7/V = F♯dim7 (F♯ A C E♭) before G.</p>
+<p>V/V is so common that it is often treated as a normal part of the cadence: ii – V/V – V – I, or, in the
+classical cadence, IV – V/V – I⁶₄ – V – I. Chains of secondary dominants, each resolving into the next
+(E7 – A7 – D7 – G7 – C), are circle progressions made entirely of dominant sevenths.</p>
+<aside class="mirror">The golden ii–V–I adds golden passing chords on the way: Dm – Dg – vGg/D – G –
+vE♭T13/G – vCg/G – C. The first pair, two golden chords in a row over a held D, needs the natural paths of System 2, because ii and V have opposite qualities and System 1 offers no golden chord between them; the second pair is the golden six-four. See <a href="ch:ch29#authentic">the golden authentic cadence</a> and <a href="ch:ch28#uneven">uneven splits</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Construction.</b> For a target triad with root $t$, V7/t is the dominant seventh on $t + 7$:
+$\{t+7,\ t+11,\ t+2,\ t+5\}$. Its third $t + 11 = t - 1$ is the leading tone of $t$, and its seventh $t + 5$
+falls to the target's third ($t + 4$ or $t + 3$). Comparing with the C major scale $\{0, 2, 4, 5, 7, 9, 11\}$:</p>
+<ul>
+<li>for $t = 2, 7, 9$ (ii, V, vi) the only foreign note is the leading tone $t - 1$ (C♯, F♯, G♯);</li>
+<li>for $t = 4$ (iii) the chord B D♯ F♯ A has two foreign notes;</li>
+<li>for $t = 5$ (IV) the leading tone is E, already in the key, and the foreign note is the seventh, B♭;</li>
+<li>for $t = 11$ the target is diminished and V/vii° is not used.</li>
+</ul>
+</div>
+<div class="exercise">
+<p><b>Exercise 11.3.</b> In G major, spell V7/ii, V7/V and V7/vi.</p>
+<details class="answer"><summary>Answer</summary><p>ii = Am, so V7/ii = E7 (E G♯ B D). V = D, so V7/V = A7
+(A C♯ E G). vi = Em, so V7/vi = B7 (B D♯ F♯ A).</p></details>
+</div>
+</section>
+
+<section id="borrowed">
+<h2>Borrowed chords and modal mixture</h2>
+<div class="layer hear">
+<p>Major and minor keys on the same tonic, C major and C minor, can lend each other chords. A major-key song that
+suddenly uses F minor instead of F major gets a shadow of sadness; one that goes C – A♭ – B♭ – C gets a heroic,
+cinematic lift. And a minor-key piece that ends on a major chord sounds like a door opening onto light.</p>
+<audio-ex src="borrowed" caption="C, F, F minor, C (the borrowed iv); C, A-flat, B-flat, C (borrowed flat-VI and flat-VII); then C minor, F minor, G7, C major: a minor phrase ending on a major tonic, the Picardy third."></audio-ex>
+<pianoroll edo="12" notes="C4 E4 G4 ; C4 F4 A4 ; C4 F4 Ab4 ; C4 E4 G4 ; C4 Eb4 Ab4 ; D4 F4 Bb4 ; C4 E4 G4" labels="C ; F ; Fm ; C ; A♭ ; B♭ ; C" title="Borrowed iv, ♭VI and ♭VII"></pianoroll>
+</div>
+<div class="layer understand">
+<p><b>Modal mixture</b> means using in one mode the chords of its <b>parallel</b> mode (the mode with the same
+tonic). In C major the most common borrowings come from C minor:</p>
+<table>
+<tr><th>Borrowed chord</th><th>In C</th><th>Borrowed note(s)</th><th>Typical use</th></tr>
+<tr><td>iv</td><td>Fm</td><td>A♭</td><td>IV – iv – I, a darkened plagal cadence</td></tr>
+<tr><td>♭VI</td><td>A♭</td><td>A♭, E♭</td><td>♭VI – ♭VII – I; deceptive V – ♭VI</td></tr>
+<tr><td>♭VII</td><td>B♭</td><td>B♭</td><td>♭VII – I, a "Mixolydian" cadence</td></tr>
+<tr><td>♭III</td><td>E♭</td><td>E♭, B♭</td><td>color, rock progressions</td></tr>
+<tr><td>iiø7</td><td>Dm7♭5</td><td>A♭</td><td>predominant before V</td></tr>
+</table>
+<p>The reverse borrowing, a major tonic at the end of a minor piece, is the <b>Picardy third</b> (French
+<i>tierce de Picardie</i>; the origin of the name is not known for certain). It was a common way to end minor-key pieces in the Baroque.</p>
+<p>Another chromatic chord often grouped with mixture is the <b>Neapolitan</b>, the major triad on the lowered
+second degree, ♭II (D♭ F A♭ in C). It normally appears in first inversion (with F in the bass) as a
+predominant: ♭II⁶ – V – i.</p>
+<aside class="mirror">Golden harmony has a mixture chord that is literally between the modes. The golden triad
+Cg is the voice-by-voice average of C, Cm and Caug, and C – Cg – Cm moves from major to minor through it. The
+<b>golden Picardy</b> raises the third of C minor through every sixth-step, Cm – C(^m3) – Cg – C, the third
+climbing 9 → 10 → 11 → 12 sixth-steps. See <a href="ch:ch29#mixture">modal mixture and the golden
+Picardy</a>.</aside>
+<pianoroll edo="36" notes="C4 Eb4 G4 ; C4 ^Eb4 G4 ; C4 vE4 ^G4 ; C4 E4 G4" labels="Cm ; C(^m3) ; Cg ; C" title="The golden Picardy: the third climbs by sixth-steps"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>The parallel move is P.</b> In neo-Riemannian terms (<a href="ch:ch10#neo-riemannian">Chapter 10</a>), the
+parallel relation C ↔ Cm, F ↔ Fm, G ↔ Gm is exactly the move $P$, which keeps the root and fifth and moves the
+third by a semitone. Borrowing iv for IV is $P$ applied to one chord of the key.</p>
+<p><b>Which chords are new?</b> C natural minor differs from C major in three notes, E♭, A♭ and B♭. Every one of
+its seven triads (Cm, Ddim, E♭, Fm, Gm, A♭, B♭) contains at least one of them, so none of the seven is a
+diatonic triad of C major (checked by listing). Adding harmonic minor's raised seventh B brings back G and Bdim,
+which are already in C major; that is why the dominant is shared by C major and C minor, while mixture
+concerns mainly the other degrees.</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 11.4.</b> In C major, which borrowed chord gives the deceptive cadence V – ♭VI? Which note does the
+leading tone go to, and what common tone does ♭VI share with I?</p>
+<details class="answer"><summary>Answer</summary><p>♭VI = A♭ (A♭ C E♭). The leading tone B rises to C, as in an
+authentic cadence, while the bass rises G → A♭ by a semitone. ♭VI shares exactly one note with I: C.</p></details>
+</div>
+</section>
+
+<section id="mediants">
+<h2>Chromatic mediants</h2>
+<div class="layer hear">
+<p>Play C major, then E major. Nothing about the change is functional, and yet it is one of the most striking
+moves in harmony: one note stays put, the others slide, and the light changes, as if a cloud moved. Nineteenth-century composers, Schubert among them, used these mediant shifts for color, and film scores are full of them.</p>
+<audio-ex src="mediants" caption="C to E, C to A-flat, C to A, C to E-flat, and home to C. In each pair the two chords share exactly one note."></audio-ex>
+<pianoroll edo="12" notes="C4 E4 G4 ; B3 E4 G#4 ; C4 E4 G4 ; C4 Eb4 Ab4 ; C4 E4 G4 ; C#4 E4 A4 ; C4 E4 G4 ; Bb3 Eb4 G4" labels="C ; E ; C ; A♭ ; C ; A ; C ; E♭" title="C and its four chromatic mediants"></pianoroll>
+</div>
+<div class="layer understand">
+<p>Two chords are in a <b>mediant relation</b> when their roots are a third apart. The diatonic mediants of C,
+E minor and A minor, share two notes with C and sound smooth and closely related. A <b>chromatic mediant</b>
+keeps the quality instead: a major chord whose root is a major or minor third away. From C major there are four:</p>
+<table>
+<tr><th>Chromatic mediant</th><th>Notes</th><th>Root relation</th><th>Common tone with C</th><th>Neo-Riemannian</th></tr>
+<tr><td>E (III)</td><td>E G♯ B</td><td>major third up</td><td>E</td><td>L then P</td></tr>
+<tr><td>A♭ (♭VI)</td><td>A♭ C E♭</td><td>major third down</td><td>C</td><td>P then L</td></tr>
+<tr><td>A (VI)</td><td>A C♯ E</td><td>minor third down</td><td>E</td><td>R then P</td></tr>
+<tr><td>E♭ (♭III)</td><td>E♭ G B♭</td><td>minor third up</td><td>G</td><td>P then R</td></tr>
+</table>
+<p>Each shares exactly one note with C, and each is two neo-Riemannian moves away. The <b>doubly chromatic
+mediants</b> change quality as well, E♭ minor and A♭ minor from C major, and share no note at all.</p>
+<p>Because they keep a common tone and move the other voices by small steps, chromatic mediants can connect keys
+that are far apart on the circle of fifths: C and E major differ in four sharps, but the chords share E.</p>
+<aside class="mirror">Every chromatic mediant pair has <b>exactly one</b> strict golden passing chord, and its
+partner on the path is a bronze triad:
+<ul>
+<li>C → E passes Eg (E vA♭ ^B) at the second position;</li>
+<li>C → A♭ passes Cg (C vE ^G) at the first position;</li>
+<li>C → A passes ^Cg (^C E vA♭) at the first position;</li>
+<li>C → E♭ passes ^E♭g (^E♭ G vB) at the second position.</li>
+</ul>
+In this sense golden harmony is native to Romantic mediant harmony. See <a href="ch:ch29#mediant">mediant
+gold</a>.</aside>
+<audio-ex src="mediant_gold" caption="36-ET: C to E, A-flat, A and E-flat, each through its two sub-chromatic passing chords, one golden and one bronze. Every voice moves at most a whole tone, in equal sixth-tone steps."></audio-ex>
+<pianoroll edo="36" notes="C4 E4 G4 ; vC4 E4 ^G4 ; ^B3 E4 vAb4 ; B3 E4 G#4 ; C4 E4 G4 ; C4 vE4 ^G4 ; C4 ^Eb4 vAb4 ; C4 Eb4 Ab4" labels="C ; ; Eg ; E ; C ; Cg ; ; Ab" title="Mediant gold: C to E and C to A-flat"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>Uniform paths.</b> Voice C E G to the chromatic mediant with each voice moving at most two semitones. The
+displacements $d$ (in semitones, for the voices C, E, G) are</p>
+<table>
+<tr><th>Pair</th><th>$d$</th><th>$P_1 = X + d$ (sixth-steps)</th><th>$P_2 = X + 2d$</th><th>Golden</th></tr>
+<tr><td>C → E</td><td>(−1, 0, +1)</td><td>vC E ^G (bronze)</td><td>^B E vA♭</td><td>$P_2$ = Eg</td></tr>
+<tr><td>C → A♭</td><td>(0, −1, +1)</td><td>C vE ^G</td><td>C ^E♭ vA♭ (bronze)</td><td>$P_1$ = Cg</td></tr>
+<tr><td>C → A</td><td>(+1, 0, +2)</td><td>^C E vA♭</td><td>vC♯ E ^A♭ (bronze)</td><td>$P_1$ = ^Cg</td></tr>
+<tr><td>C → E♭</td><td>(−2, −1, 0)</td><td>^B vE G (bronze)</td><td>vB ^E♭ G</td><td>$P_2$ = ^E♭g</td></tr>
+</table>
+<p>Here pitches are counted in sixth-steps and $P_k = X + k\,d$: a voice that moves $d$ semitones in all moves $d$ sixth-steps per step, so that $P_3 = Y$. The root rule of
+<a href="ch:ch27#quality">the quality theorem</a> predicts these: for major pairs the golden chord sits on the
+upper root (E above C, C above A♭, E♭ above C, C above A), unshifted for a major third and raised a sixth-step
+(^) for a minor third, and it lies nearer the chord with that root. Checking all assignments of voices with
+steps of at most two semitones confirms that each pair has exactly one golden passing chord.</p>
+<p><b>As an average.</b> On the path C → A♭, $P_1 = (2X + Y)/3$ voice by voice: $(2\cdot 0 + 0)/3 = 0$,
+$(2 \cdot 12 + 9)/3 = 11$, $(2\cdot 21 + 24)/3 = 22$ sixth-steps, which is Cg. Golden passing chords are
+averages of their neighbors (<a href="ch:ch25#averaging">Chapter 25</a>).</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 11.5.</b> Find the chromatic mediants of A minor that are minor triads, and their common tones
+with A minor.</p>
+<details class="answer"><summary>Answer</summary><p>Minor triads with roots a third from A: C♯m (C♯ E G♯,
+common tone E), Fm (F A♭ C, common tone C), F♯m (F♯ A C♯, common tone A) and Cm (C E♭ G, common tone C). Each
+shares one note, mirroring the major case.</p></details>
+</div>
+</section>
+
+<section id="modulation">
+<h2>Modulation</h2>
+<div class="layer hear">
+<p>A <b>modulation</b> is a change of home. Sometimes it is so smooth that you only notice afterwards that the
+music has settled somewhere new; sometimes it is a sudden lift. Listen to both kinds.</p>
+<audio-ex src="pivot" caption="C major moves to G major through A minor, a chord that belongs to both keys; D7 and G then confirm the new home."></audio-ex>
+<pianoroll edo="12" notes="C4 E4 G4 ; C4 F4 A4 ; B3 D4 G4 ; C4 E4 A4 ; C4 D4 F#4 A4 ; B3 D4 G4" labels="C: I ; IV ; V ; vi = G: ii ; V7 ; I" title="A pivot-chord modulation from C to G"></pianoroll>
+<audio-ex src="direct" caption="The same four-chord loop in C, then suddenly a whole step higher in D, with no preparation at all."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Closely related keys.</b> Keys whose scales differ by at most one note are <b>closely related</b>. For C
+major they are G major and F major (one sharp, one flat), and the relative minors of all three: A minor, E minor
+and D minor. Keys a step further round the circle of fifths share fewer notes and fewer chords:</p>
+<table>
+<tr><th>Fifths apart</th><th>Example</th><th>Shared scale notes</th><th>Shared triads</th></tr>
+<tr><td>0</td><td>C – C</td><td>7</td><td>7</td></tr>
+<tr><td>1</td><td>C – G</td><td>6</td><td>4 (C, Em, G, Am)</td></tr>
+<tr><td>2</td><td>C – D</td><td>5</td><td>2 (Em, G)</td></tr>
+<tr><td>3</td><td>C – A</td><td>4</td><td>0</td></tr>
+<tr><td>4</td><td>C – E</td><td>3</td><td>0</td></tr>
+<tr><td>5</td><td>C – B</td><td>2</td><td>0</td></tr>
+<tr><td>6</td><td>C – F♯</td><td>2</td><td>0</td></tr>
+</table>
+<p><b>Kinds of modulation:</b></p>
+<ul>
+<li><b>Pivot chord.</b> A chord diatonic in both keys is heard first in the old key and then reinterpreted in
+the new one. A minor is vi in C and ii in G, so C – F – G – Am – D7 – G moves to G major with Am as the pivot.</li>
+<li><b>Direct (phrase) modulation.</b> The new key simply starts, often at a phrase boundary. The lift of a
+whole step near the end of a pop song is the familiar example.</li>
+<li><b>Chromatic modulation.</b> A chromatic step in one voice leads into the new key, often through a secondary
+dominant that turns out to be a real dominant.</li>
+<li><b>Common-tone modulation.</b> A held note links two keys, as in the chromatic mediants above.</li>
+<li><b>Enharmonic modulation.</b> A chord is respelled. The diminished seventh can resolve to four tonics
+(<a href="ch:ch09#symmetric">Chapter 9</a>), and a dominant seventh A♭ C E♭ G♭ can be respelled as the German
+augmented sixth A♭ C E♭ F♯, which resolves to G (V of C).</li>
+</ul>
+<p>Whether a passage has modulated or only tonicized is a matter of degree: a new key needs time and a cadence to
+feel like home.</p>
+<aside class="mirror">In 36-ET there are two new kinds of modulation: moving a whole key onto another 12-ET layer
+(a sixth-step up or down), and pivoting through a golden chord that belongs to two worlds at once. For example,
+Cg lies on the strict path C ↔ A♭ and also on the path Cm ↔ Fm. See <a href="ch:ch32#layer-modulation">changing
+layers</a> and <a href="ch:ch32#golden-pivots">golden pivot chords</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Proposition.</b> Two major keys $k$ steps apart on the circle of fifths share $7 - k$ scale notes for
+$0 \le k \le 5$, and 2 notes for $k = 6$.</p>
+<p><b>Proof sketch.</b> A major scale is seven consecutive notes on the circle of fifths. Moving the tonic up a
+fifth shifts that window by one position: one note leaves and one enters. After $k \le 5$ shifts the windows
+overlap in $7 - k$ positions; at $k = 6$ the new window wraps around the twelve-note circle, and the overlap is
+again 2 (C major and F♯ major share B and E♯ = F). The triad counts in the table were found by listing. $\square$</p>
+<p><b>Shared triads at distance 1.</b> A triad is diatonic in both C and G exactly when it avoids F and F♯; of
+C's seven triads, Dm, F and Bdim contain F, leaving C, Em, G and Am.</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 11.6.</b> Find a pivot chord between C major and F major, and give its Roman numeral in each key.</p>
+<details class="answer"><summary>Answer</summary><p>The shared triads are C, Dm, F and Am (the ones that avoid B
+and B♭). For example Dm is ii in C and vi in F; Am is vi in C and iii in F; C is I in C and V in F, and F is IV
+in C and I in F.</p></details>
+</div>
+</section>

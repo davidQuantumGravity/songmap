@@ -1,0 +1,24 @@
+# ch33: two golden symmetric scales. Cg closed under the augmented subgroup (T12): 9 notes, three
+# golden triads Cg, Eg, Abg. Cg closed under the diminished-seventh subgroup (T9): 12 notes, four
+# golden triads Cg, Ebg, F#g, Ag.
+songmap: 0.2
+title: "Golden symmetric scales"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 332
+tail_seconds: 3
+instruments: {bell: clean/glass, gpad: clean/golden_pad}
+motifs:
+  t12: {notes: "c8 ^eb ve e ^g vab ab ^b | vc+8 c+2. r8", octave: 4}
+  t9:  {notes: "c8 vc# ^c# eb ve ^e f# vg | ^g8 a vbb ^bb c+2", octave: 4}
+mix:
+  bell: {gain_db: -5, send: {hall: 0.25}}
+  gpad: {gain_db: -7, send: {hall: 0.3}}
+sections:
+  - {name: scale12, bars: 2, harmony: "N.C.:2", parts: {bell: {motifs: [t12]}}}
+  - {name: chords12, bars: 4, harmony: "Cg:1 Eg:1 Abg:1 Cg:1", parts: {gpad: hold, bell: top}}
+  - {name: scale9, bars: 2, harmony: "N.C.:2", parts: {bell: {motifs: [t9]}}}
+  - {name: chords9, bars: 4, harmony: "Cg:1 Ebg:1 F#g:1 Ag:1", parts: {gpad: hold, bell: top}}
+master: clean

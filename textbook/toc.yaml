@@ -1,0 +1,469 @@
+# The canonical table of contents of "Harmony, Rational and Golden" (working title).
+# The site is built from this file: python tools/textbook/build.py
+# Each chapter's content lives in textbook/content/<id>.html; its audio in textbook/audio/<id>/.
+# `mirror` links a Western chapter to its golden counterpart(s) and back.
+
+title: "Harmony, Rational and Golden"
+subtitle: "Music theory from first principles, from the harmonic series to golden tones in 36-ET"
+author: "David Chester"
+
+parts:
+  - id: front
+    title: "Front matter"
+    chapters:
+      - id: preface
+        title: "Preface: the golden story"
+        summary: "How a golden Pythagorean scale was found, what it promises, and what it does not."
+        sections:
+          - {id: discovery, title: "A scale from the golden ratio"}
+          - {id: averaging, title: "Between major and minor"}
+          - {id: unification, title: "36-ET: three Western systems and the golden one"}
+          - {id: why-now, title: "Why now: exploring with a machine"}
+          - {id: origins, title: "Origins: bliss, brain waves and an argument"}
+          - {id: ears, title: "The evolving ear"}
+      - id: reading
+        title: "How to read this book"
+        summary: "Three layers of depth, reading paths, notation at a glance, and how the audio was made."
+        sections:
+          - {id: layers, title: "Hear it, Understand it, Derive it"}
+          - {id: paths, title: "Reading paths"}
+          - {id: notation, title: "Notation at a glance"}
+          - {id: audio, title: "About the audio examples"}
+
+  - id: part1
+    title: "Part I. Sound and number"
+    summary: "What pitch, harmony and consonance are, physically and mathematically."
+    chapters:
+      - id: ch01
+        title: "What a sound is"
+        summary: "Vibration, frequency and pitch; why hearing is logarithmic; octaves and cents."
+        sections:
+          - {id: vibration, title: "Vibration and waves"}
+          - {id: frequency, title: "Frequency, pitch and loudness"}
+          - {id: logarithms, title: "Hearing in ratios: the logarithm"}
+          - {id: octave, title: "The octave"}
+          - {id: cents, title: "Measuring intervals in cents"}
+      - id: ch02
+        title: "The harmonic series"
+        summary: "Standing waves, partials and timbre; where 2:1, 3:2 and 5:4 come from."
+        sections:
+          - {id: strings, title: "Standing waves on a string"}
+          - {id: partials, title: "Partials and the harmonic series"}
+          - {id: fourier, title: "Adding sines: Fourier's idea"}
+          - {id: timbre, title: "Timbre as a spectrum"}
+          - {id: intervals-in-series, title: "Intervals hidden in the series"}
+      - id: ch03
+        title: "Consonance and dissonance"
+        summary: "Beats, roughness and the critical band; harmonicity and harmonic entropy; why consonance depends on timbre."
+        mirror: [ch26]
+        sections:
+          - {id: beats, title: "Beats"}
+          - {id: roughness, title: "Roughness and the critical band"}
+          - {id: harmonicity, title: "Harmonicity and virtual pitch"}
+          - {id: entropy, title: "Harmonic entropy"}
+          - {id: timbre-dependence, title: "Consonance depends on timbre"}
+      - id: ch04
+        title: "Intervals as ratios"
+        summary: "Just intonation, prime limits, the ratio lattice and the Tonnetz."
+        sections:
+          - {id: just, title: "Just intervals"}
+          - {id: primes, title: "Prime limits"}
+          - {id: lattice, title: "The ratio lattice"}
+          - {id: tonnetz, title: "The Tonnetz"}
+          - {id: commas-preview, title: "Small gaps: a first look at commas"}
+
+  - id: part2
+    title: "Part II. Tuning: from Pythagoras to Bach"
+    summary: "How scales are built from one interval, and how temperament reconciled them."
+    chapters:
+      - id: ch05
+        title: "Pythagorean tuning"
+        summary: "Stacking fifths; limma, apotome and the comma; continued fractions and why twelve."
+        mirror: [ch23]
+        sections:
+          - {id: stacking, title: "Stacking fifths"}
+          - {id: chain, title: "The chain of fifths"}
+          - {id: limma-apotome, title: "Two semitones: limma and apotome"}
+          - {id: comma, title: "The Pythagorean comma"}
+          - {id: continued-fractions, title: "Continued fractions and why twelve"}
+      - id: ch06
+        title: "Well-formed scales"
+        summary: "The three-gap theorem, the Stern–Brocot tree, and the pentatonic, diatonic and chromatic as one family."
+        mirror: [ch23]
+        sections:
+          - {id: three-gap, title: "The three-gap theorem"}
+          - {id: mos, title: "Moments of symmetry"}
+          - {id: stern-brocot, title: "The Stern–Brocot tree"}
+          - {id: family, title: "Pentatonic, diatonic, chromatic"}
+          - {id: modes, title: "Modes"}
+      - id: ch07
+        title: "Temperament"
+        summary: "Meantone, well temperament and equal temperament; Bach's Well-Tempered Clavier; other equal divisions."
+        mirror: [ch24]
+        sections:
+          - {id: syntonic, title: "The syntonic comma and meantone"}
+          - {id: well, title: "Well temperament"}
+          - {id: equal, title: "Equal temperament"}
+          - {id: wtc, title: "Bach's Well-Tempered Clavier"}
+          - {id: edos, title: "Other equal divisions: 19, 31, 53"}
+      - id: ch08
+        title: "The circle of fifths and keys"
+        summary: "The twelve pitch classes as a cyclic group; the circle as a generator's orbit; key distance."
+        mirror: [ch24, ch32]
+        sections:
+          - {id: pitch-classes, title: "Pitch classes and Z12"}
+          - {id: circle, title: "The circle as an orbit"}
+          - {id: keys, title: "Keys and key signatures"}
+          - {id: distance, title: "Near and far keys"}
+          - {id: relative-parallel, title: "Relative and parallel keys"}
+
+  - id: part3
+    title: "Part III. Harmony"
+    summary: "Chords, function, progressions, tension and resolution in Western tonal music."
+    chapters:
+      - id: ch09
+        title: "Chords"
+        summary: "Stacked thirds, qualities, inversions, sevenths; chord space and evenness; the symmetric chords."
+        mirror: [ch25]
+        sections:
+          - {id: triads, title: "Triads"}
+          - {id: inversions, title: "Inversions and voicing"}
+          - {id: sevenths, title: "Seventh chords and beyond"}
+          - {id: chord-space, title: "Chord space"}
+          - {id: symmetric, title: "The symmetric chords"}
+      - id: ch10
+        title: "Function"
+        summary: "Tonic, subdominant and dominant; the leading tone; cadences; neo-Riemannian moves."
+        mirror: [ch29, ch31]
+        sections:
+          - {id: tonic, title: "Home: the tonic"}
+          - {id: dominant, title: "Pull: the dominant and the leading tone"}
+          - {id: subdominant, title: "Departure: the subdominant"}
+          - {id: cadences, title: "Cadences"}
+          - {id: neo-riemannian, title: "Neo-Riemannian moves and the Tonnetz"}
+      - id: ch11
+        title: "Progressions"
+        summary: "Circle progressions and the common progressions; secondary dominants, borrowed chords, chromatic mediants, modulation."
+        mirror: [ch29, ch32]
+        sections:
+          - {id: circle-progressions, title: "Circle progressions"}
+          - {id: common, title: "The common progressions"}
+          - {id: secondary, title: "Secondary dominants"}
+          - {id: borrowed, title: "Borrowed chords and modal mixture"}
+          - {id: mediants, title: "Chromatic mediants"}
+          - {id: modulation, title: "Modulation"}
+      - id: ch12
+        title: "Tension and resolution"
+        summary: "Dissonance into consonance; suspensions, appoggiaturas, passing and neighbor tones; tension curves."
+        mirror: [ch27, ch28]
+        sections:
+          - {id: why-resolve, title: "Why dissonance wants to move"}
+          - {id: nonchord, title: "Passing and neighbor tones"}
+          - {id: suspension, title: "Suspensions and appoggiaturas"}
+          - {id: passing-chords, title: "Passing chords"}
+          - {id: tension-curves, title: "Tension curves"}
+
+  - id: part4
+    title: "Part IV. Line, dialogue and time"
+    summary: "Melody, voice leading, counterpoint, call and response, rhythm, form and timbre."
+    chapters:
+      - id: ch13
+        title: "Melody"
+        summary: "Contour, steps and leaps, motifs and their transformations, phrases."
+        mirror: [ch30]
+        sections:
+          - {id: contour, title: "Contour"}
+          - {id: steps-leaps, title: "Steps and leaps"}
+          - {id: motif, title: "Motifs"}
+          - {id: transformations, title: "Inversion, retrograde, augmentation"}
+          - {id: phrase, title: "Phrases and cadences in melody"}
+      - id: ch14
+        title: "Voice leading"
+        summary: "Four-part writing, parallels, and smoothness as distance in chord space."
+        mirror: [ch27, ch28]
+        sections:
+          - {id: four-part, title: "Four-part writing"}
+          - {id: rules, title: "The classical rules and their reasons"}
+          - {id: distance, title: "Smoothness as distance"}
+          - {id: geometry, title: "The geometry of voice leading"}
+      - id: ch15
+        title: "Counterpoint and call and response"
+        summary: "Species counterpoint, imitation, canon and fugue; antiphony from chant to jazz."
+        mirror: [ch30]
+        sections:
+          - {id: species, title: "Species counterpoint"}
+          - {id: imitation, title: "Imitation and canon"}
+          - {id: fugue, title: "Fugue"}
+          - {id: call-response, title: "Call and response"}
+      - id: ch16
+        title: "Rhythm and form"
+        summary: "Meter, phrase, period and sentence, song forms; proportion and the golden section in form."
+        sections:
+          - {id: meter, title: "Pulse and meter"}
+          - {id: phrase-structure, title: "Period and sentence"}
+          - {id: forms, title: "Song forms and larger forms"}
+          - {id: proportion, title: "Proportion and the golden section"}
+      - id: ch17
+        title: "Timbre and orchestration"
+        summary: "Instruments as spectra; how timbre changes what consonance means."
+        mirror: [ch26]
+        sections:
+          - {id: instruments, title: "Instruments as spectra"}
+          - {id: blend, title: "Blend and contrast"}
+          - {id: timbre-harmony, title: "Timbre shapes harmony"}
+
+  - id: part5
+    title: "Part V. Beyond tonality: chromaticism and the twelve tones"
+    summary: "Chromatic harmony, symmetry, set theory, serialism and modern classical music, which point toward finer tunings."
+    chapters:
+      - id: ch18
+        title: "Chromatic harmony"
+        summary: "Romantic chromaticism, the Tristan chord, chromatic mediants and neo-Riemannian cycles."
+        mirror: [ch33]
+        sections:
+          - {id: chromaticism, title: "Chromaticism inside tonality"}
+          - {id: tristan, title: "The Tristan chord"}
+          - {id: cycles, title: "Hexatonic and octatonic cycles"}
+          - {id: parsimony, title: "Parsimonious voice leading"}
+      - id: ch19
+        title: "Symmetry: whole-tone, octatonic and the modes of limited transposition"
+        summary: "Symmetric scales as unions of cosets of subgroups of Z12; Messiaen's modes."
+        mirror: [ch33]
+        sections:
+          - {id: whole-tone, title: "The whole-tone scale"}
+          - {id: octatonic, title: "The octatonic scale"}
+          - {id: messiaen, title: "Messiaen's modes of limited transposition"}
+          - {id: subgroups, title: "Subgroups and cosets of Z12"}
+      - id: ch20
+        title: "Pitch-class set theory"
+        summary: "Transposition, inversion and multiplication in Z12; interval vectors; the Z-relation."
+        mirror: [ch33]
+        sections:
+          - {id: sets, title: "Pitch-class sets"}
+          - {id: operations, title: "Transposition and inversion"}
+          - {id: multiplication, title: "Multiplication: M5 and M7"}
+          - {id: interval-vectors, title: "Interval vectors"}
+          - {id: z-relation, title: "The Z-relation"}
+      - id: ch21
+        title: "Twelve-tone music"
+        summary: "Rows, the 48 forms, combinatoriality and all-interval rows."
+        mirror: [ch33]
+        sections:
+          - {id: rows, title: "Tone rows"}
+          - {id: forms, title: "The 48 forms of a row"}
+          - {id: combinatoriality, title: "Combinatoriality"}
+          - {id: all-interval, title: "All-interval rows"}
+          - {id: practice, title: "Serialism in practice"}
+      - id: ch22
+        title: "Modern classical music and the microtonal pioneers"
+        summary: "Debussy, Bartók, Stravinsky, Messiaen, clusters, spectralism, minimalism; Ives, Hába, Wyschnegradsky, Carrillo, Partch."
+        mirror: [ch33, ch26]
+        sections:
+          - {id: impressionism, title: "Debussy and the colors of symmetry"}
+          - {id: bartok-stravinsky, title: "Bartók and Stravinsky"}
+          - {id: clusters, title: "Clusters and texture"}
+          - {id: spectralism, title: "Spectralism: harmony from the overtone series"}
+          - {id: minimalism, title: "Minimalism"}
+          - {id: microtonal, title: "The microtonal pioneers"}
+
+  - id: part6
+    title: "Part VI. The golden tonal system"
+    summary: "The golden ratio as a generator; 36-ET; golden chords; consonance in the golden world."
+    chapters:
+      - id: ch23
+        title: "The golden ratio and the golden chain"
+        summary: "phi and Fibonacci; the golden sixth, third, fifth and seventh; the golden comma, apotome and limma; golden7, golden13 and silver13."
+        mirror: [ch05, ch06]
+        sections:
+          - {id: phi, title: "The golden ratio"}
+          - {id: golden-intervals, title: "Golden intervals"}
+          - {id: chain, title: "The golden chain"}
+          - {id: golden-comma, title: "The golden comma, apotome and limma"}
+          - {id: golden-scales, title: "Well-formed golden scales"}
+          - {id: golden7, title: "golden7: the golden diatonic"}
+          - {id: golden13, title: "golden13 and silver13"}
+      - id: ch24
+        title: "36-ET"
+        summary: "Sixth-steps and layers; ups-and-downs notation; why 36; 13-ET vs 36-ET; the 36-ET key system."
+        mirror: [ch07, ch08]
+        sections:
+          - {id: sixth-steps, title: "Sixth-steps"}
+          - {id: layers, title: "Three layers of 12-ET"}
+          - {id: notation, title: "Ups and downs: the complete notation"}
+          - {id: why-36, title: "Why 36"}
+          - {id: thirteen, title: "13-ET and 36-ET"}
+          - {id: keys, title: "The key system: 72 keys and 72 golden scales"}
+      - id: ch25
+        title: "Golden chords"
+        summary: "The golden triad and seventh; the averaging principle; silver, golden, bronze; the layer theorem."
+        mirror: [ch09]
+        sections:
+          - {id: golden-triad, title: "The golden triad"}
+          - {id: golden-seventh, title: "The golden seventh"}
+          - {id: averaging, title: "The averaging principle"}
+          - {id: metallic, title: "The equal-third line: silver, golden, bronze"}
+          - {id: layer-theorem, title: "The layer theorem"}
+          - {id: naming, title: "Naming chords in 36-ET"}
+      - id: ch26
+        title: "Consonance in the golden world"
+        summary: "Measured roughness and entropy; golden-spectrum timbres; combination tones; beats; the timbre flip."
+        mirror: [ch03, ch17]
+        sections:
+          - {id: measured, title: "Measuring golden chords"}
+          - {id: golden-spectra, title: "Golden-spectrum timbres"}
+          - {id: combination-tones, title: "Combination tones that land on the chain"}
+          - {id: beats, title: "The beats of a golden chord"}
+          - {id: timbre-flip, title: "The timbre flip"}
+
+  - id: part7
+    title: "Part VII. Golden harmony in practice"
+    summary: "Golden passing harmony in two systems; golden cadences and progressions; golden melody, counterpoint, home, modulation and chromaticism."
+    chapters:
+      - id: ch27
+        title: "System 1: the strict path"
+        summary: "Sub-chromatic voice leading; the four-path, quality, partner and never-twice theorems; the root rules."
+        mirror: [ch12, ch14]
+        sections:
+          - {id: subchromatic, title: "Splitting the semitone"}
+          - {id: uniform-path, title: "The uniform path"}
+          - {id: four-path, title: "The four-path theorem"}
+          - {id: quality, title: "The quality theorem and the root rules"}
+          - {id: partner, title: "Never twice, and the bronze partner"}
+          - {id: six-four, title: "Worked example: the golden six-four"}
+      - id: ch28
+        title: "System 2: the natural path"
+        summary: "Uneven splits; the golden escalator; the half-step theorem; the dictionary."
+        mirror: [ch12, ch14]
+        sections:
+          - {id: uneven, title: "Uneven splits"}
+          - {id: escalator, title: "The golden escalator"}
+          - {id: half-step, title: "The half-step theorem"}
+          - {id: dictionary, title: "The dictionary of transitions"}
+      - id: ch29
+        title: "Golden cadences and progressions"
+        summary: "The golden six-four, plagal glow, golden deceptive cadence, mediant gold, the staircase, the Andalusian, modal mixture and the golden Picardy."
+        mirror: [ch10, ch11]
+        sections:
+          - {id: authentic, title: "The golden authentic cadence"}
+          - {id: plagal, title: "Golden plagal glow"}
+          - {id: deceptive, title: "The golden deceptive cadence"}
+          - {id: mediant, title: "Mediant gold"}
+          - {id: staircase, title: "The golden staircase and the Andalusian"}
+          - {id: mixture, title: "Modal mixture and the golden Picardy"}
+      - id: ch30
+        title: "Golden melody and counterpoint"
+        summary: "Melodies in golden7 and golden13; consonance rules for golden voices; call and response between rational and golden voices."
+        mirror: [ch13, ch15]
+        sections:
+          - {id: golden-melody, title: "Melody in golden7 and golden13"}
+          - {id: golden-motifs, title: "Golden motifs and their transformations"}
+          - {id: golden-counterpoint, title: "Counterpoint with golden voices"}
+          - {id: antiphony, title: "Call and response between two worlds"}
+      - id: ch31
+        title: "The golden home"
+        summary: "The golden circle, breathing, planing, rational visitation; golden7 function; the Well-Tempered Golden Clavier."
+        mirror: [ch10]
+        sections:
+          - {id: asymmetry, title: "Why golden homes move differently"}
+          - {id: circle, title: "The golden circle"}
+          - {id: breathing-planing, title: "Breathing and planing"}
+          - {id: visitation, title: "Rational visitation"}
+          - {id: golden7-function, title: "Toward golden7 function"}
+          - {id: wtgc, title: "The Well-Tempered Golden Clavier"}
+      - id: ch32
+        title: "Modulation in 36-ET"
+        summary: "Layer changes, golden pivots, and key changes between golden scales."
+        mirror: [ch08, ch11]
+        sections:
+          - {id: layer-modulation, title: "Changing layers"}
+          - {id: golden-pivots, title: "Golden pivot chords"}
+          - {id: scale-modulation, title: "Between golden scales"}
+      - id: ch33
+        title: "Chromaticism in 36-ET"
+        summary: "Z36 set theory, the M11 golden transform, symmetric scales in 36, 36-tone rows and golden serialism, golden spectralism."
+        mirror: [ch18, ch19, ch20, ch21, ch22]
+        sections:
+          - {id: z36, title: "Z36: the structure of 36 pitch classes"}
+          - {id: m11, title: "The golden transform M11"}
+          - {id: symmetric-36, title: "Symmetric scales in 36"}
+          - {id: rows-36, title: "36-tone rows and the golden chain"}
+          - {id: golden-serialism, title: "Golden serialism"}
+          - {id: golden-spectralism, title: "Golden spectralism"}
+
+  - id: part8
+    title: "Part VIII. Mind, history and speculation"
+    summary: "What beats may do in the brain, and how the ear has changed over centuries."
+    chapters:
+      - id: ch34
+        title: "Beats and the brain"
+        summary: "Binaural beats and entrainment; the golden-ratio EEG hypothesis; quasi-periodicity; the bliss conjecture and how to test it."
+        sections:
+          - {id: binaural, title: "Binaural beats and entrainment"}
+          - {id: eeg, title: "The golden-ratio EEG hypothesis"}
+          - {id: quasi-periodic, title: "Quasi-periodicity and KAM theory"}
+          - {id: conjecture, title: "The bliss conjecture"}
+          - {id: testing, title: "How to test it"}
+      - id: ch35
+        title: "The evolving ear"
+        summary: "From organum's fifths to thirds, sevenths and extended harmony; acculturation; golden tones as a next color."
+        sections:
+          - {id: organum, title: "Organum and the perfect consonances"}
+          - {id: thirds, title: "The arrival of thirds"}
+          - {id: extensions, title: "Sevenths, ninths and beyond"}
+          - {id: acculturation, title: "Acculturation"}
+          - {id: next-color, title: "A next color"}
+
+  - id: part9
+    title: "Part IX. Making it"
+    summary: "Writing, synthesizing and visualizing golden music with SongMap."
+    chapters:
+      - id: ch36
+        title: "Music as text: SongMap"
+        summary: "Song maps, 36edo notation, passing placeholders and voiced styles."
+        sections:
+          - {id: songmap, title: "A song as a text file"}
+          - {id: golden-notation, title: "Golden notation in SongMap"}
+          - {id: passing, title: "Passing placeholders: ~ and ~g"}
+          - {id: voiced, title: "Voiced styles"}
+      - id: ch37
+        title: "Synthesis from scratch"
+        summary: "Clean additive tones, timbre design, golden spectra, mixing without distortion."
+        sections:
+          - {id: additive, title: "Additive synthesis"}
+          - {id: clean, title: "Clean, stable tones"}
+          - {id: golden-timbres, title: "Designing golden timbres"}
+          - {id: mixing, title: "Mixing for clarity"}
+      - id: ch38
+        title: "Seeing music"
+        summary: "Notation with ups and downs, 36-row piano rolls, circle and chord-space diagrams, tablature and animation."
+        sections:
+          - {id: staff, title: "Staff notation with ups and downs"}
+          - {id: pianoroll, title: "Piano rolls in 36-ET"}
+          - {id: diagrams, title: "Circles and chord spaces"}
+          - {id: animation, title: "Tablature and animation"}
+      - id: ch39
+        title: "AI as a collaborator"
+        summary: "How this system was explored: the division of labor between a person and a machine."
+        sections:
+          - {id: workflow, title: "The workflow"}
+          - {id: verification, title: "Verifying instead of trusting"}
+          - {id: limits, title: "What a machine cannot judge"}
+
+  - id: appendices
+    title: "Appendices"
+    chapters:
+      - {id: appA, title: "A. Math primer", summary: "Logarithms, modular arithmetic, groups, continued fractions, Fourier series.",
+         sections: [{id: logs, title: "Logarithms"}, {id: modular, title: "Modular arithmetic"}, {id: groups, title: "Groups"},
+                    {id: continued, title: "Continued fractions"}, {id: fourier, title: "Fourier series"}]}
+      - {id: appB, title: "B. Notation reference", summary: "12-ET and 36-ET note names, chord symbols, scales, SongMap syntax.",
+         sections: [{id: notes, title: "Note names"}, {id: chords, title: "Chord symbols"}, {id: scales, title: "Scales"},
+                    {id: songmap, title: "SongMap syntax"}]}
+      - {id: appC, title: "C. Tables", summary: "Intervals, chords, keys and golden scales.",
+         sections: [{id: intervals, title: "Intervals"}, {id: chords, title: "Chords"}, {id: keys, title: "Keys"},
+                    {id: golden-scales, title: "Golden scales"}]}
+      - {id: appD, title: "D. Proofs", summary: "Complete proofs of the theorems in Parts II, VI and VII.",
+         sections: [{id: tuning, title: "Tuning and scales"}, {id: golden-chords, title: "Golden chords"},
+                    {id: passing, title: "Passing harmony"}, {id: z36, title: "Z36"}]}
+      - {id: appE, title: "E. Glossary", summary: "Every term in the book, defined.", sections: [{id: terms, title: "Terms"}]}
+      - {id: appF, title: "F. Bibliography", summary: "Sources and further reading.", sections: [{id: sources, title: "Sources"}]}
+      - {id: appG, title: "G. Audio index", summary: "Every audio example in the book.", sections: [{id: index, title: "Index"}]}

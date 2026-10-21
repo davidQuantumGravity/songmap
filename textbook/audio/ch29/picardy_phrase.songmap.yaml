@@ -1,0 +1,24 @@
+# Ch. 29: a minor phrase that ends with the golden Picardy third: ... Cm - Cm(^3) - Cg - C.
+songmap: 0.2
+title: "A golden Picardy"
+tempo: 72
+meter: "4/4"
+key: "C minor"
+tuning: 36edo
+seed: 9
+tail_seconds: 3.5
+instruments: {piano: keys/still, pad: pad/still, low: clean/bass, bell: clean/glass}
+motifs:
+  bassline: {notes: "=mp c-1 | ab--1 | f--1 | g--1 | c-1 | c-1 | c-1"}
+mix:
+  piano: {gain_db: -5, send: {hall: 0.25}}
+  pad:   {gain_db: -12, send: {hall: 0.35}}
+  low:   {gain_db: -5, send: {hall: 0.05}}
+  bell:  {gain_db: -9, send: {hall: 0.35}}
+returns:
+  hall: {type: reverb, seconds: 2.8, predelay: 0.025, damping: 0.5}
+sections:
+  - {name: phrase, bars: 7, harmony: "Cm:1 Ab:1 Fm:1 G:1 Cm:0.5 Cm(^3):0.5 Cg:0.5 C:1.5",
+     parts: {piano: {style: gentle8, role: arp}, pad: {style: hold, voices: 3, range: [55, 77]},
+             low: {motifs: [bassline]}, bell: top}}
+master: clean

@@ -1,0 +1,28 @@
+# ii7 V7 Imaj7, then a turnaround iii7 VI7 ii7 V7.
+songmap: 0.2
+title: "The jazz ii-V-I"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {chords: epiano/still, bass: clean/bass, lead: clean/lead}
+mix: {chords: {gain_db: -7, send: {hall: 0.25}}, bass: {gain_db: -4}, lead: {gain_db: -5, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 4
+    harmony: "Dm7:1 G7:1 Cmaj7:2"
+    parts:
+      chords: hold
+      bass: {style: roots, role: bass}
+      lead: top
+  - name: b
+    bars: 4
+    harmony: "Dm7:0.5 G7:0.5 Cmaj7:1 Em7:0.5 A7:0.5 Dm7:0.5 G7:0.5"
+    parts:
+      chords: hold
+      bass: {style: roots, role: bass}
+      lead: top
+master: clean

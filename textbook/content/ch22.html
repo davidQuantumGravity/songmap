@@ -1,0 +1,322 @@
+<section id="impressionism">
+<h2>Debussy and the colors of symmetry</h2>
+<div class="layer hear">
+<p>Around 1900 Claude Debussy (1862–1918) began to use chords for their color rather than their pull. Three techniques do much of
+the work, and you can hear each in a few bars. In this chapter the audio examples are short passages written for this book to
+show the technique, not quotations.</p>
+<p>First, the <b>whole-tone scale</b> (<a href="ch:ch19#whole-tone">Chapter 19</a>). Parallel major thirds drift down by whole tones
+over a low pedal, and nothing resolves, because nothing in the scale can.</p>
+<audio-ex src="whole_tone_color" caption="Parallel major thirds descending through the whole-tone scale over a low B♭: a floating, centerless color."></audio-ex>
+<p>Second, the <b>pentatonic scale</b>: the five black keys, F♯ G♯ A♯ C♯ D♯. With no semitones there is no dissonance to resolve, and
+the melody can wander and stop anywhere.</p>
+<audio-ex src="pentatonic" caption="A black-key pentatonic melody over an open fifth: no semitone, so no note needs to move."></audio-ex>
+<p>Third, <b>planing</b>: a melody doubled by a chord that moves in parallel with it, like a line drawn with a broad brush. If every chord is
+the same exact shape, the planing is chromatic. If the chords follow the notes of a scale, it is diatonic.</p>
+<audio-ex src="planing" caption="A melody planed with parallel major triads (chromatic planing), then with the triads of C major (diatonic planing)."></audio-ex>
+</div>
+<div class="layer understand">
+<pianoroll edo="12" notes="C4 E4 G4 ; D4 F#4 A4 ; Eb4 G4 Bb4 ; F4 A4 C5 ; C4 E4 G4 ; D4 F4 A4 ; E4 G4 B4 ; F4 A4 C5" labels="C ; D ; E♭ ; F ; C ; Dm ; Em ; F" title="Chromatic planing (every chord major), then diatonic planing in C major"></pianoroll>
+<p>Each technique dissolves a different part of the tonal system:</p>
+<ul>
+<li><b>Whole-tone harmony</b> removes the leading tone and the perfect fifth. Debussy's piano prelude "Voiles" (Préludes, Book I, 1909–10)
+is almost entirely whole-tone over a pedal B♭, with a short pentatonic middle section.</li>
+<li><b>Pentatonic writing</b> removes the semitone and the tritone, the two intervals that drive tonal resolution (the interval vector
+⟨0, 3, 2, 1, 4, 0⟩, <a href="ch:ch20#interval-vectors">Chapter 20</a>). "Pagodes" (<i>Estampes</i>, 1903) is pentatonic through long
+stretches. Debussy had heard Javanese gamelan at the Paris Exposition of 1889, and that encounter is often linked to such pieces.</li>
+<li><b>Planing</b> removes independent voice leading. Parallel fifths and octaves, forbidden in classical counterpoint
+(<a href="ch:ch14#rules">Chapter 14</a>), become a sound in their own right, as in the parallel chords of "La cathédrale engloutie"
+(Préludes, Book I). Chromatic planing also leaves the key: parallel major triads on C, D, E♭ and F use F♯, E♭ and B♭ as well as the
+notes of C major.</li>
+</ul>
+<p>What these techniques have in common is <b>symmetry or near-symmetry</b>. A whole-tone scale has no distinguished note. A pentatonic scale
+has a note that sounds central only when the music insists on it. Planing treats a chord as one object, so the same object can be
+put anywhere. Tonal function depends on asymmetry, such as the single leading tone and the single tritone of the major scale, and
+Debussy's colors come from removing it.</p>
+<p>Olivier Messiaen took this further. His modes of limited transposition (<a href="ch:ch19#messiaen">Chapter 19</a>) are systematic
+versions of Debussy's symmetric colors, and Messiaen described experiencing his chords and modes as colors.</p>
+<aside class="box history"><b>"Impressionism".</b> The label was borrowed from painting, and Debussy himself disliked it. It is used here
+only as a conventional name for a style period.</aside>
+<aside class="mirror"><b>Golden mirror.</b> Planing is natural in 36-ET too, where a golden triad can be planed by sixth-steps, a
+third of a semitone at a time. Golden planing is one of the "golden home" techniques of
+<a href="ch:ch31#breathing-planing">Chapter 31</a>, and the symmetric scales of 36-ET, which offer many more floating colors, are in
+<a href="ch:ch33#symmetric-36">Chapter 33</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Planing as a group action.</b> Chromatic planing of a chord $X$ along a melody $m_1, m_2, \dots$ plays $T_{m_i - m_1}(X)$: every chord
+is a transposition of the first, so its set class never changes. Diatonic planing inside a scale $D$ instead plays the image of $X$
+under the scale's own step map $s: D \to D$, which shifts each note to the next note of the scale. That map is not a transposition of
+$\mathbb{Z}_{12}$, so it changes the chord quality as it goes: in C major, C → Dm → Em → F, major, minor, minor, major.</p>
+<p><b>Why the whole-tone scale cannot cadence.</b> The dominant-to-tonic cadence needs a semitone (leading tone to tonic) and a perfect
+fifth (root motion). The whole-tone scale has interval vector ⟨0, 6, 0, 6, 0, 3⟩, with no interval class 1 and no interval class 5. So
+neither ingredient is available inside it. This is a theorem, not a matter of taste.</p>
+</div>
+</section>
+
+<section id="bartok-stravinsky">
+<h2>Bartók and Stravinsky</h2>
+<div class="layer hear">
+<p>Play a C major arpeggio and an F♯ major arpeggio at the same time. The two triads share no notes and lie a tritone apart, the
+farthest pair in the circle of fifths, yet together they sound bright and brittle rather than chaotic. This bitonal sound is associated
+with Stravinsky's ballet <i>Petrushka</i> (1911), and it is called the <b>Petrushka chord</b>. Then hear the octatonic scale that
+contains both triads.</p>
+<audio-ex src="petrushka" caption="C major and F♯ major arpeggiated together, then the octatonic scale C C♯ D♯ E F♯ G A A♯ that contains both, then both triads as one chord."></audio-ex>
+<p>Now a different idea, from analyses of Béla Bartók. Treat C, A, F♯ and E♭, the four roots a minor third apart, as members of one
+"tonic" family. Then any of the four dominant-family chords G7, D♭7, B♭7 and E7 can lead to C. Listen to the tonic family, and then to the four
+dominants each resolving to C.</p>
+<audio-ex src="axis" caption="The tonic axis C, A, F♯, E♭; then G7, D♭7, B♭7 and E7, each resolving to C."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>Stravinsky and the octatonic</h3>
+<p>The Petrushka chord C–E–G + F♯–A♯–C♯ is the set {0, 1, 4, 6, 7, 10}. It lies inside the octatonic collection
+{0, 1, 3, 4, 6, 7, 9, 10}, and it is symmetric under $T_6$: transposing it by a tritone swaps the two triads. Arthur Berger (1963)
+and then Pieter van den Toorn (<i>The Music of Igor Stravinsky</i>, 1983) argued that the octatonic collection organizes large parts of
+Stravinsky's music of the 1910s, from <i>Petrushka</i> and <i>The Rite of Spring</i> (1913) onward. Their readings, like all analyses, are
+interpretations, and other scholars weigh the octatonic and diatonic elements in Stravinsky differently.</p>
+<pc-circle edo="12" marks="0 1 4 6 7 10" path="0 4 7 0" title="The Petrushka chord: C major and F♯ major, a tritone apart"></pc-circle>
+<pianoroll edo="12" notes="F#3 A#3 C#4 C4 E4 G4" labels="C + F♯" title="The Petrushka chord as voiced in the example: F♯ major below, C major above"></pianoroll>
+<h3>Bartók and the axis system</h3>
+<p>The Hungarian musicologist Ernő Lendvai proposed in the 1950s that Bartók's tonality is organized by three <b>axes</b>. Each is a
+diminished-seventh set of roots, treated as one function:</p>
+<table>
+<tr><th>Function</th><th>Axis (roots)</th><th>As pitch classes</th></tr>
+<tr><td>Tonic</td><td>C, E♭, F♯, A</td><td>{0, 3, 6, 9}</td></tr>
+<tr><td>Dominant</td><td>G, B♭, C♯, E</td><td>{7, 10, 1, 4}</td></tr>
+<tr><td>Subdominant</td><td>F, A♭, B, D</td><td>{5, 8, 11, 2}</td></tr>
+</table>
+<pc-circle edo="12" marks="0 3 6 9" title="Lendvai's tonic axis: a coset of the subgroup {0, 3, 6, 9}"></pc-circle>
+<pianoroll edo="12" notes="F4 G4 B4 ; E4 G4 C5 ; F4 G#4 B4 ; E4 G4 C5 ; F4 Ab4 D5 ; E4 G4 C5 ; D4 G#4 B4 ; E4 G4 C5" labels="G7 ; C ; D♭7 ; C ; B♭7 ; C ; E7 ; C" title="The four dominant-axis sevenths resolving to C (upper voices of the example; bass omitted)"></pianoroll>
+<p>The idea starts from the circle of fifths. Tonal theory already lets a relative minor stand in for its major (C and A), and the axis
+system extends this to every member of a diminished seventh. In each axis, the roots a tritone apart (C and F♯) are called the
+"poles". Lendvai's work also includes the golden-section analyses of Bartók's forms mentioned in
+<a href="ch:ch16#proportion">Chapter 16</a>.</p>
+<aside class="box note"><b>Status.</b> The axis system is an <b>analytical interpretation</b> due to Lendvai, not a method Bartók described.
+It has been both influential and criticized, for instance for how selectively it fits the music. Bartók's harmony also draws on folk modes,
+on the "acoustic" (Lydian–Mixolydian) scale and on octatonic and chromatic cells.</aside>
+<aside class="mirror"><b>Golden mirror.</b> The three axes are the three cosets of the subgroup {0, 3, 6, 9}: functional harmony
+reinterpreted by group theory, exactly as in <a href="ch:ch19#subgroups">Chapter 19</a>. In $\mathbb{Z}_{36}$ the same subgroup
+{0, 9, 18, 27} has nine cosets, one for each layer and root family, and the golden circle of 36 golden triads (generated by 11, a unit)
+cuts across all of them (<a href="ch:ch33#z36">Chapter 33</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>The axes as cosets.</b> Let $D = \{0, 3, 6, 9\}$. The tonic, dominant and subdominant axes are $D$, $D + 7$ and $D + 5$, the three
+cosets of $D$, so they partition the twelve roots. Since $7 \equiv 1$ and $5 \equiv 2 \pmod 3$, the dominant axis is $D + 1 = D + 7$ and
+the subdominant is $D + 2 = D + 5$. So "dominant" and "subdominant" functions are the root classes $\equiv 1$ and $\equiv 2 \pmod 3$.</p>
+<p><b>Why the substitutions are smooth (computed).</b> Each dominant-axis seventh chord resolves to C with its upper three voices moving a total of
+at most 4 semitones in the voicings of the example: G7 → C moves F→E, B→C and holds G (2 semitones, plus the bass). D♭7 → C moves F→E,
+A♭→G, B→C (3 semitones), the familiar tritone substitution. B♭7 → C moves F→E, A♭→G, D→C (4 semitones). E7 → C moves D→E,
+G♯→G, B→C (4 semitones).</p>
+<p><b>The Petrushka chord's symmetry.</b> $T_6$ maps $\{0,4,7\} \cup \{6,10,1\}$ to $\{6,10,1\} \cup \{0,4,7\}$, itself. So it has
+6 transpositions, and it is a union of the three tritone cosets $\{0,6\}, \{4,10\}, \{7,1\}$.</p>
+</div>
+</section>
+
+<section id="clusters">
+<h2>Clusters and texture</h2>
+<div class="layer hear">
+<p>Now abandon chords made of separate intervals and play every note in a span at once: a <b>tone cluster</b>. Listen first to a
+chromatic cluster built up one semitone at a time, held, so that it becomes a single shimmering band of sound. Then hear two
+clusters struck like a forearm on a piano: all the white keys across two octaves, then all the black keys.</p>
+<audio-ex src="clusters" caption="A chromatic cluster C4–B4 built one semitone at a time and held; then struck clusters: all white keys C3–C5, then all black keys."></audio-ex>
+<p>A held cluster no longer sounds like twelve notes. It sounds like a <i>texture</i>: a band with a top, a bottom, a density and a
+loudness. That shift, from harmony as notes to harmony as texture, is one of the main developments of 20th-century music.</p>
+</div>
+<div class="layer understand">
+<p>The American composer Henry Cowell (1897–1965) named and explored the <b>tone cluster</b>. In piano pieces such as <i>The Tides
+of Manaunaun</i> (c. 1917) he played clusters with the fist, palm and forearm, and his book <i>New Musical Resources</i> (written around
+1919, published 1930) gave them a theory. Charles Ives had already asked for a cluster pressed with a wooden board in his
+<i>Concord</i> Sonata.</p>
+<p>In the 1960s György Ligeti (1923–2006) made the sustained cluster a whole musical world. In <i>Atmosphères</i> (1961) for orchestra
+and <i>Lux aeterna</i> (1966) for choir, dense clusters slowly widen, narrow and shift color. Ligeti called the dense canonic writing inside such
+textures <b>micropolyphony</b>: so many lines so close together that no single one can be heard. Krzysztof Penderecki's
+<i>Threnody to the Victims of Hiroshima</i> (1960) for strings uses quarter-tone clusters as massive blocks.</p>
+<p>In set-theory terms, a cluster is the most chromatic set of its size, the prime form (0, 1, 2, …, n−1). Its interval vector is as
+lopsided as possible: for a cluster of $n \le 7$ consecutive semitones, the entry for interval class $k$ is $n - k$ (or 0 once
+$k \ge n$), so the small intervals dominate. For {0, 1, 2} the vector is ⟨2, 1, 0, 0, 0, 0⟩.</p>
+<aside class="mirror"><b>Golden mirror.</b> In 36-ET the tightest cluster is three adjacent sixth-steps, C, ^C, vC♯, only 66.67 c wide. The
+multiplication $M_{11}$ maps exactly this cluster {0, 1, 2} onto the golden triad {0, 11, 22}, as $M_7$ maps the 12-ET cluster {0, 1, 2}
+onto {0, 2, 7}. In 36-ET, the densest sound and the golden chord are images of each other under a symmetry of the pitch-class circle
+(<a href="ch:ch33#m11">Chapter 33</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Clusters and multiplication.</b> The chromatic cluster $C_n = \{0, 1, \dots, n-1\}$ is an arithmetic progression with difference 1.
+Any unit multiplier $M_k$ maps it to the progression $\{0, k, 2k, \dots, (n-1)k\}$ with difference $k$. In $\mathbb{Z}_{12}$, $M_7$ turns
+semitone clusters into stacks of fifths: $M_7(C_5) = \{0, 7, 2, 9, 4\}$, the pentatonic scale. In $\mathbb{Z}_{36}$, $M_{11}$ turns
+sixth-step clusters into stacks of golden thirds: $M_{11}(C_3) = \{0, 11, 22\}$ and $M_{11}(C_4) = \{0, 11, 22, 33\}$, the golden seventh.</p>
+<p>So the white-key and black-key clusters of the audio are $M_7$-images of chromatic clusters. The black keys {1, 3, 6, 8, 10} are $M_7$ of
+the cluster {6, 7, 8, 9, 10} (F♯ to B♭, five consecutive semitones), and the white keys are $M_7$ of {11, 0, 1, 2, 3, 4, 5}
+(B to F, seven consecutive semitones).</p>
+</div>
+</section>
+
+<section id="spectralism">
+<h2>Spectralism: harmony from the overtone series</h2>
+<div class="layer hear">
+<p>Take one low note, E1 at 41.20 Hz, and build a chord from its own overtones: the 2nd, 3rd, 4th, up to the 16th harmonic, each as a
+pure sine wave. Listen as they enter one by one from the bottom. At first you hear a chord. As the partials accumulate, they fuse into
+something closer to one rich tone, because that is what a harmonic spectrum is (<a href="ch:ch02#partials">Chapter 2</a>). Then hear
+the same chord with each partial moved to the nearest key of a piano, and finally to the nearest quarter-tone.</p>
+<audio-ex src="spectral" caption="Harmonics 1–16 of E1 entering one at a time; then the exact chord, the chord rounded to 12-ET, and the chord rounded to quarter-tones: listen for how much each one fuses into a single tone."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Spectralism</b> began in Paris in the 1970s with the composers of the ensemble L'Itinéraire, founded in 1973, above all Gérard Grisey
+(1946–1998) and Tristan Murail (born 1947). Their starting point was sound itself: the spectrum of an instrument, analyzed with the new
+tools of acoustics and computers, became the source of the harmony. Grisey's <i>Partiels</i> (1975), part of his cycle <i>Les espaces
+acoustiques</i>, is built from the spectrum of a low E on the trombone. Its harmonies are orchestrations of that note's partials, played by
+the instruments of the ensemble. Murail's <i>Gondwana</i> (1980) and <i>Désintégrations</i> (1982–83) followed. The label "spectral
+music" is usually credited to the composer Hugues Dufourt (1979).</p>
+<p>Here are the first sixteen harmonics of E1, with their nearest 12-ET pitches (computed):</p>
+<table>
+<tr><th>Harmonic</th><th>Hz</th><th>Cents above E1</th><th>Nearest 12-ET note</th><th>Deviation (c)</th></tr>
+<tr><td>1</td><td>41.20</td><td>0.00</td><td>E1</td><td>0.00</td></tr>
+<tr><td>2</td><td>82.41</td><td>1200.00</td><td>E2</td><td>0.00</td></tr>
+<tr><td>3</td><td>123.61</td><td>1901.96</td><td>B2</td><td>+1.96</td></tr>
+<tr><td>4</td><td>164.81</td><td>2400.00</td><td>E3</td><td>0.00</td></tr>
+<tr><td>5</td><td>206.02</td><td>2786.31</td><td>G♯3</td><td>−13.69</td></tr>
+<tr><td>6</td><td>247.22</td><td>3101.96</td><td>B3</td><td>+1.96</td></tr>
+<tr><td>7</td><td>288.42</td><td>3368.83</td><td>D4</td><td>−31.17</td></tr>
+<tr><td>8</td><td>329.63</td><td>3600.00</td><td>E4</td><td>0.00</td></tr>
+<tr><td>9</td><td>370.83</td><td>3803.91</td><td>F♯4</td><td>+3.91</td></tr>
+<tr><td>10</td><td>412.03</td><td>3986.31</td><td>G♯4</td><td>−13.69</td></tr>
+<tr><td>11</td><td>453.24</td><td>4151.32</td><td>A♯4</td><td>−48.68</td></tr>
+<tr><td>12</td><td>494.44</td><td>4301.96</td><td>B4</td><td>+1.96</td></tr>
+<tr><td>13</td><td>535.64</td><td>4440.53</td><td>C5</td><td>+40.53</td></tr>
+<tr><td>14</td><td>576.85</td><td>4568.83</td><td>D5</td><td>−31.17</td></tr>
+<tr><td>15</td><td>618.05</td><td>4688.27</td><td>D♯5</td><td>−11.73</td></tr>
+<tr><td>16</td><td>659.26</td><td>4800.00</td><td>E5</td><td>0.00</td></tr>
+</table>
+<p>The table shows why spectral composers needed finer pitches than 12-ET. Harmonics 7, 11, 13 and 14 lie 31 to 49 cents from any piano
+key; the 11th falls almost exactly between A♯ and B. Spectral scores therefore often approximate partials to the nearest quarter-tone, or finer.
+With quarter-tones the largest error among these sixteen drops from 48.68 c to 18.83 c (computed).</p>
+<p>Spectral composers also used <b>inharmonic</b> spectra, such as bells and the "distorted" or stretched spectra of electronic processing,
+and techniques from the electronic studio (frequency modulation, ring modulation, filtering) as harmonic models. The general principle is that
+timbre and harmony are one continuum, a theme of <a href="ch:ch17#timbre-harmony">Chapter 17</a>.</p>
+<aside class="mirror"><b>Golden mirror.</b> Spectralism with <b>golden spectra</b> is a natural next step. On a tone whose partials
+lie at products of powers of 2 and φ instead of at whole-number multiples, the golden triad is the smoothest chord, as major triads are
+among the smoothest on harmonic tones (in a roughness model: a measurement, not a theorem). See <a href="ch:ch26#golden-spectra">Chapter 26</a> for the timbres and
+<a href="ch:ch33#golden-spectralism">Chapter 33</a> for golden spectral harmony.</aside>
+</div>
+<div class="layer derive">
+<p><b>The harmonic series in cents.</b> Harmonic $k$ lies $1200 \log_2 k$ cents above the fundamental. Its deviation from 12-ET is
+$1200\log_2 k - 100 \cdot \operatorname{round}(12 \log_2 k)$. The deviation depends only on the odd part of $k$ (doubling adds exactly
+1200 c), so harmonics 7 and 14 share −31.17 c, and 5, 10 share −13.69 c.</p>
+<p><b>Fusion and periodicity.</b> The exact harmonics $f_0, 2f_0, \dots, 16 f_0$ add up to a waveform that repeats every $1/f_0$ seconds,
+which the ear tends to hear as a single pitch $f_0$ (virtual pitch, <a href="ch:ch03#harmonicity">Chapter 3</a>). Rounding the partials to
+12-ET destroys the common period: the rounded chord has no small common frequency, and its partials beat against each other. This is
+a physical statement about the signal. How strongly a listener hears fusion is a <b>measurement</b> and depends on level, register and
+listener.</p>
+</div>
+</section>
+
+<section id="minimalism">
+<h2>Minimalism</h2>
+<div class="layer hear">
+<p>Two players play the same short pattern over and over. One plays a tiny bit faster. At first you hear a single line with a slight
+echo. Then the echo becomes a blur, then a new composite pattern, then, after twelve repetitions, the two players line up again, one note
+apart, making a different interlocking melody. Nothing in the music changed except the timing, and yet the listening experience keeps changing.</p>
+<audio-ex src="phasing" caption="Phasing: one pattern in two voices (left and right), the right voice slowly gaining one note every twelve repetitions."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Minimalism</b> arose in the United States in the 1960s, partly as a reaction against the complexity of serial music. Its harmony
+is often simple, diatonic or modal, and slow to change. The interest moves to process, repetition and gradual transformation.</p>
+<ul>
+<li><b>La Monte Young</b> explored very long sustained tones from the late 1950s, often in just intonation.</li>
+<li><b>Terry Riley</b>'s <i>In C</i> (1964) gives the performers 53 short figures, each repeated as many times as a player likes over a
+steady pulse on C, so that the figures overlap in ever-changing combinations.</li>
+<li><b>Steve Reich</b> discovered <b>phasing</b> with tape loops (<i>It's Gonna Rain</i>, 1965) and transferred it to live players in
+<i>Piano Phase</i> (1967). <i>Music for 18 Musicians</i> (1974–76) builds a large form from a cycle of slowly changing chords.</li>
+<li><b>Philip Glass</b> developed additive processes, in which a figure grows or shrinks by one note at a time. His opera <i>Einstein on the
+Beach</i> (1976) is a landmark.</li>
+</ul>
+<p>Harmonically, minimalism largely returns to the consonant, centered world that the earlier chapters of this Part had moved away from. Its
+novelty is in time: harmony that changes so slowly that each chord becomes an environment rather than an event. Young's
+work with just intonation also connects minimalism with the microtonal tradition of the next section.</p>
+<aside class="mirror"><b>Golden mirror.</b> Slow, repetitive textures are where small tuning differences become audible. A held golden chord
+on harmonic tones beats at rates tied to the golden ratio (<a href="ch:ch26#beats">Chapter 26</a>), and a minimalist process that moves a
+pattern by sixth-steps would make 36-ET's layers audible one by one (the layers as cosets of the 36-note system are in
+<a href="ch:ch33#z36">Chapter 33</a>). Whether such beating has special effects on listeners is a
+hypothesis, discussed in <a href="ch:ch34#conjecture">Chapter 34</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>The arithmetic of phasing.</b> Let the pattern have $p$ notes, player 1 play one note every $d$ seconds, and player 2 every
+$d' = d(1 - \varepsilon)$. After $N$ notes player 2 is ahead by $N d \varepsilon$ seconds. The players realign, shifted by one note, when
+$N d\varepsilon = d$, i.e. after $N = 1/\varepsilon$ notes. In the example $p = 8$ and $\varepsilon = 1/96$, so the shift is complete after
+96 notes of the faster player (twelve repetitions of its pattern, 14.25 s, while the slower player has played 95 notes). In between, the relative offset passes through every fraction of a note, and the composite rhythm
+changes continuously.</p>
+<p>With an eight-note pattern there are eight aligned positions (offsets 0 to 7 notes). Reich's procedure lingers on each one, so a phasing
+piece is a walk through the cyclic group $\mathbb{Z}_p$ of offsets, with continuous transitions between its elements.</p>
+</div>
+</section>
+
+<section id="microtonal">
+<h2>The microtonal pioneers</h2>
+<div class="layer hear">
+<p>Here is one whole tone, from C to D, divided four ways: into 2 semitones (the piano), into 4 quarter-tones, into 6 sixth-tones, and into
+16 sixteenth-tones. Then a C major triad, the same triad a quarter-tone higher, and both at once, the sound of two pianos tuned a
+quarter-tone apart.</p>
+<audio-ex src="microtones" caption="C to D in 2, 4, 6 and 16 equal steps (12-, 24-, 36- and 96-ET); then a C major triad, the triad a quarter-tone higher, and both together."></audio-ex>
+<p>And here is a scale with no equal steps at all: Harry Partch's 43 notes to the octave, every one a whole-number ratio. Listen for the
+uneven, close spacing, and then for one of the chords he built from it, harmonics 4, 5, 6, 7, 9 and 11 of one fundamental.</p>
+<audio-ex src="partch43" caption="Partch's 43-tone just scale on G3, from 1/1 to 160/81 and the octave; then the 11-limit hexad 4:5:6:7:9:11."></audio-ex>
+</div>
+<div class="layer understand">
+<p>The idea of going below the semitone runs through the whole 20th century. The pioneers did not agree on how:</p>
+<table>
+<tr><th>Who</th><th>When</th><th>System</th><th>Step</th></tr>
+<tr><td>Ferruccio Busoni</td><td><i>Sketch of a New Esthetic of Music</i>, 1907</td><td>third-tones (18-ET), and two series of them combined, which amounts to sixth-tones (36-ET)</td><td>66.67 c; 33.33 c</td></tr>
+<tr><td>Julián Carrillo</td><td>from the 1890s; <i>Preludio a Colón</i>, 1922</td><td><i>Sonido 13</i>: quarter-, eighth- and sixteenth-tones</td><td>50, 25, 12.5 c</td></tr>
+<tr><td>Charles Ives</td><td><i>Three Quarter-Tone Pieces</i> for two pianos, 1923–24</td><td>two pianos tuned a quarter-tone apart</td><td>50 c</td></tr>
+<tr><td>Alois Hába</td><td>1920s–30s</td><td>quarter-tones (the opera <i>Matka</i>, 1927–29), third- and sixth-tones</td><td>50, 66.67, 33.33 c</td></tr>
+<tr><td>Ivan Wyschnegradsky</td><td>from the 1920s</td><td>quarter-tones (often two or more pianos), later other divisions</td><td>50 c</td></tr>
+<tr><td>Harry Partch</td><td><i>Genesis of a Music</i>, 1949</td><td>43-tone just intonation, 11-limit</td><td>14.37 to 38.91 c, unequal</td></tr>
+</table>
+<ul>
+<li><b>Busoni</b> (1866–1924) argued in his <i>Sketch</i> that music had confined itself unnecessarily to the twelve-note division, and proposed third-tones,
+combined in two series, as a richer system. As the table says, his combined system amounts to 36-ET, the tuning of this book's second half.</li>
+<li><b>Julián Carrillo</b> (1875–1965), a Mexican composer and violinist, called his system <i>Sonido 13</i>, "the thirteenth sound", the
+first sound beyond the twelve. He later had pianos built in divisions from thirds of a tone down to sixteenths.</li>
+<li><b>Alois Hába</b> (1893–1973), a Czech composer, taught microtonal composition in Prague and had quarter-tone instruments built.</li>
+<li><b>Ivan Wyschnegradsky</b> (1893–1979), Russian-born and Paris-based, wrote a manual of quarter-tone harmony (1932) and much music for
+pianos tuned apart.</li>
+<li><b>Harry Partch</b> (1901–1974), an American, rejected equal temperament altogether. He built a scale of 43 just ratios within the octave
+and a family of instruments (the Chromelodeon, the Diamond Marimba and others) to play it.</li>
+</ul>
+<aside class="box math"><b>Partch's 43.</b> The scale (computed checks: 43 ratios, all 11-limit, symmetric under $r \mapsto 2/r$) is<br>
+1/1, 81/80, 33/32, 21/20, 16/15, 12/11, 11/10, 10/9, 9/8, 8/7, 7/6, 32/27, 6/5, 11/9, 5/4, 14/11, 9/7, 21/16, 4/3, 27/20, 11/8, 7/5,
+10/7, 16/11, 40/27, 3/2, 32/21, 14/9, 11/7, 8/5, 18/11, 5/3, 27/16, 12/7, 7/4, 16/9, 9/5, 20/11, 11/6, 15/8, 40/21, 64/33, 160/81.
+Its steps range from 14.37 c (between 12/11 and 11/10, and its mirror image between 20/11 and 11/6) to 38.91 c.</aside>
+<aside class="mirror"><b>Golden mirror.</b> Busoni's sixth-tones are exactly 36-ET, the grid on which the golden system lives. Busoni
+reached it by subdividing the whole tone. The golden system reaches it by a different road: 36 golden sixths nearly close to 25 octaves,
+so 36-ET closes the golden chain into a circle, as 12-ET closes the chain of fifths (<a href="ch:ch24#why-36">Chapter 24</a>). The chromatic and serial methods of this
+Part, transplanted to that grid, are <a href="ch:ch33">Chapter 33</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Which equal divisions contain 12-ET?</b> An $n$-ET contains every 12-ET pitch exactly when 100 c is a whole number of its steps,
+i.e. when $12 \mid n$. So 24-ET (quarter-tones), 36-ET (sixth-tones), 48-ET and 96-ET (sixteenth-tones) all contain the piano, but 18-ET
+(third-tones alone) does not: its step is 66.67 c, and the semitone 100 c is $1\tfrac12$ steps. This is why Busoni combined two
+third-tone series a semitone apart. The union of $18$-ET and its shift by 100 c is $\{0, 1, 2, \dots\}\cdot \tfrac{1200}{36}$, which is
+36-ET.</p>
+<p><b>Proof of the union.</b> In 36-ET units, 18-ET is the even steps $\{0, 2, 4, \dots, 34\}$, and the shift by a semitone adds 3 steps, giving
+the odd steps $\{3, 5, \dots, 35, 1\}$. Together, all 36. $\square$</p>
+<p><b>Partch's symmetry.</b> If $r$ is in the scale then so is $2/r$, so the scale is its own inversion about 1/1 and the octave. Its steps are
+unequal: from 14.37 c to 38.91 c (computed). Like any just scale, it cannot be transposed freely: moving 3/2 up by 81/80 does not land on a
+member of the scale.</p>
+</div>
+<div class="exercise"><p><b>Exercise 1.</b> Show that the Petrushka chord {0, 1, 4, 6, 7, 10} lies inside exactly one octatonic collection,
+and name it.</p>
+<details class="answer"><summary>Answer</summary><p>The octatonic collections are $D\cup(D+1)$, $D\cup(D+2)$, $(D+1)\cup(D+2)$ with
+$D = \{0,3,6,9\}$. The chord contains 0, 6 ∈ D and 1, 4, 7, 10 ∈ D + 1, so it lies in $D \cup (D+1) = \{0,1,3,4,6,7,9,10\}$ and in no other
+(both others miss either $D$ or $D+1$).</p></details></div>
+<div class="exercise"><p><b>Exercise 2.</b> In Lendvai's system, to which axis does a D7 chord belong, and why does D7 → C not count as a
+dominant resolution?</p>
+<details class="answer"><summary>Answer</summary><p>D is 2 ≡ 2 (mod 3): the subdominant axis {D, F, A♭, B}. So D7 → C is
+subdominant to tonic, a plagal-type motion in this reading.</p></details></div>
+<div class="exercise"><p><b>Exercise 3.</b> Which harmonic of E1 is the first that lies more than 10 cents from a 12-ET pitch, and
+by how much?</p>
+<details class="answer"><summary>Answer</summary><p>The 5th: G♯3, −13.69 c (the just major third 5/4 is 13.69 c flatter than 12-ET's).</p></details></div>
+<div class="exercise"><p><b>Exercise 4.</b> In the phasing example, how long does it take (in seconds) for player 2 to get one note ahead?</p>
+<details class="answer"><summary>Answer</summary><p>Player 2's notes last $0.15 \times 95/96 = 0.1484$ s. The two line up
+again, one note apart, when player 2 has played 96 notes and player 1 only 95: after $95 \times 0.15 = 14.25$ s.</p></details></div>
+<div class="exercise"><p><b>Exercise 5.</b> Does 30-ET (fifth-tones) contain 12-ET? Does it contain 36-ET's sixth-tone?</p>
+<details class="answer"><summary>Answer</summary><p>No to both: 12 does not divide 30 (100 c is 2.5 steps of 40 c), and 36 does not divide
+30 (33.33 c is not a multiple of 40 c).</p></details></div>
+</section>

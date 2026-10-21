@@ -1,0 +1,15 @@
+# The chords of the staff figure, spelled with ups and downs: C (C E G), then Cg (C vE ^G),
+# then Cg7 (C vE ^G B), then the first steps of the golden circle: vEg (vE ^G B) and ^Gg (^G B vEb).
+songmap: 0.2
+title: "Spelled with ups and downs"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 38
+tail_seconds: 3
+instruments: {organ: {use: clean/organ, attack: 0.08, release: 0.5}}
+sections:
+  - {name: a, bars: 5, harmony: "C:1 Cg:1 Cg7:1 vEg:1 ^Gg:1", parts: {organ: hold}}
+mix: {organ: {gain_db: -6}}
+master: clean

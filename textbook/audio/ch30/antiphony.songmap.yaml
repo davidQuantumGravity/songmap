@@ -1,0 +1,32 @@
+# ch30: call and response between two worlds. The rational voice (harmonic lead, C major,
+# over C major chords) calls; the golden voice (golden-spectrum bell, C golden7, over golden
+# chords) answers with the same scale degrees. C and B are the only notes the two scales share.
+songmap: 0.2
+title: "Call and response between two worlds"
+tempo: 88
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 35
+tail_seconds: 3
+instruments:
+  lead: clean/lead
+  organ: clean/organ
+  bell: clean/glass
+  gpad: clean/golden_pad
+motifs:
+  call1: {deg: "0/4 2 4 2 | 3/4. 2/8 1/2", octave: 5, key: "C major"}
+  resp1: {deg: "0/4 2 4 2 | 3/4. 2/8 1/2", octave: 5, key: "C golden7"}
+  call2: {deg: "4/4 3 2 1 | 0/4 -1 0/2", octave: 5, key: "C major"}
+  resp2: {deg: "4/4 3 2 1 | 0/4 -1 0/2", octave: 5, key: "C golden7"}
+mix:
+  lead: {gain_db: -4, pan: -0.2, send: {hall: 0.2}}
+  organ: {gain_db: -12, pan: -0.2, send: {hall: 0.2}}
+  bell: {gain_db: -4, pan: 0.2, send: {hall: 0.3}}
+  gpad: {gain_db: -10, pan: 0.2, send: {hall: 0.3}}
+sections:
+  - {name: call1, bars: 2, harmony: "C:1 G:1", parts: {lead: {motifs: [call1]}, organ: hold}}
+  - {name: resp1, bars: 2, harmony: "Cg:1 C#g:1", parts: {bell: {motifs: [resp1]}, gpad: hold}}
+  - {name: call2, bars: 2, harmony: "C:1 G:0.5 C:0.5", parts: {lead: {motifs: [call2]}, organ: hold}}
+  - {name: resp2, bars: 2, harmony: "Cg:1 vEg:0.5 Cg:0.5", parts: {bell: {motifs: [resp2]}, gpad: hold}}
+master: clean

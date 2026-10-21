@@ -1,0 +1,22 @@
+# The same six chords (C Am F Dm G C) in three voices, twice. First every chord is a root-position
+# block in a different register (170 semitones of total motion); then each voice moves to the
+# nearest note of the next chord (12 semitones in all).
+songmap: 0.2
+title: "Jumpy and smooth"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 14
+tail_seconds: 2.5
+instruments: {keys: clean/keys}
+mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+returns: {hall: {type: reverb, seconds: 2.0, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: jumpy
+    bars: 3
+    parts: {keys: {notes: "=mf [c,e,g]2 [a,c+,e+] | [f-,a-,c] [d,f,a] | [g-,b-,d] [c+,e+,g+]"}}
+  - name: smooth
+    bars: 4
+    parts: {keys: {notes: "r1 | =mf [g-,c,e]2 [a-,c,e] | [a-,c,f] [a-,d,f] | [b-,d,g] [c,e,g]"}}
+master: clean

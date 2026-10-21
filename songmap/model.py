@@ -68,7 +68,7 @@ class HarmonySpec:
 
 @dataclass
 class MasterSpec:
-    mode: str = "standard"        # standard | legacy (synth_v0: normalize + tanh, for the port check)
+    mode: str = "standard"        # standard | legacy (synth_v0: normalize + tanh) | clean (peak-normalize only)
     target_lufs: float = -14.0
     ceiling_db: float = -1.0
     glue: str = "gentle"          # none | gentle | punchy

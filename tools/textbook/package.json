@@ -1,0 +1,6 @@
+{
+  "name": "songmap-textbook-tools",
+  "private": true,
+  "description": "Build-time math rendering for the textbook site",
+  "dependencies": { "katex": "0.16.11" }
+}

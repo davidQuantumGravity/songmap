@@ -1,0 +1,28 @@
+# ch30: a first-species golden counterpoint in C golden7 (rules proposed in the chapter),
+# played twice with identical envelopes: on golden-spectrum organs (partials 2^m phi^n),
+# then on harmonic organs. Only the spectrum changes.
+songmap: 0.2
+title: "Golden counterpoint, two timbres"
+tempo: 60
+meter: "4/4"
+key: "C golden7"
+tuning: 36edo
+seed: 34
+tail_seconds: 3
+instruments:
+  gup: {use: clean/organ, spectrum: 1}
+  glo: {use: clean/organ, spectrum: 1}
+  hup: clean/organ
+  hlo: clean/organ
+motifs:
+  upper: {deg: "7/2 6 | 5 7 | 8 9 | 6 7", octave: 4}
+  lower: {deg: "0/2 2 | 3 4 | 3 2 | 1 0", octave: 4}
+mix:
+  gup: {gain_db: -6, pan: 0.25, send: {hall: 0.15}}
+  glo: {gain_db: -6, pan: -0.25, send: {hall: 0.15}}
+  hup: {gain_db: -6, pan: 0.25, send: {hall: 0.15}}
+  hlo: {gain_db: -6, pan: -0.25, send: {hall: 0.15}}
+sections:
+  - {name: golden_timbre, bars: 4, harmony: "N.C.:4", parts: {gup: {motifs: [upper]}, glo: {motifs: [lower]}}}
+  - {name: harmonic_timbre, bars: 4, harmony: "N.C.:4", parts: {hup: {motifs: [upper]}, hlo: {motifs: [lower]}}}
+master: clean

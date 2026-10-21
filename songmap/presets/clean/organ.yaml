@@ -1,0 +1,4 @@
+instrument: clean
+description: "Steady organ-like tone, 8 exact harmonics at 1/k^1.2; sustains while held"
+tags: [clean, sustain, harmonic]
+params: {partials: 8, rolloff: 1.2, attack: 0.04, release: 0.35, vel_bright: 0.4}

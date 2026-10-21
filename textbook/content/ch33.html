@@ -1,0 +1,413 @@
+<section id="z36">
+<h2>Z36: the structure of 36 pitch classes</h2>
+<div class="layer hear">
+<p>Part V treated the twelve pitch classes as a little number system, "Z12", clock arithmetic with twelve hours, and
+found in its arithmetic the symmetric scales, set classes and twelve-tone rows of twentieth-century music
+(<a href="ch:ch19#subgroups">Chapter 19</a>, <a href="ch:ch20#sets">Chapter 20</a>). This chapter does the same for 36-ET,
+whose pitch classes form a clock with 36 hours, "Z36". That number system is richer: it contains 12-ET three times over,
+once on each layer, and it holds structures that Z12 cannot, among them the golden triad and the golden chain.</p>
+<p>Start with the equal divisions hidden inside 36. Some are old friends on the 12-ET layer; two are new, and they
+cannot stay on one layer.</p>
+<audio-ex src="subgroups" caption="Three equal divisions inside 36-ET, each from C to C: the 12-ET chromatic scale, then 9 equal steps of 133 cents, then 18 equal steps of 67 cents. Listen for the 9-step scale stepping through ^, v and plain notes in turn."></audio-ex>
+</div>
+<div class="layer understand">
+<p>A pitch class of 36-ET is a number of sixth-steps above C, counted mod 36: C = 0, ^C = 1, vC♯ = 2, C♯ = 3, and so on.
+Its <b>layer</b> is its remainder mod 3: 0 for the 12-ET notes, 1 for ^, 2 for v
+(<a href="ch:ch24#layers">Chapter 24</a>).</p>
+<h3>Subgroups: the equal divisions inside 36</h3>
+<p>A <b>subgroup</b> is a set of pitch classes closed under adding and subtracting, which musically is an equal division of
+the octave. Because $\mathbb{Z}_{36}$ is cyclic, it has exactly one subgroup for each divisor of 36: orders 1, 2, 3, 4, 6,
+9, 12, 18 and 36.</p>
+<table>
+<caption>The nine subgroups of Z36</caption>
+<tr><th>Order</th><th>Step (sixth-steps)</th><th>Step (c)</th><th>Notes from C</th><th>On the 12-ET layer?</th><th>Western name</th></tr>
+<tr><td>1</td><td>—</td><td>—</td><td>C</td><td>yes</td><td>unison</td></tr>
+<tr><td>2</td><td>18</td><td>600</td><td>C F♯</td><td>yes</td><td>tritone</td></tr>
+<tr><td>3</td><td>12</td><td>400</td><td>C E A♭</td><td>yes</td><td>augmented triad</td></tr>
+<tr><td>4</td><td>9</td><td>300</td><td>C E♭ F♯ A</td><td>yes</td><td>diminished seventh</td></tr>
+<tr><td>6</td><td>6</td><td>200</td><td>C D E F♯ A♭ B♭</td><td>yes</td><td>whole-tone scale</td></tr>
+<tr><td>9</td><td>4</td><td>133.33</td><td>C ^C♯ vE♭ E ^F vG A♭ ^A vB</td><td><b>no</b></td><td>9-ET (new)</td></tr>
+<tr><td>12</td><td>3</td><td>100</td><td>the 12 notes of 12-ET</td><td>yes: it <i>is</i> the layer</td><td>chromatic scale</td></tr>
+<tr><td>18</td><td>2</td><td>66.67</td><td>C vC♯ ^C♯ D vE♭ ^E♭ …</td><td><b>no</b></td><td>18-ET (new)</td></tr>
+<tr><td>36</td><td>1</td><td>33.33</td><td>everything</td><td><b>no</b></td><td>36-ET</td></tr>
+</table>
+<p>The 12-ET layer is itself a subgroup, $3\mathbb{Z}_{36} = \{0, 3, 6, \dots, 33\}$, and the three layers are its three
+<b>cosets</b>: the layer itself and its two shifts by one sixth-step. Every symmetric structure of Chapter 19 lives inside
+that subgroup. The new subgroups, of orders 9, 18 and 36, cannot: their orders do not divide 12. They visit all three
+layers, the 9-ET scale in strict rotation (plain, ^, v, plain, …), as the example lets you hear.</p>
+<h3>Multiplication and the units</h3>
+<p>In $\mathbb{Z}_{12}$ the multiplications by 5 and 7 are the interesting symmetries beyond transposition and inversion
+(<a href="ch:ch20#multiplication">Chapter 20</a>). In $\mathbb{Z}_{36}$ the numbers that can serve as multipliers, the
+<b>units</b>, are those sharing no factor with 36:</p>
+<p style="text-align:center">1, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35.</p>
+<p>Multiplying every pitch class by a unit $u$ is a symmetry of the whole system, written $M_u$. Two quick rules describe
+what it does to layers and to the 12-ET notes:</p>
+<ul>
+<li>If $u$ leaves remainder 1 when divided by 3 (1, 7, 13, 19, 25, 31), $M_u$ keeps every layer in place. If the remainder is
+2 (5, 11, 17, 23, 29, 35), $M_u$ swaps the ^ and v layers.</li>
+<li>On the 12-ET layer $M_u$ acts like the 12-ET multiplication by $u$ mod 12. So $M_{13}$, $M_{25}$ and $M_1$ all fix every
+12-ET note; $M_{11}$, $M_{23}$, $M_{35}$ act on 12-ET notes as inversion; $M_{7}$, $M_{19}$, $M_{31}$ act as Western $M_7$.</li>
+</ul>
+<h3>Interval vectors and the Z-relation</h3>
+<p>An interval class in 36-ET is a distance from 0 to 18 sixth-steps, so a set's interval vector has 18 entries
+(<a href="ch:ch20#interval-vectors">Chapter 20</a>). Two sets are <b>Z-related</b> if they have the same interval vector
+without being transpositions or inversions of each other (<a href="ch:ch20#z-relation">Chapter 20</a>). An exhaustive
+search finds no Z-related trichords in $\mathbb{Z}_{36}$ (as in $\mathbb{Z}_{12}$) and exactly four Z-related pairs of
+tetrachords:</p>
+<table>
+<caption>The Z-related tetrachords of Z36 (sixth-steps; computed exhaustively over all 897 tetrachord classes)</caption>
+<tr><th>Pair</th><th>Layers touched</th></tr>
+<tr><td>{0, 1, 9, 19} and {0, 1, 10, 18}</td><td>all three</td></tr>
+<tr><td>{0, 2, 9, 20} and {0, 2, 11, 18}</td><td>all three</td></tr>
+<tr><td>{0, 3, 9, 21} and {0, 3, 12, 18}</td><td>one: the Western pair {0,1,3,7}, {0,1,4,6} on the 12-ET layer</td></tr>
+<tr><td>{0, 4, 9, 22} and {0, 4, 13, 18}</td><td>all three</td></tr>
+</table>
+<p>All four have the shape $\{0, a, 9, 18+a\}$ and $\{0, a, 9+a, 18\}$ for $a = 1, 2, 3, 4$; the case $a = 3$ is the
+all-interval tetrachord pair of 12-ET.</p>
+</div>
+<div class="layer derive">
+<p><b>Theorem (subgroups).</b> The subgroups of $\mathbb{Z}_{36}$ are $d\mathbb{Z}_{36}$ for $d\mid 36$, of order $36/d$.
+$d\mathbb{Z}_{36}\subseteq 3\mathbb{Z}_{36}$ iff $3\mid d$ iff the order divides 12. The subgroups of order 9, 18 and 36 are
+generated by 4, 2 and 1, which lie off the 12-ET layer, so each meets all three cosets of $3\mathbb{Z}_{36}$. Proofs:
+<a href="ch:appD#z36">Appendix D</a>.</p>
+<p><b>Units.</b> $\mathbb{Z}_{36}^\times = \{u: \gcd(u,36)=1\}$ has $\phi(36)=12$ elements; $M_u: x\mapsto ux$ is an
+automorphism exactly when $u$ is a unit. The orders of the units are 1 (for 1), 2 (17, 19, 35), 3 (13, 25) and 6 (5, 7, 11,
+23, 29, 31), so $\mathbb{Z}_{36}^\times\cong\mathbb{Z}_2\times\mathbb{Z}_6$ (computed; by the Chinese remainder theorem it is
+$\mathbb{Z}_4^\times\times\mathbb{Z}_9^\times$).</p>
+<p><b>Layer action.</b> $ux \bmod 3 = (u\bmod 3)(x \bmod 3)$, so $M_u$ fixes the layers if $u\equiv1$ and swaps layers 1 and 2
+if $u\equiv 2 \pmod 3$. On $3\mathbb{Z}_{36}$, $u\cdot 3q = 3\,(uq \bmod 12)$, which is $M_{u \bmod 12}$ of $\mathbb{Z}_{12}$.</p>
+</div>
+</section>
+
+<section id="m11">
+<h2>The golden transform M11</h2>
+<div class="layer hear">
+<p>In 12-ET, multiplying by 7 turns the chromatic scale into the circle of fifths. It turns the cluster C C♯ D into
+C D G, three adjacent fifths. In 36-ET, multiplying by 11 does the same thing for the golden system: it turns the
+tightest possible cluster, C ^C vC♯ (three notes a sixth-step apart), into the golden triad. Apply it again and the golden
+triad becomes the bronze triad; a third time, and you are back to a cluster.</p>
+<audio-ex src="m11" caption="12-ET: the cluster C C♯ D, then its M7 image C D G. 36-ET: the sixth-step cluster C ^C vC♯, then M11 of it (Cg), M11 again (bronze, C ^E vA), and M11 a third time (a cluster again, ^B vC C)."></audio-ex>
+</div>
+<div class="layer understand">
+<pianoroll edo="36" notes="C4 ^C4 vC#4 ; C4 vE4 ^G4 ; C4 ^E4 vA4 ; ^B3 vC4 C4" labels="cluster ; ×11: Cg ; ×11 again: bronze ; ×11 again: cluster" title="M11 cycles cluster → golden → bronze → cluster"></pianoroll>
+<h3>From clusters to chains</h3>
+<p>$M_{11}$ sends 1 to 11, so it sends the sixth-step ladder 0, 1, 2, 3, … to 0, 11, 22, 33, …, the roots of the golden circle
+(<a href="ch:ch31#circle">Chapter 31</a>). Three adjacent sixth-steps become three adjacent golden-circle notes:
+$M_{11}\{0,1,2\} = \{0,11,22\}$ = Cg. This is exactly parallel to 12-ET, where $M_7$ sends 0, 1, 2, … to the circle of fifths
+and $M_7\{0,1,2\} = \{0,2,7\}$.</p>
+<p>The parallel continues to scales. In 12-ET the diatonic scale is $M_7$ of a seven-note chromatic cluster. In 36-ET,
+$M_{11}$ maps the seven-note sixth-step cluster B ^B vC C ^C vC♯ C♯ (−3 to +3) onto golden7, and the thirteen-note cluster
+(−6 to +6) onto golden13. The golden scales are the clusters of 36-ET seen through the golden transform.</p>
+<h3>Every multiplier makes an equal-step trichord</h3>
+<p>For any unit $u$, $M_u\{0,1,2\} = \{0, u, 2u\}$, a chord of two equal steps of $u$ sixth-steps. The twelve units give six
+chord types (a unit and its negative give mirror images of the same type):</p>
+<table>
+<caption>The images of the cluster {0, 1, 2} under the twelve multipliers</caption>
+<tr><th>u (and −u)</th><th>$M_u\{0,1,2\}$</th><th>Notes</th><th>Equal step</th><th>Name</th></tr>
+<tr><td>1, 35</td><td>{0, 1, 2}</td><td>C ^C vC♯</td><td>33.33 c</td><td>sixth-step cluster</td></tr>
+<tr><td>5, 31</td><td>{0, 5, 10}</td><td>C vD ^E♭</td><td>166.67 c</td><td>—</td></tr>
+<tr><td>7, 29</td><td>{0, 7, 14}</td><td>C ^D vF</td><td>233.33 c</td><td>—</td></tr>
+<tr><td><b>11, 25</b></td><td>{0, 11, 22}</td><td>C vE ^G</td><td>366.67 c</td><td><b>golden</b> (25 gives vFg, its mirror)</td></tr>
+<tr><td><b>13, 23</b></td><td>{0, 13, 26}</td><td>C ^E vA</td><td>433.33 c</td><td><b>bronze</b> T13 (23 gives ^E♭T13)</td></tr>
+<tr><td>17, 19</td><td>{0, 17, 34}</td><td>C vF♯ ^B</td><td>566.67 c</td><td>—</td></tr>
+</table>
+<p>Among the stacked-third sizes from 9 to 13 sixth-steps, only 11 (golden) and 13 (bronze) are units. That is the fact
+behind <code>GOLDEN_MATH.md</code> §6: only golden and bronze thirds walk through all 36 notes when stacked.</p>
+<h3>The golden transform's own arithmetic</h3>
+<ul>
+<li><b>Order 6.</b> The powers of 11 mod 36 are 11, 13, 35, 25, 23, 1. So $M_{11}^2 = M_{13}$ (the bronze transform) and
+$M_{11}^3 = M_{35}$, which is the inversion $x\mapsto -x$ about C. In 12-ET, $M_7$ undoes itself after two steps; the golden
+transform needs six.</li>
+<li><b>Cluster → golden → bronze → cluster.</b> Since $M_{11}^2 = M_{13}$, applying $M_{11}$ to Cg gives $\{0,13,26\}$, bronze,
+and applying it to bronze gives $\{0,35,34\}$, a cluster again. $M_{13}$ runs the same cycle backwards: cluster → bronze →
+golden (vFg) → cluster.</li>
+<li><b>Layers.</b> $11\equiv 2 \pmod 3$, so $M_{11}$ swaps the ^ and v layers and keeps the 12-ET layer. On 12-ET notes it acts as
+inversion about C: C major {C, E, G} goes to {C, A♭, F}, F minor; C minor goes to F major.</li>
+<li><b>Interval classes.</b> $M_{11}$ leaves every 12-ET interval class (3, 6, 9, 12, 15, 18 sixth-steps) where it is and
+cycles all the others in threes: 1 → 11 → 13 → 1, 2 → 14 → 10 → 2, 4 → 8 → 16 → 4, 5 → 17 → 7 → 5. In particular it permutes
+the sixth-step, the golden third and the bronze third.</li>
+</ul>
+<aside class="box note">What $M_{11}$ is <i>not</i>: it does not turn golden13 into silver13. silver13 is golden13 with ^ and v
+swapped while every 12-ET note stays put, and no map of the form $x\mapsto ux + t$ does that (exhaustive check over all 12
+units and 36 transpositions). The layer mirror is a symmetry of note names, not of the group.</aside>
+<div class="exercise"><p><b>Exercise 1.</b> Compute $M_{11}$ of the C minor triad {0, 9, 21} and of Cg7 {0, 11, 22, 33}.</p>
+<details class="answer"><summary>Answer</summary><p>C minor: {0, 99, 231} mod 36 = {0, 27, 15} = C A F, F major (the
+inversion of C minor about C). Cg7: {0, 121, 242, 363} mod 36 = {0, 13, 26, 3} = C ^E vA C♯: a bronze triad plus C♯, the
+golden seventh's image.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Proposition.</b> (i) $M_u\{0,1,2\} = \{0,u,2u\}$. (ii) $11^2\equiv 13$, $11^3\equiv 35\equiv -1 \pmod{36}$, and 11 has
+order 6. (iii) $M_{11}$ maps the T-class of $\{0,1,2\}$ to that of $\{0,11,22\}$, that to $\{0,13,26\}$, and that back to the
+cluster class. <i>Proof:</i> (i) is linearity; (ii) is arithmetic; (iii) $M_{11}\{0,11,22\} = \{0,121,242\} = \{0,13,26\}$ and
+$M_{11}\{0,13,26\}=\{0,143,286\} = \{0,35,34\}$. ∎</p>
+<p><b>Proposition (golden scales are transformed clusters).</b> Let $C_m = \{-m,\dots,m\}$. Then
+$M_{11}C_m = \{25j: -m\le j\le m\}$, the golden scale of size $2m+1$. <i>Proof:</i> $11j = -25j$ and $C_m = -C_m$. ∎ Likewise
+$M_{13}$ maps the golden chain back to the cluster ($13\cdot 25 = 325\equiv 1$), so $M_{13}$ and $M_{25}$ are mutually inverse.</p>
+<p><b>Interval classes.</b> For $x = 3k$, $11x = 33k\equiv -3k$, the same class. For the rest, the cycles listed above are
+$x\mapsto 11x$ reduced to $[0,18]$, computed directly.</p>
+</div>
+</section>
+
+<section id="symmetric-36">
+<h2>Symmetric scales in 36</h2>
+<div class="layer hear">
+<p>A scale of limited transposition is one that comes back to itself when transposed by less than an octave, like the
+whole-tone scale or the octatonic scale (<a href="ch:ch19#messiaen">Chapter 19</a>). 36-ET has far more of them than 12-ET, and
+some can be built from golden triads. Here are two: the golden triad copied up by major thirds, and copied up by minor
+thirds.</p>
+<audio-ex src="symmetric" caption="A 9-note scale (Cg, Eg and A♭g merged), then its three golden triads; a 12-note scale (Cg, E♭g, F♯g and Ag merged), then its four golden triads. Listen for the triads stepping by equal intervals, the way the hexatonic and octatonic scales cycle their major triads."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>Counting them</h3>
+<p>A set has <b>period</b> $p$ if $p$ is the smallest number of sixth-steps that transposes it onto itself. It then has exactly
+$p$ distinct transpositions, and it is a union of cosets of the subgroup generated by $p$. The number of sets with a given
+period depends only on $p$, so 36-ET contains the 12-ET counts for small periods and adds new ones:</p>
+<table>
+<caption>Transposition classes of sets by period (computed; empty and full sets have period 1)</caption>
+<tr><th>Period p</th><th>Symmetry interval</th><th>Classes in Z12</th><th>Classes in Z36</th></tr>
+<tr><td>2</td><td>Z12: whole tone · Z36: 66.67 c</td><td>1</td><td>1</td></tr>
+<tr><td>3</td><td>Z12: minor third · Z36: semitone</td><td>2</td><td>2</td></tr>
+<tr><td>4</td><td>Z12: major third · Z36: 133.33 c</td><td>3</td><td>3</td></tr>
+<tr><td>6</td><td>Z12: tritone · Z36: whole tone</td><td>9</td><td>9</td></tr>
+<tr><td>9</td><td>Z36: minor third</td><td>—</td><td>56</td></tr>
+<tr><td>12</td><td>Z36: major third</td><td>(not limited)</td><td>335</td></tr>
+<tr><td>18</td><td>Z36: tritone</td><td>—</td><td>14,532</td></tr>
+<tr><td colspan="2">all of limited transposition, excluding empty and full</td><td>15</td><td>14,938</td></tr>
+</table>
+<p>The Western symmetric scales reappear on each layer: a whole-tone scale on the 12-ET layer has period 6 in 36-ET, the
+octatonic period 9, and so on. Two kinds of symmetry are new. Period 3 means invariance under a <i>semitone</i>: such a set is
+a union of whole layers (one layer, or two). Periods 2 and 4 come from 18-ET and 9-ET, which mix layers. Messiaen's seven
+modes are a handful of the fifteen symmetric classes of 12-ET; in 36-ET the field is about a thousand times larger.</p>
+<h3>Golden symmetric scales</h3>
+<p>No golden triad lies inside a proper subgroup or coset, because 11 generates all of $\mathbb{Z}_{36}$. Golden harmony meets
+symmetry only through unions. Close Cg under each subgroup:</p>
+<table>
+<caption>Cg closed under the transpositions of each subgroup (computed)</caption>
+<tr><th>Closed under</th><th>Notes</th><th>Size</th><th>Period</th><th>Golden triads inside</th><th>Western analogue</th></tr>
+<tr><td>tritone (T18)</td><td>C ^C♯ vE F♯ ^G vB♭</td><td>6</td><td>18</td><td>Cg, F♯g</td><td>C + F♯ (Petrushka chord)</td></tr>
+<tr><td>major thirds (T12)</td><td>C ^E♭ vE E ^G vA♭ A♭ ^B vC</td><td>9</td><td>12</td><td>Cg, Eg, A♭g</td><td>hexatonic (C + E + A♭)</td></tr>
+<tr><td>minor thirds (T9)</td><td>C vC♯ ^C♯ E♭ vE ^E F♯ vG ^G A vB♭ ^B♭</td><td>12</td><td>9</td><td>Cg, E♭g, F♯g, Ag</td><td>octatonic (C + E♭ + F♯ + A)</td></tr>
+<tr><td>whole tones (T6)</td><td>18 notes</td><td>18</td><td>6</td><td>6</td><td>whole-tone</td></tr>
+<tr><td>133.33 c (T4)</td><td>27 notes: all but one coset of 9-ET</td><td>27</td><td>4</td><td>9</td><td>—</td></tr>
+</table>
+<pc-circle edo="36" marks="0 10 11 12 22 23 24 34 35" title="The golden-augmented scale: Cg ∪ Eg ∪ A♭g"></pc-circle>
+<p>The 9-note scale has a neat second description: it is three augmented triads, one on each layer (C E A♭, ^E♭ ^G ^B,
+vE vA♭ vC), or equally three sixth-step clusters a major third apart. Each golden triad in it takes one note from each
+augmented triad. We propose the names <i>golden-augmented scale</i> (9 notes) and <i>golden-diminished scale</i> (12 notes)
+for the two middle rows; the names are proposals, and the musical use of these scales is unexplored.</p>
+<div class="exercise"><p><b>Exercise 2.</b> Which subgroups of $\mathbb{Z}_{36}$ contain the major third, 12 sixth-steps?</p>
+<details class="answer"><summary>Answer</summary><p>$d\mathbb{Z}_{36}$ contains 12 iff $d\mid 12$: $d = 1, 2, 3, 4, 6, 12$, the
+subgroups of order 36, 18, 12, 9, 6 and 3. So the major third lies in 9-ET and 18-ET as well as in the 12-ET layer, the
+whole-tone scale and the augmented triad.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Counting.</b> A set fixed by $T_p$ ($p\mid 36$) is determined by its intersection with $\{0,\dots,p-1\}$, so there are
+$2^p$ of them. By Möbius inversion the number with exact period $p$ is $f(p) = \sum_{q\mid p}\mu(p/q)\,2^q$, and each class has
+$p$ members, giving $f(p)/p$ classes: $f = 2, 2, 6, 12, 54, 504, 4020, 261576$ for $p = 1, 2, 3, 4, 6, 9, 12, 18$. A brute-force
+enumeration of $\mathbb{Z}_{12}$ (352 transposition classes in all, 17 with $p&lt;12$) confirms the method.</p>
+<p><b>No golden triad in a proper coset.</b> If $G_r\subseteq r+d\mathbb{Z}_{36}$ then $11\in d\mathbb{Z}_{36}$, so $d\mid 11$
+and $d=1$. ∎</p>
+<p><b>The closures.</b> $\bigcup_{k} G_{r+kd}$ for the subgroup generated by $d$; sizes $3\cdot 36/d$ when the copies are
+disjoint ($d = 18, 12, 9, 6$) and 27 for $d=4$, where $G_0 + 4\mathbb{Z}_{36}$ covers the cosets of 0, 3 and 2 (since
+$11\equiv 3$ and $22\equiv 2 \pmod 4$) and misses the coset of 1.</p>
+</div>
+</section>
+
+<section id="rows-36">
+<h2>36-tone rows and the golden chain</h2>
+<div class="layer hear">
+<p>A twelve-tone row orders all twelve pitch classes, each once (<a href="ch:ch21#rows">Chapter 21</a>). A 36-tone row
+orders all 36. The most natural one in the golden system is the golden chain itself: start on C and keep moving by a golden
+sixth (or, folded into one octave, either up a golden sixth or down a golden third). After 36 steps you have played
+every pitch class of 36-ET exactly once.</p>
+<audio-ex src="chain_row" caption="The golden chain as a 36-tone row, kept between C4 and C5, over the golden triads it spells. Listen for each group of three notes outlining a golden triad, and for those triads rising a semitone at a time."></audio-ex>
+</div>
+<div class="layer understand">
+<p>The row is P = (0, 25, 14, 3, 28, 17, 6, 31, 20, 9, 34, 23, …), that is, pitch class $25j$ mod 36 for $j = 0, 1, \dots, 35$:</p>
+<p style="text-align:center">C ^A♭ vF · C♯ ^A vF♯ · D ^B♭ vG · E♭ ^B vA♭ · E ^C vA · F ^C♯ vB♭ · F♯ ^D vB · G ^E♭ vC ·
+A♭ ^E vC♯ · A ^F vD · B♭ ^F♯ vE♭ · B ^G vE</p>
+<pc-circle edo="36" marks="0 25 14" path="0 25 14 3 28 17 6 31 20 9 34 23 12 1 26 15 4 29 18 7 32 21 10 35 24 13 2 27 16 5 30 19 8 33 22 11 0" title="The golden chain row as a path on the 36-ET circle (first trichord marked)"></pc-circle>
+<p>Its properties, all checked by computation:</p>
+<ul>
+<li><b>Constant interval.</b> Every step is the same, 25 sixth-steps, a golden sixth. It is the opposite of an all-interval
+row.</li>
+<li><b>Golden everywhere.</b> Every three consecutive notes form a golden triad (all 34 overlapping windows). The twelve
+groups of three (the discrete trichords, separated by dots in the list above) are the golden triads vFg, vF♯g, vGg, …, vEg, whose roots lie on
+the v layer and rise by semitones. Each trichord plays its triad from the top down: fifth, third, root.</li>
+<li><b>Layers in rotation.</b> The layers run 0, 1, 2, 0, 1, 2, …. Taking every third note gives three ascending chromatic
+scales, one on each layer: C C♯ D …; ^A♭ ^A ^B♭ …; vF vF♯ vG …. The row is three chromatic scales interleaved, because three
+golden sixths make two octaves and (very nearly) a semitone.</li>
+<li><b>Few forms.</b> A row normally has 4 × 36 = 144 forms (transpositions of P, I, R and RI). For the golden chain row,
+rotating it by one note is the same as transposing it by 25, and its retrograde is a transposed inversion, R = T₁₁I. Only 72
+distinct forms exist.</li>
+<li><b>Combinatorial halves.</b> The first 18 notes, transposed by a tritone (18 sixth-steps), give exactly the last 18. So do
+the first 18 inverted by $x\mapsto 11-x$. In twelve-tone language the row is combinatorial at the tritone and under one
+inversion (<a href="ch:ch21#combinatoriality">Chapter 21</a>).</li>
+</ul>
+<h3>All-interval rows</h3>
+<p>An <b>all-interval</b> row uses every interval exactly once between consecutive notes (<a href="ch:ch21#all-interval">Chapter
+21</a>). For 36-ET that means the 35 successive intervals are 1, 2, …, 35 in some order. They exist; one is the "zigzag"
+0, 35, 1, 34, 2, 33, 3, …, whose intervals are 35, 2, 33, 4, 31, 6, …, all different (checked). As in 12-ET, any all-interval
+row begins and ends a tritone apart (here 18 sixth-steps; the zigzag ends on F♯). How many all-interval 36-rows exist, and
+whether any of them has golden properties such as golden-triad trichords, we have not determined: the search space is far
+too large for the simple enumeration used for 12-ET.</p>
+<div class="exercise"><p><b>Exercise 3.</b> How many distinct forms (under T, I, R, RI) does the 36-tone "chromatic row"
+0, 1, 2, …, 35 have?</p>
+<details class="answer"><summary>Answer</summary><p>72. Its retrograde (35, 34, …, 0) is $T_{35}I$ of it, and no
+transposition of it equals a transposition of its inversion (one ascends, the other descends), so the forms are the 36
+transpositions of P and the 36 of I. It is the image of the golden chain row under $M_{13}$, which preserves all these
+relations.</p></details></div>
+</div>
+<div class="layer derive">
+<p>Let $P_j = 25j \bmod 36$.</p>
+<p><b>Proposition.</b> (i) $P$ is a permutation of $\mathbb{Z}_{36}$. (ii) $\{P_j, P_{j+1}, P_{j+2}\} = G_{P_{j+2}}$. (iii)
+$\{P_{3k}, P_{3k+1}, P_{3k+2}\} = G_{14+3k}$. (iv) $P_{3k} = 3k$, $P_{3k+1} = 25+3k$, $P_{3k+2} = 14+3k$. (v)
+$P_{j+1} = P_j + 25$ and $P_{35-j} = 11 - P_j$. (vi) $\{P_j: 0\le j\le 17\} + 18 = \{P_j: 18\le j\le 35\} =
+11 - \{P_j: 0\le j\le 17\}$.</p>
+<p><i>Proof.</i> (i) $\gcd(25,36) = 1$. (ii) $G_r = \{r, r+11, r+22\} = \{r, r-25, r-50\}$; take $r = 25(j+2)$. (iii) $25(3k+2) =
+50+75k \equiv 14+3k$. (iv) $75\equiv 3$. (v) $25\cdot 35 = 875\equiv 11$. (vi) $25\cdot 18 = 450\equiv 18$, and
+$11 - 25j = 25(35-j)$. ∎</p>
+<p><b>Distinct forms.</b> $T_tP = T_sIP$ would need $t + 25j \equiv s - 25j$ for all $j$, i.e. $50j\equiv s-t$ for all $j$,
+impossible. By (v), rotations and R add nothing new: 72 forms.</p>
+<p><b>All-interval rows.</b> If the intervals of a row of $\mathbb{Z}_{n}$ ($n$ even) are $1,\dots,n-1$ in some order, the last
+note minus the first is $\sum_{i=1}^{n-1} i = n(n-1)/2\equiv n/2 \pmod n$. For $n = 36$, $630\equiv 18$.</p>
+</div>
+</section>
+
+<section id="golden-serialism">
+<h2>Golden serialism</h2>
+<div class="layer hear">
+<p>Serialism organizes music by orderings of the pitch classes and the operations that transform them
+(<a href="ch:ch21#practice">Chapter 21</a>). A golden serialism would use the golden system's own orderings and operations.
+Nothing of the kind exists yet as a repertoire; this section collects proposals. The first is a way to turn any ordinary
+twelve-tone row into a golden 36-tone row: replace each pitch class by the golden triad on it.</p>
+<audio-ex src="derived_row" caption="The twelve-tone row C B G A♭ E♭ C♯ D B♭ F♯ F E A, each note expanded into its golden triad (root, third, fifth), over the triads themselves: 36 notes, every pitch class of 36-ET once."></audio-ex>
+</div>
+<div class="layer understand">
+<aside class="box note"><b>Status: proposals.</b> The constructions below are mathematically exact (each claim was verified by
+computation), but their musical value is untested. No body of golden serial music exists to learn from.</aside>
+<h3>Proposal 1: golden derivation</h3>
+<p>The twelve golden triads whose roots lie on the 12-ET layer (Cg, C♯g, Dg, …, Bg) never share a note, and together they
+contain every pitch class of 36-ET exactly once. The same is true of the twelve golden triads with roots on the ^ layer and of
+the twelve with roots on the v layer. So the 36 golden triads fall into three <i>layer families</i>, each a partition of the
+36 notes. Consequently any twelve-tone row becomes a 36-tone row by replacing each pitch class $p$ by the golden triad on $p$,
+in any order of its three notes. The example uses the row C B G A♭ E♭ C♯ D B♭ F♯ F E A and plays each triad upward.</p>
+<p>The golden chain row of the previous section is itself such a derivation: it is the chromatic scale vF, vF♯, vG, … with each
+note replaced by the golden triad on it (v-layer family), played fifth–third–root.</p>
+<h3>Proposal 2: M11 as a row operation</h3>
+<p>Pitch-class set theory adds the multiplications $M_5$ and $M_7$ to transposition and inversion
+(<a href="ch:ch20#multiplication">Chapter 20</a>). Golden serialism can add $M_{11}$. Applied to a row it keeps the row a row
+(it permutes the pitch classes), turns sixth-step motion into golden-third motion and golden thirds into bronze thirds, leaves
+every 12-ET interval class unchanged, and swaps the ^ and v layers. A row heard through $M_{11}$, $M_{11}^2 = M_{13}$ and
+$M_{11}^3 = I$ gives a family of six related rows (the powers of $M_{11}$).</p>
+<h3>Proposal 3: layer as a serial dimension</h3>
+<p>Every pitch class has a layer (0, ^ or v), so a row has a layer sequence, as it has a register or dynamic sequence. The
+golden chain row rotates its layers 0, 1, 2, …; a golden-derived row has the pattern of the triads chosen. Transposing by one
+sixth-step, $T_1$, rotates all layers at once. A composer can treat layer color, the "prism" of
+<a href="ch:ch31#breathing-planing">Chapter 31</a>, as a serial parameter.</p>
+<h3>Proposal 4: timbre as a serial dimension</h3>
+<p>Because consonance depends on timbre, the same row segment can be stable on golden-spectrum tones and tense on harmonic
+ones (<a href="ch:ch30#golden-counterpoint">Chapter 30</a>). Assigning timbres to row segments, harmonic for some and golden
+for others, would let a serial piece control tension through spectrum rather than through pitch alone.</p>
+<div class="exercise"><p><b>Exercise 4.</b> Prove that Cg and C♯g share no note, and that Cg and vEg share two. What is the
+general rule for when two golden triads overlap?</p>
+<details class="answer"><summary>Answer</summary><p>$G_r$ and $G_s$ meet when some $r + a \equiv s + b$ with
+$a, b\in\{0,11,22\}$, i.e. when $s - r\in\{0, \pm 11, \pm 22\} = \{0, 11, 14, 22, 25\}$. C♯g is $s - r = 3$, not in the list,
+so no overlap; vEg is $s-r = 11$: overlap of two (vE and ^G). None of 11, 14, 22, 25 is a multiple of 3, so two triads with
+roots on the same layer never overlap, which proves the partition claim of Proposal 1.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Theorem (layer families).</b> For each $\ell\in\{0,1,2\}$, $\{G_r: r\equiv \ell \pmod 3\}$ is a partition of
+$\mathbb{Z}_{36}$ into 12 golden triads. <i>Proof:</i> by the exercise, $G_r\cap G_s\ne\varnothing$ iff
+$s-r\in\{0, 11, 14, 22, 25\}$; for $r\equiv s$ only $s=r$ qualifies. Twelve disjoint 3-sets fill 36 classes. ∎</p>
+<p><b>Corollary.</b> If $(p_1,\dots,p_{12})$ is a twelve-tone row, then the concatenation of $(3p_i, 3p_i+11, 3p_i+22)$ is a
+36-tone row (verified for the example).</p>
+<p><b>Rows under $M_u$.</b> $M_u$ is a bijection for each unit $u$, so it maps rows to rows; it maps the interval succession
+$(i_1, \dots, i_{35})$ to $(u i_1,\dots, u i_{35})$.</p>
+</div>
+</section>
+
+<section id="golden-spectralism">
+<h2>Golden spectralism</h2>
+<div class="layer hear">
+<p>The spectral composers of the 1970s, Gérard Grisey and Tristan Murail among them, built harmony from the overtone series
+itself: the partials of a low tone, analyzed and re-orchestrated as chords (<a href="ch:ch22#spectralism">Chapter 22</a>).
+A golden spectralism would start from a golden spectrum instead. Listen to one golden-spectrum tone, then its ten partials
+entering one at a time as pure sines, then those same ten frequencies played as a chord, first on harmonic tones and then on
+golden-spectrum tones.</p>
+<audio-ex src="golden_spectrum" caption="A golden-spectrum tone on C3; its ten partials unfolding as sines; the same frequencies as a chord of harmonic organ tones; then as a chord of golden organ tones. Listen for which chord melts into a single color."></audio-ex>
+<p>Finally, the timbre continuum between the two worlds. A golden triad and a just major triad each pass through a slow
+glide of their partials from harmonic to golden.</p>
+<audio-ex src="spectral_morph" caption="An exact golden triad whose tone glides from a harmonic to a golden spectrum, then a just C major triad through the same glide. Listen for the major triad roughening much more: at the golden end the golden triad is the smoother of the two."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>The chord inside a golden spectrum</h3>
+<p>The book's golden instruments (<code>clean/glass</code>, <code>clean/golden_pad</code>) use the ten smallest ratios of the
+form $2^m\varphi^n$ (<a href="ch:ch26#golden-spectra">Chapter 26</a>). On C:</p>
+<table>
+<caption>The ten partials of a golden-spectrum tone on C</caption>
+<tr><th>Partial</th><th>Ratio</th><th>Form</th><th>Cents above the fundamental</th><th>Pitch class</th><th>36-ET (error)</th></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>0.00</td><td>C</td><td>C (0)</td></tr>
+<tr><td>2</td><td>1.618</td><td>φ</td><td>833.09</td><td>^A♭</td><td>^A♭ (−0.24)</td></tr>
+<tr><td>3</td><td>2</td><td>2</td><td>1200.00</td><td>C</td><td>C (0)</td></tr>
+<tr><td>4</td><td>2.618</td><td>φ²</td><td>1666.18</td><td>vF</td><td>vF (−0.49)</td></tr>
+<tr><td>5</td><td>3.236</td><td>2φ</td><td>2033.09</td><td>^A♭</td><td>^A♭ (−0.24)</td></tr>
+<tr><td>6</td><td>4</td><td>4</td><td>2400.00</td><td>C</td><td>C (0)</td></tr>
+<tr><td>7</td><td>4.236</td><td>φ³</td><td>2499.27</td><td>C♯</td><td>C♯ (−0.73)</td></tr>
+<tr><td>8</td><td>5.236</td><td>2φ²</td><td>2866.18</td><td>vF</td><td>vF (−0.49)</td></tr>
+<tr><td>9</td><td>6.472</td><td>4φ</td><td>3233.09</td><td>^A♭</td><td>^A♭ (−0.24)</td></tr>
+<tr><td>10</td><td>6.854</td><td>φ⁴</td><td>3332.36</td><td>^A</td><td>^A (−0.97)</td></tr>
+</table>
+<p>The pitch classes are C, ^A♭, vF, C♯, ^A: the golden chain from 0 to 4. The harmonic series of C spells C major (partials 4,
+5, 6) and then a seventh chord whose seventh, partial 7, is 31 c flat of the 12-ET B♭; its fundamental is the root of the chord it spells. The golden series spells golden chords
+with the fundamental on <i>top</i> of the chain:</p>
+<ul>
+<li>partials 1, φ, φ² give C, ^A♭, vF: the golden triad vFg (vF ^A♭ C) in second inversion, with the fundamental as its fifth;</li>
+<li>partials 1, φ, φ², φ³ give C♯g7 (C♯ vF ^A♭ C) in chain voicing, with the fundamental as its seventh.</li>
+</ul>
+<h3>Golden chords are thinned golden spectra</h3>
+<p>Play an exact close Cg (1 : 2/φ : 4/φ²) on these ten-partial golden tones. Its 30 partials fall on only 20 distinct
+frequencies, and all of them are of the form $2^m\varphi^n$ times the root frequency: the chord is itself a piece of one golden
+spectrum. In chain voicing (1 : φ : φ²) the 30 partials fall on 16 frequencies. A just C major triad on the same tones has 30
+distinct partials and none of them coincide. On harmonic tones the situation reverses: a just C major triad's 30 partials
+(ten per tone) fall on 24 frequencies, while Cg's stay 30. This is the spectral reason behind the timbre flip: a chord is
+smooth on a timbre when the chord is a fragment of that timbre's own spectrum (<i>theorem</i> for the coincidence counts, which
+are exact; the link to smoothness is the Sethares model, a <i>measurement</i>).</p>
+<p>The partials' difference tones are golden too, though not all of them. Of the 55 pairwise differences among the eleven
+golden partials below 9 used in Chapter 26, 34 are again of the form $2^m\varphi^n$, including all ten differences between
+neighbouring partials (for example $\varphi^2 - 2 = \varphi^{-1}$ and $4 - 2\varphi = 2\varphi^{-2}$). Some are not:
+$4 - 1 = 3$ is not.</p>
+<h3>Proposals for a golden spectral practice</h3>
+<aside class="box note"><b>Status: proposals.</b> These extend spectral technique to golden spectra. They are untested
+compositionally.</aside>
+<ul>
+<li><b>Spectral chords.</b> Orchestrate the partials of a golden spectrum as chords, as in the example. In 36-ET they are
+chain pitches within a cent; in exact tuning they are exact.</li>
+<li><b>Spectral progressions along the chain.</b> Move the fundamental by chain steps. The ten-partial spectra on C and on the
+note a golden third above (ratio 2/φ) share five partial frequencies exactly, so neighbouring golden spectra overlap the way
+neighbouring golden triads do.</li>
+<li><b>Timbre interpolation.</b> Treat the path from harmonic to golden spectra as a dimension of the music, as in the second
+example. For the exact chords of that example the Sethares model gives the golden triad 0.503 on the harmonic tone and
+0.638 on the golden tone, and the just major triad 0.432 and 0.826 (eight partials at amplitude $k^{-1.2}$;
+<i>measurement</i>). The order of the two chords flips during the glide.</li>
+<li><b>Golden combination-tone fields.</b> Use the exact chain voicing, whose difference tones fall exactly on the chain
+(<a href="ch:ch26#combination-tones">Chapter 26</a>), as a self-generating spectral texture.</li>
+</ul>
+<div class="exercise"><p><b>Exercise 5.</b> Show that $\varphi^3 - 4 = \varphi^{-3}$ and $2\varphi^2 - 4 = 2\varphi^{-1}$, two
+neighbouring-partial differences of the golden spectrum.</p>
+<details class="answer"><summary>Answer</summary><p>Use $\varphi^2 = \varphi + 1$, so $\varphi^3 = 2\varphi + 1$, and $\varphi^{-1} = \varphi - 1$. Then $\varphi^{-3} =
+(\varphi-1)^3 = \varphi^3 - 3\varphi^2 + 3\varphi - 1 = (2\varphi+1) - 3(\varphi+1) + 3\varphi - 1 = 2\varphi - 3 =
+\varphi^3 - 4$. And $2\varphi^2 - 4 = 2(\varphi + 1) - 4 = 2(\varphi - 1) = 2\varphi^{-1}$.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Partial set.</b> $S_{10}$ = the ten smallest elements of $\{2^m\varphi^n: m,n\ge 0\}$ $= \{1, \varphi, 2, \varphi^2, 2\varphi,
+4, \varphi^3, 2\varphi^2, 4\varphi, \varphi^4\}$ (the instrument code takes $m, n &lt; 8$ and sorts). Their pitch classes are
+$c(n)$ for $n = 0,\dots,4$ since multiplying by $2^m$ is octave equivalence.</p>
+<p><b>Coincidences.</b> For a chord $\{1, 2/\varphi, 4/\varphi^2\} = \{1, 2\varphi^{-1}, 4\varphi^{-2}\}$, every product with an
+element of $S_{10}$ is $2^a\varphi^b$, and two products coincide exactly when their exponent pairs agree (since
+$2^a\varphi^b = 2^{a'}\varphi^{b'}$ forces $b=b'$, $\varphi$ being irrational, and then $a=a'$). Counting distinct pairs gives
+20; for the chain voicing $\{1,\varphi,\varphi^2\}$, 16. A just triad $\{1, 5/4, 3/2\}$ times $S_{10}$ has no coincidences,
+because $5/4$ and $3/2$ are not of the form $2^a\varphi^b$.</p>
+<p><b>Neighbouring spectra.</b> $S_{10}\cap (2/\varphi)S_{10}$ has 5 elements (computed: $2, 2\varphi, 4, 2\varphi^2, 4\varphi$).</p>
+</div>
+</section>

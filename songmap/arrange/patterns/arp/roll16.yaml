@@ -1,0 +1,7 @@
+# Sixteenth-note rolling arpeggio over the chord tones, steady (no filter ramp or pan LFO).
+style: roll16
+role: arp
+grid: 16
+order: [0, 1, 2, 3, 2, 1, 2, 3]
+oct: 0
+len: 0.6

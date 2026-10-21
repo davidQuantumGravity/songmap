@@ -1,0 +1,320 @@
+<section id="organum">
+<h2>Organum and the perfect consonances</h2>
+<div class="layer hear">
+<p>Start with a single line of melody, sung by one voice or by many in unison. For centuries this was the sacred music
+of the Latin West: plainchant, often called Gregorian chant, which is <b>monophonic</b>, a single line with no harmony
+at all. Now add a second voice that shadows the first a perfect fourth below, moving in strict parallel. Then try the
+same with a perfect fifth. The result is bright, hollow and very stable. Nothing in it beats quickly: the two voices
+seem to merge into one richer voice.</p>
+<audio-ex src="organum" caption="A chant-like phrase (written for this book) alone, then with a second voice a perfect fourth below in strict parallel motion, then a perfect fifth below. Listen for how the second voice fuses with the first."></audio-ex>
+<p>This is <b>parallel organum</b>, the earliest written polyphony in European music. It is worth hearing with fresh
+ears, because it shows what "consonant" meant at the start of the story: the octave, the fifth and the fourth, and
+nothing else.</p>
+</div>
+<div class="layer understand">
+<p><b>The first written polyphony.</b> The anonymous treatise <i>Musica enchiriadis</i> and its companion
+<i>Scolica enchiriadis</i>, from the 9th century, describe a principal voice (<i>vox principalis</i>) carrying the chant
+and an added voice (<i>vox organalis</i>) a fourth or a fifth below it. Either voice could be doubled at the octave,
+giving three- and four-voice textures built only from octaves, fifths and fourths. The treatise also describes a
+modified organum at the fourth, in which the added voice holds a note instead of moving in parallel, to avoid the
+augmented fourth (the tritone) that strict parallel fourths would produce at certain points of the scale.</p>
+<aside class="box history"><p><b>Chant and organum.</b> Parallel fourths and fifths belong to early medieval
+<i>organum</i> (9th–10th centuries), not to Gregorian chant itself, which was sung in unison. Over the following
+centuries organum grew freer: voices moved in contrary and oblique motion, and by around 1200 the composers of the
+Notre-Dame school in Paris, Léonin and Pérotin, wrote elaborate organa over long-held chant notes. But for the whole
+period the stable sonorities, the places where music could rest, remained the octave, fifth, fourth and unison.</p></aside>
+<p><b>Why these intervals.</b> Medieval theory, inherited from Greek writers through Boethius (early 6th century), held
+that consonance comes from simple ratios: the octave 2:1, the fifth 3:2, the fourth 4:3, all made from the numbers
+1, 2, 3, 4. Acoustics agrees, for harmonic tones (<a href="ch:ch03#roughness">Chapter 3</a>): in a 3:2 fifth every
+third partial of the lower note coincides with every second partial of the upper, and the partials that do not
+coincide are far apart. Nothing is left close enough to beat.</p>
+<table>
+<tr><th>Interval</th><th>Ratio</th><th>Cents</th><th>Complexity $\log_2(pq)$</th><th>Medieval status</th></tr>
+<tr><td>unison</td><td>1:1</td><td>0.00</td><td>0</td><td>perfect consonance</td></tr>
+<tr><td>octave</td><td>2:1</td><td>1200.00</td><td>1.00</td><td>perfect consonance</td></tr>
+<tr><td>fifth</td><td>3:2</td><td>701.96</td><td>2.58</td><td>perfect consonance</td></tr>
+<tr><td>fourth</td><td>4:3</td><td>498.04</td><td>3.58</td><td>perfect consonance</td></tr>
+<tr><td>Pythagorean major third</td><td>81:64</td><td>407.82</td><td>12.34</td><td>later: imperfect consonance</td></tr>
+<tr><td>Pythagorean minor third</td><td>32:27</td><td>294.13</td><td>9.75</td><td>later: imperfect consonance</td></tr>
+</table>
+<p>The last column of numbers is a common rough measure of a ratio's complexity, the logarithm of numerator times
+denominator (sometimes called Tenney height). The three perfect consonances are the three simplest ratios after the
+unison.</p>
+</div>
+<div class="layer derive">
+<p><b>Coincident partials (theorem, harmonic tones).</b> Let two harmonic tones have fundamentals $f$ and $(p/q)f$ with
+$\gcd(p,q)=1$. Partial $m$ of the lower tone and partial $n$ of the upper coincide exactly when $mf = n(p/q)f$, i.e. when
+$m = pj$ and $n = qj$ for some integer $j \ge 1$. Among partials up to $N$, the number of coincidences is
+$\lfloor N/\max(p,q)\rfloor$. With eight partials per tone: the octave has 4 coincidences, the fifth 2, the fourth 2,
+the just major third 5:4 one, and the Pythagorean third 81:64 none.</p>
+<p><b>The example is in 12-ET.</b> Its fourths and fifths are 1.96 c away from 4:3 and 3:2, so the nearly coinciding
+partials drift slowly: for the fifth D4–A4, $3 \cdot 293.665 - 2 \cdot 440 = 0.99$ Hz, an undulation of about once a second,
+far below the speed heard as roughness. Medieval singers, tuning by ear, would have sung them pure.</p>
+<p><b>The Pythagorean third's beat.</b> In 81:64 the nearest pair is partial 5 of the lower tone and partial 4 of the
+upper, which differ by</p>
+$$4\cdot\frac{81}{64}f - 5f = \frac{f}{16}.$$
+<p>At $f = 220$ Hz that is a 13.75 Hz beat, a clear roughness; the ratio of the two partials is the syntonic comma
+$81/80$ (21.51 c). Parallel thirds in Pythagorean tuning cannot fuse the way fourths and fifths do.</p>
+</div>
+</section>
+
+<section id="thirds">
+<h2>The arrival of thirds</h2>
+<div class="layer hear">
+<p>The first example plays the same major third three ways on a steady organ tone: as Pythagorean tuning makes it
+(the ratio 81:64), as the harmonic series makes it (5:4), and as a modern piano makes it (12-ET). Then the same for the
+minor third. The Pythagorean thirds buzz quickly, the just thirds are still, and the equal-tempered thirds sit in
+between, beating gently.</p>
+<audio-ex src="thirds_tuning" caption="Major third on 220 Hz: Pythagorean 81/64 (beats 13.75 Hz), just 5/4 (still), 12-ET (8.73 Hz). Then the minor third: Pythagorean 32/27 (16.30 Hz), just 6/5 (still), 12-ET (11.87 Hz)."></audio-ex>
+<p>The second example is in the style of a 15th-century technique: a melody in the top voice, a second voice a sixth
+below it, and a middle voice a fourth below the top. Every sonority is a third with a sixth above it, a sound of
+gliding sweetness quite unlike the open fifths of organum, until the cadence opens out onto an octave with a fifth.</p>
+<audio-ex src="fauxbourdon" caption="A D-mode melody alone, then harmonized in parallel sixth-three sonorities (fauxbourdon style), ending on the open octave and fifth. Listen to the warmth the thirds and sixths add, and to the bare final sonority."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Thirds as imperfect consonances.</b> By the 13th century, theorists classed major and minor thirds as
+<i>imperfect</i> consonances: acceptable in passing, not stable enough to end on. In Pythagorean tuning that verdict is
+also what the ear reports, since its thirds beat (§35.1).</p>
+<p><b>England.</b> English sources of the 13th to 15th centuries make unusually free use of thirds and sixths, in
+two-voice singing in parallel thirds and in the style historians call English discant. In the early 15th century
+the music of John Dunstable (c. 1390–1453), with its full, consonant sound rich in thirds and sixths, was admired on the
+Continent. A contemporary French poem by Martin le Franc praised Guillaume Du Fay and Gilles Binchois for adopting the
+<i>contenance angloise</i>, "the English manner", a phrase usually taken to mean this sound, though exactly what it
+referred to is debated.</p>
+<p><b>Fauxbourdon.</b> In the 15th century, continental composers, Du Fay among them, used <i>fauxbourdon</i>: a melody
+harmonized by a voice a sixth below, with an unwritten middle voice sung a fourth below the melody. The texture is a chain
+of sixth-three sonorities, as in the example. Cadences still closed on the octave and fifth.</p>
+<p><b>Thirds explained, and tuned.</b> In 1558 Gioseffo Zarlino's <i>Le istitutioni harmoniche</i> gave thirds a
+theoretical home: the just ratios 5:4 and 6:5, built from the numbers 1 to 6 (his <i>senario</i>). Meantone
+temperaments, described in the same era (<a href="ch:ch07#syntonic">Chapter 7</a>), narrowed the fifths slightly so that
+thirds became pure or nearly so. Over the 16th and 17th centuries the full triad became the normal final sonority, and by
+1722 Jean-Philippe Rameau's <i>Traité de l'harmonie</i> could build an entire theory of harmony on the triad.</p>
+<table>
+<tr><th>Period (approximate)</th><th>Stable sonorities</th><th>Thirds</th></tr>
+<tr><td>9th–12th c.</td><td>unison, octave, fifth, fourth</td><td>passing, or absent</td></tr>
+<tr><td>13th–14th c.</td><td>octave, fifth (and fourth)</td><td>imperfect consonances, between perfect ones</td></tr>
+<tr><td>15th c.</td><td>final octave and fifth; sixth-three chains in the course of a piece</td><td>pervasive in English and fauxbourdon textures</td></tr>
+<tr><td>16th–17th c.</td><td>the full triad, increasingly at the end</td><td>justified as 5:4 and 6:5 (Zarlino, 1558)</td></tr>
+<tr><td>18th c.</td><td>the triad as foundation (Rameau, 1722)</td><td>defining major and minor</td></tr>
+</table>
+<pianoroll edo="12" notes="G3 D4 ; A3 D4 ; C4 E4 A4 ; B3 D4 G4 ; E3 G#3 C#4 ; D3 A3 D4" labels="organum 5th ; organum 4th ; 6/3 ; 6/3 ; cadence ; final" title="From organum to fauxbourdon: open fifths and fourths, then sixth-three sonorities and the closing octave-fifth"></pianoroll>
+<p>The table simplifies a long and uneven history: practices differed by region and genre, and changes took
+generations. The direction, though, is clear. The ear's idea of rest widened from the simplest ratios to include the
+next simplest.</p>
+</div>
+<div class="layer derive">
+<p><b>The syntonic comma separates the two thirds.</b> The Pythagorean major third is four fifths minus two octaves,
+$(3/2)^4/4 = 81/64$; the just third is $5/4$. Their ratio is</p>
+$$\frac{81/64}{5/4} = \frac{81}{80}, \qquad 1200\log_2\frac{81}{80} = 21.51\ \text{c}.$$
+<p>Likewise $\dfrac{6/5}{32/27} = \dfrac{81}{80}$: the Pythagorean minor third (294.13 c) is a syntonic comma narrower
+than the just one (315.64 c).</p>
+<p><b>Beat rates on $f = 220$ Hz</b> (nearest partial pair: 5 and 4 for major thirds, 6 and 5 for minor thirds):</p>
+<table>
+<tr><th>Third</th><th>Ratio $r$</th><th>Beat</th><th>Hz</th></tr>
+<tr><td>Pythagorean major</td><td>81/64</td><td>$|4r - 5|\,f$</td><td>13.75</td></tr>
+<tr><td>12-ET major</td><td>$2^{4/12}$</td><td>$|4r - 5|\,f$</td><td>8.73</td></tr>
+<tr><td>just major</td><td>5/4</td><td>0</td><td>0</td></tr>
+<tr><td>Pythagorean minor</td><td>32/27</td><td>$|5r - 6|\,f$</td><td>16.30</td></tr>
+<tr><td>12-ET minor</td><td>$2^{3/12}$</td><td>$|5r - 6|\,f$</td><td>11.87</td></tr>
+<tr><td>just minor</td><td>6/5</td><td>0</td><td>0</td></tr>
+</table>
+<p><b>The senario.</b> The ratios with both terms in $\{1,\dots,6\}$, reduced and inside an octave, are 2:1, 3:2, 4:3,
+5:4, 5:3 and 6:5: octave, fifth, fourth, major third, major sixth, minor third. The minor sixth 8:5 needs the number 8
+and lies outside the senario.</p>
+</div>
+</section>
+
+<section id="extensions">
+<h2>Sevenths, ninths and beyond</h2>
+<div class="layer hear">
+<p>Once the triad was home, the frontier moved up the stack of thirds. Listen to a C major triad grow: add a minor
+seventh (the sound of a dominant seventh, pulling forward), change it to a major seventh (softer, suspended), add a
+ninth on top (lush). Then a short progression in the harmonic language of jazz: a minor ninth chord, a dominant chord
+with a thirteenth, and a major ninth chord to finish. Chords that a Renaissance musician would have heard as a pile of
+dissonances now sound, to most listeners raised on popular music, simply warm.</p>
+<audio-ex src="extensions" caption="C, C7, Cmaj7, Cmaj9, then Dm9 – G13 – Cmaj9. Listen to each added third change the color, and to how relaxed the extended chords sound to a modern ear."></audio-ex>
+<p>The harmonic series has its own seventh, lower than the piano's. The next example plays a seventh chord tuned as
+harmonics 4, 5, 6 and 7 of A2, and then the 12-ET dominant seventh on the same root.</p>
+<audio-ex src="harmonic_seventh" caption="A seventh chord as harmonics 4:5:6:7 (the seventh at 968.83 c, perfectly still), then the 12-ET dominant seventh (seventh at 1000 c, beating). Same root, same organ tone."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Sevenths.</b> In Renaissance counterpoint a seventh above the bass occurred as a passing tone or a prepared
+suspension, always resolving. During the 17th century the dominant seventh became a chord in its own right, and in
+Rameau's theory (1722) it is the model of a dissonant chord that demands resolution
+(<a href="ch:ch09#sevenths">Chapter 9</a>).</p>
+<p><b>Ninths and beyond.</b> 19th-century composers used ninth chords increasingly freely; around 1900 Debussy and his
+contemporaries let ninth chords and other extended sonorities move in parallel as colors rather than as tensions to
+resolve (<a href="ch:ch22#impressionism">Chapter 22</a>). By the bebop era of the 1940s, jazz harmony treated ninths,
+elevenths and thirteenths as normal chord tones; today they are everyday sounds in jazz, film and popular music.</p>
+<p><b>Two readings of the same chord.</b> A dominant seventh can be heard as a stack of 12-ET intervals or as a
+segment of the harmonic series. The two readings agree well for the triad and drift apart higher up:</p>
+<table>
+<tr><th>Chord tone</th><th>Harmonic</th><th>Harmonic-series cents above the root</th><th>12-ET cents</th><th>difference</th></tr>
+<tr><td>third</td><td>5 (of 4)</td><td>386.31</td><td>400</td><td>13.69</td></tr>
+<tr><td>fifth</td><td>6 (of 4)</td><td>701.96</td><td>700</td><td>−1.96</td></tr>
+<tr><td>seventh</td><td>7 (of 4)</td><td>968.83</td><td>1000</td><td>31.17</td></tr>
+<tr><td>ninth</td><td>9 (of 8)</td><td>203.91 (+ octave)</td><td>200</td><td>−3.91</td></tr>
+<tr><td>eleventh</td><td>11 (of 8)</td><td>551.32</td><td>500 (F) or 600 (F♯)</td><td>−51.32 / +48.68</td></tr>
+<tr><td>thirteenth</td><td>13 (of 8)</td><td>840.53</td><td>900 (A) or 800 (A♭)</td><td>+59.47 / −40.53</td></tr>
+</table>
+<p>So the ninth chord 4:5:6:7:9 is still close to "a slice of one harmonic series", but the 12-ET eleventh and thirteenth
+are not harmonic-series tones at all: they are learned sounds, made familiar by use. This matters for the golden
+project. The extended chords that modern ears accept were never certified by simple ratios.</p>
+</div>
+<div class="layer derive">
+<p><b>A complexity ladder (measurement, one model).</b> Ordering just intervals by $\log_2(pq)$:</p>
+<table>
+<tr><th>2/1</th><th>3/2</th><th>4/3</th><th>5/3</th><th>5/4</th><th>7/4</th><th>6/5</th><th>9/4</th><th>8/5</th><th>9/8</th><th>15/8</th><th>16/15</th></tr>
+<tr><td>1.00</td><td>2.58</td><td>3.58</td><td>3.91</td><td>4.32</td><td>4.81</td><td>4.91</td><td>5.17</td><td>5.32</td><td>6.17</td><td>6.91</td><td>7.91</td></tr>
+</table>
+<p>Read loosely, the history of §35.1–§35.3 climbs this ladder: perfect consonances first, then thirds and sixths, then
+sevenths and ninths, then the major seventh (15/8) and the semitone-laden extended chords. The fit is loose, not a law.
+The fourth is near the bottom of the ladder, yet in common-practice harmony a fourth above the bass is treated as a
+dissonance; and the harmonic seventh 7/4, low on the ladder, is not in 12-ET at all. Complexity is one ingredient of
+consonance; context and habit are others.</p>
+<p><b>The harmonic seventh chord is beat-free (theorem, harmonic tones).</b> The chord tones $4g, 5g, 6g, 7g$ are harmonics
+of one frequency $g$, so every partial of every tone is a whole-number multiple of $g$, and every difference between two
+partials is a multiple of $g$. In the example $g$ = A2 = 110 Hz (the chord is 440, 550, 660, 770 Hz): two partials either
+coincide or are at least 110 Hz apart, so there is no slow beat. In the 12-ET dominant seventh the seventh is 31.17 c sharp of 7/4 and the third 13.69 c sharp of 5/4, and slow beats
+appear.</p>
+</div>
+</section>
+
+<section id="acculturation">
+<h2>Acculturation</h2>
+<div class="layer hear">
+<p>Here is a sound many listeners would call "out of tune" on first hearing and others hear as the whole point. Two
+struck metal bars are first played in exact unison; then one is tuned a little higher and the other a little lower,
+so that together they shimmer, beating six times a second. Some musical traditions build their instruments in pairs
+precisely to get this shimmer.</p>
+<audio-ex src="paired_tuning" caption="Two synthetic struck-bar tones in unison, then 6 Hz apart (397 and 403 Hz): the shimmer that paired tuning produces on purpose. An illustration, not a gamelan recording."></audio-ex>
+<p>And here is a sound almost everyone raised with Western music accepts without noticing: the major third of a piano,
+which beats. On middle C the 12-ET major third beats about ten times a second. We have learned not to hear it as
+wrong.</p>
+</div>
+<div class="layer understand">
+<p><b>Nature and nurture in consonance.</b> Some ingredients of consonance are physical and shared by all listeners:
+roughness from close partials (<a href="ch:ch03#roughness">Chapter 3</a>) and the fusion of harmonic tones. Whether a
+listener <i>likes</i> those properties is another question. Cross-cultural studies of consonance preference exist, and
+they suggest a large learned component. In a widely discussed 2016 study in <i>Nature</i>, Josh McDermott and colleagues
+tested the Tsimane', a society in the Bolivian Amazon with little exposure to Western music. They rated consonant and
+dissonant chords as about equally pleasant, while groups with more exposure to Western music showed progressively
+stronger preferences for consonance. Other research, including studies of infants, has been read as showing some early
+preference for consonance, and the balance between innate and learned components remains debated.</p>
+<p><b>Traditions that value beating.</b> Balinese gamelan instruments are often made in pairs tuned slightly apart, so
+that the pair shimmers; the beating is called <i>ombak</i>, "wave". Some vocal traditions of the Balkans cultivate
+close seconds sung together. These are not mistakes; they are aesthetic choices, learned and loved within a
+culture.</p>
+<p><b>Familiarity.</b> In psychology the <i>mere-exposure effect</i> (Robert Zajonc, 1968) describes the general tendency to
+like things more after repeated exposure. It is one plausible reason the Western ear accepted the beating thirds of
+equal temperament: they arrived with the piano and the convenience of playing in every key, and generations grew up
+hearing them as normal.</p>
+<aside class="box note"><p><b>What this means for golden tones.</b> If consonance were purely a matter of simple ratios,
+golden intervals, built on the least rational number, would be ruled out forever. The evidence of history and of
+cross-cultural research says otherwise: what sounds right is partly physics and partly habit. That leaves room for a new
+color to become familiar. It does not show that it will.</p></aside>
+</div>
+<div class="layer derive">
+<p><b>The beating piano third (theorem, harmonic tones).</b> For a 12-ET major third on root $f$, the nearest partial pair
+(5 of the root, 4 of the third) beats at</p>
+$$\left|4\cdot 2^{1/3} - 5\right| f = 0.039684\,f .$$
+<p>On C3 (130.81 Hz) that is 5.19 Hz; on C4 (261.63 Hz), 10.38 Hz; it doubles with each octave. The 12-ET third is
+13.69 c wider than 5:4.</p>
+<p><b>A way to organize the hypotheses.</b> Write a listener's pleasantness rating of a sound as a combination of a
+<i>sensory</i> part, which depends on the spectrum (roughness, harmonicity), and a <i>learned</i> part, which depends on
+the listener's history (familiarity, style). The models of Chapters 3 and 26 compute only the sensory part, and for a
+given timbre they rank chords the same way for every listener. The cross-cultural results suggest that how much the
+sensory part matters to <i>liking</i> varies with exposure. Golden chords score differently on the sensory part depending
+on timbre (<a href="ch:ch26#timbre-flip">Chapter 26</a>); their learned part, for almost every listener today, starts
+at zero.</p>
+</div>
+</section>
+
+<section id="next-color">
+<h2>A next color</h2>
+<div class="layer hear">
+<p>Here is the claim this book has been building toward, in sound. First a plain cadence, C – F – G – C, the most
+familiar progression in Western music. Then the same cadence again, but each move now passes through golden chords
+that the voice leading itself picks out: the bass and inner voices glide through steps a third of a semitone wide on
+the way to the next familiar chord. The Western chords are still the homes. Between them, for a moment, there is a
+color no Renaissance or Romantic composer could have used.</p>
+<audio-ex src="golden_color" caption="C – F – G – C, then the same cadence with golden passing chords: C – vFg/C – F – vF♯g – ^F♯g – G – vCg/G – C (36-ET). Listen for the brief, glowing in-between chords."></audio-ex>
+<audio-ref file="P06b_light_and_shade.mp3" caption="“Light and Shade”: major and minor trade places through their golden centroid, C – Cg – Cm, ending with the golden Picardy."></audio-ref>
+</div>
+<div class="layer understand">
+<p><b>The pattern so far.</b> Each widening of Western harmony admitted intervals that are, in one sense or another, more
+complex: from 3:2 to 5:4, from triads to sevenths, from the harmonic series to the tempered elevenths of jazz. Each time
+the new sound was first heard in passing, between familiar ones, before it became a place to rest. The perfect fourth
+and fifth were the homes of organum; thirds passed between them, and later became homes themselves.</p>
+<p><b>The golden step is different in kind.</b> Golden intervals are not more complex rationals; they are irrational, and
+no simple ratio is close to them. But they are not alien to the old intervals either. Their best rational approximations
+start exactly where Western harmony lives:</p>
+<table>
+<tr><th>Golden interval</th><th>Exact (c)</th><th>First approximation</th><th>Next approximations</th></tr>
+<tr><td>golden third 2/φ</td><td>366.91</td><td>5/4, the just major third (+19.40 c)</td><td>21/17 (−1.08 c), 89/72 (+0.06 c)</td></tr>
+<tr><td>golden fifth 4/φ²</td><td>733.82</td><td>3/2, the perfect fifth (−31.86 c)</td><td>26/17 (+1.75 c), 55/36 (−0.10 c)</td></tr>
+<tr><td>golden seventh 8/φ³</td><td>1100.73</td><td>15/8, the just major seventh (−12.46 c)</td><td>17/9 (+0.32 c)</td></tr>
+</table>
+<p>To a first approximation a golden third is a major third, a golden fifth a perfect fifth, a golden seventh a major
+seventh; and the next approximations jump at once to ratios with numbers in the twenties. That is the precise sense in
+which golden chords are "almost Western, and then not": they are recognizably related to the familiar chords, and yet no
+simple ratio captures them. It also explains a measurement from <a href="ch:ch26#measured">Chapter 26</a>: the golden fifth
+is one of the most ambiguous intervals in the octave (harmonic entropy in the 69th percentile), sitting between the
+attraction of 3/2 and nothing else simple.</p>
+<p><b>Golden chords as averages.</b> The averaging principle (<a href="ch:ch25#averaging">Chapter 25</a>) gives the same
+relation in harmony: the golden triad is the average of major, minor and augmented, and a golden passing chord is a
+2/3 : 1/3 blend of two familiar chords. A listener hears it as a mixture of known sounds, which is how every new
+harmony has entered the ear: in passing, between two homes.</p>
+<p><b>The hope, stated as a hope.</b> The author's view is that golden tones can become a <i>next color</i>, extending
+Western harmony rather than replacing it: first as passing chords, where their instability is an asset, and in time,
+perhaps, as homes of their own on golden timbres. Whether listeners will come to love them is not a theorem. It is the
+open question that the rest of this Part tries to make answerable, with clean sound (<a href="ch:ch37#clean">Chapter
+37</a>) and fair tests (<a href="ch:ch34#testing">Chapter 34</a>).</p>
+</div>
+<div class="layer derive">
+<p><b>Continued fractions of the golden intervals (theorem).</b> Since $\varphi = (1+\sqrt5)/2$,</p>
+$$\frac{2}{\varphi} = \sqrt5 - 1, \qquad \frac{4}{\varphi^2} = 8 - 4\varphi, \qquad \frac{8}{\varphi^3} = 8\sqrt5 - 16 .$$
+<p>With $\sqrt5 = [2; 4, 4, 4, \dots]$, the golden third is $2/\varphi = [1; 4, 4, 4, \dots]$, whose convergents are
+$1,\ 5/4,\ 21/17,\ 89/72,\ 377/305, \dots$. The golden fifth expands as $[1; 1, 1, 8, 2, 8, 2, \dots]$, with convergents
+$1, 2, 3/2, 26/17, 55/36, 466/305, \dots$; the golden seventh as $[1; 1, 7, 1, 34, 1, 7, 1, 34, \dots]$, with convergents
+$1, 2, 15/8, 17/9, 593/314, 610/323, \dots$ (all computed to 60 digits). A large partial quotient (the 4s, 8s and 34s)
+means the preceding convergent is an unusually good approximation, followed by a long gap before the next. That is the
+arithmetic behind "almost Western, and then not".</p>
+<p><b>36-ET keeps the relation.</b> In 36-ET the golden third is 11 sixth-steps (366.67 c), between the major third
+(12) and the minor third (9), and the golden fifth is 22 (733.33 c), between the perfect fifth (21) and the augmented
+fifth (24). The grid itself records that golden chords live between familiar ones.</p>
+</div>
+<h3>Exercises</h3>
+<div class="exercise">
+<p><b>Exercise 35.1 (listening).</b> In the organum example, which sounds more fused, the fourths or the fifths? Then in
+the thirds example, can you count the beats of the Pythagorean major third? About how many in one second?</p>
+<details class="answer"><summary>Answer</summary><p>Most listeners find both fused, the fifths slightly more so (the fifth
+has the simpler ratio). The Pythagorean major third on 220 Hz beats 13.75 times per second, too fast to count one by one:
+it is heard as a buzz or roughness rather than as separate pulses.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 35.2 (calculation).</b> Show that the Pythagorean minor third 32/27 is a syntonic comma narrower than
+6/5, and compute its beat rate on 220 Hz.</p>
+<details class="answer"><summary>Answer</summary><p>$(6/5)/(32/27) = 162/160 = 81/80$. Beat: $|5\cdot(32/27) - 6|\cdot 220
+= (6 - 160/27)\cdot 220 = (2/27)\cdot 220 = 16.30$ Hz.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 35.3 (calculation).</b> How many partials coincide, among the first 12 of each tone, for a perfect fifth,
+a just major third and a harmonic seventh 7:4?</p>
+<details class="answer"><summary>Answer</summary><p>$\lfloor 12/\max(p,q)\rfloor$: fifth 3:2 → 4; major third 5:4 → 2;
+7:4 → 1.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 35.4 (proof).</b> Show that $2/\varphi = \sqrt5 - 1$ and that its continued fraction is $[1; 4, 4, 4, \dots]$.</p>
+<details class="answer"><summary>Answer</summary><p>$1/\varphi = \varphi - 1 = (\sqrt5 - 1)/2$, so $2/\varphi = \sqrt5 - 1$.
+Write $\sqrt5 = 2 + x$ with $0 &lt; x &lt; 1$. Then $(2+x)^2 = 5$ gives $x(4 + x) = 1$, so $x = 1/(4 + x)$, which unfolds to
+$x = [0; 4, 4, 4, \dots]$. Hence $\sqrt5 - 1 = 1 + x = [1; 4, 4, 4, \dots]$.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 35.5 (reflection).</b> Name one interval or chord that you hear as normal but that a listener of an
+earlier century would probably have heard as unstable. What made it normal for you?</p>
+<details class="answer"><summary>Answer</summary><p>Many answers are reasonable: the 12-ET major third (which beats), the
+dominant seventh as a final chord in blues, a major seventh or added ninth as a closing chord in popular music. The
+usual reason is exposure: the sound was everywhere in the music you grew up with.</p></details>
+</div>
+</section>

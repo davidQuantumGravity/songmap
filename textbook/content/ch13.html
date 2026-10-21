@@ -1,0 +1,344 @@
+<section id="contour">
+<h2>Contour</h2>
+<div class="layer hear">
+<p>Hum a tune you know well and trace it in the air with your hand. Your hand goes up and down long before you
+could name a single interval. That outline, the pattern of rises and falls, is the melody's <b>contour</b>, and it
+is the first thing most listeners remember. Here are four melodies with exactly the same rhythm. They differ only in
+shape: an arch that climbs and comes home, a bowl that dips and climbs back, a line that rises to a high C, and one
+that falls to a low C.</p>
+<audio-ex src="contours" caption="Same rhythm, four shapes: arch, bowl, rising, falling. Notice how the rising line sounds open and the falling line sounds finished."></audio-ex>
+<p>Even without harmony the four shapes have different characters. The arch feels complete: it leaves home, peaks
+and returns. The rising line ends in the air, like a question. The falling one settles. Contour carries a large
+share of a melody's expression before any question of scales or chords comes up.</p>
+</div>
+<div class="layer understand">
+<p>A <b>melody</b> is a succession of pitches in time, heard as one line. Two things describe it: its pitches and
+its rhythm. The <b>contour</b> keeps only the direction of each move: up, down or same. The arch above, C E G A G E C,
+has the contour up, up, up, down, down, down. The bowl, A G E D E G A, has the mirror image: down, down, down, up,
+up, up.</p>
+<pianoroll edo="12" notes="C4 ; E4 ; G4 ; A4 ; G4 ; E4 ; C4" labels="C ; E ; G ; A ; G ; E ; C" title="The arch: up, up, up, down, down, down"></pianoroll>
+<p>Contour matters because memory treats it as a separate layer. In a well-known line of experiments, W. Jay Dowling
+showed that listeners hearing an <i>unfamiliar</i> melody often accept a different melody with the same contour as
+"the same tune", especially when it is transposed. For <i>familiar</i> melodies the exact intervals matter much more:
+a well-known tune sung with the right shape but the wrong steps sounds wrong. Contour is the outline, and intervals
+fill it in.</p>
+<p>Many melodies share a large-scale shape: a rise to a high point somewhere in the middle and a descent to the end.
+David Huron's study of thousands of phrases from a large collection of Western folk songs (1996) found that the
+<i>average</i> phrase has exactly this <b>melodic arch</b>, although individual phrases vary a great deal. Notice
+the word <i>average</i>: this is a measurement about a corpus, not a rule that good melodies must follow.</p>
+<p>Some vocabulary used in this chapter:</p>
+<table>
+<tr><th>Term</th><th>Meaning</th><th>Example in the arch</th></tr>
+<tr><td>Range (ambitus)</td><td>Distance from lowest to highest note</td><td>C4 to A4, a major sixth</td></tr>
+<tr><td>Peak</td><td>The highest note, often a point of intensity</td><td>A4, the fourth note</td></tr>
+<tr><td>Contour</td><td>Sequence of directions</td><td>+ + + − − −</td></tr>
+<tr><td>Tessitura</td><td>Where most notes lie</td><td>Around E4 to G4</td></tr>
+</table>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> Write a melody as a sequence of pitches $p_0, p_1, \dots, p_{n-1}$ (in semitones, MIDI
+numbers for instance). Its <b>intervals</b> are $\Delta_i = p_{i} - p_{i-1}$ for $i = 1, \dots, n-1$, and its
+<b>contour</b> is the sign sequence $c_i = \operatorname{sgn}(\Delta_i) \in \{-1, 0, +1\}$.</p>
+<p>Two melodies have the same contour when their sign sequences agree. Since each of the $n-1$ moves has three
+possible signs, an $n$-note melody has $3^{n-1}$ possible contours: 729 for seven notes. A finer description, used in
+contour theory, ranks the notes from lowest to highest. If all seven notes are different, the ranking is a
+permutation of $\{0, \dots, 6\}$, and there are $7! = 5040$ such <b>contour segments</b>. The arch has repeated
+pitches, so its ranking is $(0, 1, 2, 3, 2, 1, 0)$.</p>
+<p><b>Invariance.</b> Contour is unchanged by any order-preserving change of pitch: transposition $p \mapsto p + k$,
+but also stretching $p \mapsto a p + b$ with $a &gt; 0$, or moving a melody from one scale to another degree by
+degree. That is why a melody in C major and its scale-degree copy in a quite different scale can share a contour,
+even when every interval changes (see the mirror below and <a href="ch:ch30#golden-melody">Chapter 30</a>).</p>
+</div>
+</section>
+
+<section id="steps-leaps">
+<h2>Steps and leaps</h2>
+<div class="layer hear">
+<p>A melody can move to a neighbouring note, a <b>step</b>, or jump over notes, a <b>leap</b>. Listen to three
+short lines. The first moves only by step and sounds smooth and singable. The second leaps everywhere, and it barely
+holds together as one line: your ear starts to hear it as notes scattered across registers. The third makes one big
+leap up and then walks back down by step, filling the gap it opened.</p>
+<audio-ex src="steps_leaps" caption="All steps; all leaps; one leap up a sixth followed by stepwise descent that fills the gap."></audio-ex>
+<p>The third shape, a leap answered by steps in the opposite direction, is one of the most common gestures in
+melody. It sounds balanced, as if the line had borrowed height and then paid it back.</p>
+</div>
+<div class="layer understand">
+<p>In a seven-note scale a <b>step</b> is a second: a semitone (1 semitone) or a whole tone (2). A move by a third
+(3 or 4 semitones) is often called a <b>skip</b>, and anything from a fourth up is a <b>leap</b>.</p>
+<table>
+<tr><th>Interval</th><th>Semitones</th><th>Kind</th></tr>
+<tr><td>unison (repeat)</td><td>0</td><td>repetition</td></tr>
+<tr><td>minor / major second</td><td>1 / 2</td><td>step</td></tr>
+<tr><td>minor / major third</td><td>3 / 4</td><td>skip</td></tr>
+<tr><td>perfect fourth, tritone, perfect fifth</td><td>5, 6, 7</td><td>leap</td></tr>
+<tr><td>sixths, sevenths, octave</td><td>8 to 12</td><td>large leap</td></tr>
+</table>
+<p>Most melodies are mostly steps. A simple count makes the point. The first two phrases of the "Ode to Joy" theme
+from Beethoven's Ninth Symphony (1824), heard later in this chapter, have 30 notes and 29 moves between them:
+20 steps, 9 repeated notes and <i>no leaps at all</i>. Why should steps dominate? Three reasons work together.</p>
+<ul>
+<li><b>Voices.</b> Singing is the oldest melodic instrument, and small intervals are easier to sing in tune.</li>
+<li><b>Grouping.</b> The ear groups sounds that are close in pitch into one <b>stream</b>. Fast alternation between
+a high and a low register splits into two separate lines, a phenomenon studied in detail by Albert Bregman in
+<i>Auditory Scene Analysis</i> (1990). Steps keep a melody in one stream; wide leaps strain it. Composers exploit
+this on purpose: a solo violin line that alternates registers quickly can sound like two voices.</li>
+<li><b>Expectation.</b> Listeners expect small intervals, so steps are heard as continuation and leaps as events.</li>
+</ul>
+<p>The <b>gap-fill</b> idea is that a leap creates a gap that the melody then fills, usually by steps in the other
+direction. Leonard Meyer described this in <i>Explaining Music</i> (1973), and Eugene Narmour's
+implication-realization model (1990) built a theory of melodic expectation on similar principles. An important
+correction came from Paul von Hippel and David Huron ("Why do skips precede reversals?", 2000). They argued that
+much of the tendency to reverse after a leap is <b>regression to the mean</b>: a big leap usually lands near the edge
+of the melody's range, and from the edge most available notes lie back toward the middle. The derive layer shows this
+effect in a model with no melodic rules at all.</p>
+<aside class="mirror">In golden7 (C C♯ vE vF ^G ^A♭ B), the two scale steps are 3 and 8 sixth-steps: 100 c and
+266.67 c in 36-ET (exact chain values 99.27 c and 267.6 c). The larger "step" is wider than a whole tone and close to
+a minor third, so a stepwise golden7 melody moves in a mixture of semitones and near-thirds. How listeners classify
+those moves, as steps or as skips, is an open listening question (<a href="ch:ch30#golden-melody">Chapter 30</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>A model with regression and nothing else (measurement).</b> Let the pitches of a "melody" be independent
+draws from a normal distribution centred on middle C with a standard deviation of 3 semitones, rounded to whole
+semitones. Such a melody has no memory: each note ignores the previous one. Yet in two million simulated notes,</p>
+<table>
+<tr><th>Size of the previous move</th><th>Probability the next move reverses direction</th></tr>
+<tr><td>step (1 or 2 semitones)</td><td>0.53</td></tr>
+<tr><td>3 or 4 semitones</td><td>0.63</td></tr>
+<tr><td>5 or 6 semitones</td><td>0.73</td></tr>
+<tr><td>7 semitones or more</td><td>0.84</td></tr>
+</table>
+<p>(A repeated note counts as not reversing.) The larger the leap, the more likely a reversal, purely because a large
+leap tends to end far from the centre. With a wider distribution (standard deviation 4 semitones) the trend is the
+same but weaker: 0.52 after a step and 0.80 after a leap of 7 or more. This does not refute gap-fill as a stylistic
+practice; it shows that any test of it must compare real melodies with a baseline that already includes regression.
+That is the comparison von Hippel and Huron made.</p>
+<p><b>Why the effect appears.</b> If $X_1$ and $X_2$ are independent with the same symmetric distribution around
+$\mu$, then given a large upward leap $X_1 - X_0 = d &gt; 0$, the note $X_1$ is likely to lie above $\mu$, and then
+$P(X_2 &lt; X_1) &gt; 1/2$. The bigger $d$, the larger the expected $X_1 - \mu$, and the larger this probability.</p>
+</div>
+</section>
+
+<section id="motif">
+<h2>Motifs</h2>
+<div class="layer hear">
+<p>A <b>motif</b> is a short musical idea that a piece keeps coming back to. The most famous example in Western
+music is four notes long: three quick repeated notes and a longer one a third lower. Beethoven opens his Fifth
+Symphony (first performed in 1808) with it, and then states it again one step lower.</p>
+<audio-ex src="fifth_motif" caption="Short-short-short-long on G and E♭, then the same rhythm and shape a step lower, on F and D."></audio-ex>
+<pianoroll edo="12" notes="G4 ; G4 ; G4 ; Eb4 ; F4 ; F4 ; F4 ; D4" labels="G ; G ; G ; E♭ ; F ; F ; F ; D" title="The Fifth Symphony motif and its tonal sequence"></pianoroll>
+<p>The motif is recognizable from its rhythm and its shape alone. Beethoven builds much of the movement from it,
+repeated, moved to other pitches and passed between instruments. The next example shows the same principle with a
+gentler idea: one arpeggio figure, kept the same shape, moving through a chain of chords.</p>
+<audio-ex src="motif_sequence" caption="One figure (root, third, fifth, octave, fifth, third) over eight chords whose roots fall by fifths: the shape stays, the pitches follow the harmony."></audio-ex>
+</div>
+<div class="layer understand">
+<p>A motif has an identity made of a few features: a rhythm, a contour, often a characteristic interval. It can be
+changed in many ways and still be recognized. The basic operations are:</p>
+<ul>
+<li><b>Repetition</b>: the motif again, unchanged.</li>
+<li><b>Sequence</b>: the motif repeated at another pitch level, usually several times in a row, each time moved by the
+same amount. In the Beethoven example the second statement is a step lower.</li>
+<li><b>Variation</b>: the motif with something changed: an interval widened, a note added, the rhythm altered.</li>
+<li><b>Fragmentation</b>: only a piece of the motif, repeated or sequenced. Fragmentation is a classic way of
+building intensity before a cadence (see the <i>sentence</i> in <a href="ch:ch16#phrase-structure">Chapter 16</a>).</li>
+</ul>
+<p>A sequence can be <b>real</b> or <b>tonal</b>. A real sequence transposes every interval exactly. A tonal sequence
+moves the motif by scale degrees, so that it stays in the key and its intervals change size slightly: a major third
+may become a minor third. In the Beethoven example, G–E♭ is a major third and F–D a minor third: the second statement
+is a tonal (diatonic) step lower in C minor, not an exact transposition.</p>
+<p>The second example uses a third kind of identity: a figure defined <b>relative to the chord</b>. Its notes are
+"root, third, fifth, octave, fifth, third" of whatever chord is sounding. The harmony underneath is the
+circle-of-fifths progression I–IV–vii°–iii–vi–ii–V–I (C F B° Em Am Dm G C), and the figure follows it like a shadow.
+This is how arpeggios and accompaniment patterns work, and it is also how this book's audio is written: a SongMap
+motif can be given in letters (<code>c4 d e</code>), in scale degrees (<code>0/4 1 2</code>), or relative to the
+chord (<code>R8 3 5 R+</code>), and the same text produces different notes over different harmonies.</p>
+<p>Richard Wagner's <b>leitmotifs</b> ("leading motifs") attach a motif to a character, object or idea in a
+music drama, so that its return carries meaning. The term was popularized by writers on Wagner rather than by Wagner
+himself, but the practice runs through his <i>Ring</i> cycle and later through film music.</p>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> Represent a motif as a list of pairs $m = ((p_0, d_0), \dots, (p_{k-1}, d_{k-1}))$, where
+$p_i$ is a pitch and $d_i$ a duration. The <b>real transposition</b> by $t$ semitones is
+$T_t(m) = ((p_i + t, d_i))_i$.</p>
+<p>A <b>tonal transposition</b> acts on scale degrees instead. Number the notes of a seven-note scale by degree
+$s \in \mathbb{Z}$ (degree 0 = tonic, degree 7 = tonic an octave up). Pitch is the function
+$\pi(s) = 12\lfloor s/7 \rfloor + \sigma(s \bmod 7)$, where $\sigma = (0, 2, 4, 5, 7, 9, 11)$ in C major. A tonal
+transposition by $j$ degrees maps $s \mapsto s + j$, and its pitch intervals are generally different from the
+original's, because $\pi(s + j) - \pi(s)$ depends on $s$. The C-minor degrees of the Beethoven motif are
+$(4, 4, 4, 2)$ and then $(3, 3, 3, 1)$: a tonal transposition by $j = -1$.</p>
+<p><b>Chord-relative motifs.</b> The arpeggio figure is a list of chord members $(R, 3, 5, R^{+}, 5, 3)$. Over a
+chord with root $r$ and member intervals $(0, a, b)$ it sounds $(r, r + a, r + b, r + 12, r + b, r + a)$. Over the
+falling-fifth chain the roots alternate up a fourth and down a fifth (C5, F5, B4, E5, A4, D5, G4, C5 in the example),
+so the line zig-zags while descending one step per two bars.</p>
+</div>
+</section>
+
+<section id="transformations">
+<h2>Inversion, retrograde, augmentation</h2>
+<div class="layer hear">
+<p>Composers have long transformed motifs in ways that can be pictured as moving a shape on paper. Turn it upside
+down, so every rise becomes a fall: <b>inversion</b>. Play it backwards: <b>retrograde</b>. Do both: <b>retrograde
+inversion</b>. Slow it down, every note twice as long: <b>augmentation</b>. Listen to a four-note motif and its
+transformations.</p>
+<audio-ex src="transforms" caption="Original C D F E; inversion C B G A; retrograde E F D C; retrograde inversion A G B C; augmentation, twice as slow."></audio-ex>
+<p>The inversion is easy to hear as related: it has the same rhythm and a mirrored shape. The retrograde is much
+harder to recognize, because it reverses the rhythm as well. Augmentation keeps the shape but changes its pace,
+and in a fugue a subject in augmentation can sound like a slow chorale under faster music.</p>
+</div>
+<div class="layer understand">
+<p>Write the motif as pitches and durations in beats (quarter notes): C (dotted quarter, 1.5), D (eighth, 0.5), F (quarter, 1), E (quarter, 1).</p>
+<table>
+<tr><th>Form</th><th>Pitches</th><th>Rhythm</th><th>What changes</th></tr>
+<tr><td>Original (O)</td><td>C4 D4 F4 E4</td><td>1.5, 0.5, 1, 1</td><td>—</td></tr>
+<tr><td>Inversion (I), diatonic, about C</td><td>C4 B3 G3 A3</td><td>1.5, 0.5, 1, 1</td><td>every step up becomes a step down</td></tr>
+<tr><td>Retrograde (R)</td><td>E4 F4 D4 C4</td><td>1, 1, 0.5, 1.5</td><td>order of notes and durations reversed</td></tr>
+<tr><td>Retrograde inversion (RI)</td><td>A3 G3 B3 C4</td><td>1, 1, 0.5, 1.5</td><td>both</td></tr>
+<tr><td>Augmentation</td><td>C4 D4 F4 E4</td><td>3, 1, 2, 2</td><td>durations doubled</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 ; D4 ; F4 ; E4 ; C4 ; B3 ; G3 ; A3" labels="O ; ; ; ; I ; ; ; " title="Original and its inversion about C: a reflection in pitch"></pianoroll>
+<p>The inversion here is <b>diatonic</b>: it counts scale steps (up 1 step becomes down 1 step). A <b>chromatic</b>
+or <b>real</b> inversion counts semitones instead: C D F E is 0, +2, +5, +4 semitones from C, so its real inversion
+is 0, −2, −5, −4, that is C B♭ G A♭. The diatonic version stays in C major; the real version leaves it.</p>
+<pianoroll edo="12" notes="C4 ; D4 ; F4 ; E4 ; C4 ; Bb3 ; G3 ; Ab3" labels="O ; ; ; ; real I ; ; ; " title="The motif and its real (chromatic) inversion"></pianoroll>
+<p>These devices are old. Inverted subjects are everywhere in Bach's fugues, and his <i>Art of Fugue</i> contains a
+canon by augmentation in contrary motion. His <i>Musical Offering</i> (1747) includes a <b>crab canon</b>
+(<i>canon cancrizans</i>), in which a line is played against its own retrograde. In the twentieth century,
+twelve-tone composers made O, I, R and RI the four basic forms of a tone row
+(<a href="ch:ch21#forms">Chapter 21</a>).</p>
+<p>How much of this does a listener actually hear? Listening experiments have generally found transposition far
+easier to recognize than inversion, and retrograde harder still. Transformations often work as a composer's
+construction method and as a source of unity that is felt more than identified. That is not a weakness: a well-made
+retrograde still shares intervals, rhythm values and harmony with its original.</p>
+<aside class="mirror">The same four operations apply to melodies in golden7, where a diatonic inversion maps each
+golden7 step to the step below it, and the alternating 100 c and 266.67 c steps reverse their order. Golden motifs
+and their transformations are the subject of <a href="ch:ch30#golden-motifs">Chapter 30</a>.</aside>
+</div>
+<div class="layer derive">
+<p>Picture a melody as a set of points in the plane, time across and pitch up. Each transformation is then a simple
+geometric map:</p>
+<table>
+<tr><th>Operation</th><th>Map on (time $t$, pitch $p$)</th><th>Geometry</th></tr>
+<tr><td>Transposition $T_k$</td><td>$(t, p) \mapsto (t, p + k)$</td><td>vertical shift</td></tr>
+<tr><td>Inversion $I_a$</td><td>$(t, p) \mapsto (t, 2a - p)$</td><td>reflection in the line $p = a$</td></tr>
+<tr><td>Retrograde $R$</td><td>$(t, p) \mapsto (L - t, p)$</td><td>reflection in the line $t = L/2$</td></tr>
+<tr><td>RI</td><td>$(t, p) \mapsto (L - t, 2a - p)$</td><td>rotation by 180°</td></tr>
+<tr><td>Augmentation</td><td>$(t, p) \mapsto (2t, p)$</td><td>horizontal stretch</td></tr>
+</table>
+<p>(For notes with durations, the retrograde maps a note occupying $[t, t + d]$ to $[L - t - d, L - t]$, where $L$
+is the motif's length.)</p>
+<p><b>Theorem.</b> For a fixed axis $a$, the four maps $\{1, I_a, R, RI_a\}$ form a group isomorphic to
+$\mathbb{Z}_2 \times \mathbb{Z}_2$ (the Klein four-group).</p>
+<p><i>Proof.</i> $I_a$ and $R$ are each their own inverse: $2a - (2a - p) = p$ and $L - (L - t) = t$. They act on
+different coordinates, so they commute: $I_a R = R I_a$, both equal to $(t, p) \mapsto (L - t, 2a - p)$. Hence
+$(RI_a)^2 = R^2 I_a^2 = 1$, and the four elements are closed under composition, each of order at most 2. A group of
+order 4 in which every element squares to the identity is $\mathbb{Z}_2 \times \mathbb{Z}_2$. ∎</p>
+<p>The axis matters. If "inversion" means "about the motif's own first note", then $R$ changes the first note and
+the two operations no longer commute in general. Take C D F E with real (chromatic) inversion. Inverting about C and
+then reversing gives A♭ G B♭ C. Reversing first, to E F D C, and then inverting about its new first note E gives
+E E♭ F♯ G♯: the same shape, but transposed up 8 semitones. Fixing the axis, as row theory does, restores the group.</p>
+<p>Adding transpositions: $T_k$ and $I_a$ generate the infinite dihedral group (on pitch classes mod 12, the
+dihedral group of order 24), and $R$ commutes with all of them. On a twelve-tone row this gives the
+$24 \times 2 = 48$ row forms of <a href="ch:ch21#forms">Chapter 21</a>.</p>
+</div>
+</section>
+
+<section id="phrase">
+<h2>Phrases and cadences in melody</h2>
+<div class="layer hear">
+<p>Melodies breathe. They are made of <b>phrases</b>, units of a few bars that end in a point of rest. Listen to the
+"Ode to Joy" theme from Beethoven's Ninth Symphony, transposed to C. It has two phrases that begin identically. The
+first stops on a note that leaves you waiting; the second, changing only its last bar, comes home.</p>
+<audio-ex src="ode_period" caption="Two four-bar phrases with the same start: the first ends on D (open, a question), the second on C (closed, the answer)."></audio-ex>
+<pianoroll edo="12" notes="E5 ; D5 ; D5 ; E5 ; D5 ; C5 ; C5" labels="3 ; 2 ; 2 (open) ; 3 ; 2 ; 1 ; 1 (closed)" title="The two endings of the Ode period"></pianoroll>
+<p>The difference is small on paper and large to the ear. The first ending hangs on the second degree of the scale,
+over the dominant chord. The second walks down E, D, C to the tonic. Ending a phrase is what a <b>cadence</b> does,
+and a melody can make most of a cadence by itself.</p>
+</div>
+<div class="layer understand">
+<p>A <b>phrase</b> is a complete musical thought ending with a cadence. In much tonal music phrases are four bars
+long, but two, three, five and eight are all common, and composers lengthen and shorten them freely. A melodic
+cadence has several ingredients, which usually arrive together:</p>
+<ul>
+<li><b>The final degree.</b> Ending on degree 1 (the tonic) sounds closed. Ending on 2, 7 or 5, usually over the
+dominant chord, sounds open: a <b>half cadence</b>.</li>
+<li><b>The approach.</b> The strongest closes reach the tonic by step: 2 → 1 from above, or 7 → 1 from below,
+where 7 is the leading tone, a semitone under the tonic (<a href="ch:ch10#dominant">Chapter 10</a>).</li>
+<li><b>Rhythm and meter.</b> Cadences tend to land on a strong beat and on a longer note. In the Ode, both phrases
+end on a half note at the start of beat 3 after a dotted rhythm.</li>
+<li><b>Harmony.</b> The chords underneath confirm the ending: V for a half cadence, V → I for an authentic one
+(<a href="ch:ch10#cadences">Chapter 10</a>).</li>
+</ul>
+<p>Two phrases related like this, a question ending open and an answer ending closed, form a <b>period</b>: the first
+phrase is the <b>antecedent</b>, the second the <b>consequent</b>. Because the two phrases start alike, this one is a
+<b>parallel period</b>. Periods and their larger relatives are discussed in
+<a href="ch:ch16#phrase-structure">Chapter 16</a>.</p>
+<p>Look at the last three notes of each phrase. The antecedent goes E → D and stops: scale degrees 3 → 2. The
+consequent goes E → D → C: 3 → 2 → 1. In Heinrich Schenker's theory of tonal structure (<i>Der freie Satz</i>,
+1935), a descent to degree 1 by step is the backbone of a tonal piece, and a period like this one is the classic case
+of an <b>interruption</b>: the line descends 3–2, breaks off, starts again, and completes 3–2–1.</p>
+<table>
+<tr><th>Phrase</th><th>Last notes</th><th>Degrees</th><th>Chord</th><th>Cadence</th></tr>
+<tr><td>Antecedent</td><td>E D D</td><td>3 2 2</td><td>V</td><td>half cadence (open)</td></tr>
+<tr><td>Consequent</td><td>E D C C</td><td>3 2 1 1</td><td>V → I</td><td>authentic cadence (closed)</td></tr>
+</table>
+<aside class="mirror">Golden melodies need their own sense of ending. In golden7 the tonic C can be approached from
+B, a semitone below (the same leading-tone step as in C major), or from C♯, a semitone above. Which golden7 degrees
+sound like a question and which like an answer is one of the open problems of golden function
+(<a href="ch:ch30#golden-melody">Chapter 30</a>, <a href="ch:ch31#golden7-function">Chapter 31</a>).</aside>
+<p>Here is the arch contour from the beginning of the chapter, sung once in C major over C and once, degree for
+degree, in golden7 over the golden triad Cg. The contour is identical; the intervals are not. In golden7 the first
+three notes are C, vE, ^G, the golden triad itself.</p>
+<audio-ex src="golden7_arch" caption="Scale degrees 0 2 4 5 4 2 0 in C major (C E G A G E C), then in golden7 (C vE ^G ^A♭ ^G vE C) over Cg."></audio-ex>
+<pianoroll edo="36" notes="C5 ; vE5 ; ^G5 ; ^Ab5 ; ^G5 ; vE5 ; C5" labels="C ; vE ; ^G ; ^A♭ ; ^G ; vE ; C" title="The arch in golden7: degrees 0 2 4 5 4 2 0"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>A melodic cadence, formally.</b> Let a phrase end with degrees $(s_{n-2}, s_{n-1})$ in a major key, with the
+last note on a metrically strong position. Call the ending</p>
+<ul>
+<li><b>closed</b> if $s_{n-1} \equiv 0 \pmod 7$ and $s_{n-2} \in \{1, -1\} \pmod 7$ (a step from 2 or from 7);</li>
+<li><b>open</b> if $s_{n-1} \bmod 7 \in \{1, 4, 6\}$ (degrees 2, 5, 7, the members of the dominant triad).</li>
+</ul>
+<p>This is a definition, not a theorem: it describes the common practice of tonal melody, and real music adds
+exceptions (a closed ending on degree 3 over I is weaker but common; folk tunes often close by a leap from 5). Its
+use is to make the period's logic explicit: an antecedent ends open and a consequent ends closed.</p>
+<p><b>Golden7 arithmetic.</b> In 36-ET sixth-steps, golden7 is $\{0, 3, 11, 14, 22, 25, 33\}$, with steps
+$(3, 8, 3, 8, 3, 8, 3)$. The degrees $(0, 2, 4, 5, 4, 2, 0)$ are therefore $(0, 11, 22, 25, 22, 11, 0)$, so the
+moves are $+11, +11, +3, -3, -11, -11$ sixth-steps. In C major the same degrees give $+4, +3, +2, -2, -3, -4$
+semitones. Both have the contour $(+, +, +, -, -, -)$, as the invariance statement of the first section predicts.</p>
+</div>
+</section>
+
+<div class="exercise">
+<p><b>Exercise 13.1 (listening).</b> Play the contours example and, without looking, sketch each melody's shape as a
+line. Then hum a familiar song and describe its first phrase as a contour.</p>
+<details class="answer"><summary>Answer</summary><p>The four examples are arch (+ + + − − −), bowl (− − − + + +),
+rising (all +) and falling (all −). Most familiar song phrases are some variant of the arch: a rise to a peak and a
+descent, often with small reversals along the way.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 13.2.</b> How many contours (up, down, same) can a five-note melody have? How many if no two
+consecutive notes repeat?</p>
+<details class="answer"><summary>Answer</summary><p>Four moves with three choices each: $3^4 = 81$. Without
+repetitions each move is up or down: $2^4 = 16$.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 13.3.</b> Write the diatonic inversion about C of the motif C E D G (in C major), and its real
+(chromatic) inversion. Then write the retrograde of the original.</p>
+<details class="answer"><summary>Answer</summary><p>In degrees the motif is 0, 2, 1, 4, so the diatonic inversion is
+0, −2, −1, −4: C A B F (the A, B and F below the C). In semitones it is 0, 4, 2, 7, so the real inversion is 0, −4, −2,
+−7: C A♭ B♭ F. The retrograde is G D E C.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 13.4 (proof).</b> Show that transposition and retrograde commute, but transposition and inversion do
+not: $I_a T_k = T_{-k} I_a$.</p>
+<details class="answer"><summary>Answer</summary><p>$T_k$ changes only pitch and $R$ only time, so they commute.
+For inversion: $I_a(T_k(p)) = 2a - (p + k) = (2a - p) - k = T_{-k}(I_a(p))$. So $I_a T_k = T_{-k} I_a$, which is the
+defining relation of a dihedral group.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 13.5.</b> Count the steps, skips, leaps and repeated notes in the first phrase of the Ode (E E F G | G F
+E D | C C D E | E D D). Which degree does the phrase end on, and what kind of cadence is it?</p>
+<details class="answer"><summary>Answer</summary><p>15 notes, 14 moves: E–E repeat, E–F step, F–G step, G–G
+repeat, G–F, F–E, E–D, D–C steps, C–C repeat, C–D, D–E steps, E–E repeat, E–D step, D–D repeat. That is 9 steps,
+5 repeats and no skips or leaps. It ends on D, degree 2, over V: a half cadence.</p></details>
+</div>

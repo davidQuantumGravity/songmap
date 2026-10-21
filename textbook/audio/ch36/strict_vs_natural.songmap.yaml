@@ -1,0 +1,16 @@
+# IV -> V two ways. System 1 (~ ~): F - vF#dim(v3) - vAbg7(v7)/^F# - G, every voice moving 2+2+2 sixth-steps.
+# System 2 (~g ~g): F - vF#g - ^F#g - G, the golden escalator (two golden chords in a row).
+songmap: 0.2
+title: "IV to V: strict path, then natural path"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 2
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+sections:
+  - {name: strict, bars: 4, harmony: "F:1 ~:0.5 ~:0.5 G:2", parts: {organ: hold, low: bassline}}
+  - {name: natural, bars: 4, harmony: "F:1 ~g:0.5 ~g:0.5 G:2", parts: {organ: hold, low: bassline}}
+mix: {organ: {gain_db: -6}, low: {gain_db: -5}}
+master: clean

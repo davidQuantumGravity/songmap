@@ -1,0 +1,20 @@
+# ch31: rational visitation in a golden home. Cg is visited by C (2 sixth-steps away), Cm (3),
+# Caug (3) and Ab (4), each for half a bar, all on the golden-spectrum pad, so the Western
+# chords are the rough, bright tension and Cg the release.
+songmap: 0.2
+title: "Rational visitation"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 313
+tail_seconds: 4
+instruments:
+  gpad: clean/golden_pad
+  low: clean/bass
+mix:
+  gpad: {gain_db: -6, send: {hall: 0.3}}
+  low: {gain_db: -8}
+sections:
+  - {name: visits, bars: 8, harmony: "Cg:1.5 C:0.5 Cg:1.5 Cm:0.5 Cg:1.5 Caug:0.5 Cg:1.5 Ab:0.5 Cg:1", parts: {gpad: hold, low: {style: roots, role: bass}}}
+master: clean

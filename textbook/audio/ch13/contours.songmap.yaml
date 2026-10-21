@@ -1,0 +1,18 @@
+# Four contours on the same rhythm: arch, bowl, rising, falling (a bar of rest between them).
+songmap: 0.2
+title: "Four contours"
+tempo: 104
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 13
+tail_seconds: 1.5
+instruments: {lead: clean/lead}
+mix: {lead: {gain_db: -4, send: {hall: 0.2}}}
+returns: {hall: {type: reverb, seconds: 1.8, predelay: 0.02, damping: 0.5}}
+sections:
+  - {name: arch,    bars: 2, parts: {lead: {notes: "=mf c4 e g a | g e c2"}}}
+  - {name: bowl,    bars: 3, parts: {lead: {notes: "r1 | =mf a4 g e d | e g a2"}}}
+  - {name: rising,  bars: 3, parts: {lead: {notes: "r1 | =mf c4 d e g | a b c+2"}}}
+  - {name: falling, bars: 3, parts: {lead: {notes: "r1 | =mf c+4 b a g | e d c2"}}}
+master: clean
