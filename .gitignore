@@ -22,3 +22,6 @@ scratchpad/
 
 # built textbook site (rebuild: python tools/textbook/build.py)
 textbook_site/
+
+# song renders (rebuild from the .sm next to them)
+songs/**/renders/

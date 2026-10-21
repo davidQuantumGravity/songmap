@@ -16,6 +16,7 @@ Good scores come from **composing first and typing second**. Follow the method i
 | [reference/melody.md](reference/melody.md) | writing motifs and phrases, bar math, scale degrees in major and minor, developing a theme |
 | [reference/rhythm.md](reference/rhythm.md) | grooves, swing, ghost notes, fills, builds, bass lines, arpeggios |
 | [reference/instruments.md](reference/instruments.md) | each instrument's sound and settings, ambience and sound-design moves, arrangement |
+| [reference/golden.md](reference/golden.md) | golden harmony in 36-ET inside a Western song: spelling, five techniques, rules that keep it tasteful, the rub check |
 | [examples/](examples/) | three complete, rendered and balanced scores to imitate (§8) |
 | [catalog.txt](catalog.txt) | every style, mod, instrument and event name (`songmap describe --compact`) |
 

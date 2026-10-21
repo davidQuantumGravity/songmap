@@ -244,7 +244,9 @@ def parse_motif(text: str, *, deg: bool = False, rel: bool = False, key: str = "
             idx = DYN_ORDER.index(min(DYN, key=lambda k: abs(DYN[k] - l0)))
             target = DYN[DYN_ORDER[min(max(idx + (1 if d == "<" else -1), 0), len(DYN_ORDER) - 1)]]
             _apply_ramp(evs, i0, l0, target)
-    return evs
+    phrase = Phrase(evs)
+    phrase.length = beat          # trailing rests count: "c1 | r1" is two bars long
+    return phrase
 
 
 def _apply_ramp(evs: list[Ev], i0: int, l0: float, l1: float):
@@ -259,5 +261,11 @@ def _apply_ramp(evs: list[Ev], i0: int, l0: float, l1: float):
         e.vel = min(1.0, base * ratio)
 
 
+class Phrase(list):
+    """A parsed motif: its events, plus its written length in beats (rests included)."""
+    length: float = 0.0
+
+
 def motif_length(evs: list[Ev]) -> float:
-    return max((e.beat + e.dur for e in evs), default=0.0)
+    """Written length: to the end of the last note, or of trailing rests when the phrase has them."""
+    return max(getattr(evs, "length", 0.0), max((e.beat + e.dur for e in evs), default=0.0))
