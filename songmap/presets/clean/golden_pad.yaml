@@ -1,0 +1,4 @@
+instrument: clean
+description: "Sustained golden-spectrum pad for golden-home drones"
+tags: [clean, golden, pad, drone]
+params: {partials: 10, rolloff: 1.4, spectrum: 1, attack: 2.5, release: 3.0, vel_bright: 0.3}

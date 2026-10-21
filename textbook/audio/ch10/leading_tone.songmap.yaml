@@ -1,0 +1,18 @@
+# The C major scale stopping on B, then completed to C.
+songmap: 0.2
+title: "The leading tone"
+tempo: 100
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {up: clean/keys}
+mix: {up: {gain_db: -3, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 6
+    parts:
+      up: {notes: "=mp c4 d4 e4 f4 g4 a4 b2. r2. c4 d4 e4 f4 g4 a4 b4 c+1 r4"}
+master: clean

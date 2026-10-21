@@ -1,0 +1,19 @@
+# The same scale-degree melody (0 2 4 5 4 2 0) twice: in C major over C, then in golden7
+# (C C# vE vF ^G ^Ab B) over the golden triad Cg. In golden7 the arch outlines Cg itself.
+songmap: 0.2
+title: "One arch, two scales"
+tempo: 88
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 13
+tail_seconds: 2.5
+instruments: {lead: clean/lead, pad: clean/organ}
+mix:
+  lead: {gain_db: -3, send: {hall: 0.2}}
+  pad:  {gain_db: -12, send: {hall: 0.25}}
+returns: {hall: {type: reverb, seconds: 2.0, predelay: 0.02, damping: 0.5}}
+sections:
+  - {name: major,  bars: 2, key: "C major",   harmony: "C:2",  parts: {lead: {deg: "0/4 2 4 5 | 4 2 0/2", oct: 1}, pad: hold}}
+  - {name: golden, bars: 3, key: "C golden7", harmony: "N.C.:1 Cg:2", parts: {lead: {deg: "r/1 | 0/4 2 4 5 | 4 2 0/2", oct: 1}, pad: hold}}
+master: clean

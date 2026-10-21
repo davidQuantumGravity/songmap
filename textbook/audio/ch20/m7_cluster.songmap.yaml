@@ -1,0 +1,19 @@
+# ch20: multiplication. The cluster C C# D, then M7 of it (C D G), then M5 of it (C F Bb).
+# Then the chromatic scale, and M7 of the chromatic scale: the circle of fifths, all in one octave.
+songmap: 0.2
+title: "M7: from cluster to fifths"
+tempo: 92
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 20
+tail_seconds: 2
+instruments: {organ: clean/organ, keys: clean/keys}
+mix: {organ: {gain_db: -6, send: {hall: 0.2}}, keys: {gain_db: -4, send: {hall: 0.2}}}
+sections:
+  - {name: cluster, bars: 1, parts: {organ: {notes: "[c,c#,d]1"}}}
+  - {name: m7, bars: 1, parts: {organ: {notes: "[c,d,g]1"}}}
+  - {name: m5, bars: 1, parts: {organ: {notes: "[c,f,bb]1"}}}
+  - {name: chromatic, bars: 2, parts: {keys: {notes: "c8 c# d d# e f f# g g# a a# b c+2"}}}
+  - {name: fifths, bars: 2, parts: {keys: {notes: "c8 g d a e b f# c# g# d# a# f c+2"}}}
+master: clean

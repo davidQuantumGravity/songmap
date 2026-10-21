@@ -1,0 +1,31 @@
+# Golden Étude No. 1, "passing light": the first-focus étude of docs/GOLDEN_HARMONY.md §5.5.
+# Diatonic chords are home; `~g` placeholders become the golden passing chords that the
+# voice leading picks out (docs/GOLDEN_THEORY.md): I-IV via vFg, IV-V via vF#g ^F#g, V-I via vCg.
+songmap: 0.2
+title: "Golden Étude No. 1 — passing light"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+
+instruments:
+  chords: clean/organ
+  melody: clean/lead
+  bass:   clean/bass
+
+harmony:
+  progressions:
+    walk: "C:0.75 ~g:0.25 F:0.5 ~g:0.25 ~g:0.25 G:0.75 ~g:0.25 C:1 Am:0.75 ~g:0.25 Dm:0.5 ~g:0.25 ~g:0.25 G:0.5 ~:0.25 ~:0.25 C:1"
+
+sections:
+  - {name: a, bars: 8, harmony: walk, parts: {chords: hold, bass: bassline}}
+  - {name: b, bars: 8, harmony: walk, parts: {chords: hold, bass: bassline, melody: top}}
+
+mix:
+  chords: {gain_db: -4}
+  melody: {gain_db: -2}
+  bass:   {gain_db: -3}
+
+master: clean

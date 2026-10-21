@@ -1,0 +1,4 @@
+instrument: clean
+description: "Clean round bass: 6 harmonics, soft rolloff"
+tags: [clean, bass]
+params: {partials: 6, rolloff: 1.6, attack: 0.01, decay: 3.0, damp: 0.3, release: 0.15, vel_bright: 0.5}

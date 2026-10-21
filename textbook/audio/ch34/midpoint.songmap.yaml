@@ -1,0 +1,20 @@
+# ch34: the golden midpoint, dry. C -> ^Cg -> vC# and Am -> Ag -> vBbm: each voice moves 2
+# sixth-steps in all, and at the midpoint the three voices have moved 0, 1 and 2. Then the passing
+# engine (System 2) asked for one chord between C and vC#: it finds the same ^Cg (doc demo D2b).
+songmap: 0.2
+title: "The golden midpoint"
+tempo: 76
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 344
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix:
+  organ: {gain_db: -6}
+  low: {gain_db: -6}
+sections:
+  - {name: major, bars: 3, harmony: "C:1 ^Cg:1 vC#:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+  - {name: minor, bars: 3, harmony: "Am:1 Ag:1 vBbm:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+  - {name: engine, bars: 4, harmony: "C:1 ~g:1 vC#:2", parts: {organ: hold, low: {style: roots, role: bass}}}
+master: clean

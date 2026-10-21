@@ -1,0 +1,265 @@
+<section id="rows">
+<h2>Tone rows</h2>
+<div class="layer hear">
+<p>Here is a melody that uses each of the twelve notes exactly once before any note returns: C, E, A, B♭, F, E♭, F♯, C♯, D,
+B, G, A♭. No note is repeated, so none can become a tonic by insistence. Listen to it as a melody first. Then hear its two halves as
+chords of six notes each. Each half sounds dense and ambiguous, and together they contain all twelve notes.</p>
+<audio-ex src="row_melody" caption="A twelve-tone row made for this book, C E A B♭ F E♭ | F♯ C♯ D B G A♭, as a melody; then its two six-note halves as chords."></audio-ex>
+<p>Such an ordering of the twelve pitch classes is a <b>tone row</b> (or series). In <b>twelve-tone music</b> one row,
+chosen for a piece, supplies all its melodies and harmonies: the notes are taken in the row's order, horizontally as a tune or
+vertically as chords, in any octave and rhythm. The row is less a theme than a "genetic code". You rarely hear it plainly, but
+its intervals shape everything.</p>
+</div>
+<div class="layer understand">
+<p>Arnold Schoenberg (1874–1951) formulated his "method of composing with twelve tones which are related only with one another" in the
+early 1920s, after a decade of free atonality. Among the first pieces written wholly with it are the last of the Five Piano
+Pieces Op. 23 (a waltz) and the Suite for Piano Op. 25 (1921–23). The Austrian composer Josef Matthias Hauer developed a different
+twelve-tone system at about the same time.</p>
+<p>The method solved a problem that free atonality had raised. If any note can follow any note, what keeps music from simply
+drifting? Schoenberg's answer was to fix an order. Two goals guided it:</p>
+<ul>
+<li><b>Equality of the twelve.</b> Because no note recurs before the other eleven have sounded, no pitch class gains the weight of a tonic.
+This is not a law of acoustics. It is a stylistic choice to avoid tonal implications.</li>
+<li><b>Unity.</b> Every melody and chord derives from one source, so the piece's intervals are related throughout, the way a
+tonal piece's harmonies are related through its key.</li>
+</ul>
+<p>Some vocabulary: a row is written as a list of pitch classes, here P<sub>0</sub> = ⟨0, 4, 9, 10, 5, 3, 6, 1, 2, 11, 7, 8⟩. Its
+<b>hexachords</b> are its first and last six notes. Its <b>ordered intervals</b> are the differences between consecutive notes mod 12,
+here 4, 5, 1, 7, 10, 3, 7, 1, 9, 8, 1. The intervals, not the notes, are what transposition preserves.</p>
+<pc-circle edo="12" marks="0 3 4 5 9 10" path="0 4 9 10 5 3 6 1 2 11 7 8" title="The row's path around the circle; dots mark its first hexachord"></pc-circle>
+<pianoroll edo="12" notes="C4 ; E4 ; A4 ; Bb4 ; F4 ; Eb4 ; F#4 ; C#5 ; D5 ; B4 ; G4 ; Ab4" labels="C ; E ; A ; B♭ ; F ; E♭ ; F♯ ; C♯ ; D ; B ; G ; A♭" title="The row P0 as played in the example"></pianoroll>
+<pianoroll edo="12" notes="Eb3 F3 C4 E4 A4 Bb4 ; G3 Ab3 B3 C#4 D4 F#4" labels="first hexachord ; second hexachord" title="The row's two hexachords as chords: together, all twelve pitch classes"></pianoroll>
+<aside class="mirror"><b>Golden mirror.</b> A 36-ET row would order all 36 sixth-step pitch classes. One such row is already
+familiar: the <b>golden chain</b>, a golden sixth (25 sixth-steps) at a time, $0, 25, 14, 3, 28, \dots$, visits all 36 pitch classes before it
+returns, because 25 shares no factor with 36. It is a 36-tone row whose ordered intervals are all the same
+(<a href="ch:ch33#rows-36">Chapter 33</a>). You can hear it in the section on all-interval rows.</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> A <b>twelve-tone row</b> is a bijection $P: \{0, 1, \dots, 11\} \to \mathbb{Z}_{12}$, written
+$\langle P(0), \dots, P(11)\rangle$ (order positions to pitch classes). Its <b>interval succession</b> is
+$\langle P(i+1) - P(i) \rangle_{i=0}^{10}$ mod 12.</p>
+<p><b>Counting.</b> There are $12! = 479{,}001{,}600$ rows, and $11! = 39{,}916{,}800$ of them start on C. Since transposition changes
+the first note and keeps the intervals, rows up to transposition correspond to interval successions, and there are $11!$ of them.</p>
+</div>
+</section>
+
+<section id="forms">
+<h2>The 48 forms of a row</h2>
+<div class="layer hear">
+<p>A row can be played forwards or backwards, right side up or upside down. Listen to the four basic forms: the <b>prime</b>
+P<sub>0</sub>, the <b>inversion</b> I<sub>0</sub> (every interval turned the other way), the <b>retrograde</b> R<sub>0</sub> (the
+prime backwards) and the <b>retrograde inversion</b> RI<sub>0</sub> (the inversion backwards). They sound like four views of one
+object: the same intervals, mirrored in pitch or in time.</p>
+<audio-ex src="row_forms" caption="P0, I0, R0 and RI0 of the row: forwards, upside down, backwards, and upside down and backwards."></audio-ex>
+</div>
+<div class="layer understand">
+<p>Each of the four forms can start on any of the twelve notes, which gives $4 \times 12 = 48$ forms. Composers lay them out in a
+<b>row matrix</b>, a 12 × 12 square. Read the top line left to right for P<sub>0</sub>, the left column top to bottom for
+I<sub>0</sub>, any line right to left for a retrograde, and any column bottom to top for a retrograde inversion. The subscripts
+name the first note of a P or I form. An R or RI form here carries the subscript of the line it reverses, so it names that form's last
+note; some authors label retrogrades by their first note instead.</p>
+<table>
+<tr><th></th><th>I0</th><th>I4</th><th>I9</th><th>I10</th><th>I5</th><th>I3</th><th>I6</th><th>I1</th><th>I2</th><th>I11</th><th>I7</th><th>I8</th><th></th></tr>
+<tr><th>P0</th><td>C</td><td>E</td><td>A</td><td>B♭</td><td>F</td><td>E♭</td><td>F♯</td><td>C♯</td><td>D</td><td>B</td><td>G</td><td>A♭</td><th>R0</th></tr>
+<tr><th>P8</th><td>A♭</td><td>C</td><td>F</td><td>F♯</td><td>C♯</td><td>B</td><td>D</td><td>A</td><td>B♭</td><td>G</td><td>E♭</td><td>E</td><th>R8</th></tr>
+<tr><th>P3</th><td>E♭</td><td>G</td><td>C</td><td>C♯</td><td>A♭</td><td>F♯</td><td>A</td><td>E</td><td>F</td><td>D</td><td>B♭</td><td>B</td><th>R3</th></tr>
+<tr><th>P2</th><td>D</td><td>F♯</td><td>B</td><td>C</td><td>G</td><td>F</td><td>A♭</td><td>E♭</td><td>E</td><td>C♯</td><td>A</td><td>B♭</td><th>R2</th></tr>
+<tr><th>P7</th><td>G</td><td>B</td><td>E</td><td>F</td><td>C</td><td>B♭</td><td>C♯</td><td>A♭</td><td>A</td><td>F♯</td><td>D</td><td>E♭</td><th>R7</th></tr>
+<tr><th>P9</th><td>A</td><td>C♯</td><td>F♯</td><td>G</td><td>D</td><td>C</td><td>E♭</td><td>B♭</td><td>B</td><td>A♭</td><td>E</td><td>F</td><th>R9</th></tr>
+<tr><th>P6</th><td>F♯</td><td>B♭</td><td>E♭</td><td>E</td><td>B</td><td>A</td><td>C</td><td>G</td><td>A♭</td><td>F</td><td>C♯</td><td>D</td><th>R6</th></tr>
+<tr><th>P11</th><td>B</td><td>E♭</td><td>A♭</td><td>A</td><td>E</td><td>D</td><td>F</td><td>C</td><td>C♯</td><td>B♭</td><td>F♯</td><td>G</td><th>R11</th></tr>
+<tr><th>P10</th><td>B♭</td><td>D</td><td>G</td><td>A♭</td><td>E♭</td><td>C♯</td><td>E</td><td>B</td><td>C</td><td>A</td><td>F</td><td>F♯</td><th>R10</th></tr>
+<tr><th>P1</th><td>C♯</td><td>F</td><td>B♭</td><td>B</td><td>F♯</td><td>E</td><td>G</td><td>D</td><td>E♭</td><td>C</td><td>A♭</td><td>A</td><th>R1</th></tr>
+<tr><th>P5</th><td>F</td><td>A</td><td>D</td><td>E♭</td><td>B♭</td><td>A♭</td><td>B</td><td>F♯</td><td>G</td><td>E</td><td>C</td><td>C♯</td><th>R5</th></tr>
+<tr><th>P4</th><td>E</td><td>A♭</td><td>C♯</td><td>D</td><td>A</td><td>G</td><td>B♭</td><td>F</td><td>F♯</td><td>E♭</td><td>B</td><td>C</td><th>R4</th></tr>
+<tr><th></th><th>RI0</th><th>RI4</th><th>RI9</th><th>RI10</th><th>RI5</th><th>RI3</th><th>RI6</th><th>RI1</th><th>RI2</th><th>RI11</th><th>RI7</th><th>RI8</th><th></th></tr>
+</table>
+<p>The matrix is built in two steps. Write P<sub>0</sub> across the top, then I<sub>0</sub> (the negatives, $-x \bmod 12$) down the
+left side. Each line is then P<sub>0</sub> transposed to begin on its left-hand note. The main diagonal is all C: the entry in line $i$, column $j$ is $P_0(j) - P_0(i)$, which is 0 when $i = j$.</p>
+<p>Some rows have fewer than 48 distinct forms, because one operation maps the row onto another of its forms. A famous example is
+the row of Anton Webern's Symphony Op. 21 (1928), A–F♯–G–A♭–E–F | B–B♭–D–C♯–C–E♭. Its second half is the first half backwards,
+transposed by a tritone. So its retrograde equals its own transposition by a tritone, and it has only 24 distinct forms.</p>
+<audio-ex src="webern_palindrome" caption="The row of Webern's Symphony Op. 21, then its retrograde: the retrograde is the same row transposed by a tritone."></audio-ex>
+</div>
+<div class="layer derive">
+<p><b>The group of row operations.</b> Transposition $T_n$ and inversion $I_n$ act on pitch classes as in
+<a href="ch:ch20#operations">Chapter 20</a>; retrograde acts on order positions, $R(P)(i) = P(11 - i)$. $R$ commutes with every
+$T_n$ and $I_n$, and $R^2 = 1$, so the row operations form the group $D_{12} \times \mathbb{Z}_2$ of order 48.</p>
+<p><b>Theorem (row classes).</b> The number of rows up to the 48 operations is $9{,}985{,}920$.</p>
+<p><i>Proof (Burnside).</i> Count rows fixed by each operation. No $T_n$ ($n \ne 0$) or $I_n$ fixes a row: a fixed row would need
+$P(i) + n = P(i)$, or $n - P(i) = P(i)$ for all twelve $i$, but $2x \equiv n$ has at most two solutions. An operation $RT_n$ fixes $P$
+iff $P(11-i) = P(i) + n$; applying it twice forces $2n \equiv 0$, and $n = 0$ is impossible ($P(11-i) \ne P(i)$), so $n = 6$. Then the
+first six notes determine the row, and they must contain one note from each tritone pair: $6!\cdot 2^6 = 46{,}080$ rows. An operation
+$RI_n$ fixes $P$ iff $P(11-i) = n - P(i)$, which needs $x \mapsto n - x$ to have no fixed points, i.e. $n$ odd (6 values), each giving
+$6!\cdot 2^6 = 46{,}080$ rows. So</p>
+$$\#\text{classes} = \frac{12! + 46{,}080 + 6 \cdot 46{,}080}{48} = \frac{479{,}324{,}160}{48} = 9{,}985{,}920.\quad\square$$
+<p>The rows with fewer than 48 forms are exactly those fixed by $RT_6$ (like Webern's Op. 21) or by some $RI_n$ with $n$ odd. Each has
+24 forms.</p>
+<p><b>Check.</b> Webern's row is $\langle 9,6,7,8,4,5,11,10,2,1,0,3\rangle$. Its retrograde is $\langle 3,0,1,2,10,11,5,4,8,7,6,9\rangle$,
+and adding 6 to each note of the prime gives the same list (computed).</p>
+</div>
+</section>
+
+<section id="combinatoriality">
+<h2>Combinatoriality</h2>
+<div class="layer hear">
+<p>Play the row against its own inversion, note against note: the prime in the upper voice, and below it the inversion that starts on
+B. Something special happens at the halfway point. In the first six beats, the two voices together have played all twelve notes, each
+exactly once, and the same is true of the last six. The two rows interlock so that each half of the passage is a complete chromatic
+<b>aggregate</b>. No note doubles another and no pitch class is over-weighted.</p>
+<audio-ex src="combinatorial" caption="P0 above and I11 below: in each half, the two voices together play all twelve pitch classes exactly once."></audio-ex>
+</div>
+<div class="layer understand">
+<p>This property is <b>hexachordal combinatoriality</b>, and Milton Babbitt (1916–2011) named and systematized it in the 1940s and
+50s, building on Schoenberg's practice. It depends only on the row's first hexachord $H$: we need a form of the row whose first hexachord is
+the <b>complement</b> of $H$, the six notes $H$ leaves out.</p>
+<pianoroll edo="12" notes="C5 B3 ; E5 G3 ; A4 D4 ; Bb4 C#4 ; F4 F#3 ; Eb4 Ab3 ; F#4 F3 ; C#5 Bb3 ; D5 A3 ; B4 C4 ; G4 E4 ; Ab4 Eb4" labels="1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8 ; 9 ; 10 ; 11 ; 12" title="P0 above, I11 below, note against note: beats 1–6 and 7–12 are each an aggregate"></pianoroll>
+<p>Here $H$ = {C, E♭, E, F, A, B♭} and the inversion I<sub>11</sub> = B G D C♯ F♯ A♭ | F B♭ A C E E♭ begins with {B, G, D, C♯, F♯, A♭},
+which is the complement. There are four kinds, by the operation that produces the complementary hexachord:</p>
+<table>
+<tr><th>Kind</th><th>Condition on the first hexachord $H$</th><th>How common (of the 50 hexachord classes)</th></tr>
+<tr><td>Prime (P)</td><td>some $T_n(H)$ is the complement</td><td>7</td></tr>
+<tr><td>Inversional (I)</td><td>some $I_n(H)$ is the complement</td><td>19</td></tr>
+<tr><td>Retrograde (R)</td><td>trivial: the retrograde's first hexachord is the prime's second</td><td>all 50</td></tr>
+<tr><td>Retrograde-inversional (RI)</td><td>some $I_n(H) = H$</td><td>20 (the inversionally symmetric ones)</td></tr>
+</table>
+<p>Prime or inversional combinatoriality is possible for 20 of the 50 hexachord classes (computed). Our row's hexachord is inversionally
+combinatorial but not prime combinatorial. Schoenberg built many of his later rows on inversionally combinatorial hexachords, pairing
+a prime with an inversion so that the two together fill out aggregates.</p>
+<p>Six hexachord classes are <b>all-combinatorial</b>: combinatorial under P, I, R and RI at once. Babbitt called them source sets.
+In Forte's numbering:</p>
+<table>
+<tr><th>Forte</th><th>Prime form</th><th>Example on C</th><th>Description</th></tr>
+<tr><td>6-1</td><td>(0,1,2,3,4,5)</td><td>C C♯ D E♭ E F</td><td>chromatic hexachord</td></tr>
+<tr><td>6-7</td><td>(0,1,2,6,7,8)</td><td>C C♯ D F♯ G A♭</td><td>two chromatic trichords a tritone apart</td></tr>
+<tr><td>6-8</td><td>(0,2,3,4,5,7)</td><td>C D E♭ E F G</td><td></td></tr>
+<tr><td>6-20</td><td>(0,1,4,5,8,9)</td><td>C C♯ E F A♭ A</td><td>hexatonic (<a href="ch:ch18#cycles">Chapter 18</a>)</td></tr>
+<tr><td>6-32</td><td>(0,2,4,5,7,9)</td><td>C D E F G A</td><td>diatonic hexachord</td></tr>
+<tr><td>6-35</td><td>(0,2,4,6,8,10)</td><td>C D E F♯ G♯ A♯</td><td>whole-tone</td></tr>
+</table>
+<aside class="mirror"><b>Golden mirror.</b> In 36-ET the natural unit is the half-aggregate of 18 notes. The hexachord theorem
+carries over: the complement argument of <a href="ch:ch20#interval-vectors">Chapter 20</a> works for any even number of pitch
+classes, so an 18-note set and its complement always have the same interval vector. Which 18-note sets are combinatorial,
+and which of them are useful in golden music, is open. One example is known: the golden chain row is combinatorial at the
+tritone and under one inversion (<a href="ch:ch33#rows-36">Chapter 33</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> A hexachord $H$ is <b>P-combinatorial</b> if $T_n(H) = \mathbb{Z}_{12}\setminus H$ for some $n$, and
+<b>I-combinatorial</b> if $I_n(H) = \mathbb{Z}_{12}\setminus H$ for some $n$. A row is combinatorial in the same sense if its first
+hexachord is.</p>
+<p><b>Why it works.</b> If $I_n(H) = H'$ (the complement), the first hexachord of $I_n(P)$ is $I_n(H) = H'$, so the first halves of
+$P$ and $I_n(P)$ together are $H \cup H' = \mathbb{Z}_{12}$. The second halves are $H'$ and $I_n(H') = H$, another aggregate.</p>
+<p><b>A necessary condition.</b> By the hexachord theorem (<a href="ch:ch20#interval-vectors">Chapter 20</a>), $H$ and its complement
+always have the same interval vector. Combinatoriality asks for more: that they be in the same <i>set class</i>. So a Z-hexachord can
+never be P- or I-combinatorial, because its complement is its Z-partner, a different class.</p>
+<p><b>Theorem (computed exhaustively over the 50 hexachord classes).</b> 7 classes are P-combinatorial, 19 are I-combinatorial, 6 are
+both, and 20 are at least one. One class, (0,1,3,4,5,8), is P- but not I-combinatorial. The six that are both, listed above, are exactly
+the all-combinatorial hexachords. For our row, $I_{11}$ is the only inversion that works: $11 - \{0,3,4,5,9,10\} = \{11,8,7,6,2,1\}$,
+the complement.</p>
+</div>
+</section>
+
+<section id="all-interval">
+<h2>All-interval rows</h2>
+<div class="layer hear">
+<p>A row has eleven intervals between its twelve notes. Can they all be different, so that the row contains each interval from
+semitone to major seventh exactly once? Yes. Listen to one such row, voiced so that its leaps grow steadily: down a semitone, up a whole
+tone, down a minor third, up a major third, and so on, opening like a fan until the last leap is eleven semitones. Then hear the row of
+the first movement of Alban Berg's <i>Lyric Suite</i> for string quartet (1925–26), another all-interval row. Its first six notes are white
+keys and its last six are the five black keys and B.</p>
+<audio-ex src="all_interval" caption="The wedge row C B C♯ B♭ D A E♭ A♭ E G F F♯, its leaps growing from 1 to 11 semitones; then Berg's all-interval row F E C A G D | A♭ D♭ E♭ G♭ B♭ B."></audio-ex>
+<p>At the opposite extreme is a row with only one interval. 12-ET has a famous one, the circle of fifths. 36-ET has its golden counterpart:
+the golden chain, each note a golden sixth above the last, through all 36 sixth-step pitch classes.</p>
+<audio-ex src="golden_chain_row" caption="Golden mirror: the golden chain as a 36-tone row, each note 25 sixth-steps (a golden sixth) above the last, folded into one octave."></audio-ex>
+</div>
+<div class="layer understand">
+<p>An <b>all-interval row</b> is a row whose eleven ordered intervals are 1, 2, …, 11 in some order. The "wedge" in the example has
+intervals 11, 2, 9, 4, 7, 6, 5, 8, 3, 10, 1, which is each value once. Berg's row has 11, 8, 9, 10, 7, 6, 5, 2, 3, 4, 1 (computed).</p>
+<p>How many are there? A computer search over all rows starting on C finds:</p>
+<table>
+<tr><th>Counted up to</th><th>All-interval rows</th></tr>
+<tr><td>transposition (rows starting on C)</td><td>3,856</td></tr>
+<tr><td>transposition and inversion</td><td>1,928</td></tr>
+<tr><td>the 48 row operations (T, I, R, RI)</td><td>1,008</td></tr>
+<tr><td>the 48 operations and $M_5$</td><td>504</td></tr>
+</table>
+<p>These counts were first obtained by computer in the 1960s, and they are small enough to check in seconds today. Of the 3,856, exactly
+176 are their own retrograde up to transposition, like Webern's Op. 21 row.</p>
+<p>Every all-interval row has one property you can hear: its <b>first and last notes are a tritone apart</b>. The wedge runs from C to F♯,
+and Berg's row from F to B. The proof is one line, below.</p>
+<pc-circle edo="12" marks="0 6" path="0 11 1 10 2 9 3 8 4 7 5 6" title="The wedge row's path: it zigzags outward and ends a tritone from its start"></pc-circle>
+<pianoroll edo="12" notes="C4 ; B3 ; C#4 ; Bb3 ; D4 ; A3 ; Eb4 ; Ab3 ; E4 ; G3 ; F4 ; F#3" labels="C ; B ; C♯ ; B♭ ; D ; A ; E♭ ; A♭ ; E ; G ; F ; F♯" title="The wedge row as voiced in the example: leaps of 1, 2, 3, … 11 semitones"></pianoroll>
+<aside class="mirror"><b>Golden mirror.</b> The wedge idea works in any even equal division. In 36-ET the row $0, 35, 1, 34, 2, 33, \dots$
+has 35 different intervals, so 36-ET has all-interval 36-tone rows (checked by computer). The golden chain, with one interval used 35 times,
+is the other extreme. Between them lies the territory of golden serialism (<a href="ch:ch33#golden-serialism">Chapter 33</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Theorem.</b> In an all-interval row, $P(11) - P(0) \equiv 6 \pmod{12}$.</p>
+<p><i>Proof.</i> The intervals telescope: $P(11) - P(0) = \sum_{i=0}^{10} \bigl(P(i+1) - P(i)\bigr) \equiv 1 + 2 + \dots + 11 = 66 \equiv 6. \ \square$</p>
+<p><b>The wedge in general.</b> For even $n$, the row $w_0 = 0$, $w_k = (-1)^k \lceil k/2 \rceil \bmod n$ (that is $0, -1, 1, -2, 2, \dots$) has
+successive intervals $(-1)^k k$ for $k = 1, \dots, n-1$. The odd $k$ give the odd residues $n - k$, the even $k$ give the even residues $k$,
+and all $n-1$ are different. So every even EDO has all-interval rows. For odd $n$ there are none, because the same telescoping sum gives
+$n(n-1)/2 \equiv 0$, which would make the first and last notes equal.</p>
+<p><b>Counts (computed).</b> Depth-first search over rows beginning with 0, rejecting any repeated pitch class or interval, finds 3,856 rows.
+No row at all is fixed by a nontrivial $T_n$ or $I_n$, no all-interval row is fixed by any $RI_n$ (computed), and 176 are fixed by $RT_6$. Burnside then gives
+$(12 \cdot 3856 + 12 \cdot 176)/48 = 1008$ classes under the 48 operations, which matches direct canonicalization.</p>
+</div>
+</section>
+
+<section id="practice">
+<h2>Serialism in practice</h2>
+<div class="layer hear">
+<p>Twelve-tone theory is about rows, but twelve-tone music is about everything else too: rhythm, register, color, phrasing. A row heard
+plainly, as in this chapter's examples, sounds like an exercise. The same row spread across registers, split between instruments, partly
+sounded as chords, can sound passionate (Berg), crystalline (Webern) or intricate (Babbitt). If you listen to the composers below, try to forget
+the rows and follow the gestures.</p>
+<audio-ex src="row_texture" caption="The row of this chapter plainly, then the same order of pitch classes spread over registers, grouped into chords, with dynamics."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>The Second Viennese School</h3>
+<ul>
+<li><b>Schoenberg</b> treated the row as a source of themes and harmonies within traditional forms: suites, variations, concertos,
+the opera <i>Moses und Aron</i> (composed 1930–32, unfinished).</li>
+<li><b>Alban Berg</b> (1885–1935) often chose rows with tonal fragments. The row of his Violin Concerto (1935) begins with
+a chain of thirds that outlines G minor, D major, A minor and E major triads and ends in whole tones. Its music can sound almost Romantic.</li>
+<li><b>Anton Webern</b> (1883–1945) favored rows with internal symmetries and few notes per gesture. The row of his Concerto Op. 24 (1934),
+B–B♭–D | E♭–G–F♯ | A♭–E–F | C–C♯–A, is built from four forms of one three-note cell, set class (0,1,4) (computed). The Op. 21 row above is
+a palindrome up to transposition.</li>
+</ul>
+<pianoroll edo="12" notes="B3 Bb3 D4 ; Eb4 G4 F#4 ; Ab3 E4 F4 ; C4 C#4 A3" labels="B B♭ D ; E♭ G F♯ ; A♭ E F ; C C♯ A" title="The four (0, 1, 4) cells of Webern's Op. 24 row"></pianoroll>
+<h3>After 1945: total serialism</h3>
+<p>Composers of the next generation extended the series idea from pitch to other dimensions. Messiaen's piano study <i>Mode de valeurs et
+d'intensités</i> (1949) assigned fixed durations, dynamics and attacks to pitches. Pierre Boulez's <i>Structures</i> (book I, 1952, for two
+pianos) took a series from it and ordered durations, dynamics and attacks by series too. Karlheinz Stockhausen and others in Europe worked
+similarly. In the United States, Babbitt built a rigorous theory of serial structure for pitch and rhythm, from his
+<i>Three Compositions for Piano</i> (1947) on. Stravinsky, long the opposite pole of Schoenberg, adopted serial techniques in his late works
+from the 1950s.</p>
+<aside class="box note"><b>What serialism does and does not claim.</b> The row guarantees equal use of the twelve pitch classes and a web
+of interval relations. It does not guarantee that a listener perceives the row, and listening experiments have given mixed results on whether
+listeners can recognize row forms. Its value is as a compositional
+discipline, like counterpoint's rules, and is judged by the music.</aside>
+<aside class="mirror"><b>Golden mirror.</b> Golden serialism would order all 36 sixth-step pitch classes, or the 13 of golden13, and could
+combine rows by the 36-ET symmetries, including the golden transform $M_{11}$ that turns clusters into golden chords. These are
+experiments, not established practice (<a href="ch:ch33#golden-serialism">Chapter 33</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Invariance.</b> A central tool of serial composition is <i>invariance</i>: segments that two row forms share. If a segment
+$S$ of $P$ satisfies $T_n(S) = S$ or $I_n(S) = S$ as a set, then the form $T_n P$ or $I_n P$ contains the same notes in the same positions as
+a set, and the two forms can be linked through it. Combinatoriality is the extreme case where the segment is a whole hexachord and its image is the
+complement. Webern's Op. 24 row shows the other extreme. Its cells are related by $RI$, $R$ and $I$ operations, so the row's own
+symmetries reproduce its parts.</p>
+<p><b>Check (computed).</b> The four trichords of the Op. 24 row, {11, 10, 2}, {3, 7, 6}, {8, 4, 5} and {0, 1, 9}, all have prime form (0, 1, 4).</p>
+</div>
+<div class="exercise"><p><b>Exercise 21.1.</b> Write I<sub>0</sub>, R<sub>0</sub> and RI<sub>0</sub> of P<sub>0</sub> = ⟨0, 4, 9, 10, 5, 3, 6, 1, 2, 11, 7, 8⟩.</p>
+<details class="answer"><summary>Answer</summary><p>I<sub>0</sub> = ⟨0, 8, 3, 2, 7, 9, 6, 11, 10, 1, 5, 4⟩; R<sub>0</sub> = ⟨8, 7, 11, 2, 1, 6, 3, 5, 10, 9, 4, 0⟩;
+RI<sub>0</sub> = ⟨4, 5, 1, 10, 11, 6, 9, 7, 2, 3, 8, 0⟩.</p></details></div>
+<div class="exercise"><p><b>Exercise 21.2.</b> Show that the row ⟨0, 1, 2, 3, 4, 5, 11, 10, 9, 8, 7, 6⟩ satisfies $R = T_6$ and so has 24 forms.</p>
+<details class="answer"><summary>Answer</summary><p>Its retrograde is ⟨6, 7, 8, 9, 10, 11, 5, 4, 3, 2, 1, 0⟩, which is each note of the row plus 6.</p></details></div>
+<div class="exercise"><p><b>Exercise 21.3.</b> Is the chromatic hexachord {0, 1, 2, 3, 4, 5} P-combinatorial? I-combinatorial? Find the operations.</p>
+<details class="answer"><summary>Answer</summary><p>Both: $T_6$ maps it to {6, …, 11}, its complement; $I_{11}$ maps it to {11, 10, 9, 8, 7, 6}, also the complement.</p></details></div>
+<div class="exercise"><p><b>Exercise 21.4.</b> Check that Berg's row F E C A G D A♭ D♭ E♭ G♭ B♭ B begins and ends a tritone apart, and explain why it must.</p>
+<details class="answer"><summary>Answer</summary><p>F to B is 6 semitones. It must, because its intervals are 1 to 11 in some order, summing to 66 ≡ 6 (mod 12).</p></details></div>
+<div class="exercise"><p><b>Exercise 21.5 (listening).</b> In the combinatorial example, listen to the first six beats and name the note each voice
+plays on the downbeat of the second half.</p>
+<details class="answer"><summary>Answer</summary><p>The seventh notes of P<sub>0</sub> and I<sub>11</sub>: F♯ above and F below.</p></details></div>
+</section>

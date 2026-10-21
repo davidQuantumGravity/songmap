@@ -1,0 +1,22 @@
+# Stacking thirds higher: triad, two sevenths and a ninth on C, then a ii-V-I with ninths and a thirteenth.
+#   C (C3 G3 C4 E4) - C7 (C3 G3 Bb3 E4) - Cmaj7 (C3 G3 B3 E4) - Cmaj9 (C3 G3 B3 D4 E4)
+#   Dm9 (D3 A3 C4 E4 F4) - G13 (G2 F3 B3 E4 A4: root, 7th, 3rd, 13th, 9th) - Cmaj9 (C3 B3 D4 E4 G4)
+songmap: 0.2
+title: "Sevenths, ninths and a thirteenth"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 35
+tail_seconds: 3
+instruments:
+  keys: {use: clean/keys, decay: 6.0}
+motifs:
+  stack: {notes: "[c,g,c+,e+]1 | [c,g,bb,e+]1 | [c,g,b,e+]1 | [c,g,b,d+,e+]1", octave: 3}
+  jazz: {notes: "[d,a,c+,e+,f+]1 | [g-,f,b,e+,a+]1 | [c,b,d+,e+,g+]1 | [c,b,d+,e+,g+]1", octave: 3}
+sections:
+  - {name: stack, bars: 4, parts: {keys: {motifs: [stack]}}}
+  - {name: jazz, bars: 4, parts: {keys: {motifs: [jazz]}}}
+mix:
+  keys: {gain_db: -6, send: {hall: 0.25}}
+master: clean

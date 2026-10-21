@@ -1,0 +1,19 @@
+# ch35: the three golden pivots between C major and ^Eb major (a silver third, 10 sixth-steps, up):
+# C -> Cg -> ^Cm (I = vi), F -> Fg -> ^Fm (IV = ii), G -> Gg -> ^Gm (V = iii). Each is 2 + 2 sixth-steps,
+# every voice moving in one direction, and the golden chord keeps one note of each Western chord.
+songmap: 0.2
+title: "Three golden pivots, C major to ^Eb major"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 354
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix:
+  organ: {gain_db: -6}
+  low: {gain_db: -6}
+sections:
+  - {name: pivots, bars: 6, harmony: "C:0.5 Cg:0.5 ^Cm:1 F:0.5 Fg:0.5 ^Fm:1 G:0.5 Gg:0.5 ^Gm:1", parts: {organ: {style: hold, range: [48, 76]}}}
+  - {name: home, bars: 2, harmony: "^Bb7:1 ^Eb:1", parts: {organ: {style: hold, range: [48, 76]}}}
+master: clean

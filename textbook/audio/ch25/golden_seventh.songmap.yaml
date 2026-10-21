@@ -1,0 +1,16 @@
+# Cmaj7 and Cg7 alternating, voiced C4 E4 G4 B4 / C4 vE4 ^G4 B4 over a low C: the outer voices C and B stay; the third bends down a sixth-step
+# (E -> vE) and the fifth up a sixth-step (G -> ^G). Then breathing: Cg -> Cg7 -> vEg.
+songmap: 0.2
+title: "The golden seventh"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 33
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix: {organ: {gain_db: -5}, low: {gain_db: -8}}
+sections:
+  - {name: shimmer, bars: 4, harmony: "Cmaj7:1 Cg7:1 Cmaj7:1 Cg7:1", parts: {organ: {notes: "[c,e,g,b]1 | [c,ve,^g,b]1 | [c,e,g,b]1 | [c,ve,^g,b]1"}, low: {style: roots, role: bass}}}
+  - {name: breathe, bars: 3, harmony: "Cg:1 Cg7:1 vEg:1", parts: {organ: hold}}
+master: clean

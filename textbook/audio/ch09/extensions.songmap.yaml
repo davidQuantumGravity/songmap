@@ -1,0 +1,19 @@
+# Thirds stacked on C through the C major scale until all seven notes sound;
+# then G13 (G F B E) resolving to Cmaj9 (C E B D).
+songmap: 0.2
+title: "Stacking thirds to the thirteenth"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {up: clean/organ}
+mix: {up: {gain_db: -8, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 4
+    parts:
+      up: {notes: "=mp c-4 [c-,e-]4 [c-,e-,g-]4 [c-,e-,g-,b-]4 [c-,e-,g-,b-,d]4 [c-,e-,g-,b-,d,f]4 [c-,e-,g-,b-,d,f,a]2 [g--,f-,b-,e]2 [c-,e-,b-,d]1 r2"}
+master: clean

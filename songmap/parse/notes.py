@@ -13,6 +13,7 @@ Motif grammar (whitespace-separated tokens; `|` bar lines are checked against th
               STICKY: a note without a duration repeats the previous one (LilyPond rule)
               in deg mode durations follow a slash: 3/8, 0/4.
     marks     ^ accent   ! marcato   ' staccato   _ tenuto   ~ slur into next (glide on mono)
+    36edo     ^ / v PREFIX = up / down one sixth-step (1/3 semitone): ^c4, ve8, v3/4, ^5 (rel), [c,ve,^g]
     velocity  @0..127 explicit, overrides dynamics
     ghost     (e8)  parenthesized note = ghost (very soft)
     grace     {d}e4  quick grace note(s) just before the main note
@@ -27,7 +28,7 @@ import re
 from dataclasses import dataclass, field
 
 from ..theory.keys import LETTER, MODES, degree_to_midi, letter_to_midi, parse_key
-from ..theory.tuning import DEFAULT as TUNING_12, OCTAVE, Tuning, octaves, reject_microtone_prefix
+from ..theory.tuning import DEFAULT as TUNING_12, OCTAVE, Tuning, octaves, split_updown
 from .errors import NotationError
 
 
@@ -72,7 +73,7 @@ def parse_duration(d: str, beat_unit: int = 4) -> float:
 _PITCH_TOK = re.compile(r"""^
     (?P<open>\()?
     (?:\{(?P<grace>[^}]+)\})?
-    (?:(?P<rest>r)|\[(?P<chord>[^\]]+)\]|(?P<pitch>[a-g](?:\#|b)?[+-]*))
+    (?:(?P<rest>r)|\[(?P<chord>[^\]]+)\]|(?P<pitch>[\^v]*[a-g](?:\#|b)?[+-]*))
     (?P<dur>(?:1|2|4|8|16|32|64)\.*t?)?
     (?P<marks>[\^!'_~]*)
     (?:@(?P<vel>\d{1,3}))?
@@ -83,7 +84,7 @@ $""", re.X)
 _DEG_TOK = re.compile(r"""^
     (?P<open>\()?
     (?:\{(?P<grace>[^}]+)\})?
-    (?:(?P<rest>r)|\[(?P<chord>[^\]]+)\]|(?P<pitch>[\#b]?-?\d+))
+    (?:(?P<rest>r)|\[(?P<chord>[^\]]+)\]|(?P<pitch>[\^v]*[\#b]?-?\d+))
     (?:/(?P<dur>(?:1|2|4|8|16|32|64)\.*t?))?
     (?P<marks>[\^!'_~]*)
     (?:@(?P<vel>\d{1,3}))?
@@ -98,7 +99,7 @@ _DUR = r"(?:1|2|4|8|16|32|64)\.*t?"
 _REL_TOK = re.compile(rf"""^
     (?P<open>\()?
     (?:\{{(?P<grace>[^}}]+)\}})?
-    (?:(?P<rest>r)|\[(?P<chord>[^\]]+)\]|(?P<pitch>R[+-]*|[\#b]?\d{{1,2}}[+-]*))
+    (?:(?P<rest>r)|\[(?P<chord>[^\]]+)\]|(?P<pitch>[\^v]*(?:R[+-]*|[\#b]?\d{{1,2}}[+-]*)))
     (?:/(?P<dur>{_DUR})|(?P<dur2>{_DUR}))?
     (?P<marks>[\^!'_~]*)
     (?:@(?P<vel>\d{{1,3}}))?
@@ -107,10 +108,12 @@ $""", re.X)
 
 _REL_NATURAL = {1: 0, 2: 2, 3: 4, 4: 5, 5: 7, 6: 9, 7: 11}
 _REL_CLASS = {2: (2, 1), 3: (3, 4), 4: (5,), 5: (7, 6, 8), 6: (9,), 7: (10, 11, 9)}   # chord intervals that count as that degree
+_REL_RANGE = {3: (2.6, 4.7), 5: (5.6, 8.7), 7: (9.3, 11.7)}    # semitone ranges for microtonal chord tones
 
 
 def rel_degree(tok: str) -> tuple[int, int]:
-    """'b7' -> (7, -1), 'R' -> (1, 0), '#11' -> (11, +1)."""
+    """'b7' -> (7, -1), 'R' -> (1, 0), '#11' -> (11, +1). A ^/v prefix is handled by rel_to_midi."""
+    tok = split_updown(tok)[1]
     if tok == "R":
         return 1, 0
     alter = {"#": 1, "b": -1}.get(tok[0], 0)
@@ -122,7 +125,9 @@ def rel_degree(tok: str) -> tuple[int, int]:
 
 
 def rel_to_midi(tok: str, octs: int, intervals: tuple, root_midi: float, tuning: Tuning = TUNING_12) -> float:
-    """Resolve one rel token against a chord: its own 3rd/5th/7th when it has one, else diatonic."""
+    """Resolve one rel token against a chord: its own 3rd/5th/7th when it has one, else diatonic.
+    Microtonal chords (golden, silver, alterations): the chord tone in that degree's range counts."""
+    shift, tok = split_updown(tok)
     n, alter = rel_degree(tok)
     compound = OCTAVE if n > 7 else 0
     base = n - 7 if n > 7 else n
@@ -136,8 +141,13 @@ def rel_to_midi(tok: str, octs: int, intervals: tuple, root_midi: float, tuning:
         if semis is not None:     # the chord's own tone, exactly as the chord spells it
             semis = next(i % OCTAVE for i in intervals if tuning.pc(i) == tuning.pc(semis))
         if semis is None:
+            lo, hi = _REL_RANGE.get(base, (None, None))
+            inside = [i % OCTAVE for i in intervals if lo is not None and lo - 1e-9 <= i % OCTAVE <= hi + 1e-9]
+            if inside:
+                semis = min(inside, key=lambda i: abs(i - _REL_NATURAL[base]))
+        if semis is None:
             semis = 10 if base == 7 and tuning.pc(3) in have else _REL_NATURAL[base]
-    return root_midi + semis + compound + octaves(octs)
+    return root_midi + semis + compound + octaves(octs) + shift
 
 
 def parse_motif(text: str, *, deg: bool = False, rel: bool = False, key: str = "C major", octave: int = 4,
@@ -149,16 +159,18 @@ def parse_motif(text: str, *, deg: bool = False, rel: bool = False, key: str = "
     tok_re = _REL_TOK if rel else _DEG_TOK if deg else _PITCH_TOK
 
     def pitch_of(p: str):
+        shift, core = split_updown(p.strip())
         if rel:
-            m = re.fullmatch(r"(R|[#b]?\d{1,2})([+-]*)", p.strip())
+            m = re.fullmatch(r"(R|[#b]?\d{1,2})([+-]*)", core)
             if not m:
                 raise NotationError(f"{name}: bad rel tone '{p}'; use R, 3, 5, b7, 9 with + or - for octaves")
             rel_degree(m[1])
-            return m[1], m[2].count("+") - m[2].count("-")
+            pre = p.strip()[: len(p.strip()) - len(core)]
+            return pre + m[1], m[2].count("+") - m[2].count("-")
         if deg:
-            alter = {"#": 1, "b": -1}.get(p[0], 0)
-            return degree_to_midi(int(p.lstrip("#b")), key, octave, alter)
-        return letter_to_midi(p, octave)
+            alter = {"#": 1, "b": -1}.get(core[0], 0)
+            return degree_to_midi(int(core.lstrip("#b")), key, octave, alter + shift)
+        return letter_to_midi(p.strip(), octave)
 
     evs: list[Ev] = []
     beat, dur, level = 0.0, 1.0, DYN["mf"]
@@ -184,7 +196,6 @@ def parse_motif(text: str, *, deg: bool = False, rel: bool = False, key: str = "
         if raw in ("<", ">"):
             ramps.append((len(evs), level, raw))
             continue
-        reject_microtone_prefix(raw, name)
         m = tok_re.match(raw)
         if not m:
             hint = ("rel tokens look like R8, R+, 5/8, b7, [R,3,5]1" if rel else

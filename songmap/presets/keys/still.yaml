@@ -1,0 +1,4 @@
+instrument: keys
+description: "Modal piano with no string detune or per-hit variation: stable partials for microtonal harmony"
+tags: [piano, stable, 36edo]
+params: {unison: 0, rr: 0, thump: 0.06, hardness: 0.45, t60: 7.0}

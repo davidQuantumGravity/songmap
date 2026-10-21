@@ -20,6 +20,13 @@ def master_legacy(mix: np.ndarray, fade: float = 2.5) -> np.ndarray:
     return y * 0.89
 
 
+def master_clean(mix: np.ndarray, ceiling_db: float = -1.0) -> np.ndarray:
+    """`master: clean`: peak-normalize only. No EQ, compression, limiting or saturation, so the
+    instruments' exact partials and the tuning's beats reach the listener unaltered."""
+    y = as_stereo(mix)
+    return y / (np.max(np.abs(y)) + 1e-12) * 10 ** (ceiling_db / 20)
+
+
 def master(mix: np.ndarray, target_lufs: float = -14.0, ceiling_db: float = -1.0,
            glue: bool = True) -> np.ndarray:
     """High-pass, gentle glue compression, tilt EQ, loudness normalize, limit."""

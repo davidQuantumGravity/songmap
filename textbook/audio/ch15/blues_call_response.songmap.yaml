@@ -1,0 +1,28 @@
+# Call and response in a 12-bar blues in C (C7 F7 C7 G7 F7 C7). In each four-bar line a two-bar
+# "call" (lead) is answered by a two-bar "response" (keys). Lines 1 and 2 use the same call (the
+# AAB pattern of blues lyrics); line 3 has a new call. Written for this book; straight eighths.
+songmap: 0.2
+title: "Call and response in the blues"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 15
+tail_seconds: 2
+instruments: {lead: clean/lead, keys: clean/keys, organ: clean/organ, bass: clean/bass}
+mix:
+  lead:  {gain_db: -2, pan: -0.3, send: {hall: 0.15}}
+  keys:  {gain_db: -3, pan: 0.3, send: {hall: 0.15}}
+  organ: {gain_db: -16, send: {hall: 0.2}}
+  bass:  {gain_db: -6}
+returns: {hall: {type: reverb, seconds: 1.6, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: blues
+    bars: 12
+    harmony: "C7:4 F7:2 C7:2 G7:1 F7:1 C7:2"
+    parts:
+      lead:  {notes: "=mf g8 bb c+ eb+ c+4 bb | g8 f eb c c2 | r1 | r1 | g8 bb c+ eb+ c+4 bb | g8 f eb c c2 | r1 | r1 | d+8 d+ d+ b g4 f | eb8 d c bb- c2 | r1 | r2. r8. c16@0"}
+      keys:  {notes: "r1 | r1 | =mf r4 eb+8 e+ g+ bb+ g+4 | e+8 c+ g4 c+2 | r1 | r1 | r4 eb+8 e+ g+ bb+ g+4 | e+8 c+ g4 c+2 | r1 | r1 | r4 g+8 a+ bb+ a+ g+4 | e+8 c+ g4 c+2"}
+      organ: hold
+      bass:  {style: roots, role: bass}
+master: clean

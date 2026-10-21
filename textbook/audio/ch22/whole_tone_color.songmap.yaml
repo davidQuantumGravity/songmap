@@ -1,0 +1,15 @@
+# ch22: a whole-tone passage written for this book in the manner of early-1900s French piano music:
+# parallel major thirds descending in whole tones over a low Bb pedal. Every note is in the whole-tone scale on C.
+songmap: 0.2
+title: "Whole-tone color"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 22
+tail_seconds: 3
+instruments: {keys: keys/still, low: clean/organ}
+mix: {keys: {gain_db: -4, send: {hall: 0.35}}, low: {gain_db: -9, send: {hall: 0.3}}}
+sections:
+  - {name: a, bars: 4, parts: {keys: {notes: "=p [e,g#]8 [d,f#] [c,e] [a#-,d] [c,e]4 [d,f#] | [e,g#]2 [c,e]2 | [f#,a#]4 [e,g#] [d,f#] [c,e] | [a#-,d]1"}, low: {notes: "bb--1"}}}
+master: clean

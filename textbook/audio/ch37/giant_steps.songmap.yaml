@@ -1,0 +1,32 @@
+# ch37: golden giant steps. The major-third cycle C - Ab - E - C (the root motion of Coltrane's
+# changes) first plain, then with one strict passing chord per move (System 1, the first passing
+# chord P1 = (2X + Y)/3 voice by voice). By the quality theorem each is the golden triad on the
+# upper root: C - Cg - Ab - Abg - E - Eg - C. Written out here in close voicing; doc demo D17
+# (`C:1 ~:1 Ab:1 ~:1 E:1 ~:1 C:2`) makes the engine choose the same three golden chords.
+# The three golden chords sit 12 steps apart on the 36-step golden circle.
+songmap: 0.2
+title: "Golden giant steps"
+tempo: 88
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 375
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix:
+  organ: {gain_db: -6, send: {hall: 0.25}}
+  low: {gain_db: -7}
+sections:
+  - name: western
+    bars: 4
+    harmony: "C:1 Ab:1 E:1 C:1"
+    parts:
+      organ: {notes: "=mf [c,e,g]1 | [c,eb,ab] | [b-,e,g#] | [c,e,g]"}
+      low: {notes: "=mf c-1 | ab-- | e-- | c-"}
+  - name: golden
+    bars: 8
+    harmony: "C:1 Cg:1 Ab:1 Abg:1 E:1 Eg:1 C:2"
+    parts:
+      organ: {notes: "=mf [c,e,g]1 | [c,ve,^g] | [c,eb,ab] | [vc,^eb,ab] | [b-,e,g#] | [^b-,e,vg#] | [c,e,g] | [c,e,g]"}
+      low: {notes: "=mf c-1 | c- | ab-- | ab-- | e-- | e-- | c- | c-"}
+master: clean

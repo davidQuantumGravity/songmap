@@ -1,0 +1,16 @@
+# ch20: four members of set class {0,1,4}: C C# E, its transposition F F# A (T5),
+# its inversion E Eb C (I4) and that inversion moved to B Bb G (I11). Melodies, then chords.
+songmap: 0.2
+title: "One set class, four forms"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 20
+tail_seconds: 2
+instruments: {keys: clean/keys, organ: clean/organ}
+mix: {keys: {gain_db: -4, send: {hall: 0.2}}, organ: {gain_db: -6, send: {hall: 0.2}}}
+sections:
+  - {name: melodies, bars: 4, parts: {keys: {notes: "c4 c# e2 | f4 f# a2 | e4 eb c2 | b4 bb g2"}}}
+  - {name: chords, bars: 2, parts: {organ: {notes: "[c,c#,e]2 [f,f#,a]2 | [c,eb,e]2 [g,bb,b]2"}}}
+master: clean

@@ -1,0 +1,17 @@
+# ch35: the same modulation through Gg (GOLDEN_BLENDING D8): golden V of C = golden iii of ^Eb.
+# ^Gm (iii) - ^Ab (IV) - ^Bb7 (V7) - ^Eb (I) confirms the new key.
+songmap: 0.2
+title: "C major to ^Eb major through Gg"
+tempo: 76
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 356
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix:
+  organ: {gain_db: -6, send: {hall: 0.25}}
+  low: {gain_db: -6}
+sections:
+  - {name: all, bars: 9, harmony: "C:1 Dm:1 G:1 Gg:1 ^Gm:1 ^Ab:1 ^Bb7:1 ^Eb:2", parts: {organ: {style: hold, range: [48, 76]}, low: bassline}}
+master: clean

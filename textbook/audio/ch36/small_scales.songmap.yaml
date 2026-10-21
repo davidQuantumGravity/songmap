@@ -1,0 +1,19 @@
+# ch36 small-scales: golden2 (C vE), golden3 (C vE ^G = the golden triad), golden4 (C vE ^G ^Ab),
+# each up and then as a chord; finally C6 (C E G A) against the golden4 chord (= ^Abg7 over C).
+songmap: 0.2
+title: "The smallest golden scales"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys}
+mix:
+  keys: {gain_db: -4}
+sections:
+  - {name: golden2, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c4 ve4 c+4 ve+4 | [c,ve]1"}}}
+  - {name: golden3, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 ve8 ^g8 c+8 ^g8 ve8 c4 | [c,ve,^g]1"}}}
+  - {name: golden4, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 ve8 ^g8 ^ab8 c+8 ^ab8 ^g8 ve8 | [c,ve,^g,^ab]1"}}}
+  - {name: compare, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "[c,e,g,a]1 | [c,ve,^g,^ab]1"}}}
+master: clean

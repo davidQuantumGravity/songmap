@@ -1,0 +1,18 @@
+# Reading, notation: the sixth-step ladder C, ^C, vC#, C# (each step 33.33 c), back down, then the plain semitone.
+songmap: 0.2
+title: "The sixth-step ladder"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2
+instruments: {keys: clean/organ}
+mix: {keys: {gain_db: -6}}
+sections:
+  - name: ladder
+    bars: 3
+    harmony: "N.C.:3"
+    parts:
+      keys: {notes: "c4 ^c vc# c# | c#4 vc# ^c c | c2 c#2"}
+master: clean

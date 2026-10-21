@@ -1,0 +1,224 @@
+<section id="workflow">
+<h2>The workflow</h2>
+<div class="layer hear">
+<p>Everything you have heard in this book, from the first pure sine of Chapter 1 to the golden circle of Chapter 44, came
+out of one working loop between a person and a machine. The person is the author, who had the idea of a golden
+Pythagorean scale years before any of this was built. The machine is an AI system that writes and runs code. The longest
+single product of that loop is the Well-Tempered Golden Clavier, a cycle through all 72 major and minor keys of 36-ET and
+all 36 golden13 and 36 silver13 scales.</p>
+<audio-ref file="W1_well_tempered_golden_clavier.mp3" caption="The Well-Tempered Golden Clavier (Books I and II), from the golden suite: designed with the author, enumerated, written as SongMap songs and rendered by machine."></audio-ref>
+<p>This chapter describes how that loop worked: who did what, how claims were checked, and what the machine could not do.
+It is written in the same spirit as the rest of the book: it states what happened and labels what is opinion.</p>
+</div>
+<div class="layer understand">
+<p><b>Who contributed what.</b> The division of labor was clear and is worth recording.</p>
+<table>
+<tr><th>The author (ideas, taste, decisions)</th><th>The machine (enumeration, verification, rendering)</th></tr>
+<tr><td>The golden Pythagorean scale: φ as a generator, the golden sixth, third and fifth; 13 golden sixths ≈ 9 octaves</td><td>Exact values: the golden comma, apotome and limma; well-formed sizes; the 36-comma (<a href="ch:ch23#golden-comma">Chapter 23</a>)</td></tr>
+<tr><td>The golden triad and seventh as stacked golden thirds; golden chords as passing chords between Western ones</td><td>The classification of passing paths: 288 strict golden paths in 12 types, the quality, partner and never-twice theorems, the System 2 census (<a href="ch:ch27#four-path">Chapter 27</a>)</td></tr>
+<tr><td>The observation that the golden third lies about two thirds of the way from minor to major</td><td>Made exact as the averaging principle (golden and silver as centroids), which the author then adopted as a founding principle (<a href="ch:ch25#averaging">Chapter 25</a>)</td></tr>
+<tr><td>Names and choices: "bronze" for T13, silver as 0-10-20, exploring System 1 first and then System 2</td><td>The dictionary of all 870 ordered pairs of 30 chords, with voice lines, in both systems</td></tr>
+<tr><td>The sound: stable, clean, undistorted tones, no wobble; songs written in SongMap itself; short pieces that flatter each technique</td><td>The SongMap engine, the clean additive instruments, the passing engine and the rendering of every example</td></tr>
+<tr><td>The bliss hypothesis and its origin (<a href="ch:ch40#conjecture">Chapter 40</a>)</td><td>Measurements of roughness, entropy, combination tones and beat spectra; the statement of what is and is not known</td></tr>
+<tr><td>Final judgement, by ear</td><td>Numbers instead of ears: QA reports for every render</td></tr>
+</table>
+<figure class="svgfig"><svg class="fig" viewBox="0 0 640 250" role="img" aria-label="The working loop between the author and the machine"><defs><marker id="ar39" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs><rect x="20" y="40" width="135" height="50" rx="10" fill="none" stroke="var(--gold)" stroke-width="2"/><text x="87" y="64" text-anchor="middle" class="cl">Idea and taste</text><text x="87" y="80" text-anchor="middle" class="lab">person</text><rect x="175" y="40" width="135" height="50" rx="10" fill="none" stroke="var(--muted)" stroke-width="2"/><text x="242" y="64" text-anchor="middle" class="cl">Rules as code</text><text x="242" y="80" text-anchor="middle" class="lab">both</text><rect x="330" y="40" width="135" height="50" rx="10" fill="none" stroke="currentColor" stroke-width="2"/><text x="397" y="64" text-anchor="middle" class="cl">Enumerate, measure</text><text x="397" y="80" text-anchor="middle" class="lab">machine</text><rect x="485" y="40" width="135" height="50" rx="10" fill="none" stroke="currentColor" stroke-width="2"/><text x="552" y="64" text-anchor="middle" class="cl">Render audio</text><text x="552" y="80" text-anchor="middle" class="lab">machine</text><rect x="485" y="160" width="135" height="50" rx="10" fill="none" stroke="var(--gold)" stroke-width="2"/><text x="552" y="184" text-anchor="middle" class="cl">Listen and judge</text><text x="552" y="200" text-anchor="middle" class="lab">person</text><rect x="330" y="160" width="135" height="50" rx="10" fill="none" stroke="var(--muted)" stroke-width="2"/><text x="397" y="184" text-anchor="middle" class="cl">Check the claims</text><text x="397" y="200" text-anchor="middle" class="lab">both</text><rect x="175" y="160" width="135" height="50" rx="10" fill="none" stroke="var(--muted)" stroke-width="2"/><text x="242" y="184" text-anchor="middle" class="cl">Write it down</text><text x="242" y="200" text-anchor="middle" class="lab">both</text><line x1="155" y1="65" x2="175" y2="65" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar39)"/><line x1="310" y1="65" x2="330" y2="65" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar39)"/><line x1="465" y1="65" x2="485" y2="65" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar39)"/><line x1="552" y1="90" x2="552" y2="160" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar39)"/><line x1="485" y1="185" x2="465" y2="185" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar39)"/><line x1="330" y1="185" x2="310" y2="185" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar39)"/><line x1="175" y1="185" x2="87" y2="92" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar39)"/><text x="20" y="240" class="lab">Gold: the author decides. Dark: the machine computes. Grey: done together and checked by both.</text></svg><figcaption>The working loop. The author supplies ideas and judges results by ear; the
+machine turns rules into code, enumerates, proves by exhaustion, measures and renders; claims are checked before they are
+written down.</figcaption></figure>
+<p><b>Why a machine helped.</b> The golden system is small enough to state on a page and large enough to defeat patient
+hand calculation. There are 36 pitch classes, 36 golden triads, thousands of four-voice paths between chords, and every
+claim about them has to hold in every key and both passing systems. A person can conjecture "golden chords pass only
+between triads of the same quality a third or fifth apart"; a program can check it for every pair. The author's own
+account (in the Preface) is that the system waited years for exactly this kind of help.</p>
+<p><b>What the loop looked like in practice.</b> An idea, usually the author's, was stated in words. The machine restated
+it precisely, often as code, and enumerated its consequences. The results came back as tables, theorems with their
+exhaustive checks, and audio. The author listened, accepted, rejected or redirected. Questions went both ways: the author
+asked whether there is a natural nine-note golden scale (there is not: nine golden sixths give three step sizes, and the
+natural sub-scale is golden7); the machine asked which fifth the silver triad should have and what to call T13, and the
+author decided.</p>
+<p><b>Questions with options.</b> The most useful questions from the machine were not open-ended. They laid out the
+alternatives with their consequences and asked the author to choose. Examples from the project's design notes:</p>
+<table>
+<tr><th>Question</th><th>Options offered</th><th>The author's decision</th></tr>
+<tr><td>Which fifth should the silver triad (with the third 10 sixth-steps) have?</td><td>vP5 (0, 10, 20): equal stacked thirds, the exact
+centroid of major, minor and diminished; P5 (0, 10, 21): a brightened minor with a pure fifth; ^P5 (0, 10, 22): sharing the golden
+fifth</td><td>vP5: silver is 0-10-20, the dark-side average</td></tr>
+<tr><td>What should T13 (0, 13, 26), golden's passing partner, be called?</td><td>left open to the author</td><td>"Bronze", continuing the metallic sequence golden, silver, bronze</td></tr>
+<tr><td>Which passing system first?</td><td>System 1 (strict, one golden chord per move) or System 2 (natural, two in a row)</td><td>Both, System 1 first</td></tr>
+</table>
+<p>A good question of this kind makes the author's taste cheap to apply: a minute of judgement settles what would otherwise
+be a guess built into the code.</p>
+<p><b>Stating interpretations back.</b> The author's founding notes were written in musical language ("well-defined ways to
+expand melodies of voice leading"). The machine turned such phrases into precise rules, in this case the uniform
+sub-chromatic path of <a href="ch:ch27#uniform-path">Chapter 27</a>, and then said explicitly that this was its
+<i>reading</i>, asking whether the author meant it or would weight the choices differently. Interpretations are where a
+collaboration most easily drifts without either side noticing; writing them down as interpretations is the cure.</p>
+</div>
+<div class="layer derive">
+<p><b>What "enumerate" means here.</b> The dictionary of transitions covers 30 chords in C major: the 7 diatonic triads, the 7
+diatonic sevenths, and 16 chromatic chords (i, iv, ♭III, ♭VI, ♭VII, ♭II, II, III, VI, V7/V, V7/vi, V7/IV, iiø7, ♭VImaj7, I+,
+vii°7). The ordered pairs of distinct chords number $30\cdot 29 = 870$, partitioned as</p>
+$$\underbrace{7\cdot6}_{\text{triads}} + \underbrace{7\cdot6}_{\text{sevenths}} + \underbrace{2\cdot7\cdot7}_{\text{triad}\leftrightarrow\text{seventh}} + \underbrace{14\cdot16}_{\text{diatonic}\to\text{chromatic}} + \underbrace{16\cdot14}_{\text{chromatic}\to\text{diatonic}} + \underbrace{16\cdot15}_{\text{chromatic}} = 42 + 42 + 98 + 224 + 224 + 240 = 870.$$
+<p>For each pair, each system, and every assignment of voices and schedule of moves (<a href="ch:ch42#passing">Chapter
+42</a>), the passing engine builds the candidate paths and classifies their chords. A theorem such as "a strict path never
+contains two golden chords" is then not argued from examples; it is checked on every path, and where possible also proved
+by hand (<a href="ch:appD#passing">Appendix D</a>).</p>
+<p><b>The census.</b> Over the 870 pairs, System 1 yields 32 exact golden passing chords and 122 golden chords over a pedal;
+System 2 yields 227 and 299, with 46 pairs passing through two different golden chords and 181 through at least one
+(<a href="ch:ch28#dictionary">Chapter 28</a>).</p>
+</div>
+</section>
+
+<section id="verification">
+<h2>Verifying instead of trusting</h2>
+<div class="layer hear">
+<p>Here is a claim you can check with your own ears. Two chords, in exact ratios on 110 Hz: the golden triad, then the
+golden seventh. Listen to the beating inside each. The triad's strongest beats are at about 6.1 and 7.6 per second, with
+fainter, faster ones from about 12.3 up. The seventh adds a beat at about 9.4. An early summary of this project got the relation between
+these numbers wrong, and the author caught it.</p>
+<audio-ex src="beat_claim" caption="Exact close-voiced Cg on 110 Hz (beats 6.13, 7.58 and 12.26 Hz), then Cg7 (adds 9.37 Hz). The rates of the triad's beats are not a golden triad; those of the seventh's are."></audio-ex>
+<p>And a second one. The founding vision of the project said that golden chords, built on the most irrational number,
+must be "the least stable chords". Listen to six triads in close position on middle C, in the order a roughness model
+ranks them for harmonic tones: sus4, major, minor, augmented, golden, diminished. The golden triad is near the rough end,
+but it is not last.</p>
+<audio-ex src="stability_order" caption="Close triads on C4 in measured roughness order for harmonic tones: Csus4, C, Cm, Caug, Cg (36-ET), Cdim. Golden is rougher than major, minor and augmented, but diminished is rougher still."></audio-ex>
+<pianoroll edo="36" notes="C4 F4 G4 ; C4 E4 G4 ; C4 Eb4 G4 ; C4 E4 G#4 ; C4 vE4 ^G4 ; C4 Eb4 Gb4" labels="Csus4 ; C ; Cm ; Caug ; Cg ; Cdim" title="The six triads of the example, smoothest to roughest (model)"></pianoroll>
+</div>
+<div class="layer understand">
+<p><b>The habit.</b> A language model writes fluent, plausible text, and a plausible wrong number reads exactly like a right
+one. The only defense is a habit: never state a number that was not computed, never state a theorem that was not checked,
+and say what kind of claim each statement is. The book's three labels, <i>theorem</i>, <i>measurement</i> and
+<i>hypothesis</i>, come from that habit.</p>
+<p><b>Corrections on the record.</b> These are corrections made in the course of the project, by the author, by checking
+code, or by both:</p>
+<table>
+<tr><th>Claim as first made</th><th>How it was checked</th><th>What is true</th></tr>
+<tr><td>The beats of a close golden triad, at rates proportional to 1 : 2/φ : 2, form "a golden triad in rhythm"</td><td>The author pointed out that 1 : 2/φ : 2 is a golden third and an octave, not a golden triad; the beat spectrum was recomputed</td><td>The golden <i>seventh</i> beats at $f_0\varphi^{-6}\times(1, 2/\varphi, 4/\varphi^2)$, a golden triad in rhythm, plus $2f_0\varphi^{-6}$; no beat occurs at the seventh's own ratio (theorem; <a href="ch:ch26#beats">Chapter 26</a>)</td></tr>
+<tr><td>Golden chords are "the least stable chords"</td><td>Roughness and harmonic entropy computed for all triads</td><td>With harmonic timbres the golden triad (1.50) is rougher than major (1.32), minor (1.34) and augmented (1.45) but smoother than diminished (1.67); its instability is concentrated in the golden fifth (measurement). The author's view of the golden triad as a delicate local home is a musical model, not something these numbers show</td></tr>
+<tr><td>There may be a natural 9-note golden scale, since 13 golden sixths ≈ 9 octaves</td><td>Three-gap computation on the golden chain</td><td>9 is not a well-formed size; the sizes are 2, 3, 4, 7, 10, 13, 23, 36, and golden7 is the golden diatonic (theorem)</td></tr>
+<tr><td>Bach invented equal temperament (a widespread misattribution)</td><td>Historical sources</td><td>Zhu Zaiyu (1584) and Simon Stevin (c. 1605) computed it; Mersenne popularized it (1636); Bach's <i>Well-Tempered Clavier</i> used a well temperament</td></tr>
+<tr><td>Medieval chant was sung in parallel fifths (a common simplification)</td><td>Historical sources</td><td>Chant is monophonic; parallel fourths and fifths are organum, 9th–10th centuries (<a href="ch:ch41#organum">Chapter 41</a>)</td></tr>
+<tr><td>A design note describes a command <code>songmap theory pass</code></td><td>Running the command-line tool while writing Chapter 42</td><td>The tool has only <code>check</code>, <code>render</code> and <code>migrate</code>; the analysis exists as a Python function</td></tr>
+<tr><td>The voiced styles play the passing engine's four lines</td><td>Comparing expanded notes with the engine's paths while writing Chapter 42</td><td>At the time they re-voiced each chord's pitch classes independently and did not force slash basses. The engine was then changed: passing chords in voiced styles now play the engine's own four lines, chord names unchanged (<a href="ch:ch42#voiced">Chapter 42</a>)</td></tr>
+<tr><td>Schroeder phases give a low crest factor</td><td>Measuring crest factors while writing Chapter 43</td><td>True for flat spectra; for the presets' falling spectra, plain sine phases do as well or better (<a href="ch:ch43#clean">Chapter 43</a>)</td></tr>
+</table>
+<p>Errors came from every side. The first correction was the author's, of the machine. The second corrected the
+author's own founding intuition, by measurement. The historical slips are ones that people repeat everywhere. The last
+three were found by the machine, in the project's own documents and code, only because each claim was checked against the
+running program before it went into this book.</p>
+<p><b>Rules that worked.</b></p>
+<ol>
+<li><b>Compute, then write.</b> Every number in this book was produced by code or copied from a computed table.</li>
+<li><b>Check one way, then another.</b> The golden-seventh beats were derived algebraically, then counted by brute force over
+partial pairs, then seen in the envelope spectrum of the rendered audio.</li>
+<li><b>Exhaust, don't sample.</b> Where a statement is about all chords or all paths, check all of them.</li>
+<li><b>Keep canonical values.</b> One table of exact values (φ = 833.09 c, the golden comma 30.17 c, …) that every chapter
+copies, so that no rounding drifts.</li>
+<li><b>Label the status.</b> A theorem, a measurement under a model, or a hypothesis.</li>
+<li><b>Let the ear have the last word on taste</b>, and only on taste.</li>
+</ol>
+</div>
+<div class="layer derive">
+<p><b>Three independent checks of one claim.</b> The claim: an exact close-voiced Cg7 on harmonic tones beats at
+$b_1 = f_0\varphi^{-6}$, $b_2 = b_1\cdot 2/\varphi$, $b_3 = b_1\cdot 4/\varphi^2$ and $2b_1$.</p>
+<p><i>1. Algebra.</i> Partial 5 of a tone at $f$ and partial 4 of the tone a golden third above it, at $2f/\varphi$, differ by
+$f(5 - 8/\varphi) = f(13 - 8\varphi) = f\varphi^{-6}$, using $1/\varphi = \varphi - 1$. Applied to the three consecutive golden
+thirds of Cg7 (root–third, third–fifth, fifth–seventh), with $f = f_0,\ 2f_0/\varphi,\ 4f_0/\varphi^2$, this gives $b_1, b_2, b_3$.
+And $8/\varphi^3 = 2 - 2\varphi^{-6}$ (both sides equal 1.8885438199983176 in double precision), so the seventh's fundamental lies
+$2f_0\varphi^{-6}$ below the root's second partial.</p>
+<p><i>2. Brute force.</i> List every pair of partials (8 per tone) from different chord tones whose frequencies differ by
+less than 25 Hz, and weight each by the smaller amplitude:</p>
+<pre><code>for i, a in enumerate(notes):
+    for b in notes[i+1:]:
+        for k in range(1, 9):
+            for l in range(1, 9):
+                df = abs(k*a - l*b)
+                if 0.5 &lt; df &lt; 25:
+                    beats[round(df, 2)] += min(k**-1.2, l**-1.2)</code></pre>
+<p>For Cg7 on 110 Hz the strongest rates are 12.26, 6.13, 7.58, 24.52 and 9.37 Hz; for the triad alone, 6.13, 7.58 and then
+weaker components at 12.26, 19.84 and 24.52 Hz, with no 9.37. The seventh's own ratio would predict a beat at
+$b_1\cdot 8/\varphi^3 = 11.58$ Hz: it does not appear.</p>
+<p><i>3. Measurement.</i> In the rendered audio of the stable Cg7 (<a href="ch:ch43#clean">Chapter 43</a>), the spectrum of the
+amplitude envelope has peaks at 6.12 and 12.25 Hz (within the 0.125 Hz resolution of an 8 s analysis window), among the
+largest in the 3–30 Hz band.</p>
+<p>Agreement of three methods that share no code is much stronger evidence than any one of them, and much stronger than a
+fluent sentence.</p>
+</div>
+</section>
+
+<section id="limits">
+<h2>What a machine cannot judge</h2>
+<div class="layer hear">
+<p>Listen to a finished piece from the golden suite, a lullaby that ends every phrase on the golden six-four. Every chord in
+it was computed, every voice was led by an algorithm, every partial of every tone was placed by a formula. Whether it is
+beautiful is not in any of those numbers.</p>
+<audio-ref file="P01b_lullaby_in_gold.mp3" caption="“Lullaby in Gold”: every phrase ends on the golden six-four. Is it beautiful? That is for you to decide."></audio-ref>
+</div>
+<div class="layer understand">
+<p><b>No ears.</b> The machine in this project did not listen. It read numbers: loudness, true peak, band balance, chord
+symbols, beat rates. SongMap was designed so that every render produces such a report, precisely so that a program can
+check its own work without ears. That makes many errors catchable (a clipped peak, a wrong chord, a beat outside its
+intended band) and leaves the most important question untouched: how does it sound to a person?</p>
+<p><b>Proxies, and their limits.</b> Some numbers are good proxies for listening. A roughness model predicts, for a given
+timbre, which of two chords most listeners will call smoother; a beat spectrum predicts which pulsations a chord will
+produce; a loudness measurement predicts which of two excerpts will seem louder. The project used them constantly. But each
+proxy is a model with assumptions (a spectrum, a register, a listener with typical hearing), and each answers a narrower
+question than "is this good?". The roughness of the golden triad on a golden spectrum is a fact under the model; whether a
+listener prefers that sound is a separate fact, to be found out.</p>
+<p><b>What remained the author's.</b></p>
+<ul>
+<li><b>Taste.</b> Which of the 870 transitions are worth hearing, which voicing flatters a golden chord, how long a passing
+chord should last. The engine ranks candidates by rules; the rules themselves were the author's taste written down, and the
+author decided by ear whether the results were right.</li>
+<li><b>What to explore.</b> A machine explores where it is pointed, and it is easiest to point it at what is easy to compute.
+The decision to explore golden passing harmony first, and golden homes second, was a musical choice.</li>
+<li><b>Meaning and function.</b> Whether a golden7 progression feels like tonic, predominant and dominant is an open question
+(<a href="ch:ch31#golden7-function">Chapter 31</a>). It can be proposed by computation (for example, ranking chords by
+golden-circle distance from Cg); it can only be answered by listening.</li>
+<li><b>Effects on people.</b> Whether golden sound calms, absorbs or delights is a question about listeners, not about
+signals. No amount of computation answers it; only experiments with people can
+(<a href="ch:ch40#testing">Chapter 40</a>).</li>
+<li><b>History beyond the sources.</b> A model can produce a confident date or quotation it has never seen. The rule in this
+book is to state only well-established facts, hedge the uncertain ones and omit the rest.</li>
+</ul>
+<p><b>What the collaboration changed.</b> In the Preface the author estimates that he could have worked the system out
+himself in under 40 hours at any point in the past decade, but never did; with the machine it took a few minutes of his
+time and a few hours of computation. What did not change is where the music comes from: the scale, the idea of golden passing chords,
+the averaging intuition, the demand for clean sound and the final yes or no were all human. The machine made it possible to
+hear the idea, completely and quickly, and to know which statements about it are true.</p>
+</div>
+<div class="layer derive">
+<p><b>Predicates and judgements.</b> Call a <i>predicate</i> any yes-or-no property computable from the rendered signal or the
+score: "the peak is below −1 dBFS", "every passing chord in this section is golden", "at least 60% of the beat energy lies
+between 4 and 8 Hz". A machine can verify predicates exactly. A <i>judgement</i> such as "this section is calm" is not a
+function of the signal alone; it is a property of a listener hearing it. The bridge between the two is empirical: one can
+<i>measure</i> how well a predicate predicts listeners' judgements, with the blind protocols of
+<a href="ch:ch40#testing">Chapter 40</a>, but one cannot derive it. The division of labor in this project follows that line:
+predicates for the machine, judgements for people, and experiments to connect them.</p>
+</div>
+<h3>Exercises</h3>
+<div class="exercise">
+<p><b>Exercise 45.1 (checking).</b> Verify the identity $8/\varphi^3 = 2 - 2\varphi^{-6}$ by hand, using $\varphi^3 = 2\varphi + 1$ and
+$\varphi^{-1} = \varphi - 1$.</p>
+<details class="answer"><summary>Answer</summary><p>$\varphi^{-3} = (\varphi - 1)^3 = \varphi^3 - 3\varphi^2 + 3\varphi - 1 = (2\varphi + 1) -
+3(\varphi + 1) + 3\varphi - 1 = 2\varphi - 3$, so $8\varphi^{-3} = 16\varphi - 24$. Also $\varphi^{-6} = (2\varphi - 3)^2 = 4\varphi^2 -
+12\varphi + 9 = 4(\varphi + 1) - 12\varphi + 9 = 13 - 8\varphi$, so $2 - 2\varphi^{-6} = 2 - 26 + 16\varphi = 16\varphi - 24$. Equal.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 45.2 (checking).</b> Why are the rates 1 : 2/φ : 2 not a golden triad? What would the third rate have to be?</p>
+<details class="answer"><summary>Answer</summary><p>A golden triad is 1 : 2/φ : 4/φ² = 1 : 1.236 : 1.528. The third rate 2 is an
+octave above the first, not a golden fifth; for a golden triad it would have to be 4/φ² ≈ 1.528 times the first.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 45.3 (classifying).</b> Label each statement theorem, measurement or hypothesis: (a) Cg = (C + Cm + Caug)/3 in
+sixth-steps; (b) on a golden spectrum the golden triad is the smoothest triad; (c) golden textures promote absorption.</p>
+<details class="answer"><summary>Answer</summary><p>(a) theorem (arithmetic: (12+9+12)/3 = 11, (21+21+24)/3 = 22); (b) measurement,
+under the Sethares roughness model and a particular spectrum; (c) hypothesis.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 45.4 (reflection).</b> Write one predicate that a machine could check about the lullaby above and one judgement
+that it could not.</p>
+<details class="answer"><summary>Answer</summary><p>For example: predicate, "every phrase ends with the chords G – vE♭T13/G – vCg/G –
+C"; judgement, "the ending of each phrase feels like a soft arrival".</p></details>
+</div>
+</section>

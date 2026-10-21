@@ -1,0 +1,6 @@
+# Root and fifth in quarters (the chord's own fifth: golden chords give a golden fifth).
+style: root5
+role: bass
+rel: "R4 5 R+ 5"
+oct: -2
+gate: 0.85

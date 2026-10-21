@@ -1,0 +1,354 @@
+<section id="vibration">
+<h2>Vibration and waves</h2>
+<div class="layer hear">
+<p>Every sound begins with something moving back and forth. A guitar string blurs when you pluck it; the cone of a
+loudspeaker trembles under your fingertips; your own throat buzzes when you hum. That motion pushes on the air next to it,
+the air pushes on the air beyond, and a ripple of pressure spreads outward until it reaches your ear, where it moves your
+eardrum back and forth in the same pattern. Hearing is the ear's report on that motion.</p>
+<p>The simplest possible back-and-forth motion is a smooth, even swing, like a weight bouncing on a spring or a pendulum
+that never runs down. As a sound, it is a <b>pure tone</b>, or <b>sine tone</b>: plain, a little hollow, with no color
+of its own. Listen to one, then to a tone with the same pitch whose vibration has a more complicated shape.</p>
+<audio-ex src="sine_a440" caption="A pure sine tone at 440 vibrations per second (the A above middle C), then a richer tone with the same pitch: same rate of vibration, different shape."></audio-ex>
+<p>Both tones repeat their pattern 440 times every second, and that is why they have the same pitch. They differ in the
+<em>shape</em> of each repetition, and that is why they sound different. This chapter is about the rate. The shape is
+the subject of <a href="ch:ch02">Chapter 2</a>.</p>
+</div>
+<div class="layer understand">
+<p>Picture a single point on a vibrating string, or a single molecule of air near a loudspeaker. Its position changes in
+time. Plot that position against time and, for the simplest motion, you get the curve in the figure below: a <b>sine
+wave</b>.</p>
+<figure class="svgfig"><svg class="fig" viewBox="0 0 640 225" role="img" aria-label="A sine wave with its period and amplitude, and a wave of twice the frequency"><line x1="50.0" y1="115.0" x2="610.0" y2="115.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="50.0" y1="25.0" x2="50.0" y2="200.0" style="stroke:var(--muted)" stroke-width="1" /><polyline points="50.0,115.0 50.9,113.2 51.9,111.3 52.8,109.5 53.7,107.7 54.7,105.8 55.6,104.0 56.5,102.2 57.5,100.4 58.4,98.6 59.3,96.9 60.3,95.1 61.2,93.3 62.2,91.6 63.1,89.9 64.0,88.2 65.0,86.5 65.9,84.8 66.8,83.2 67.8,81.5 68.7,79.9 69.6,78.4 70.6,76.8 71.5,75.3 72.4,73.8 73.4,72.3 74.3,70.9 75.2,69.5 76.2,68.1 77.1,66.8 78.0,65.4 79.0,64.2 79.9,62.9 80.9,61.7 81.8,60.5 82.7,59.4 83.7,58.3 84.6,57.2 85.5,56.2 86.5,55.3 87.4,54.3 88.3,53.4 89.3,52.6 90.2,51.8 91.1,51.0 92.1,50.3 93.0,49.6 93.9,49.0 94.9,48.4 95.8,47.8 96.7,47.3 97.7,46.9 98.6,46.5 99.5,46.1 100.5,45.8 101.4,45.6 102.4,45.4 103.3,45.2 104.2,45.1 105.2,45.0 106.1,45.0 107.0,45.0 108.0,45.1 108.9,45.2 109.8,45.4 110.8,45.6 111.7,45.9 112.6,46.2 113.6,46.6 114.5,47.0 115.4,47.4 116.4,47.9 117.3,48.5 118.2,49.1 119.2,49.7 120.1,50.4 121.1,51.1 122.0,51.9 122.9,52.7 123.9,53.6 124.8,54.5 125.7,55.4 126.7,56.4 127.6,57.5 128.5,58.5 129.5,59.6 130.4,60.8 131.3,61.9 132.3,63.2 133.2,64.4 134.1,65.7 135.1,67.0 136.0,68.4 136.9,69.8 137.9,71.2 138.8,72.6 139.7,74.1 140.7,75.6 141.6,77.1 142.6,78.7 143.5,80.3 144.4,81.9 145.4,83.5 146.3,85.1 147.2,86.8 148.2,88.5 149.1,90.2 150.0,91.9 151.0,93.7 151.9,95.4 152.8,97.2 153.8,99.0 154.7,100.8 155.6,102.6 156.6,104.4 157.5,106.2 158.4,108.0 159.4,109.9 160.3,111.7 161.3,113.5 162.2,115.4 163.1,117.2 164.1,119.0 165.0,120.9 165.9,122.7 166.9,124.5 167.8,126.3 168.7,128.1 169.7,129.9 170.6,131.7 171.5,133.5 172.5,135.3 173.4,137.0 174.3,138.7 175.3,140.5 176.2,142.2 177.1,143.9 178.1,145.5 179.0,147.2 179.9,148.8 180.9,150.4 181.8,151.9 182.8,153.5 183.7,155.0 184.6,156.5 185.6,158.0 186.5,159.4 187.4,160.8 188.4,162.2 189.3,163.5 190.2,164.8 191.2,166.1 192.1,167.3 193.0,168.5 194.0,169.7 194.9,170.8 195.8,171.9 196.8,173.0 197.7,174.0 198.6,174.9 199.6,175.9 200.5,176.8 201.5,177.6 202.4,178.4 203.3,179.2 204.3,179.9 205.2,180.5 206.1,181.2 207.1,181.7 208.0,182.3 208.9,182.7 209.9,183.2 210.8,183.6 211.7,183.9 212.7,184.2 213.6,184.5 214.5,184.7 215.5,184.8 216.4,184.9 217.3,185.0 218.3,185.0 219.2,185.0 220.2,184.9 221.1,184.7 222.0,184.6 223.0,184.3 223.9,184.0 224.8,183.7 225.8,183.3 226.7,182.9 227.6,182.5 228.6,181.9 229.5,181.4 230.4,180.8 231.4,180.1 232.3,179.4 233.2,178.7 234.2,177.9 235.1,177.1 236.0,176.2 237.0,175.3 237.9,174.4 238.8,173.4 239.8,172.3 240.7,171.3 241.7,170.2 242.6,169.0 243.5,167.8 244.5,166.6 245.4,165.3 246.3,164.0 247.3,162.7 248.2,161.4 249.1,160.0 250.1,158.5 251.0,157.1 251.9,155.6 252.9,154.1 253.8,152.6 254.7,151.0 255.7,149.4 256.6,147.8 257.5,146.2 258.5,144.5 259.4,142.8 260.4,141.2 261.3,139.4 262.2,137.7 263.2,136.0 264.1,134.2 265.0,132.4 266.0,130.7 266.9,128.9 267.8,127.1 268.8,125.2 269.7,123.4 270.6,121.6 271.6,119.8 272.5,117.9 273.4,116.1 274.4,114.3 275.3,112.4 276.2,110.6 277.2,108.8 278.1,106.9 279.0,105.1 280.0,103.3 280.9,101.5 281.9,99.7 282.8,97.9 283.7,96.1 284.7,94.4 285.6,92.6 286.5,90.9 287.5,89.2 288.4,87.5 289.3,85.8 290.3,84.2 291.2,82.5 292.1,80.9 293.1,79.3 294.0,77.7 294.9,76.2 295.9,74.7 296.8,73.2 297.7,71.7 298.7,70.3 299.6,68.9 300.6,67.6 301.5,66.2 302.4,64.9 303.4,63.7 304.3,62.4 305.2,61.2 306.2,60.1 307.1,59.0 308.0,57.9 309.0,56.8 309.9,55.8 310.8,54.9 311.8,54.0 312.7,53.1 313.6,52.2 314.6,51.5 315.5,50.7 316.4,50.0 317.4,49.3 318.3,48.7 319.2,48.2 320.2,47.6 321.1,47.2 322.1,46.7 323.0,46.3 323.9,46.0 324.9,45.7 325.8,45.5 326.7,45.3 327.7,45.2 328.6,45.1 329.5,45.0 330.5,45.0 331.4,45.1 332.3,45.2 333.3,45.3 334.2,45.5 335.1,45.7 336.1,46.0 337.0,46.3 337.9,46.7 338.9,47.2 339.8,47.6 340.8,48.2 341.7,48.7 342.6,49.3 343.6,50.0 344.5,50.7 345.4,51.5 346.4,52.2 347.3,53.1 348.2,54.0 349.2,54.9 350.1,55.8 351.0,56.8 352.0,57.9 352.9,59.0 353.8,60.1 354.8,61.2 355.7,62.4 356.6,63.7 357.6,64.9 358.5,66.2 359.4,67.6 360.4,68.9 361.3,70.3 362.3,71.7 363.2,73.2 364.1,74.7 365.1,76.2 366.0,77.7 366.9,79.3 367.9,80.9 368.8,82.5 369.7,84.2 370.7,85.8 371.6,87.5 372.5,89.2 373.5,90.9 374.4,92.6 375.3,94.4 376.3,96.1 377.2,97.9 378.1,99.7 379.1,101.5 380.0,103.3 381.0,105.1 381.9,106.9 382.8,108.8 383.8,110.6 384.7,112.4 385.6,114.3 386.6,116.1 387.5,117.9 388.4,119.8 389.4,121.6 390.3,123.4 391.2,125.2 392.2,127.1 393.1,128.9 394.0,130.7 395.0,132.4 395.9,134.2 396.8,136.0 397.8,137.7 398.7,139.4 399.6,141.2 400.6,142.8 401.5,144.5 402.5,146.2 403.4,147.8 404.3,149.4 405.3,151.0 406.2,152.6 407.1,154.1 408.1,155.6 409.0,157.1 409.9,158.5 410.9,160.0 411.8,161.4 412.7,162.7 413.7,164.0 414.6,165.3 415.5,166.6 416.5,167.8 417.4,169.0 418.3,170.2 419.3,171.3 420.2,172.3 421.2,173.4 422.1,174.4 423.0,175.3 424.0,176.2 424.9,177.1 425.8,177.9 426.8,178.7 427.7,179.4 428.6,180.1 429.6,180.8 430.5,181.4 431.4,181.9 432.4,182.5 433.3,182.9 434.2,183.3 435.2,183.7 436.1,184.0 437.0,184.3 438.0,184.6 438.9,184.7 439.8,184.9 440.8,185.0 441.7,185.0 442.7,185.0 443.6,184.9 444.5,184.8 445.5,184.7 446.4,184.5 447.3,184.2 448.3,183.9 449.2,183.6 450.1,183.2 451.1,182.7 452.0,182.3 452.9,181.7 453.9,181.2 454.8,180.5 455.7,179.9 456.7,179.2 457.6,178.4 458.5,177.6 459.5,176.8 460.4,175.9 461.4,174.9 462.3,174.0 463.2,173.0 464.2,171.9 465.1,170.8 466.0,169.7 467.0,168.5 467.9,167.3 468.8,166.1 469.8,164.8 470.7,163.5 471.6,162.2 472.6,160.8 473.5,159.4 474.4,158.0 475.4,156.5 476.3,155.0 477.2,153.5 478.2,151.9 479.1,150.4 480.1,148.8 481.0,147.2 481.9,145.5 482.9,143.9 483.8,142.2 484.7,140.5 485.7,138.7 486.6,137.0 487.5,135.3 488.5,133.5 489.4,131.7 490.3,129.9 491.3,128.1 492.2,126.3 493.1,124.5 494.1,122.7 495.0,120.9 495.9,119.0 496.9,117.2 497.8,115.4 498.7,113.5 499.7,111.7 500.6,109.9 501.6,108.0 502.5,106.2 503.4,104.4 504.4,102.6 505.3,100.8 506.2,99.0 507.2,97.2 508.1,95.4 509.0,93.7 510.0,91.9 510.9,90.2 511.8,88.5 512.8,86.8 513.7,85.1 514.6,83.5 515.6,81.9 516.5,80.3 517.4,78.7 518.4,77.1 519.3,75.6 520.3,74.1 521.2,72.6 522.1,71.2 523.1,69.8 524.0,68.4 524.9,67.0 525.9,65.7 526.8,64.4 527.7,63.2 528.7,61.9 529.6,60.8 530.5,59.6 531.5,58.5 532.4,57.5 533.3,56.4 534.3,55.4 535.2,54.5 536.1,53.6 537.1,52.7 538.0,51.9 538.9,51.1 539.9,50.4 540.8,49.7 541.8,49.1 542.7,48.5 543.6,47.9 544.6,47.4 545.5,47.0 546.4,46.6 547.4,46.2 548.3,45.9 549.2,45.6 550.2,45.4 551.1,45.2 552.0,45.1 553.0,45.0 553.9,45.0 554.8,45.0 555.8,45.1 556.7,45.2 557.6,45.4 558.6,45.6 559.5,45.8 560.5,46.1 561.4,46.5 562.3,46.9 563.3,47.3 564.2,47.8 565.1,48.4 566.1,49.0 567.0,49.6 567.9,50.3 568.9,51.0 569.8,51.8 570.7,52.6 571.7,53.4 572.6,54.3 573.5,55.3 574.5,56.2 575.4,57.2 576.3,58.3 577.3,59.4 578.2,60.5 579.1,61.7 580.1,62.9 581.0,64.2 582.0,65.4 582.9,66.8 583.8,68.1 584.8,69.5 585.7,70.9 586.6,72.3 587.6,73.8 588.5,75.3 589.4,76.8 590.4,78.4 591.3,79.9 592.2,81.5 593.2,83.2 594.1,84.8 595.0,86.5 596.0,88.2 596.9,89.9 597.8,91.6 598.8,93.3 599.7,95.1 600.7,96.9 601.6,98.6 602.5,100.4 603.5,102.2 604.4,104.0 605.3,105.8 606.3,107.7 607.2,109.5 608.1,111.3 609.1,113.2 610.0,115.0" style="stroke:var(--accent2)" stroke-width="2" fill="none"/><polyline points="50.0,115.0 50.9,113.2 51.9,111.3 52.8,109.5 53.7,107.7 54.7,105.9 55.6,104.2 56.5,102.4 57.5,100.7 58.4,99.1 59.3,97.5 60.3,95.9 61.2,94.4 62.2,92.9 63.1,91.5 64.0,90.2 65.0,89.0 65.9,87.8 66.8,86.7 67.8,85.6 68.7,84.7 69.6,83.8 70.6,83.0 71.5,82.3 72.4,81.7 73.4,81.2 74.3,80.7 75.2,80.4 76.2,80.2 77.1,80.0 78.0,80.0 79.0,80.1 79.9,80.2 80.9,80.4 81.8,80.8 82.7,81.2 83.7,81.7 84.6,82.4 85.5,83.1 86.5,83.9 87.4,84.8 88.3,85.7 89.3,86.8 90.2,87.9 91.1,89.1 92.1,90.3 93.0,91.7 93.9,93.1 94.9,94.5 95.8,96.1 96.7,97.6 97.7,99.2 98.6,100.9 99.5,102.6 100.5,104.3 101.4,106.1 102.4,107.9 103.3,109.7 104.2,111.5 105.2,113.3 106.1,115.2 107.0,117.0 108.0,118.8 108.9,120.7 109.8,122.5 110.8,124.3 111.7,126.0 112.6,127.7 113.6,129.4 114.5,131.1 115.4,132.7 116.4,134.2 117.3,135.8 118.2,137.2 119.2,138.6 120.1,139.9 121.1,141.2 122.0,142.3 122.9,143.5 123.9,144.5 124.8,145.4 125.7,146.3 126.7,147.1 127.6,147.8 128.5,148.4 129.5,148.9 130.4,149.3 131.3,149.6 132.3,149.8 133.2,150.0 134.1,150.0 135.1,149.9 136.0,149.8 136.9,149.5 137.9,149.2 138.8,148.7 139.7,148.2 140.7,147.6 141.6,146.9 142.6,146.0 143.5,145.2 144.4,144.2 145.4,143.1 146.3,142.0 147.2,140.8 148.2,139.5 149.1,138.2 150.0,136.8 151.0,135.3 151.9,133.8 152.8,132.2 153.8,130.6 154.7,128.9 155.6,127.2 156.6,125.5 157.5,123.7 158.4,121.9 159.4,120.1 160.3,118.3 161.3,116.5 162.2,114.6 163.1,112.8 164.1,111.0 165.0,109.2 165.9,107.4 166.9,105.6 167.8,103.8 168.7,102.1 169.7,100.4 170.6,98.8 171.5,97.2 172.5,95.6 173.4,94.1 174.3,92.7 175.3,91.3 176.2,90.0 177.1,88.7 178.1,87.5 179.0,86.4 179.9,85.4 180.9,84.5 181.8,83.6 182.8,82.9 183.7,82.2 184.6,81.6 185.6,81.1 186.5,80.7 187.4,80.4 188.4,80.1 189.3,80.0 190.2,80.0 191.2,80.1 192.1,80.2 193.0,80.5 194.0,80.9 194.9,81.3 195.8,81.9 196.8,82.5 197.7,83.2 198.6,84.0 199.6,84.9 200.5,85.9 201.5,87.0 202.4,88.1 203.3,89.3 204.3,90.6 205.2,92.0 206.1,93.4 207.1,94.8 208.0,96.4 208.9,98.0 209.9,99.6 210.8,101.2 211.7,103.0 212.7,104.7 213.6,106.5 214.5,108.3 215.5,110.1 216.4,111.9 217.3,113.7 218.3,115.6 219.2,117.4 220.2,119.2 221.1,121.0 222.0,122.8 223.0,124.6 223.9,126.4 224.8,128.1 225.8,129.8 226.7,131.4 227.6,133.0 228.6,134.5 229.5,136.0 230.4,137.5 231.4,138.9 232.3,140.2 233.2,141.4 234.2,142.6 235.1,143.7 236.0,144.7 237.0,145.6 237.9,146.5 238.8,147.2 239.8,147.9 240.7,148.5 241.7,149.0 242.6,149.4 243.5,149.7 244.5,149.9 245.4,150.0 246.3,150.0 247.3,149.9 248.2,149.7 249.1,149.5 250.1,149.1 251.0,148.6 251.9,148.1 252.9,147.4 253.8,146.7 254.7,145.9 255.7,145.0 256.6,144.0 257.5,142.9 258.5,141.8 259.4,140.5 260.4,139.3 261.3,137.9 262.2,136.5 263.2,135.0 264.1,133.5 265.0,131.9 266.0,130.3 266.9,128.6 267.8,126.9 268.8,125.1 269.7,123.4 270.6,121.6 271.6,119.8 272.5,117.9 273.4,116.1 274.4,114.3 275.3,112.4 276.2,110.6 277.2,108.8 278.1,107.0 279.0,105.2 280.0,103.5 280.9,101.8 281.9,100.1 282.8,98.4 283.7,96.8 284.7,95.3 285.6,93.8 286.5,92.4 287.5,91.0 288.4,89.7 289.3,88.5 290.3,87.3 291.2,86.2 292.1,85.2 293.1,84.3 294.0,83.5 294.9,82.7 295.9,82.0 296.8,81.5 297.7,81.0 298.7,80.6 299.6,80.3 300.6,80.1 301.5,80.0 302.4,80.0 303.4,80.1 304.3,80.3 305.2,80.6 306.2,80.9 307.1,81.4 308.0,82.0 309.0,82.6 309.9,83.4 310.8,84.2 311.8,85.1 312.7,86.1 313.6,87.2 314.6,88.4 315.5,89.6 316.4,90.9 317.4,92.2 318.3,93.7 319.2,95.1 320.2,96.7 321.1,98.3 322.1,99.9 323.0,101.6 323.9,103.3 324.9,105.0 325.8,106.8 326.7,108.6 327.7,110.4 328.6,112.2 329.5,114.1 330.5,115.9 331.4,117.8 332.3,119.6 333.3,121.4 334.2,123.2 335.1,125.0 336.1,126.7 337.0,128.4 337.9,130.1 338.9,131.7 339.8,133.3 340.8,134.9 341.7,136.3 342.6,137.8 343.6,139.1 344.5,140.4 345.4,141.6 346.4,142.8 347.3,143.9 348.2,144.9 349.2,145.8 350.1,146.6 351.0,147.4 352.0,148.0 352.9,148.6 353.8,149.1 354.8,149.4 355.7,149.7 356.6,149.9 357.6,150.0 358.5,150.0 359.4,149.9 360.4,149.7 361.3,149.4 362.3,149.0 363.2,148.5 364.1,148.0 365.1,147.3 366.0,146.5 366.9,145.7 367.9,144.8 368.8,143.8 369.7,142.7 370.7,141.5 371.6,140.3 372.5,139.0 373.5,137.6 374.4,136.2 375.3,134.7 376.3,133.2 377.2,131.6 378.1,129.9 379.1,128.2 380.0,126.5 381.0,124.8 381.9,123.0 382.8,121.2 383.8,119.4 384.7,117.6 385.6,115.7 386.6,113.9 387.5,112.1 388.4,110.2 389.4,108.4 390.3,106.6 391.2,104.9 392.2,103.1 393.1,101.4 394.0,99.7 395.0,98.1 395.9,96.5 396.8,95.0 397.8,93.5 398.7,92.1 399.6,90.7 400.6,89.5 401.5,88.2 402.5,87.1 403.4,86.0 404.3,85.0 405.3,84.1 406.2,83.3 407.1,82.6 408.1,81.9 409.0,81.4 409.9,80.9 410.9,80.5 411.8,80.3 412.7,80.1 413.7,80.0 414.6,80.0 415.5,80.1 416.5,80.3 417.4,80.6 418.3,81.0 419.3,81.5 420.2,82.1 421.2,82.8 422.1,83.5 423.0,84.4 424.0,85.3 424.9,86.3 425.8,87.4 426.8,88.6 427.7,89.8 428.6,91.1 429.6,92.5 430.5,94.0 431.4,95.5 432.4,97.0 433.3,98.6 434.2,100.2 435.2,101.9 436.1,103.6 437.0,105.4 438.0,107.2 438.9,109.0 439.8,110.8 440.8,112.6 441.7,114.4 442.7,116.3 443.6,118.1 444.5,119.9 445.5,121.7 446.4,123.5 447.3,125.3 448.3,127.0 449.2,128.8 450.1,130.4 451.1,132.0 452.0,133.6 452.9,135.2 453.9,136.6 454.8,138.0 455.7,139.4 456.7,140.7 457.6,141.9 458.5,143.0 459.5,144.1 460.4,145.1 461.4,146.0 462.3,146.8 463.2,147.5 464.2,148.1 465.1,148.7 466.0,149.1 467.0,149.5 467.9,149.8 468.8,149.9 469.8,150.0 470.7,150.0 471.6,149.9 472.6,149.6 473.5,149.3 474.4,148.9 475.4,148.4 476.3,147.8 477.2,147.1 478.2,146.4 479.1,145.5 480.1,144.6 481.0,143.6 481.9,142.5 482.9,141.3 483.8,140.0 484.7,138.7 485.7,137.3 486.6,135.9 487.5,134.4 488.5,132.8 489.4,131.2 490.3,129.6 491.3,127.9 492.2,126.2 493.1,124.4 494.1,122.6 495.0,120.8 495.9,119.0 496.9,117.2 497.8,115.4 498.7,113.5 499.7,111.7 500.6,109.9 501.6,108.1 502.5,106.3 503.4,104.5 504.4,102.8 505.3,101.1 506.2,99.4 507.2,97.8 508.1,96.2 509.0,94.7 510.0,93.2 510.9,91.8 511.8,90.5 512.8,89.2 513.7,88.0 514.6,86.9 515.6,85.8 516.5,84.8 517.4,84.0 518.4,83.1 519.3,82.4 520.3,81.8 521.2,81.3 522.1,80.8 523.1,80.5 524.0,80.2 524.9,80.1 525.9,80.0 526.8,80.0 527.7,80.2 528.7,80.4 529.6,80.7 530.5,81.1 531.5,81.6 532.4,82.2 533.3,82.9 534.3,83.7 535.2,84.6 536.1,85.5 537.1,86.5 538.0,87.7 538.9,88.8 539.9,90.1 540.8,91.4 541.8,92.8 542.7,94.2 543.6,95.8 544.6,97.3 545.5,98.9 546.4,100.6 547.4,102.3 548.3,104.0 549.2,105.7 550.2,107.5 551.1,109.3 552.0,111.2 553.0,113.0 553.9,114.8 554.8,116.7 555.8,118.5 556.7,120.3 557.6,122.1 558.6,123.9 559.5,125.7 560.5,127.4 561.4,129.1 562.3,130.8 563.3,132.4 564.2,133.9 565.1,135.5 566.1,136.9 567.0,138.3 567.9,139.7 568.9,140.9 569.8,142.1 570.7,143.2 571.7,144.3 572.6,145.2 573.5,146.1 574.5,146.9 575.4,147.6 576.3,148.3 577.3,148.8 578.2,149.2 579.1,149.6 580.1,149.8 581.0,149.9 582.0,150.0 582.9,150.0 583.8,149.8 584.8,149.6 585.7,149.3 586.6,148.8 587.6,148.3 588.5,147.7 589.4,147.0 590.4,146.2 591.3,145.3 592.2,144.4 593.2,143.3 594.1,142.2 595.0,141.0 596.0,139.8 596.9,138.5 597.8,137.1 598.8,135.6 599.7,134.1 600.7,132.5 601.6,130.9 602.5,129.3 603.5,127.6 604.4,125.8 605.3,124.1 606.3,122.3 607.2,120.5 608.1,118.7 609.1,116.8 610.0,115.0" style="stroke:var(--accent)" stroke-width="1.5" fill="none" stroke-dasharray="5 4"/><text x="44.0" y="119.0" class="lab" text-anchor="end">0</text><text x="610.0" y="131.0" class="lab" text-anchor="end">time</text><line x1="106.0" y1="35.0" x2="330.0" y2="35.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="106.0" y1="31.0" x2="106.0" y2="39.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="330.0" y1="31.0" x2="330.0" y2="39.0" style="stroke:var(--muted)" stroke-width="1" /><text x="218.0" y="29.0" class="cl" text-anchor="middle">one period T = 1/f</text><line x1="554.0" y1="115.0" x2="554.0" y2="45.0" style="stroke:var(--muted)" stroke-width="1" stroke-dasharray="3 3"/><text x="554.0" y="37.0" class="lab" text-anchor="middle">amplitude</text><text x="50.0" y="218.0" class="t" text-anchor="start">Solid: frequency f. Dashed: frequency 2f at half the amplitude (an octave higher, and quieter).</text></svg></figure>
+<p>Three numbers describe it.</p>
+<ul>
+<li>The <b>period</b> $T$ is the time one full cycle takes, measured in seconds.</li>
+<li>The <b>frequency</b> $f$ is the number of cycles per second, measured in <b>hertz</b> (Hz). It is the reciprocal of
+the period: $f = 1/T$. A tone at 440 Hz has a period of $1/440$ s, about 2.27 milliseconds.</li>
+<li>The <b>amplitude</b> is how far the motion swings from the middle. Bigger swings push harder on the air.</li>
+</ul>
+<p>A vibrating object does not send its own molecules to your ear. It sends a <b>wave</b>: each layer of air pushes the
+next and then falls back, so a pattern of slightly squeezed and slightly stretched air (compressions and rarefactions)
+travels outward while each molecule only jiggles in place. In air at 20 °C the pattern moves at about 343 metres per
+second. In one period the wave travels one <b>wavelength</b> $\lambda$, so</p>
+$$\lambda = \frac{v}{f},$$
+<p>where $v$ is the speed of sound. The table shows how wide the audible range is in space as well as in time.</p>
+<table>
+<tr><th>Frequency</th><th>Period</th><th>Wavelength in air (343 m/s)</th></tr>
+<tr><td>20 Hz (near the lowest audible)</td><td>50 ms</td><td>17.15 m</td></tr>
+<tr><td>261.63 Hz (middle C)</td><td>3.82 ms</td><td>1.31 m</td></tr>
+<tr><td>440 Hz (A4)</td><td>2.27 ms</td><td>0.78 m</td></tr>
+<tr><td>20,000 Hz (near the highest audible)</td><td>0.05 ms</td><td>1.7 cm</td></tr>
+</table>
+<p>The pressure changes involved are tiny compared with the steady pressure of the atmosphere, yet the ear detects them
+over an enormous range of strengths. What reaches the eardrum is a single wiggly line, pressure against time, however many
+instruments are playing. Everything we call pitch, loudness, color and harmony has to be read out of that one line.</p>
+<aside class="box note">Sound in air is a <em>longitudinal</em> wave: the air moves along the direction the wave travels.
+A wave on a string is <em>transverse</em>: the string moves sideways while the wave runs along it. The two obey the same
+wave equation (<a href="ch:ch02#strings">Chapter 2</a>), so the same mathematics describes both.</aside>
+</div>
+<div class="layer derive">
+<p><b>Why sines.</b> Let a mass $m$ sit on a spring. If it is displaced by $x$ from rest, the spring pulls it back with
+force $F = -kx$, where $k$ is the spring's stiffness (Hooke's law). Newton's second law, force equals mass times
+acceleration, gives</p>
+$$m\,\frac{d^2x}{dt^2} = -kx.$$
+<p><b>Claim.</b> Every solution is $x(t) = A\sin(2\pi f t + \theta)$ with</p>
+$$f = \frac{1}{2\pi}\sqrt{\frac{k}{m}},$$
+<p>where the amplitude $A$ and the starting phase $\theta$ depend only on how the motion was started.</p>
+<p><b>Check.</b> Differentiate twice: $x'' = -(2\pi f)^2 A\sin(2\pi f t + \theta) = -(2\pi f)^2 x$. This equals
+$-(k/m)\,x$ exactly when $(2\pi f)^2 = k/m$. That these are <em>all</em> the solutions follows from the uniqueness
+theorem for linear differential equations: a solution is fixed by its starting position and velocity, and the two free
+numbers $A$ and $\theta$ can match any such pair. $\square$</p>
+<p>The frequency depends on stiffness and mass, not on amplitude: a spring swings at the same rate whether it swings
+widely or barely. That is why a struck bell or a plucked string keeps very nearly the same pitch as it fades. Almost any system near a
+stable resting point behaves like a spring for small motions, since the restoring force is then approximately
+proportional to the displacement. Sines are therefore the natural vibrations of the physical world. (For example,
+$k = 100$ N/m and $m = 0.01$ kg give $f = \frac{1}{2\pi}\sqrt{10^4} \approx 15.92$ Hz.)</p>
+<p><b>A travelling wave.</b> A sine pressure wave moving in the $+x$ direction at speed $v$ is</p>
+$$p(x, t) = P\sin\!\Big(2\pi\big(f t - x/\lambda\big)\Big).$$
+<p>A crest sits where $f t - x/\lambda$ is constant, so it moves with $dx/dt = f\lambda$. Hence $v = f\lambda$, the
+formula above.</p>
+</div>
+</section>
+
+<section id="frequency">
+<h2>Frequency, pitch and loudness</h2>
+<div class="layer hear">
+<p>Speed up a vibration and the tone rises; slow it down and it falls. The next example glides a pure tone from 55 to
+1760 vibrations per second. Listen to how steady the climb sounds, and notice that the low end seems quieter even
+though the sweep's strength never changes.</p>
+<audio-ex src="sweep" caption="A pure tone gliding from 55 Hz to 1760 Hz in 15 seconds: the pitch rises at an even pace. Notice that the low end sounds weaker than the middle, at the same physical strength."></audio-ex>
+<p>Now keep the rate fixed and change only the size of the swing. The pitch stays put while the tone grows quieter.</p>
+<audio-ex src="loudness" caption="One 440 Hz tone at five levels, each with half the amplitude of the one before (6 decibels lower): same pitch, falling loudness."></audio-ex>
+</div>
+<div class="layer understand">
+<p>It is worth keeping physical quantities and heard qualities apart, because they do not match one for one.</p>
+<table>
+<tr><th>Physical (measured)</th><th>Perceived (heard)</th><th>How they relate</th></tr>
+<tr><td>frequency (Hz)</td><td><b>pitch</b>: high or low</td><td>Pitch follows frequency closely, but by ratios, not differences (next section).</td></tr>
+<tr><td>amplitude, intensity</td><td><b>loudness</b>: strong or soft</td><td>Loudness grows with amplitude, but also depends on frequency.</td></tr>
+<tr><td>shape of the vibration (spectrum)</td><td><b>timbre</b>: tone color</td><td><a href="ch:ch02#timbre">Chapter 2</a>.</td></tr>
+</table>
+<p><b>The audible range.</b> Young listeners hear roughly from 20 Hz to 20,000 Hz (20 kHz); the upper limit falls with
+age. Musical pitch is clearest in a narrower band: a piano runs from 27.5 Hz to about 4186 Hz, and most melodies live
+between about 100 and 1000 Hz.</p>
+<p><b>Pitch of complex tones.</b> A real instrument's tone is not a single sine. Its pitch is set by how often the whole
+pattern repeats, which is normally the frequency of its lowest component, the <b>fundamental</b>. We will see in
+<a href="ch:ch03#harmonicity">Chapter 3</a> that the ear can hear this repetition rate even when no component sits at
+that frequency.</p>
+<p><b>Loudness and decibels.</b> The ear handles pressure amplitudes over a range of roughly a million to one, from the
+faintest audible sound to the painfully loud. To keep the numbers manageable, levels are measured on a logarithmic scale
+in <b>decibels</b> (dB). Every halving of the amplitude lowers the level by about 6 dB, and every factor of ten in
+amplitude is 20 dB, so a million to one is about 120 dB. Loudness as heard is not simply amplitude: at the same physical
+level, very low and very high tones sound softer than tones in the middle of the range. This was mapped in the
+<em>equal-loudness contours</em> first measured by Fletcher and Munson (1933). Those contours are measurements on
+listeners, and they vary from person to person.</p>
+<aside class="box note">Pitch, loudness and timbre are not completely independent. Loud tones can sound very slightly
+different in pitch from soft ones, and brightness can make a tone seem louder. For the steady tones of this book the
+three are close enough to separate.</aside>
+</div>
+<div class="layer derive">
+<p><b>Definitions.</b> For a pressure wave with amplitude $A$, the <b>sound level</b> relative to a reference amplitude
+$A_0$ is</p>
+$$L = 20\log_{10}\frac{A}{A_0}\ \text{dB}.$$
+<p>Intensity (power per area) is proportional to the square of the amplitude, $I \propto A^2$, so equivalently
+$L = 10\log_{10}(I/I_0)$. The standard reference intensity for sound in air is $I_0 = 10^{-12}$ W/m², near the threshold
+of hearing at 1 kHz.</p>
+<p><b>Consequences.</b></p>
+<ul>
+<li>Doubling the amplitude adds $20\log_{10}2 \approx 6.02$ dB; doubling the intensity adds $10\log_{10}2 \approx 3.01$ dB.</li>
+<li>The steps in the loudness example are exactly $-6$ dB in amplitude, $20\log_{10}(10^{-6/20}) = -6$, about half the
+amplitude each time ($10^{-0.3} \approx 0.501$).</li>
+<li>An amplitude ratio of $10^6$ is $20 \cdot 6 = 120$ dB.</li>
+</ul>
+<p>The decibel is a first example of the idea of the next section: when a quantity matters by ratios, measure it with a
+logarithm.</p>
+</div>
+</section>
+
+<section id="logarithms">
+<h2>Hearing in ratios: the logarithm</h2>
+<div class="layer hear">
+<p>Here is a simple experiment with a surprising result. First you will hear tones that climb in equal steps of
+110 vibrations per second: 110, 220, 330, and so on up to 880. Then you will hear tones that climb by doubling: 110, 220,
+440, 880. Both runs end in the same place.</p>
+<audio-ex src="equal_hz_vs_equal_ratio" caption="Equal steps in hertz (110, 220, 330 … 880 Hz) shrink as they rise: the first step is huge, the last is small. Doubling steps (110, 220, 440, 880 Hz) all sound the same size."></audio-ex>
+<p>The first step of the equal-hertz run is a big leap; the last step is a modest one, though each adds the same 110 Hz.
+The doubling run sounds like a staircase with equal treads. The ear does not hear differences in frequency. It hears
+<em>ratios</em>.</p>
+<p>The same thing shows up in glides. The next example first raises the frequency by the same number of hertz every
+second, then raises it by the same <em>ratio</em> every second.</p>
+<audio-ex src="linear_vs_log_sweep" caption="First a glide that adds the same number of hertz each second: it races through the low range and crawls at the top. Then a glide that multiplies by the same ratio each second: it climbs at an even pace."></audio-ex>
+</div>
+<div class="layer understand">
+<p>A <b>ratio</b> compares two frequencies by division. From 110 Hz to 220 Hz is a ratio of $220/110 = 2$; so is 220 to
+440, and 440 to 880. Equal ratios sound like equal distances in pitch. Musicians call a pitch distance an
+<b>interval</b>, and the conclusion of the experiment is:</p>
+<p style="text-align:center"><em>an interval is a ratio of frequencies.</em></p>
+<p>The equal-hertz steps above have ratios $2/1, 3/2, 4/3, 5/4, 6/5, 7/6, 8/7$, which get smaller and smaller. That is
+exactly what you heard. (The first of these ratios, 2/1, 3/2, 4/3, 5/4 and 6/5, will turn out to be among the most
+important intervals in music; see <a href="ch:ch02#intervals-in-series">Chapter 2</a>.)</p>
+<pianoroll edo="12" notes="A2 ; A3 ; E4 ; A4 ; C#5 ; E5 ; G5 ; A5" labels="110 ; 220 ; 330 ; 440 ; 550 ; 660 ; 770 ; 880" title="The equal-hertz run at its nearest 12-ET notes (550 and 770 Hz lie 14 c and 31 c below C♯5 and G5): the steps shrink"></pianoroll>
+<p>To turn ratios into distances we can add, we use the <b>logarithm</b>. The base-2 logarithm of a number $x$, written
+$\log_2 x$, answers the question "2 to what power gives $x$?"</p>
+<table>
+<tr><th>$x$</th><td>1</td><td>2</td><td>4</td><td>8</td><td>1/2</td><td>3/2</td><td>3</td></tr>
+<tr><th>$\log_2 x$</th><td>0</td><td>1</td><td>2</td><td>3</td><td>−1</td><td>0.58496…</td><td>1.58496…</td></tr>
+</table>
+<p>Its key property is that it turns multiplication into addition: $\log_2(xy) = \log_2 x + \log_2 y$. Stacking two
+intervals multiplies their ratios, so it adds their logarithms. The figure shows the same six notes, each twice the
+frequency of the one before, on an ordinary (linear) axis and on a logarithmic axis. On the linear axis the low notes
+crowd together; on the logarithmic axis they are evenly spaced, as the ear hears them. A piano keyboard is a logarithmic
+axis made of wood: equal distances along it are equal ratios.</p>
+<figure class="svgfig"><svg class="fig" viewBox="0 0 640 190" role="img" aria-label="The A's from A1 to A6 on a linear and on a logarithmic frequency axis"><line x1="40.0" y1="60.0" x2="600.0" y2="60.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="40.0" y1="145.0" x2="600.0" y2="145.0" style="stroke:var(--muted)" stroke-width="1" /><text x="40.0" y="32.0" class="t" text-anchor="start">Linear axis: equal distances are equal numbers of hertz (0 to 1760 Hz).</text><text x="40.0" y="117.0" class="t" text-anchor="start">Logarithmic axis: equal distances are equal ratios (55 to 1760 Hz).</text><circle cx="57.5" cy="60" r="4" style="fill:var(--accent2)"/><circle cx="40.0" cy="145" r="4" style="fill:var(--accent)"/><text x="40.0" y="163.0" class="lab" text-anchor="middle">A1 (55 Hz)</text><circle cx="75.0" cy="60" r="4" style="fill:var(--accent2)"/><circle cx="152.0" cy="145" r="4" style="fill:var(--accent)"/><text x="152.0" y="163.0" class="lab" text-anchor="middle">A2 (110 Hz)</text><circle cx="110.0" cy="60" r="4" style="fill:var(--accent2)"/><text x="110.0" y="78.0" class="lab" text-anchor="middle">A3</text><circle cx="264.0" cy="145" r="4" style="fill:var(--accent)"/><text x="264.0" y="163.0" class="lab" text-anchor="middle">A3 (220 Hz)</text><circle cx="180.0" cy="60" r="4" style="fill:var(--accent2)"/><text x="180.0" y="78.0" class="lab" text-anchor="middle">A4</text><circle cx="376.0" cy="145" r="4" style="fill:var(--accent)"/><text x="376.0" y="163.0" class="lab" text-anchor="middle">A4 (440 Hz)</text><circle cx="320.0" cy="60" r="4" style="fill:var(--accent2)"/><text x="320.0" y="78.0" class="lab" text-anchor="middle">A5</text><circle cx="488.0" cy="145" r="4" style="fill:var(--accent)"/><text x="488.0" y="163.0" class="lab" text-anchor="middle">A5 (880 Hz)</text><circle cx="600.0" cy="60" r="4" style="fill:var(--accent2)"/><text x="600.0" y="78.0" class="lab" text-anchor="middle">A6</text><circle cx="600.0" cy="145" r="4" style="fill:var(--accent)"/><text x="600.0" y="163.0" class="lab" text-anchor="middle">A6 (1760 Hz)</text><text x="70.0" y="78.0" class="lab" text-anchor="start">A1 A2</text></svg></figure>
+<aside class="box history">The idea that sensation grows with the logarithm of the stimulus is associated with Ernst
+Weber and Gustav Fechner in the nineteenth century. For pitch it holds well in the musical range; for other senses it is
+only a rough rule. The logarithm itself was introduced by John Napier in 1614 as a way to turn long multiplications into
+additions, which is exactly the job it does here.</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> For $x > 0$, $\log_2 x$ is the unique real $y$ with $2^y = x$. Since $y \mapsto 2^y$ is continuous
+and strictly increasing from $(-\infty, \infty)$ onto $(0, \infty)$, this is well defined.</p>
+<p><b>Laws.</b> For $x, y > 0$ and real $n$:</p>
+$$\log_2(xy) = \log_2 x + \log_2 y,\qquad \log_2(x^n) = n\log_2 x,$$
+$$\log_2 x = \frac{\ln x}{\ln 2} = \frac{\log_{10} x}{\log_{10} 2}.$$
+<p>The first follows from $2^{a}2^{b} = 2^{a+b}$, the second from $(2^a)^n = 2^{an}$, the third from writing $x = 2^y$
+and taking any other logarithm of both sides.</p>
+<p><b>Theorem (equal-hertz steps shrink).</b> The interval from $nf$ to $(n+1)f$ has size $\log_2\frac{n+1}{n}$
+octaves, which decreases strictly as $n$ grows, and tends to 0.</p>
+<p><b>Proof.</b> $\frac{n+1}{n} = 1 + \frac1n$ decreases strictly toward 1, and $\log_2$ is strictly increasing with
+$\log_2 1 = 0$. $\square$</p>
+<p><b>Why a logarithm and nothing else (sketch).</b> Suppose we want a measure $d(r)$ of interval size that is continuous
+in the ratio $r$, adds when intervals stack, $d(rs) = d(r) + d(s)$, and gives the octave size 1. Then $d = \log_2$.
+Setting $g(u) = d(2^u)$ gives a continuous $g$ with $g(u + v) = g(u) + g(v)$ and $g(1) = 1$; the only continuous
+solutions of this equation (Cauchy's functional equation) are $g(u) = cu$, so $g(u) = u$ and $d(r) = \log_2 r$. The
+logarithm is forced on us by two requirements: intervals add, and size varies continuously. See
+<a href="ch:appA#logs">Appendix A</a> for a primer on logarithms.</p>
+<p><b>Sweeps.</b> A glide whose frequency is $f(t) = f_0 + (f_1 - f_0)t/T$ is linear in hertz. A glide with
+$f(t) = f_0 (f_1/f_0)^{t/T}$ is linear in $\log_2 f$: it rises $\log_2(f_1/f_0)/T$ octaves per second. The sweep in the
+previous section rose 5 octaves in 15 s, one octave every 3 s.</p>
+</div>
+</section>
+
+<section id="octave">
+<h2>The octave</h2>
+<div class="layer hear">
+<p>Play a note, then the note with exactly twice its frequency. The second is clearly higher, and yet it sounds like the
+<em>same note</em>, lifted. When men and women sing a tune together, they usually sing it this far apart without noticing
+that they are not in unison. This interval, the ratio 2:1, is the <b>octave</b>.</p>
+<audio-ex src="octaves" caption="C at 65.41, 130.81, 261.63 and 523.25 Hz, one at a time and then all together: four heights of one note, which blend into a single chord-like tone."></audio-ex>
+<p>When the four C's sound together they fuse so well that they can be hard to count. The octave is one of the smoothest
+intervals there is, and many musical traditions treat notes an octave apart as being in some sense the same, though how
+much of this is learned rather than built into hearing is still debated.</p>
+</div>
+<div class="layer understand">
+<p>Because of this <b>octave equivalence</b>, Western music names notes with seven letters, A to G, plus sharps and
+flats, and repeats the names in every octave. To say which C we mean, we add an octave number: <b>middle C is C4</b>, and
+each octave number begins at a C. The tuning standard is <b>A4 = 440 Hz</b>, the A above middle C. Every A is a power of
+2 times 440 Hz:</p>
+<table>
+<tr><th>Note</th><td>A0</td><td>A1</td><td>A2</td><td>A3</td><td>A4</td><td>A5</td><td>A6</td><td>A7</td></tr>
+<tr><th>Hz</th><td>27.5</td><td>55</td><td>110</td><td>220</td><td>440</td><td>880</td><td>1760</td><td>3520</td></tr>
+</table>
+<p>The octave is divided into twelve <b>semitones</b> (the steps from one piano key to the next, black keys included). In
+the standard tuning, <b>12-tone equal temperament</b> (12-ET), all twelve are the same size, so each is the ratio
+$2^{1/12} \approx 1.059463$. Some useful values:</p>
+<table>
+<tr><th>Note</th><th>MIDI number</th><th>Frequency</th></tr>
+<tr><td>A0 (lowest piano key)</td><td>21</td><td>27.50 Hz</td></tr>
+<tr><td>C2</td><td>36</td><td>65.41 Hz</td></tr>
+<tr><td>C3</td><td>48</td><td>130.81 Hz</td></tr>
+<tr><td>C4 (middle C)</td><td>60</td><td>261.63 Hz</td></tr>
+<tr><td>A4</td><td>69</td><td>440.00 Hz</td></tr>
+<tr><td>C5</td><td>72</td><td>523.25 Hz</td></tr>
+<tr><td>C8 (highest piano key)</td><td>108</td><td>4186.01 Hz</td></tr>
+</table>
+<p>The <b>MIDI number</b> counts semitones, with middle C = 60 and A4 = 69; it is how computers name pitches. The piano's
+88 keys span $108 - 21 = 87$ semitones, seven octaves and a minor third.</p>
+<pianoroll edo="12" notes="C3 ; C4 ; C5 ; C3 C4 C5" labels="C3 ; C4 ; C5 ; all three" title="One pitch class, three octaves"></pianoroll>
+<p>A <b>pitch class</b> is a note name with the octave forgotten: "C", meaning every C. Twelve-tone music has twelve
+pitch classes, which <a href="ch:ch08#pitch-classes">Chapter 8</a> arranges on a circle and studies as a group.</p>
+<aside class="box note">Why the octave sounds so smooth is a question about the inside of a tone, not its rate. The
+answer, in <a href="ch:ch02#intervals-in-series">Chapter 2</a> and <a href="ch:ch03#roughness">Chapter 3</a>, is that for
+the harmonic tones of most instruments every component of the upper note coincides with a component of the lower
+one.</aside>
+</div>
+<div class="layer derive">
+<p><b>Equal-tempered frequencies.</b> The note with MIDI number $n$ has frequency</p>
+$$f(n) = 440\cdot 2^{(n-69)/12}\ \text{Hz},\qquad n(f) = 69 + 12\log_2\frac{f}{440}.$$
+<p>For example $f(60) = 440 \cdot 2^{-9/12} \approx 261.63$ Hz. Non-integer $n$ is meaningful: $n = 60.5$ is a
+quarter-tone above middle C. 36-ET, the golden system's tuning, uses steps of $1/3$ of a MIDI unit
+(<a href="ch:ch24#sixth-steps">Chapter 24</a>).</p>
+<p><b>Octave equivalence as a relation.</b> Call two frequencies equivalent, $f \sim g$, when $\log_2(f/g)$ is an
+integer. This is an <b>equivalence relation</b>:</p>
+<ul>
+<li>reflexive: $\log_2(f/f) = 0$;</li>
+<li>symmetric: $\log_2(g/f) = -\log_2(f/g)$;</li>
+<li>transitive: $\log_2(f/h) = \log_2(f/g) + \log_2(g/h)$, a sum of integers.</li>
+</ul>
+<p>An equivalence class is a <b>pitch class</b>. Fixing a reference $f_0$, the class of $f$ is labelled by the
+fractional part of $\log_2(f/f_0)$, a number in $[0, 1)$. Pitch classes therefore form a <b>circle</b>: walking up from
+the reference, you return to it after one octave. In 12-ET the twelve classes sit at the points $k/12$,
+$k = 0, 1, \dots, 11$, the group $\mathbb{Z}_{12}$.</p>
+</div>
+</section>
+
+<section id="cents">
+<h2>Measuring intervals in cents</h2>
+<div class="layer hear">
+<p>A semitone is the smallest step on a piano, but the ear can tell much smaller differences, and tuning is all about
+those. To talk about them we split each equal-tempered semitone into 100 equal parts called <b>cents</b>, so the octave is
+1200 cents. Listen to pairs of tones that differ by 100, 50, 25, 10 and finally 5 cents.</p>
+<audio-ex src="cents_steps" caption="440 Hz, then 440 Hz raised by 100 cents (a semitone), 50, 25, 10 and 5 cents. Where does the difference become hard to hear?"></audio-ex>
+<p>A semitone is obvious and a quarter-tone (50 cents) sounds clearly "out of tune". At 10 cents many listeners can
+still hear a difference when the two tones follow each other closely; at 5 cents fewer can. These are rough figures: the
+smallest difference a listener can detect depends on the person, the training, the register and the kind of tone, and in
+the middle range careful listeners can manage a few cents.</p>
+</div>
+<div class="layer understand">
+<p>The size of an interval with ratio $r$, in cents, is</p>
+$$\text{cents}(r) = 1200\log_2 r.$$
+<p>An octave ($r = 2$) is 1200 c, an equal-tempered semitone ($r = 2^{1/12}$) is exactly 100 c, and any 12-ET interval of
+$k$ semitones is $100k$ cents. Intervals that are not in 12-ET get fractional values. The table lists some that will
+matter throughout the book; the ratios come from the harmonic series of <a href="ch:ch02">Chapter 2</a>.</p>
+<table>
+<tr><th>Ratio</th><th>Cents</th><th>Name</th><th>Nearest 12-ET</th></tr>
+<tr><td>2/1</td><td>1200.00</td><td>octave</td><td>1200 (exact)</td></tr>
+<tr><td>3/2</td><td>701.96</td><td>perfect fifth</td><td>700</td></tr>
+<tr><td>4/3</td><td>498.04</td><td>perfect fourth</td><td>500</td></tr>
+<tr><td>5/4</td><td>386.31</td><td>major third</td><td>400</td></tr>
+<tr><td>6/5</td><td>315.64</td><td>minor third</td><td>300</td></tr>
+<tr><td>5/3</td><td>884.36</td><td>major sixth</td><td>900</td></tr>
+<tr><td>8/5</td><td>813.69</td><td>minor sixth</td><td>800</td></tr>
+<tr><td>9/8</td><td>203.91</td><td>whole tone</td><td>200</td></tr>
+<tr><td>16/15</td><td>111.73</td><td>semitone</td><td>100</td></tr>
+<tr><td>7/4</td><td>968.83</td><td>harmonic seventh</td><td>1000</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 G4 ; C4 F4 ; C4 E4 ; C4 Eb4 ; C4 A4 ; C4 Ab4 ; C4 D4 ; C4 C#4 ; C4 Bb4" labels="3/2 ; 4/3 ; 5/4 ; 6/5 ; 5/3 ; 8/5 ; 9/8 ; 16/15 ; 7/4" title="The table's ratios above C4, at their nearest 12-ET notes"></pianoroll>
+<p><b>Computing cents.</b> With a calculator that only has base-10 logarithms, use
+$\text{cents}(r) = 1200\,\log_{10} r / \log_{10} 2 \approx 3986.31\,\log_{10} r$. To go back from cents to a ratio, use
+$r = 2^{c/1200}$.</p>
+<p><b>Worked example.</b> How far apart are 440 Hz and 450 Hz? $1200\log_2(450/440) \approx 38.91$ c, a bit more than a
+third of a semitone. And one cent at A4 is $440\,(2^{1/1200} - 1) \approx 0.25$ Hz; one cent is a frequency change of
+about one part in 1731.</p>
+<p><b>Cents add.</b> Stack a fifth and a fourth and you get an octave: $3/2 \cdot 4/3 = 2$, and
+$701.96 + 498.04 = 1200$. That additivity is the whole point of cents.</p>
+<aside class="mirror">The golden system uses intervals that are not ratios of whole numbers at all. Its basic interval is
+the golden ratio $\varphi = (1+\sqrt5)/2 \approx 1.618$, which in cents is 833.09 c, a slightly wide minor sixth. Its
+inversion, the <b>golden third</b> $2/\varphi$, is 366.91 c, between the minor third (300) and the major third (400). The
+golden system's grid, 36-ET, divides the octave into 36 equal <em>sixth-steps</em> of 33.33 c each
+(<a href="ch:ch23#golden-intervals">Chapter 23</a>, <a href="ch:ch24#sixth-steps">Chapter 24</a>).
+<pianoroll edo="36" notes="C4 Ab4 ; C4 ^Ab4 ; C4 E4 ; C4 vE4 ; C4 Eb4" labels="m6 ; φ ; M3 ; 2/φ ; m3" title="The golden sixth and golden third on C4 at their nearest 36-ET notes, beside 12-ET sixths and thirds"></pianoroll></aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> $c(r) = 1200\log_2 r$ for a ratio $r > 0$. It is the unique continuous measure of interval size
+that adds under stacking and assigns 1200 to the octave (by the argument in the
+<a href="ch:ch01#logarithms">logarithm section</a>).</p>
+<p><b>Properties.</b></p>
+<ul>
+<li>$c(rs) = c(r) + c(s)$: stacking adds.</li>
+<li>$c(1/r) = -c(r)$: a downward interval is negative.</li>
+<li>$c(r^n) = n\,c(r)$: $n$ equal intervals stacked.</li>
+<li>$c(2/r) = 1200 - c(r)$: the <b>inversion</b> of an interval (the step from its top note up to the octave) fills the
+octave. For example $c(4/3) = 1200 - c(3/2)$.</li>
+</ul>
+<p><b>Theorem.</b> The perfect fifth, $c(3/2) = 701.955\ldots$, is irrational, and more generally $c(p/q)$ is irrational
+for every ratio of whole numbers $p/q$ that is not a power of 2.</p>
+<p><b>Proof.</b> Write $p/q$ in lowest terms and suppose $1200\log_2(p/q) = a/b$ with integers $a, b$, $b > 0$. Then
+$(p/q)^{1200b} = 2^{a}$. If $a \ge 0$ this says $p^{1200b} = 2^{a}q^{1200b}$; if $a &lt; 0$ it says
+$2^{-a}p^{1200b} = q^{1200b}$. Either way, an odd prime dividing $p$ would divide $q$, and an odd prime dividing $q$ would
+divide $p$, which lowest terms forbid. By unique factorization into primes, $p$ and $q$ are then powers of 2, and so is
+$p/q$. $\square$</p>
+<p>So no pure interval other than octaves ever lands exactly on the 12-ET grid, or on the grid of any equal division of
+the octave. This small
+fact is the root of the whole history of tuning (<a href="ch:ch04#commas-preview">Chapter 4</a>,
+<a href="ch:ch05#comma">Chapter 5</a>).</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 1.1.</b> What are the period and the wavelength in air (343 m/s) of middle C, 261.63 Hz?</p>
+<details class="answer"><summary>Answer</summary><p>$T = 1/261.63 \approx 3.82$ ms; $\lambda = 343/261.63 \approx 1.31$ m.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 1.2.</b> Find the frequency seven semitones above A4 in 12-ET, and compare it with $\tfrac32 \cdot 440$ Hz. How many
+cents apart are they?</p>
+<details class="answer"><summary>Answer</summary><p>$440 \cdot 2^{7/12} \approx 659.26$ Hz (E5), against 660 Hz. The gap is
+$1200\log_2(660/659.26) \approx 1.96$ c: the 12-ET fifth is 1.96 c narrower than the pure fifth, $701.96 - 700$.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 1.3.</b> A tone is raised by 1 percent ($r = 1.01$). How many cents is that? What ratio is 1 cent?</p>
+<details class="answer"><summary>Answer</summary><p>$1200\log_2 1.01 \approx 17.23$ c. One cent is $2^{1/1200} \approx 1.000578$,
+about 0.058 percent.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 1.4.</b> Show that the inversion of an inversion is the original interval, and that an interval and its inversion
+always add to 1200 c. Which interval is its own inversion?</p>
+<details class="answer"><summary>Answer</summary><p>Inversion sends $r \mapsto 2/r$; applying it twice gives $2/(2/r) = r$. Then
+$c(r) + c(2/r) = c(2) = 1200$. An interval is its own inversion when $r = 2/r$, i.e. $r = \sqrt2$, which is 600 c, the
+equal-tempered tritone.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 1.5.</b> (Listening.) Play the cents example and write down the smallest step you can reliably hear. Then repeat it
+at a lower volume. Does your threshold change?</p>
+<details class="answer"><summary>Answer</summary><p>There is no single right answer: it is a measurement on you. Many
+listeners hear 10 c in this setting and fewer hear 5 c; very soft levels usually make small differences harder to
+hear.</p></details>
+</div>
+</section>

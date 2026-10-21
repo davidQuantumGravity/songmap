@@ -1,0 +1,515 @@
+<p>Western modulation is built on common ground. Two keys that share a chord can hand the music from one to the other:
+the shared chord is heard in the old key and understood in the new one (<a href="ch:ch11#modulation">Chapter 11</a>).
+Between Western keys on different layers of 36-ET there is no common ground at all, not a single note
+(<a href="ch:ch32#layer-modulation">Chapter 32</a>). This chapter shows that golden harmony puts the pivot chord back.
+Every major and minor triad has one nearest golden triad, its <b>golden projection</b>. Keys whose projections overlap
+share golden chords, and the best-connected pairs of keys on different layers turn out to lie a <b>silver third</b>
+apart and to share three golden pivot chords, one fewer than the four ordinary triads that C and G major share. The
+results come from <code>docs/GOLDEN_BLENDING.md</code> and its script <code>reference/golden/blending.py</code>; each is
+labelled as a theorem, an exhaustive check, a measurement or a proposal.</p>
+
+<section id="projection">
+<h2>The golden projection of a triad</h2>
+<div class="layer hear">
+<p>Play a C major chord and then bend two of its notes very slightly: the E down by a sixth-step, the G up by a
+sixth-step. The C stays. The result is Cg, the golden triad on C. Nothing else in 36-ET is that close to C major and
+golden at the same time. Do the same with D minor, but now the A stays while D bends down and F bends up: you reach
+vDg. Every major and minor chord has one such golden neighbour, two tiny bends away.</p>
+<audio-ex src="projection" caption="Each consonant triad of C major followed by its golden projection: C – Cg, Dm – vDg, Em – vEg, F – Fg, G – Gg, Am – vAg, then C. Listen for one note held through each pair while two others lean apart by a sixth-step."></audio-ex>
+<p>The golden chord does not sound like a new chord in a new key, but like the Western chord seen through slightly warped
+glass. That closeness makes it useful as a hinge between keys.</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; C4 F4 A4 ; ^C4 F4 vA4 ; B3 D4 G4 ; vB3 ^D4 G4" labels="C ; Cg ; F ; Fg ; G ; Gg" title="Major triads: the root stays, the third bends down, the fifth bends up"></pianoroll>
+<pianoroll edo="36" notes="D4 F4 A4 ; vD4 ^F4 A4 ; E4 G4 B4 ; vE4 ^G4 B4 ; C4 E4 A4 ; ^C4 E4 vA4" labels="Dm ; vDg ; Em ; vEg ; Am ; vAg" title="Minor triads: the fifth stays, the root bends down, the third bends up"></pianoroll>
+</div>
+<div class="layer understand">
+<p>Recall the <b>voice-leading distance</b> between two chords with the same number of notes: match the notes one to
+one, add up how far each note moves (in sixth-steps, the short way round the octave), and take the best matching
+(<a href="ch:ch32#golden-pivots">Chapter 32</a>). C to Cg costs 2: E moves one sixth-step down, G one up, C not at all.</p>
+<p><b>Definition.</b> The <b>golden projection</b> π(X) of a Western triad X is the golden triad nearest to X in
+voice-leading distance.</p>
+<p>The name is borrowed from geometry. Projecting a point onto a line means finding the nearest point of the line; here
+the "line" is the set of 36 golden triads inside the space of all three-note chords, and π drops each Western triad onto
+its nearest golden one. A golden triad is its own projection. (The book already uses <i>shadow</i> for a different
+relation: a golden chord a sixth-step below a diatonic root that leads up into it, such as vCg before C,
+<a href="ch:ch29#authentic">Chapter 29</a>. The shadow of C lies below it; the projection of C keeps its root.)</p>
+<table>
+<caption>Nearest golden triads (exhaustive over all 144 triads of these four kinds)</caption>
+<tr><th>Western triad</th><th>Nearest golden triad</th><th>Distance</th><th>What moves</th></tr>
+<tr><td>major, root r (C)</td><td>the golden triad on r (Cg), unique</td><td>2</td><td>third −1, fifth +1</td></tr>
+<tr><td>minor, root r (Cm)</td><td>the golden triad a sixth-step lower (vCg), unique</td><td>2</td><td>root −1, third +1</td></tr>
+<tr><td>augmented (C E A♭)</td><td>three: ^Cg, ^Eg, ^A♭g</td><td>2</td><td>one note held, one up, one down</td></tr>
+<tr><td>diminished, root r (C E♭ G♭)</td><td>the golden triad two sixth-steps lower (^Bg = ^B E♭ vG), unique</td><td>4</td><td>root −2, fifth +2</td></tr>
+</table>
+<p>So for the two consonant kinds the projection is a function, and an easy one to remember:</p>
+<ul>
+<li>a <b>major</b> triad keeps its root and bends third down and fifth up: Cg = C(v3, ^5);</li>
+<li>a <b>minor</b> triad keeps its fifth and bends root down and third up: Cm = C E♭ G goes to vCg = vC ^E♭ G.</li>
+</ul>
+<p>The projections of the six consonant triads of C major:</p>
+<table>
+<caption>Projections of C major's consonant triads (computed)</caption>
+<tr><th>Triad</th><th>π</th><th>Notes of π</th><th>Moves</th><th>Common tone</th></tr>
+<tr><td>C (I)</td><td>Cg</td><td>C vE ^G</td><td>E −1, G +1</td><td>C</td></tr>
+<tr><td>Dm (ii)</td><td>vDg</td><td>vD ^F A</td><td>D −1, F +1</td><td>A</td></tr>
+<tr><td>Em (iii)</td><td>vEg</td><td>vE ^G B</td><td>E −1, G +1</td><td>B</td></tr>
+<tr><td>F (IV)</td><td>Fg</td><td>F vA ^C</td><td>A −1, C +1</td><td>F</td></tr>
+<tr><td>G (V)</td><td>Gg</td><td>G vB ^D</td><td>B −1, D +1</td><td>G</td></tr>
+<tr><td>Am (vi)</td><td>vAg</td><td>vA ^C E</td><td>A −1, C +1</td><td>E</td></tr>
+</table>
+<p>The roots of the six projections are C, vD, vE, F, G and vA: the three major triads keep their roots on the 12-ET
+layer, and the three minor triads land a sixth-step below their roots, on the down layer. This split between two layers
+is the whole secret of the pivots in the section after next.</p>
+<p>Two more facts complete the picture. First, no Western triad is ever at distance 1 from a golden triad: a single
+sixth-step bend leaves two notes on the same layer, and a golden triad has one note on each
+(<a href="ch:ch25#layer-theorem">the layer theorem</a>). So 2 is the smallest possible distance, and major and minor
+triads achieve it. Second, the next-nearest golden triads to C major, ^Cg and vCg, are already at distance 3, the
+same as the sixth-step lift C → ^C itself. The projection is not just nearest; it is clearly nearest.</p>
+<aside class="box note"><b>Where projection is used elsewhere.</b> Replacing a diatonic triad by its projection as a held
+colour, rather than as a pivot, is golden modal mixture by projection (<a href="ch:ch38#colour-chords">Chapter 38</a>).
+Chapter 34 uses the same chord as the first and last step of its long modulations along the golden circle
+(<a href="ch:ch34#golden-circle-keys">Chapter 34</a>).</aside>
+<div class="exercise"><p><b>Exercise 35.1.</b> Find the golden projections of A♭ major and B minor, and say which note each
+keeps.</p>
+<details class="answer"><summary>Answer</summary><p>A♭ = A♭ C E♭ is major, so it keeps its root: π(A♭) = A♭g = A♭ vC
+^E♭ (C down a sixth-step, E♭ up). B minor = B D F♯ keeps its fifth: π(Bm) = vBg = vB ^D F♯ (B down, D up).</p></details></div>
+</div>
+<div class="layer derive">
+<p>Write pitch classes in sixth-steps mod 36, $G_r=\{r,r+11,r+22\}$ for the golden triad on $r$, $M_r=\{r,r+12,r+21\}$
+and $m_r=\{r,r+9,r+21\}$ for major and minor, $A_r=\{r,r+12,r+24\}$ for augmented. Let $\lambda(p)=p \bmod 3$ be the
+layer and $d$ the voice-leading distance.</p>
+<p><b>Theorem (projection).</b> $\pi(M_r)=G_r$ and $\pi(m_r)=G_{r-1}$, uniquely, at distance 2. The nearest golden
+triads of $A_r$ are $G_{r+1}$, $G_{r+13}$, $G_{r+25}$ at distance 2; the nearest of the diminished triad on $r$ is
+$G_{r-2}$, at distance 4. <i>Status:</i> exhaustive over all 144 triads; the lower bound and the uniqueness are proved
+below.</p>
+<p><i>Proof (major and minor).</i> A Western triad lies on one layer; a golden triad meets every layer once. So at least
+two voices must change layer, each by at least one sixth-step: $d\ge 2$. If $d=2$, exactly two voices move by one
+sixth-step each and one holds. The two moving voices must reach the two other layers, so one moves up ($+1$) and one
+down ($-1$). That leaves six candidates: choose the held note (3 ways), then which of the other two goes up (2 ways).
+For C major $\{0,12,21\}$ they are</p>
+<table>
+<tr><th>Held</th><th>Candidates</th><th>What they are</th></tr>
+<tr><td>C</td><td>C vE ^G; C ^E vG</td><td><b>Cg</b>; not tertian</td></tr>
+<tr><td>E</td><td>vC E ^G; ^C E vG</td><td>^G bronze (^G vC E); not tertian</td></tr>
+<tr><td>G</td><td>^C vE G; vC ^E G</td><td>^C silver (^C vE G); not tertian</td></tr>
+</table>
+<p>exactly one of which is golden. Transposition by $r$ commutes with $d$, which gives $\pi(M_r)=G_r$. For C minor
+$\{0,9,21\}$ the six candidates contain exactly one golden triad, $\{35,10,21\}=G_{35}$ = vCg (G held), so
+$\pi(m_r)=G_{r-1}$. ∎</p>
+<p>The same table shows a little more: every major or minor triad has <b>exactly one golden, one silver and one bronze
+triad</b> at distance 2 (checked for all 72; for C major: Cg, ^Cs, ^GT13; for C minor: vCg, Cs, E♭T13). All three
+metallic triads have one note per layer, so each major and minor triad also has a unique nearest silver triad and a
+unique nearest bronze triad, both at distance 2. Whether silver projections give a pivot relation of their own is an open question.</p>
+<p><b>Preimages.</b> Every golden triad has exactly three Western triads at distance 2, one on each layer:
+$$G_r=\pi(M_r)=\pi(m_{r+1}),\qquad G_r \text{ is also one of the three projections of } A_{r+11}=\{r+11,r+23,r+35\}.$$
+For Cg these are C (layer 0, keeps C), ^Cm (layer 1, keeps ^G) and vE vA♭ vC (layer 2, keeps vE). <i>Proof:</i> from
+the theorem, $\pi(M_s)=G_r$ forces $s=r$, $\pi(m_s)=G_r$ forces $s=r+1$, and $G_r$ is a projection of $A_a$ iff
+$r\in\{a+1,a+13,a+25\}$, i.e. $A_a=A_{r+11}$. The layers are $\lambda(r)$, $\lambda(r)+1$ and $\lambda(r+11)=\lambda(r)+2$. ∎</p>
+<p><b>Equivariance.</b> $\pi(X+s)=\pi(X)+s$ for every transposition $s$, because transposition preserves both $d$ and the set
+of golden triads. This is why every statement in this chapter can be checked on C and transferred to every key.</p>
+</div>
+</section>
+
+<section id="plr">
+<h2>Neo-Riemannian moves through the golden lens</h2>
+<div class="layer hear">
+<p>The neo-Riemannian moves of <a href="ch:ch10#neo-riemannian">Chapter 10</a> change one note of a triad by a small step
+and turn major into minor: P (C to C minor), L (C to E minor), R (C to A minor). Now look at each pair through the
+golden lens: project both chords and listen to the golden pair that results.</p>
+<audio-ex src="plr_golden" caption="C – Cm, C – Em, C – Am; then their golden projections Cg – vCg, Cg – vEg, Cg – vAg, and C. Listen for P becoming a slide of the whole chord, L keeping two notes exactly as before, and R becoming a wide, open shift."></audio-ex>
+<p>L survives almost unchanged: C → E minor lowers C to B and keeps E and G; Cg → vEg lowers C to B and keeps vE and ^G.
+It is the step of the golden circle (<a href="ch:ch31#circle">Chapter 31</a>). P turns into something new: the whole
+golden chord slides down a sixth-step, every voice together. R turns into a jump of the golden root by a silver third,
+the interval that names the key relation of the next section.</p>
+<p>The famous hexatonic cycle (C, C minor, A♭, A♭ minor, E, E minor) projects onto a cycle of six golden triads that
+alternates a sixth-step slide with a golden-circle step.</p>
+<audio-ex src="hexatonic_golden" caption="The hexatonic cycle C – Cm – A♭ – A♭m – E – Em – C, then its golden image Cg – vCg – A♭g – vA♭g – Eg – vEg – Cg, and home to C. Listen for the same three-step descent of the roots (C, A♭, E) in both, with every golden move one sixth-step slide or one semitone."></audio-ex>
+<pianoroll edo="36" notes="^G3 C4 vE4 ; G3 vC4 ^Eb4 ; Ab3 vC4 ^Eb4 ; vAb3 ^B3 Eb4 ; vAb3 ^B3 E4 ; ^G3 B3 vE4 ; ^G3 C4 vE4" labels="Cg ; vCg ; A♭g ; vA♭g ; Eg ; vEg ; Cg" title="The golden image of the hexatonic cycle"></pianoroll>
+</div>
+<div class="layer understand">
+<p>Because π is a function on major and minor triads, every move between them has a golden image: the move from π(X) to
+π(Y). Since π commutes with transposition, the image of a move is always a change of golden root by a fixed amount,
+which depends only on the move and on the quality of the starting triad:</p>
+<table>
+<caption>Neo-Riemannian moves seen through π (exhaustive over all 72 major and minor triads; also a short proof below)</caption>
+<tr><th>Move</th><th>Western example</th><th>Golden image</th><th>Golden root change (from major / from minor)</th><th>Golden operation</th><th>Common tones of the image</th></tr>
+<tr><td>L</td><td>C → Em</td><td>Cg → vEg</td><td>+11 / −11</td><td>one golden-circle step</td><td>2</td></tr>
+<tr><td>P</td><td>C → Cm</td><td>Cg → vCg</td><td>−1 / +1</td><td>planing by a sixth-step</td><td>0</td></tr>
+<tr><td>R</td><td>C → Am</td><td>Cg → vAg</td><td>−10 / +10</td><td>root moves a silver third</td><td>0</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 vE4 ^G4 ; vC4 ^Eb4 G4 ; C4 vE4 ^G4 ; B3 vE4 ^G4 ; C4 vE4 ^G4 ; ^C4 E4 vA4" labels="Cg ; vCg (P) ; Cg ; vEg (L) ; Cg ; vAg (R)" title="P, L and R after projection"></pianoroll>
+<p>Three remarks.</p>
+<ul>
+<li><b>L is the golden circle.</b> This explains the observation of Chapter 31 that the circle step <i>is</i> the
+leading-tone gesture: the golden circle is the image of L under the projection. From F → Am (an L move) you get Fg → vAg,
+again a circle step.</li>
+<li><b>P becomes planing.</b> Western P keeps two notes; its golden image keeps none, but moves every voice by one
+sixth-step, the smallest possible motion (<a href="ch:ch31#breathing-planing">Chapter 31</a>). The direction depends on
+where you start: from major the golden chord slides down, from minor it slides up.</li>
+<li><b>R becomes a silver-third root move.</b> R moves a Western root down a minor third (C → Am). Its golden image moves
+the root down 10 sixth-steps, 333.33 c, the <b>silver third</b>, the interval stacked twice in the silver triad
+Cs = C ^E♭ vG (<a href="ch:ch25#metallic">Chapter 25</a>).</li>
+</ul>
+<p>The sizes of the moves survive too: in total voice motion P and L cost 3 sixth-steps (a semitone) and R costs 6 (a whole
+tone), in the Western original and in its golden image alike. What does not survive is the common-tone structure.</p>
+<p><b>Cycles.</b> Alternating two moves gives the cycles of <a href="ch:ch10#neo-riemannian">Chapter 10</a> and
+<a href="ch:ch18#cycles">Chapter 18</a>. Their images under π (computed):</p>
+<table>
+<caption>Neo-Riemannian cycles from C and their golden images</caption>
+<tr><th>Cycle</th><th>Western chords</th><th>Golden image</th><th>Golden root changes</th></tr>
+<tr><td>PL (hexatonic)</td><td>C Cm A♭ A♭m E Em</td><td>Cg vCg A♭g vA♭g Eg vEg</td><td>−1, −11, alternating</td></tr>
+<tr><td>PR (octatonic)</td><td>C Cm E♭ E♭m F♯ F♯m A Am</td><td>Cg vCg E♭g vE♭g F♯g vF♯g Ag vAg</td><td>−1, +10, alternating</td></tr>
+<tr><td>LR (all 24)</td><td>C Em G Bm D F♯m …</td><td>Cg vEg Gg vBg Dg vF♯g …</td><td>+11, +10, alternating</td></tr>
+</table>
+<p>Every two moves the golden roots advance exactly as the Western roots do: −12 (a major third down) for PL, +9 (a minor
+third up) for PR, +21 (a fifth up) for LR. The LR image visits 24 of the 36 golden triads: those with roots on the 12-ET
+layer (images of major triads) and on the down layer (images of minor triads). The twelve golden triads with roots on the
+up layer, such as ^Cg, are projections of 12-ET augmented triads, or of major and minor triads on other layers.</p>
+<div class="exercise"><p><b>Exercise 35.2.</b> Check the second row of the cycle table: project C, Cm and E♭ and give the
+two golden root changes.</p>
+<details class="answer"><summary>Answer</summary><p>π(C) = Cg (root 0), π(Cm) = vCg (root 35, a change of −1), π(E♭) =
+E♭g (root 9, a change of +10 from 35). Western roots move C → E♭ (+9) per two moves; the golden roots move 0 → 9, also +9.</p></details></div>
+</div>
+<div class="layer derive">
+<p>In 36-ET the neo-Riemannian moves are $P(M_r)=m_r$, $L(M_r)=m_{r+12}$, $R(M_r)=m_{r+27}$, and on minor triads
+$P(m_r)=M_r$, $L(m_r)=M_{r+24}$, $R(m_r)=M_{r+9}$ (the 12-ET formulas of Chapter 10 times 3).</p>
+<p><b>Proposition (moves through π).</b> With $\pi(M_r)=G_r$ and $\pi(m_r)=G_{r-1}$:</p>
+$$\begin{aligned}
+\pi P(M_r)&=G_{r-1}, & \pi L(M_r)&=G_{r+11}, & \pi R(M_r)&=G_{r+26}=G_{r-10},\\
+\pi P(m_r)&=G_{r}=G_{(r-1)+1}, & \pi L(m_r)&=G_{r+24}=G_{(r-1)-11}, & \pi R(m_r)&=G_{r+9}=G_{(r-1)+10}.
+\end{aligned}$$
+<p><i>Proof:</i> substitute. ∎ The script confirms all 72 cases.</p>
+<p><b>Distances.</b> $d(G_0,G_{\pm1})=3$ (every voice moves one sixth-step), $d(G_0,G_{\pm11})=3$ (two common tones, one
+voice moves a semitone), $d(G_0,G_{\pm10})=6$ (no common tone; for Cg → vAg the moves are C +1, vE +1, ^G +4). The
+Western moves cost $d(M_0,P M_0)=d(M_0, L M_0)=3$ and $d(M_0,R M_0)=6$: π preserves the cost of each move, though not
+its common tones.</p>
+<p><b>Not a group action.</b> π does not turn P into a single operation on golden triads: $G_r$ is the image of both
+$M_r$ and $m_{r+1}$, and P sends them to triads with golden roots $r-1$ and $r+1$. The moves act on the 72 Western triads; π only
+records where each lands.</p>
+</div>
+</section>
+
+<section id="silver-third-keys">
+<h2>Keys a silver third apart</h2>
+<div class="layer hear">
+<p>Here is the main result of the chapter in sound. C major and ^E♭ major (an E♭ major raised a sixth-step) lie on
+different layers and share no note. Yet three golden chords belong to both, in the sense that matters: each is the
+golden projection of a triad in C and of a triad in ^E♭. First the three pivots on their own, each heard as a step from
+a chord of C, through gold, to a chord of ^E♭.</p>
+<audio-ex src="three_pivots" caption="C – Cg – ^Cm, F – Fg – ^Fm, G – Gg – ^Gm, then ^B♭7 – ^E♭. Listen for one note held into each golden chord and another held out of it, while every voice keeps moving in one direction."></audio-ex>
+<pianoroll edo="36" notes="G3 C4 E4 ; ^G3 C4 vE4 ; ^G3 ^C4 ^Eb4 ; A3 C4 F4 ; vA3 ^C4 F4 ; ^Ab3 ^C4 ^F4 ; B3 D4 G4 ; vB3 ^D4 G4 ; ^Bb3 ^D4 ^G4" labels="C ; Cg ; ^Cm ; F ; Fg ; ^Fm ; G ; Gg ; ^Gm" title="The three golden pivots between C major and ^E♭ major"></pianoroll>
+<p>Now a real modulation. A phrase in C reaches F, the subdominant; F bends into Fg; Fg leans into ^F minor, which is
+the ii of ^E♭ major; a ii–V7–I in the new key confirms it.</p>
+<audio-ex src="pivot_ii" caption="C – Am – F – Fg – ^Fm – ^B♭7 – ^E♭. Listen for Fg as the moment of double meaning: golden IV of C, golden ii of ^E♭. After it everything is on the new layer."></audio-ex>
+<pianoroll edo="36" notes="G3 C4 E4 C5 ; A3 C4 E4 C5 ; A3 C4 F4 C5 ; vA3 ^C4 F4 ^C5 ; ^Ab3 ^C4 ^F4 ^C5 ; ^Ab3 ^D4 ^F4 ^Bb4 ; ^G3 ^Eb4 ^G4 ^Bb4" labels="C: I ; vi ; IV ; Fg ; ^E♭: ii ; V7 ; I" title="C major to ^E♭ major through Fg (golden IV = golden ii)"></pianoroll>
+<p>The same works through the dominant: G bends into Gg, golden V of C and golden iii of ^E♭.</p>
+<audio-ex src="pivot_iii" caption="C – Dm – G – Gg – ^Gm – ^A♭ – ^B♭7 – ^E♭: the pivot is Gg, golden V of C and golden iii of ^E♭."></audio-ex>
+<p>And downward: C major and vA major (an A major lowered a sixth-step) are also a silver third apart, in the other
+direction, and also share three golden pivots. Here the pivot is vAg, golden vi of C and golden I of vA.</p>
+<audio-ex src="pivot_vA" caption="C – F – G – Am – vAg – vA – vE7 – vA. Listen for A minor turning into vA major through gold: the A sinks a sixth-step, C rises two, E holds and then sinks."></audio-ex>
+<pianoroll edo="36" notes="G3 C4 E4 C5 ; A3 C4 F4 C5 ; G3 B3 G4 D5 ; A3 C4 E4 C5 ; vA3 ^C4 E4 ^C5 ; vA3 vC#4 vE4 vC#5 ; vAb3 vB3 vE4 vD5 ; vA3 vC#4 vE4 vC#5" labels="C: I ; IV ; V ; vi ; vAg ; vA: I ; V7 ; I" title="C major to vA major through vAg (golden vi = golden I)"></pianoroll>
+<p>On harmonic instruments, as here, the Western chords on both sides are the points of rest; the golden pivot is the
+brief, delicate moment between them. Arriving in ^E♭ major or vA major is a release.</p>
+</div>
+<div class="layer understand">
+<h3>Projection pivots</h3>
+<p>Recall the starting point (a theorem, <a href="ch:ch32#layer-modulation">Chapter 32</a>): Western keys on different
+layers share no note, so they share no chord, and pivot-chord modulation between them is impossible. Call the set of projections of a key's six consonant triads π(K). For C major, π(K) = {Cg, vDg, vEg, Fg, Gg, vAg},
+as in the first section. For ^E♭ major (^E♭ ^F ^G ^A♭ ^B♭ ^C ^D) the triads are ^E♭, ^Fm, ^Gm, ^A♭, ^B♭ and ^Cm,
+and their projections are ^E♭g, Fg, Gg, ^A♭g, ^B♭g and Cg. The two sets share three golden triads:</p>
+<table>
+<caption>The projection pivots between C major and its silver-third keys (exhaustive)</caption>
+<tr><th>Golden pivot</th><th>In C major</th><th>In ^E♭ major</th><th>Smoothest path</th></tr>
+<tr><td>Cg</td><td>π(C) = golden I</td><td>π(^Cm) = golden vi</td><td>C → Cg → ^Cm</td></tr>
+<tr><td>Fg</td><td>π(F) = golden IV</td><td>π(^Fm) = golden ii</td><td>F → Fg → ^Fm</td></tr>
+<tr><td>Gg</td><td>π(G) = golden V</td><td>π(^Gm) = golden iii</td><td>G → Gg → ^Gm</td></tr>
+<tr><th>Golden pivot</th><th>In C major</th><th>In vA major</th><th>Smoothest path</th></tr>
+<tr><td>vDg</td><td>π(Dm) = golden ii</td><td>π(vD) = golden IV</td><td>Dm → vDg → vD</td></tr>
+<tr><td>vEg</td><td>π(Em) = golden iii</td><td>π(vE) = golden V</td><td>Em → vEg → vE</td></tr>
+<tr><td>vAg</td><td>π(Am) = golden vi</td><td>π(vA) = golden I</td><td>Am → vAg → vA</td></tr>
+</table>
+<p>This is pivot-chord modulation in exactly the Western sense, between keys that Western theory cannot connect by any
+pivot. In C the chord Fg is "golden IV"; in ^E♭ it is "golden ii". It plays the pivot's double role, and because the
+golden chord is two sixth-steps from each of its Western sources, it sits between them on a smoothest path.</p>
+<h3>Why a silver third</h3>
+<p>^E♭ lies 10 sixth-steps (333.33 c) above C, vA 10 sixth-steps below. That interval is the silver third: a little wider
+than a minor third (300 c), a little narrower than a neutral third (350 c). In 36-ET it is the distance from C to ^E♭
+and from vA to C.</p>
+<p>A clearer way to see the relation: the relative minor of ^E♭ major is ^C minor, and the relative minor of C major
+is A minor, whose parallel major lowered a sixth-step is vA major. So the silver-third relation is the <b>parallel
+relation shifted by a sixth-step</b>, degree for degree:</p>
+<ul>
+<li>C major and ^C minor share Cg, Fg and Gg as I/i, IV/iv and V/v;</li>
+<li>A minor and vA major share vAg, vDg and vEg as i/I, iv/IV and v/V.</li>
+</ul>
+<p>That is the projection theorem lifted from chords to keys. π identifies the major triad on r with the minor triad on
+r + 1 (C with ^Cm), so it identifies a major key with the minor key a sixth-step above it, chord by chord, for the three
+primary triads.</p>
+<h3>How many pivots other keys have</h3>
+<table>
+<caption>Golden projections shared with C major (exhaustive over the 36 major keys; relative minors have the same triads)</caption>
+<tr><th>Key</th><th>Shift (sixth-steps)</th><th>Shared projections</th><th>Layer</th></tr>
+<tr><td>F major, G major</td><td>±15</td><td>4 (their common Western triads)</td><td>same</td></tr>
+<tr><td><b>^E♭ major (= ^C minor)</b></td><td><b>+10</b></td><td><b>3: Cg, Fg, Gg</b></td><td>up</td></tr>
+<tr><td><b>vA major (= vF♯ minor)</b></td><td><b>−10</b></td><td><b>3: vDg, vEg, vAg</b></td><td>down</td></tr>
+<tr><td>vE major</td><td>+11</td><td>2: vEg, vAg</td><td>down</td></tr>
+<tr><td>^A♭ major</td><td>−11</td><td>2: Cg, Fg</td><td>up</td></tr>
+<tr><td>vD major</td><td>+5</td><td>2: vDg, vAg</td><td>down</td></tr>
+<tr><td>^B♭ major</td><td>−5</td><td>2: Cg, Gg</td><td>up</td></tr>
+<tr><td>D major, B♭ major</td><td>±6</td><td>2</td><td>same</td></tr>
+</table>
+<p>Over all 36 major keys the counts are: 21 keys share no projection with C major, 4 share one, 6 share two, 2 share three,
+2 share four, and C shares six with itself. Among keys on other layers, three is the maximum and only the two silver-third
+keys reach it; harmonic minor keys on other layers share at most two (exhaustive over 108 keys: 36 major, 36 natural minor,
+36 harmonic minor). Compare the Western numbers of <a href="ch:ch11#modulation">Chapter 11</a>: keys one fifth apart share
+four triads, keys two fifths apart only two. By golden pivots, ^E♭ major is closer to C than D major is by Western
+pivots, though less close than G.</p>
+<p>The three maps of distance disagree completely here. By common tones ^E♭ major is infinitely far from C (none). By
+voice leading it is 10 sixth-steps away (scale to scale) and its tonic triad 8. By projection pivots it is one of C's two
+nearest neighbours off the layer (<a href="ch:ch34#key-map">Chapter 34</a> maps all three).</p>
+<aside class="box note"><b>Status.</b> The shared-projection counts are exhaustive. That these golden chords are heard as
+pivots, Fg as "IV becoming ii", is a hypothesis: whether the ear hears Fg in C or in ^E♭, and how quickly the continuation
+decides, could be tested with probe tones. The modulations above are proposals whose chords SongMap has verified.</aside>
+<div class="exercise"><p><b>Exercise 35.3.</b> Step up a silver third three times from C major: C → ^E♭ → ? → ?. Where do you
+land, how far is that in cents, and how many golden projections does the result share with C major?</p>
+<details class="answer"><summary>Answer</summary><p>C (0) → ^E♭ (10) → vG (20) → B♭ (30). Three silver thirds are 1000 c, so
+the third step lands on B♭ major, back on the 12-ET layer a whole tone below C. It shares two projections with C major (vDg
+and Fg, from Dm and F, the triads the two keys share). Each single step shares three; the relation does not compose.
+Since 10 has order 18 in $\mathbb{Z}_{36}$, eighteen silver-third steps (5 octaves) return to C through 18 major keys.</p></details></div>
+</div>
+<div class="layer derive">
+<p>For a major key on tonic $t$ let $\pi(K_t)$ be the roots of the projections of its six consonant triads. From the
+projection theorem, $\pi(K_t)=t+D$ with</p>
+$$D=\{0,15,21\}\cup\{5,11,26\},$$
+<p>where the first part comes from I, IV, V (major, roots kept, layer of $t$) and the second from ii, iii, vi (minor roots
+6, 12, 27 lowered by one, layer $\lambda(t)+2$).</p>
+<p><b>Theorem (silver-third pivots).</b> Two major keys on different layers share at most three golden projections, and
+exactly three if and only if their tonics differ by $\pm10$. <i>Proof.</i> Let $s\not\equiv 0 \pmod 3$ be the difference of
+tonics, and work from $t=0$. The set $D$ lies on layers 0 and 2; the set $s+D$ lies on layers $\lambda(s)$ and
+$\lambda(s)+2$.</p>
+<ul>
+<li>If $\lambda(s)=1$, then $s+D$ lies on layers 1 and 0, and the only possible overlap is on layer 0, between
+$\{0,15,21\}$ and $s+\{5,11,26\}$: at most 3. Since $\{5,11,26\}=\{0,15,21\}+26$, equality means $\{0,15,21\}+(s+26)=\{0,15,21\}$.
+A three-element set is fixed by a translation $u\ne 0$ only if $u\in\{12,24\}$ and the set is an augmented triad, which
+$\{0,15,21\}$ is not. So $s+26\equiv 0$, $s=10$.</li>
+<li>If $\lambda(s)=2$, then $s+D$ lies on layers 2 and 1; the overlap is on layer 2, between $\{5,11,26\}$ and
+$s+\{0,15,21\}$, at most 3, with equality iff $s+\{0,15,21\}=\{0,15,21\}+26$, i.e. $s=26=-10$. ∎</li>
+</ul>
+<p>The count for the other differences is the number of pairs $(a,b)\in D^2$ with $b-a\equiv s$. Computed: 1 for $s=\pm4,\pm16$,
+2 for $\pm5,\pm11$, 3 for $\pm10$ (layers 1 and 2), and 2 for $\pm6$, 4 for $\pm15$, 6 for 0 (layer 0); 0 for every other shift.</p>
+<p><b>Geodesic pivots.</b> Each shared projection joins a major triad $M_r$ of one key with the minor triad $m_{r+1}$ of the
+other, and $d(M_r,m_{r+1})=4=d(M_r,G_r)+d(G_r,m_{r+1})=2+2$. For $r=0$ the voices move</p>
+$$\text{C}: 0\to0\to1,\qquad \text{E}: 12\to11\to10,\qquad \text{G}: 21\to22\to22,$$
+<p>each monotone: C holds then rises to ^C, E falls twice (vE, then ^E♭), G rises to ^G then holds. The golden chord is a
+geodesic hinge: it lies on a smoothest voice leading between the two Western chords. By transposition the same holds for
+every $r$; in the vA direction the path is $m_{r+1}\to G_r\to M_r$, e.g. Am → vAg → vA with A $27\to26\to26$,
+C $0\to1\to2$, E $12\to12\to11$. Chapter 32 found C → Cg → ^Cm as the cheapest golden route from C major to another
+layer; the theorem shows it is one of three such pivots between C major and ^E♭ major, and names the relation.</p>
+</div>
+</section>
+
+<section id="hinges">
+<h2>Golden hinges and the passing engine across layers</h2>
+<div class="layer hear">
+<p>The projection pivots are deliberate: you choose the golden chord. The passing engine of Part VII can also find golden
+chords between keys on its own. Give it A minor in C and the tonic of ^C major, and ask for a natural passing chord in
+between.</p>
+<audio-ex src="hinge_vi" caption="C – F – G – Am, then the engine's own passing chord vAg over a held A, then ^C – ^F – ^G7 – ^C. Listen for A minor bending into gold and opening onto the new layer; the tonic C could not have done this."></audio-ex>
+<pianoroll edo="36" notes="A2 A3 C4 E4 ; A2 vA3 ^C4 E4 ; ^C3 ^G3 ^C4 ^E4" labels="Am ; vAg/A ; ^C" title="vi → ^I: the engine passes through vAg, the projection of A minor"></pianoroll>
+<p>The engine can also put two different golden chords in a row between keys. From F, the IV of C, to ^E minor, the iii of
+^C, it chooses vFg and then ^Eg: two golden chords, then a cadence in ^C.</p>
+<audio-ex src="two_golden" caption="C – F, then the engine's vFg – ^Eg, then ^Em – ^Am – ^F – ^G7 – ^C. Listen for the bass sliding F, vF, ^E one sixth-step at a time while the two golden chords pass."></audio-ex>
+<pianoroll edo="36" notes="F2 A3 C4 F4 ; vF2 ^Ab3 C4 vF4 ; ^E2 Ab3 vC4 ^E4 ; ^E2 ^G3 ^B3 ^E4" labels="F ; vFg ; ^Eg ; ^Em" title="Two golden passing chords from IV of C to iii of ^C"></pianoroll>
+</div>
+<div class="layer understand">
+<h3>Golden hinges</h3>
+<p>A golden triad G is a <b>geodesic hinge</b> between two chords X and Y if going through it costs nothing extra:
+d(X, G) + d(G, Y) = d(X, Y). Then G lies on a smoothest voice leading from X to Y. Every projection pivot is a hinge
+(the previous section). How common are hinges between the diatonic triads of C major and those of a key on another layer?</p>
+<table>
+<caption>Golden hinges between the seven diatonic triads of C major and those of another key (49 pairs each; exhaustive)</caption>
+<tr><th>Target key</th><th>Pairs with an exact golden hinge</th><th>With a golden chord at most 2 sixth-steps off a smoothest path</th></tr>
+<tr><td>^C major (a sixth-step up)</td><td>34/49</td><td>48/49</td></tr>
+<tr><td>vC♯ major (two sixth-steps up)</td><td>46/49</td><td>48/49</td></tr>
+<tr><td>C♯ major (same layer, a semitone up)</td><td>43/49</td><td>49/49</td></tr>
+<tr><td>vC major (a sixth-step down)</td><td>34/49</td><td>48/49</td></tr>
+</table>
+<p>Golden hinges are common. Two cases deserve names.</p>
+<ul>
+<li><b>The tonic lift has none.</b> C → ^C, the plain sixth-step lift, has no golden hinge (the layer-betweenness theorem
+below; <a href="ch:ch34#lifts">Chapter 34</a>). Every route through gold costs at least 2 extra, as in Chapter 32's
+C → Cg → ^C (5 against 3).</li>
+<li><b>The submediant is the door.</b> The shortest pairs to ^C major with an exact hinge are Am → ^C, Dm → ^F and
+Em → ^G (distance 7, hinges ^Cg and vAg, vDg and ^Fg, vEg and ^Gg). So vi → ^I goes through gold at no cost: A minor
+bends into its own projection vAg (2), then on to ^C (5). That is the first example above.</li>
+</ul>
+<p>Toward vC♯ major (two sixth-steps up) seven pairs at distance 6 have exactly one hinge each. Six are limma lifts,
+each through its exact golden midpoint (<a href="ch:ch34#midpoint">Chapter 34</a>): C → ^Cg → vC♯, Dm → Dg → vE♭m,
+Em → Eg → vFm, F → ^Fg → vF♯, G → ^Gg → vA♭, Am → Ag → vB♭m. The seventh is F → vFg → vFm, through the projection of the
+target (vFg = π(vFm)).</p>
+<h3>The passing engine across layers</h3>
+<p><b>System 1 is undefined across layers.</b> The strict path splits each voice's motion into three equal sixth-step
+parts (<a href="ch:ch27#uniform-path">Chapter 27</a>). A voice that changes layer moves a number of sixth-steps that is
+not a multiple of 3, which cannot be split evenly. So there is no strict path between keys on different layers. SongMap's
+engine falls back to moving each voice as early as an even split allows; in all 108 pairs tested (the six consonant
+triads of C major to the six of ^C, vC♯ and ^E♭ major) that fallback produced no golden chord.</p>
+<p><b>System 2 works.</b> The natural path (<a href="ch:ch28#uneven">Chapter 28</a>) lets each voice move unevenly, and it
+finds golden chords across layers often:</p>
+<table>
+<caption>Natural passing paths (<code>~g ~g</code>) from the six consonant triads of C major (36 pairs per target; exhaustive)</caption>
+<tr><th>Target</th><th>At least one exact golden passing chord</th><th>Two different golden chords</th><th>Golden, counting golden triads over a held bass</th></tr>
+<tr><td>^C major</td><td>6</td><td>5</td><td>13</td></tr>
+<tr><td>vC♯ major</td><td>19</td><td>10</td><td>21</td></tr>
+<tr><td>^E♭ major (= ^C minor)</td><td>21</td><td>12</td><td>29</td></tr>
+</table>
+<p>The smoothest golden paths the engine finds into ^E♭ major are <b>C – Cg – ^Cm, F – Fg – ^Fm and G – Gg – ^Gm</b>, 5
+sixth-steps of motion each in four voices: exactly the three projection pivots, found without being told about
+projections. The next smoothest, Am – vAg – ^A♭ and Em – vEg – ^E♭ (7 each), leave through a projection (vAg = π(Am)) and
+arrive by a three-sixth-step move. Toward ^C major the smoothest two-golden path is F – vFg – ^Eg – ^Em (11), the second
+example above; toward vC♯ major the smoothest are F – vFg – vFm (7) and the six limma midpoints such as C – ^Cg – vC♯
+(8 each, the golden chord held over both passing slots). The
+natural engine already performs cross-layer golden modulation; it only needs a target in the other key.</p>
+<div class="exercise"><p><b>Exercise 35.4.</b> Am → ^C (distance 7) has a golden hinge, but C → ^C (distance 3) has none.
+Explain the difference using the moves of each voice.</p>
+<details class="answer"><summary>Answer</summary><p>In C → ^C every voice must change layer and the smoothest motion moves each
+by exactly one sixth-step. A hinge would have each of its notes between a note of C and a note of ^C, that is, on one of
+the two layers, so it touches two layers and cannot be golden. Am → ^C is not a lift: A has to travel to ^G (5
+sixth-steps), and on that longer road there is room for an intermediate chord on all three layers. vAg = vA ^C E takes
+A one sixth-step down, C one up and keeps E (2); then vA → ^G, ^C held, E → ^E (5). Total 7, the direct cost.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Theorem (layer betweenness).</b> Let X be a pc-set on one layer and Y = X + 1. Then d(X, Y) = |X|, and every geodesic
+hinge between X and Y is a subset of X ∪ Y; so no golden, silver or bronze triad lies on a smoothest voice leading from X to
+X + 1. <i>Proof sketch</i> (in full in <a href="ch:ch34#lifts">Chapter 34</a>): every voice must change layer, so
+$d\ge |X|$, and the uniform $+1$ attains it; composing the two matchings through a hinge gives a matching $X\to Y$ of cost
+$|X|$, so every note of the hinge lies on a one-sixth-step arc and equals one of its two ends. Hence $G\subseteq X\cup Y$,
+which touches two layers; metallic triads touch three. ∎ (Checked over all 48 twelve-ET triads of the four kinds: 0 golden
+hinges.)</p>
+<p><b>Strict paths.</b> System 1 moves voice $i$ by $\delta_i/3$ at each of the three stages, which requires
+$3\mid\delta_i$. Between layers $\delta_i\equiv\lambda(Y)-\lambda(X)\not\equiv0\pmod 3$ for every voice, so no strict path exists.</p>
+<p><b>Method.</b> Hinges were found by minimizing $d(X,G)+d(G,Y)$ over the 36 golden triads; paths by SongMap's four-part
+natural engine. "Two different golden chords" excludes one golden chord held over both passing slots.</p>
+</div>
+</section>
+
+<section id="reinterpretation">
+<h2>One golden chord, three meanings</h2>
+<div class="layer hear">
+<p>A German augmented sixth and a dominant seventh sound the same on a piano; only where they go tells you which one you
+heard (<a href="ch:ch11#modulation">Chapter 11</a>). A golden triad has the same ambiguity, three ways over. Listen to Cg
+three times, each time followed by a different continuation: back to C, on to ^C minor and ^E♭ major, and through an
+augmented chord into vA major.</p>
+<audio-ex src="three_meanings" caption="Cg – C; then Cg – ^Cm – ^B♭7 – ^E♭; then Cg – vE augmented – vA. The same golden chord opens three times; listen for how each continuation decides, after the fact, which layer the golden chord belonged to."></audio-ex>
+<pianoroll edo="36" notes="^G3 C4 vE4 ; G3 C4 E4 ; ^G3 C4 vE4 ; ^G3 ^C4 ^Eb4 ; ^G3 C4 vE4 ; vAb3 vC4 vE4 ; vA3 vC#4 vE4" labels="Cg ; C ; Cg ; ^Cm ; Cg ; vE+ ; vA" title="Cg resolved on each of the three layers"></pianoroll>
+<p>From the golden chord alone you cannot tell which story is being told. The ear waits for the next chord, as it does in
+any good modulation.</p>
+</div>
+<div class="layer understand">
+<p>The preimage theorem of the first section says that Cg is the projection of exactly three Western triads at distance 2,
+one on each layer. Each of them lives in several keys, so Cg carries a meaning in every one of them:</p>
+<table>
+<caption>The Western meanings of Cg (computed over all major and harmonic minor keys)</caption>
+<tr><th>Layer</th><th>Preimage (note kept)</th><th>Keys and degrees</th></tr>
+<tr><td>12-ET</td><td>C major (C)</td><td>I of C major, V of F major, IV of G major; V of F harmonic minor, VI of E harmonic minor</td></tr>
+<tr><td>up</td><td>^C minor (^G)</td><td>vi of ^E♭ major, iii of ^A♭ major, ii of ^B♭ major; i of ^C minor, iv of ^G minor</td></tr>
+<tr><td>down</td><td>vE vA♭ vC, augmented (vE)</td><td>III+ of vC♯, vF and vA harmonic minor; the augmented dominant (V+) of vA major</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; ^C4 ^Eb4 ^G4 ; C4 vE4 ^G4 ; vC4 vE4 vAb4 ; C4 vE4 ^G4" labels="C ; Cg ; ^Cm ; Cg ; vE+ ; Cg" title="The three Western triads two sixth-steps from Cg, one per layer"></pianoroll>
+<p>Among major keys, Cg is a projection in exactly six: three on the 12-ET layer (through the C major triad) and three on
+the up layer (through ^C minor). It belongs to no major key on the down layer. There, its only Western source is the
+augmented triad, which occurs in harmonic and melodic minor keys and as a chromatic augmented dominant. This is the golden
+analogue of <b>enharmonic reinterpretation</b>: one sound, several spellings, and the spelling is decided by the
+continuation.</p>
+<ul>
+<li><b>As I of C</b> (or IV of G, V of F): Cg → C, the release of golden mixture.</li>
+<li><b>As vi of ^E♭</b> (or i of ^C minor): Cg → ^Cm, the second half of the projection pivot. ^G is the note held.</li>
+<li><b>As the augmented dominant of vA</b>: Cg → vE+ (C sinks to vC, ^G rises to vA♭, vE holds), then vE+ → vA,
+an ordinary augmented-dominant resolution on the down layer. vA major is the other silver-third key of C.</li>
+</ul>
+<p>Because π commutes with transposition, every golden triad has the same three-fold structure: Fg is I of F, IV of C and V
+of B♭ (through F major), ii of ^E♭, iii of ^C♯ and vi of ^A♭ (through ^F minor), and one of the three projections of the augmented triad vA vC♯ vF.</p>
+<aside class="box note"><b>Status.</b> The lists of keys are exhaustive computations; the claim that the continuation decides
+how Cg is heard is a hypothesis about perception, to be tested.</aside>
+<div class="exercise"><p><b>Exercise 35.5.</b> Which three Western triads have Gg as their projection at distance 2, and on which
+layers are they? In which major key is Gg golden I, and in which is it golden vi?</p>
+<details class="answer"><summary>Answer</summary><p>Transpose the Cg case by 21 (C → G): G major (layer 0, keeps G), ^G minor
+= ^G ^B♭ ^D (layer 1, keeps ^D), and the augmented triad vB vE♭ vG (layer 2, keeps vB). Gg is golden I of G major and golden vi of ^B♭ major, whose vi is ^G minor (it is also golden i of
+^G minor). On the up layer it can never be a golden I, because its preimage there is a minor triad.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Proposition (meanings of a golden triad).</b> $G_r\in\pi(K_t)$ for a major key $K_t$ iff $r-t\in D$, i.e.
+$t\in r-D=\{r,\,r-5,\,r-11,\,r-15,\,r-21,\,r-26\}$. These are six keys: $r$, $r-15$, $r-21$ on the layer of $r$ (degrees I, IV,
+V) and $r-5$, $r-11$, $r-26$ on layer $\lambda(r)+1$ (degrees ii, iii, vi). <i>Proof:</i> $\pi(K_t)=t+D$, and the layers
+follow from those of $D$. ∎ For $r=0$: C, G, F and ^B♭, ^A♭, ^E♭. No major key on layer $\lambda(r)+2$ contains a preimage of
+$G_r$, because that preimage, $A_{r+11}$, is augmented.</p>
+<p><b>Augmented triads.</b> In 12-ET the augmented triad on the third degree of harmonic minor is shared by three keys
+(C E G♯ is III+ of A, C♯ and F harmonic minor). Lowered a sixth-step, vE vA♭ vC $=A_{11}$ is III+ of vA, vC♯ and vF
+harmonic minor (computed). Its three nearest golden triads are $G_{12}$ = Eg, $G_{24}$ = A♭g and $G_{36}=G_0$ = Cg, all
+with roots on the 12-ET layer: the projections of an augmented triad lie one layer above it.</p>
+</div>
+</section>
+
+<section id="golden-western-keys">
+<h2>Between golden keys and Western keys</h2>
+<div class="layer hear">
+<p>So far the pivots joined two Western keys. A golden key, such as C golden7, has its own chords: five golden triads
+(Cg, C♯g, vEg, vFg, ^A♭g; <a href="ch:ch32#scale-modulation">Chapter 32</a>). Which Western key leads most naturally into
+it? The surprising answer is F harmonic minor, whose dominant is C. Listen to F minor's i, VI, III+ and V, then V bending
+into Cg and a walk through C♯g, vFg and ^A♭g back to Cg: golden images of those same four chords. Then the way back.</p>
+<audio-ex src="fminor_golden7" caption="F minor – D♭ – A♭ augmented – C, then Cg – C♯g – vFg – ^A♭g – Cg in C golden7, then C – F minor. Listen for the bass E sinking to vE as C bends into Cg, and for the return through C to F minor as the release."></audio-ex>
+<pianoroll edo="36" notes="F3 C4 F4 Ab4 ; F3 C#4 F4 Ab4 ; E3 C4 E4 Ab4 ; E3 C4 E4 G4 ; vE3 C4 vE4 ^G4 ; vF3 C#4 vF4 ^Ab4 ; vF3 C4 vF4 ^Ab4 ; vE3 C4 vE4 ^Ab4 ; vE3 C4 vE4 ^G4" labels="Fm ; D♭ ; A♭+ ; C ; Cg ; C♯g ; vFg ; ^A♭g ; Cg" title="From F harmonic minor into C golden7"></pianoroll>
+</div>
+<div class="layer understand">
+<p>Project every major, minor and augmented triad of a Western key (an augmented triad has three projections) and count how
+many of C golden7's five golden triads you reach.</p>
+<table>
+<caption>Western keys whose triads project onto the most golden triads of C golden7 (exhaustive over 144 keys: major, natural, harmonic and melodic minor on all 36 tonics)</caption>
+<tr><th>Western key</th><th>Covered</th><th>Preimages</th><th>Missing</th></tr>
+<tr><td><b>F harmonic minor</b></td><td>4 of 5</td><td>Cg ← C (V), C♯g ← D♭ (VI), vFg ← Fm (i), ^A♭g ← A♭+ (III+)</td><td>vEg</td></tr>
+<tr><td><b>vA harmonic minor</b></td><td>4 of 5</td><td>Cg ← vC+ (III+), vEg ← vE (V), vFg ← vF (VI), ^A♭g ← vAm (i)</td><td>C♯g</td></tr>
+<tr><td>^C and ^C♯ harmonic minor; ^C♯, F and vA melodic minor</td><td>3 of 5</td><td></td><td></td></tr>
+<tr><td>C major</td><td>2 of 5</td><td>Cg ← C, vEg ← Em</td><td></td></tr>
+</table>
+<p>No Western key covers all five (distribution over the 144 keys: 50 cover none, 62 one, 25 two, 5 three, 2 four). Without
+the augmented triad no key covers more than three, so the harmonic minor's III+ is essential: one of its three projections,
+^A♭g in F minor, is a golden7 chord. In pictures, each projection keeps one note and bends two:</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; C#4 F4 Ab4 ; C#4 vF4 ^Ab4 ; C4 F4 Ab4 ; C4 vF4 ^Ab4 ; C4 E4 Ab4 ; C4 vE4 ^Ab4" labels="C (V) ; Cg ; D♭ (VI) ; C♯g ; Fm (i) ; vFg ; A♭+ (III+) ; ^A♭g" title="Four triads of F harmonic minor and their projections in C golden7"></pianoroll>
+<pianoroll edo="36" notes="vC4 vE4 vAb4 ; C4 vE4 ^G4 ; vAb3 vB3 vE4 ; ^G3 B3 vE4 ; vF3 vA3 vC4 ; vF3 ^Ab3 C4 ; vC4 vE4 vA4 ; C4 vE4 ^Ab4" labels="vC+ (III+) ; Cg ; vE (V) ; vEg ; vF (VI) ; vFg ; vAm (i) ; ^A♭g" title="Four triads of vA harmonic minor and their projections in C golden7"></pianoroll>
+<p>Two features of the result are worth noticing.</p>
+<ul>
+<li><b>The bridge is harmonic, not melodic.</b> F harmonic minor shares only two notes with C golden7 (C and C♯ = D♭), vA
+harmonic minor only two (vE, vF). Yet four of the five golden chords lie two sixth-steps from chords of the Western key.</li>
+<li><b>The dominant is the door.</b> In F minor, C is V, and its projection Cg is the tonic of C golden7. The example walks
+from F minor's i, VI and III+ to its V, bends V into golden I, and then moves inside the golden key: C♯g (the golden
+Neapolitan of <a href="ch:ch37#approach">Chapter 37</a>, reached here with every voice up a semitone), then circle steps vFg, ^A♭g, Cg, each
+moving one voice a semitone down. Returning through C to F minor is the deeper release.</li>
+</ul>
+<p>So the natural Western partner of C golden7 is F harmonic minor, with vA harmonic minor (a golden third higher) as its
+mirror. <i>Status:</i> the chord facts are exhaustive; any functional reading (C golden7 as a "dominant region" of F minor) is
+a hypothesis.</p>
+<div class="exercise"><p><b>Exercise 35.6.</b> F harmonic minor misses vEg. Which Western triads project onto vEg, and why is none
+of them in F harmonic minor?</p>
+<details class="answer"><summary>Answer</summary><p>By the preimage theorem with r = 11 (vE): the major triad vE vA♭ vB (down
+layer), E minor (12-ET layer, since π(Em) = vEg) and the augmented triad on ^G, ^G ^B ^E♭ (up layer). F harmonic minor (F G A♭ B♭ C
+D♭ E) is on the 12-ET layer, so only E minor could qualify, and E minor needs B, which the key does not have (it has B♭).</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Coverage.</b> Let $\Gamma=\{G_0,G_3,G_{11},G_{14},G_{25}\}$ be the golden triads of C golden7. For each key $K$ (major,
+natural, harmonic or melodic minor, 36 tonics each), let $\Pi(K)$ be the set of nearest golden triads of all its major,
+minor and augmented triads. Then $\max_K|\Gamma\cap\Pi(K)|=4$, attained exactly by F and vA harmonic minor (exhaustive).</p>
+<p><b>Why an augmented triad is needed.</b> The roots of $\Gamma$ lie on all three layers: 0 and 3 on layer 0, 25 on
+layer 1, 11 and 14 on layer 2. A Western key on layer $\ell$ has its major triads projecting to roots on layer $\ell$ and
+its minor triads to roots on layer $\ell+2$, so its consonant triads reach only two layers and can cover at most four
+elements of $\Gamma$ (and in fact at most three, exhaustively). The third layer is reached only through an augmented
+triad, whose projections $G_{a+1},G_{a+13},G_{a+25}$ lie on layer $\ell+1$. In F harmonic minor ($\ell=0$):</p>
+<table>
+<tr><th>Degree</th><th>Triad</th><th>Projection(s)</th><th>In C golden7?</th></tr>
+<tr><td>i</td><td>Fm $=m_{15}$</td><td>$G_{14}$ = vFg</td><td>yes</td></tr>
+<tr><td>iv</td><td>B♭m $=m_{30}$</td><td>$G_{29}$ = vB♭g</td><td>no</td></tr>
+<tr><td>V</td><td>C $=M_0$</td><td>$G_0$ = Cg</td><td>yes</td></tr>
+<tr><td>VI</td><td>D♭ $=M_3$</td><td>$G_3$ = C♯g</td><td>yes</td></tr>
+<tr><td>III+</td><td>A♭ C E $=A_{24}$</td><td>$G_{25}$ = ^A♭g, $G_1$ = ^Cg, $G_{13}$ = ^Eg</td><td>^A♭g only</td></tr>
+</table>
+<p>Four of five; the missing vEg (root 11, layer 2) would need E minor or vE major. ∎ The same computation for vA harmonic
+minor ($\ell=2$) gives vAm → ^A♭g, vE → vEg, vF → vFg and vC+ → Cg (among Eg, A♭g, Cg).</p>
+</div>
+</section>

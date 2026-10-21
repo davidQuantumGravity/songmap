@@ -1,0 +1,580 @@
+<p>Chapter 23 built the golden scales from one interval, the golden sixth, exactly as Chapter 6 built the pentatonic,
+diatonic and chromatic scales from the fifth. This chapter takes the golden family apart scale by scale and mode by
+mode. It starts with the smallest golden scales (two, three and four notes), works through all seven modes of
+golden7, and then follows a proposal of the author's: split each large step of golden7 in two, and see what ten-note
+scale comes out. The answer is a <b>golden decatonic</b> with a remarkably clean structure. It is golden10 of
+Chapter 23, it is a "double pentatonic", and its two natural readings, 35 and 53, are modes of one scale. The chapter
+then shows that golden13, and not golden7, is maximally even in 36-ET, and ends with melodies drawn from these
+scales and the golden chords that harmonize them. Every count below was computed by enumeration; mode names are
+proposals, and so are all the progressions.</p>
+
+<section id="small-scales">
+<h2>Two, three and four notes: the smallest golden scales</h2>
+<div class="layer hear">
+<p>Before golden7 there are three smaller well-formed golden scales. With two notes the octave holds a single golden
+third and its complement, the golden sixth. With three it holds a golden triad, spread out as a scale. With four, a
+note a semitone above the golden fifth joins in, and the four notes together make a soft, slightly veiled
+"added-sixth" chord. Listen to each scale as a line and then as a chord, and at the end compare the four-note golden
+scale with its Western look-alike, C6 (C E G A).</p>
+<audio-ex src="small_scales" caption="golden2 (C vE), golden3 (C vE ^G) and golden4 (C vE ^G ^A♭), each as a line and then held; then C6 (C E G A) against the golden4 chord. The golden chord is the C6 shape with its third bent down a sixth-step, its fifth bent up one and its sixth bent down two."></audio-ex>
+</div>
+<div class="layer understand">
+<p>A golden scale of $n$ notes is a window of $n$ consecutive notes of the golden chain (<a href="ch:ch23#chain">Chapter
+23</a>). The window is well formed (two step sizes) only for $n$ = 2, 3, 4, 7, 10, 13, 23 and 36
+(<a href="ch:ch23#golden-scales">Chapter 23</a>). The three smallest, placed on C as SongMap places golden3 and golden4
+(SongMap has no golden2), are:</p>
+<table>
+<caption>The three smallest golden scales on C (chain positions, steps in sixth-steps and exact cents)</caption>
+<tr><th>Scale</th><th>Notes</th><th>Chain</th><th>Steps (sixth-steps)</th><th>Steps (exact cents)</th><th>Chords inside</th></tr>
+<tr><td>golden2</td><td>C vE</td><td>−1, 0</td><td>11, 25</td><td>366.91, 833.09</td><td>a golden third</td></tr>
+<tr><td>golden3</td><td>C vE ^G</td><td>−2 … 0</td><td>11, 11, 14</td><td>366.91, 366.91, 466.18</td><td>Cg (the scale <i>is</i> the triad)</td></tr>
+<tr><td>golden4</td><td>C vE ^G ^A♭</td><td>−2 … 1</td><td>11, 11, 3, 11</td><td>366.91 ×3, 99.27</td><td>Cg, ^A♭g, ^A♭g7</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 vE4 C5 ; C4 vE4 ^G4 C5 ; C4 vE4 ^G4 ^Ab4 C5" labels="golden2 ; golden3 ; golden4" title="The smallest golden scales on C, each with its octave"></pianoroll>
+<p><b>golden2</b> is a single interval, the golden third (366.91 c) with the golden sixth (833.09 c) as its
+complement: the golden chain's first link. It could equally be written C ^A♭ (chain 0, 1); both are the same
+two-note scale, rotated.</p>
+<p><b>golden3</b> is the golden triad. Its steps are two golden thirds and a wide step of 466.18 c, the golden
+fifth's complement. Western theory has the same moment: three notes a fifth apart, F C G, make the three-note
+well-formed scale C F G, whose steps are a fourth, a whole tone and a fourth. The golden version is more musical in one
+respect: its three notes are already a chord, and a tertian one.</p>
+<p><b>golden4</b> adds ^A♭, one golden sixth above C. Its four notes C vE ^G ^A♭ contain two golden triads (Cg and
+^A♭g = ^A♭ C vE) and one golden seventh, ^A♭g7 = ^A♭ C vE ^G. Played from C it is the golden counterpart of an
+added-sixth chord: C6 = C E G A is Am7 with C in the bass, and golden4 is ^A♭g7 with C in the bass. The new step,
+^G to ^A♭, is the golden apotome (99.27 c), the semitone that golden7 will use four times.</p>
+<pianoroll edo="36" notes="C4 E4 G4 A4 ; C4 vE4 ^G4 ^Ab4 ; ^Ab3 C4 vE4 ^G4" labels="C6 ; golden4 ; ^A♭g7" title="C6 and the golden4 chord; golden4 is the golden seventh on ^A♭ with C at the bottom"></pianoroll>
+<p>Compare the two families side by side. The well-formed sizes are the denominators on each generator's
+Stern–Brocot path (<a href="ch:ch06#stern-brocot">Chapter 6</a>):</p>
+<table>
+<tr><th>Generator</th><th>Path</th><th>Well-formed sizes</th></tr>
+<tr><td>fifth (701.96 c)</td><td>1/2, 2/3, 3/5, 4/7, 7/12, 10/17, …</td><td>2, 3, 5, 7, 12, 17, 29, 41, 53</td></tr>
+<tr><td>golden sixth (833.09 c)</td><td>1/2, 2/3, 3/4, 5/7, 7/10, 9/13, 16/23, 25/36</td><td>2, 3, 4, 7, 10, 13, 23, 36</td></tr>
+</table>
+<p>Where the fifth makes a five-note pentatonic, the golden sixth makes a four-note scale; five and six golden
+sixths have three step sizes and are not well formed. Seven is shared. After seven the fifth jumps to twelve, while
+the golden chain passes through ten and thirteen. The ten-note scale will turn out to be the heart of this chapter.</p>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> golden$n$ on C is the set $\{25j \bmod 36 : j_0 \le j \le j_0 + n - 1\}$ in sixth-steps, a window
+of $n$ consecutive chain positions. SongMap's convention places the window so that the tonic golden triad (chain
+$0, -1, -2$) is inside it: golden3 = $[-2, 0]$, golden4 = $[-2, 1]$, golden7 = $[-3, 3]$, golden10 = $[-4, 5]$,
+golden13 = $[-6, 6]$. golden2, too small to hold the triad, is written here as $[-1, 0]$.</p>
+<p><b>Proposition (chords in a window).</b> A window of $k$ chain notes contains exactly $k-2$ golden triads and $k-3$
+golden sevenths (<a href="ch:ch23#golden7">Chapter 23</a>). So golden3 has 1 triad and no seventh, golden4 has 2 and
+1. (Theorem.)</p>
+<p><b>Exact steps.</b> Chain position $j$ sits at $1200\{j\log_2\varphi\}$ cents. For golden4: $-2 \mapsto 733.82$,
+$-1 \mapsto 366.91$, $0 \mapsto 0$, $1 \mapsto 833.09$, so the steps are $366.91, 366.91, 99.27, 366.91$; the apotome
+is $3\log_2\varphi - 2$ octaves $= \varphi^3/4$. In 36-ET the same steps are 11, 11, 3, 11 sixth-steps, within 0.73 c
+of exact.</p>
+</div>
+</section>
+
+<section id="golden7-modes">
+<h2>The seven modes of golden7</h2>
+<div class="layer hear">
+<p>golden7, C C♯ vE vF ^G ^A♭ B, has seven modes, one on each of its notes, just as the white keys have seven
+(<a href="ch:ch06#modes">Chapter 6</a>). Move each mode to C so that only the pattern changes, and play them from the
+brightest to the darkest. Each mode lowers one note of the one before, by 168 c, about five sixths of a whole
+tone. After each mode you hear the chord on its first, third and fifth degrees: in five modes it
+is the golden triad Cg, and in the two darkest it is something else.</p>
+<audio-ex src="golden7_modes" caption="The seven modes of golden7 on C over a C drone, from brightest to darkest, each followed by its tonic triad. Listen for the moment, in the sixth mode, when the tonic chord stops being golden."></audio-ex>
+<p>A tune makes the difference clearer. The same tune, written only as scale degrees, in four of the modes:</p>
+<audio-ex src="golden7_mode_tune" caption="One tune (degrees 1 3 5 6, 5 3 2 7 1, 3 2 1) in four golden7 modes on C: 5|1, 3|3 (golden7 itself), 2|4 and 0|6. In 0|6 the third degree is a whole tone above C and the tune loses its golden triad."></audio-ex>
+</div>
+<div class="layer understand">
+<p>golden7 on C is the chain window from $-3$ to $3$: three chain notes below the tonic (vE, ^G, B, at $-1, -2, -3$)
+and three above (^A♭, vF, C♯, at $1, 2, 3$). A mode is the same seven notes heard from another tonic. Moved to C, a mode
+is again a window of seven chain notes containing 0, with $b$ notes below the tonic and $a = 6 - b$ above.</p>
+<aside class="box note"><b>Proposal: naming the modes.</b> We name a golden mode by its window, writing
+<b>$b|a$</b> for "$b$ chain notes below the tonic, $a$ above". golden7 itself is the 3|3 mode. The name works for every
+golden scale (the decatonic modes below are 9|0 … 0|9) and says at once which chords sit on the tonic. In the chain
+positions of <code>GOLDEN_BLENDING.md</code> §8.1, the mode on the note at chain position $j$ of golden7 is
+$(3+j)|(3-j)$. We do not borrow the Greek names: the brightness order does not line up with the Greek modes' chord
+properties, and "golden Ionian" is already used for a different scale (<a href="ch:ch38#inflections">Chapter 38</a>).</aside>
+<table>
+<caption>The seven modes of golden7, as modes on C, brightest first (brightness = sum of the degrees in sixth-steps)</caption>
+<tr><th>Mode</th><th>Parent tonic</th><th>Notes on C</th><th>Steps</th><th>Brightness</th><th>Tonic triad (1-3-5)</th><th>Tonic seventh (1-3-5-7)</th></tr>
+<tr><td>6|0</td><td>C♯</td><td>C vE♭ vE ^F♯ ^G B♭ B</td><td>8 3 8 3 8 3 3</td><td>123</td><td>Cg</td><td>Cg7</td></tr>
+<tr><td>5|1</td><td>vF</td><td>C vE♭ vE ^F♯ ^G ^A♭ B</td><td>8 3 8 3 3 8 3</td><td>118</td><td>Cg</td><td>Cg7</td></tr>
+<tr><td>4|2</td><td>^A♭</td><td>C vE♭ vE vF ^G ^A♭ B</td><td>8 3 3 8 3 8 3</td><td>113</td><td>Cg</td><td>Cg7</td></tr>
+<tr><td><b>3|3</b></td><td>C</td><td><b>C C♯ vE vF ^G ^A♭ B</b></td><td>3 8 3 8 3 8 3</td><td>108</td><td>Cg</td><td>Cg7</td></tr>
+<tr><td>2|4</td><td>vE</td><td>C C♯ vE vF ^G ^A♭ ^A</td><td>3 8 3 8 3 3 8</td><td>103</td><td>Cg</td><td>C vE ^G ^A</td></tr>
+<tr><td>1|5</td><td>^G</td><td>C C♯ vE vF vF♯ ^A♭ ^A</td><td>3 8 3 3 8 3 8</td><td>98</td><td>C vE vF♯</td><td>C vE vF♯ ^A</td></tr>
+<tr><td>0|6</td><td>B</td><td>C C♯ D vF vF♯ ^A♭ ^A</td><td>3 3 8 3 8 3 8</td><td>93</td><td>C D vF♯</td><td>C D vF♯ ^A</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 vEb4 vE4 ^F#4 ^G4 Bb4 B4 C5 ; C4 vEb4 vE4 ^F#4 ^G4 ^Ab4 B4 C5 ; C4 vEb4 vE4 vF4 ^G4 ^Ab4 B4 C5 ; C4 C#4 vE4 vF4 ^G4 ^Ab4 B4 C5 ; C4 C#4 vE4 vF4 ^G4 ^Ab4 ^A4 C5 ; C4 C#4 vE4 vF4 vF#4 ^Ab4 ^A4 C5 ; C4 C#4 D4 vF4 vF#4 ^Ab4 ^A4 C5" labels="6|0 ; 5|1 ; 4|2 ; 3|3 ; 2|4 ; 1|5 ; 0|6" title="The seven golden7 modes on C, each lowering one note of the one before by 5 sixth-steps"></pianoroll>
+<p>Read down the table and one note drops at each line, always by 5 sixth-steps (exact 168.37 c): B♭ → ^A♭, ^F♯ →
+vF, vE♭ → C♯, B → ^A, ^G → vF♯, vE → D. The brightness falls by 5 each time. This is the golden twin of the
+diatonic modes, where each step lowers one note by a semitone (<a href="ch:ch06#modes">Chapter 6</a>).</p>
+<h3>What the modes contain</h3>
+<p>As sets, all seven modes are the same seven notes, so they all contain the same chords: the five golden triads
+and four golden sevenths of golden7, and nothing else of the seven named triad types. There is no major, minor,
+augmented, diminished, silver or bronze triad in any mode, because golden7's widest chain distance is 6, while a
+Western triad spans at least 18 links of the chain (major and minor 21, augmented 24, diminished 18), and a silver or a
+bronze triad 22. What
+changes from mode to mode is which chord sits on the tonic:</p>
+<ul>
+<li>The five brighter modes (6|0 to 2|4) have the golden triad Cg on C.</li>
+<li>The four brightest (6|0 to 3|3) also have the golden seventh Cg7 = C vE ^G B.</li>
+<li>The two darkest have no golden tonic. Their tonic triads, C vE vF♯ and C D vF♯, are the two "odd" degree triads of
+golden7 moved to C.</li>
+</ul>
+<p>Those odd triads are worth a closer look. Stack scale thirds (degrees 1-3-5) on each note of golden7 on C and you
+get five golden triads, Cg, C♯g, vEg, vFg and ^A♭g, and two others: ^G B C♯ (golden third + whole tone, shape 0 11 17)
+and B C♯ vF (whole tone + golden third, shape 0 6 17). Both have a <b>defective fifth</b> of 17 sixth-steps (exact
+565.45 c) in place of the golden fifth (733.82 c). They are golden7's counterpart of the diatonic's one diminished
+triad, B D F, whose diminished fifth is the one odd size of the diatonic's generic fifth. golden7 has two of them because its generic
+fifth takes its odd size twice (<a href="ch:ch30#golden-melody">Chapter 30</a>).</p>
+<pianoroll edo="36" notes="C4 vE4 ^G4 ; C#4 vF4 ^Ab4 ; vE4 ^G4 B4 ; vF4 ^Ab4 C5 ; ^G4 B4 C#5 ; ^Ab4 C5 vE5 ; B3 C#4 vF4" labels="Cg ; C♯g ; vEg ; vFg ; ^G B C♯ ; ^A♭g ; B C♯ vF" title="The seven degree triads of golden7 on C: five golden, two with a defective fifth"></pianoroll>
+<h3>Symmetry: golden7 is the golden Dorian</h3>
+<p>golden7 on C reads the same upside down. Its step pattern 3 8 3 8 3 8 3 is a palindrome, and turning every interval
+above C into the same interval below C maps the scale onto itself. Among the diatonic modes only Dorian has this property
+(T s T T T s T), because D is the center of the white-key chain F C G D A E B. golden7 on C is the centered window, so
+<b>as a mode it plays the role of Dorian, not Ionian</b>: the middle of the brightness order, symmetric, with its tonic
+in the middle of its chain. The other modes pair up under inversion: 6|0 with 0|6, 5|1 with 1|5, 4|2 with 2|4.</p>
+<pc-circle edo="36" marks="0 3 11 14 22 25 33" path="33 22 11 0 25 14 3" title="golden7 on C: the chain B → ^G → vE → C → ^A♭ → vF → C♯, symmetric about C"></pc-circle>
+</div>
+<div class="layer derive">
+<p><b>Proposition (modes along the chain).</b> Let $W_b = \{25j : -b \le j \le 6-b\}$ be the mode $b|(6-b)$ on C.
+Passing from $W_b$ to $W_{b-1}$ removes chain position $-b$ and adds $7-b$. These are 7 links apart, and
+$25 \cdot 7 = 175 \equiv -5 \pmod{36}$: the new note is the old note lowered by 5 sixth-steps. In exact tuning the
+change is chain distance 7, $7\log_2\varphi - 5$ octaves $= -168.37$ c, the chroma of golden7 (its large step minus its
+small step, $267.64 - 99.27$). (Theorem; the brightness values were computed exhaustively.)</p>
+<p><b>Proposition (tonic chords).</b> The tonic golden triad of C is chain $\{0, -1, -2\}$ and the tonic golden seventh
+$\{0, -1, -2, -3\}$. So the mode $b|a$ contains Cg if and only if $b \ge 2$, and Cg7 if and only if $b \ge 3$. (Theorem.)</p>
+<p><b>Proposition (inversion).</b> The inversion $x \mapsto -x$ about C maps chain position $j$ to $-j$ (because
+$-25j = 25(-j)$), so it maps the mode $b|a$ to $a|b$. The only self-inverse mode is 3|3. More generally every chain
+window $[\ell, h]$ is inversion-symmetric, by the inversion that maps chain position $j$ to $\ell + h - j$, as every
+diatonic scale is symmetric about its own "D". (Theorem.)</p>
+<p><b>Degree triads.</b> The generic third (two scale steps) of golden7 is 11 sixth-steps six times and 6 once (B–C♯);
+the generic fifth is 22 five times and 17 twice. A degree triad is golden exactly when both of its thirds are 11, which
+fails at the degrees ^G and B. (Checked by enumeration.)</p>
+</div>
+</section>
+
+<section id="decatonic">
+<h2>The golden decatonic: splitting the large step</h2>
+<div class="layer hear">
+<p>golden7 walks with a limp: semitone, wide step, semitone, wide step. Its wide step, 267.64 c, is almost a small minor
+third (7/6 is 266.87 c), so a golden7 melody keeps leaping. The author proposed a remedy: put one more note inside each
+wide step. A wide step is eight sixth-steps, which can be split as three plus five, five plus three or four plus four, so
+there are three uniform ways to do it, and they
+give three ten-note scales, written here by their splits as <b>35</b>, <b>53</b> and <b>44</b>. Listen to golden7 and
+then to the three.</p>
+<audio-ex src="decatonic_splits" caption="golden7, then its large steps split three ways, each scale up and down over a C drone: 35 = C C♯ D vE vF vF♯ ^G ^A♭ ^A B, 53 = C C♯ vE♭ vE vF ^F♯ ^G ^A♭ B♭ B, and 44 = C C♯ ^D vE vF F♯ ^G ^A♭ vB♭ B."></audio-ex>
+<p>All three are smoother than golden7, with every step at most a 12-ET whole tone. The 35 and 53 scales move by
+semitones and by a step of about five sixths of a whole tone. The 44 scale moves by semitones and by steps of a
+third of a semitone wider than a semitone (133 c), and it puts the plain F♯, the exact middle of the octave, in its
+center.</p>
+</div>
+<div class="layer understand">
+<p>Write golden7's steps as 3 [8] 3 [8] 3 [8] 3 and replace each bracket by a split:</p>
+<table>
+<caption>The three uniform splits of golden7 on C (new notes in bold)</caption>
+<tr><th>Split</th><th>Steps (sixth-steps)</th><th>Notes on C</th><th>Chain positions</th></tr>
+<tr><td>35</td><td>3 3 5 3 3 5 3 3 5 3</td><td>C C♯ <b>D</b> vE vF <b>vF♯</b> ^G ^A♭ <b>^A</b> B</td><td>−3 … 6</td></tr>
+<tr><td>53</td><td>3 5 3 3 5 3 3 5 3 3</td><td>C C♯ <b>vE♭</b> vE vF <b>^F♯</b> ^G ^A♭ <b>B♭</b> B</td><td>−6 … 3</td></tr>
+<tr><td>44</td><td>3 4 4 3 4 4 3 4 4 3</td><td>C C♯ <b>^D</b> vE vF <b>F♯</b> ^G ^A♭ <b>vB♭</b> B</td><td>−3 … 3 and ±17, 18</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 C#4 vE4 vF4 ^G4 ^Ab4 B4 C5 ; C4 C#4 D4 vE4 vF4 vF#4 ^G4 ^Ab4 ^A4 B4 C5 ; C4 C#4 vEb4 vE4 vF4 ^F#4 ^G4 ^Ab4 Bb4 B4 C5 ; C4 C#4 ^D4 vE4 vF4 F#4 ^G4 ^Ab4 vBb4 B4 C5" labels="golden7 ; 35 ; 53 ; 44" title="golden7 and its three uniform splits on C"></pianoroll>
+<h3>35 and 53 are one scale</h3>
+<p>The author asked whether the modes of 53 contain 35. They do. Read the two step patterns around the circle,
+starting at their first 5:</p>
+<p style="text-align:center">35: 3 3 <b>5 3 3 5 3 3 5 3</b> → 5 3 3 5 3 3 5 3 3 3<br>53: 3 <b>5 3 3 5 3 3 5 3 3</b> → 5 3 3 5 3 3 5 3 3 3</p>
+<p>The same cyclic pattern: 35 and 53 are two rotations, two modes, of a single scale. Concretely, 53 on C has
+exactly the notes of 35 on B. And that single scale is an old friend: the cyclic pattern of seven 3s and three 5s
+spaced as evenly as possible is <b>golden10</b>, the ten-note well-formed golden scale of
+<a href="ch:ch23#golden-scales">Chapter 23</a>. In chain terms, 35 on C is the chain window from $-3$ to $6$ and 53 on C
+the window from $-6$ to $3$; SongMap's "C golden10" is the window from $-4$ to $5$, a third mode of the same scale. So the
+author's "35 series" and "53 series" are one mode family, and one set of chords serves both.</p>
+<p>The construction explains why. A 35 split inserts a note a golden apotome (3 sixth-steps, exact 99.27 c) <i>above</i>
+the lower end of a large step: C♯ → D, vF → vF♯, ^A♭ → ^A. Each new note is a golden sixth up the chain from the last
+note of golden7 (chain 4, 5, 6). A 53 split inserts a note a golden apotome <i>below</i> the upper end: vE → vE♭, ^G →
+^F♯, B → B♭, which extends the chain downward (chain $-4$, $-5$, $-6$). Either way the result is ten consecutive chain
+notes.</p>
+<pc-circle edo="36" marks="0 3 6 11 14 17 22 25 28 33" path="33 22 11 0 25 14 3 28 17 6" title="The 35 decatonic on C: ten consecutive golden sixths, B → ^G → vE → C → ^A♭ → vF → C♯ → ^A → vF♯ → D"></pc-circle>
+<h3>Mixed splits</h3>
+<p>Nothing forces the three large steps to be split the same way. Choosing 35, 53 or 44 for each of the three
+independently gives $3^3 = 27$ scales, all containing golden7. Computed over all 27:</p>
+<ul>
+<li>They fall into <b>18 classes</b> up to rotation.</li>
+<li>Exactly <b>4 are well formed</b> (two step sizes and Myhill's property), and all four are modes of golden10. Going up
+from C♯, they are 35·35·35, 53·35·35, 53·53·35 and 53·53·53: every 53 comes before every 35. These are the chain windows
+$[-3, 6]$, $[-4, 5]$, $[-5, 4]$ and $[-6, 3]$, the four modes of golden10 that contain golden7 on C.</li>
+<li>The other four splits that use only 3s and 5s (35·53·35, 53·35·53, 35·35·53, 35·53·53) are irregular; they stay
+inside golden13 but contain only 5 or 6 golden triads, against golden10's 8.</li>
+<li>Every split that uses a 44 leaves golden13. None of these 19 is well formed. Seven of them contain a Western major
+or minor triad (F♯, Bm, ^D or vE♭m): a 44 note can complete a Western triad with notes added by the other splits.</li>
+<li>None of the 27 is maximally even in 36-ET (see <a href="ch:ch36#golden13-modes">below</a>). The 3-and-5 splits have
+step sizes 2 apart, and in every split the two semitones B–C–C♯ stay adjacent, while the evenest ten-note set of 36-ET
+(steps 3 4 3 4 4 3 4 3 4 4) never puts two 3s together.</li>
+</ul>
+<h3>44, its own beast</h3>
+<p>The 44 split cuts every large step exactly in half: steps of 3 and 4 sixth-steps (100 and 133.33 c). The scale is
+perfectly symmetric about C (its steps read the same backward), and its new notes ^D, F♯ and vB♭ form a golden triad of
+their own, ^Dg. So 44 is golden7 plus one more golden triad: 6 golden triads and 4 golden sevenths. But that triad comes
+from the far side of the golden circle, 17 of its 36 steps away from Cg, and its notes are chain positions $-17$, $-18$
+and $17$, the farthest the 36-ET chain can reach from C. They lie in neither golden13 nor golden23. In exact golden
+tuning the halfway points of golden7's large steps are 233.09 c, 600.00 c and 966.91 c: the middle one is the 12-ET
+tritone itself, and none of the three is a golden interval at all (Derive). The 44 scale has two step sizes but is not
+generated by any single interval, it is not well formed, and its ten modes are not ordered by single changes (several
+pairs tie in brightness).</p>
+<aside class="box note"><b>Why the 35 series.</b> The author's choice is to make the 35/53 family the primary golden
+decatonic, the scale for extending golden chords and harmony, and to treat 44 as a separate 36-ET colour. The facts
+behind the choice: 35/53 is a chain of golden sixths (golden10), well formed and Myhill, a subset of golden13, exactly
+tunable in golden intervals (steps 99.27 and 168.37 c), with 8 golden triads, 7 golden sevenths and 6 golden ninths;
+its modes are totally ordered by brightness. 44 is none of these: it is a 36-ET object made by halving, as silver13 is a
+36-ET object made by mirroring (<a href="ch:ch23#golden13">Chapter 23</a>).</aside>
+<pianoroll edo="36" notes="C4 vE4 ^G4 ; ^D4 F#4 vBb4 ; C4 C#4 ^D4 vE4 vF4 F#4 ^G4 ^Ab4 vBb4 B4" labels="Cg ; ^Dg ; 44" title="The 44 decatonic is golden7 plus the far-away golden triad ^Dg"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>Theorem (35 = 53).</b> The step sequences $s = (3,3,5,3,3,5,3,3,5,3)$ and $t = (3,5,3,3,5,3,3,5,3,3)$ satisfy
+$t_i = s_{i+1}$ (indices mod 10), so the scales are rotations of each other. As sets on C, $53 = 35 - 3$ sixth-steps,
+i.e. 53 on C equals 35 on B. Both are chain windows of length 10: $35 = \{25j: -3 \le j \le 6\}$ and
+$53 = \{25j : -6 \le j \le 3\}$. (Theorem, checked directly.)</p>
+<p><b>Theorem (which splits are golden10).</b> Number golden7's large steps 1, 2, 3 from the bottom (C♯–vE, vF–^G,
+^A♭–B). A 35 split of step $i$ adds chain position $7 - i$ (D = 6, vF♯ = 5, ^A = 4); a 53 split adds chain position
+$-3 - i$ (vE♭ = $-4$, ^F♯ = $-5$, B♭ = $-6$). The ten notes are a chain window exactly when the added positions are
+contiguous with $[-3, 3]$, that is, when the positions above 3 are $4, \dots, 3 + c$ and those below $-3$ are
+$-4, \dots, -3 - (3 - c)$. This forces steps $1, \dots, 3-c$ to be split 53 and steps $4 - c, \dots, 3$ to be split 35.
+So there are exactly four golden10 splits, one for each $c = 0, \dots, 3$. (Theorem; the enumeration of all 27 agrees.)</p>
+<p><b>Exact steps of golden10.</b> The small step is the golden apotome $\varphi^3/4 = 99.27$ c and the large step is
+chain distance 7 inverted, $32/\varphi^7 = 168.37$ c, which is apotome + limma ($99.27 + 69.10$). Seven small and three
+large steps fill the octave: $7 \times 99.27 + 3 \times 168.37 = 1200$. In 36-ET they are 3 and 5 sixth-steps (100 and
+166.67 c).</p>
+<p><b>Proposition (the 44 notes are not golden).</b> The golden intervals are the ratios $2^m\varphi^n$
+(<a href="ch:ch23#golden-intervals">Chapter 23</a>). The exact midpoint (in cents) of two golden pitches $x = 2^{m_1}\varphi^{n_1}$
+and $y = 2^{m_2}\varphi^{n_2}$ is $\sqrt{xy}$, which is golden only if $m_1 + m_2$ and $n_1 + n_2$ are both even. For
+golden7's large steps the products are $\tfrac{\varphi^3}{4}\cdot\tfrac{2}{\varphi} = \varphi^2/2$,
+$\tfrac{\varphi^2}{2}\cdot\tfrac{4}{\varphi^2} = 2$ and $\varphi \cdot \tfrac{8}{\varphi^3} = 8/\varphi^2$: the power of 2 is odd
+each time, so the midpoints $\varphi/\sqrt2$, $\sqrt2$ and $2\sqrt2/\varphi$ (233.09, 600.00, 966.91 c) are not golden.
+(Theorem.) In 36-ET they become chain positions $-17$, $-18$ and $17$.</p>
+<p><b>44 is not a chain.</b> No generator $g$ and start $x_0$ give $\{x_0 + gj : 0 \le j \le 9\} = 44$ (checked for
+all 35 generators and 36 starts). Its generic seconds are 3 or 4, but its generic thirds take three sizes (6, 7, 8), so it
+fails Myhill's property.</p>
+</div>
+</section>
+
+<section id="decatonic-modes">
+<h2>Modes of the decatonic: 35, 53 and 44</h2>
+<div class="layer hear">
+<p>The golden decatonic has ten modes. Here they are on C, from the brightest to the darkest, each one note lower than
+the one before. The fourth is 53 on C and the seventh is 35 on C.</p>
+<audio-ex src="decatonic_modes" caption="The ten modes of the golden decatonic on C over a C drone, from 9|0 (brightest) to 0|9 (darkest). Each lowers one note by a golden limma, a third of a whole tone. The fourth is 53, the seventh is 35."></audio-ex>
+<p>The decatonic is also a <b>double pentatonic</b>. Take every other note of 35 and you get a five-note scale
+C D vF ^G ^A; the remaining notes C♯ vE vF♯ ^A♭ B are the same pentatonic a golden third higher. Each pentatonic is a
+tidy, singable scale of whole tones and small minor thirds, and the decatonic is the two of them interleaved like two
+hands on one keyboard.</p>
+<audio-ex src="double_pentatonic" caption="Golden pentatonic A (C D vF ^G ^A, keys), golden pentatonic B (C♯ vE vF♯ ^A♭ B, pluck), then the two interleaved as the 35 decatonic; then a phrase in A, its answer in B a golden third higher, and both together in parallel golden thirds."></audio-ex>
+<p>Finally, the same tune in 35 and in 44, over the same golden chords. Only three degrees differ, each by a sixth-step;
+listen for the plain F♯ that opens the second bar in the 44 version, and for ^D and vB♭ in place of D and ^A.</p>
+<audio-ex src="tune_35_vs_44" caption="A tune in the 35 decatonic and then in the 44 decatonic, each scale played first, over Cg C♯g Cg vEg Cg (chords both scales contain). The tune's degrees 3, 6 and 9 (counting C as 1) are D, vF♯, ^A in 35 and ^D, F♯, vB♭ in 44."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>The ten modes</h3>
+<p>Every mode of golden10 on C is a window of ten chain notes containing C, with $b$ notes below the tonic and
+$a = 9 - b$ above. As with golden7, consecutive modes differ in one note, here lowered by a golden limma (2 sixth-steps,
+exact 69.10 c), and the brightness falls by 2 each time.</p>
+<table>
+<caption>The ten modes of the golden decatonic on C (golden10), brightest first</caption>
+<tr><th>Mode</th><th>Notes on C</th><th>Steps</th><th>Bright.</th><th>Cg</th><th>Cg7</th><th>Cg9</th><th>golden7 on C inside</th></tr>
+<tr><td>9|0</td><td>C vD vE♭ vE ^F ^F♯ ^G A B♭ B</td><td>5 3 3 5 3 3 5 3 3 3</td><td>171</td><td>yes</td><td>yes</td><td>yes</td><td>no</td></tr>
+<tr><td>8|1</td><td>C vD vE♭ vE ^F ^F♯ ^G ^A♭ B♭ B</td><td>5 3 3 5 3 3 3 5 3 3</td><td>169</td><td>yes</td><td>yes</td><td>yes</td><td>no</td></tr>
+<tr><td>7|2</td><td>C vD vE♭ vE vF ^F♯ ^G ^A♭ B♭ B</td><td>5 3 3 3 5 3 3 5 3 3</td><td>167</td><td>yes</td><td>yes</td><td>yes</td><td>no</td></tr>
+<tr><td><b>6|3 = 53</b></td><td>C C♯ vE♭ vE vF ^F♯ ^G ^A♭ B♭ B</td><td>3 5 3 3 5 3 3 5 3 3</td><td>165</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td></tr>
+<tr><td>5|4</td><td>C C♯ vE♭ vE vF ^F♯ ^G ^A♭ ^A B</td><td>3 5 3 3 5 3 3 3 5 3</td><td>163</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td></tr>
+<tr><td>4|5</td><td>C C♯ vE♭ vE vF vF♯ ^G ^A♭ ^A B</td><td>3 5 3 3 3 5 3 3 5 3</td><td>161</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td></tr>
+<tr><td><b>3|6 = 35</b></td><td>C C♯ D vE vF vF♯ ^G ^A♭ ^A B</td><td>3 3 5 3 3 5 3 3 5 3</td><td>159</td><td>yes</td><td>yes</td><td>no</td><td>yes</td></tr>
+<tr><td>2|7</td><td>C C♯ D vE vF vF♯ ^G ^A♭ ^A ^B♭</td><td>3 3 5 3 3 5 3 3 3 5</td><td>157</td><td>yes</td><td>no</td><td>no</td><td>no</td></tr>
+<tr><td>1|8</td><td>C C♯ D vE vF vF♯ vG ^A♭ ^A ^B♭</td><td>3 3 5 3 3 3 5 3 3 5</td><td>155</td><td>no</td><td>no</td><td>no</td><td>no</td></tr>
+<tr><td>0|9</td><td>C C♯ D E♭ vF vF♯ vG ^A♭ ^A ^B♭</td><td>3 3 3 5 3 3 5 3 3 5</td><td>153</td><td>no</td><td>no</td><td>no</td><td>no</td></tr>
+</table>
+<p>(Cg9 is the golden ninth C vE ^G B vE♭, four stacked golden thirds; see below. The 4|5 mode is SongMap's
+<code>C golden10</code>.)</p>
+<pianoroll edo="36" notes="C4 vD4 vEb4 vE4 ^F4 ^F#4 ^G4 A4 Bb4 B4 C5 ; C4 C#4 vEb4 vE4 vF4 ^F#4 ^G4 ^Ab4 Bb4 B4 C5 ; C4 C#4 vEb4 vE4 vF4 vF#4 ^G4 ^Ab4 ^A4 B4 C5 ; C4 C#4 D4 vE4 vF4 vF#4 ^G4 ^Ab4 ^A4 B4 C5 ; C4 C#4 D4 Eb4 vF4 vF#4 vG4 ^Ab4 ^A4 ^Bb4 C5" labels="9|0 ; 6|3 = 53 ; 4|5 ; 3|6 = 35 ; 0|9" title="Five of the ten decatonic modes on C: the brightest, 53, golden10, 35 and the darkest"></pianoroll>
+<h3>What the decatonic contains</h3>
+<p>Every mode has the same notes up to transposition, so the chord content is the same for all ten (computed):</p>
+<ul>
+<li><b>8 golden triads</b> and <b>7 golden sevenths</b> (the window count $k-2$, $k-3$). In 35 on C the triads are, in
+chain order, vEg, Cg, ^A♭g, vFg, C♯g, ^Ag, vF♯g and Dg: golden7's five plus three new ones on the notes the split
+added.</li>
+<li><b>6 golden ninths</b>: five consecutive chain notes stacked as four golden thirds, for example C♯ vF ^A♭ C vE
+(root C♯). The golden ninth's top interval above the root is 16/φ⁴ = 1467.64 c, an octave plus golden7's large step.
+These are the "extended chords" the decatonic makes possible.</li>
+<li><b>No Western, silver or bronze triad.</b> The decatonic's widest chain distance is 9. It has whole tones (chain 6,
+198.54 c, four of them) and exactly one minor third (chain 9, 297.81 c), but no major third (chain 12) and no perfect
+fourth or fifth (chain 15). So no mode contains any Western triad, let alone a Western and a golden triad together.</li>
+</ul>
+<p>One structural surprise: in the decatonic a golden third spans <b>three</b> scale steps, not two. Its generic
+"fourth" (three steps) is 11 sixth-steps nine times out of ten, and its generic "third" (two steps) is a whole tone or a
+small minor third. So the golden triads of the decatonic are built by skipping two notes, degrees 1-4-7, as quartal
+chords are built in the diatonic. In each mode eight of these degree chords are golden. This is the step-count shadow of
+the Stern–Brocot fractions: the golden sixth spans 5 of golden7's 7 steps, 7 of golden10's 10 and 9 of golden13's 13.</p>
+<pianoroll edo="36" notes="vE4 ^G4 B4 ; C4 vE4 ^G4 ; ^Ab3 C4 vE4 ; vF4 ^Ab4 C5 ; C#4 vF4 ^Ab4 ; ^A3 C#4 vF4 ; vF#4 ^A4 C#5 ; D4 vF#4 ^A4 ; C#4 vF4 ^Ab4 C5 vE5" labels="vEg ; Cg ; ^A♭g ; vFg ; C♯g ; ^Ag ; vF♯g ; Dg ; C♯g9" title="The eight golden triads of the 35 decatonic in chain order, and one of its golden ninths"></pianoroll>
+<h3>The double pentatonic</h3>
+<p>Split the decatonic into alternate notes. In 35 on C the even-numbered notes are C D vF ^G ^A and the odd-numbered
+ones are C♯ vE vF♯ ^A♭ B. Computed over all 252 five-note subsets of 35, these two are the <b>only</b> well-formed
+pentatonics it contains, and each is the complement of the other. They are transpositions of one scale, the second a
+golden third above the first.</p>
+<table>
+<caption>The golden pentatonic (C D vF ^G ^A) against the Western major pentatonic (C D E G A)</caption>
+<tr><th></th><th>Golden pentatonic</th><th>Western pentatonic</th></tr>
+<tr><td>Generator</td><td>golden fifth, 733.82 c (two golden sixths)</td><td>fifth, 701.96 c</td></tr>
+<tr><td>Steps (exact)</td><td>267.64 ×3, 198.54 ×2</td><td>203.91 ×3, 294.13 ×2</td></tr>
+<tr><td>Steps (36-ET, from C)</td><td>6 8 8 6 8</td><td>6 6 9 6 9</td></tr>
+<tr><td>Type</td><td>3L 2s</td><td>2L 3s</td></tr>
+</table>
+<p>So the golden pentatonic has two whole tones (198.54 c, chain 6) and three steps just above 7/6 (267.64 c): the
+proportions of the Western pentatonic reversed. A melody inside one golden pentatonic sounds almost Western, a
+melody of whole tones and small minor thirds; the golden character appears where the line crosses between the two
+interleaved pentatonics, by semitones and by golden thirds. This is the precise sense of "double pentatonic", and it
+is also the source of the decatonic's motifs:</p>
+<table>
+<caption>Intervals of the 35 decatonic (interval classes; exact cents, 36-ET in brackets; number of pairs)</caption>
+<tr><th>Sixth-steps</th><th>Exact</th><th>Pairs</th><th>Melodic role</th></tr>
+<tr><td>3</td><td>99.27 (100)</td><td>7</td><td>semitone (golden apotome)</td></tr>
+<tr><td>5</td><td>168.37 (166.67)</td><td>3</td><td>the wide step, about ⅚ of a whole tone</td></tr>
+<tr><td>6</td><td>198.54 (200)</td><td>4</td><td>whole tone, 5.37 c narrow of 9/8</td></tr>
+<tr><td>8</td><td>267.64 (266.67)</td><td>6</td><td>small minor third (≈ 7/6)</td></tr>
+<tr><td>9</td><td>297.81 (300)</td><td>1</td><td>minor third, the one Western third</td></tr>
+<tr><td>11</td><td>366.91 (366.67)</td><td>9</td><td>golden third</td></tr>
+<tr><td>14</td><td>466.18 (466.67)</td><td>8</td><td>narrow "fourth" (inverts to the golden fifth)</td></tr>
+<tr><td>16</td><td>535.28 (533.33)</td><td>2</td><td>wide "fourth"</td></tr>
+<tr><td>17</td><td>565.45 (566.67)</td><td>5</td><td>near-tritone</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 D4 vF4 ^G4 ^A4 C5 ; C#4 vE4 vF#4 ^Ab4 B4 C#5 ; C4 C#4 D4 vE4 vF4 vF#4 ^G4 ^Ab4 ^A4 B4 C5" labels="pent. A ; pent. B ; 35 = A ∪ B" title="The 35 decatonic as two golden pentatonics a golden third apart"></pianoroll>
+<h3>The 44 modes, briefly</h3>
+<p>The 44 scale also has ten distinct modes (its step pattern 3 4 4 3 4 4 3 4 4 3 is not periodic). Computed: the tonic
+golden triad is present in 6 of them and the tonic golden seventh in 4; their brightness values (168 down to 156)
+include three ties, so the modes do not form a single chain of one-note changes. They are colourful, but they do not
+behave like a well-formed family. The tune above shows the practical difference: 44 replaces D, vF♯ and ^A by ^D, F♯ and
+vB♭. In 35 those three notes are chain notes of the golden triads around them (Dg, vF♯g, ^Ag); in 44 they belong
+only to ^Dg, a chord the tune never uses, and F♯ sounds as the plain 12-ET tritone against C.</p>
+</div>
+<div class="layer derive">
+<p><b>Proposition (decatonic modes).</b> Let $V_b = \{25j : -b \le j \le 9 - b\}$, the mode $b|(9-b)$ on C. Passing from
+$V_b$ to $V_{b-1}$ removes chain position $-b$ and adds $10 - b$, ten links apart, and $25 \cdot 10 = 250 \equiv -2
+\pmod{36}$: one note is lowered by 2 sixth-steps, exactly a golden limma ($10\log_2\varphi - 7$ octaves $= -69.10$ c).
+$V_b$ contains Cg iff $b \ge 2$, Cg7 iff $b \ge 3$, Cg9 iff $b \ge 4$, and contains golden7 on C ($[-3,3]$) iff
+$3 \le b \le 6$. (Theorem.)</p>
+<p><b>Theorem (double pentatonic).</b> In golden10 every step changes the chain position by an odd number: a small
+step (3 sixth-steps) is $+3$ and a large step (5) is $-7$, since $25 \cdot 3 = 75 \equiv 3$ and $25 \cdot (-7) =
+-175 \equiv 5 \pmod{36}$. Hence two steps change the chain position by an even number, and alternate notes of the scale
+are exactly the notes of even and of odd chain position. For the window $[-3, 6]$ these are
+$\{-2, 0, 2, 4, 6\}$ and $\{-3, -1, 1, 3, 5\}$: two chains of five notes linked by golden fifths (chain step 2), the second one chain step
+below the first, i.e. a golden third higher. (Theorem; uniqueness among the 252 five-note subsets checked by
+enumeration.)</p>
+<p><b>The golden pentatonic is well formed.</b> The generator is two golden sixths, $2\log_2\varphi - 1 = 0.38848$
+octaves (466.18 c). Its chain has two step sizes at $n$ = 2, 3, 5, 8, 13 (and three sizes at 4, 6, 7, 9–12), computed
+from exact φ. At $n = 5$ the steps are $8/\varphi^4 = 267.64$ c and $\varphi^6/16 = 198.54$ c.</p>
+</div>
+</section>
+
+<section id="golden13-modes">
+<h2>golden13 and maximal evenness</h2>
+<div class="layer hear">
+<p>A scale can be well formed and still lumpy. golden7 has steps of 100 and 267 c, so it alternates tight and wide.
+golden13 has steps of 100 and 67 c, as close to equal as thirteen notes in 36 steps can be. Listen to golden7, then
+golden13 and its brightest and darkest modes, and finally the evenest possible seven-note scale of 36-ET, which turns out
+to be silver rather than golden.</p>
+<audio-ex src="golden13_even" caption="golden7 with Cg; golden13 on C; golden13's brightest mode (on B♭) and darkest mode (on D), both moved to C; then the maximally even 7-note scale of 36-ET, C vD ^E♭ F vG ^A♭ B♭, with its silver triad Cs."></audio-ex>
+</div>
+<div class="layer understand">
+<p>A scale of $n$ notes in an EDO is <b>maximally even</b> (Clough and Douthett, 1991) if every generic interval comes in
+one size or in two sizes one step apart. In 12-ET the diatonic scale is maximally even: its seconds are 1 or 2
+semitones, its thirds 3 or 4, and so on. In 36-ET the picture changes:</p>
+<table>
+<caption>Evenness in 36-ET (computed)</caption>
+<tr><th>Scale</th><th>Steps (sixth-steps)</th><th>Chroma (large − small)</th><th>Well formed</th><th>Maximally even in 36-ET</th></tr>
+<tr><td>golden2, 3, 4</td><td>11/25; 11/14; 3/11</td><td>14; 3; 8</td><td>yes</td><td>no</td></tr>
+<tr><td>golden7</td><td>3 (×4), 8 (×3)</td><td>5</td><td>yes</td><td>no</td></tr>
+<tr><td>C major in 36-ET</td><td>3 (×2), 6 (×5)</td><td>3</td><td>yes</td><td>no (yes in 12-ET)</td></tr>
+<tr><td>golden10</td><td>3 (×7), 5 (×3)</td><td>2</td><td>yes</td><td>no</td></tr>
+<tr><td><b>golden13</b></td><td>2 (×3), 3 (×10)</td><td><b>1</b></td><td>yes</td><td><b>yes</b></td></tr>
+<tr><td>golden23</td><td>1 (×10), 2 (×13)</td><td>1</td><td>yes</td><td>yes</td></tr>
+<tr><td>silver13</td><td>1, 2, 3, 4</td><td></td><td>no</td><td>no</td></tr>
+</table>
+<p>The rule is simple: <b>a well-formed scale is maximally even exactly when its chroma is one step of the tuning</b>
+(Derive). golden13's chroma is the golden comma, which 36-ET renders as one sixth-step; golden23's is 38.92 c, also one
+sixth-step. golden10's chroma is the limma (2 sixth-steps) and golden7's is 168.37 c (5). So in 36-ET, golden13 is the
+golden counterpart of the diatonic in a sense golden7 is not: in its own tuning it is both well formed and maximally even,
+as the diatonic is in 12-ET. The evenest 13-note set of 36-ET, $\lfloor 36k/13 \rfloor$ = C vC♯ vD vE♭ vE ^E ^F ^F♯ ^G
+A♭ A B♭ B, <i>is</i> golden13, transposed to B♭ (as a mode on C it is the D mode, golden13's darkest).</p>
+<pc-circle edo="36" marks="0 3 6 8 11 14 17 19 22 25 28 30 33" path="30 19 8 33 22 11 0 25 14 3 28 17 6" title="golden13 on C: thirteen golden sixths, spread almost evenly around the 36-step circle"></pc-circle>
+<pc-circle edo="36" marks="0 3 11 14 22 25 33" title="golden7 on C on the same circle: three clusters and three gaps"></pc-circle>
+<p><b>The modes of golden13</b> (<code>GOLDEN_BLENDING.md</code> §8.2, recomputed). Its 13 modes are ordered by
+brightness from the mode on B♭ (0|12 in the window naming, brightness 222) to the mode on D (12|0, brightness 210),
+consecutive modes differing in one note by a single sixth-step, the 36-ET golden comma. Because golden13's chroma is
+$+1$ while golden7's is $-5$, the order is reversed: the brightest golden13 mode has all its chain notes above the tonic.
+The tonic golden triad is present in 11 modes (all but 0|12 and 1|11, the modes on B♭ and ^F♯) and the tonic golden
+seventh in 10 (also not 2|10, on vE♭), exactly as the rule "Cg iff $b \ge 2$, Cg7 iff $b \ge 3$" predicts. All 13 contain
+11 golden triads and 10 golden sevenths, and no Western triad.</p>
+<pianoroll edo="36" notes="C4 C#4 D4 Eb4 E4 vF4 vF#4 vG4 vAb4 ^Ab4 ^A4 ^Bb4 ^B4 C5 ; C4 C#4 D4 vEb4 vE4 vF4 vF#4 ^F#4 ^G4 ^Ab4 ^A4 Bb4 B4 C5 ; C4 vC#4 vD4 vEb4 vE4 ^E4 ^F4 ^F#4 ^G4 Ab4 A4 Bb4 B4 C5" labels="on B♭ (brightest) ; golden13 ; on D (darkest)" title="golden13 on C between its brightest and darkest modes, all moved to C"></pianoroll>
+<p><b>Seven notes, maximally even.</b> 36-ET does have a maximally even 7-note scale: steps of 5 and 6 sixth-steps, for
+example C vD ^E♭ F vG ^A♭ B♭ (unique up to transposition; computed over all 1,623,160 seven-note scales containing C).
+It contains three silver triads and no other named triad. A transposition of it, the same scale on ^B♭ (C vD ^E♭ F vG
+^A♭ ^B♭ as a set), is the degree-by-degree average (Ionian + Aeolian + Locrian)/3 of three diatonic modes on C, a story
+told in <a href="ch:ch38#centroid-scales">Chapter 38</a>. The golden seven-note scale gives up
+evenness to gain five golden triads.</p>
+<pc-circle edo="36" marks="0 5 10 15 20 25 30" title="The maximally even 7-note scale of 36-ET (steps 5 and 6): silver, not golden"></pc-circle>
+</div>
+<div class="layer derive">
+<p><b>Definition (Clough–Douthett).</b> An $n$-note set $S$ in $N$-ET is maximally even if for every $k = 1, \dots,
+n-1$ the spans of $k$ consecutive steps take one value or two consecutive values.</p>
+<p><b>Theorem (chroma criterion).</b> A well-formed scale with steps $L &gt; s$ is maximally even if and only if
+$L - s = 1$ step of the EDO.</p>
+<p><i>Proof.</i> In a well-formed scale the step word is balanced: any two spans of $k$ consecutive steps contain
+numbers of large steps that differ by at most one (this is equivalent to Myhill's property, <a href="ch:ch06#mos">Chapter 6</a>).
+So every generic interval takes the sizes $m L + (k - m)s$ and $(m+1)L + (k-m-1)s$, which differ by exactly $L - s$
+(or a single size). They are consecutive if and only if $L - s = 1$. ∎ Checked by enumeration for every golden window
+(2, 3, 4, 7, 10, 13, 23) and for C major in 36-ET: the two sizes of each generic interval differ by exactly the chroma.</p>
+<p><b>Corollary.</b> In 36-ET, golden13 and golden23 are maximally even; golden2, 3, 4, 7, 10 and the diatonic are not.
+In 12-ET the diatonic is (chroma 1 semitone). (Theorem.)</p>
+<p><b>Evenest 13 = golden13.</b> $\{\lfloor 36k/13 \rfloor : 0 \le k \le 12\} = \{0, 2, 5, 8, 11, 13, 16, 19, 22, 24, 27,
+30, 33\}$, which is golden13 transposed by 30 sixth-steps (to B♭). (Checked.)</p>
+</div>
+</section>
+
+<section id="melody-harmony">
+<h2>Golden melodies and how to harmonize them</h2>
+<div class="layer hear">
+<p>Here is the idea of this chapter put to work: a melody drawn from the decatonic, harmonized only with golden triads
+that the decatonic contains, ending with a release into C major. The chords walk down the golden circle one step at a
+time, so that between any two chords only one voice moves, by a semitone. The melody moves freely through both
+interleaved pentatonics.</p>
+<audio-ex src="decatonic_walk" caption="A tune in the 35 decatonic over Dg, vF♯g, ^Ag, C♯g, vFg, ^A♭g, Cg, then C major. Listen for the single moving voice in each chord change, and for the release at the end, where ^G falls to G and vE rises to E."></audio-ex>
+<p>A second tune uses the brighter 53 mode. Where the first tune's chords lie on one side of Cg on the circle, this one
+travels out on the other side, to Bg and vE♭g, and comes home by the parallel move Bg to Cg, every voice rising a
+semitone, before the release.</p>
+<audio-ex src="decatonic_53_tune" caption="A tune in the 53 decatonic over Cg, vEg, ^Gg, Bg, vE♭g, Bg, Cg, C. The arrival Bg → Cg moves all three voices up a semitone together."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>Which chords harmonize which note</h3>
+<p>Every note of a golden scale lies in up to three golden triads: as root, as golden third and as golden fifth. Chain
+note $j$ belongs to the triads whose roots are chain notes $j$, $j + 1$ and $j + 2$. In the 35 decatonic (chain $-3$ to
+6, triad roots $-1$ to 6) that gives:</p>
+<table>
+<caption>The golden triads and sevenths of the 35 decatonic that contain each note (R = root, 3 = third, 5 = fifth)</caption>
+<tr><th>Note</th><th>Chain</th><th>Golden triads</th><th>Golden sevenths</th></tr>
+<tr><td>C</td><td>0</td><td>Cg (R), ^A♭g (3), vFg (5)</td><td>Cg7, ^A♭g7, vFg7, C♯g7</td></tr>
+<tr><td>C♯</td><td>3</td><td>C♯g (R), ^Ag (3), vF♯g (5)</td><td>C♯g7, ^Ag7, vF♯g7, Dg7</td></tr>
+<tr><td>D</td><td>6</td><td>Dg (R)</td><td>Dg7</td></tr>
+<tr><td>vE</td><td>−1</td><td>vEg (R), Cg (3), ^A♭g (5)</td><td>Cg7, ^A♭g7, vFg7</td></tr>
+<tr><td>vF</td><td>2</td><td>vFg (R), C♯g (3), ^Ag (5)</td><td>vFg7, C♯g7, ^Ag7, vF♯g7</td></tr>
+<tr><td>vF♯</td><td>5</td><td>vF♯g (R), Dg (3)</td><td>vF♯g7, Dg7</td></tr>
+<tr><td>^G</td><td>−2</td><td>vEg (3), Cg (5)</td><td>Cg7, ^A♭g7</td></tr>
+<tr><td>^A♭</td><td>1</td><td>^A♭g (R), vFg (3), C♯g (5)</td><td>^A♭g7, vFg7, C♯g7, ^Ag7</td></tr>
+<tr><td>^A</td><td>4</td><td>^Ag (R), vF♯g (3), Dg (5)</td><td>^Ag7, vF♯g7, Dg7</td></tr>
+<tr><td>B</td><td>−3</td><td>vEg (5)</td><td>Cg7</td></tr>
+</table>
+<p>The middle notes of the chain (C, C♯, vE, vF, ^A♭, ^A) each have three triads to choose from; the edge notes B and D
+have one. A melody that leans on its middle notes can be harmonized in many ways; a melody that touches B or D almost
+dictates its chord.</p>
+<h3>Smooth moves: one chain step at a time</h3>
+<p>Golden triads whose roots are $k$ chain steps apart share $3 - k$ notes (for $k \le 3$), and the smoothest voice leading
+between them moves $3k$ sixth-steps in total for $k \le 6$ (computed for every pair in the scale):</p>
+<table>
+<tr><th>Chain steps between roots</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr>
+<tr><th>Common notes</th><td>2</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><th>Voice-leading distance</th><td>3</td><td>6</td><td>9</td><td>12</td><td>15</td><td>18</td><td>15</td></tr>
+<tr><th>Example</th><td>vEg → Cg</td><td>vFg → Cg</td><td>C♯g → Cg</td><td>^Ag → Cg</td><td>vF♯g → Cg</td><td>Dg → Cg</td><td>(Dg → vEg)</td></tr>
+</table>
+<p>A chain step is a step of the golden circle (<a href="ch:ch31#circle">Chapter 31</a>): two notes stay and one moves
+by a golden apotome. Three chain steps is the parallel move in which every voice moves a semitone the same way, C♯g → Cg
+(all fall, the "golden Neapolitan") or Bg → Cg (all rise); these are developed as approach chords in
+<a href="ch:ch37#approach">Chapter 37</a>.</p>
+<h3>Proposed progressions</h3>
+<p>The following progressions stay inside one decatonic mode and are ranked by total voice-leading distance (smallest
+first). They are <b>proposals</b>: the arithmetic is exact, the musical value is for the ear to judge.</p>
+<table>
+<caption>Golden progressions in the decatonic (35 on C unless noted), ranked by voice leading</caption>
+<tr><th>Progression</th><th>Moves (sixth-steps)</th><th>Total</th><th>Character</th></tr>
+<tr><td>^Ag – C♯g – Cg</td><td>3, 9</td><td>12</td><td>one circle step, then the golden Neapolitan</td></tr>
+<tr><td>vF♯g – ^Ag – C♯g – Cg</td><td>3, 3, 9</td><td>15</td><td>decatonic chords leading into golden7's</td></tr>
+<tr><td>Dg – vF♯g – ^Ag – C♯g – vFg – ^A♭g – Cg</td><td>3 ×6</td><td>18</td><td>the whole circle walk of the scale (first tune)</td></tr>
+<tr><td>Cg – ^A♭g – vFg – C♯g – Cg</td><td>3, 3, 3, 9</td><td>18</td><td>golden7's own chords, out and back</td></tr>
+<tr><td>Cg – vFg – C♯g – Cg – C</td><td>6, 3, 9, 2</td><td>20</td><td>golden cadence, then Western release</td></tr>
+<tr><td>Cg – vEg – ^Gg – Bg – vE♭g – Bg – Cg – C (53)</td><td>3, 3, 3, 3, 3, 9, 2</td><td>26</td><td>out the bright side, home by Bg → Cg (second tune)</td></tr>
+<tr><td>Cg – Dg – C♯g – Cg</td><td>18, 9, 9</td><td>36</td><td>a "whole-tone" golden neighbour: no common tones</td></tr>
+</table>
+<p><b>What roughness can and cannot say here.</b> All golden triads are transpositions of one shape, so on harmonic tones
+their roughness differs only through register (measurement, in the harmonic-partial model of <code>explore.py</code>:
+in close position on roots within half an octave of middle C, from ^A♭3 up to vF♯4, the eight triads of the scale measure
+1.72 down to 1.26, purely by height). Roughness
+therefore cannot rank one golden progression above another; voice leading can. Where roughness does speak is at the end:
+the move Cg → C (two voices bend by a sixth-step; both chords in close position on C4) drops the measured roughness
+from 1.498 to 1.319, the release into the
+global minimum of harmonic tension. In the author's model the golden triad is a delicate local minimum one can dwell in;
+on harmonic instruments the measurement does not show that minimum, and arriving on a Western chord is always release
+(<a href="ch:ch26#measured">Chapter 26</a>).</p>
+<h3>Western chords and the decatonic</h3>
+<p>The decatonic contains no Western triad, and only two major or minor triads come close: G (G B D) and Bm (B D F♯)
+each have two notes, B and D, in 35 on C. Western harmony therefore enters a decatonic piece from outside, most smoothly through the
+golden projection (<a href="ch:ch35#projection">Chapter 35</a>): each golden triad G<sub>r</sub> is two sixth-steps from the
+major triad on the same root and from the minor triad a sixth-step higher. Cg → C, Dg → D and ^Ag → ^A are such
+releases. The proposal for writing golden melodies, then:</p>
+<ol>
+<li>Draw the melody from one decatonic mode (35 or 53 on C), using its two pentatonics for singable, almost Western
+phrases and the crossings between them for golden colour.</li>
+<li>Harmonize strong beats with a golden triad that contains the melody note (table above); prefer chords one chain step
+apart.</li>
+<li>Use the three-step parallel moves (C♯g → Cg, Bg → Cg) as cadential approaches; whether they function as cadences is an
+open question (<a href="ch:ch31#golden7-function">Chapter 31</a>).</li>
+<li>End, when a release is wanted, on the Western projection of the last golden chord.</li>
+</ol>
+<pianoroll edo="36" notes="D4 vF#4 ^A4 ; C#4 vF#4 ^A4 ; C#4 vF4 ^A4 ; C#4 vF4 ^Ab4 ; C4 vF4 ^Ab4 ; C4 vE4 ^Ab4 ; C4 vE4 ^G4 ; C4 E4 G4" labels="Dg ; vF♯g ; ^Ag ; C♯g ; vFg ; ^A♭g ; Cg ; C" title="The circle walk of the first tune: one voice moves a semitone per chord, then the release to C"></pianoroll>
+<pianoroll edo="36" notes="C4 vE4 ^G4 ; B3 vE4 ^G4 ; B3 vEb4 ^G4 ; B3 vEb4 ^F#4 ; vEb4 ^F#4 Bb4 ; vEb4 ^F#4 B4 ; C4 vE4 ^G4 ; C4 E4 G4" labels="Cg ; vEg ; ^Gg ; Bg ; vE♭g ; Bg ; Cg ; C" title="The second tune's harmony in the 53 mode: Bg → Cg lifts every voice a semitone"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>Proposition (chords containing a note).</b> $x \in G_r = \{r, r + 11, r + 22\}$ iff $r \in \{x, x - 11, x - 22\}$. With
+$x = 25j$, $x - 11 = 25(j + 1)$ and $x - 22 = 25(j + 2)$ (since $-11 \equiv 25$). So chain note $j$ lies in the golden
+triads rooted at chain notes $j$, $j + 1$, $j + 2$, and in a window $[\ell, h]$ only those with $\ell + 2 \le$ root position
+$\le h$ are available. (Theorem.)</p>
+<p><b>Voice-leading distance between golden triads.</b> Computed over all 36 golden triads, the distance from Cg to the
+triad rooted $k$ chain steps away is, for $k = 0, \dots, 18$:
+0, 3, 6, 9, 12, 15, 18, 15, 12, 9, 6, 5, 4, 3, 6, 9, 12, 15, 18. The early values are $3k$ (each chain step replaces one note
+by its neighbour a golden apotome away); the dip at $k = 13$ is the sixth-step lift Cg → ^Cg, every voice up one sixth-step
+(<a href="ch:ch34#lifts">Chapter 34</a>). Inside one decatonic, $k \le 7$.</p>
+<p><b>Progression totals.</b> The totals in the table are sums of these pairwise distances, and a greedy smooth voicing
+starting from close position realizes each total exactly. (Computed.)</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 36.1.</b> Which golden7 mode is the inversion of 5|1? Check it on the notes.</p>
+<details class="answer"><summary>Answer</summary><p>1|5. The mode 5|1 on C is C vE♭ vE ^F♯ ^G ^A♭ B. Invert about C (x → −x):
+C, ^A (inverts vE♭, 8 → 28), ^A♭ (vE), vF♯ (^F♯), vF (^G), vE (^A♭), C♯ (B): the set C C♯ vE vF vF♯ ^A♭ ^A, which is 1|5.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 36.2.</b> Show that 53 on C has the same notes as 35 on B.</p>
+<details class="answer"><summary>Answer</summary><p>35 on C is 0 3 6 11 14 17 22 25 28 33. Subtract 3 sixth-steps:
+33 0 3 8 11 14 19 22 25 30, i.e. C C♯ vE♭ vE vF ^F♯ ^G ^A♭ B♭ B, which is 53 on C.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 36.3.</b> Compute golden10's large step exactly and check that seven small and three large steps make an
+octave.</p>
+<details class="answer"><summary>Answer</summary><p>The large step is chain distance 7 inverted: $1200(5 - 7\log_2\varphi)
+= 168.37$ c. The small step is $1200(3\log_2\varphi - 2) = 99.27$ c. Then $7 \times 99.27 + 3 \times 168.37 = 694.89 +
+505.11 = 1200$ (exactly: $7(3g - 2) + 3(5 - 7g) = 1$ octave, where $g = \log_2\varphi$).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 36.4.</b> Why is golden10 not maximally even in 36-ET, although its steps (3 and 5) look nearly equal?</p>
+<details class="answer"><summary>Answer</summary><p>Its chroma is 5 − 3 = 2 sixth-steps, so each generic interval comes in two
+sizes 2 apart (for example its generic thirds are 6 or 8). Maximal evenness needs sizes one step apart, which by the chroma
+criterion needs $L - s = 1$, as in golden13 (3 and 2).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 36.5.</b> A melody in 35 on C sustains vF on a downbeat. Name the three golden triads of the scale that
+contain it. Is any of them a single chain step from Cg? Which is nearest?</p>
+<details class="answer"><summary>Answer</summary><p>vF is chain 2, so the triads are rooted at chain 2, 3, 4: vFg (root),
+C♯g (third), ^Ag (fifth). None is one chain step from Cg (chain 0); vFg is two steps away (sharing C), C♯g three and ^Ag
+four. The nearest choice is vFg, voice-leading distance 6.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 36.6 (listening).</b> In the 35-versus-44 example, on which beats of the tune do you hear the difference, and
+which of the two versions sounds closer to 12-ET?</p>
+<details class="answer"><summary>Answer</summary><p>Wherever the tune uses degrees 3, 6 or 9: the second note (D or ^D), the
+first note of bar 2 (vF♯ or F♯), the fourth note of bar 2 and the first of bar 4 (D or ^D again) and the high note of bar 3
+(^A or vB♭). Only 44's F♯ is a plain 12-ET pitch; its ^D and vB♭ are a sixth-step off 12-ET, as 35's vF♯ and ^A are. The
+audible difference is harmonic: 35's D, vF♯ and ^A belong to golden triads of the scale (Dg, vF♯g, ^Ag), while 44's new
+notes belong only to ^Dg, a golden triad seventeen circle steps from Cg that the progression never touches.</p></details>
+</div>
+</section>

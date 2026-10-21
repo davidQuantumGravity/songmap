@@ -1,0 +1,27 @@
+# ch36 decatonic-modes: the ten modes of the golden decatonic (golden10) on C over a C drone, from the
+# brightest (9|0) to the darkest (0|9). Consecutive modes differ in one note, lowered by a golden limma
+# (2 sixth-steps). 53 on C is the fourth (6|3), 35 on C the seventh (3|6).
+songmap: 0.2
+title: "The ten modes of the decatonic"
+tempo: 160
+meter: "6/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys, low: clean/bass}
+mix:
+  keys: {gain_db: -4}
+  low: {gain_db: -10}
+sections:
+  - {name: m90, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 vd8 veb8 ve8 ^f8 ^f#8 ^g8 a8 bb8 b8 c+4"}, low: {notes: "c-1."}}}
+  - {name: m81, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 vd8 veb8 ve8 ^f8 ^f#8 ^g8 ^ab8 bb8 b8 c+4"}, low: {notes: "c-1."}}}
+  - {name: m72, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 vd8 veb8 ve8 vf8 ^f#8 ^g8 ^ab8 bb8 b8 c+4"}, low: {notes: "c-1."}}}
+  - {name: m63, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 c#8 veb8 ve8 vf8 ^f#8 ^g8 ^ab8 bb8 b8 c+4"}, low: {notes: "c-1."}}}
+  - {name: m54, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 c#8 veb8 ve8 vf8 ^f#8 ^g8 ^ab8 ^a8 b8 c+4"}, low: {notes: "c-1."}}}
+  - {name: m45, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 c#8 veb8 ve8 vf8 vf#8 ^g8 ^ab8 ^a8 b8 c+4"}, low: {notes: "c-1."}}}
+  - {name: m36, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 c#8 d8 ve8 vf8 vf#8 ^g8 ^ab8 ^a8 b8 c+4"}, low: {notes: "c-1."}}}
+  - {name: m27, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 c#8 d8 ve8 vf8 vf#8 ^g8 ^ab8 ^a8 ^bb8 c+4"}, low: {notes: "c-1."}}}
+  - {name: m18, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 c#8 d8 ve8 vf8 vf#8 vg8 ^ab8 ^a8 ^bb8 c+4"}, low: {notes: "c-1."}}}
+  - {name: m09, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 c#8 d8 eb8 vf8 vf#8 vg8 ^ab8 ^a8 ^bb8 c+4"}, low: {notes: "c-1."}}}
+master: clean

@@ -1,0 +1,547 @@
+<p>This appendix collects the mathematics the book uses, from the beginning, with worked examples and exercises.
+Nothing here is needed to <i>hear</i> the music, but the Derive layers of the chapters lean on it. Each section ends
+with a list of the places where its tools are used. Every number below was computed for this appendix, with the
+book's canonical rounding (two decimals in cents).</p>
+
+<section id="logs">
+<h2>Logarithms</h2>
+
+<h3>Powers</h3>
+<p>For a positive number $b$ and a whole number $n$, $b^n$ is $b$ multiplied by itself $n$ times. The rules
+$$b^m b^n = b^{m+n}, \qquad (b^m)^n = b^{mn}, \qquad b^0 = 1, \qquad b^{-n} = \frac{1}{b^n}, \qquad b^{1/n} = \sqrt[n]{b}$$
+extend the definition to every rational exponent, and by continuity to every real one. In music the base is
+almost always 2, because the octave doubles the frequency: a tone $n$ octaves above $f$ has frequency $2^n f$, and
+the equal-tempered semitone is the ratio $2^{1/12} \approx 1.059463$, the number whose twelfth power is 2.</p>
+
+<h3>The logarithm</h3>
+<p><b>Definition.</b> For $b > 0$, $b \ne 1$ and $x > 0$, the logarithm $\log_b x$ is the exponent $y$ with
+$b^y = x$. It answers the question "$b$ to what power gives $x$?" For example $\log_2 8 = 3$,
+$\log_2 \tfrac12 = -1$, $\log_2 1 = 0$ and $\log_2 \tfrac32 = 0.58496\ldots$ (the perfect fifth is a little more
+than half an octave).</p>
+<p>The rules for powers turn into the rules for logarithms:
+$$\log_b(xy) = \log_b x + \log_b y, \qquad \log_b\frac{x}{y} = \log_b x - \log_b y, \qquad \log_b(x^n) = n\log_b x.$$
+The first is the reason logarithms exist: they turn multiplication into addition. John Napier introduced them in
+1614 for exactly that purpose (<a href="ch:ch01#logarithms">Chapter 1</a>). Calculators usually offer only
+$\log_{10}$ and the natural logarithm $\ln = \log_e$, with $e = 2.71828\ldots$; the change of base rule
+$$\log_2 x = \frac{\ln x}{\ln 2} = \frac{\log_{10} x}{\log_{10} 2}$$
+converts between them.</p>
+
+<h3>Cents</h3>
+<p>An interval is a frequency ratio $r$, and stacking intervals multiplies their ratios. Measured by a logarithm,
+stacking becomes adding. The book's unit is the <b>cent</b>, 1/1200 of an octave:
+$$c(r) = 1200\log_2 r = 3986.31\,\log_{10} r = 1731.23\,\ln r, \qquad r = 2^{c/1200}.$$
+So the octave is 1200 c, the equal-tempered semitone 100 c, the 36-ET sixth-step $1200/36 = 33.33$ c (ratio
+$2^{1/36} \approx 1.019441$), and one cent is the ratio $2^{1/1200} \approx 1.000578$, about 0.058 percent.</p>
+<div class="box math"><p><b>Worked examples.</b></p>
+<ul>
+<li>The pure fifth: $c(3/2) = 1200 \times 0.5849625 = 701.96$ c. The golden sixth: $c(\varphi) = 1200\log_2 1.6180340 =
+833.09$ c. The golden third: $c(2/\varphi) = 1200 - 833.09 = 366.91$ c, because $\log_2(2/\varphi) = 1 - \log_2\varphi$.</li>
+<li>Stacking adds: a fifth and a fourth make an octave, $701.96 + 498.04 = 1200$, because $\tfrac32 \cdot \tfrac43 = 2$.</li>
+<li>Twelve fifths against seven octaves: $12 \times 701.955 - 7 \times 1200 = 23.46$ c, the Pythagorean comma
+(<a href="ch:ch05#comma">Chapter 5</a>).</li>
+<li>From hertz to cents: 440 Hz to 450 Hz is $1200\log_2(450/440) = 38.91$ c. From cents to hertz: 500 c above
+middle C (261.63 Hz) is $261.63 \cdot 2^{500/1200} = 349.23$ Hz, F4.</li>
+</ul></div>
+<p><b>Inversion.</b> The interval from the top note of $r$ up to the octave is $2/r$, and
+$c(2/r) = 1200 - c(r)$: an interval and its inversion fill the octave. A downward interval has negative cents,
+$c(1/r) = -c(r)$, and $n$ equal intervals stacked give $c(r^n) = n\,c(r)$.</p>
+
+<h3>Notes and frequencies</h3>
+<p>With A4 = 440 Hz and MIDI note numbers (C4 = 60, A4 = 69), a 12-ET note $m$ has frequency
+$$f = 440 \cdot 2^{(m - 69)/12}\ \text{Hz}, \qquad m = 69 + 12\log_2\frac{f}{440}.$$
+Middle C is $440 \cdot 2^{-9/12} = 261.63$ Hz. In 36-ET a pitch is counted in sixth-steps $s = 3m + u - d$ ($u$ ups and
+$d$ downs, <a href="ch:ch24#notation">Chapter 24</a>), and $f = 440 \cdot 2^{(s - 207)/36}$ Hz.</p>
+
+<h3>Decibels and exponentials</h3>
+<p>Levels are logarithms too. A sound level is $L = 20\log_{10}(A/A_0)$ dB for an amplitude $A$ against a
+reference $A_0$, so doubling the amplitude adds $20\log_{10}2 = 6.02$ dB and a factor of ten adds 20 dB
+(<a href="ch:ch01#frequency">Chapter 1</a>). The inverse of the logarithm is the exponential: a tone whose amplitude
+decays as $e^{-t/\tau}$ loses $20\log_{10}e = 8.69$ dB every $\tau$ seconds, and it is 60 dB down after
+$\tau\ln 1000 = 6.9078\,\tau$ seconds, which is how decay times are specified for the synthesized tones of
+<a href="ch:ch43#additive">Chapter 43</a>.</p>
+
+<h3>Irrational logarithms</h3>
+<p><b>Proposition.</b> $\log_2 3$ is irrational. <i>Proof.</i> If $\log_2 3 = m/n$ with whole numbers $m, n > 0$,
+then $3^n = 2^m$; the left side is odd and the right side even. ∎ The same argument shows that $\log_2(p/q)$ is
+irrational for every ratio of whole numbers that is not a power of 2, so no number of pure fifths ever makes a whole
+number of octaves. For $\log_2\varphi$ a different argument is needed (<a href="ch:appD#tuning">Appendix D</a>).</p>
+
+<p><b>Where logarithms are used.</b> Hearing in ratios (<a href="ch:ch01#logarithms">§1.3</a>), cents
+(<a href="ch:ch01#cents">§1.5</a>), the harmonic series in cents (<a href="ch:ch02#partials">§2.2</a>), commas and
+tuning (<a href="ch:ch05#comma">§5.4</a>, <a href="ch:ch07#equal">§7.3</a>), golden intervals
+(<a href="ch:ch23#golden-intervals">§23.2</a>), sixth-steps (<a href="ch:ch24#sixth-steps">§24.1</a>), decay and
+loudness (<a href="ch:ch43#additive">§43.1</a>, <a href="ch:ch43#mixing">§43.4</a>).</p>
+
+<div class="exercise">
+<p><b>Exercise A.1.</b> Compute the cents of 6/5 and of 5/4, and check that their sum is the cents of the just fifth.</p>
+<details class="answer"><summary>Answer</summary><p>$c(6/5) = 315.64$ c and $c(5/4) = 386.31$ c. Their sum is
+701.96 c $= c(3/2)$, because $\tfrac65 \cdot \tfrac54 = \tfrac32$.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.2.</b> A tone is raised by 1 percent. How many cents is that? How many octaves does human hearing
+span, from 20 Hz to 20 kHz?</p>
+<details class="answer"><summary>Answer</summary><p>$1200\log_2 1.01 = 17.23$ c. The hearing range is
+$\log_2(20000/20) = \log_2 1000 = 9.97$ octaves, almost ten.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.3.</b> Show that the inversion of the golden sixth is the golden third, in ratios and in cents.</p>
+<details class="answer"><summary>Answer</summary><p>The inversion of $\varphi$ is $2/\varphi$, the golden third. In
+cents $c(2/\varphi) = 1200 - c(\varphi) = 1200 - 833.09 = 366.91$ c.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.4.</b> Prove that $\log_2 5$ is irrational, and conclude that no stack of just major thirds (5/4)
+is ever a whole number of octaves.</p>
+<details class="answer"><summary>Answer</summary><p>If $\log_2 5 = m/n$ then $5^n = 2^m$, odd against even. A stack
+of $k$ just thirds is $5^k/4^k$, and $5^k/4^k = 2^j$ would give $5^k = 2^{j + 2k}$, impossible for $k > 0$.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.5.</b> Using $f = 440\cdot 2^{(s-207)/36}$, find the frequency of ^G4 and compare it with the exact
+golden fifth above middle C, $261.63 \cdot 4/\varphi^2$.</p>
+<details class="answer"><summary>Answer</summary><p>^G4 is $s = 3 \cdot 67 + 1 = 202$, so $f = 440 \cdot 2^{-5/36} =
+399.62$ Hz. The exact golden fifth is 399.73 Hz; the 36-ET note is 0.49 c flat.</p></details>
+</div>
+</section>
+
+<section id="modular">
+<h2>Modular arithmetic</h2>
+
+<h3>Remainders and congruence</h3>
+<p>Every integer $a$ can be divided by a positive integer $n$ with a remainder: $a = qn + r$ with
+$0 \le r &lt; n$. The remainder is written $a \bmod n$. Two integers are <b>congruent modulo $n$</b>,
+$a \equiv b \pmod n$, when $n$ divides $a - b$, that is, when they leave the same remainder. Congruence respects
+addition and multiplication: if $a \equiv a'$ and $b \equiv b'$ then $a + b \equiv a' + b'$ and
+$ab \equiv a'b' \pmod n$. So we may compute with remainders alone. The set $\{0, 1, \dots, n-1\}$ with this
+arithmetic is $\mathbb{Z}_n$, the integers mod $n$: clock arithmetic on a clock with $n$ hours.</p>
+<p><b>Music.</b> Octave equivalence makes pitch classes into a clock. In 12-ET a note with MIDI number $m$ has pitch
+class $m \bmod 12$ in $\mathbb{Z}_{12}$ (C = 0, C♯ = 1, …, B = 11); middle C is $60 \bmod 12 = 0$, A4 is
+$69 \bmod 12 = 9$. In 36-ET pitch classes are sixth-steps in $\mathbb{Z}_{36}$ (C = 0, ^C = 1, vC♯ = 2, C♯ = 3, …), and
+a 12-ET pitch class $p$ becomes $3p$. Going up 7 semitones from F (5) lands on $12 \equiv 0$, C; going up a golden
+sixth (25 sixth-steps) from ^A♭ (25) lands on $50 \equiv 14$, vF.</p>
+
+<h3>Negatives, intervals and interval classes</h3>
+<p>The interval from pitch class $x$ up to $y$ is $y - x \bmod n$; down from $x$ to $y$ it is $x - y$. Negative
+numbers are fine: $-5 \equiv 7 \pmod{12}$, so a fourth down lands where a fifth up does. The <b>interval class</b>
+of a pair $\{x, y\}$ is the smaller of $y - x$ and $x - y$ (mod $n$), a number from 0 to $n/2$: it identifies an
+interval with its inversion. In $\mathbb{Z}_{12}$ the classes are 0 to 6 (C–A is class 3, a minor third or major
+sixth); in $\mathbb{Z}_{36}$ they are 0 to 18, and the golden third (11) and golden sixth (25) are both class 11
+(<a href="ch:ch08#pitch-classes">Chapter 8</a>, <a href="ch:ch20#sets">Chapter 20</a>).</p>
+
+<h3>Layers and names in 36-ET</h3>
+<p>Division by 3 splits a 36-ET pitch class into a semitone and a layer: $p = 3q + r$ with $q \in \mathbb{Z}_{12}$ and
+$r \in \{0, 1, 2\}$. The <b>layer</b> is $\lambda(p) = p \bmod 3$: 0 for the 12-ET notes, 1 for the ^ notes, 2 for
+the v notes, and the standard name is that of $q$, ^ plus that of $q$, or v plus that of $q + 1$
+(<a href="ch:ch24#notation">Chapter 24</a>). Example: $29 = 3 \cdot 9 + 2$, so step 29 is v plus the name of
+semitone 10, vB♭.</p>
+
+<h3>Greatest common divisors and inverses</h3>
+<p>The <b>greatest common divisor</b> $\gcd(a, n)$ is found by Euclid's algorithm: divide, keep the remainder, and
+repeat with the last divisor until the remainder is 0. For 36 and 25:
+$$36 = 1\cdot 25 + 11,\quad 25 = 2 \cdot 11 + 3,\quad 11 = 3\cdot 3 + 2,\quad 3 = 1 \cdot 2 + 1,\quad 2 = 2\cdot 1 + 0,$$
+so $\gcd(36, 25) = 1$. Running the equations backwards gives <b>Bézout's identity</b>, integers $u, v$ with
+$ua + vn = \gcd(a, n)$; here $25 \cdot 13 - 36 \cdot 9 = 1$.</p>
+<p>An element $a$ of $\mathbb{Z}_n$ has a <b>multiplicative inverse</b> $a^{-1}$, with $a a^{-1} \equiv 1$, exactly
+when $\gcd(a, n) = 1$; Bézout's identity supplies it. Such elements are the <b>units</b> of $\mathbb{Z}_n$. The units
+of $\mathbb{Z}_{12}$ are 1, 5, 7 and 11, each its own inverse. The units of $\mathbb{Z}_{36}$ are 1, 5, 7, 11, 13, 17,
+19, 23, 25, 29, 31 and 35, with inverses
+$$5^{-1} = 29,\quad 7^{-1} = 31,\quad 11^{-1} = 23,\quad 13^{-1} = 25,\quad 17^{-1} = 17,\quad 19^{-1} = 19,\quad 35^{-1} = 35.$$
+The number of units is written $|\mathbb{Z}_n^\times|$ in this appendix (4 for $n = 12$, 12 for $n = 36$). Number
+theorists write it $\varphi(n)$, Euler's totient, and <a href="ch:ch08#circle">Chapter 8</a> uses that notation once;
+everywhere else in the book $\varphi$ is the golden ratio.</p>
+<div class="box math"><p><b>Worked example: where is a note on the golden chain?</b> The golden chain puts chain note
+$j$ at pitch class $25j \bmod 36$. To find which $j$ gives a pitch class $t$, solve $25j \equiv t$: multiply by
+$25^{-1} = 13$ to get $j \equiv 13t \pmod{36}$. For E ($t = 12$), $j \equiv 156 \equiv 12$: E is twelve golden
+sixths above C. For vE ($t = 11$), $j \equiv 143 \equiv 35 \equiv -1$: the golden third is one golden sixth down
+(<a href="ch:ch23#chain">Chapter 23</a>, <a href="ch:ch24#keys">Chapter 24</a>).</p></div>
+
+<h3>Orbits of repeated addition</h3>
+<p><b>Theorem.</b> Adding $k$ again and again in $\mathbb{Z}_n$ returns to the start after exactly $n/\gcd(k, n)$
+steps, and the orbit of 0 is the set of multiples of $\gcd(k, n)$. In particular $k$ reaches every element exactly
+when $\gcd(k, n) = 1$. (Proof in <a href="ch:ch08#circle">§8.2</a>.) In $\mathbb{Z}_{12}$ the fifth 7 visits all
+twelve pitch classes; in $\mathbb{Z}_{36}$:</p>
+<table>
+<tr><th>Step $k$ (sixth-steps)</th><th>Interval</th><th>$\gcd(k, 36)$</th><th>Notes before returning</th></tr>
+<tr><td>9</td><td>minor third</td><td>9</td><td>4</td></tr>
+<tr><td>10</td><td>silver third</td><td>2</td><td>18</td></tr>
+<tr><td>11</td><td>golden third</td><td>1</td><td>36</td></tr>
+<tr><td>12</td><td>major third</td><td>12</td><td>3</td></tr>
+<tr><td>13</td><td>bronze third</td><td>1</td><td>36</td></tr>
+<tr><td>21</td><td>12-ET fifth</td><td>3</td><td>12</td></tr>
+<tr><td>25</td><td>golden sixth</td><td>1</td><td>36</td></tr>
+</table>
+
+<h3>The Chinese remainder theorem</h3>
+<p>If $\gcd(m, n) = 1$, the map $x \mapsto (x \bmod m, x \bmod n)$ is a one-to-one correspondence
+$\mathbb{Z}_{mn} \to \mathbb{Z}_m \times \mathbb{Z}_n$ that respects addition and multiplication. So
+$\mathbb{Z}_{36} \cong \mathbb{Z}_4 \times \mathbb{Z}_9$ (for example $11 \mapsto (3, 2)$), but $\mathbb{Z}_{36}$ is
+<i>not</i> $\mathbb{Z}_{12} \times \mathbb{Z}_3$, because 12 and 3 share the factor 3. Musically: the layer is not an
+independent coordinate, since three sixth-steps up through the layers carry over into one semitone
+(<a href="ch:ch24#layers">§24.2</a>).</p>
+
+<p><b>Where modular arithmetic is used.</b> Pitch classes and $\mathbb{Z}_{12}$
+(<a href="ch:ch08#pitch-classes">§8.1</a>), the circle of fifths (<a href="ch:ch08#circle">§8.2</a>), key signatures
+(<a href="ch:ch08#keys">§8.3</a>), meters and polyrhythms (<a href="ch:ch16#meter">§16.1</a>), set theory and
+multiplication (<a href="ch:ch20#operations">§20.2</a>, <a href="ch:ch20#multiplication">§20.3</a>), rows
+(<a href="ch:ch21#forms">§21.2</a>), layers and spelling in 36-ET (<a href="ch:ch24#layers">§24.2</a>,
+<a href="ch:ch24#notation">§24.3</a>), golden keys (<a href="ch:ch24#keys">§24.6</a>), voice-leading paths
+(<a href="ch:ch27#uniform-path">§27.2</a>), $\mathbb{Z}_{36}$ (<a href="ch:ch33#z36">§33.1</a>,
+<a href="ch:appD#z36">Appendix D</a>).</p>
+
+<div class="exercise">
+<p><b>Exercise A.6.</b> Find the inverse of 7 modulo 36 with Euclid's algorithm, and check it.</p>
+<details class="answer"><summary>Answer</summary><p>$36 = 5 \cdot 7 + 1$, so $1 = 36 - 5 \cdot 7$ and
+$7^{-1} \equiv -5 \equiv 31$. Check: $7 \cdot 31 = 217 = 6 \cdot 36 + 1$.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.7.</b> Give the standard 36-ET names of steps 17, 23 and 34, and their layers.</p>
+<details class="answer"><summary>Answer</summary><p>$17 = 3\cdot 5 + 2$: vF♯ (layer 2). $23 = 3 \cdot 7 + 2$: vA♭
+(layer 2). $34 = 3 \cdot 11 + 1$: ^B (layer 1).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.8.</b> What is the interval class of {C, ^A♭} in $\mathbb{Z}_{36}$? Of {C, A} in $\mathbb{Z}_{12}$?</p>
+<details class="answer"><summary>Answer</summary><p>{0, 25}: $\min(25, 11) = 11$, the golden third/sixth class.
+{0, 9}: $\min(9, 3) = 3$, the minor third/major sixth class.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.9.</b> Which chain note is B (step 33)? Use $j \equiv 13t \pmod{36}$.</p>
+<details class="answer"><summary>Answer</summary><p>$13 \cdot 33 = 429 = 11 \cdot 36 + 33$, so $j \equiv 33 \equiv -3$:
+B is three golden sixths below C, the bottom of golden7's chain window.</p></details>
+</div>
+</section>
+
+<section id="groups">
+<h2>Groups</h2>
+
+<h3>Definition and examples</h3>
+<p>A <b>group</b> is a set $G$ with an operation $\circ$ such that (i) $a \circ b \in G$ for all $a, b \in G$
+(closure); (ii) $(a \circ b) \circ c = a \circ (b \circ c)$ (associativity); (iii) there is an identity $e$ with
+$e \circ a = a \circ e = a$; (iv) every $a$ has an inverse $a^{-1}$ with $a \circ a^{-1} = a^{-1} \circ a = e$. If
+also $a \circ b = b \circ a$ always, the group is <b>abelian</b> (commutative). The <b>order</b> of a finite group is
+its number of elements; the order of an element $a$ is the least $k \ge 1$ with $a^k = e$.</p>
+<table>
+<tr><th>Group</th><th>Order</th><th>Where in the book</th></tr>
+<tr><td>$\mathbb{Z}_{12}$, $\mathbb{Z}_{36}$ under addition (pitch classes; also the transpositions $T_n$)</td><td>12, 36</td><td><a href="ch:ch08#pitch-classes">§8.1</a>, <a href="ch:ch24#layers">§24.2</a></td></tr>
+<tr><td>Transpositions and inversions $T_n$, $I_n$ of $\mathbb{Z}_{12}$: the dihedral group</td><td>24</td><td><a href="ch:ch20#operations">§20.2</a></td></tr>
+<tr><td>Units of $\mathbb{Z}_{12}$ under multiplication: $\{1, 5, 7, 11\} \cong \mathbb{Z}_2 \times \mathbb{Z}_2$</td><td>4</td><td><a href="ch:ch20#multiplication">§20.3</a></td></tr>
+<tr><td>Units of $\mathbb{Z}_{36}$: $\cong \mathbb{Z}_2 \times \mathbb{Z}_6$</td><td>12</td><td><a href="ch:ch33#m11">§33.2</a>, <a href="ch:appD#z36">D.20</a></td></tr>
+<tr><td>The affine maps $x \mapsto kx + n$ of $\mathbb{Z}_{12}$ ($k$ a unit)</td><td>48</td><td><a href="ch:ch20#multiplication">§20.3</a></td></tr>
+<tr><td>Motif operations $\{1, I, R, RI\}$: the Klein four-group $\mathbb{Z}_2\times\mathbb{Z}_2$</td><td>4</td><td><a href="ch:ch13#transformations">§13.4</a></td></tr>
+<tr><td>Row operations $T_n$, $I_n$, $R$ and their products</td><td>48</td><td><a href="ch:ch21#forms">§21.2</a></td></tr>
+<tr><td>The neo-Riemannian group generated by $P$, $L$, $R$ (dihedral)</td><td>24</td><td><a href="ch:ch04#tonnetz">§4.4</a>, <a href="ch:ch10#neo-riemannian">§10.5</a></td></tr>
+<tr><td>Golden intervals $2^m\varphi^n$ under multiplication: $\cong \mathbb{Z}^2$</td><td>infinite</td><td><a href="ch:ch23#golden-intervals">§23.2</a></td></tr>
+</table>
+<p>A group is <b>cyclic</b> if some element $g$ (a <b>generator</b>) gives every element as a power (or, written
+additively, a multiple) of $g$. $\mathbb{Z}_n$ is cyclic, generated by 1 and by every unit. The dihedral group of
+order 24, the symmetries of a regular 12-gon, is generated by $T_1$ (rotation) and $I_0$ (reflection) with
+$T_1^{12} = I_0^2 = e$ and $I_0 T_1 I_0 = T_1^{-1}$; it is not abelian. (The book writes it $D_{12}$, after the
+12-gon; some authors write $D_{24}$, after its order.)</p>
+
+<h3>Subgroups and Lagrange's theorem</h3>
+<p>A <b>subgroup</b> $H \subseteq G$ is a subset that is a group under the same operation: it contains $e$ and is
+closed under the operation and under inverses. <b>Lagrange's theorem:</b> the order of a subgroup divides the order
+of the group. In a cyclic group of order $n$ there is exactly one subgroup of each order $d$ dividing $n$, generated
+by $n/d$. So:</p>
+<ul>
+<li>$\mathbb{Z}_{12}$ has subgroups of orders 1, 2, 3, 4, 6, 12: a note, the tritone {0, 6}, the augmented triad
+{0, 4, 8}, the diminished seventh {0, 3, 6, 9}, the whole-tone scale, everything
+(<a href="ch:ch19#subgroups">§19.4</a>).</li>
+<li>$\mathbb{Z}_{36}$ has subgroups of orders 1, 2, 3, 4, 6, 9, 12, 18, 36. The one of order 12, generated by 3, is
+12-ET itself; those of orders 9 and 18 (generated by 4 and by 2) have no 12-ET counterpart
+(<a href="ch:ch24#sixth-steps">§24.1</a>, <a href="ch:ch33#z36">§33.1</a>).</li>
+</ul>
+
+<h3>Cosets</h3>
+<p>A <b>coset</b> of a subgroup $H$ in an additive group is a translate $a + H = \{a + h : h \in H\}$. Two cosets are
+either equal or disjoint, and all have $|H|$ elements, so the cosets <b>partition</b> the group into $|G|/|H|$ pieces
+(this is the proof of Lagrange's theorem). The four augmented triads are the cosets of {0, 4, 8} in
+$\mathbb{Z}_{12}$; the three layers of 36-ET are the cosets $3\mathbb{Z}_{36}$, $1 + 3\mathbb{Z}_{36}$ and
+$2 + 3\mathbb{Z}_{36}$ of 12-ET. A set is fixed by the transposition $T_k$ exactly when it is a union of cosets of
+the subgroup generated by $k$, which is the theory of the symmetric scales (<a href="ch:ch19#subgroups">§19.4</a>).</p>
+
+<h3>Homomorphisms and quotients</h3>
+<p>A <b>homomorphism</b> is a map $f: G \to G'$ with $f(a \circ b) = f(a) \circ f(b)$. Its <b>kernel</b>
+$\{a : f(a) = e\}$ is a subgroup, and $f$ identifies elements of the same coset of the kernel: the image is the
+<b>quotient group</b> $G/\ker f$. The layer map $\lambda: \mathbb{Z}_{36} \to \mathbb{Z}_3$, $\lambda(p) = p \bmod 3$,
+is a homomorphism with kernel $3\mathbb{Z}_{36} \cong \mathbb{Z}_{12}$, so $\mathbb{Z}_{36}/3\mathbb{Z}_{36} \cong
+\mathbb{Z}_3$. That $\lambda$ is additive is the whole content of the layer theorem
+(<a href="ch:ch25#layer-theorem">§25.5</a>) and of the admissibility condition of strict paths
+(<a href="ch:ch27#uniform-path">§27.2</a>).</p>
+<p>Not every natural map is a homomorphism. "Round to the nearest 12-ET note" is not: ^C and ^C each round to C,
+but their sum, $1 + 1 = 2$, is vC♯, which rounds to C♯.</p>
+<p>A homomorphism from a group to itself that is one-to-one is an <b>automorphism</b>. For a unit $u$ of
+$\mathbb{Z}_n$, multiplication $M_u(x) = ux$ is an automorphism. $M_7$ of $\mathbb{Z}_{12}$ turns the chromatic scale
+into the circle of fifths and has order 2; $M_{11}$ of $\mathbb{Z}_{36}$, the golden transform, has order 6, since
+the powers of 11 mod 36 are 11, 13, 35, 25, 23, 1 (<a href="ch:ch33#m11">§33.2</a>).</p>
+
+<h3>Actions, orbits and stabilizers</h3>
+<p>A group $G$ <b>acts</b> on a set $X$ when each $g$ moves the points of $X$ ($x \mapsto g \cdot x$) so that
+$e \cdot x = x$ and $g \cdot (h \cdot x) = (g \circ h) \cdot x$. The transpositions act on pitch-class sets, the
+$T_n$/$I_n$ group acts on chords, $P$, $L$, $R$ act on the 24 triads. The <b>orbit</b> of $x$ is
+$\{g \cdot x : g \in G\}$, everything $x$ can be moved to; the <b>stabilizer</b> is
+$\operatorname{Stab}(x) = \{g : g \cdot x = x\}$, a subgroup.</p>
+<p><b>Orbit–stabilizer theorem.</b> $|\text{orbit of } x| \cdot |\operatorname{Stab}(x)| = |G|$. <i>Proof.</i>
+$g \cdot x = h \cdot x$ exactly when $h^{-1} g \in \operatorname{Stab}(x)$, that is, when $g$ and $h$ lie in the same
+coset of the stabilizer, so points of the orbit correspond to cosets. ∎ Example: the augmented triad {0, 4, 8} is
+fixed by $T_0, T_4, T_8$, so it has $12/3 = 4$ distinct transpositions; the diminished seventh is fixed by four
+transpositions and has 3; this is why Messiaen's modes have "limited transposition"
+(<a href="ch:ch19#messiaen">§19.3</a>).</p>
+<p><b>Burnside's lemma.</b> The number of orbits equals the average number of points fixed by a group element:
+$$\#\text{orbits} = \frac{1}{|G|}\sum_{g \in G} |\{x : g \cdot x = x\}|.$$
+<i>Worked example.</i> There are $\tbinom{12}{3} = 220$ three-note sets in $\mathbb{Z}_{12}$. Under transposition,
+$T_0$ fixes all 220, $T_4$ and $T_8$ each fix the 4 augmented triads, and the other nine fix none, so there are
+$(220 + 4 + 4)/12 = 19$ transposition classes of trichords. Adding the 12 inversions, $I_n$ fixes 10 sets for each
+even $n$ and none for odd $n$, giving $(228 + 60)/24 = 12$ set classes. (Both counts were confirmed by listing the
+classes directly.) The same method counts set classes (<a href="ch:ch20#sets">§20.1</a>), symmetric scales
+(<a href="ch:ch19#subgroups">§19.4</a>) and row classes (<a href="ch:ch21#forms">§21.2</a>).</p>
+
+<p><b>Where groups are used.</b> $\mathbb{Z}_{12}$ (<a href="ch:ch08#pitch-classes">§8.1</a>), orbits and generators
+(<a href="ch:ch08#circle">§8.2</a>), the Tonnetz (<a href="ch:ch04#tonnetz">§4.4</a>), counting chords
+(<a href="ch:ch09#triads">§9.1</a>), motif transformations (<a href="ch:ch13#transformations">§13.4</a>), symmetric
+scales (<a href="ch:ch19#messiaen">§19.3</a>, <a href="ch:ch19#subgroups">§19.4</a>), set theory
+(<a href="ch:ch20#operations">§20.2</a>, <a href="ch:ch20#multiplication">§20.3</a>), rows
+(<a href="ch:ch21#forms">§21.2</a>), layers (<a href="ch:ch24#layers">§24.2</a>), $\mathbb{Z}_{36}$ and the golden
+transform (<a href="ch:ch33#z36">§33.1</a>, <a href="ch:ch33#m11">§33.2</a>), the proofs of
+<a href="ch:appD#z36">Appendix D</a>.</p>
+
+<div class="exercise">
+<p><b>Exercise A.10.</b> List the subgroups of $\mathbb{Z}_{36}$ with a generator for each, and say which contain the
+golden triad's notes 11 and 22.</p>
+<details class="answer"><summary>Answer</summary><p>Orders 1, 2, 3, 4, 6, 9, 12, 18, 36, generated by 0, 18, 12, 9, 6,
+4, 3, 2, 1. Since $\gcd(11, 36) = 1$, only the whole group contains 11; 22 has $\gcd(22, 36) = 2$, so it lies in the
+subgroups generated by 2 and by 1.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.11.</b> Use Burnside's lemma to count the two-note sets (dyads) of $\mathbb{Z}_{12}$ up to
+transposition. What are the classes?</p>
+<details class="answer"><summary>Answer</summary><p>There are 66 dyads. $T_0$ fixes all 66 and $T_6$ fixes the 6
+tritones; no other $T_n$ fixes a dyad. So there are $(66 + 6)/12 = 6$ classes: the interval classes 1 to 6.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.12.</b> Find the stabilizer of the octatonic set {0, 1, 3, 4, 6, 7, 9, 10} under transposition and
+the number of its distinct transpositions.</p>
+<details class="answer"><summary>Answer</summary><p>It is fixed by $T_0, T_3, T_6, T_9$, the subgroup of order 4, so it
+has $12/4 = 3$ transpositions (<a href="ch:ch19#octatonic">§19.2</a>).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.13.</b> Show that $\lambda(11p) = 2\lambda(p)$ for every $p \in \mathbb{Z}_{36}$. What does $M_{11}$ do
+to the layers?</p>
+<details class="answer"><summary>Answer</summary><p>$11 \equiv 2 \pmod 3$ and $\lambda$ is additive, so
+$\lambda(11p) = 11\lambda(p) \equiv 2\lambda(p)$. It fixes layer 0 and swaps layers 1 and 2.</p></details>
+</div>
+</section>
+
+<section id="continued">
+<h2>Continued fractions</h2>
+
+<h3>The expansion</h3>
+<p>Tuning keeps asking one question: how many generators make nearly a whole number of octaves? With the generator
+measured in octaves, $x = \log_2(\text{ratio})$, we want fractions $m/n$ close to $x$: $n$ generators $\approx m$
+octaves. The tool is the <b>continued fraction</b>
+$$x = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{a_3 + \cdots}}} = [a_0; a_1, a_2, a_3, \ldots].$$
+<b>Algorithm.</b> Put $y_0 = x$. Take the whole part $a_i = \lfloor y_i \rfloor$; if $y_i$ is not a whole number, invert
+the rest, $y_{i+1} = 1/(y_i - a_i)$, and repeat. For a rational number this is Euclid's algorithm and it stops; for
+an irrational one it never stops.</p>
+<div class="box math"><p><b>Worked example.</b> $19/12 = 1 + 7/12$; $12/7 = 1 + 5/7$; $7/5 = 1 + 2/5$; $5/2 = 2 + 1/2$;
+$2/1 = 2$. So $19/12 = [1; 1, 1, 2, 2]$, the same digits that begin $\log_2 3 = [1; 1, 1, 2, 2, 3, 1, 5, \ldots]$:
+19 semitones (an octave and a fifth) approximate the ratio 3 well.</p></div>
+<p>The expansions the book uses (computed to 80 digits):</p>
+<table>
+<tr><th>Number</th><th>Value</th><th>Continued fraction</th></tr>
+<tr><td>$\log_2(3/2)$, the fifth</td><td>0.5849625</td><td>[0; 1, 1, 2, 2, 3, 1, 5, 2, 23, 2, 2, 1, 1, …]</td></tr>
+<tr><td>$\log_2\varphi$, the golden sixth</td><td>0.6942419</td><td>[0; 1, 2, 3, 1, 2, 3, 2, 4, 2, 1, 2, 11, …]</td></tr>
+<tr><td>$\log_2(5/4)$, the just major third</td><td>0.3219281</td><td>[0; 3, 9, 2, 2, 4, 6, 2, 1, 1, 3, …]</td></tr>
+<tr><td>$\varphi$</td><td>1.6180340</td><td>[1; 1, 1, 1, 1, …]</td></tr>
+</table>
+
+<h3>Convergents</h3>
+<p>Stopping the expansion early gives the <b>convergents</b> $p_i/q_i$. They obey a simple recursion:
+$$p_{-1} = 1,\ q_{-1} = 0,\ p_0 = a_0,\ q_0 = 1;\qquad p_i = a_i p_{i-1} + p_{i-2},\quad q_i = a_i q_{i-1} + q_{i-2}.$$
+For the fifth they are 0/1, 1/1, 1/2, 3/5, 7/12, 24/41, 31/53, 179/306, …; for the golden sixth 0/1, 1/1, 2/3, 7/10,
+9/13, 25/36, 84/121, 193/278, …. Each convergent $m/n$ is a tuning fact: $n$ generators make about $m$ octaves, and
+the leftover $1200\,(nx - m)$ cents is a comma.</p>
+<table>
+<tr><th>Fifth: $n/m$</th><th>Leftover</th><th>Golden sixth: $n/m$</th><th>Leftover</th></tr>
+<tr><td>2 fifths ≈ 1 octave</td><td>+203.91 c (whole tone)</td><td>3 ≈ 2 octaves</td><td>+99.27 c (golden apotome)</td></tr>
+<tr><td>5 ≈ 3</td><td>−90.22 c (limma)</td><td>10 ≈ 7</td><td>−69.10 c (golden limma)</td></tr>
+<tr><td>12 ≈ 7</td><td>+23.46 c (Pythagorean comma)</td><td>13 ≈ 9</td><td>+30.17 c (golden comma)</td></tr>
+<tr><td>41 ≈ 24</td><td>−19.84 c</td><td>36 ≈ 25</td><td>−8.75 c (36-comma)</td></tr>
+<tr><td>53 ≈ 31</td><td>+3.62 c</td><td>121 ≈ 84</td><td>+3.93 c</td></tr>
+</table>
+<p><b>Determinant identity.</b> $p_i q_{i-1} - p_{i-1} q_i = (-1)^{i-1}$. <i>Proof.</i> By the recursion,
+$p_i q_{i-1} - p_{i-1} q_i = (a_i p_{i-1} + p_{i-2}) q_{i-1} - p_{i-1}(a_i q_{i-1} + q_{i-2}) = -(p_{i-1} q_{i-2} - p_{i-2} q_{i-1})$,
+so the value only changes sign at each step, and it is $p_0 q_{-1} - p_{-1} q_0 = -1$ at $i = 0$. ∎ For example
+$24 \cdot 12 - 7 \cdot 41 = 1$ and $25 \cdot 13 - 9 \cdot 36 = 1$. Consequences: every convergent is in lowest terms;
+consecutive convergents lie on opposite sides of $x$, so the leftovers alternate in sign; and
+$|x - p_i/q_i| &lt; 1/(q_i q_{i+1})$.</p>
+
+<h3>Best approximation</h3>
+<p><b>Theorem.</b> Let $x$ be irrational and $p_i/q_i$ a convergent. If $0 &lt; q &lt; q_{i+1}$ and $p$ is any integer
+with $(p, q) \ne (p_i, q_i)$, then $|qx - p| > |q_i x - p_i|$.</p>
+<p><i>Proof.</i> Because the matrix with rows $(p_i, q_i)$ and $(p_{i+1}, q_{i+1})$ has determinant $\pm 1$, there are
+integers $u, v$ with $p = u p_i + v p_{i+1}$ and $q = u q_i + v q_{i+1}$. If $v = 0$ then $(p, q) = u(p_i, q_i)$ with
+$u \ge 2$ (as $q > 0$ and $(p,q) \ne (p_i,q_i)$), and $|qx - p| = u|q_i x - p_i|$ is larger. If $u = 0$ then
+$q = v q_{i+1} \ge q_{i+1}$, excluded. Otherwise $u$ and $v$ have opposite signs, since $q &lt; q_{i+1}$ rules out both
+positive and $q > 0$ rules out both negative. The numbers $q_i x - p_i$ and $q_{i+1}x - p_{i+1}$ also have opposite
+signs, so $u(q_i x - p_i)$ and $v(q_{i+1} x - p_{i+1})$ have the same sign, and
+$|qx - p| = |u|\,|q_i x - p_i| + |v|\,|q_{i+1} x - p_{i+1}| > |q_i x - p_i|$. ∎</p>
+<p>In tuning language, no cycle shorter than the next convergent's leaves a smaller comma. That is why 12 fifths
+are the record until 41, and 36 golden sixths the record until 121 (<a href="ch:ch05#continued-fractions">§5.5</a>,
+<a href="ch:ch24#why-36">§24.4</a>).</p>
+
+<h3>Semiconvergents and the Stern–Brocot tree</h3>
+<p>Between two convergents lie the <b>semiconvergents</b>
+$(p_{i-1} + t p_i)/(q_{i-1} + t q_i)$ for $t = 1, \dots, a_{i+1}$ (the last one is $p_{i+1}/q_{i+1}$). For the fifth,
+2/3, 4/7, 10/17 and 17/29 are semiconvergents; for the golden sixth, 1/2, 3/4, 5/7, 16/23, 34/49 and 59/85.</p>
+<p>The <b>mediant</b> of $a/b$ and $c/d$ is $(a + c)/(b + d)$; it lies strictly between them. The
+<b>Stern–Brocot tree</b> (Stern 1858, Brocot 1861) is built from mediants: between 0/1 and 1/1 put 1/2, then the
+mediant of each new fraction with each neighbour, and so on. Facts: two fractions $a/b &lt; c/d$ that are ever
+neighbours satisfy $bc - ad = 1$; their mediant is the fraction with the smallest denominator between them; every
+fraction in $(0, 1)$ in lowest terms appears exactly once. To locate $x$, start at 1/1 and move left (to the mediant
+with the lower neighbour) when $x$ is smaller, right when it is larger. The runs of lefts and rights have lengths
+$a_1, a_2, a_3, \ldots$, and the fractions met are exactly the convergents and semiconvergents (checked for both
+generators for every denominator up to 60). For the golden sixth:
+$$\tfrac11 \xrightarrow{L} \tfrac12 \xrightarrow{R} \tfrac23 \xrightarrow{R} \tfrac34 \xrightarrow{L} \tfrac57
+\xrightarrow{L} \tfrac7{10} \xrightarrow{L} \tfrac9{13} \xrightarrow{R} \tfrac{16}{23} \xrightarrow{L} \tfrac{25}{36}
+\xrightarrow{L} \tfrac{34}{49} \to \cdots$$
+(runs 1, 2, 3, 1, 2, …). The denominators on the path, 2, 3, 4, 7, 10, 13, 23, 36, 49, …, are the sizes of the
+well-formed golden scales (<a href="ch:ch06#stern-brocot">§6.3</a>, <a href="ch:ch23#golden-scales">§23.5</a>,
+<a href="ch:appD#tuning">D.4</a>).</p>
+
+<h3>The golden ratio and Hurwitz's theorem</h3>
+<p>$\varphi = [1; 1, 1, 1, \ldots]$, because $\varphi = 1 + 1/\varphi$. Its convergents are ratios of Fibonacci
+numbers, $F_{n+1}/F_n$: 1/1, 2/1, 3/2, 5/3, 8/5, 13/8, …. All its partial quotients are 1, the smallest possible, so
+its convergents improve as slowly as possible. <b>Hurwitz's theorem</b> (1891): every irrational $\alpha$ has
+infinitely many fractions with $|\alpha - p/q| &lt; 1/(\sqrt5\,q^2)$, and $\sqrt5$ cannot be replaced by a larger
+constant, because of $\varphi$. The bound is tight for $\varphi$: $|\varphi - 13/8| = 0.006966 &lt; 1/(\sqrt5 \cdot 64) =
+0.006988$, while 21/13 just misses, $0.0026494 > 0.0026462$ (<a href="ch:ch23#phi">§23.1</a>,
+<a href="ch:ch40#eeg">§40.2</a>).</p>
+<aside class="box note"><p><b>Two different numbers.</b> Hurwitz's theorem is about $\varphi$ as a frequency ratio,
+which matters for beats and quasi-periodicity (<a href="ch:ch40#quasi-periodic">§40.3</a>). Whether a chain of
+golden sixths closes up at the octave is governed by $\log_2\varphi$, whose continued fraction is not all ones.</p></aside>
+
+<p><b>Where continued fractions are used.</b> Why twelve (<a href="ch:ch05#continued-fractions">§5.5</a>), the
+three-gap theorem and well-formed scales (<a href="ch:ch06#three-gap">§6.1</a>, <a href="ch:ch06#stern-brocot">§6.3</a>),
+other equal divisions (<a href="ch:ch07#edos">§7.5</a>), $\varphi$ and Fibonacci (<a href="ch:ch23#phi">§23.1</a>),
+golden scales (<a href="ch:ch23#golden-scales">§23.5</a>), why 36 (<a href="ch:ch24#why-36">§24.4</a>), realignment
+and KAM theory (<a href="ch:ch40#eeg">§40.2</a>, <a href="ch:ch40#quasi-periodic">§40.3</a>), the golden intervals as
+fractions (<a href="ch:ch41#next-color">§41.5</a>), proofs in <a href="ch:appD#tuning">Appendix D</a>.</p>
+
+<div class="exercise">
+<p><b>Exercise A.14.</b> The just major third is $\log_2(5/4) = [0; 3, 9, 2, 2, \ldots]$ octaves. Compute the first
+three convergents and interpret the first in musical terms.</p>
+<details class="answer"><summary>Answer</summary><p>1/3, 9/28, 19/59. Three just thirds make about one octave, short by
+$1200(3 \times 0.3219281 - 1) = -41.06$ c, the diesis 128/125 (<a href="ch:ch07#syntonic">§7.1</a>); 28 thirds
+make about 9 octaves, 16.78 c over.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.15.</b> From $\log_2\varphi = [0; 1, 2, 3, 1, 2, 3, \ldots]$ and the convergents 9/13 and 25/36,
+compute the next convergent.</p>
+<details class="answer"><summary>Answer</summary><p>The next partial quotient is 3, so $p = 3 \cdot 25 + 9 = 84$ and
+$q = 3 \cdot 36 + 13 = 121$: 84/121. 121 golden sixths exceed 84 octaves by 3.93 c.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.16.</b> Check the determinant identity for 7/12 and 31/53 against their neighbours, and verify
+$|x - 7/12| &lt; 1/(12 \cdot 41)$ for the fifth.</p>
+<details class="answer"><summary>Answer</summary><p>$24 \cdot 12 - 7 \cdot 41 = 1$ and $31 \cdot 41 - 24 \cdot 53 = -1$.
+$|0.5849625 - 0.5833333| = 0.0016292 &lt; 1/492 = 0.0020325$.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.17.</b> Find the Stern–Brocot path to $x = \log_2(3/2)$ as far as 31/53 and read off the partial
+quotients.</p>
+<details class="answer"><summary>Answer</summary><p>1/1 L 1/2 R 2/3 L 3/5 L 4/7 R 7/12 R 10/17 L 17/29 L 24/41 L 31/53:
+runs 1, 1, 2, 2, 3, matching $[0; 1, 1, 2, 2, 3, \ldots]$ (<a href="ch:ch06#stern-brocot">§6.3</a>).</p></details>
+</div>
+</section>
+
+<section id="fourier">
+<h2>Fourier series</h2>
+
+<h3>Sines</h3>
+<p>The building block of sound is the sine wave $A\sin(2\pi f t + \theta)$: amplitude $A$, frequency $f$ in hertz,
+phase $\theta$ in radians. Its period is $1/f$. Two useful facts: a sine and a cosine of the same frequency add to a
+single sine, $a\cos(2\pi f t) + b\sin(2\pi f t) = A\sin(2\pi f t + \theta)$ with $A = \sqrt{a^2 + b^2}$; and Euler's
+formula $e^{i\theta} = \cos\theta + i\sin\theta$ lets a sine be written with complex exponentials,
+$\sin\theta = (e^{i\theta} - e^{-i\theta})/(2i)$.</p>
+
+<h3>The series</h3>
+<p><b>Theorem (Fourier series).</b> Let $g$ have period $2\pi$ and be piecewise smooth. Then
+$$g(x) = \frac{a_0}{2} + \sum_{k \ge 1}\big(a_k\cos kx + b_k\sin kx\big), \qquad
+a_k = \frac1\pi\int_{-\pi}^{\pi} g(x)\cos kx\,dx, \quad b_k = \frac1\pi\int_{-\pi}^{\pi} g(x)\sin kx\,dx,$$
+the series converging to $g(x)$ where $g$ is continuous and to the midpoint of a jump where it is not (Dirichlet's
+theorem). For a sound of period $T = 1/f_1$, put $x = 2\pi f_1 t$: every periodic sound is a sum of sines at the
+<b>harmonics</b> $k f_1$, and the list of their amplitudes $A_k = \sqrt{a_k^2 + b_k^2}$ is its <b>spectrum</b>
+(<a href="ch:ch02#fourier">§2.3</a>). In complex form, $g(x) = \sum_{k \in \mathbb{Z}} c_k e^{ikx}$ with
+$c_k = \frac{1}{2\pi}\int_{-\pi}^{\pi} g(x) e^{-ikx}\,dx$.</p>
+<p><b>Orthogonality</b> is why the coefficient formulas work. From $2\sin jx\sin kx = \cos(j-k)x - \cos(j+k)x$,
+$$\int_{-\pi}^{\pi}\sin jx\,\sin kx\,dx = \begin{cases}\pi & j = k \ge 1,\\ 0 & j \ne k,\end{cases}$$
+since a cosine of a nonzero whole frequency integrates to 0 over a full period; similarly for cosines, and every
+sine is orthogonal to every cosine. Multiply the series by $\sin kx$, integrate, and only $b_k$ survives.</p>
+<p><b>Parseval's theorem.</b> The average power is the sum of the harmonics' powers:
+$\frac{1}{2\pi}\int_{-\pi}^{\pi} g^2\,dx = \frac{a_0^2}{4} + \frac12\sum_{k\ge1}(a_k^2 + b_k^2)$.</p>
+<div class="box math"><p><b>Worked example: the square wave.</b> Let $g(x) = 1$ on $(0, \pi)$ and $-1$ on $(-\pi, 0)$. It is
+odd, so $a_k = 0$, and
+$$b_k = \frac{2}{\pi}\int_0^{\pi}\sin kx\,dx = \frac{2(1 - \cos k\pi)}{\pi k} = \begin{cases}4/(\pi k) & k \text{ odd},\\ 0 & k \text{ even}.\end{cases}$$
+So $g(x) = \frac4\pi\big(\sin x + \tfrac13\sin 3x + \tfrac15\sin 5x + \cdots\big)$: only odd harmonics, falling as
+$1/k$, like a closed pipe. The average power is 1, and by Parseval the fundamental carries
+$\tfrac12(4/\pi)^2 = 8/\pi^2 = 81.06\%$ of it; the first ten odd harmonics (up to the 19th) carry 97.98%. Near the
+jumps the partial sums overshoot by about 9% of the jump however many terms are taken: the Gibbs phenomenon.</p></div>
+
+<h3>Beats</h3>
+<p>Two sines of nearly equal frequency add to a product:
+$$\sin 2\pi f_1 t + \sin 2\pi f_2 t = 2\cos\big(\pi(f_1 - f_2)t\big)\,\sin\big(\pi(f_1 + f_2)t\big).$$
+The ear hears a tone at the average frequency whose loudness swells and fades $|f_1 - f_2|$ times a second (the
+envelope $|2\cos(\pi(f_1-f_2)t)|$ has that period): 440 Hz and 444 Hz beat 4 times a second around 442 Hz. In a chord
+of complex tones, every pair of nearly coinciding partials beats this way, which is how the beat spectra of golden
+chords are computed (<a href="ch:ch03#beats">§3.1</a>, <a href="ch:ch26#beats">§26.4</a>).</p>
+
+<h3>Periodic, quasi-periodic, inharmonic</h3>
+<p>A finite sum of sines repeats exactly if and only if all its frequency ratios are rational. Its period is then
+$1/f_0$ with $f_0$ the largest frequency of which all are whole multiples: 200 Hz and 300 Hz repeat 100 times a
+second, which is one way to see the missing fundamental (<a href="ch:ch03#harmonicity">§3.3</a>). If some ratio is
+irrational, the sum never repeats; it is <b>quasi-periodic</b>, as is any pair of tones a golden ratio apart
+(<a href="ch:ch40#quasi-periodic">§40.3</a>). A tone whose partials are not whole multiples of one frequency, such as
+a bell or the digital golden-spectrum tones with partials at $2^m\varphi^n$ times the fundamental, is still a sum of sines,
+but not a Fourier series of any period: its spectrum is <b>inharmonic</b> (<a href="ch:ch02#partials">§2.2</a>,
+<a href="ch:ch26#golden-spectra">§26.2</a>).</p>
+
+<h3>Synthesis and analysis</h3>
+<p>Additive synthesis runs the series forward: choose the partials' frequencies, amplitudes and phases and add the
+sines (<a href="ch:ch43#additive">§43.1</a>). Analysis runs it backward on sampled sound: for $N$ samples
+$x_0, \dots, x_{N-1}$ taken at rate $f_s$, the discrete Fourier transform
+$X_k = \sum_{n=0}^{N-1} x_n e^{-2\pi i kn/N}$ measures the component at $k f_s/N$ Hz, so the frequency resolution is
+$f_s/N$. The fast Fourier transform computes all $N$ values in about $N\log_2 N$ steps. This is how spectra and beat
+rates are measured from the rendered audio (<a href="ch:ch45#verification">§45.2</a>).</p>
+
+<p><b>Where Fourier series are used.</b> Fourier's idea (<a href="ch:ch02#fourier">§2.3</a>), timbre as a spectrum
+(<a href="ch:ch02#timbre">§2.4</a>), beats and roughness (<a href="ch:ch03#beats">§3.1</a>,
+<a href="ch:ch03#roughness">§3.2</a>), harmonicity (<a href="ch:ch03#harmonicity">§3.3</a>), instruments as spectra
+(<a href="ch:ch17#instruments">§17.1</a>), golden spectra and beats (<a href="ch:ch26#golden-spectra">§26.2</a>,
+<a href="ch:ch26#beats">§26.4</a>), quasi-periodicity (<a href="ch:ch40#quasi-periodic">§40.3</a>), additive synthesis
+(<a href="ch:ch43#additive">§43.1</a>).</p>
+
+<div class="exercise">
+<p><b>Exercise A.18.</b> Middle C (261.63 Hz) and a slightly sharp C at 264.00 Hz sound together. How fast do they beat,
+and at what pitch is the beating tone heard?</p>
+<details class="answer"><summary>Answer</summary><p>$264.00 - 261.63 = 2.37$ beats per second, on a tone at the
+average, 262.82 Hz.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.19.</b> The triangle wave is $\frac{8}{\pi^2}\big(\sin x - \frac{\sin 3x}{9} + \frac{\sin 5x}{25} - \cdots\big)$.
+What share of its power is in the fundamental? (Use $\sum_{k \text{ odd}} 1/k^4 = \pi^4/96$.)</p>
+<details class="answer"><summary>Answer</summary><p>The harmonic powers are proportional to $1/k^4$ over odd $k$, so the
+fundamental's share is $1/(\pi^4/96) = 96/\pi^4 = 98.55\%$: a triangle is almost a sine, which is why it sounds
+dark.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.20.</b> What is the period of the just major triad 220 : 275 : 330 Hz? Is the sum of 100 Hz and
+161.80 Hz periodic? Of 100 Hz and $100\varphi$ Hz?</p>
+<details class="answer"><summary>Answer</summary><p>All three are multiples of 55 Hz (4, 5 and 6 times), so the period
+is 1/55 s. 100 and 161.80 are both whole multiples of 0.2 Hz (500 and 809 times, and $\gcd(500, 809) = 1$), so that
+sum is periodic, with a period of 5 s. With $100\varphi$ the ratio is irrational and the sum never repeats, however
+close 161.80 is to it.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise A.21.</b> Prove that $\int_{-\pi}^{\pi}\sin jx\cos kx\,dx = 0$ for all whole numbers $j, k$.</p>
+<details class="answer"><summary>Answer</summary><p>The integrand is odd (a sine times a cosine), and the integral of an
+odd function over $(-\pi, \pi)$ is 0. (Or use $2\sin jx\cos kx = \sin(j+k)x + \sin(j-k)x$.)</p></details>
+</div>
+</section>

@@ -1,0 +1,20 @@
+# ch33: a golden-derived 36-tone row. The 12-tone row C B G Ab Eb C# D Bb F# F E A, with every
+# pitch class replaced by the golden triad on it (root, v3, ^5). The twelve golden triads with
+# roots on the 12-ET layer are disjoint, so the result uses all 36 pitch classes once.
+songmap: 0.2
+title: "A golden-derived row"
+tempo: 96
+meter: "3/4"
+key: "C major"
+tuning: 36edo
+seed: 334
+tail_seconds: 3
+instruments: {bell: clean/glass, gorg: {use: clean/organ, spectrum: 1}}
+motifs:
+  der: {notes: "c8 ve ^g b- veb ^f# | g- vb- ^d ab- vc ^eb | eb vg ^bb c# vf ^ab | d vf# ^a bb- vd ^f | f#- vbb- ^c# f va ^c+ | e vab ^b a- vc# ^e", octave: 4}
+mix:
+  bell: {gain_db: -4, send: {hall: 0.2}}
+  gorg: {gain_db: -14, send: {hall: 0.2}}
+sections:
+  - {name: row, bars: 6, harmony: "Cg:0.5 Bg:0.5 Gg:0.5 Abg:0.5 Ebg:0.5 C#g:0.5 Dg:0.5 Bbg:0.5 F#g:0.5 Fg:0.5 Eg:0.5 Ag:0.5", parts: {bell: {motifs: [der]}, gorg: hold}}
+master: clean

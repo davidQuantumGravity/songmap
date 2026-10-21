@@ -1,0 +1,20 @@
+# ch30: golden13 as a melodic scale: ten golden apotomes and three golden limmas (the "seams").
+songmap: 0.2
+title: "A line through golden13"
+tempo: 72
+meter: "4/4"
+key: "C golden13"
+tuning: 36edo
+seed: 31
+tail_seconds: 3
+instruments: {bell: clean/glass, gpad: clean/golden_pad}
+motifs:
+  climb: {deg: "0/8 1 2 3 4 5 6 7 | 8/8 9 10 11 12 13/4.", octave: 4}
+  tune:  {deg: "10/4. 9/8 6/2 | 4/4 3/8 4/8 0/2", octave: 4}
+mix:
+  bell: {gain_db: -5, send: {hall: 0.25}}
+  gpad: {gain_db: -9, send: {hall: 0.3}}
+sections:
+  - {name: climb, bars: 2, harmony: "Cg:2", parts: {bell: {motifs: [climb]}, gpad: hold}}
+  - {name: tune, bars: 2, harmony: "Dg:1 Cg:1", parts: {bell: {motifs: [tune]}, gpad: hold}}
+master: clean

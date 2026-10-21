@@ -1,0 +1,271 @@
+<section id="meter">
+<h2>Pulse and meter</h2>
+<div class="layer hear">
+<p>Most music has a <b>pulse</b>: a steady stream of beats you could clap or tap your foot to. Above the pulse the
+ear groups beats into larger units, strong and weak, and that grouping is the <b>meter</b>. Listen to six quick notes
+per bar, grouped two different ways. First they fall into three pairs (ONE-and TWO-and THREE-and), then into two
+triplets (ONE-and-a TWO-and-a). Finally the two groupings alternate, bar by bar.</p>
+<audio-ex src="meters" caption="Six eighth notes per bar: grouped 2+2+2 (three-four), then 3+3 (six-eight), then alternating, which makes the bar seem to change length."></audio-ex>
+<p>The notes are almost the same in all three passages; only the accents and the bass change. Yet the first sounds
+like a waltz, the second like a jig, and the third has a lilting, unstable swing between them.</p>
+<p>Meter creates expectations, and music plays with them. A <b>syncopation</b> is an accent where the meter says
+there should be none, or a silence where it says there should be a strong beat. Listen to a short tune played
+straight, then with its notes pushed half a beat early and held across the beat.</p>
+<audio-ex src="syncopation" caption="The same tune straight (every note on a beat), then syncopated (notes on the off-beats, held through beats 2 and 3), over a steady pulse."></audio-ex>
+</div>
+<div class="layer understand">
+<p>A <b>time signature</b> names a meter. In 4/4 there are four quarter-note beats per bar; in 3/4, three; in 6/8,
+six eighth notes grouped into two beats of three. Meters are classified by how beats divide and group:</p>
+<table>
+<tr><th>Meter</th><th>Beats per bar</th><th>Each beat divides into</th><th>Name</th></tr>
+<tr><td>2/4, 4/4</td><td>2, 4</td><td>2</td><td>simple duple, simple quadruple</td></tr>
+<tr><td>3/4</td><td>3</td><td>2</td><td>simple triple</td></tr>
+<tr><td>6/8</td><td>2</td><td>3</td><td>compound duple</td></tr>
+<tr><td>9/8, 12/8</td><td>3, 4</td><td>3</td><td>compound triple, compound quadruple</td></tr>
+<tr><td>5/8, 7/8</td><td>2+3, 2+2+3 …</td><td>mixed</td><td>asymmetric ("additive")</td></tr>
+</table>
+<p>Meter is a <b>hierarchy</b>. In 4/4, the bar divides into two halves, each half into two quarter-note beats, each
+beat into two eighths. Beats higher in the hierarchy are felt as stronger. Fred Lerdahl and Ray Jackendoff's
+<i>A Generative Theory of Tonal Music</i> (1983) made this precise for Western tonal music with rules for well-formed
+metrical structures; one of them says that the beats at each level are two or three beats of the next lower level
+apart. The asymmetric meters common in Balkan and many other traditions mix groups of two and three at the same
+level, such as 7/8 as 2+2+3.</p>
+<p><b>Tempo</b> is the rate of the pulse, in beats per minute. People can entrain to beats over a wide range of
+rates, roughly from a few tenths of a second to about two seconds between beats, and many listening and tapping
+studies put a comfortable "preferred" tempo somewhere around 100 to 120 beats per minute. These are measurements with
+wide individual variation, not fixed constants.</p>
+<p><b>Polyrhythm</b> sets two pulses against each other: three evenly spaced notes against two, or four against
+three, in the same span. Polyrhythm and polymeter are fundamental to many musical traditions of West and Central
+Africa and of the African diaspora, and appear in Western music as cross-rhythm and hemiola.</p>
+<audio-ex src="polyrhythm" caption="Three against two (high tone in threes, low tone in twos), then four against three: they meet only on the first beat of each cycle."></audio-ex>
+<p>A <b>hemiola</b> regroups six pulses from 3+3 to 2+2+2 (or the reverse), exactly the change in the meters example.
+Baroque composers often used it at cadences: two bars of 3/4 are heard for a moment as one bar of 3/2.</p>
+<p>Some rhythms distribute a few onsets as evenly as possible over a cycle of pulses. The Cuban <i>tresillo</i> puts
+3 onsets in 8 pulses (x . . x . . x .), the <i>cinquillo</i> 5 in 8 (x . x x . x x .). A bell pattern widely used in
+West African and Afro-Caribbean music puts 7 onsets in 12 pulses with gaps 2 2 1 2 2 2 1, the same pattern as the
+steps of the major scale, a parallel between rhythm and scale pointed out by Jeff Pressing (1983). Godfried
+Toussaint called rhythms built this way <b>Euclidean rhythms</b> (2005), after the algorithm that generates them.</p>
+<audio-ex src="euclidean" caption="Three maximally even rhythms, four cycles each: 3 in 8 (tresillo), 5 in 8 (cinquillo), and the 12-pulse bell pattern 2 2 1 2 2 2 1. A low tone marks each cycle."></audio-ex>
+<pc-circle edo="12" marks="0 2 4 5 7 9 11" title="The 12-pulse bell pattern drawn on a clock of 12 pulses: the same shape as the major scale"></pc-circle>
+</div>
+<div class="layer derive">
+<p><b>Meters as factorizations (theorem).</b> Under the rule that every metrical level groups the level below in twos
+or threes, a regular metrical hierarchy on $N$ pulses per bar is an ordered factorization of $N$ into 2s and 3s
+(read from the smallest level up). If $N = 2^a 3^b$, there are $\binom{a+b}{a}$ such hierarchies, since we only choose
+the order of the factors.</p>
+<table>
+<tr><th>Pulses $N$</th><th>Ordered factorizations</th><th>Usual names</th></tr>
+<tr><td>6</td><td>2·3, 3·2</td><td>3/4 (pairs of eighths, three of them), 6/8 (triplets, two of them)</td></tr>
+<tr><td>8</td><td>2·2·2</td><td>4/4 (or 2/2)</td></tr>
+<tr><td>12</td><td>2·2·3, 2·3·2, 3·2·2</td><td>3/2, 6/4, 12/8</td></tr>
+</table>
+<p><b>Polyrhythm onsets (theorem).</b> In an $a$-against-$b$ polyrhythm, one layer has onsets at $j/a$ and the other at
+$k/b$ of the cycle. They coincide exactly at the multiples of $1/\gcd(a, b)$, so the composite rhythm has
+$a + b - \gcd(a, b)$ distinct onsets per cycle: 4 for 3:2 and 6 for 4:3. All onsets lie on the grid of
+$\operatorname{lcm}(a, b)$ pulses (6 for 3:2, 12 for 4:3).</p>
+<p><b>Maximally even rhythms.</b> The rhythm $E(k, n)$ has onsets at $\lfloor i n / k \rfloor$, $i = 0, \dots, k - 1$.
+Every gap between consecutive onsets is $\lfloor n/k \rfloor$ or $\lceil n/k \rceil$, so the rhythm has at most two
+gap sizes, exactly like a well-formed scale (<a href="ch:ch06#mos">Chapter 6</a>). $E(3, 8)$ has onsets $(0, 2, 5)$ and
+gaps $(2, 3, 3)$, a rotation of the tresillo's $(3, 3, 2)$; $E(5, 8)$ has gaps $(1, 2, 1, 2, 2)$, a rotation of the
+cinquillo's $(2, 1, 2, 1, 2)$; $E(7, 12)$ has gaps $(1, 2, 2, 1, 2, 2, 2)$, a rotation of the bell pattern's
+$(2, 2, 1, 2, 2, 2, 1)$ and of the major scale's steps.</p>
+<p><b>Counting syncopations.</b> A simple measure: count the beats on which no note begins while a note that began
+on an off-beat is still sounding. The straight tune scores 0; the syncopated version scores 2 per bar (beats 2 and 3
+in each bar). More refined measures, such as the one proposed by H. Christopher Longuet-Higgins and Christopher Lee
+(1984), weight each syncopation by how much stronger the skipped beat is than the note's own position.</p>
+</div>
+</section>
+
+<section id="phrase-structure">
+<h2>Period and sentence</h2>
+<div class="layer hear">
+<p>Phrases group into larger units the way beats group into bars. Two patterns are so common in Classical music that
+they have names. The <b>period</b>, a question and an answer, was the "Ode to Joy" example of
+<a href="ch:ch13#phrase">Chapter 13</a>. The <b>sentence</b> works differently. Listen for its three stages: a short
+idea, the same idea again on a different chord, and then a faster, more urgent continuation that breaks the idea into
+pieces and drives to a cadence.</p>
+<audio-ex src="sentence" caption="A sentence: a two-bar idea on I, the same idea on V, then one-bar fragments over IV and ii, and the cadence V–I."></audio-ex>
+<p>The second half feels like a gathering of speed even though the tempo does not change. The units get shorter (two
+bars, then one bar) and the chords change twice as often. That compression is the sentence's engine.</p>
+</div>
+<div class="layer understand">
+<p>Both forms are typically eight bars long and are described by William Caplin in <i>Classical Form</i> (1998),
+building on Arnold Schoenberg's teaching (<i>Fundamentals of Musical Composition</i>, published 1967).</p>
+<table>
+<tr><th></th><th>Bars 1–2</th><th>Bars 3–4</th><th>Bars 5–6</th><th>Bars 7–8</th></tr>
+<tr><th>Period</th><td colspan="2">antecedent: basic idea + contrasting idea, ends with a weak cadence (often a half cadence)</td><td colspan="2">consequent: basic idea again + contrasting idea, ends with a strong (authentic) cadence</td></tr>
+<tr><th>Sentence</th><td>basic idea</td><td>repetition of the basic idea (often on V)</td><td colspan="2">continuation: fragmentation, faster harmonic rhythm, then cadence</td></tr>
+</table>
+<p>In the example, the basic idea is E G C G | E C over C. Its repetition is the same shape, D G B G | D B, over G.
+The continuation takes only the first bar's shape, F A C A over F and D F A F over Dm (a sequence down a third), and
+then cadences: B C D B G B | C over G and C.</p>
+<pianoroll edo="12" notes="E5 ; G5 ; C6 ; G5 ; E5 ; C5 ; D5 ; G5 ; B5 ; G5 ; D5 ; B4" labels="I: E ; G ; C ; G ; E ; C ; V: D ; G ; B ; G ; D ; B" title="The basic idea and its repetition on V"></pianoroll>
+<p>Above the bar, many phrases also have a <b>hypermeter</b>: bars group into strong and weak pairs and four-bar
+units, as if each bar were one beat of a larger meter. Composers exploit this by lengthening a phrase (an
+<b>expansion</b>), or by letting the last bar of one phrase also be the first bar of the next (an <b>elision</b>).</p>
+</div>
+<div class="layer derive">
+<p><b>Proportions and rates.</b> Write a phrase as a list of units with their lengths in bars. The period is
+$(4 \mid 4)$, symmetric. The sentence is $(2, 2 \mid 1, 1, 2)$ in the example: the units shrink by a factor of 2 in
+the continuation, and the harmonic rhythm doubles, from one chord per 2 bars (C, G) to one chord per bar (F, Dm, G,
+C). The presentation and continuation are each 4 bars, a 1 : 1 split, while the basic idea is a quarter of the whole.</p>
+<p><b>Hypermeter.</b> The factorization rule of the previous section applies one level up: 8 bars grouped in twos,
+twos in twos and fours in twos give the hierarchy $2 \cdot 2 \cdot 2$, so bar 1 is the strongest, bar 5 next, then
+bars 3 and 7. A five-bar phrase cannot be built this way without a group of 3 or a deviation; that is why composers
+and listeners hear five-bar phrases as irregular.</p>
+</div>
+</section>
+
+<section id="forms">
+<h2>Song forms and larger forms</h2>
+<div class="layer hear">
+<p>Larger forms are built from sections that return, contrast and develop. The most familiar plan in popular song
+of the twentieth century is <b>AABA</b>: a main section, its repeat, a contrasting "bridge", and the main section once
+more. Here is a miniature, with four-bar sections instead of the usual eight.</p>
+<audio-ex src="aaba" caption="A (ends open), A (ends closed), B (the bridge: new chords, higher melody), A again."></audio-ex>
+<p>The bridge is what makes the return satisfying: after hearing something different, the familiar A sounds like
+coming home.</p>
+</div>
+<div class="layer understand">
+<p>Forms are usually labelled with letters, one per section; a prime (A′) marks a varied return.</p>
+<table>
+<tr><th>Form</th><th>Plan</th><th>Typical use</th></tr>
+<tr><td>Strophic</td><td>A A A …</td><td>hymns, folk songs, many art songs: new words, same music</td></tr>
+<tr><td>Binary</td><td>‖: A :‖: B :‖</td><td>Baroque dance movements; A moves to the dominant (or relative major), B returns</td></tr>
+<tr><td>Rounded binary</td><td>‖: A :‖: B A′ :‖</td><td>Classical minuets and themes</td></tr>
+<tr><td>Ternary</td><td>A B A</td><td>da capo arias, minuet and trio, many character pieces</td></tr>
+<tr><td>Rondo</td><td>A B A C A (B A)</td><td>Classical finales</td></tr>
+<tr><td>Theme and variations</td><td>A A′ A″ …</td><td>sets of variations on a theme</td></tr>
+<tr><td>Sonata form</td><td>exposition, development, recapitulation</td><td>first movements of Classical sonatas, quartets, symphonies</td></tr>
+<tr><td>12-bar blues</td><td>three 4-bar lines, repeated as choruses</td><td>blues, rock and roll, jazz</td></tr>
+<tr><td>32-bar AABA</td><td>four 8-bar sections</td><td>Tin Pan Alley and Broadway songs, many jazz standards</td></tr>
+<tr><td>Verse–chorus</td><td>verse, chorus, verse, chorus, bridge, chorus</td><td>much popular music since the 1960s</td></tr>
+</table>
+<p><b>Sonata form</b> deserves a closer look, because it is a form made of key relationships. The
+<b>exposition</b> presents a first theme in the tonic, a transition, and a second theme group in another key (the
+dominant in a major-key movement, usually the relative major in a minor-key one), often repeated. The
+<b>development</b> moves through further keys and works over the themes, fragmenting and recombining them. The
+<b>recapitulation</b> brings the themes back with the second group now in the tonic, resolving the tension of the
+exposition's key contrast. Charles Rosen's <i>Sonata Forms</i> (1980) and James Hepokoski and Warren Darcy's
+<i>Elements of Sonata Theory</i> (2006) are standard modern accounts.</p>
+<p>Form is created by the same forces as the smaller units: repetition gives identity, contrast gives interest, and
+cadences mark the boundaries. A bridge in AABA does on a large scale what a half cadence does in a period: it opens
+a question that the return answers.</p>
+</div>
+<div class="layer derive">
+<p><b>Counting letter schemes (theorem).</b> Call two forms the same if they differ only in letter names (ABBA and
+BAAB describe the same plan). A scheme with $n$ sections is then a <i>restricted growth string</i>: the first
+section is A, and each new letter is the next unused one. The number of schemes with $n$ sections is the Bell number
+$B_n$: 1, 2, 5, 15, 52 for $n = 1, \dots, 5$. For $n = 4$ the 15 schemes are AAAA, AAAB, AABA, AABB, AABC, ABAA, ABAB,
+ABAC, ABBA, ABBB, ABBC, ABCA, ABCB, ABCC and ABCD. AABA (song form) and ABAC are among the most used; ABCD
+("through-composed") uses no repetition at all.</p>
+<p><i>Proof sketch.</i> A scheme is the same thing as a partition of the set of sections into blocks of equal
+letters, and partitions of an $n$-set are counted by $B_n$. ∎</p>
+<p><b>Symmetry.</b> Ternary ABA and the arch form ABCBA are palindromes: they read the same backwards, the formal
+analogue of the retrograde symmetry of <a href="ch:ch13#transformations">Chapter 13</a>.</p>
+</div>
+</section>
+
+<section id="proportion">
+<h2>Proportion and the golden section</h2>
+<div class="layer hear">
+<p>Where should the high point of a piece fall? Many pieces build to a climax well past the middle and then release
+it in a shorter final stretch. Here is a constructed example: thirteen bars, eight rising and growing louder, five
+falling away. The peak arrives at the start of bar 9, about 62 percent of the way through.</p>
+<audio-ex src="fibonacci_form" caption="Eight bars of ascent and crescendo, a peak at the start of bar 9 (8/13 of the way through), and five bars of descent."></audio-ex>
+<p>The numbers 8, 5 and 13 are consecutive Fibonacci numbers, and 8/13 is close to the golden section. Whether that
+proportion is special to the ear is a genuinely open question, and the claims made about it in music are worth
+examining carefully.</p>
+</div>
+<div class="layer understand">
+<p>The <b>golden section</b> divides a length so that the whole is to the larger part as the larger part is to the
+smaller. The larger part is $1/\varphi \approx 0.618$ of the whole and the smaller $1/\varphi^2 \approx 0.382$ (see
+<a href="ch:ch23#phi">Chapter 23</a>). Ratios of consecutive Fibonacci numbers approach it: 3/5 = 0.600, 5/8 = 0.625,
+8/13 = 0.615, 13/21 = 0.619.</p>
+<p><b>Claims about composers.</b> The most influential are these:</p>
+<ul>
+<li><b>Bartók.</b> The Hungarian theorist Ernő Lendvai argued, in Hungarian publications from the 1950s and in
+<i>Béla Bartók: An Analysis of His Music</i> (1971), that Bartók organized form by the golden section and Fibonacci
+numbers, as in the first movement of <i>Music for Strings, Percussion and Celesta</i> (1936), whose climax he placed
+at the golden section. Roy Howat ("Bartók, Lendvai and the principles of proportional analysis", <i>Music
+Analysis</i>, 1983) re-examined such analyses and found some of Lendvai's measurements inaccurate, while defending a
+more careful kind of proportional analysis. Bartók himself is not known to have mentioned the golden section, and
+whether such proportions were intended, or are even perceptible, remains contested.</li>
+<li><b>Debussy.</b> Howat's <i>Debussy in Proportion</i> (1983) argues that several of Debussy's works, among them
+<i>Reflets dans l'eau</i> and <i>La mer</i>, are shaped by golden-section and symmetrical proportions. The readings are
+detailed and influential, and also contested: results depend on choices of unit (bars, beats or seconds) and of which
+events count as structural.</li>
+<li><b>Popular claims</b> that Mozart, Beethoven, Chopin or others "used the golden ratio" usually rest on choosing,
+after the fact, a pair of numbers that happens to fit. Without documentary evidence of intention and without a
+comparison against chance, they are better treated as myths.</li>
+</ul>
+<p>The derive layer shows why "fits the golden section" is weak evidence: with a few candidate events and a modest
+tolerance, a fit is likely by chance alone. Even in vision, where Gustav Fechner reported a preference for golden
+rectangles in 1876, later experiments have given mixed results.</p>
+<aside class="box note"><b>Status in this book.</b> The golden tonal system of Parts VI–VII is about golden
+<i>pitch</i> ratios (φ as an interval). Golden <i>proportion in time</i> is a separate idea. Some of this book's
+golden pieces use Fibonacci section lengths (8, 13, 21 bars) as a design choice, in keeping with the "golden at every
+scale" principle of <a href="ch:ch40#conjecture">Chapter 40</a>; that is a compositional decision and a hypothesis to
+explore by listening, not a claim that listeners perceive golden proportions.</aside>
+<p>There is one place where golden proportion enters rhythm with full mathematical precision: a rhythm of long and
+short notes whose lengths are in the ratio φ, ordered by the <b>Fibonacci word</b> L S L L S L S L L S L L S … (each
+L becomes LS and each S becomes L at every step). It never repeats, yet it is as evenly balanced as a rhythm of two
+note lengths can be. Listen to it, and then to the plain alternation L S L S with the same two lengths.</p>
+<audio-ex src="golden_rhythm" caption="34 notes in the Fibonacci-word rhythm (long notes high, short notes low, long = φ × short), then the periodic L S L S for comparison."></audio-ex>
+</div>
+<div class="layer derive">
+<p><b>How close are the Fibonacci ratios?</b> Relative to $1/\varphi = 0.6180$: 3/5 is 2.92% low, 5/8 is 1.13%
+high, 8/13 is 0.43% low. In general $F_{n-1}/F_n - 1/\varphi = (-1)^n/(\varphi^{n} F_n)$ exactly, so the
+error shrinks roughly like $1/F_n^2$. In the example, the golden-section point of 13 bars is $13/\varphi = 8.03$ bars.</p>
+<p><b>Chance fits (a calculation).</b> Suppose a piece has $k$ "notable events" (climaxes, key changes, entries),
+placed independently and uniformly at random along its length, and suppose we accept a fit if an event falls within
+$\pm\delta$ of either golden-section point, at $0.382$ or $0.618$ of the length. The two windows have total width
+$4\delta$, so</p>
+$$P(\text{at least one fit}) = 1 - (1 - 4\delta)^k.$$
+<p>With a tolerance of $\delta = 2\%$ of the length, this is 8% for one event, 34.1% for five events and 56.6% for ten.
+Random placement is not a model of real composition, but the calculation shows that a fit has to be very precise, or
+predicted in advance, before it means much.</p>
+<p><b>The Fibonacci word (theorems).</b> Let $w_1 = \mathrm{L}$ and $w_{n+1} = \mu(w_n)$ with
+$\mu(\mathrm{L}) = \mathrm{LS}$, $\mu(\mathrm{S}) = \mathrm{L}$. Then $w_n$ has length $F_{n+1}$, with $F_n$ letters L
+and $F_{n-1}$ letters S (Fibonacci numbers $F_1 = F_2 = 1$). The first 34 letters contain 21 L and 13 S. As
+$n \to \infty$ the ratio of L to S tends to $\varphi$. The infinite word is <b>Sturmian</b>: any two blocks of the same
+length contain numbers of L that differ by at most 1, the rhythmic counterpart of the two-step-size property of
+well-formed scales and of the evenness of Euclidean rhythms. Its onsets are never periodic, because $\varphi$ is
+irrational. <i>Proof of the counts:</i> $\mu$ maps each L to one L and one S, and each S to one L, so the counts
+$(\ell, s)$ evolve as $(\ell, s) \mapsto (\ell + s, \ell)$, the Fibonacci recursion. ∎</p>
+</div>
+</section>
+
+<div class="exercise">
+<p><b>Exercise 16.1 (listening).</b> In the meters example, tap along with the strongest beats. How many taps per bar do
+you make in each of the three passages?</p>
+<details class="answer"><summary>Answer</summary><p>Three in the first passage (three-four), two in the second
+(six-eight), and in the third passage alternately two and three, which is why it feels as if the bar length changes
+even though it does not.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 16.2.</b> How many distinct onsets per cycle does a 5-against-3 polyrhythm have? A 6-against-4?</p>
+<details class="answer"><summary>Answer</summary><p>$5 + 3 - \gcd(5, 3) = 7$. $6 + 4 - \gcd(6, 4) = 8$: the layers
+also coincide at the half cycle, because 6:4 is really 3:2 played twice per cycle.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 16.3.</b> List the ordered factorizations of 18 pulses into 2s and 3s and name a time signature for
+each.</p>
+<details class="answer"><summary>Answer</summary><p>$18 = 2 \cdot 3^2$ gives $\binom{3}{1} = 3$ orders: 2·3·3,
+3·2·3 and 3·3·2. With eighth-note pulses, 2·3·3 is 9/4 (quarters grouped in threes, three groups); 3·2·3 is three
+bars' worth of 6/8; 3·3·2 is two bars' worth of 9/8. The count is the point; notation for such long hierarchies
+varies.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 16.4.</b> Compute $E(5, 12)$ and its gaps. Which familiar scale has the same step pattern?</p>
+<details class="answer"><summary>Answer</summary><p>Onsets $\lfloor 12i/5 \rfloor$ = 0, 2, 4, 7, 9, with gaps
+2, 2, 3, 2, 3: the pentatonic scale C D E G A.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 16.5.</b> A piece is 89 bars long and its climax falls in bar 55. How far is that from the golden
+section, in bars? Using the chance formula with $\delta = 1/89$ (one bar), how likely is at least one of five random
+events to fit as well?</p>
+<details class="answer"><summary>Answer</summary><p>$89/\varphi = 55.005$, so the fit is essentially exact. With
+$\delta = 1/89$, $1 - (1 - 4/89)^5 \approx 0.205$: about a one-in-five chance for five events. A precise fit like this
+is suggestive only if the event and the unit of measurement were fixed before looking.</p></details>
+</div>

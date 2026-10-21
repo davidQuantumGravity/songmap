@@ -1,0 +1,20 @@
+# 36edo. Cdim, C silver, C golden, Caug, C bronze (thirds of 9, 10, 11, 12, 13 sixth-steps);
+# then C, Cm, Caug and their voice-by-voice average Cg.
+songmap: 0.2
+title: "The equal-third line and the golden average"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2
+instruments: {up: clean/organ, low: clean/bass}
+mix: {up: {gain_db: -6, send: {hall: 0.25}}, low: {gain_db: -5}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 6
+    parts:
+      up: {notes: "=mp [c,eb,gb]2 [c,^eb,vg]2 [c,ve,^g]2 [c,e,g#]2 [c,^e,va]2 r2 [c,e,g]2 [c,eb,g]2 [c,e,g#]2 [c,ve,^g]1 r2"}
+      low: {notes: "=mp c-2 c-2 c-2 c-2 c-2 r2 c-2 c-2 c-2 c-1 r2"}
+master: clean

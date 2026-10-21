@@ -1,0 +1,28 @@
+# Blend and contrast. The same melody and chords twice: first melody and chords on the same organ
+# tone in overlapping registers (they blend, and the melody is hard to follow), then the melody on a
+# brighter, odd-leaning lead an octave higher over a soft pad (it stands out).
+songmap: 0.2
+title: "Blend, then contrast"
+tempo: 92
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 17
+tail_seconds: 2
+instruments: {mel: clean/organ, chords: clean/organ, lead: clean/lead, pad: pad/still}
+mix:
+  mel:    {gain_db: -7, send: {hall: 0.2}}
+  chords: {gain_db: -7, send: {hall: 0.2}}
+  lead:   {gain_db: -3, send: {hall: 0.2}}
+  pad:    {gain_db: -10, send: {hall: 0.3}}
+returns: {hall: {type: reverb, seconds: 2.0, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: blend
+    bars: 4
+    harmony: "C:1 Am:1 F:1 G:1"
+    parts: {mel: {notes: "=mf e4 g c+ b | a e c2 | f4 a c+ a | b2 d+"}, chords: hold}
+  - name: contrast
+    bars: 4
+    harmony: "C:1 Am:1 F:1 G:1"
+    parts: {lead: {notes: "=mf e4 g c+ b | a e c2 | f4 a c+ a | b2 d+", oct: 1}, pad: hold}
+master: clean

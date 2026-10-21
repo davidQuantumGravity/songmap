@@ -1,0 +1,15 @@
+# ch19: a chord C-G-E-F#-A (major triad with added sixth and augmented fourth) moved by T3, T6, T9:
+# every chord stays inside the same octatonic collection (Messiaen's mode 2).
+songmap: 0.2
+title: "A chorale in mode 2"
+tempo: 54
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 19
+tail_seconds: 3
+instruments: {organ: clean/organ}
+mix: {organ: {gain_db: -6, send: {hall: 0.3}}}
+sections:
+  - {name: chorale, bars: 3, parts: {organ: {notes: "[c-,g-,e,f#,a]2 [eb-,bb-,g,a,c+]2 | [f#-,c#,a#,c+,d#+]2 [a--,e-,c#,d#,f#]2 | [c-,g-,e,f#,a]1"}}}
+master: clean

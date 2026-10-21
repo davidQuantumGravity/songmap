@@ -6,7 +6,7 @@ There are two equivalent spellings:
 - **YAML form** (this document): explicit and easy to diff. Use it for hand edits, the GUI's save format, and anything unusual.
 - **Compact form** ([COMPACT_FORMAT.md](COMPACT_FORMAT.md)): one line per section, about 2–3× fewer tokens. Use it when an LLM writes or revises a song.
 
-Both parse to the same internal tree, and `songmap fmt --to yaml|compact` converts between them losslessly.
+Both parse to the same internal tree, and a lossless converter between them (`songmap fmt`) is planned; today the CLI has `check`, `render` and `migrate`.
 
 **Changes from v0.1:** durations are now sticky; dynamics, articulation, groove, humanize and automation are new; positions can be bar:beat or video frames; there are `instruments`, `mix` and `master` blocks; sections inherit from earlier ones; motifs have transforms; drums can use step strings; video sync is first-class. v0.1 files still load with a deprecation warning. The only semantic change is sticky durations, and `songmap migrate` rewrites old files for you.
 
@@ -292,7 +292,17 @@ qa:
 
 `songmap render` exits non-zero and prints the failing rule, numbers and section when a rule fails.
 
-## 12. Outputs
+## 12. Tuning and microtones
+
+`tuning: 12edo` is the default. `tuning: 36edo` adds sixth-step inflections:
+- `^` and `v` **prefixes** on notes, degrees, chord roots and keys (`^c4`, `v3`, `^F#m`);
+- golden chords `Cg` and `Cg7`;
+- alteration lists `C(v3,^5)`;
+- the golden scales `golden3`, `golden4`, `golden7`, `golden10`, `golden13`, `golden23` and the layer mirror `silver13`.
+
+Full design in [GOLDEN_HARMONY.md](GOLDEN_HARMONY.md). Accent `^` stays a suffix, so `^c4^` is a C-up quarter note, accented.
+
+## 13. Outputs
 
 | File | Contents |
 |---|---|

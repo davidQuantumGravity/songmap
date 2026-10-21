@@ -1,0 +1,18 @@
+# ch34: the third-step lift through its golden midpoint (doc demo D2). C major, then ^Cg (each
+# voice of C has moved 0, 1 or 2 sixth-steps: the exact midpoint), then vC# major and its cadence.
+songmap: 0.2
+title: "The limma lift"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 343
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass, keys: clean/keys}
+mix:
+  organ: {gain_db: -7, send: {hall: 0.2}}
+  low: {gain_db: -6}
+  keys: {gain_db: -6, send: {hall: 0.25}}
+sections:
+  - {name: lift, bars: 8, harmony: "C:1 F:0.5 G7:0.5 C:1 ^Cg:1 vC#:1 vF#:0.5 vG#7:0.5 vC#:2", parts: {organ: hold, low: {style: roots, role: bass}, keys: top}}
+master: clean

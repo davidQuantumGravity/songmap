@@ -169,7 +169,7 @@ Work through the catalog in [docs/INSTRUMENTS.md §3](docs/INSTRUMENTS.md), each
 6. **Brass and winds:** `brass` (the dynamics→brightness law, lip blat, scoop), `braam`, `flute`, `clarinet`.
 7. **Voice:** `choir` (formant vowels, N singers).
 8. **Synths:** `fm` (4-op), `wavetable`, `reese`, `string_machine`. **FX:** `downlifter`, `whoosh`, `reverse_cymbal`, `sub_drop`, `stab` (layered orchestral hit).
-9. **Sampler backend** (`instruments/sampler.py`, the SFZ subset in [INSTRUMENTS.md §5.1](docs/INSTRUMENTS.md)). Evaluate VSCO-2 CE and Salamander, and add `LICENSES.md`.
+9. **Sampler backend** (`instruments/sampler/`, the SFZ subset in [INSTRUMENTS.md §5.1](docs/INSTRUMENTS.md)). ✅ engine, tests and per-render `LICENSES.md` (2026-10-21); still to do: evaluate VSCO-2 CE and Salamander by ear.
 10. **Plugin backend** (`instruments/plugin.py`, DawDreamer): Surge XT + Dexed first.
 11. **Patch instruments** (`instruments/patch.py`): the YAML module graph and safe expression evaluator of [INSTRUMENTS.md §7](docs/INSTRUMENTS.md), with templates.
 
@@ -224,3 +224,31 @@ Milestones G1–G6 exactly as in [docs/GUI.md §6](docs/GUI.md):
 - KTH performance rules (duration contrast, final ritardando, phrase punctuation, leap articulation, harmonic charge).
 - Tempo maps with `rit`/`accel`, plus frame-safety warnings.
 - Mood presets for new video types (explainer, promo, calm walkthrough).
+
+## P10: Golden harmony and 36-ET (≈4–6 sessions after P1 and P3)
+
+36-ET tuning with ups/downs notation (`^c`, `vE`), golden chords (`Cg` = C vE ^G, `Cg7`), the golden3/10/13 scales (golden13 has 36 transpositions), resolution tables, roughness and harmonic-entropy analysis with a tension curve in QA, golden-spectrum timbres, three-layer MIDI and Scala export, and GUI tools (layer keyboard, chord explorer).
+
+Phases G0–G7 with done-when criteria are in [docs/GOLDEN_HARMONY.md §8](docs/GOLDEN_HARMONY.md).
+
+**Progress (2026-10-20):**
+- G0 vision captured.
+- The theory is classified and proved in [docs/GOLDEN_THEORY.md](docs/GOLDEN_THEORY.md).
+- The 870-pair dictionary is generated in [docs/GOLDEN_PROGRESSIONS.md](docs/GOLDEN_PROGRESSIONS.md).
+- Research code and listening examples are in `reference/golden/`.
+- **G1 and G2 done:**
+  - 36edo notation (`^`/`v`, golden, silver and bronze chords, alteration lists, golden scales);
+  - `songmap/theory/passing.py` (System 1 `~`, System 2 `~g`);
+  - `voiced` styles;
+  - the `clean` instrument and still presets;
+  - `master: clean`, `--mp3`.
+- **G3 first pass:** `tools/golden_suite.py` renders 15 technique portfolios, the Well-Tempered Golden Clavier (Books I and II) and the System 1 and System 2 dictionaries into `golden_audio/index.html`.
+- **Math and history:** [docs/GOLDEN_MATH.md](docs/GOLDEN_MATH.md).
+- **Next:**
+  - `GoldenExact` tuning (exact φ instead of 36-ET);
+  - `@chain` voicing;
+  - silver passing rules;
+  - golden7 functional harmony;
+  - analysis tools (G4).
+
+**Constraint on earlier phases:** keep pitch as float MIDI end to end, and never hard-code 12 pitch classes in chords, keys or voicing. Use `tuning.steps_per_octave`.

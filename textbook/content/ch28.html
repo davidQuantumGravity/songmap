@@ -1,0 +1,295 @@
+<p>System 1 (<a href="ch:ch27">Chapter 27</a>) asked every voice to move at a constant speed. That rule made the
+theory exact: one path per voicing, at most one golden chord per transition, a fixed partner. It also left out
+some of the most common progressions in tonal music. IV → V, V → vi and I → ii move their roots by a whole step,
+and under the strict rule they produce no golden chord at all. This chapter relaxes the rule in one place: a whole
+step may be split unevenly. The result is <b>System 2</b>, the natural path, written <code>~g</code> in SongMap.
+It finds golden chords on stepwise progressions, sometimes two different ones in a row, and it comes with one
+clear limit, the half-step theorem.</p>
+
+<section id="uneven">
+<h2>Uneven splits</h2>
+<div class="layer hear">
+<p>A single voice can cross a whole step in three moves in more than one way. It can take three equal double
+steps, as in System 1. It can start slowly and speed up (one sixth-step, then two, then three), or start fast and
+slow down, or make two semitone moves and rest. Listen to C rising to D in five such schedules. The goal is always
+the same; what changes is where the voice spends its time on the way.</p>
+<audio-ex src="uneven_splits" caption="C to D in five schedules: 2+2+2 (System 1), then 1+2+3, 3+2+1, 3+3+0 and 0+3+3 sixth-steps. Listen to which in-between pitches each schedule touches: the off-grid ones (^C, vC♯, ^C♯, vD) only appear in some."></audio-ex>
+<p>When several voices move together, these choices let voices that would have marched in lockstep fall onto
+different layers. That is what opens the door to golden chords on whole-step progressions.</p>
+</div>
+<div class="layer understand">
+<p><b>The System 2 rule.</b></p>
+<ul>
+<li>A held voice stays (0 + 0 + 0).</li>
+<li>A <b>half step</b> is still split 1 + 1 + 1.</li>
+<li>A <b>whole step</b> may be split into three monotone parts of at most a semitone each (0 to 3 sixth-steps),
+summing to 6. There are exactly 10 such schedules: 2 + 2 + 2, the six orders of 1 + 2 + 3, and the three orders of
+0 + 3 + 3.</li>
+<li>A voice that moves more than a whole tone (in four-part writing, usually the bass) holds and then moves on the
+arrival chord, like the dominant pedal under a cadential six-four.</li>
+</ul>
+<p>Every voice still moves in one direction and never more than a semitone per chord. The passing chords are no
+longer exact barycenters $(2X+Y)/3$ and $(X+2Y)/3$, but they still lie between $X$ and $Y$ voice by voice.</p>
+<p><b>Why uneven splits are natural.</b> Pythagorean tuning already splits its whole tone unevenly: the tone 9/8
+(203.91 c) is a limma (90.22 c) plus an apotome (113.69 c) (<a href="ch:ch05#limma-apotome">Chapter 5</a>). The
+golden scales do the same with the golden limma (69.10 c) and the golden apotome (99.27 c)
+(<a href="ch:ch23#golden-comma">Chapter 23</a>). System 2 lets voice leading use the same unevenness.</p>
+<p><b>Layers on a natural path.</b> If a voice starts on layer 0 and has moved $s$ sixth-steps after $k$ chords, it
+is on layer $s \bmod 3$. For each kind of motion, here are the layers it can occupy at the two passing chords:</p>
+<table>
+<tr><th>Motion</th><th>Schedules</th><th>Layers at ($P_1$, $P_2$)</th></tr>
+<tr><td>hold</td><td>0+0+0</td><td>(0, 0)</td></tr>
+<tr><td>half step up</td><td>1+1+1</td><td>(1, 2)</td></tr>
+<tr><td>half step down</td><td>1+1+1 down</td><td>(2, 1)</td></tr>
+<tr><td>whole step up</td><td>10 schedules</td><td>every pair except (1, 2)</td></tr>
+<tr><td>whole step down</td><td>10 schedules</td><td>every pair except (2, 1)</td></tr>
+</table>
+<p>A whole step can now reach almost any layer pattern. A half step cannot: it is still locked to its class. Both
+facts drive the rest of the chapter.</p>
+</div>
+<div class="layer derive">
+<p><b>Counting schedules.</b> A whole step up is a triple $(a, b, c)$ with $a, b, c \in \{0,1,2,3\}$ and
+$a+b+c = 6$. Writing $c = 6 - a - b$ with $0 \le c \le 3$ forces $3 \le a + b \le 6$; listing gives
+(0,3,3), (1,2,3), (1,3,2), (2,1,3), (2,2,2), (2,3,1), (3,0,3), (3,1,2), (3,2,1), (3,3,0): ten. The layer pair is
+$(a \bmod 3, (a+b) \bmod 3)$, which takes the values (0,0) [three times], (1,0), (1,1), (2,0), (2,1), (2,2), (0,1),
+(0,2). The missing pair (1, 2) would need $a \equiv 1$ and $a + b \equiv 2$, so $a = 1$, $b = 1$, $c = 4 > 3$:
+impossible. A whole step down is the mirror image, missing (2, 1). (These ten schedules are exactly the ones
+<code>dictionary.py</code> and <code>songmap/theory/passing.py</code> use for a whole step on a natural path.)</p>
+</div>
+</section>
+
+<section id="escalator">
+<h2>The golden escalator</h2>
+<div class="layer hear">
+<p>Play IV → V in C, F major to G major, with every voice rising a whole step. On the strict path all voices take
+the same 2 + 2 + 2 schedule, so the whole chord simply slides: an F major triad lowered off the grid, then raised
+off the grid, then G. That is <b>planing</b>, and it contains no golden chord. Now let two inner voices split their
+whole steps unevenly, one early and one late. The two chords in the middle become golden triads, one just below
+F♯ and one just above it. The harmony seems to ride an escalator from IV to V.</p>
+<audio-ex src="escalator_def" caption="IV → V twice: first the strict path (all voices 2+2+2: planing through vF♯ and ^F♯ major), then the natural path F → vF♯g → ^F♯g → G with the alto split 3+2+1 and the tenor 1+2+3."></audio-ex>
+<audio-ref file="P03a_the_golden_escalator_definition.mp3" caption="From the golden audio suite: three escalators, IV → V, V → vi and I → ii, written with ~g placeholders."></audio-ref>
+</div>
+<div class="layer understand">
+<p>The natural path for IV → V in the dictionary's four-part setting:</p>
+<table>
+<tr><th>Voice</th><th>IV</th><th>$P_1$</th><th>$P_2$</th><th>V</th><th>Schedule</th></tr>
+<tr><td>S</td><td>F4</td><td>vF♯4</td><td>^F♯4</td><td>G4</td><td>2 + 2 + 2</td></tr>
+<tr><td>A</td><td>C4</td><td>C♯4</td><td>vD4</td><td>D4</td><td>3 + 2 + 1</td></tr>
+<tr><td>T</td><td>A3</td><td>^A3</td><td>B♭3</td><td>B3</td><td>1 + 2 + 3</td></tr>
+<tr><td>B</td><td>F2</td><td>vF♯2</td><td>^F♯2</td><td>G2</td><td>2 + 2 + 2</td></tr>
+</table>
+<pianoroll edo="36" notes="A3 C4 F4 ; ^A3 C#4 vF#4 ; Bb3 vD4 ^F#4 ; B3 D4 G4" labels="F ; vF♯g ; ^F♯g ; G" title="IV → V, natural path (upper voices; the bass doubles the soprano two octaves lower)"></pianoroll>
+<p>$P_1$ = vF♯ ^A C♯ = <b>vF♯g</b> (17, 28, 3: thirds of 11) and $P_2$ = ^F♯ B♭ vD = <b>^F♯g</b> (19, 30, 5). The bass and
+soprano carry the golden roots and move evenly, F → vF♯ → ^F♯ → G. The alto arrives at C♯ early and the tenor
+leaves A late; that puts the three upper voices on three different layers at each passing chord.</p>
+<p><b>Whole-step root rule.</b> When the roots move by a whole step, the two golden chords sit on or beside the
+<b>chromatic root between</b>, crossing layers:</p>
+<table>
+<tr><th>Progression</th><th>Path</th></tr>
+<tr><td>IV → V</td><td>F – <b>vF♯g – ^F♯g</b> – G</td></tr>
+<tr><td>V → vi</td><td>G – <b>vA♭g – A♭g</b> – Am</td></tr>
+<tr><td>I → ii</td><td>C – <b>vC♯g – C♯g</b> – Dm</td></tr>
+<tr><td>ii → iii</td><td>Dm – <b>^Dg – E♭g</b> – Em</td></tr>
+<tr><td>♭VII → I</td><td>B♭ – <b>vBg – ^Bg</b> – C</td></tr>
+</table>
+<p>Descending works the same way in reverse: V → IV is G – ^F♯g – vF♯g – F. The deceptive cadence V → vi is an
+escalator, which <a href="ch:ch29#deceptive">Chapter 29</a> turns into the golden deceptive cadence.</p>
+<p><b>How general is it?</b> Among the 15 major and minor triads in the dictionary's chord set (the six diatonic
+ones plus i, iv, ♭III, ♭VI, ♭VII, ♭II, II, III and VI), 36 ordered pairs have roots a whole step apart. In the
+dictionary's natural realizations, 30 of them get two different golden passing chords. The six that do not are
+exactly the pairs in which a minor triad rises a whole step to a major triad (ii → III, iv → V, i → II) or a major
+triad falls a whole step to a minor triad (V → iv, II → i, III → ii). This is a census of one voicing model, not a
+theorem about every possible voicing.</p>
+<p>Here are three escalators and a golden six-four in a short phrase:</p>
+<audio-ex src="escalator_phrase" caption="C – vC♯g – C♯g – Dm, G – vA♭g – A♭g – Am, F – vF♯g – ^F♯g – G, then the strict golden six-four into C. Listen to the bass climbing through sixth-steps under each escalator."></audio-ex>
+<audio-ref file="P03b_escalator.mp3" caption="From the golden audio suite: 'Escalator', a full piece built on these moves."></audio-ref>
+</div>
+<div class="layer derive">
+<p><b>Why the strict path fails and the natural path succeeds.</b> In IV → V every voice has $d = +2$ semitones. On a
+uniform path every voice is then in the falling class, so every passing chord is single-layer: by the admissibility
+condition of <a href="ch:ch27#uniform-path">Chapter 27</a> no golden chord is possible, and in fact
+$P_k = X + 2k$ is $X$ planed. On a natural path a whole-step voice can sit on any layer pair except (1, 2); with
+the schedules (2,2,2), (3,2,1) and (1,2,3) the three upper voices have layer pairs (2, 1), (0, 2) and (1, 0): at
+$P_1$ they are on layers 2, 0, 1 and at $P_2$ on 1, 2, 0, one on each layer both times. The remaining condition,
+that the pitch classes form the pattern $\{r, r+11, r+22\}$, is checked directly: $17 + 11 = 28$, $17 + 22 = 39 \equiv 3$;
+$19 + 11 = 30$, $19 + 22 = 41 \equiv 5$.</p>
+<p><b>Two golden chords in a row.</b> Never-twice (<a href="ch:ch27#partner">Chapter 27</a>) is a theorem about
+uniform paths: its proof used $P_2 - P_1 = d$, a vector with one entry in each motion class. On a natural path the
+second step need not equal the first. In this escalator the second step is $(2, 2, 2, 2)$ in every voice
+(B: 125 → 127, T: 172 → 174, A: 183 → 185, S: 197 → 199), so $P_2$ is $P_1$ <i>planed</i> up two sixth-steps, and a
+planed golden triad is again a golden triad. The unevenness sits in the first and last steps, which carry the
+voices from the single layer of F major onto three layers and back onto the single layer of G major.</p>
+</div>
+</section>
+
+<section id="half-step">
+<h2>The half-step theorem</h2>
+<div class="layer hear">
+<p>Not every step can be made golden. Move E major to F major with every voice rising a semitone. Whatever you do,
+the passing chords are E major and F major shifted off the grid: ^E, then vF. The chord glides without changing
+shape. Then descend F → vF → ^E → E, the last step of the Andalusian cadence, and hear the same thing in reverse.</p>
+<audio-ex src="half_step_planing" caption="E → ^E → vF → F, written E ~g ~g F (System 2 can only plane here), then F → vF → ^E → E in four voices. Listen for one chord shape sliding, with no golden color."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Half-step theorem.</b> Chords a half step apart in parallel motion can never pass through golden. Every voice
+moves a half step in the same direction, so every voice is in the same motion class, all passing chords lie on one
+layer, and each is the starting chord <i>planed</i> by one or two sixth-steps: a Western chord moved onto another
+layer (<a href="ch:ch31#breathing-planing">Chapter 31</a> uses planing as a golden-home operation).</p>
+<p>The reason is the one fact System 2 did not change: half steps are still split 1 + 1 + 1. Two voices that both
+move a half step up are on the same layer at every passing chord. A golden triad has one note on each layer, so it
+cannot contain two different notes on one layer. This gives a stronger statement.</p>
+<pianoroll edo="36" notes="E3 Ab3 B3 E4 ; ^E3 ^Ab3 ^B3 ^E4 ; vF3 vA3 vC4 vF4 ; F3 A3 C4 F4" labels="E ; ^E ; vF ; F" title="E → F in parallel half steps: planing only"></pianoroll>
+<p><b>Lemma (two parallel half steps).</b> If two voices with different pitch classes both move a half step in the
+same direction, neither passing chord is a golden triad. (It can be a golden seventh only if those two voices are a
+semitone or a major seventh apart, because a golden seventh's root and seventh, 33 sixth-steps apart, share a layer.)</p>
+<p><b>Consequence for triads.</b> An exhaustive check of every stepwise three-voice System 2 path (doublings allowed)
+between major and minor triads whose roots are a half step apart (C → C♯, C → B, C → C♯m, Cm → B, and so on, in
+every combination of qualities) finds no golden passing chord at all. Voice-leading such a pair by smallest steps
+always moves two voices a half step the same way. Golden color on a half-step progression needs a diminished or
+augmented chord at one end: vii° → I passes through Bdim – ^B silver – vCg – C, where only one chord tone, B, moves by a half
+step (in four parts the bass doubles it, but two voices on the same pitch class do not fall under the lemma).</p>
+<p>So the half-step progressions of a major key (iii → IV, vii° → I in parallel) are where golden passing harmony
+stops and planing takes over. The golden Andalusian (<a href="ch:ch29#staircase">Chapter 29</a>) ends exactly this
+way: two escalators, then F → vF → ^E → E.</p>
+</div>
+<div class="layer derive">
+<p><b>Theorem (half-step theorem).</b> On a System 1 or System 2 path in which every voice moves $+3$ sixth-steps (or
+every voice $-3$), each passing chord is $P_k = X \pm k$, the starting chord transposed by $k$ sixth-steps.
+<i>Proof.</i> Half steps have the single schedule 1 + 1 + 1, so after $k$ chords each voice has moved exactly $\pm k$. ∎
+$P_k$ is single-layer (layer $\pm k \bmod 3$), so it is not golden.</p>
+<p><b>Lemma.</b> If voices $i \ne j$ with $x_i \not\equiv x_j$ both move $+3$ (or both $-3$), then for $k = 1, 2$ the
+pitch-class set of $P_k$ contains two distinct classes on one layer, so it is not a golden triad.
+<i>Proof.</i> $p_i = x_i \pm k$ and $p_j = x_j \pm k$ have the same layer and differ by $x_i - x_j \not\equiv 0$. A golden
+triad $\{r, r+11, r+22\}$ has one class on each layer. ∎ For a golden seventh $\{r, r+11, r+22, r+33\}$ the only two
+classes sharing a layer are $r$ and $r+33$, which differ by $\pm 33 \equiv \mp 3$, so $x_i - x_j \equiv \pm 3$: the two
+voices are a semitone (or major seventh) apart.</p>
+<p><b>Exhaustive check (new in this book).</b> For every pair of triads with qualities in {major, minor, diminished,
+augmented} and roots a semitone apart, all three-voice assignments of chord tones (doublings allowed), all stepwise
+displacements and all System 2 schedules were enumerated. Major and minor pairs: no golden passing chord in any case.
+Pairs with a diminished or augmented triad: some golden chords occur (for example Bdim → C gives vCg; Caug → Bm gives
+several). Allowing every voice to move up to three semitones (split 3 + 3 + 3) changes nothing for major and minor
+pairs. This is the check recorded in <code>docs/GOLDEN_THEORY.md</code> §2.6; it extends the half-step theorem, which
+is stated for parallel motion, to every voicing.</p>
+</div>
+</section>
+
+<section id="dictionary">
+<h2>The dictionary of transitions</h2>
+<div class="layer hear">
+<p>With two systems in hand, every common progression can be looked up: what does System 1 put between the chords,
+and what does System 2? The golden audio suite plays the whole dictionary. Start with a short tour of four entries:
+ii → V, vii° → I, ♭VII → I and V7 → I, each with its natural passing chords.</p>
+<audio-ex src="dictionary_tour" caption="Four dictionary entries on System 2: Dm – Dg – vGg/D – G; Bdim – ^B silver – vCg – C; B♭ – vBg – ^Bg – C; G7 – Gg7(^^3,^5) – vCg/G – C. Count the golden chords: two, one, two, one."></audio-ex>
+<pianoroll edo="36" notes="B2 B3 D4 F4 ; ^B2 ^B3 vEb4 F#4 ; vC3 vC4 ^Eb4 G4 ; C3 C4 E4 G4" labels="Bdim ; ^Bs ; vCg ; C" title="vii° → I on System 2: silver, then golden"></pianoroll>
+<p>The last entry deserves a closer listen. On the strict path, V7 → I has no golden chord and its seventh falls,
+as a seventh should. On the natural path the seventh rises through F♯ to G in an inner voice, as Bach often lets an
+inner-voice seventh rise, and the tonic arrives through vCg over the dominant.</p>
+<audio-ex src="seventh_rises" caption="V7 → I in four voices: the strict path (the seventh F falls F → vF → ^E → E, no golden chord), then the natural path (F → F♯ → G rises; B → ^B → vC → C; passing chords Gg7(^^3,^5) and vCg/G)."></audio-ex>
+<audio-ref file="D00_common_moves_system1_then_system2.mp3" caption="From the golden audio suite: the 33 common moves in C major, each on System 1 and then on System 2."></audio-ref>
+</div>
+<div class="layer understand">
+<p><b>The dictionary</b> (<code>reference/golden/dictionary.py</code>, printed in <code>docs/GOLDEN_PROGRESSIONS.md</code>)
+covers 30 chords in C major: the diatonic triads and sevenths, plus i, iv, ♭III, ♭VI, ♭VII, ♭II, II, III, VI,
+V7/V, V7/vi, V7/IV, iiø7, ♭VImaj7, I+ and vii°7. That makes $30 \times 29 = 870$ ordered pairs. Each is realized in
+four parts by fixed rules:</p>
+<ul>
+<li>The upper three voices are the three chord tones (for sevenths: third, fifth and seventh), joined by the
+smoothest stepwise lines.</li>
+<li>The bass sounds the root. It moves by step like the other voices when the roots are a step apart; otherwise it
+holds through the passing chords and moves on the arrival.</li>
+<li>Among the candidate paths, the one with the most golden chords is preferred, then exact golden chords over golden
+chords on a pedal, then two different passing chords over a repeated one, then fewer parallel octaves and fifths, then
+the smoothest motion.</li>
+</ul>
+<p><b>Census</b> (exhaustive over these 870 realizations):</p>
+<table>
+<tr><th>Path type</th><th>Exact golden passing chords</th><th>Golden over a pedal</th><th>Pairs with two different golden chords</th><th>Pairs with at least one</th></tr>
+<tr><td>Strict (System 1)</td><td>32</td><td>122</td><td>—</td><td>—</td></tr>
+<tr><td>Natural (System 2)</td><td>227</td><td>299</td><td><b>46</b></td><td><b>181</b></td></tr>
+</table>
+<p>The 32 strict golden chords lie in 32 different pairs (never twice). The 227 natural ones are $2 \times 46 + 135$:
+46 pairs with two different golden chords and 135 pairs with exactly one, 181 pairs in all. ("Golden over a pedal",
+written Xg/Y, means the three upper voices form a golden triad over a bass that is not one of its notes.) These counts
+are <i>measurements of a voicing model</i>: a different voicing rule would give different numbers. The
+theorems of Chapter 27 hold for every voicing.</p>
+<p><b>Selected entries</b> (System 2):</p>
+<table>
+<tr><th>Transition</th><th>Natural path</th><th>Golden</th></tr>
+<tr><td>V → I</td><td>G – vE♭T13/G – <b>vCg/G</b> – C</td><td>1</td></tr>
+<tr><td>V7 → I</td><td>G7 – <b>Gg7(^^3,^5)</b> – <b>vCg/G</b> – C</td><td>1 exact, 1 altered seventh</td></tr>
+<tr><td>I → IV</td><td>C – vA♭T13/C – <b>vFg/C</b> – F</td><td>1</td></tr>
+<tr><td>ii → V</td><td>Dm – <b>Dg</b> – <b>vGg/D</b> – G</td><td>2</td></tr>
+<tr><td>IV → V</td><td>F – <b>vF♯g</b> – <b>^F♯g</b> – G</td><td>2</td></tr>
+<tr><td>V → vi</td><td>G – <b>vA♭g</b> – <b>A♭g</b> – Am</td><td>2</td></tr>
+<tr><td>vi → ii</td><td>Am – <b>Ag</b> – vFT13/A – Dm</td><td>1</td></tr>
+<tr><td>vii° → I</td><td>Bdim – ^B silver – <b>vCg</b> – C</td><td>1</td></tr>
+<tr><td>♭VII → I</td><td>B♭ – <b>vBg</b> – <b>^Bg</b> – C</td><td>2</td></tr>
+<tr><td>I → ♭VI</td><td>C – <b>Cg</b> – ^E♭T13/C – A♭</td><td>1</td></tr>
+<tr><td>IVmaj7 → V7</td><td>Fmaj7 – <b>^Fg7</b> – F♯g7(^3,v7) – G7</td><td>1</td></tr>
+<tr><td>iii → IV</td><td>Em – ^F♯7()/^E – vF♯maj7()/vF – F</td><td>0 (half step)</td></tr>
+</table>
+<p>(In the V7 → I row, Gg7(^^3,^5) is a golden seventh with altered tones; only vCg/G counts as an exact golden
+triad, here in second inversion over the held G. In the iii → IV row the labels are the nearest named shapes of off-grid chords.)</p>
+<pianoroll edo="36" notes="G2 B3 D4 F4 ; G2 ^B3 vEb4 F#4 ; G2 vC4 ^Eb4 G4 ; C3 C4 E4 G4" labels="G7 ; Gg7(^^3,^5) ; vCg/G ; C" title="V7 → I, natural path: the seventh rises F → F♯ → G"></pianoroll>
+<p><b>Forms.</b> The dictionary sorts its golden entries into two forms you can drop into any progression:</p>
+<ul>
+<li><b>diatonic – golden – golden – diatonic</b> (46 pairs), for example I – v♭IIg – ♭IIg – ii
+(C – vC♯g – C♯g – Dm), ii – IIg – vVg/II – V (Dm – Dg – vGg/D – G), V – v♭VIg – ♭VIg – vi;</li>
+<li><b>diatonic – golden – diatonic</b> (181 pairs), using one golden chord alone: V – vIg/V – I (G – vCg/G – C),
+I – vIVg/I – IV (C – vFg/C – F), vi – VIg – ii (Am – Ag – Dm), vii° – vIg – I (Bdim – vCg – C).</li>
+</ul>
+<p>In SongMap, two placeholders ask for both passing chords and one placeholder for the more golden one:
+<code>Dm:1 ~g:0.5 ~g:0.5 G:2</code> gives Dm – Dg – vGg/D – G, and <code>G:1 ~:1 C:2</code> gives G – vCg/G – C
+(<a href="ch:ch42#passing">Chapter 42</a>).</p>
+<audio-ref file="D21_S2_diatonic_triads.mp3" caption="From the golden audio suite: all 42 ordered pairs of diatonic triads on System 2. Compare with the System 1 version in Chapter 27: the escalators (I → ii, ii → iii, IV → V, V → vi and their reverses) now turn golden."></audio-ref>
+</div>
+<div class="layer derive">
+<p><b>What is proved and what is counted.</b></p>
+<ul>
+<li><i>Theorems</i> (hold for every voicing): the System 1 results of Chapter 27; the layer table of the Uneven
+splits section; the half-step theorem and its lemma.</li>
+<li><i>Exhaustive checks of a defined finite model</i>: the half-step consequence for triads (all three-voice
+voicings); the census above (the 870 four-part realizations of <code>dictionary.py</code>: 46 and 181, plus 32,
+122, 227 and 299); the whole-step tally (30 of 36 pairs).</li>
+</ul>
+<p>The census is reproducible: <code>dictionary.evaluate(a, b, natural)</code> returns the realization of each pair, and
+counting the labels with kind "golden" reproduces 32 (strict) and 227 (natural). A pair contributes to the "46" if both
+passing chords are exact golden triads with different roots; it contributes to the "181" if at least one passing chord
+on either path is exact golden. In this model every natural path with two exact golden chords has two different ones,
+and the 181 pairs with a strict or natural golden chord coincide with the 181 pairs with a natural one.</p>
+</div>
+</section>
+
+<div class="exercise">
+<p><b>Exercise 28.1 (schedules).</b> A voice rises from A to B on a natural path and is on layer 1 at $P_1$ and layer 1
+at $P_2$. Which schedule is it using, and what are its pitches?</p>
+<details class="answer"><summary>Answer</summary><p>Layers (1, 1) need $a \equiv 1$, $a + b \equiv 1$, so $a = 1$, $b = 3$,
+$c = 2$: the schedule 1 + 3 + 2. Pitches A, ^A, ^B♭, B (27, 28, 31, 33).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 28.2 (escalator).</b> Check that vA♭g and A♭g in G – vA♭g – A♭g – Am are golden triads, and find the
+bass schedule from the dictionary voicing B: G2 vA♭2 A♭2 A2.</p>
+<details class="answer"><summary>Answer</summary><p>vA♭g = {23, 34, 9} = vA♭ ^B E♭ (23 + 11 = 34, 23 + 22 = 45 ≡ 9);
+A♭g = {24, 35, 10} = A♭ vC ^E♭. The bass moves 21 → 23 → 24 → 27: 2 + 1 + 3.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 28.3 (half steps).</b> Explain without computation why C major → C♯ major has no golden passing chord on
+either system, in any stepwise voicing.</p>
+<details class="answer"><summary>Answer</summary><p>The targets are C♯, F and G♯. Within a whole tone, C can only go to
+C♯ and E can only go to F, both a half step up, whatever the other voices do. Two distinct voices moving a half step the
+same way sit on one layer at both passing chords (the lemma), and a golden triad has one note per layer.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 28.4 (listening).</b> In the dictionary tour, the vii° → I entry passes through silver and then golden.
+Does the silver chord sound darker than the golden one? Why might that be expected from the averaging principle?</p>
+<details class="answer"><summary>Answer</summary><p>A listening question. Silver is the average of major, minor and
+diminished; golden the average of major, minor and augmented (<a href="ch:ch25#averaging">Chapter 25</a>). Many listeners
+hear silver as the darker of the two, which matches its "dark side" construction, but this is a perception, not a
+theorem.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 28.5 (proof).</b> Show that on a natural path, a voice moving a whole step up can never be on layer 1 at
+$P_1$ and layer 2 at $P_2$. Which motion does have that pattern?</p>
+<details class="answer"><summary>Answer</summary><p>It would need $a = 1$ and $a + b \in \{2, 5\}$ with $c = 6 - a - b \le 3$, so
+$a + b \ge 3$, hence $a + b = 5$, $b = 4 > 3$: impossible. The half step up (1 + 1 + 1) has exactly that pattern.</p></details>
+</div>

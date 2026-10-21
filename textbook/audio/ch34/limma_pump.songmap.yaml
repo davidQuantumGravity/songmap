@@ -1,0 +1,21 @@
+# ch34: the limma pump (doc demo D4). Ten golden13 keys down the golden chain (the golden circle
+# forwards, Cg -> vEg -> ... -> vC#g). Every step lowers one note by a sixth-step (D -> vD,
+# vF# -> ^F, ... B -> vB), yet the walk ends in vC#, two sixth-steps above C.
+songmap: 0.2
+title: "The limma pump"
+tempo: 76
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 347
+tail_seconds: 4
+instruments: {organ: clean/organ, low: clean/bass, keys: clean/keys}
+motifs:
+  pairs: {notes: "c+1 c+2 d+4 vd+ vf# ^f ^a a c#+ vc#+ vf ^e ^ab ab c+ vc+ ve ^eb ^g g b2 vb vf vab vc#+1", octave: 4}
+mix:
+  organ: {gain_db: -8, send: {hall: 0.25}}
+  low: {gain_db: -7}
+  keys: {gain_db: -4, send: {hall: 0.2}}
+sections:
+  - {name: pump, bars: 9, harmony: "C:1 Cg:0.5 vEg:0.5 ^Gg:0.5 Bg:0.5 vEbg:0.5 ^F#g:0.5 Bbg:0.5 vDg:0.5 ^Fg:0.5 Ag:0.5 vC#g:1 vC#:2", parts: {organ: hold, low: {style: roots, role: bass}, keys: {motifs: [pairs]}}}
+master: clean

@@ -1,0 +1,21 @@
+# ch36 decatonic-modes: one tune by scale degrees, first in the 35 decatonic, then in the 44 decatonic,
+# over the same golden chords (Cg C#g Cg vEg Cg, all in both scales). The tune uses degrees 2, 5 and 8,
+# D, vF#, ^A in 35 against ^D, F#, vBb in 44.
+songmap: 0.2
+title: "One tune, 35 and 44"
+tempo: 92
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ}
+mix:
+  keys: {gain_db: -4}
+  pad: {gain_db: -11}
+sections:
+  - {name: scale35, bars: 2, harmony: "Cg:2", parts: {keys: {notes: "c8 c#8 d8 ve8 vf8 vf#8 ^g8 ^ab8 | ^a8 b8 c+2."}, pad: hold}}
+  - {name: tune35, bars: 4, harmony: "Cg:1 C#g:1 Cg:1 vEg:0.5 Cg:0.5", parts: {keys: {notes: "c4 d8 ve8 ^g4 ^ab8 ^g8 | vf#8 vf8 ve8 d8 ve2 | ^g4 ^a8 ^ab8 ^g4 ve8 vf8 | d8 c#8 b-8 c#8 c2"}, pad: hold}}
+  - {name: scale44, bars: 2, harmony: "Cg:2", parts: {keys: {notes: "c8 c#8 ^d8 ve8 vf8 f#8 ^g8 ^ab8 | vbb8 b8 c+2."}, pad: hold}}
+  - {name: tune44, bars: 4, harmony: "Cg:1 C#g:1 Cg:1 vEg:0.5 Cg:0.5", parts: {keys: {notes: "c4 ^d8 ve8 ^g4 ^ab8 ^g8 | f#8 vf8 ve8 ^d8 ve2 | ^g4 vbb8 ^ab8 ^g4 ve8 vf8 | ^d8 c#8 b-8 c#8 c2"}, pad: hold}}
+master: clean

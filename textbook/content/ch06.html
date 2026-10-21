@@ -1,0 +1,392 @@
+<p>Chapter 5 cut the chain of fifths at seven notes and at twelve. Why those numbers? Why not eight, or nine? This
+chapter answers that question with three pieces of mathematics: a theorem about points on a circle, a family of
+fractions arranged in a tree, and the idea of a <b>well-formed scale</b>. Together they show that the pentatonic,
+diatonic and chromatic scales are not three separate inventions. They are three moments of one process, and the
+same process, run with a different generator, produces the golden scales of Part VI.</p>
+
+<section id="three-gap">
+<h2>The three-gap theorem</h2>
+<div class="layer hear">
+<p>Build a scale one fifth at a time, folding every new note into one octave, and play it after each addition. With
+three notes the scale has two kinds of step, a big leap and a smaller one. With four, an odd step appears that is
+neither. With five the scale settles down again: the pentatonic, with just two kinds of step. Six notes bring an odd
+one back, seven settle again into the major scale, and eight unsettle it once more.</p>
+<audio-ex src="growth" caption="The scale grows one fifth at a time, from three notes to eight. At five and seven notes the steps come in only two sizes and the scale sounds balanced; at four, six and eight a third size breaks the pattern."></audio-ex>
+<p>However many fifths you stack, there are never more than three different step sizes. That is a theorem, and it is
+true for any generator at all, not just the fifth.</p>
+</div>
+<div class="layer understand">
+<p>Think of the octave as a circle, one turn around being 1200 cents. Each fifth moves you 701.96 c around it.
+After $n$ notes the circle is cut into $n$ arcs, the steps of the scale. Here are the step sizes and how many of each
+there are, for the first few values of $n$:</p>
+<table>
+<tr><th>Notes $n$</th><th>Scale (chain from F)</th><th>Step sizes in cents (how many)</th><th>Sizes</th></tr>
+<tr><td>2</td><td>C F</td><td>498.04 (1), 701.96 (1)</td><td>2</td></tr>
+<tr><td>3</td><td>C F G</td><td>203.91 (1), 498.04 (2)</td><td>2</td></tr>
+<tr><td>4</td><td>C D F G</td><td>203.91 (2), 294.13 (1), 498.04 (1)</td><td>3</td></tr>
+<tr><td>5</td><td>C D F G A</td><td>203.91 (3), 294.13 (2)</td><td>2</td></tr>
+<tr><td>6</td><td>C D E F G A</td><td>90.22 (1), 203.91 (4), 294.13 (1)</td><td>3</td></tr>
+<tr><td>7</td><td>C D E F G A B</td><td>90.22 (2), 203.91 (5)</td><td>2</td></tr>
+<tr><td>8</td><td>+ F♯</td><td>90.22 (3), 113.69 (1), 203.91 (4)</td><td>3</td></tr>
+<tr><td>9</td><td>+ C♯</td><td>90.22 (4), 113.69 (2), 203.91 (3)</td><td>3</td></tr>
+<tr><td>10</td><td>+ G♯</td><td>90.22 (5), 113.69 (3), 203.91 (2)</td><td>3</td></tr>
+<tr><td>11</td><td>+ D♯</td><td>90.22 (6), 113.69 (4), 203.91 (1)</td><td>3</td></tr>
+<tr><td>12</td><td>+ A♯</td><td>90.22 (7), 113.69 (5)</td><td>2</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 F4 G4 C5 ; C4 D4 F4 G4 C5 ; C4 D4 F4 G4 A4 C5 ; C4 D4 E4 F4 G4 A4 C5 ; C4 D4 E4 F4 G4 A4 B4 C5 ; C4 D4 E4 F4 F#4 G4 A4 B4 C5" labels="3 ; 4 ; 5 ; 6 ; 7 ; 8" title="The scale growing one fifth at a time, 3 to 8 notes (nearest 12-ET keys)"></pianoroll>
+<p>Two features stand out. There are never more than three sizes. And whenever there are three, the largest is the sum
+of the other two: at $n = 4$, $203.91 + 294.13 = 498.04$; at $n = 6$, $90.22 + 203.91 = 294.13$; at $n = 9$,
+$90.22 + 113.69 = 203.91$. Between $n = 7$ and $n = 12$ you can watch the whole tones (203.91 c) being split, one per
+new note, into an apotome (113.69 c) and a limma (90.22 c) until none is left.</p>
+<p>The step sizes do not depend on where the chain starts. Starting from C instead of F rotates the scale but leaves
+the list of steps the same.</p>
+</div>
+<div class="layer derive">
+<p><b>Theorem (three-gap theorem).</b> Let $\alpha$ be a real number and $n \ge 1$. The $n$ points
+$\{k\alpha\}$, $k = 0, 1, \dots, n-1$, on a circle of circumference 1 (here $\{\cdot\}$ is the fractional part)
+divide it into $n$ arcs of at most three different lengths. If there are three, the largest is the sum of the other
+two.</p>
+<p>The theorem was conjectured by Hugo Steinhaus and proved in the late 1950s by Vera Sós, Stanisław Świerczkowski and
+János Surányi.</p>
+<p><i>Proof sketch.</i> Write $x_k = \{k\alpha\}$ and assume $\alpha$ is irrational (so the points are distinct). Among
+$x_1, \dots, x_{n-1}$, let $x_i$ be the point closest to 0 going counterclockwise, at distance $a = x_i$, and $x_j$ the
+point closest to 0 going clockwise, at distance $b = 1 - x_j$. Now look at the arc that starts at $x_k$ and goes
+counterclockwise.</p>
+<ul>
+<li>If $k + i \le n - 1$, the point $x_{k+i} = x_k + a$ exists, and no point lies strictly between: such a point
+$x_m$ would give an index difference $|m - k|$ or $|k + i - m|$ below $n$ whose point lies closer to 0 than $a$. The
+arc has length $a$.</li>
+<li>Otherwise, if $k - j \ge 0$, the point $x_{k-j} = x_k + b$ exists, and by the same argument the arc has length
+$b$.</li>
+<li>Otherwise ($n - i \le k \le j - 1$) the next point is $x_{k+i-j} = x_k + a + b$, and the arc has length
+$a + b$.</li>
+</ul>
+<p>So every arc is $a$, $b$ or $a + b$. ∎ (Full proof in <a href="ch:appD#tuning">Appendix D</a>.)</p>
+<p><b>Counting.</b> The proof also counts the arcs: $n - i$ of length $a$, $n - j$ of length $b$, and $i + j - n$ of
+length $a + b$. (One can show $i + j \ge n$.) Check with fifths at $n = 9$: the closest returns are $x_7$ (an
+apotome above 0, $a$ = 113.69 c) and $x_5$ (a limma below, $b$ = 90.22 c). The formula gives $9 - 7 = 2$ apotomes,
+$9 - 5 = 4$ limmas and $7 + 5 - 9 = 3$ whole tones, as in the table.</p>
+<p><b>Corollary.</b> The scale has exactly two step sizes if and only if $n = i + j$.</p>
+</div>
+</section>
+
+<section id="mos">
+<h2>Moments of symmetry</h2>
+<div class="layer hear">
+<p>The sizes 5, 7 and 12 are special moments in the growth of the chain: the moments when the steps come in only two
+sizes. Such a scale has a remarkable evenness. Not only its steps but <i>every</i> interval comes in just two sizes.
+In the major scale, for example, every third you can form from the scale's own notes is either a major third or a
+minor third, never anything else.</p>
+<audio-ex src="myhill" caption="The seven thirds of the Pythagorean C major scale, C–E up to B–D: only two sizes, major and minor. Then the seven fourths: six pure and one wider, F–B."></audio-ex>
+<p>The tuning theorist Erv Wilson called these special sizes <b>moments of symmetry</b> (in the
+1970s). Music theorists also call them <b>well-formed</b> scales, the term of Norman Carey and David Clampitt
+(1989).</p>
+</div>
+<div class="layer understand">
+<p><b>Definition.</b> A <b>moment-of-symmetry scale</b> (MOS), or <b>well-formed scale</b>, is a scale made of $n$
+consecutive notes of a chain of one generator, folded into the octave, that has exactly two step sizes. Call the
+larger step $L$ and the smaller $s$. If there are $a$ large and $b$ small steps, the scale is described as
+$a$L $b$s.</p>
+<table>
+<tr><th>$n$</th><th>Scale</th><th>$L$</th><th>$s$</th><th>Type</th></tr>
+<tr><td>5</td><td>pentatonic C D E G A</td><td>294.13 c (32/27)</td><td>203.91 c (9/8)</td><td>2L 3s</td></tr>
+<tr><td>7</td><td>diatonic C D E F G A B</td><td>203.91 c (9/8)</td><td>90.22 c (limma)</td><td>5L 2s</td></tr>
+<tr><td>12</td><td>chromatic, E♭ to G♯</td><td>113.69 c (apotome)</td><td>90.22 c (limma)</td><td>5L 7s</td></tr>
+<tr><td>17</td><td>G♭ to A♯</td><td>90.22 c (limma)</td><td>23.46 c (comma)</td><td>12L 5s</td></tr>
+</table>
+<p><b>Specific and generic intervals.</b> In a scale, a "third" means "two scale steps up", whatever its exact size.
+That counting-in-steps size is the <b>generic</b> interval; the exact size in cents is the <b>specific</b> interval.
+In the Pythagorean major scale every generic interval comes in exactly two specific sizes:</p>
+<table>
+<tr><th>Generic</th><th>2nd</th><th>3rd</th><th>4th</th><th>5th</th><th>6th</th><th>7th</th></tr>
+<tr><th>Smaller</th><td>90.22</td><td>294.13</td><td>498.04</td><td>588.27</td><td>792.18</td><td>996.09</td></tr>
+<tr><th>Larger</th><td>203.91</td><td>407.82</td><td>611.73</td><td>701.96</td><td>905.87</td><td>1109.78</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 E4 ; D4 F4 ; E4 G4 ; F4 A4 ; G4 B4 ; A4 C5 ; B4 D5" labels="M ; m ; m ; M ; M ; m ; m" title="The seven thirds of C major: major (M, 407.82 c) or minor (m, 294.13 c) only (nearest 12-ET keys)"></pianoroll>
+<p>This is called <b>Myhill's property</b>. For chains of one generator it goes hand in hand with having two step
+sizes: a scale has one exactly when it has the other. Norman Carey and David Clampitt proved this equivalence in
+general (1989), and we checked it by computation for the chain of fifths and for the golden chain, for every size
+below 320.</p>
+<p>The generic fourth and fifth are special: they are the generator itself (a fifth up is a fourth down). Six of the
+seven fifths are pure, and one, B–F, is smaller by an apotome: 701.96 − 113.69 = 588.27 c, the diminished fifth.
+That single odd fifth is the scale's tritone, and it is a miniature version of the wolf of
+<a href="ch:ch05#comma">Chapter 5</a>.</p>
+</div>
+<div class="layer derive">
+<p><b>Proposition (the odd generator).</b> In the scale of $n$ consecutive chain notes $x_0, \dots, x_{n-1}$ with
+generator $g$ (in cents), the $n - 1$ pairs $x_k \to x_{k+1}$ are exactly $g$ apart (folded). The remaining pair,
+$x_{n-1} \to x_0$, differs from $g$ by the leftover $\varepsilon_n = n g - 1200\,m$, where $m$ is the nearest whole
+number of octaves: it is $g - \varepsilon_n$.</p>
+<p><i>Proof.</i> Going from $x_{n-1}$ up by $g$ lands on chain position $n$, which is $\varepsilon_n$ away from
+position 0. ∎</p>
+<p>For the diatonic scale $\varepsilon_7 = 7 \times 701.955 - 4800 = 113.69$ c (the apotome), so the odd fifth is
+588.27 c. For the chromatic scale $\varepsilon_{12} = 23.46$ c (the comma), and the odd fifth is the wolf, 678.49 c.
+For the pentatonic $\varepsilon_5 = -90.22$ c, so the odd interval is $701.96 + 90.22 = 792.18$ c, the minor sixth E–C
+standing in for a fifth.</p>
+<p><b>MOS and Myhill (computed).</b> For $g$ = the fifth and for $g$ = the golden sixth, and every $n$ from 2 to 319,
+the following were computed directly: (i) the step sizes; (ii) the number of specific sizes of each generic interval.
+In every case the scale has two step sizes if and only if every generic interval (other than the octave) has exactly
+two specific sizes.</p>
+</div>
+</section>
+
+<section id="stern-brocot">
+<h2>The Stern–Brocot tree</h2>
+<div class="layer hear">
+<p>After twelve, the next well-formed size of the chain of fifths is seventeen. In the 17-note Pythagorean scale
+each black key of the piano splits into two notes, a sharp and a flat, a comma apart. The steps are now limmas and
+commas: a scale of tiny and very tiny steps.</p>
+<audio-ex src="seventeen" caption="The 17-note Pythagorean scale rising from C, with steps of 90 and 23 cents; then C, D♭, C♯, D slowly: the flat comes before the sharp."></audio-ex>
+<p>Where do the sizes 5, 7, 12, 17 come from? There is a single structure, a tree of fractions, that lists them all,
+and that also contains the near-misses of the last chapter.</p>
+</div>
+<div class="layer understand">
+<p>The <b>mediant</b> of two fractions $a/b$ and $c/d$ is $(a + c)/(b + d)$: add the tops and add the bottoms. It
+always lies between the two. The <b>Stern–Brocot tree</b> is built from mediants. Start with $0/1$ and $1/1$. Their
+mediant $1/2$ is the root. Each new fraction has two children: the mediant with its nearest neighbor on the left, and
+the mediant with its nearest neighbor on the right. Every fraction between 0 and 1 appears exactly once, in lowest
+terms.</p>
+<figure class="svgfig"><svg class="fig" viewBox="0 0 640 400" role="img" aria-label="The Stern-Brocot tree between 0 and 1, with the path toward log2(3/2) highlighted">
+<line x1="320.0" y1="38.0" x2="160.0" y2="62.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="320.0" y1="38.0" x2="480.0" y2="62.0" stroke="var(--accent)" stroke-width="2.5"/>
+<line x1="160.0" y1="82.0" x2="80.0" y2="106.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="160.0" y1="82.0" x2="240.0" y2="106.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="80.0" y1="126.0" x2="40.0" y2="150.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="80.0" y1="126.0" x2="120.0" y2="150.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="240.0" y1="126.0" x2="200.0" y2="150.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="240.0" y1="126.0" x2="280.0" y2="150.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="480.0" y1="82.0" x2="400.0" y2="106.0" stroke="var(--accent)" stroke-width="2.5"/>
+<line x1="480.0" y1="82.0" x2="560.0" y2="106.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="400.0" y1="126.0" x2="360.0" y2="150.0" stroke="var(--accent)" stroke-width="2.5"/>
+<line x1="400.0" y1="126.0" x2="440.0" y2="150.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="560.0" y1="126.0" x2="520.0" y2="150.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="560.0" y1="126.0" x2="600.0" y2="150.0" stroke="var(--line)" stroke-width="1.2"/>
+<line x1="360.0" y1="170.0" x2="390.0" y2="194.0" stroke="var(--accent)" stroke-width="2.5"/>
+<line x1="390.0" y1="214.0" x2="420.0" y2="238.0" stroke="var(--accent)" stroke-width="2.5"/>
+<line x1="420.0" y1="258.0" x2="390.0" y2="282.0" stroke="var(--accent)" stroke-width="2.5"/>
+<line x1="390.0" y1="302.0" x2="360.0" y2="326.0" stroke="var(--accent)" stroke-width="2.5"/>
+<line x1="360.0" y1="346.0" x2="330.0" y2="370.0" stroke="var(--accent)" stroke-width="2.5"/>
+<text x="320.0" y="34.0" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="700">1/2</text>
+<text x="160.0" y="78.0" text-anchor="middle" font-size="14" fill="currentColor">1/3</text>
+<text x="80.0" y="122.0" text-anchor="middle" font-size="14" fill="currentColor">1/4</text>
+<text x="40.0" y="166.0" text-anchor="middle" font-size="14" fill="currentColor">1/5</text>
+<text x="120.0" y="166.0" text-anchor="middle" font-size="14" fill="currentColor">2/7</text>
+<text x="240.0" y="122.0" text-anchor="middle" font-size="14" fill="currentColor">2/5</text>
+<text x="200.0" y="166.0" text-anchor="middle" font-size="14" fill="currentColor">3/8</text>
+<text x="280.0" y="166.0" text-anchor="middle" font-size="14" fill="currentColor">3/7</text>
+<text x="480.0" y="78.0" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="700">2/3</text>
+<text x="400.0" y="122.0" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="700">3/5</text>
+<text x="360.0" y="166.0" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="700">4/7</text>
+<text x="440.0" y="166.0" text-anchor="middle" font-size="14" fill="currentColor">5/8</text>
+<text x="560.0" y="122.0" text-anchor="middle" font-size="14" fill="currentColor">3/4</text>
+<text x="520.0" y="166.0" text-anchor="middle" font-size="14" fill="currentColor">5/7</text>
+<text x="600.0" y="166.0" text-anchor="middle" font-size="14" fill="currentColor">4/5</text>
+<text x="390.0" y="210.0" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="700">7/12</text>
+<text x="420.0" y="254.0" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="700">10/17</text>
+<text x="390.0" y="298.0" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="700">17/29</text>
+<text x="360.0" y="342.0" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="700">24/41</text>
+<text x="330.0" y="386.0" text-anchor="middle" font-size="14" fill="var(--accent)" font-weight="700">31/53</text>
+<text x="510.0" y="294.0" font-size="12" fill="currentColor">continues toward</text>
+<text x="510.0" y="310.0" font-size="12" fill="currentColor">log₂(3/2) = 0.58496…</text>
+</svg><figcaption>The Stern–Brocot tree between 0 and 1. Highlighted: the path toward $\log_2(3/2) = 0.58496\ldots$, the
+fifth as a fraction of an octave. Below 4/7 only the path is drawn.</figcaption></figure>
+<p>To find a number in the tree, start at the root and at each fraction go left if the number is smaller, right if
+it is larger. For the fifth, $x = 0.58496\ldots$:</p>
+<table>
+<tr><th>Fraction</th><td>1/2</td><td>2/3</td><td>3/5</td><td>4/7</td><td>7/12</td><td>10/17</td><td>17/29</td><td>24/41</td><td>31/53</td></tr>
+<tr><th>Value</th><td>0.5000</td><td>0.6667</td><td>0.6000</td><td>0.5714</td><td>0.5833</td><td>0.5882</td><td>0.5862</td><td>0.5854</td><td>0.5849</td></tr>
+<tr><th>Next move</th><td>right</td><td>left</td><td>left</td><td>right</td><td>right</td><td>left</td><td>left</td><td>left</td><td>right</td></tr>
+</table>
+<p>The denominators along the path are 2, 3, 5, 7, 12, 17, 29, 41, 53, and those are exactly the well-formed sizes
+of the chain of fifths. Each fraction $m/n$ on the path has a musical meaning: in the $n$-note well-formed scale, the
+fifth spans $m$ of the $n$ steps. In the pentatonic a fifth is 3 of 5 steps (C to G is C–D–E–G); in the diatonic, 4 of
+7 (C–D–E–F–G); in the chromatic, 7 of 12.</p>
+<p>The path also contains every convergent of Chapter 5's continued fraction (1/2, 3/5, 7/12, 24/41, 31/53) plus the
+fractions in between (2/3, 4/7, 10/17, 17/29). The runs of lefts and rights follow the continued fraction: one right,
+two lefts, two rights, three lefts, and so on.</p>
+<aside class="box note">
+<p><b>Two different sevens.</b> "Twelve fifths make about seven octaves" and "the major scale has seven notes" use
+the number 7 in two different ways.</p>
+<ul>
+<li>The 7 in "twelve fifths ≈ seven octaves" is the <b>numerator</b> of 7/12: a fifth is 7 of the 12 chromatic steps.</li>
+<li>The 7 notes of the diatonic scale are a <b>denominator</b>: 4/7, the step before 7/12 on the path. A fifth is 4 of
+the 7 diatonic steps.</li>
+</ul>
+<p>The two coincide because 7/12 is the mediant of 3/5 and 4/7, so its numerator is $3 + 4 = 7$. They are
+arithmetically linked, but neither causes the other. The coincidence does not generalize: 24/41 is on the path, but 24
+notes do not make a well-formed scale (they have three step sizes).</p>
+</aside>
+</div>
+<div class="layer derive">
+<p><b>Facts about the tree</b> (Stern 1858, Brocot 1861). If $a/b &lt; c/d$ are neighbors at some stage of the
+construction, then $bc - ad = 1$, and their mediant is the fraction with the smallest denominator strictly between
+them. Every reduced fraction in $(0, 1)$ appears exactly once.</p>
+<p><b>Theorem (well-formed sizes).</b> Let $x \in (0,1)$ be irrational. The scale of $n$ consecutive points of the
+chain $\{kx\}$ has exactly two step sizes if and only if $n$ is the denominator of a fraction on the Stern–Brocot path
+of $x$ (the root $1/2$ included).</p>
+<p><i>Proof sketch.</i> Use the notation of the three-gap proof. The closest return from above, $x_i = \{ix\}$, means
+$ix$ is just above some integer $p$: the fraction $p/i$ is the best lower approximation of $x$ with denominator below
+$n$. Likewise the closest return from below gives the best upper approximation $q/j$. Best one-sided approximations
+with bounded denominators are neighbors in the tree: $p/i &lt; x &lt; q/j$ with $qi - pj = 1$. By the corollary of the
+three-gap theorem the scale has two sizes exactly when $n = i + j$, the denominator of their mediant
+$(p + q)/(i + j)$, which is the next fraction on the path. ∎</p>
+<p>For example, at $n = 7$ the closest returns are $x_2$ ($2x = 1.170$, just above 1, so the lower fraction is 1/2)
+and $x_5$ ($5x = 2.925$, just below 3, so the upper fraction is 3/5). Indeed $3 \cdot 2 - 1 \cdot 5 = 1$ and $2 + 5 = 7$. At $n = 12$ the
+returns are $x_7$ (lower 4/7) and $x_5$ (upper 3/5), and $7 + 5 = 12$.</p>
+<p><b>Computed.</b> For the fifth, the sizes $n &lt; 320$ with two step sizes are 2, 3, 5, 7, 12, 17, 29, 41, 53, 94,
+147, 200, 253, 306. The five after 53 are the denominators of $(24 + 31t)/(41 + 53t)$ for $t = 1, \dots, 5$: the
+intermediate fractions 55/94, 86/147, 117/200 and 148/253, and then ($t = 5$) the convergent 179/306 itself. They come
+from the partial quotient 5 in the continued fraction.</p>
+<aside class="mirror">The golden sixth's path through the tree is 1/2, 2/3, 3/4, 5/7, 7/10, 9/13, 16/23, 25/36, so the
+well-formed golden scales have 2, 3, 4, 7, 10, 13, 23 and 36 notes. The golden "two sevens" puzzle has the same
+answer: 13 golden sixths make about 9 octaves, but 9 is not a well-formed size. Nine golden sixths give three step
+sizes (99.3, 168.4 and 267.6 c). The parents of 9/13 are 2/3 and 7/10, so golden13's well-formed sub-scales are
+golden10, golden7 and golden4 (<a href="ch:ch23#golden-scales">Chapter 23</a>).</aside>
+</div>
+</section>
+
+<section id="family">
+<h2>Pentatonic, diatonic, chromatic</h2>
+<div class="layer hear">
+<p>Now listen to the three famous moments one after another: five notes, seven notes, twelve notes. The pentatonic
+has no half steps at all; pentatonic scales are found in many of the world's musical traditions. The diatonic adds two half steps, and with them the pull of E toward F and B toward
+C. The chromatic fills in every gap.</p>
+<audio-ex src="family" caption="Pythagorean pentatonic, diatonic and chromatic scales on C, in exact ratios: each scale's larger steps are split to make the next."></audio-ex>
+</div>
+<div class="layer understand">
+<p>Each scale in the family comes from the previous one by splitting every large step in two:</p>
+<ul>
+<li><b>Pentatonic → diatonic.</b> The pentatonic's large step, the minor third 294.13 c (E–G and A–C), splits into a
+whole tone and a limma: $294.13 = 203.91 + 90.22$. The new notes are F (in E–G) and B (in A–C).</li>
+<li><b>Diatonic → chromatic.</b> Each whole tone splits into an apotome and a limma: $203.91 = 113.69 + 90.22$.
+The new notes are the five black keys.</li>
+<li><b>Chromatic → 17.</b> Each apotome splits into a limma and a comma: $113.69 = 90.22 + 23.46$.</li>
+</ul>
+<pc-circle edo="12" marks="0 2 4 7 9" path="0 7 2 9 4" title="Pentatonic C D E G A and its chain"></pc-circle>
+<pc-circle edo="12" marks="0 2 4 5 7 9 11" path="5 0 7 2 9 4 11" title="C major and its chain F C G D A E B"></pc-circle>
+<p>The figures show the two scales on the twelve-position circle, with the chain of fifths drawn through their notes.
+A pleasing complement: the seven white keys are the chain segment F to B, and the five black keys are the next five
+links, F♯ C♯ G♯ D♯ A♯. So the black keys form a pentatonic scale, and every 12-note chain splits into a 7-note and a
+5-note chain segment.</p>
+<aside class="mirror"><b>Golden mirror.</b> The golden chain has a pentatonic too: five notes linked by golden fifths, C D vF ^G ^A, with
+two whole tones (198.54 c) and three steps of 267.64 c, the Western pentatonic's proportions reversed. Two of them a golden
+third apart interleave to give the ten-note <b>golden decatonic</b> C C♯ D vE vF vF♯ ^G ^A♭ ^A B, which is also what you get
+by splitting each large step of golden7 in two (<a href="ch:ch36#decatonic-modes">Chapter 36</a>).</aside>
+<pianoroll edo="12" notes="C4 D4 E4 G4 A4 C5 ; C4 D4 E4 F4 G4 A4 B4 C5 ; C4 C#4 D4 Eb4 E4 F4 F#4 G4 Ab4 A4 Bb4 B4 C5" labels="pentatonic ; diatonic ; chromatic" title="One family on C: 5, 7 and 12 notes (nearest 12-ET keys)"></pianoroll>
+<aside class="mirror">The golden chain has its own family: golden4, golden7, golden10, golden13. golden7, C C♯ vE vF
+^G ^A♭ B, is the golden diatonic. Its steps are 3, 8, 3, 8, 3, 8, 3 sixth-steps in 36-ET: the golden apotome
+(99.27 c) and a large step of 267.6 c, which is two golden apotomes plus a golden limma. In golden13 that large step
+has been split into golden apotomes and limmas (<a href="ch:ch23#golden7">Chapter 23</a>).
+<pianoroll edo="36" notes="C4 D4 E4 F4 G4 A4 B4 C5 ; C4 C#4 vE4 vF4 ^G4 ^Ab4 B4 C5" labels="diatonic ; golden7" title="C major and golden7 in 36-ET"></pianoroll>
+<audio-ref file="P14a_the_golden_diatonic_definition.mp3" caption="golden7 as a scale and as chords: the golden counterpart of the diatonic."></audio-ref></aside>
+</div>
+<div class="layer derive">
+<p><b>Proposition (splitting).</b> Let an MOS of $n$ notes have $a$ large steps $L$ and $b$ small steps $s$. The next
+well-formed size on the path is $n + a$: each large step is split into $s$ and $L - s$, giving $a + b$ steps of size
+$s$ and $a$ steps of size $L - s$. Which of the two is now the larger depends on whether $L - s$ is more or less than
+$s$.</p>
+<p>For the chain of fifths (all values in cents):</p>
+<table>
+<tr><th>From</th><th>$L$, $s$</th><th>$L - s$</th><th>To</th></tr>
+<tr><td>5 = 2L 3s</td><td>294.13, 203.91</td><td>90.22 (less than $s$)</td><td>7 = 5L 2s</td></tr>
+<tr><td>7 = 5L 2s</td><td>203.91, 90.22</td><td>113.69 (more than $s$)</td><td>12 = 5L 7s</td></tr>
+<tr><td>12 = 5L 7s</td><td>113.69, 90.22</td><td>23.46 (less than $s$)</td><td>17 = 12L 5s</td></tr>
+</table>
+<p>This is the Euclidean algorithm in disguise: repeatedly subtracting the smaller step from the larger. It is the
+same arithmetic as the continued fraction, now acting on step sizes. (Checked by computation for every row above;
+the general proof is in <a href="ch:appD#tuning">Appendix D</a>.)</p>
+<p><b>Complements.</b> In any closed 12-note cycle of fifths, the complement of 7 consecutive positions is 5
+consecutive positions. So the complement of a diatonic set in 12-ET is a pentatonic set, and vice versa.</p>
+</div>
+</section>
+
+<section id="modes">
+<h2>Modes</h2>
+<div class="layer hear">
+<p>A scale is a set of notes; a <b>mode</b> is that set heard from a particular home note. Play the white keys from C
+to C and you hear major. Play the same white keys from D to D, or from E to E, and the mood changes completely,
+because the pattern of large and small steps now starts in a different place. Here are all seven modes, each moved
+to start on C so that only the pattern changes. Each one lowers exactly one note of the one before.</p>
+<audio-ex src="modes" caption="The seven diatonic modes on C over a C drone, from Lydian (with F♯) through Ionian, Mixolydian, Dorian, Aeolian and Phrygian to Locrian (with D♭ and G♭). Each lowers one more note by a semitone."></audio-ex>
+<p>The effect is easiest to hear with a melody. Here one tune, written only as scale degrees, is played in four
+modes on C.</p>
+<audio-ex src="mode_tune" caption="One tune in C Ionian, C Dorian, C Phrygian and C Mixolydian: the same degrees, but the third, second, sixth and seventh change color."></audio-ex>
+</div>
+<div class="layer understand">
+<p>The diatonic step pattern is 5L 2s arranged as L L s L L L s (from C). Starting it on each of its seven notes
+gives the seven modes. Ordered by the home note's place on the chain of fifths, F C G D A E B:</p>
+<table>
+<tr><th>Mode</th><th>White-key form</th><th>Steps (T = tone, s = semitone)</th><th>On C</th><th>Change from the line above</th></tr>
+<tr><td>Lydian</td><td>F–F</td><td>T T T s T T s</td><td>C D E F♯ G A B</td><td></td></tr>
+<tr><td>Ionian (major)</td><td>C–C</td><td>T T s T T T s</td><td>C D E F G A B</td><td>F♯ → F</td></tr>
+<tr><td>Mixolydian</td><td>G–G</td><td>T T s T T s T</td><td>C D E F G A B♭</td><td>B → B♭</td></tr>
+<tr><td>Dorian</td><td>D–D</td><td>T s T T T s T</td><td>C D E♭ F G A B♭</td><td>E → E♭</td></tr>
+<tr><td>Aeolian (natural minor)</td><td>A–A</td><td>T s T T s T T</td><td>C D E♭ F G A♭ B♭</td><td>A → A♭</td></tr>
+<tr><td>Phrygian</td><td>E–E</td><td>s T T T s T T</td><td>C D♭ E♭ F G A♭ B♭</td><td>D → D♭</td></tr>
+<tr><td>Locrian</td><td>B–B</td><td>s T T s T T T</td><td>C D♭ E♭ F G♭ A♭ B♭</td><td>G → G♭</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 D4 E4 F#4 G4 A4 B4 C5 ; C4 D4 E4 F4 G4 A4 B4 C5 ; C4 D4 E4 F4 G4 A4 Bb4 C5 ; C4 D4 Eb4 F4 G4 A4 Bb4 C5 ; C4 D4 Eb4 F4 G4 Ab4 Bb4 C5 ; C4 Db4 Eb4 F4 G4 Ab4 Bb4 C5 ; C4 Db4 Eb4 F4 Gb4 Ab4 Bb4 C5" labels="Lydian ; Ionian ; Mixolyd. ; Dorian ; Aeolian ; Phrygian ; Locrian" title="The seven modes on C, each lowering one note of the one before"></pianoroll>
+<p>Moving down the table, the home note moves one step up the chain of fifths, and exactly one note drops by a
+semitone. The first step cancels Lydian's F♯; after that the notes drop in the order B, E, A, D, G, which is the
+order of flats in key signatures (<a href="ch:ch08#keys">Chapter 8</a>). In Lydian every degree takes the higher of
+its two diatonic forms; in Locrian every degree takes the lower one. Musicians often describe this ordering as bright
+to dark. Locrian is the only mode without a perfect fifth above its tonic (C–G♭ is the odd generator of the last
+section), and it is rarely used as a home mode.</p>
+<p>The pentatonic has five modes in the same way. Two of them have everyday names: C D E G A is the <b>major
+pentatonic</b>, and its rotation A C D E G the <b>minor pentatonic</b>.</p>
+<aside class="box history">
+<p><b>Names.</b> The mode names are borrowed from ancient Greek, but the way they are attached to the white-key
+scales today comes from medieval and Renaissance theory, not from ancient Greek practice. Medieval theory recognized
+eight church modes on D, E, F and G. Heinrich Glarean's <i>Dodecachordon</i> (1547) added modes on A and C, named
+Aeolian and Ionian.</p>
+</aside>
+<aside class="mirror">golden7 has seven modes too, one on each of its notes. Since golden7 is built the same way (seven
+consecutive links of a chain), its modes are ordered along the golden chain in exactly the same manner. Consecutive modes
+differ in one note, moved by seven golden sixths folded into the octave: 168.37 c, the difference of golden7's two
+steps (267.64 − 99.27 c), just as the diatonic modes differ by the apotome, 203.91 − 90.22 c
+(<a href="ch:ch23#golden7">Chapter 23</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Proposition (modes along the chain).</b> Let a scale be the chain positions $c, c+1, \dots, c+6$ (relative to
+the tonic at position 0), so the Lydian mode is $c = 0$ and Locrian is $c = -6$. Passing from $c$ to $c - 1$ removes
+position $c + 6$ and adds position $c - 1$. These are seven links apart: the same letter, lowered by an apotome (a
+semitone in 12-ET). So consecutive modes differ in exactly one note, lowered by a chromatic semitone.</p>
+<p><b>Proposition (seven distinct modes).</b> The seven rotations of L L s L L L s are all different. A rotation that
+equaled the original would make the pattern periodic with a period dividing 7, hence all steps equal, which is false.
+The same argument shows that an $a$L $b$s pattern with $a + b$ prime has $a + b$ distinct modes.</p>
+<p><b>Fifths above the tonic.</b> Mode $c$ contains the fifth above its tonic (position 1) exactly when $c + 6 \ge 1$,
+that is, for every mode except Locrian ($c = -6$).</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 6.1.</b> Using the counting formula of the three-gap theorem, find the steps of the 10-note scale of the chain of
+fifths.</p>
+<details class="answer"><summary>Answer</summary><p>For $n = 10$ the closest returns are still $x_7$ (apotome,
+113.69 c) and $x_5$ (limma, 90.22 c), so $i = 7$, $j = 5$. There are $10 - 7 = 3$ apotomes, $10 - 5 = 5$ limmas and
+$7 + 5 - 10 = 2$ whole tones, matching the table.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 6.2.</b> Compute the two children of 7/12 in the Stern–Brocot tree, and say which is on the path of the fifth.</p>
+<details class="answer"><summary>Answer</summary><p>The neighbors of 7/12 when it is created are 4/7 and 3/5. Its
+children are $(4 + 7)/(7 + 12) = 11/19$ and $(7 + 3)/(12 + 5) = 10/17$. Since $7/12 = 0.5833 &lt; x$, the path goes
+right, to 10/17. (11/19 is on the path of the meantone fifth: <a href="ch:ch07#edos">Chapter 7</a>.)</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 6.3.</b> Name the two sizes of diatonic sixth in the Pythagorean C major scale and say how many of each occur.</p>
+<details class="answer"><summary>Answer</summary><p>Minor sixths of 792.18 c (E–C, A–F, B–G: three) and major sixths
+of 905.87 c (C–A, D–B, F–D, G–E: four). They are the inversions of the four minor and three major thirds.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 6.4.</b> (Listening.) In the "one tune, four modes" example, which scale degrees change between the Ionian and the
+Mixolydian versions? Between Ionian and Dorian?</p>
+<details class="answer"><summary>Answer</summary><p>The tune uses degrees 1, 2, 3, 5 and 6 and the seventh below the tonic,
+but never the fourth. Ionian to Mixolydian: only the seventh changes (B to B♭), heard once, near the end. Ionian to
+Dorian: the third (E to E♭) and the seventh (B to B♭); the sixth, A, is the same in both.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 6.5.</b> Show that the diatonic scale contains exactly one tritone.</p>
+<details class="answer"><summary>Answer</summary><p>A tritone in the diatonic is a generic fourth or fifth of the odd
+size. By the proposition on the odd generator, exactly one of the seven chain pairs (B → F, folded) is not a pure
+fifth: it is 588.27 c, the diminished fifth B–F, whose inversion F–B is the augmented fourth. So there is one tritone
+pair, {F, B}.</p></details>
+</div>
+</section>

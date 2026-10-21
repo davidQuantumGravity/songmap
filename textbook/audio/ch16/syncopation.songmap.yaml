@@ -1,0 +1,29 @@
+# The same two-bar tune twice straight, then twice syncopated (notes arriving half a beat early and
+# held across the beat), over a steady quarter-note pulse.
+songmap: 0.2
+title: "Straight and syncopated"
+tempo: 100
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 16
+tail_seconds: 1.5
+instruments: {lead: clean/lead, keys: clean/keys, bass: clean/bass}
+mix: {lead: {gain_db: -2, send: {hall: 0.15}}, keys: {gain_db: -12}, bass: {gain_db: -7}}
+returns: {hall: {type: reverb, seconds: 1.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: straight
+    bars: 4
+    harmony: "C:1 Am:1 C:1 Am:1"
+    parts:
+      lead: {notes: "=mf e4 g c+ g | a g e2", oct: 1}
+      keys: pulse
+      bass: {style: roots, role: bass}
+  - name: synco
+    bars: 4
+    harmony: "C:1 Am:1 C:1 Am:1"
+    parts:
+      lead: {notes: "=mf e8 g4 c+ g8 r4 | a8 g4 e4. r4", oct: 1}
+      keys: pulse
+      bass: {style: roots, role: bass}
+master: clean

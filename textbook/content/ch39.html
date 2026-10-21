@@ -1,0 +1,631 @@
+<section id="overshoot">
+<h2>Overshoot and settle: elastic resolution</h2>
+<div class="layer hear">
+<p>Part VII joined Western chords through golden chords placed <i>between</i> them: the passing chords of
+<a href="ch:ch27#uniform-path">Chapter 27</a> and <a href="ch:ch28#escalator">Chapter 28</a>. Tradition knows many
+other ways for a dissonance to meet a consonance. A note can lean on its target from above, wait over it, arrive too
+early, step away and come back, or circle around it (<a href="ch:ch12#nonchord">Chapter 12</a>). This chapter
+turns each of those embellishments into a way of joining golden and Western chords, computes which ones exist exactly,
+and ends with a catalogue of every strategy in the book.</p>
+<p>The first strategy is the author's own idea. When all the voices make a big jump, let them fly a little past the
+target chord, onto a golden chord just beyond it, and then settle back: an elastic response that overshoots and comes
+to rest at home. Listen to a dominant leaping down a fifth onto C major three times: straight, with a small overshoot,
+and with a full one.</p>
+<audio-ex src="overshoot_def" caption="G (G4 B4 D5) leaps down to C three times: straight; overshooting onto vCg (root and third fly past by one and two sixth-steps, the fifth lands) and settling up; overshooting onto ^Bg (every voice flies past) and settling up. Then a short phrase on piano, IV – V – I, each leap landing through vGg and ^Cg."></audio-ex>
+<pianoroll edo="36" notes="G4 B4 D5 ; C4 E4 G4 ; G4 B4 D5 ; vC4 ^Eb4 G4 ; C4 E4 G4 ; G4 B4 D5 ; ^B3 Eb4 vG4 ; C4 E4 G4" labels="G ; C ; G ; vCg ; C ; G ; ^Bg ; C" title="V → I by a parallel leap: plain, partial overshoot, full overshoot (upper voices)"></pianoroll>
+<p>The overshoot chord lasts one beat and the arrival three. Because the golden chord comes first and C major second,
+the arrival is a release twice over: a leap that lands, and a golden bend that straightens into the deepest rest there
+is (<a href="ch:ch31#visitation">Chapter 31</a>). Here is a whole phrase built this way, every chord change a leap
+that lands just beyond its target.</p>
+<audio-ex src="elastic_phrase" caption="I – IV – V – I – vi – IV – V – I, every change a leap of all voices; each new chord is reached first, for one beat, through a golden chord just past it (^Fg, vGg, ^Cg, ^A♭g …) and then settles; the last arrival uses the full overshoot vC♯g. Listen for the small spring at every arrival."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Definition.</b> Let a voiced chord $X$ move to $Y$, voice $i$ by $D_i$ sixth-steps. An <b>overshoot chord</b> is
+$G = Y + E$ where every moving voice continues past its target in the direction it was going, by
+$|E_i| \in \{1, 2, 3\}$ sixth-steps (at most a semitone), and every held voice stays ($E_i = 0$ when $D_i = 0$). The
+<b>settle</b> $G \to Y$ moves each voice back by $E_i$. If some moving voices land exactly and the others overshoot,
+call the overshoot <b>partial</b>; if every moving voice overshoots, <b>full</b>.</p>
+<p>There is a neat way to see what this means. A passing chord lies <i>between</i> $X$ and $Y$: on a smoothest path
+from one to the other. An overshoot chord is the other way round: the <i>target</i> $Y$ lies between $X$ and $G$, so
+$Y$ is a passing chord on the way from $X$ to the overshoot. The extra distance travelled is exactly twice the settle,
+$d(X,G) + d(G,Y) - d(X,Y) = 2\,d(G,Y)$: the elastic stretch, counted out and back.</p>
+<aside class="box note"><b>Western mirror.</b> The distance is the voice-leading distance of <a href="ch:ch14#distance">Chapter 14</a>, total
+motion in sixth-steps with each voice keeping its identity, and "between" means lying on a shortest path in the chord
+space of <a href="ch:ch14#geometry">Chapter 14</a>. Passing chords (Chapter 12's <a href="ch:ch12#passing-chords">passing
+chords</a>, Part VII's golden ones) are the points between; overshoot, escape and neighbour chords are the three ways of
+leaving that path.</aside>
+<p><b>Which golden chords lie just beyond C major?</b> The answer depends only on the direction from which each note of
+C major is approached. Checking every pattern of directions (up, down or held for root, third and fifth) gives this
+table:</p>
+<table>
+<caption>Golden overshoot chords of C major (full overshoot; exhaustive over the 26 patterns with motion)</caption>
+<tr><th>Root C approached</th><th>Third E</th><th>Fifth G</th><th>Golden overshoot (C + E)</th><th>Settle</th></tr>
+<tr><td>held</td><td>from above</td><td>from below</td><td><b>Cg</b> = C vE ^G (0, −1, +1)</td><td>2</td></tr>
+<tr><td>from above</td><td>from above</td><td>held</td><td><b>vCg</b> = vC ^E♭ G (−1, −2, 0)</td><td>3</td></tr>
+<tr><td>from below</td><td>held</td><td>from below</td><td><b>^Cg</b> = ^C E vA♭ (+1, 0, +2)</td><td>3</td></tr>
+<tr><td>from above</td><td>held</td><td>from below</td><td>Eg = ^B E vA♭ (−2, 0, +2)</td><td>4</td></tr>
+<tr><td>from above</td><td>from above</td><td>from below</td><td>vEg (−3, −1, +1), A♭g (−1, −2, +3), vA♭g (−2, −3, +2)</td><td>5, 6, 7</td></tr>
+<tr><td>from above</td><td>from below</td><td>from below</td><td>^Eg = vC ^E A♭ (−1, +1, +3)</td><td>5</td></tr>
+<tr><td>from above</td><td>from above</td><td>from above</td><td><b>^Bg</b> = ^B E♭ vG (−2, −3, −1)</td><td>6</td></tr>
+<tr><td>from below</td><td>from below</td><td>from below</td><td><b>vC♯g</b> = vC♯ ^E A♭ (+2, +1, +3)</td><td>6</td></tr>
+</table>
+<p>Only 8 of the 26 patterns have a golden overshoot at all (9 if partial overshoots are allowed), and in every case the
+settle is the smoothest way from the golden chord back to C. C minor gives a table of the same size.</p>
+<p><b>The parallel rule.</b> The commonest big jump moves all voices the same way: root-position blocks leaping a
+fourth, a fifth, a third or an octave. Then the answer is the same whatever the size of the leap, and it has a clean
+form. Write π(Y) for the golden projection of Y, its nearest golden triad (π(C) = Cg, π(Am) = vAg;
+<a href="ch:ch35#projection">Chapter 35</a>). Then:</p>
+<ul>
+<li>the <b>partial</b> overshoot is π(Y) <b>planed one sixth-step</b> in the direction of motion: ^Cg when the voices
+rise into C, vCg when they fall into it (settle 3);</li>
+<li>the <b>full</b> overshoot is π(Y) <b>planed two sixth-steps</b>: vC♯g rising, ^Bg falling (settle 6).</li>
+</ul>
+<p>It is as if the golden image of the target were carried along by the momentum of the leap, one or two sixth-steps
+past home. Planing is one of the golden home's own moves (<a href="ch:ch31#breathing-planing">Chapter 31</a>), so the
+elastic is made of golden motion.</p>
+<table>
+<caption>Overshoots of common leaps (upper voices in close position; motion in semitones per voice)</caption>
+<tr><th>Progression</th><th>Voicing</th><th>Motion</th><th>Partial overshoot</th><th>Full overshoot</th></tr>
+<tr><td>V → I, down a fifth</td><td>G4 B4 D5 → C4 E4 G4</td><td>−7, −7, −7</td><td>vCg</td><td>^Bg</td></tr>
+<tr><td>V → I, up a fourth</td><td>G3 B3 D4 → C4 E4 G4</td><td>+5, +5, +5</td><td>^Cg</td><td>vC♯g</td></tr>
+<tr><td>IV → I, down a fourth</td><td>F4 A4 C5 → C4 E4 G4</td><td>−5, −5, −5</td><td>vCg</td><td>^Bg</td></tr>
+<tr><td>I → IV, up a fourth</td><td>C4 E4 G4 → F4 A4 C5</td><td>+5, +5, +5</td><td>^Fg</td><td>vF♯g</td></tr>
+<tr><td>I → V, down a fourth</td><td>C4 E4 G4 → G3 B3 D4</td><td>−5, −5, −5</td><td>vGg</td><td>^F♯g</td></tr>
+<tr><td>I → vi, down a third</td><td>C4 E4 G4 → A3 C4 E4</td><td>−3, −4, −3</td><td>^A♭g</td><td>A♭g</td></tr>
+<tr><td>I → ♭VI, down a major third</td><td>C4 E4 G4 → A♭3 C4 E♭4</td><td>−4, −4, −4</td><td>vA♭g</td><td>^Gg</td></tr>
+<tr><td>I → III, up a major third</td><td>C4 E4 G4 → E4 G♯4 B4</td><td>+4, +4, +4</td><td>^Eg</td><td>vFg</td></tr>
+<tr><td>F♯ → I, a tritone down</td><td>F♯4 A♯4 C♯5 → C4 E4 G4</td><td>−6, −6, −6</td><td>vCg</td><td>^Bg</td></tr>
+<tr><td>V → vi, up a step</td><td>G3 B3 D4 → A3 C4 E4</td><td>+2, +1, +2</td><td>Ag</td><td>^Ag</td></tr>
+<tr><td>I → I, up an octave</td><td>C4 E4 G4 → C5 E5 G5</td><td>+12, +12, +12</td><td>^Cg</td><td>vC♯g</td></tr>
+<tr><td>V → I, smooth</td><td>G3 B3 D4 → G3 C4 E4</td><td>0, +1, +2</td><td colspan="2">none (use the passing chord vCg/G)</td></tr>
+</table>
+<p>Two of these chords already have a job elsewhere in the book. <b>vCg</b>, the partial overshoot of every parallel falling
+leap into C, is the shadow that passes into C in the smooth golden cadence (<a href="ch:ch29#authentic">Chapter 29</a>): the
+same chord is the passing chord of the smooth V → I and the overshoot of the leaping one. <b>^Bg</b>, the full overshoot
+of every parallel falling leap, is the last golden chord of the natural path B♭ – vBg – ^Bg – C, the golden backdoor of
+§39.7. Its settle into C is a rise in all three voices.</p>
+<p><b>The projection as an overshoot.</b> Cg itself, the nearest golden chord of all, is reached only by
+<i>converging</i> voices: the root held, the third approached from above and the fifth from below. Among Western
+triads the sources are C itself (a voice exchange, E and G trading places), F (A falls to E while F rises to G,
+a contrary-motion plagal cadence), F minor, C minor, A♭ and A minor. A converging approach overshoots onto the
+projection: E falls a little too far to vE, G rises a little too far to ^G, and both straighten.</p>
+<p><b>Stretching the passing path does not work.</b> A natural guess is to stretch the uniform path of Chapter 27 one
+step past its end: if $P_k = X + k\,d$ with $Y = P_3$, try $P_4 = Y + d$, the target pushed a third of the way further.
+This is never golden when the source is a major, minor or augmented triad, whatever the target and however far the
+voices move (a theorem, below). Golden overshoot is always <i>uneven</i>: the voices must fly past by different amounts,
+which is the same lesson System 2 taught for passing (<a href="ch:ch28#uneven">Chapter 28</a>).</p>
+<h3>Damped oscillation</h3>
+<p>A real spring does not stop after one overshoot: it swings back past the rest point, less each time. Could the
+voices do the same, overshoot onto one golden chord, undershoot onto another and settle? Strictly, no. If $G = Y + E$
+is golden, the mirror image $Y - E$ is <b>never</b> golden (theorem below), and even allowing every voice to swing
+back by a smaller amount, no undershoot of a golden overshoot is golden within a semitone (exhaustive: 45 candidates for
+C, 45 for C minor, none golden and none even tertian).</p>
+<p>A looser elastic does exist. If only <i>one</i> voice swings back while the others creep in or stop, there are 11
+two-stage settles into C (and 11 into C minor), and in every one of them exactly one voice reverses. The one that
+follows the full overshoot of a falling leap is ^Bg → Cg → C (8 sixth-steps of motion against 6 for settling at once). The fifth swings below G and back above it
+(vG, ^G, G) while the third creeps up (E♭, vE, E) and the root arrives at once. There are even four three-stage
+settles into C in which one voice swings twice; in three of them its amplitudes are 2, 1, 1 sixth-steps, three Fibonacci
+numbers in a row (the fourth goes 2, 2, 1; exhaustive within a semitone per voice, each stage no wider than the last). For example vA♭g → ^Bg → Cg → C, whose fifth goes vA♭, vG, ^G, G (G + 2, G − 1, G + 1, G).</p>
+<audio-ex src="damped_settle" caption="Proposal. V leaps down to C, overshooting onto ^Bg: settling at once; settling through Cg, so that the top voice swings below and above G before it lands; then ii → I with the tenor swinging twice (vA♭, vG, ^G, G) through vA♭g, ^Bg and Cg. Then a phrase on piano, vi – V – ^Bg – Cg – I."></audio-ex>
+<pianoroll edo="36" notes="F3 D4 A4 ; vAb3 ^B3 Eb4 ; vG3 ^B3 Eb4 ; ^G3 C4 vE4 ; G3 C4 E4" labels="Dm ; vA♭g ; ^Bg ; Cg ; C" title="A damped settle: the tenor swings G+2, G−1, G+1, G"></pianoroll>
+<aside class="box math"><b>The spring, as a metaphor.</b> An underdamped spring released from a stretch swings with
+extrema that shrink by a constant factor $e^{-\pi\zeta/\sqrt{1-\zeta^2}}$ every half period, where $\zeta$ is the damping
+ratio; the same factor is its first overshoot as a fraction of the step. A decay of $1/\varphi$ per swing means
+$\pi\zeta/\sqrt{1-\zeta^2} = \ln\varphi = 0.4812$, so $\zeta = 0.1514$, and such a spring would overshoot a leap of a
+fourth (15 sixth-steps) by $15/\varphi = 9.27$ sixth-steps, more than a minor third. Musical overshoot is far smaller:
+about 2 sixth-steps on a fourth, a fraction 0.133, which a spring produces with $\zeta = 0.540$; its next swing would be
+under 2% of the leap. So the elastic is a metaphor, not a model: real voices overshoot little, and their swings, when
+they swing at all, go 2, 1, 1 rather than shrinking smoothly.</aside>
+<aside class="box history"><b>Precedents.</b> The overshoot chord is an appoggiatura from beyond: Chapter 12 defined the
+appoggiatura as a note reached by leap and left by step, usually in the opposite direction, which is exactly what each
+overshooting voice does. The counterpoint tradition taught that a leap should be followed by stepwise motion the other
+way, and Leonard Meyer called the resulting shape <i>gap-fill</i> (<i>Explaining Music</i>, 1973;
+<a href="ch:ch13#steps-leaps">Chapter 13</a>). Paul von Hippel and David Huron (2000) showed that much of this reversal
+is regression toward the middle of the range, which suits the elastic picture: the further a voice flies, the more room
+it has to come back. Steve Larson's <i>Musical Forces</i> (2012) described melodic expectation with the physical
+metaphors of gravity, magnetism and inertia; the overshoot is the inertia of a leap, and the settle its pull home.</aside>
+</div>
+<div class="layer derive">
+<p><b>Lemma (betweenness).</b> For one voice with pitches $x \to g \to y$, all distinct, exactly one of the three lies
+between the other two: $g$ (passing), $y$ (overshoot) or $x$ (escape). With fixed voice assignment and the $L^1$ norm,
+$d(X,G) + d(G,Y) = d(X,Y) + \sum_i e_i$ where $e_i = 0$ for a passing voice, $2|g_i - y_i|$ for an overshooting voice and
+$2|g_i - x_i|$ for an escaping one. <i>Proof.</i> On a line, $|g-x| + |y-g| - |y-x|$ is zero when $g$ is between and
+twice the distance from $g$ to the nearer endpoint otherwise. Summing over voices gives the formula. ∎</p>
+<p><b>Theorem (parallel rule).</b> Let every voice approach a major or minor triad $Y$ in the same direction. The only
+full golden overshoot is $\pi(Y)$ planed two sixth-steps in that direction, and the only additional partial one is
+$\pi(Y)$ planed one sixth-step. <i>Proof.</i> Rising overshoots of $+1, +2, +3$ sixth-steps put a voice on layers
+1, 2, 0 (falling ones: 2, 1, 0). A golden triad has one note per layer (<a href="ch:ch25#layer-theorem">the layer
+theorem</a>), so a full overshoot uses each size once, in one of $3! = 6$ orders. For C major rising, the orders
+(root, third, fifth) give $(2,1,3)$: vC♯g; $(1,2,3)$: A♭T13 (bronze); $(3,1,2)$: C♯s (silver); the other three are not
+tertian. A partial overshoot has one landing voice (layer 0) and sizes 1 and 2 on the others, which for C rising gives
+only ^Cg. The layer argument holds for every target; which of the orders is golden depends on the triad, and that part is an
+exhaustive check: the script tests both statements for all 24 major and minor triads and both directions. ∎</p>
+<p><b>Theorem (no proportional overshoot).</b> If $X$ is a major, minor or augmented triad, $Y$ any chord on the
+12-ET layer and $d = (Y - X)/3$ voice by voice, then $P_4 = Y + d$ is not golden. <i>Proof.</i> Suppose $P_4 = G$ is
+golden, with notes $g, g+11, g+22$ in some voice order. Then $d = G - Y$ and
+$X = Y - 3d = 4Y - 3G \pmod{36}$. Each $Y_i$ is a multiple of 3, so $4Y_i \equiv 12\,(Y_i/3) \in \{0, 12, 24\}$, and
+$-3G_i \in \{-3g, -3g+3, -3g+6\}$ because $33 \equiv -3$ and $66 \equiv -6 \pmod{36}$. In semitones,
+$X_i \equiv 4a_i - g + c_i \pmod{12}$ with $(c_i)$ a permutation of $(0, 1, 2)$. Reduced mod 4, the three notes of $X$
+have three different residues. But a major triad $\{r, r+4, r+7\}$ has residues $r, r, r+3$, a minor triad
+$r, r+3, r+3$, an augmented triad one residue only. ∎ (Diminished and suspended triads do have three residues, and for
+them golden $P_4$ chords exist; the script finds them by brute force. By reversal, the uniform backswing $X - d$ before a
+major or minor $Y$ is never golden either. The census over all 2,616 voice leadings from C or Cm to a major or minor
+triad with each voice moving up to an octave finds no golden $P_4$.)</p>
+<p><b>Theorem (no golden mirror).</b> If $Y$ lies on one layer and $G = Y + E$ is golden, then $Y - E$ is not golden.
+<i>Proof.</i> Suppose $G' = Y - E$ is golden too, $G_i = g + 11\sigma_i$ and $G'_i = g' + 11\tau_i$ with $\sigma, \tau$
+permutations of $(0,1,2)$. Then $G_i + G'_i = 2Y_i$, a constant mod 6 since $Y$ lies on one layer. As
+$11 \equiv -1 \pmod 6$, $\sigma_i + \tau_i$ is constant mod 6, hence constant (it lies in $0, \dots, 4$), and since
+$\tau = c - \sigma$ must be a permutation of $(0,1,2)$, $c = 2$. Then $G_i + G'_i = g + g' + 22$ for every $i$, so
+$2Y_i$ is constant mod 36 and $Y$ has at most two pitch classes (equal or a tritone apart): not a triad. ∎ The script
+confirms it over all 1,320 voice assignments with $|E_i| \le 6$.</p>
+<p><b>Exhaustive results</b> (<code>reference/golden/elastic.py</code> §2–§6): the overshoot tables (8 full and 9
+partial patterns for C, the same counts for C minor; the settle is always the smoothest voice leading back); the 11
+relaxed two-stage settles into C and into C minor, each with exactly one reversing voice; and the sources of every golden
+overshoot of C among the 24 major and minor triads. The four three-stage settles into C (four into C minor as well) with a
+voice swinging twice were enumerated separately for this chapter in the same way: three golden stages, each overshoot at most
+a semitone and no wider than the stage before, voice by voice.</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 39.1.</b> The voices of F4 A4 C5 leap down a fourth to C4 E4 G4. Name the partial and the full overshoot
+chords, with their notes, and the settle cost of each.</p>
+<details class="answer"><summary>Answer</summary><p>All voices fall, so by the parallel rule the partial overshoot is
+π(C) = Cg planed down one sixth-step, vCg = vC4 ^E♭4 G4 (root 1 and third 2 sixth-steps past, the fifth lands; settle
+1 + 2 = 3), and the full one is Cg planed down two, ^Bg = ^B3 E♭4 vG4 (settle 2 + 3 + 1 = 6).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 39.2.</b> For the parallel leap C4 E4 G4 → F4 A4 C5, compute the stretched chord $P_4 = Y + d$. What
+kind of chord is it, and why could you have predicted that it is not golden?</p>
+<details class="answer"><summary>Answer</summary><p>Every voice moves 5 semitones, so $d = (5, 5, 5)$ sixth-steps and
+$P_4$ = vG4 vB4 vD5: a G major triad on the v layer, a Western chord moved off the grid. A parallel motion keeps the shape
+of the chord, and stretching it only transposes it. The general reason is the theorem: the source C major has two notes
+with the same residue mod 4.</p></details>
+</div>
+</section>
+
+<section id="appoggiatura-chords">
+<h2>Golden appoggiatura chords</h2>
+<div class="layer hear">
+<p>An appoggiatura arrives on the beat, unprepared, leaning on the note it will become. A whole chord can do the same:
+the tonic can arrive bent, its third a sixth-step low and its fifth a sixth-step high, and straighten a moment later.
+That bent tonic is Cg. Listen to it on the downbeat after G, then to the dominant arriving the same way, then to a
+golden cadential six-four that falls into the dominant.</p>
+<audio-ex src="appoggiatura_def" caption="G – Cg – C: the tonic arrives bent and straightens. Dm/F – Gg – G: the dominant arrives bent. F – vCg/G – G – C: a golden six-four on beat three, falling into V like the Western cadential six-four, then I. Then a phrase on piano: ii⁶ – vCg/G – V – Cg – I."></audio-ex>
+<pianoroll edo="36" notes="G3 B3 D4 ; C4 vE4 ^G4 ; C4 E4 G4 ; F3 A3 D4 ; G3 vB3 ^D4 ; G3 B3 D4" labels="G ; Cg ; C ; Dm/F ; Gg ; G" title="Golden appoggiatura chords on the downbeat: Cg → C and Gg → G"></pianoroll>
+</div>
+<div class="layer understand">
+<p><b>Definition.</b> A <b>golden appoggiatura chord</b> is a golden chord on a strong beat, approached by leap or
+without preparation, that resolves by sixth-steps into a Western chord on the following weaker beat. It is the chordal
+form of the appoggiatura of <a href="ch:ch12#suspension">Chapter 12</a>, and its Western ancestors are the
+appoggiatura chord and the cadential six-four, which is often described as a double appoggiatura over the dominant
+bass.</p>
+<p><b>Which golden chords resolve into C most smoothly?</b> Every golden triad, by its distance to C major:</p>
+<table>
+<caption>The golden triads nearest C major (exhaustive over all 36)</caption>
+<tr><th>Distance</th><th>Golden chord</th><th>Resolution into C</th><th>Motion</th></tr>
+<tr><td>2</td><td><b>Cg</b> = C vE ^G</td><td>vE → E +1, ^G → G −1</td><td>contrary</td></tr>
+<tr><td>3</td><td><b>vCg</b> = vC ^E♭ G</td><td>vC → C +1, ^E♭ → E +2</td><td>all rise</td></tr>
+<tr><td>3</td><td><b>^Cg</b> = ^C E vA♭</td><td>^C → C −1, vA♭ → G −2</td><td>all fall</td></tr>
+<tr><td>4</td><td>Eg = E vA♭ ^B</td><td>vA♭ → G −2, ^B → C +2</td><td>contrary</td></tr>
+<tr><td>5</td><td>vEg, ^Eg, ^A♭g</td><td>e.g. vEg: B → C +3, vE → E +1, ^G → G −1</td><td>contrary</td></tr>
+<tr><td>6</td><td>vC♯g, ^Bg and four more</td><td>vC♯g: every voice falls; ^Bg: every voice rises</td><td></td></tr>
+</table>
+<p>Cg is the unique golden chord at distance 2 (the projection theorem: no golden triad is at distance 1 from a Western
+one, and each major triad has exactly one at distance 2). Ten golden triads resolve into C with every voice moving by a
+semitone or less; two of them fall in every voice (^Cg, vC♯g) and two rise (vCg, ^Bg). Those four are the overshoot
+chords of §39.1: an appoggiatura chord is an overshoot whose approach you did not hear.</p>
+<p><b>Beats and lengths.</b> The appoggiatura chord belongs on the beat, where the passing chords of Part VII, kept on weak
+beats (<a href="ch:ch29#authentic">Chapter 29</a>), do not stand: beat 1, or beat 3 in 4/4. Eighteenth-century treatises, C. P. E. Bach's
+<i>Versuch</i> (1753) among them, teach that a long appoggiatura usually takes half the value of its main note (two
+thirds of a dotted one). Borrowing that rule, a golden appoggiatura chord on a half-note arrival lasts a quarter and its
+resolution a quarter. <i>Status:</i> a proposal; the right proportion for a bend of 33 cents is a matter for the ear.</p>
+<p><b>Three cadences.</b></p>
+<ol>
+<li><b>The bent tonic.</b> V – Cg – I: the final tonic arrives as its own golden image. The resolution is the smallest
+golden-to-Western motion there is, two sixth-steps in contrary motion, and the release is C major.</li>
+<li><b>The bent dominant.</b> ii⁶ – Gg – V – I: the dominant arrives as Gg (G vB ^D) and sharpens its leading tone vB → B
+as it straightens. The leading tone, approached from a sixth-step below, already leans upward.</li>
+<li><b>The golden six-four, falling.</b> IV – vCg/G – V – I. The upper voices G3 C4 E4 of the Western cadential six-four
+fall to G3 B3 D4 when it resolves. Split evenly in 36-ET, that resolution passes through vCg/G and then the bronze chord
+vE♭T13/G. So the golden six-four of Chapter 27, which rises <i>into</i> I over the dominant bass, is also the first
+step of the Western six-four falling <i>into</i> V: the same chord on the same bass, heard in two directions.</li>
+</ol>
+<pianoroll edo="36" notes="G3 C4 E4 ; G3 vC4 ^Eb4 ; G3 ^B3 vEb4 ; G3 B3 D4 ; G3 ^B3 vEb4 ; G3 vC4 ^Eb4 ; G3 C4 E4" labels="C/G ; vCg/G ; vE♭T13/G ; G ; vE♭T13/G ; vCg/G ; C" title="The cadential six-four and the golden authentic cadence: one strict path, traversed both ways over G"></pianoroll>
+<p>The roll above is a palindrome: I⁶₄ – V – I with every step split into sixth-steps. A cadence written this way puts
+vCg/G on both sides of the dominant. <i>Status:</i> the path is a theorem (it is the uniform path); its use is a
+proposal.</p>
+<aside class="box note"><b>Western mirror.</b> The Western appoggiatura and cadential six-four are in <a href="ch:ch12#suspension">Chapter 12</a>
+and <a href="ch:ch10#cadences">Chapter 10</a>; the golden six-four as a passing chord is in
+<a href="ch:ch27#six-four">Chapter 27</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Distances.</b> $d(G_r, \mathrm{C})$ over the 36 golden triads takes the values 2 (once), 3 (twice), 4 (once), 5
+(three times), 6 (six), 7 (once), 8 (once), 9 (six), 12 (six), 15 (six) and 18 (three times); C minor has the same
+distribution, with vCg at distance 2. Exhaustive (<code>elastic.py</code> §7).</p>
+<p><b>The six-four path.</b> In sixth-steps, $X = (165, 180, 192)$ (G3 C4 E4) and $Y = (165, 177, 186)$ (G3 B3 D4), so
+$d = (0, -1, -2)$ and $P_1 = (165, 179, 190)$ = G3 vC4 ^E♭4, pitch classes $\{21, 35, 10\}$ = vCg;
+$P_2 = (165, 178, 188)$ = G3 ^B3 vE♭4 = vE♭T13. Reversing $X$ and $Y$ reverses the path, which is the golden authentic
+cadence of <a href="ch:ch29#authentic">Chapter 29</a>.</p>
+<p><b>A measurement.</b> Sethares roughness (harmonic partials 1–8, the model of <a href="ch:ch12#tension-curves">Chapter
+12</a>), four notes each, bass included, no unisons, in the voicings of the audio example (C/G, the Western cadential
+six-four, is not in the example and is added for comparison):</p>
+<table>
+<tr><th>Chord</th><th>Cg</th><th>C</th><th>Gg</th><th>G</th><th>vCg/G</th><th>C/G</th></tr>
+<tr><td>Voicing</td><td>C3 C4 vE4 ^G4</td><td>C3 C4 E4 G4</td><td>G2 G3 vB3 ^D4</td><td>G2 G3 B3 D4</td><td>G2 G3 vC4 ^E♭4</td><td>G2 G3 C4 E4</td></tr>
+<tr><td>Roughness</td><td>2.292</td><td>1.956</td><td>2.903</td><td>2.604</td><td>2.965</td><td>2.640</td></tr>
+</table>
+<p>On harmonic tones each golden appoggiatura chord is rougher than its resolution, as an appoggiatura should be; the
+golden six-four is also rougher than the Western one on the same bass. (Compare within a column pair: the registers
+differ between pairs.)</p>
+</div>
+</section>
+
+<section id="suspensions">
+<h2>Golden suspensions and retardations</h2>
+<div class="layer hear">
+<p>In a suspension one voice refuses to leave while the harmony changes under it, then gives in. The golden version needs
+a golden note to hold, so it starts from a golden chord. Listen first to a double suspension: the bass and the lowest
+upper voice move from B to C, while the two golden notes above are held, and only then do they let go, one rising and
+one falling. Then the same two bends taken one at a time, and a chain in which three voices fall a semitone in turn.</p>
+<audio-ex src="suspensions_def" caption="Em/B – vEg/B – Cg – C: B rises to C under two held golden notes, which then resolve in contrary motion. Cg – C(^5) – C and Cg – C(v3) – C: one bend first, the other held. C♯g – vFg/C – ^A♭g/C – Cg – C: voices falling a semitone in turn, then straightening. Then a phrase on piano: vi – Em/B – vEg/B – Cg – I."></audio-ex>
+<pianoroll edo="36" notes="B3 E4 G4 ; B3 vE4 ^G4 ; C4 vE4 ^G4 ; C4 E4 G4" labels="Em/B ; vEg/B ; Cg ; C" title="A golden double suspension: preparation, suspension, resolution"></pianoroll>
+</div>
+<div class="layer understand">
+<p><b>Why Western suspensions cannot be golden.</b> A suspension holds notes of one chord against another. If both are
+Western, every note in sight is on the 12-ET layer, so the vertical is Western too (theorem: a golden triad needs a note
+on each layer). A golden suspension therefore needs a golden <b>preparation</b>.</p>
+<p><b>The golden double suspension.</b> Hold two golden notes and move the third voice onto a Western note; if the
+vertical is golden, the two held notes then resolve by sixth-steps. A golden chord sharing two notes with another is its
+neighbour on the golden circle (<a href="ch:ch31#circle">Chapter 31</a>), so the change is a circle step: one voice moves
+a semitone, two are held. Every such suspension into C major, found exhaustively:</p>
+<table>
+<caption>Golden double suspensions into C (preparation → suspension → C)</caption>
+<tr><th>Preparation</th><th>Moving voice</th><th>Suspension chord</th><th>Resolution</th><th>Type</th></tr>
+<tr><td>vEg</td><td>B → C</td><td><b>Cg</b></td><td>vE → E +1, ^G → G −1</td><td>retardation + suspension</td></tr>
+<tr><td>vA♭g</td><td>E♭ → E</td><td>Eg</td><td>vA♭ → G −2, ^B → C +2</td><td>suspension + retardation</td></tr>
+<tr><td>C♯g</td><td>C♯ → C</td><td>vFg</td><td>vF → E −2, ^A♭ → G −4</td><td>two suspensions</td></tr>
+<tr><td>Fg</td><td>F → E</td><td>vAg</td><td>^C → C −1, vA → G −5</td><td>two suspensions</td></tr>
+<tr><td>A♭g</td><td>A♭ → G</td><td>vCg</td><td>^E♭ → E +2, vC → C +1</td><td>two retardations</td></tr>
+<tr><td>vBg</td><td>F♯ → G</td><td>Gg</td><td>^D → E +5, vB → C +4</td><td>two retardations</td></tr>
+</table>
+<p>Into C minor there are six as well, the cheapest A♭g → vCg → Cm (A♭ falls to G; then ^E♭ → E♭ and vC → C). Three
+shapes stand out:</p>
+<ul>
+<li><b>vEg → Cg → C</b>: the leading tone rises B → C under the held golden notes, then the projection straightens. When
+the suspension chord is the projection, the resolution is always one suspension and one retardation, because the
+projection bends a major triad's third down and its fifth up (<a href="ch:ch35#projection">Chapter 35</a>).</li>
+<li><b>C♯g → vFg/C → C</b>: both held notes fall. vFg/C → C is the golden counterpart of the minor plagal close
+iv⁶₄ – I (F and A♭ falling to E and G over C), with bends of 2 and 4 sixth-steps in place of semitones.</li>
+<li><b>A♭g → vCg → C</b>: both held notes rise: a golden double retardation, ending in the shadow vCg → C.</li>
+</ul>
+<p><b>Staggered resolution.</b> The two bends of a projection need not straighten together. Cg → C(^5) → C lets the
+third resolve first and holds the fifth a sixth-step high, a small suspension; Cg → C(v3) → C holds the third low, a
+small retardation. Measured on harmonic tones (C3 C4 E4 ^G4 against C3 C4 vE4 G4), the held high fifth is the rougher of
+the two, 2.262 against 2.003, close to Cg's 2.292 and C's 1.956: most of the golden tension sits in the golden fifth
+(measurement).</p>
+<p><b>A golden chord held over a moving bass.</b> In the Western 7–6 or 4–3 the bass moves under a held note. Hold Cg
+and move the bass; then resolve the upper voices to one of Cg's four nearest Western neighbours (C, Cm, Caug, A♭). The
+bass turns them into familiar chords:</p>
+<table>
+<caption>Cg over a new bass, resolved by sixth-steps (each upper voice moves at most 2)</caption>
+<tr><th>Upper voices resolve to</th><th>Cost</th><th>With the bass on …</th></tr>
+<tr><td>C (C E G)</td><td>2</td><td>A: Am7 · B: Cmaj7/B · B♭: C7/B♭ · E: C/E</td></tr>
+<tr><td>Cm (C E♭ G)</td><td>3</td><td>A♭: A♭maj7 · A: Am7♭5 · B♭: Cm7/B♭</td></tr>
+<tr><td>A♭ (C E♭ A♭)</td><td>4</td><td>F: Fm7 · F♯: A♭7/F♯ · G: A♭maj7/G</td></tr>
+</table>
+<p><b>Chains of suspensions.</b> Baroque writers liked chains in which voices fall by step in turn, each dissonance
+prepared by the last. The golden circle is such a chain by construction: each step moves one voice a semitone and holds
+two. Walking it into Cg and then straightening gives a <b>golden suspension chain</b>:
+^Ag → C♯g → vFg → ^A♭g → Cg → C (each moving voice falls a semitone) or, rising,
+vE♭g → Bg → ^Gg → vEg → Cg → C. Every falling semitone here is an exact golden apotome in golden tuning (99.27 c);
+the walk is the apotome pump of <a href="ch:ch34#comma-pump">Chapter 34</a> read backwards. <i>Status:</i> the chords
+are a theorem (circle steps); hearing them as suspensions is a proposal.</p>
+<pianoroll edo="36" notes="C#4 vF4 ^Ab4 ; C4 vF4 ^Ab4 ; C4 vE4 ^Ab4 ; C4 vE4 ^G4 ; C4 E4 G4" labels="C♯g ; vFg ; ^A♭g ; Cg ; C" title="A falling golden suspension chain into C"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>Theorem (shape of a golden suspension).</b> Let a vertical $S$ consist of held notes of a golden preparation and
+moved notes that already belong to a Western target $Y$. If $S$ is golden, exactly two notes are held and one is moved.
+<i>Proof.</i> Moved notes lie on the 12-ET layer, held golden notes on distinct layers. A golden $S$ has one note on each
+layer, so it has exactly one layer-0 note: either one moved note and two held off-layer notes, or no moved note at all
+(no change). ∎ <b>Corollary.</b> Preparation and suspension share two notes, so they are neighbours on the golden circle:
+$G_r \cap G_s$ has two elements only for $s = r \pm 11$: the differences between notes of $\{0, 11, 22\}$ are 11 and
+$25 \equiv -11$ (twice each) and 22 and $14 \equiv -22$ (once each), so a shift by $\pm 11$ keeps two common notes and a shift
+by $\pm 22$ only one.</p>
+<p><b>Exhaustive list.</b> Over the 36 preparations, each voice moving at most a semitone to a note of C or Cm, the
+script finds the six suspensions into C tabled above and six into C minor (<code>elastic.py</code> §8). The Western-only
+check (every Western triad held against every other, any held note) finds no golden vertical, as the layer argument
+predicts.</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 39.3.</b> Transpose the double suspension vEg → Cg → C to G major. Which chord prepares it, which voice
+moves, and how do the held notes resolve?</p>
+<details class="answer"><summary>Answer</summary><p>Add 21 sixth-steps (a fifth): vEg becomes vBg = vB ^D F♯, Cg
+becomes Gg = G vB ^D. F♯ rises to G (the leading tone of G) while vB and ^D are held; then vB rises to B (retardation) and
+^D falls to D (suspension).</p></details>
+</div>
+</section>
+
+<section id="anticipation-escape">
+<h2>Anticipations and escape chords</h2>
+<div class="layer hear">
+<p>Two more classical figures. An anticipation arrives early: one voice reaches its note of the next chord before the
+others. An escape tone steps away from the goal and then leaps to it, a small feint. Listen for both as golden chords:
+first an alto that reaches C a beat early while the other voices are still bending upward, then all three voices
+stepping down, away from A minor, before leaping up into it, then a gentler escape into C.</p>
+<audio-ex src="anticipation_escape" caption="G – Cg/G – Am: the alto's C arrives a beat early while G and D pass upward by sixth-steps. G – ^F♯g/G – Am: every upper voice steps down, away from the goal, then leaps up into it. G – Gg – C: B steps a sixth-step away from C, D starts upward, then C arrives. Then a phrase on piano: I – V – Cg/G – vi – IV – V – Gg – I."></audio-ex>
+<pianoroll edo="36" notes="G3 B3 D4 ; ^G3 C4 vE4 ; A3 C4 E4 ; G3 B3 D4 ; ^F#3 Bb3 vD4 ; A3 C4 E4" labels="G ; Cg (anticipation) ; Am ; G ; ^F♯g (escape) ; Am" title="V → vi through a golden anticipation chord and through a golden escape chord"></pianoroll>
+</div>
+<div class="layer understand">
+<p><b>One framework for all the figures.</b> Chapter 12 classified non-chord tones by the motion into them and out of
+them. For one voice going $x \to g \to y$ the same classification reads:</p>
+<table>
+<caption>The embellishing types of one voice (<a href="ch:ch12#nonchord">Chapter 12</a>), by where the ornament lies</caption>
+<tr><th>Type</th><th>Condition</th><th>Excess travel</th><th>Example over V → I (B → C)</th></tr>
+<tr><td>passing</td><td>$g$ between $x$ and $y$</td><td>0</td><td>B → ^B → C</td></tr>
+<tr><td>overshoot (appoggiatura from beyond)</td><td>$y$ between $x$ and $g$</td><td>$2|g-y|$</td><td>B → ^C → C</td></tr>
+<tr><td>escape (échappée)</td><td>$x$ between $g$ and $y$</td><td>$2|g-x|$</td><td>B → vB → C</td></tr>
+<tr><td>anticipation</td><td>$g = y \ne x$</td><td>0</td><td>B → C → C</td></tr>
+<tr><td>suspension</td><td>$g = x \ne y$</td><td>0</td><td>B → B → C</td></tr>
+<tr><td>neighbour</td><td>$x = y \ne g$</td><td>$2|g-x|$</td><td>G → ^G → G</td></tr>
+</table>
+<p>A golden chord between two Western chords gives each voice one of these types. Call the chord an <b>anticipation
+chord</b>, an <b>escape chord</b> and so on when all its moving voices agree (passing voices allowed alongside an
+anticipation). Taking every golden voicing within a whole tone of each voice's two notes and sorting them gives a census
+for each progression:</p>
+<table>
+<caption>Golden chords near smooth progressions, by type (exhaustive within a whole tone per voice)</caption>
+<tr><th>Progression</th><th>Passing (excess 0)</th><th>Anticipation + passing (0)</th><th>Uniform overshoot</th><th>Uniform escape</th><th>Best mixed chord (excess 2)</th></tr>
+<tr><td>V → I (G3 B3 D4 → G3 C4 E4)</td><td>vCg/G</td><td>none</td><td>none</td><td>none</td><td>Gg (B escapes to vB)</td></tr>
+<tr><td>IV → I (F3 A3 C4 → E3 G3 C4)</td><td>vFg/C</td><td>none</td><td>none</td><td>none</td><td>^A♭g (F overshoots to vE)</td></tr>
+<tr><td>V → vi (G3 B3 D4 → A3 C4 E4)</td><td>vA♭g</td><td><b>Cg</b> (^G3 C4 vE4)</td><td>^Ag (excess 12)</td><td><b>^F♯g</b> (excess 12)</td><td>^Bg (G escapes to vG)</td></tr>
+<tr><td>IV → V (F3 A3 C4 → G3 B3 D4)</td><td>vF♯g</td><td><b>Dg</b> (vF♯3 ^A3 D4)</td><td>vA♭g (12)</td><td>^Eg (12)</td><td>^Ag (F escapes to vF)</td></tr>
+</table>
+<p>Three findings. For the smooth fifth progressions V → I, IV → I (and likewise I → IV, I → V), the only golden chord on
+a smoothest path is the strict passing chord, and no golden chord is a pure anticipation, overshoot or escape: every
+other golden chord nearby mixes types and costs at least two extra sixth-steps. For progressions in which every voice
+moves the same way (V → vi, IV → V), all the pure types exist. And a golden anticipation chord costs nothing: in
+V → vi the alto reaches C while the other two voices are one and five sixth-steps along their whole-tone climbs (G → ^G,
+D → vE), and the chord they make is Cg. Placed on the weak beat before the arrival, it is the golden form of the
+anticipation that so often precedes a deceptive or a final cadence. (In the audio the bass holds G under these chords,
+hence the symbols Cg/G and ^F♯g/G; the census concerns the three upper voices.)</p>
+<p><b>The golden escape chord.</b> ^F♯g between V and vi steps every voice down (G → ^F♯, B → B♭, D → vD) and then
+leaps up 6 to 8 sixth-steps (a whole tone or more) into A minor: an échappée in three voices at once, with an excess of 12 sixth-steps. A
+milder escape is Gg between V and I, where only the leading tone steps away (B → vB) before rising four sixth-steps to C.
+The échappée is a weak-beat figure, and so are these chords.</p>
+<p><b>A golden cambiata.</b> The <i>nota cambiata</i> of Renaissance counterpoint steps down from a consonance to a
+dissonance, leaps a third further down, past the note the dissonance would have resolved to, and steps back up to it. Read
+as motion toward a goal, this is passing, then overshoot, then settle. Chord by chord, and rising instead of falling,
+golden chords exist for each stage in V → vi: G3 B3 D4 → vA♭3 ^B3 E♭4 (passing, vA♭g) → ^A3 C♯4 vF4 (overshoot, ^Ag)
+→ A3 C4 E4. The motion is 6 + 15 + 6 = 27 sixth-steps against 15 for the direct move. <i>Status:</i> a proposal; the
+chords and costs are computed.</p>
+</div>
+<div class="layer derive">
+<p><b>The census.</b> For a voiced progression $X \to Y$, enumerate every voicing $G$ with
+$\min(x_i, y_i) - 6 \le g_i \le \max(x_i, y_i) + 6$ whose pitch classes form a golden triad, classify each voice by the
+betweenness lemma of §39.1, and record the excess $d(X,G) + d(G,Y) - d(X,Y)$. A chord is uniform when its moving voices
+share one type. Counts for V → I: one passing chord, and 36 mixed chords in ten mixed classes, with excesses 2 to 12
+(<code>elastic.py</code> §9–§10). The uniform escape and overshoot chords of V → vi each have excess 12, which by the
+lemma means every voice detours by 1, 2 and 3 sixth-steps: the parallel rule of §39.1 seen from the other side.</p>
+</div>
+</section>
+
+<section id="neighbour-chords">
+<h2>Golden neighbour chords</h2>
+<div class="layer hear">
+<p>The simplest embellishment of all leaves home and comes straight back. Over a held C in the bass, listen to C major
+stepping onto three golden neighbours and back: one that bends two voices in opposite directions, one that sinks, and
+one that lifts. Then the Western neighbour six-four, C – F/C – C, beside its golden counterpart, and finally a double
+neighbour that dips below and then rises above before coming home.</p>
+<audio-ex src="neighbour_def" caption="Over a C pedal: C – Cg – C, C – vCg – C, C – ^Cg – C; then C – F/C – C beside C – vFg/C – C; then C – ^Bg – vC♯g – C, every voice dipping below and rising above its note before returning. Then an amen-like tag on piano: C – vFg/C – C – Cg – C."></audio-ex>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; C4 E4 G4 ; vC4 ^Eb4 G4 ; C4 E4 G4 ; ^C4 E4 vAb4 ; C4 E4 G4" labels="C ; Cg ; C ; vCg ; C ; ^Cg ; C" title="Split, lower and upper golden neighbours of C"></pianoroll>
+</div>
+<div class="layer understand">
+<p><b>Types.</b> A golden neighbour chord of C is a golden chord G in C – G – C. It is an <b>upper</b> neighbour if every
+voice that moves goes up, a <b>lower</b> neighbour if every one goes down, and <b>split</b> otherwise. Of the 28 golden
+voicings within a whole tone of C4 E4 G4 in every voice, 10 are upper, 10 lower and 8 split. The nearest of each kind:</p>
+<table>
+<caption>Golden neighbours of C4 E4 G4: the nearest of each type, then a selection up to cost 6 (motions in sixth-steps)</caption>
+<tr><th>Type</th><th>Chord</th><th>Voicing</th><th>Motion</th><th>Cost one way</th></tr>
+<tr><td>split</td><td>Cg</td><td>C4 vE4 ^G4</td><td>0, −1, +1</td><td>2</td></tr>
+<tr><td>lower</td><td>vCg</td><td>vC4 ^E♭4 G4</td><td>−1, −2, 0</td><td>3</td></tr>
+<tr><td>upper</td><td>^Cg</td><td>^C4 E4 vA♭4</td><td>+1, 0, +2</td><td>3</td></tr>
+<tr><td>split</td><td>Eg</td><td>^B3 E4 vA♭4</td><td>−2, 0, +2</td><td>4</td></tr>
+<tr><td>lower</td><td>^Bg</td><td>^B3 E♭4 vG4</td><td>−2, −3, −1</td><td>6</td></tr>
+<tr><td>upper</td><td>vFg</td><td>C4 vF4 ^A♭4</td><td>0, +2, +4</td><td>6</td></tr>
+<tr><td>upper</td><td>vC♯g</td><td>vC♯4 ^E4 A♭4</td><td>+2, +1, +3</td><td>6</td></tr>
+</table>
+<p>Four of these chords, vCg and ^Cg (the nearest lower and upper neighbours) and ^Bg and vC♯g, are the partial and full
+overshoots of §39.1: a neighbour is an overshoot with no journey before it. With Western home they are colour on the way out and release on the way back.</p>
+<p><b>Visitation, seen from the other side.</b> Chapter 31 described Cg – C – Cg, a golden home that opens briefly onto C
+major (<a href="ch:ch31#visitation">rational visitation</a>). C – Cg – C is the same pair of chords with the other one as
+home. On harmonic instruments C major is the deeper rest, so the visit and the neighbour feel different even though the
+voice leading is identical: the neighbour returns to the global minimum; the visit leaves it and returns to the delicate
+local rest of the golden triad (the author's model).</p>
+<p><b>The golden pedal six-four.</b> The Western neighbour six-four, C – F/C – C, lifts E to F and G to A over a held C
+(3 + 6 sixth-steps). Its golden counterpart is <b>vFg/C</b> = C vF ^A♭, which lifts the same voices by 2 and 4: exactly
+two thirds of the way to F/C. It is the strict passing chord of C → F/C used as a neighbour, the plagal glow of
+<a href="ch:ch29#plagal">Chapter 29</a> turned back on itself. ^A♭g/C = C vE ^A♭ is a split alternative (cost 5).
+Measured with the pedal (C3 C4 vF4 ^A♭4 against C3 C4 F4 A4), the golden one is rougher, 2.360 against 2.022.</p>
+<p><b>Double neighbours.</b> A double neighbour goes above and then below its note, or below and then above, before
+returning (C – D – B – C). Requiring every voice to do this, there are 98 golden pairs; the cheapest is
+C – ^Bg – vC♯g – C, with every voice first below and then above, 24 sixth-steps in all. The pair is the two full
+overshoots of C, from above and from below: the neighbour form of an elastic that swings both ways.</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; ^B3 Eb4 vG4 ; vC#4 ^E4 Ab4 ; C4 E4 G4 ; C4 F4 A4 ; C4 vF4 ^Ab4 ; C4 E4 G4" labels="C ; ^Bg ; vC♯g ; C ; F/C ; vFg/C ; C" title="A golden double neighbour, and the Western and golden pedal six-fours"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>Counts</b> (<code>elastic.py</code> §11): golden voicings $G$ with $|g_i - c_i| \le 6$ for C4 E4 G4: 28, of
+which 10 upper, 10 lower and 8 split; double neighbours $C \to G_1 \to G_2 \to C$ with $m^{(1)}_i m^{(2)}_i &lt; 0$ for every
+moving voice: 98, the cheapest of total motion 24.</p>
+<p><b>The pedal six-four.</b> Upper voices C4 E4 G4 → C4 F4 A4 move $(0, 3, 6)$; the uniform path has $d = (0, 1, 2)$
+and $P_2 = (C4, E4 + 2, G4 + 4)$ = C4 vF4 ^A♭4, pitch classes $\{0, 14, 25\}$ = vFg. ∎</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 39.4.</b> Show that ^Cg is an upper neighbour of C major and vCg a lower one, write each as a planing
+of Cg, and find the total motion of C – ^Cg – C – vCg – C.</p>
+<details class="answer"><summary>Answer</summary><p>^Cg = ^C E vA♭: C → ^C (+1), E stays, G → vA♭ (+2), all up.
+vCg = vC ^E♭ G: C → vC (−1), E → ^E♭ (−2), G stays, all down. Every note of Cg = C vE ^G moved up one sixth-step gives
+^C E vA♭, and down one gives vC ^E♭ G, so ^Cg = Cg + 1 and vCg = Cg − 1: the projection planed up and down, as in the
+parallel rule. The motion is 3 + 3 + 3 + 3 = 12 sixth-steps.</p></details>
+</div>
+</section>
+
+<section id="reharmonization">
+<h2>Reharmonizing a melody with golden chords</h2>
+<div class="layer hear">
+<p>Any Western melody can be reharmonized, its familiar notes set against new chords. With golden chords the melody
+stays in C major while the harmony slides through golden colours, and Western chords return at the cadences. Listen to
+the theme of Beethoven's <i>Ode to Joy</i> (1824) harmonized this way: twenty of its thirty notes carry a golden chord,
+the rest a diatonic one, with a half cadence on G and a full close on C.</p>
+<audio-ex src="reharm_ode" caption="First, dry: the note E over its three golden triads ^Cg, Eg and vAg. Then Ode to Joy, every note harmonized by a golden triad that contains it (or a diatonic triad where that is much smoother): vAg – Fg – vCg – Fg – vAg – Dm – vFg … with Western G at the half cadence and G – Em – G – C at the end."></audio-ex>
+<pianoroll edo="36" notes="vA4 ^C5 E5 ; vA4 ^C5 F5 ; vC5 ^Eb5 G5 ; vA4 ^C5 F5 ; vA4 ^C5 E5 ; F4 A4 D5 ; vF4 ^Ab4 C5" labels="vAg ; Fg ; vCg ; Fg ; vAg ; Dm ; vFg" title="Ode to Joy, the first nine notes E E F G G F E D C with their chords (melody on top)"></pianoroll>
+</div>
+<div class="layer understand">
+<p><b>Three chords per note.</b> Every pitch class lies in exactly three golden triads, as their root, third and fifth,
+and the three are <b>consecutive on the golden circle</b>. For the notes of C major:</p>
+<table>
+<caption>The golden triads containing each note of C major (circle positions: Cg = 0, vEg = 1, …)</caption>
+<tr><th>Note</th><th>As root</th><th>As golden third</th><th>As golden fifth</th><th>Circle positions</th></tr>
+<tr><td>C</td><td>Cg</td><td>^A♭g</td><td>vFg</td><td>0, −1, −2</td></tr>
+<tr><td>D</td><td>Dg</td><td>^B♭g</td><td>vGg</td><td>−6, −7, −8</td></tr>
+<tr><td>E</td><td>Eg</td><td>^Cg</td><td>vAg</td><td>−12, −13, −14</td></tr>
+<tr><td>F</td><td>Fg</td><td>^C♯g</td><td>vB♭g</td><td>−15, −16, −17</td></tr>
+<tr><td>G</td><td>Gg</td><td>^E♭g</td><td>vCg</td><td>15, 14, 13</td></tr>
+<tr><td>A</td><td>Ag</td><td>^Fg</td><td>vDg</td><td>9, 8, 7</td></tr>
+<tr><td>B</td><td>Bg</td><td>^Gg</td><td>vEg</td><td>3, 2, 1</td></tr>
+</table>
+<p>This mirrors the Western fact that each scale note lies in three diatonic triads (C in C, A minor and F), but the
+golden three are neighbours: moving between two of them is a circle step, one voice by a semitone.</p>
+<p><b>What golden chords like in a melody.</b> The cheapest move between a golden chord containing one note and a golden
+chord containing the next depends sharply on the melodic interval:</p>
+<table>
+<caption>Smallest voice-leading cost between golden harmonizations of two melody notes (exhaustive)</caption>
+<tr><th>Melodic interval</th><th>unison</th><th>semitone</th><th>whole tone</th><th>minor third</th><th>major third</th><th>fourth</th><th>tritone</th></tr>
+<tr><td>Cost (sixth-steps)</td><td>0</td><td>3 (circle step)</td><td>12</td><td>5</td><td>3 (planing)</td><td>3 (planing)</td><td>12</td></tr>
+</table>
+<p>Golden harmony loves semitones, major thirds and fourths, and dislikes whole steps and the tritone. A diatonic melody
+is full of whole steps, which is why golden reharmonization of a scale tune is expensive, and why letting diatonic chords
+take some whole-step moves helps.</p>
+<p><b>Choosing by voice leading.</b> A dynamic programme picks one chord per note to minimize the total voice-leading
+motion, with the cadences fixed (G under the D of bar 4, G – C at the end):</p>
+<table>
+<caption>Ode to Joy: total motion of the accompaniment (sixth-steps, pitch-class voice leading) for five rules</caption>
+<tr><th>Rule</th><th>Golden notes</th><th>Total motion</th></tr>
+<tr><td>diatonic triads only</td><td>0 of 30</td><td>162</td></tr>
+<tr><td>golden or diatonic, smoothest</td><td>13 of 30</td><td>162</td></tr>
+<tr><td>golden colour: diatonic charged 4 extra (the audio)</td><td>20 of 30</td><td>180</td></tr>
+<tr><td>golden only, Western cadences</td><td>25 of 30</td><td>210</td></tr>
+<tr><td>golden only, no cadences</td><td>30 of 30</td><td>204</td></tr>
+</table>
+<p>The second row is the surprise: the smoothest harmonization, allowed either kind of chord, can use golden chords on 13
+notes at no cost at all. Two exchanges make this possible. Where the diatonic solution moves F → Am → F (leading-tone
+exchanges, cost 3), the golden one moves Fg → vAg → Fg, circle steps of the same cost, because the projection turns the
+leading-tone exchange into a circle step (<a href="ch:ch35#plr">Chapter 35</a>); and where the diatonic solution puts C
+under the melody's E between Dm and G (15 + 9) or between G and F (9 + 9), the golden one puts ^Cg there (12 + 12, 12 + 6).
+The audio uses the third row:
+vAg vAg Fg vCg vCg Fg vAg Dm | vFg vFg Dm ^Cg ^Cg G G | … | Dm Cg Cg G Em G C C.</p>
+<p><b>Guidelines</b> (proposal). Keep Western chords at cadences, where they are the release. Give golden chords to the
+melody's semitones and to its leaps of a third or a fourth; let whole steps change into or out of a diatonic chord. Hold
+a golden chord across repeated notes. Place the bass on the golden root, as the audio does, so that the bass line
+moves with the circle.</p>
+<aside class="box note"><b>Western mirror.</b> Western reharmonization, choosing among the chords that contain a melody note, is the subject of
+<a href="ch:ch11#common">Chapter 11</a>; golden melodies and their harmonization are in
+<a href="ch:ch36#melody-harmony">Chapter 36</a>; golden colour chords borrowed into a key are in
+<a href="ch:ch38#colour-chords">Chapter 38</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Theorem (three consecutive chords).</b> A pitch class $x$ lies in $G_r = \{r, r+11, r+22\}$ if and only if
+$r \in \{x, x-11, x-22\}$. On the golden circle $G_r$ sits at position $p$ with $11p \equiv r \pmod{36}$, that is
+$p \equiv 23r$ ($23 = 11^{-1}$ in $\mathbb{Z}_{36}$), so the three chords sit at $23x$, $23x - 1$ and $23x - 2$:
+consecutive. ∎ (Checked for all 36 pitch classes.)</p>
+<p><b>The interval costs.</b> For a melodic interval of $s$ semitones, the minimum of $d(G, G')$ over $G \ni x$,
+$G' \ni x + 3s$ is 0, 3, 12, 5, 3, 3, 12 for $s = 0, \dots, 6$ (exhaustive). The semitone case is a circle step
+(vFg → C♯g: vF ^A♭ C → vF ^A♭ C♯); the third and fourth cases are planing by one sixth-step (Cg → ^Cg; vFg → Fg).</p>
+<p><b>The programme.</b> Candidates for note $i$ are its three golden triads, plus, if allowed, the major and minor triads
+of C major containing it, each with a penalty $\lambda$. The cost of a sequence is $\sum_i d(c_i, c_{i+1}) +
+\lambda\cdot\#\{\text{diatonic chords}\}$, minimized by dynamic programming over the 30 notes (<code>elastic.py</code>
+§12; $\lambda = 0$ and $\lambda = 4$ give the second and third rows).</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 39.5.</b> The melody steps E → F. Which pair of golden chords harmonizes it most smoothly, and what
+moves?</p>
+<details class="answer"><summary>Answer</summary><p>E lies in ^Cg, Eg and vAg; F in ^C♯g, Fg and vB♭g. The cheapest pair
+is vAg → Fg (cost 3): vA ^C E → vA ^C F, a circle step in which only the melody moves. The next best are ^Cg → Fg and
+vAg → ^C♯g (cost 6).</p></details>
+</div>
+</section>
+
+<section id="catalogue">
+<h2>A catalogue of strategies</h2>
+<div class="layer hear">
+<p>Here, in one place, are all the ways this book has found to join golden and Western harmony, with their traditional
+ancestors. Before the table, three further cadences: a golden backdoor, in which the flat seventh climbs into C through
+two golden chords; a chromatic-mediant cadence from A♭; and the mediant E settling into C through its own golden image.</p>
+<audio-ex src="cadences_extra" caption="Fm – B♭ – vBg – ^Bg – C, the golden backdoor: every voice rises into C at the end. A♭ – Cg/A♭ – C, a chromatic-mediant cadence through the projection of C. E – Eg – C: III bends into its golden image, then falls into I. Then a phrase on piano: C – Am – Fm – B♭ – vBg – ^Bg – C."></audio-ex>
+<pianoroll edo="36" notes="F3 Ab3 C4 ; Bb3 D4 F4 ; vB3 ^D4 F#4 ; ^B3 Eb4 vG4 ; C4 E4 G4" labels="Fm ; B♭ ; vBg ; ^Bg ; C" title="The golden backdoor (natural passing path, upper voices)"></pianoroll>
+</div>
+<div class="layer understand">
+<table>
+<caption>Strategies for joining golden and Western chords (costs in sixth-steps; C major home)</caption>
+<tr><th>Strategy</th><th>Traditional analogue</th><th>Mechanism</th><th>Cost</th><th>Example in C</th><th>Works best</th><th>Where</th></tr>
+<tr><td>Strict golden passing</td><td>passing chord</td><td>$P_k = X + kd$, uniform splits</td><td>0 extra</td><td>C – Cg – ^E♭T13/C – A♭</td><td>fifth- and third-related triads of one quality, weak beats</td><td><a href="ch:ch27#quality">27</a></td></tr>
+<tr><td>Natural passing</td><td>chromatic passing chords</td><td>uneven splits of whole steps</td><td>0 extra</td><td>F – vF♯g – ^F♯g – G</td><td>stepwise roots</td><td><a href="ch:ch28#escalator">28</a></td></tr>
+<tr><td>Golden cadences</td><td>authentic, plagal, deceptive, Picardy</td><td>passing chords at cadences</td><td>0 extra</td><td>G – vE♭T13/G – vCg/G – C</td><td>phrase ends</td><td><a href="ch:ch29#authentic">29</a></td></tr>
+<tr><td><b>Overshoot and settle</b></td><td>appoggiatura from beyond; gap-fill</td><td>target lies between source and golden chord; π(Y) planed with the motion</td><td>settle 3 or 6; extra 6 or 12</td><td>G4 B4 D5 – vCg – C</td><td>parallel leaps of any size</td><td>§39.1</td></tr>
+<tr><td>Damped settle</td><td>(spring, as metaphor)</td><td>one voice swings, others creep</td><td>e.g. 8 against 6</td><td>^Bg – Cg – C</td><td>after a full overshoot</td><td>§39.1, proposal</td></tr>
+<tr><td><b>Golden appoggiatura chord</b></td><td>appoggiatura chord, cadential six-four</td><td>golden chord on the beat, resolving by sixth-steps</td><td>2 (Cg → C), 3 (vCg, ^Cg)</td><td>G – Cg – C; ii⁶ – Gg – G</td><td>arrivals on strong beats</td><td>§39.2</td></tr>
+<tr><td>Golden six-four, falling</td><td>cadential six-four</td><td>first step of the uniform path I⁶₄ → V</td><td>6 to V</td><td>F – vCg/G – G – C</td><td>cadences</td><td>§39.2</td></tr>
+<tr><td><b>Golden double suspension</b></td><td>4–3, 7–6, double suspensions</td><td>circle step under two held golden notes, then resolution</td><td>3 + 2</td><td>vEg – Cg – C</td><td>leading-tone arrivals</td><td>§39.3</td></tr>
+<tr><td>Staggered resolution</td><td>suspension or retardation</td><td>one bend of π(Y) held</td><td>1 + 1</td><td>Cg – C(^5) – C</td><td>slow final chords</td><td>§39.3</td></tr>
+<tr><td>Golden suspension chain</td><td>chains of suspensions</td><td>golden circle walk into π(Y)</td><td>3 per chord, then 2</td><td>C♯g – vFg – ^A♭g – Cg – C</td><td>approaches to a cadence</td><td>§39.3, proposal</td></tr>
+<tr><td>Golden anticipation chord</td><td>anticipation</td><td>passing chord with one voice already arrived</td><td>0 extra</td><td>G – Cg/G – Am</td><td>progressions with all voices moving one way</td><td>§39.4</td></tr>
+<tr><td>Golden escape chord</td><td>échappée</td><td>voices step away, then leap to the goal</td><td>2 to 12 extra</td><td>G – ^F♯g/G – Am; G – Gg – C</td><td>weak beats</td><td>§39.4</td></tr>
+<tr><td>Golden neighbour chord</td><td>neighbour chord</td><td>C – G – C</td><td>2 or 3 each way</td><td>C – Cg – C; C – vCg – C</td><td>prolonging a tonic</td><td>§39.5</td></tr>
+<tr><td>Golden double neighbour</td><td>double neighbour</td><td>both full overshoots</td><td>24 in all</td><td>C – ^Bg – vC♯g – C</td><td>ornamenting a held chord</td><td>§39.5</td></tr>
+<tr><td>Golden reharmonization</td><td>reharmonization</td><td>one of three consecutive circle chords per note</td><td>0 to 48 extra (Ode to Joy)</td><td>vAg – Fg – vCg …</td><td>melodies with semitones, thirds, fourths</td><td>§39.6</td></tr>
+<tr><td>Golden colour chords</td><td>modal mixture</td><td>replace X by π(X)</td><td>2</td><td>C – Fg – G7 – C</td><td>held chords, strong beats</td><td><a href="ch:ch38#colour-chords">38</a></td></tr>
+<tr><td>Projection pivots</td><td>pivot-chord modulation</td><td>π(X) shared by keys a silver third apart</td><td>2 + 2</td><td>C – Cg – ^Cm</td><td>modulating between layers</td><td><a href="ch:ch35#silver-third-keys">35</a></td></tr>
+<tr><td>Limma lift, comma pump</td><td>modulation by step</td><td>golden midpoint; golden circle as key engine</td><td>3 + 3; one sixth-step per chord</td><td>C – ^Cg – vC♯</td><td>long modulations</td><td><a href="ch:ch34#midpoint">34</a></td></tr>
+<tr><td>Golden planing</td><td>organum, planing</td><td>parallel golden triads = three keys at once</td><td>—</td><td>Cg Dg Eg … under a scale</td><td>melodies in the root</td><td><a href="ch:ch37#golden-planing">37</a></td></tr>
+<tr><td>Golden pedals</td><td>pedal point</td><td>three circle chords share each note</td><td>—</td><td>C – Cg/C – ^A♭g/C – vFg/C</td><td>tonic and dominant pedals</td><td><a href="ch:ch37#pedals-drones">37</a></td></tr>
+<tr><td>Golden Neapolitan</td><td>Neapolitan, leading-tone chord</td><td>every voice a semitone into Cg</td><td>9</td><td>C♯g – Cg – C</td><td>golden keys</td><td><a href="ch:ch37#approach">37</a></td></tr>
+<tr><td>Golden sequences</td><td>sequences, giant steps</td><td>quality theorem on a major-third cycle; projections</td><td>geodesic</td><td>C – Cg – A♭ – A♭g – E – Eg – C</td><td>development sections</td><td><a href="ch:ch37#sequences">37</a></td></tr>
+<tr><td>Hybrid scales, inflections</td><td>modal inflection</td><td>scales with golden notes</td><td>—</td><td>C D vE F ^G A B</td><td>melody and colour</td><td><a href="ch:ch38#inflections">38</a></td></tr>
+</table>
+<h3>Three further strategies</h3>
+<p><b>The golden pedal six-four.</b> C – vFg/C – C, the golden neighbour over a tonic pedal, two thirds of the way to the
+Western C – F/C – C (§39.5). It suits plagal endings and the "amen" after a cadence. <i>Status:</i> the chord fact is a
+theorem; the use is a proposal.</p>
+<p><b>The golden chromatic-mediant cadence.</b> The Romantic mediants close onto I in one move (♭VI – I, III – I). Each
+pair is a same-quality pair a major third apart, so by the quality theorem it has exactly one golden passing chord, and
+in both cases that chord is a golden image of one of the two triads: A♭ – Cg/A♭ – C passes through π(C) = Cg over the A♭
+bass, and E – Eg – C bends E into π(E) = Eg before falling into C. The strict paths are A♭ – {C ^E♭ vA♭} – Cg/A♭ – C and
+E – Eg – ^GT13/E – C (<code>elastic.py</code> §13). <i>Status:</i> the paths are theorems; calling them cadences is a
+proposal.</p>
+<p><b>The golden backdoor.</b> The jazz backdoor iv – ♭VII – I (Fm – B♭ – C) approaches C from a whole step below. The
+natural passing engine fills B♭ → C with two golden chords on the chromatic root between, B♭ – vBg – ^Bg – C (the
+whole-step root rule of <a href="ch:ch28#escalator">Chapter 28</a>), and the last of them, ^Bg, rises into C in every
+voice: ^B → C, E♭ → E, vG → G. It is the same ^Bg that every falling leap into C overshoots onto (§39.1): the golden
+backdoor arrives from below exactly where the elastic would swing. <i>Status:</i> the path is the engine's;
+the name and use are a proposal.</p>
+</div>
+<div class="layer derive">
+<p><b>What the catalogue shows.</b> Every strategy in the table is a relation between a golden chord $G$ and one or two
+Western chords, and the betweenness lemma sorts them. Passing chords lie between $X$ and $Y$; overshoot, appoggiatura and
+the falling six-four put $Y$ between $X$ and $G$; escape chords put $X$ between; neighbour chords have $X = Y$;
+suspensions and anticipations hold or pre-empt single voices. Projection-based strategies (colour chords, pivots,
+appoggiatura to the tonic) use the minimum distance 2 between the two worlds, which no strategy can beat because a golden
+triad has a note on every layer and a Western triad on one. And the asymmetry theorem of
+<a href="ch:ch31#asymmetry">Chapter 31</a> explains why the ornament relation runs one way: golden chords can pass between
+Western ones, but no uniform path goes golden → Western → golden. So in these strategies the golden chord is the ornament,
+and C major the place where it comes to rest.</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 39.6 (listening).</b> Play the elastic phrase of §39.1 and the golden reharmonization of §39.6 one after
+the other. In which do the golden chords sound like ornaments of Western chords, and in which like a harmony of their
+own? Relate your answer to how long each golden chord lasts and to whether it is followed by its own projection's
+Western preimage.</p>
+<details class="answer"><summary>Answer</summary><p>There is no single right answer. In the elastic phrase every golden
+chord lasts one beat and resolves at once into the Western chord it is an image of (^Fg into F, vGg into G …), so most
+listeners hear ornaments. In the reharmonization golden chords follow each other (vAg – Fg – vCg), often for two
+beats, and resolve only at the cadences, so they are more likely to be heard as a harmony in their own right.</p></details>
+</div>
+</section>

@@ -1,0 +1,14 @@
+{
+ "song": "examples/golden/etude1_passing_light.songmap.yaml",
+ "digest": "27a8b4601074db05255785e44e9c8ad2814f8796f79a37b0ab9a546ee8bcfa65",
+ "counts": {
+  "bass": 34,
+  "chords": 34,
+  "melody": 17
+ },
+ "frames": 1290,
+ "sections": {
+  "a": 0,
+  "b": 600
+ }
+}

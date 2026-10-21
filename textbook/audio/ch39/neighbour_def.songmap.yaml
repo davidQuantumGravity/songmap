@@ -1,0 +1,40 @@
+# ch39: over a C pedal, C -> Cg -> C (split: third down, fifth up), C -> vCg -> C (lower), C -> ^Cg -> C
+# (upper); then the Western pedal six-four C - F/C - C against the golden one C - vFg/C - C; then a double
+# neighbour C -> ^Bg -> vC#g -> C (every voice below, then above).
+songmap: 0.2
+title: "Golden neighbour chords"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 39
+tail_seconds: 2.5
+instruments: {up: clean/organ, keys: keys/still, low: clean/bass}
+mix: {up: {gain_db: -6, send: {hall: 0.15}}, keys: {gain_db: -5, send: {hall: 0.35}}, low: {gain_db: -5}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: single
+    bars: 3
+    harmony: "C:0.5 Cg:0.25 C:0.25 C:0.5 vCg/C:0.25 C:0.25 C:0.5 ^Cg/C:0.25 C:0.25"
+    parts:
+      up: {notes: "=mp [c,e,g]2 [c,ve,^g]4 [c,e,g]4 [c,e,g]2 [vc,^eb,g]4 [c,e,g]4 [c,e,g]2 [^c,e,vab]4 [c,e,g]4"}
+      low: {notes: "=mp c-2 c-4 c-4 c-2 c-4 c-4 c-2 c-4 c-4"}
+  - name: pedal
+    bars: 2
+    harmony: "C:0.5 F/C:0.25 C:0.25 C:0.5 vFg/C:0.25 C:0.25"
+    parts:
+      up: {notes: "=mp [c,e,g]2 [c,f,a]4 [c,e,g]4 [c,e,g]2 [c,vf,^ab]4 [c,e,g]4"}
+      low: {notes: "=mp c-2 c-4 c-4 c-2 c-4 c-4"}
+  - name: double
+    bars: 2
+    harmony: "C:0.5 ^Bg/C:0.25 vC#g/C:0.25 C:1"
+    parts:
+      up: {notes: "=mp [c,e,g]2 [^b-,eb,vg]4 [vc#,^e,ab]4 [c,e,g]1"}
+      low: {notes: "=mp c-2 c-4 c-4 c-1"}
+  - name: phrase
+    bars: 2
+    harmony: "C:0.5 vFg/C:0.25 C:0.25 C:0.25 Cg:0.25 C:0.5"
+    parts:
+      keys: {notes: "=mp [e,g,c+]2 [vf,^ab,c+]4 [e,g,c+]4 [e,g,c+]4 [ve,^g,c+]4 [e,g,c+]2"}
+      low: {notes: "=mp c-2 c-4 c-4 c-4 c-4 c-2"}
+master: clean

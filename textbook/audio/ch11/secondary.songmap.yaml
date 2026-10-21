@@ -1,0 +1,21 @@
+# C, then V7/vi -> vi, V7/ii -> ii, V7/V -> V7 -> I. Each secondary dominant raises one note.
+songmap: 0.2
+title: "A chain of secondary dominants"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {chords: clean/organ, bass: clean/bass, lead: clean/lead}
+mix: {chords: {gain_db: -7, send: {hall: 0.25}}, bass: {gain_db: -4}, lead: {gain_db: -5, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 8
+    harmony: "C:1 E7:1 Am:1 A7:1 Dm:1 D7:1 G7:1 C:1"
+    parts:
+      chords: hold
+      bass: {style: roots, role: bass}
+      lead: top
+master: clean

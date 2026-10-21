@@ -1,0 +1,18 @@
+# Caug, and each of the six major/minor triads one semitone away: C, Am, E, C#m, Fm, Ab.
+songmap: 0.2
+title: "The augmented triad and its six neighbors"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {up: clean/organ}
+mix: {up: {gain_db: -6, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 7
+    parts:
+      up: {notes: "=mp [c,e,g#]2 [c,e,g]2 [c,e,g#]2 [c,e,a]2 [c,e,g#]2 [b-,e,g#]2 [c,e,g#]2 [c#,e,g#]2 [c,e,g#]2 [c,f,g#]2 [c,e,g#]2 [c,eb,g#]2 [c,e,g#]1"}
+master: clean

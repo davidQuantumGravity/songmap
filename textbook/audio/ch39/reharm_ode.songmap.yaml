@@ -1,0 +1,32 @@
+# ch39: Beethoven's Ode to Joy theme (public domain), every melody note harmonized by one of the three
+# golden triads that contain it or by a diatonic triad (charged 4 sixth-steps extra), chosen by dynamic programming
+# for the smallest voice-leading motion (20 of 30 notes golden), with
+# Western cadences: a half cadence on G in bar 4 and G - C at the end (reference/golden/elastic.py section 12).
+# First, dry: the melody note E over its three golden triads ^Cg, Eg, vAg (consecutive on the golden circle).
+songmap: 0.2
+title: "Ode to Joy in golden colour"
+tempo: 92
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 39
+tail_seconds: 2.5
+instruments: {keys: keys/still, low: clean/bass, lead: clean/lead}
+mix: {keys: {gain_db: -7, send: {hall: 0.3}}, low: {gain_db: -8}, lead: {gain_db: -6, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: dry
+    bars: 1
+    harmony: "^Cg:0.25 Eg:0.25 vAg:0.25 N.C.:0.25"
+    parts:
+      keys: {notes: "=mp [vab,^c+]4 [vab,^b]4 [va,^c+]4 r8. c16@0"}
+      low: {notes: "=mp ^c-4 e-4 va--4 r8. c16@0"}
+      lead: {notes: "=mf e+2. r8. c16@0"}
+  - name: theme
+    bars: 8
+    harmony: "vAg:0.5 Fg:0.25 vCg:0.5 Fg:0.25 vAg:0.25 Dm:0.25 vFg:0.5 Dm:0.25 ^Cg:0.25 ^Cg:0.375 G:0.125 G:0.5 ^Cg:0.5 Fg:0.25 vCg:0.5 Fg:0.25 vAg:0.25 Dm:0.25 Cg:0.5 G:0.25 Em:0.25 G:0.375 C:0.125 C:0.5"
+    parts:
+      keys: {notes: "=mp [va,^c+]2 [va,^c+]4 [vc+,^eb+]2 [va,^c+]4 [va,^c+]4 [f,a]4 [vf,^ab]2 [f,a]4 [vab,^c+]4 [vab,^c+]4. [g,b]8 [g,b]2 [vab,^c+]2 [va,^c+]4 [vc+,^eb+]2 [va,^c+]4 [va,^c+]4 [f,a]4 [ve,^g]2 [g,b]4 [g,b]4 [g,b]4. [e,g]8 [e,g]2"}
+      low: {notes: "=mp va--2 f--4 vc-2 f--4 va--4 d-4 vf--2 d-4 ^c-4 ^c-4. g--8 g--2 ^c-2 f--4 vc-2 f--4 va--4 d-4 c-2 g--4 e--4 g--4. c-8 c-2"}
+      lead: {notes: "=mf e+4 e+4 f+4 g+4 g+4 f+4 e+4 d+4 c+4 c+4 d+4 e+4 e+4. d+8 d+2 e+4 e+4 f+4 g+4 g+4 f+4 e+4 d+4 c+4 c+4 d+4 e+4 d+4. c+8 c+2"}
+master: clean

@@ -1,0 +1,21 @@
+# ch32: modulation from C golden7 to vE golden7 by a common chord. Cg - C#g - Cg establish C;
+# ^Abg belongs to both keys (pivot); ^Gg brings the new note vEb; vFg - vEg confirm vE.
+songmap: 0.2
+title: "From C golden7 to vE golden7"
+tempo: 76
+meter: "4/4"
+key: "C golden7"
+tuning: 36edo
+seed: 324
+tail_seconds: 3
+instruments: {bell: clean/glass, gpad: clean/golden_pad}
+motifs:
+  inc: {deg: "0/4 2 4 2 | 1/2 3/2 | 2/4 0 -1 0 | 5/2 2/2", octave: 5, key: "C golden7"}
+  ine: {deg: "6/4 4 2 4 | 7/2 6/4 7 | 3/4 1 5 3 | 2/4 -1 0/2", octave: 4, key: "vE golden7"}
+mix:
+  bell: {gain_db: -5, send: {hall: 0.25}}
+  gpad: {gain_db: -9, send: {hall: 0.3}}
+sections:
+  - {name: in_c, bars: 4, harmony: "Cg:1 C#g:1 Cg:1 ^Abg:1", parts: {bell: {motifs: [inc]}, gpad: hold}}
+  - {name: in_ve, bars: 4, harmony: "^Gg:1 vEg:1 vFg:1 vEg:1", parts: {bell: {motifs: [ine]}, gpad: hold}}
+master: clean

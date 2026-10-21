@@ -1,0 +1,26 @@
+# A three-voice fugal exposition written for this book. Subject (alto, bars 1-2):
+# C G A G F E | F E D C B C. Tonal answer at the dominant (soprano, bars 3-4): G C E D C B |
+# C B A G F# G, against a countersubject in the alto. Subject in the bass (bars 5-6), with free
+# counterpoint above, and a closing C chord.
+songmap: 0.2
+title: "A fugal exposition"
+tempo: 76
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 15
+tail_seconds: 2.5
+instruments: {s: clean/organ, a: clean/organ, b: clean/organ}
+mix:
+  s: {gain_db: -6, pan: 0.35, send: {hall: 0.25}}
+  a: {gain_db: -6, pan: 0.0, send: {hall: 0.25}}
+  b: {gain_db: -5, pan: -0.35, send: {hall: 0.25}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: exposition
+    bars: 7
+    parts:
+      s: {notes: "r1 | r1 | =mf g4 c+ e+8 d+ c+ b | c+8 b a g f#4 g | e+2 f+4 d+ | c+4 b d+ c+ | c+1"}
+      a: {notes: "=mf c4 g a8 g f e | f8 e d c b-4 c | e8 f e d c4 e | e c d b- | c4 b- c a- | a- d d e | e1"}
+      b: {notes: "r1 | r1 | r1 | r1 | =mf c-4 g- a-8 g- f- e- | f-8 e- d- c- b--4 c- | c-1"}
+master: clean

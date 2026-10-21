@@ -1,0 +1,25 @@
+# Call and response between two worlds (36-ET): a call in C major on a harmonic-spectrum keyboard
+# over C, answered by the same scale-degree shape in golden7 on a golden-spectrum bell over Cg.
+#   call 1: C E G E D C        answer 1: degrees 0 2 4 2 1 0  = C vE ^G vE C# C
+#   call 2: E G C G A G        answer 2: degrees 2 4 7 4 5 4  = vE ^G C ^G ^Ab ^G
+songmap: 0.2
+title: "Rational call, golden answer"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 15
+tail_seconds: 4
+instruments: {keys: clean/keys, bell: clean/glass, pad: clean/organ, gpad: clean/golden_pad}
+mix:
+  keys: {gain_db: -3, pan: -0.25, send: {hall: 0.25}}
+  bell: {gain_db: -4, pan: 0.25, send: {hall: 0.35}}
+  pad:  {gain_db: -14, send: {hall: 0.25}}
+  gpad: {gain_db: -10, send: {hall: 0.3}}
+returns: {hall: {type: reverb, seconds: 2.6, predelay: 0.02, damping: 0.5}}
+sections:
+  - {name: call1, bars: 2, key: "C major",   harmony: "C:2",  parts: {keys: {deg: "=mf 0/4 2 4 2 | 1/2 0", oct: 1}, pad: hold}}
+  - {name: ans1,  bars: 2, key: "C golden7", harmony: "Cg:2", parts: {bell: {deg: "=mf 0/4 2 4 2 | 1/2 0", oct: 1}, gpad: hold}}
+  - {name: call2, bars: 2, key: "C major",   harmony: "C:2",  parts: {keys: {deg: "=mf 2/4 4 7 4 | 5/2 4", oct: 1}, pad: hold}}
+  - {name: ans2,  bars: 2, key: "C golden7", harmony: "Cg:2", parts: {bell: {deg: "=mf 2/4 4 7 4 | 5/2 4", oct: 1}, gpad: hold}}
+master: clean

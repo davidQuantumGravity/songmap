@@ -1,0 +1,26 @@
+# The "Ode to Joy" theme from Beethoven's Ninth Symphony (1824, public domain), transposed to C:
+# two four-bar phrases with the same beginning. The first ends on D (scale degree 2, over V: a
+# half cadence); the second ends on C (degree 1, over I: an authentic cadence).
+songmap: 0.2
+title: "Question and answer"
+tempo: 112
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 13
+tail_seconds: 2
+instruments: {lead: clean/lead, keys: clean/keys, low: clean/bass}
+mix:
+  lead: {gain_db: -2, send: {hall: 0.2}}
+  keys: {gain_db: -11, send: {hall: 0.25}}
+  low:  {gain_db: -8, send: {hall: 0.1}}
+returns: {hall: {type: reverb, seconds: 2.0, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: period
+    bars: 8
+    harmony: "C:1 G:1 C:1 C:0.5 G:0.5 C:1 G:1 C:1 G:0.5 C:0.5"
+    parts:
+      lead: {notes: "=mf e4 e f g | g f e d | c c d e | e4. d8 d2 | e4 e f g | g f e d | c c d e | d4. c8 c2", oct: 1}
+      keys: hold
+      low: {style: roots, role: bass}
+master: clean

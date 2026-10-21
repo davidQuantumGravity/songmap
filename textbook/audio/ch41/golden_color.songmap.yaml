@@ -1,0 +1,20 @@
+# One Western cadence, then the same cadence with golden passing chords (36-ET, System 2 placeholders).
+# Plain: C - F - G - C.  Golden: C - vFg/C - F - vF#g - ^F#g - G - vCg/G - C.
+# The bass is written out: C - F - G - C, then C (pedal under vFg/C) - F - vF# - ^F# - G (pedal under vCg/G) - C.
+songmap: 0.2
+title: "A cadence, then the same cadence in gold"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 35
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+motifs:
+  plainbass: {notes: "c1 | f | g | c", octave: 2}
+  goldbass: {notes: "c2. c4 | f2 vf#4 ^f#4 | g2. g4 | c1", octave: 2}
+sections:
+  - {name: plain, bars: 4, harmony: "C:1 F:1 G:1 C:1", parts: {organ: hold, low: {motifs: [plainbass]}}}
+  - {name: golden, bars: 4, harmony: "C:0.75 ~g:0.25 F:0.5 ~g:0.25 ~g:0.25 G:0.75 ~g:0.25 C:1", parts: {organ: hold, low: {motifs: [goldbass]}}}
+mix: {organ: {gain_db: -6, send: {hall: 0.2}}, low: {gain_db: -5}}
+master: clean

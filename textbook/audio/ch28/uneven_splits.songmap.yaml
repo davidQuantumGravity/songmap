@@ -1,0 +1,17 @@
+# Ch. 28: one voice crossing the whole step C -> D in five different three-chord schedules:
+# 2+2+2 (System 1), then the uneven System 2 splits 1+2+3, 3+2+1, 3+3+0 and 0+3+3.
+songmap: 0.2
+title: "Uneven splits of a whole step"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2
+instruments: {organ: clean/organ}
+motifs:
+  splits: {notes: "=mf c4 vc# ^c# d | c ^c c# d | c c# vd d | c c# d d | c c c# d"}
+mix: {organ: {gain_db: -6}}
+sections:
+  - {name: splits, bars: 5, parts: {organ: {motifs: [splits]}}}
+master: clean

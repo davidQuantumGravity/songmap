@@ -1,0 +1,20 @@
+# ch36 golden7-modes: one tune (degrees 1 3 5 6 | 5 3 2 7 1 | 3 2 1) in four golden7 modes on C:
+# 5|1 (C vEb vE ^F# ^G ^Ab B), 3|3 (golden7 itself), 2|4 (C C# vE vF ^G ^Ab ^A), 0|6 (C C# D vF vF# ^Ab ^A).
+songmap: 0.2
+title: "One tune in four golden7 modes"
+tempo: 100
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys, low: clean/bass}
+mix:
+  keys: {gain_db: -4}
+  low: {gain_db: -10}
+sections:
+  - {name: m51, bars: 3, harmony: "N.C.:3", parts: {keys: {notes: "c4 ve4 ^g4 ^ab4 | ^g8 ve8 veb8 b-8 c2 | ve4 veb4 c2"}, low: {notes: "c-1 | c-1 | c-1"}}}
+  - {name: m33, bars: 3, harmony: "N.C.:3", parts: {keys: {notes: "c4 ve4 ^g4 ^ab4 | ^g8 ve8 c#8 b-8 c2 | ve4 c#4 c2"}, low: {notes: "c-1 | c-1 | c-1"}}}
+  - {name: m24, bars: 3, harmony: "N.C.:3", parts: {keys: {notes: "c4 ve4 ^g4 ^ab4 | ^g8 ve8 c#8 ^a-8 c2 | ve4 c#4 c2"}, low: {notes: "c-1 | c-1 | c-1"}}}
+  - {name: m06, bars: 3, harmony: "N.C.:3", parts: {keys: {notes: "c4 d4 vf#4 ^ab4 | vf#8 d8 c#8 ^a-8 c2 | d4 c#4 c2"}, low: {notes: "c-1 | c-1 | c-1"}}}
+master: clean

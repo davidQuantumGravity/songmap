@@ -1,0 +1,26 @@
+# ch37: the golden-third key cycle through projections. C major -> vE major -> ^G major -> B major,
+# each tonic a golden third (11 sixth-steps) above the last; three steps fall a semitone, back on
+# the 12-ET layer. Each move goes through two golden chords: the projection of the old tonic, one
+# golden-circle step, and the projection of the new tonic (C - Cg - vEg - vE, 2 + 3 + 2 = 7
+# sixth-steps, which equals the direct distance C -> vE: a smoothest voice leading). Doc demo D18,
+# voiced explicitly so that every voice moves monotonically.
+songmap: 0.2
+title: "The golden-third key cycle"
+tempo: 88
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 376
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix:
+  organ: {gain_db: -6, send: {hall: 0.25}}
+  low: {gain_db: -7}
+sections:
+  - name: cycle
+    bars: 11
+    harmony: "C:1 Cg:1 vEg:1 vE:1 vEg:1 ^Gg:1 ^G:1 ^Gg:1 Bg:1 B:2"
+    parts:
+      organ: {notes: "=mf [c,e,g]1 | [c,ve,^g] | [b-,ve,^g] | [vb-,ve,vab] | [b-,ve,^g] | [b-,veb,^g] | [^b-,^d,^g] | [b-,veb,^g] | [b-,veb,^f#] | [b-,d#,f#] | [b-,d#,f#]"}
+      low: {notes: "=mf c-1 | c- | ve- | ve- | ve- | ^g-- | ^g-- | ^g-- | b-- | b-- | b--"}
+master: clean

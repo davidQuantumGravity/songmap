@@ -60,6 +60,10 @@ Drums can be step strings: `"X..x..x.|X.ox.x.r"`.
 | [docs/GUI.md](docs/GUI.md) | SongMap Studio: auto-generated knobs, audition, presets, steps and feel, video-synced song view, patch editor, API, milestones |
 | [docs/SCENE_TIMELINES.md](docs/SCENE_TIMELINES.md) | Frame-by-frame spotting of the three Oct-13 videos |
 | [docs/RESCORE_PLAN.md](docs/RESCORE_PLAN.md) | Through-composed re-scores of those videos: shared motifs, per-scene treatment, production steps |
+| [docs/GOLDEN_HARMONY.md](docs/GOLDEN_HARMONY.md) | Golden-ratio harmony in 36-ET: golden intervals, chords and scales, notation, stability measurements, infrastructure plan (P10) |
+| [docs/GOLDEN_THEORY.md](docs/GOLDEN_THEORY.md) | Rigorous classification of golden passing harmony (theorems), the inverted golden-home and drone theory, the general theory and new progressions |
+| [docs/GOLDEN_PROGRESSIONS.md](docs/GOLDEN_PROGRESSIONS.md) | Generated dictionary: all 870 chord pairs, 3- and 4-chord golden forms, golden versions of common progressions, with SATB voice lines |
+| [docs/GOLDEN_MATH.md](docs/GOLDEN_MATH.md) | The math and history: golden comma, golden limma and apotome, well-formed scales (golden7 = the golden diatonic), the averaging principle, the metallic triads (silver, golden, bronze), Pythagorean and tuning history |
 
 ## Layout
 
@@ -111,3 +115,27 @@ NBARS=74 python reference/synth_v0.py A
 ```
 
 Use `$env:NBARS=74; python …` in PowerShell. The script's output path is hard-coded. `tools/v0_oracle.py` runs its `build()` with the instruments stubbed out to list every note it plays.
+
+## Golden harmony (36-ET)
+
+SongMap songs can use `tuning: 36edo`:
+- sixth-step accidentals: `^c4`, `vE`, `v3` in motifs;
+- golden, silver and bronze chords: `Cg`, `Cg7`, `Cs`, `CT13`, plus alteration lists like `C(v3,^5)`;
+- golden scales: `key: C golden7`, `golden13`, `silver13`;
+- passing-chord placeholders: `~` (System 1, strict) and `~g` (System 2, natural);
+- `voiced` styles (`hold`, `comp`, `pulse`, `top`, `bassline`) that voice-lead in sixth-steps;
+- the stable `clean/*` instruments, `master: clean`, and `songmap render --mp3`.
+- note-synchronized video: `songmap video song.sm -o song.mp4` (letter names, a grand staff and a 36-row piano roll,
+  sounding notes lit; `songmap.visual`, needs ffmpeg).
+
+Try it:
+
+```bash
+songmap render examples/golden/etude1_passing_light.songmap.yaml --mp3
+```
+
+```bash
+python tools/golden_suite.py
+```
+
+The second command writes every suite song to `examples/golden/suite/` and renders them to `golden_audio/`. Open `golden_audio/index.html` to browse the technique portfolios, the Well-Tempered Golden Clavier, and the System 1 and System 2 dictionaries.

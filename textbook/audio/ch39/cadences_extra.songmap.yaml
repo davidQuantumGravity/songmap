@@ -1,0 +1,39 @@
+# ch39: (a) the golden backdoor Fm - Bb - vBg - ^Bg - C (natural engine path; ^Bg rises into C in every voice);
+# (b) the golden chromatic-mediant cadence Ab - Cg/Ab - C; (c) III - I through its projection: E - Eg - C.
+songmap: 0.2
+title: "Golden backdoor and mediant cadences"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 39
+tail_seconds: 2.5
+instruments: {up: clean/organ, keys: keys/still, low: clean/bass}
+mix: {up: {gain_db: -6, send: {hall: 0.15}}, keys: {gain_db: -5, send: {hall: 0.35}}, low: {gain_db: -5}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: backdoor
+    bars: 2
+    harmony: "Fm:0.5 Bb:0.5 vBg:0.25 ^Bg:0.25 C:0.5"
+    parts:
+      up: {notes: "=mp [f-,ab-,c]2 [bb-,d,f]2 [vb-,^d,f#]4 [^b-,eb,vg]4 [c,e,g]2"}
+      low: {notes: "=mp f--2 bb--2 vb--4 ^b--4 c-2"}
+  - name: mediant
+    bars: 2
+    harmony: "Ab:0.5 Cg/Ab:0.5 C:1"
+    parts:
+      up: {notes: "=mp [ab-,c,eb]2 [^g-,c,ve]2 [g-,c,e]1"}
+      low: {notes: "=mp ab--2 ab--2 c-1"}
+  - name: third
+    bars: 2
+    harmony: "E:0.5 Eg:0.5 C:1"
+    parts:
+      up: {notes: "=mp [g#-,b-,e]2 [vab-,^b-,e]2 [g-,c,e]1"}
+      low: {notes: "=mp e--2 e--2 c-1"}
+  - name: phrase
+    bars: 3
+    harmony: "C:0.5 Am:0.5 Fm:0.5 Bb:0.25 vBg:0.125 ^Bg:0.125 C:1"
+    parts:
+      keys: {notes: "=mp [c,e,g]2 [c,e,a]2 [c,f,ab]2 [d,f,bb]4 [^d,f#,vb]8 [eb,vg,^b]8 [e,g,c+]1"}
+      low: {notes: "=mp c-2 a--2 f--2 bb--4 vb--8 ^b--8 c-1"}
+master: clean

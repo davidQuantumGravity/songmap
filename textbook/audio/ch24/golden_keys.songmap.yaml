@@ -1,0 +1,22 @@
+# Neighbouring golden keys: golden13 on C, then golden13 on vE (a golden third higher), both played
+# from C4 to C5 so that the one difference is audible. They share 12 of their 13 notes; the only
+# change is D -> vD, one sixth-step (in exact tuning, one golden comma, 30.17 c). Then each tonic
+# golden triad: Cg and vEg.
+songmap: 0.2
+title: "Neighbouring golden keys"
+tempo: 100
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 72
+tail_seconds: 2
+instruments: {keys: clean/keys, pad: clean/organ}
+motifs:
+  onC: {notes: "c8 c# d veb ve vf vf# ^f# | ^g ^ab ^a bb b c+4.", octave: 4}
+  onE: {notes: "c8 c# vd veb ve vf vf# ^f# | ^g ^ab ^a bb b c+4.", octave: 4}
+mix: {keys: {gain_db: -3}, pad: {gain_db: -8}}
+sections:
+  - {name: c, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [onC]}}}
+  - {name: e, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [onE]}}}
+  - {name: chords, bars: 2, harmony: "Cg:1 vEg:1", parts: {pad: hold}}
+master: clean

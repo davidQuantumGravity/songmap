@@ -1,0 +1,318 @@
+<p>This appendix collects the proofs behind the theorems of Parts II, VI and VII. Each result is labelled by how it was
+established. A <b>proof</b> is a complete argument. A <b>finite check</b> is an exhaustive computer enumeration of a
+finite, precisely defined set of cases, which is also a proof, but one you verify by rerunning code rather than by
+reading; the scripts are named. Where both exist, both are given. Results that depend on a voicing model or a
+listening model are <b>measurements</b>, and they are not proved here.</p>
+<p>Notation: $\alpha$ is a generator as a fraction of an octave ($\log_2(3/2)$ for the fifth, $\log_2\varphi$ for the
+golden sixth); $\{x\}$ is the fractional part; cents are $1200\log_2$; pitch classes in 36-ET are elements of
+$\mathbb{Z}_{36}$ (sixth-steps), and the layer of $p$ is $\lambda(p) = p \bmod 3$.</p>
+
+<section id="tuning">
+<h2>Tuning and scales</h2>
+<div class="layer derive">
+<h3>D.1 The generators are irrational</h3>
+<p><b>Proposition.</b> $\log_2(3/2)$ and $\log_2\varphi$ are irrational.</p>
+<p><i>Proof.</i> If $\log_2(3/2) = m/n$ with integers $n \ge 1$, then $3^n = 2^{m+n}$, impossible since the left side is odd
+and the right side even (or equal to 1 only if $n = 0$). If $\log_2\varphi = m/n$, then $\varphi^n = 2^m$. Here
+$\varphi = (1+\sqrt5)/2$ has conjugate $\psi = (1-\sqrt5)/2$ and norm $\varphi\psi = -1$, so the norm of $\varphi^n$ is
+$(-1)^n$, while the norm of the rational number $2^m$ is $2^{2m}$. Hence $2^{2m} = \pm 1$, so $m = 0$ and $\varphi^n = 1$,
+forcing $n = 0$. ∎</p>
+<p>Consequently no number of fifths, or of golden sixths, ever equals a whole number of octaves: every chain has a comma.</p>
+
+<h3>D.2 Limma, apotome and comma</h3>
+<p><b>Pythagorean.</b> The limma is $2^8/3^5 = 256/243$ (90.22 c), the apotome $3^7/2^{11} = 2187/2048$ (113.69 c), the
+whole tone $9/8$ (203.91 c). Then limma × apotome $= 3^2/2^3 = 9/8$ and apotome ÷ limma $= 3^{12}/2^{19}$, the Pythagorean
+comma (23.46 c). In units of octaves with $\alpha = \log_2(3/2)$: tone $= 2\alpha - 1$, limma $= 3 - 5\alpha$, and the
+diatonic octave is $5(2\alpha - 1) + 2(3 - 5\alpha) = 1$ exactly.</p>
+<p><b>Golden.</b> With $g = \log_2\varphi$: golden apotome $\varphi^3/4$, i.e. $3g - 2$ (99.27 c); golden limma
+$2^7/\varphi^{10}$, i.e. $7 - 10g$ (69.10 c). Their ratio is
+$$\frac{\varphi^3/4}{2^7/\varphi^{10}} = \frac{\varphi^{13}}{2^9},$$
+the golden comma (30.17 c): thirteen golden sixths minus nine octaves. The golden13 scale has 10 apotomes and 3 limmas, and
+$10(3g-2) + 3(7-10g) = 1$ exactly, for every value of $g$. The golden7 scale has 4 golden apotomes and 3 large steps of
+$2(3g-2) + (7 - 10g) = 3 - 4g$ (267.64 c), and $4(3g-2) + 3(3-4g) = 1$.</p>
+<p><b>The 36-comma.</b> $\varphi^{36}/2^{25}$ is $1200(36g - 25) = -8.75$ c: thirty-six golden sixths fall 8.75 c short of 25
+octaves. 36-ET tempers it out by setting the golden sixth to 25 steps, 833.33 c, which is 0.24 c above $\varphi$ (833.09 c).
+13-ET sets it to 9 steps, $9/13 \cdot 1200 = 830.77$ c, 2.32 c below.</p>
+
+<h3>D.3 The three-gap theorem</h3>
+<p>Steinhaus conjectured it; the first proofs were published in the late 1950s by Sós, by Świerczkowski and by Surányi. The
+proof below follows the classical argument by cases.</p>
+<p><b>Setting.</b> Let $\alpha \in (0,1)$ be irrational and $N \ge 2$. Place the $N$ points $x_k = \{k\alpha\}$,
+$k = 0, 1, \dots, N-1$, on the circle $\mathbb{R}/\mathbb{Z}$ (distinct, since $\alpha$ is irrational). Among
+$k = 1, \dots, N-1$ let $u$ be the index of the smallest $x_k$ and $v$ the index of the largest, and put
+$$a = x_u, \qquad b = 1 - x_v.$$
+So $x_k + a \equiv x_{k+u}$ and $x_k + b \equiv x_{k-v}$ (mod 1) whenever those indices exist. Note $a \ne b$, since
+$a = b$ would make $(u+v)\alpha$ an integer.</p>
+<p><b>Lemma 1.</b> $u + v \ge N$.</p>
+<p><i>Proof.</i> If $u + v \le N-1$, then $x_{u+v} \equiv a - b$. If $a > b$ this is a point in $(0, a)$, contradicting the
+minimality of $a$; if $a &lt; b$ it is a point in $(1-b, 1)$, contradicting the maximality of $x_v = 1 - b$. ∎</p>
+<p>So the index set $\{0, \dots, N-1\}$ splits into three consecutive ranges $[0, N-u)$, $[N-u, v)$, $[v, N)$, the middle
+one possibly empty.</p>
+<p><b>Theorem (three-gap).</b> The gap from $x_k$ to the next point (in the increasing direction) is $a$ if $k &lt; N-u$, it
+is $a+b$ if $N - u \le k &lt; v$, and it is $b$ if $k \ge v$. Hence the $N$ gaps take at most three lengths, $a$, $b$ and
+$a+b$, occurring $N-u$, $N-v$ and $u+v-N$ times.</p>
+<p><i>Proof.</i> In each case we name a point at the claimed distance and show that no point lies strictly between. Write
+$t \in (0,1)$ for the distance from $x_k$ forward to a hypothetical point $x_j$ in that open arc.</p>
+<ul>
+<li><i>Case $k &lt; N-u$.</i> The point $x_{k+u} = x_k + a$ exists. Suppose $t \in (0, a)$. If $j > k$, then
+$x_{j-k} = t &lt; a$ with $1 \le j-k \le N-1$: contradiction. If $j &lt; k$, put $m = k - j$; then $x_m = 1 - t$, and since
+$m \le k &lt; N - u$ the index $m + u \le N-1$ exists, with $x_{m+u} = x_m + a - 1 = a - t \in (0, a)$: contradiction.</li>
+<li><i>Case $k \ge v$.</i> The point $x_{k-v} = x_k + b$ exists. Suppose $t \in (0, b)$. If $j &lt; k$, then
+$x_{k-j} = 1 - t > 1 - b$: contradiction with the maximum. If $j > k$, put $m = j - k \le N - 1 - k \le N - 1 - v$; then
+$x_m = t$ and $x_{m+v} = t + 1 - b \in (1 - b, 1)$: contradiction.</li>
+<li><i>Case $N-u \le k &lt; v$.</i> The index $i = k + u - v$ satisfies $N - v \le i \le u - 1$, so it exists, and
+$x_i = x_k + a + b$. Suppose $t \in (0, a+b)$ with $j \ne i$. If $j > k$: $j - k \le N-1-k \le u-1$, so $t = x_{j-k} \ge a$,
+and $t \ne a$ because $j - k \ne u$; thus $t \in (a, a+b)$, and the index $u - (j-k) \in [1, u-1]$ has
+$x_{u-(j-k)} = a - t + 1 \in (1-b, 1)$: contradiction with the maximum. If $j &lt; k$: $m = k - j \in [1, v-1]$, so
+$x_m = 1 - t \in (1 - a - b, 1)$ and $x_m &lt; 1 - b$ (as $m \ne v$); then $v - m \in [1, v-1]$ has
+$x_{v-m} = (1-b) - x_m \in (0, a)$: contradiction with the minimum. ∎</li>
+</ul>
+<p><b>Corollary (sum rule).</b> Adding all gaps, $(N-u)a + (N-v)b + (u+v-N)(a+b) = va + ub = 1$.</p>
+
+<h3>D.4 Well-formed scales and the Stern–Brocot path</h3>
+<p><b>Theorem.</b> The scale of $N$ notes $\{0, \alpha, \dots, (N-1)\alpha\}$ (mod 1) has exactly two step sizes if and
+only if $N = u + v$, and this happens exactly when $N$ is the denominator of a fraction on the Stern–Brocot path of
+$\alpha$. In that case there are $v$ steps of size $a$ and $u$ steps of size $b$.</p>
+<p><i>Proof.</i> By the three-gap theorem there are two sizes iff the middle range is empty, i.e. $u + v \le N$, i.e.
+(Lemma 1) $u + v = N$. Write $a = u\alpha - p$ and $b = q - v\alpha$ with integers $p, q$, so $p/u &lt; \alpha &lt; q/v$. The
+sum rule gives $v(u\alpha - p) + u(q - v\alpha) = uq - vp = 1$. Fractions $p/u &lt; q/v$ with $uq - vp = 1$ are neighbours
+in the Stern–Brocot tree (each node of the tree is the mediant of its two nearest ancestors, which form such a pair, and
+every such pair in $[0,1]$ arises this way); the path from the root to $\alpha$ passes through a node exactly when its two
+ancestors bracket $\alpha$. So $(p+q)/(u+v) = (p+q)/N$ lies on $\alpha$'s path.</p>
+<p>Conversely let $p/u &lt; \alpha &lt; q/v$ with $uq - vp = 1$ and $N = u + v$. We show that $u$ and $v$ are the record
+indices for $N$ points. Any $1 \le k \le N-1$ and any integer $r$ can be written $(k, r) = s(u, p) + t(v, q)$ with integers
+$s, t$, because the matrix with rows $(u,p)$ and $(v,q)$ has determinant $\pm 1$. Then $k\alpha - r = sa - tb$ and
+$k = su + tv$. If $s, t \ge 1$ then $k \ge N$; if $s, t \le 0$ then $k \le 0$; so $s$ and $t$ have opposite signs or one is
+zero. If $0 &lt; k\alpha - r \le a$: $t = 0$ gives $s \ge 1$ and $k\alpha - r = sa$, so $s = 1$ and $k = u$; $s = 0$ gives
+$k\alpha - r = -tb &lt; 0$ for $t \ge 1$; $s \ge 1, t \le -1$ gives $sa + |t|b > a$; $s \le -1, t \ge 1$ gives a negative value.
+So $u$ is the unique minimizer. The same argument with the roles of $a$ and $b$ exchanged shows $v$ is the maximizer. Hence
+$u + v = N$ and the scale has two step sizes. ∎</p>
+<p><b>The two families.</b> Running the Stern–Brocot path (and checking the gap counts directly by computer for $N \le 60$):</p>
+<table>
+<tr><th>Generator</th><th>Path</th><th>Well-formed sizes</th></tr>
+<tr><td>fifth, $\alpha = 0.58496\ldots$</td><td>1/2, 2/3, 3/5, 4/7, 7/12, 10/17, 17/29, 24/41, 31/53</td><td>2, 3, 5, 7, 12, 17, 29, 41, 53</td></tr>
+<tr><td>golden sixth, $\alpha = 0.69424\ldots$</td><td>1/2, 2/3, 3/4, 5/7, 7/10, 9/13, 16/23, 25/36, 34/49</td><td>2, 3, 4, 7, 10, 13, 23, 36 (then 49)</td></tr>
+</table>
+<p><b>Worked examples.</b> Diatonic, $N = 7$: the Stern–Brocot parents of 4/7 are $1/2 &lt; \alpha &lt; 3/5$, so $u = 2$,
+$v = 5$, $a = 2\alpha - 1$ (203.91 c, five of them) and $b = 3 - 5\alpha$ (90.22 c, two). golden7, $N = 7$: the parents of
+5/7 are $2/3 &lt; \alpha &lt; 3/4$, so $u = 3$, $v = 4$, $a = 3\alpha - 2$ (99.27 c, four of them) and $b = 3 - 4\alpha$
+(267.64 c, three). Nine golden sixths are not well formed: 9 is not on the path, and the three sizes are 99.27, 168.37 and
+267.64 c.</p>
+<p>The term "moment of symmetry" is Erv Wilson's (1970s); Carey and Clampitt's "well-formed scales" (1989) describe the
+same class. Continued fractions and the Stern–Brocot tree are reviewed in <a href="ch:appA#continued">Appendix A</a>; the
+musical discussion is in <a href="ch:ch06#three-gap">Chapter 6</a> and <a href="ch:ch23#golden-scales">Chapter 23</a>.</p>
+
+<h3>D.5 Best approximations</h3>
+<p>The continued fractions are $\log_2(3/2) = [0; 1, 1, 2, 2, 3, 1, 5, \dots]$ and $\log_2\varphi = [0; 1, 2, 3, 1, 2, 3, 2,
+\dots]$. Convergents of the second are $1/1, 2/3, 7/10, 9/13, 25/36, 84/121, \dots$: 9/13 is why thirteen golden sixths
+nearly make nine octaves, and 25/36 is why 36-ET carries the golden chain so well. (The number $\varphi$ itself has the
+all-ones continued fraction $[1; 1, 1, \dots]$; that is a statement about $\varphi$, not about $\log_2\varphi$.)</p>
+</div>
+</section>
+
+<section id="golden-chords">
+<h2>Golden chords</h2>
+<div class="layer derive">
+<h3>D.6 Identities of the golden ratio</h3>
+<p>Let $\varphi = (1+\sqrt5)/2$ and $\psi = (1-\sqrt5)/2 = -1/\varphi$; both satisfy $x^2 = x + 1$. With the Fibonacci
+numbers $F_0 = 0, F_1 = 1, F_{n+1} = F_n + F_{n-1}$:</p>
+<p><b>Lemma.</b> $\varphi^n = F_n\varphi + F_{n-1}$ and $\psi^n = F_n\psi + F_{n-1}$ for $n \ge 1$; hence
+$F_{n+1} - F_n\varphi = \psi^n$.</p>
+<p><i>Proof.</i> Induction: $\varphi^{n+1} = F_n\varphi^2 + F_{n-1}\varphi = (F_n + F_{n-1})\varphi + F_n$. The same holds
+for $\psi$. Then $F_{n+1} - F_n\varphi = F_n + F_{n-1} - F_n\varphi = F_n(1 - \varphi) + F_{n-1} = F_n\psi + F_{n-1} = \psi^n$,
+using $1 - \varphi = \psi$. ∎</p>
+<p>In particular $\varphi^3 = 2\varphi + 1 = 2 + \sqrt5$, so $\varphi^{-3} = \sqrt5 - 2 \approx 0.23607$ and
+$\varphi^{-6} = (\sqrt5-2)^2 = 9 - 4\sqrt5 \approx 0.055728$. With $n = 6$: $13 - 8\varphi = \psi^6 = \varphi^{-6}$.</p>
+<p><b>Proposition (the golden seventh below the octave).</b> $8/\varphi^3 = 2 - 2\varphi^{-6}$.</p>
+<p><i>Proof.</i> Put $x = \varphi^{-3} = \sqrt5 - 2$. Then $x^2 + 4x - 1 = (9 - 4\sqrt5) + (4\sqrt5 - 8) - 1 = 0$, so
+$1 - x^2 = 4x$, i.e. $2 - 2x^2 = 8x$, which is the claim. ∎ Numerically $8/\varphi^3 = 1.8885438\ldots$ (1100.73 c), and the
+gap below the octave is $2\varphi^{-6} = 0.11146$. This is why a close golden seventh on harmonic tones beats at
+$2f_0\varphi^{-6}$ against the root's octave; the base beat $f_0(13 - 8\varphi) = f_0\varphi^{-6}$ comes from the Fibonacci
+approximation $13/8 \approx \varphi$. At $f_0 = 110$ Hz: $f_0\varphi^{-6}\times(1, 2/\varphi, 4/\varphi^2) = 6.13, 7.58,
+9.37$ Hz and $2f_0\varphi^{-6} = 12.26$ Hz. (The derivation of which partials beat is in
+<a href="ch:ch26#beats">Chapter 26</a>; the beat spectrum itself depends on the timbre and is a measurement.)</p>
+
+<h3>D.7 Golden intervals in 36-ET</h3>
+<p>The golden third $2/\varphi$ is 366.91 c, the golden fifth $4/\varphi^2$ 733.82 c, the golden seventh $8/\varphi^3$
+1100.73 c. 36-ET renders them as 11, 22 and 33 sixth-steps (366.67, 733.33 and 1100 c). Each golden third is 0.24 c wider
+than 11 sixth-steps, so the errors add up linearly: 0.24, 0.49 and 0.73 c. The 36-ET golden seventh is exactly the 12-ET
+major seventh.</p>
+
+<h3>D.8 The layer theorem</h3>
+<p><b>Theorem.</b> A golden triad $\{r, r+11, r+22\}$ has one note on each layer. A golden seventh $\{r, r+11, r+22, r+33\}$
+has its root and seventh on the root's layer and one note on each of the other two.</p>
+<p><i>Proof.</i> $\lambda$ is additive, $11 \equiv 2$, $22 \equiv 1$ and $33 \equiv 0 \pmod 3$, so the layers are
+$\lambda(r), \lambda(r)+2, \lambda(r)+1$ (all different) and, for the seventh, also $\lambda(r)$. ∎ A Western chord, built from
+multiples of 3 sixth-steps, lies on a single layer.</p>
+
+<h3>D.9 The averaging principle: uniqueness of the centroids</h3>
+<p>On a common root write triads as (third, fifth) in sixth-steps: major (12, 21), minor (9, 21), augmented (12, 24),
+diminished (9, 18).</p>
+<p><b>Proposition.</b> The only multisets of three of these triads whose average is golden (11, 22) are
+{major, minor, augmented} and {augmented, augmented, diminished}; the only ones whose average is silver (10, 20) are
+{major, minor, diminished} and {augmented, diminished, diminished}.</p>
+<p><i>Proof.</i> Golden needs third sum 33; the thirds are 12 or 9, so exactly two chords have third 12 (major or augmented)
+and one has third 9 (minor or diminished). The fifth sum must be 66. Listing the six cases: (maj, maj, min) 63; (maj, maj, dim)
+60; (maj, aug, min) 66; (maj, aug, dim) 63; (aug, aug, min) 69; (aug, aug, dim) 66. Silver needs third sum 30, so one chord
+from {maj, aug} and two from {min, dim}, and fifth sum 60: (maj, min, min) 63; (maj, min, dim) 60; (maj, dim, dim) 57;
+(aug, min, min) 66; (aug, min, dim) 63; (aug, dim, dim) 60. ∎</p>
+<p><b>Universality.</b> Every 36-ET pitch is an average of three 12-ET pitches: if $p = 3m + e$ with
+$e \in \{0, 1, 2\}$, then $p = (3m + 3m + (3m + 3e))/3$. Applied voice by voice, every 36-ET chord is an average of three
+12-ET chords, so the principle's musical content lies in averaging <i>related</i> chords.</p>
+
+<h3>D.10 The equal-third line</h3>
+<p>$T_n = (0, n, 2n)$ is affine in $n$, so $T_9$ (diminished), $T_{10}$ (silver), $T_{11}$ (golden), $T_{12}$
+(augmented) and $T_{13}$ (bronze) are equally spaced on one line, with $T_{n+1} - T_n = (0, 1, 2)$. Bronze is golden
+reflected through augmented: $2T_{12} - T_{11} = T_{13}$. Stacking thirds of $n$ sixth-steps returns after
+$36/\gcd(n, 36)$ notes: 4 for $n = 9$, 18 for 10, 36 for 11, 3 for 12, 36 for 13. Only 11 and 13 are coprime to 36, so only
+golden and bronze thirds pass through all 36 pitch classes.</p>
+</div>
+</section>
+
+<section id="passing">
+<h2>Passing harmony</h2>
+<div class="layer derive">
+<h3>D.11 Setting</h3>
+<p>A voicing in $v$ voices is $X \in \mathbb{Z}^v$ (sixth-steps); voice order is voice identity. A uniform stepwise path
+is $P_k = X + k\,d$, $k = 0, \dots, 3$, with $d \in \{-2, \dots, 2\}^v$, so $Y = X + 3d$ and each voice moves at most a
+whole tone. $P_k = ((3-k)X + kY)/3$. If $X$ is on layer 0, voice $i$ of $P_k$ is on layer $k d_i \bmod 3$; the residue of
+$d_i$ mod 3 is its <i>class</i>: hold (0), rising (+1, −2), falling (−1, +2). All triad results below are for three voices;
+the enumerations are in <code>reference/golden/classify.py</code> (sections A–G), and the extra checks named "new" were run
+for this book with the same definitions.</p>
+
+<h3>D.12 Admissibility and the four-path theorem</h3>
+<p><b>Admissibility.</b> If $P_k$ is a golden triad then $d$ has one voice in each class. <i>Proof.</i> The three notes of
+$P_k$ are on three different layers (D.8), and voice $i$ is on layer $k d_i$; since $k \in \{1, 2\}$ is invertible mod 3,
+the residues $d_i \bmod 3$ are all different. ∎</p>
+<p><b>Four-path theorem.</b> For each golden triad $G$ and $k \in \{1, 2\}$ there are exactly four $d$ with $X = G - kd$ on
+layer 0; all have three distinct pitch classes at both ends; the 288 resulting paths form 12 classes of 24 under semitone
+transposition and reversal. <i>Proof:</i> <a href="ch:ch27#four-path">Chapter 27</a>, Derive layer. In brief: the residue
+of each $d_i$ is forced; residue 0 allows only $d_i = 0$ and residues 1 and 2 allow two values each; distinctness follows
+because golden intervals ($\pm 11$, $\pm 14$ mod 36) cannot equal displacement differences of size at most 8; and no path is
+fixed by a non-trivial symmetry. (The count of 288 and the orbit size 24 both use the never-twice theorem, D.13, whose
+proof is independent: no path has golden chords at both positions, so each path is counted once and reversal really moves
+its golden chord to the other position.) Of the 288 paths, 240 have Western triads at both ends (one type ends on a suspended
+fourth) and 48 end on non-tertian sets (finite check: <code>classify.py</code> §A).</p>
+
+<h3>D.13 Never twice</h3>
+<p><b>Theorem.</b> No uniform stepwise path from a layer-0 chord in three voices has both passing chords golden.</p>
+<p><i>Proof.</i> Let $P_1 = G$ have root $r$, so voice $i$ is on layer $\lambda(g_i) \equiv d_i$, and $P_2 = G + d$ puts it
+on layer $2d_i \equiv -\lambda(g_i)$. If $P_2$ is golden with root $r'$, matching layers leaves three role assignments,
+each forcing one of $d_1 - d_0 \equiv 11$, $d_0 - d_1 \equiv 22$, $d_1 - d_2 \equiv 22 \pmod{36}$ (details in
+<a href="ch:ch27#partner">Chapter 27</a>). Since $|d_i - d_j| \le 4$, none holds. ∎</p>
+<p><b>Finite check.</b> <code>classify.py</code> §B finds 0 such paths among the 288. A new enumeration over every layer-0
+voicing in three voices and in four voices (doublings allowed, transposed so the first voice is C), every
+$d \in \{-2,\dots,2\}^v$, and golden triads <i>or</i> golden sevenths at both passing positions, also finds 0.</p>
+<p><b>In short:</b> the layers of the three voices are permuted between $P_1$ and $P_2$, so the voices would have to
+change roles, and every role change requires two voices' displacements to differ by 11 or 22 sixth-steps mod 36, far more
+than the at most 4 available.</p>
+
+<h3>D.14 The partner theorem</h3>
+<p><b>Theorem.</b> On the 240 Western-ended golden paths, the other passing chord is an equal-third triad: $T_{13}$ (bronze)
+in 168 paths and $T_{10}$ (silver) in 72; silver occurs exactly on the paths between augmented and diminished triads.
+<i>Proof.</i> By the four-path theorem it suffices to inspect the 10 Western-ended types of the table in
+<a href="ch:ch27#four-path">Chapter 27</a>: seven have a T13 partner and three (Caug → Cg → Cs → Cdim,
+Caug → ^Cg → vC♯s → C♯dim, Caug → vC♯g → ^C♯s → Ddim) a silver one. Each type has 24 paths. ∎ (Finite check:
+<code>classify.py</code> §C.)</p>
+
+<h3>D.15 The quality theorem and the root rules</h3>
+<p><b>Theorem.</b> Over all ordered pairs of distinct major or minor triads, a uniform stepwise three-voice path (any
+assignment of chord tones to voices) has a golden passing chord exactly for the 144 pairs of the same quality whose roots
+are 3, 4 or 5 semitones apart in either direction, and then for exactly one golden chord, placed as follows. Major pairs:
+on the root lying a third or a fourth above the other, shifted 0 (major third), ^ (minor third) or v (fourth), nearer that
+chord. Minor pairs: on the root lying a third or a fourth below the other, shifted 0 (fourth), v (major third) or vv (minor
+third), nearer that chord.</p>
+<p><i>Status:</i> established by finite check, in two independent ways. (1) From the 12-type table: the six rows with
+major or minor triads at both ends are C → A♭, C → A, C♯ → A♭ (major; roots a major third, minor third, fourth apart) and
+Cm → Fm, C♯m → Em, C♯m → Fm (minor; fourth, minor third, major third). Each row is an orbit of 24 ordered pairs, giving
+144, and the golden roots in the rows (Cg, ^Cg, vC♯g; Cg, ^Cg, vC♯g at position 1) are the root rules for those six
+relations; reversal moves the chord to position 2, keeping it "nearer" the same triad. Because every golden path appears in
+the table, no other pair has one. (2) A direct enumeration of all $24 \cdot 23 = 552$ ordered pairs of major and minor
+triads, all voice assignments, all $d$ and both positions, found exactly 144 pairs with a golden passing chord, all of the
+same quality with roots 3, 4 or 5 semitones apart, each with exactly one golden chord (new check; it agrees with
+<code>classify.py</code> §E on the major and minor pairs among the 68 listed there).</p>
+<p><b>Equivalent form.</b> The 144 pairs are exactly the pairs of triads two neo-Riemannian moves apart. From C major the
+six two-move compositions give PL: A♭, PR: E♭, LP: E, LR: G, RP: A, RL: F, the six major triads whose roots lie 3, 4 or 5
+semitones from C, and by the P/L/R symmetry between major and minor the same holds for minor triads; $24 \times 6 = 144$.</p>
+<p><b>Golden sevenths (finite check).</b> With four voices, 96 uniform paths join Western chords through a golden seventh,
+in 4 types up to transposition and reversal (<code>classify.py</code> §D; $4 \times 24 = 96$).</p>
+
+<h3>D.16 The asymmetry theorem</h3>
+<p><b>Theorem.</b> No uniform stepwise path in three voices between two different golden triads has a single-layer passing
+chord. In particular no path golden → Western → golden exists.</p>
+<p><i>Proof (new).</i> Let $G$ have root $r$ and let $P_k = G + kd$ be single-layer, on layer $L$. Then
+$\lambda(g_i) + k d_i \equiv L$ for every voice, so the $d_i$ have three different residues mod 3. The end chord
+$G' = G + 3d$ keeps every voice on its layer. If $G'$ is a golden triad with root $r'$, its root, third and fifth lie on
+layers $r'$, $r'+2$, $r'+1$, and since layers are preserved, either (a) $r' \equiv r$ and each voice keeps its role, which
+gives $3d_0 = 3d_1 = 3d_2 \pmod{36}$, hence $d_0 = d_1 = d_2$; or (b) $r' \equiv r+1$: the fifth voice becomes the root, the
+root voice the third and the third voice the fifth, which gives $3(d_0 - d_2) \equiv 33$ and $3(d_1 - d_2) \equiv 33$, so
+$d_0 = d_1 = d_2 - 1$; or (c) $r' \equiv r + 2$: the third voice becomes the root and the fifth voice the third, giving
+$d_2 = d_1$. In every case two of the $d_i$ are equal, contradicting the three different residues. ∎</p>
+<p><b>Finite check.</b> <code>classify.py</code> §G finds 0 paths golden → Western → golden. A new enumeration also finds
+0 single-layer passing chords between distinct golden triads, and 0 Western passing chords on four-voice uniform paths
+between golden sevenths (and golden triads with a doubled voice).</p>
+
+<h3>D.17 System 2: layer patterns and the half-step theorem</h3>
+<p><b>Schedules.</b> On a natural path a half step is 1 + 1 + 1, and a whole step is any $(a, b, c)$ with entries in
+$\{0, 1, 2, 3\}$ summing to 6 (ten schedules). The layer pair at $(P_1, P_2)$ of a rising whole step is
+$(a \bmod 3, (a+b) \bmod 3)$, which takes every value except $(1, 2)$: that pair needs $a = 1$ and $a+b \in \{2, 5\}$, but
+$c = 6 - a - b \le 3$ forces $a + b \ge 3$, so $b = 4$, impossible. A falling whole step misses $(2, 1)$.</p>
+<p><b>Half-step theorem.</b> If every voice moves $+3$ (or every voice $-3$), $P_k = X \pm k$ is $X$ planed, single-layer,
+not golden. <b>Lemma.</b> If two voices of different pitch class both move $+3$ (or both $-3$), neither passing chord is a
+golden triad; it can be a golden seventh only if the two voices are 3 (equivalently 33) sixth-steps apart. <i>Proofs:</i>
+<a href="ch:ch28#half-step">Chapter 28</a>, Derive layer.</p>
+<p><b>Finite check (new).</b> For every ordered pair of triads with qualities in {major, minor, diminished, augmented} and
+roots a semitone apart, all three-voice assignments (doublings allowed), stepwise displacements and System 2 schedules
+were enumerated. No pair of major or minor triads has a golden passing chord; some pairs involving a diminished or
+augmented triad do (for example Bdim → C through vCg). Allowing every voice to move up to three semitones (split
+3 + 3 + 3) gives the same answer for major and minor pairs.</p>
+
+<h3>D.18 What the census is</h3>
+<p>The dictionary numbers (870 ordered pairs; System 1: 32 exact golden chords and 122 over a pedal; System 2: 227 and 299;
+46 pairs with two different golden chords; 181 with at least one) count the four-part realizations produced by
+<code>reference/golden/dictionary.py</code> under its stated voicing and preference rules. They are exact counts of that
+model, reproducible by rerunning it, but they are not theorems about all voicings.</p>
+</div>
+</section>
+
+<section id="z36">
+<h2>Z36</h2>
+<div class="layer derive">
+<h3>D.19 Subgroups and layers</h3>
+<p>$\mathbb{Z}_{36}$ is cyclic, so it has exactly one subgroup of each order $d$ dividing 36, namely
+$\langle 36/d \rangle$. The orders are 1, 2, 3, 4, 6, 9, 12, 18, 36. The subgroup $\langle 3 \rangle$ of order 12 is
+12-ET; its three cosets $3\mathbb{Z}_{36}$, $1 + 3\mathbb{Z}_{36}$, $2 + 3\mathbb{Z}_{36}$ are the three layers, and
+$\lambda$ is the quotient map $\mathbb{Z}_{36} \to \mathbb{Z}_{36}/\langle 3\rangle \cong \mathbb{Z}_3$.
+(<a href="ch:appA#groups">Appendix A</a> reviews groups and cosets.)</p>
+
+<h3>D.20 Units and multiplication maps</h3>
+<p>The units of $\mathbb{Z}_{36}$ (residues coprime to 36) are 1, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35: twelve of them.
+By the Chinese remainder theorem $\mathbb{Z}_{36} \cong \mathbb{Z}_4 \times \mathbb{Z}_9$, so the unit group is
+$\mathbb{Z}_4^\times \times \mathbb{Z}_9^\times \cong \mathbb{Z}_2 \times \mathbb{Z}_6$. Multiplicative orders:</p>
+<table>
+<tr><th>unit</th><td>1</td><td>5</td><td>7</td><td>11</td><td>13</td><td>17</td><td>19</td><td>23</td><td>25</td><td>29</td><td>31</td><td>35</td></tr>
+<tr><th>order</th><td>1</td><td>6</td><td>6</td><td>6</td><td>3</td><td>2</td><td>2</td><td>6</td><td>3</td><td>6</td><td>6</td><td>2</td></tr>
+</table>
+<p>For a unit $u$, $M_u(p) = up$ is an automorphism of $\mathbb{Z}_{36}$ and maps pitch-class sets to pitch-class sets of the
+same size.</p>
+<ul>
+<li>$M_{11}\{0, 1, 2\} = \{0, 11, 22\}$: the sixth-step cluster becomes the golden triad Cg.</li>
+<li>$M_{13}\{0, 1, 2\} = \{0, 13, 26\}$: the cluster becomes the bronze triad.</li>
+<li>In $\mathbb{Z}_{12}$, $M_7\{0, 1, 2\} = \{0, 7, 14\} = \{0, 2, 7\}$.</li>
+<li>$11^2 = 121 \equiv 13$, $11^3 \equiv 13 \cdot 11 = 143 \equiv 35 = -1$, so $M_{11}^2 = M_{13}$, $M_{11}^3$ is the
+inversion $p \mapsto -p$, and $M_{11}$ has order 6. $13^2 = 169 \equiv 25$ and $13^3 \equiv 1$: $M_{13}$ has order 3. (New
+observations, checked by computation.)</li>
+<li>Because $11 \cdot 3 = 33 \equiv -3$, $M_{11}$ acts on the 12-ET layer as inversion: it sends C major $\{0, 12, 21\}$ to
+$\{0, 24, 15\}$ = F minor. Because $13 \cdot 3 = 39 \equiv 3$, $M_{13}$ fixes every 12-ET pitch class. On layers,
+$\lambda(11p) = 2\lambda(p)$ (swapping layers 1 and 2) and $\lambda(13p) = \lambda(p)$. (New observations.)</li>
+<li>Since $11 \cdot 13 \equiv -1$, $M_{11}$ sends bronze to the inverted cluster: $M_{11}\{0, 13, 26\} = \{0, 35, 34\}$.</li>
+</ul>
+
+<h3>D.21 The golden chain is a 36-tone row</h3>
+<p>The golden sixth is 25 sixth-steps, and 25 is a unit, so $k \mapsto 25k$ $(k = 0, \dots, 35)$ is a bijection of
+$\mathbb{Z}_{36}$: the golden chain visits every pitch class once, a 36-tone row (<a href="ch:ch33#rows-36">Chapter 33</a>).
+It begins 0, 25, 14, 3, 28, 17, 6, 31, 20, 9, 34, 23, 12, that is C, ^A♭, vF, C♯, ^A, vF♯, D, ^B♭, vG, E♭, ^B, vA♭, E.
+Since $25 \equiv -11$, the chain of golden sixths is the chain of golden thirds read backwards, and the golden circle
+$G_r \to G_{r+11}$ visits all 36 golden triads because $\gcd(11, 36) = 1$.</p>
+</div>
+</section>

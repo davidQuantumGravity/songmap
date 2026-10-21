@@ -1,0 +1,31 @@
+# ch31: one tonic of the Well-Tempered Golden Clavier, slowed down: C major and C minor with
+# strict (System 1) passing chords, then C golden13 (circle steps, breathing, a brief C major
+# visit) and C silver13 (silver triads with a minor visit). Same templates as golden_audio W1.
+songmap: 0.2
+title: "A Golden Clavier miniature"
+tempo: 100
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 315
+tail_seconds: 3
+instruments:
+  chords: clean/keys
+  low: clean/bass
+  bell: clean/glass
+harmony:
+  progressions:
+    major: "C:0.375 ~:0.25 F:0.25 ~:0.25 G:0.375 ~:0.25 C:0.25"
+    minor: "Cm:0.375 ~:0.25 Fm:0.25 ~:0.25 G:0.375 ~:0.25 Cm:0.25"
+    gold: "Cg:0.375 vEg:0.25 ^Gg:0.25 Cg7:0.25 ^Abg:0.25 vFg:0.25 C:0.125 Cg:0.25"
+    silver: "Cs:0.25 C#s:0.25 Ds:0.25 ^Ebs:0.25 ^Es:0.25 Cm:0.25 Cs:0.5"
+mix:
+  chords: {gain_db: -6, send: {hall: 0.2}}
+  low: {gain_db: -5}
+  bell: {gain_db: -9, send: {hall: 0.3}}
+sections:
+  - {name: major, bars: 2, harmony: major, parts: {chords: comp, low: bassline}}
+  - {name: minor, bars: 2, harmony: minor, parts: {chords: comp, low: bassline}}
+  - {name: golden13, bars: 2, harmony: gold, parts: {chords: comp, low: bassline, bell: top}}
+  - {name: silver13, bars: 2, harmony: silver, parts: {chords: comp, low: bassline, bell: top}}
+master: clean

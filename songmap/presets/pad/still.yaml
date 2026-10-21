@@ -1,0 +1,4 @@
+instrument: pad
+description: "Single-voice warm pad: no unison detune, drift or filter LFO (no wobble)"
+tags: [pad, stable, 36edo]
+params: {voices: 1, detune: 0, drift: 0, lfo_depth: 0, rr: 0, cutoff: 1500, attack: 0.6, release: 1.4}

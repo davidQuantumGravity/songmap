@@ -1,0 +1,20 @@
+# ch33: the golden chain as a 36-tone row (pitch class 25j mod 36, j = 0..35), every pitch
+# class once, kept between C4 and C5. Every three consecutive notes form a golden triad; the
+# twelve discrete trichords are the golden triads vFg, vF#g, ... vEg, held underneath.
+songmap: 0.2
+title: "The golden chain as a 36-tone row"
+tempo: 96
+meter: "3/4"
+key: "C major"
+tuning: 36edo
+seed: 333
+tail_seconds: 3
+instruments: {bell: clean/glass, gorg: {use: clean/organ, spectrum: 1}}
+motifs:
+  row: {notes: "c8 ^ab vf c# ^a vf# | d ^bb vg eb ^b vab | e ^c va f ^c# vbb | f# ^d vb g ^eb vc+ | ab ^e vc# a ^f vd | bb ^f# veb b ^g ve", octave: 4}
+mix:
+  bell: {gain_db: -4, send: {hall: 0.2}}
+  gorg: {gain_db: -14, send: {hall: 0.2}}
+sections:
+  - {name: row, bars: 6, harmony: "vFg:0.5 vF#g:0.5 vGg:0.5 vAbg:0.5 vAg:0.5 vBbg:0.5 vBg:0.5 vCg:0.5 vC#g:0.5 vDg:0.5 vEbg:0.5 vEg:0.5", parts: {bell: {motifs: [row]}, gorg: hold}}
+master: clean

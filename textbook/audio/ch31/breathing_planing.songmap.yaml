@@ -1,0 +1,20 @@
+# ch31: breathing (Cg - Cg7 - vEg - vEg7 - ^Gg: add the next chain tone, then drop the oldest)
+# and planing (Cg - ^Cg - vC#g - C#g: every voice up one sixth-step at a time).
+songmap: 0.2
+title: "Breathing and planing"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 312
+tail_seconds: 4
+instruments:
+  gpad: clean/golden_pad
+  bell: clean/glass
+mix:
+  gpad: {gain_db: -6, send: {hall: 0.3}}
+  bell: {gain_db: -10, send: {hall: 0.35}}
+sections:
+  - {name: breathing, bars: 5, harmony: "Cg:1 Cg7:1 vEg:1 vEg7:1 ^Gg:1", parts: {gpad: hold}}
+  - {name: planing, bars: 4, harmony: "Cg:1 ^Cg:1 vC#g:1 C#g:1", parts: {gpad: hold, bell: top}}
+master: clean

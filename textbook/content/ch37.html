@@ -1,0 +1,444 @@
+<p>Chapters 34 and 35 changed keys, by golden intervals (<a href="ch:ch34">Chapter 34</a>) and through golden pivot
+chords (<a href="ch:ch35">Chapter 35</a>), and <a href="ch:ch36">Chapter 36</a> built the golden scales and their modes. This chapter
+collects five <b>textures</b> that blend golden and Western harmony inside a phrase: planing, pedals and drones, approach
+chords, sequences and passing keys. Each has a Western ancestor, from Debussy's parallel chords and the bagpipe drone to the
+Neapolitan sixth and Coltrane's major-third cycle, and each is tested here by the same standard as the rest of the book.
+Some results are theorems (golden planing is exactly three-key polytonality; there is no golden augmented sixth), some are
+measurements in the roughness model, and several are negative: the golden escalator does not work as a pair of passing keys, no
+golden7 scale lies between C major and ^C major, and canon at the golden third rarely sounds golden. The framing is the book's throughout (<a href="ch:ch26#timbre-flip">Chapter
+26</a>, <a href="ch:ch31#asymmetry">Chapter 31</a>): every example is played on harmonic tones, C major is the deepest rest
+there is, and arriving on it from golden harmony is release. The golden triad is, in the author's model and listening
+experience, a delicate local minimum; the roughness models on harmonic tones do not show that minimum, and this chapter says
+so wherever it measures. Embellishing chords (golden appoggiaturas, suspensions, neighbour and escape chords) are the subject of
+<a href="ch:ch39">Chapter 39</a>.</p>
+
+<section id="golden-planing">
+<h2>Golden planing and three-key polytonality</h2>
+<div class="layer hear">
+<p>Debussy's <b>planing</b> doubles a melody with a chord that moves in parallel with it, like a line drawn with a broad
+brush (<a href="ch:ch22#impressionism">Chapter 22</a>). Do the same with a golden triad: put a golden triad on every note of
+a C major scale, each the same exact shape. Then listen to the result in a second way. Take a short tune in C major, play it
+alone, add a copy of it a golden third higher, and then a second copy a golden fifth higher. Each copy, heard alone, is an
+ordinary major-key melody. Together they sound a golden triad on every note.</p>
+<audio-ex src="golden_planing" caption="The C major scale descending in parallel golden triads, released onto C major; then a tune in C major alone, with its copy in vE major (golden thirds), and with a third copy in ^G major: three plain melodies in three keys that share no note, sounding golden triads together, and a final C major chord."></audio-ex>
+<p>The texture is simple and the explanation is clean, which is why the technique ranks well among the blending methods of
+this Part: golden planing is <b>polytonality</b>, music in several keys at once, and it is polytonality of an extreme kind,
+because the three keys cannot share a single note.</p>
+</div>
+<div class="layer understand">
+<p><b>Golden planing</b> harmonizes every note $x$ of a line with the golden triad $\{x, x+11, x+22\}$ (in sixth-steps), the
+melody in the root. On the C major scale:</p>
+<table>
+<caption>Parallel golden triads on the C major scale (melody in the root)</caption>
+<tr><th>Melody</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>A</th><th>B</th></tr>
+<tr><th>Chord</th><td>Cg</td><td>Dg</td><td>Eg</td><td>Fg</td><td>Gg</td><td>Ag</td><td>Bg</td></tr>
+<tr><th>Third (+11)</th><td>vE</td><td>vF♯</td><td>vG♯</td><td>vA</td><td>vB</td><td>vC♯</td><td>vD♯</td></tr>
+<tr><th>Fifth (+22)</th><td>^G</td><td>^A</td><td>^B</td><td>^C</td><td>^D</td><td>^E</td><td>^F♯</td></tr>
+</table>
+<pianoroll edo="36" notes="C5 vE5 ^G5 ; B4 vD#5 ^F#5 ; A4 vC#5 ^E5 ; G4 vB4 ^D5 ; F4 vA4 ^C5 ; E4 vG#4 ^B4 ; D4 vF#4 ^A4 ; C4 vE4 ^G4 ; C4 E4 G4" labels="Cg ; Bg ; Ag ; Gg ; Fg ; Eg ; Dg ; Cg ; C" title="The scale planed in golden triads, then release onto C major"></pianoroll>
+<p>Now read the rows of the table instead of the columns. The third row is vE vF♯ vG♯ vA vB vC♯ vD♯: the <b>vE major</b>
+scale, the major scale a golden third (11 sixth-steps, 366.67 c in 36-ET) above C, all of it on the v layer. The fourth row is the <b>^G major</b> scale,
+a golden fifth above C, all of it on the ^ layer. So planing a C major line in golden triads is the same as playing it at once
+in three keys, one per layer:</p>
+<table>
+<caption>The three keys of golden planing (computed)</caption>
+<tr><th>Voice</th><th>Key</th><th>Notes</th><th>Layer</th></tr>
+<tr><td>root</td><td>C major</td><td>C D E F G A B</td><td>12-ET</td></tr>
+<tr><td>third</td><td>vE major</td><td>vE vF♯ vG♯ vA vB vC♯ vD♯</td><td>v</td></tr>
+<tr><td>fifth</td><td>^G major</td><td>^G ^A ^B ^C ^D ^E ^F♯</td><td>^</td></tr>
+</table>
+<p>The three keys share no note pairwise and together use 21 of the 36 pitch classes. The 15 they leave out are, on each layer,
+the five notes outside its key: C♯ E♭ F♯ A♭ B♭ on the 12-ET layer, and their counterparts on the other two (vD vF vG vB♭ vC
+and ^C♯ ^E♭ ^F ^A♭ ^B♭). Each key is the "white keys" of its own layer.</p>
+<pc-circle edo="36" marks="0 6 12 15 21 27 33 11 17 23 26 32 2 8 22 28 34 1 7 13 19" title="The 21 notes of golden planing: C major, vE major and ^G major, one key per layer"></pc-circle>
+<p>In the tune of the example, the C major melody E G A G E D C D C is answered, note against note, by vG♯ vB vC♯ vB … in vE
+major and ^B ^D ^E ^D … in ^G major, and the verticals are Eg, Gg, Ag, Gg, Eg, Dg, Cg, Dg, Cg:</p>
+<pianoroll edo="36" notes="E4 vG#4 ^B4 ; G4 vB4 ^D5 ; A4 vC#5 ^E5 ; G4 vB4 ^D5 ; E4 vG#4 ^B4 ; D4 vF#4 ^A4 ; C4 vE4 ^G4 ; D4 vF#4 ^A4 ; C4 vE4 ^G4" labels="Eg ; Gg ; Ag ; Gg ; Eg ; Dg ; Cg ; Dg ; Cg" title="Three melodies, three keys: C major (low), vE major (middle), ^G major (top)"></pianoroll>
+<h3>Western planing and Western polytonality</h3>
+<p>Western chromatic planing works the same way, with a difference that is the whole point. Parallel major triads on a C major
+line put the third in E major and the fifth in G major. But those keys overlap heavily: C and E major share 3 notes, C and G
+major 6, E and G major 4, and the three lines together use 11 of the 12 pitch classes (computed). The ear hears one blurred key,
+not three. In 36-ET the keys are on three different layers and cannot overlap at all, so golden planing is three-key
+polytonality in the strictest sense.</p>
+<p>Polytonality has a Western history of its own. The bitonal Petrushka chord, C major against F♯ major
+(<a href="ch:ch22#bartok-stravinsky">Chapter 22</a>), is its best-known emblem, and Darius Milhaud (1892–1974) made
+simultaneous keys a hallmark of his style from around 1920. Western bitonality often chooses keys far apart on the circle of
+fifths, such as Petrushka's tritone, so that they share few notes. Golden planing gets three keys that share none, and the price of their combination is predictable: every
+vertical is the same chord shape.</p>
+<h3>Melody on top</h3>
+<p>With the melody in the top voice (as the fifth of each chord), the roots are $x - 22$: vFg, vGg, vAg, vB♭g, vCg, vDg, vEg
+under C, D, E, F, G, A, B. The two lower lines are then in vF major and ^A♭ major, the keys a golden fifth and a golden third
+<i>below</i> C (computed). Any 12-ET scale can be planed this way: the rule is a theorem about layers, not about the major scale.</p>
+<p><b>Roughness</b> (<i>measurement</i>, close position on each degree from C4, harmonic partials 1–8). All golden triads are
+the same shape, so in the model their roughness changes only with register: Cg 1.498, Dg 1.402, Eg 1.321, Fg 1.284, Gg 1.220,
+Ag 1.166, Bg 1.120, falling as the chords rise. The diatonic triads on the same roots measure C 1.319, Dm 1.238, Em 1.149,
+F 1.090, G 1.020, Am 0.977 and Bdim 1.201: the golden version is rougher on every degree except the seventh. A golden-planed
+passage is a band of constant colour, as Debussy's chromatic planing is, and like it, it ends best on a Western chord: in the
+example the final Cg opens onto C major, the release.</p>
+<aside class="box note"><b>Canon at the golden third: a negative result.</b> Polytonality in time instead of at once does not
+work. Let a follower repeat a stepwise C major leader 11 sixth-steps higher, one note behind. The vertical interval is then
+11 minus the leader's last step: 17, 14, 11, 8 or 5 sixth-steps for steps of −6, −3, 0, +3 and +6. Only a repeated note gives a
+golden third (11); a falling semitone gives 14, the octave complement of the golden fifth; the whole steps give 5 and 17, which
+are no golden intervals. Canon (<a href="ch:ch15#imitation">Chapter 15</a>) needs the follower's notes to fit against the
+leader's <i>later</i> notes, and the golden third is not an interval a stepwise line can echo. <i>Status:</i> theorem; ranked
+last of the techniques in <code>GOLDEN_BLENDING.md</code>.</aside>
+<div class="exercise"><p><b>Exercise 37.1.</b> Plane a C major line with golden triads, but with the melody in the <i>third</i>
+of each chord. In which keys are the root line and the fifth line?</p>
+<details class="answer"><summary>Answer</summary><p>With $x$ the third, the root is $x - 11 \equiv x + 25$ and the fifth is
+$x + 11$. So the root line is in ^A♭ major (25 sixth-steps above C) and the fifth line in vE major. The three keys ^A♭, C and
+vE major again lie on three layers (1, 0, 2) and share no note.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Theorem (golden planing is three-key polytonality).</b> Let $K \subset \mathbb{Z}_{36}$ be any scale on the 12-ET layer
+(all its pitch classes $\equiv 0 \pmod 3$). Planing a line in $K$ in golden triads with the melody in the root puts the three
+voices in $K$, $K + 11$ and $K + 22$. These sets are pairwise disjoint and $|K \cup (K+11) \cup (K+22)| = 3|K|$; for C major,
+21. <i>Proof.</i> The voice $x + 11$ is in $K + 11$ and $x + 22$ in $K + 22$ by definition. Since $11 \equiv 2$ and
+$22 \equiv 1 \pmod 3$, the three sets lie in the three different cosets of $3\mathbb{Z}_{36}$ (the layers), so they cannot
+meet. ∎ This is the layer theorem (<a href="ch:ch25#layer-theorem">Chapter 25</a>) read horizontally: a golden triad has one
+note on each layer, so a stream of golden triads is three streams, one per layer.</p>
+<p><b>The Western comparison.</b> For a 12-ET scale $K$, $|K \cap (K + t)|$ is the number of times the interval $t$ occurs in
+$K$, read from its interval vector (<a href="ch:ch20#interval-vectors">Chapter 20</a>). The diatonic vector is
+$\langle 2, 5, 4, 3, 6, 1\rangle$, so C major meets E major ($t = 4$ semitones) in 3 notes, G major ($t = 7$, interval class 5)
+in 6, and E meets G major ($t = 3$) in 4. In $\mathbb{Z}_{36}$ the transpositions by 11 and 22 are not multiples of 3, and every
+such intersection is empty.</p>
+<p><b>Exact tuning.</b> In exact golden tuning the three lines lie a golden third $2/\varphi$ (366.91 c) and a golden fifth
+$4/\varphi^2$ (733.82 c) above the melody; 36-ET renders them as 366.67 c and 733.33 c. The keys vE and ^G major are then not
+12-ET major scales shifted by sixth-steps but the C major scale multiplied by $2/\varphi$ and $4/\varphi^2$, still disjoint
+from C major and from each other.</p>
+</div>
+</section>
+
+<section id="pedals-drones">
+<h2>Golden pedals, Western drones</h2>
+<div class="layer hear">
+<p>A <b>pedal point</b> is a note held, usually in the bass, while the chords above it change
+(<a href="ch:ch12#nonchord">Chapter 12</a>); a <b>drone</b> is a pedal that never stops, like the bagpipe's. Hold a low C and
+ask which golden chords can stand on it. There are exactly three, and they are neighbours on the golden circle, so the
+harmony above the pedal can walk back and forth along the circle while the bass stays put.</p>
+<audio-ex src="golden_pedal" caption="A low C held throughout. First the three golden triads that contain C: Cg, ^A♭g, vFg. Then a phrase: C – Cg – ^A♭g – vFg – ^A♭g – Cg – C, one voice moving a semitone at each change between golden chords, and the release onto C major over the same pedal."></audio-ex>
+<p>The opposite experiment holds a golden chord as a drone and plays Western chords above it. Listen to the same simple
+progression twice, first over a C major drone, then over a Cg drone, and to the return of the C major drone at the end.</p>
+<audio-ex src="western_drone" caption="C – Am – F – G – C over a sustained C major chord (C3 E3 G3), then the same over a sustained Cg (C3 vE3 ^G3), then C major over C major. Listen for the extra shimmer the golden drone adds to every chord, and for the rest when the C major drone returns."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>Every note lies in three golden triads</h3>
+<p>C is the root of Cg = C vE ^G, the third of ^A♭g = ^A♭ C vE and the fifth of vFg = vF ^A♭ C. No other golden triad
+contains it. On the golden circle (<a href="ch:ch31#circle">Chapter 31</a>) these three chords sit at positions 0, −1 and −2:
+consecutive. So a C pedal supports exactly one golden progression, the walk Cg ↔ ^A♭g ↔ vFg, with one voice moving a
+semitone at each step (vE ↔ vF and ^G ↔ ^A♭). All three chords belong to C golden7, and together they use the five notes
+vF ^A♭ C vE ^G, the middle five of the golden chain (chain positions −2 to +2).</p>
+<pianoroll edo="36" notes="C3 C4 vE4 ^G4 ; C3 C4 vE4 ^Ab4 ; C3 C4 vF4 ^Ab4 ; C3 C4 E4 G4" labels="Cg ; ^A♭g/C ; vFg/C ; C" title="The three golden triads over a C pedal, then C major"></pianoroll>
+<p>In Western harmony a held C lies in six consonant triads, C, F and A♭ major and C, F and A minor, so a Western pedal is
+far more permissive. A Western <i>open-fifth</i> drone C–G, the bagpipe's, supports no golden triad at all: C and G are both on
+the 12-ET layer, and a golden triad has only one note there. A golden dyad drone is more selective in the other direction:
+C–vE lies in two golden triads (Cg and ^A♭g), C–^G only in Cg (computed).</p>
+<table>
+<caption>Roughness with a C3 pedal under close root-position triads from C4 (harmonic tones; <i>measurement</i>)</caption>
+<tr><th>Chord</th><th>C</th><th>F/C</th><th>Am/C</th><th>A♭/C</th><th>Fm/C</th><th>Cg</th><th>^A♭g/C</th><th>vFg/C</th><th>vEg (no C)</th></tr>
+<tr><th>Triad alone</th><td>1.319</td><td>1.090</td><td>0.977</td><td>0.989</td><td>1.109</td><td>1.498</td><td>1.183</td><td>1.296</td><td>1.333</td></tr>
+<tr><th>With C3 pedal</th><td>1.956</td><td>1.859</td><td>1.489</td><td>1.605</td><td>1.901</td><td>2.292</td><td>1.733</td><td>2.145</td><td>2.312</td></tr>
+</table>
+<p>Each triad is in close root position with its root between C4 and B4 (so F/C is F4 A4 C5); the pedal is C3. The golden chords
+that contain C all measure smoother over the pedal than vEg, which does not contain it. Register matters: ^A♭g/C, voiced
+^A♭4 C5 vE5, lies higher than the others and measures 1.733, below C major's 1.956. The fair comparison is root position on
+the same root, C over its own pedal (1.956) against Cg over it (2.292).</p>
+<h3>Western chords over a golden drone</h3>
+<p>Now reverse the roles. Hold Cg in the low register (C3 vE3 ^G3) and play the triads of C major above it, in close root
+position from C4. Every Western triad measures rougher over the golden drone than over a C major drone (C3 E3 G3):</p>
+<pianoroll edo="36" notes="C3 E3 G3 C4 E4 G4 ; C3 vE3 ^G3 C4 E4 G4 ; C3 E3 G3 B3 D4 G4 ; C3 vE3 ^G3 B3 D4 G4" labels="C / C drone ; C / Cg drone ; G / C drone ; G / Cg drone" title="Two drones under the same Western chords (voicings of the audio example)"></pianoroll>
+<table>
+<caption>Western triads over two drones (harmonic tones; <i>measurement</i>)</caption>
+<tr><th>Triad</th><th>C</th><th>Dm</th><th>Em</th><th>F</th><th>G</th><th>Am</th><th>B°</th></tr>
+<tr><th>Over C major drone</th><td>6.141</td><td>7.136</td><td>5.447</td><td>6.236</td><td>4.908</td><td>5.155</td><td>5.144</td></tr>
+<tr><th>Over Cg drone</th><td>7.130</td><td>7.482</td><td>6.451</td><td>6.417</td><td>5.783</td><td>5.594</td><td>5.560</td></tr>
+<tr><th>Difference</th><td>0.99</td><td>0.35</td><td>1.00</td><td>0.18</td><td>0.88</td><td>0.44</td><td>0.42</td></tr>
+</table>
+<p>The excess runs from 0.18 (F, which shares C with the drone and has no E or G to clash with vE and ^G) to 1.00 (E minor, whose
+E and G sit a sixth-step from the drone's vE and ^G). In the voicing of the audio example (C4 E4 G4, C4 E4 A4, C4 F4 A4, B3 D4 G4),
+the excess is 0.99, 0.72, 0.28 and 0.89. The two drones alone measure 2.344 (C major) and 2.477 (Cg) at C3. All values are
+counted over every pair of partials of all six notes; octave doublings between drone and chord (C3 and C4) are counted as
+separate notes.</p>
+<p>So a golden drone colours a Western progression at a measurable cost on harmonic instruments. That is the framing of this
+book, not a defect of the technique: C major is the deepest rest, and a Western chord over a golden drone is a Western chord
+<i>tinted</i>, not a Western chord made more stable. The example ends by restoring the C major drone, and the ear hears that as
+arrival. On the digital golden spectrum the order reverses (<i>measurement</i>, laboratory only): with partials $2^m\varphi^n$
+for every note, each triad of C major measures smoother over the Cg drone than over the C major drone, by 0.55 (Em) to 1.36
+(F). The laboratory is a place to learn the golden drone's colour on its own terms; the harmonic numbers are what real
+instruments give.</p>
+<div class="exercise"><p><b>Exercise 37.2.</b> Which three golden triads contain vE, and where are they on the golden circle
+relative to Cg?</p>
+<details class="answer"><summary>Answer</summary><p>$r \in \{11, 11 - 11, 11 - 22\} = \{11, 0, 25\}$: vEg (vE is its root),
+Cg (third) and ^A♭g = ^A♭ C vE (fifth). Their circle positions are +1, 0 and −1: again three consecutive chords, now centred
+on Cg.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Theorem (three golden chords per pedal).</b> Every pitch class $x$ lies in exactly three golden triads, $G_x$, $G_{x-11}$
+and $G_{x-22}$, which are consecutive on the golden circle. <i>Proof.</i> $x \in G_r = \{r, r+11, r+22\}$ iff
+$r \in \{x, x - 11, x - 22\}$, three distinct roots. The circle position of $G_r$ is $p(r) \equiv 23r$ (since
+$11 \cdot 23 = 253 \equiv 1 \pmod{36}$), and $p(r - 11) = p(r) - 253 \equiv p(r) - 1$. So the three positions are $p$, $p-1$,
+$p-2$. ∎</p>
+<p><b>Corollary (dyads).</b> Two notes lie together in a golden triad only if they differ by $\pm 11$ or $\pm 22$. A difference
+of $\pm 11$ is either root–third or third–fifth, so the dyad lies in two golden triads; a difference of $\pm 22$ is only
+root–fifth, so it lies in one. Two notes on the same layer differ by a multiple of 3 and lie in none: a Western drone of any
+interval excludes every golden triad.</p>
+<p><b>The model.</b> Sethares roughness with harmonic partials $k = 1, \dots, 8$ at amplitudes $0.88^{k-1}$, summed over all pairs of partials of
+all sounding notes (<code>reference/golden/blending.py</code> §16, the model of <code>explore.py</code>). The golden-spectrum
+comparison uses partials $2^m\varphi^n &lt; 9$ ($m, n &lt; 4$) with the same amplitude law. The numbers depend on register
+and voicing.</p>
+</div>
+</section>
+
+<section id="approach">
+<h2>Approach chords: the golden Neapolitan</h2>
+<div class="layer hear">
+<p>Western harmony approaches its goals by semitones. The Neapolitan sixth puts D♭ above the bass and lets it fall to the
+leading tone; augmented sixth chords push two voices a semitone outward onto an octave
+(<a href="ch:ch18#chromaticism">Chapter 18</a>). A golden triad can be approached by semitones too, but only from other
+golden triads. Listen first to the Western slide D♭ → C, every voice falling a semitone, and then to its golden counterpart,
+C♯g → Cg. Then hear the same chord from below, Bg → Cg, every voice rising, and vEg → Cg, where only one voice moves.</p>
+<audio-ex src="golden_neapolitan" caption="D♭ → C, then C♯g → Cg (the golden Neapolitan: every voice falls a semitone), Bg → Cg (every voice rises) and vEg → Cg (B rises to C). Then a phrase in C golden7: Cg – ^A♭g – vFg – C♯g – Cg – vEg – Cg, released onto C major."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>No Western chord leads into a golden triad by step</h3>
+<p>A semitone is three sixth-steps and a whole tone six, so a voice that moves by semitones or whole tones never changes layer. A
+Western chord lies on one layer, and a golden triad needs one note on each. So <b>no Western chord resolves into a golden triad by
+semitone or whole-tone motion</b>: at least two of its voices must bend by sixth-steps, and the cheapest such move costs 2, the
+golden projection of <a href="ch:ch35#projection">Chapter 35</a> (C → Cg: E falls and G rises one sixth-step).</p>
+<p>Among all chords that move into Cg with every voice falling a semitone, rising a semitone or holding (26 motion patterns),
+exactly six are golden triads and none is Western; the other 20 are not triads of any of the seven named types (computed):</p>
+<table>
+<caption>The golden triads that resolve into Cg by semitones (computed exhaustively)</caption>
+<tr><th>Chord</th><th>Notes</th><th>Motion into Cg</th><th>Voices moving</th><th>Circle position</th></tr>
+<tr><td>vEg</td><td>vE ^G B</td><td>B → C</td><td>1 (rises)</td><td>+1</td></tr>
+<tr><td>^A♭g</td><td>^A♭ C vE</td><td>^A♭ → ^G</td><td>1 (falls)</td><td>−1</td></tr>
+<tr><td>^Gg</td><td>^G B vE♭</td><td>B → C, vE♭ → vE</td><td>2 (rise)</td><td>+2</td></tr>
+<tr><td>vFg</td><td>vF ^A♭ C</td><td>vF → vE, ^A♭ → ^G</td><td>2 (fall)</td><td>−2</td></tr>
+<tr><td><b>C♯g</b></td><td>C♯ vF ^A♭</td><td>all three fall</td><td>3</td><td>−3</td></tr>
+<tr><td><b>Bg</b></td><td>B vE♭ ^F♯</td><td>all three rise</td><td>3</td><td>+3</td></tr>
+</table>
+<pianoroll edo="36" notes="C#4 F4 Ab4 ; C4 E4 G4 ; C#4 vF4 ^Ab4 ; C4 vE4 ^G4 ; B3 vEb4 ^F#4 ; C4 vE4 ^G4 ; B3 vE4 ^G4 ; C4 vE4 ^G4" labels="D♭ ; C ; C♯g ; Cg ; Bg ; Cg ; vEg ; Cg" title="The Western slide D♭ → C, the golden Neapolitan C♯g → Cg, and the two rising approaches"></pianoroll>
+<h3>The golden Neapolitan</h3>
+<p><b>C♯g</b> deserves the name <b>golden Neapolitan</b>. Like the Western Neapolitan, a major triad on D♭, the lowered second
+degree, it is built on the note a semitone above the tonic, and it is diatonic in its key: C♯ is the second degree of C golden7
+(C C♯ vE vF ^G ^A♭ B), and C♯g is the triad on it. Its resolution is the purest semitone descent there is: C♯ → C, vF → vE,
+^A♭ → ^G. In exact golden tuning each of the three falls is a golden apotome, $\varphi^3/4$ = 99.27 c, because each voice moves
+three places down the golden chain. The analogy has a limit worth stating. In classical practice the Neapolitan is a
+predominant: it usually stands in first inversion and moves to the dominant (D♭/F → G7 → C). The direct slide D♭ → C with every
+voice falling is rarer there and more typical of Phrygian and other modal contexts, and it is that slide which the golden
+Neapolitan imitates. Inside golden7 the triad a semitone above the tonic is also three circle steps from it, the far end of the
+scale's falling side (<a href="ch:ch31#golden7-function">Chapter 31</a>), so C♯g → Cg is the longest move into the tonic within
+the key (9 sixth-steps), yet no voice moves more than a semitone.</p>
+<h3>Golden leading-tone chords</h3>
+<p>Two chords rise into Cg. <b>vEg</b> contains B, the scale's one leading tone, and resolves by that single rising semitone with
+two common tones: the leading-tone exchange in reverse, and the candidate for a dominant-like role in golden7 that Chapter 31
+proposes as a hypothesis. <b>Bg</b> = B vE♭ ^F♯ is the mirror of the golden Neapolitan, every voice rising a semitone; it is not
+in C golden7 (vE♭ and ^F♯ are foreign), so it acts as a chromatic, applied leading-tone triad. The phrase of the audio example walks the
+falling side of golden7 (Cg – ^A♭g – vFg – C♯g), resolves the golden Neapolitan, touches vEg, and only then opens onto C major,
+the deepest arrival. Which of these approaches the ear hears as most cadential is a question for listening tests, not a theorem.</p>
+<h3>There is no golden augmented sixth</h3>
+<p>An augmented sixth chord works because it contains an interval just short of an octave, A♭ up to F♯ (10 semitones), whose two
+notes move a semitone outward each, in contrary motion, onto the octave G–G. Its golden counterpart would need an interval
+that two voices can open to an octave, or close to a unison, by equal contrary steps. In 36-ET those intervals are 34, 32 and
+30 sixth-steps (opening by a sixth-step, a third-step or a semitone in each voice) and 2, 4 and 6 (closing). The intervals of a
+golden triad or a golden seventh are 3, 11, 14, 22, 25 and 33 sixth-steps. None is on the list, so <b>no golden triad or seventh
+contains a golden augmented sixth</b> (theorem). Golden approach chords resolve by parallel motion or by one or two voices, never
+by the outward wedge that makes the augmented sixth so directional.</p>
+<pianoroll edo="12" notes="Ab3 C4 F#4 ; G3 B3 G4" labels="It+6 ; V" title="The Western wedge: A♭ and F♯ open by contrary semitones onto G–G"></pianoroll>
+<div class="exercise"><p><b>Exercise 37.3.</b> Compute the total voice-leading distance, in sixth-steps, of C♯g → Cg, vFg → Cg and
+^A♭g → Cg, and compare with the circle positions in the table.</p>
+<details class="answer"><summary>Answer</summary><p>9, 6 and 3: three sixth-steps per circle step, as inside golden7 in general
+(<a href="ch:ch31#golden7-function">Chapter 31</a>). The golden Neapolitan is the farthest golden7 triad from Cg, yet every voice
+moves only a semitone.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Theorem (no Western approach by step).</b> Let $W$ be a triad on one layer and $\delta \in \{0, \pm 3, \pm 6\}^3$ a motion
+by semitones and whole tones. Then $W + \delta$ is on the same layer, hence never a golden triad. <i>Proof.</i> Every entry of
+$\delta$ is $\equiv 0 \pmod 3$. ∎ Combined with the projection theorem (<a href="ch:ch35#projection">Chapter 35</a>), the
+minimum voice-leading distance from a Western triad to a golden triad is exactly 2.</p>
+<p><b>The exhaustive count.</b> The 26 nonzero vectors $\mu \in \{-3, 0, 3\}^3$ define 26 chords $G_0 - \mu$ that move by $\mu$
+into Cg; six are golden ($\mu = (3,0,0), (0,0,-3), (3,3,0), (0,-3,-3), (-3,-3,-3), (3,3,3)$ on the voices C, vE, ^G in that
+order, with the signs of the motion <i>into</i> Cg), none is major, minor, augmented, diminished, silver or bronze
+(<code>blending.py</code> §17).</p>
+<p><b>Exact apotomes.</b> In chain coordinates C♯, vF, ^A♭ are $+3, +2, +1$ and C, vE, ^G are $0, -1, -2$. Each voice moves
+three chain steps down; three golden sixths down and two octaves up is $4/\varphi^3$, a fall of
+$1200\,(3\log_2\varphi - 2) = 99.27$ c, the golden apotome (<a href="ch:ch23#golden-comma">Chapter 23</a>).</p>
+<p><b>Theorem (no golden augmented sixth).</b> The intervals of $\{0, 11, 22, 33\}$ are $\pm 11k \bmod 36$ for $k = 1, 2, 3$,
+namely $\{11, 25, 22, 14, 33, 3\}$. Symmetric contrary resolution to an octave or unison requires an interval $\equiv \pm 2u$ with
+$u \in \{1, 2, 3\}$, namely $\{2, 4, 6, 30, 32, 34\}$. The sets are disjoint. ∎ <i>Remark.</i> With <i>unequal</i> contrary
+steps the golden seventh does reach an octave: C falls one sixth-step to vC while B rises two to vC. This is a resolution by a
+sixth-step against a third-step, not an augmented-sixth wedge.</p>
+</div>
+</section>
+
+<section id="sequences">
+<h2>Golden sequences: giant steps and the golden-third cycle</h2>
+<div class="layer hear">
+<p>John Coltrane's "Giant Steps" (recorded 1959) moves through three keys a major third apart, B, G and E♭, which divide the
+octave into three equal parts. Its root motion is a cycle of major thirds, and major triads a major third apart are joined
+by very smooth voice leading: one common tone, and two voices moving a semitone (<a href="ch:ch18#cycles">Chapter 18</a>). Play it on C, C – A♭ – E – C, and put one strict passing chord into each move. The
+passing chords come out golden, all three, and they too divide something into three equal parts: the golden circle.</p>
+<audio-ex src="giant_steps" caption="C – A♭ – E – C, the major-third cycle; then C – Cg – A♭ – A♭g – E – Eg – C, with a golden passing chord on the upper root of each move."></audio-ex>
+<p>A second cycle moves the <i>key</i> by golden thirds: C major, vE major, ^G major, B major. Each move goes through two golden
+chords, and every voice moves in one direction only. After three moves the music is back on the 12-ET layer, a semitone below
+where it began.</p>
+<audio-ex src="golden_third_keys" caption="C – Cg – vEg – vE – vEg – ^Gg – ^G – ^Gg – Bg – B: three key changes by a golden third, each through the golden image of the old tonic and of the new one."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>Golden giant steps</h3>
+<p>C → A♭ and A♭ → E and E → C are pairs of same-quality triads a major third apart. By the quality theorem
+(<a href="ch:ch27#quality">Chapter 27</a>) each has exactly one golden chord on its strict path, the golden triad on the upper
+root: C – <b>Cg</b> – ^E♭T13/C – A♭, A♭ – <b>A♭g</b> – ^BT13/A♭ – E, E – <b>Eg</b> – ^GT13/E – C, with the bronze partner as
+second passing chord (<a href="ch:ch27#partner">Chapter 27</a>). With one passing chord per move (a single <code>~</code> in
+SongMap), the sequence is C – Cg – A♭ – A♭g – E – Eg – C. In each move one voice holds, one falls a sixth-step and one rises a
+sixth-step into the golden chord, then each moving voice continues by two sixth-steps:</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; C4 Eb4 Ab4 ; vC4 ^Eb4 Ab4 ; B3 E4 G#4 ; ^B3 E4 vG#4 ; C4 E4 G4" labels="C ; Cg ; A♭ ; A♭g ; E ; Eg ; C" title="Golden giant steps: one golden passing chord per major-third move"></pianoroll>
+<p>On the golden circle the three golden chords sit at positions 0, 12 and −12: twelve circle steps apart, so they divide the
+36-step circle into three equal arcs, as Coltrane's three keys divide the octave. Twelve circle steps transpose a golden triad
+by 24 sixth-steps, which is exactly the major third down from C to A♭: the golden circle, read in steps of twelve, <i>is</i> the
+major-third cycle.</p>
+<h3>The golden-third key cycle</h3>
+<p>Move the tonic up a golden third (11 sixth-steps) again and again: C → vE → ^G → B → vE♭ → ^F♯ → B♭ → vD → ^F → A → vC♯ →
+^E → A♭ → … Three steps make 33 sixth-steps, a semitone down, back on the 12-ET layer (C → B → B♭ → A …); 36 steps visit every
+major key of 36-ET once, because 11 generates $\mathbb{Z}_{36}$. Neighbouring keys share no note (they are on different
+layers), and the scales are 11 sixth-steps of voice leading apart, so as a key relation the golden third is remote. As a chord
+relation it is close: the tonic triads C and vE major are 7 sixth-steps apart, and that distance can be covered entirely through
+golden chords.</p>
+<table>
+<caption>C major → vE major through two golden chords (voice by voice, in sixth-steps)</caption>
+<tr><th>Voice</th><th>C</th><th>Cg</th><th>vEg</th><th>vE</th><th>Total</th></tr>
+<tr><td>root</td><td>C</td><td>C</td><td>B</td><td>vB</td><td>−4</td></tr>
+<tr><td>third</td><td>E</td><td>vE</td><td>vE</td><td>vE</td><td>−1</td></tr>
+<tr><td>fifth</td><td>G</td><td>^G</td><td>^G</td><td>vA♭</td><td>+2</td></tr>
+<tr><th>Cost</th><td></td><td>2</td><td>3</td><td>2</td><td>7</td></tr>
+</table>
+<p>Cg is the golden projection of C, vEg the projection of vE major, and the middle step Cg → vEg is one golden-circle step.
+The route costs 2 + 3 + 2 = 7, exactly the direct distance from C to vE (C −4, E −1, G +2), and every voice moves in one
+direction. So the golden route is a <b>geodesic</b>: a smoothest voice leading that happens to pass through two golden chords.
+The example repeats the move twice more, to ^G and to B:</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; B3 vE4 ^G4 ; vB3 vE4 vAb4 ; B3 vE4 ^G4 ; B3 vEb4 ^G4 ; ^B3 ^D4 ^G4 ; B3 vEb4 ^G4 ; B3 vEb4 ^F#4 ; B3 Eb4 F#4" labels="C ; Cg ; vEg ; vE ; vEg ; ^Gg ; ^G ; ^Gg ; Bg ; B" title="The golden-third key cycle: C, vE, ^G, B major, each reached through two golden chords"></pianoroll>
+<p>The cycle and the giant steps are two readings of one structure. Coltrane divides the octave by a third of itself; the
+golden-third cycle reaches a semitone below its start after three steps and the whole 36-ET in 36; golden giant steps divide the
+golden circle into three. The <b>layer-prism sequence</b> is a third way: a ii–V–I repeated a sixth-step higher each time, on C,
+^C, vC♯ and C♯, divides the semitone into three. Its key changes are the sixth-step lifts of <a href="ch:ch34#lifts">Chapter
+34</a>: of all 35 transpositions of a major tonic triad, the two sixth-step lifts are the only ones that no golden chord can
+mediate on a smoothest path (computed).</p>
+<div class="exercise"><p><b>Exercise 37.4.</b> In the golden-third key cycle starting on C major, which key comes after six
+steps, and after how many steps does C♯ major appear?</p>
+<details class="answer"><summary>Answer</summary><p>Six steps: $66 \equiv 30$ sixth-steps, B♭ major (two semitones below C,
+as two groups of three steps each fall a semitone). C♯ major is 3 sixth-steps above C: $11k \equiv 3 \pmod{36}$ gives
+$k \equiv 3 \cdot 23 = 69 \equiv 33$, so after 33 steps, three steps before the cycle closes.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Circle positions.</b> The circle position of $G_r$ is $p \equiv 23r \pmod{36}$, folded to $[-18, 18)$: for C, A♭ = 24 and
+E = 12, $p = 0$, $23 \cdot 24 = 552 \equiv 12$ and $23 \cdot 12 = 276 \equiv -12$. Twelve circle steps add $12 \cdot 11 = 132
+\equiv 24$ to the root. <i>Status:</i> theorem; the strict paths were computed with <code>songmap/theory/passing.py</code>
+(<code>blending.py</code> §18).</p>
+<p><b>Geodesic.</b> The distances $d(\text{C}, \text{Cg}) = 2$, $d(\text{Cg}, \text{vEg}) = 3$, $d(\text{vEg}, \text{vE}) = 2$ and
+$d(\text{C}, \text{vE}) = 7$ (minimum over all voice assignments, computed) satisfy $2 + 3 + 2 = 7$, so Cg and vEg are both
+geodesic hinges of C → vE, and the composite voice assignment is monotone in every voice (C: 0, 0, −3, −4; E: 0, −1, −1, −1;
+G: 0, +1, +1, +2). An exhaustive search over all 36 golden triads finds exactly three hinges of C → vE major: Cg, vEg and also
+Eg (E vA♭ ^B, reached at cost 4 and left at cost 3), which is not a projection of either tonic. The same search for C → ^A♭ major
+finds Cg, ^Cg and ^A♭g.</p>
+<p><b>The key cycle.</b> $3 \cdot 11 = 33 \equiv -3$, and since $\gcd(11, 36) = 1$ the cycle has length 36. Each step costs 7
+in tonic-triad voice leading, so a full tour through all 36 keys moves the voices $36 \times 7 = 252$ sixth-steps in all.</p>
+</div>
+</section>
+
+<section id="passing-keys">
+<h2>Bridge scales and passing keys</h2>
+<div class="layer hear">
+<p>Western music often passes through a key on the way to another: a few bars that tonicize a chord, then move on
+(<a href="ch:ch11#secondary">Chapter 11</a>). Can a golden scale serve as such a passing key between two Western keys? The
+answer of this section is mostly negative, and the negative results are as useful as the positive one. The positive one is
+this: C major and ^C minor, keys on different layers with no note in common, can be bridged by two bars in vE golden7.</p>
+<audio-ex src="passing_key" caption="C – F – G – C in C major; two bars in vE golden7 (Cg – vEg – ^Gg – vEg, its tonic vEg reached by circle steps from both sides); then Cg – ^Cm – ^Fm – ^G – ^Cm, arriving in ^C minor. The melody follows the keys: C major, then vE golden7, then ^C minor."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>The golden escalator is not a pair of keys</h3>
+<p>The golden escalator (<a href="ch:ch28#escalator">Chapter 28</a>) carries C major to D major through two golden chords,
+C – vC♯g – ^C♯g – D. It is tempting to hear those chords as two brief keys, vC♯ golden7 and ^C♯ golden7. Every metric says no
+(exhaustive):</p>
+<ul>
+<li>vC♯ golden7 (vC♯ vD ^E ^F A♭ A vC) shares one note with C major (A) and one with D major (A); ^C♯ golden7 shares one with
+each (F with C major, F♯ with D major). The two golden7 keys share nothing and are 14 sixth-steps of voice leading apart, while C
+and D major share five notes at distance 6.</li>
+<li>No golden7, golden10 or silver13 key contains both escalator chords. Exactly one golden13 key does, <b>vB golden13</b>,
+because vC♯g and ^C♯g lie 10 circle steps apart (circle positions 10 and −16), the full span of the 11 golden triads of a
+golden13 key. vB golden13 shares only two notes with each Western key. For F → G the key is vE golden13.</li>
+<li>The degree-by-degree averages of the two scales, (2·C + D)/3 = ^C D E ^F G A B and (C + 2·D)/3 = vC♯ D E vF♯ G A B,
+contain only two triads of any of the seven types: G and Em.</li>
+</ul>
+<pianoroll edo="36" notes="G3 C4 E4 ; Ab3 vC#4 ^E4 ; vA3 ^C#4 F4 ; A3 D4 F#4" labels="C ; vC♯g ; ^C♯g ; D" title="The golden escalator C → D (upper voices of the engine's path): voice leading, not keys"></pianoroll>
+<p>The escalator is a voice-leading phenomenon, two lines rising through the layers, not a key phenomenon. Use it as passing
+harmony, as Chapter 28 does, not as passing keys.</p>
+<h3>No golden scale between C and ^C major</h3>
+<p>The nearest key on another layer is a sixth-step lift away: C major to ^C major costs 7, every note rising one sixth-step
+(<a href="ch:ch34#lifts">Chapter 34</a>). No golden7 scale lies between them. The best golden7 detour, through ^C golden7 or
+E golden7, costs 15 (7 + 8 or 8 + 7), more than twice the direct route. The reason is a theorem: every scale on a smoothest voice
+leading from a key to its sixth-step lift uses only the notes of the two keys, two layers, while golden7 has notes on all three
+(3, 2 and 2 per layer).</p>
+<h3>Bridge scales</h3>
+<p>Between keys further apart, golden scales do better, though never as common-tone bridges in the Western sense: no golden7,
+golden13 or silver13 scale shares more than three notes with any major or natural minor key (<a href="ch:ch34#key-map">Chapter
+34</a>). The best bridges by shared notes (and, for seven-note scales, by voice-leading detour) are:</p>
+<table>
+<caption>Best golden bridge scales from C major (exhaustive over all 36 transpositions)</caption>
+<tr><th>To</th><th>Direct distance</th><th>Best golden7 (shared, detour)</th><th>golden13 sharing 3 + 3 (examples)</th></tr>
+<tr><td>^C major</td><td>7</td><td>^C or E (2 + 2, 15)</td><td>^C♯, E♭, F, ^F♯, B♭, ^B</td></tr>
+<tr><td>vC♯ major</td><td>14</td><td>vC♯ or E (detour 18)</td><td>C, D, vE♭, …</td></tr>
+<tr><td>C♯ major</td><td>15</td><td>C or F (2 + 2, 19)</td><td>C, C♯, D, …</td></tr>
+<tr><td><b>^C minor</b></td><td>10</td><td><b>vE (2 + 2, 14 = 7 + 7)</b></td><td>C♯, ^C♯, vE♭, …</td></tr>
+</table>
+<p>The one bridge that stands out is <b>vE golden7</b> = C vE♭ vE vF ^G ^A♭ B between C major and ^C minor. It shares C and B
+with C major and ^G and ^A♭ with ^C minor, and it sits symmetrically between them, 7 sixth-steps from each, against 10 for the
+direct move. Its five golden triads are ^Gg, vEg, Cg, ^A♭g and vFg, and two of them are projections of chords in the target key:
+Cg = π(^Cm) and ^A♭g = π(^A♭), the tonic and submediant of ^C minor. So the bridge key contains the pivot C → Cg → ^Cm of the
+silver-third keys (<a href="ch:ch35#silver-third-keys">Chapter 35</a>), and the example uses it: C → Cg enters, Cg → vEg and
+^Gg → vEg establish the passing tonic, vEg → Cg → ^Cm leaves.</p>
+<pianoroll edo="36" notes="C4 D4 E4 F4 G4 A4 B4 ; C4 vEb4 vE4 vF4 ^G4 ^Ab4 B4 ; ^C4 ^D4 ^Eb4 ^F4 ^G4 ^Ab4 ^Bb4" labels="C major ; vE golden7 ; ^C minor" title="A bridge scale: vE golden7 shares C, B with C major and ^G, ^A♭ with ^C minor"></pianoroll>
+<pianoroll edo="36" notes="E3 G3 C4 ; vE3 ^G3 C4 ; vE3 ^G3 B3 ; vEb3 ^G3 B3 ; vE3 ^G3 B3 ; vE3 ^G3 C4 ; ^Eb3 ^G3 ^C4" labels="C ; Cg ; vEg ; ^Gg ; vEg ; Cg ; ^Cm" title="Into and out of the passing key: projection, circle steps, projection"></pianoroll>
+<p>A Western-only alternative exists between C and ^C major: raise the notes of C major one at a time. Of the 5040 raising orders,
+the one that keeps the most consonant triads at every stage is D, F, A, C, E, G, B, never fewer than three (exhaustive); the
+intermediate scales contain no golden triad, since they use only two layers. It is a Western "comma pump" in seven stages
+(<i>proposal</i>), and it needs no golden chord at all.</p>
+<h3>How long must a passing key last?</h3>
+<p>No measurement exists yet. <code>GOLDEN_BLENDING.md</code> §7.4 proposes a testable criterion (<i>proposal</i>):</p>
+<ol>
+<li><b>Content.</b> The passing key must sound the notes that distinguish it from both neighbours. For a golden13 key that can be a
+single note (neighbouring golden13 keys differ by one comma-shifted note, <a href="ch:ch34#comma-pump">Chapter 34</a>); a golden7
+key needs a note five sixth-steps from its predecessor. vE golden7 brings five notes new to C major (vE♭ vE vF ^G ^A♭) and five
+new to ^C minor (C vE♭ vE vF B).</li>
+<li><b>Anchor.</b> Its tonic golden triad on a strong beat, approached by a circle step (whether vEg → Cg, or here ^Gg → vEg,
+sounds dominant-like is itself a hypothesis, Chapter 31).</li>
+<li><b>Duration.</b> A working figure of at least two chord changes or about 2–4 s, by analogy with Western tonicization, to be
+replaced by data. The example's passing key lasts two bars, four chord changes, about 5.5 s at 88 beats per minute.</li>
+<li><b>Test.</b> Probe-tone ratings, the method of Krumhansl and Kessler (1982), after sequences in which the passing key lasts
+1, 2, 4 and 8 beats, with probes from the old key, the passing key and the new key.</li>
+</ol>
+<div class="exercise"><p><b>Exercise 37.5.</b> Check that vE golden7 is the transposition of C golden7 by a golden third, and
+that it contains Cg. Which golden triad of C golden7 does it not contain?</p>
+<details class="answer"><summary>Answer</summary><p>C golden7 = {0, 3, 11, 14, 22, 25, 33}; adding 11 gives {11, 14, 22, 25, 33, 0,
+8} = C vE♭ vE vF ^G ^A♭ B. It contains Cg = {0, 11, 22}. C golden7's triads are vEg, Cg, ^A♭g, vFg and C♯g; vE golden7 has
+all of them except C♯g (C♯ is missing) and gains ^Gg instead. The two keys share six notes, one golden-chain step apart.</p></details></div>
+<div class="exercise"><p><b>Exercise 37.6 (listening).</b> In the passing-key example, at which chord do you first hear that
+C major has been left, and at which that ^C minor has arrived? Compare your answers with the anchor and content conditions of the
+proposal.</p>
+<details class="answer"><summary>Answer</summary><p>There is no single right answer; this is the kind of judgement the proposed
+probe-tone test would measure. By the content condition, C major is contradicted from the first Cg (vE and ^G replace E and G),
+and ^C minor is first sounded by ^Cm (its ^C and ^E♭ are foreign to vE golden7) and confirmed by ^Fm – ^G.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Theorem (layer betweenness, <a href="ch:ch34#lifts">Chapter 34</a>).</b> If $X$ lies on one layer and $Y = X + 1$, every
+geodesic hinge between $X$ and $Y$ is a subset of $X \cup Y$. <i>Consequence.</i> A golden7 scale has notes on three layers, so it
+is never a hinge between C major and ^C major; the exhaustive minimum of the detour is 15. The same argument shows that no golden,
+silver or bronze triad lies on a smoothest voice leading between a triad and its sixth-step lift.</p>
+<p><b>The escalator keys.</b> The circle positions of vC♯g and ^C♯g are $23 \cdot 2 = 46 \equiv 10$ and
+$23 \cdot 4 = 92 \equiv 20 \equiv -16$; the shorter arc between them has $36 - 26 = 10$ steps. A golden13 key contains 11 golden
+triads, consecutive on the circle, so it contains both chords only if the arc of 10 steps fits exactly: one key, vB golden13
+(<code>blending.py</code> §10).</p>
+<p><b>The bridge.</b> Write $K_1$ for C major, $S$ for vE golden7 and $K_2$ for ^C minor. Then $d(K_1, S) = 7$,
+$d(S, K_2) = 7$ and $d(K_1, K_2) = 10$ (minimum over cyclic matchings of the sorted scales; computed). Among all 36
+golden7 keys none does better than 14 for this pair (<code>blending.py</code> §9). Passing keys, as a technique, rank low in
+<code>GOLDEN_BLENDING.md</code> §12: the escalator result is negative, and the duration criterion awaits data.</p>
+</div>
+</section>

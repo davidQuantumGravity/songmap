@@ -1,0 +1,21 @@
+# Ch. 28: IV -> V in four voices. First the strict path (every voice 2+2+2): pure planing,
+# F - vF# - ^F# - G as major triads. Then the natural path of the dictionary:
+# S F vF# ^F# G (2+2+2), A C C# vD D (3+2+1), T A ^A Bb B (1+2+3), B F vF# ^F# G (2+2+2) = F - vF#g - ^F#g - G.
+songmap: 0.2
+title: "Planing, then the golden escalator"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2.5
+instruments: {organ: clean/organ}
+motifs:
+  strict:  {notes: "=mf [f--,a-,c,f]2 [vf#--,vbb-,vc#,vf#]4 [^f#--,^bb-,^c#,^f#] | [g--,b-,d,g]1"}
+  natural: {notes: "=mf [f--,a-,c,f]2 [vf#--,^a-,c#,vf#]4 [^f#--,bb-,vd,^f#] | [g--,b-,d,g]1"}
+mix: {organ: {gain_db: -6}}
+sections:
+  - {name: strict, bars: 2, parts: {organ: {motifs: [strict]}}}
+  - {name: gap, bars: 2, parts: {}}
+  - {name: natural, bars: 2, parts: {organ: {motifs: [natural]}}}
+master: clean
