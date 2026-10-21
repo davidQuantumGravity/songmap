@@ -52,6 +52,7 @@ Drums can be step strings: `"X..x..x.|X.ox.x.r"`.
 | [docs/DESIGN.md](docs/DESIGN.md) | Architecture, renderer strategy, efficiency measurements, decisions log |
 | [docs/SONGMAP_SPEC.md](docs/SONGMAP_SPEC.md) | The format v0.2 (YAML form): instruments, harmony, note language, transforms, groove, sections, events, positions and cues, mix, master, QA |
 | [docs/COMPACT_FORMAT.md](docs/COMPACT_FORMAT.md) | The `.sm` LLM encoding: grammar, measured savings, the LLM authoring loop, scoring rules of thumb |
+| [docs/LANGUAGE.md](docs/LANGUAGE.md) | The SongMap language behind `.sm`: named sections and beats, `with`, the form block, loops, per-bar conditions, named events, functions, decisions |
 | [docs/PERFORMANCE.md](docs/PERFORMANCE.md) | How annotations become played notes: velocity scale, groove templates, humanize tables, voicing, MIDI mapping |
 | [docs/INSTRUMENTS.md](docs/INSTRUMENTS.md) | The instrument contract, the full suite catalog, realism recipes, sampler and plugin backends, presets, YAML patch instruments |
 | [docs/ENGINE.md](docs/ENGINE.md) | Package layout, data flow, styles-as-data, timing math, contrast-preserving mastering, test strategy, what code exists now |
@@ -67,7 +68,7 @@ Music/
 ├── docs/                         ← the documents above
 ├── songmap/                      ← the engine (layout in docs/ENGINE.md §2)
 │   ├── cli.py  model.py  render.py
-│   ├── parse/                    ← yaml_form (v0.2 + v0.1 migration), notes (letter/deg/rel), steps, positions
+│   ├── parse/                    ← lang (the .sm language), yaml_form (v0.2 + v0.1 migration), notes, steps, positions
 │   ├── theory/                   ← keys, harmony (progressions, harmony timeline), voicing
 │   ├── arrange/                  ← timeline, styles + patterns/*.yaml, expand, events, ensemble + defaults.yaml
 │   ├── instruments/              ← contract, registry, presets loader, dsp/ and 16 instruments
@@ -78,7 +79,8 @@ Music/
 ├── examples/
 │   ├── v0.2_yaml/                ← faithful v0.2 ports of the three Oct-13 tracks (render these)
 │   ├── v0.1_yaml/                ← the original v0.1 YAML ports (still load, with a deprecation warning)
-│   └── *.sm                      ← the same ports in compact form (parser arrives in P6)
+│   ├── *.sm                      ← the same ports in compact form (same notes as the YAML ports)
+│   └── lang/                     ← The Swarm written with definitions and a form block (.sml)
 ├── assets/oct13/                 ← recovered Oct-13 sources: Remotion project, synth.py, original audio (P0)
 └── reference/
     └── synth_v0.py               ← the original prototype (made the Oct-13 tracks)
@@ -90,10 +92,11 @@ Music/
 
 ```bash
 python -m venv .venv && .venv/Scripts/pip install -e .[dev,gui]
+songmap check  examples/week_oct13_swarm.sm                       # the compact form (same notes as the YAML)
 songmap check  examples/v0.2_yaml/week_oct13_swarm.songmap.yaml
 songmap render examples/v0.2_yaml/week_oct13_swarm.songmap.yaml -o build/swarm   # ~4 s
 songmap migrate examples/v0.1_yaml/week_oct13_swarm.songmap.yaml                 # v0.1 -> v0.2 on stdout
-python -m pytest -q                       # 114 tests (-m "not port" skips the 30 s render-vs-original checks)
+python -m pytest -q                       # 200 tests (-m "not port" skips the 30 s render-vs-original checks)
 python tools/port_check.py --stems        # notes vs synth_v0, loudness vs the original audio, per-part levels
 python tools/demo.py                      # out/demo.wav + out/gallery.wav (every instrument at p, mf, ff)
 ```

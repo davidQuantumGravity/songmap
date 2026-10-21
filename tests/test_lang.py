@@ -31,9 +31,18 @@ def hits(a, piece):
     return [e.beat for e in a.parts.get("drums", []) if e.piece == piece]
 
 
-def doc_blocks():
-    with open(DOC, encoding="utf-8") as f:
+def doc_blocks(path=DOC):
+    with open(path, encoding="utf-8") as f:
         return re.findall(r"```\n(.*?)```", f.read(), re.S)
+
+
+@pytest.mark.parametrize("doc", ["LANGUAGE.md", "COMPACT_FORMAT.md"])
+def test_every_complete_program_in_the_docs_expands(doc):
+    programs = [b for b in doc_blocks(os.path.join(ROOT, "docs", doc))
+                if b.startswith(("song ", "# ")) and "<title>" not in b]      # not the syntax listings
+    assert programs
+    for b in programs:
+        assert expand(lang.loads(b, doc)).timeline.total_bars > 0
 
 
 # ----------------------------------------------------------------------------
@@ -210,14 +219,15 @@ ERRORS = [
     ("v = {bass: sub}\nform:\n  v 1 x5000\n", 7, "x5000", None),
     ("v = {bass: sub}\nform:\n  v 4 !impakt\n", 7, "unknown event type 'impakt'", "did you mean 'impact'"),
     ("v = {arp: up with {oder: [0, 1]}}\nform:\n  v 4\n", 5, "unknown part option 'oder'", "did you mean 'order'"),
-    ("v = {bass: sub}\nform:\n  v 4:\n    every 2 bars: bass += {kick: \"x...\"}\n", 8, "drum kits", "split the section"),
+    ("v = {bass: sub}\nform:\n  v 4:\n    every 2 bars: bass += {kick: \"x...\"}\n", 5, "unknown part option 'kick'",
+     "valid:"),
     ("v = {drums: full}\nform:\n  v 8:\n    every 8 bars: drums += fill\n", 8, "already plays every 8 bars",
      "without 'every'"),
     ("v = {drums: \"x...\"}\nform:\n  v 4\n", 7, "ambiguous", "{kick:"),
     ("v = {bass: sub\nform:\n  v 4\n", 5, "unclosed bracket", "close every"),
     ("for i in 1..2:\n  x = 1\n", 5, "go in the form block", "every N bars"),
-    ("groove swing=.5\n", 5, "not in the language prototype", "P6"),
-    ("v = {bass: sub}\n", None, "no form block", "form:"),
+    ("groove swang=.5\n", 5, "groove: 'swang=.5' not understood", "swing="),
+    ("v = {bass: sub}\n", None, "no sections", "form:"),
     ("v = {bass: sub}\nform:\n  v\n", 7, "how many bars", "v 8"),
     ("v = {bass: sub}\nform:\n    v 4\n  v 4\n", 8, "indent", None),
     ("v = {bass: sub}\nx = v + 1\n", 6, "can't use '+'", "layers beats"),
@@ -235,3 +245,188 @@ def test_errors_carry_file_line_and_a_suggestion(src, line, what, hint):
     if hint:
         assert e.suggestion and hint in e.suggestion, str(e)
     assert str(e).startswith(f"song.sml:{line} " if line else "song.sml ")
+
+
+# ----------------------------------------------------------------------------
+# .sm: the compact ports are the YAML ports
+# ----------------------------------------------------------------------------
+PORTS = ["week_oct13_swarm", "week_oct13_bench", "deepdive_kapton"]
+
+
+@pytest.mark.parametrize("name", PORTS)
+def test_compact_ports_match_the_yaml_ports(name):
+    from songmap.theory.keys import parse_key
+    a = expand(lang.load(os.path.join(ROOT, "examples", f"{name}.sm")))
+    b = expand(yaml_form.load(os.path.join(ROOT, "examples", "v0.2_yaml", f"{name}.songmap.yaml")))
+    assert a.digest() == b.digest()
+    assert [(s.name, s.bars) for s in a.song.sections] == [(s.name, s.bars) for s in b.song.sections]
+    assert [(e.type, e.at, e.params) for e in a.song.events] == [(e.type, e.at, e.params) for e in b.song.events]
+    for k in ("title", "tempo", "fps", "seed", "tail_seconds", "video", "instruments", "harmony", "master"):
+        assert getattr(a.song, k) == getattr(b.song, k), k
+    assert parse_key(a.song.key) == parse_key(b.song.key)          # 'Em' vs 'E minor'
+
+
+@pytest.mark.parametrize("ext", [".sm", ".sml"])
+def test_cli_loads_both_extensions(tmp_path, capsys, ext):
+    from songmap.cli import main
+    p = tmp_path / f"song{ext}"
+    p.write_text(HEAD + "verse 4 | bass:sub\n", encoding="utf-8")
+    assert main(["check", str(p)]) == 0
+    assert "4 bars" in capsys.readouterr().out
+
+
+# ----------------------------------------------------------------------------
+# section lines (the compact grammar)
+# ----------------------------------------------------------------------------
+def test_section_lines_define_and_place():
+    r = raw('lit = up(order=[0, 2, 1])\n'
+            'x 4 | drums:full+fill bass:8ths(art=staccato) arp:lit lead:a,b:t+2 | !impact\n'
+            'y 2 x2 | like=x -lead drums:half kick="X...x..." keys="=p a c e" | !riser:1@+1\n'
+            'z 2 | pad:warm:dyn=pp lead:a:oct=1\n')
+    s = {x["name"]: x for x in r["sections"]}
+    assert list(s) == ["x", "y", "y_2", "z"]
+    assert s["x"]["parts"] == {"drums": {"style": "full+fill"}, "bass": {"art": "staccato", "style": "8ths"},
+                               "arp": {"style": "up", "order": [0, 2, 1]}, "lead": {"motifs": ["a", "b:t+2"]}}
+    assert s["y"]["parts"] == {"drums": {"style": "half", "steps": {"kick": "X...x..."}},
+                               "bass": {"art": "staccato", "style": "8ths"}, "arp": {"style": "up", "order": [0, 2, 1]},
+                               "keys": {"notes": "=p a c e"}}
+    assert s["z"]["parts"] == {"pad": {"dyn": "pp", "style": "warm"}, "lead": {"oct": 1, "motifs": ["a"]}}
+    assert [(e["at"], e["type"]) for e in r["events"]] == [("x", "impact"), ("y+1", "riser"), ("y_2+1", "riser")]
+
+
+def test_section_line_settings():
+    r = raw('prog doubt "Am:2 Dm:2"\n'
+            'a 4 | arp:up dyn=p<mf prog=doubt feel=push swing=.58 tempo=120 key=Am auto="arp.cutoff:1500>4000 exp"\n'
+            'b 2 | pad:warm chords="Am:1 G:1" tempo=rit120>96\n')
+    a, b = r["sections"]
+    assert (a["dyn"], a["harmony"], a["feel"], a["tempo"], a["key"]) == (
+        "p<mf", "doubt", {"template": "push", "swing": 0.58}, 120, "Am")
+    assert a["parts"]["arp"] == {"auto": {"cutoff": "1500>4000 exp"}, "style": "up"}
+    assert (b["harmony"], b["tempo"]) == ("Am:1 G:1", "rit 120>96")
+
+
+def test_header_directives_map_onto_song_fields():
+    song = lang.loads(HEAD + 'inst bass(cutoff=600) keys=keys/felt(hardness=.35) lead=lead\n'
+                      'kit kick=kick/v0(tune=44) clap=clap\n'
+                      'groove swing=.54/16 tpl=push hum=4,3,.03 metric=.5\n'
+                      'feel bass offset=-3 gate=.85\nfeel keys high_loud=.4 arch=.5 hum=7,2,.02\n'
+                      'mix bass -2 sc=.5 | pad -6 hall=.35 | lead -4 room=.1 pan=.2\n'
+                      'qa lufs=-15..-13 contrast=a<b:6 silent!=b low<=.6 peak<=-1 hits=true\n'
+                      'cue big=f300\nmaster standard lufs=-14 ceiling=-1 glue=punchy contrast=4\n'
+                      'a 4 | bass:sub\nb 4 | pad:warm\n', "song.sm")
+    assert song.instruments == {"bass": {"cutoff": 600}, "keys": {"use": "keys/felt", "hardness": 0.35}, "lead": "lead",
+                                "drums": {"kit": {"kick": {"use": "kick/v0", "tune": 44}, "clap": "clap"}}}
+    assert song.groove == {"swing": 0.54, "swing_grid": 16, "template": "push",
+                           "humanize": {"time_ms": 4, "drift_ms": 3, "vel": 0.03}, "metric": 0.5}
+    assert song.parts_feel == {"bass": {"offset_ms": -3, "gate": 0.85}, "keys": {
+        "high_loud": 0.4, "arch": 0.5, "humanize": {"time_ms": 7, "drift_ms": 2, "vel": 0.02}}}
+    assert song.mix["bass"]["gain_db"] == -2 and song.mix["bass"]["sidechain"]["depth"] == 0.5
+    assert song.mix["bass"]["sidechain"]["from"] == "kick" and "release" in song.mix["bass"]["sidechain"]
+    assert song.mix["pad"]["send"] == {"hall": 0.35} and song.mix["lead"]["pan"] == 0.2
+    assert song.qa == {"target_lufs": [-15, -13], "contrast": [["a", "b", 6]], "never_silent": ["b"],
+                       "max_low_ratio": 0.6, "true_peak_max_db": -1, "hits_audible": True}
+    assert song.cues == {"big": "f300"}
+    assert (song.master.mode, song.master.target_lufs, song.master.glue, song.master.preserve_contrast) == (
+        "standard", -14, "punchy", 4)
+
+
+# ----------------------------------------------------------------------------
+# named events
+# ----------------------------------------------------------------------------
+def test_named_events():
+    r = raw('lift = !impact !riser:2\nbig = !lift !riser:1@+8\nzz = !zaps(count=3, every=8, keep=[pad, bass])\n'
+            'end = lift + zz\nx 16 | bass:sub | !big\ny 2 | pad:warm | !end !impact@+1 !hit@3:2 !stop@2\n')
+    assert [(e["at"], e["type"], {k: v for k, v in e.items() if k not in ("at", "type")}) for e in r["events"]] == [
+        ("x", "impact", {}), ("x", "riser", {"bars": 2}), ("x+8", "riser", {"bars": 1}),
+        ("y", "impact", {}), ("y", "riser", {"bars": 2}), ("y", "zaps", {"count": 3, "every": 8, "keep": ["pad", "bass"]}),
+        ("y+1", "impact", {}), ("3:2", "hit", {}), (2, "stop", {})]
+
+
+def test_named_events_on_form_lines_and_in_edits():
+    r = raw('lift = !impact !riser:2\nv = {bass: sub}\nform:\n  v 4 !lift\n  v 4:\n    !lift\n')
+    assert [(e["at"], e["type"]) for e in r["events"]] == [("v", "impact"), ("v", "riser"), ("v_2", "impact"),
+                                                            ("v_2", "riser")]
+
+
+# ----------------------------------------------------------------------------
+# per-bar edits on any part
+# ----------------------------------------------------------------------------
+def test_per_bar_variants_on_pitched_parts():
+    src = ('v = {bass: sub, pad: warm, lead: [a]}\nform:\n  v 8:\n    every 4 bars: bass = eighths\n'
+           '    bar 2, -1: lead = [b]\n    bar 3: pad = none\n')
+    parts = raw(src)["sections"][0]["parts"]
+    assert parts["bass"] == {"style": "sub", "vary": [{"bars": [3, 7], "part": {"style": "eighths"}}]}
+    assert parts["lead"] == {"motifs": ["a"], "vary": [{"bars": [1, 7], "part": {"motifs": ["b"]}}]}
+    assert parts["pad"] == {"style": "warm", "vary": [{"bars": [2], "part": {"mute": True}}]}
+    a = arr(src)
+    eighths = sorted({int(e.beat // 4) for e in a.parts["bass"] if e.dur < 1})
+    assert eighths == [3, 7]                                   # eighths only in bars 4 and 8
+    assert not [e for e in a.parts["pad"] if 8 <= e.beat < 12]  # pad starts nothing in bar 3
+    tags = {int(e.beat // 4): {t for t in e.tags if t.startswith("motif:")} for e in a.parts["lead"]}
+    assert tags[1] == tags[7] == {"motif:b"} and tags[0] == {"motif:a"}
+
+
+def test_per_bar_variant_adds_a_part_the_section_lacks():
+    src = 'v = {bass: sub}\nform:\n  v 4:\n    bar 4: lead = [a]\n'
+    assert raw(src)["sections"][0]["parts"]["lead"] == {"mute": True, "vary": [{"bars": [3], "part": {"motifs": ["a"]}}]}
+    assert {int(e.beat // 4) for e in arr(src).parts["lead"]} == {3}
+
+
+def test_every_song_bars_inside_a_section():
+    src = ('v = {bass: sub}\nform:\n  v 2\n  v 6:\n    every 4 song bars: bass = eighths\n'
+           '    every 4 bars: bass.oct = 1\n')
+    parts = raw(src)["sections"][1]["parts"]
+    # song bars 4 and 8 are this section's offsets 1 and 5; its own 4th bar is offset 3
+    assert parts["bass"]["vary"] == [{"bars": [1, 5], "part": {"style": "eighths"}},
+                                     {"bars": [3], "part": {"oct": 1, "style": "sub"}}]
+
+
+def test_form_level_every_reaches_pitched_parts():
+    src = 'x = {bass: sub}\ny = {pad: warm}\nform:\n  every 2 bars: bass = eighths\n  x 2\n  y 2\n  x 2\n'
+    s = raw(src)["sections"]
+    assert s[0]["parts"]["bass"]["vary"] == [{"bars": [1], "part": {"style": "eighths"}}]
+    assert "bass" not in s[1]["parts"]
+    assert s[2]["parts"]["bass"]["vary"] == [{"bars": [1], "part": {"style": "eighths"}}]
+
+
+def test_yaml_vary(make_song):
+    song = make_song({"tempo": 120, "key": "A minor", "harmony": {"default": ["Am", "F"]}, "sections": [
+        {"name": "v", "bars": 4, "parts": {"bass": {"style": "sub", "vary": [{"bars": [1, 3], "part": "eighths"}]}}}]})
+    a = expand(song)
+    assert sorted({int(e.beat // 4) for e in a.parts["bass"] if e.dur < 1}) == [1, 3]
+    with pytest.raises(SongError, match="vary bars are whole bar offsets"):
+        make_song({"sections": [{"name": "v", "bars": 4, "parts": {"bass": {
+            "style": "sub", "vary": [{"bars": [-1], "part": "eighths"}]}}}]})
+
+
+def test_variants_leave_other_songs_untouched():
+    a = expand(lang.load(SWARM_SML))
+    assert not [p for s in a.song.sections for p in s.parts.values() if p.variants]
+
+
+# ----------------------------------------------------------------------------
+# errors in the new features
+# ----------------------------------------------------------------------------
+NEW_ERRORS = [
+    ("hit = !impact\n", 5, "'hit' is an event type", "pick another name"),
+    ("lift = !impact\nv = {bass: sub}\nform:\n  v 4 !lift@+2\n", 8, "named event list", "inside its definition"),
+    ("a 4 | bass:sub\nv = {bass: sub}\nform:\n  v 4\n", 7, "can't be mixed", "the first section line is line 5"),
+    ("a 4 | like=b bass:sub\n", 5, "like=b: not an earlier section", None),
+    ("a 4 | bass:sub vibe=chill\n", 5, "unknown setting 'vibe'", "valid:"),
+    ("a 4 | bass:sub ??\n", 5, "'??' not understood", "role:style"),
+    ("a 4 | lead:a,zz\n", 5, "unknown motif 'zz'", "valid:"),
+    ("a 4 | bass:sub auto=lead.cutoff:1>2\n", 5, "auto for 'lead'", None),
+    ("mix bass loud\n", 5, "needs a part and a gain", "mix bass -2"),
+    ("mix bass -2 reverb=.3\n", 5, "unknown option 'reverb'", "valid:"),
+    ("qa contrast=a>b:6\n", 5, "qa contrast 'a>b:6'", "quiet<loud"),
+    ("feel bass swing=.6\n", 5, "feel bass: 'swing=.6' not understood", "valid:"),
+    ("kit kick\n", 5, "kit: write kick=", None),
+    ("v = {bass: sub}\nform:\n  v 4:\n    bar 5: bass = eighths\n", 8, "bar 5: the section has 4 bars", "1..4"),
+    ("v = {bass: sub}\nform:\n  v 4:\n    every 2 bars: dyn = \"p\"\n", 8, "not the section's dyn", "split the section"),
+    ("v = {bass: sub}\nbar 2: bass = eighths\n", 6, "goes under a section line", None),
+]
+
+
+@pytest.mark.parametrize("src,line,what,hint", NEW_ERRORS, ids=[e[2][:28] for e in NEW_ERRORS])
+def test_new_feature_errors(src, line, what, hint):
+    test_errors_carry_file_line_and_a_suggestion(src, line, what, hint)

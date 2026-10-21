@@ -1,16 +1,22 @@
-# Deep Dive — Inside the 56 Movies (5:03), faithful v0.2 port of the original track.
+# Deep Dive — Inside the 56 Movies (5:03), faithful v0.2 port of the original track. Compact form.
+# Same notes as examples/v0.2_yaml/deepdive_kapton.songmap.yaml (tests/test_lang.py checks the digest).
 song "Deep Dive — Inside the 56 Movies" 120 4/4 Am fps=30 mood=documentary tail=3 seed=7 video=DeepDive:9090
+inst bass(cutoff=600)
 chords Am F C G /2
+master legacy
 motif m1 deg oct=4 "4/2 2 | 4/4 5 4/2"
 motif m2 deg oct=4 "2/2 0 | 2/1"
 motif m3 deg oct=4 "4/2 6 | 7 6"
 motif m4 deg oct=4 "5/2. 4/4 | 1/1"
+lit = up(order=[0, 2, 4, 2, 1, 3, 2, 4])
+dim = dark(order=[0, 2, 4, 2, 1, 3, 2, 4])
+lift = !impact !riser:2
 title     6 | pad:dark bass:sub
-setup    22 | drums:half_kick pad:warm arp:dark bass:sub              | !impact
-movies_a 38 | drums:four_floor bass:8ths pad:warm arp:up              | !impact !riser:2
-coverage 18 | like=movies_a drums:full                              | !riser:1
-barrier  22 | drums:half bass:sub pad:warm arp:dark                   | !impact
-findings 16 | like=coverage lead:m1,m2,m3,m4                          | !impact !riser:2
+setup    22 | drums:half_kick pad:warm arp:dim bass:sub                | !impact
+movies_a 38 | drums:four_floor bass:8ths pad:warm arp:lit                | !lift
+coverage 18 | like=movies_a drums:full+open                            | !riser:1
+barrier  22 | drums:half bass:sub pad:warm arp:dim                      | !impact
+findings 16 | like=movies_a drums:full lead:m1,m2,m3,m4                 | !lift
 limits   16 | like=setup
-next      8 | like=findings                                          | !impact !riser:2
-outro     4 | pad:dark                                               | !impact
+next      8 | like=findings                                            | !lift
+outro     4 | pad:dark                                                 | !impact

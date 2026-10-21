@@ -1,20 +1,23 @@
-# Bench / Fields / Thruster (2:31), faithful v0.2 port of the original Oct-13 track.
+# Bench / Fields / Thruster (2:31), faithful v0.2 port of the original Oct-13 track. Compact form.
+# Same notes as examples/v0.2_yaml/week_oct13_bench.songmap.yaml (tests/test_lang.py checks the digest).
 song "Week of Oct 13 — Bench / Fields / Thruster" 120 4/4 Dm fps=30 mood=cinematic tail=3 seed=7 video=WeekBench:4530
 chords Dm Bb F C /2
+master legacy
 motif m1 deg oct=5 "4/4. 3/8 2/4 4 | 7/2 6/4 4"
 motif m2 deg oct=5 "3/4. 2/8 1/4 3 | 5/2. 4/4"
 motif m3 deg oct=5 "2 4 6 7 | 9/2 7/4 6"
 motif m4 deg oct=5 "6/4. 5/8 4/2 | 6 4"
-cold_open   4 | pad:dark bass:sub fx:ticks arp:dark                   | !zaps@+2(n=6)
-pulser      3 | drums:full bass:8ths pad:warm arp:up                  | !impact !riser:2
-chain_test  6 | drums:half bass:sub pad:warm arp:dark                 | !zaps(n=4)
-problem     3 | pad:dark bass:sub fx:ticks                            | !impact !zaps(n=6)
-fixes       6 | drums:full+fill bass:8ths pad:warm arp:up             | !impact !riser:2
-dashboard  12 | like=fixes lead:m1,m2,m3,m4                           | !riser:1
+lift = !impact !riser:2
+cold_open   4 | pad:dark bass:sub fx:ticks arp:dark                   | !drop:2@0(keep=[pad,bass]) !zaps@2(count=6)
+pulser      3 | drums:full bass:8ths pad:warm arp:up                  | !lift
+chain_test  6 | drums:half bass:sub pad:warm arp:dark                 | !zaps(count=4)
+problem     3 | pad:dark bass:sub fx:ticks                            | !impact !zaps(count=6)
+fixes       6 | drums:full+fill bass:8ths pad:warm arp:up             | !lift
+dashboard  12 | like=fixes drums:full+fill+open lead:m1,m2,m3,m4      | !riser:1
 sim_break   2 | pad:warm arp:dark fx:ticks
-fields_a    8 | like=chain_test                                       | !impact !riser:2
+fields_a    8 | like=chain_test                                       | !lift
 fields_b    8 | like=fixes                                            | !riser:1
 big_break   2 | like=problem
-thruster   16 | like=dashboard drums:full+fill+hats16                 | !impact !riser:2 !riser:1@+8
+thruster   16 | like=dashboard drums:full+fill+hats16+open            | !lift !riser:1@+8
 summary     2 | pad:warm arp:up bass:sub                              | !impact
 end_card    2 | pad:dark                                              | !impact

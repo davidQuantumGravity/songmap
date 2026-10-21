@@ -185,6 +185,13 @@ sections:
 
 `X` accent · `x` normal · `-` soft · `o` ghost · `.` rest · `f` flam · `r` ratchet (two quick hits). The number of characters per bar sets the grid (16 = 16ths, 12 = 8th-note triplets, 24 = 16th triplets). Patterns loop to fill the section.
 
+**Per-bar variants:** `vary:` gives a part different material for some bars of its section. `bars` are offsets from the section start, as in `name+3`. In those bars the variant's notes replace the part's, and a note belongs to the bar it starts in. A part with `mute: true` and `vary:` plays only in its variants' bars. The SongMap language writes these for per-bar edits (`every 4 bars: bass = eighths`, `bar -1: lead = [answer]`; [LANGUAGE.md §7](LANGUAGE.md)).
+
+```yaml
+      bass: {style: sub, vary: [{bars: [3, 7], part: eighths}]}
+      lead: {motifs: [theme], vary: [{bars: [7], part: [answer]}, {bars: [2], part: {mute: true}}]}
+```
+
 **Inheritance:** `like:` copies another section's `parts`, `harmony`, `feel` and `dyn`; `add:` merges parts in and `drop:` removes them. This is how a chorus repeat costs one line.
 
 ## 7. Voicing and orchestration helpers

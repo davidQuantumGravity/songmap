@@ -105,6 +105,14 @@ All four sit behind the same `Instrument` contract, so a song swaps backends by 
 | 2026-10-20 | (P1) The default progression and motif blocks loop from beat 0, not from each section, and a chord that crosses a section boundary is not re-struck. This is what synth_v0 did |
 | 2026-10-20 | (P1) v0.1 songs migrate to `master: legacy` (synth_v0's normalize + tanh), because that master is what rendered them |
 | 2026-10-20 | (P1) The default ensemble is the synth_v0 port. Its levels are calibrated against synth_v0's own voices and stems (`tools/calibrate_v0.py`, `port_check.py --stems`) |
+| 2026-10-21 | The SongMap language *is* the `.sm` grammar (`.sml` is an alias): section lines are its flat subset, and definitions, `with`, `form:`, loops, conditions, named events and functions are opt-in. It compiles to the v0.2 raw mapping, so YAML and `.sm` share one validator and one engine. *One format to learn, and flat files stay line-addressable* |
+| 2026-10-21 | (Language) The n-th instance of a section is `<name>_n`, counted only among that section's instances; `as` pins a name. *Inserting other sections never renames an instance, so cues and seeds stay put* |
+| 2026-10-21 | (Language) `every N bars` counts the instance's bars; `every N song bars`, and `every` at the top of the form, count song bars. *Phrases are section-relative, and song-wide rules say so explicitly* |
+| 2026-10-21 | (Language) `+` concatenates strings, `&` overlays them, and `+` layers beats. *Python for text, "play both" for drums* |
+| 2026-10-21 | (Language) Values, not references: `b = a with {...}` copies `a` at that line. *A line's meaning depends only on the lines above it, like YAML `like:`* |
+| 2026-10-21 | (Language) Per-bar edits on any part compile to part variants (`vary:`, a per-bar mask in expand), not sub-sections. *Sections, cue names, seeds and dynamic arcs stay whole, and songs without variants are untouched* |
+| 2026-10-21 | (Language) Events are values: `lift = !impact !riser:2`, placed with `!lift`, relative to where they are placed. *Hit-and-riser groups are the most repeated thing in the Oct-13 scores* |
+| 2026-10-21 | (Language) Layering step strings of different lengths uses their common grid. *The drum voices ignore note length, so only the written step length changes, and one string per lane stays printable* |
 
 ## 8. Open questions
 

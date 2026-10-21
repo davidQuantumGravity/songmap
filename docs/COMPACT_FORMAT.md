@@ -1,99 +1,118 @@
 # Compact SongMap (`.sm`): the LLM encoding
 
-The compact form is the same song tree as the YAML form ([SONGMAP_SPEC.md](SONGMAP_SPEC.md)), written as **one line per section** with short directives. It is designed for an LLM to write and revise cheaply:
+The compact form is the same song tree as the YAML form ([SONGMAP_SPEC.md](SONGMAP_SPEC.md)), written as **one line per section** with short directives. It is the flat subset of the SongMap language ([LANGUAGE.md](LANGUAGE.md)): the same `.sm` file can also name beats and sections, loop, branch and vary bars, and the parser is the same. It is designed for an LLM to write and revise cheaply:
 
 - **No structural punctuation.** YAML's braces, quotes, `name:`/`bars:`/`parts:` keys and indentation are about half of a YAML song map.
 - **Defaults do the work.** Default instruments, styles, groove and mix mean a line only states what differs.
 - **Inheritance.** `like=goals` plus a diff makes a repeated section cost a few tokens.
 - **Line-addressable edits.** A revision is "replace line `agents`", not a re-emit of the file.
-- **Validated names.** Every style, instrument, parameter and event is checked, and errors say how to fix them.
+- **Validated names.** Every style, mod, motif, setting, directive option and event is checked, and errors say how to fix them.
 
-## Measured size (the three Oct-13 ports in `examples/`, comments stripped)
+`songmap check song.sm` and `songmap render song.sm` read it (`.sml` is an alias).
 
-| Song | v0.1 YAML | v0.2 compact | Ratio |
+## Measured size (the three Oct-13 ports, comments and blank lines stripped)
+
+| Song | v0.2 YAML port | `.sm` | Ratio |
 |---|---|---|---|
-| Bench / Fields / Thruster (2:31) | 2,046 chars | 1,013 | 2.0× |
-| Deep Dive (5:03) | 1,413 | 708 | 2.0× |
-| The Swarm (2:03) | 1,489 | 1,027 | 1.45× (the compact file also carries `inst`, `groove`, `mix` and `qa` lines the YAML lacks) |
+| Bench / Fields / Thruster (2:31) | 2,093 chars | 1,368 | 1.53× |
+| Deep Dive (5:03) | 1,534 | 1,036 | 1.48× |
+| The Swarm (2:03) | 1,761 | 1,158 | 1.52× (the `.sm` also carries a `qa` line) |
 
-For comparison, the engine that renders them, `reference/synth_v0.py`, is 14,837 chars. A full new soundtrack is now **about 250–300 tokens** of output, against about 4,000 tokens to regenerate the prototype synth. Richer through-composed scores (see [RESCORE_PLAN.md](RESCORE_PLAN.md)) run about 2–4k chars, because the extra content is musical decisions, not boilerplate.
+Each `.sm` port expands to exactly the same notes as its YAML port: the arrangement digest, events, instruments and master all match (`tests/test_lang.py`). Written with definitions and a form block instead of section lines, The Swarm is 1,081 chars ([LANGUAGE.md §14](LANGUAGE.md)).
+
+For comparison, the engine that rendered them, `reference/synth_v0.py`, is 14,837 chars. A full new soundtrack is now **about 250–350 tokens** of output, against about 4,000 tokens to regenerate the prototype synth.
 
 ## Grammar
 
 ```
 file      := line*
-line      := directive | section | comment
+line      := directive | definition | section | comment
 comment   := '#' ...                        (also allowed after any line)
 
 directive :=
-  song "<title>" <tempo> <meter> <key> [k=v ...]     # fps= mood= tail= seed= video=<Composition>:<frames>
-  inst  <part>=<instrument>[/<preset>][(k=v,...)] ...
+  song "<title>" <tempo> <meter> <key> [fps=] [seed=] [mood=] [tail=] [tuning=] [video=<Composition>:<frames>]
+  inst  <part>[=<instrument>[/<preset>]][(k=v,...)] ...          # inst bass(cutoff=700) keys=keys/felt_piano
   kit   <piece>=<instrument>[/<preset>][(k=v,...)] ...           # kick= snare= hat= ohat= clap= tom=
   groove [swing=<0.5..0.75>[/8|/16]] [tpl=<template>] [hum=<time_ms>,<drift_ms>,<vel>] [metric=<0..1>]
-  feel  <part> [offset=<ms>] [gate=<x>] [hum=...] [high_loud=<x>] [arch=<x>]
+  feel  <part> [offset=<ms>] [gate=<x>] [hum=<t>,<d>,<v>] [high_loud=<x>] [arch=<x>]
   chords <chord> <chord> ... [/<bars per chord>]                  # default progression
   prog  <name> "<chord:bars ...>"                                 # named progression
-  motif <name> [deg] [oct=<n>] [key=<key>] "<note language>"
+  motif <name> [deg|rel] [oct=<n>] [key=<key>] "<note language>"
   cue   <name>=<position>                                         # e.g. cue big=f3960
-  mix   <part> <gain_db> [sc=<depth>] [hall=<send>] [room=<send>] [delay=<send>] [pan=<x>] [| <part> ...]
-  master [lufs=<x>] [ceiling=<x>] [glue=none|gentle|punchy] [contrast=<dB>]
-  qa    [lufs=<x>] [contrast=<a><<b>:<dB>,...] [silent!=<a>,<b>] [low<=<x>]
+  mix   <part> <gain_db> [sc=<depth>] [hall=|room=|delay=|plate=<send>] [pan=<x>] [width=<x>] [| <part> ...]
+  master [legacy|standard] [lufs=<x>] [ceiling=<x>] [glue=none|gentle|punchy] [contrast=<dB>]
+  qa    [lufs=<x>|<a>..<b>] [contrast=<quiet><<loud>:<dB>,...] [silent!=<a>,<b>] [low<=<x>] [peak<=<dB>] [hits=true]
 
-section   := <name> <bars> '|' <part-or-setting>* ['|' <event>*]
-part      := <role>:<style>[+<mod>...][(k=v,...)]       e.g. drums:full+fill   bass:8ths(art=staccato)
-           | <role>:<motif>[,<motif>...]                 e.g. lead:theme,answer:t+2
-           | <role>="<note language>"                    inline notes, e.g. keys="=p [e,b]1 | [c,g]"
-           | <piece>="<step string>"                     drum step pattern, e.g. kick="X...x...|X..x...."
+definition := <name> = <value>                                    # lit = up(order=[0,2,1,3]); see LANGUAGE.md
+            | <name> = !<event> ...                               # a named event list: lift = !impact !riser:2
+
+section   := <name> <bars> [x<N>] '|' <part-or-setting>* ['|' <event>*]
+part      := <role>:<style>[+<mod>...][(k=v,...)]       drums:full+fill   bass:8ths(art=staccato)
+           | <role>:<variable>                           arp:lit   (any part or beat defined above)
+           | <role>:<motif>[:<transform>][,<motif>...]   lead:m1,m2,m3,m4   lead:theme,answer:t+2
+           | <role>:<value>:<k>=<v>                      keys:lattice:dyn=pp
+           | <role>="<note language>"                    keys="=p [e,b]1 | [c,g]"
+           | <piece>="<step string>"                     kick="X...x...|X..x...."   (a drums lane)
            | -<role>                                     remove an inherited part
-setting   := like=<section> | dyn=<shape> | prog=<name> | chords="<...>" | feel=<template>
-           | tempo=<bpm>|rit<a>><b> | key=<key> | swing=<x>
-           | auto=<part>.<param>:<a>><b>[ exp]           ramp across the section
-           | auto=<part>.<param>:<v>@<pos>,<v>@<pos>,...  breakpoints (steps, or ramps with `~` between)
-event     := !<type>[:<length>][@<position>][(k=v,...)]
-length    := <bars> | <beats>b                           e.g. !riser:2   !stop:2b
-position  := +<bars>[:<beat>] (relative to section start) | <bar>[:<beat>] | f<frame> | cue:<name>
+setting   := like=<section> | dyn=<shape> | prog=<name> | chords="<chord:bars ...>" | feel=<template>
+           | swing=<x> | tempo=<bpm>|rit<a>><b> | key=<key>
+           | auto=<part>.<param>:<a>><b>                 auto="arp.cutoff:1500>4000 exp" (quote it with a space)
+event     := !<type>[:<length>][@<position>][(k=v,...)] | !<named list>
+length    := <bars> | <beats>b                           !riser:2   !stop:2b
+position  := +<bars>[:<beat>] (from the section start) | <bar>[:<beat>] | f<frame> | cue:<name> | <section>[+<bars>]
+k=v       := a number, a word, "a string" or [a, list]   !drop:2@0(keep=[pad,bass])
 ```
 
+Notes on the grammar:
+- `like=` is applied first, wherever it appears on the line. The other items apply left to right.
+- `<value>` options in `(...)` may be lists or variables: `arp:up(order=[0,2,4,2])`.
+- A section line both defines the section, as a variable for later `like=` and `with`, and places it. `x<N>` places it N times; the repeats are named `<name>_2`, `<name>_3`, and so on.
+- A file uses section lines or a `form:` block ([LANGUAGE.md §4](LANGUAGE.md)), not both.
+
 **Defaults:**
-- Every `song` gets the default parts (`drums bass pad arp lead fx`) with the mood preset's instruments.
-- `groove` defaults to `swing=.5 hum=4,3,.03 metric=.5`, so even an un-annotated song is humanized slightly.
+- Every song plays on the default ensemble: the synth_v0 port for now; mood presets arrive in P4. `inst`, `kit` and `mix` change only what they name.
+- `groove` and `feel` are stored in the song and applied by the performance layer from P3. `qa` rules are evaluated from P2.
 - Events land at the section start. A riser *ends* at its position.
 
-**Part roles** can be any name. A role not in `inst` errors unless it matches a default role or an instrument name (`keys:block` implies `inst keys=keys`).
+**Part roles** can be any name. A role without an instrument entry uses the instrument of the same name or the part fallback (`keys` → keys, `gtr` → string_pluck); `inst` sets it explicitly.
 
 ## A richer example (expression and orchestration)
 
 ```
 song "Inside the 56 Movies (rescore sketch)" 100 4/4 Am fps=30 mood=documentary tail=4 seed=11
-inst keys=keys/felt_piano(hardness=.35) gtr=string_pluck/nylon cello=bowed/cello pad=pad/air
-kit  kick=kick(tune=44,decay=.6) snare=snare(tone=170) hat=hat
+inst keys=keys bass(cutoff=650)
 groove swing=.54/16 hum=6,4,.04
 feel keys high_loud=.4 arch=.5
 prog explain "Am:2 F:2 C:2 G:2"
-prog doubt   "Am:2 Dm7:2 Bbmaj7:2 E7sus4:1 E7:1"
-motif lattice deg oct=4 "=mp 0/8 2 4 2 5 4 2 4 | 0/8 2 4 7/2 r/8 4"
-motif contact deg oct=5 "=p < 4/2_ 3/4 2 | 1/2.~ 0/4 =mf"
-cue  thesis=f6070
-title    6 | pad:air keys:lattice:dyn=pp dyn=pp<p
-setup   22 | like=title gtr:arp16(pattern=0213) bass:sub prog=explain dyn=p<mp
-# ... more sections ...
-barrier 16 | prog=doubt keys:contact cello:sustain(dyn=p) drums:half(ghosts=on) -gtr dyn=mp<f | !riser:2@cue:thesis !impact@cue:thesis(size=xl)
+prog doubt "Am:2 Dm7:2 Bbmaj7:2 Esus4:1 E7:1"
+motif lattice deg oct=4 "=mp 0/8 2 4 2 5 4 2 4 | 0/8 2 4 7/2 4/8"
+motif contact deg oct=5 "=p 4/2 3/4 2 | 1/2. 0/4"
+cue thesis=f2880
+reveal = !riser:2@cue:thesis !impact@cue:thesis(size=xl)
+title    6 | pad:warm keys:lattice:dyn=pp dyn=pp<p
+setup   22 | like=title arp:up bass:sub prog=explain dyn=p<mp
+barrier 16 | prog=doubt keys:contact drums:half+ghosts -arp dyn=mp<f kick="X.....x...x....." | !reveal
+mix keys -5 hall=.3 | pad -6 sc=.35
+qa contrast=title<barrier:6 silent!=setup,barrier
 ```
+
+When a section repeats with small changes, or a beat needs a fill every 8 bars, switch to definitions and a `form:` block ([LANGUAGE.md](LANGUAGE.md)). The header lines stay the same.
 
 ## The LLM authoring loop
 
-1. **Load the catalog, not the engine.** `songmap describe --compact` prints about 400 tokens: every style per role, instruments with key params, event types, transforms and the note-language cheat sheet. That is all the context an LLM needs. (`instruments.describe()` in the sketch already does the instrument part, at roughly 40 tokens per instrument.)
+1. **Load the catalog, not the engine.** `songmap describe --compact` (P6) prints about 400 tokens: every style per role, instruments with key params, event types, transforms and the note-language cheat sheet. That is all the context an LLM needs. (`instruments.describe()` already does the instrument part, at roughly 40 tokens per instrument.)
 2. **Read the video.** If `video=` is set, `songmap cues-from-video` (Phase 8) proposes `cue` lines from the Remotion source or `cues.json`. Otherwise use a scene timeline like [SCENE_TIMELINES.md](SCENE_TIMELINES.md).
-3. **Write** the `.sm` file: header, then sections. Prefer `like=` and motif transforms over new material when the music should recur.
-4. **Check.** `songmap check song.sm` takes milliseconds: it parses, bar-checks motifs, validates names and checks cue alignment. Errors are one line each, written to be fixed without guessing:
+3. **Write** the `.sm` file: header, then sections. Prefer `like=`, named event lists and motif transforms over new material when the music should recur.
+4. **Check.** `songmap check song.sm` takes milliseconds. It parses, bar-checks motifs, validates names and checks the length against the video. Errors are one line each, written to be fixed without guessing:
    ```
-   song.sm:14 agents: unknown bass style 'eigths' (did you mean 'eighths'? valid: sub eighths octaves walking pedal syncopated root5)
-   song.sm:9 motif m2: bar 2 has 3 beats, expected 4. Check durations before bar line 2 (durations are sticky).
-   song.sm:22 event !impact@f3962: lands 2 frames after beat 66:1; use @66 or snap=none
+   song.sm:14 agents: unknown bass style 'eigths' (did you mean 'eighths'? valid: 8ths eighths sub)
+   song.sm:9 agents: motif m2: bar 1 has 3 beats, expected 4. Check durations before bar line 1 (durations are sticky).
+   song.sm:12 cold_open: unknown setting 'vibe' (valid: auto chords dyn feel key like prog swing tempo)
+   song.sm:22 unknown event type 'impakt' (did you mean 'impact'? valid: cloud crash downlifter drop ...)
    ```
-5. **Render** with `songmap render song.sm --out build/`. It writes `qa.json` and `qa.png`, about 10–30 s for a 5-minute track.
+5. **Render** with `songmap render song.sm -o build/`. It writes `song.wav`, `stems/`, `cues.json` and `qa.json`, in about 10–30 s for a 5-minute track.
 6. **Read QA and revise.** QA reports section loudness contrast, band balance, true peak and whether hits are audible. Revise by replacing whole section lines.
-7. **Audition (human).** The user listens and gives feedback in musical terms ("pad too bright in barrier", "hits should feel bigger"). The LLM maps that to parameter or line edits. `songmap why <section>` explains what was generated there (part by part, notes per bar, velocity range) so the LLM can reason about what it can't hear.
+7. **Audition (human).** The user listens and gives feedback in musical terms ("pad too bright in barrier", "hits should feel bigger"). The LLM maps that to parameter or line edits. `songmap why <section>` (P2) explains what was generated there (part by part, notes per bar, velocity range) so the LLM can reason about what it can't hear.
 
 ## Rules of thumb for LLM-written scores
 

@@ -1,9 +1,10 @@
 """songmap command line.
 
-    songmap check  song.yaml|song.sml        parse, validate, expand; prints a summary or precise errors
-    songmap render song.yaml [-o build/x]    song.wav (24-bit), stems/, cues.json, qa.json, render.log
-    songmap migrate old.yaml [-o new.yaml]   rewrite a v0.1 song map as v0.2
+    songmap check  song.sm|song.yaml          parse, validate, expand; prints a summary or precise errors
+    songmap render song.sm [-o build/x]       song.wav (24-bit), stems/, cues.json, qa.json, render.log
+    songmap migrate old.yaml [-o new.yaml]    rewrite a v0.1 song map as v0.2
 
+Song maps are `.sm` (the SongMap language, docs/LANGUAGE.md; `.sml` is an alias) or YAML (`.yaml`, `.yml`).
 Exit codes: 0 ok, 1 song error, 2 usage error.
 """
 from __future__ import annotations
@@ -17,14 +18,13 @@ from .parse.errors import NotationError, SongError
 
 
 def _load(path: str):
+    from .parse import lang
     ext = os.path.splitext(path)[1].lower()
-    if ext == ".sm":
-        raise SongError("the compact .sm parser arrives in P6", file=path,
-                        suggestion="use the YAML form (examples/v0.2_yaml/) or the language (.sml) for now")
-    if ext == ".sml":
-        from .parse import lang
+    if not os.path.isfile(path):
+        raise SongError(f"no such file: {path}")
+    if ext in lang.EXTS:
         return lang.load(path)
-    from .parse import yaml_form
+    from .parse import yaml_form          # .yaml, .yml (and anything else)
     return yaml_form.load(path)
 
 
@@ -107,14 +107,17 @@ def main(argv=None) -> int:
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8")
-    ap = argparse.ArgumentParser(prog="songmap", description="SongMap: song maps -> audio, stems and frame-accurate cues")
+    ap = argparse.ArgumentParser(
+        prog="songmap", description="SongMap: song maps -> audio, stems and frame-accurate cues",
+        epilog="Song maps are .sm files in the SongMap language (docs/LANGUAGE.md, docs/COMPACT_FORMAT.md; "
+               ".sml is an alias) or YAML (.yaml, docs/SONGMAP_SPEC.md). Exit codes: 0 ok, 1 song error, 2 usage.")
     ap.add_argument("--version", action="version", version=f"songmap {__version__}")
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("check", help="parse, validate and expand a song map (fast, no audio)")
-    p.add_argument("song")
+    p.add_argument("song", help="a .sm (.sml) or .yaml song map")
     p.set_defaults(fn=cmd_check)
     p = sub.add_parser("render", help="render song.wav, stems/, cues.json, qa.json")
-    p.add_argument("song")
+    p.add_argument("song", help="a .sm (.sml) or .yaml song map")
     p.add_argument("-o", "--out", help="output folder (default build/<song>)")
     p.add_argument("--no-stems", action="store_true", help="skip stems/*.wav")
     p.add_argument("--master", choices=["standard", "legacy"], help="override the song's master")

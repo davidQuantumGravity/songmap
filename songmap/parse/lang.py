@@ -1,5 +1,6 @@
-"""The SongMap language (`.sml`) -> Song: named beats, parts and sections, `with`, dotted assignment,
-`+`-layered drum lanes, the form block, `xN`, `for`, `if`/`every` and small functions (docs/LANGUAGE.md).
+"""The SongMap language (`.sm`, alias `.sml`) -> Song: named beats, parts and sections, `with`, dotted
+assignment, `+`-layered drum lanes, compact section lines, the form block, `xN`, `for`, `if`/`every`/`bar`,
+named events and small functions (docs/LANGUAGE.md, docs/COMPACT_FORMAT.md).
 
 A program is evaluated once, top to bottom, and compiled to the v0.2 raw mapping that
 `yaml_form.from_raw` turns into a `Song`. So the language adds no new semantics below the song
@@ -20,14 +21,13 @@ from ..model import Song
 from .errors import SongError, did_you_mean
 from .yaml_form import PART_OPTS, PART_SOURCES, VERSION, LineDict, from_raw
 
-EXT = ".sml"
+EXTS = (".sm", ".sml")
 LIMIT = 4096                       # loop iterations, list items, step-string length, sections
 SECTION_SETTINGS = ("harmony", "dyn", "feel", "tempo", "key", "bars")
 PART_KEYS = PART_SOURCES + PART_OPTS
 KEYWORDS = {"for", "in", "if", "elif", "else", "every", "def", "return", "form", "with", "and", "or", "not",
             "true", "false", "none", "as", "at", "bars"}
-DIRECTIVES = ("song", "inst", "kit", "chords", "prog", "motif", "cue", "master")
-LATER_DIRECTIVES = ("groove", "feel", "mix", "qa")      # compact-format lines this prototype does not read yet
+DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "master", "qa")
 STEP_RANK = {".": 0, "o": 1, "-": 2, "x": 3, "r": 4, "f": 5, "X": 6}
 
 
@@ -40,7 +40,7 @@ _TOKEN = re.compile(r"""
 | (?P<str>"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*')
 | (?P<num>\d+\.\d+|\d+|\.\d+)
 | (?P<name>[A-Za-z_]\w*)
-| (?P<op>\.\.|==|!=|<=|>=|\+=|-=|//|[-+*/%<>=()\[\]{},:.|&!@])
+| (?P<op>\.\.|==|!=|<=|>=|\+=|-=|//|[-+*/%<>=()\[\]{},:.|&!@~^?;$])
 | (?P<nl>\n)
 """, re.X)
 
@@ -359,7 +359,7 @@ def parse_expr(toks: list[Tok], file) -> tuple:
 class Ref:
     """A bare name that is not a variable: a style, mod or motif, resolved when bound to a role."""
     name: str
-    line: int | None = None
+    line: int | None = field(default=None, compare=False)
 
 
 @dataclass(frozen=True)
@@ -372,10 +372,16 @@ class Part:
     mods: tuple = ()
     opts: tuple = ()               # ((key, value), ...) part options and sources (order, oct, deg, ...)
     ops: tuple = ()
-    line: int | None = None
+    line: int | None = field(default=None, compare=False)
 
     def opt_dict(self) -> dict:
         return dict(self.opts)
+
+
+@dataclass(frozen=True)
+class Events:
+    """A named list of events (`lift = !impact !riser:2`), placed with `!lift` on a form or section line."""
+    items: tuple
 
 
 @dataclass
@@ -405,6 +411,8 @@ def _kind(v) -> str:
         return "a part"
     if isinstance(v, Func):
         return "a function"
+    if isinstance(v, Events):
+        return "an event list"
     return "none" if v is None else type(v).__name__
 
 
@@ -517,13 +525,51 @@ def _scalar(v: str):
     return {"true": True, "false": False}.get(v, v.strip("\"'"))
 
 
-def _kv(text: str) -> dict:
+def split_top(text: str, sep: str | None = None) -> list[str]:
+    """Split on `sep` (None: whitespace) outside quotes and brackets."""
+    out, cur, depth, quote = [], [], 0, None
+    for c in text:
+        if quote:
+            cur.append(c)
+            if c == quote:
+                quote = None
+            continue
+        if c in "\"'":
+            quote = c
+        elif c in "([{":
+            depth += 1
+        elif c in ")]}":
+            depth -= 1
+        if depth == 0 and (c == sep or (sep is None and c.isspace())):
+            out.append("".join(cur))
+            cur = []
+            continue
+        cur.append(c)
+    out.append("".join(cur))
+    return [x.strip() for x in out if x.strip()]
+
+
+def _value(text: str, it=None, env=None):
+    """A compact-format value: number, word, "string", [list] or {map} (names inside become strings);
+    a bare word that is a variable gives its value."""
+    t = text.strip()
+    if t[:1] in "[{\"'":
+        toks = [x for ln in _lex(t, None) for x in ln.toks]
+        it = it or _Interp(None)
+        v = it.ev(parse_expr(toks, None), env or {})
+        return v if env is not None else _plain(v)
+    if env is not None and re.fullmatch(r"[A-Za-z_]\w*", t) and t in env:
+        return env[t]
+    return _scalar(t)
+
+
+def _kv(text: str, it=None, env=None) -> dict:
     out = {}
-    for item in filter(None, (x.strip() for x in text.split(","))):
+    for item in split_top(text, ","):
         k, eq, v = item.partition("=")
-        if not eq:
+        if not eq or not k.strip():
             raise SongError(f"'{item}' is not key=value")
-        out[k.strip()] = _scalar(v)
+        out[k.strip()] = _value(v, it, env)
     return out
 
 
@@ -618,9 +664,20 @@ class _Parser:
             if ctx != "top":
                 self.err(f"'{word}' lines go at the top level, not inside a block", ln.no)
             return ("directive", word, ln.raw, ln.no)
-        if word in LATER_DIRECTIVES and not is_assign:
-            self.err(f"'{word}' lines are not in the language prototype yet", ln.no,
-                     "they arrive with the compact parser (ROADMAP P6); leave them out for now")
+        if is_assign and nxt.value == "=" and len(toks) > 2 and toks[2].kind == "op" and toks[2].value == "!":
+            if ctx != "top":
+                self.err("define named events at the top level", ln.no)
+            evs, rest = _events(ln.text[toks[2].pos:toks[-1].end], ln.no, self.file)
+            if rest:
+                self.err(f"unexpected '{rest}' after the events", ln.no)
+            return ("events_def", word, evs, ln.no)
+        if word == "bar" and not is_assign:
+            if ctx != "inst":
+                self.err("'bar N:' goes under a section line in the form", ln.no)
+            return self.bar(node)
+        if (ctx == "top" and word and word not in KEYWORDS and nxt is not None
+                and (nxt.kind == "num" or (nxt.kind == "op" and nxt.value == "("))):
+            return self.section_line(ln)
         if word == "def":
             if ctx != "top":
                 self.err("define functions at the top level", ln.no)
@@ -663,7 +720,7 @@ class _Parser:
         self.err("expected a definition (name = value)" if ctx == "top" else "statement not understood", ln.no,
                  {"top": "e.g. verse = {drums: four_floor, bass: sub}",
                   "form": "a form line is '<section> <bars> [xN] [!events]'",
-                  "inst": "under a section: drums += fill, drums.kick = \"x...\", every 8 bars: ..., !impact",
+                  "inst": "under a section: drums += fill, drums.kick = \"x...\", every 8 bars: ..., bar 4: ..., !impact",
                   "def": "a function body is 'name = value' lines and 'return value'"}.get(ctx))
 
     def assign(self, ln: Line, ctx: str):
@@ -711,18 +768,71 @@ class _Parser:
         ln, toks = node.line, node.line.toks
         k = self.colon_at(toks)
         head = toks[1:k]
-        at = None
+        at, song_bars = None, ctx == "form"
         if head and head[-1].kind in ("num", "name") and len(head) >= 2 and head[-2].value == "at":
             at, head = parse_expr(head[-1:], self.file), head[:-2]
         if head and head[-1].value == "bars":
             head = head[:-1]
+            if head and head[-1].value == "song":
+                head, song_bars = head[:-1], True
         if not head:
             self.err("write 'every 8 bars: drums += fill' or 'every 4 bars at 1: ...'", ln.no)
         body = self.body_of(node, k, "inst")
         for s in body:
             if s[0] != "assign":
                 self.err("'every' takes part edits such as 'drums += fill'", ln.no)
-        return ("every", parse_expr(head, self.file), at, body, ln.no)
+        return ("every", parse_expr(head, self.file), at, body, ln.no, song_bars)
+
+    def bar(self, node: Node):
+        """bar 4: ... | bar 1, 5: ... | bar -1: ... (1-based within the section; negative counts from the end)."""
+        ln, toks = node.line, node.line.toks
+        k = self.colon_at(toks)
+        parts, cur, depth = [], [], 0
+        for t in toks[1:k]:
+            if t.kind == "op" and t.value in "([{":
+                depth += 1
+            elif t.kind == "op" and t.value in ")]}":
+                depth -= 1
+            if depth == 0 and t.kind == "op" and t.value == ",":
+                parts.append(cur)
+                cur = []
+            else:
+                cur.append(t)
+        parts.append(cur)
+        if not all(parts):
+            self.err("write 'bar 4: lead = [m2]' or 'bar 1, 5: ...'", ln.no)
+        body = self.body_of(node, k, "inst")
+        for s in body:
+            if s[0] != "assign":
+                self.err("'bar' takes part edits such as 'bass = eighths'", ln.no)
+        return ("bar", [parse_expr(p, self.file) for p in parts], body, ln.no)
+
+    def section_line(self, ln: Line):
+        """The compact section line: `name bars [xN] | role:style ... -role key=value | !events`."""
+        fields = split_top(ln.raw, "|")
+        m = re.fullmatch(r"([A-Za-z_]\w*)\s+(.+?)(?:\s+x(\d+))?", fields[0])
+        if not m:
+            self.err("a section line is '<name> <bars> | parts | !events'", ln.no)
+        try:
+            bars = parse_expr([x for line in _lex(m[2], self.file) for x in line.toks], self.file)
+        except SongError as e:
+            self.err(f"bars '{m[2]}' not understood: {e.message}", ln.no,
+                     "a section line is '<name> <bars> [xN] | parts | !events'")
+        rep = int(m[3]) if m[3] else None
+        if rep is not None and not 1 <= rep <= LIMIT:
+            self.err(f"x{rep}: repeat 1..{LIMIT} times", ln.no)
+        items, events = [], []
+        for f in fields[1:]:
+            for tok in split_top(f):
+                if tok.startswith("!"):
+                    evs, rest = _events(tok, ln.no, self.file)
+                    if rest:
+                        self.err(f"event '{tok}' not understood", ln.no,
+                                 "write !type[:bars|:<beats>b][@+bar:beat|@bar|@f123|@cue:x][(k=v)]")
+                    events += evs
+                else:
+                    items.append(tok)
+        return ("secline", m[1], bars, rep, items, events, ln.no)
 
     def instance(self, node: Node):
         ln, toks = node.line, node.line.toks
@@ -771,9 +881,10 @@ class _Inst:
     section: dict
     bars: float
     events: list
-    every: list                    # [(n, at, path, op, value, line)] instance-relative
+    edits: list                    # per-bar edits: [(selector, path, op, value, line)]
     line: int
     name: str | None = None
+    vary: dict = field(default_factory=dict)    # role -> [(part value, [bars])], filled by the compiler
 
 
 class _Interp:
@@ -782,8 +893,9 @@ class _Interp:
         self.env: dict = {}
         self.song: dict = {}
         self.instances: list[_Inst] = []
-        self.song_every: list = []           # form-level 'every' (song bars)
+        self.song_edits: list = []           # form-level 'every' (song bars)
         self.form_line = None
+        self.flat_line = None                # first compact section line (the implicit form)
         self.iterations = 0
         self.stack: list[str] = []
         self.scope: dict = {}
@@ -968,6 +1080,8 @@ class _Interp:
                 return f() if f else self.bad(op, a, b, line)
             if op == "+" and isinstance(a, str) and isinstance(b, str):
                 return _check_len(a + b, "a step string")
+            if op == "+" and isinstance(a, Events) and isinstance(b, Events):
+                return Events(a.items + b.items)
             if op == "+" and isinstance(a, list) and isinstance(b, list):
                 return self.cap(a + b, line)
             if op == "*" and isinstance(a, (str, list)) and isinstance(b, int) and not isinstance(b, bool):
@@ -1095,6 +1209,10 @@ class _Interp:
 
     def set_path(self, cur, keys, op, val, line, where):
         """Return a copy of `cur` with the value at `keys` set (=) or combined (+= -=); none removes."""
+        if cur is None and keys:
+            cur = {}
+        if isinstance(cur, list) and keys:                 # a motif list gains options: lead.oct = 1
+            cur = Part(opts=(("motifs", cur),), line=line)
         if not keys:
             if op == "=":
                 return val
@@ -1135,15 +1253,28 @@ class _Interp:
                 self.directive(s[1], s[2], s[3])
             elif kind == "assign":
                 self.assign_var(s, self.env)
+            elif kind == "events_def":
+                self.define_events(s)
             elif kind == "def":
                 _, name, params, body, line = s
                 if name in self.env:
                     self.err(f"'{name}' is already defined", line)
                 defaults = [(p, d if d is _REQUIRED else self.ev(d, self.env)) for p, d in params]
                 self.env[name] = Func(name, defaults, body, dict(self.env), line)   # snapshot: no self-reference
+            elif kind == "secline":
+                if self.form_line is not None:
+                    self.err("section lines and a form: block can't be mixed", s[-1],
+                             f"the form block is on line {self.form_line}; define sections with name = {{...}} "
+                             "and place them there")
+                self.flat_line = self.flat_line or s[-1]
+                self.section_line(s)
             elif kind == "form":
                 if self.form_line is not None:
                     self.err("a second form block", s[2], f"the first is on line {self.form_line}")
+                if self.flat_line is not None:
+                    self.err("section lines and a form: block can't be mixed", s[2],
+                             f"the first section line is line {self.flat_line}; turn section lines into "
+                             "definitions (name = {...}) or drop the form block")
                 self.form_line = s[2]
                 self.run_form(s[1], dict(self.env))
             else:
@@ -1154,6 +1285,32 @@ class _Interp:
         if self.iterations > LIMIT:
             self.err(f"the form unrolls to more than {LIMIT} steps", line, "loops have static, small bounds")
 
+    # -- events --
+    def define_events(self, s):
+        _, name, evs, line = s
+        from ..arrange.events import EVENT_TYPES
+        if name in EVENT_TYPES:
+            self.err(f"'{name}' is an event type, so it can't name an event list", line,
+                     f"pick another name, e.g. {name}s or my_{name}")
+        if name in KEYWORDS or name in BUILTINS:
+            self.err(f"'{name}' is reserved", line, "pick another name")
+        self.env[name] = Events(tuple(self.events(evs, self.env)))
+
+    def events(self, evs, env) -> list:
+        """Expand `!name` references to named event lists."""
+        out = []
+        for e in evs:
+            v = env.get(e.type)
+            if isinstance(v, Events):
+                if e.length is not None or e.pos is not None or e.params:
+                    self.err(f"!{e.type} is a named event list; it takes no :length, @position or (options)", e.line,
+                             "give them on the events inside its definition")
+                out += v.items
+            else:
+                out.append(e)
+        return out
+
+    # -- the form --
     def run_form(self, stmts, env):
         for s in stmts:
             kind = s[0]
@@ -1180,15 +1337,16 @@ class _Interp:
             elif kind == "assign":
                 self.assign_var(s, env)
             elif kind == "every":
+                sel = ("every", self.ev(s[1], env), None if s[2] is None else self.ev(s[2], env), True)
                 for edit in s[3]:
-                    self.song_every.append((self.ev(s[1], env), None if s[2] is None else self.ev(s[2], env),
-                                            edit[1], edit[2], self.ev(edit[3], env), s[-1]))
+                    self.song_edits.append((sel, edit[1], edit[2], self.ev(edit[3], env), s[4]))
             elif kind == "event":
-                for e in s[1]:
+                evs = self.events(s[1], env)
+                for e in evs:
                     if e.pos is None or e.pos.startswith(("+", "-")):
                         self.err(f"!{e.type} on its own form line needs an absolute position (@12, @f3960, @name+8)",
                                  e.line)
-                self.instances.append(_Inst("", {}, 0, list(s[1]), [], s[-1], name=None))
+                self.instances.append(_Inst("", {}, 0, evs, [], s[-1], name=None))
             else:
                 self.err(f"'{kind}' in the form block", s[-1])
 
@@ -1209,6 +1367,7 @@ class _Interp:
             self.err(f"how many bars of '{head}'?", line, f"write '{head} 8'")
         if isinstance(bars, bool) or not isinstance(bars, (int, float)) or bars <= 0:
             self.err(f"bars must be a number > 0, got {bars!r}", line)
+        events = self.events(events, env)
         n = rep or 1
         for r in range(1, n + 1):
             self.tick(line)
@@ -1231,16 +1390,130 @@ class _Interp:
             elif kind == "if":
                 self.run_inst(self.pick(s, env), inst, env)
             elif kind == "event":
-                inst.events += s[1]
+                inst.events += self.events(s[1], env)
             elif kind == "every":
-                n = self.ev(s[1], env)
-                at = None if s[2] is None else self.ev(s[2], env)
+                sel = ("every", self.ev(s[1], env), None if s[2] is None else self.ev(s[2], env), s[5])
                 for edit in s[3]:
-                    inst.every.append((n, at, edit[1], edit[2], self.ev(edit[3], env), s[-1]))
+                    inst.edits.append((sel, edit[1], edit[2], self.ev(edit[3], env), s[4]))
+            elif kind == "bar":
+                bars = []
+                for x in s[1]:
+                    v = self.ev(x, env)
+                    bars += v if isinstance(v, list) else [v]
+                for b in bars:
+                    if isinstance(b, bool) or not isinstance(b, int) or b == 0:
+                        self.err(f"bar {b!r}: bars are whole numbers, 1 = the first, -1 = the last", s[-1])
+                for edit in s[2]:
+                    inst.edits.append((("bars", tuple(bars)), edit[1], edit[2], self.ev(edit[3], env), s[-1]))
             else:
                 self.err(f"'{kind}' under a form line", s[-1])
 
-    # -- directives (the compact .sm header lines) --
+    # -- the compact section line --
+    def section_line(self, s):
+        _, name, bars_n, rep, items, events, line = s
+        if name in KEYWORDS or name in DIRECTIVES or name in BUILTINS:
+            self.err(f"'{name}' is reserved and can't name a section", line, "pick another name")
+        sec: dict = {}
+        likes = [x[5:] for x in items if x.startswith("like=")]
+        if len(likes) > 1:
+            self.err("one like= per section line", line)
+        if likes:
+            base = self.env.get(likes[0])
+            if not isinstance(base, dict):
+                maps = [k for k, v in self.env.items() if isinstance(v, dict)]
+                self.err(f"like={likes[0]}: not an earlier section", line,
+                         did_you_mean(likes[0], maps) if maps else "like= needs a section defined above")
+            sec = dict(base)
+        pieces = self.kit_pieces()
+        settings = ("dyn", "prog", "chords", "feel", "swing", "tempo", "key", "auto")
+        for item in items:
+            if item.startswith("like="):
+                continue
+            m_drop = re.fullmatch(r"-([A-Za-z_]\w*)", item)
+            m_set = re.fullmatch(r"([A-Za-z_]\w*)=(.*)", item, re.S)
+            m_part = re.fullmatch(r"([A-Za-z_]\w*):(.+)", item, re.S)
+            if m_drop:
+                sec.pop(m_drop[1], None)
+            elif m_set and m_set[1] in settings:
+                self.section_setting(sec, m_set[1], m_set[2], line, name)
+            elif m_set and m_set[2][:1] in "\"'":
+                key, text = m_set[1], _value(m_set[2])
+                if key in pieces and key not in sec:
+                    sec["drums"] = self.set_path(sec.get("drums") or {}, [key], "=", text, line, name)
+                else:
+                    sec[key] = {"notes": text}
+            elif m_set:
+                self.err(f"{name}: unknown setting '{m_set[1]}'", line, did_you_mean(m_set[1], ("like", *settings)))
+            elif m_part:
+                sec[m_part[1]] = self.compact_part(m_part[2], line)
+            else:
+                self.err(f"{name}: '{item}' not understood", line,
+                         "write role:style[+mod], role:m1,m2, piece=\"x...\", role=\"notes\", -role, like=name or dyn=p<f")
+        self.env[name] = sec
+        self.place(("inst", name, bars_n, rep, None, events, [], line), self.env)
+
+    def section_setting(self, sec, key, v, line, name):
+        v = v.strip().strip("\"'")
+        if key == "dyn":
+            sec["dyn"] = v
+        elif key in ("prog", "chords"):
+            sec["harmony"] = v
+        elif key in ("feel", "swing"):
+            sec["feel"] = {**(sec.get("feel") or {}), ("template" if key == "feel" else "swing"): _scalar(v)}
+        elif key == "tempo":
+            sec["tempo"] = _scalar(v) if re.fullmatch(r"\d+(\.\d+)?", v) else re.sub(r"^(rit|accel)\s*", r"\1 ", v)
+        elif key == "key":
+            sec["key"] = v
+        elif key == "auto":
+            m = re.fullmatch(r"([A-Za-z_]\w*)\.([A-Za-z_]\w*):(.+)", v)
+            if not m:
+                self.err(f"{name}: auto={v} not understood", line,
+                         "write auto=arp.cutoff:1500>4000 (quote it to add ' exp')")
+            role, param, ramp = m.groups()
+            if role not in sec:
+                self.err(f"{name}: auto for '{role}', which the section doesn't play", line,
+                         did_you_mean(role, sec) if sec else None)
+            p = self.as_part(sec[role], line)
+            sec[role] = self.with_(p, {"auto": {**(p.opt_dict().get("auto") or {}), param: ramp}}, line)
+
+    def compact_part(self, text, line):
+        """`full+fill`, `8ths(art=staccato)`, `up(order=[0,2,1,3])`, `m1,m2,m3`, `theme:t+2`, `lattice:dyn=pp`."""
+        items = split_top(text, ",")
+        split = [split_top(it, ":") for it in items]
+        opts = {}
+        for segs in split:
+            for seg in segs[1:]:
+                if "=" in seg:
+                    k, _, v = seg.partition("=")
+                    opts[k] = _value(v, self, self.env)
+        if len(items) > 1 or any("=" not in seg for segs in split for seg in segs[1:]):
+            refs = [":".join([segs[0]] + [x for x in segs[1:] if "=" not in x]) for segs in split]
+            return Part(opts=(("motifs", refs), *opts.items()), line=line)
+        m = re.fullmatch(r"(\w+)((?:\+\w+)*)(?:\((.*)\))?", split[0][0], re.S)
+        if not m:
+            self.err(f"part value '{text}' not understood", line,
+                     "write style[+mod][(k=v)], a variable, or motifs m1,m2")
+        v = self.env[m[1]] if m[1] in self.env else Ref(m[1], line)
+        for mod in filter(None, m[2].split("+")):
+            mv = self.env[mod] if mod in self.env else Ref(mod, line)
+            v = self.layer(v, mv, line) if self.is_kit_value(v) and self.is_kit_value(mv) else self.bad("+", v, mv, line)
+        try:
+            kw = _kv(m[3], self, self.env) if m[3] else {}
+        except SongError as e:
+            self.err(e.message, line, "options are k=v, e.g. 8ths(art=staccato) or up(order=[0, 2, 1, 3])")
+        kw.update(opts)
+        return self.with_(self.as_part(v, line), kw, line) if kw else v
+
+    def kit_pieces(self) -> set:
+        from ..arrange.ensemble import defaults
+        d = defaults()
+        out = set((d["instruments"].get("drums") or {}).get("kit", {})) | set(d.get("kit_fallback", {}))
+        drums = (self.song.get("instruments") or {}).get("drums")
+        if isinstance(drums, dict):
+            out |= set(drums.get("kit", drums))
+        return out
+
+    # -- directives (the compact header lines) --
     def directive(self, word, raw, line):
         try:
             args = shlex.split(raw, posix=True)[1:]
@@ -1252,6 +1525,11 @@ class _Interp:
             if e.line:
                 raise
             raise SongError(e.message, file=self.file, line=line, suggestion=e.suggestion) from None
+
+    @staticmethod
+    def _rest(raw: str) -> str:
+        parts = raw.split(None, 1)
+        return parts[1] if len(parts) > 1 else ""
 
     def d_song(self, args, raw, line):
         if not args:
@@ -1276,23 +1554,130 @@ class _Interp:
             else:
                 s["key"] = a
 
+    _VOICE = re.compile(r"\s*([A-Za-z_]\w*)(?:=([\w/.-]+))?(?:\(([^)]*)\))?")
+
+    def _voices(self, raw, line, what):
+        out, pos, body = [], 0, self._rest(raw)
+        while pos < len(body.rstrip()):
+            m = self._VOICE.match(body, pos)
+            if not m or m.end() == pos:
+                self.err(f"{what}: '{body[pos:].split()[0]}' not understood", line,
+                         "write inst bass(cutoff=700) keys=keys/felt_piano" if what == "inst"
+                         else "write kit kick=kick/punchy snare=snare(tone=170)")
+            out.append((m[1], m[2], _kv(m[3]) if m[3] else {}))
+            pos = m.end()
+        if not out:
+            self.err(f"{what}: nothing to set", line)
+        return out
+
     def d_inst(self, args, raw, line):
-        body = raw.split(None, 1)[1] if len(raw.split(None, 1)) > 1 else ""
-        items = re.findall(r"([A-Za-z_]\w*)(?:=([\w/]+))?(?:\(([^)]*)\))?", body)
-        if not items:
-            self.err("write: inst bass(cutoff=700) keys=keys/felt_piano", line)
         ins = self.song.setdefault("instruments", {})
-        for part, use, params in items:
-            p = _kv(params) if params else {}
-            ins[part] = ({"use": use, **p} if p else use) if use else p
+        for part, use, params in self._voices(raw, line, "inst"):
+            ins[part] = ({"use": use, **params} if params else use) if use else params
 
     def d_kit(self, args, raw, line):
-        kit = self.song.setdefault("instruments", {}).setdefault("drums", {"kit": {}})["kit"]
+        drums = self.song.setdefault("instruments", {}).setdefault("drums", {})
+        kit = drums.setdefault("kit", {})
+        for piece, use, params in self._voices(raw, line, "kit"):
+            if not use:
+                self.err(f"kit: write {piece}=<instrument>[/<preset>]", line)
+            kit[piece] = {"use": use, **params} if params else use
+
+    @staticmethod
+    def _hum(v: str, line, err) -> dict:
+        xs = [x for x in v.split(",") if x]
+        if len(xs) != 3:
+            err(f"hum={v}: write hum=<time_ms>,<drift_ms>,<vel>, e.g. hum=4,3,.03", line)
+        return {"time_ms": _scalar(xs[0]), "drift_ms": _scalar(xs[1]), "vel": _scalar(xs[2])}
+
+    def d_groove(self, args, raw, line):
+        g = self.song.setdefault("groove", {})
         for a in args:
-            piece, eq, use = a.partition("=")
-            if not eq:
-                self.err(f"kit: write piece=instrument, got '{a}'", line)
-            kit[piece] = use
+            k, eq, v = a.partition("=")
+            if k == "swing" and eq:
+                amt, _, grid = v.partition("/")
+                g["swing"] = _scalar(amt)
+                if grid:
+                    g["swing_grid"] = _scalar(grid)
+            elif k == "tpl" and eq:
+                g["template"] = v
+            elif k == "hum" and eq:
+                g["humanize"] = self._hum(v, line, self.err)
+            elif k == "metric" and eq:
+                g["metric"] = _scalar(v)
+            else:
+                self.err(f"groove: '{a}' not understood", line, "valid: swing=.54[/16] tpl=<template> "
+                         "hum=<time_ms>,<drift_ms>,<vel> metric=<0..1>")
+
+    def d_feel(self, args, raw, line):
+        if not args or "=" in args[0]:
+            self.err("write: feel <part> offset=<ms> gate=<x> hum=<t>,<d>,<v> high_loud=<x> arch=<x>", line)
+        f = self.song.setdefault("parts_feel", {}).setdefault(args[0], {})
+        keys = {"offset": "offset_ms", "gate": "gate", "high_loud": "high_loud", "arch": "arch"}
+        for a in args[1:]:
+            k, eq, v = a.partition("=")
+            if k == "hum" and eq:
+                f["humanize"] = self._hum(v, line, self.err)
+            elif k in keys and eq:
+                f[keys[k]] = _scalar(v)
+            else:
+                self.err(f"feel {args[0]}: '{a}' not understood", line, did_you_mean(k, [*keys, "hum"]))
+
+    def d_mix(self, args, raw, line):
+        from ..arrange.ensemble import defaults
+        base = defaults().get("mix", {})
+        sends = ("hall", "room", "delay", "plate")
+        for chunk in split_top(self._rest(raw), "|"):
+            words = chunk.split()
+            if len(words) < 2 or not re.fullmatch(r"[+-]?\d+(\.\d+)?", words[1]):
+                self.err(f"mix: '{chunk}' needs a part and a gain in dB", line,
+                         "write mix bass -2 sc=.5 | pad -6 hall=.35")
+            part, m = words[0], {"gain_db": _scalar(words[1])}
+            for a in words[2:]:
+                k, eq, v = a.partition("=")
+                if not eq:
+                    self.err(f"mix {part}: '{a}' is not key=value", line)
+                if k == "sc":
+                    m["sidechain"] = {**(base.get(part, {}).get("sidechain") or {"from": "kick"}), "depth": _scalar(v)}
+                elif k in sends:
+                    m.setdefault("send", dict(base.get(part, {}).get("send") or {}))[k] = _scalar(v)
+                elif k in ("pan", "width"):
+                    m[k] = _scalar(v)
+                else:
+                    self.err(f"mix {part}: unknown option '{k}'", line,
+                             did_you_mean(k, ("sc", "pan", "width", *sends)))
+            self.song.setdefault("mix", {})[part] = m
+
+    def d_qa(self, args, raw, line):
+        q = self.song.setdefault("qa", {})
+        for a in args:
+            m = re.fullmatch(r"([a-z_]+)(!=|<=|=)(.+)", a)
+            if not m:
+                self.err(f"qa: '{a}' not understood", line,
+                         "e.g. qa lufs=-14 contrast=who<agents:6 silent!=goals,agents")
+            k, op, v = m.groups()
+            if k == "lufs" and op == "=":
+                lo, dots, hi = v.partition("..")
+                q["target_lufs"] = [_scalar(lo), _scalar(hi)] if dots else _scalar(v)
+            elif k == "contrast" and op == "=":
+                rules = []
+                for r in v.split(","):
+                    mm = re.fullmatch(r"([A-Za-z_]\w*)<([A-Za-z_]\w*):(\d+(?:\.\d+)?)", r)
+                    if not mm:
+                        self.err(f"qa contrast '{r}' not understood", line, "write quiet<loud:dB, e.g. who<agents:6")
+                    rules.append([mm[1], mm[2], _scalar(mm[3])])
+                q["contrast"] = rules
+            elif k == "silent" and op == "!=":
+                q["never_silent"] = [x for x in v.split(",") if x]
+            elif k == "low" and op == "<=":
+                q["max_low_ratio"] = _scalar(v)
+            elif k == "peak" and op in ("<=", "="):
+                q["true_peak_max_db"] = _scalar(v)
+            elif k == "hits" and op == "=":
+                q["hits_audible"] = _scalar(v)
+            else:
+                self.err(f"qa: unknown rule '{k}{op}'", line,
+                         "valid: lufs=<x>|<a>..<b> contrast=a<b:dB,... silent!=a,b low<=<x> peak<=<dB> hits=true")
 
     def d_chords(self, args, raw, line):
         h = self.song.setdefault("harmony", {})
@@ -1470,7 +1855,13 @@ class _Compiler:
             p = self.it.as_part(v, line)
             opts = {k: _plain(x) for k, x in p.opts}
             raw = dict(opts)
-            if p.style:
+            for n in opts.get("motifs") or []:
+                if str(n).split(":")[0] not in self.motifs:
+                    self.err(f"unknown motif '{n}'", p.line or line, section,
+                             did_you_mean(str(n), self.motifs) if self.motifs else "define it: motif m1 deg \"0 2 4\"")
+            if p.style and not p.mods and p.style.split(":")[0] in self.motifs:
+                raw["motifs"] = [p.style]
+            elif p.style:
                 self.check_style(role, p.style, p.line or line, section, opts)
                 raw["style"] = "+".join((p.style, *p.mods))
             elif p.mods:
@@ -1487,35 +1878,85 @@ class _Compiler:
             return raw
         self.err(f"{role}: expected a part, got {_kind(v)}", line, section)
 
-    def apply_every(self, inst: _Inst, start_bar: float, every: list, song_level: bool):
-        """Per-bar edits on kit lanes, baked into per-bar step strings ('a|b|...')."""
-        for n, at, path, op, val, line in every:
-            role = path[0]
-            if role not in inst.section:
-                if song_level:
-                    continue
-                self.err(f"every: the section has no '{role}' part", line, inst.name,
-                         did_you_mean(role, inst.section) if inst.section else None)
+    def bar_set(self, sel, inst: _Inst, start_bar: float, line) -> set:
+        """The 0-based bars of an instance that a per-bar selector picks."""
+        nb = math.ceil(inst.bars - 1e-9)
+        if sel[0] == "every":
+            _, n, at, song_bars = sel
             if not isinstance(n, int) or isinstance(n, bool) or n < 1:
                 self.err(f"every {n!r}: write a whole number of bars", line, inst.name)
             k = n if at is None else at
-            if not isinstance(k, int) or not 1 <= k <= n:
+            if not isinstance(k, int) or isinstance(k, bool) or not 1 <= k <= n:
                 self.err(f"every {n} bars at {k!r}: 'at' is a bar 1..{n} of each group", line, inst.name)
-            nb = inst.bars
-            if nb != int(nb):
-                self.err("every needs a whole number of bars in the section", line, inst.name)
-            p = self.it.as_part(inst.section[role], line)
-            if not self.is_kit(role, p, p.opt_dict()):
-                self.err(f"every: per-bar edits work on drum kits, and {role} is not one", line, inst.name,
-                         f"split the section instead: {inst.base} {int(nb) - 1} then a 1-bar variant")
+            if song_bars and start_bar != int(start_bar):
+                self.err("every N song bars needs the section to start on a whole bar", line, inst.name)
+            first = int(start_bar) if song_bars else 0
+            return {b for b in range(nb) if (first + b) % n == k - 1}
+        out = set()
+        for b in sel[1]:
+            i = b - 1 if b > 0 else nb + b
+            if not 0 <= i < nb:
+                self.err(f"bar {b}: the section has {nb} bars", line, inst.name,
+                         f"bars count 1..{nb} from the start, -1..-{nb} from the end")
+            out.add(i)
+        return out
+
+    def apply_edits(self, inst: _Inst, start_bar: float):
+        """Per-bar edits. Lane edits on a drum kit are baked into per-bar step strings ('a|a|a|b');
+        anything else becomes per-bar variants of the part (`vary:` in the song tree)."""
+        edits = [(e, False) for e in inst.edits] + [(e, True) for e in self.it.song_edits]
+        by_role: dict[str, list] = {}
+        for (sel, path, op, val, line), from_form in edits:
+            role = path[0]
+            if role in SECTION_SETTINGS:
+                self.err(f"per-bar edits change parts, not the section's {role}", line, inst.name,
+                         "split the section to change its harmony, dyn or tempo")
+            if from_form and role not in inst.section:
+                continue                        # song-wide `every` skips sections without the part
+            bars = self.bar_set(sel, inst, start_bar, line)
+            if bars:
+                by_role.setdefault(role, []).append((bars, path, op, val, line))
+        for role, items in by_role.items():
+            base = inst.section.get(role)
+            if base is not None and self.bakeable(role, base, items, inst):
+                self.bake(inst, role, items)
+            else:
+                self.vary(inst, role, base, items)
+
+    def bakeable(self, role, base, items, inst) -> bool:
+        if not isinstance(base, (Ref, Part, dict)):
+            return False
+        p = self.it.as_part(base, items[0][4])
+        if not self.is_kit(role, p, p.opt_dict()):
+            return False
+        for _, path, op, val, line in items:
+            if len(path) == 2 and op in ("=", "+=") and isinstance(val, str):
+                continue
+            if len(path) == 1 and op == "+=" and isinstance(val, dict):
+                continue
+            if len(path) == 1 and op == "+=" and isinstance(val, Ref) and p.style:
+                from ..arrange.styles import get_style
+                m = (get_style(role, p.style).get("mods") or {}).get(val.name)
+                if m is not None and "every" in m:
+                    self.err(f"mod '{val.name}' already plays every {m['every']} bars", line, inst.name,
+                             f"write {role} += {val.name} without 'every'")
+                if m is not None:
+                    continue
+            return False
+        return True
+
+    def bake(self, inst: _Inst, role, items):
+        p = self.it.as_part(inst.section[role], items[0][4])
+        nb = math.ceil(inst.bars - 1e-9)
+        for bars, path, op, val, line in items:
             try:
-                edits = self.every_edits(role, p, path, op, val)
+                lane_edits = self.lane_edits(role, p, path, op, val)
                 steps = _steps(role, p)
                 base_lanes = _style_lanes(role, p.style, p.mods)
             except SongError as e:
                 self.err(e.message, line, inst.name, e.suggestion)
             ops = []
-            for kind, lane, s in edits:
+            for kind, lane, s in lane_edits:
                 base = steps.get(lane)
                 if base is None and lane in base_lanes:
                     try:
@@ -1523,61 +1964,74 @@ class _Compiler:
                     except SongError as e:
                         self.err(e.message, line, inst.name, e.suggestion)
                 if isinstance(base, dict) or isinstance(s, dict):
-                    self.err(f"every: lane '{lane}' has a velocity list", line, inst.name,
-                             "per-bar edits need plain step strings")
+                    self.err(f"per-bar edit: lane '{lane}' has a velocity list", line, inst.name,
+                             "per-bar lane edits need plain step strings")
                 bsegs = _bars(base) if base else None
                 xsegs = _bars(s)
                 segs, hits = [], 0
-                for b in range(int(nb)):
-                    bar_no = int(round(start_bar)) + b if song_level else b
+                for b in range(nb):
                     bseg = bsegs[b % len(bsegs)] if bsegs else None
-                    if bar_no % n == k - 1:
+                    if b in bars:
                         x = xsegs[hits % len(xsegs)]
                         hits += 1
                         seg = x if kind == "set" or not bseg else overlay(bseg, x)
                     else:
                         seg = bseg or "."
                     segs.append(seg)
-                if not hits:
-                    continue
                 ops.append(("set", lane, _check_len("|".join(segs), f"lane '{lane}'")))
-            inst.section[role] = replace(p, ops=p.ops + tuple(ops))
+            p = replace(p, ops=p.ops + tuple(ops))
+        inst.section[role] = p
 
-    def every_edits(self, role, p: Part, path, op, val):
+    def vary(self, inst: _Inst, role, base, items):
+        nb = math.ceil(inst.bars - 1e-9)
+        groups: list = []                       # [(value, [bars])] in first-bar order
+        for b in range(nb):
+            v = base
+            for bars, path, op, val, line in items:
+                if b in bars:
+                    v = self.it.set_path(v, path[1:], op, val, line, f"{inst.name}.{role}")
+            if v == base:
+                continue
+            for g in groups:
+                if g[0] == v:
+                    g[1].append(b)
+                    break
+            else:
+                groups.append((v, [b]))
+        if groups:
+            inst.vary[role] = groups
+
+    def lane_edits(self, role, p: Part, path, op, val):
         if len(path) == 2:
-            if not isinstance(val, str):
-                raise SongError(f"every: {role}.{path[1]} needs a step string, got {_kind(val)}")
             return [("set" if op == "=" else "layer", path[1], val)]
-        if len(path) != 1 or op != "+=":
-            raise SongError("every takes 'role += beat' or 'role.lane = \"...\"'",
-                            suggestion="e.g. every 8 bars: drums += fill")
         if isinstance(val, dict):
             return [("layer", lane, _lane_value(v, lane)) for lane, v in val.items()]
-        if isinstance(val, Ref):
-            from ..arrange.styles import get_style
-            if not p.style:
-                raise SongError(f"'{val.name}' is a mod, and this part has no style")
-            st = get_style(role, p.style)
-            m = (st.get("mods") or {}).get(val.name)
-            if m is None:
-                raise SongError(f"{role} style '{p.style}' has no mod '+{val.name}'",
-                                suggestion=did_you_mean(val.name, st.get("mods") or {}))
-            if "every" in m:
-                raise SongError(f"mod '{val.name}' already plays every {m['every']} bars",
-                                suggestion=f"write {role} += {val.name} without 'every'")
-            return ([("set", k, v) for k, v in (m.get("set") or {}).items()]
-                    + [("layer", k, v) for k, v in (m.get("add") or {}).items()])
-        raise SongError(f"every: {role} += needs a beat ({{lane: \"...\"}}) or a mod name, got {_kind(val)}")
+        from ..arrange.styles import get_style
+        m = (get_style(role, p.style).get("mods") or {})[val.name]
+        return ([("set", k, v) for k, v in (m.get("set") or {}).items()]
+                + [("layer", k, v) for k, v in (m.get("add") or {}).items()])
+
+    def part_dict(self, role, v, line, section) -> dict:
+        """part_raw, always as a mapping (so `vary:` can be added); none -> a muted part."""
+        if v is None:
+            return {"mute": True}
+        raw = self.part_raw(role, v, line, section)
+        if isinstance(raw, list):
+            return {"motifs": raw}
+        if isinstance(raw, str):
+            return {"motifs": [raw]} if raw.split(":")[0] in self.motifs else {"style": raw}
+        return raw
 
     def compile(self) -> dict:
         it = self.it
-        if it.form_line is None:
-            raise SongError("no form block", file=self.file,
-                            suggestion="end the file with 'form:' and one indented line per section: 'verse 8'")
+        if it.form_line is None and it.flat_line is None:
+            raise SongError("no sections", file=self.file,
+                            suggestion="add section lines ('verse 8 | drums:full bass:sub') or a 'form:' block")
         insts = [x for x in it.instances if x.base]
         if not insts:
-            self.err("the form places no sections", it.form_line)
-        # names: the first instance of `verse` is `verse`, later ones verse_2, verse_3, ...
+            self.err("the form places no sections", it.form_line or it.flat_line)
+        # names: the first instance of `verse` is `verse`, later ones verse_2, verse_3, ...; a name depends
+        # only on earlier instances of the same section, so inserting other sections never renames it
         count: dict[str, int] = {}
         taken = {x.name for x in insts if x.name}
         for x in insts:
@@ -1601,21 +2055,30 @@ class _Compiler:
             if not x.base:                      # a bare event line in the form
                 events += [self.event(e, None) for e in x.events]
                 continue
-            self.apply_every(x, bar, x.every, False)
-            self.apply_every(x, bar, it.song_every, True)
+            self.apply_edits(x, bar)
             sec = LineDict(name=x.name, bars=x.bars, parts={})
             sec.line = x.line
-            for key, v in x.section.items():
+            roles = list(x.section) + [r for r in x.vary if r not in x.section]
+            for key in roles:
+                v = x.section.get(key)
                 if key in SECTION_SETTINGS:
                     if key != "bars":
                         sec[key] = _plain(v)
-                elif v is not None:
-                    try:
-                        sec["parts"][key] = self.part_raw(key, v, x.line, x.name)
-                    except SongError as e:
-                        if e.file:
-                            raise
-                        self.err(e.message, x.line, x.name, e.suggestion)
+                    continue
+                if v is None and key not in x.vary:
+                    continue
+                try:
+                    if key in x.vary:
+                        raw = self.part_dict(key, v, x.line, x.name)
+                        raw["vary"] = [{"bars": bars, "part": self.part_dict(key, pv, x.line, x.name)}
+                                       for pv, bars in x.vary[key]]
+                    else:
+                        raw = self.part_raw(key, v, x.line, x.name)
+                    sec["parts"][key] = raw
+                except SongError as e:
+                    if e.file:
+                        raise
+                    self.err(e.message, x.line, x.name, e.suggestion)
             sections.append(sec)
             events += [self.event(e, x.name) for e in x.events]
             bar += x.bars
@@ -1629,6 +2092,8 @@ class _Compiler:
             at = inst
         elif e.pos.startswith(("+", "-")):
             at = f"{inst}{e.pos}"
+        elif re.fullmatch(r"\d+", e.pos):
+            at = int(e.pos)                     # an absolute bar, as YAML writes it
         else:
             at = e.pos
         d = LineDict(at=at, type=e.type)
@@ -1663,4 +2128,4 @@ def load(path: str) -> Song:
         return loads(f.read(), path)
 
 
-__all__ = ["load", "loads", "compile_raw", "overlay", "euclid", "rotate", "reverse", "EXT"]
+__all__ = ["load", "loads", "compile_raw", "overlay", "euclid", "rotate", "reverse", "split_top", "EXTS"]

@@ -13,6 +13,7 @@ motif m4 deg oct=5 "1/4. 0/8 -1/2 | -3/1"
 order = [0, 2, 1, 3, 0, 2, 4, 3, 1, 2, 0, 3]
 up = up(order=order)
 dim = dark(order=order)
+lift = !impact !riser:2 !riser:1@+8
 
 terminal = {arp: dim, fx: ticks, bass: sub}
 swarm_in = terminal with {drums: four_floor, bass: eighths}
@@ -32,9 +33,9 @@ form:
   swarm_in 4    !impact
   goals 8       !riser:1
   who 2
-  agents 16     !impact !riser:2 !riser:1@+8
+  agents 16     !lift
   so_what 2
-  output 16     !impact !riser:2 !riser:1@+8
+  output 16     !lift
   guardrails 4
   summary 2     !impact
   end_card 2    !impact
