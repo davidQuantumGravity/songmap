@@ -734,6 +734,13 @@ golden triad. [Exhaustive.] A hybrid scale is necessarily irregular: hybrids are
   pentatonic C D vF ^G ^A plus the same pentatonic a golden third higher (C# vE vF# ^Ab B). These are the only two
   well-formed 5-subsets of the 252. The golden pentatonic (chain of golden fifths; well-formed at 2, 3, 5, 8, 13 notes in
   exact tuning) has steps 267.64 c × 3 and 198.54 c × 2: the Western pentatonic's proportions reversed.
+- **The decatonic is the golden pentatonic by chroma** [Theorem + computation]: the chroma of an n-note well-formed scale
+  spans n chain links, so the limma (5 fifths; 10 golden sixths) is the chroma of the pentatonic and of golden10. By
+  chroma: apotome — diatonic (7) / golden3 (3); limma — pentatonic (5) / golden10 (10); comma — chromatic (12) /
+  golden13 (13). The comma scale is the union of the other two (12 = 7 + 5 white + black keys; 13 = 3 + 10), and a key
+  change by a limma keeps one part and moves the other: golden13 on C -> vC# keeps vEbg (Bb ^F# vEb) and moves exactly the
+  35 decatonic on C; down to ^B it keeps Dg and moves the 53 decatonic. The proportions are reversed (10 + 3 against
+  5 + 7) because the golden apotome lies 3 chain links away, the Pythagorean 7 (ch36 §pentatonic-mirror).
 - **Distances.** From Cg to the golden triad k chain steps away (k = 0 … 18): 0, 3, 6, …, 18, 15, 12, 9, 6, 5, 4, 3, 6, …, 18.
 
 ### 8.7 Demos

@@ -1,0 +1,25 @@
+# ch36 pentatonic mirror: a key change by a limma splits the scale into a part that stays and a part that moves.
+# 12-ET: the white keys (C major), the black keys (a pentatonic); C major -> Db major keeps C and F and moves the
+# pentatonic D E G A B. Golden: golden13 on C -> golden13 on vC# (up a golden limma, two sixth-steps) keeps the golden
+# triad vEbg (vEb ^F# Bb) and moves the ten notes of the 35 decatonic C C# D vE vF vF# ^G ^Ab ^A B.
+songmap: 0.2
+title: "The decatonic as the golden pentatonic"
+tempo: 100
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 37
+tail_seconds: 3
+instruments: {keys: clean/keys, pluck: string_pluck/still, organ: clean/organ}
+mix:
+  keys: {gain_db: -4}
+  pluck: {gain_db: -4}
+  organ: {gain_db: -8}
+sections:
+  - {name: white_keys, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 d8 e8 f8 g8 a8 b8 c+8"}}}
+  - {name: black_keys, bars: 1, harmony: "N.C.:1", parts: {pluck: {notes: "c#8 d#8 f#8 g#8 a#8 c#+4."}}}
+  - {name: limma_12et, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 d8 e8 f8 g8 a8 b8 c+8 | db8 eb8 f8 gb8 ab8 bb8 c+8 db+8"}}}
+  - {name: kept_triad, bars: 1, harmony: "vEbg:1", parts: {organ: hold}}
+  - {name: decatonic, bars: 2, harmony: "N.C.:2", parts: {pluck: {notes: "c8 c#8 d8 ve8 vf8 vf#8 ^g8 ^ab8 | ^a8 b8 c+2."}}}
+  - {name: golden13_lift, bars: 4, harmony: "N.C.:4", parts: {keys: {notes: "c8 c#8 d8 veb8 ve8 vf8 vf#8 ^f#8 | ^g8 ^ab8 ^a8 bb8 b8 c+4. | vc#8 vd8 veb8 ^eb8 ^e8 ^f8 ^f#8 g8 | ab8 a8 bb8 vb8 vc+8 vc#+4."}}}
+master: clean
