@@ -10,3 +10,6 @@ node_modules/
 # large binary sources: recoverable from the weekly_videos folder (see README)
 assets/**/*.mp3
 assets/**/*.mp4
+# sample libraries (sampler backend): never committed, see docs/INSTRUMENTS.md §5.1
+samples/
+*.flac

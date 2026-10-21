@@ -59,7 +59,7 @@ songmap/
     base.py               # Param, Note, Instrument, registry, describe()
     dsp/                  # osc, filters, env, noise, physical models, fx kernels (numba)
     drums/ bass/ keys/ mallets/ strings/ brass/ winds/ voice/ synth/ fx/
-    sampler.py            # SFZ subset
+    sampler/              # SFZ subset: sfz.py parser, resample.py (sinc), library.py (find + LICENSES.md)
     plugin.py             # DawDreamer host (optional extra)
     patch.py              # YAML module-graph instruments + safe expression evaluator
   presets/                # <instrument>/<name>.yaml

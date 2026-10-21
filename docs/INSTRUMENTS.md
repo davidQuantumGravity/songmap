@@ -142,6 +142,22 @@ Two optional backends plug into the same `Instrument` contract, so a song can sw
   - Sonatina Symphonic Orchestra (CC Sampling+)
   - freesound.org packs filtered by CC0 (drum one-shots)
   - Keep a `LICENSES.md` listing every sample source used in a render.
+- **Status:** ✅ `songmap/instruments/sampler/` (sfz.py parser, resample.py Kaiser-windowed sinc, library.py finder and licenses). Notes:
+  - Regions are matched by `round(pitch)`, then repitched from the exact float MIDI pitch, so 36edo works.
+  - Round-robin cycles with `Note.rr`, the part's note counter mod 8.
+  - Chokes are applied by the engine across the notes of a part, with a 6 ms fade.
+  - Extras beyond the list above: `key`, `default_path`, `amp_veltrack`, `pitch_keytrack`, `rt_decay`, `#define` and `#include`.
+  - Other opcodes are ignored, and the render log warns about them. Loops, filters and LFOs are not supported yet.
+  - Knobs: `level`, `tune`, `xfade` (velocity crossfade width), `attack`, `release_mul` and `release_level`.
+
+#### Using Salamander from a song
+1. Install the extra: `pip install -e .[sampler]` (soundfile).
+2. Download `SalamanderGrandPiano-SFZ+FLAC-V3+20200602.tar.gz` (707 MB, CC BY 3.0, Alexander Holm) from <https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html>.
+3. Unpack it so the `.sfz` sits somewhere under `samples/salamander/`. `samples/` is git-ignored, and sample audio is never committed. Instead of `./samples`, you can use `~/.songmap/samples/`, or any folder named in `SONGMAP_SAMPLES` (`os.pathsep`-separated).
+4. In the song, write `instruments: {keys: sampler/salamander}`, or `{use: sampler/salamander, xfade: 0.7, release_mul: 1.5}`. Nothing else changes.
+5. `songmap render` writes `LICENSES.md` next to `song.wav`, crediting every library used. Keep it with the published video's credits.
+
+For a library with several programs, write `sampler/<library>/<program stem>`. For example, VSCO-2 CE (CC0, <https://github.com/sgossner/VSCO-2-CE/releases/tag/1.1.0>) unpacked as `samples/vsco2/` is used as `sampler/vsco2/<stem>`. If a library is missing, the error says where it looked and where to download it.
 
 ### 5.2 `plugin`: VST3 hosting via DawDreamer
 - `pip install dawdreamer`, then load a VST3 instrument, send it the Played notes as MIDI, and render offline. Parameters come from `get_parameters_description()`, and the GUI shows them like native knobs.

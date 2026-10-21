@@ -42,6 +42,7 @@ class Note:
     vel: float = 0.7                    # 0..1 (MIDI velocity / 127)
     gate: float = 0.5                   # seconds the key is held (after articulation)
     seed: int = 0                       # per-note seed: round-robin + humanize variation
+    rr: int = 0                         # round-robin slot (the part's note counter); samplers cycle layers by it
     glide_from: float | None = None     # previous pitch when slurred (mono instruments glide)
     params: dict = field(default_factory=dict)  # per-note automation snapshot
 
@@ -102,6 +103,10 @@ class Instrument:
 
     def tail(self, note: Note) -> float:
         return self.p.get("release", 0.2)
+
+    def choke(self, note: Note) -> tuple[int, int]:
+        """(group, off_by): a later note of group `off_by` in the same part cuts this one. 0 = none."""
+        return 0, 0
 
     def p_(self, note: Note, k: str) -> float:
         """Param value with per-note automation override."""

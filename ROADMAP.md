@@ -169,7 +169,7 @@ Work through the catalog in [docs/INSTRUMENTS.md §3](docs/INSTRUMENTS.md), each
 6. **Brass and winds:** `brass` (the dynamics→brightness law, lip blat, scoop), `braam`, `flute`, `clarinet`.
 7. **Voice:** `choir` (formant vowels, N singers).
 8. **Synths:** `fm` (4-op), `wavetable`, `reese`, `string_machine`. **FX:** `downlifter`, `whoosh`, `reverse_cymbal`, `sub_drop`, `stab` (layered orchestral hit).
-9. **Sampler backend** (`instruments/sampler.py`, the SFZ subset in [INSTRUMENTS.md §5.1](docs/INSTRUMENTS.md)). Evaluate VSCO-2 CE and Salamander, and add `LICENSES.md`.
+9. **Sampler backend** (`instruments/sampler/`, the SFZ subset in [INSTRUMENTS.md §5.1](docs/INSTRUMENTS.md)). ✅ engine, tests and per-render `LICENSES.md` (2026-10-21); still to do: evaluate VSCO-2 CE and Salamander by ear.
 10. **Plugin backend** (`instruments/plugin.py`, DawDreamer): Surge XT + Dexed first.
 11. **Patch instruments** (`instruments/patch.py`): the YAML module graph and safe expression evaluator of [INSTRUMENTS.md §7](docs/INSTRUMENTS.md), with templates.
 
