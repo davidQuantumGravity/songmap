@@ -1,6 +1,6 @@
 """songmap command line.
 
-    songmap check  song.yaml                 parse, validate, expand; prints a summary or precise errors
+    songmap check  song.yaml|song.sml        parse, validate, expand; prints a summary or precise errors
     songmap render song.yaml [-o build/x]    song.wav (24-bit), stems/, cues.json, qa.json, render.log
     songmap migrate old.yaml [-o new.yaml]   rewrite a v0.1 song map as v0.2
 
@@ -20,7 +20,10 @@ def _load(path: str):
     ext = os.path.splitext(path)[1].lower()
     if ext == ".sm":
         raise SongError("the compact .sm parser arrives in P6", file=path,
-                        suggestion="use the YAML form (examples/v0.2_yaml/) for now")
+                        suggestion="use the YAML form (examples/v0.2_yaml/) or the language (.sml) for now")
+    if ext == ".sml":
+        from .parse import lang
+        return lang.load(path)
     from .parse import yaml_form
     return yaml_form.load(path)
 
