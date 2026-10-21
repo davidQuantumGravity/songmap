@@ -38,6 +38,15 @@ mix:
   arp:   {gain_db: 2.5, send: {hall: 0.3}, sidechain: {from: kick, depth: 0.6, release: 0.214, attack: 0.0005}}
   lead:  {gain_db: 1.2, send: {hall: 0.35}, sidechain: {from: kick, depth: 0.6, release: 0.214, attack: 0.0005}}
   fx:    {gain_db: 0, send: {hall: 0.3}}
+  # Parts beyond synth_v0's six, levelled so their chords sit near the default pad (measured
+  # 2026-10-21: keys +4.2 dB, epiano +11.0, organ +18.8, string_pluck +2.4 over pad:warm on the same
+  # chords), with some hall and no kick ducking (acoustic-style instruments shouldn't pump).
+  keys:   {gain_db: -4, send: {hall: 0.25}}
+  piano:  {gain_db: -4, send: {hall: 0.25}}
+  epiano: {gain_db: -11, send: {hall: 0.2}}
+  organ:  {gain_db: -19, send: {hall: 0.15}}
+  gtr:    {gain_db: -2.5, send: {hall: 0.25}}
+  guitar: {gain_db: -2.5, send: {hall: 0.25}}
 
 returns:
   hall: {type: reverb, seconds: 2.06, predelay: 0.0, damping: 0.3, early: 0}

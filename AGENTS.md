@@ -4,7 +4,13 @@ SongMap is a from-scratch Python music engine. Songs are short text files (`.sm`
 
 ## Writing or revising music
 
-Follow **[.claude/skills/songmap-compose/SKILL.md](.claude/skills/songmap-compose/SKILL.md)**. It is the full authoring loop, the `.sm` format on one screen, and the scoring rules of thumb. Its catalog, [catalog.txt](.claude/skills/songmap-compose/catalog.txt), lists every style, instrument and event you may use. In short:
+Follow **[.claude/skills/songmap-compose/SKILL.md](.claude/skills/songmap-compose/SKILL.md)**. It covers:
+- the composing method and the "lifelike, not robotic" checklist;
+- the `.sm` format;
+- an index of craft references (`reference/`: emotion recipes, harmony, melody, rhythm, instruments and arrangement);
+- three complete, rendered example scores (`examples/`).
+
+Its catalog, [catalog.txt](.claude/skills/songmap-compose/catalog.txt), lists every style, instrument and event you may use. In short:
 
 1. `songmap describe --compact`: read the catalog and use only its names.
 2. Spot the video. Frames per bar = `fps × beats_per_bar × 60 / tempo`, which is 60 at 120 BPM, 4/4, 30 fps.

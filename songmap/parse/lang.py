@@ -23,7 +23,7 @@ from .yaml_form import PART_OPTS, PART_SOURCES, VERSION, LineDict, from_raw
 
 EXTS = (".sm", ".sml")
 LIMIT = 4096                       # loop iterations, list items, step-string length, sections
-SECTION_SETTINGS = ("harmony", "dyn", "feel", "tempo", "key", "bars")
+SECTION_SETTINGS = ("harmony", "chords", "prog", "dyn", "feel", "tempo", "key", "bars")   # chords/prog: aliases of harmony
 PART_KEYS = PART_SOURCES + PART_OPTS
 KEYWORDS = {"for", "in", "if", "elif", "else", "every", "def", "return", "form", "with", "and", "or", "not",
             "true", "false", "none", "as", "at", "bars"}
@@ -667,6 +667,9 @@ class _Parser:
             nxt.kind == "num" or (nxt.kind == "op" and nxt.value == "(")) and word != "bar"
         if placed and ctx == "form":
             return self.instance(node)
+        if word in KEYWORDS and nxt is not None and nxt.kind == "num" and ctx == "top" and "|" in ln.raw:
+            self.err(f"'{word}' is a keyword, so it can't name a section", ln.no,
+                     f"rename the section, e.g. {word}_a or a{word}")
         if word in DIRECTIVES and not is_assign and not placed:
             if ctx != "top":
                 self.err(f"'{word}' lines go at the top level, not inside a block", ln.no)
@@ -871,7 +874,8 @@ class _Parser:
                 if not rest_raw.startswith(":"):
                     self.err(f"unexpected '{rest_raw.split()[0]}' on a form line", ln.no,
                              "a form line is '<section> <bars> [xN] [as name] [!events] [: edits]'")
-                colon = next(j for j, x in enumerate(toks) if x.pos >= ln.text.index(rest_raw, t.pos) and x.value == ":")
+                start = toks[-1].end - len(rest_raw)        # rest_raw is the line's unparsed tail
+                colon = next(j for j, x in enumerate(toks) if x.pos == start)
                 body = self.body_of(node, colon, "inst")
         elif node.children:
             self.err("expected ':' before the indented block", ln.no)
@@ -1511,9 +1515,13 @@ class _Interp:
             refs = [":".join([segs[0]] + [x for x in segs[1:] if "=" not in x]) for segs in split]
             return Part(opts=(("motifs", refs), *opts.items()), line=line)
         m = re.fullmatch(r"(\w+)((?:\+\w+)*)(?:\((.*)\))?", split[0][0], re.S)
-        if not m:
-            self.err(f"part value '{text}' not understood", line,
-                     "write style[+mod][(k=v)], a variable, or motifs m1,m2")
+        if not m:                                 # any expression: pocket + {ohat: "..x."}, four(acc=1)
+            try:
+                toks = [x for ln in _lex(text, self.file) for x in ln.toks]
+                return self.ev(parse_expr(toks, self.file), self.env)
+            except SongError as e:
+                self.err(f"part value '{text}' not understood: {e.message}", line,
+                         "write style[+mod][(k=v)], a variable, an expression, or motifs m1,m2")
         v = self.env[m[1]] if m[1] in self.env else Ref(m[1], line)
         for mod in filter(None, m[2].split("+")):
             mv = self.env[mod] if mod in self.env else Ref(mod, line)
@@ -2099,7 +2107,7 @@ class _Compiler:
                 v = x.section.get(key)
                 if key in SECTION_SETTINGS:
                     if key != "bars":
-                        sec[key] = _plain(v)
+                        sec["harmony" if key in ("chords", "prog") else key] = _plain(v)
                     continue
                 if v is None and key not in x.vary:
                     continue
