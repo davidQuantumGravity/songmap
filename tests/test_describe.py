@@ -1,0 +1,25 @@
+"""`songmap describe`: the catalog is complete (built from the registries) and the compact one stays small."""
+from songmap.arrange.events import EVENT_TYPES
+from songmap.arrange.styles import catalog as style_catalog
+from songmap.describe import catalog
+from songmap.instruments import REGISTRY
+
+
+def test_compact_catalog_names_everything_and_stays_small():
+    c = catalog(compact=True)
+    for role, names in style_catalog().items():
+        assert f"{role}:" in c and all(n in c for n in names)
+    assert all(n in c for n in REGISTRY) and all(t in c for t in EVENT_TYPES)
+    assert "+hats16" in c and "8ths" in c and "STICKY" in c
+    assert len(c) < 2000                     # ~500 tokens at ~3.5 chars per token
+
+
+def test_full_catalog_has_descriptions_and_params():
+    f = catalog(compact=False)
+    assert "four-on-the-floor" in f and "cutoff=" in f and len(f) > len(catalog(compact=True))
+
+
+def test_cli_describe(capsys):
+    from songmap.cli import main
+    assert main(["describe", "--compact"]) == 0
+    assert capsys.readouterr().out == catalog(compact=True)

@@ -27,7 +27,8 @@ SECTION_SETTINGS = ("harmony", "dyn", "feel", "tempo", "key", "bars")
 PART_KEYS = PART_SOURCES + PART_OPTS
 KEYWORDS = {"for", "in", "if", "elif", "else", "every", "def", "return", "form", "with", "and", "or", "not",
             "true", "false", "none", "as", "at", "bars"}
-DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "master", "qa")
+DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "master", "qa", "set")
+MIX_KEYS = ("pan", "width", "send", "sidechain", "eq", "bus_comp")
 STEP_RANK = {".": 0, "o": 1, "-": 2, "x": 3, "r": 4, "f": 5, "X": 6}
 
 
@@ -94,7 +95,7 @@ def _lex(text: str, file: str | None) -> list[Line]:
             if kind == "num":
                 v = float(v) if "." in v else int(v)
             elif kind == "str":
-                v = bytes(v[1:-1], "utf-8").decode("unicode_escape") if "\\" in v else v[1:-1]
+                v = re.sub(r"\\(.)", lambda m: {"n": "\n", "t": "\t"}.get(m[1], m[1]), v[1:-1])
             if not cur and depth == 0:
                 indent = m.start() - line_start
             if kind == "op" and v in "([{":
@@ -660,7 +661,13 @@ class _Parser:
         word = t0.value if t0.kind == "name" else None
         nxt = toks[1] if len(toks) > 1 else None
         is_assign = word and nxt is not None and nxt.kind == "op" and nxt.value in ("=", "+=", "-=", ".")
-        if word in DIRECTIVES and not is_assign:
+        # `<name> <bars> ...` places a section, even one named like a directive (`groove 8 | ...`): no
+        # directive's arguments start with a number
+        placed = word and word not in KEYWORDS and nxt is not None and (
+            nxt.kind == "num" or (nxt.kind == "op" and nxt.value == "(")) and word != "bar"
+        if placed and ctx == "form":
+            return self.instance(node)
+        if word in DIRECTIVES and not is_assign and not placed:
             if ctx != "top":
                 self.err(f"'{word}' lines go at the top level, not inside a block", ln.no)
             return ("directive", word, ln.raw, ln.no)
@@ -675,8 +682,7 @@ class _Parser:
             if ctx != "inst":
                 self.err("'bar N:' goes under a section line in the form", ln.no)
             return self.bar(node)
-        if (ctx == "top" and word and word not in KEYWORDS and nxt is not None
-                and (nxt.kind == "num" or (nxt.kind == "op" and nxt.value == "("))):
+        if ctx == "top" and placed:
             return self.section_line(ln)
         if word == "def":
             if ctx != "top":
@@ -705,8 +711,8 @@ class _Parser:
                 self.err("'every' goes in the form block or under a section", ln.no)
             return self.every(node, ctx)
         if t0.kind == "op" and t0.value == "!":
-            if ctx not in ("inst", "form"):
-                self.err("events go on form lines or under a section in the form", ln.no)
+            if ctx not in ("inst", "form", "top"):
+                self.err("events go on section lines, form lines or under a section in the form", ln.no)
             evs, rest = _events(ln.raw, ln.no, self.file)
             if rest:
                 self.err(f"unexpected '{rest}' after the events", ln.no)
@@ -1261,6 +1267,15 @@ class _Interp:
                     self.err(f"'{name}' is already defined", line)
                 defaults = [(p, d if d is _REQUIRED else self.ev(d, self.env)) for p, d in params]
                 self.env[name] = Func(name, defaults, body, dict(self.env), line)   # snapshot: no self-reference
+            elif kind == "event":                 # a flat file's own event line: absolute positions
+                if self.form_line is not None:
+                    self.err("put event lines inside the form block", s[-1])
+                evs = self.events(s[1], self.env)
+                for e in evs:
+                    if e.pos is None or e.pos.startswith(("+", "-")):
+                        self.err(f"!{e.type} on its own line needs an absolute position (@12, @f3960, @name+8)",
+                                 e.line)
+                self.instances.append(_Inst("", {}, 0, evs, [], s[-1], name=None))
             elif kind == "secline":
                 if self.form_line is not None:
                     self.err("section lines and a form: block can't be mixed", s[-1],
@@ -1411,7 +1426,7 @@ class _Interp:
     # -- the compact section line --
     def section_line(self, s):
         _, name, bars_n, rep, items, events, line = s
-        if name in KEYWORDS or name in DIRECTIVES or name in BUILTINS:
+        if name in KEYWORDS or name in BUILTINS:
             self.err(f"'{name}' is reserved and can't name a section", line, "pick another name")
         sec: dict = {}
         likes = [x[5:] for x in items if x.startswith("like=")]
@@ -1453,11 +1468,15 @@ class _Interp:
         self.place(("inst", name, bars_n, rep, None, events, [], line), self.env)
 
     def section_setting(self, sec, key, v, line, name):
-        v = v.strip().strip("\"'")
+        v = v.strip()
+        if not v.startswith("{"):
+            v = v.strip("\"'")
         if key == "dyn":
             sec["dyn"] = v
         elif key in ("prog", "chords"):
             sec["harmony"] = v
+        elif key == "feel" and v.startswith("{"):
+            sec["feel"] = {**(sec.get("feel") or {}), **_value(v)}
         elif key in ("feel", "swing"):
             sec["feel"] = {**(sec.get("feel") or {}), ("template" if key == "feel" else "swing"): _scalar(v)}
         elif key == "tempo":
@@ -1478,6 +1497,8 @@ class _Interp:
 
     def compact_part(self, text, line):
         """`full+fill`, `8ths(art=staccato)`, `up(order=[0,2,1,3])`, `m1,m2,m3`, `theme:t+2`, `lattice:dyn=pp`."""
+        if text.startswith(("{", "[")):
+            return _value(text, self, self.env)
         items = split_top(text, ",")
         split = [split_top(it, ":") for it in items]
         opts = {}
@@ -1628,7 +1649,7 @@ class _Interp:
         base = defaults().get("mix", {})
         sends = ("hall", "room", "delay", "plate")
         for chunk in split_top(self._rest(raw), "|"):
-            words = chunk.split()
+            words = split_top(chunk)
             if len(words) < 2 or not re.fullmatch(r"[+-]?\d+(\.\d+)?", words[1]):
                 self.err(f"mix: '{chunk}' needs a part and a gain in dB", line,
                          "write mix bass -2 sc=.5 | pad -6 hall=.35")
@@ -1641,11 +1662,10 @@ class _Interp:
                     m["sidechain"] = {**(base.get(part, {}).get("sidechain") or {"from": "kick"}), "depth": _scalar(v)}
                 elif k in sends:
                     m.setdefault("send", dict(base.get(part, {}).get("send") or {}))[k] = _scalar(v)
-                elif k in ("pan", "width"):
-                    m[k] = _scalar(v)
+                elif k in MIX_KEYS:
+                    m[k] = _value(v)
                 else:
-                    self.err(f"mix {part}: unknown option '{k}'", line,
-                             did_you_mean(k, ("sc", "pan", "width", *sends)))
+                    self.err(f"mix {part}: unknown option '{k}'", line, did_you_mean(k, ("sc", *MIX_KEYS, *sends)))
             self.song.setdefault("mix", {})[part] = m
 
     def d_qa(self, args, raw, line):
@@ -1678,6 +1698,22 @@ class _Interp:
             else:
                 self.err(f"qa: unknown rule '{k}{op}'", line,
                          "valid: lufs=<x>|<a>..<b> contrast=a<b:dB,... silent!=a,b low<=<x> peak<=<dB> hits=true")
+
+    def d_set(self, args, raw, line):
+        """set <key>[.<key>...]=<value>: any field of the YAML form (returns, harmony.voicing, ...)."""
+        for item in split_top(self._rest(raw)):
+            m = re.fullmatch(r"([A-Za-z_][\w-]*(?:\.[A-Za-z_][\w-]*)*)=(.+)", item, re.S)
+            if not m:
+                self.err(f"set: '{item}' not understood", line, "write set returns={hall: {type: reverb, seconds: 2.4}}")
+            *path, last = m[1].split(".")
+            if path and path[0] in ("sections", "motifs", "events") or m[1] in ("sections", "events"):
+                self.err(f"set {m[1]}: sections and events are written as lines", line)
+            d = self.song
+            for k in path:
+                d = d.setdefault(k, {})
+                if not isinstance(d, dict):
+                    self.err(f"set {m[1]}: '{k}' is not a mapping", line)
+            d[last] = _value(m[2])
 
     def d_chords(self, args, raw, line):
         h = self.song.setdefault("harmony", {})
@@ -1714,7 +1750,7 @@ class _Interp:
             k, eq, v = a.partition("=")
             if not eq:
                 self.err(f"cue: write name=position, got '{a}'", line)
-            self.song.setdefault("cues", {})[k] = v
+            self.song.setdefault("cues", {})[k] = _scalar(v)
 
     def d_master(self, args, raw, line):
         keys = {"lufs": "target_lufs", "ceiling": "ceiling_db", "glue": "glue", "contrast": "preserve_contrast"}
@@ -2092,8 +2128,8 @@ class _Compiler:
             at = inst
         elif e.pos.startswith(("+", "-")):
             at = f"{inst}{e.pos}"
-        elif re.fullmatch(r"\d+", e.pos):
-            at = int(e.pos)                     # an absolute bar, as YAML writes it
+        elif re.fullmatch(r"\d+(\.\d+)?", e.pos):
+            at = _scalar(e.pos)                 # an absolute bar, as YAML writes it
         else:
             at = e.pos
         d = LineDict(at=at, type=e.type)

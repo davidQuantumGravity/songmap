@@ -3,6 +3,8 @@
     songmap check  song.sm|song.yaml          parse, validate, expand; prints a summary or precise errors
     songmap render song.sm [-o build/x]       song.wav (24-bit), stems/, cues.json, qa.json, render.log
     songmap migrate old.yaml [-o new.yaml]    rewrite a v0.1 song map as v0.2
+    songmap fmt song.yaml --to sm [-o x.sm]   print a song map as .sm or YAML (lossless)
+    songmap describe [--compact]              the catalog an LLM needs: styles, instruments, events, syntax
 
 Song maps are `.sm` (the SongMap language, docs/LANGUAGE.md; `.sml` is an alias) or YAML (`.yaml`, `.yml`).
 Exit codes: 0 ok, 1 song error, 2 usage error.
@@ -103,6 +105,32 @@ def cmd_migrate(args) -> int:
     return 0
 
 
+def _write(text: str, out: str | None) -> None:
+    if out:
+        os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
+        with open(out, "w", encoding="utf-8", newline="\n") as f:
+            f.write(text)
+        print(f"wrote {out}", file=sys.stderr)
+    else:
+        sys.stdout.write(text)
+
+
+def cmd_fmt(args) -> int:
+    from .parse import fmt, yaml_form
+    song = _load(args.song)
+    to = {"compact": "sm", "sml": "sm"}.get(args.to, args.to)
+    header = yaml_form.leading_comments(args.song)
+    text = fmt.to_sm(song, header) if to == "sm" else fmt.to_yaml(song, header)
+    _write(text, args.out)
+    return 0
+
+
+def cmd_describe(args) -> int:
+    from .describe import catalog
+    _write(catalog(compact=args.compact), args.out)
+    return 0
+
+
 def main(argv=None) -> int:
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -126,6 +154,15 @@ def main(argv=None) -> int:
     p.add_argument("song")
     p.add_argument("-o", "--out", help="write here instead of stdout")
     p.set_defaults(fn=cmd_migrate)
+    p = sub.add_parser("fmt", help="print a song map as .sm or YAML (lossless; keeps leading comments)")
+    p.add_argument("song", help="a .sm (.sml) or .yaml song map")
+    p.add_argument("--to", choices=["sm", "compact", "sml", "yaml"], required=True, help="output format")
+    p.add_argument("-o", "--out", help="write here instead of stdout")
+    p.set_defaults(fn=cmd_fmt)
+    p = sub.add_parser("describe", help="the catalog for writing song maps: styles, instruments, events, syntax")
+    p.add_argument("--compact", action="store_true", help="the ~500-token version for an LLM's context")
+    p.add_argument("-o", "--out", help="write here instead of stdout")
+    p.set_defaults(fn=cmd_describe)
     args = ap.parse_args(argv)
     try:
         return args.fn(args)
