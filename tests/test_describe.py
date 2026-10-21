@@ -19,6 +19,28 @@ def test_full_catalog_has_descriptions_and_params():
     assert "four-on-the-floor" in f and "cutoff=" in f and len(f) > len(catalog(compact=True))
 
 
+def test_skill_bundles_the_current_catalog():
+    import os
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = os.path.join(root, ".claude", "skills", "songmap-compose", "catalog.txt")
+    with open(path, encoding="utf-8") as f:
+        assert f.read() == catalog(compact=True), \
+            "regenerate it: songmap describe --compact -o .claude/skills/songmap-compose/catalog.txt"
+
+
+def test_skill_example_checks():
+    import os
+    import re
+    from songmap.arrange.expand import expand
+    from songmap.parse import lang
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    with open(os.path.join(root, ".claude", "skills", "songmap-compose", "SKILL.md"), encoding="utf-8") as f:
+        blocks = [b for b in re.findall(r"```\n(.*?)```", f.read(), re.S) if b.startswith("song ")]
+    assert blocks
+    for b in blocks:
+        assert expand(lang.loads(b, "SKILL.md")).timeline.frames == 1350
+
+
 def test_cli_describe(capsys):
     from songmap.cli import main
     assert main(["describe", "--compact"]) == 0

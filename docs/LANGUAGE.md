@@ -57,9 +57,10 @@ cue <name>=<position>
 mix <part> <gain_db> [sc=<depth>] [hall= room= delay= plate=<send>] [pan=<x>] [width=<x>] [| <part> ...]
 master legacy|standard [lufs=] [ceiling=] [glue=none|gentle|punchy] [contrast=<dB>]
 qa [lufs=<x>|<a>..<b>] [contrast=<quiet><<loud>:<dB>,...] [silent!=<a>,<b>] [low<=<x>] [peak<=<dB>] [hits=true]
+set <key>[.<key>...]=<value>                               set returns={hall: {type: "reverb", seconds: 2.4}}
 ```
 
-Each directive maps onto a field of the song: `instruments`, `groove`, `parts_feel`, `harmony`, `motifs`, `cues`, `mix`, `master` or `qa` ([SONGMAP_SPEC.md](SONGMAP_SPEC.md)). In `mix`, `sc=` and the sends change only the depth or send they name; the rest of the part's default sidechain and sends is kept. `groove` and `feel` are stored now, and the performance layer applies them from P3. `qa` rules are evaluated from P2.
+`set` writes any field of the YAML form that has no directive, such as `returns`, `harmony.voicing` or an `fx` kit. Each other directive maps onto a field of the song: `instruments`, `groove`, `parts_feel`, `harmony`, `motifs`, `cues`, `mix`, `master` or `qa` ([SONGMAP_SPEC.md](SONGMAP_SPEC.md)). In `mix`, `sc=` and the sends change only the depth or send they name; the rest of the part's default sidechain and sends is kept. `groove` and `feel` are stored now, and the performance layer applies them from P3. `qa` rules are evaluated from P2.
 
 **Values:**
 
@@ -146,7 +147,7 @@ The simplest song is one line per section. Each section line **defines** the sec
 | `dyn=`, `prog=`, `chords="..."`, `feel=`, `swing=`, `tempo=`, `key=` | section settings | `dyn=p<mf`, `prog=doubt`, `tempo=rit120>96` |
 | `auto=<part>.<param>:<ramp>` | automation on one part | `auto="arp.cutoff:1500>4000 exp"` |
 
-Events go after the second `|`, or anywhere a token starts with `!`. Section lines may use any variable defined above them: parts, beats and named events. A file uses either section lines or a `form:` block. Mixing them is an error that says which line to change.
+Events go after the second `|`, or anywhere a token starts with `!`. A line of only events (`!impact@agents+8`) needs absolute positions, and it keeps its place in the event order. Section lines may use any variable defined above them: parts, beats and named events. A file uses either section lines or a `form:` block. Mixing them is an error that says which line to change.
 
 ## 4. The form block
 
@@ -302,9 +303,9 @@ Anything generative, such as a Markov melody or a search over grooves, belongs i
 Blocks are indented with spaces. A line ending in `:` opens a block, or the statement can follow the `:` on the same line. Brackets continue a line, and `#` starts a comment.
 
 ```
-program   := (directive | def | assign | evdef | secline* | form)*      # section lines or one form, not both
+program   := (directive | def | assign | evdef | secline* | event+ | form)*   # section lines or one form, not both
 directive := ("song" | "inst" | "kit" | "groove" | "feel" | "chords" | "prog" | "motif" | "cue" | "mix"
-              | "master" | "qa") <arguments, see §1>
+              | "master" | "qa" | "set") <arguments, see §1>
 secline   := NAME expr ["x" INT] ("|" (item | event)*)*                    # §3
 item      := role ":" pvalue | NAME "=" STRING | "-" NAME | NAME "=" value
 pvalue    := NAME ("+" NAME)* ["(" k=v ("," k=v)* ")"] (":" k=v)* | NAME (":" transform)* ("," ...)+
@@ -351,7 +352,7 @@ The evaluator unrolls the form (or the section lines) into a list of instances. 
 | `dyn`, `harmony`, `feel`, `tempo`, `key` | the same `Section` fields |
 | events and named events | `Song.events`, with positions written as `<instance>+<bar>:<beat>`; an absolute bar stays a number |
 
-`like:`, `add:` and `drop:` are not needed, because `with` and `like=` resolve at compile time. A program's arrangement digest equals its YAML equivalent's. `tests/test_lang.py` checks this for the three Oct-13 ports in `.sm` and for The Swarm in `.sml`.
+`like:`, `add:` and `drop:` are not needed, because `with` and `like=` resolve at compile time. The other direction is [`songmap/parse/fmt.py`](../songmap/parse/fmt.py) (`songmap fmt`). It prints a song as section lines, with `like=`, named part variables and `set` lines, so that parsing the printout gives the same song: `tests/test_fmt.py` checks every example. A program's arrangement digest equals its YAML equivalent's. `tests/test_lang.py` checks this for the three Oct-13 ports in `.sm` and for The Swarm in `.sml`.
 
 ## 13. Decisions
 
@@ -443,4 +444,3 @@ song.sm:7 section lines and a form: block can't be mixed (the first section line
 - **Section expressions in the head of a form line** (`(verse with {...}) 8`). Use an edit block under the line instead.
 - **Shifting a named event list** (`!lift@+8`). Define a second list with the offsets written in.
 - **Per-bar changes to section settings** (`dyn`, `harmony`, `tempo`). Split the section.
-- **Printing a song back as `.sm`** (P6's `fmt.py`, for lossless YAML ↔ `.sm` conversion).

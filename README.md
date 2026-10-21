@@ -52,6 +52,7 @@ Drums can be step strings: `"X..x..x.|X.ox.x.r"`.
 | [docs/DESIGN.md](docs/DESIGN.md) | Architecture, renderer strategy, efficiency measurements, decisions log |
 | [docs/SONGMAP_SPEC.md](docs/SONGMAP_SPEC.md) | The format v0.2 (YAML form): instruments, harmony, note language, transforms, groove, sections, events, positions and cues, mix, master, QA |
 | [docs/COMPACT_FORMAT.md](docs/COMPACT_FORMAT.md) | The `.sm` LLM encoding: grammar, measured savings, the LLM authoring loop, scoring rules of thumb |
+| [AGENTS.md](AGENTS.md) · [songmap-compose skill](.claude/skills/songmap-compose/SKILL.md) | How Claude Code, Codex and other agents compose with SongMap: the authoring loop, the `.sm` format, scoring rules, the catalog |
 | [docs/LANGUAGE.md](docs/LANGUAGE.md) | The SongMap language behind `.sm`: named sections and beats, `with`, the form block, loops, per-bar conditions, named events, functions, decisions |
 | [docs/PERFORMANCE.md](docs/PERFORMANCE.md) | How annotations become played notes: velocity scale, groove templates, humanize tables, voicing, MIDI mapping |
 | [docs/INSTRUMENTS.md](docs/INSTRUMENTS.md) | The instrument contract, the full suite catalog, realism recipes, sampler and plugin backends, presets, YAML patch instruments |
@@ -96,7 +97,9 @@ songmap check  examples/week_oct13_swarm.sm                       # the compact 
 songmap check  examples/v0.2_yaml/week_oct13_swarm.songmap.yaml
 songmap render examples/v0.2_yaml/week_oct13_swarm.songmap.yaml -o build/swarm   # ~4 s
 songmap migrate examples/v0.1_yaml/week_oct13_swarm.songmap.yaml                 # v0.1 -> v0.2 on stdout
-python -m pytest -q                       # 200 tests (-m "not port" skips the 30 s render-vs-original checks)
+songmap fmt examples/v0.2_yaml/week_oct13_swarm.songmap.yaml --to sm             # YAML -> .sm (lossless)
+songmap describe --compact                # the ~450-token catalog an LLM composes from
+python -m pytest -q                       # 219 tests (-m "not port" skips the 30 s render-vs-original checks)
 python tools/port_check.py --stems        # notes vs synth_v0, loudness vs the original audio, per-part levels
 python tools/demo.py                      # out/demo.wav + out/gallery.wav (every instrument at p, mf, ff)
 ```

@@ -1,0 +1,19 @@
+SongMap catalog (songmap describe --compact)
+styles  arp: dark up
+        bass: eighths|8ths sub
+        drums: four_floor full half half_kick  +fill +ghosts +hats16 +open
+        fx: ticks
+        pad: dark warm
+kit     kick snare clap fill hat ohat hat16 ghost rim
+inst    kick/v0 snare/v0 clap/v0 hat/v0,v0_open bass/sub,v0 pad/dark,warm pluck/dark,v0 lead/v0 string_pluck keys epiano organ riser/v0 impact/v0 zap/v0 tick/v0
+events  impact riser zaps stop drop; cue-only until P3/P4: downlifter hit ticks fill swell crash reverse tape_stop filter_sweep cloud
+roles   drums bass pad arp lead fx; any other role plays the instrument of its name (inst to set)
+notes   c d e f g a b, #/b, +/- octave (c=C4) | deg: 0 1 -3 #4 b7 | [c,e,g] chord | r rest | bars checked
+        durations 1 2 4 8 16 32 . t, STICKY; deg: 3/8 | =p =mf =f, < > hairpins | ^ accent ' stacc _ ten ~ slur
+steps   X x - o . f r = accent hit soft ghost rest flam ratchet; chars per bar = grid; | next bar
+header  song "T" 120 4/4 Em fps=30 seed=7 tail=3 video=Comp:3690 | inst bass(cutoff=700) | chords Em C G D /2
+        motif m1 deg oct=5 "0 2 4 | 3/2" | prog p "Am:2 F:2" | cue x=f3960 | mix pad -6 sc=.35 | master legacy
+line    name bars | role:style+mod role:m1,m2 role:style(k=v) kick="X..." -role like=prev dyn=p<f prog=p | !events
+event   !type[:bars|:Nb][@+bar:beat|@bar|@f123|@cue:x][(k=v)]; risers END at @; lift = !impact !riser:2 -> !lift
+more    lit = up(order=[0,2,1,3]); form: verse 8 x2 / for i in 1..4: / if i == last: / every 4 bars: bass = 8ths
+        / bar -1: lead = [m2]; b = a with {pad: none}; euclid(3,8) rot rev &  (docs/LANGUAGE.md)

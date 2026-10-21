@@ -8,7 +8,7 @@ The compact form is the same song tree as the YAML form ([SONGMAP_SPEC.md](SONGM
 - **Line-addressable edits.** A revision is "replace line `agents`", not a re-emit of the file.
 - **Validated names.** Every style, mod, motif, setting, directive option and event is checked, and errors say how to fix them.
 
-`songmap check song.sm` and `songmap render song.sm` read it (`.sml` is an alias).
+`songmap check song.sm` and `songmap render song.sm` read it (`.sml` is an alias). `songmap fmt x.yaml --to sm` prints any song map as `.sm`, and `--to yaml` prints it back; both are lossless. For agents, the [songmap-compose skill](../.claude/skills/songmap-compose/SKILL.md) (and [AGENTS.md](../AGENTS.md)) packages the authoring loop below.
 
 ## Measured size (the three Oct-13 ports, comments and blank lines stripped)
 
@@ -26,7 +26,7 @@ For comparison, the engine that rendered them, `reference/synth_v0.py`, is 14,83
 
 ```
 file      := line*
-line      := directive | definition | section | comment
+line      := directive | definition | section | eventline | comment
 comment   := '#' ...                        (also allowed after any line)
 
 directive :=
@@ -42,12 +42,15 @@ directive :=
   mix   <part> <gain_db> [sc=<depth>] [hall=|room=|delay=|plate=<send>] [pan=<x>] [width=<x>] [| <part> ...]
   master [legacy|standard] [lufs=<x>] [ceiling=<x>] [glue=none|gentle|punchy] [contrast=<dB>]
   qa    [lufs=<x>|<a>..<b>] [contrast=<quiet><<loud>:<dB>,...] [silent!=<a>,<b>] [low<=<x>] [peak<=<dB>] [hits=true]
+  set   <key>[.<key>...]=<value>                                 # any YAML field: set returns={hall: {type: reverb}}
 
 definition := <name> = <value>                                    # lit = up(order=[0,2,1,3]); see LANGUAGE.md
             | <name> = !<event> ...                               # a named event list: lift = !impact !riser:2
+eventline := <event> ...                                          # absolute positions only: !impact@agents+8
 
 section   := <name> <bars> [x<N>] '|' <part-or-setting>* ['|' <event>*]
 part      := <role>:<style>[+<mod>...][(k=v,...)]       drums:full+fill   bass:8ths(art=staccato)
+           | <role>:{<map>}                              bass:{style: "sub", vary: [{bars: [3], part: "eighths"}]}
            | <role>:<variable>                           arp:lit   (any part or beat defined above)
            | <role>:<motif>[:<transform>][,<motif>...]   lead:m1,m2,m3,m4   lead:theme,answer:t+2
            | <role>:<value>:<k>=<v>                      keys:lattice:dyn=pp
@@ -68,6 +71,8 @@ Notes on the grammar:
 - `<value>` options in `(...)` may be lists or variables: `arp:up(order=[0,2,4,2])`.
 - A section line both defines the section, as a variable for later `like=` and `with`, and places it. `x<N>` places it N times; the repeats are named `<name>_2`, `<name>_3`, and so on.
 - A file uses section lines or a `form:` block ([LANGUAGE.md §4](LANGUAGE.md)), not both.
+- A section may be named like a directive (`groove 8 | ...`), because no directive's arguments start with a number.
+- `set` writes any field of the YAML form that has no directive (`returns`, `harmony.voicing`, an `fx` kit). `songmap fmt` uses it so that printing is lossless.
 
 **Defaults:**
 - Every song plays on the default ensemble: the synth_v0 port for now; mood presets arrive in P4. `inst`, `kit` and `mix` change only what they name.
@@ -100,7 +105,7 @@ When a section repeats with small changes, or a beat needs a fill every 8 bars, 
 
 ## The LLM authoring loop
 
-1. **Load the catalog, not the engine.** `songmap describe --compact` (P6) prints about 400 tokens: every style per role, instruments with key params, event types, transforms and the note-language cheat sheet. That is all the context an LLM needs. (`instruments.describe()` already does the instrument part, at roughly 40 tokens per instrument.)
+1. **Load the catalog, not the engine.** `songmap describe --compact` prints about 450 tokens: every style and mod per role, kit pieces, instruments and presets, event types, the note language and the `.sm` syntax. That is all the context an LLM needs. Without `--compact` it adds style descriptions and every instrument's parameters.
 2. **Read the video.** If `video=` is set, `songmap cues-from-video` (Phase 8) proposes `cue` lines from the Remotion source or `cues.json`. Otherwise use a scene timeline like [SCENE_TIMELINES.md](SCENE_TIMELINES.md).
 3. **Write** the `.sm` file: header, then sections. Prefer `like=`, named event lists and motif transforms over new material when the music should recur.
 4. **Check.** `songmap check song.sm` takes milliseconds. It parses, bar-checks motifs, validates names and checks the length against the video. Errors are one line each, written to be fixed without guessing:
