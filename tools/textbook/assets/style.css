@@ -191,6 +191,10 @@ figure.audio .ico { flex: none; display: grid; place-items: center; width: 38px;
   background: linear-gradient(135deg, var(--pc), color-mix(in oklab, var(--pc) 60%, var(--gold))); }
 figure.audio.suite .ico { background: linear-gradient(135deg, #e8bb45, #b8860b); }
 figure.audio audio { flex: 1; min-width: 0; height: 40px; }
+figure.audio.video { padding: 8px 8px 6px; }
+figure.audio.video video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 10px; background: var(--bg); }
+figcaption a.mp3 { font: 600 11px var(--ui); letter-spacing: .06em; text-decoration: none; border: 1px solid var(--line);
+  border-radius: 99px; padding: 1px 8px; margin-left: 4px; color: var(--muted); white-space: nowrap; }
 figure.svgfig { overflow-x: auto; display: flex; flex-direction: column; align-items: center; background: var(--pc-soft); border: 1px solid var(--line); border-radius: 16px; padding: 10px 12px 8px; text-align: center; }
 .fig { max-width: 100%; height: auto; font-family: var(--ui); }
 .pccircle { width: 340px; } figure.svgfig figcaption { text-align: center; max-width: 560px; }

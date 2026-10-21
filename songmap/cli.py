@@ -3,6 +3,7 @@
     songmap check  song.sm|song.yaml          parse, validate, expand; prints a summary or precise errors
     songmap render song.sm [-o build/x]       song.wav (24-bit), stems/, cues.json, qa.json, render.log  [--mp3]
     songmap migrate old.yaml [-o new.yaml]    rewrite a v0.1 song map as v0.2
+    songmap video  song.sm [-o song.mp4]      MP4 with letter names, staff and piano roll, sounding notes lit
 
 Song maps are `.sm` (the SongMap language, docs/LANGUAGE.md; `.sml` is an alias) or YAML (`.yaml`, `.yml`).
 Exit codes: 0 ok, 1 song error, 2 usage error.
@@ -83,6 +84,24 @@ def cmd_render(args) -> int:
     return 0
 
 
+def cmd_video(args) -> int:
+    from .visual import write_poster, write_video
+    song = _load(args.song)
+    stem = os.path.splitext(os.path.basename(args.song))[0].split(".")[0]
+    out = args.out or os.path.join("build", stem, stem + ".mp4")
+    try:
+        w, h = (int(x) for x in args.size.lower().split("x"))
+    except ValueError:
+        print(f"error: --size must look like 1280x720, not {args.size}", file=sys.stderr)
+        return 2
+    parts = args.parts.split(",") if args.parts else None
+    if args.poster:
+        print("wrote", write_poster(song, args.poster, size=(w, h), theme=args.theme, parts=parts))
+    write_video(song, out, fps=args.fps, size=(w, h), theme=args.theme, parts=parts, master_mode=args.master, log=print)
+    print(f"wrote {out}")
+    return 0
+
+
 def cmd_migrate(args) -> int:
     from .parse import yaml_form
     raw = yaml_form.load_raw(args.song)
@@ -124,6 +143,16 @@ def main(argv=None) -> int:
     p.add_argument("--mp3", action="store_true", help="also write song.mp3 (needs ffmpeg)")
     p.add_argument("--master", choices=["standard", "legacy", "clean"], help="override the song's master")
     p.set_defaults(fn=cmd_render)
+    p = sub.add_parser("video", help="render an MP4: letter names, staff and piano roll with the sounding notes lit")
+    p.add_argument("song", help="a .sm (.sml) or .yaml song map")
+    p.add_argument("-o", "--out", help="output .mp4 (default build/<song>/<song>.mp4)")
+    p.add_argument("--size", default="1280x720", help="frame size WxH (default 1280x720)")
+    p.add_argument("--fps", type=int, default=30)
+    p.add_argument("--theme", choices=["light", "dark"], default="light")
+    p.add_argument("--parts", help="comma-separated parts to show (default: every pitched part)")
+    p.add_argument("--poster", help="also write one frame as a PNG here")
+    p.add_argument("--master", choices=["standard", "legacy", "clean"], help="override the song's master")
+    p.set_defaults(fn=cmd_video)
     p = sub.add_parser("migrate", help="rewrite a v0.1 song map as v0.2")
     p.add_argument("song")
     p.add_argument("-o", "--out", help="write here instead of stdout")

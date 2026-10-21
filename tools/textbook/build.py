@@ -12,6 +12,8 @@ Content fragments (textbook/content/<id>.html) use plain HTML plus these tags:
     <div class="exercise"> ... <details class="answer"><summary>Answer</summary>...</details></div>
     <audio-ex src="name" caption="..."></audio-ex>
         -> textbook/audio/<id>/<name>.songmap.yaml (SongMap song) or <name>.py (defines render() -> (n,2) float array at 48 kHz)
+           SongMap songs are shown as videos (letter names, staff and piano roll, sounding notes lit;
+           songmap.visual) with an MP3 alongside; Python examples (exact frequencies) are audio only
     <audio-ref file="P01b_lullaby_in_gold.mp3" caption="..."></audio-ref>     (from golden_audio/)
     <pianoroll edo="12|36" notes="C4 E4 G4 ; C4 vE4 ^G4" labels="C ; Cg" title="..."></pianoroll>
     <pc-circle edo="12|36" marks="0 4 7" path="0 7 2 9" title="..."></pc-circle>   (pitch classes in steps)
@@ -45,6 +47,8 @@ ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
 OUT = os.path.join(ROOT, "textbook_site")
 GOLDEN_AUDIO = os.path.join(ROOT, "golden_audio")
 CACHE = os.path.join(ROOT, "build", "textbook_audio_cache.json")
+VIDEO = True                                  # SongMap examples as videos (--no-video turns it off)
+VIDEO_SIZE = (1280, 720)
 SR = 48000
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")       # PROBLEM lines carry note names like ♭
@@ -195,6 +199,45 @@ def _write_mp3(x: np.ndarray, path: str):
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", w, "-codec:a", "libmp3lame", "-q:a", "2", path], check=True)
 
 
+def _visual_hash() -> str:
+    """Version of the video renderer: a change to songmap/visual re-renders every video."""
+    h = hashlib.sha1()
+    vdir = os.path.join(ROOT, "songmap", "visual")
+    for f in sorted(os.listdir(vdir)):
+        if f.endswith(".py"):
+            h.update(open(os.path.join(vdir, f), "rb").read())
+    h.update(repr(VIDEO_SIZE).encode())
+    return h.hexdigest()[:12]
+
+
+def render_song_media(src: str, mp3: str, mp4: str | None) -> None:
+    """One SongMap example: render the audio once; write the MP3 and (optionally) the video and its poster."""
+    from songmap.parse import yaml_form
+    from songmap.render import render
+    song = yaml_form.load(src)
+    r = render(song)
+    _write_mp3(r.audio, mp3)
+    if mp4:
+        from songmap.export.wav import write_wav24
+        from songmap.visual import write_poster, write_video
+        os.makedirs(os.path.dirname(mp4), exist_ok=True)
+        with tempfile.TemporaryDirectory() as td:
+            wav = os.path.join(td, "song.wav")
+            write_wav24(wav, r.audio)
+            write_video(song, mp4, size=VIDEO_SIZE, audio_wav=wav, crf=23)
+        im_path = mp4[:-4] + ".jpg"
+        write_poster(song, im_path, size=VIDEO_SIZE)
+
+
+def _media_job(job):
+    src, mp3, mp4 = job
+    try:
+        render_song_media(src, mp3, mp4)
+        return job, None
+    except Exception as e:                                           # noqa: BLE001
+        return job, f"{type(e).__name__}: {e}"
+
+
 def render_audio(src: str, dst: str):
     if AUDIO_SRC not in sys.path:
         sys.path.insert(0, AUDIO_SRC)                 # so examples can `from _lib import ...`
@@ -243,6 +286,11 @@ def process(chid, frag, ids, sec_ids, problems, audio_jobs, audio_list):
                 audio_jobs.append((src, os.path.join(OUT, rel)))
                 audio_list.append((chid, name, attrs.get("caption", ""), rel))
                 cap = attrs.get("caption", "")
+                if VIDEO and src and src.endswith(".songmap.yaml"):
+                    v = f"video/{chid}/{name}"
+                    return (f'<figure class="audio video"><video controls preload="none" playsinline '
+                            f'poster="../{v}.jpg" src="../{v}.mp4"></video>'
+                            f'<figcaption>{cap} <a class="mp3" href="../{rel}">MP3</a></figcaption></figure>')
                 return (f'<figure class="audio"><div class="player"><span class="ico">♪</span>'
                         f'<audio controls preload="none" src="../{rel}"></audio></div><figcaption>{cap}</figcaption></figure>')
             if tag == "audio-ref":
@@ -550,9 +598,13 @@ def main():
     ap.add_argument("--check", action="store_true", help="validate only (no files written)")
     ap.add_argument("--chapters", nargs="*", help="limit to these chapter ids")
     ap.add_argument("--no-audio", action="store_true")
+    ap.add_argument("--no-video", action="store_true", help="SongMap examples as audio players, no videos")
+    ap.add_argument("--jobs", type=int, default=min(12, max(1, (os.cpu_count() or 2) - 1)), help="parallel renders")
     ap.add_argument("--test-audio", action="store_true",
                     help="with --chapters: render those chapters' audio into build/tbtest/<id>/ and report errors")
     args = ap.parse_args()
+    global VIDEO
+    VIDEO = not args.no_video and shutil.which("ffmpeg") is not None
     toc, chapters = load_toc()
     ids = {c["id"] for c in chapters}
     sec_ids = {c["id"]: {s["id"] for s in c.get("sections", [])} for c in chapters}
@@ -620,7 +672,8 @@ def main():
         f.write(page(toc["title"], index_body(toc, chapters), toc, chapters, None, "", layers=False))
     if not args.no_audio:
         cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
-        done = 0
+        vhash = _visual_hash() if VIDEO else ""
+        done, songs = 0, []
         for src, dst in audio_jobs:
             if not src:
                 continue
@@ -632,6 +685,13 @@ def main():
                 continue
             key = os.path.relpath(dst, OUT)
             hsh = file_hash(src)
+            if src.endswith(".songmap.yaml"):
+                mp4 = os.path.join(OUT, "video", os.path.relpath(dst, os.path.join(OUT, "audio")))[:-4] + ".mp4" if VIDEO else None
+                want = hsh + ("|" + vhash if mp4 else "")
+                if cache.get(key) == want and os.path.exists(dst) and (not mp4 or os.path.exists(mp4)):
+                    continue
+                songs.append(((src, dst, mp4), key, want))
+                continue
             if cache.get(key) == hsh and os.path.exists(dst):
                 continue
             try:
@@ -643,7 +703,21 @@ def main():
                 print(f"PROBLEM audio {key}: {e}")
             os.makedirs(os.path.dirname(CACHE), exist_ok=True)
             json.dump(cache, open(CACHE, "w"), indent=0)
-        print(f"rendered {done} audio examples")
+        if songs:
+            from concurrent.futures import ProcessPoolExecutor
+            by_job = {job: (key, want) for job, key, want in songs}
+            with ProcessPoolExecutor(max_workers=args.jobs) as pool:
+                for job, err in pool.map(_media_job, list(by_job)):
+                    key, want = by_job[job]
+                    if err:
+                        print(f"PROBLEM media {key}: {err}")
+                        continue
+                    cache[key] = want
+                    done += 1
+                    print("  " + ("video" if job[2] else "audio"), key)
+                    os.makedirs(os.path.dirname(CACHE), exist_ok=True)
+                    json.dump(cache, open(CACHE, "w"), indent=0)
+        print(f"rendered {done} examples" + (" (SongMap examples with video)" if VIDEO else ""))
     print(f"wrote {OUT}")
 
 

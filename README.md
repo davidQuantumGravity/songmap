@@ -122,6 +122,8 @@ SongMap songs can use `tuning: 36edo`:
 - passing-chord placeholders: `~` (System 1, strict) and `~g` (System 2, natural);
 - `voiced` styles (`hold`, `comp`, `pulse`, `top`, `bassline`) that voice-lead in sixth-steps;
 - the stable `clean/*` instruments, `master: clean`, and `songmap render --mp3`.
+- note-synchronized video: `songmap video song.sm -o song.mp4` (letter names, a grand staff and a 36-row piano roll,
+  sounding notes lit; `songmap.visual`, needs ffmpeg).
 
 Try it:
 
