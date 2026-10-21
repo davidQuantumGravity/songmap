@@ -30,6 +30,21 @@ Instrument names only appear in `inst` lines. A part always names its role, e.g.
 | reflective, solo | keys alone, or keys and pad. Silence is part of the sound |
 | playful | gtr bright and staccato, arp, light pocket, zaps on list items |
 
+## Ambience and sound design with this palette
+
+There are no field recordings. Suggest the world with musical gestures, kept quiet and sparse:
+
+| Effect | Recipe |
+|---|---|
+| rain, data, clock | `fx:ticks` with `mix fx -9`; denser for heavier rain. `!zaps` for digital chatter |
+| distant thunder, a boom | an `!impact(size=s)` plus a low bass note: `bass:{rel: "R/1", oct: -2}` under `dyn=pp<mp`. The bass is audible from about `oct: -2` (E1–G2); lower is felt, not heard |
+| a heartbeat | `drums:{kick: "X.x.....X.x....."}`, quiet: `dyn=p` and `mix drums -6` |
+| wind, mist, breath | `pad:dark` with a slow swell (`dyn=pp<p>pp`) on an open chord (`[R,5,9]`), and no drums |
+| birdsong, sparkle | sparse, high, short notes: `gtr:{deg: "=pp r/2 11/8' 9 r/4", oct: 1}` or epiano grace notes (`{9}11/16'`), with rests in between |
+| water, shimmer | `arp:dark(order=[0, 2, 4, 2])` very quiet (`dyn=pp`), or slow guitar ripples |
+| tension drone | a held `bass:{rel: "R/1", oct: -2}` plus `pad:dark` on one chord for several bars, with `dyn=pp<mf` |
+| an arrival, landing | `!riser:2` ending on the frame, `!impact`, every part entering together |
+
 ## Arrangement: making a texture
 
 - **One job per instrument.** Every part is one of: melody (one at a time), counter-line, harmony (chords), rhythm (drums, plucks), bass. Two parts in the same job and register blur.
@@ -37,4 +52,6 @@ Instrument names only appear in `inst` lines. A part always names its role, e.g.
 - **Density follows the story.** Start sparse (2–3 parts), add one layer per section or scene, peak with everything, then subtract. Entries and exits are themselves events: a new instrument entering on a cut is a free "hit".
 - **Contrast between sections:** a change of texture (who plays), register, rhythm density or harmonic rhythm. Changing only the drums is weak; change two things.
 - **Leave room for the voice-over.** In a narrated video, keep the melody sparse and mid-low under speech, and bring it forward between lines.
-- **Balance.** After rendering, look at `qa.json`. Per-part levels are in `stems` (LUFS over the whole song), and contrast is in the per-section `loudness`. A featured melody should be audible above its accompaniment, so lift it with `mix <part> <dB>`. Typical moves: `mix lead 6`, `mix keys 0` to `2` for a piano melody, `mix drums -3` for gentler drums.
+- **Balance.** Start new songs with `mix drums -6 | fx -6 | lead 6` (the defaults are tuned to the drum-heavy Oct-13 tracks). After rendering, look at `qa.json`: `stems` holds per-part LUFS over the whole song (a part that plays less reads lower), and `sections` holds the contrast.
+  - **Melody.** A featured melody belongs within a few dB of the loudest accompaniment: `mix keys 0` to `2` for a piano tune, `mix lead 6` to `8`.
+  - **Soft pieces.** For a soft or reflective piece, go further: `mix drums -9`.

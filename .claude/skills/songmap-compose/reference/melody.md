@@ -1,5 +1,16 @@
 # Melody: writing motifs and lines that sing
 
+## Scale degrees
+
+| Degree | −3 | −1 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 9 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| D major | A below | C♯ below | D | E | F♯ | G | A | B | C♯ | D (up an octave) | F♯ |
+| D minor (natural) | A below | C below | D | E | F | G | A | B♭ | C | D (up an octave) | F |
+| D dorian | A below | C below | D | E | F | G | A | B | C | D (up an octave) | F |
+
+- `#`/`b` before a degree alters it: in a minor key, `#6` is the raised 7th (C♯ in D minor). Use it whenever the chord is the major V (A or A7 in D minor), or the melody clashes with the chord.
+- The key's mode decides the degrees (`song ... Dm`, `"D dorian"`). A section's `key=D` re-keys its inline deg notes, which is the Picardy or major-reprise move.
+
 ## Writing notes
 
 There are two ways to write pitches:

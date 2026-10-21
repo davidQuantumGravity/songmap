@@ -7,16 +7,16 @@ description: Compose, score or revise music with the SongMap engine in this repo
 
 You write **musical decisions as text**, in a `.sm` song map. The engine does the synthesis, mixing and frame-accurate cue export. Never write DSP or edit engine code to change the music. If the engine can't do something, say so and pick the closest thing it can do.
 
-Good scores come from **composing first and typing second**. Follow the method in §2, make it alive with the checklist in §3, and use the references for depth:
+Good scores come from **composing first and typing second**. Follow the method in §2, make it alive with §3, balance it with §4, and use the references for depth:
 
 | Read | When |
 |---|---|
 | [reference/emotion.md](reference/emotion.md) | choosing key, harmony, rhythm and palette for a feeling; arcs for 1–3 minute videos |
 | [reference/harmony.md](reference/harmony.md) | chords, progressions by mood, cadences, voicings (rel mode) |
-| [reference/melody.md](reference/melody.md) | writing motifs and phrases, bar math, developing a theme, counter-melodies |
+| [reference/melody.md](reference/melody.md) | writing motifs and phrases, bar math, scale degrees in major and minor, developing a theme |
 | [reference/rhythm.md](reference/rhythm.md) | grooves, swing, ghost notes, fills, builds, bass lines, arpeggios |
-| [reference/instruments.md](reference/instruments.md) | what each instrument sounds like, how to shape it, arrangement and balance |
-| [examples/](examples/) | three complete, rendered scores to imitate (§7) |
+| [reference/instruments.md](reference/instruments.md) | each instrument's sound and settings, ambience and sound-design moves, arrangement |
+| [examples/](examples/) | three complete, rendered and balanced scores to imitate (§8) |
 | [catalog.txt](catalog.txt) | every style, mod, instrument and event name (`songmap describe --compact`) |
 
 ## 1. Commands
@@ -33,39 +33,69 @@ From the repo root, activate `.venv` (`.venv/Scripts/activate` on Windows, `sour
 ## 2. The method
 
 1. **Brief → concept.** In one sentence each, write:
-   - what the music must make the viewer *feel*, and how that feeling changes scene by scene (the arc);
-   - one musical idea that carries the piece: "a curious piano question that becomes a confident answer", "a pulse that grows into a choir".
-2. **Choose the frame.** Pick key and mode, tempo (120 BPM for 30 fps video unless there's a reason), palette (3–5 instruments, each with a job) and a progression per section from [emotion.md](reference/emotion.md) and [harmony.md](reference/harmony.md).
-3. **Spot the picture** (§5). Turn scene starts into section boundaries, and must-land moments (reveals, counters landing, list items, cuts) into events or cues.
-4. **Write the material.** One motif (1–2 bars) and its answer, a groove, a bass line and a voicing ([melody.md](reference/melody.md), [rhythm.md](reference/rhythm.md)). Count every bar.
-5. **Arrange.** Decide who plays in each section. Start sparse, add a layer per scene, peak once, and subtract for caveats. Vary something every 4–8 bars. Contrast neighbouring sections.
-6. **Express** with the checklist in §3: dynamics arcs, accents and ghosts, articulation, breathing.
-7. **Check → render → read the numbers.**
-   - Run `songmap check` until `ok:` with the exact frame count.
-   - Render, then read `qa.json`: per-section `loudness` should trace your arc (caveats at least 4–6 dB below their neighbours, the peak loudest), and `stems` shows part balance (a featured melody should stand out).
-   - Fix with `dyn=`, `mix <part> <dB>` and arrangement changes.
+   - what the viewer should *feel*, and how that changes scene by scene (the arc);
+   - one musical idea that carries the piece: "a curious piano question that becomes a confident answer", "the bird's call as the motif".
+2. **Choose the frame.** Pick key and mode, tempo (120 BPM for 30 fps video unless there's a reason), palette (3–5 instruments, each with a job) and a progression per section, using [emotion.md](reference/emotion.md) and [harmony.md](reference/harmony.md).
+3. **Spot the picture** (§6). Turn scene starts into section boundaries, and must-land moments (reveals, counters landing, list items) into events or cues. **Budget the hits:** one big impact per 15–20 s at most, and vary the device (a new layer entering, a fill, a stop-time, a harmonic arrival).
+4. **Write the material.** One motif (1–2 bars) and its answer, a groove, a bass line and a voicing ([melody.md](reference/melody.md), [rhythm.md](reference/rhythm.md)).
+   - **Count every bar.**
+   - **Check every held melody note against the chord under it:** a half step above or below a chord tone, on a strong beat, clashes.
+5. **Arrange.** Decide who plays in each section.
+   - Start sparse and add a layer per scene.
+   - Keep at most 5–6 parts sounding at once (a doubling counts as one).
+   - Peak once, late. Subtract for caveats.
+   - Vary something every 4–8 bars, and make neighbouring sections contrast.
+6. **Express** with the checklist in §3.
+7. **Check → render → read the numbers** (§4). Run `check` until `ok:` with the exact frame count. Render, then compare `qa.json` with the targets in §4 and fix with `dyn=`, `mix` and arrangement.
 8. **Revise by line.** Map feedback in musical terms ("pad too bright in barrier", "bigger hit at 970 M") to a section-line edit, then check and render again.
 
 ## 3. Lifelike, not robotic: the checklist
 
-The engine plays exactly what you write: no swing, no timing humanisation and no motif transforms yet (the performance layer arrives in P3). **All of the feel has to be in the text.** Before rendering, go through this list.
+The engine plays exactly what you write: no swing, no timing humanisation and no motif transforms yet (the performance layer arrives in P3). **All of the feel has to be in the text.**
 
-1. **Every section has a dynamic shape.** `dyn=p<mf`, `dyn=mf>p`, or `dyn=pp` for a caveat. Never minutes at one level. Velocity also changes timbre (pianos brighten, filters open), so dynamics are colour, not just volume.
+1. **Dynamic shape.** Give most sections an arc (`dyn=p<mf`, `dyn=mf>p`). A flat `dyn=mp` is fine when the sections around it move. Velocity also changes timbre (pianos brighten, filters open), so dynamics are colour, not just volume.
 2. **Velocity varies inside patterns.**
    - drums: `X x - o` and `vel: [...]` lists (strong on the beat, weaker off it), plus snare ghosts (`o`);
    - melodies: `=p … < … =f` hairpins, `^` on the peak note, `(ghost)` notes.
-3. **Articulation.** `'` staccato for playful or tight, `_` tenuto and `~` slurs for singing lines. A bass slide (`5/4~ R`) humanises a groove.
-4. **Phrases breathe.** Melodies end phrases on long notes or rests every 2–4 bars, written as question and answer. Leave space for other instruments and the voice-over.
-5. **Something changes every 4–8 bars.** A new layer, a fill (multi-bar lanes or `bar -1:`), a register shift, a new voicing, the melody moving to another instrument, the harmonic rhythm doubling.
+3. **Articulation.** `'` staccato for playful or tight, `_` tenuto and `~` slurs for singing lines, a bass slide (`5/4~ R`). Marks work in deg, letter and rel notes.
+4. **Phrases breathe.** End phrases on long notes or rests every 2–4 bars, written as question and answer. Leave room for other instruments and the voice-over.
+5. **Something changes every 4–8 bars.** A new layer, a fill (a multi-bar lane or `bar -1:`), a register shift, a new voicing, the melody moving to another instrument, the harmonic rhythm doubling.
 6. **Syncopation and anticipation.** Push a chord or bass note a 16th or a triplet early (`r/8t [3,7,9]`), and land the bass with the kick.
-7. **Swing is written on the 12-step grid.** `x.xx.xx.xx.x` gives shuffled hats, and triplets in notes are `/8t`.
-8. **Rich, moving harmony.** Use 7ths and 9ths and inversions in rel voicings (`[3,7,9]`, `[5-,R,3]`) instead of root-position triads everywhere. `pad:warm` and `pad:dark` are triads only.
-9. **Separate registers.** Bass below C3, chords C3–C5, melody above them. Two parts in the same job and register blur.
-10. **Contrast and arc.** Adjacent sections differ (texture, register, density, harmony). The peak comes once, late. A quiet section before the biggest one makes it land.
-11. **Endings mean something.** Resolve (V–I, IV–I, Picardy) for closure, or hang on a sus chord on purpose.
-12. **Silence and space are allowed.** `N.C.` chords, rests, a 2-beat `!stop:2b` before a hit, a solo instrument.
+7. **Swing is written on the 12-step grid.** `x.xx.xx.xx.x` gives shuffled hats, and each lane has its own grid, so a swung hat can sit over a straight kick. Triplets in notes are `/8t`.
+8. **Rich, moving harmony.** Use 7ths and 9ths and inversions in rel voicings (`[3,7,9]`, `[5-,R,3]`). `pad:warm` and `pad:dark` are triads only.
+9. **Separate registers.** Bass below C3, chords C3–C5, melody above them.
+10. **Contrast and arc.** Adjacent sections differ (texture, register, density, harmony). The peak comes once; a quiet section before it makes it land.
+11. **Endings mean something.** Resolve (V–I, IV–I, Picardy) or hang on a sus chord on purpose.
+12. **Silence and space.** `N.C.` chords, rests, a 2-beat `!stop:2b` before a hit, a solo instrument.
 
-## 4. The `.sm` format
+## 4. Loudness, contrast and balance
+
+- **Start every new song with a balanced mix line**, then adjust from the stems:
+
+  ```
+  mix drums -6 | fx -6 | lead 6
+  ```
+
+  The default levels match the original Oct-13 tracks, where the drums sit about 10 dB above the melody and the lead is quiet. For a piano melody, add `| keys 0` to `2`.
+- **`dyn` levels relative to `mf`**, before mastering:
+
+  | Level | pp | p | mp | mf | f | ff |
+  |---|---|---|---|---|---|---|
+  | Gain | −11 dB | −6 dB | −2.6 dB | 0 | +2.3 dB | +3 to +4 dB |
+
+  **`ff` saturates:** velocities cap at 1.0, and accented hits are already there. A peak is made by **arrangement** (more parts, an octave doubling, open hats or 16th hats, a higher register) and by **making the section before it quieter**, not by `ff` alone.
+- **The master normalises the whole song** to −14 LUFS, so only the differences between sections count.
+- **`qa.json`, what to read:**
+
+  | Field | Meaning | Target |
+  |---|---|---|
+  | `sections[].loudness` | LUFS per section | **peak at least 2–3 dB above every other section; a caveat or breakdown 4–6 dB or more below its neighbours; a quiet bar before the peak 6 dB or more below it** |
+  | `sections[].low / mid / high` | share of energy below 250 Hz, 250 Hz–4 kHz, above 4 kHz | low above 0.85 means bass- or kick-heavy (dark, muddy); bright sections show more high |
+  | `stems` | LUFS per part over the whole song (parts that play less read lower) | a featured melody within a few dB of the loudest accompaniment |
+  | `return_hall` | the reverb return | — |
+  | `true_peak_db`, `clipped_samples` | the master's output | −1.0 and 0 |
+
+## 5. The `.sm` format
 
 ```
 song "Title" 120 4/4 Em fps=30 seed=7 tail=3 video=Comp:3690       # tail is in seconds
@@ -77,7 +107,7 @@ lift = !impact !riser:2                                          # a named event
 # name   bars | parts and settings                               | events
 intro      4 | keys:{rel: "[R,3,5]/2 [3,5,R+]"} dyn=pp<p
 verse      8 | like=intro keys:theme bass:{rel: "R/4. R/8 r/8 5/8 R+/4", oct: -2} drums:pocket dyn=p<mf | !lift
-mix keys 0
+mix drums -6 | fx -6 | keys 0 | lead 6
 ```
 
 - **Parts:**
@@ -93,47 +123,62 @@ mix keys 0
   | an expression | `role:pocket+{ohat: "..x."}` |
   | remove an inherited part | `-role` |
 
-- **Settings:** `like=<section>` (copies its parts and settings), `dyn=`, `chords="Am:2 G:2"`, `prog=<name>`, `key=`, `tempo=<bpm>`.
-- **Events:** `!impact(size=s|m|l|xl)`, `!riser:2` (ends at its position), `!zaps(count=6)`, `!stop:2b`, `!drop:2(keep=[pad])`. Position them with `@+bar:beat` (from this section), `@bar` (absolute), `@f123` or `@cue:x`.
+- **Settings:** `like=<section>` copies its parts and settings, including `chords`. Others: `dyn=`, `chords="Am:2 G:2"`, `prog=<name>`, `key=`, `tempo=<bpm>`.
+- **Events** are written **`!type[:length][@position][(options)]`**, in that order: `!zaps@+2:3(count=3)`, `!impact@cue:bird(size=xl)`.
+  - Lengths are in bars (`:2`) or beats (`:2b`).
+  - Positions are `@+bar:beat` (from this section, so `@-1:3` is beat 3 of the bar before), `@bar` (absolute), `@f123` or `@cue:x`.
+
+  | Event | What it does |
+  |---|---|
+  | `!impact(size=s\|m\|l\|xl)` | a boom and crash starting at the position. `l` is the default; `xl` is longer and bigger |
+  | `!riser:2` | a 2-bar sweep that **ends** at the position, leading into it |
+  | `!zaps(count=6, every=8)` | a run of rising chirps, one per 8th note: lists, data |
+  | `!stop:2b` | stop-time: every section part goes silent for 2 beats (notes starting in the span are removed); the fx keep sounding |
+  | `!drop:2(keep=[pad, bass])` | every part not kept goes silent for 2 bars: breakdowns |
+  | `hit crash swell fill downlifter cloud ...` | **silent for now:** written to `cues.json` only; they render from later phases |
+
 - **Loops, per-bar edits, repeats:** use definitions and `form:` ([cinematic_build.sm](examples/cinematic_build.sm), `docs/LANGUAGE.md`):
   - `for i in 1..3:`, `if i == last:`;
   - `every 4 bars: bass = eighths`, `bar -1: lead = none`;
   - `verse 8 x2`.
 
-## 5. Time: frames, bars, positions
+## 6. Time: frames, bars, positions
 
 - **Frames per bar.** `fps × beats_per_bar × 60 / tempo`, which is 60 at 120 BPM, 4/4, 30 fps (a beat is 15 frames) and 80 at 90 BPM. The whole-frame tempos at 30 fps are 60, 72, 75, 90, 100, 120, 150 and 180. Bars count from **0**.
-- **Length.** The song is all bars plus `tail` seconds. With `video=Comp:frames`, `check` compares the two: it warns when they differ by less than a bar and fails beyond. So the bars are `(frames − tail × fps) / frames_per_bar`; adjust `tail` (it may be fractional) or give the last section a fractional length.
+- **Length.** The song is all bars plus `tail` seconds. With `video=Comp:frames`, `check` compares the two: it warns when they differ by less than a bar and fails beyond. So the bars are `(frames − tail × fps) / frames_per_bar`.
+  - When that isn't whole, use a fractional tail (`tail=2.5`) or a fractional last section (`end 2.5`). For example, 1,500 frames at 120 BPM with `tail=3` leaves 1,410 frames, which is 23.5 bars.
 - **Scene starts** round to bars. **Off-grid moments** get `cue name=f1145` and `!impact@cue:name`. Cues snap to the nearest 16th, with a warning if that moves one by more than a frame.
 - **Positions:**
 
   | Position | Meaning |
   |---|---|
-  | (none) | the start of this section |
+  | (none) | this section's start |
   | `@+3:2` | 3 bars in, beat 2 (beats are 1-based) |
   | `@12:3` | absolute bar 12, beat 3 |
   | `@f735` | video frame 735 |
   | `@cue:x` | a named cue |
   | `@agents+8` | 8 bars into the section `agents` |
 
-  A riser on a section with no `@` ends at that section's start, so it plays during the section before.
-
-## 6. Gotchas
+## 7. Gotchas
 
 - **Bar sums.** Durations are sticky, and every bar must add up to the meter. Always write `|` bar lines; inline notes without them are not checked.
+- **Scale degrees.**
+  - Degrees run past the octave: 7 is the tonic an octave up, and −1 is the 7th below.
+  - In a minor key they are natural minor (in D minor, 5 = B♭ and 6 = C). When the chord is the major V (A in D minor), the melody needs the raised 7th: `#6` (C♯).
+  - Accidentals go before the degree: `#4`, `b7`.
 - **Motif cycling.** `motif` plus `role:m1,m2` cycles in blocks anchored at **bar 0 of the song**, so a section starting mid-cycle begins mid-motif. Prefer melodies as inline-note variables (`theme = {deg: "...", oct: 1}`), which start with their section.
 - **Pad and slash chords.** `pad:warm` and `pad:dark` voice triads, so 7ths and 9ths need a rel voicing. Slash chords (`C/E`) still put the root in the bass.
-- **Levels.** The default `lead` level is low: add `mix lead 6` for a featured melody. Parts named `keys`, `piano`, `epiano`, `organ`, `gtr` or `guitar` get calibrated levels; any other name needs an `inst` line and a `mix` level.
-- **Section names.** Avoid style, motif and keyword names (`return`, `if`, `for`, …): a section is also a variable, and `pad:warm` would pick up a section called `warm`.
-- **Not available yet:** tempo ramps (`rit`), motif transforms (`m1:aug`), humanised timing and swing (the `groove` line is stored for P3), and instruments outside the catalog (strings, brass, bells). Use what exists.
+- **Part names and levels.** Parts named `keys`, `piano`, `epiano`, `organ`, `gtr` or `guitar` get their instrument and a calibrated level; any other name needs an `inst` line and a `mix` level.
+- **Section names.** Avoid style, motif and keyword names (`return`, `if`, `for`, …): a section is also a variable.
+- **Not available yet:** tempo ramps (`rit`), motif transforms (`m1:aug`), humanised timing and swing (the `groove` line is stored for P3), and instruments outside the catalog (strings, brass, bells, real field recordings). For ambience and nature sounds, see [instruments.md](reference/instruments.md).
 
-## 7. Examples (complete, checked and rendered)
+## 8. Examples (complete, checked, rendered and balanced)
 
 - [examples/hopeful_explainer.sm](examples/hopeful_explainer.sm), D major, 1:15:
   - a piano question/answer theme;
   - guitar ripples, a pocket groove with ghosts and a bass that locks to the kick;
   - the synth lead takes the tune;
-  - an 8 dB drop for a caveat, and a plagal ending.
+  - a caveat 11 dB under its neighbours, and a plagal ending.
 - [examples/cinematic_build.sm](examples/cinematic_build.sm), E minor, 1:40, a form block:
   - three rising waves driven by a loop index (dynamics and euclid hats);
   - risers into drops, per-bar fills, the lead resting in the last bar;
@@ -141,11 +186,11 @@ mix keys 0
 - [examples/lofi_late_notes.sm](examples/lofi_late_notes.sm), D dorian, 90 BPM:
   - a 12-step shuffle, rootless 9th chords with an anticipation, a bass slide;
   - a piano melody with a grace note and breathing rests;
-  - a drum-less bridge, and the melody lifted in the mix.
+  - a drum-less bridge.
 
 Section loudness measured from the renders:
 
 | Example | Sections, in order (LUFS) |
 |---|---|
-| hopeful explainer | intro −21.7, verse −16.8, lift −12.6, **breath −20.8**, home −12.5, outro −17.5 |
-| cinematic build | intro −27.3, waves −19.8 / −17.2 / −14.9, drop −13.3, **held −19.2**, finale −12.4, coda −21.5 |
+| hopeful explainer | intro −21.2, verse −16.5, lift −12.6, **breath −23.3**, home −12.3, outro −17.5 |
+| cinematic build | intro −26.5, waves −20.5 / −18.0 / −15.6, drop −13.1, **held −22.5**, finale −11.8, coda −22.7 |

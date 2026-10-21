@@ -25,4 +25,4 @@ lift       8 | like=verse drums:pocket pad:warm keys:broken lead:theme dyn=mp<f 
 breath     4 | keys:{rel: "[R,5,9]/1"} pad:dark chords="Bm:2 Gmaj7:2" dyn=pp
 home       8 | like=lift keys:theme_low drums:pocket+{ohat: "..x...x...x...x."} dyn=f | !spark
 outro      4 | keys:broken gtr:ripple chords="G:2 D:2" dyn=mp>pp           | !impact@+2(size=s)
-mix keys 0 | lead 6
+mix drums -6 | fx -6 | keys 0 | lead 6

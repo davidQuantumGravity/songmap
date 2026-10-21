@@ -40,3 +40,4 @@ form:
   intro 4 as coda:
     dyn = "mp>pp"
     !impact(size=s)
+mix drums -6 | fx -6 | lead 6
