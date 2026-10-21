@@ -1,0 +1,336 @@
+<p>Part I ended with a lattice of ratios built from the primes 2, 3 and 5. This chapter keeps only the first two.
+Take the octave (2/1) and the perfect fifth (3/2), and build a whole musical system from them. The result is
+<b>Pythagorean tuning</b>: the oldest systematic tuning in the Western tradition, and the model for everything else in
+this book, including the golden system of Part VI. Its central fact is a small failure. Twelve fifths almost make
+seven octaves, but not quite. That gap, the Pythagorean comma, drives the whole history of tuning that Chapter 7
+tells.</p>
+
+<section id="stacking">
+<h2>Stacking fifths</h2>
+<div class="layer hear">
+<p>After the octave, the perfect fifth is the most stable interval there is. Its two notes share many partials, and
+when it is tuned exactly it does not beat at all (<a href="ch:ch03#beats">Chapter 3</a>). So it is natural to ask:
+what happens if we build notes from fifths alone?</p>
+<p>Start on a low C and go up a pure fifth to G. From G go up another fifth to D, then to A, then to E. Each step
+sounds equally stable, but the notes climb out of range quickly: four fifths already span more than two octaves. The
+fix is to move notes down by whole octaves, which our ears treat as "the same note" (<a href="ch:ch01#octave">Chapter
+1</a>). Folded into one octave, the fifths give the familiar steps of a scale. Do this with seven notes, starting
+one fifth below C, and you get the major scale, tuned the Pythagorean way.</p>
+<audio-ex src="stack" caption="Pure fifths climb C–G, G–D, D–A, A–E; then the seven fifth-generated notes folded into one octave make a major scale on C, ending on a C–E–G chord whose third is noticeably bright."></audio-ex>
+<pianoroll edo="12" notes="C3 G3 ; G3 D4 ; D4 A4 ; A4 E5" labels="C–G ; G–D ; D–A ; A–E" title="Four pure fifths climbing from C3 (shown at the nearest 12-ET keys)"></pianoroll>
+<p>Listen to the final chord. The fifth C–G is calm, but the third C–E has a fast shimmer. Hold on to that
+impression: it is the first sign that fifths alone cannot give everything a musician wants, and it is the starting
+point of <a href="ch:ch07#syntonic">Chapter 7</a>.</p>
+</div>
+<div class="layer understand">
+<p>A pure fifth multiplies frequency by 3/2. Stacking intervals multiplies their ratios, and adding their sizes in
+cents (<a href="ch:ch01#cents">Chapter 1</a>). Two fifths up from C give D at $(3/2)^2 = 9/4$ of C's frequency.
+That is more than an octave, so we halve it: $9/4 \div 2 = 9/8$, the Pythagorean <b>whole tone</b>, 203.91 cents.
+Going <i>down</i> a fifth from C and up an octave gives F at $2 \cdot 2/3 = 4/3$, the pure fourth, 498.04 c.</p>
+<p>Every note is reached by some number $k$ of fifths up (or down, if $k$ is negative), then folded by octaves. The
+seven notes from $k = -1$ (F) to $k = 5$ (B) give the Pythagorean major scale:</p>
+<table>
+<tr><th>Note</th><th>Fifths from C, $k$</th><th>Ratio</th><th>Cents</th><th>12-ET cents</th><th>Difference</th></tr>
+<tr><td>C</td><td>0</td><td>1/1</td><td>0.00</td><td>0</td><td>0.00</td></tr>
+<tr><td>D</td><td>2</td><td>9/8</td><td>203.91</td><td>200</td><td>+3.91</td></tr>
+<tr><td>E</td><td>4</td><td>81/64</td><td>407.82</td><td>400</td><td>+7.82</td></tr>
+<tr><td>F</td><td>−1</td><td>4/3</td><td>498.04</td><td>500</td><td>−1.96</td></tr>
+<tr><td>G</td><td>1</td><td>3/2</td><td>701.96</td><td>700</td><td>+1.96</td></tr>
+<tr><td>A</td><td>3</td><td>27/16</td><td>905.87</td><td>900</td><td>+5.87</td></tr>
+<tr><td>B</td><td>5</td><td>243/128</td><td>1109.78</td><td>1100</td><td>+9.78</td></tr>
+<tr><td>C′</td><td></td><td>2/1</td><td>1200.00</td><td>1200</td><td>0.00</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 ; D4 ; E4 ; F4 ; G4 ; A4 ; B4 ; C5 ; C4 E4 G4" labels="0 ; 2 ; 4 ; −1 ; 1 ; 3 ; 5 ; octave ; C–E–G" title="The fifths folded into one octave, with each note's chain position k (nearest 12-ET keys)"></pianoroll>
+<p>Look at the last column: each note differs from its equal-tempered counterpart by $k$ times 1.96 c. The scale has
+only two step sizes. C–D, D–E, F–G, G–A and A–B are whole tones of 9/8 (203.91 c). E–F and B–C are smaller,
+$256/243$ = 90.22 c. That small step is the <b>limma</b>, and <a href="#limma-apotome">a later section</a> is about
+it.</p>
+<p>The third C–E is $81/64$ = 407.82 c, four fifths minus two octaves. The simplest major third, the one in the
+harmonic series, is $5/4$ = 386.31 c. The Pythagorean third is 21.51 c wider, which is why it shimmers. Fifths
+alone cannot make the 5/4 third, because 5 is a prime that powers of 2 and 3 never reach
+(<a href="ch:ch04#primes">Chapter 4</a>).</p>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> Let $x = \log_2(3/2) \approx 0.5849625$ be the fifth measured in octaves. The
+<b>Pythagorean note at chain position</b> $k \in \mathbb{Z}$ is the ratio</p>
+$$r_k = \left(\tfrac{3}{2}\right)^{k} \cdot 2^{-\lfloor kx \rfloor}, \qquad 1 \le r_k &lt; 2,$$
+<p>that is, $k$ fifths folded into the octave $[1, 2)$. In cents its size is $1200\,\{kx\}$, where $\{\cdot\}$ is
+the fractional part. Every $r_k$ has the form $2^a 3^b$: Pythagorean tuning is <b>3-limit</b> tuning.</p>
+<p><b>Deviation from 12-ET.</b> A 12-ET fifth is 700 c, so the 12-ET note named by chain position $k$ sits at
+$700k \bmod 1200$. The Pythagorean note sits at $701.955\,k \bmod 1200$, so the two differ by $1.955\,k$ cents,
+up to a whole octave. For $|k| \le 25$ this is less than half a semitone, so the 12-ET key nearest the Pythagorean
+note is the one with the same name. The table's last column is this formula.</p>
+<p><b>Theorem (fifths never make octaves).</b> For integers $k \ne 0$ and $m$, $(3/2)^k \ne 2^m$.</p>
+<p><i>Proof.</i> Suppose $(3/2)^k = 2^m$ with $k > 0$ (for $k &lt; 0$ take reciprocals). Then $3^k = 2^{m+k}$. The
+left side is odd and greater than 1; a power of 2 greater than 1 is even. Contradiction. ∎</p>
+<p>Consequently all the $r_k$ are different, and $x$ is irrational: if $x = m/k$ we would have
+$(3/2)^k = 2^m$.</p>
+</div>
+</section>
+
+<section id="chain">
+<h2>The chain of fifths</h2>
+<div class="layer hear">
+<p>Keep going. After B comes F♯, then C♯, G♯, D♯ and on to the sharps of sharps; below F come B♭, E♭, A♭ and the
+flats. Laid out in order, the notes form an endless line, the <b>chain of fifths</b>. Twelve consecutive links give a
+note for every key of the keyboard. Here are the twelve from E♭ to G♯, first in chain order and then sorted into a
+chromatic scale.</p>
+<audio-ex src="chain" caption="Twelve fifth-generated notes from E♭ to G♯, first in chain order, then rising as a chromatic scale. Listen to the semitones: they come in two slightly different sizes."></audio-ex>
+<p>The chromatic scale is not quite even. Some semitones are a little smaller than others. On a keyboard you would
+never notice the pattern by looking, but a careful ear catches the unevenness in a slow chromatic run.</p>
+</div>
+<div class="layer understand">
+<p>Here is part of the chain, with each note's position $k$ (the number of fifths above C) and its size in cents
+above C after folding:</p>
+<table>
+<tr><th>$k$</th><td>−6</td><td>−5</td><td>−4</td><td>−3</td><td>−2</td><td>−1</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+<tr><th>Note</th><td>G♭</td><td>D♭</td><td>A♭</td><td>E♭</td><td>B♭</td><td>F</td><td>C</td><td>G</td><td>D</td><td>A</td><td>E</td><td>B</td><td>F♯</td><td>C♯</td><td>G♯</td></tr>
+<tr><th>Cents</th><td>588.27</td><td>90.22</td><td>792.18</td><td>294.13</td><td>996.09</td><td>498.04</td><td>0</td><td>701.96</td><td>203.91</td><td>905.87</td><td>407.82</td><td>1109.78</td><td>611.73</td><td>113.69</td><td>815.64</td></tr>
+</table>
+<p>Three patterns are worth noticing.</p>
+<ul>
+<li><b>The letters repeat every seven links.</b> The seven natural letters occupy positions −1 to 5 in the order F C G
+D A E B. Seven links further on, the same letters return with a sharp: F♯ C♯ G♯ D♯ A♯ E♯ B♯. Seven links in the
+other direction they return with a flat. A sharp means "seven fifths further up the chain"; a flat means "seven
+fifths further down".</li>
+<li><b>Enharmonic notes are different notes.</b> F♯ ($k = 6$) is 611.73 c; G♭ ($k = -6$) is 588.27 c. They are
+twelve links apart, and they differ by 23.46 c. On a modern piano they are one key. In Pythagorean tuning they are
+not.</li>
+<li><b>The chain never closes.</b> By the theorem of the last section, no two positions give the same note. The
+chain is a line, not a circle.</li>
+</ul>
+<pc-circle edo="12" marks="0" path="3 10 5 0 7 2 9 4 11 6 1 8" title="Eleven pure fifths, E♭ to G♯"></pc-circle>
+<p>The figure draws the twelve notes on the familiar twelve-position circle, in chain order. Eleven links are pure
+fifths. The twelfth, from G♯ back to E♭, is not a fifth at all, as the next sections show. The circle of fifths of
+<a href="ch:ch08#circle">Chapter 8</a> closes only because equal temperament forces it to.</p>
+<aside class="mirror">The golden system has its own chain: stack the golden sixth φ (833.09 c) instead of the fifth.
+Its links fold into the octave just as fifths do, and like the chain of fifths it never closes, because powers of φ
+are never powers of 2. Chain distance 3 is a semitone (99.27 c, within a cent of the 12-ET semitone), 9 is nearly a
+minor third and 12 nearly a major third
+(<a href="ch:ch23#chain">Chapter 23</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Spelling from position.</b> Number the natural letters by their chain positions, F = −1, C = 0, G = 1, D = 2,
+A = 3, E = 4, B = 5. The note at position $k$ has letter $L(k)$ = the natural at position
+$((k+1) \bmod 7) - 1$ and carries</p>
+$$s(k) = \left\lfloor \frac{k+1}{7} \right\rfloor$$
+<p>sharps ($s > 0$) or $|s|$ flats ($s &lt; 0$). For example $k = 6$: $s = 1$, letter F, so F♯. $k = -8$:
+$s = -1$, letter F, so F♭. $k = 13$: $s = 2$, letter F, so F double-sharp.</p>
+<p><b>Size of a sharp.</b> Raising a note by a sharp moves it 7 positions up the chain. In ratio terms it
+multiplies by $(3/2)^7$ and then folds down 4 octaves:</p>
+$$\frac{3^7}{2^7 \cdot 2^4} = \frac{2187}{2048} \approx 113.69\ \text{c}.$$
+<p>So in Pythagorean tuning every sharp raises by exactly 113.69 c and every flat lowers by the same amount. This
+interval is the <b>apotome</b>.</p>
+</div>
+</section>
+
+<section id="limma-apotome">
+<h2>Two semitones: limma and apotome</h2>
+<div class="layer hear">
+<p>In the Pythagorean scale the half step E–F is small and tight. The half step F–F♯ is wider. Both are called
+"semitones" in ordinary speech, but they are different intervals, and you can hear the difference when they are
+played one after the other. Then comes a more surprising pair: C♯ and D♭, which share a piano key, are not the same
+note here. C♯ is higher. Played together they beat.</p>
+<audio-ex src="limma_apotome" caption="E–F (the smaller limma), then F–F♯ (the larger apotome); then C♯ and D♭ alternate over a low C, and finally sound together, beating about four times a second."></audio-ex>
+<pianoroll edo="12" notes="E4 F4 ; F4 F#4" labels="limma ; apotome" title="E–F (limma, 90.22 c) and F–F♯ (apotome, 113.69 c): one key apart each, yet different sizes"></pianoroll>
+</div>
+<div class="layer understand">
+<p>The two semitones have Greek names, inherited by medieval theory through Boethius:</p>
+<ul>
+<li>the <b>limma</b> ("remnant") $= 256/243 \approx$ 90.22 c, the <i>diatonic</i> semitone between two letters, as
+in E–F or B–C;</li>
+<li>the <b>apotome</b> ("a cutting-off") $= 2187/2048 \approx$ 113.69 c, the <i>chromatic</i> semitone between a
+letter and its sharp, as in F–F♯ or C–C♯.</li>
+</ul>
+<p>Their chain distances explain them. E is at position 4 and F at −1, five links apart. Going five fifths
+<i>down</i> and three octaves up gives the limma: $2^8/3^5 = 256/243$. F♯ is seven links above F, and seven fifths up
+less four octaves is the apotome, $3^7/2^{11} = 2187/2048$.</p>
+<p>A whole tone is one of each:</p>
+$$\frac{256}{243} \cdot \frac{2187}{2048} = \frac{9}{8}, \qquad 90.22 + 113.69 = 203.91\ \text{c}.$$
+<p>C–C♯ is an apotome (113.69 c) and C–D♭ is a limma (90.22 c), so <b>C♯ is higher than D♭</b>, by
+113.69 − 90.22 = 23.46 c. This is the opposite of meantone tuning (<a href="ch:ch07#syntonic">Chapter 7</a>), where D♭ is higher than C♯. In
+Pythagorean tuning sharps are high and flats are low.</p>
+<p>The twelve-note chromatic scale of the last section, E♭ to G♯, contains seven limmas and five apotomes. Which
+semitones are which depends on where the chain is cut, but the count is always seven and five.</p>
+<aside class="mirror">The golden 13-note scale has the same two-semitone structure. The <b>golden apotome</b> is three
+golden sixths minus two octaves, $\varphi^3/4$ = 99.27 c; the <b>golden limma</b> is seven octaves minus ten golden
+sixths, $2^7/\varphi^{10}$ = 69.10 c. golden13 has ten golden apotomes and three golden limmas
+(<a href="ch:ch23#golden-comma">Chapter 23</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Definitions.</b> The limma is $\lambda = 2^8/3^5$ and the apotome is $\alpha = 3^7/2^{11}$. In cents,
+$1200\log_2\lambda = 3 \cdot 1200 - 5 \cdot 701.955\ldots \approx 90.22$ and $1200\log_2\alpha = 7 \cdot 701.955\ldots - 4 \cdot 1200 \approx
+113.69$, where $701.955\ldots = 1200\log_2(3/2)$.</p>
+<p><b>Proposition.</b> (i) $\lambda\alpha = 9/8$. (ii) $\alpha/\lambda = 3^{12}/2^{19}$, the Pythagorean comma.
+(iii) $7\lambda$ and $5\alpha$ make an octave exactly: $\lambda^7\alpha^5 = 2$.</p>
+<p><i>Proof.</i> (i) $2^8 \cdot 3^7 / (3^5 \cdot 2^{11}) = 3^2/2^3$. (ii) $3^7 \cdot 3^5/(2^{11} \cdot 2^8) =
+3^{12}/2^{19}$. (iii) Exponents of 2: $7 \cdot 8 - 5 \cdot 11 = 1$. Exponents of 3: $-7 \cdot 5 + 5 \cdot 7 = 0$.
+So $\lambda^7\alpha^5 = 2^1$. ∎</p>
+<p>In cents (iii) reads $7 \times 90.22 + 5 \times 113.69 = 1200$ (exactly, before rounding). Part (ii) is the
+bridge to the next section: the gap between the two semitones is the comma.</p>
+</div>
+</section>
+
+<section id="comma">
+<h2>The Pythagorean comma</h2>
+<div class="layer hear">
+<p>Stack twelve perfect fifths and you nearly return to where you started, seven octaves up, but not quite. The
+twelfth fifth overshoots by a sliver: about a quarter of a semitone. Listen to the two notes one after another, then
+together, and you will hear them beat.</p>
+<audio-ex src="comma" caption="C, then the C reached by twelve pure fifths (really B♯): a quarter-semitone apart. Together they beat slowly, between three and four times a second."></audio-ex>
+<p>If a keyboard has only twelve keys per octave, that overshoot has to go somewhere. Tune eleven fifths pure and the
+twelfth must absorb the whole comma. It becomes the <b>wolf</b>: a "fifth" so narrow that it howls.</p>
+<audio-ex src="wolf" caption="Three pure fifths in a twelve-note Pythagorean tuning, then the wolf G♯–E♭, a quarter-semitone too narrow and harshly beating, then a pure fifth again."></audio-ex>
+<pianoroll edo="12" notes="C3 G3 ; E3 B3 ; A3 E4 ; G#3 Eb4 ; C3 G3" labels="C–G ; E–B ; A–E ; wolf ; C–G" title="Three pure fifths, the wolf G♯–E♭, then C–G (nearest 12-ET keys, where the wolf looks like any fifth)"></pianoroll>
+</div>
+<div class="layer understand">
+<p>A pure fifth multiplies frequency by 3/2. Twelve of them multiply it by $(3/2)^{12} \approx 129.75$, while seven
+octaves multiply it by $2^7 = 128$. The ratio of the two,</p>
+$$\frac{(3/2)^{12}}{2^7} = \frac{3^{12}}{2^{19}} = \frac{531441}{524288} \approx 1.01364,$$
+<p>is the <b>Pythagorean comma</b>, 23.46 cents. It appears in three guises that are all the same interval:</p>
+<ul>
+<li>twelve fifths minus seven octaves (C to B♯);</li>
+<li>apotome minus limma (C–C♯ against C–D♭);</li>
+<li>any enharmonic pair twelve links apart, such as G♭ and F♯ (588.27 c against 611.73 c).</li>
+</ul>
+<p>In the twelve-note tuning from E♭ to G♯, the eleven fifths E♭–B♭, B♭–F, …, C♯–G♯ are pure. The twelfth interval,
+G♯–E♭, is really a diminished sixth: a fifth short by one comma, 701.96 − 23.46 = 678.49 c. Played as if it were a
+fifth, it beats hard. Medieval music, built on fifths and fourths with the wolf kept out of the way, could live with
+this. Music built on thirds and on many keys could not; that is the story of <a href="ch:ch07">Chapter 7</a>.</p>
+<aside class="mirror">With the golden sixth φ instead of the fifth, thirteen steps nearly make nine octaves:
+$\varphi^{13} \approx 521.0$ against $2^9 = 512$. The overshoot is the <b>golden comma</b>, 30.17 cents, and just as
+here it equals golden apotome minus golden limma: 99.27 − 69.10 = 30.17 c
+(<a href="ch:ch23#golden-comma">Chapter 23</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> The Pythagorean comma is $\kappa = 3^{12}/2^{19}$. In cents,
+$1200\log_2\kappa = 1200\,(12\log_2 3 - 19) \approx 23.46$.</p>
+<p><b>The wolf.</b> In a 12-note tuning made from the chain positions $k = a, a+1, \dots, a+11$, the interval from
+position $a+11$ up to position $a$ (folded) is $(3/2)/\kappa = 2^{18}/3^{11} = 262144/177147$, which is
+$701.96 - 23.46 = 678.49$ c. It is the only impure fifth.</p>
+<p><b>Distributing the comma.</b> Twelve fifths must make seven octaves on any closed 12-note keyboard. If the
+fifths have sizes $f_1, \dots, f_{12}$ cents, then $\sum f_i = 8400$, so the total amount by which they fall short of
+pure is $\sum (701.955 - f_i) = 12 \times 701.955 - 8400 = 23.46$ c, one comma, whatever the tuning. Pythagorean
+tuning puts all of it into one fifth. Equal temperament shares it equally: each fifth is narrowed by
+$23.46/12 = 1.955$ c, giving 700 c. Well temperaments share it unevenly (<a href="ch:ch07#well">Chapter 7</a>).</p>
+<p><b>Beats.</b> Two pure tones at $f$ and $f\kappa$ beat at $f(\kappa - 1)$ Hz. For C4 = 261.63 Hz that is 3.57 Hz;
+for C3 it is 1.78 Hz. With harmonic tones the $n$th partials beat $n$ times faster.</p>
+</div>
+<div class="exercise">
+<p><b>1.</b> Compute the Pythagorean A as a ratio and in cents, from its chain position.</p>
+<details class="answer"><summary>Answer</summary><p>A is three fifths up: $(3/2)^3 = 27/8$, folded down one octave
+to $27/16$. In cents $3 \times 701.955 - 1200 = 905.87$.</p></details>
+</div>
+<div class="exercise">
+<p><b>2.</b> F♯ and G♭ in Pythagorean tuning: which is higher, and by how much? Use chain positions only.</p>
+<details class="answer"><summary>Answer</summary><p>F♯ is at $k = 6$, G♭ at $k = -6$. They are twelve links apart, so
+they differ by one comma. F♯ = $6 \times 701.955 - 3600 = 611.73$ c and G♭ = $4800 - 6 \times 701.955 = 588.27$ c.
+F♯ is higher by 23.46 c.</p></details>
+</div>
+</section>
+
+<section id="continued-fractions">
+<h2>Continued fractions and why twelve</h2>
+<div class="layer hear">
+<p>Since the chain never closes, any keyboard must cut it somewhere. The question is where. A good place is a
+number of fifths that comes very close to a whole number of octaves, so that the leftover comma is small and can be
+shared out without spoiling the fifths. Twelve is the first number that works well. Five fifths miss three octaves
+by almost a semitone. Seven miss four octaves by more than a semitone. Twelve miss seven octaves by only a quarter
+of a semitone. When that quarter-semitone is spread over all twelve fifths, each is narrowed by an amount so small
+that it is hard to hear except as a very slow beat.</p>
+<audio-ex src="et_fifth" caption="A pure fifth C–G, perfectly still; then the 12-ET fifth, two cents narrow: listen for a slow pulse, a little under once a second."></audio-ex>
+<p>There is a beautiful piece of mathematics that finds these good numbers systematically, and it says what comes
+after twelve: 41, then 53.</p>
+</div>
+<div class="layer understand">
+<p>The question "how many fifths make nearly a whole number of octaves?" asks for whole numbers $n$ and $m$ with
+$n \cdot x \approx m$, where $x = \log_2(3/2) = 0.5849625\ldots$ is the fifth measured in octaves. In other words, we
+want fractions $m/n$ close to $x$. The tool for this is the <b>continued fraction</b> (<a href="ch:appA#continued">Appendix
+A</a>). Peel off the whole part, invert the rest, and repeat:</p>
+$$x = 0 + \cfrac{1}{1 + \cfrac{1}{1 + \cfrac{1}{2 + \cfrac{1}{2 + \cfrac{1}{3 + \cdots}}}}}
+\qquad\text{written}\qquad x = [0; 1, 1, 2, 2, 3, 1, 5, 2, 23, \ldots].$$
+<p>Cutting the expansion off at each stage gives the <b>convergents</b>, the best fractions of their size:</p>
+<table>
+<tr><th>Convergent $m/n$</th><th>Meaning</th><th>$n$ fifths minus $m$ octaves</th><th>Fifth in $n$-ET</th><th>Fifth error</th></tr>
+<tr><td>1/2</td><td>2 fifths ≈ 1 octave</td><td>+203.91 c (a whole tone)</td><td>600.00 c</td><td>−101.96</td></tr>
+<tr><td>3/5</td><td>5 fifths ≈ 3 octaves</td><td>−90.22 c (a limma)</td><td>720.00 c</td><td>+18.04</td></tr>
+<tr><td><b>7/12</b></td><td><b>12 fifths ≈ 7 octaves</b></td><td><b>+23.46 c (the comma)</b></td><td>700.00 c</td><td>−1.96</td></tr>
+<tr><td>24/41</td><td>41 fifths ≈ 24 octaves</td><td>−19.84 c</td><td>702.44 c</td><td>+0.48</td></tr>
+<tr><td>31/53</td><td>53 fifths ≈ 31 octaves</td><td>+3.62 c</td><td>701.89 c</td><td>−0.07</td></tr>
+<tr><td>179/306</td><td>306 fifths ≈ 179 octaves</td><td>−1.77 c</td><td>701.96 c</td><td>+0.006</td></tr>
+</table>
+<p>The leftovers alternate in sign and shrink. Notice the first ones: the whole tone, then the limma, then the
+comma. Each is the small interval left over by its own cycle, and each is smaller than the one before.</p>
+<p><b>Why twelve?</b> Three facts, all checked by computation, make 12 special.</p>
+<ul>
+<li>For every $n$ below 12, $n$ fifths miss the nearest whole number of octaves by at least 90.22 c (the best is
+$n = 5$). Twelve is the first cycle with a leftover under a quarter-tone.</li>
+<li>No $n$ below 41 does better than 12 at this. The leftover after 12 fifths, 23.46 c, is beaten first by 41 fifths
+(19.84 c). This is what it means for 7/12 to be a convergent.</li>
+<li>Spread over the cycle, 12's leftover narrows each fifth by only 1.96 c. Among equal divisions with fewer than
+29 notes, none has a fifth closer to pure than 12-ET's. 29-ET's fifth is 1.49 c wide, a little better, but it needs
+29 notes.</li>
+</ul>
+<p>So 12 is a sweet spot: few enough notes for a keyboard and a notation, and fifths within 2 c of pure. Musical
+history also had other reasons, which <a href="ch:ch07">Chapter 7</a> explores (12-ET thirds are not good, and
+the thirds mattered a great deal). The mathematics only says that 12 is where the chain of fifths first nearly
+closes.</p>
+<aside class="mirror">The golden sixth measured in octaves is $\log_2\varphi = 0.69424\ldots = [0; 1, 2, 3, 1, 2, 3, 2,
+4, \ldots]$. Its convergents 2/3, 7/10, 9/13 and 25/36 leave, in turn, the golden apotome (+99.27 c), the golden limma
+(−69.10 c), the golden comma (+30.17 c) and the 36-comma (−8.75 c), exactly as 1/2, 3/5 and 7/12 leave the tone, the
+limma and the Pythagorean comma. So 13 is the golden twelve, and 36 is the next good golden cycle. Unlike 41 or 53,
+36 also contains 12-ET exactly, which is why the golden system lives in 36-ET (<a href="ch:ch24#why-36">Chapter
+24</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>The algorithm.</b> Set $y_0 = x$. For $i \ge 0$ let $a_i = \lfloor y_i \rfloor$ and, if $y_i$ is not an
+integer, $y_{i+1} = 1/(y_i - a_i)$. Then $x = [a_0; a_1, a_2, \ldots]$. Because $x$ is irrational (the theorem of
+<a href="#stacking">the first section</a>), the expansion never stops. Computed to 60 digits,</p>
+$$\log_2\tfrac{3}{2} = [0; 1, 1, 2, 2, 3, 1, 5, 2, 23, 2, 2, 1, 1, 55, 1, \ldots].$$
+<p><b>Convergents.</b> With $p_{-1} = 1,\ q_{-1} = 0,\ p_0 = a_0,\ q_0 = 1$, set
+$p_i = a_i p_{i-1} + p_{i-2}$ and $q_i = a_i q_{i-1} + q_{i-2}$. Then $p_i/q_i$ is the $i$th convergent. For
+$\log_2(3/2)$ they are</p>
+$$\frac{0}{1},\ \frac{1}{1},\ \frac{1}{2},\ \frac{3}{5},\ \frac{7}{12},\ \frac{24}{41},\ \frac{31}{53},\
+\frac{179}{306},\ \frac{389}{665},\ \ldots$$
+<p><b>Theorem (best approximation).</b> If $p_i/q_i$ is a convergent of an irrational $x$ and $0 &lt; q &lt; q_{i+1}$,
+then $|qx - p| \ge |q_i x - p_i|$ for every integer $p$, with equality only when $(p, q) = (p_i, q_i)$. Moreover the
+signs of $q_i x - p_i$ alternate. (Proof in <a href="ch:appD#tuning">Appendix D</a>.)</p>
+<p>In tuning language, $1200\,(qx - p)$ is the comma left after $q$ fifths and $p$ octaves. The theorem says that
+the convergent denominators 1, 2, 5, 12, 41, 53, 306, … are exactly the record-setting cycle lengths. A direct
+check over $q = 1, \dots, 59$ confirms that the records are at $q = 1, 2, 5, 12, 41, 53$.</p>
+<p><b>Two kinds of "best".</b> The theorem measures the total leftover $|qx - p|$. Dividing by $q$ measures the error
+per fifth in $q$-ET, $1200\,|x - p/q|$. By that measure the record-holders up to 53 are 1, 2, 3, 5, 7 and then
+12 (1.96 c), 29 (1.49 c), 41 (0.48 c) and 53 (0.07 c). Here 3-ET (98.04 c) and 7-ET (16.24 c) set records although 3
+and 7 are not convergent denominators. The fraction 17/29 is not a convergent but an <i>intermediate</i> fraction (a
+semiconvergent), $17/29 = (7 + 10)/(12 + 17)$. Both kinds reappear in the next chapter, on the Stern–Brocot tree.</p>
+<p><b>The 53-cycle.</b> Fifty-three fifths exceed thirty-one octaves by $1200\,(53x - 31) = 3.62$ c, a comma often
+named after Nicholas Mercator, who studied 53-fold division in the 17th century.</p>
+</div>
+<aside class="box history">
+<p><b>Pythagoras and after.</b> Later writers attribute the fifth-generated scale to Pythagoras (6th century BCE);
+no writings of his survive. Philolaus (5th century BCE) describes the octave as a fourth (4/3) plus a fifth (3/2) and
+the tone as 9/8, and Plato's <i>Timaeus</i> (c. 360 BCE) fills the scale with tones of 9/8 and the remnant 256/243,
+the limma. Boethius, in <i>De institutione musica</i> (early 6th century CE),
+carried this theory into medieval Europe, together with the terms limma, apotome and comma. Medieval music theory was
+built on these 3-limit ratios.</p>
+</aside>
+<div class="exercise">
+<p><b>3.</b> (Listening.) In the comma example the fundamentals beat at about 3.6 Hz. If the same comparison were
+made an octave lower, at C3, how fast would the fundamentals beat?</p>
+<details class="answer"><summary>Answer</summary><p>Half as fast: $130.81 \times (1.01364 - 1) \approx 1.78$ Hz.
+The comma is a fixed ratio, so its beat rate is proportional to frequency.</p></details>
+</div>
+<div class="exercise">
+<p><b>4.</b> Compute the next convergent after 31/53 from the continued fraction $[0; 1, 1, 2, 2, 3, 1, 5, \ldots]$
+and check that it is 179/306.</p>
+<details class="answer"><summary>Answer</summary><p>The partial quotient after the one that produced 31/53 is
+$a_7 = 5$. With $p_5/q_5 = 24/41$ and $p_6/q_6 = 31/53$: $p_7 = 5 \cdot 31 + 24 = 179$ and
+$q_7 = 5 \cdot 53 + 41 = 306$.</p></details>
+</div>
+<div class="exercise">
+<p><b>5.</b> Prove that no number of pure fourths (4/3) can equal a whole number of octaves.</p>
+<details class="answer"><summary>Answer</summary><p>$(4/3)^k = 2^m$ with $k > 0$ means $2^{2k} = 3^k 2^m$, so
+$3^k = 2^{2k - m}$. The left side is odd and greater than 1, the right side is 1 or even (or a fraction).
+Impossible. (Equivalently, a fourth is an octave minus a fifth, so this reduces to the theorem for fifths.)</p></details>
+</div>
+</section>

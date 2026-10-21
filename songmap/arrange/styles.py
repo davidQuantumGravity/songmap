@@ -8,6 +8,10 @@ Four shapes, told apart by their keys:
 | `rel` (+ `oct`, `gate`)  | chord-relative figure, looped from the section start (bass)        |
 | `hold: chord` + `rel`    | one voicing per chord change, held for the whole chord (pads)      |
 | `grid` + `order`         | arpeggio over the current chord's tones (indices wrap up octaves)  |
+| `voiced: true`           | voice-led chords in the song's tuning (smoothest motion between    |
+|                          | chords); `rhythm` step string for comping, `voice` picks one line  |
+|                          | (top = melody from the soprano). Styles in patterns/voiced/ serve  |
+|                          | every part.                                                        |
 
 Common keys: `preset` (applies that preset's own params when the part plays that instrument),
 `params` (instrument overrides), `gain_db`, `aliases`.
@@ -29,7 +33,9 @@ SHAPES = {
     "rel": ("rel", "oct", "gate", "art"),
     "hold": ("hold", "rel", "oct", "gate"),
     "arp": ("grid", "order", "oct", "len", "pan_lfo", "brightness_ramp"),
+    "voiced": ("voiced", "voices", "range", "rhythm", "voice", "oct", "gate", "vel", "accent", "bass_note"),
 }
+SHARED_ROLE = "voiced"     # styles in patterns/voiced/ are available to every part
 
 
 @dataclass(frozen=True)
@@ -45,7 +51,9 @@ class Style:
 
 
 def _shape(d: dict, path: str) -> str:
-    if "steps" in d:
+    if d.get("voiced"):
+        shape = "voiced"
+    elif "steps" in d:
         shape = "kit"
     elif d.get("hold") == "chord":
         shape = "hold"
@@ -84,12 +92,16 @@ def load_styles() -> dict[str, dict[str, Style]]:
 
 def get_style(role: str, name: str) -> Style:
     styles = load_styles()
+    if name in styles.get(role, {}):
+        return styles[role][name]
+    if name in styles.get(SHARED_ROLE, {}):
+        return styles[SHARED_ROLE][name]
     if role not in styles:
         raise SongError(f"no styles for role '{role}'",
-                        suggestion=f"roles with styles: {' '.join(styles)}; or give notes:/motifs/steps")
-    if name not in styles[role]:
-        raise SongError(f"unknown {role} style '{name}'", suggestion=did_you_mean(name, styles[role]))
-    return styles[role][name]
+                        suggestion=f"roles with styles: {' '.join(styles)}; voiced styles for any part: "
+                                   + " ".join(sorted(styles.get(SHARED_ROLE, {}))))
+    raise SongError(f"unknown {role} style '{name}'",
+                    suggestion=did_you_mean(name, {**styles[role], **styles.get(SHARED_ROLE, {})}))
 
 
 def catalog() -> dict[str, list[str]]:

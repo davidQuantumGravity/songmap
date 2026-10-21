@@ -1,0 +1,18 @@
+# A semitone split into three sixth-steps (33.33 c each): C ^C vC# C# ... up to D and back,
+# then the C major triad moved up one sixth-step at a time: C, ^C, vC#, C#.
+songmap: 0.2
+title: "Sixth-steps"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 2
+instruments: {lead: clean/lead, organ: clean/organ}
+motifs:
+  climb: {notes: "c8 ^c vc# c# ^c# vd d4 | d8 vd ^c# c# vc# ^c c4", octave: 4}
+mix: {lead: {gain_db: -4}, organ: {gain_db: -6}}
+sections:
+  - {name: steps, bars: 2, harmony: "N.C.:2", parts: {lead: {motifs: [climb]}}}
+  - {name: chords, bars: 4, harmony: "C:1 ^C:1 vC#:1 C#:1", parts: {organ: hold}}
+master: clean

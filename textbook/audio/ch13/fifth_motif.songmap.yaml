@@ -1,0 +1,20 @@
+# The opening motif of Beethoven's Fifth Symphony (1808, public domain): short-short-short-long,
+# stated on G and then sequenced a step lower on F. Pitches only; fermatas and orchestration omitted.
+songmap: 0.2
+title: "Short-short-short-long"
+tempo: 108
+meter: "4/4"
+key: "C minor"
+tuning: 12edo
+seed: 13
+tail_seconds: 1.5
+instruments: {lead: clean/organ, low: clean/bass}
+mix: {lead: {gain_db: -3, send: {hall: 0.2}}, low: {gain_db: -6, send: {hall: 0.1}}}
+returns: {hall: {type: reverb, seconds: 1.8, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: motif
+    bars: 3
+    parts:
+      lead: {notes: "=f r8 g g g eb2 | r1 | r8 f f f d2"}
+      low:  {notes: "=f r8 g-- g-- g-- eb--2 | r1 | r8 f-- f-- f-- d--2"}
+master: clean

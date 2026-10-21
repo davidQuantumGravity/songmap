@@ -1,0 +1,26 @@
+# First species: the D-mode cantus firmus that opens Fux's exercises (D F E D G F A G F E D), alone,
+# then with a note-against-note counterpoint above it (A D E F E D C B C C# D).
+# Intervals: P5 M6 P8 m10 M6 M6 m3 M3 P5 M6 P8; no parallel or direct perfect consonances.
+songmap: 0.2
+title: "First species"
+tempo: 88
+meter: "4/4"
+key: "D dorian"
+tuning: 12edo
+seed: 15
+tail_seconds: 2.5
+instruments: {cf: clean/organ, cp: clean/organ}
+mix:
+  cf: {gain_db: -5, pan: -0.3, send: {hall: 0.25}}
+  cp: {gain_db: -5, pan: 0.3, send: {hall: 0.25}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: cantus
+    bars: 6
+    parts: {cf: {notes: "=mf d2 f | e d | g f | a g | f e | d1"}}
+  - name: both
+    bars: 7
+    parts:
+      cf: {notes: "r1 | =mf d2 f | e d | g f | a g | f e | d1"}
+      cp: {notes: "r1 | =mf a2 d+ | e+ f+ | e+ d+ | c+ b | c+ c#+ | d+1"}
+master: clean

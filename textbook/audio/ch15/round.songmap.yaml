@@ -1,0 +1,27 @@
+# "Frère Jacques", a traditional round (public domain), in four voices entering two bars apart.
+# Each voice sings the tune once; a silent note (velocity 0) at the end of each line keeps the
+# line from repeating.
+songmap: 0.2
+title: "A round in four voices"
+tempo: 132
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 15
+tail_seconds: 2
+instruments: {v1: clean/lead, v2: clean/keys, v3: clean/organ, v4: string_pluck/still}
+mix:
+  v1: {gain_db: -5, pan: -0.45, send: {hall: 0.2}}
+  v2: {gain_db: -5, pan: -0.15, send: {hall: 0.2}}
+  v3: {gain_db: -8, pan: 0.15, send: {hall: 0.2}}
+  v4: {gain_db: -4, pan: 0.45, send: {hall: 0.2}}
+returns: {hall: {type: reverb, seconds: 2.0, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: round
+    bars: 14
+    parts:
+      v1: {notes: "=mf c+4 d+ e+ c+ | c+ d+ e+ c+ | e+ f+ g+2 | e+4 f+ g+2 | g+8 a+ g+ f+ e+4 c+ | g+8 a+ g+ f+ e+4 c+ | c+ g c+2 | c+4 g c+2 | r1 | r1 | r1 | r1 | r1 | r2. c16@0 r"}
+      v2: {notes: "r1 | r1 | =mf c4 d e c | c d e c | e f g2 | e4 f g2 | g8 a g f e4 c | g8 a g f e4 c | c g- c2 | c4 g- c2 | r1 | r1 | r1 | r2. c16@0 r"}
+      v3: {notes: "r1 | r1 | r1 | r1 | =mf c+4 d+ e+ c+ | c+ d+ e+ c+ | e+ f+ g+2 | e+4 f+ g+2 | g+8 a+ g+ f+ e+4 c+ | g+8 a+ g+ f+ e+4 c+ | c+ g c+2 | c+4 g c+2 | r1 | r2. c16@0 r"}
+      v4: {notes: "r1 | r1 | r1 | r1 | r1 | r1 | =mf c-4 d- e- c- | c- d- e- c- | e- f- g-2 | e-4 f- g-2 | g-8 a- g- f- e-4 c- | g-8 a- g- f- e-4 c- | c- g-- c-2 | c-4 g-- c-2"}
+master: clean

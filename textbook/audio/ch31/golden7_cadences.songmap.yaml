@@ -1,0 +1,20 @@
+# ch31: candidate golden7 cadences, each golden7 triad moving to Cg, on a golden-spectrum organ:
+# ^Abg -> Cg (one voice falls), vEg -> Cg (B rises to C), vFg -> Cg (two voices fall),
+# C#g -> Cg (all three voices fall a golden apotome).
+songmap: 0.2
+title: "Toward golden7 cadences"
+tempo: 72
+meter: "4/4"
+key: "C golden7"
+tuning: 36edo
+seed: 314
+tail_seconds: 3
+instruments:
+  gorg: {use: clean/organ, spectrum: 1}
+  low: {use: clean/organ, spectrum: 1}
+mix:
+  gorg: {gain_db: -6, send: {hall: 0.2}}
+  low: {gain_db: -9, send: {hall: 0.2}}
+sections:
+  - {name: cadences, bars: 8, harmony: "^Abg:1 Cg:1 vEg:1 Cg:1 vFg:1 Cg:1 C#g:1 Cg:1", parts: {gorg: hold, low: {style: roots, role: bass}}}
+master: clean

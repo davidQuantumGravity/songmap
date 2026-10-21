@@ -1,0 +1,328 @@
+<p>Pythagorean tuning gives perfect fifths and a chain that never closes. That was enough for music built on fifths and
+fourths. Between the 14th and 16th centuries thirds moved to the center of Western music, and the Pythagorean third,
+81/64, is not the simple 5/4 of the harmonic series. <b>Temperament</b> is the art of adjusting ("tempering") intervals slightly
+away from pure so that more of them can be good at once. This chapter follows the three great solutions, meantone,
+well temperament and equal temperament, and corrects a famous myth along the way: Bach did not invent equal
+temperament.</p>
+
+<section id="syntonic">
+<h2>The syntonic comma and meantone</h2>
+<div class="layer hear">
+<p>First, the problem. Listen to two major thirds over C. The first is the Pythagorean third, made from four pure
+fifths. The second is the pure third of the harmonic series. The Pythagorean third is bright and restless; it beats
+quickly. The pure third is calm. Then hear both inside a full major chord.</p>
+<audio-ex src="syntonic" caption="The Pythagorean major third (four fifths) against the pure 5:4 third, then the two C major triads: only the E differs, by about a fifth of a semitone, and only the second is still."></audio-ex>
+<p>The solution widely used on keyboards in the 16th and 17th centuries was <b>meantone</b>: make every fifth a
+little narrow, just narrow enough that four of them land exactly on the pure third. The fifths now beat slightly, but
+the thirds are perfect. The price is paid elsewhere: one "fifth" in twelve becomes a wolf, and some thirds become
+unusable.</p>
+<audio-ex src="meantone" caption="A C major triad in quarter-comma meantone (pure third, slightly narrow fifth), then the Pythagorean triad; then the meantone wolf G♯–E♭, far too wide; then C♯–F, a 'third' that is really a diminished fourth."></audio-ex>
+</div>
+<div class="layer understand">
+<p>Four fifths up from C, less two octaves, give E at $81/64$ = 407.82 c. The pure major third is $5/4$ =
+386.31 c. The gap between them,</p>
+$$\frac{81/64}{5/4} = \frac{81}{80} \approx 21.51\ \text{c},$$
+<p>is the <b>syntonic comma</b>, which <a href="ch:ch04#commas-preview">Chapter 4</a> met in the ratio lattice. It is
+close to the Pythagorean comma (23.46 c) but a different interval: the Pythagorean comma compares fifths with
+octaves, the syntonic comma compares fifths with thirds. Their difference, 1.95 c, is called the schisma.</p>
+<pianoroll edo="12" notes="C4 ; G4 ; D4 ; A4 ; E4" labels="C ; G ; D ; A ; E" title="Four fifths up from C, folded down two octaves, reach E (12-ET key positions)"></pianoroll>
+<p><b>Quarter-comma meantone.</b> Narrow each fifth by a quarter of the syntonic comma, $21.51/4 = 5.38$ c. Then
+four fifths are smaller by a whole syntonic comma, and the third C–E comes out pure. The fifth itself is
+$\sqrt[4]{5} \approx$ 696.58 c, because four of them must equal $5 = 4 \times 5/4$. The whole tone C–D is then exactly
+half of the pure third, 193.16 c: the "mean tone" that gives the system its name.</p>
+<table>
+<tr><th>Note</th><td>C</td><td>C♯</td><td>D</td><td>E♭</td><td>E</td><td>F</td><td>F♯</td><td>G</td><td>G♯</td><td>A</td><td>B♭</td><td>B</td></tr>
+<tr><th>Cents</th><td>0</td><td>76.05</td><td>193.16</td><td>310.26</td><td>386.31</td><td>503.42</td><td>579.47</td><td>696.58</td><td>772.63</td><td>889.74</td><td>1006.84</td><td>1082.89</td></tr>
+</table>
+<p>This is the usual twelve-note layout, the chain from E♭ to G♯. In it:</p>
+<ul>
+<li>eight major thirds are pure (386.31 c), on C, D, E♭, E, F, G, A and B♭;</li>
+<li>four "major thirds" are really diminished fourths of 427.37 c, on C♯ (C♯–F), F♯ (F♯–B♭), G♯ (G♯–C) and B (B–E♭),
+41.06 c too wide;</li>
+<li>eleven fifths are 696.58 c, and the twelfth, G♯–E♭, is a wolf of 737.64 c, 35.68 c too <i>wide</i>.</li>
+</ul>
+<pianoroll edo="12" notes="C4 E4 G4 ; G#3 Eb4 ; C#4 F4" labels="C ; wolf ; C♯–F" title="Meantone's best and worst: the C triad, the wolf G♯–E♭ (G♯ on the A♭ key), the false third C♯–F"></pianoroll>
+<p>The semitones are reversed compared with Pythagorean tuning. The chromatic semitone C–C♯ is 76.05 c and the
+diatonic semitone C♯–D is 117.11 c, so in meantone <b>D♭ is higher than C♯</b>, by 41.06 c. A keyboard with one key
+for both must choose; that is why the meantone wolf exists, and why some historical instruments had split black keys,
+with separate D♯ and E♭ or G♯ and A♭.</p>
+<pc-circle edo="12" marks="0 4 8" title="C E G♯: three major thirds"></pc-circle>
+<p>The figure shows why the thirds cannot all be pure. Three major thirds stack to the octave in 12-ET (4 + 4 + 4 =
+12 semitones). But three pure thirds make $125/64$, which is 1158.94 c, short of the octave by
+$128/125$ = 41.06 c, the <b>diesis</b>. In meantone, one third out of every such cycle of three absorbs that whole
+gap.</p>
+</div>
+<div class="layer derive">
+<p><b>The meantone family.</b> A meantone tuning is a chain of fifths of size $f = 701.955 - c \times 21.506$ cents,
+narrowed by a fraction $c$ of the syntonic comma. The major third is four fifths up less two octaves, $4f - 2400$;
+the minor third is three fifths down plus two octaves, $2400 - 3f$:</p>
+<table>
+<tr><th>Tuning</th><th>Fifth</th><th>Major third (vs 386.31)</th><th>Minor third (vs 315.64)</th><th>Wolf (G♯–E♭)</th></tr>
+<tr><td>Pythagorean, $c = 0$</td><td>701.96</td><td>407.82 (+21.51)</td><td>294.13 (−21.51)</td><td>678.49</td></tr>
+<tr><td>1/6-comma</td><td>698.37</td><td>393.48 (+7.17)</td><td>304.89 (−10.75)</td><td>717.92</td></tr>
+<tr><td>1/4-comma</td><td>696.58</td><td>386.31 (0.00)</td><td>310.26 (−5.38)</td><td>737.64</td></tr>
+<tr><td>2/7-comma</td><td>695.81</td><td>383.24 (−3.07)</td><td>312.57 (−3.07)</td><td>746.09</td></tr>
+<tr><td>1/3-comma</td><td>694.79</td><td>379.14 (−7.17)</td><td>315.64 (0.00)</td><td>757.35</td></tr>
+</table>
+<p>Quarter-comma makes major thirds pure, 1/3-comma makes minor thirds pure, and 2/7-comma makes both equally
+impure (3.07 c each).</p>
+<p><b>Quarter-comma exactly.</b> $f = 1200\log_2 5^{1/4} = 300\log_2 5 = 696.58$ c, so $4f - 2400 =
+1200\log_2(5/4)$: the third is exactly pure. The tone is $2f - 1200 = 600\log_2(5/4)$, exactly half the third.</p>
+<p><b>Where the comma goes.</b> Eleven fifths narrowed by 5.38 c each lose $11 \times 5.377 = 59.14$ c. But twelve
+fifths must total seven octaves, which requires a total shortfall of only one Pythagorean comma, 23.46 c
+(<a href="ch:ch05#comma">Chapter 5</a>). So the twelfth interval must be wider than pure by $59.14 - 23.46 = 35.68$ c:
+the wolf, $701.96 + 35.68 = 737.64$ c.</p>
+<p><b>The diesis.</b> In quarter-comma meantone the diatonic semitone minus the chromatic semitone is
+$117.11 - 76.05 = 41.06$ c, exactly the diesis $128/125 = 2/(5/4)^3$, since three pure thirds and the diesis make an
+octave.</p>
+</div>
+<aside class="box history">
+<p><b>Meantone in history.</b> Meantone tunings were described by Renaissance theorists, among them Gioseffo Zarlino
+in the 16th century, and quarter-comma meantone became a widely used keyboard tuning in the 16th and 17th centuries.
+Pietro Aron's description of 1523 is usually read as quarter-comma meantone.</p>
+</aside>
+</section>
+
+<section id="well">
+<h2>Well temperament</h2>
+<div class="layer hear">
+<p>Meantone is beautiful in the keys near C and unusable far from it. A composer who wants to write in F♯ major
+needs A♯, D♯ and E♯, and a meantone keyboard tuned from E♭ to G♯ simply does not have them: it offers B♭, E♭ and F,
+which are the wrong notes. The solution of the late 17th and 18th centuries was the <b>well temperament</b>: share the
+comma unevenly, so that every key is usable, but the near keys are sweeter and the far keys more sharply colored.</p>
+<p>Listen to the same cadence in C major and in F♯ major, first in quarter-comma meantone and then in one famous well
+temperament, Werckmeister III.</p>
+<audio-ex src="keys_three_ways" caption="I–IV–V–I in C and then F♯, in meantone (F♯ is sour: every third is a wide diminished fourth), then in Werckmeister III (both keys work; F♯'s thirds are brighter than C's)."></audio-ex>
+<pianoroll edo="12" notes="F#2 F#3 A#3 C#4 ; B2 B3 D#4 F#4 ; C#2 C#3 F3 G#3 ; F#2 F#3 A#3 C#4" labels="F♯ ; B ; C♯ ; F♯" title="The F♯ cadence as played: A♯, D♯ and E♯ fall on the keys meantone tunes as B♭, E♭ and F"></pianoroll>
+</div>
+<div class="layer understand">
+<p>Andreas Werckmeister published several temperaments in <i>Musicalische Temperatur</i> (1691). The one usually
+called <b>Werckmeister III</b> narrows four fifths, C–G, G–D, D–A and B–F♯, by a quarter of the Pythagorean comma each
+($23.46/4 = 5.87$ c, giving 696.09 c), and leaves the other eight fifths pure. Four quarters make one whole comma, so
+the circle closes exactly, with no wolf.</p>
+<table>
+<tr><th>Note</th><td>C</td><td>C♯</td><td>D</td><td>E♭</td><td>E</td><td>F</td><td>F♯</td><td>G</td><td>G♯</td><td>A</td><td>B♭</td><td>B</td></tr>
+<tr><th>Cents</th><td>0</td><td>90.22</td><td>192.18</td><td>294.13</td><td>390.22</td><td>498.04</td><td>588.27</td><td>696.09</td><td>792.18</td><td>888.27</td><td>996.09</td><td>1092.18</td></tr>
+</table>
+<p>The major thirds now take four sizes, and they track the circle of fifths:</p>
+<table>
+<tr><th>Major third on</th><th>Size</th><th>Above pure 5/4</th></tr>
+<tr><td>C, F</td><td>390.22 c</td><td>+3.91</td></tr>
+<tr><td>G, D, B♭</td><td>396.09 c</td><td>+9.78</td></tr>
+<tr><td>A, E, B, E♭</td><td>401.96 c</td><td>+15.64</td></tr>
+<tr><td>F♯, C♯, G♯</td><td>407.82 c</td><td>+21.51 (Pythagorean)</td></tr>
+</table>
+<p>The keys with at most two sharps or flats have the best thirds, better than 12-ET's 400 c; the keys far around the circle
+have Pythagorean thirds. Nothing is as bad as meantone's diminished fourths or wolf. Every key is playable, and every
+key has its own color.</p>
+<p>Werckmeister's was one of many such schemes; later well temperaments by Johann Philipp Kirnberger and Francesco
+Antonio Vallotti, among others, distributed the comma in other ways. Eighteenth-century writers often attributed
+distinct characters to particular keys. How much of that came from the tuning, and how much from instruments,
+conventions and associations, is debated.</p>
+</div>
+<div class="layer derive">
+<p><b>The closure condition.</b> Any 12-note tuning with no wolf is a circle of twelve fifths $f_1, \dots, f_{12}$
+with $\sum f_i = 8400$ c, that is, total tempering $\sum (701.955 - f_i) = 23.46$ c, one Pythagorean comma. A
+<i>well</i> temperament chooses the $f_i$ unevenly but keeps every $f_i$ acceptable.</p>
+<p><b>Thirds from fifths.</b> A major third spans four consecutive fifths of the circle (C–G–D–A–E), so in any
+closed 12-note tuning</p>
+$$\text{M3 on } X = 407.82 - (\text{tempering of the four fifths from } X).$$
+<p>In Werckmeister III each fifth is tempered by 0 or $\kappa/4 = 5.865$ c, so the third on $X$ is
+$407.82 - 5.865\,t$, where $t \in \{0, 1, 2, 3\}$ is the number of tempered fifths among the four. The four fifths
+from C are C–G, G–D, D–A (tempered) and A–E (pure): $t = 3$, giving 390.22 c. From F♯: F♯–C♯, C♯–G♯, G♯–E♭, E♭–B♭, all
+pure: $t = 0$, the Pythagorean 407.82 c. This is why the thirds come in exactly four sizes, a quarter comma apart.</p>
+<aside class="mirror">The golden system has its own well-tempered cycle. The <i>Well-Tempered Golden Clavier</i>
+passes through every key of 36-ET: 36 tonics, each heard as major, minor, golden13 and silver13, at a much faster
+harmonic rhythm than Bach's (<a href="ch:ch24#keys">Chapter 24</a>). Unlike Bach's tuning, 36-ET is an
+<i>equal</i> temperament, so its keys do not differ in color; the name honours the complete tour of keys.
+<audio-ref file="W1_well_tempered_golden_clavier.mp3" caption="The Well-Tempered Golden Clavier: one continuous piece through every key of 36-ET."></audio-ref></aside>
+</div>
+</section>
+
+<section id="equal">
+<h2>Equal temperament</h2>
+<div class="layer hear">
+<p>The simplest way to share the comma is to share it equally: make all twelve fifths exactly alike and all twelve
+semitones exactly alike. That is <b>equal temperament</b>, the tuning of almost every piano today. Every key sounds
+the same, and modulation anywhere is free. The cost is that no interval except the octave is pure. The fifths are
+almost pure, but the thirds are noticeably wide: listen for the shimmer in the equal-tempered chord, between two pure
+ones.</p>
+<audio-ex src="equal" caption="A pure 4:5:6 major triad, then the 12-ET triad, then the pure one again: the equal-tempered third beats about ten times a second."></audio-ex>
+</div>
+<div class="layer understand">
+<p>In twelve-tone equal temperament (12-ET) the octave is divided into twelve equal semitones, each a frequency ratio
+of $2^{1/12} \approx 1.059463$, exactly 100 c. Each fifth is 700 c, narrowed from pure by a twelfth of the Pythagorean
+comma, 1.96 c. The limma and the apotome both become 100 c, so C♯ and D♭ are the same key and the same pitch: 12-ET
+makes enharmonic notes equal, and the chain of fifths closes into the circle of fifths
+(<a href="ch:ch08#circle">Chapter 8</a>).</p>
+<table>
+<tr><th>Interval</th><th>Just ratio</th><th>Just size</th><th>12-ET</th><th>Error</th></tr>
+<tr><td>fifth</td><td>3/2</td><td>701.96</td><td>700</td><td>−1.96</td></tr>
+<tr><td>fourth</td><td>4/3</td><td>498.04</td><td>500</td><td>+1.96</td></tr>
+<tr><td>major third</td><td>5/4</td><td>386.31</td><td>400</td><td>+13.69</td></tr>
+<tr><td>minor third</td><td>6/5</td><td>315.64</td><td>300</td><td>−15.64</td></tr>
+<tr><td>major sixth</td><td>5/3</td><td>884.36</td><td>900</td><td>+15.64</td></tr>
+<tr><td>minor sixth</td><td>8/5</td><td>813.69</td><td>800</td><td>−13.69</td></tr>
+<tr><td>harmonic seventh</td><td>7/4</td><td>968.83</td><td>1000</td><td>+31.17</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 G4 ; C4 F4 ; C4 E4 ; C4 Eb4 ; C4 A4 ; C4 Ab4 ; C4 Bb4" labels="fifth ; fourth ; M3 ; m3 ; M6 ; m6 ; ≈ 7/4" title="The table's intervals on C, as 12-ET keys"></pianoroll>
+<p>Compare the meantone and Werckmeister tables. 12-ET gives up the pure thirds of meantone and the sweet near keys of
+well temperament, and in exchange makes every key identical. Its major third, 400 c, lies between the pure third
+(386.31) and the Pythagorean one (407.82), nearer the Pythagorean.</p>
+<aside class="box history">
+<p><b>Who computed equal temperament.</b> The idea of equal semitones is old, and fretted instruments used nearly equal
+semitones in practice; Vincenzo Galilei, in the 16th century, recommended placing lute frets by the ratio 18:17
+(98.95 c, close to an equal semitone). The mathematics of exactly equal semitones, each the twelfth root of 2, was worked out
+independently by the Chinese prince Zhu Zaiyu (1584) and the Flemish mathematician Simon Stevin (c. 1605). Marin Mersenne popularized it in Europe
+in <i>Harmonie universelle</i> (1636). Equal temperament became the normal keyboard tuning only gradually, over the
+18th and 19th centuries. <b>Bach did not invent it.</b></p>
+</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> $n$-tone equal temperament ($n$-ET) has the notes $2^{k/n}$, $k \in \mathbb{Z}$; each step is
+$1200/n$ cents. 12-ET is $n = 12$.</p>
+<p><b>Errors.</b> 12-ET approximates a just ratio $r$ by the nearest multiple of 100 c; the error is
+$100\,\mathrm{round}(12\log_2 r) - 1200\log_2 r$. For the fifth, $700 - 701.955 = -1.955$ c, which is $-\kappa/12$.</p>
+<p><b>Why the third is wide.</b> The 12-ET third is four 12-ET fifths minus two octaves:
+$4 \times 700 - 2400 = 400$. The Pythagorean third is $4 \times 701.955 - 2400 = 407.82$. So the 12-ET third is the
+Pythagorean third narrowed by $4 \times 1.955 = 7.82$ c, still 13.69 c above pure. Every tuning built from a chain of
+equal fifths faces this trade: to bring the thirds down, the fifths must be narrowed more, as in meantone, and then
+the chain no longer closes after twelve fifths.</p>
+<p><b>Irrationality.</b> $2^{k/12}$ is irrational unless $12 \mid k$, so no 12-ET interval other than octaves is a
+whole-number ratio. (If $2^{k/12} = p/q$ in lowest terms, then $p^{12} = 2^k q^{12}$, forcing $q = 1$ and $p$ a power
+of 2, so $12 \mid k$.)</p>
+</div>
+</section>
+
+<section id="wtc">
+<h2>Bach's Well-Tempered Clavier</h2>
+<div class="layer hear">
+<p>In 1722 Johann Sebastian Bach completed a collection of 24 preludes and fugues, one in every major and every minor
+key. Twenty years later, in 1742, he assembled a second set of 24. The title, <i>Das wohltemperirte Clavier</i>, means
+"the well-tempered keyboard". It showed that a well-tempered keyboard could play in all 24 keys.</p>
+<p>The example below is not by Bach. It is a short arpeggiated texture, in the manner of a keyboard prelude, that
+travels to keys far apart on the circle of fifths: C, E, A♭ and back to C. On a meantone keyboard the E and A♭
+sections would be badly out of tune. In a well temperament each would sound in tune with its own color; in the
+equal temperament used here they sound alike.</p>
+<pianoroll edo="12" notes="C4 E4 G4 ; E4 G#4 B4 ; Ab3 C4 Eb4 ; C4 E4 G4" labels="C ; E ; A♭ ; C" title="The example's home chords: C, E, A♭ and C again"></pianoroll>
+<audio-ex src="prelude" caption="Arpeggiated I–IV–V7–I in C, in E and in A♭, then home to C: keys far apart on the circle, all equally usable in equal temperament."></audio-ex>
+</div>
+<div class="layer understand">
+<p>The facts, stated carefully:</p>
+<ul>
+<li><b>Book I</b> is dated 1722 and <b>Book II</b> 1742. Each contains 24 pairs of a prelude and a fugue, one pair for
+each major and minor key, arranged in rising chromatic order: C major, C minor, C♯ major, C♯ minor, D major, and so on
+up to B minor.</li>
+<li><b>"Clavier"</b> meant keyboard instruments in general: harpsichord, clavichord and organ.</li>
+<li><b>"Well-tempered" is not "equal-tempered".</b> The title refers to a good tempering that makes all keys usable.
+The word does not by itself rule out equal temperament, but the good temperaments of Bach's day were mostly
+unequal well temperaments, and exactly which tuning Bach used is not documented. Several modern
+reconstructions have been proposed, some based on readings of a decorative drawing on the title page of Book I; they
+remain debated.</li>
+<li><b>Bach did not invent equal temperament.</b> Zhu Zaiyu and Simon Stevin had computed it more than a century
+earlier, and Mersenne had published it in 1636.</li>
+</ul>
+<p>Bach was not the first composer to write a cycle of pieces through many keys, but the <i>Well-Tempered Clavier</i>
+became the model for such cycles. Its musical point is the one the tuning history makes possible: once every key is
+usable, a composer can modulate anywhere, and the circle of keys becomes a space to travel in
+(<a href="ch:ch08#distance">Chapter 8</a>).</p>
+<aside class="mirror">This project's <i>Well-Tempered Golden Clavier</i> takes the WTC as its model in 36-ET: 72
+major and minor keys plus 36 golden13 and 36 silver13 scales. Where Bach needed a tuning in which 24 keys were usable,
+36-ET has 36 tonics, and each of them carries the golden scales as well as the Western ones
+(<a href="ch:ch24#keys">Chapter 24</a>, <a href="ch:ch31#wtgc">Chapter 31</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Counting keys.</b> With 12 tonics and two modes there are $12 \times 2 = 24$ keys. In a closed 12-note well
+temperament, transposing a key changes its tuning, so in principle up to 12 different "colors" of major key exist. In
+Werckmeister III the twelve major thirds take only four sizes (last section), and the three keys on F♯, C♯ and G♯ have
+the Pythagorean third. In 12-ET all twelve major keys are exact transpositions of each other: one color.</p>
+</div>
+</section>
+
+<section id="edos">
+<h2>Other equal divisions: 19, 31, 53</h2>
+<div class="layer hear">
+<p>Twelve is not the only way to divide the octave equally. Other divisions keep the convenience of equal steps but
+choose a different compromise. Listen to a C major triad in four equal temperaments and then in pure tuning. In 12-ET
+the third is wide. In 19-ET it is a little narrow. In 31-ET it is almost pure. In 53-ET both the third and the fifth are
+very close to pure.</p>
+<audio-ex src="edos" caption="A C major triad in 12-ET, 19-ET, 31-ET and 53-ET, then in pure 4:5:6 tuning: listen to the third settle as the division gets finer."></audio-ex>
+</div>
+<div class="layer understand">
+<p>Each $n$-ET approximates a just interval by the nearest whole number of steps:</p>
+<table>
+<tr><th>Division</th><th>Step</th><th>Fifth (vs 701.96)</th><th>Major third (vs 386.31)</th><th>Minor third (vs 315.64)</th><th>7/4 (vs 968.83)</th></tr>
+<tr><td>12-ET</td><td>100.00</td><td>7 steps: 700.00 (−1.96)</td><td>4: 400.00 (+13.69)</td><td>3: 300.00 (−15.64)</td><td>10: 1000.00 (+31.17)</td></tr>
+<tr><td>19-ET</td><td>63.16</td><td>11: 694.74 (−7.22)</td><td>6: 378.95 (−7.37)</td><td>5: 315.79 (+0.15)</td><td>15: 947.37 (−21.46)</td></tr>
+<tr><td>31-ET</td><td>38.71</td><td>18: 696.77 (−5.18)</td><td>10: 387.10 (+0.78)</td><td>8: 309.68 (−5.96)</td><td>25: 967.74 (−1.08)</td></tr>
+<tr><td>53-ET</td><td>22.64</td><td>31: 701.89 (−0.07)</td><td>17: 384.91 (−1.41)</td><td>14: 316.98 (+1.34)</td><td>43: 973.58 (+4.76)</td></tr>
+</table>
+<ul>
+<li><b>19-ET</b> is almost exactly 1/3-comma meantone (fifths 694.74 against 694.79 c), with nearly pure minor
+thirds.</li>
+<li><b>31-ET</b> is almost exactly quarter-comma meantone (fifths 696.77 against 696.58 c), with nearly pure major
+thirds and a close 7/4. Christiaan Huygens wrote about the 31-fold division in the 17th century, and in the 20th
+century Adriaan Fokker built an organ with 31 keys per octave.</li>
+<li><b>53-ET</b> is almost exactly Pythagorean (fifth 0.07 c narrow), the cycle of 53 fifths from
+<a href="ch:ch05#continued-fractions">Chapter 5</a>, and its major third is also good. The Chinese theorist Jing Fang
+(1st century BCE) is credited with noticing that 53 fifths nearly make 31 octaves, and Nicholas Mercator studied the
+53-fold division in the 17th century. Turkish classical music theory describes intervals in units of a 53rd of an
+octave.</li>
+</ul>
+<p>The price is the number of notes. Nineteen, thirty-one or fifty-three keys per octave are hard to build and to
+play, which is one reason 12 prevailed.</p>
+<aside class="mirror">The golden system makes the same kind of choice. 13-ET closes the golden chain at the golden
+comma, as 12-ET closes the chain of fifths, but its golden sixth (830.77 c) is 2.32 c flat and it does not contain
+12-ET. 36-ET closes the golden chain at the smaller 36-comma: its golden sixth is 25 steps, within 0.24 c. And because
+$36 = 3 \times 12$, it contains 12-ET exactly. No other small tuning does both. That is why the golden system lives in
+36-ET (<a href="ch:ch24#why-36">Chapter 24</a>, <a href="ch:ch24#thirteen">13-ET and 36-ET</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Which divisions approximate which tuning.</b> An $n$-ET has a fifth of $m$ steps, a fraction $m/n$ of the
+octave. It approximates a chain tuning well when $m/n$ is close to the chain's generator. By the theorem of
+<a href="ch:ch06#stern-brocot">Chapter 6</a>, the sizes $n$ on the generator's Stern–Brocot path are exactly the
+well-formed sizes of that chain. Computed directly:</p>
+<ul>
+<li>Pythagorean fifth ($0.584963$ octave): well-formed sizes 2, 3, 5, 7, 12, 17, 29, 41, 53, …</li>
+<li>Quarter-comma meantone fifth ($0.580482$ octave): 2, 3, 5, 7, 12, 19, 31, 50, …</li>
+<li>1/3-comma meantone fifth ($0.578989$ octave): 2, 3, 5, 7, 12, 19, 31, 50, 69, …</li>
+</ul>
+<p>The two families share 2, 3, 5, 7, 12 and then part ways: 7/12 has the children 11/19 and 10/17. Meantone fifths
+(smaller than 7/12 of an octave) go left to 11/19, then on to 18/31; the Pythagorean fifth (larger) goes right to
+10/17 and on to 53. So 19 and 31 are to meantone what 17, 41 and 53 are to Pythagorean tuning.</p>
+<p><b>Nearness.</b> $|1200 \times 11/19 - 694.79| = 0.05$ c, and $|1200 \times 18/31 - 696.58| = 0.20$ c.</p>
+</div>
+<div class="exercise">
+<p><b>1.</b> Show that in quarter-comma meantone the minor third is 5.38 c narrower than 6/5.</p>
+<details class="answer"><summary>Answer</summary><p>The minor third is three fifths down and two octaves up:
+$2400 - 3 \times 696.58 = 310.26$ c. Pure 6/5 is 315.64 c, so the meantone minor third is 5.38 c narrow, the same
+amount as each fifth. (Exactly: the pure minor third is a pure fifth minus a pure major third, and meantone keeps the
+third pure while narrowing the fifth by a quarter comma.)</p></details>
+</div>
+<div class="exercise">
+<p><b>2.</b> In Werckmeister III, how large is the major third on G, and why?</p>
+<details class="answer"><summary>Answer</summary><p>It spans the fifths G–D, D–A, A–E and E–B. Two of them (G–D and
+D–A) are tempered by 5.865 c, so the third is $407.82 - 2 \times 5.865 = 396.09$ c.</p></details>
+</div>
+<div class="exercise">
+<p><b>3.</b> (Listening.) In the equal-temperament example, the third beats at about 10.4 Hz. Which partials are
+beating, and why does the pure third not beat?</p>
+<details class="answer"><summary>Answer</summary><p>The fifth partial of C4 (5 × 261.63 = 1308.13 Hz) and the fourth
+partial of E4 (4 × 329.63 = 1318.51 Hz) are 10.38 Hz apart. In the pure third E = 5/4 × C, so 4E = 5C exactly and
+these partials coincide.</p></details>
+</div>
+<div class="exercise">
+<p><b>4.</b> True or false: Bach's <i>Well-Tempered Clavier</i> was written to show off equal temperament, which Bach
+invented.</p>
+<details class="answer"><summary>Answer</summary><p>False on both counts. Equal temperament was computed by Zhu Zaiyu
+(1584) and Simon Stevin (c. 1605) and popularized by Mersenne (1636). "Well-tempered" means a good temperament in which
+every key is usable, which in Bach's time usually meant an unequal well temperament; Bach's exact tuning is not
+documented.</p></details>
+</div>
+<div class="exercise">
+<p><b>5.</b> In 31-ET, how many steps is the chromatic semitone C–C♯, and how many the diatonic semitone C♯–D?</p>
+<details class="answer"><summary>Answer</summary><p>The fifth is 18 steps, so C♯ (seven fifths up, four octaves down)
+is $7 \times 18 - 4 \times 31 = 2$ steps, and D (two fifths up, one octave down) is $36 - 31 = 5$ steps. So C–C♯ is 2
+steps (77.42 c) and C♯–D is 3 steps (116.13 c): a meantone pattern, with D♭ (3 steps) above C♯.</p></details>
+</div>
+</section>

@@ -1,0 +1,14 @@
+# ch20: the six two-note intervals inside {0,1,4,6} = C C# E F#: interval classes 1, 4, 6, 3, 5, 2, each exactly once.
+songmap: 0.2
+title: "Every interval once"
+tempo: 76
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 20
+tail_seconds: 2
+instruments: {organ: clean/organ}
+mix: {organ: {gain_db: -5, send: {hall: 0.2}}}
+sections:
+  - {name: dyads, bars: 4, parts: {organ: {notes: "[c,c#]2 [c,e]2 | [c,f#]2 [c#,e]2 | [c#,f#]2 [e,f#]2 | [c,c#,e,f#]1"}}}
+master: clean

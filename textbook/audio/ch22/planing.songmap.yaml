@@ -1,0 +1,16 @@
+# ch22: planing. A melody harmonized first by parallel major triads (chromatic planing: every chord the same shape),
+# then by triads of the C major scale (diatonic planing: the shape changes with the scale).
+songmap: 0.2
+title: "Chromatic and diatonic planing"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 22
+tail_seconds: 3
+instruments: {keys: keys/still}
+mix: {keys: {gain_db: -4, send: {hall: 0.3}}}
+sections:
+  - {name: chromatic, bars: 2, parts: {keys: {notes: "[c,e,g]4 [d,f#,a] [eb,g,bb] [f,a,c+] | [eb,g,bb]2 [c,e,g]2"}}}
+  - {name: diatonic, bars: 2, parts: {keys: {notes: "[c,e,g]4 [d,f,a] [e,g,b] [f,a,c+] | [e,g,b]2 [c,e,g]2"}}}
+master: clean

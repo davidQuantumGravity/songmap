@@ -6,10 +6,10 @@ The tuning only says how finely the octave is divided: 12 steps (12edo, the defa
 semitones (floats allowed), so they mean the same in any tuning. Membership tests ("is this
 pitch class in the chord?") compare grid steps, never raw floats.
 
-Reserved notation for P10 (docs/GOLDEN_HARMONY.md): `^` and `v` as PREFIXES on notes, degrees,
-chord roots and keys are sixth-step accidentals (`^c4`, `v3`, `^F#m`). An accent `^` stays a
-suffix after the duration (`c4^`). Until 36edo exists, the parsers reject the prefixes with a
-message that says so.
+36edo notation (docs/GOLDEN_HARMONY.md): `^` and `v` as PREFIXES on notes, degrees, chord-relative
+tones, chord roots and keys are sixth-step accidentals (`^c4`, `v3`, `^F#m`), +-1/3 semitone each.
+An accent `^` stays a suffix after the duration (`c4^`). The parsers always accept the prefixes;
+a song whose pitches leave the 12-step grid must declare `tuning: 36edo` (checked in expand()).
 """
 from __future__ import annotations
 
@@ -44,7 +44,8 @@ class Tuning:
 
 
 DEFAULT = Tuning(12)
-SUPPORTED = {"12edo": DEFAULT}       # 36edo arrives with P10
+EDO36 = Tuning(36)
+SUPPORTED = {"12edo": DEFAULT, "36edo": EDO36}
 
 
 def pc_semitones(x: float) -> float:
@@ -65,15 +66,34 @@ def parse_tuning(name) -> Tuning:
     key = str(name).strip().lower().replace("-", "").replace("tet", "edo").replace("et", "edo")
     if key in SUPPORTED:
         return SUPPORTED[key]
-    raise ValueError(f"tuning '{name}' is not available yet (36edo arrives with ROADMAP P10); valid: "
-                     + " ".join(SUPPORTED))
+    raise ValueError(f"tuning '{name}' is not available; valid: " + " ".join(SUPPORTED))
+
+
+SIXTH = OCTAVE / 36      # one sixth-step in semitones
+
+
+def split_updown(token: str) -> tuple[float, str]:
+    """'^^c4' -> (+2/3, 'c4'); 'vEb' -> (-1/3, 'Eb'). Prefixes only; a suffix '^' is an accent."""
+    n = 0
+    i = 0
+    while i < len(token) and token[i] in "^v" and i + 1 < len(token) and (token[i + 1] in "^v" or token[i + 1].isalnum()
+                                                                         or token[i + 1] in "#b-[R"):
+        if token[i] == "v" and not (token[i + 1] in "^v" or token[i + 1].upper() in "ABCDEFGR" or token[i + 1].isdigit()
+                                    or token[i + 1] in "#b-["):
+            break
+        n += 1 if token[i] == "^" else -1
+        i += 1
+    return (n * SIXTH if n else 0), token[i:]
+
+
+def on_grid(pitch: float, tuning: "Tuning" = DEFAULT) -> bool:
+    k = pitch / tuning.step
+    return abs(k - round(k)) < 1e-6
 
 
 def reject_microtone_prefix(token: str, what: str) -> None:
-    """Raise if a token starts with the reserved sixth-step prefix `^` or `v`."""
+    """Kept for callers that must stay on the 12 grid; the note/chord/key parsers accept prefixes."""
     from ..parse.errors import NotationError
     t = token.lstrip("({")
     if t[:1] in ("^", "v") and len(t) > 1 and (t[1].isalnum() or t[1] in "#b-[R"):
-        raise NotationError(
-            f"{what}: '{token}' starts with '{t[0]}', which is reserved for sixth-step accidentals "
-            "(tuning: 36edo, ROADMAP P10). For an accent put '^' after the duration, e.g. c4^")
+        raise NotationError(f"{what}: '{token}' uses a sixth-step accidental; this needs tuning: 36edo")

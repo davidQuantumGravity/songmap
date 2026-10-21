@@ -1,0 +1,20 @@
+# Ch. 8, orbits in Z12: start on C and keep adding the same interval until C returns.
+# +1: all twelve (chromatic); +7: all twelve in circle-of-fifths order (folded into one register);
+# +2: six notes (whole-tone); +3: four (diminished seventh); +4: three (augmented triad).
+songmap: 0.2
+title: "Orbits of 1, 7, 2, 3 and 4"
+tempo: 132
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {lead: clean/organ}
+mix: {lead: {gain_db: -6}}
+sections:
+  - {name: by1, bars: 2, harmony: "N.C.:2", parts: {lead: {notes: "c8 c# d eb e f f# g | ab a bb b c+2"}}}
+  - {name: by7, bars: 2, harmony: "N.C.:2", parts: {lead: {notes: "c8 g d a- e b- f# c# | ab eb bb- f c2"}}}
+  - {name: by2, bars: 1, harmony: "N.C.:1", parts: {lead: {notes: "c8 d e f# ab bb c+4"}}}
+  - {name: by3, bars: 1, harmony: "N.C.:1", parts: {lead: {notes: "c8 eb f# a c+2"}}}
+  - {name: by4, bars: 1, harmony: "N.C.:1", parts: {lead: {notes: "c8 e ab c+ r2"}}}
+master: clean

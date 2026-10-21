@@ -1,0 +1,327 @@
+<section id="songmap">
+<h2>A song as a text file</h2>
+<div class="layer hear">
+<p>Every example in this book was made the same way: someone wrote a short text file, and a program turned it into
+sound. Here is one of them. Listen first: a four-chord progression on an organ with a bass, played twice, the second
+time with a glass bell arpeggiating each chord, and at the end of each phrase a dominant chord that slides into the
+tonic through two passing chords, its upper voices climbing in steps of a third of a semitone.</p>
+<audio-ex src="first_song" caption="“A first song map”: C – Am – F – G and the strict V → I path, twice (the second time with a bell arpeggio), then the final C. The whole piece is the 17-line text file shown below."></audio-ex>
+<p>The program is <b>SongMap</b>, written for this project. Nothing in the file says how to make an organ sound, how to
+voice a chord or how loud anything is in decibels of raw signal: those things live in a fixed engine. The file says only
+what a musician would say: tempo, key, chords, which instrument plays what, and how the parts are balanced.</p>
+</div>
+<div class="layer understand">
+<p><b>The file.</b> This is the complete source of the example:</p>
+<pre><code>songmap: 0.2
+title: "A first song map"
+tempo: 90
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass, bell: clean/glass}
+motifs:
+  m1: {rel: "R8 3 5 R+ 5 3 R 3"}
+sections:
+  - {name: a, bars: 4, harmony: "C:1 Am:1 F:1 G:0.5 ~:0.25 ~:0.25", parts: {organ: hold, low: bassline}}
+  - {name: b, bars: 4, harmony: "C:1 Am:1 F:1 G:0.5 ~:0.25 ~:0.25", parts: {organ: hold, low: bassline, bell: {motifs: [m1]}}}
+  - {name: end, bars: 1, harmony: "C:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+mix: {organ: {gain_db: -6}, low: {gain_db: -4}, bell: {gain_db: -9, send: {hall: 0.3}}}
+master: clean</code></pre>
+<p>It is written in YAML, a plain-text format of keys and values. Reading it top to bottom:</p>
+<table>
+<tr><th>Field</th><th>Meaning</th></tr>
+<tr><td><code>songmap</code>, <code>title</code></td><td>format version (0.2) and a name</td></tr>
+<tr><td><code>tempo</code>, <code>meter</code>, <code>key</code></td><td>90 beats per minute, four beats per bar, home key C major</td></tr>
+<tr><td><code>tuning</code></td><td><code>12edo</code> or <code>36edo</code>: which pitch grid the song may use (§36.2)</td></tr>
+<tr><td><code>seed</code></td><td>every random choice the engine makes derives from it, so a render is reproducible</td></tr>
+<tr><td><code>tail_seconds</code></td><td>silence after the last bar, for the sound to ring out</td></tr>
+<tr><td><code>instruments</code></td><td>the ensemble: part name → <code>instrument/preset</code></td></tr>
+<tr><td><code>motifs</code></td><td>named melodies; <code>rel</code> means chord-relative: R = root, 3 = third, 5 = fifth, R+ = root an octave up, 8 = eighth notes</td></tr>
+<tr><td><code>sections</code></td><td>the form: each section has a length in bars, a harmony and a part list</td></tr>
+<tr><td><code>harmony</code></td><td><code>Chord:bars</code> tokens; <code>~</code> is a passing-chord placeholder (§36.3)</td></tr>
+<tr><td><code>parts</code></td><td>which parts play, and in which style (§36.4)</td></tr>
+<tr><td><code>mix</code></td><td>per-part gain in decibels and the amount sent to a hall reverb</td></tr>
+<tr><td><code>master</code></td><td><code>clean</code>: scale the final peak and nothing else (<a href="ch:ch37#mixing">Chapter 37</a>)</td></tr>
+</table>
+<p><b>Why text.</b> A song as a short text file has practical virtues. It can be read, compared line by line with an
+earlier version, and changed by a person or by a program; it is small enough for a language model to write and revise;
+and it is <i>exact</i>: the file, not a mouse gesture, is the score. The engine behind it is written once and improves
+over time, while each song stays a few lines long. The same file can also drive video: SongMap writes the time and video
+frame of every section and event to a <code>cues.json</code> file (<a href="ch:ch38#animation">Chapter 38</a>).</p>
+<p><b>The pipeline.</b> Rendering goes through fixed stages:</p>
+<table>
+<tr><th>Stage</th><th>What happens</th></tr>
+<tr><td>parse</td><td>the YAML is read and validated; errors say what is wrong and, where possible, how to fix it</td></tr>
+<tr><td>arrange</td><td>harmony strings become a timeline of chords, placeholders become passing chords, styles and motifs become notes</td></tr>
+<tr><td>perform</td><td>dynamics and articulation turn written notes into played notes</td></tr>
+<tr><td>instruments</td><td>each note is synthesized from scratch (<a href="ch:ch37#additive">Chapter 37</a>)</td></tr>
+<tr><td>mix and master</td><td>parts are balanced, sent to reverb and summed; the clean master scales the peak</td></tr>
+<tr><td>export</td><td>audio, per-part stems, <code>cues.json</code> and a QA report of measured numbers</td></tr>
+</table>
+<p>Checking the file without rendering it prints a summary:</p>
+<pre><code>$ songmap check first_song.songmap.yaml
+ok: A first song map
+  3 sections, 9 bars at 90 BPM 4/4, 0:27.00 (810 frames @ 30 fps)
+  parts: organ 13, low 14, bell 32</code></pre>
+</div>
+<div class="layer derive">
+<p><b>Timing.</b> With tempo $T$ beats per minute and $b$ beats per bar, one beat lasts $60/T$ seconds and one bar
+$60b/T$. A token <code>G:0.5</code> lasts half a bar, $0.5\,b = 2$ beats. The song length is</p>
+$$\text{seconds} = \frac{60\,b}{T}\sum_{\text{sections}} \text{bars} + \text{tail}.$$
+<p>Here $60\cdot 4/90 = 2.667$ s per bar, $9$ bars $= 24$ s, plus a 3 s tail: 27.00 s, as <code>songmap check</code>
+reports. Video frames are $\operatorname{round}(\text{seconds}\times\text{fps})$; at 30 fps that is 810.</p>
+<p><b>Frame-exact beats.</b> A beat lands on a whole video frame exactly when $60\cdot\text{fps}/T$ is an integer. At
+90 BPM and 30 fps it is $1800/90 = 20$ frames per beat. At 80 BPM it would be 22.5, and <code>songmap check</code> warns
+that beats do not land on whole frames.</p>
+<p><b>Harmony per section.</b> A section's harmony string is laid along its bars and repeats if it is shorter than the
+section (progressions loop). In the example each harmony string sums to $1+1+1+0.5+0.25+0.25 = 4$ bars, the section
+length.</p>
+<p><b>Reproducibility.</b> A render depends only on the file and the engine version: the seed fixes every random
+choice, and the clean instruments use none (§37.2). The engine's test suite keeps a hash of the complete expanded note
+list of every example song in the repository, so any change in output is detected.</p>
+</div>
+</section>
+
+<section id="golden-notation">
+<h2>Golden notation in SongMap</h2>
+<div class="layer hear">
+<p>The first example writes the averaging principle as chord symbols: C, Cm and Caug, then their average Cg; then C, Cm
+and Cdim, then their average Cs. It ends by playing <code>Cg</code> and then <code>C(v3,^5)</code>: two spellings of
+the same chord, which sound identical.</p>
+<audio-ex src="golden_chords" caption="C – Cm – Caug – Cg (the bright average), C – Cm – Cdim – Cs (the dark average), then Cg and C(v3,^5): the same chord written two ways."></audio-ex>
+<p>The second example is a melody written as scale degrees of the golden diatonic, golden7, over golden chords taken
+from the same scale. The bell climbs the scale's tones C, vE, ^G, B and the octave, and falls back by step.</p>
+<audio-ex src="golden7_melody" caption="A melody in scale degrees of C golden7 (C C♯ vE vF ^G ^A♭ B) on a golden-spectrum bell, over Cg – Cg7 – vEg – Cg on a golden pad."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Tuning.</b> <code>tuning: 36edo</code> switches the song to 36-ET, the grid of sixth-steps of 33.33 c
+(<a href="ch:ch24#sixth-steps">Chapter 24</a>). A <code>12edo</code> song that uses a sixth-step anywhere is an error
+whose message names the fix, so a Western piece can never drift off the grid by a typo.</p>
+<p><b>Ups and downs.</b> A sixth-step up is <code>^</code>, down is <code>v</code>, always written as a <b>prefix</b>
+(<a href="ch:ch24#notation">Chapter 24</a>). The same marks work everywhere a pitch can be written:</p>
+<table>
+<tr><th>Where</th><th>Examples</th></tr>
+<tr><td>letter notes in motifs</td><td><code>^c4</code> (C up, quarter note), <code>ve8</code> (E down, eighth), <code>veb+</code> (E♭ down, an octave up)</td></tr>
+<tr><td>scale degrees</td><td><code>^3</code>, <code>v5/8.</code> (degree 5 down, dotted eighth)</td></tr>
+<tr><td>chord-relative tones</td><td><code>v3</code>, <code>^5</code></td></tr>
+<tr><td>chord roots</td><td><code>^C</code>, <code>vEb</code>, <code>^F#m7</code></td></tr>
+<tr><td>keys</td><td><code>key: ^D minor</code>, <code>key: vE golden13</code></td></tr>
+</table>
+<p><b>Chord symbols.</b> On top of the Western qualities (C, Cm, Cdim, Caug, Csus4, C7, Cmaj7, Cm7, Cm7b5, Cdim7, C6, Cm6,
+C9, Cadd9 and others), 36edo songs have the golden family:</p>
+<table>
+<tr><th>Symbol</th><th>Notes on C</th><th>Sixth-steps</th><th>Meaning</th></tr>
+<tr><td><code>Cg</code></td><td>C vE ^G</td><td>0, 11, 22</td><td>golden triad, exact 1 : 2/φ : 4/φ²</td></tr>
+<tr><td><code>Cg7</code></td><td>C vE ^G B</td><td>0, 11, 22, 33</td><td>golden seventh, exact 1 : 2/φ : 4/φ² : 8/φ³</td></tr>
+<tr><td><code>Cs</code></td><td>C ^E♭ vG</td><td>0, 10, 20</td><td>silver triad, the average of C, Cm, Cdim</td></tr>
+<tr><td><code>CT13</code></td><td>C ^E vA</td><td>0, 13, 26</td><td>bronze triad, golden's passing partner</td></tr>
+<tr><td><code>C(v3,^5)</code></td><td>C vE ^G</td><td>0, 11, 22</td><td>alteration list: any chord tone bent by sixth-steps</td></tr>
+<tr><td><code>vCg/G</code></td><td>vC ^E♭ G over G</td><td>35, 10, 21</td><td>slash: a bass note (here the golden six-four)</td></tr>
+</table>
+<p><b>Golden keys.</b> <code>key: C golden7</code>, <code>golden13</code>, <code>silver13</code> (and golden3, 4, 10, 23) make
+the golden scales of <a href="ch:ch23#golden-scales">Chapter 23</a> available to scale-degree motifs. In
+<code>golden7</code>, degree 0 is C, 1 is C♯, 2 is vE, 3 is vF, 4 is ^G, 5 is ^A♭, 6 is B and 7 is the octave. The
+melody of the second example is</p>
+<pre><code>tune: {deg: "0/4 2 4 6 | 7/2 6/4 4 | 3/4 2 1 2 | 0/1", octave: 5}</code></pre>
+<p>which reads: degree 0 as a quarter note, then degrees 2, 4, 6 (durations are sticky), the octave as a half note, and so
+on: C5 vE5 ^G5 B5 | C6 B5 ^G5 | vF5 vE5 C♯5 vE5 | C5.</p>
+</div>
+<div class="layer derive">
+<p><b>From a name to a frequency.</b> SongMap's pitch unit is the semitone (MIDI number), and in 36edo a pitch may be a
+multiple of 1/3. A written note with letter, accidental and octave has MIDI number $m$ (C4 = 60), and $u$ ups and $d$ downs
+move it to $m + (u-d)/3$. In sixth-steps, $s = 3m + u - d$, and with A4 = 440 Hz ($s = 207$),</p>
+$$f = 440\cdot 2^{(s - 207)/36}\ \text{Hz}.$$
+<p>Example: vE4 has $m = 64$, $s = 191$, $f = 440\cdot 2^{-16/36} = 323.34$ Hz. The exact golden third above C4
+(261.63 Hz) is $261.63\cdot 2/\varphi = 323.39$ Hz: the 36-ET note is 0.24 c flat.</p>
+<p><b>Chord qualities as interval lists</b> (in semitones, as the parser stores them):</p>
+$$\texttt{g} = \left(0, \tfrac{11}{3}, \tfrac{22}{3}\right),\quad \texttt{g7} = \left(0, \tfrac{11}{3}, \tfrac{22}{3}, 11\right),\quad \texttt{s} = \left(0, \tfrac{10}{3}, \tfrac{20}{3}\right),\quad \texttt{T13} = \left(0, \tfrac{13}{3}, \tfrac{26}{3}\right).$$
+<p>An alteration list adds $\pm\tfrac13$ per mark to the named chord tone. For <code>C(v3,^5)</code>:
+$(0, 4, 7) + (0, -\tfrac13, +\tfrac13) = (0, \tfrac{11}{3}, \tfrac{22}{3})$, which is exactly <code>Cg</code>.</p>
+<p><b>Golden scales from the chain.</b> A golden scale is a window of the golden chain, whose generator φ is 25
+sixth-steps. golden7 is the chain from index $-3$ to $3$:</p>
+$$\{25j \bmod 36 : j = -3,\dots,3\} = \{33, 22, 11, 0, 25, 14, 3\} = \{0, 3, 11, 14, 22, 25, 33\},$$
+<p>that is C, C♯, vE, vF, ^G, ^A♭, B. golden13 is the window $-6,\dots,6$, and silver13 is golden13 with every ^ and v
+swapped.</p>
+</div>
+</section>
+
+<section id="passing">
+<h2>Passing placeholders: ~ and ~g</h2>
+<div class="layer hear">
+<p>The dominant chord G does not usually go straight to F, but F to G, IV to V, is one of the most common moves there is.
+The example plays it twice, with two passing chords in between each time. The first time the passing chords come from
+<b>System 1</b>, the strict path: every voice moves in equal steps. The second time they come from <b>System 2</b>, the
+natural path, where two golden chords in a row carry the music up the "golden escalator". Both were written with
+placeholders, not chord names: the engine worked out which chords lie on the way.</p>
+<audio-ex src="strict_vs_natural" caption="F → G twice. First F:1 ~:0.5 ~:0.5 G:2 (System 1, strict: F – vF♯dim(v3) – vA♭g7(v7)/^F♯ – G), then F:1 ~g:0.5 ~g:0.5 G:2 (System 2: F – vF♯g – ^F♯g – G, two golden chords)."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Placeholders.</b> In a harmony string, a token that begins with <code>~</code> is not a chord but a request:
+"put here the passing chord that the voice leading from the previous chord to the next one picks out". The theory behind
+it is in <a href="ch:ch27#uniform-path">Chapter 27</a> (System 1) and <a href="ch:ch28#uneven">Chapter 28</a> (System 2).</p>
+<table>
+<tr><th>Token</th><th>Meaning</th></tr>
+<tr><td><code>~</code></td><td>System 1, the strict path: every voice moves uniformly (a half step as 1+1+1 sixth-steps, a whole step as 2+2+2)</td></tr>
+<tr><td><code>~g</code></td><td>System 2, the natural path: uneven monotone splits allowed, golden chords preferred</td></tr>
+<tr><td><code>~g7</code></td><td>System 2, golden sevenths preferred</td></tr>
+<tr><td><code>~ ~</code>, <code>~g ~g</code></td><td>two in a row: both passing chords P1 and P2 of one path</td></tr>
+<tr><td><code>~g@1/3</code>, <code>~g@2/3</code></td><td>one placeholder forced to the first or second position of the path</td></tr>
+</table>
+<p>A single placeholder takes the better of the two chords on the path, ranked golden, then golden over a pedal, then
+silver or bronze, then planing or Western, then micro-altered. Because progressions loop, a placeholder at the end of a
+string bridges back to its first chord, as in the first example of this chapter.</p>
+<p><b>What the placeholders resolve to.</b> These were computed by SongMap's passing engine
+(<code>songmap/theory/passing.py</code>):</p>
+<table>
+<tr><th>Harmony string</th><th>Resolved chords</th></tr>
+<tr><td><code>G:1 ~:0.5 ~:0.5 C:2</code></td><td>G – vE♭T13/G – vCg/G – C</td></tr>
+<tr><td><code>C:1.5 ~:0.5 F:2</code></td><td>C – vFg/C – F</td></tr>
+<tr><td><code>C:1 ~:0.5 ~:0.5 Ab:2</code></td><td>C – Cg – ^E♭T13/C – A♭</td></tr>
+<tr><td><code>F:1 ~:0.5 ~:0.5 G:2</code></td><td>F – vF♯dim(v3) – vA♭g7(v7)/^F♯ – G</td></tr>
+<tr><td><code>F:1 ~g:0.5 ~g:0.5 G:2</code></td><td>F – vF♯g – ^F♯g – G</td></tr>
+<tr><td><code>G:1 ~g:0.5 ~g:0.5 Am:2</code></td><td>G – vA♭g – A♭g – Am</td></tr>
+<tr><td><code>Dm:1 ~g:0.5 ~g:0.5 G:2</code></td><td>Dm – Dg – vGg/D – G</td></tr>
+<tr><td><code>G7:1.5 ~g7:0.5 Abmaj7:2</code></td><td>G7 – vCg/vA♭ – A♭maj7</td></tr>
+</table>
+<p>The F → G rows show the difference between the systems. On the strict path every voice of F → G moves by a whole
+step or a half step in equal parts, and the chords in between are a micro-altered diminished triad and an incomplete
+golden seventh: neither is golden, as the quality theorem predicts for a move between roots a whole step apart
+(<a href="ch:ch27#quality">Chapter 27</a>). On the natural path two voices split unevenly, and both passing chords become
+golden triads on the chromatic root between F and G: the golden escalator of
+<a href="ch:ch28#escalator">Chapter 28</a>.</p>
+<pianoroll edo="36" notes="F2 A3 C4 F4 ; vF#2 ^A3 C#4 vF#4 ; ^F#2 Bb3 vD4 ^F#4 ; G2 B3 D4 G4" labels="F ; vF#g ; ^F#g ; G" title="System 2, the engine's four lines: F → vF♯g → ^F♯g → G"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>The passing-path algorithm.</b> For a move $X \to Y$ the engine works entirely in integer sixth-steps.</p>
+<ol>
+<li><b>Voices.</b> Four lines: a bass on the root (in E2–G3) and three upper voices (in G3–G4). For a triad the upper
+voices are its three tones; for a seventh chord, third–fifth–seventh or third–seventh–root.</li>
+<li><b>Targets.</b> Every assignment of $Y$'s upper tones to the three upper voices is tried. Each voice's displacement
+$D$ is the nearest-way distance, in $(-18, 18]$ sixth-steps. Assignments in which every voice moves at most a whole
+step ($|D| \le 6$) are preferred; otherwise the ones with least total motion.</li>
+<li><b>Schedules.</b> Each displacement is split into three moves $(d_1, d_2, d_3)$, one per step of the path
+$X \to P_1 \to P_2 \to Y$:
+<ul>
+<li>System 1: $(D/3, D/3, D/3)$, uniform. A sixth-step-sized displacement not divisible by 3 moves as early as evenly
+possible.</li>
+<li>System 2: a half step stays $(1,1,1)$; other moves may use any monotone split with each part at most 3 sixth-steps
+(a semitone).</li>
+<li>A leap larger than a whole step (often the bass) holds and moves only on the arrival chord: a pedal.</li>
+</ul></li>
+<li><b>Classification.</b> $P_1$ and $P_2$ are named: golden (g, g7), golden over a pedal, equal-third (silver, bronze),
+Western, planing (a Western chord off the 12-ET layer) or micro-altered (nearest chord plus alterations).</li>
+<li><b>Choice.</b> Among all candidates the engine prefers, in strict order of priority: more golden sevenths (when
+<code>~g7</code> asks for them); more golden chords, counting golden over a pedal (when <code>~g</code> asks); more exact
+golden chords; $P_1 
+e P_2$; fewer parallel fifths or octaves between $X$ and $Y$; less total motion (with a penalty for a
+seventh that rises); and finally more even splits.</li>
+</ol>
+<p>For System 1 the uniform schedule makes the path unique once the targets are chosen, and voice by voice</p>
+$$P_1 = \tfrac{2X + Y}{3}, \qquad P_2 = \tfrac{X + 2Y}{3},$$
+<p>the averaging principle of <a href="ch:ch25#averaging">Chapter 25</a>. For V → I in C the engine's lines, in sixth-steps
+(C4 = 180), are</p>
+<table>
+<tr><th>voice</th><th>G</th><th>$P_1$</th><th>$P_2$</th><th>C</th><th>moves</th></tr>
+<tr><td>soprano</td><td>186 (D4)</td><td>188 (vE♭4)</td><td>190 (^E♭4)</td><td>192 (E4)</td><td>+2 +2 +2</td></tr>
+<tr><td>alto</td><td>177 (B3)</td><td>178 (^B3)</td><td>179 (vC4)</td><td>180 (C4)</td><td>+1 +1 +1</td></tr>
+<tr><td>tenor</td><td>165 (G3)</td><td>165</td><td>165</td><td>165 (G3)</td><td>0 0 0</td></tr>
+<tr><td>bass</td><td>129 (G2)</td><td>129</td><td>129</td><td>144 (C3)</td><td>leap: held, then +15</td></tr>
+</table>
+<p>$P_1 = \{G, {}^\wedge B, {}^v E\flat\}$ is the bronze triad vE♭T13 over G and $P_2 = \{G, {}^v C, {}^\wedge E\flat\}$ is
+the golden triad vCg over G: the golden six-four.</p>
+</div>
+</section>
+
+<section id="voiced">
+<h2>Voiced styles</h2>
+<div class="layer hear">
+<p>A chord symbol says which notes; a <i>style</i> says how they are played. The example takes one progression (C – Am – F
+– G, with the strict V → I path at the end) and plays it five ways: held chords, a comping rhythm, steady quarter notes,
+the top and bottom voices alone as melody and bass, and a gentle arpeggio over a bass in half notes. Listen to the
+passing chords in each: in the held version they are heard as chords, in the line version as a melody that climbs
+through sixth-steps.</p>
+<audio-ex src="voiced_styles" caption="One progression, five styles: hold, comp, pulse, top + bassline (the soprano as a melody over the voice-led bass), and a gentle8 arpeggio with a roots bass. The passing chords come out differently in each."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Styles as data.</b> A style is a small YAML file in the engine. The <i>voiced</i> styles share one idea: the
+song's chords are voiced once, as four voice-led parts in the song's tuning, and each style plays some of those voices
+in some rhythm. Because the voicing is shared, a <code>top</code> melody is exactly the soprano of the <code>hold</code>
+chords, and a <code>bassline</code> exactly their lowest voice.</p>
+<table>
+<tr><th>Style</th><th>Plays</th><th>Rhythm</th></tr>
+<tr><td><code>hold</code></td><td>all four voices</td><td>struck on each chord change, held</td></tr>
+<tr><td><code>comp</code></td><td>all four voices</td><td><code>x..x.x..x..x.x..</code> (sixteenths): 1, and-of-2, 3, and-of-4, plus every change</td></tr>
+<tr><td><code>pulse</code></td><td>all four voices</td><td>every quarter note</td></tr>
+<tr><td><code>top</code></td><td>the soprano, an octave up</td><td>one note per chord</td></tr>
+<tr><td><code>bassline</code></td><td>the lowest voice, an octave down</td><td>one note per chord</td></tr>
+</table>
+<p>Other styles are chord-relative patterns rather than voiced parts: arpeggios (<code>gentle8</code>, <code>roll16</code>)
+and bass figures (<code>roots</code>, half-note roots; <code>root5</code>, root and fifth).</p>
+<p><b>What "voice-led" means here.</b> The voiced styles do not copy the passing engine's four lines. They take each
+chord's pitch classes and choose, among all playable voicings in the range D3–D5, the one that moves least from the
+previous chord. In 36-ET that minimum often <i>is</i> a sub-chromatic line, which is why the passing chords are heard as
+gliding voices. But it need not match the engine's lines, and the voiced styles do not force a slash chord's bass note.
+For the System 2 escalator F → vF♯g → ^F♯g → G the hold voicing happens to move by exactly the engine's four lines, with the
+bass and the A–B line placed an octave higher. For the strict path F → G it does not:</p>
+<pianoroll edo="36" notes="F3 C4 F4 A4 ; vF#3 vC4 vF#4 ^Ab4 ; vAb3 ^B3 ^F#4 vAb4 ; G3 B3 D4 G4" labels="F ; vF#dim(v3) ; vAbg7(v7)/^F# ; G" title="System 1, F → G as the hold style voices it"></pianoroll>
+<p>Here the chords are right (each has the pitch classes the engine computed) but the bass climbs F – vF♯ – vA♭ – G
+instead of the engine's uniform F – vF♯ – ^F♯ – G, and the lowest voice is not the slash bass ^F♯. When the exact lines
+matter, as in the piano roll of <a href="ch:ch38#pianoroll">Chapter 38</a>, an example can spell the chords out as
+explicit notes instead.</p>
+<aside class="box note"><p><b>A habit of the voicer.</b> Because the voicing cost only mildly penalizes a bass that is not
+the root, held chords often come out with the fifth in the bass (C as G–C–E–C). Several examples in this book therefore
+add a separate bass part, either a written bass line or the <code>roots</code> style, for a firm cadence.</p></aside>
+</div>
+<div class="layer derive">
+<p><b>Candidate voicings.</b> For a chord with pitch classes $\mathcal P$ and a range $[\ell, h]$ (default D3–D5, MIDI 50–74),
+a candidate is a set of four distinct grid pitches $c_1 &lt; c_2 &lt; c_3 &lt; c_4$ in the range, each in $\mathcal P$, such
+that</p>
+<ul>
+<li>every chord tone is present (the fifth may be dropped when the chord has more tones than voices);</li>
+<li>neighbouring voices are at most an octave apart, and $c_4 - c_1$ is at most two octaves.</li>
+</ul>
+<p><b>Cost.</b> With $r$ the root, the voicing cost is</p>
+$$\kappa(c) = \#\{\text{doubled non-root pitch classes}\} + \begin{cases}0 & c_1 \equiv r\\ 2 & 0 &lt; (c_1 - r) \bmod 12 \le 2\\ 0.5 & \text{otherwise.}\end{cases}$$
+<p><b>Choice.</b> For the first chord (or after <code>N.C.</code>), with center $\mu = (\ell + h)/2 = 62$,</p>
+$$c^\ast = \arg\min_c\ \big|\bar c - \mu\big| + 0.1\,(c_4 - c_1) + \kappa(c);$$
+<p>for every later chord, with $p$ the previous voicing,</p>
+$$c^\ast = \arg\min_c\ \sum_{i=1}^{4} |c_i - p_i| + 0.05\,\big|\bar c - \mu\big| + \kappa(c).$$
+<p>Distances are in semitones on the song's grid, so in 36edo a voice can move by $\tfrac13$. The root-position voicing
+C3–C4–E4–G4 is outside the default range (C3 = 48), and the second-inversion voicing G3–C4–E4–C5 scores
+$0.75 + 1.7 + 0.5 = 2.95$, the lowest of all candidates, against $3.75 + 1.2 + 0 = 4.95$ for the root-position
+C4–E4–G4–C5: that is the arithmetic behind the box above.</p>
+</div>
+<h3>Exercises</h3>
+<div class="exercise">
+<p><b>Exercise 36.1 (reading).</b> How long is a song with <code>tempo: 72</code>, <code>meter: "4/4"</code>, two sections of
+4 bars and <code>tail_seconds: 2</code>? Do its beats land on whole frames at 30 fps?</p>
+<details class="answer"><summary>Answer</summary><p>A bar lasts $60\cdot 4/72 = 3.333$ s; 8 bars = 26.67 s; plus 2 s = 28.67 s.
+$60\cdot 30/72 = 25$ frames per beat, an integer: yes.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 36.2 (notation).</b> Write the frequency of ^G4 in 36-ET and compare it with the exact golden fifth above
+C4.</p>
+<details class="answer"><summary>Answer</summary><p>G4 is MIDI 67, so $s = 202$ and $f = 440\cdot 2^{-5/36} = 399.62$ Hz. The exact
+golden fifth is $261.63\cdot 4/\varphi^2 = 399.73$ Hz; 36-ET is 0.49 c flat.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 36.3 (calculation).</b> On the strict path C → A♭ (bass C held), the voices C4, E4 and G3 move to C4, E♭4 and
+A♭3. Compute $P_1$ and name it.</p>
+<details class="answer"><summary>Answer</summary><p>In sixth-steps: C4 180 → 180; E4 192 → 189, so $P_1$ = 191 (vE4); G3 165 → 168,
+so $P_1$ = 166 (^G3). $P_1$ = C, vE, ^G = Cg: the golden triad is one third of the way from C to A♭, exactly as the
+table above reports.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 36.4 (writing).</b> Write a harmony string for I – vi – IV – V – I in C in which the IV → V move passes through
+the golden escalator and the V → I move through the golden six-four, each bar of four beats.</p>
+<details class="answer"><summary>Answer</summary><p>One solution: <code>"C:1 Am:1 F:0.5 ~g:0.25 ~g:0.25 G:0.5 ~:0.25 ~:0.25 C:1"</code>.
+It resolves to C – Am – F – vF♯g – ^F♯g – G – vE♭T13/G – vCg/G – C.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 36.5 (spelling).</b> Spell the golden7 scale on D (every note two semitones higher than on C).</p>
+<details class="answer"><summary>Answer</summary><p>Add 6 sixth-steps to 0, 3, 11, 14, 22, 25, 33: 6, 9, 17, 20, 28, 31, 3, that is
+D, E♭, vF♯, vG, ^A, ^B♭, C♯.</p></details>
+</div>
+</section>

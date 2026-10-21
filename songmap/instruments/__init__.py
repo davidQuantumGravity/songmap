@@ -4,7 +4,7 @@
 from a preset (`presets/pad/warm.yaml`) and applies overrides on top. `make('sampler/salamander')`
 loads a sample library instead (the optional SFZ backend, `instruments/sampler/`).
 """
-from . import drums, bass, synth, strings, keys, fx  # noqa: F401,I001  (registers the suite, in catalog order)
+from . import drums, bass, synth, strings, keys, fx, clean  # noqa: F401,I001  (registers the suite, in catalog order)
 from .base import REGISTRY, Instrument, Note, Param, ParamError, describe, register
 from .base import make as _make
 from .presets import list_presets, resolve

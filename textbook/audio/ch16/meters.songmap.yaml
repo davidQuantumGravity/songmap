@@ -1,0 +1,31 @@
+# Six eighth notes per bar, grouped two ways: 3/4 (2+2+2, accents on eighths 1, 3, 5, bass in
+# quarters) and 6/8 (3+3, accents on eighths 1 and 4, bass in dotted quarters); then the two
+# groupings alternate bar by bar.
+songmap: 0.2
+title: "Three-four and six-eight"
+tempo: 112
+meter: "3/4"
+key: "C major"
+tuning: 12edo
+seed: 16
+tail_seconds: 1.5
+instruments: {lead: clean/keys, bass: clean/bass}
+mix: {lead: {gain_db: -3, send: {hall: 0.1}}, bass: {gain_db: -4}}
+returns: {hall: {type: reverb, seconds: 1.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: threefour
+    bars: 4
+    parts:
+      lead: {notes: "=mp c8^ e g^ e g^ e | c8^ e g^ e g^ e | b-8^ d g^ d g^ d | c8^ e g^ e g^ e"}
+      bass: {notes: "=mf c-4 c- c- | c- c- c- | g-- g-- g-- | c- c- c-"}
+  - name: sixeight
+    bars: 4
+    parts:
+      lead: {notes: "=mp c8^ e g g^ e g | c8^ e g g^ e g | b-8^ d g g^ d g | c8^ e g g^ e g"}
+      bass: {notes: "=mf c-4. c- | c- c- | g-- g-- | c- c-"}
+  - name: alternate
+    bars: 4
+    parts:
+      lead: {notes: "=mp c8^ e g g^ e g | c8^ e g^ e g^ e | b-8^ d g g^ d g | b-8^ d g^ d g^ d"}
+      bass: {notes: "=mf c-4. c- | c-4 c- c- | g--4. g-- | g--4 g-- g--"}
+master: clean

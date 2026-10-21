@@ -1,0 +1,17 @@
+# Ch. 8, pitch classes: a little tune C E G C, A F D G, C (pitch classes 0 4 7 0, 9 5 2 7, 0),
+# first in one octave, then with every note moved to a different octave. The octaves change but
+# the pitch classes, and so the harmony, do not.
+songmap: 0.2
+title: "Same pitch classes, different octaves"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {lead: clean/organ}
+mix: {lead: {gain_db: -6}}
+sections:
+  - {name: close, bars: 3, harmony: "N.C.:3", parts: {lead: {notes: "c4 e g c+ | a f d g | c1"}}}
+  - {name: spread, bars: 3, harmony: "N.C.:3", parts: {lead: {notes: "c-4 e+ g- c++ | a- f+ d- g-- | c+1"}}}
+master: clean

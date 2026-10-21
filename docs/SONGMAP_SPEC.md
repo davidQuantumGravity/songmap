@@ -292,7 +292,17 @@ qa:
 
 `songmap render` exits non-zero and prints the failing rule, numbers and section when a rule fails.
 
-## 12. Outputs
+## 12. Tuning and microtones
+
+`tuning: 12edo` is the default. `tuning: 36edo` adds sixth-step inflections:
+- `^` and `v` **prefixes** on notes, degrees, chord roots and keys (`^c4`, `v3`, `^F#m`);
+- golden chords `Cg` and `Cg7`;
+- alteration lists `C(v3,^5)`;
+- the `golden3`, `golden10` and `golden13` scales.
+
+Full design in [GOLDEN_HARMONY.md](GOLDEN_HARMONY.md). Accent `^` stays a suffix, so `^c4^` is a C-up quarter note, accented.
+
+## 13. Outputs
 
 | File | Contents |
 |---|---|

@@ -1,0 +1,19 @@
+# Ch. 8, keys and key signatures: one tune in scale degrees played in C major (no sharps), G major
+# (F#), D major (F#, C#) and A major (F#, C#, G#). Each new tonic is a fifth above the last (D is
+# folded down an octave); each key adds one sharp, and its leading tone (degree 6) is the newest sharp.
+songmap: 0.2
+title: "Adding sharps"
+tempo: 104
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {lead: clean/lead, organ: clean/organ}
+mix: {lead: {gain_db: -5}, organ: {gain_db: -11}}
+sections:
+  - {name: c, bars: 2, key: "C major", harmony: "C:1 G:0.5 C:0.5", parts: {lead: {deg: "0/8 2 4 7 6 4 5 6 | 7/4 3 1/8 -1 0/4"}, organ: hold}}
+  - {name: g, bars: 2, key: "G major", harmony: "G:1 D:0.5 G:0.5", parts: {lead: {deg: "0/8 2 4 7 6 4 5 6 | 7/4 3 1/8 -1 0/4"}, organ: hold}}
+  - {name: d, bars: 2, key: "D major", harmony: "D:1 A:0.5 D:0.5", parts: {lead: {deg: "0/8 2 4 7 6 4 5 6 | 7/4 3 1/8 -1 0/4"}, organ: hold}}
+  - {name: a, bars: 2, key: "A major", harmony: "A:1 E:0.5 A:0.5", parts: {lead: {deg: "0/8 2 4 7 6 4 5 6 | 7/4 3 1/8 -1 0/4"}, organ: hold}}
+master: clean

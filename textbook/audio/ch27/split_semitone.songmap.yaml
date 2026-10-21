@@ -1,0 +1,20 @@
+# Ch. 27: one voice crossing a half step in three sixth-steps, then a whole step in three double steps.
+songmap: 0.2
+title: "Splitting the semitone"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2
+instruments: {organ: clean/organ}
+motifs:
+  half:  {notes: "=mf c4 ^c vc# c# | c#1"}
+  whole: {notes: "=mf c4 vc# ^c# d | d1"}
+  plain: {notes: "=mf c2 c# | d1"}
+mix: {organ: {gain_db: -6}}
+sections:
+  - {name: half, bars: 2, parts: {organ: {motifs: [half]}}}
+  - {name: whole, bars: 2, parts: {organ: {motifs: [whole]}}}
+  - {name: plain, bars: 2, parts: {organ: {motifs: [plain]}}}
+master: clean

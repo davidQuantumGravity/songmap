@@ -1,0 +1,17 @@
+# The same cadence I-IV-V-I on the three 12-ET layers of 36-ET: in C (layer 0), in ^C (layer 1,
+# 33.33 c higher) and in vC# (layer 2, 66.67 c higher). Inside each key nothing changes.
+songmap: 0.2
+title: "Three layers"
+tempo: 112
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 3
+tail_seconds: 2.5
+instruments: {organ: clean/organ, low: clean/bass}
+mix: {organ: {gain_db: -5}, low: {gain_db: -6}}
+sections:
+  - {name: layer0, bars: 4, harmony: "C:1 F:1 G:1 C:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+  - {name: layer1, bars: 4, harmony: "^C:1 ^F:1 ^G:1 ^C:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+  - {name: layer2, bars: 4, harmony: "vC#:1 vF#:1 vAb:1 vC#:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+master: clean

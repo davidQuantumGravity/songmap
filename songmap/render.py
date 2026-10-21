@@ -20,7 +20,7 @@ from .instruments import Note
 from .instruments.dsp import SR, as_stereo, n_samples, pan_mono, undb
 from .instruments.sampler.library import licenses_md
 from .mix.fx import convolve, reverb_ir, sidechain_env
-from .mix.master import master, master_legacy
+from .mix.master import master, master_clean, master_legacy
 from .model import Song
 from .perform.pipeline import GATE
 
@@ -158,6 +158,8 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
     mode = master_mode or song.master.mode
     if mode == "legacy":
         out = master_legacy(mix)
+    elif mode == "clean":
+        out = master_clean(mix, song.master.ceiling_db)
     else:
         out = master(mix, song.master.target_lufs, song.master.ceiling_db, glue=song.master.glue != "none")
     stats = {"seconds": round(time.time() - t0, 2), "notes_rendered": rendered, "cache_hits": hits,
@@ -170,11 +172,14 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
     return RenderResult(arr, as_stereo(out), mix, stems, stats, list(sources.values()))
 
 
-def write_outputs(r: RenderResult, out_dir: str, *, stems: bool = True) -> dict[str, str]:
+def write_outputs(r: RenderResult, out_dir: str, *, stems: bool = True, mp3: bool = False) -> dict[str, str]:
     os.makedirs(out_dir, exist_ok=True)
     paths = {"song": os.path.join(out_dir, "song.wav"), "cues": os.path.join(out_dir, "cues.json"),
              "qa": os.path.join(out_dir, "qa.json"), "log": os.path.join(out_dir, "render.log")}
     write_wav24(paths["song"], r.audio)
+    if mp3:
+        from .export.wav import write_mp3
+        paths["mp3"] = write_mp3(os.path.join(out_dir, "song.mp3"), paths["song"])
     if stems:
         for name, x in r.stems.items():
             write_float(os.path.join(out_dir, "stems", f"{name}.wav"), x)

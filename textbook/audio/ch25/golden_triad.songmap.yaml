@@ -1,0 +1,16 @@
+# C major and the golden triad Cg = C vE ^G alternating, then Cg resolving to its nearest
+# Western neighbours: C (2 sixth-steps away), Cm and Caug (3 each).
+songmap: 0.2
+title: "The golden triad"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 25
+tail_seconds: 2.5
+instruments: {organ: clean/organ}
+mix: {organ: {gain_db: -5}}
+sections:
+  - {name: alternate, bars: 4, harmony: "C:1 Cg:1 C:1 Cg:1", parts: {organ: hold}}
+  - {name: resolve, bars: 6, harmony: "Cg:0.5 C:1 Cg:0.5 Cm:1 Cg:0.5 Caug:1 Cg:1.5", parts: {organ: hold}}
+master: clean

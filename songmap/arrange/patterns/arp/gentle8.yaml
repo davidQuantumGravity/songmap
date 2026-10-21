@@ -1,0 +1,7 @@
+# Eighth-note chord-tone arpeggio, no filter ramp or pan movement (for clean 36edo pieces).
+style: gentle8
+role: arp
+grid: 8
+order: [0, 1, 2, 1, 3, 2, 1, 2]
+oct: 0
+len: 0.9

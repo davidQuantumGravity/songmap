@@ -1,0 +1,16 @@
+# ch21: the row of Webern's Symphony Op. 21 (1928), A F# G Ab E F | B Bb D C# C Eb, then its retrograde.
+# The retrograde is the row transposed by a tritone (R0 = P6), so the row has only 24 distinct forms.
+songmap: 0.2
+title: "A row that is its own retrograde"
+tempo: 100
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 21
+tail_seconds: 2
+instruments: {keys: clean/keys}
+mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+sections:
+  - {name: prime, bars: 2, parts: {keys: {notes: "a8 f# g ab e f b bb d+ c#+ c+ eb4"}}}
+  - {name: retrograde, bars: 2, parts: {keys: {notes: "eb8 c+ c#+ d+ bb b f e ab g f# a4"}}}
+master: clean

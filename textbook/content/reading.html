@@ -1,0 +1,288 @@
+<section id="layers">
+<h2>Hear it, Understand it, Derive it</h2>
+<p>This book is written for two kinds of reader at once: musicians who may not have studied much
+mathematics, and mathematically minded readers who may not have studied much music. Neither is assumed.
+Every term is defined when it first appears, every symbol is explained, and nothing is skipped in the
+proofs. To make that possible without burying anyone, almost every section is written in three
+<b>layers</b>, always in the same order and always marked by a colored bar and a label.</p>
+<ul>
+<li><b>Hear it</b> is about intuition and listening. It uses plain language, numbers in words, and an
+audio example whenever there is something to hear. It has no formulas.</li>
+<li><b>Understand it</b> gives the concepts, the notation, worked examples and tables, with light
+mathematics: fractions, and logarithms with an explanation.</li>
+<li><b>Derive it</b> gives the definitions, theorems, proofs or proof sketches, exact values and small
+algorithms. Proofs too long for the page are completed in
+<a href="ch:appD">Appendix D</a>.</li>
+</ul>
+<p>Here are the three layers in miniature, on one idea from later in the book.</p>
+<div class="layer hear">
+<p>Between the bright major third and the darker minor third there is room for another third. The
+<b>golden third</b> sits about two thirds of the way from minor to major. Listen to a major third, a
+minor third, and then the golden third, each played as two notes and then together.</p>
+<audio-ex src="golden_third" caption="On middle C: a major third, a minor third, then the golden third. The golden third is neither bright nor dark; it lands between the two, nearer the major."></audio-ex>
+</div>
+<div class="layer understand">
+<p>The golden third is the frequency ratio $2/\varphi \approx 1.236$, where $\varphi \approx 1.618$ is
+the golden ratio. Measured in cents (hundredths of an equal-tempered semitone), it is 366.91 c, between
+the minor third (300 c) and the major third (400 c). Two thirds major plus one third minor is
+$\tfrac23 \cdot 400 + \tfrac13 \cdot 300 \approx 366.67$ c, only 0.24 c away.</p>
+</div>
+<div class="layer derive">
+<p><b>Computation.</b> The size in cents of a ratio $r$ is $1200\log_2 r$. For $r = 2/\varphi$ this is
+$1200\,(1 - \log_2\varphi) \approx 1200\,(1 - 0.694242) \approx 366.91$. Since
+$\tfrac23\cdot400+\tfrac13\cdot300 = 1100/3 \approx 366.67$, the difference is about 0.24 c.</p>
+</div>
+<h3>The Depth buttons</h3>
+<p>At the top of every chapter page is a row of three buttons: <b>Depth: Hear it · Understand it ·
+Derive it</b>. Each one shows or hides its layer throughout the book. Try it on the example above. Turn
+off Derive it for a first reading; turn off Hear it if you want only the mathematics; leave all three on
+for the complete text. Your choice is remembered by your browser from page to page, and at least one
+layer always stays on. Text outside the layers, such as this paragraph, is always shown.</p>
+<h3>Boxes and exercises</h3>
+<ul>
+<li>A <b>Golden mirror</b> box appears in the Western chapters (Parts I–V). It previews how the idea
+returns in the golden system, with a link to the golden chapter. The golden chapters (Parts VI–VII) in
+turn refer back to the Western idea they generalize.</li>
+<li><b>Math</b>, <b>History</b> and <b>Note</b> boxes hold side material: a technique, the background
+of an idea, a caution.</li>
+<li><b>Try it</b> boxes are exercises: listening tasks, calculations and short proofs. Each answer is
+folded away under <i>Answer</i>; open it when you are ready.</li>
+</ul>
+<h3>Theorems, measurements and hypotheses</h3>
+<p>The book is careful about what kind of claim it is making, and labels it.</p>
+<ul>
+<li>A <b>theorem</b> is proved, or checked exhaustively by computer over every case. Example: in 36-ET a
+golden triad has exactly one note on each of the three layers.</li>
+<li>A <b>measurement</b> depends on a model: of roughness, of harmonic entropy, of the tone color or the
+register. Example: with harmonic tones the golden triad measures rougher than major, minor and augmented
+triads but smoother than diminished.</li>
+<li>A <b>conjecture</b> or <b>hypothesis</b> is an idea that has not been established. Example: that
+golden harmony can encourage a blissful state (<a href="ch:ch34#conjecture">Chapter 34</a>). It is
+never presented as fact.</li>
+</ul>
+<div class="exercise">
+<p>Which kind of claim is each of these? (a) Twelve perfect fifths overshoot seven octaves by 23.46 c.
+(b) With harmonic tones, the diminished triad is rougher than the golden triad. (c) Golden beats can
+calm a listener.</p>
+<details class="answer"><summary>Answer</summary>
+<p>(a) A theorem: it is exact arithmetic, $1200\log_2\big((3/2)^{12}/2^7\big) \approx 23.46$.
+(b) A measurement: it depends on the roughness model and on the tone. (c) A hypothesis: it would need
+listening experiments to test.</p>
+</details>
+</div>
+</section>
+
+<section id="paths">
+<h2>Reading paths</h2>
+<p>The book is built in nine parts plus appendices. Parts I–V develop Western theory from first
+principles, from the physics of sound through tuning, harmony, voice leading and form, to twelve-tone
+and modern music. Parts VI–VII build the golden tonal system as a mirror of that development, Part VIII
+turns to the mind and to history, and Part IX shows how the music in the book was made. The chapters
+are in an order that works straight through, but you do not have to read them that way.</p>
+<h3>The musician's path</h3>
+<p>Read with Hear it and Understand it switched on, and Derive it off.</p>
+<ol>
+<li>Part I quickly, for the vocabulary of sound: <a href="ch:ch01#cents">cents</a>,
+<a href="ch:ch02#partials">the harmonic series</a>, <a href="ch:ch03#roughness">roughness</a>.</li>
+<li>Part II for tuning: <a href="ch:ch05">Pythagorean tuning</a>, <a href="ch:ch07">temperament</a>,
+<a href="ch:ch08">the circle of fifths</a>.</li>
+<li>Parts III–IV as a theory course, then dip into Part V where you like.</li>
+<li>Then the golden system: <a href="ch:ch23">Chapter 23</a> to <a href="ch:ch25">Chapter 25</a>,
+followed by <a href="ch:ch27">System 1</a>, <a href="ch:ch29">golden cadences</a> and
+<a href="ch:ch31">the golden home</a>.</li>
+<li>If you want to write golden music yourself, finish with <a href="ch:ch36">Chapter 36</a>.</li>
+</ol>
+<h3>The mathematician's path</h3>
+<p>Leave all three layers on and lean on Derive it. <a href="ch:appA">Appendix A</a> reviews logarithms,
+modular arithmetic, groups, continued fractions and Fourier series.</p>
+<ol>
+<li><a href="ch:ch01#logarithms">Hearing in ratios</a> and <a href="ch:ch02#fourier">Fourier's idea</a>.</li>
+<li><a href="ch:ch05#continued-fractions">Continued fractions and why twelve</a>,
+<a href="ch:ch06#three-gap">the three-gap theorem</a> and <a href="ch:ch06#stern-brocot">the
+Stern–Brocot tree</a>.</li>
+<li><a href="ch:ch08#pitch-classes">Pitch classes and $\mathbb{Z}_{12}$</a>,
+<a href="ch:ch14#geometry">the geometry of voice leading</a>, <a href="ch:ch19#subgroups">subgroups and
+cosets</a>, <a href="ch:ch20">pitch-class set theory</a>.</li>
+<li>The golden side: <a href="ch:ch23#chain">the golden chain</a>, <a href="ch:ch24#why-36">why 36</a>,
+<a href="ch:ch25#layer-theorem">the layer theorem</a>, <a href="ch:ch27#four-path">the four-path
+theorem</a>, <a href="ch:ch28#half-step">the half-step theorem</a>, <a href="ch:ch33#z36">$\mathbb{Z}_{36}$</a>.</li>
+<li>The complete proofs in <a href="ch:appD">Appendix D</a>.</li>
+</ol>
+<h3>Golden in 30 minutes</h3>
+<p>A fast tour for readers who want the new ideas first. Read the Hear it layer of each stop and play
+its examples; the times are rough guides.</p>
+<table>
+<tr><th>Stop</th><th>Read</th><th>What you get</th><th>Minutes</th></tr>
+<tr><td>1</td><td><a href="ch:preface">The preface</a></td><td>The story and the central ideas</td><td>5</td></tr>
+<tr><td>2</td><td><a href="ch:ch23#golden-intervals">Golden intervals</a></td><td>The golden sixth, third, fifth and seventh</td><td>4</td></tr>
+<tr><td>3</td><td><a href="ch:ch24#sixth-steps">Sixth-steps</a></td><td>36-ET and its three layers</td><td>3</td></tr>
+<tr><td>4</td><td><a href="ch:ch25#golden-triad">The golden triad</a> and <a href="ch:ch25#averaging">the averaging principle</a></td><td>Cg as the average of C, Cm and Caug</td><td>5</td></tr>
+<tr><td>5</td><td><a href="ch:ch27#six-four">The golden six-four</a></td><td>A golden passing chord inside an ordinary cadence</td><td>4</td></tr>
+<tr><td>6</td><td><a href="ch:ch28#escalator">The golden escalator</a></td><td>Two golden chords in a row</td><td>3</td></tr>
+<tr><td>7</td><td><a href="ch:ch26#timbre-flip">The timbre flip</a></td><td>Why tone color decides which chords are at rest</td><td>3</td></tr>
+<tr><td>8</td><td><a href="ch:ch31#circle">The golden circle</a></td><td>Golden harmony as home</td><td>3</td></tr>
+</table>
+<p>If you then want the speculative side, read <a href="ch:ch34#conjecture">the bliss conjecture</a>
+and <a href="ch:ch34#testing">how to test it</a>.</p>
+<h3>Mirror chapters</h3>
+<p>Each golden chapter generalizes one or more Western chapters. The links at the top of a chapter
+("Mirror: …") jump between them.</p>
+<table>
+<tr><th>Western</th><th>Golden</th></tr>
+<tr><td><a href="ch:ch05">5 Pythagorean tuning</a>, <a href="ch:ch06">6 Well-formed scales</a></td><td><a href="ch:ch23">23 The golden ratio and the golden chain</a></td></tr>
+<tr><td><a href="ch:ch07">7 Temperament</a>, <a href="ch:ch08">8 The circle of fifths and keys</a></td><td><a href="ch:ch24">24 36-ET</a></td></tr>
+<tr><td><a href="ch:ch09">9 Chords</a></td><td><a href="ch:ch25">25 Golden chords</a></td></tr>
+<tr><td><a href="ch:ch03">3 Consonance and dissonance</a>, <a href="ch:ch17">17 Timbre</a></td><td><a href="ch:ch26">26 Consonance in the golden world</a></td></tr>
+<tr><td><a href="ch:ch12">12 Tension and resolution</a>, <a href="ch:ch14">14 Voice leading</a></td><td><a href="ch:ch27">27 System 1</a>, <a href="ch:ch28">28 System 2</a></td></tr>
+<tr><td><a href="ch:ch10">10 Function</a>, <a href="ch:ch11">11 Progressions</a></td><td><a href="ch:ch29">29 Golden cadences and progressions</a>, <a href="ch:ch31">31 The golden home</a>, <a href="ch:ch32">32 Modulation in 36-ET</a></td></tr>
+<tr><td><a href="ch:ch13">13 Melody</a>, <a href="ch:ch15">15 Counterpoint</a></td><td><a href="ch:ch30">30 Golden melody and counterpoint</a></td></tr>
+<tr><td><a href="ch:ch18">18</a>–<a href="ch:ch22">22</a> Chromaticism to modern music</td><td><a href="ch:ch33">33 Chromaticism in 36-ET</a></td></tr>
+</table>
+<p>For quick lookups use <a href="ch:appB">Appendix B</a> (notation), <a href="ch:appC">Appendix C</a>
+(tables), <a href="ch:appE">Appendix E</a> (glossary) and <a href="ch:appG#index">Appendix G</a>,
+which lists every audio example in the book.</p>
+</section>
+
+<section id="notation">
+<h2>Notation at a glance</h2>
+<p>This is a one-page summary. Every item is introduced properly in the chapter where it first matters,
+and <a href="ch:appB">Appendix B</a> is the complete reference.</p>
+<div class="layer hear">
+<p>Ordinary notes are named with letters, sharps and flats. The golden system needs notes between the
+keys of the piano, so it adds two small marks: <b>^</b> raises a note by a third of a semitone and
+<b>v</b> lowers it by the same amount. Listen to a C major chord, and then to the same three letters
+with the E bent down and the G bent up. That second chord is the golden triad.</p>
+<audio-ex src="c_major_bent" caption="C E G as single notes and as a chord, then C vE ^G the same way. Only the E and the G move, each by a third of a semitone."></audio-ex>
+<p>Three of these small steps make one semitone. Here is the ladder from C up to C♯ and back down,
+and then the plain semitone in a single jump.</p>
+<audio-ex src="ladder" caption="C, ^C, vC♯, C♯, then back down, then C to C♯ directly: three equal sixth-steps fill each semitone."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>Notes, frequencies and cents</h3>
+<ul>
+<li><b>Note names</b> carry an octave number: C4 is middle C, which is MIDI note 60, and A4 = 440 Hz.
+C3 is an octave lower, C5 an octave higher. In prose the book writes ♯ and ♭; in code and SongMap files,
+# and b.</li>
+<li><b>Ratios.</b> An interval is a frequency ratio: the octave 2/1, the perfect fifth 3/2, the major
+third 5/4 in just intonation, the golden sixth φ.</li>
+<li><b>Cents.</b> Intervals are also measured in cents: 1200 to the octave, 100 to the equal-tempered
+semitone. The pure fifth 3/2 is 701.96 c; the just major third 5/4 is 386.31 c. Values are given to two
+decimals.</li>
+</ul>
+<h3>36-ET: sixth-steps, ups and downs</h3>
+<p>36-ET divides the octave into 36 equal <b>sixth-steps</b> of 33.33 c, a third of a semitone (a sixth
+of a whole tone, hence the name). A prefix <b>^</b> ("up") raises a note one sixth-step and <b>v</b>
+("down") lowers it one. In the golden chapters pitch classes are numbered in sixth-steps from C = 0:</p>
+<table>
+<tr><th>Step</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>…</td><td>11</td><td>…</td><td>22</td><td>…</td><td>33</td></tr>
+<tr><th>Note</th><td>C</td><td>^C</td><td>vC♯</td><td>C♯</td><td>^C♯</td><td>vD</td><td>D</td><td>…</td><td>vE</td><td>…</td><td>^G</td><td>…</td><td>B</td></tr>
+<tr><th>Cents</th><td>0</td><td>33.33</td><td>66.67</td><td>100</td><td>133.33</td><td>166.67</td><td>200</td><td>…</td><td>366.67</td><td>…</td><td>733.33</td><td>…</td><td>1100</td></tr>
+</table>
+<p>Every third step is an ordinary 12-ET note, so 36-ET contains 12-ET exactly. Steps 0, 3, 6, …
+form the ordinary <b>layer</b>; steps 1, 4, 7, … the ^ layer; steps 2, 5, 8, … the v layer. A note
+just below a 12-ET note is written with v on that note (step 2 is vC♯, not ^^C). In Western chapters
+pitch classes are numbered in semitones, C = 0 to B = 11.</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; C4 vE4 ^G4 B4" labels="C ; Cg ; Cg7" title="C major, the golden triad and the golden seventh in 36-ET"></pianoroll>
+<p>In the piano rolls, rows are sixth-steps and notes are shaded by layer, so a golden chord shows
+one note on each of the three layers.</p>
+<pc-circle edo="36" marks="0 11 22" title="Cg = C vE ^G at steps 0, 11, 22 of the 36-step circle"></pc-circle>
+<h3>Chord symbols</h3>
+<table>
+<tr><th>Symbol</th><th>Notes on C</th><th>Steps above the root</th><th>Meaning</th></tr>
+<tr><td>C, Cm, Cdim, Caug</td><td>C E G · C E♭ G · C E♭ G♭ · C E G♯</td><td>(0, 12, 21) · (0, 9, 21) · (0, 9, 18) · (0, 12, 24)</td><td>major, minor, diminished, augmented triads</td></tr>
+<tr><td>C7, Cmaj7, Cm7, Cm7b5, Cdim7</td><td>C E G B♭ · C E G B · …</td><td>(0, 12, 21, 30) · (0, 12, 21, 33) · …</td><td>seventh chords; also C6, Cm6, C9, Cadd9, Csus4</td></tr>
+<tr><td><b>Cg</b></td><td>C vE ^G</td><td>(0, 11, 22)</td><td>golden triad, exactly $1 : 2/\varphi : 4/\varphi^2$</td></tr>
+<tr><td><b>Cg7</b></td><td>C vE ^G B</td><td>(0, 11, 22, 33)</td><td>golden seventh, exactly $1 : 2/\varphi : 4/\varphi^2 : 8/\varphi^3$</td></tr>
+<tr><td><b>Cs</b></td><td>C ^E♭ vG</td><td>(0, 10, 20)</td><td>silver triad, the average of C, Cm and Cdim</td></tr>
+<tr><td><b>CT13</b></td><td>C ^E vA</td><td>(0, 13, 26)</td><td>bronze triad, golden's usual partner in passing</td></tr>
+<tr><td>vCg/G</td><td>vC ^E♭ G, G in the bass</td><td></td><td>slash: the note after / is the bass</td></tr>
+<tr><td>C(v3,^5), Cm(^3)</td><td>C vE ^G · C ^E♭ G</td><td>(0, 11, 22) · (0, 10, 21)</td><td>alterations: named chord tones moved by sixth-steps</td></tr>
+<tr><td>^Cg, vE♭m</td><td>^C E vA♭ · vE♭ vG♭ vB♭</td><td>(0, 11, 22) · (0, 9, 21) above the moved root</td><td>a prefix on the root moves the whole chord by a sixth-step</td></tr>
+</table>
+<p><b>Step notation.</b> A chord's shape is written as the list of its notes in steps above the root:
+semitones in the Western chapters, so a major triad is (0, 4, 7), and sixth-steps in the golden
+chapters, where the same triad is (0, 12, 21) and the golden triad is (0, 11, 22).</p>
+<h3>Roman numerals</h3>
+<p>Chords in a key are numbered by scale degree, with upper case for major and lower case for minor:
+I ii iii IV V vi vii° in a major key, and ♭VI, ♭III and so on for chromatic chords. The golden chapters
+add the sixth-step marks and the g suffix. <b>vIg</b> is the golden triad a sixth-step below the tonic
+(vCg in C major), vIVg is vFg, v♭VIg is vA♭g, and vIg/V is vCg over the dominant G in the bass.</p>
+</div>
+<div class="layer derive">
+<p><b>Formulas.</b> MIDI note $m$ has frequency $f = 440\cdot 2^{(m-69)/12}$ Hz, so C4 ($m = 60$) is
+261.63 Hz. A ratio $r$ measures $1200\log_2 r$ cents. In 36-ET, step $k$ above a reference has ratio
+$2^{k/36}$; its layer is $k \bmod 3$ (0 ordinary, 1 up, 2 down), and its 12-ET neighbour is
+$\lfloor (k+1)/3 \rfloor$ semitones up, so the 36 pitch classes form the cyclic group $\mathbb{Z}_{36}$
+with $\mathbb{Z}_{12}$ inside it as the multiples of 3. The golden intervals sit within a cent of the grid:
+the golden third $2/\varphi$ = 366.91 c against 11 steps = 366.67 c, the golden fifth $4/\varphi^2$ =
+733.82 c against 22 steps = 733.33 c, and the golden seventh $8/\varphi^3$ = 1100.73 c against 33 steps =
+1100 c, exactly the 12-ET major seventh.</p>
+</div>
+</section>
+
+<section id="audio">
+<h2>About the audio examples</h2>
+<div class="layer hear">
+<p>Every example in this book was synthesized from scratch, note by note, and none is a recording. The
+examples are short, usually five to forty seconds, and each makes one point. The caption under each
+player tells you what to listen for. The instruments are deliberately plain and steady, so what you hear
+is the tuning itself and not an effect. Listen at a moderate volume, ideally on headphones or good
+speakers: the differences between sixth-steps are small, and small laptop speakers lose the bass.</p>
+<p>Most examples are tuned on the 12-ET or 36-ET grid. A few, where exact ratios are the point, are tuned exactly.
+For golden chords the two are very close. Here is the golden triad in 36-ET and then in exact golden
+ratios.</p>
+<audio-ex src="edo_vs_exact" caption="The golden triad on middle C, first in 36-ET, then in exact golden ratios. They should sound the same: the third differs by a quarter of a cent and the fifth by half a cent."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>SongMap</h3>
+<p>The musical examples are written as short text files in <b>SongMap</b>, a format and synthesis
+engine made for this project (<a href="ch:ch36#songmap">Chapter 36</a>). A song file names the tempo,
+key, tuning (<code>12edo</code> or <code>36edo</code>), instruments and a harmony string such as
+<code>C:1 ~:0.5 ~:0.5 F:1</code>. The engine voice-leads the chords in four parts in sixth-steps, and a
+placeholder <code>~</code> (System 1, the strict path) or <code>~g</code> (System 2, the natural path)
+asks it to insert the passing chords the voice leading picks out. Each example's source sits in the
+book's repository under <code>textbook/audio/&lt;chapter&gt;/</code>, so any example can be read,
+changed and rendered again.</p>
+<h3>Clean, stable instruments</h3>
+<p>The instruments are additive: each tone is a sum of sine waves (partials) at fixed, exact
+frequencies, with no vibrato, drift, detuning, noise, filtering or distortion, and with smooth
+attack and release envelopes (<a href="ch:ch37#clean">Chapter 37</a>). So any beating you hear comes
+from the intervals, not from the instrument. There are two families of tone color:</p>
+<ul>
+<li><b>harmonic</b> tones, with partials at 1, 2, 3, … times the fundamental, like most acoustic
+instruments; for example the clean organ, 8 harmonics with amplitudes falling as $1/k^{1.2}$;</li>
+<li><b>golden-spectrum</b> tones, with partials at $2^m\varphi^n$ times the fundamental (the "glass" bell
+and the golden pad), on which golden chords measure as the smoothest chords (<a href="ch:ch26#golden-spectra">Chapter 26</a>).</li>
+</ul>
+<h3>36-ET and exact references</h3>
+<p>Anything on the 12-ET or 36-ET grid is rendered by SongMap. When the exact ratio is itself the
+point, as with the harmonic series, beats, just intonation, exact powers of φ or combination tones, the
+example is a short Python program that computes the frequencies directly. On middle C the 36-ET golden
+triad differs from the exact one by about 0.05 Hz on the third and 0.11 Hz on the fifth.</p>
+<h3>Mastering without compression</h3>
+<p>Every song uses the <b>clean master</b>: the mix is only scaled so that its loudest peak sits at
+−1 dBFS. There is no equalization, compression, limiting or saturation, all of which would add or
+remove partials and blur the very differences the examples are about. The site then encodes each
+example as an MP3. One consequence is that examples are not loudness-matched; a quiet pure sine and a
+full chord both peak at the same level. Longer finished pieces from the golden audio suite (for example
+the <a href="ch:ch31#wtgc">Well-Tempered Golden Clavier</a>) are embedded in the same way, and
+<a href="ch:appG#index">Appendix G</a> indexes everything.</p>
+</div>
+<div class="layer derive">
+<p><b>Precision of the grid.</b> With $C_4 = 440\cdot 2^{-9/12} \approx 261.63$ Hz, the exact golden
+third is $C_4\cdot 2/\varphi \approx 323.387$ Hz and the 36-ET one is $C_4\cdot 2^{11/36} \approx 323.342$
+Hz, a difference of 0.045 Hz (0.24 c). The exact golden fifth is $C_4\cdot 4/\varphi^2 \approx 399.728$ Hz
+against $C_4 \cdot 2^{22/36} \approx 399.616$ Hz, a difference of 0.112 Hz (0.49 c). The golden seventh
+$8/\varphi^3$ is 1100.73 c, which 36-ET renders as 33 steps, exactly the 12-ET major seventh, 0.73 c
+flat of the exact value.</p>
+</div>
+<div class="exercise">
+<p>Listen to the 36-ET versus exact example again. If both golden triads were sounded together, the two
+thirds would beat at about 0.045 Hz. How many seconds is one beat cycle, and could you hear it in a
+four-second chord?</p>
+<details class="answer"><summary>Answer</summary>
+<p>One cycle takes $1/0.045 \approx 22$ seconds. A four-second chord covers less than a fifth of a
+cycle, so no beat is audible: for listening purposes the two tunings are the same.</p>
+</details>
+</div>
+</section>

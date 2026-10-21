@@ -1,0 +1,338 @@
+<section id="measured">
+<h2>Measuring golden chords</h2>
+<div class="layer hear">
+<p>How tense is a golden triad? Ears differ, and so do instruments, so this chapter measures. It uses the two models
+of consonance from <a href="ch:ch03">Chapter 3</a>: <b>roughness</b>, the buzz of nearby partials beating against each
+other, and <b>harmonic entropy</b>, how ambiguous an interval is as a ratio of small whole numbers. First listen,
+with an ordinary harmonic tone like an organ's, to C major, the golden triad and C diminished. Listen for whether the
+golden triad sounds less settled than major but less harsh than diminished: that is what the model predicts.</p>
+<audio-ex src="roughness_harmonic" caption="On a harmonic tone (8 partials): C major, the exact golden triad, C diminished. Modelled roughness 1.32, 1.50, 1.67: the golden triad sits between."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Roughness</b> (the Plomp–Levelt curve in Sethares' formulation, <a href="ch:ch03#roughness">Chapter 3</a>). Each
+note is given partials, every pair of partials from different notes or the same note contributes a roughness that
+peaks when they are a fraction of a critical band apart, and the contributions are added. The model used here
+(<code>reference/golden/explore.py</code>) builds each chord on C4 (261.63 Hz) with either harmonic partials 1 to 8 or
+golden partials (the next section), amplitudes falling by a factor 0.88 per partial. Lower numbers mean smoother.</p>
+<table>
+<tr><th>Chord</th><th>Harmonic partials</th><th>Golden partials $2^m\varphi^n$</th></tr>
+<tr><td>sus4</td><td>1.23</td><td>2.99</td></tr>
+<tr><td>major</td><td>1.32</td><td>3.17</td></tr>
+<tr><td>minor</td><td>1.34</td><td>3.26</td></tr>
+<tr><td>augmented</td><td>1.45</td><td>3.14</td></tr>
+<tr><td><b>golden</b> (exact)</td><td><b>1.50</b></td><td><b>2.08</b> (smoothest)</td></tr>
+<tr><td>diminished</td><td>1.67</td><td>3.19</td></tr>
+<tr><td>maj7</td><td>2.39</td><td>5.62</td></tr>
+<tr><td>golden seventh (exact)</td><td>2.79</td><td>3.89</td></tr>
+</table>
+<p>Three further rows, computed with the same model for this book (36-ET tunings): the golden triad in 36-ET 1.50 and
+2.10, the silver triad 1.59 and 3.08, the bronze triad 1.49 and 3.10. The 36-ET rounding hardly matters. Compare values
+only within one column (each timbre has its own scale): on golden partials only the golden triad stands apart from the
+Western chords, while silver and bronze sit among them.</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; C4 Eb4 F#4" labels="C ; Cg ; Cdim" title="The three chords of the examples (Cg shown in 36-ET; the audio uses exact ratios)"></pianoroll>
+<p><b>Harmonic entropy</b> (<a href="ch:ch03#entropy">Chapter 3</a>; Paul Erlich's model, here with a spread of 17
+c). Each interval is compared with all simple ratios near it, and the entropy is high when no single ratio clearly
+explains it. The percentile is the share of the octave's intervals (0 to 1200 c in 1-cent steps) that are less
+ambiguous:</p>
+<table>
+<tr><th>Interval</th><th>Cents</th><th>Entropy</th><th>Percentile</th></tr>
+<tr><td>perfect fifth</td><td>700.0</td><td>4.323</td><td>4%</td></tr>
+<tr><td>major sixth</td><td>900.0</td><td>4.677</td><td>16%</td></tr>
+<tr><td>major third</td><td>400.0</td><td>4.694</td><td>18%</td></tr>
+<tr><td>golden third</td><td>366.9</td><td>4.723</td><td>27%</td></tr>
+<tr><td>minor third</td><td>300.0</td><td>4.733</td><td>34%</td></tr>
+<tr><td>minor sixth</td><td>800.0</td><td>4.736</td><td>36%</td></tr>
+<tr><td>neutral third</td><td>350.0</td><td>4.763</td><td>62%</td></tr>
+<tr><td>golden sixth</td><td>833.1</td><td>4.767</td><td>65%</td></tr>
+<tr><td><b>golden fifth</b></td><td>733.8</td><td>4.771</td><td><b>69%</b></td></tr>
+</table>
+<p><b>Reading the numbers</b> (all of them measurements in a model):</p>
+<ul>
+<li>With harmonic tones the golden triad is rougher than major, minor and augmented and smoother than diminished.
+It is not "the least stable chord": diminished is rougher still.</li>
+<li>Its instability is concentrated in the <b>golden fifth</b>, one of the most ambiguous intervals in the octave
+(69th percentile, worse than the neutral third). The golden third alone is surprisingly clear in this model: less
+ambiguous than the 12-ET minor third.</li>
+<li>So on harmonic instruments golden chords are tense, which suits them to passing between Western chords
+(<a href="ch:ch27">Chapter 27</a>).</li>
+</ul>
+</div>
+<div class="layer derive">
+<p><b>Roughness model.</b> For two partials with frequencies $f_1 \le f_2$ and amplitudes $a_1, a_2$,
+$$d = \min(a_1, a_2)\,\big(e^{-3.5\,s\,(f_2 - f_1)} - e^{-5.75\,s\,(f_2 - f_1)}\big), \qquad s = \frac{0.24}{0.0207 f_1 + 18.96},$$
+and the roughness of a chord is the sum of $d$ over all pairs of its partials. The factor $s$ scales the curve to the
+critical band at $f_1$.</p>
+<p><b>Harmonic-entropy model.</b> The candidate ratios are the reduced fractions $n/d$ with $d &lt; 120$,
+$d \le n \le 4d$ and $nd \le 12000$, each with weight $1/\sqrt{nd}$. An interval of $c$ cents assigns the ratio at
+$r$ cents the probability $p_r \propto w_r\, e^{-(c - r)^2/(2\sigma^2)}$, $\sigma = 17$ c, and its entropy is
+$H(c) = -\sum p_r \ln p_r$.</p>
+<p>Both models have parameters (number and loudness of partials, register, $\sigma$, the ratio set). The rankings
+above are stable under small changes, but the values are not universal constants.</p>
+</div>
+</section>
+
+<section id="golden-spectra">
+<h2>Golden-spectrum timbres</h2>
+<div class="layer hear">
+<p>Now play the same three chords on a different kind of tone. Its overtones are not the harmonic series 1, 2, 3, 4,
+…, but golden numbers: 1, 1.618, 2, 2.618, 3.236, 4, …. It sounds like glass or a soft bell. On this tone the model's
+order reverses: C major and C diminished are the rough ones, and the golden triad is the smoothest of the three.</p>
+<audio-ex src="roughness_golden" caption="The same chords on a golden-spectrum tone (partials at products of powers of 2 and the golden ratio): C major, the golden triad, C diminished. Modelled roughness 3.17, 2.08, 3.19: now golden is the smooth one."></audio-ex>
+</div>
+<div class="layer understand">
+<p>A <b>golden spectrum</b> has partials at the numbers $2^m\varphi^n$ ($m, n \ge 0$), in increasing order:</p>
+<p style="text-align:center">1, 1.618, 2, 2.618, 3.236, 4, 4.236, 5.236, 6.472, 6.854, 8, 8.472, …</p>
+<p>The idea, due to Sethares (<i>Tuning, Timbre, Spectrum, Scale</i>, 1998), is to match the timbre to the tuning
+(<a href="ch:ch03#timbre-dependence">Chapter 3</a>, <a href="ch:ch17#timbre-harmony">Chapter 17</a>). The golden triad's
+notes are themselves of the form $2^m\varphi^n$ (1, $2/\varphi$, $4/\varphi^2$), so the partials of its three notes
+fall on one shared lattice and many of them coincide exactly instead of beating. For example the third's partial
+$\varphi$ is $(2/\varphi)\cdot\varphi = 2$, the root's second partial; the third's partial $\varphi^2$ is $2\varphi$,
+the root's fifth partial; the fifth's partial $\varphi^2$ is $(4/\varphi^2)\cdot\varphi^2 = 4$. Western ratios such
+as 5/4 and 3/2, or their 12-ET approximations, are not on this lattice, so their partials land near but not on each
+other: roughness.</p>
+<figure class="svgfig">
+<svg class="fig" viewBox="0 0 520 262" role="img" aria-label="Modelled roughness of six triads with harmonic and golden-spectrum tones">
+<text x="70" y="14" font-size="12" fill="currentColor">Roughness (Sethares model, chord on C4; lower = smoother)</text>
+<text x="62" y="43" font-size="12" text-anchor="end" fill="currentColor">sus4</text>
+<rect x="70" y="28" width="148.1" height="11" fill="var(--l0)"/>
+<text x="223.1" y="38" font-size="11" fill="currentColor">1.23</text>
+<rect x="70" y="41" width="358.4" height="11" fill="var(--l1)"/>
+<text x="433.4" y="51" font-size="11" fill="currentColor">2.99</text>
+<text x="62" y="77" font-size="12" text-anchor="end" fill="currentColor">major</text>
+<rect x="70" y="62" width="158.3" height="11" fill="var(--l0)"/>
+<text x="233.3" y="72" font-size="11" fill="currentColor">1.32</text>
+<rect x="70" y="75" width="379.9" height="11" fill="var(--l1)"/>
+<text x="454.9" y="85" font-size="11" fill="currentColor">3.17</text>
+<text x="62" y="111" font-size="12" text-anchor="end" fill="currentColor">minor</text>
+<rect x="70" y="96" width="161.0" height="11" fill="var(--l0)"/>
+<text x="236.0" y="106" font-size="11" fill="currentColor">1.34</text>
+<rect x="70" y="109" width="390.7" height="11" fill="var(--l1)"/>
+<text x="465.7" y="119" font-size="11" fill="currentColor">3.26</text>
+<text x="62" y="145" font-size="12" text-anchor="end" fill="currentColor">aug</text>
+<rect x="70" y="130" width="174.2" height="11" fill="var(--l0)"/>
+<text x="249.2" y="140" font-size="11" fill="currentColor">1.45</text>
+<rect x="70" y="143" width="377.2" height="11" fill="var(--l1)"/>
+<text x="452.2" y="153" font-size="11" fill="currentColor">3.14</text>
+<text x="62" y="179" font-size="12" text-anchor="end" fill="currentColor">golden</text>
+<rect x="70" y="164" width="179.8" height="11" fill="var(--l0)"/>
+<text x="254.8" y="174" font-size="11" fill="currentColor">1.50</text>
+<rect x="70" y="177" width="249.7" height="11" fill="var(--l1)"/>
+<text x="324.7" y="187" font-size="11" fill="currentColor">2.08</text>
+<text x="62" y="213" font-size="12" text-anchor="end" fill="currentColor">dim</text>
+<rect x="70" y="198" width="200.0" height="11" fill="var(--l0)"/>
+<text x="275.0" y="208" font-size="11" fill="currentColor">1.67</text>
+<rect x="70" y="211" width="382.3" height="11" fill="var(--l1)"/>
+<text x="457.3" y="221" font-size="11" fill="currentColor">3.19</text>
+<rect x="70" y="240" width="12" height="10" fill="var(--l0)"/><text x="88" y="249" font-size="11" fill="currentColor">harmonic partials 1–8</text>
+<rect x="240" y="240" width="12" height="10" fill="var(--l1)"/><text x="258" y="249" font-size="11" fill="currentColor">golden partials 2^m·φ^n</text>
+</svg></figure>
+<p>(The roughness model uses the eleven values below 9 with $m, n \le 3$, which leaves out $\varphi^4 = 6.854$; the
+book's golden instruments, <code>clean/glass</code> and <code>clean/golden_pad</code>, use the first ten values of the
+list, with amplitudes falling as a power of the partial number.)</p>
+<p><b>What such tones sound like.</b> Acoustic strings, winds and voices have nearly harmonic spectra, so golden
+spectra are synthetic. Their partials do not line up as a harmonic series, so like bells and glass they give a less
+definite sense of pitch than a string or a voice (a general property of inharmonic spectra). How to design them is in
+<a href="ch:ch37#golden-timbres">Chapter 37</a>.</p>
+</div>
+<div class="layer derive">
+<p><b>Why golden chords fit golden spectra.</b> The set $\Lambda = \{2^m\varphi^n : m, n \in \mathbb{Z}\}$ is a group
+under multiplication. If every note of a chord has frequency $f\lambda$ with $\lambda \in \Lambda$ and every partial
+ratio is in $\Lambda$, then every partial of the chord is in $f\Lambda$. Two partials in $f\Lambda$ either coincide
+or differ by a factor $2^m\varphi^n \ne 1$. Exact golden triads and sevenths (and the chain chords
+$1 : \varphi : \varphi^2 : \varphi^3$) satisfy the hypothesis; Western chords in just or 12-ET tuning do not, since
+$5/4$, $3/2$ and $2^{k/12}$ ($k$ not a multiple of 12) are not in $\Lambda$. (Theorem for the lattice; how much
+smoother that makes the chord than other chords on the same tone is the measurement above.)</p>
+</div>
+</section>
+
+<section id="combination-tones">
+<h2>Combination tones that land on the chain</h2>
+<div class="layer hear">
+<p>When two loud tones sound together, the ear itself adds faint extra tones that are not in the air: the
+<b>combination tones</b>, most strongly at the difference of the two frequencies and at twice the lower minus the
+upper. For most chords these by-products are foreign pitches. For a golden chord spread out along the chain in exact
+tuning, every one of them is another golden-chain pitch. In the example the chord is played first, then (quietly)
+the six tones the ear would add, then both together: nothing new appears, because the chord's by-products are more
+of the chord.</p>
+<audio-ex src="combination_tones" caption="The exact chain chord on 220 Hz (220, 355.97, 575.97 and 931.93 Hz, each a golden sixth above the last) on pure tones; then, quietly, its six combination tones (84.03, 135.97, 220, 355.97, 575.97 and 711.93 Hz), all on the same golden chain; then everything together."></audio-ex>
+</div>
+<div class="layer understand">
+<p>The strongest combination tones of two tones $f_1 &lt; f_2$ are $f_2 - f_1$ and $2f_1 - f_2$. Take the chain voicing
+$f_0\cdot(1, \varphi, \varphi^2, \varphi^3)$, which is Cg7 with its seventh at the bottom
+(<a href="ch:ch25#golden-seventh">Chapter 25</a>). Because $\varphi^n - \varphi^{n-1} = \varphi^{n-2}$, its six pairs
+produce exactly six distinct combination tones:</p>
+$$f_0 \cdot \{\varphi^{-2},\ \varphi^{-1},\ 1,\ \varphi,\ \varphi^2,\ 2\varphi\},$$
+<p>at $f_0 = 110$ Hz: 42.02, 67.98, 110, 177.98, 287.98 and 355.97 Hz. Every one is $f_0 \cdot 2^m\varphi^n$, a pitch of the
+same golden chain, with zero error (theorem). Three of them (110, 177.98, 287.98) are chord tones; the others are the
+chain continued downward and an octave of a chord tone.</p>
+<pianoroll edo="36" notes="C3 vE3 ^G3 B3 ; B2 ^G3 vE4 C5" labels="close Cg7 ; chain Cg7 (1:φ:φ²:φ³)" title="Close and chain voicings of the golden seventh"></pianoroll>
+<p>The effect depends on exact tuning and on the chain voicing:</p>
+<table>
+<tr><th>Voicing (root 110 Hz)</th><th>Distinct combination tones</th><th>Largest miss from a chain pitch</th></tr>
+<tr><td>chain 1 : φ : φ² : φ³, exact</td><td>6</td><td>0.000 Hz</td></tr>
+<tr><td>chain, 36-ET (25-step chain)</td><td>9</td><td>0.196 Hz</td></tr>
+<tr><td>close C vE ^G B, exact</td><td>12</td><td>3.496 Hz</td></tr>
+</table>
+<p>In 36-ET the misses become very slow beats, at most about one every five seconds: a "breathing" of the chord.
+In close voicing they reach 3.5 Hz at a 110 Hz root and grow in proportion to register (about 7 Hz at 220 Hz).
+How audible combination tones are depends on loudness and on the listener; the pitches above are exact, their
+strength is not part of the claim.</p>
+<h3>Fibonacci frequencies</h3>
+<p>On $f_0 = 55$ Hz the golden chain is almost the Fibonacci sequence: $55\varphi^k$ = 55, 88.99, 143.99, 232.98, 376.98,
+609.96 Hz against the Fibonacci numbers 55, 89, 144, 233, 377, 610. With integer Fibonacci frequencies the combination
+tones are again Fibonacci numbers ($F_{n+1} - F_n = F_{n-1}$ and $2F_n - F_{n+1} = F_{n-2}$), but the chord becomes
+exactly periodic, repeating once per second (every frequency is a whole number of hertz). The exact $\varphi$ chord
+never repeats. To the ear the two are the same chord: they differ by 0.008 to 0.016 Hz on the four lowest notes, one
+beat every one to two minutes.</p>
+<audio-ex src="fibonacci" caption="A golden chain on 55 Hz on a golden-spectrum tone: exact golden ratios (55, 88.99, 143.99, 232.98 Hz), then the Fibonacci numbers 55, 89, 144, 233 Hz. Indistinguishable."></audio-ex>
+</div>
+<div class="layer derive">
+<p><b>Proposition.</b> For the chain chord $\{\varphi^0, \varphi^1, \varphi^2, \varphi^3\}$ (times $f_0$), the set of
+differences $\varphi^b - \varphi^a$ ($a &lt; b$) and positive values $2\varphi^a - \varphi^b$ is
+$\{\varphi^{-2}, \varphi^{-1}, 1, \varphi, \varphi^2, 2\varphi\}$. (Theorem.)</p>
+<p><i>Proof.</i> For $b - a = 1, 2, 3$: $\varphi^b - \varphi^a$ equals $\varphi^a(\varphi - 1) = \varphi^{a-1}$,
+$\varphi^a(\varphi^2 - 1) = \varphi^{a+1}$, or $\varphi^a(\varphi^3 - 1) = 2\varphi^{a+1}$ (using $\varphi^3 - 1 = 2\varphi$).
+For cubic tones: $2\varphi^a - \varphi^{a+1} = \varphi^a(2 - \varphi) = \varphi^{a-2}$, while
+$2 - \varphi^2 = 1 - \varphi &lt; 0$ and $2 - \varphi^3 &lt; 0$, so only adjacent pairs give positive cubic tones. With
+$a$ from 0 to 3 this gives the differences $\varphi^{-1}, 1, \varphi$ (adjacent pairs), $\varphi, \varphi^2$ (distance 2),
+$2\varphi$ (distance 3), and the cubic tones $\varphi^{-2}, \varphi^{-1}, 1$: six distinct values. ∎</p>
+<p><b>Fibonacci identity.</b> From Binet's formula ($F_n = (\varphi^n - \psi^n)/\sqrt5$, $\psi = -1/\varphi$),
+$$F_{10}\,\varphi^k = F_{k+10} - \varphi^{-10}F_k,$$
+so $55\varphi^k$ falls short of $F_{k+10}$ by $\varphi^{-10}F_k = 0.00813\,F_k$ Hz: 0.008 Hz for 89 and 144, 0.016 Hz for
+233, 0.024 Hz for 377, 0.041 Hz for 610. (Derived here; checked numerically.) <i>Proof.</i>
+$F_{10}\varphi^k = (\varphi^{k+10} - \psi^{10}\varphi^k)/\sqrt5$ and $F_{k+10} = (\varphi^{k+10} - \psi^{k+10})/\sqrt5$;
+the difference is $\psi^{10}(\varphi^k - \psi^k)/\sqrt5 = \varphi^{-10}F_k$, since $\psi^{10} = \varphi^{-10}$. ∎</p>
+<p><b>Never periodic.</b> A sum of two sinusoids with frequency ratio $\varphi$ has no common period, since a period
+$T$ would need $f_1T$ and $f_2T$ to be whole numbers, making $\varphi$ rational. (Theorem.) Why that might matter is
+discussed, as hypothesis, in <a href="ch:ch34#quasi-periodic">Chapter 34</a>.</p>
+</div>
+</section>
+
+<section id="beats">
+<h2>The beats of a golden chord</h2>
+<div class="layer hear">
+<p>Close-voiced chords on harmonic tones beat: nearby partials of different notes drift in and out of phase. A 12-ET
+major triad beats irregularly, at unrelated rates. A golden chord in exact tuning beats in a pattern: its beat rates
+are themselves golden ratios of each other. Listen to the golden triad and then the golden seventh at a low register,
+and then the golden seventh higher up, where the same pattern runs faster.</p>
+<audio-ex src="beating_seventh" caption="Close-voiced exact Cg on 110 Hz (beats at 6.13, 7.58 and 12.26 per second), then Cg7 (6.13, 7.58, 9.37 and 12.26), then Cg7 on 179.44 Hz, where the slowest beat is 10 per second."></audio-ex>
+<audio-ref file="R5_exact_beating_golden_seventh.mp3" caption="From the golden audio suite: Cg → Cg7 → vEg at 110 Hz in exact ratios on a dry harmonic tone, held long enough to count the beats."></audio-ref>
+</div>
+<div class="layer understand">
+<p>A <b>beat</b> between two partials is a slow swell at their frequency difference (<a href="ch:ch03#beats">Chapter
+3</a>). For a close-voiced golden seventh in exact tuning, $f_0\cdot(1, 2/\varphi, 4/\varphi^2, 8/\varphi^3)$, on harmonic
+tones with six partials, the beats below 15 Hz are (110 Hz is A2, so strictly this is the golden seventh on A; the rates
+depend only on the root frequency, not on its name):</p>
+<pianoroll edo="36" notes="A2 vC#3 ^E3 G#3" labels="golden seventh on A2" title="The close voicing of the beat table, in 36-ET notation (the audio uses exact ratios)"></pianoroll>
+<table>
+<tr><th>Rate at $f_0 = 110$ Hz</th><th>Formula</th><th>Relative</th><th>Partial pairs (h = harmonic number)</th></tr>
+<tr><td>6.13 Hz</td><td>$f_0\varphi^{-6}$</td><td>1</td><td>root h5 – third h4; root h3 – fifth h2</td></tr>
+<tr><td>7.58 Hz</td><td>$f_0\varphi^{-6}\cdot 2/\varphi$</td><td>1.236</td><td>third h5 – fifth h4; third h3 – seventh h2</td></tr>
+<tr><td>9.37 Hz</td><td>$f_0\varphi^{-6}\cdot 4/\varphi^2$</td><td>1.528</td><td>fifth h5 – seventh h4</td></tr>
+<tr><td>12.26 Hz</td><td>$2f_0\varphi^{-6}$</td><td>2</td><td>root h2 – seventh h1; root h6 – fifth h4</td></tr>
+</table>
+<p>The first three rates are $f_0\varphi^{-6}\times(1, 2/\varphi, 4/\varphi^2)$: <b>the golden triad in rhythm</b>. The
+fourth, $2f_0\varphi^{-6}$, is the golden seventh beating against the root's octave, because the seventh lies exactly
+$2\varphi^{-6}$ below the octave ($8/\varphi^3 = 2 - 2\varphi^{-6}$). <b>No beat occurs at the golden seventh's own
+ratio</b>, $f_0\varphi^{-6}\cdot 8/\varphi^3$ = 11.58 Hz at 110 Hz.</p>
+<p>The golden triad alone (no seventh) beats at $f_0\varphi^{-6}\times(1, 2/\varphi)$ = 6.13 and 7.58 Hz, plus
+$2f_0\varphi^{-6}$ = 12.26 Hz from root h6 against fifth h4. For comparison, at the same root a 12-ET C major triad
+beats at 0.37, 0.74, 4.37 and 7.48 Hz (unrelated rates), a just 4:5:6 triad does not beat at all, and the chain
+voicing $1 : \varphi : \varphi^2$ has no beats below 15 Hz.</p>
+<p><b>Register sets the band.</b> Every rate is proportional to $f_0$. At $f_0 = 55$ Hz they halve; at
+$f_0 = 10\varphi^6 \approx 179.44$ Hz the base beat is exactly 10 Hz (and the others 12.36, 15.28 and 20 Hz). Whether
+beats at such rates do anything beyond being heard is a hypothesis, treated in
+<a href="ch:ch34#conjecture">Chapter 34</a>.</p>
+<p><b>In 36-ET</b> the coincidences split: computed the same way, a 36-ET Cg7 on 110 Hz beats at 6.04 and 6.21 Hz
+instead of 6.13, 7.46 and 7.67 instead of 7.58, 9.48 instead of 9.37, 12.07 and 12.35 instead of 12.26, plus a beat
+at 14.92 Hz. The golden pattern is still there, blurred into pairs. (Measurement.)</p>
+<audio-ref file="P15a_golden_beats_definition.mp3" caption="From the golden audio suite: one close-voiced Cg7 around 110 Hz on a harmonic organ, held so the beats can be heard. It is tuned in 36-ET, so its beats are the blurred pairs just described."></audio-ref>
+</div>
+<div class="layer derive">
+<p><b>Where $\varphi^{-6}$ comes from.</b> Root h5 against third h4: $5 - 4\cdot\frac{2}{\varphi} = 5 - 8(\varphi - 1) = 13 - 8\varphi$.
+And $13 - 8\varphi = \varphi^{-6}$, because $\varphi^6 = 8\varphi + 5$ and $(13 - 8\varphi)(8\varphi + 5) = 64\varphi + 65 - 64\varphi^2 = 1$.
+The Fibonacci approximant $13/8 \approx \varphi$ is the source of the base rate: $f_0(13 - 8\varphi) = f_0\varphi^{-6}$.</p>
+<p>Every other pair in the table is a golden multiple of this one: third h5 – fifth h4 and fifth h5 – seventh h4 are
+the same pattern on notes $2/\varphi$ and $4/\varphi^2$ higher; root h3 – fifth h2 gives
+$|3 - 2\cdot 4/\varphi^2| = |3 - 8(2-\varphi)| = |8\varphi - 13| = 13 - 8\varphi = \varphi^{-6}$; root h6 – fifth h4 gives
+$|6 - 16(2 - \varphi)| = 2\varphi^{-6}$; root h2 – seventh h1 gives $2 - 8/\varphi^3 = 2\varphi^{-6}$.</p>
+<p><b>The list is complete</b> for this model: enumerating all pairs of the six partials of the four notes, the only
+differences below 15 Hz at $f_0 = 110$ Hz are 6.13, 7.58, 9.37 and 12.26 Hz, and the same four appear with eight
+partials. (Checked by computation.) The arithmetic is exact; how loud each beat is depends on the partial amplitudes.</p>
+</div>
+</section>
+
+<section id="timbre-flip">
+<h2>The timbre flip</h2>
+<div class="layer hear">
+<p>Put the pieces together and the golden system has two faces. On harmonic instruments, the ones we know, the
+golden triad is a tense, shimmering chord that wants to move on to a Western chord. On golden-spectrum instruments it
+is the calm chord, and the Western chords are the rough visitors. The same chords, the same order, only the timbre
+changes.</p>
+<audio-ex src="timbre_flip" caption="Cg – C – Cg on a harmonic organ (C sounds like arrival, Cg like suspense), then the same three chords on a golden-spectrum pad (Cg sounds settled, C bright and rough)."></audio-ex>
+<audio-ref file="P11a_golden_breathing_and_the_timbre_flip_definition.mp3" caption="From the golden audio suite: golden breathing on golden-spectrum tones, on a harmonic organ, then golden again."></audio-ref>
+<audio-ref file="P13a_rational_visitation_definition.mp3" caption="From the golden audio suite: rational visitation, a golden home Cg visited in turn by C, A♭ and Cm on golden-spectrum tones."></audio-ref>
+</div>
+<div class="layer understand">
+<p>The two roughness columns of the first section rank the triads in opposite ways:</p>
+<table>
+<tr><th>Timbre</th><th>Smoothest → roughest (modelled)</th><th>Which world is home</th></tr>
+<tr><td>Harmonic partials</td><td>sus4, major, minor, augmented, bronze, golden, silver, diminished</td><td>rational: Western chords rest, golden chords pass</td></tr>
+<tr><td>Golden partials</td><td><b>golden</b>, sus4, silver, bronze, augmented, major, diminished, minor</td><td>golden: golden chords rest, Western chords visit</td></tr>
+</table>
+<p>This is the <b>timbre flip</b>: the instrument's spectrum decides which family of chords is acoustically at rest.
+The grammar of golden harmony is the same in both cases. In Part VII, Chapters 27 and 28 treat Western homes with
+golden passing chords; <a href="ch:ch31#visitation">Chapter 31</a> inverts it, with golden homes, the golden circle,
+breathing and rational visitors. Timbre is what tells the listener which of the two is going on.</p>
+<p>Two cautions. First, the flip is specific to golden chords: on golden partials silver and bronze (3.08 and 3.10) sit
+among the Western chords (sus4 2.99, major 3.17), far from golden's 2.08. Second, "home" here means "smoothest in a
+roughness model". Whether listeners also <i>hear</i> golden chords as home on golden timbres, across registers,
+loudness levels and musical contexts, is a listening question that this book does not settle.</p>
+<aside class="box note"><p><b>Western mirror.</b> Chapter 3 shows that consonance depends on timbre
+(<a href="ch:ch03#timbre-dependence">Consonance depends on timbre</a>), and Chapter 17 that orchestration can change
+what counts as a stable chord (<a href="ch:ch17#timbre-harmony">Timbre shapes harmony</a>). The golden world is the most
+extreme case: the same chord is rougher than every Western triad except diminished on one instrument, and the smoothest
+triad of all on another.</p></aside>
+<pianoroll edo="36" notes="C4 vE4 ^G4 ; C4 E4 G4 ; C4 vE4 ^G4" labels="Cg ; C ; Cg" title="The timbre-flip example: the same three chords on both timbres"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>Statement.</b> In the roughness model of the first section (8 harmonic partials or the 11 golden partials below
+9, amplitudes $0.88^k$, chords on C4):</p>
+<ul>
+<li>harmonic: $R(\text{golden}) = 1.50 &gt; R(\text{aug}) = 1.45 &gt; R(\text{minor}) = 1.34 &gt; R(\text{major}) = 1.32$,
+and $R(\text{golden}) &lt; R(\text{dim}) = 1.67$;</li>
+<li>golden: $R(\text{golden}) = 2.08 &lt; R(\text{sus4}) = 2.99 &lt; R(\text{aug}) = 3.14 &lt; R(\text{major}) = 3.17 &lt; R(\text{dim}) = 3.19 &lt; R(\text{minor}) = 3.26$.</li>
+</ul>
+<p>These are measurements (they depend on the model's parameters). The structural reason for the golden column is
+the lattice argument of the second section: the exact golden triad's partials lie on the golden lattice, so many of
+them coincide and the rest are separated by golden ratios, not by small mistunings.</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 1.</b> Compute the four beat rates of a close-voiced exact Cg7 on $f_0 = 220$ Hz.</p>
+<details class="answer"><summary>Answer</summary><p>Double the 110 Hz values: $220\varphi^{-6}$ = 12.26 Hz, then
+15.15, 18.73 and 24.52 Hz.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 2.</b> Which root frequency puts the base beat $f_0\varphi^{-6}$ at 6 Hz?</p>
+<details class="answer"><summary>Answer</summary><p>$f_0 = 6\varphi^6 = 6 \times 17.944 = 107.67$ Hz.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 3.</b> Find the combination tones $f_2 - f_1$ and $2f_1 - f_2$ of the golden sixth $f_0\cdot(1, \varphi)$, and
+show they are chain pitches.</p>
+<details class="answer"><summary>Answer</summary><p>$f_0(\varphi - 1) = f_0\varphi^{-1}$ and $f_0(2 - \varphi) = f_0\varphi^{-2}$:
+the chain continued downward by one and two links.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 4.</b> Show that the third's third partial and the seventh's second partial of an exact Cg7 beat at
+$(2/\varphi)\,f_0\varphi^{-6}$.</p>
+<details class="answer"><summary>Answer</summary><p>$3\cdot\frac2\varphi - 2\cdot\frac8{\varphi^3} = \frac2\varphi\big(3 - \frac8{\varphi^2}\big)$, and
+$3 - 8/\varphi^2 = 3 - 8(2 - \varphi) = 8\varphi - 13 = -\varphi^{-6}$. The difference is negative (the seventh's partial is
+the higher one), and the beat rate is its size, $(2/\varphi)\,f_0\varphi^{-6}$.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 5 (listening).</b> In the timbre-flip example, which chord sounds like the resolution in each half?
+Does your answer agree with the roughness table?</p>
+<details class="answer"><summary>Answer</summary><p>The model predicts C in the first half (harmonic organ) and Cg in
+the second (golden pad). Listeners vary; register, loudness and the tone's attack also affect the impression.</p></details>
+</div>
+</section>

@@ -1,0 +1,19 @@
+# A miniature AABA song form written for this book (4-bar sections instead of the usual 8):
+# A (C Am Dm G, open ending), A (closing on C), B, the bridge (F G Em G, new and higher), A again.
+songmap: 0.2
+title: "AABA in miniature"
+tempo: 132
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 16
+tail_seconds: 2
+instruments: {lead: clean/lead, keys: clean/keys, bass: clean/bass}
+mix: {lead: {gain_db: -2, send: {hall: 0.2}}, keys: {gain_db: -11, send: {hall: 0.2}}, bass: {gain_db: -7}}
+returns: {hall: {type: reverb, seconds: 1.8, predelay: 0.02, damping: 0.5}}
+sections:
+  - {name: A1, bars: 4, harmony: "C:1 Am:1 Dm:1 G:1", parts: {lead: {notes: "=mf e4 g a g | e2 c | d4 f a g | g1", oct: 1}, keys: hold, bass: {style: roots, role: bass}}}
+  - {name: A2, bars: 4, harmony: "C:1 Am:1 Dm:0.5 G:0.5 C:1", parts: {lead: {notes: "=mf e4 g a g | e2 c | d4 f a g | c+1", oct: 1}, keys: hold, bass: {style: roots, role: bass}}}
+  - {name: B,  bars: 4, harmony: "F:1 G:1 Em:1 G:1", parts: {lead: {notes: "=mf a4 c+ f+ c+ | b2 d+ | g4 b e+ b | d+1", oct: 1}, keys: hold, bass: {style: roots, role: bass}}}
+  - {name: A3, bars: 4, harmony: "C:1 Am:1 Dm:0.5 G:0.5 C:1", parts: {lead: {notes: "=mf e4 g a g | e2 c | d4 f a g | c+1", oct: 1}, keys: hold, bass: {style: roots, role: bass}}}
+master: clean

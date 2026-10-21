@@ -1,0 +1,27 @@
+# ch30: one degree string, two scales. First in C major on a harmonic tone over C major
+# harmony; then the same degrees in C golden7 on a golden-spectrum tone over golden chords.
+songmap: 0.2
+title: "Degree transplant: C major to C golden7"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 32
+tail_seconds: 3
+instruments:
+  lead: clean/lead
+  organ: clean/organ
+  bell: clean/glass
+  gpad: clean/golden_pad
+motifs:
+  rational: {deg: "0/8 1 2 3 4/4 2 | 3/8 2 1 0 1/2 | 4/8 3 2 1 2/4 -1 | 0/1", octave: 5, key: "C major"}
+  golden:   {deg: "0/8 1 2 3 4/4 2 | 3/8 2 1 0 1/2 | 4/8 3 2 1 2/4 -1 | 0/1", octave: 5, key: "C golden7"}
+mix:
+  lead: {gain_db: -4, send: {hall: 0.2}}
+  organ: {gain_db: -11, send: {hall: 0.2}}
+  bell: {gain_db: -4, send: {hall: 0.25}}
+  gpad: {gain_db: -9, send: {hall: 0.3}}
+sections:
+  - {name: rational, bars: 4, harmony: "C:2 G:1 C:1", parts: {lead: {motifs: [rational]}, organ: hold}}
+  - {name: golden, bars: 4, harmony: "Cg:2 vEg:1 Cg:1", parts: {bell: {motifs: [golden]}, gpad: hold}}
+master: clean

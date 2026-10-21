@@ -1,0 +1,20 @@
+# Ch. 27: the golden six-four in exact SATB (the voices of the worked example), then the Western
+# cadential six-four C/G - G - C for comparison.
+songmap: 0.2
+title: "The golden six-four, SATB"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2.5
+instruments: {organ: clean/organ}
+motifs:
+  golden:  {notes: "=mf [g--,g-,b-,d]2 [g--,g-,^b-,veb]4 [g--,g-,vc,^eb] | [c-,g-,c,e]1"}
+  western: {notes: "=mf [g--,g-,c,e]2 [g--,g-,b-,d] | [c-,g-,c,e]1"}
+mix: {organ: {gain_db: -6}}
+sections:
+  - {name: golden, bars: 2, parts: {organ: {motifs: [golden]}}}
+  - {name: gap, bars: 2, parts: {}}
+  - {name: western, bars: 2, parts: {organ: {motifs: [western]}}}
+master: clean

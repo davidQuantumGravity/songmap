@@ -1,0 +1,268 @@
+<section id="layer-modulation">
+<h2>Changing layers</h2>
+<div class="layer hear">
+<p>Modulation means moving the sense of home from one key to another. Western music does it through common ground:
+keys near each other on the circle of fifths share most of their notes and several chords, and a shared chord can be
+reinterpreted as belonging to the new key (<a href="ch:ch11#modulation">Chapter 11</a>,
+<a href="ch:ch08#distance">Chapter 8</a>). 36-ET adds a kind of key change that has no common ground at all. Listen to a
+cadence in C major, then the same cadence in ^C major, every note one sixth-step (a third of a semitone) higher.</p>
+<audio-ex src="layer_shift" caption="C – F – G – C, then ^C – ^F – ^G – ^C. Listen for the second cadence as the same music on a slightly brighter, slightly 'wrong' plane: a key change with no shared note."></audio-ex>
+<p>The effect resembles the abrupt step-up key change of many pop songs, but smaller than any semitone, and stranger:
+nothing carries over. Every note of the second key is new.</p>
+</div>
+<div class="layer understand">
+<h3>The key system of 36-ET</h3>
+<p>36-ET contains 12-ET exactly, plus two copies shifted up and down by a sixth-step: the three layers
+(<a href="ch:ch24#layers">Chapter 24</a>). A Western scale lives on one layer, so 36-ET has 36 major and 36 minor keys,
+twelve of each on each layer (<a href="ch:ch24#keys">Chapter 24</a>). Their relationships come in two kinds:</p>
+<table>
+<caption>How many notes two major keys share</caption>
+<tr><th>Relation</th><th>Example</th><th>Common tones</th></tr>
+<tr><td>same key</td><td>C, C</td><td>7</td></tr>
+<tr><td>1 fifth apart (same layer)</td><td>C, G</td><td>6</td></tr>
+<tr><td>2 fifths</td><td>C, D</td><td>5</td></tr>
+<tr><td>3 fifths</td><td>C, A</td><td>4</td></tr>
+<tr><td>4 fifths</td><td>C, E</td><td>3</td></tr>
+<tr><td>5 fifths</td><td>C, B (or C, C♯)</td><td>2</td></tr>
+<tr><td>6 fifths (tritone)</td><td>C, F♯</td><td>2</td></tr>
+<tr><td><b>different layers</b></td><td>C, ^C (or C, vC, C, ^G …)</td><td><b>0</b></td></tr>
+</table>
+<p>Within a layer, everything from Chapter 8 holds unchanged. Between layers there are no common tones, so there are no
+common chords and no pivot chords of the Western kind. ^C major is the closest possible key to C major in pitch, every
+note just 33 c away, and the farthest possible in common tones. In 12-ET the nearest key in pitch, C♯, still shares two
+notes with C (F = E♯ and C = B♯).</p>
+<h3>Four ways across</h3>
+<ol>
+<li><b>Direct shift.</b> Simply continue in the new key, as in the example. The ear accepts it as a change of plane,
+because the new key is internally the same as the old.</li>
+<li><b>Planing.</b> Slide chords by sixth-steps, as the half-step theorem forces when chords a semitone apart move in
+parallel (<a href="ch:ch28#half-step">Chapter 28</a>): C → ^C → vC♯ → C♯ passes through two layers on its way to the
+next semitone. Stopping at ^C instead of C♯ is a planing modulation.</li>
+<li><b>A golden pivot.</b> Use a golden chord, which touches all three layers, as the hinge
+(<a href="ch:ch32#golden-pivots">the next section</a>).</li>
+<li><b>A passing bridge.</b> Let the passing-chord engine connect the last chord of one key to the first of the next.
+The Well-Tempered Golden Clavier uses passing slots to bridge every tonic to the next one, a sixth-step higher
+(<a href="ch:ch31#wtgc">Chapter 31</a>).</li>
+</ol>
+<h3>Western techniques, translated</h3>
+<p>Chapter 11 described the standard ways to modulate. Here is what becomes of each when the two keys lie on different
+layers. <i>Status:</i> the common-tone facts are theorems; the descriptions of effect are informal.</p>
+<table>
+<caption>Western modulation techniques between two layers</caption>
+<tr><th>Western technique</th><th>Needs</th><th>Between layers</th></tr>
+<tr><td>Pivot-chord modulation</td><td>a chord diatonic in both keys</td><td>impossible: the keys share no note, so no chord</td></tr>
+<tr><td>Common-tone modulation</td><td>one held note</td><td>impossible directly; possible through a golden chord, which shares one note with each key</td></tr>
+<tr><td>Direct (phrase) modulation</td><td>nothing</td><td>works: the layer shift of the first example</td></tr>
+<tr><td>Chromatic (voice-leading) modulation</td><td>stepwise voices</td><td>works best of all: every voice moves by sixth-steps, the smallest steps 36-ET has</td></tr>
+<tr><td>Sequential modulation</td><td>a repeated pattern</td><td>works: a sequence can rise by sixth-steps, as the Golden Clavier rises through its tonics</td></tr>
+</table>
+<p>The table shows the character of layer modulation. Because the keys share nothing, modulation between layers is carried
+by <i>motion</i>, voices sliding by sixth-steps, rather than by <i>reinterpretation</i> of something held in common. The one
+exception is the golden chord, which reaches into every layer. That is why it is the natural pivot of 36-ET.</p>
+<div class="exercise"><p><b>Exercise 1.</b> Of the 72 major and minor keys of 36-ET, how many share at least one note with
+C major (counting C major itself)?</p>
+<details class="answer"><summary>Answer</summary><p>Exactly the 24 keys on the 12-ET layer. Any two major scales share at
+least two notes (the minimum, 2, occurs at five or six fifths apart), and a natural minor scale has the same notes as its
+relative major. The 48 keys on the other two layers share none.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Theorem (layer disjointness).</b> Let $K\subseteq\ell+3\mathbb{Z}_{36}$ and $K'\subseteq\ell'+3\mathbb{Z}_{36}$ be
+Western scales on layers $\ell\ne\ell'$. Then $K\cap K'=\varnothing$. <i>Proof:</i> distinct cosets of a subgroup are
+disjoint. ∎</p>
+<p><b>Same layer.</b> On one layer, $3\mathbb{Z}_{36}\cong\mathbb{Z}_{12}$ by $3x\mapsto x$, so all of 12-ET key theory
+applies verbatim. For major scales $k$ fifths apart the common-tone count is $7,6,5,4,3,2,2$ for $k=0,\dots,6$ (computed).</p>
+</div>
+</section>
+
+<section id="golden-pivots">
+<h2>Golden pivot chords</h2>
+<div class="layer hear">
+<p>A golden triad has one note on each layer (<a href="ch:ch25#layer-theorem">Chapter 25</a>). So it can hold hands with
+keys on every layer at once. Listen to C major turning into ^C major through Cg.</p>
+<audio-ex src="golden_pivot" caption="C – F – G – C, then Cg, then ^C – ^F – ^G – ^C. Listen for C held from C into Cg, and ^G held from Cg into ^C: the golden chord passes the baton."></audio-ex>
+<p>Cg also sits two sixth-steps from a Western triad on each layer: C major, ^C minor and vE augmented. Here it acts as
+a hub, going out to each layer and returning.</p>
+<audio-ex src="golden_hub" caption="C – Cg – ^Cm – Cg – vEaug – Cg – C on a harmonic organ. Each Western chord is on a different layer; each keeps one note of Cg."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>A one-note hinge on every layer</h3>
+<p>Cg = C vE ^G. Its C is the root of the C major triad, its ^G is the fifth of the ^C major triad, and its vE is the
+third of the vC major triad. In voice-leading distance (sixth-steps summed over voices) Cg is 2 from C and 3 from each of
+^C and vC. So the pivot C → Cg → ^C costs 2 + 3 = 5 sixth-steps of total motion:</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; ^C4 ^E4 ^G4 ; C4 vE4 ^G4 ; ^C4 ^Eb4 ^G4" labels="C ; Cg ; ^C ; Cg ; ^Cm" title="Two golden pivots: C → Cg → ^C and C → Cg → ^Cm"></pianoroll>
+<ul>
+<li><b>C → Cg → ^C:</b> C holds, then rises a sixth-step to ^C; E falls a sixth-step to vE, then rises two to ^E; G rises a
+sixth-step to ^G, then holds. One common tone at each joint.</li>
+<li><b>C → Cg → ^Cm:</b> C holds, then rises to ^C; E falls one sixth-step at a time, vE then ^E♭; G rises to ^G, then
+holds. Total motion 2 + 2 = 4, and every voice moves in one direction only. It is the most efficient golden route from C
+major to any key on another layer, and it changes mode at the same time.</li>
+</ul>
+<p>In four parts, with the root doubled, the first pivot can be written so that every voice moves by at most two
+sixth-steps at each joint:</p>
+<table>
+<caption>C → Cg → ^C in four voices (one realization)</caption>
+<tr><th>Voice</th><th>C</th><th>Cg</th><th>^C</th><th>Motion</th></tr>
+<tr><td>Soprano</td><td>C5</td><td>C5</td><td>^C5</td><td>hold, then up one sixth-step</td></tr>
+<tr><td>Alto</td><td>G4</td><td>^G4</td><td>^G4</td><td>up one, then hold</td></tr>
+<tr><td>Tenor</td><td>E4</td><td>vE4</td><td>^E4</td><td>down one, then up two</td></tr>
+<tr><td>Bass</td><td>C3</td><td>C3</td><td>^C3</td><td>hold, then up one</td></tr>
+</table>
+<p>The bass and soprano behave like a common-tone pivot on C followed by a gentle sixth-step lift; the inner voices carry the
+change of world. Against the tenor's zigzag (down one, up two), the alternative C → Cg → ^Cm lets the tenor fall twice
+instead (E4, vE4, ^E♭4), with every voice monotone.</p>
+<p>The golden pivot is closer to Western <i>common-tone</i> modulation than to pivot-chord modulation: the golden chord does
+not belong to both keys as a chord, but it shares one note with each and lies very near both tonic triads.</p>
+<table>
+<caption>The best golden pivot G for X → G → Y, starting from X = C major (computed over all 36 golden triads)</caption>
+<tr><th>Target Y</th><th>Best golden pivots</th><th>Total motion (sixth-steps)</th><th>Common tones X–G–Y</th></tr>
+<tr><td>^C minor (other layer)</td><td>Cg</td><td>2 + 2 = 4</td><td>C, then ^G</td></tr>
+<tr><td>^C major (up a sixth-step)</td><td>Cg or ^Cg</td><td>2 + 3 or 3 + 2 = 5</td><td>one at each joint</td></tr>
+<tr><td>vC major (down a sixth-step)</td><td>Cg or vCg</td><td>2 + 3 or 3 + 2 = 5</td><td>one at each joint</td></tr>
+<tr><td>C♯ major (same layer, a semitone up)</td><td>^Cg or vC♯g</td><td>3 + 6 or 6 + 3 = 9</td><td>one joint only</td></tr>
+</table>
+<p>The last row shows the limit of the method. Between keys a semitone apart on the same layer, no golden chord is near
+both, which is the half-step theorem seen from the side of modulation (<a href="ch:ch28#half-step">Chapter 28</a>).</p>
+<h3>Pivots between modes</h3>
+<p>The golden chord also pivots between major and minor on the same layer. By the quality theorem, Cg is the strict passing
+chord of C ↔ A♭ (major world) and of Cm ↔ Fm (minor world) (<a href="ch:ch27#quality">Chapter 27</a>). That makes the
+golden modal mixture C – Cg – Cm (<a href="ch:ch29#mixture">Chapter 29</a>) a modulation tool: Cg is the centroid of C, Cm
+and Caug, two sixth-steps from the first and three from the other two.</p>
+<div class="exercise"><p><b>Exercise 2.</b> Find the golden triad that plays Cg's hub role for the three G major
+triads G, ^G and vG, and say which note it shares with each.</p>
+<details class="answer"><summary>Answer</summary><p>Transpose everything by 21 sixth-steps (C → G): Gg = G vB ^D
+(21, 32, 7). It contains G, the root of G major; ^D, the fifth of ^G major (^G ^B ^D); and vB, the third of vG major
+(vG vB vD). By transposition its distances to the three are again 2, 3 and 3.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Proposition (one note per key).</b> If $W$ lies on one layer and $G_r$ is a golden triad, then $|W\cap G_r|\le 1$.
+<i>Proof:</i> $G_r$ has exactly one element in each coset of $3\mathbb{Z}_{36}$. ∎ Of the 36 major-scale sets, exactly 21
+contain a note of Cg, seven on each layer, each containing exactly one (computed).</p>
+<p><b>The three C's.</b> C major $=\{0,12,21\}$, ^C $=\{1,13,22\}$, vC $=\{35,11,20\}$. $G_0=\{0,11,22\}$ meets them in 0, 22
+and 11 respectively, and the minimal voice-leading distances are 2, 3, 3 (with moves $(0,+1,-1)$, $(+1,+2,0)$,
+$(-1,0,-2)$ for C, vE, ^G).</p>
+<p><b>Why ^Cm is as close as C.</b> The inversion $I_{22}: x\mapsto 22-x$ fixes $G_0$ and maps $\{0,12,21\}$ to
+$\{22,10,1\}$ = ^Cm; it preserves voice-leading distance. The table of best pivots was computed by minimizing
+$d(X,G)+d(G,Y)$ over all 36 golden triads $G$.</p>
+</div>
+</section>
+
+<section id="scale-modulation">
+<h2>Between golden scales</h2>
+<div class="layer hear">
+<p>Golden scales have keys too. A golden7 scale can start on any of the 36 tonics, and neighbouring golden keys share
+almost everything. First, hear how little changes between neighbours. Each scale is played from C, so only the altered
+note is different.</p>
+<audio-ex src="key_signatures" caption="C golden7, then vE golden7 from C (C♯ becomes vE♭); C golden13, then vE golden13 from C (D becomes vD, a sixth-step lower). Listen for the single changed note in each pair."></audio-ex>
+<p>Now a real modulation from C golden7 to vE golden7 through a chord both keys share.</p>
+<audio-ex src="golden7_modulation" caption="Cg – C♯g – Cg – ^A♭g in C golden7; ^A♭g is common to both keys. Then ^Gg brings the new note vE♭, and vFg – vEg settle in vE golden7. Listen for the bell's vE♭ rising to vE at the end."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>The circle of golden keys</h3>
+<p>A golden7 scale is a window of seven consecutive golden-chain notes. Moving its tonic by one chain step, up a golden
+sixth (C → ^A♭) or up a golden third (C → vE), slides the window by one: one note leaves and one enters. This is the
+golden counterpart of moving one step on the circle of fifths, where G major replaces F by F♯
+(<a href="ch:ch08#keys">Chapter 8</a>).</p>
+<table>
+<caption>Common tones of C golden7 and C golden13 with their transpositions, by chain distance between tonics (computed for all 36 tonics)</caption>
+<tr><th>Chain distance</th><th>Tonics</th><th>golden7 common tones</th><th>golden13 common tones</th></tr>
+<tr><td>0</td><td>C</td><td>7</td><td>13</td></tr>
+<tr><td>1</td><td>vE, ^A♭</td><td>6</td><td>12</td></tr>
+<tr><td>2</td><td>^G, vF</td><td>5</td><td>11</td></tr>
+<tr><td>3</td><td>B, C♯</td><td>4</td><td>10</td></tr>
+<tr><td>4</td><td>vE♭, ^A</td><td>3</td><td>9</td></tr>
+<tr><td>5</td><td>^F♯, vF♯</td><td>2</td><td>8</td></tr>
+<tr><td>6</td><td>B♭, D</td><td>1</td><td>7</td></tr>
+<tr><td>7 or more</td><td>the other 23 tonics</td><td>0</td><td>13 − distance, down to 0 at distance 13–18</td></tr>
+</table>
+<p>The tonics one chain step apart, vE and ^A♭, are exactly the roots of Cg's two neighbours on the golden circle
+(<a href="ch:ch31#circle">Chapter 31</a>). So the circle of golden keys and the golden circle of chords are the same circle,
+as the circle of fifths serves both keys and dominant chords in Western music.</p>
+<h3>Golden key signatures</h3>
+<table>
+<caption>One chain step of modulation</caption>
+<tr><th>From C to</th><th>golden7: out → in</th><th>golden13: out → in</th></tr>
+<tr><td>vE (tonic up a golden third)</td><td>C♯ → vE♭ (5 sixth-steps up)</td><td>D → vD (1 sixth-step down)</td></tr>
+<tr><td>^A♭ (tonic up a golden sixth)</td><td>B → ^A (5 sixth-steps down)</td><td>B♭ → ^B♭ (1 sixth-step up)</td></tr>
+</table>
+<p>The size of the change is the scale's <b>chroma</b>, the difference between its two step sizes. For the diatonic it is
+the chromatic semitone (113.69 c in Pythagorean tuning, 100 c in 12-ET). For golden7 it is 267.64 − 99.27 = 168.37 c, which
+36-ET renders as 5 sixth-steps: a key change alters one note by about a sixth-step less than a whole tone. For golden13
+it is 99.27 − 69.10 = 30.17 c, the golden comma, one sixth-step: neighbouring golden13 keys differ by the smallest
+interval of 36-ET.</p>
+<h3>Common chords and a worked modulation</h3>
+<p>C golden7 has five golden triads (C♯g, vFg, ^A♭g, Cg, vEg; chain roots +3 to −1). vE golden7 has ^Gg, vEg, Cg, ^A♭g,
+vFg (chain roots +2 to −2). Four are common: Cg, vEg, vFg, ^A♭g. That is the same number of shared triads as between C and G
+major, which share C, Em, G and Am, but out of five triads per key instead of seven.</p>
+<p>The worked example: Cg – C♯g – Cg confirms C golden7. ^A♭g belongs to both keys and serves as the pivot. ^Gg is the
+first chord that uses the new note vE♭; the move ^A♭g → ^Gg lowers every voice a semitone. vFg – vEg settles the new key,
+again with every voice falling a semitone, and the bell's vE♭ rises to vE. In vE golden7, ^Gg and vFg play the roles that
+vEg and C♯g play in C golden7, so if the functional hypothesis of <a href="ch:ch31#golden7-function">Chapter 31</a> holds,
+the modulation ends with the new key's "falling" cadence. <i>Status:</i> the chord facts are theorems; any functional
+reading is hypothesis.</p>
+<h3>Golden keys are not on a layer</h3>
+<p>A Western key lives on one layer. A golden key never does. Every golden7 scale has three notes on its tonic's layer
+(B, C, C♯ for C golden7) and two on each of the other layers; every golden13 scale has five, four and four. So the two kinds
+of modulation in this chapter are independent: changing layers moves Western keys between disjoint worlds, while golden keys
+always straddle all three.</p>
+<p>This also reverses some intuitions about distance. Read the common-tone table above by pitch instead of by chain:</p>
+<ul>
+<li>golden7 on ^C, one sixth-step above C, is chain distance 13 away and shares <b>no</b> notes with C golden7;</li>
+<li>golden7 on C♯, a semitone above, is chain distance 3 away and shares four (C, C♯, vF, ^A♭);</li>
+<li>golden7 on D, a whole tone above, is chain distance 6 away and shares one (C♯).</li>
+</ul>
+<p>In 12-ET the keys a semitone apart are among the most distant (two common tones). In golden7 the semitone neighbour is
+fairly close, because three golden sixths make two octaves and almost exactly a semitone: transposing by a semitone is
+nearly a three-step move along the chain.</p>
+<h3>Between kinds of scale</h3>
+<ul>
+<li><b>golden7 inside golden13.</b> C golden13 contains seven golden7 scales, on C, C♯, vE, vF, ^G, ^A♭ and B, just as a
+chromatic aggregate contains every diatonic set. Moving from golden7 to golden13 on the same tonic adds six notes and loses
+none.</li>
+<li><b>golden13 and silver13.</b> silver13 is golden13 with every ^ and v swapped. On the same tonic they share seven notes,
+C, C♯, D, vF♯, ^F♯, B♭ and B: the five 12-ET notes, which the swap fixes, and the pair vF♯, ^F♯, which it exchanges.
+That is as many as golden13 keys six chain steps apart share.</li>
+<li><b>Golden and Western.</b> C golden7 shares only C and B with C major (<a href="ch:ch30#antiphony">Chapter 30</a>).
+The smoothest bridge uses exactly those notes: Cmaj7 = C E G B bends its inner voices by a sixth-step each into Cg7 = C vE
+^G B, which is the tonic seventh of golden7.</li>
+</ul>
+<h3>Three axes of key change</h3>
+<p>Putting the chapter together, a key change in 36-ET can move along three independent axes:</p>
+<table>
+<caption>Three kinds of modulation in 36-ET</caption>
+<tr><th>Axis</th><th>Example</th><th>Common ground</th><th>Typical means</th></tr>
+<tr><td>Within a layer (Western)</td><td>C major → G major</td><td>6 of 7 notes, 4 triads</td><td>pivot chords, as in Chapter 11; golden passing chords on the way</td></tr>
+<tr><td>Across layers (Western)</td><td>C major → ^C major</td><td>none</td><td>direct shift, planing, a golden pivot</td></tr>
+<tr><td>Between golden keys</td><td>C golden7 → vE golden7</td><td>6 of 7 notes, 4 golden triads</td><td>golden pivot chords, circle steps</td></tr>
+<tr><td>Between worlds</td><td>C major → C golden7</td><td>2 notes (C, B)</td><td>bending (Cmaj7 → Cg7), visitation, timbre change</td></tr>
+</table>
+<p>The last row is the most characteristic of this book. Crossing from the rational world to the golden one is a
+modulation of <i>tuning world</i> as much as of key, and it is most convincing when the timbre changes with it, so that the
+arriving world is also the acoustically stable one (<a href="ch:ch26#timbre-flip">Chapter 26</a>).</p>
+<audio-ex src="bend_modulation" caption="C – F – G7 – Cmaj7 on a harmonic organ, then Cmaj7 bends into Cg7 (E down, G up a sixth-step; C and B held); a golden pad and bell continue in C golden7."></audio-ex>
+<div class="exercise"><p><b>Exercise 3.</b> Which note changes when C golden7 modulates two chain steps to vF golden7, and
+how many golden triads do the two keys share?</p>
+<details class="answer"><summary>Answer</summary><p>vF golden7 is chain window −1 to +5 (vF is chain +2). It loses chain −3
+(B) and −2 (^G) and gains chain +4 (^A) and +5 (vF♯), so two notes change and five remain, in line with the table. Triads:
+C golden7 has chain roots −1…+3; vF golden7 has +1…+5. Common: chain roots +1, +2, +3, that is ^A♭g, vFg, C♯g. Three
+shared triads.</p></details></div>
+<div class="exercise"><p><b>Exercise 4.</b> Explain why neighbouring golden13 keys differ by only one sixth-step, while
+neighbouring golden7 keys differ by five.</p>
+<details class="answer"><summary>Answer</summary><p>The entering and leaving notes are $n$ chain steps apart (the window
+length), so the change is the chain-$n$ interval: chain 13 is the golden comma, 30.17 c (one sixth-step); chain 7 is
+168.37 c after octave reduction (five sixth-steps). Equivalently, the change is the scale's chroma, its large step minus its
+small step.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Proposition (window overlap).</b> Let $W_n(t)$ be golden$n$ ($n = 2m+1$) on tonic $t$, a chain window
+$\{25j: k-m\le j\le k+m\}$ where $k\equiv 13t \pmod{36}$ is the chain position of $t$ (13 is the inverse of 25 mod 36).
+Take $k\in[-18,18]$. Then $|W_n(0)\cap W_n(t)| = \max(0, n-|k|)$. <i>Proof:</i> $j\mapsto 25j$ is injective on any 36
+consecutive integers, and the union of the two windows spans $n+|k|\le 7+18 = 25$ (golden7) or $13 + 18 = 31$ (golden13)
+consecutive positions, so the overlap of the sets equals the overlap of the integer intervals. ∎</p>
+<p><b>Proposition (the altered note).</b> Shifting the window by $\mp 1$ removes chain note $\pm m$ and adds $\mp(m+1)$. The two
+differ by chain distance $2m+1 = n$; for golden7, $1200(7\log_2\varphi \bmod 1) = 1031.63$, i.e. 168.37 c octave-reduced;
+for golden13, chain 13 is $\varphi^{13}/2^9 = 30.17$ c.</p>
+<p><b>Common triads.</b> The golden triads in $W_n(t)$ are $G$ with chain roots $k-m+2,\dots,k+m$ ($n-2$ of them; 5 for
+golden7, 11 for golden13), so two golden7 keys at chain distance $|k|$ share $\max(0, 5-|k|)$ triads: 4, 3, 2, 1, 0.</p>
+<p><b>golden13 ∩ silver13</b> on C is $\{0, 3, 6, 17, 19, 30, 33\}$ = C, C♯, D, vF♯, ^F♯, B♭, B (computed).</p>
+</div>
+</section>

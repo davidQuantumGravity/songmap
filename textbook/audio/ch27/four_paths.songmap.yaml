@@ -1,0 +1,23 @@
+# Ch. 27: the four strict paths through Cg (golden chord in position 1), three voices, root C held.
+#   Caug -> Cg -> Cs -> Cdim ;  C -> Cg -> ^EbT13 -> Ab ;  Cm -> Cg -> vAbT13 -> Fm ;  Ab -> Cg -> {C ^E vG} -> {C F F#}
+songmap: 0.2
+title: "Four paths through Cg"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2.5
+instruments: {organ: clean/organ}
+motifs:
+  p1: {notes: "=mf [c,e,g#]2 [c,ve,^g]4 [c,^eb,vg] | [c,eb,f#]2 r2"}
+  p2: {notes: "=mf [c,e,g]2 [c,ve,^g]4 [c,^eb,vab] | [c,eb,ab]2 r2"}
+  p3: {notes: "=mf [c,eb,g]2 [c,ve,^g]4 [c,^e,vab] | [c,f,ab]2 r2"}
+  p4: {notes: "=mf [c,eb,ab]2 [c,ve,^g]4 [c,^e,vg] | [c,f,f#]2 r2"}
+mix: {organ: {gain_db: -6}}
+sections:
+  - {name: augdim, bars: 2, parts: {organ: {motifs: [p1]}}}
+  - {name: major, bars: 2, parts: {organ: {motifs: [p2]}}}
+  - {name: minor, bars: 2, parts: {organ: {motifs: [p3]}}}
+  - {name: cluster, bars: 2, parts: {organ: {motifs: [p4]}}}
+master: clean

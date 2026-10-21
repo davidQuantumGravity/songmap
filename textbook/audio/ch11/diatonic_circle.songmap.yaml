@@ -1,0 +1,20 @@
+# I IV vii° iii vi ii V I: every root falls a fifth (F to B is the one diminished fifth).
+songmap: 0.2
+title: "The diatonic circle of fifths"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {chords: clean/organ, bass: clean/bass}
+mix: {chords: {gain_db: -6, send: {hall: 0.25}}, bass: {gain_db: -4}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 4
+    harmony: "C:0.5 F:0.5 Bdim:0.5 Em:0.5 Am:0.5 Dm:0.5 G:0.5 C:0.5"
+    parts:
+      chords: hold
+      bass: {style: roots, role: bass}
+master: clean

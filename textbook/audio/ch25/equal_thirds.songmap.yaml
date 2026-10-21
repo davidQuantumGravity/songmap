@@ -1,0 +1,17 @@
+# The equal-third line T_n = {0, n, 2n}: first the uniform path Caug -> Cg -> Cs -> Cdim
+# (root holds; third falls 1 sixth-step and fifth 2 per chord), then the whole line from T8 to
+# bronze: T8 (C vEb ^F), dim, silver, golden, aug, bronze T13 (C ^E vA).
+songmap: 0.2
+title: "The equal-third line"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 13
+tail_seconds: 2.5
+instruments: {organ: clean/organ, low: clean/bass}
+mix: {organ: {gain_db: -5}, low: {gain_db: -8}}
+sections:
+  - {name: path, bars: 4, harmony: "Caug:1 Cg:1 Cs:1 Cdim:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+  - {name: line, bars: 6, harmony: "Cdim(v3,vv5):1 Cdim:1 Cs:1 Cg:1 Caug:1 CT13:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+master: clean

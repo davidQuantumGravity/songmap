@@ -1,0 +1,19 @@
+# Ch. 7, Bach's Well-Tempered Clavier: an arpeggiated keyboard texture (not a quotation) that moves
+# through keys far apart on the circle of fifths: C, E, Ab and back to C, each with I-IV-V7-I.
+# In 12-ET (shown here) every key is tuned alike; Bach's well temperament made them all usable.
+songmap: 0.2
+title: "A walk through distant keys"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 3
+tail_seconds: 3
+instruments: {keys: keys/still, low: clean/bass}
+mix: {keys: {gain_db: -5, send: {hall: 0.25}}, low: {gain_db: -8}}
+sections:
+  - {name: c,  bars: 4, harmony: "C:1 F:1 G7:1 C:1",     parts: {keys: {style: gentle8, role: arp}, low: bassline}}
+  - {name: e,  bars: 4, harmony: "E:1 A:1 B7:1 E:1",     parts: {keys: {style: gentle8, role: arp}, low: bassline}}
+  - {name: ab, bars: 4, harmony: "Ab:1 Db:1 Eb7:1 Ab:1", parts: {keys: {style: gentle8, role: arp}, low: bassline}}
+  - {name: c2, bars: 2, harmony: "G7:1 C:1",             parts: {keys: {style: gentle8, role: arp}, low: bassline}}
+master: clean

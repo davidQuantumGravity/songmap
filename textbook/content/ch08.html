@@ -1,0 +1,300 @@
+<p>Equal temperament closed the chain of fifths into a circle. This chapter studies that circle as a mathematical
+object. Once octaves are ignored, the twelve notes of 12-ET form a small, perfectly regular number system, the
+integers modulo 12. Transposition is addition, the circle of fifths is what you get by adding 7 over and over, and
+keys, key signatures and the distance between keys all fall out of that one operation. The same ideas, in a system
+of 36 pitch classes, organize the golden keys of Part VI.</p>
+
+<section id="pitch-classes">
+<h2>Pitch classes and Z12</h2>
+<div class="layer hear">
+<p>A C is a C in any octave. Low or high, it plays the same role in a melody or a chord
+(<a href="ch:ch01#octave">Chapter 1</a>). Listen to a short tune, then to the same tune with every note thrown into a
+different octave. The contour becomes wild, but the notes, as names, are the same, and so is the harmony they
+outline.</p>
+<audio-ex src="same_classes" caption="A tune C E G C, A F D G, C in one octave, then with every note moved to a different octave: the pitches change but the pitch classes do not."></audio-ex>
+<p>Music theory captures this by grouping all the Cs together into one <b>pitch class</b>, all the C♯s into another,
+and so on. In 12-ET there are exactly twelve pitch classes.</p>
+</div>
+<div class="layer understand">
+<p>Number the pitch classes from C:</p>
+<table>
+<tr><th>Pitch class</th><td>C</td><td>C♯/D♭</td><td>D</td><td>D♯/E♭</td><td>E</td><td>F</td><td>F♯/G♭</td><td>G</td><td>G♯/A♭</td><td>A</td><td>A♯/B♭</td><td>B</td></tr>
+<tr><th>Number</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td></tr>
+</table>
+<p>Arithmetic with these numbers is clock arithmetic: count around and wrap at 12. Going up 7 semitones from F (5)
+lands on $5 + 7 = 12$, which is 0, C. We write $12 \equiv 0 \pmod{12}$. In this arithmetic:</p>
+<ul>
+<li><b>an interval</b> between two pitch classes is a difference: from E (4) up to C (0) is $0 - 4 \equiv 8$
+semitones, a minor sixth; down from E to C is 4;</li>
+<li><b>transposition</b> by $n$ semitones adds $n$ to every pitch class: C major {0, 4, 7} transposed by 2 becomes
+{2, 6, 9}, D major;</li>
+<li><b>enharmonic names are the same class</b>: C♯ and D♭ are both 1. In 12-ET they are the same pitch; in Pythagorean
+tuning they differ by a comma (<a href="ch:ch05#comma">Chapter 5</a>), and the numbers 0 to 11 do not describe
+Pythagorean pitches exactly.</li>
+</ul>
+<pianoroll edo="12" notes="C4 E4 G4 ; E3 G3 C5 ; D4 F#4 A4" labels="{0,4,7} ; {0,4,7} ; {2,6,9}" title="C major in two octave layouts, then transposed by 2 to D major"></pianoroll>
+<p>From a MIDI note number (C4 = 60) the pitch class is simply the remainder after dividing by 12: middle C is
+$60 \bmod 12 = 0$, A4 = 69 is $69 \bmod 12 = 9$.</p>
+<aside class="mirror">In 36-ET the pitch classes are the numbers 0 to 35, counted in sixth-steps: C = 0, ^C = 1,
+vC♯ = 2, C♯ = 3, and so on. The twelve 12-ET pitch classes are the multiples of 3, one of three <b>layers</b>
+(<a href="ch:ch24#layers">Chapter 24</a>). Everything in this chapter carries over to $\mathbb{Z}_{36}$, with richer
+results (<a href="ch:ch33#z36">Chapter 33</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> $\mathbb{Z}_{12} = \{0, 1, \dots, 11\}$ with addition modulo 12. The pitch class of a 12-ET
+pitch with MIDI number $p$ is $p \bmod 12$.</p>
+<p><b>$\mathbb{Z}_{12}$ is a group</b> (<a href="ch:appA#groups">Appendix A</a>). Addition mod 12 is closed and
+associative; 0 is the identity; the inverse of $x$ is $12 - x$ (for $x \ne 0$), the interval that brings $x$ back to
+0. It is <b>cyclic</b>: every element is a multiple of 1. It is also commutative, which says that two transpositions
+in either order give the same result.</p>
+<p><b>Transposition and interval class.</b> Transposition by $n$ is the map $T_n(x) = x + n$. Since $T_m T_n =
+T_{m+n}$, the transpositions form a copy of $\mathbb{Z}_{12}$. The interval from $x$ up to $y$ is $y - x$; the
+<b>interval class</b> of $\{x, y\}$ is the smaller of $y - x$ and $x - y$ (mod 12), a number from 0 to 6, which
+identifies an interval with its inversion (<a href="ch:appA#modular">Appendix A</a>).</p>
+</div>
+</section>
+
+<section id="circle">
+<h2>The circle as an orbit</h2>
+<div class="layer hear">
+<p>Start on C and keep adding the same interval until C comes back. Add a semitone and you pass through all twelve
+notes. Add a fifth and you also pass through all twelve, in the order of the circle of fifths. But add a whole tone
+and you return after six notes; a minor third, after four; a major third, after three. Only some intervals can carry
+you everywhere.</p>
+<audio-ex src="orbits" caption="Adding a semitone (all twelve notes), a fifth (all twelve, in circle-of-fifths order, folded into one register), a whole tone (six), a minor third (four) and a major third (three), each until C returns."></audio-ex>
+<p>The circle of fifths is also a progression. Chords whose roots fall by fifths are one of the strongest motions in
+tonal harmony (<a href="ch:ch11#circle-progressions">Chapter 11</a>). Follow it all the way round and you visit
+every key and arrive home.</p>
+<audio-ex src="circle_progression" caption="Major chords with roots falling by fifths, C F B♭ E♭ A♭ D♭ G♭(F♯) B E A D G, and home to C: all twelve, in twelve steps."></audio-ex>
+</div>
+<div class="layer understand">
+<p>Adding 7 again and again from 0 gives</p>
+$$0,\ 7,\ 14 \equiv 2,\ 9,\ 16 \equiv 4,\ 11,\ 6,\ 1,\ 8,\ 3,\ 10,\ 5,\ 12 \equiv 0,$$
+<p>that is C G D A E B F♯ C♯ G♯ E♭ B♭ F and back to C. This sequence is the <b>orbit</b> of 0 under adding 7. It
+contains every pitch class once, so 7 is a <b>generator</b> of $\mathbb{Z}_{12}$. Drawn on the clock face, the orbit
+is the star-shaped circle of fifths.</p>
+<pc-circle edo="12" marks="0" path="0 7 2 9 4 11 6 1 8 3 10 5 0" title="The circle of fifths: the orbit of 7"></pc-circle>
+<p>In 12-ET the orbit closes after twelve steps because twelve 12-ET fifths are exactly seven octaves. The circle of
+fifths is the Pythagorean chain of <a href="ch:ch05#chain">Chapter 5</a> with the comma erased, so that G♯ and A♭,
+twelve links apart, are the same note.</p>
+<p>Which intervals generate? Here are all the orbits of 0:</p>
+<table>
+<tr><th>Add</th><th>Interval</th><th>Orbit of 0</th><th>Size</th><th>Name</th></tr>
+<tr><td>1 or 11</td><td>semitone</td><td>0 1 2 3 4 5 6 7 8 9 10 11</td><td>12</td><td>chromatic scale</td></tr>
+<tr><td>5 or 7</td><td>fourth / fifth</td><td>0 7 2 9 4 11 6 1 8 3 10 5</td><td>12</td><td>circle of fifths (fourths)</td></tr>
+<tr><td>2 or 10</td><td>whole tone</td><td>0 2 4 6 8 10</td><td>6</td><td>whole-tone scale</td></tr>
+<tr><td>3 or 9</td><td>minor third</td><td>0 3 6 9</td><td>4</td><td>diminished seventh chord</td></tr>
+<tr><td>4 or 8</td><td>major third</td><td>0 4 8</td><td>3</td><td>augmented triad</td></tr>
+<tr><td>6</td><td>tritone</td><td>0 6</td><td>2</td><td>tritone</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 D4 E4 F#4 Ab4 Bb4 ; C4 Eb4 F#4 A4 ; C4 E4 Ab4 ; C4 F#4" labels="add 2 ; add 3 ; add 4 ; add 6" title="The smaller orbits of C: whole-tone scale, diminished seventh, augmented triad, tritone"></pianoroll>
+<p>Only 1, 5, 7 and 11 generate everything: they are the numbers that share no factor with 12. The smaller orbits are
+the symmetric chords and scales of <a href="ch:ch19#subgroups">Chapter 19</a>.</p>
+<p>There is a neat link between the chromatic circle and the circle of fifths: multiplying every pitch class by 7 turns
+one into the other. $7 \times 1 = 7$, $7 \times 2 = 14 \equiv 2$, $7 \times 3 = 21 \equiv 9$, and so on. Since
+$7 \times 7 = 49 \equiv 1$, doing it twice gives back the original. This multiplication, M7, reappears in set theory
+(<a href="ch:ch20#multiplication">Chapter 20</a>).</p>
+<aside class="mirror">In 36-ET the 12-ET fifth is 21 sixth-steps, and 21 shares the factor 3 with 36. So adding 21
+visits only 12 of the 36 pitch classes: the circle of fifths of 36-ET is three separate twelve-note circles, one on each
+layer. The golden sixth, 25 sixth-steps, shares no factor with 36, so the golden chain visits all 36 pitch classes
+before returning, a 36-tone row (<a href="ch:ch23#chain">Chapter 23</a>, <a href="ch:ch33#rows-36">Chapter 33</a>). The
+units of $\mathbb{Z}_{36}$ are 1, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31 and 35; among them are the golden third (11),
+the bronze third (13) and the golden sixth (25).</aside>
+</div>
+<div class="layer derive">
+<p><b>Theorem (orbits in $\mathbb{Z}_n$).</b> The orbit of 0 under repeated addition of $k$ in $\mathbb{Z}_n$ is the
+set of multiples of $d = \gcd(k, n)$, and it has $n/d$ elements. In particular $k$ generates $\mathbb{Z}_n$ if and only
+if $\gcd(k, n) = 1$.</p>
+<p><i>Proof.</i> Every multiple $jk$ is a multiple of $d$ modulo $n$, since $d$ divides both $k$ and $n$. Conversely,
+by Bézout's identity there are integers $u, v$ with $uk + vn = d$, so $uk \equiv d \pmod n$, and every multiple of $d$
+is a multiple of $k$. The multiples of $d$ in $\{0, \dots, n-1\}$ are $0, d, 2d, \dots, n - d$: there are $n/d$ of
+them. ∎</p>
+<p>For $n = 12$ the generators are the four <b>units</b> 1, 5, 7, 11, the numbers that share no factor with 12. The
+orbits of the other nonzero elements are the subgroups of orders 2, 3, 4 and 6 listed in the table; the orbit of 0
+itself is the trivial subgroup $\{0\}$. For $n = 36$, the fifth $k = 21$ has $\gcd = 3$ and an orbit
+of 12, while $k = 25$ has $\gcd = 1$.</p>
+<p><b>M7.</b> The map $M_7(x) = 7x \bmod 12$ sends the chromatic order $0, 1, 2, \dots$ to the circle-of-fifths order
+$0, 7, 2, \dots$. Since $7^2 = 49 \equiv 1 \pmod{12}$, $M_7$ is its own inverse. The same holds for $M_5$, because
+$5^2 = 25 \equiv 1$; $M_5$ gives the circle of fourths.</p>
+</div>
+</section>
+
+<section id="keys">
+<h2>Keys and key signatures</h2>
+<div class="layer hear">
+<p>A <b>key</b> is a home note, the tonic, together with a scale built on it. C major uses only the white keys. Move
+the home note up a fifth, to G, and the major scale on G needs one black key, F♯. Up another fifth, D major needs two,
+F♯ and C♯. Each step around the circle adds one sharp. Listen to the same tune in C, G, D and A major.</p>
+<audio-ex src="sharps" caption="One tune in C, G, D and A major: each key is a fifth above the last and adds one sharp (F♯, then C♯, then G♯), always on the note just below the new tonic."></audio-ex>
+<p>Musicians do not write those sharps in front of every note. Instead, a <b>key signature</b> at the start of each
+line of music lists the sharps or flats once.</p>
+</div>
+<div class="layer understand">
+<p>The major scale on tonic $t$ is the set $\{t, t+2, t+4, t+5, t+7, t+9, t+11\}$. Seen on the circle of fifths it is
+seven consecutive notes: the tonic, the note one fifth below it and the five notes above it. C major is F C G D A E B.
+G major moves the whole window one step clockwise: it drops F and gains F♯.</p>
+<pc-circle edo="12" marks="7 9 11 0 2 4 6" path="0 7 2 9 4 11 6" title="G major: seven neighbours on the circle, C to F♯"></pc-circle>
+<pianoroll edo="12" notes="C4 D4 E4 F4 G4 A4 B4 ; C4 D4 E4 F#4 G4 A4 B4" labels="C major ; G major" title="C major and G major as pitch classes: only F changes, to F♯"></pianoroll>
+<p>So the sharps enter in circle-of-fifths order, <b>F C G D A E B</b>, and the flats in the reverse order, <b>B E A
+D G C F</b>:</p>
+<table>
+<tr><th>Sharps</th><th>Major key</th><th>Relative minor</th><th></th><th>Flats</th><th>Major key</th><th>Relative minor</th></tr>
+<tr><td>0</td><td>C</td><td>A</td><td></td><td>0</td><td>C</td><td>A</td></tr>
+<tr><td>1 (F♯)</td><td>G</td><td>E</td><td></td><td>1 (B♭)</td><td>F</td><td>D</td></tr>
+<tr><td>2 (+C♯)</td><td>D</td><td>B</td><td></td><td>2 (+E♭)</td><td>B♭</td><td>G</td></tr>
+<tr><td>3 (+G♯)</td><td>A</td><td>F♯</td><td></td><td>3 (+A♭)</td><td>E♭</td><td>C</td></tr>
+<tr><td>4 (+D♯)</td><td>E</td><td>C♯</td><td></td><td>4 (+D♭)</td><td>A♭</td><td>F</td></tr>
+<tr><td>5 (+A♯)</td><td>B</td><td>G♯</td><td></td><td>5 (+G♭)</td><td>D♭</td><td>B♭</td></tr>
+<tr><td>6 (+E♯)</td><td>F♯</td><td>D♯</td><td></td><td>6 (+C♭)</td><td>G♭</td><td>E♭</td></tr>
+<tr><td>7 (+B♯)</td><td>C♯</td><td>A♯</td><td></td><td>7 (+F♭)</td><td>C♭</td><td>A♭</td></tr>
+</table>
+<p>Two rules of thumb follow. In a sharp key the last sharp is the leading tone, a semitone below the tonic (F♯ in G
+major). In a flat key the last flat is the fourth degree, so the next-to-last flat names the tonic (B♭ in the
+signature of B♭ major, B♭ E♭).</p>
+<p>There are 15 signatures but only 12 tonic pitch classes, so three pairs of keys are <b>enharmonic</b>: B major (5
+sharps) and C♭ major (7 flats), F♯ major and G♭ major (6 each), C♯ major (7 sharps) and D♭ major (5 flats). In 12-ET
+each pair sounds identical; in Pythagorean tuning they would differ by a comma. Counting minor keys as well, there
+are 24 keys, the 24 of Bach's <a href="ch:ch07#wtc">Well-Tempered Clavier</a>.</p>
+<aside class="mirror">36-ET has a tonic on each of its 36 pitch classes, so it has 72 major and minor keys, and 72
+golden scales besides (36 golden13 and 36 silver13). Their names use the ups-and-downs accidentals ^ and v as
+prefixes, ^C major or vE♭ minor (<a href="ch:ch24#keys">Chapter 24</a>, <a href="ch:ch24#notation">notation</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Chain coordinates.</b> Place the natural notes at chain positions F = −1, C = 0, G = 1, D = 2, A = 3, E = 4,
+B = 5 (as in <a href="ch:ch05#chain">Chapter 5</a>), and let a key signature with $s$ sharps be $s$, with $s &lt; 0$
+for $|s|$ flats.</p>
+<p><b>Proposition.</b> The major key with signature $s$ ($-7 \le s \le 7$) consists of the chain positions
+$s - 1, s, \dots, s + 5$, and its tonic is at position $s$, pitch class $7s \bmod 12$.</p>
+<ul>
+<li>For $s > 0$ the altered notes are the positions 6 to $s + 5$, which are the first $s$ letters of F C G D A E B,
+each sharped. The newest sharp, position $s + 5$, is five fifths above the tonic: the leading tone.</li>
+<li>For $s &lt; 0$ the altered notes are the positions $s - 1$ to $-2$, the first $|s|$ letters of B E A D G C F,
+each flatted. The newest flat, position $s - 1$, is one fifth below the tonic: the fourth degree.</li>
+</ul>
+<p><i>Proof.</i> The C major scale is positions −1 to 5. Transposing by a fifth adds 1 to every chain position, and
+$s$ transpositions give positions $s - 1$ to $s + 5$. A position $k$ outside −1…5 carries $\lfloor (k+1)/7 \rfloor$
+sharps (Chapter 5), which is $+1$ for $6 \le k \le 12$ and $-1$ for $-8 \le k \le -2$. ∎</p>
+<p><b>Enharmonic keys.</b> Signatures $s$ and $s - 12$ have tonic pitch classes $7s$ and $7s - 84 \equiv 7s$: the same.
+Within $-7 \le s \le 7$ this happens for exactly three pairs, $(5, -7)$, $(6, -6)$ and $(7, -5)$.</p>
+</div>
+</section>
+
+<section id="distance">
+<h2>Near and far keys</h2>
+<div class="layer hear">
+<p>Some keys feel close to each other and some feel far apart. Listen to a phrase in C major, then the same phrase in G
+major: the change is gentle, a brightening. Return to C, then jump to F♯ major: the shift is abrupt, almost a change
+of world. G is one step from C on the circle of fifths; F♯ is six steps away, the far side of the circle.</p>
+<audio-ex src="near_far" caption="A phrase in C, then in G (one step away, one note changed), then C again, then F♯ (six steps away, five notes changed): a gentle move and then a jolt."></audio-ex>
+</div>
+<div class="layer understand">
+<p>The simplest measure of key distance is the number of steps around the circle of fifths between the two tonics,
+counted the shorter way round, so it is never more than 6. It equals the difference of the two key signatures, or 12
+minus that difference when it is larger than 6 (E major, 4 sharps, and A♭ major, 4 flats, are 4 steps apart, not 8). It predicts how many notes two major scales share:</p>
+<table>
+<tr><th>Steps apart</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+<tr><th>Example with C</th><td>C</td><td>G or F</td><td>D or B♭</td><td>A or E♭</td><td>E or A♭</td><td>B or D♭</td><td>F♯</td></tr>
+<tr><th>Common notes</th><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>2</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 D4 E4 F4 G4 A4 B4 ; C#4 D#4 F4 F#4 G#4 A#4 B4" labels="C major ; F♯ major" title="Six steps apart: C major and F♯ major share only B and F (= E♯)"></pianoroll>
+<p>Neighboring keys differ in a single note, moved by a semitone (C major to G major: F becomes F♯). That is why a
+modulation to the dominant or subdominant key is so smooth: almost everything stays. The <b>closely related keys</b> of
+C major are traditionally the keys whose signatures differ from C's by at most one accidental: G major, F major and
+the three relative minors A, E and D minor. Modulations to them are the everyday modulations of tonal music
+(<a href="ch:ch11#modulation">Chapter 11</a>).</p>
+<p>The circle is a measure of note content, not of everything. C major and C minor share their tonic and their
+dominant chord but sit three steps apart on the circle; the next section looks at that relationship.</p>
+<aside class="mirror">36-ET adds a second direction of travel. Moving a whole key up one sixth-step, from C major to
+^C major, keeps no pitch class at all, yet every voice moves by only 33 c. Near and far are then measured in two
+directions, around the circle of fifths and across the layers (<a href="ch:ch32#layer-modulation">Chapter 32</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Theorem (common tones).</b> Let $D_t$ be the major scale on tonic $t$. For $d = 0, 1, \dots, 6$,
+$$|D_0 \cap D_{7d}| = \begin{cases} 7 - d, &amp; 0 \le d \le 5,\\ 2, &amp; d = 6.\end{cases}$$
+By symmetry, $D_{-7d}$ gives the same counts.</p>
+<p><i>Proof.</i> On the circle of fifths (positions mod 12), $D_0$ is the window $\{-1, \dots, 5\}$ and $D_{7d}$ the
+window $\{d - 1, \dots, d + 5\}$. Directly, the windows share the $7 - d$ positions $d - 1, \dots, 5$. Going round the
+circle, the second window's top end $d + 5$ is also $d - 7$, so it can overlap the bottom of the first window,
+positions $\{d - 13, \dots, d - 7\} \cap \{-1, \dots, 5\}$, which is empty for $d \le 5$ and is $\{-1\}$ for $d = 6$.
+So the count is $7 - d$ for $d \le 5$ and $1 + 1 = 2$ for $d = 6$. ∎ (Checked directly for every $d$.)</p>
+<p>For $d = 6$ the two common notes of C major and F♯ major are B and F (= E♯).</p>
+</div>
+</section>
+
+<section id="relative-parallel">
+<h2>Relative and parallel keys</h2>
+<div class="layer hear">
+<p>Every major key has two minor partners. The <b>relative minor</b> uses exactly the same notes but treats a
+different note as home: A minor is C major's white keys heard from A. The <b>parallel minor</b> keeps the home note
+and changes the notes: C minor has the same tonic as C major, with E♭, A♭ and B♭. Listen to a cadence and tune in C
+major, then in A minor, then in C minor.</p>
+<audio-ex src="relative_parallel" caption="The same cadence and tune in C major, A minor (same notes, new home) and C minor (same home, three flats). In both minor keys the dominant chord borrows the raised leading tone, G♯ or B."></audio-ex>
+</div>
+<div class="layer understand">
+<table>
+<tr><th>Key</th><th>Notes</th><th>Signature</th><th>Relation to C major</th></tr>
+<tr><td>C major</td><td>C D E F G A B</td><td>none</td><td></td></tr>
+<tr><td>A minor</td><td>A B C D E F G</td><td>none</td><td>relative: same notes, tonic a minor third lower</td></tr>
+<tr><td>C minor</td><td>C D E♭ F G A♭ B♭</td><td>3 flats</td><td>parallel: same tonic, three steps counterclockwise</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 E4 G4 ; A3 C4 E4 ; C4 Eb4 G4" labels="C ; Am ; Cm" title="Tonic triads: C major, its relative A minor, its parallel C minor"></pianoroll>
+<p><b>Relative keys</b> share a key signature, which is why the key-signature table lists each signature with a major
+and a minor key. The relative minor's tonic is the sixth degree of the major scale, three semitones below the major
+tonic. In the language of <a href="ch:ch06#modes">Chapter 6</a>, the relative minor is the Aeolian mode of the same
+collection.</p>
+<p><b>Parallel keys</b> share a tonic. C minor has the notes of E♭ major, three fifths counterclockwise, and so
+it shares only four notes with C major (C, D, F, G). But the two keys share a home, and in practice minor keys borrow
+the major key's leading tone: the dominant chord in C minor is usually G major (G B D), with B natural, the
+<b>harmonic minor</b> form. Composers move freely between parallel major and minor; borrowing chords from the parallel
+key is <b>modal mixture</b> (<a href="ch:ch11#borrowed">Chapter 11</a>), and ending a minor piece on a major tonic chord
+is the <b>Picardy third</b>.</p>
+<p>A famous tour of all 24 keys uses the relative pairs: Chopin's 24 Preludes, Op. 28, go around the circle of fifths
+pairing each major key with its relative minor, C major, A minor, G major, E minor, and so on.</p>
+<aside class="mirror">The golden triad lives exactly between parallel major and minor. Its third, 11 sixth-steps, is
+two thirds of the way from the minor third (9) to the major third (12), and its fifth, 22, sits one third of the way from
+the perfect fifth (21) to the augmented (24): Cg = (C + Cm + Caug)/3 (<a href="ch:ch25#averaging">Chapter 25</a>). In
+golden harmony the move between parallel major and minor can pass through gold: golden modal mixture C – Cg – Cm, and
+the golden Picardy Cm – Cm(^3) – Cg – C (<a href="ch:ch29#mixture">Chapter 29</a>).
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; C4 Eb4 G4" labels="C ; Cg ; Cm" title="Golden modal mixture: C – Cg – Cm"></pianoroll></aside>
+</div>
+<div class="layer derive">
+<p><b>Proposition (relative).</b> As sets, the major scale on $t$ equals the natural minor scale on $t + 9$.</p>
+<p><i>Proof.</i> The natural minor on $u$ is $\{u, u+2, u+3, u+5, u+7, u+8, u+10\}$. With $u = t + 9$ this is
+$\{t+9, t+11, t, t+2, t+4, t+5, t+7\}$ (mod 12), the major scale on $t$. ∎</p>
+<p><b>Proposition (parallel).</b> The natural minor scale on $t$ equals the major scale on $t + 3$, so its signature is
+$s - 3$, where $s$ is the signature of $t$ major.</p>
+<p><i>Proof.</i> By the previous proposition the minor scale on $t$ is the major scale on $t - 9 \equiv t + 3$. On the
+circle, $+3 \equiv 7 \times (-3) \pmod{12}$, which is three steps counterclockwise: three more flats (or three fewer
+sharps). ∎</p>
+<p>C major and C minor therefore share $7 - 3 = 4$ notes, by the common-tone theorem of the last section.</p>
+</div>
+<div class="exercise">
+<p><b>1.</b> Compute the orbit of 0 under adding 5 in $\mathbb{Z}_{12}$, and name the notes.</p>
+<details class="answer"><summary>Answer</summary><p>0, 5, 10, 3, 8, 1, 6, 11, 4, 9, 2, 7: C F B♭ E♭ A♭ D♭ G♭ B E A D G,
+the circle of fourths (the circle of fifths backwards). It has 12 elements because $\gcd(5, 12) = 1$.</p></details>
+</div>
+<div class="exercise">
+<p><b>2.</b> Which major key has four flats, and what is its relative minor? Use chain positions.</p>
+<details class="answer"><summary>Answer</summary><p>$s = -4$: the tonic is at position −4, pitch class
+$7 \times (-4) = -28 \equiv 8$, A♭. The relative minor is $8 + 9 = 17 \equiv 5$, F minor. The flats are B, E, A, D.</p></details>
+</div>
+<div class="exercise">
+<p><b>3.</b> How many notes do E major and B♭ major share? Check by listing them.</p>
+<details class="answer"><summary>Answer</summary><p>E major has 4 sharps and B♭ major 2 flats: the signatures are
+$4 - (-2) = 6$ steps apart, so they share 2 notes. E major is E F♯ G♯ A B C♯ D♯; B♭ major is B♭ C D E♭ F G A. The
+common notes are A and D♯ = E♭.</p></details>
+</div>
+<div class="exercise">
+<p><b>4.</b> In $\mathbb{Z}_{36}$, how many distinct pitch classes does the orbit of the bronze third (13 sixth-steps)
+contain? And the orbit of the 12-ET major third (12 sixth-steps)?</p>
+<details class="answer"><summary>Answer</summary><p>$\gcd(13, 36) = 1$, so 36: the bronze third walks through every
+pitch class. $\gcd(12, 36) = 12$, so $36/12 = 3$: three major thirds close the cycle, an augmented triad, just as in
+$\mathbb{Z}_{12}$.</p></details>
+</div>
+<div class="exercise">
+<p><b>5.</b> (Listening.) In the near-and-far example, the G major phrase contains one note that the C major phrase
+lacks. Which, and where do you hear it?</p>
+<details class="answer"><summary>Answer</summary><p>F♯, in the D major chord (D F♯ A) just before the final G chord,
+where it acts as the new leading tone.</p></details>
+</div>
+</section>

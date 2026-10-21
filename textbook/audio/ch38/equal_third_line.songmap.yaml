@@ -1,0 +1,16 @@
+# A straight line in chord space: Caug (0,12,24) - Cg (0,11,22) - Cs (0,10,20) - Cdim (0,9,18).
+# The root holds, the third falls one sixth-step and the fifth two at each step. Then back up.
+songmap: 0.2
+title: "The equal-third line"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 12
+tail_seconds: 3
+instruments: {organ: {use: clean/organ, attack: 0.1, release: 0.6}}
+sections:
+  - {name: down, bars: 4, harmony: "Caug:1 Cg:1 Cs:1 Cdim:1", parts: {organ: hold}}
+  - {name: up, bars: 3, harmony: "Cs:1 Cg:1 Caug:1", parts: {organ: hold}}
+mix: {organ: {gain_db: -6}}
+master: clean

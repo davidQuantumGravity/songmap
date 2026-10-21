@@ -1,0 +1,16 @@
+# ch18: the same harmonic plan twice, first diatonic (C F Dm G7 C), then with chromatic chords
+# (C C7 F Fm C/E A7 Dm G7 C) whose top voice falls by semitones: C B♭ A A♭ G.
+songmap: 0.2
+title: "Diatonic, then chromatic"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 18
+tail_seconds: 2
+instruments: {organ: clean/organ}
+mix: {organ: {gain_db: -5, send: {hall: 0.2}}}
+sections:
+  - {name: diatonic, bars: 5, parts: {organ: {notes: "[c-,g-,e,c+]1 | [f-,a-,f,c+]1 | [d-,a-,f,d+]1 | [g--,b-,f,d+]1 | [c-,c,e,c+]1"}}}
+  - {name: chromatic, bars: 5, parts: {organ: {notes: "[c-,g-,e,c+]2 [c-,g-,e,bb]2 | [f--,c,f,a]2 [f--,c,f,ab]2 | [e--,c,e,g]2 [a--,c#,e,g]2 | [d-,d,f,a]2 [g--,b-,f,g]2 | [c-,c,e,g]1"}}}
+master: clean

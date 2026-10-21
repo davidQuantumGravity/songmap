@@ -1,0 +1,408 @@
+<p>In Western harmony a passing chord is a chord that exists because voices are on their way somewhere
+(<a href="ch:ch12#passing-chords">Chapter 12</a>). In 36-ET the voices can travel in smaller steps than a
+semitone, so between two ordinary chords there is room for chords that 12-ET does not have. This chapter
+asks the simplest possible version of the question "which chords appear on the way?" and answers it
+completely. The rule is strict: every voice moves at a constant speed. Under that rule the golden triad turns
+out to be a very particular kind of passing chord, with exact laws about where it can appear, which root it
+has, and what stands next to it. This is <b>System 1</b>, written <code>~</code> in SongMap. The next chapter
+relaxes the rule (<a href="ch:ch28">System 2</a>), and <a href="ch:ch29">Chapter 29</a> turns both into
+cadences and progressions.</p>
+
+<section id="subchromatic">
+<h2>Splitting the semitone</h2>
+<div class="layer hear">
+<p>Play a C, then the C♯ above it. Between them lies a single semitone, the smallest step of the piano. In 36-ET
+that step is three steps long: C, then a C raised by a sixth-step (^C), then a C♯ lowered by a sixth-step
+(vC♯), then C♯. Each small step is a third of a semitone, about a third of the distance your ear is used to
+calling "the next note". A whole step, C to D, becomes three double steps: C, vC♯, ^C♯, D.</p>
+<p>Listen to one voice doing this. The motion sounds like a slow slide that has been cut into equal slices.
+Nothing in it is a new interval in the melodic sense; it is still a half step or a whole step, only walked more
+slowly.</p>
+<audio-ex src="split_semitone" caption="One voice: C to C♯ in three sixth-steps, then C to D in three double sixth-steps, then the plain 12-ET steps C, C♯, D. Listen for the same goal reached in smaller, equal slices."></audio-ex>
+<p>Now imagine three or four voices doing this at once, each crossing its own half step or whole step in
+three equal slices. The chords that appear at the first and second slices are the subject of this chapter.</p>
+</div>
+<div class="layer understand">
+<p>Recall the units of <a href="ch:ch24#sixth-steps">Chapter 24</a>. A <b>sixth-step</b> is 1/36 of an
+octave, 33.33 c. A semitone is 3 sixth-steps and a whole tone is 6. We write pitches as integers in sixth-steps
+(C4 = 180, because MIDI note 60 times 3) and pitch classes as integers mod 36 (C = 0, ^C = 1, vC♯ = 2,
+C♯ = 3, and so on). The <b>layer</b> of a pitch class $p$ is $\lambda(p) = p \bmod 3$:</p>
+<table>
+<tr><th>Layer</th><th>Pitch classes</th><th>Offset from 12-ET</th><th>Spelling</th></tr>
+<tr><td>0</td><td>0, 3, 6, …, 33</td><td>0 c</td><td>C, C♯, D, …</td></tr>
+<tr><td>1</td><td>1, 4, 7, …, 34</td><td>+33.33 c</td><td>^C, ^C♯, ^D, …</td></tr>
+<tr><td>2</td><td>2, 5, 8, …, 35</td><td>−33.33 c</td><td>vC♯, vD, vE♭, …</td></tr>
+</table>
+<p>Every Western chord lives on one layer; ordinary 12-ET music lives entirely on layer 0
+(<a href="ch:ch24#layers">Chapter 24</a>). A voice that moves up a semitone one sixth-step at a time visits
+layers 0, 1, 2, 0. A voice that moves up a whole step two sixth-steps at a time visits 0, 2, 1, 0. That simple
+bookkeeping, which layer each voice is on at each moment, is the key to everything below.</p>
+<aside class="mirror">This chapter mirrors the Western passing chord (<a href="ch:ch12#passing-chords">Chapter 12</a>)
+and four-part voice leading (<a href="ch:ch14#four-part">Chapter 14</a>). There, voices move by semitones and
+whole tones and a passing chord is whatever sounds while they move. Here the same voices move through 36-ET and
+the passing chords can be chords that 12-ET cannot spell.</aside>
+</div>
+<div class="layer derive">
+<p><b>Definitions.</b> A <i>voicing</i> of a chord in $v$ voices is a vector $X \in \mathbb{Z}^v$ of absolute
+pitches in sixth-steps; its pitch-class set is $\{x_i \bmod 36\}$. Voice order is voice identity: the
+$i$-th voice is one singer. A voice moves <i>stepwise</i> between $X$ and $Y$ if $|y_i - x_i| \le 6$ (at most a
+whole tone). The layer map $\lambda:\mathbb{Z}_{36}\to\mathbb{Z}_3$, $\lambda(p) = p \bmod 3$, is a group
+homomorphism, so $\lambda(p+q) = \lambda(p)+\lambda(q)$. A chord is <i>single-layer</i> if all its pitch classes
+have the same layer; Western chords on the 12-ET grid are single-layer on layer 0.</p>
+</div>
+</section>
+
+<section id="uniform-path">
+<h2>The uniform path</h2>
+<div class="layer hear">
+<p>Take the most common progression in tonal music, V to I in C: G major to C major. In the usual four-part
+setting the bass leaps G to C and the upper voices move by the smallest steps: B rises to C, D rises to E, G
+stays. Now let the upper voices walk those steps in sixth-steps, all at the same pace, while the bass holds G
+until the arrival. Two new chords appear in the middle. To many ears the first sounds like a slightly sour, widened chord;
+the second has a strange warmth, as if C major were arriving early and out of focus. That second chord is a
+golden triad.</p>
+<audio-ex src="uniform_v_i" caption="G to C with two System 1 passing chords (written ~ ~ in SongMap) over a held G in the bass: the upper voices glide B → C and D → E in equal sixth-steps; the second passing chord is the golden triad vCg."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>The rule.</b> Fix a voicing of the two chords, $X$ and $Y$, with every voice moving at most a whole tone.
+Let $d_i = (y_i - x_i)/3$ be voice $i$'s motion in semitones, so $d_i \in \{-2,-1,0,1,2\}$. The
+<b>uniform path</b> moves every voice by $d_i$ sixth-steps per chord:</p>
+$$P_k = X + k\,d, \qquad k = 0, 1, 2, 3,$$
+<p>so $P_0 = X$, $P_3 = Y$, and the two <b>passing chords</b> are $P_1$ and $P_2$. A half step is split
+1 + 1 + 1 sixth-steps, a whole step 2 + 2 + 2, a held note 0 + 0 + 0. Once the voicing is fixed the path is
+unique; that is what "strict" means.</p>
+<p><b>The barycentric reading.</b> Since $X + kd = X + \tfrac{k}{3}(Y - X)$,</p>
+$$P_k = \frac{(3-k)\,X + k\,Y}{3}, \qquad P_1 = \frac{2X+Y}{3},\quad P_2 = \frac{X+2Y}{3}.$$
+<p>Each passing chord is a weighted average of its neighbours, voice by voice: $P_1$ is two thirds $X$ and one
+third $Y$, $P_2$ the reverse. This is the averaging principle of <a href="ch:ch25#averaging">Chapter 25</a>
+applied along a progression. In V → I the alto B (pitch class 33) moves to C
+(36 ≡ 0): $P_1 = (2\cdot 33 + 36)/3 = 34$, which is ^B, and $P_2 = (33 + 2\cdot 36)/3 = 35$, which is vC.</p>
+<p><b>Motion classes.</b> Start on layer 0 (any Western chord). After $k$ steps, voice $i$ sits on layer
+$k\,d_i \bmod 3$. Only $d_i \bmod 3$ matters, so the five possible motions fall into three classes:</p>
+<table>
+<tr><th>Class</th><th>Motion $d$ (semitones)</th><th>Layer of $P_1$</th><th>Layer of $P_2$</th><th>Example</th></tr>
+<tr><td>hold</td><td>0</td><td>0</td><td>0</td><td>G G G G</td></tr>
+<tr><td>rising</td><td>+1 or −2</td><td>1 (^)</td><td>2 (v)</td><td>+1: B ^B vC C; −2: E ^E♭ vE♭ D</td></tr>
+<tr><td>falling</td><td>−1 or +2</td><td>2 (v)</td><td>1 (^)</td><td>−1: E vE ^E♭ E♭; +2: D vE♭ ^E♭ E</td></tr>
+</table>
+<p>The names describe the layer, not the direction of travel: a voice that rises a semitone and a voice that
+falls a whole tone both land on the ^ layer first, so they are in the same class. Listen to the three classes
+one at a time on the path C → Cg → ^E♭T13 → A♭, where the root holds, the third falls a semitone and the fifth
+rises a semitone:</p>
+<audio-ex src="motion_classes" caption="The hold voice (C), the falling voice (E vE ^E♭ E♭) and the rising voice (G ^G vA♭ A♭) one after another, then together: the first chord on the way is the golden triad Cg = C vE ^G."></audio-ex>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; C4 ^Eb4 vAb4 ; C4 Eb4 Ab4" labels="C ; Cg ; ^E♭T13 ; A♭" title="C → A♭ on the uniform path: hold, falling, rising"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>Lemma (layers along a path).</b> If $X$ lies on layer 0, voice $i$ of $P_k$ lies on layer
+$\lambda(x_i + k d_i) = k\,d_i \bmod 3$. <i>Proof.</i> $\lambda$ is additive and $\lambda(x_i) = 0$. ∎</p>
+<p>So the class of $d_i$ is its residue mod 3: residue 0 is $\{0\}$ (within $|d_i|\le 2$), residue 1 is
+$\{+1,-2\}$ (rising), residue 2 is $\{-1,+2\}$ (falling). At $k=2$ the layers are doubled mod 3, which swaps the
+rising and falling layers, as in the table.</p>
+<p><b>Admissibility.</b> By the layer theorem (<a href="ch:ch25#layer-theorem">Chapter 25</a>), a golden
+triad $\{r, r+11, r+22\}$ has its notes on layers $r$, $r+2$, $r+1$: one on each. Three voices on a uniform path
+from layer 0 can produce a golden triad at $P_k$ only if they occupy three different layers there, that is, only
+if the voice leading has <b>exactly one voice of each class</b>: one hold, one rising, one falling. This necessary
+condition already rules out most progressions: any move in which two voices share a class (for example, two
+voices both rising a semitone) has no golden passing chord.</p>
+</div>
+</section>
+
+<section id="four-path">
+<h2>The four-path theorem</h2>
+<div class="layer hear">
+<p>Turn the question around. Start from a golden triad, Cg = C vE ^G, and ask: from which Western chords can a
+uniform path lead into it? The answer is that there are exactly four ways in (with the golden chord first on the
+path), and you can hear all four. In each one the root C holds, the third arrives from E or E♭, and the fifth
+arrives from G or G♯.</p>
+<audio-ex src="four_paths" caption="The four strict paths through Cg: C augmented → Cg → C silver → C diminished; C → Cg → ^E♭ bronze → A♭; C minor → Cg → vA♭ bronze → F minor; A♭ → Cg → … → the cluster C F F♯. The same golden chord, four destinations."></audio-ex>
+<p>Three of the four destinations are ordinary triads. The fourth, C F F♯, is not a chord anyone would call
+home, which is why golden passing harmony in practice uses the other three kinds of path.</p>
+</div>
+<div class="layer understand">
+<p>Fix a golden triad and a position (first or second passing chord). The admissibility condition decides
+which voice holds: it is the voice whose note is on the layer of the starting chord, layer 0. Each of the other
+two voices has exactly two motions in its class (a semitone one way or a whole tone the other), so there are
+$2 \times 2 = 4$ paths. Over all 36 golden triads and both positions that makes $36 \times 2 \times 4 =
+\mathbf{288}$ ordered paths. Of these, <b>240</b> have Western triads at both ends (major, minor, augmented,
+diminished, and in one type a suspended fourth); the other 48 end on a non-tertian set such as
+{C, F, F♯}.</p>
+<p>Transposing by a semitone keeps every layer, and reversing a path swaps positions 1 and 2. Up to these
+symmetries there are exactly <b>12 path types</b>. This is the complete list (golden chord at position 1; the
+reversed path has it at position 2):</p>
+<table>
+<tr><th>Root layer</th><th>Motion (root, third, fifth)</th><th>$X$</th><th>$P_1$</th><th>$P_2$</th><th>$Y$</th></tr>
+<tr><td>0</td><td>(0, −1, −2)</td><td>Caug</td><td><b>Cg</b></td><td>C silver</td><td>Cdim</td></tr>
+<tr><td>0</td><td>(0, −1, +1)</td><td>C</td><td><b>Cg</b></td><td>^E♭ T13</td><td>A♭</td></tr>
+<tr><td>0</td><td>(0, +2, +1)</td><td>Cm</td><td><b>Cg</b></td><td>vA♭ T13</td><td>Fm</td></tr>
+<tr><td>0</td><td>(0, +2, −2)</td><td>A♭</td><td><b>Cg</b></td><td>{C ^E vG}</td><td>{C F F♯}</td></tr>
+<tr><td>1</td><td>(−2, 0, −1)</td><td>C♯m</td><td><b>^Cg</b></td><td>^G T13</td><td>Em</td></tr>
+<tr><td>1</td><td>(−2, 0, +2)</td><td>C♯dim</td><td><b>^Cg</b></td><td>vC T13</td><td>Esus4</td></tr>
+<tr><td>1</td><td>(+1, 0, −1)</td><td>Caug</td><td><b>^Cg</b></td><td>vC♯ silver</td><td>C♯dim</td></tr>
+<tr><td>1</td><td>(+1, 0, +2)</td><td>C</td><td><b>^Cg</b></td><td>E T13</td><td>A</td></tr>
+<tr><td>2</td><td>(−1, −2, 0)</td><td>C♯</td><td><b>vC♯g</b></td><td>vE T13</td><td>A♭</td></tr>
+<tr><td>2</td><td>(−1, +1, 0)</td><td>C♯m</td><td><b>vC♯g</b></td><td>A♭ T13</td><td>Fm</td></tr>
+<tr><td>2</td><td>(+2, −2, 0)</td><td>Fm</td><td><b>vC♯g</b></td><td>{^C♯ vE A♭}</td><td>{D E♭ A♭}</td></tr>
+<tr><td>2</td><td>(+2, +1, 0)</td><td>Caug</td><td><b>vC♯g</b></td><td>^C♯ silver</td><td>Ddim</td></tr>
+</table>
+<p>Each row holds for all 12 semitone transpositions. "Root layer" is the layer of the golden chord's root:
+when it is 0 the root holds (Cg = C vE ^G, C held); when it is 1 the third holds (^Cg = ^C E vA♭, E held);
+when it is 2 the fifth holds (vC♯g = vC♯ ^E A♭, A♭ held).
+The motions are listed for the golden chord's root, third and fifth in that order.</p>
+<aside class="box note">How to read a row: in the second row, C major moves to A♭ major with C held, E falling a
+semitone to E♭ and G rising a semitone to A♭. One third of the way along, the chord is C vE ^G = Cg; two thirds
+along it is C ^E♭ vA♭, an equal-third triad with thirds of 13 sixth-steps (bronze, T13).</aside>
+</div>
+<div class="layer derive">
+<p><b>Theorem (four-path theorem).</b> Let $G = (r, r+11, r+22)$ be a golden triad in three voices and
+$k \in \{1,2\}$. There are exactly four motion vectors $d \in \{-2,\dots,2\}^3$ such that $X = G - k\,d$ lies
+on layer 0. All 4 have three distinct pitch classes at both ends. Hence there are $36\cdot 2\cdot 4 = 288$
+ordered uniform paths with a golden passing chord, and they form 12 orbits of size 24 under semitone
+transposition and reversal.</p>
+<p><i>Proof.</i> $X$ on layer 0 means $k\,d_i \equiv \lambda(g_i) \pmod 3$ for each $i$; since $k$ is invertible
+mod 3, the residue of each $d_i$ is fixed. The layers $\lambda(g_i)$ are $r, r+2, r+1$, all different, so exactly
+one $d_i$ has residue 0 (forcing $d_i = 0$) and the other two have residues 1 and 2, with two choices each
+($\{1,-2\}$ and $\{-1,2\}$). That gives 4. Two notes of $X$ cannot coincide: $x_i - x_j = (g_i - g_j) - k(d_i - d_j)$
+with $g_i - g_j \equiv \pm 11$ or $\pm 14 \pmod{36}$ and $|k(d_i-d_j)| \le 8$, so the difference is never
+$\equiv 0$; the same argument with $3-k$ applies to $Y$. Semitone transposition adds 3 to every note and
+preserves layers; reversal maps $(X, P_1, P_2, Y)$ to $(Y, P_2, P_1, X)$ and so swaps $k=1$ with $k=2$. No path
+is fixed by a non-trivial symmetry (transposition changes the pitch classes; reversal changes $k$), so every orbit
+has $12 \times 2 = 24$ elements and there are $288/24 = 12$ orbits. (Counting triples of golden triad, position
+and motion vector counts each path exactly once because no path has two golden passing chords; that is the
+never-twice theorem of <a href="ch:ch27#partner">the next section but one</a>, whose proof does not use this one.) ∎</p>
+<p>The exact golden triads in the table, as pitch classes: Cg = {0, 11, 22} = C vE ^G; ^Cg = {1, 12, 23} =
+^C E vA♭; vC♯g = {2, 13, 24} = vC♯ ^E A♭. In the root-layer-1 rows the held voice is the third (E), and in the
+root-layer-2 rows it is the fifth (A♭). The table is printed by <code>reference/golden/classify.py</code>,
+section A; 240 of the 288 paths have Western triads (including Esus4) at both ends. The full proof is
+repeated in <a href="ch:appD#passing">Appendix D</a>.</p>
+</div>
+</section>
+
+<section id="quality">
+<h2>The quality theorem and the root rules</h2>
+<div class="layer hear">
+<p>Which ordinary progressions hide a golden chord on the strict path? Not V to vi, not I to ii, not any move by
+a step. The answer is surprisingly tidy: two major chords, or two minor chords, whose roots are a third or a
+fourth apart. I to IV, I to V, and every chromatic mediant (C to A♭, C to E, C to A, C to E♭) qualify. When they
+do, there is exactly one golden chord on the way, and its root is predictable.</p>
+<audio-ref file="D11_S1_diatonic_triads.mp3" caption="All 42 ordered pairs of diatonic triads in C on System 1, one bar each. Listen for the few that turn golden (I–IV, I–V, ii–vi, iii–vi and their reverses) among the many that only bend."></audio-ref>
+</div>
+<div class="layer understand">
+<p><b>Quality theorem.</b> Between two major or minor triads, a strict golden passing chord exists
+<b>only when both triads have the same quality</b> (major–major or minor–minor) and their roots are a minor
+third, a major third, or a fourth/fifth apart (equivalently a sixth, a sixth, or a fifth/fourth the other way).
+It never exists for roots a second or a tritone apart, and never between a major and a minor triad. Each
+qualifying ordered pair has <b>exactly one</b> golden passing chord.</p>
+<p><b>Root rules, major pairs.</b> The golden chord stands on the <i>upper root</i>, the root that lies a third or
+a fourth above the other, shifted by the interval, and it lies nearer that chord (position 1 if that chord comes
+first, position 2 if it comes second):</p>
+<table>
+<tr><th>Relation</th><th>Shift</th><th>Examples</th></tr>
+<tr><td>major third</td><td>0</td><td>C ↔ E: <b>Eg</b> · C ↔ A♭: <b>Cg</b></td></tr>
+<tr><td>minor third</td><td>^</td><td>C ↔ E♭: <b>^E♭g</b> · C ↔ A: <b>^Cg</b></td></tr>
+<tr><td>fourth/fifth</td><td>v</td><td>C ↔ F: <b>vFg</b> · C ↔ G: <b>vCg</b></td></tr>
+</table>
+<p><b>Root rules, minor pairs.</b> The golden chord stands on the <i>lower root</i>, the root that lies a third or a
+fourth below the other, and lies nearer that chord:</p>
+<table>
+<tr><th>Relation</th><th>Shift</th><th>Examples</th></tr>
+<tr><td>fourth/fifth</td><td>0</td><td>Cm ↔ Fm: <b>Cg</b> · Dm ↔ Am: <b>Ag</b></td></tr>
+<tr><td>major third</td><td>v</td><td>Cm ↔ Em: <b>vCg</b></td></tr>
+<tr><td>minor third</td><td>vv</td><td>Cm ↔ E♭m: <b>^Bg</b> (= vvC)</td></tr>
+</table>
+<p><b>In a major key</b> the diatonic qualifying pairs are exactly four, all related by fifths:</p>
+<table>
+<tr><th>Pair</th><th>Golden passing chord</th><th>Position (left to right)</th></tr>
+<tr><td>I ↔ IV</td><td><b>vFg</b> (vF ^A♭ C)</td><td>C → F at 2/3; F → C at 1/3</td></tr>
+<tr><td>I ↔ V</td><td><b>vCg</b> (vC ^E♭ G)</td><td>C → G at 1/3; G → C at 2/3</td></tr>
+<tr><td>ii ↔ vi</td><td><b>Ag</b> (A vC♯ ^E)</td><td>Dm → Am at 2/3; Am → Dm at 1/3</td></tr>
+<tr><td>iii ↔ vi</td><td><b>Eg</b> (E vG♯ ^B)</td><td>Em → Am at 1/3; Am → Em at 2/3</td></tr>
+</table>
+<p>No other pair of diatonic triads qualifies: I–ii, ii–iii, IV–V, V–vi are seconds; ii–IV, iii–V, IV–vi and
+similar are mixed quality; vii° is neither major nor minor. The chromatic mediants all qualify, which is why golden
+harmony fits so naturally into Romantic and film-score mediant writing (<a href="ch:ch29#mediant">Chapter 29</a>).
+<code>classify.py</code> §E lists the 68 ordered pairs, in C major plus common chromatic chords, that have a strict
+golden passing chord.</p>
+<pc-circle edo="36" marks="35 10 21" title="vCg = vC ^E♭ G: the golden chord a sixth-step below the tonic, with G as its fifth"></pc-circle>
+</div>
+<div class="layer derive">
+<p><b>Theorem (quality theorem and root rules).</b> Among all ordered pairs $(A, B)$ of distinct major or minor
+triads, those connected by a uniform stepwise path (three voices, any assignment of chord tones to voices)
+with a golden passing chord are exactly the 144 same-quality pairs with roots 3, 4 or 5 semitones apart (in
+either direction), and each has exactly one such golden chord, at the position and root given by the root rules.</p>
+<p><i>Status: theorem, proved by a finite case check.</i> Two independent checks establish it. (1) Reading the
+12-type table: its major-to-major rows are C → A♭ (roots a major third), C → A (minor third) and C♯ → A♭
+(fourth); its minor-to-minor rows are Cm → Fm (fourth), C♯m → Em (minor third) and C♯m → Fm (major third). No row
+joins a major and a minor triad, and none joins triads a second or a tritone apart. Each row is one orbit of 24
+ordered pairs, so the six rows give $6 \times 24 = 144$ ordered pairs, one golden chord each, and the golden roots
+in the rows are exactly the root rules (for example C♯ → A♭: the upper root C♯ lies a fourth above A♭, and the
+golden chord is vC♯g at position 1, nearer C♯). The remaining Western-ended rows (three augmented–diminished rows and
+C♯dim → Esus4) account for the other $4 \times 24 = 96$ of the 240 paths. (2) A direct enumeration over all
+$24 \times 23$ ordered pairs of major and minor triads, all voice assignments and all stepwise motions finds
+golden passing chords for exactly 144 pairs, each with exactly one golden chord. A full write-up is in
+<a href="ch:appD#passing">Appendix D</a>.</p>
+</div>
+</section>
+
+<section id="partner">
+<h2>Never twice, and the bronze partner</h2>
+<div class="layer hear">
+<p>On a strict path two passing chords sound between the endpoints, and at most one of them is golden. The other
+one, when the endpoints are major or minor triads, is always the same kind of chord: a triad made of two equal
+thirds of 13 sixth-steps (about 433 c each), wider than a major third. We call it <b>bronze</b>. Hear it alongside
+its relatives on the equal-third line: diminished, silver, golden, augmented, bronze. Each chord's thirds are one
+sixth-step wider than the last.</p>
+<audio-ex src="equal_third_line" caption="The equal-third line on C: diminished (thirds of 9 sixth-steps), silver (10), golden (11), augmented (12) and bronze (13). The root stays; the two upper notes widen by one and two sixth-steps at each chord."></audio-ex>
+<audio-ref file="P07a_metallic_means_definition.mp3" caption="From the golden audio suite: the equal-third line as a uniform path (augmented → golden → silver → diminished) and V → I with its bronze partner."></audio-ref>
+</div>
+<div class="layer understand">
+<p><b>Never twice.</b> No uniform path has both passing chords golden. A golden chord can open or close the
+middle of a strict transition, never fill it.</p>
+<p><b>Partner theorem.</b> On every strict path between Western triads, the passing chord that is not golden is an
+<b>equal-third triad</b> $T_n = \{0, n, 2n\}$: <b>bronze</b> ($n = 13$, C ^E vA) in 168 of the 240 paths, and
+<b>silver</b> ($n = 10$, C ^E♭ vG) in the other 72. Silver appears only on paths between an augmented and a
+diminished triad (three of the 12 types); every path between major or minor triads has a bronze partner.</p>
+<p>The equal-third chords are evenly spaced points on one line:</p>
+<table>
+<tr><th>$n$</th><th>Name</th><th>On C</th><th>Third (36-ET)</th><th>Exact chain value</th></tr>
+<tr><td>9</td><td>diminished</td><td>C E♭ F♯</td><td>300 c</td><td></td></tr>
+<tr><td>10</td><td>silver</td><td>C ^E♭ vG</td><td>333.33 c</td><td>336.74 c (chain distance 14)</td></tr>
+<tr><td>11</td><td>golden</td><td>C vE ^G</td><td>366.67 c</td><td>366.91 c ($2/\varphi$)</td></tr>
+<tr><td>12</td><td>augmented</td><td>C E G♯</td><td>400 c</td><td></td></tr>
+<tr><td>13</td><td>bronze</td><td>C ^E vA</td><td>433.33 c</td><td>436.01 c (chain distance 11, inverted) ≈ 9/7 = 435.08 c</td></tr>
+</table>
+<p>Bronze is golden reflected through augmented: $2 \cdot (0,12,24) - (0,11,22) = (0,13,26)$. On the path
+C → Cg → ^E♭T13 → A♭, the passing chords are one third and two thirds of the way from C to A♭, and bronze is where
+the golden chord would be if you started from A♭.</p>
+<p>One caution for four-part writing: the partner theorem is about three moving voices. When SongMap realizes
+<code>C:1 ~:0.5 ~:0.5 A:2</code> in four parts with a held bass, the second passing chord is labelled
+vC♯g7(v3,^5,^7)/C, because the bass C sits under the three upper voices. The upper voices themselves still
+follow the table.</p>
+<aside class="box note"><b>Golden sevenths on strict paths</b> are rare. In four voices only four types (up to
+transposition and reversal; 96 paths in all) reach a golden seventh between Western chords: C♯m7 → ^Cg7 → ^G T13 → Cmaj7,
+C♯m7 → vC♯g7 → A♭ T13 → C♯maj7, and two from an augmented triad (one note doubled) to a diminished-seventh chord,
+Caug → ^Cg7 → … → C♯dim7 and Caug → vC♯g7 → … → A♭dim7. Golden sevenths become common
+on natural paths (<a href="ch:ch28#dictionary">Chapter 28</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Theorem (never twice).</b> No uniform stepwise path in three voices from a layer-0 chord has both $P_1$ and
+$P_2$ golden.</p>
+<p><i>Proof.</i> Suppose $P_1 = X + d$ is the golden triad $G$ with root $r$. By the lemma, voice $i$ of $P_1$ is on
+layer $\lambda(g_i) = d_i \bmod 3$, and voice $i$ of $P_2 = P_1 + d$ is on layer $2d_i \equiv -\lambda(g_i)$. So the
+voices carrying G's root, third and fifth (layers $r$, $r+2$, $r+1$) sit in $P_2$ on layers $-r$, $-r+1$, $-r+2$.
+If $P_2$ is a golden triad with root $r'$, its root, third and fifth are on layers $r'$, $r'+2$, $r'+1$, and matching
+layers forces one of three role assignments. If $r' \equiv -r$: the root voice stays the root and the third voice
+becomes the fifth, so $r + d_0 = r'$ and $r + 11 + d_1 = r' + 22$, giving $d_1 - d_0 \equiv 11 \pmod{36}$. If
+$r' \equiv -r+1$: the third voice becomes the root and the root voice becomes the third, giving
+$d_0 - d_1 \equiv 22$. If $r' \equiv -r + 2$: the fifth voice becomes the root and the third voice the third,
+giving $d_1 - d_2 \equiv 22$. But $|d_i - d_j| \le 4$, so none of these congruences can hold. ∎</p>
+<p>An exhaustive check confirms it and extends it to four voices (with doublings) and golden sevenths: among all
+uniform stepwise paths from layer-0 chords, none has two golden passing chords (triads or sevenths).</p>
+<p><b>Theorem (partner).</b> On the 240 golden paths with Western triads at both ends, the non-golden passing chord
+is $T_{13}$ in 168 paths and $T_{10}$ in 72. <i>Proof.</i> Read the $P_2$ column of the 10 Western-ended types:
+seven are T13 (bronze) and three, exactly the augmented-to-diminished types, are silver; each type has 24 paths, so
+$7 \times 24 = 168$ and $3 \times 24 = 72$. ∎ (Verified by <code>classify.py</code> §C.)</p>
+<p><b>The equal-third line.</b> $T_n = (0, n, 2n)$ is an affine function of $n$, so the points $T_9, \dots, T_{13}$
+are equally spaced on one line in $\mathbb{R}^3$, and $T_{12} - T_{11} = T_{11} - T_{10} = (0, 1, 2)$. Hence
+Caug → Cg → Cs → Cdim is the uniform path with $d = (0, -1, -2)$: the first row of the four-path table.</p>
+</div>
+</section>
+
+<section id="six-four">
+<h2>Worked example: the golden six-four</h2>
+<div class="layer hear">
+<p>The most important single result of System 1 is a cadence. In Western harmony the cadential six-four
+(<a href="ch:ch10#cadences">Chapter 10</a>, <a href="ch:ch14#four-part">Chapter 14</a>) puts a C major triad
+over the dominant bass G, then lets its upper notes fall to the dominant before the final tonic:
+C/G → G → C. The golden six-four does the opposite. It starts on the dominant, keeps G in the bass, and lets
+the leading tone and the second degree <i>rise</i> through two passing chords. The second of them is a golden
+triad a sixth-step below the tonic, sitting on the dominant bass: the tonic arriving early, out of focus.</p>
+<audio-ex src="six_four_satb" caption="The golden six-four in four voices (G → vE♭T13/G → vCg/G → C), then the Western cadential six-four C/G → G → C. Compare where the C-like sound arrives: before the dominant in the Western cadence, after it in the golden one."></audio-ex>
+<p>In a musical phrase the golden six-four is short and on a weak beat; the ear hears V, a shimmer, and I.</p>
+<audio-ex src="six_four_phrase" caption="A seven-bar phrase F – C – Dm – G – (~ ~) – C on piano, pad and bell. Over the held G, listen for the soprano's last climb D → vE♭ → ^E♭ → E and, under it, the leading tone B → ^B → vC → C."></audio-ex>
+<audio-ref file="P01b_lullaby_in_gold.mp3" caption="From the golden audio suite: 'Lullaby in gold', a full piece whose phrases end with the golden six-four."></audio-ref>
+</div>
+<div class="layer understand">
+<p>In SongMap the cadence is <code>G:1 ~:0.5 ~:0.5 C:2</code>. In four voices, with the bass holding G
+until the arrival, the strict path is unique:</p>
+<table>
+<tr><th>Voice</th><th>V</th><th>$P_1$</th><th>$P_2$</th><th>I</th><th>Motion</th></tr>
+<tr><td>S</td><td>D4</td><td>vE♭4</td><td>^E♭4</td><td>E4</td><td>whole step up, 2 + 2 + 2 (falling class)</td></tr>
+<tr><td>A</td><td>B3</td><td>^B3</td><td>vC4</td><td>C4</td><td>half step up, 1 + 1 + 1 (rising class)</td></tr>
+<tr><td>T</td><td>G3</td><td>G3</td><td>G3</td><td>G3</td><td>hold</td></tr>
+<tr><td>B</td><td>G2</td><td>G2</td><td>G2</td><td>C3</td><td>pedal, then leap on the arrival</td></tr>
+</table>
+<pianoroll edo="36" notes="G2 G3 B3 D4 ; G2 G3 ^B3 vEb4 ; G2 G3 vC4 ^Eb4 ; C3 G3 C4 E4" labels="G ; vE♭T13/G ; vCg/G ; C" title="V → I, strict path (the golden six-four)"></pianoroll>
+<ul>
+<li>$P_1$ = <b>vE♭T13/G</b> (Roman: v♭IIIT13/V): the upper voices G ^B vE♭ form a bronze triad on vE♭
+(pitch classes 8, 21, 34: thirds of 13), the partner.</li>
+<li>$P_2$ = <b>vCg/G</b> (vIg/V): the upper voices vC ^E♭ G form the golden triad on vC (35, 10, 21: thirds of 11).
+Its fifth <i>is</i> G, the bass, so the bass belongs to the golden chord; the label "/G" names a golden triad in
+second inversion, a golden six-four in the literal sense.</li>
+<li>The leading tone rises B → ^B → vC → C and the second degree rises D → vE♭ → ^E♭ → E. Both voices move up,
+but in different classes (half step and whole step), which is exactly what admissibility requires; the held G
+supplies the third class.</li>
+</ul>
+<p>The barycentric reading makes vCg concrete: it is $(X + 2Y)/3$ voice by voice, one third V and two thirds I.
+The root rule predicts it too: G and C are major triads a fourth apart, so the golden chord is on the upper root C
+(C lies a fourth above G), shifted down a sixth-step, nearer C.</p>
+<aside class="box note"><b>Three-chord form.</b> A single placeholder, <code>G:1 ~:1 C:2</code>, keeps only the
+more golden of the two passing chords: G – vCg/G – C. This is the golden authentic cadence of
+<a href="ch:ch29#authentic">Chapter 29</a>.</aside>
+</div>
+<div class="layer derive">
+<p>In sixth-steps (MIDI × 3), with voices (B, T, A, S):</p>
+$$X = (129, 165, 177, 186),\quad d = (0, 0, +1, +2),\quad Y_{\text{upper}} = X + 3d = (\cdot, 165, 180, 192),$$
+<p>and the bass moves 129 → 144 only on the arrival. So $P_1 = (129, 165, 178, 188)$ and
+$P_2 = (129, 165, 179, 190)$. Reducing mod 36: $P_1 = \{21, 34, 8\}$ = {G, ^B, vE♭}, and $8 + 13 = 21$,
+$21 + 13 = 34$: the triad $T_{13}$ rooted on 8 = vE♭. $P_2 = \{21, 35, 10\}$ = {G, vC, ^E♭}, and $35 + 11 = 46
+\equiv 10$, $35 + 22 = 57 \equiv 21$: the golden triad rooted on 35 = vC. Within the three upper voices this is the
+row "(−1, −2, 0) … vC♯g" of the four-path table transposed down a semitone (C → vCg → vE♭T13 → G, the fifth G held) and then reversed,
+which is why the golden chord comes second.</p>
+<p>In exact golden tuning vCg would be vC · $2/\varphi$ · $4/\varphi^2$, i.e. its third 366.91 c and its fifth
+733.82 c above vC; 36-ET renders them as 11 and 22 sixth-steps (366.67 c and 733.33 c).</p>
+</div>
+</section>
+
+<div class="exercise">
+<p><b>Exercise 27.1 (layers).</b> A voice moves down a whole tone from E to D on a uniform path. Name its four
+pitches and their layers.</p>
+<details class="answer"><summary>Answer</summary><p>E (12, layer 0), ^E♭ (10, layer 1), vE♭ (8, layer 2), D (6,
+layer 0). Motion $d = -2$ is in the rising class: it reaches the ^ layer first.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 27.2 (admissibility).</b> F major moves to G major with every voice rising a whole tone (F→G, A→B,
+C→D). Can either strict passing chord be golden?</p>
+<details class="answer"><summary>Answer</summary><p>No. All three voices have $d = +2$, the falling class, so each
+passing chord lies on a single layer: the path is F, vF♯, ^F♯, G, every chord a planed F major triad. A golden triad
+needs one voice in each class. (System 2 does find golden chords here: <a href="ch:ch28#escalator">Chapter 28</a>.)</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 27.3 (root rules).</b> Predict the strict golden passing chord and its position for E♭ → C, for
+Am → Em and for E → A♭ (E and A♭ = G♯ are a major third apart).</p>
+<details class="answer"><summary>Answer</summary><p>E♭ → C: major, minor third, upper root E♭ shifted ^: ^E♭g, nearer
+E♭, so at position 1/3. Am → Em: minor, fifth/fourth, lower root (the root a fourth below the other) is E: Eg,
+nearer Em, so at 2/3. E → A♭: major, major third, upper root A♭ (G♯ lies a major third above E), shift 0: A♭g,
+nearer A♭, at 2/3. (<code>classify.py</code> §E lists III → ♭VI as A♭g@2/3.)</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 27.4 (barycenter).</b> Using $P_1 = (2X+Y)/3$, compute the first passing chord of Cm → Fm with
+voices C→C, E♭→F, G→A♭, and identify it.</p>
+<details class="answer"><summary>Answer</summary><p>C: (0+0+0)/3 = 0; E♭→F: (2·9+15)/3 = 11; G→A♭: (2·21+24)/3 = 22.
+So $P_1 = \{0, 11, 22\}$ = Cg.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 27.5 (listening).</b> In the four-paths example, which destination sounds most like a resolution of
+Cg, and which least? Relate your answer to the partner chord in each path.</p>
+<details class="answer"><summary>Answer</summary><p>Answers vary; this is a listening question, not a theorem. Many
+listeners hear Fm and A♭ as the clearest arrivals (bronze partners, major or minor endpoints) and the cluster C F F♯
+as the least, with Cdim in between (silver partner, diminished endpoint).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 27.6 (proof).</b> Show that on a uniform path from a layer-0 chord, a passing chord in which all
+voices are in one class is the starting chord transposed by $k$ or $2k$ sixth-steps only when all $d_i$ are equal.
+What is it in general?</p>
+<details class="answer"><summary>Answer</summary><p>If all $d_i$ are equal to $d$, $P_k = X + kd$ is $X$ transposed
+by $kd$ sixth-steps: planing. If the $d_i$ are in one class but unequal (some $+1$, some $-2$), $P_k$ is single-layer
+but not a transposition of $X$; it is a Western chord shape on layer $k d_i \bmod 3$ whose intervals differ from
+$X$'s by multiples of 3 sixth-steps, for example a different 12-ET chord moved onto the ^ layer.</p></details>
+</div>

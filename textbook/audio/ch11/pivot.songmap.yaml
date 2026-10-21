@@ -1,0 +1,21 @@
+# C major; Am (vi in C = ii in G) is the pivot; D7 G confirms G major.
+songmap: 0.2
+title: "Modulation by pivot chord"
+tempo: 100
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {chords: clean/organ, bass: clean/bass, lead: clean/lead}
+mix: {chords: {gain_db: -7, send: {hall: 0.25}}, bass: {gain_db: -4}, lead: {gain_db: -5, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 9
+    harmony: "C:1 F:1 G:1 Am:1 D7:1 G:1 C:1 D7:1 G:1"
+    parts:
+      chords: hold
+      bass: {style: roots, role: bass}
+      lead: top
+master: clean

@@ -1,0 +1,18 @@
+# Major, minor, diminished, augmented on C: arpeggiated, then struck together.
+songmap: 0.2
+title: "Four triads on C"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {up: clean/keys}
+mix: {up: {gain_db: -4, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 4
+    parts:
+      up: {notes: "=mp c8 e8 g8 r8 [c,e,g]2 c8 eb8 g8 r8 [c,eb,g]2 c8 eb8 gb8 r8 [c,eb,gb]2 c8 e8 g#8 r8 [c,e,g#]2"}
+master: clean

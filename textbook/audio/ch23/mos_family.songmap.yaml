@@ -1,0 +1,23 @@
+# The well-formed golden scales on C, each up one octave: golden4 (C vE ^G ^Ab), golden7,
+# golden10 and golden13. Each scale splits the larger step of the one before.
+songmap: 0.2
+title: "The golden MOS family"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 7
+tail_seconds: 2
+instruments: {keys: clean/keys}
+mix: {keys: {gain_db: -3}}
+motifs:
+  g4: {deg: "0/4 1 2 3 | 4/1", octave: 4, key: "C golden4"}
+  g7: {deg: "0/8 1 2 3 4 5 6/4 | 7/1", octave: 4, key: "C golden7"}
+  g10: {deg: "0/8 1 2 3 4 5 6 7 | 8/8 9 10/2.", octave: 4, key: "C golden10"}
+  g13: {deg: "0/8 1 2 3 4 5 6 7 | 8/8 9 10 11 12 13/4.", octave: 4, key: "C golden13"}
+sections:
+  - {name: s4, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [g4]}}}
+  - {name: s7, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [g7]}}}
+  - {name: s10, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [g10]}}}
+  - {name: s13, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [g13]}}}
+master: clean

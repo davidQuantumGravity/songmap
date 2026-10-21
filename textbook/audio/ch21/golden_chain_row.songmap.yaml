@@ -1,0 +1,15 @@
+# ch21 golden mirror: the golden chain as a 36-tone row: step 25k mod 36 for k = 0..35 (each note a golden sixth
+# above the last, folded into one octave). It uses all 36 sixth-step pitch classes once.
+songmap: 0.2
+title: "The golden chain as a 36-tone row"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 21
+tail_seconds: 2
+instruments: {keys: clean/keys}
+mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+sections:
+  - {name: row, bars: 3, parts: {keys: {notes: "c16 ^ab vf c# ^a vf# d ^bb vg eb ^b vab e ^c va f ^c# vbb f# ^d vb g ^eb vc ab ^e vc# a ^f vd bb ^f# veb b ^g ve c+2"}}}
+master: clean

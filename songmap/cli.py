@@ -1,7 +1,7 @@
 """songmap command line.
 
     songmap check  song.sm|song.yaml          parse, validate, expand; prints a summary or precise errors
-    songmap render song.sm [-o build/x]       song.wav (24-bit), stems/, cues.json, qa.json, render.log
+    songmap render song.sm [-o build/x]       song.wav (24-bit), stems/, cues.json, qa.json, render.log  [--mp3]
     songmap migrate old.yaml [-o new.yaml]    rewrite a v0.1 song map as v0.2
 
 Song maps are `.sm` (the SongMap language, docs/LANGUAGE.md; `.sml` is an alias) or YAML (`.yaml`, `.yml`).
@@ -74,11 +74,12 @@ def cmd_render(args) -> int:
     song = _load(args.song)
     out = args.out or os.path.join("build", os.path.splitext(os.path.basename(args.song))[0].split(".")[0])
     r = render(song, master_mode=args.master, log=print)
-    paths = write_outputs(r, out, stems=not args.no_stems)
+    paths = write_outputs(r, out, stems=not args.no_stems, mp3=args.mp3)
     print(_summary(r.arrangement))
     for w in list(song.warnings) + r.arrangement.warnings + _video_check(r.arrangement):
         print(f"  warning: {w}")
-    print(f"wrote {paths['song']}, {paths['cues']}, {paths['qa']}" + (", stems/" if "stems" in paths else ""))
+    print(f"wrote {paths['song']}, {paths['cues']}, {paths['qa']}" + (", stems/" if "stems" in paths else "")
+          + (f", {paths['mp3']}" if "mp3" in paths else ""))
     return 0
 
 
@@ -120,7 +121,8 @@ def main(argv=None) -> int:
     p.add_argument("song", help="a .sm (.sml) or .yaml song map")
     p.add_argument("-o", "--out", help="output folder (default build/<song>)")
     p.add_argument("--no-stems", action="store_true", help="skip stems/*.wav")
-    p.add_argument("--master", choices=["standard", "legacy"], help="override the song's master")
+    p.add_argument("--mp3", action="store_true", help="also write song.mp3 (needs ffmpeg)")
+    p.add_argument("--master", choices=["standard", "legacy", "clean"], help="override the song's master")
     p.set_defaults(fn=cmd_render)
     p = sub.add_parser("migrate", help="rewrite a v0.1 song map as v0.2")
     p.add_argument("song")

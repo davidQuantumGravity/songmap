@@ -1,0 +1,18 @@
+# C -P- Cm -P- C -L- Em -L- C -R- Am -R- C.
+songmap: 0.2
+title: "P, L and R"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {up: clean/organ}
+mix: {up: {gain_db: -6, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 4
+    parts:
+      up: {notes: "=mp [c,e,g]2 [c,eb,g]2 [c,e,g]2 [b-,e,g]2 [c,e,g]2 [c,e,a]2 [c,e,g]1"}
+master: clean

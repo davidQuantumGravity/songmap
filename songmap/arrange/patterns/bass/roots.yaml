@@ -1,0 +1,6 @@
+# Chord roots in half notes.
+style: roots
+role: bass
+rel: "R2 R"
+oct: -2
+gate: 0.95

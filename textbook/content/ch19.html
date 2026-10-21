@@ -1,0 +1,254 @@
+<section id="whole-tone">
+<h2>The whole-tone scale</h2>
+<div class="layer hear">
+<p>Play only whole tones, C, D, E, F♯, G♯, A♯, and you are back on C after six steps instead of seven. Listen to the
+scale and to the chords that live in it. Nothing in it pulls anywhere. There is no semitone to lean on, so there is
+no leading tone, and there is no perfect fifth, so no chord sounds like a home. Every note stands in exactly the same
+relation to the others, and the music seems to float.</p>
+<audio-ex src="whole_tone" caption="The whole-tone scale on C, up and down, then augmented triads sliding inside it: no note sounds like home."></audio-ex>
+<p>Now try the whole-tone scale on C♯: a new set of six notes. Then try it on D. You may expect a third scale, but
+it has exactly the notes of the first one. There are only <b>two</b> whole-tone scales, and between them they use
+all twelve notes.</p>
+<audio-ex src="two_whole_tone" caption="Whole-tone scales on C, C♯ and D: the third is the first one again. Then one augmented triad from each, and the first again."></audio-ex>
+</div>
+<div class="layer understand">
+<pc-circle edo="12" marks="0 2 4 6 8 10" title="The whole-tone scale on C: a regular hexagon"></pc-circle>
+<p>On the pitch-class circle the whole-tone scale is a regular hexagon. Rotate it by one position (transpose by a
+semitone) and you get the other hexagon; rotate it by two and it lands on itself. That is the whole story of its
+character:</p>
+<ul>
+<li><b>Only even intervals.</b> Every interval between two of its notes is 2, 4, 6, 8 or 10 semitones: whole tones,
+major thirds, tritones and their inversions. No semitone, no minor third, no perfect fourth or fifth.</li>
+<li><b>One kind of triad.</b> Stacking thirds inside the scale gives only augmented triads, and there are just two of them
+as sets of notes: C–E–G♯ and D–F♯–A♯.</li>
+<li><b>No center.</b> Any of the six notes could be called the "tonic" and the scale would look the same from it.
+Composers who want a center must supply it from outside, with a pedal, a register or a repeated note.</li>
+</ul>
+<p>Some familiar tonal chords are whole-tone chords in disguise. The French augmented sixth A♭–C–D–F♯ uses only even pitch
+classes (8, 0, 2, 6), so it lies inside the whole-tone scale on C. The Tristan chord becomes a French sixth of the same
+kind, F–A–B–D♯ (5, 9, 11, 3), when its top voice reaches A (<a href="ch:ch18#tristan">Chapter 18</a>); that one lies inside
+the other whole-tone scale, as does the dominant seventh with a lowered fifth, G–B–D♭–F (7, 11, 1, 5). Late-Romantic harmony that leans on these chords is already halfway to the floating whole-tone
+sound, and composers around 1900 needed only to stay there instead of resolving.</p>
+<p>The scale had been used for special effects before 1900. A famous early example is in Glinka's opera <i>Ruslan and
+Lyudmila</i> (1842), and Liszt also used it. Debussy made it a whole color of its own (<a href="ch:ch22#impressionism">Chapter 22</a>).</p>
+<aside class="mirror"><b>Golden mirror.</b> The whole-tone scale is the 12-ET picture of one subgroup, and 36-ET has
+many more subgroups to draw. Steps of 2 sixth-steps (an 18-note scale) or of 4 (a 9-note scale, 133.33 c per step) are
+"whole-tone scales" that 12-ET cannot play. You can hear the 9-note one in the last section; the full list is in
+<a href="ch:ch33#symmetric-36">Chapter 33</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> The whole-tone collections are the two cosets of the subgroup
+$2\mathbb{Z}_{12} = \{0,2,4,6,8,10\}$:</p>
+$$WT_0 = \{0,2,4,6,8,10\}, \qquad WT_1 = \{1,3,5,7,9,11\} = WT_0 + 1.$$
+<p><b>Proposition.</b> (i) $T_n(WT_0) = WT_0$ exactly when $n$ is even, so there are 2 distinct transpositions. (ii) Every
+interval within $WT_0$ is even. (iii) The interval vector of $WT_0$ is $\langle 0,6,0,6,0,3\rangle$.</p>
+<p><i>Proof.</i> (i) $T_n(WT_0) = WT_0 + n$, which is $WT_0$ if $n$ is even and $WT_1$ if $n$ is odd. (ii) The difference of
+two even numbers is even. (iii) Among the $\binom{6}{2} = 15$ pairs, interval classes 1, 3 and 5 (odd) cannot occur.
+Each note has two neighbours at interval class 2 and two at interval class 4, giving $6\cdot 2/2 = 6$ pairs of each, and
+one partner at the tritone, giving $6/2 = 3$ pairs. $\square$</p>
+</div>
+</section>
+
+<section id="octatonic">
+<h2>The octatonic scale</h2>
+<div class="layer hear">
+<p>Alternate a semitone and a whole tone: C, C♯, D♯, E, F♯, G, A, A♯, and then C. Eight notes. This scale has semitones, so it has edges, and it
+contains ordinary major and minor triads. But it contains them in a strange arrangement: four major triads whose
+roots are a minor third apart, C, E♭, F♯ and A, all inside the same eight notes.</p>
+<audio-ex src="octatonic" caption="The octatonic scale on C (half step, whole step, …), then the four major triads inside it: C, E♭, F♯, A."></audio-ex>
+</div>
+<div class="layer understand">
+<pc-circle edo="12" marks="0 1 3 4 6 7 9 10" path="0 3 6 9 0" title="Octatonic collection; the square marks its diminished seventh C–E♭–F♯–A"></pc-circle>
+<p>The <b>octatonic scale</b> (from Greek <i>okto</i>, eight) is the 12-ET's other famous symmetric scale. In
+Russian music theory it is called the Rimsky-Korsakov scale, after the composer who used it widely. The name
+"octatonic" is usually credited to the theorist Arthur Berger, in an article on Stravinsky (1963). Its
+properties, all computed:</p>
+<ul>
+<li><b>Three transpositions.</b> Transposing by a minor third (3 semitones) maps it to itself. Only the transpositions
+by 0, 1 and 2 semitones give different collections.</li>
+<li><b>Two modes.</b> Starting on C it goes half–whole. Starting on C♯ it goes whole–half. Every other starting note gives
+one of these two patterns.</li>
+<li><b>Its triads.</b> 4 major (C, E♭, F♯, A), 4 minor (Cm, E♭m, F♯m, Am), 8 diminished, and no augmented
+triad. The major and minor triads are exactly the eight chords of the octatonic cycle in
+<a href="ch:ch18#cycles">Chapter 18</a>.</li>
+<li><b>Interval vector</b> $\langle 4,4,8,4,4,4\rangle$: every interval class occurs, minor thirds twice as often as the others.</li>
+</ul>
+<p>Because the scale has both the semitone (which makes leading tones) and the symmetry (which keeps a center from emerging),
+composers found it ideal for music that is colorful, harmonic and yet not tonal. Rimsky-Korsakov, Scriabin, Ravel, Stravinsky,
+Bartók and Messiaen all used it. On Stravinsky see <a href="ch:ch22#bartok-stravinsky">Chapter 22</a>.</p>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> Let $D = \{0,3,6,9\}$, the diminished seventh chord, a subgroup of $\mathbb{Z}_{12}$ of order 4.
+Its cosets are $D$, $D+1$, $D+2$. The three octatonic collections are the unions of two of them:</p>
+$$O_{01} = D \cup (D+1),\qquad O_{12} = (D+1) \cup (D+2),\qquad O_{02} = D \cup (D+2).$$
+<p><b>Proposition.</b> The stabilizer $\{n : T_n(O) = O\}$ of each octatonic collection is exactly $D$, so it has $12/4 = 3$
+distinct transpositions. <i>Proof.</i> $D$ fixes each coset, so it fixes their union. Conversely, if $T_n$ fixes $O_{01}$, it permutes its two
+cosets. If $T_n$ swapped $D$ and $D+1$, then $n \equiv 1$ and also $n \equiv -1 \pmod 3$, which is impossible. So $T_n$ fixes $D$, and
+$n \in D$. $\square$</p>
+<p>The same argument shows that the four major triads of $O_{01}$ form one orbit under $D$: $T_3$ carries C to E♭ to F♯ to
+A. That is why the roots in the octatonic cycle climb by minor thirds.</p>
+</div>
+</section>
+
+<section id="messiaen">
+<h2>Messiaen's modes of limited transposition</h2>
+<div class="layer hear">
+<p>Olivier Messiaen (1908–1992) built much of his harmony from a small family of scales he called <b>modes of limited
+transposition</b>. The whole-tone and octatonic scales are the first two. Five more follow, each made of a little
+pattern of steps that repeats inside the octave. Listen to all seven on C.</p>
+<audio-ex src="messiaen_modes" caption="Messiaen's modes 1 to 7 on C, each ascending to the octave: listen for the repeating step pattern inside each."></audio-ex>
+<p>"Limited transposition" means that you run out of new versions quickly. Mode 3 has nine notes, built from the step pattern whole,
+half, half, three times over. Transpose it up a semitone, then two, then three: each time you hear new notes. Transpose it by four
+and you are back to the original set exactly.</p>
+<audio-ex src="mode3_transpositions" caption="Mode 3 at T0, T1, T2, T3 and T4, each played upward from C (T3, which lacks C, from C♯): the fifth run has exactly the notes of the first."></audio-ex>
+<p>Messiaen's harmony favored rich chords taken from inside one mode. Here is a chord (a major triad with an added sixth and
+augmented fourth, C–E–G–A–F♯) moved by minor thirds. Every chord stays inside the same octatonic collection.</p>
+<audio-ex src="mode2_chorale" caption="One chord moved by T3, T6, T9 and back: all five chords lie inside mode 2, so the harmony changes while the collection does not."></audio-ex>
+</div>
+<div class="layer understand">
+<p>Messiaen set out the modes in his treatise <i>Technique de mon langage musical</i> (1944). He wrote of the "charm of
+impossibilities" in them. They cannot be transposed more than a few times, just as his non-retrogradable
+(palindromic) rhythms cannot be reversed. The seven modes, on C, with numbers computed from the sets:</p>
+<table>
+<tr><th>Mode</th><th>Notes on C</th><th>Step pattern (semitones)</th><th>Notes</th><th>Transpositions</th><th>Invariant under</th></tr>
+<tr><td>1</td><td>C D E F♯ G♯ A♯</td><td>(2) ×6</td><td>6</td><td>2</td><td>$T_2$ (whole tone)</td></tr>
+<tr><td>2</td><td>C C♯ D♯ E F♯ G A A♯</td><td>(1 2) ×4</td><td>8</td><td>3</td><td>$T_3$ (minor third)</td></tr>
+<tr><td>3</td><td>C D E♭ E F♯ G A♭ B♭ B</td><td>(2 1 1) ×3</td><td>9</td><td>4</td><td>$T_4$ (major third)</td></tr>
+<tr><td>4</td><td>C C♯ D F F♯ G A♭ B</td><td>(1 1 3 1) ×2</td><td>8</td><td>6</td><td>$T_6$ (tritone)</td></tr>
+<tr><td>5</td><td>C C♯ F F♯ G B</td><td>(1 4 1) ×2</td><td>6</td><td>6</td><td>$T_6$</td></tr>
+<tr><td>6</td><td>C D E F F♯ G♯ A♯ B</td><td>(2 2 1 1) ×2</td><td>8</td><td>6</td><td>$T_6$</td></tr>
+<tr><td>7</td><td>C C♯ D D♯ F F♯ G G♯ A B</td><td>(1 1 1 2 1) ×2</td><td>10</td><td>6</td><td>$T_6$</td></tr>
+</table>
+<pc-circle edo="12" marks="0 2 3 4 6 7 8 10 11" title="Mode 3: three copies of one block, rotated by a major third"></pc-circle>
+<pianoroll edo="12" notes="C4 E4 F#4 G4 A4 ; Eb4 G4 A4 Bb4 C5 ; F#4 A#4 C5 C#5 D#5 ; A4 C#5 D#5 E5 F#5" labels="chord ; T3 ; T6 ; T9" title="The mode 2 chorale chord and its minor-third transpositions (close position)"></pianoroll>
+<pc-circle edo="12" marks="0 1 5 6 7 11" title="Mode 5: two copies of one block, rotated by a tritone"></pc-circle>
+<p>Each mode is a block of steps repeated 2, 3, 4 or 6 times to fill the octave. The number of repeats is the number of
+transpositions that map the mode onto itself (including $T_0$), and 12 divided by that number is the number of
+different transpositions it has. Some further facts, all computed:</p>
+<ul>
+<li>All seven modes are also symmetric under <i>inversion</i>: each one reads the same, as a set, when turned upside down about some axis.</li>
+<li>Modes 1 and 2 were in use before Messiaen (by Debussy, Rimsky-Korsakov, Stravinsky and others). Messiaen used the modes throughout his output, in works such as <i>La Nativité du Seigneur</i> (1935) and <i>Quatuor pour la fin du temps</i> (1941).</li>
+<li>Messiaen regarded other symmetric scales as "truncations" of his seven. The next section proves him right in a
+precise sense: <b>every</b> pitch-class set with limited transposition is contained in some transposition of one of
+the seven modes.</li>
+</ul>
+<p>Limited transposition changes what "modulation" can mean. A piece in mode 2 can move to another transposition of the
+mode, but there are only three, and any two of them share a diminished seventh chord (four notes), which can serve as a pivot.
+Mode 3's four transpositions overlap in more interesting ways (computed): $T_0$ and $T_1$ share the six notes of a hexatonic scale,
+$T_0$ and $T_2$ share a whole-tone scale, and $T_0$ and $T_3$ share another hexatonic scale. So within one mode, the composer has a small,
+closed world of related "keys", each pair linked by a smaller symmetric scale.</p>
+<aside class="box note"><b>Not every symmetric set is a mode.</b> The hexatonic scale C–E♭–E–G–A♭–B of
+<a href="ch:ch18#cycles">Chapter 18</a> also has limited transposition (four forms). It is not among Messiaen's seven,
+because it is a subset ("truncation") of mode 3, which contains it.</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> A pitch-class set $S \subseteq \mathbb{Z}_{12}$ has <b>limited transposition</b> if $T_n(S) = S$
+for some $n \not\equiv 0$. Its <b>stabilizer</b> is $\operatorname{Stab}(S) = \{n : T_n(S) = S\}$.</p>
+<p><b>Lemma.</b> $\operatorname{Stab}(S)$ is a subgroup of $\mathbb{Z}_{12}$, and $S$ has exactly
+$12/|\operatorname{Stab}(S)|$ distinct transpositions. <i>Proof.</i> If $T_m$ and $T_n$ fix $S$, so do $T_{m+n}$ and
+$T_{-n}$. The transpositions of $S$ correspond to the cosets of the stabilizer (orbit–stabilizer theorem,
+<a href="ch:appA#groups">Appendix A</a>). $\square$</p>
+<p>For the seven modes the stabilizers are the subgroups of order 6, 4, 3, 2, 2, 2, 2, giving 2, 3, 4, 6, 6, 6, 6
+transpositions, as in the table.</p>
+</div>
+</section>
+
+<section id="subgroups">
+<h2>Subgroups and cosets of Z12</h2>
+<div class="layer hear">
+<p>Every symmetric scale you have heard in this chapter is a pattern that repeats around the circle a whole number of times. You
+can hear the repeat: a whole-tone scale sounds the same from every one of its notes, an octatonic scale from notes a minor third apart, mode 3
+from notes a major third apart. The repeat is always a regular polygon hidden in the twelve notes: the tritone, the augmented triad,
+the diminished seventh, the whole-tone hexagon. In 36-ET there are more polygons to hide. Here is one that 12-ET does not
+have, a scale of nine equal steps of 133.33 cents, which sounds like a whole-tone scale that has lost its way.</p>
+<audio-ex src="nine_of_36" caption="Golden mirror: a symmetric 9-note scale of 36-ET (steps of 4 sixth-steps, 133.33 c): another polygon, impossible in 12-ET."></audio-ex>
+</div>
+<div class="layer understand">
+<pianoroll edo="36" notes="C4 ; ^C#4 ; vEb4 ; E4 ; ^F4 ; vG4 ; Ab4 ; ^A4 ; vB4 ; C5" labels="0 ; 4 ; 8 ; 12 ; 16 ; 20 ; 24 ; 28 ; 32 ; 36" title="The 9-note scale of 36-ET (sixth-steps above C): plain, ^ and v notes in turn"></pianoroll>
+<p>The pitch classes $\mathbb{Z}_{12} = \{0, 1, \dots, 11\}$ form a group under addition mod 12 (<a href="ch:ch08#pitch-classes">Chapter 8</a>).
+A <b>subgroup</b> is a subset closed under addition. $\mathbb{Z}_{12}$ has exactly one subgroup for each divisor of 12:</p>
+<table>
+<tr><th>Order</th><th>Generated by</th><th>Elements</th><th>Musical name</th><th>Cosets</th></tr>
+<tr><td>1</td><td>0</td><td>{0}</td><td>a single note</td><td>12</td></tr>
+<tr><td>2</td><td>6</td><td>{0, 6}</td><td>tritone</td><td>6</td></tr>
+<tr><td>3</td><td>4</td><td>{0, 4, 8}</td><td>augmented triad</td><td>4</td></tr>
+<tr><td>4</td><td>3</td><td>{0, 3, 6, 9}</td><td>diminished seventh</td><td>3</td></tr>
+<tr><td>6</td><td>2</td><td>{0, 2, 4, 6, 8, 10}</td><td>whole-tone scale</td><td>2</td></tr>
+<tr><td>12</td><td>1</td><td>all twelve</td><td>chromatic scale</td><td>1</td></tr>
+</table>
+<p>A <b>coset</b> is a subgroup moved by a transposition: {1, 5, 9} is a coset of the augmented triad, the C♯ augmented triad.
+The cosets of a subgroup tile the circle without overlap. So the four augmented triads partition the twelve notes, and so do
+the three diminished sevenths and the two whole-tone scales.</p>
+<p>The main theorem of this chapter says that <b>a set is symmetric under a transposition exactly when it is built from
+whole cosets</b>. The octatonic scale is two diminished sevenths, mode 3 is three augmented triads, and the hexatonic scale is two augmented triads.
+The Petrushka chord, C major plus F♯ major, is three tritones: {C, F♯}, {E, B♭}, {G, C♯}. You can make a symmetric scale by
+choosing a subgroup and picking any collection of its cosets. That is all there is to it.</p>
+<aside class="mirror"><b>Golden mirror.</b> $\mathbb{Z}_{36}$ has a subgroup for each divisor of 36, of orders
+<b>1, 2, 3, 4, 6, 9, 12, 18, 36</b>. The new ones, of orders 9 and 18, generated by 4 and 2 sixth-steps, have no 12-ET counterpart, and
+the order-12 subgroup is 12-ET itself, sitting inside 36-ET. By the counting below, 36-ET has 266,176 sets with limited
+transposition (counting the empty and the full set), which form 14,938 transposition classes of nonempty proper sets,
+against 76 sets and 15 classes for 12-ET. Messiaen's "charm of
+impossibilities" multiplies (<a href="ch:ch33#symmetric-36">Chapter 33</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>Theorem.</b> Let $H = \langle k \rangle$ be the subgroup generated by $k$. Then $T_k(S) = S$ if and only if $S$ is a union of
+cosets of $H$.</p>
+<p><i>Proof.</i> If $S$ is a union of cosets $a + H$, then $T_k(a+H) = a + k + H = a + H$ because $k \in H$, so $T_k$ fixes $S$.
+Conversely, if $T_k(S) = S$ and $a \in S$, then $a + k, a + 2k, \dots \in S$, so the whole coset $a + H \subseteq S$. $\square$</p>
+<p><b>Counting (theorem, with an exhaustive check).</b> The subgroups of $\mathbb{Z}_{12}$ of prime order are $\{0,6\}$ and
+$\{0,4,8\}$, and every nontrivial subgroup contains one of them. So $S$ has limited transposition iff it is fixed by $T_6$ or by $T_4$.
+Sets fixed by $T_6$ are unions of the 6 tritone cosets: $2^6$ of them. Sets fixed by $T_4$: $2^4$. Sets fixed by both are fixed by $T_2$:
+$2^2$. By inclusion and exclusion,</p>
+$$2^6 + 2^4 - 2^2 = 76$$
+<p>sets have limited transposition, including the empty and the full set. Grouped by transposition, the 74 nonempty proper ones form
+<b>15 classes</b>: one of size 2 (the tritone), one of size 3, three of size 4, five of size 6, three of size 8, one of size 9 and
+one of size 10. Two of the hexachord classes are inversions of each other (one is the Petrushka chord), so under transposition
+<i>and</i> inversion there are 14.</p>
+<table>
+<tr><th>Size</th><th>Representative on C</th><th>Built from cosets of</th><th>Transpositions</th><th>Inside mode(s)</th></tr>
+<tr><td>2</td><td>C F♯</td><td>{0,6}</td><td>6</td><td>all seven</td></tr>
+<tr><td>3</td><td>C E A♭</td><td>{0,4,8}</td><td>4</td><td>1, 3, 6, 7</td></tr>
+<tr><td>4</td><td>C C♯ F♯ G</td><td>{0,6}</td><td>6</td><td>2, 4, 5, 6, 7</td></tr>
+<tr><td>4</td><td>C D F♯ A♭</td><td>{0,6}</td><td>6</td><td>all seven</td></tr>
+<tr><td>4</td><td>C E♭ F♯ A</td><td>{0,3,6,9}</td><td>3</td><td>2, 4, 6, 7</td></tr>
+<tr><td>6</td><td>C C♯ D F♯ G A♭</td><td>{0,6}</td><td>6</td><td>4, 5, 6, 7</td></tr>
+<tr><td>6</td><td>C C♯ E♭ F♯ G A</td><td>{0,6}</td><td>6</td><td>2, 4, 6, 7</td></tr>
+<tr><td>6</td><td>C C♯ E F♯ G B♭ (Petrushka chord)</td><td>{0,6}</td><td>6</td><td>2, 4, 6, 7</td></tr>
+<tr><td>6</td><td>C C♯ E F A♭ A (hexatonic)</td><td>{0,4,8}</td><td>4</td><td>3</td></tr>
+<tr><td>6</td><td>C D E F♯ G♯ A♯ (whole-tone)</td><td>{0,2,4,6,8,10}</td><td>2</td><td>1, 3, 6, 7</td></tr>
+<tr><td>8</td><td>C C♯ D E♭ F♯ G A♭ A</td><td>{0,6}</td><td>6</td><td>4, 7</td></tr>
+<tr><td>8</td><td>C C♯ D E F♯ G A♭ B♭</td><td>{0,6}</td><td>6</td><td>6, 7</td></tr>
+<tr><td>8</td><td>C C♯ E♭ E F♯ G A B♭ (octatonic)</td><td>{0,3,6,9}</td><td>3</td><td>2, 7</td></tr>
+<tr><td>9</td><td>C C♯ D E F F♯ A♭ A B♭ (mode 3 form)</td><td>{0,4,8}</td><td>4</td><td>3</td></tr>
+<tr><td>10</td><td>C C♯ D E♭ E F♯ G A♭ A B♭ (mode 7 form)</td><td>{0,6}</td><td>6</td><td>7</td></tr>
+</table>
+<p>In the table, "built from cosets of" names the stabilizer (the largest subgroup whose cosets build the set), and "inside
+mode(s)" lists the modes, in any transposition, that contain the set. Mode 4, mode 5 and mode 6 appear on C in the table in
+other rotations (for example mode 5, C C♯ F F♯ G B, is the class of C C♯ D F♯ G A♭).</p>
+<p><b>Theorem (computed exhaustively).</b> Each of the 15 classes is contained in some transposition of at least one of
+Messiaen's seven modes. The 9-note mode 3 and the 10-note mode 7 are maximal, and every symmetric set lies inside a
+transposition of mode 3 or of mode 7.</p>
+<p><b>In $\mathbb{Z}_{36}$</b> the prime-order subgroups are $\{0,18\}$ and $\{0,12,24\}$, so the same argument gives
+$2^{18} + 2^{12} - 2^{6} = 266{,}176$ sets with limited transposition. Burnside's lemma, confirmed by direct enumeration, gives
+14,938 transposition classes of nonempty proper ones.</p>
+</div>
+<div class="exercise"><p><b>Exercise 1.</b> How many transpositions does the set {C, C♯, F♯, G} have, and which subgroup is its stabilizer?</p>
+<details class="answer"><summary>Answer</summary><p>{0, 1, 6, 7} = {0, 6} ∪ {1, 7}, two tritone cosets. Its stabilizer is {0, 6},
+of order 2, so it has 12/2 = 6 transpositions.</p></details></div>
+<div class="exercise"><p><b>Exercise 2 (listening).</b> In the mode 3 example, which transposition first repeats an earlier one?
+Why must it be that one?</p>
+<details class="answer"><summary>Answer</summary><p>T4. Mode 3 is a union of cosets of {0, 4, 8}, so its stabilizer contains
+4, and no smaller positive transposition fixes it (its stabilizer is exactly {0, 4, 8}).</p></details></div>
+<div class="exercise"><p><b>Exercise 3.</b> Show that a set with an odd number of notes can have limited transposition only if its
+stabilizer is exactly {0, 4, 8}, and find all such sizes.</p>
+<details class="answer"><summary>Answer</summary><p>A set fixed by $T_n$ is a union of cosets of $\langle n\rangle$, so its size is a
+multiple of $|\langle n\rangle|$. The possible orders are 2, 3, 4, 6, 12. Odd sizes need order 3 (not 2, 4 or 6), so sizes 3 and
+9: the augmented triad and mode 3.</p></details></div>
+<div class="exercise"><p><b>Exercise 4.</b> List the four major triads in the octatonic collection {C, C♯, D♯, E, F♯, G, A, A♯} and show
+that $T_3$ permutes them cyclically.</p>
+<details class="answer"><summary>Answer</summary><p>C, E♭, F♯, A. $T_3$: C → E♭ → F♯ → A → C.</p></details></div>
+<div class="exercise"><p><b>Exercise 5.</b> In $\mathbb{Z}_{36}$, which subgroup is generated by 8 sixth-steps, and how many notes
+per octave does a coset of it have?</p>
+<details class="answer"><summary>Answer</summary><p>$\gcd(8, 36) = 4$, so $\langle 8 \rangle = \langle 4 \rangle$, of order
+36/4 = 9: nine notes, the scale heard above.</p></details></div>
+</section>

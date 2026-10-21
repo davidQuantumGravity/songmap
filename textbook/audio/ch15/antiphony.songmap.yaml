@@ -1,0 +1,23 @@
+# Antiphonal alternation: a chant-like recitation formula (written for this book in the manner of a
+# psalm tone: rising intonation, reciting tone A, mediant cadence, termination on D), sung in unison
+# by "choir I" (left), then "choir II" (right), then choir I again. Monophonic, as chant is.
+songmap: 0.2
+title: "Two choirs"
+tempo: 100
+meter: "4/4"
+key: "D dorian"
+tuning: 12edo
+seed: 15
+tail_seconds: 3
+instruments: {c1: clean/organ, c2: clean/organ}
+mix:
+  c1: {gain_db: -5, pan: -0.6, send: {hall: 0.4}}
+  c2: {gain_db: -5, pan: 0.6, send: {hall: 0.4}}
+returns: {hall: {type: reverb, seconds: 3.2, predelay: 0.03, damping: 0.5}}
+sections:
+  - name: verses
+    bars: 12
+    parts:
+      c1: {notes: "=mf f4 g a a | a a bb8 a g4 | a4 a a g | f e d2 | r1 | r1 | r1 | r1 | =mf f4 g a a | a a bb8 a g4 | a4 a a g | f e d2"}
+      c2: {notes: "r1 | r1 | r1 | r1 | =mf f4 g a a | a a bb8 a g4 | a4 a a g | f e d2 | r1 | r1 | r1 | r2. d16@0 r"}
+master: clean

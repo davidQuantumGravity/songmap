@@ -1,0 +1,17 @@
+# ch19: the whole-tone scale on C, then on C#, then on D. The third is the first again: only two exist.
+songmap: 0.2
+title: "Only two whole-tone scales"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 19
+tail_seconds: 2
+instruments: {keys: clean/keys}
+mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+sections:
+  - {name: on_c, bars: 1, parts: {keys: {notes: "c8 d e f# g# a# c+4"}}}
+  - {name: on_csharp, bars: 1, parts: {keys: {notes: "c#8 d# f g a b c#+4"}}}
+  - {name: on_d, bars: 1, parts: {keys: {notes: "d8 e f# g# a# c+ d+4"}}}
+  - {name: both, bars: 2, parts: {keys: {notes: "[c,e,g#]2 [c#,f,a]2 | [d,f#,a#]1"}}}
+master: clean

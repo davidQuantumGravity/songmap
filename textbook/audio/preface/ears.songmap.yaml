@@ -1,0 +1,32 @@
+# Preface, "The evolving ear": parallel fifths (organum style), then I-IV-V-I in triads, then the same
+# triads with golden passing chords: C - vAbT13/C - vFg/C - F - vF#g - ^F#g - G - vEbT13/G - vCg/G - C
+# (System 1 `~` for I-IV and V-I, System 2 `~g` for the IV-V escalator). The bass is written out.
+songmap: 0.2
+title: "The evolving ear"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 3
+tail_seconds: 2.5
+instruments: {organ: clean/organ, low: clean/bass}
+mix: {organ: {gain_db: -6}, low: {gain_db: -6}}
+sections:
+  - name: fifths
+    bars: 3
+    harmony: "N.C.:3"
+    parts:
+      organ: {notes: "[f-,c]4 [g-,d] [a-,e] [g-,d] | [bb-,f]4 [a-,e] [g-,d]2 | [a-,e]4 [g-,d] [f-,c]2"}
+  - name: triads
+    bars: 4
+    harmony: "C:1 F:1 G:1 C:1"
+    parts:
+      organ: hold
+      low: {notes: "c1 | f | g | c", oct: -2}
+  - name: golden
+    bars: 4
+    harmony: "C:0.5 ~:0.25 ~:0.25 F:0.5 ~g:0.25 ~g:0.25 G:0.5 ~:0.25 ~:0.25 C:1"
+    parts:
+      organ: hold
+      low: {notes: "c1 | f2 vf#4 ^f#4 | g1 | c1", oct: -2}
+master: clean

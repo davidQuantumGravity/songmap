@@ -1,0 +1,4 @@
+instrument: string_pluck
+description: "Karplus-Strong guitar without per-hit variation"
+tags: [guitar, stable, 36edo]
+params: {rr: 0, body: 0.5}

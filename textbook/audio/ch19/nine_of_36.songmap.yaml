@@ -1,0 +1,15 @@
+# ch19 golden mirror: a coset of the order-9 subgroup of Z36: steps of 4 sixth-steps (133.33 c), nine notes per octave.
+# This symmetric scale exists in 36-ET but not in 12-ET.
+songmap: 0.2
+title: "A nine-note symmetric scale in 36-ET"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 19
+tail_seconds: 2
+instruments: {keys: clean/keys}
+mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+sections:
+  - {name: up_down, bars: 3, parts: {keys: {notes: "c8 ^c# veb e ^f vg ab ^a vb c+ vb ^a ab vg ^f e veb ^c# c2 r4"}}}
+master: clean
