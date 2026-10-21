@@ -1,296 +1,349 @@
-<section id="additive">
-<h2>Additive synthesis</h2>
+<section id="songmap">
+<h2>A song as a text file</h2>
 <div class="layer hear">
-<p>Every tone in this book's examples was built from nothing but sine waves. Listen to one being assembled. A pure sine
-at 220 Hz sounds first: smooth, colorless, a little hollow. Then, every 1.2 seconds, another sine joins at the next whole
-multiple of the frequency, 440, 660, 880 Hz and so on, each softer than the last. The pitch never changes, but the tone
-grows brighter and buzzier until, with eight partials, it begins to resemble a reedy organ stop. Finally the same eight
-partials return with their upper members much softer: the same pitch, a rounder color.</p>
-<audio-ex src="additive_build" caption="Partials 1 to 8 of 220 Hz enter one every 1.2 s with amplitudes 1/k (the tone brightens toward a sawtooth-like buzz), then the same eight with amplitudes 1/k² (rounder)."></audio-ex>
+<p>Every example in this book was made the same way: someone wrote a short text file, and a program turned it into
+sound. Here is one of them. Listen first: a four-chord progression on an organ with a bass, played twice, the second
+time with a glass bell arpeggiating each chord, and at the end of each phrase a dominant chord that slides into the
+tonic through two passing chords over a held G: one inner voice climbs B – ^B – vC – C one sixth-step (a third of a
+semitone) at a time, and the top voice climbs D – vE♭ – ^E♭ – E two sixth-steps at a time.</p>
+<audio-ex src="first_song" caption="“A first song map”: C – Am – F – G and the strict V → I path, twice (the second time with a bell arpeggio), then the final C. The whole piece is the 17-line text file shown below."></audio-ex>
+<p>The program is <b>SongMap</b>, written for this project. Nothing in the file says how to make an organ sound, how to
+voice a chord or how loud anything is in decibels of raw signal: those things live in a fixed engine. The file says only
+what a musician would say: tempo, key, chords, which instrument plays what, and how the parts are balanced.</p>
 </div>
 <div class="layer understand">
-<p><b>Building tones from sines.</b> Fourier's idea (<a href="ch:ch02#fourier">Chapter 2</a>) says that a steady periodic
-tone is a sum of sines at whole multiples of its fundamental. <b>Additive synthesis</b> runs the idea backwards: choose
-the frequencies and amplitudes of the partials, add the sines, and you have the tone. It is the most transparent way to
-make sound: every component is known exactly, and nothing is present that was not put there.</p>
-<p>The <code>clean</code> instrument that renders this book's audio is an additive synthesizer with a handful of
-controls:</p>
+<p><b>The file.</b> This is the complete source of the example:</p>
+<pre><code>songmap: 0.2
+title: "A first song map"
+tempo: 90
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass, bell: clean/glass}
+motifs:
+  m1: {rel: "R8 3 5 R+ 5 3 R 3"}
+sections:
+  - {name: a, bars: 4, harmony: "C:1 Am:1 F:1 G:0.5 ~:0.25 ~:0.25", parts: {organ: hold, low: bassline}}
+  - {name: b, bars: 4, harmony: "C:1 Am:1 F:1 G:0.5 ~:0.25 ~:0.25", parts: {organ: hold, low: bassline, bell: {motifs: [m1]}}}
+  - {name: end, bars: 1, harmony: "C:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+mix: {organ: {gain_db: -6}, low: {gain_db: -4}, bell: {gain_db: -9, send: {hall: 0.3}}}
+master: clean</code></pre>
+<p>It is written in YAML, a plain-text format of keys and values. (SongMap also reads songs written in its own compact
+language, <code>.sm</code> files, which compile to the same thing; this book's examples all use YAML.) Reading it top to
+bottom:</p>
 <table>
-<tr><th>Control</th><th>Effect</th></tr>
-<tr><td><code>partials</code></td><td>how many partials (1 = a pure sine)</td></tr>
-<tr><td><code>rolloff</code></td><td>partial $k$ has amplitude $k^{-\text{rolloff}}$: 1 is sawtooth-like and bright, 2 is soft</td></tr>
-<tr><td><code>even</code></td><td>weight of the even harmonics (0 = odd harmonics only, a clarinet-like color)</td></tr>
-<tr><td><code>spectrum</code></td><td>which frequency ratios: harmonic (1, 2, 3, …), golden ($2^m\varphi^n$, §43.3) or odd (1, 3, 5, …)</td></tr>
-<tr><td><code>attack</code>, <code>release</code></td><td>raised-cosine fade-in and fade-out times (§43.2)</td></tr>
-<tr><td><code>decay</code>, <code>damp</code></td><td>for struck sounds: how long the fundamental takes to fade by 60 dB, and how much faster the higher partials fade</td></tr>
-<tr><td><code>vel_bright</code></td><td>harder notes get a lower rolloff, i.e. a brighter tone</td></tr>
-<tr><td><code>pan</code></td><td>a fixed stereo position</td></tr>
+<tr><th>Field</th><th>Meaning</th></tr>
+<tr><td><code>songmap</code>, <code>title</code></td><td>format version (0.2) and a name</td></tr>
+<tr><td><code>tempo</code>, <code>meter</code>, <code>key</code></td><td>90 beats per minute, four beats per bar, home key C major</td></tr>
+<tr><td><code>tuning</code></td><td><code>12edo</code> or <code>36edo</code>: which pitch grid the song may use (§43.2)</td></tr>
+<tr><td><code>seed</code></td><td>every random choice the engine makes derives from it, so a render is reproducible</td></tr>
+<tr><td><code>tail_seconds</code></td><td>silence after the last bar, for the sound to ring out</td></tr>
+<tr><td><code>instruments</code></td><td>the ensemble: part name → <code>instrument/preset</code></td></tr>
+<tr><td><code>motifs</code></td><td>named melodies; <code>rel</code> means chord-relative: R = root, 3 = third, 5 = fifth, R+ = root an octave up, 8 = eighth notes</td></tr>
+<tr><td><code>sections</code></td><td>the form: each section has a length in bars, a harmony and a part list</td></tr>
+<tr><td><code>harmony</code></td><td><code>Chord:bars</code> tokens; <code>~</code> is a passing-chord placeholder (§43.3)</td></tr>
+<tr><td><code>parts</code></td><td>which parts play, and in which style (§43.4)</td></tr>
+<tr><td><code>mix</code></td><td>per-part gain in decibels and the amount sent to a hall reverb</td></tr>
+<tr><td><code>master</code></td><td><code>clean</code>: scale the final peak and nothing else (<a href="ch:ch44#mixing">Chapter 44</a>)</td></tr>
 </table>
-<p>The presets used in this book are settings of these controls:</p>
+<p><b>Why text.</b> A song as a short text file has practical virtues. It can be read, compared line by line with an
+earlier version, and changed by a person or by a program; it is small enough for a language model to write and revise;
+and it is <i>exact</i>: the file, not a mouse gesture, is the score. The engine behind it is written once and improves
+over time, while each song stays a few lines long. The same file can also drive video: SongMap writes the time and video
+frame of every section and event to a <code>cues.json</code> file (<a href="ch:ch45#animation">Chapter 45</a>).</p>
+<p><b>The pipeline.</b> Rendering goes through fixed stages:</p>
 <table>
-<tr><th>Preset</th><th>Partials</th><th>Rolloff</th><th>Spectrum</th><th>Envelope</th></tr>
-<tr><td><code>clean/sine</code></td><td>1</td><td>–</td><td>–</td><td>attack 0.03 s, release 0.4 s</td></tr>
-<tr><td><code>clean/organ</code></td><td>8</td><td>1.2</td><td>harmonic</td><td>sustains while held; attack 0.04 s, release 0.35 s</td></tr>
-<tr><td><code>clean/keys</code></td><td>12</td><td>1.5</td><td>harmonic</td><td>struck: decay 5 s, damp 0.35</td></tr>
-<tr><td><code>clean/bass</code></td><td>6</td><td>1.6</td><td>harmonic</td><td>struck: decay 3 s, damp 0.3</td></tr>
-<tr><td><code>clean/lead</code></td><td>6</td><td>1.3</td><td>harmonic, even 0.5</td><td>struck: decay 2.5 s</td></tr>
-<tr><td><code>clean/glass</code></td><td>10</td><td>1.3</td><td>golden</td><td>struck bell: decay 6 s, damp 0.25</td></tr>
-<tr><td><code>clean/golden_pad</code></td><td>10</td><td>1.4</td><td>golden</td><td>sustained: attack 2.5 s, release 3 s</td></tr>
+<tr><th>Stage</th><th>What happens</th></tr>
+<tr><td>parse</td><td>the YAML is read and validated; errors say what is wrong and, where possible, how to fix it</td></tr>
+<tr><td>arrange</td><td>harmony strings become a timeline of chords, placeholders become passing chords, styles and motifs become notes</td></tr>
+<tr><td>perform</td><td>articulation sets how long each written note is held; notes are played on the grid as written
+(a performance layer with groove and humanizing is planned, and the clean examples do not need it)</td></tr>
+<tr><td>instruments</td><td>each note is synthesized from scratch (<a href="ch:ch44#additive">Chapter 44</a>)</td></tr>
+<tr><td>mix and master</td><td>parts are balanced, sent to reverb and summed; the clean master scales the peak</td></tr>
+<tr><td>export</td><td>audio, per-part stems, <code>cues.json</code> and a QA report of measured numbers</td></tr>
 </table>
-<p>A rolloff of 1 means each doubling of the partial number halves the amplitude, a slope of about −6 dB per octave of
-the spectrum; a rolloff of 2 gives −12 dB per octave. The sawtooth wave has rolloff exactly 1, which is why the first
-part of the example drifts toward a buzz.</p>
+<p>Checking the file without rendering it prints a summary:</p>
+<pre><code>$ songmap check first_song.songmap.yaml
+ok: A first song map
+  3 sections, 9 bars at 90 BPM 4/4, 0:27.00 (810 frames @ 30 fps)
+  parts: organ 13, low 14, bell 32</code></pre>
+<p>(A last line, omitted here, gives the number of events and a fingerprint of the expanded note list.) The counts are
+note events: the organ strikes 13 chords, the bass plays 14 notes, and the bell plays 32 eighth notes in section b.</p>
 </div>
 <div class="layer derive">
-<p><b>The clean tone.</b> For a note of fundamental $f_0$ and velocity $v$, with partial ratios $r_1 &lt; r_2 &lt; \dots$
-(harmonic: $r_k = k$), the instrument computes</p>
-$$x(t) = \frac{E(t)\,G(v)}{\sum_{k=1}^{K} k^{-\rho}}\ \sum_{k=1}^{K} a_k \sin\!\big(2\pi f_0 r_k t + \phi_k\big)\, e^{-6.9078\, t / T_k},$$
-<p>where</p>
-<ul>
-<li>$a_k = k^{-\rho}$ (times the <code>even</code> weight for even harmonic $k$), with $\rho = \max(\text{rolloff} - \text{vel\_bright}\cdot(v - 0.7),\ 0)$;</li>
-<li>$\phi_k = \pi k^2 / K$ are fixed phases (§43.2);</li>
-<li>$T_k = \text{decay}/(1 + \text{damp}\,(k-1))$, and the decay factor is omitted when decay is 0 (sustained tones); since
-$\ln 1000 = 6.9078$, partial $k$ is 60 dB down after $T_k$ seconds;</li>
-<li>$E(t)$ is the raised-cosine envelope and $G(v)$ a velocity gain;</li>
-<li>partials at or above $0.45\times 48\,000 = 21\,600$ Hz are skipped, to stay below the Nyquist frequency (24 kHz) and
-avoid aliasing.</li>
-</ul>
-<p><b>No clipping by construction (theorem).</b> Each term is at most $a_k$ in absolute value, so by the triangle inequality
-the inner sum is at most $\sum a_k \le \sum k^{-\rho}$, and $|x(t)| \le E(t)\,G(v)$. The normalization makes the loudest
-possible alignment of the partials fit exactly.</p>
-<p><b>The sawtooth.</b> The Fourier series of a sawtooth of period $1/f_0$ is
-$\frac{2}{\pi}\sum_{k\ge1} \frac{(-1)^{k+1}}{k}\sin(2\pi k f_0 t)$: amplitudes $1/k$, i.e. rolloff 1.</p>
+<p><b>Timing.</b> With tempo $T$ beats per minute and $b$ beats per bar, one beat lasts $60/T$ seconds and one bar
+$60b/T$. A token <code>G:0.5</code> lasts half a bar, $0.5\,b = 2$ beats. The song length is</p>
+$$\text{seconds} = \frac{60\,b}{T}\sum_{\text{sections}} \text{bars} + \text{tail}.$$
+<p>Here $60\cdot 4/90 = 2.667$ s per bar, $9$ bars $= 24$ s, plus a 3 s tail: 27.00 s, as <code>songmap check</code>
+reports. Video frames are $\operatorname{round}(\text{seconds}\times\text{fps})$; at 30 fps that is 810.</p>
+<p><b>Frame-exact beats.</b> A beat lands on a whole video frame exactly when $60\cdot\text{fps}/T$ is an integer. At
+90 BPM and 30 fps it is $1800/90 = 20$ frames per beat. At 80 BPM it would be 22.5, and <code>songmap check</code> warns
+that beats do not land on whole frames.</p>
+<p><b>Harmony per section.</b> A section's harmony string is laid along its bars and repeats if it is shorter than the
+section (progressions loop). In the example each harmony string sums to $1+1+1+0.5+0.25+0.25 = 4$ bars, the section
+length.</p>
+<p><b>Reproducibility.</b> A render depends only on the file and the engine version: the seed fixes every random
+choice, and the clean instruments use none (§44.2). The engine's test suite keeps a hash of the complete expanded note
+list of a set of locked example songs (the ported soundtrack examples and the first golden étude), so any change in
+their output is detected.</p>
 </div>
 </section>
 
-<section id="clean">
-<h2>Clean, stable tones</h2>
+<section id="golden-notation">
+<h2>Golden notation in SongMap</h2>
 <div class="layer hear">
-<p>Two things are easy to get wrong when building a tone from scratch, and both matter for hearing harmony precisely.
-First, the edges. A tone that switches on and off instantly clicks; a short straight ramp still ticks; a smooth
-raised-cosine fade is silent. Listen to the same short note with each.</p>
-<audio-ex src="envelopes" caption="The same 0.5 s tone four times each with an abrupt gate (clicks), a 5 ms linear ramp (soft ticks) and a 30 ms raised-cosine ramp (clean)."></audio-ex>
-<p>Second, stability. Many synthesizer sounds are made "warm" by letting each voice drift slightly in pitch and wobble
-with vibrato. That is pleasant in a pop mix, but it destroys exactly what this book listens to. The example plays an
-exact golden seventh twice: once with every partial perfectly steady, so its beats at about 6, 7.6, 9.4 and 12.3 per
-second interlock in a clear pattern; and once with a few cents of slow drift and a gentle vibrato on each voice. The
-beat pattern dissolves into a generic shimmer.</p>
-<audio-ex src="drift" caption="Exact close-voiced Cg7 on 110 Hz: first perfectly stable (the golden beat pattern is clear), then with a few cents of slow drift and ±10-cent vibrato per voice (the pattern smears)."></audio-ex>
+<p>The first example writes the averaging principle as chord symbols: C, Cm and Caug, then their average Cg; then C, Cm
+and Cdim, then their average Cs. It ends by playing <code>Cg</code> and then <code>C(v3,^5)</code>: two spellings of
+the same chord, which sound identical.</p>
+<audio-ex src="golden_chords" caption="C – Cm – Caug – Cg (the bright average), C – Cm – Cdim – Cs (the dark average), then Cg and C(v3,^5): the same chord written two ways."></audio-ex>
+<p>The second example is a melody written as scale degrees of the golden diatonic, golden7, over golden chords taken
+from the same scale. The bell climbs the scale's tones C, vE, ^G, B and the octave, then falls back, mostly by step,
+and turns around vE before landing on C.</p>
+<audio-ex src="golden7_melody" caption="A melody in scale degrees of C golden7 (C C♯ vE vF ^G ^A♭ B) on a golden-spectrum bell, over Cg – Cg7 – vEg – Cg on a golden pad."></audio-ex>
 </div>
 <div class="layer understand">
-<p><b>What "clean" means.</b> The clean instrument has, by design, no vibrato, no pitch drift, no detuned copies, no
-chorus, no noise, no filter and no saturation. Every partial is an exact sine at a fixed frequency. As a result, any
-beating in a chord comes only from the tuning of its notes, and any roughness only from the interaction of their partials.
-When the book says "listen to the beats of the golden seventh", the beats are the chord's, not the synthesizer's.</p>
-<p><b>Edges: raised-cosine envelopes.</b> Each note fades in and out along half a cosine curve,
-$\tfrac12 - \tfrac12\cos(\pi t/t_a)$, instead of a straight line. The curve starts and ends with zero slope, so the
-waveform never has a corner, and corners are what the ear hears as clicks.</p>
-<p><b>Fixed phases.</b> Each partial starts at a fixed phase, $\pi k^2/K$, a formula due to Manfred Schroeder (1970). It
-has two purposes: it avoids randomness (the same file always renders to the same samples), and it avoids starting
-every partial at its peak at once. Schroeder's formula was designed to give a low <i>crest factor</i> (peak over
-RMS level) for a sum of equal-amplitude partials. For the falling spectra of real presets that advantage is absent, as
-this measurement shows (peak over RMS of one period, sampled finely; the random column is the mean of 20 draws of
-uniform random phases, numpy seeds 0–19, and single draws vary by about ±2 dB):</p>
+<p><b>Tuning.</b> <code>tuning: 36edo</code> switches the song to 36-ET, the grid of sixth-steps of 33.33 c
+(<a href="ch:ch24#sixth-steps">Chapter 24</a>). A <code>12edo</code> song that uses a sixth-step anywhere is an error
+whose message names the fix, so a Western piece can never drift off the grid by a typo.</p>
+<p><b>Ups and downs.</b> A sixth-step up is <code>^</code>, down is <code>v</code>, always written as a <b>prefix</b>
+(<a href="ch:ch24#notation">Chapter 24</a>). The same marks work everywhere a pitch can be written:</p>
 <table>
-<tr><th>Spectrum</th><th>all sine phase</th><th>all cosine phase</th><th>Schroeder</th><th>random (mean of 20)</th></tr>
-<tr><td>8 equal partials</td><td>9.75 dB</td><td>12.04 dB</td><td><b>5.53 dB</b></td><td>7.56 dB</td></tr>
-<tr><td>16 equal partials</td><td>12.52 dB</td><td>15.05 dB</td><td><b>5.62 dB</b></td><td>8.16 dB</td></tr>
-<tr><td>8 partials, rolloff 1.2 (organ)</td><td><b>4.52 dB</b></td><td>9.07 dB</td><td>6.58 dB</td><td>5.40 dB</td></tr>
-<tr><td>12 partials, rolloff 1.5 (keys)</td><td><b>3.11 dB</b></td><td>8.44 dB</td><td>6.14 dB</td><td>4.93 dB</td></tr>
+<tr><th>Where</th><th>Examples</th></tr>
+<tr><td>letter notes in motifs</td><td><code>^c4</code> (C up, quarter note), <code>ve8</code> (E down, eighth), <code>veb+</code> (E♭ down, an octave up)</td></tr>
+<tr><td>scale degrees</td><td><code>^3</code>, <code>v5/8.</code> (degree 5 down, dotted eighth)</td></tr>
+<tr><td>chord-relative tones</td><td><code>v3</code>, <code>^5</code></td></tr>
+<tr><td>chord roots</td><td><code>^C</code>, <code>vEb</code>, <code>^F#m7</code></td></tr>
+<tr><td>keys</td><td><code>key: ^D minor</code>, <code>key: vE golden13</code></td></tr>
 </table>
-<p>(A single sine has a crest factor of 3.01 dB.) The phases of steady low partials are largely inaudible, so the choice
-affects headroom rather than color; what the clean instruments really need from the phases is that they are fixed.</p>
-<p><b>Why drift destroys beats.</b> A beat is a slow, regular change in the phase relation of two nearly equal partials.
-If the partials themselves wander in frequency by as much as the beat rate, the relation is no longer regular. In the
-drifting example, the 8th partial of the 110 Hz voice (880 Hz) swings by about ±5 Hz under a ±10-cent vibrato,
-comparable to the beat rates of 6–12 Hz. Measured on the envelope of the rendered signal (its 10 ms RMS, 8 s with a
-Hann window, amplitude spectrum), the components at the four golden beat rates 6.13, 7.58, 9.37 and 12.26 Hz stand
-about 350, 310, 51 and 750 times above the median of the 3–30 Hz band for the stable chord, and only about 3.7, 3.0,
-1.2 and 7.2 times for the drifting one. (The largest envelope component in that band, in both versions, is at 26 Hz:
-the difference of the two lowest fundamentals, 110 and 135.97 Hz, heard as roughness rather than as a countable
-beat.)</p>
-<pianoroll edo="36" notes="A2 vC#3 ^E3 G#3" labels="Ag7" title="The drift example's chord (36-ET spelling of the exact ratios)"></pianoroll>
+<p><b>Chord symbols.</b> On top of the Western qualities (C, Cm, Cdim, Caug, Csus4, C7, Cmaj7, Cm7, Cm7b5, Cdim7, C6, Cm6,
+C9, Cadd9 and others), 36edo songs have the golden family:</p>
+<table>
+<tr><th>Symbol</th><th>Notes on C</th><th>Sixth-steps</th><th>Meaning</th></tr>
+<tr><td><code>Cg</code></td><td>C vE ^G</td><td>0, 11, 22</td><td>golden triad, exact 1 : 2/φ : 4/φ²</td></tr>
+<tr><td><code>Cg7</code></td><td>C vE ^G B</td><td>0, 11, 22, 33</td><td>golden seventh, exact 1 : 2/φ : 4/φ² : 8/φ³</td></tr>
+<tr><td><code>Cs</code></td><td>C ^E♭ vG</td><td>0, 10, 20</td><td>silver triad, the average of C, Cm, Cdim</td></tr>
+<tr><td><code>CT13</code></td><td>C ^E vA</td><td>0, 13, 26</td><td>bronze triad, golden's passing partner</td></tr>
+<tr><td><code>C(v3,^5)</code></td><td>C vE ^G</td><td>0, 11, 22</td><td>alteration list: any chord tone bent by sixth-steps</td></tr>
+<tr><td><code>vCg/G</code></td><td>vC ^E♭ G over G</td><td>35, 10, 21</td><td>slash: a bass note (here the golden six-four)</td></tr>
+</table>
+<p><b>Golden keys.</b> <code>key: C golden7</code>, <code>golden13</code>, <code>silver13</code> (and golden3, 4, 10, 23) make
+the golden scales of <a href="ch:ch23#golden-scales">Chapter 23</a> available to scale-degree motifs. In
+<code>golden7</code>, degree 0 is C, 1 is C♯, 2 is vE, 3 is vF, 4 is ^G, 5 is ^A♭, 6 is B and 7 is the octave. The
+melody of the second example is</p>
+<pre><code>tune: {deg: "0/4 2 4 6 | 7/2 6/4 4 | 3/4 2 1 2 | 0/1", octave: 5}</code></pre>
+<p>which reads: degree 0 as a quarter note, then degrees 2, 4, 6 (durations are sticky), the octave as a half note, and so
+on: C5 vE5 ^G5 B5 | C6 B5 ^G5 | vF5 vE5 C♯5 vE5 | C5.</p>
 </div>
 <div class="layer derive">
-<p><b>Crest factor.</b> $\mathrm{CF} = 20\log_{10}\big(\max|x| / \sqrt{\overline{x^2}}\big)$. A single sine has
-$\mathrm{CF} = 20\log_{10}\sqrt2 = 3.01$ dB. For $K$ equal partials all starting at their peak (cosine phase) the peak is
-$K$ times one amplitude while the RMS is $\sqrt{K/2}$ times it, so $\mathrm{CF} = 10\log_{10}(2K)$: 12.04 dB for $K = 8$,
-15.05 dB for $K = 16$, as measured.</p>
-<p><b>Smoothness and clicks (theorem).</b> The spectrum of an envelope edge decays with frequency according to how smooth
-the edge is. If the envelope jumps (an abrupt gate), its spectrum falls as $1/f$, about −6 dB per octave, and spreads
-energy far above the tone: a click. If it is continuous with a corner (a linear ramp), the spectrum falls as $1/f^2$,
-−12 dB per octave. If it and its slope are continuous (the raised cosine, whose derivative
-$\tfrac{\pi}{2t_a}\sin(\pi t/t_a)$ is zero at both ends), the spectrum falls as $1/f^3$, −18 dB per octave, and the edge
-is inaudible at ordinary ramp times.</p>
-<p><b>Drift in numbers.</b> A pitch change of $c$ cents multiplies every frequency by $2^{c/1200}$. For partial $k$ of
-fundamental $f_0$ the frequency moves by $k f_0 (2^{c/1200} - 1)$: for $k = 8$, $f_0 = 110$ Hz and $c = 10$, that is
-5.10 Hz, against 0.64 Hz for the fundamental. Upper partials carry the beats, and upper partials drift the most.</p>
+<p><b>From a name to a frequency.</b> SongMap's pitch unit is the semitone (MIDI number), and in 36edo a pitch may be a
+multiple of 1/3. A written note with letter, accidental and octave has MIDI number $m$ (C4 = 60), and $u$ ups and $d$ downs
+move it to $m + (u-d)/3$. In sixth-steps, $s = 3m + u - d$, and with A4 = 440 Hz ($s = 207$),</p>
+$$f = 440\cdot 2^{(s - 207)/36}\ \text{Hz}.$$
+<p>Example: vE4 has $m = 64$, $s = 191$, $f = 440\cdot 2^{-16/36} = 323.34$ Hz. The exact golden third above C4
+(261.63 Hz) is $261.63\cdot 2/\varphi = 323.39$ Hz: the 36-ET note is 0.24 c flat.</p>
+<p><b>Chord qualities as interval lists</b> (in semitones, as the parser stores them):</p>
+$$\texttt{g} = \left(0, \tfrac{11}{3}, \tfrac{22}{3}\right),\quad \texttt{g7} = \left(0, \tfrac{11}{3}, \tfrac{22}{3}, 11\right),\quad \texttt{s} = \left(0, \tfrac{10}{3}, \tfrac{20}{3}\right),\quad \texttt{T13} = \left(0, \tfrac{13}{3}, \tfrac{26}{3}\right).$$
+<p>An alteration list adds $\pm\tfrac13$ per mark to the named chord tone. For <code>C(v3,^5)</code>:
+$(0, 4, 7) + (0, -\tfrac13, +\tfrac13) = (0, \tfrac{11}{3}, \tfrac{22}{3})$, which is exactly <code>Cg</code>.</p>
+<p><b>Golden scales from the chain.</b> A golden scale is a window of the golden chain, whose generator φ is 25
+sixth-steps. golden7 is the chain from index $-3$ to $3$:</p>
+$$\{25j \bmod 36 : j = -3,\dots,3\} = \{33, 22, 11, 0, 25, 14, 3\} = \{0, 3, 11, 14, 22, 25, 33\},$$
+<p>that is C, C♯, vE, vF, ^G, ^A♭, B. golden13 is the window $-6,\dots,6$, and silver13 is golden13 with every ^ and v
+swapped.</p>
 </div>
 </section>
 
-<section id="golden-timbres">
-<h2>Designing golden timbres</h2>
+<section id="passing">
+<h2>Passing placeholders: ~ and ~g</h2>
 <div class="layer hear">
-<p>A harmonic tone puts its partials at 1, 2, 3, 4 times the fundamental. Nothing forces that choice on a synthesizer.
-The next example builds a tone whose partials are golden: the fundamental, then φ times it, then twice it, then φ², and so
-on. It does not sound like an ordinary instrument: more like a bell or a struck glass, with a slightly unearthly ring.</p>
-<audio-ex src="golden_partials" caption="A golden spectrum built partial by partial on 220 Hz: ratios 1, φ, 2, φ², 2φ, 4, φ³, 2φ², 4φ, φ⁴, one per second."></audio-ex>
-<p>No physical instrument makes such a tone. Strings, winds and voices have (nearly) harmonic spectra; a golden
-spectrum exists only digitally. It is a laboratory tone, and the next example is a laboratory experiment. A just major
-triad and an exact golden triad, first on a harmonic tone, then on the golden tone. On the harmonic tone, the major
-triad is the calm one and the golden triad shimmers uneasily. On the golden tone the ranking reverses: the golden triad
-is now the calmer of the two, and the major triad the rougher.</p>
-<audio-ex src="two_spectra" caption="On C4, exact ratios: major 4:5:6 then golden 1 : 2/φ : 4/φ² on a harmonic spectrum; then the same two chords on a golden spectrum. Listen for which chord is calm in each pair."></audio-ex>
+<p>F to G, IV to V, is one of the most common moves there is. The example plays it twice, with two passing chords in between each time. The first time the passing chords come from
+<b>System 1</b>, the strict path: every voice moves in equal steps. The second time they come from <b>System 2</b>, the
+natural path, where two golden chords in a row carry the music up the "golden escalator". Both were written with
+placeholders, not chord names: the engine worked out which chords lie on the way.</p>
+<audio-ex src="strict_vs_natural" caption="F → G twice. First F:1 ~:0.5 ~:0.5 G:2 (System 1, strict: F – vF♯dim(v3) – vA♭g7(v7)/^F♯ – G), then F:1 ~g:0.5 ~g:0.5 G:2 (System 2: F – vF♯g – ^F♯g – G, two golden chords)."></audio-ex>
 </div>
 <div class="layer understand">
-<p><b>The golden spectrum.</b> The clean instrument's golden mode uses the frequency ratios $2^m\varphi^n$ ($m, n \ge 0$),
-sorted by size. The first ten:</p>
+<p><b>Placeholders.</b> In a harmony string, a token that begins with <code>~</code> is not a chord but a request:
+"put here the passing chord that the voice leading from the previous chord to the next one picks out". The theory behind
+it is in <a href="ch:ch27#uniform-path">Chapter 27</a> (System 1) and <a href="ch:ch28#uneven">Chapter 28</a> (System 2).</p>
 <table>
-<tr><th>rank $k$</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
-<tr><td>ratio</td><td>1</td><td>φ</td><td>2</td><td>φ²</td><td>2φ</td><td>4</td><td>φ³</td><td>2φ²</td><td>4φ</td><td>φ⁴</td></tr>
-<tr><td>value</td><td>1</td><td>1.618</td><td>2</td><td>2.618</td><td>3.236</td><td>4</td><td>4.236</td><td>5.236</td><td>6.472</td><td>6.854</td></tr>
-<tr><td>cents</td><td>0</td><td>833.09</td><td>1200</td><td>1666.18</td><td>2033.09</td><td>2400</td><td>2499.27</td><td>2866.18</td><td>3233.09</td><td>3332.36</td></tr>
+<tr><th>Token</th><th>Meaning</th></tr>
+<tr><td><code>~</code></td><td>System 1, the strict path: every voice moves uniformly (a half step as 1+1+1 sixth-steps, a whole step as 2+2+2)</td></tr>
+<tr><td><code>~g</code></td><td>System 2, the natural path: uneven monotone splits allowed, golden chords preferred</td></tr>
+<tr><td><code>~g7</code></td><td>System 2, golden sevenths preferred</td></tr>
+<tr><td><code>~ ~</code>, <code>~g ~g</code></td><td>two in a row: both passing chords P1 and P2 of one path</td></tr>
+<tr><td><code>~g@1/3</code>, <code>~g@2/3</code></td><td>one placeholder forced to the first or second position of the path</td></tr>
 </table>
-<figure class="svgfig"><svg class="fig" viewBox="0 0 640 245" role="img" aria-label="Harmonic and golden spectra, ten partials each"><text x="60" y="16" class="t">Ten partials, amplitude k^-1.3, log-frequency axis (ratio to the fundamental)</text><line x1="60" y1="100" x2="620" y2="100" stroke="var(--line)"/><text x="54" y="96" text-anchor="end" class="lab">harmonic</text><line x1="60.0" y1="100" x2="60.0" y2="36.0" stroke="currentColor" stroke-width="3"/><text x="60.0" y="113" text-anchor="middle" class="lab">1</text><line x1="221.9" y1="100" x2="221.9" y2="74.0" stroke="currentColor" stroke-width="3"/><text x="221.9" y="113" text-anchor="middle" class="lab">2</text><line x1="316.6" y1="100" x2="316.6" y2="84.7" stroke="currentColor" stroke-width="3"/><text x="316.6" y="113" text-anchor="middle" class="lab">3</text><line x1="383.8" y1="100" x2="383.8" y2="89.4" stroke="currentColor" stroke-width="3"/><text x="383.8" y="113" text-anchor="middle" class="lab">4</text><line x1="435.9" y1="100" x2="435.9" y2="92.1" stroke="currentColor" stroke-width="3"/><text x="435.9" y="113" text-anchor="middle" class="lab">5</text><line x1="478.4" y1="100" x2="478.4" y2="93.8" stroke="currentColor" stroke-width="3"/><text x="478.4" y="113" text-anchor="middle" class="lab">6</text><line x1="514.4" y1="100" x2="514.4" y2="94.9" stroke="currentColor" stroke-width="3"/><text x="514.4" y="113" text-anchor="middle" class="lab">7</text><line x1="545.6" y1="100" x2="545.6" y2="95.7" stroke="currentColor" stroke-width="3"/><text x="545.6" y="113" text-anchor="middle" class="lab">8</text><line x1="573.1" y1="100" x2="573.1" y2="96.3" stroke="currentColor" stroke-width="3"/><text x="573.1" y="113" text-anchor="middle" class="lab">9</text><line x1="597.7" y1="100" x2="597.7" y2="96.8" stroke="currentColor" stroke-width="3"/><text x="597.7" y="113" text-anchor="middle" class="lab">10</text><line x1="60" y1="200" x2="620" y2="200" stroke="var(--line)"/><text x="54" y="196" text-anchor="end" class="lab">golden</text><line x1="60.0" y1="200" x2="60.0" y2="136.0" stroke="var(--gold)" stroke-width="3"/><text x="60.0" y="213" text-anchor="middle" class="lab">1</text><line x1="172.4" y1="200" x2="172.4" y2="174.0" stroke="var(--gold)" stroke-width="3"/><text x="172.4" y="224" text-anchor="middle" class="lab">1.62</text><line x1="221.9" y1="200" x2="221.9" y2="184.7" stroke="var(--gold)" stroke-width="3"/><text x="221.9" y="213" text-anchor="middle" class="lab">2</text><line x1="284.8" y1="200" x2="284.8" y2="189.4" stroke="var(--gold)" stroke-width="3"/><text x="284.8" y="224" text-anchor="middle" class="lab">2.62</text><line x1="334.3" y1="200" x2="334.3" y2="192.1" stroke="var(--gold)" stroke-width="3"/><text x="334.3" y="213" text-anchor="middle" class="lab">3.24</text><line x1="383.8" y1="200" x2="383.8" y2="193.8" stroke="var(--gold)" stroke-width="3"/><text x="383.8" y="224" text-anchor="middle" class="lab">4</text><line x1="397.1" y1="200" x2="397.1" y2="194.9" stroke="var(--gold)" stroke-width="3"/><text x="397.1" y="213" text-anchor="middle" class="lab">4.24</text><line x1="446.6" y1="200" x2="446.6" y2="195.7" stroke="var(--gold)" stroke-width="3"/><text x="446.6" y="224" text-anchor="middle" class="lab">5.24</text><line x1="496.1" y1="200" x2="496.1" y2="196.3" stroke="var(--gold)" stroke-width="3"/><text x="496.1" y="213" text-anchor="middle" class="lab">6.47</text><line x1="509.5" y1="200" x2="509.5" y2="196.8" stroke="var(--gold)" stroke-width="3"/><text x="509.5" y="224" text-anchor="middle" class="lab">6.85</text></svg><figcaption>Ten partials of a harmonic tone (top) and a golden tone (bottom), on a
-logarithmic frequency axis. The golden tone keeps the octaves 1, 2, 4 and fills the gaps with golden sixths.</figcaption></figure>
-<p><b>Why it works: matching timbre to tuning.</b> William Sethares (<i>Tuning, Timbre, Spectrum, Scale</i>, 1998)
-showed how to choose a timbre so that a given tuning's intervals become smooth: put the partials where the intervals'
-other partials will land. Golden chords are built from golden intervals, so a golden spectrum lines the partials up.
-The count below is exact (computed for ten partials per tone, exact ratios):</p>
+<p>A single placeholder takes the better of the two chords on the path, ranked golden, then golden over a pedal, then
+silver or bronze, then planing or Western, then micro-altered. Because progressions loop, a placeholder at the end of a
+string bridges back to its first chord, as in the first example of this chapter.</p>
+<p><b>What the placeholders resolve to.</b> These were computed by SongMap's passing engine
+(<code>songmap/theory/passing.py</code>):</p>
 <table>
-<tr><th>Chord</th><th>harmonic spectrum: exact coincidences / near misses (&lt; 60 c)</th><th>golden spectrum: exact / near</th></tr>
-<tr><td>just major 4:5:6</td><td>6 / 2</td><td>0 / 12</td></tr>
-<tr><td>just minor 10:12:15</td><td>6 / 2</td><td>0 / 12</td></tr>
-<tr><td>golden 1 : 2/φ : 4/φ²</td><td>0 / 9</td><td>12 / 0</td></tr>
+<tr><th>Harmony string</th><th>Resolved chords</th></tr>
+<tr><td><code>G:1 ~:0.5 ~:0.5 C:2</code></td><td>G – vE♭T13/G – vCg/G – C</td></tr>
+<tr><td><code>C:1.5 ~:0.5 F:2</code></td><td>C – vFg/C – F</td></tr>
+<tr><td><code>C:1 ~:0.5 ~:0.5 Ab:2</code></td><td>C – Cg – ^E♭T13/C – A♭</td></tr>
+<tr><td><code>F:1 ~:0.5 ~:0.5 G:2</code></td><td>F – vF♯dim(v3) – vA♭g7(v7)/^F♯ – G</td></tr>
+<tr><td><code>F:1 ~g:0.5 ~g:0.5 G:2</code></td><td>F – vF♯g – ^F♯g – G</td></tr>
+<tr><td><code>G:1 ~g:0.5 ~g:0.5 Am:2</code></td><td>G – vA♭g – A♭g – Am</td></tr>
+<tr><td><code>Dm:1 ~g:0.5 ~g:0.5 G:2</code></td><td>Dm – Dg – vGg/D – G</td></tr>
+<tr><td><code>G7:1.5 ~g7:0.5 Abmaj7:2</code></td><td>G7 – vCg/vA♭ – A♭maj7</td></tr>
 </table>
-<p>Coincident partials fuse; near misses beat and make roughness. On the golden spectrum the golden triad has twelve exact
-coincidences and no near misses at all, while the major triad has none and twelve near misses. The Sethares roughness
-model gives the same verdict in numbers, on C4 (<a href="ch:ch26#golden-spectra">Chapter 26</a>): with harmonic overtones
-major 1.32 and golden 1.50; with golden overtones golden <b>2.08</b> against major 3.17 and minor 3.26. That is the
-<b>timbre flip</b>: the timbre decides which chord the model ranks smoothest. Compare the numbers only within one
-timbre: 2.08 on the golden spectrum is not "rougher" than 1.50 on the harmonic one in any meaningful sense, because the
-two spectra have different partials to interact.</p>
-<p><b>A laboratory, not an instrument.</b> On the digital golden spectrum the exact golden triad is a strict local
-minimum of roughness: every triad within 5–30 c of it is rougher, by 0.11–0.46. On harmonic tones, the spectra of all
-real instruments, it is not: roughness and harmonic entropy fall steadily from the golden triad toward just major, and
-C major remains the smoothest chord and the deepest rest (<a href="ch:ch26#timbre-flip">Chapter 26</a>). In the
-author's model the golden triad is a delicate <i>local</i> home even there, a place one can dwell; that is a musical
-claim to test by listening, not something these models show. The golden spectrum is a way to immerse oneself in golden
-harmony on its own terms, and then to bring what was learned back to harmonic instruments.</p>
-<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4" labels="C (4:5:6) ; Cg (1 : 2/φ : 4/φ²)" title="The two chords of the timbre-flip example (36-ET spelling)"></pianoroll>
-<p><b>Designing your own.</b> A golden timbre has the same other controls as any clean tone. A golden bell
-(<code>clean/glass</code>) uses ten golden partials, rolloff 1.3 and a 6 s decay with the upper partials fading faster; a
-golden pad (<code>clean/golden_pad</code>) uses rolloff 1.4 and a slow 2.5 s attack. Fewer partials make a purer, more
-flute-like golden tone; a lower rolloff a brighter, more metallic one. The essential choice is the set of ratios.</p>
+<p>The F → G rows show the difference between the systems. On the strict path every voice of F → G moves by a whole
+step or a half step in equal parts, and the chords in between are a micro-altered diminished triad and an incomplete
+golden seventh: neither is golden, as the quality theorem predicts for a move between roots a whole step apart
+(<a href="ch:ch27#quality">Chapter 27</a>). On the natural path two voices split unevenly, and both passing chords become
+golden triads on the chromatic root between F and G: the golden escalator of
+<a href="ch:ch28#escalator">Chapter 28</a>. The two piano rolls show the engine's four lines for each system; they are
+also exactly what the example's held organ plays.</p>
+<pianoroll edo="36" notes="F2 A3 C4 F4 ; vF#2 ^Ab3 vC4 vF#4 ; ^F#2 vAb3 ^B3 ^F#4 ; G2 G3 B3 G4" labels="F ; vF#dim(v3) ; vAbg7(v7)/^F# ; G" title="System 1, the engine's four lines: F → G"></pianoroll>
+<pianoroll edo="36" notes="F2 A3 C4 F4 ; vF#2 ^A3 C#4 vF#4 ; ^F#2 Bb3 vD4 ^F#4 ; G2 B3 D4 G4" labels="F ; vF#g ; ^F#g ; G" title="System 2, the engine's four lines: F → vF♯g → ^F♯g → G"></pianoroll>
 </div>
 <div class="layer derive">
-<p><b>Coincidence theorem (exact tuning).</b> Let the chord be $1 : 2/\varphi : 4/\varphi^2$ on a golden spectrum
-$\{2^m\varphi^n\}$. A partial of the golden third is $\tfrac{2}{\varphi}\cdot 2^m\varphi^n = 2^{m+1}\varphi^{n-1}$, which is a
-partial of the root whenever $n \ge 1$. A partial of the golden fifth is $\tfrac{4}{\varphi^2}\cdot 2^m\varphi^n =
-2^{m+2}\varphi^{n-2}$, a root partial whenever $n \ge 2$. So most partials of the upper notes land exactly on partials of
-the root (with a finite set of partials, those near the top of the list may have no partner).</p>
-<p><b>The major third never coincides (theorem).</b> A coincidence between the root and a just third would need
-$2^a\varphi^b = 5/4$ for integers $a, b$. If $b \ne 0$, $\varphi^b = F_b\varphi + F_{b-1}$ (with Fibonacci numbers extended to
-negative indices) is irrational, so $2^a\varphi^b$ is irrational; if $b = 0$, $2^a = 5/4$ is impossible. The same argument
-excludes 3/2 and 6/5. On a golden spectrum, rational intervals other than octaves never fuse.</p>
-<p><b>In 36-ET.</b> The 36-ET golden third is 0.24 c flat of $2/\varphi$, so its exact coincidences become near
-coincidences: at a partial frequency of 1 kHz the two partials differ by $1000\,(2^{0.24/1200} - 1) = 0.14$ Hz, a beat
-every seven seconds, heard as a slow breathing rather than roughness.</p>
-</div>
-</section>
-
-<section id="mixing">
-<h2>Mixing for clarity</h2>
-<div class="layer hear">
-<p>The last stage of making a track, mixing and mastering, usually adds processing: compression to even out loudness,
-limiting and saturation to make it louder and denser. This book's audio uses none of it, and the example shows why. First,
-two pure tones beating six times a second, clean and then through a fast compressor matched to the same loudness: the
-compressor follows the beat and pushes its peaks down, so the beat becomes shallower. Then a pure major third, clean and
-then through a saturation curve: new pitches appear that were never played, 330 Hz (a fourth below the lower note)
-and 660 Hz (a fifth above it).</p>
-<audio-ex src="processing" caption="A 6 Hz beat (220 + 226 Hz) clean, then fast-compressed: the beat gets shallower. A just major third (440 + 550 Hz) clean, then saturated: new tones at 330 and 660 Hz appear."></audio-ex>
-</div>
-<div class="layer understand">
-<p><b>Gain staging.</b> In a SongMap song, each part has a gain in decibels (<code>gain_db</code>) and an optional send to a
-hall reverb (<code>send: {hall: 0.3}</code>). For dry demonstrations the examples omit the reverb; for musical examples a
-send of 0.2–0.4 adds space without blurring the harmony. Balance is set by these gains, not by processing.</p>
-<p><b>Two masters.</b> SongMap has a mastering chain for video soundtracks and a clean one for listening experiments:</p>
-<table>
-<tr><th></th><th><code>master: clean</code> (this book)</th><th>default master (video soundtracks)</th></tr>
-<tr><td>EQ</td><td>none</td><td>low shelf −12 dB at 30 Hz</td></tr>
-<tr><td>compression</td><td>none</td><td>gentle glue: 2:1 above −20 dB, attack 30 ms, release 200 ms</td></tr>
-<tr><td>loudness</td><td>none</td><td>normalized to −14 LUFS (ITU-R BS.1770)</td></tr>
-<tr><td>limiting</td><td>none</td><td>look-ahead limiter, then true peak trimmed to −1 dBTP</td></tr>
-<tr><td>level</td><td>peak scaled to −1 dBFS</td><td>as above</td></tr>
-</table>
-<p><b>What processing does to designed sound (measurements).</b> The example's numbers:</p>
-<ul>
-<li><b>Compression.</b> The 6 Hz beat of 220 + 226 Hz has a depth of about 15.8 dB (95th against 10th percentile of
-its 10 ms RMS envelope). A fast compressor (threshold −30 dB, 8:1, attack 2 ms, release 40 ms) reduces it to about
-9.9 dB. A slow glue setting like the default master's barely changes it (about 15.2 dB with 3:1, 30 ms, 200 ms).</li>
-<li><b>Saturation.</b> The tanh curve used by the project's original prototype master (drive 1.6) turns 440 + 550 Hz into
-a signal with components at 330 Hz and 660 Hz about 20 dB below the notes (19.6 dB in a spectrum of the rendered
-example), plus others above the notes, such as $2\cdot 440 + 550 = 1430$ Hz at the same level. These are real
-combination tones created by
-the processor, not by the ear, and they would contaminate exactly the experiments of
-<a href="ch:ch26#combination-tones">Chapter 26</a>.</li>
-</ul>
-<p>So the clean master does one thing: it scales the whole mix so that its highest peak sits at −1 dBFS, leaving every
-partial and every beat as the instruments made them.</p>
-<p><b>Loudness for comparisons.</b> Because the clean master normalizes peaks, not loudness, two examples can differ in
-perceived loudness. When loudness matters, as in the blind comparisons of <a href="ch:ch40#testing">Chapter 40</a>, the
-excerpts are matched by measured loudness: SongMap's QA report computes integrated loudness by the ITU-R BS.1770 method.</p>
-</div>
-<div class="layer derive">
-<p><b>The clean master.</b> $y = x \cdot 10^{-1/20} / \max_{t,c}|x_c(t)|$, a single gain for the whole file.</p>
-<p><b>BS.1770 integrated loudness</b> (as implemented in SongMap's QA, at 48 kHz):</p>
+<p><b>The passing-path algorithm.</b> For a move $X \to Y$ the engine works entirely in integer sixth-steps.</p>
 <ol>
-<li><b>K-weighting.</b> Each channel passes through two second-order filters: a high-frequency shelf boost of about 4 dB and a
-high-pass that discounts the lowest frequencies, modeling the ear's sensitivity.</li>
-<li><b>Blocks.</b> Mean squares $z_{c,j}$ of the weighted channels over 400 ms blocks, overlapping by 75% (a new block every
-100 ms). Block loudness $\ell_j = -0.691 + 10\log_{10}\sum_c G_c z_{c,j}$, with $G_c = 1$ for left and right.</li>
-<li><b>Gating.</b> Discard blocks below −70 LUFS (absolute gate); compute the mean of the rest; discard blocks more than
-10 LU below that mean (relative gate).</li>
-<li><b>Integrated loudness</b> $= -0.691 + 10\log_{10}$ of the mean of $\sum_c G_c z_{c,j}$ over the surviving blocks, in
-LUFS.</li>
+<li><b>Voices.</b> Four lines: a bass on the root, in the octave from E2 up, and three upper voices, each in the octave
+from G3 up. For a triad the upper voices are its three tones, or (with a penalty) the root doubled with the third and
+no fifth; for a seventh chord, third–fifth–seventh or (with a smaller penalty) third–seventh–root.</li>
+<li><b>Targets.</b> Every assignment of $Y$'s upper tones to the three upper voices is tried. Each voice's displacement
+$D$ is the nearest-way distance, in $[-18, 18)$ sixth-steps. Assignments in which every voice moves at most a whole
+step ($|D| \le 6$) are preferred; otherwise the ones with least total motion.</li>
+<li><b>Schedules.</b> Each displacement is split into three moves $(d_1, d_2, d_3)$, one per step of the path
+$X \to P_1 \to P_2 \to Y$:
+<ul>
+<li>System 1: $(D/3, D/3, D/3)$, uniform. A sixth-step-sized displacement not divisible by 3 moves as early as evenly
+possible.</li>
+<li>System 2: a half step stays $(1,1,1)$; other moves may use any monotone split with each part at most 3 sixth-steps
+(a semitone).</li>
+<li>A leap larger than a whole step (often the bass) holds and moves only on the arrival chord: a pedal.</li>
+</ul></li>
+<li><b>Classification.</b> $P_1$ and $P_2$ are named: golden (g, g7), golden over a pedal, equal-third (silver, bronze),
+Western, planing (a Western chord off the 12-ET layer) or micro-altered (nearest chord plus alterations).</li>
+<li><b>Choice.</b> Among all candidates the engine prefers, in strict order of priority: more golden sevenths (when
+<code>~g7</code> asks for them); more golden chords, counting golden over a pedal (when <code>~g</code> asks); more exact
+golden chords; $P_1 \ne P_2$; fewer parallel fifths or octaves between $X$ and $Y$; less total motion (plus the small
+penalties for incomplete voicings); and finally more even splits.</li>
 </ol>
-<p>Matching two excerpts to loudness $L^\ast$ multiplies each by $10^{(L^\ast - L)/20}$.</p>
-<p><b>Where the new tones come from (theorem).</b> For small inputs $\tanh u = u - u^3/3 + \dots$. With
-$u = a\cos\omega_1 t + b\cos\omega_2 t$, the cube contains the terms $\tfrac34 a^2 b\cos\big((2\omega_1 - \omega_2)t\big)$ and
-$\tfrac34 a b^2\cos\big((2\omega_2 - \omega_1)t\big)$. Any odd-order nonlinearity therefore creates the third-order
-intermodulation tones $2f_1 - f_2$ and $2f_2 - f_1$: for 440 and 550 Hz, exactly 330 and 660 Hz.</p>
+<p>For System 1 the uniform schedule makes the path unique once the targets are chosen, and voice by voice</p>
+$$P_1 = \tfrac{2X + Y}{3}, \qquad P_2 = \tfrac{X + 2Y}{3},$$
+<p>the averaging principle of <a href="ch:ch25#averaging">Chapter 25</a> (voices that leap are held instead, as the bass
+is here). For V → I in C the engine's lines, in sixth-steps (C4 = 180), are</p>
+<pianoroll edo="36" notes="G2 G3 B3 D4 ; G2 G3 ^B3 vEb4 ; G2 G3 vC4 ^Eb4 ; C3 G3 C4 E4" labels="G ; vEbT13/G ; vCg/G ; C" title="V → I, strict path: the engine's lines"></pianoroll>
+<table>
+<tr><th>voice</th><th>G</th><th>$P_1$</th><th>$P_2$</th><th>C</th><th>moves</th></tr>
+<tr><td>soprano</td><td>186 (D4)</td><td>188 (vE♭4)</td><td>190 (^E♭4)</td><td>192 (E4)</td><td>+2 +2 +2</td></tr>
+<tr><td>alto</td><td>177 (B3)</td><td>178 (^B3)</td><td>179 (vC4)</td><td>180 (C4)</td><td>+1 +1 +1</td></tr>
+<tr><td>tenor</td><td>165 (G3)</td><td>165</td><td>165</td><td>165 (G3)</td><td>0 0 0</td></tr>
+<tr><td>bass</td><td>129 (G2)</td><td>129</td><td>129</td><td>144 (C3)</td><td>leap: held, then +15</td></tr>
+</table>
+<p>$P_1 = \{G, {}^\wedge B, {}^v E\flat\}$ is the bronze triad vE♭T13 over G and $P_2 = \{G, {}^v C, {}^\wedge E\flat\}$ is
+the golden triad vCg over G: the golden six-four.</p>
+</div>
+</section>
+
+<section id="voiced">
+<h2>Voiced styles</h2>
+<div class="layer hear">
+<p>A chord symbol says which notes; a <i>style</i> says how they are played. The example takes one progression (C – Am – F
+– G, with the strict V → I path at the end) and plays it five ways: held chords, a comping rhythm, steady quarter notes,
+the top and bottom voices alone as melody and bass, and a gentle arpeggio over a bass in half notes. Listen to the
+passing chords in each: in the held version they are heard as chords, in the line version as a melody that climbs
+through sixth-steps.</p>
+<audio-ex src="voiced_styles" caption="One progression, five styles: hold, comp, pulse, top + bassline (the soprano as a melody over the voice-led bass), and a gentle8 arpeggio with a roots bass. The passing chords come out differently in each."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Styles as data.</b> A style is a small YAML file in the engine. The <i>voiced</i> styles share one idea: the
+song's chords are voiced once, as four parts in the song's tuning, and each style plays some of those voices in some
+rhythm. Because the voicing is shared, a <code>top</code> melody is exactly the soprano of the <code>hold</code>
+chords, and a <code>bassline</code> exactly their lowest voice.</p>
+<table>
+<tr><th>Style</th><th>Plays</th><th>Rhythm</th></tr>
+<tr><td><code>hold</code></td><td>all four voices</td><td>struck on each chord change, held</td></tr>
+<tr><td><code>comp</code></td><td>all four voices</td><td><code>x..x.x..x..x.x..</code> (one character per sixteenth): the downbeat, then 0.75, 1.25, 2, 2.75 and 3.25 beats after it, plus every chord change</td></tr>
+<tr><td><code>pulse</code></td><td>all four voices</td><td>every quarter note</td></tr>
+<tr><td><code>top</code></td><td>the soprano, an octave up</td><td>one note per chord</td></tr>
+<tr><td><code>bassline</code></td><td>the lowest voice, an octave down</td><td>one note per chord</td></tr>
+</table>
+<p>Other styles are chord-relative patterns rather than voiced parts: arpeggios (<code>gentle8</code>, <code>roll16</code>)
+and bass figures (<code>roots</code>, half-note roots; <code>root5</code>, root and fifth).</p>
+<p><b>What "voice-led" means here.</b> There are two cases.</p>
+<ul>
+<li><b>Ordinary chords</b> are voice-led: the style takes the chord's pitch classes and chooses, among all playable
+voicings in the range D3–D5, the one that moves least from the previous chord (Derive layer).</li>
+<li><b>Passing paths</b> are played as the passing engine computed them. A chord produced by <code>~</code>,
+<code>~g</code> or <code>~g7</code>, and the two chords at the ends of its path, are played on the engine's own four
+lines (§43.3): the bass and the three upper voices, ordered low to high. The whole path is moved by one octave shift
+toward the middle of the part's range, so every sub-chromatic line, slash bass included, is heard exactly as computed.
+The chord names do not change.</li>
+</ul>
+<p>So in the strict F → G example the held organ plays the System 1 roll of §43.3 note for note: the bass climbs
+F – vF♯ – ^F♯ – G two sixth-steps at a time, so that ^F♯ sounds as the slash bass of vA♭g7(v7)/^F♯, and the arrival G is
+the engine's G–G–B–G, with the fifth omitted. Because the octave shift is chosen from the three upper voices, the
+engine's bass can lie below the style's range: here it is F2, and the <code>bassline</code> style, an octave lower
+still, plays F1. When two passing paths in a progression share a chord (… F ~g ~g G ~ ~ C …), the second path continues
+from the voicing on which the first arrived, but only if that gives the same passing chords; otherwise it starts from
+its own standard voicing, so a chord's name never depends on its neighbours.</p>
+<aside class="box note"><p><b>A habit of the voicer.</b> Outside passing paths, because the voicing cost only mildly
+penalizes a bass that is not the root, held chords often come out with the fifth in the bass (C as G–C–E–C). Several examples in this book therefore
+add a separate bass part, either a written bass line or the <code>roots</code> style, for a firm cadence.</p></aside>
+</div>
+<div class="layer derive">
+<p><b>Candidate voicings.</b> For a chord with pitch classes $\mathcal P$ and a range $[\ell, h]$ (default D3–D5, MIDI 50–74),
+a candidate is a set of four distinct grid pitches $c_1 &lt; c_2 &lt; c_3 &lt; c_4$ in the range, each in $\mathcal P$, such
+that</p>
+<ul>
+<li>every chord tone is present (the fifth may be dropped when the chord has more tones than voices);</li>
+<li>neighbouring voices are at most an octave apart, and $c_4 - c_1$ is at most two octaves.</li>
+</ul>
+<p><b>Cost.</b> With $r$ the root, the voicing cost is</p>
+$$\kappa(c) = \#\{\text{doubled non-root pitch classes}\} + \begin{cases}0 & c_1 \equiv r\\ 2 & 0 &lt; (c_1 - r) \bmod 12 \le 2\\ 0.5 & \text{otherwise.}\end{cases}$$
+<p><b>Choice.</b> For the first chord (or after <code>N.C.</code>), with center $\mu = (\ell + h)/2 = 62$,</p>
+$$c^\ast = \arg\min_c\ \big|\bar c - \mu\big| + 0.1\,(c_4 - c_1) + \kappa(c);$$
+<p>for every later chord, with $p$ the previous voicing,</p>
+$$c^\ast = \arg\min_c\ \sum_{i=1}^{4} |c_i - p_i| + 0.05\,\big|\bar c - \mu\big| + \kappa(c).$$
+<p>Distances are in semitones on the song's grid, so in 36edo a voice can move by $\tfrac13$. The root-position voicing
+C3–C4–E4–G4 is outside the default range (C3 = 48), and the second-inversion voicing G3–C4–E4–C5 scores
+$0.75 + 1.7 + 0.5 = 2.95$, the lowest of all candidates, against $3.75 + 1.2 + 0 = 4.95$ for the root-position
+C4–E4–G4–C5: that is the arithmetic behind the box above.</p>
+<p><b>Passing paths.</b> A placeholder's chord and the two chords at the ends of its path carry the engine's lines
+$(\ell_0, \ell_1, \ell_2, \ell_3)$ in semitones, bass first, the upper lines ordered by their pitch in the first chord. A
+four-voice style plays $\ell_i + 12k$, with one integer $k$ for the whole path, fixed by the path's first chord:</p>
+$$k = \operatorname{round}\!\left(\frac{\mu - \tfrac13(\ell_1 + \ell_2 + \ell_3)}{12}\right).$$
+<p>For F → G the upper lines start at A3, C4, F4 (MIDI 57, 60, 65), whose mean 60.67 is within half an octave of
+$\mu = 62$, so $k = 0$. The ordinary chords after a path are voice-led from its arrival voicing by the rule above.</p>
 </div>
 <h3>Exercises</h3>
 <div class="exercise">
-<p><b>Exercise 43.1 (calculation).</b> A clean tone has 8 harmonic partials with rolloff 2. What fraction of its normalization
-sum does the fundamental contribute?</p>
-<details class="answer"><summary>Answer</summary><p>$\sum_{k=1}^{8} k^{-2} = 1.5274$, so the fundamental's share is
-$1/1.5274 = 0.655$, about two thirds.</p></details>
+<p><b>Exercise 43.1 (reading).</b> How long is a song with <code>tempo: 72</code>, <code>meter: "4/4"</code>, two sections of
+4 bars and <code>tail_seconds: 2</code>? Do its beats land on whole frames at 30 fps?</p>
+<details class="answer"><summary>Answer</summary><p>A bar lasts $60\cdot 4/72 = 3.333$ s; 8 bars = 26.67 s; plus 2 s = 28.67 s.
+$60\cdot 30/72 = 25$ frames per beat, an integer: yes.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 43.2 (listening).</b> In the envelopes example, which edge is louder as a click, the start or the end of
-the abrupt note? Why might they differ?</p>
-<details class="answer"><summary>Answer</summary><p>They can differ because the click's size depends on the waveform's value at
-the moment of the jump: a jump from or to a value near zero clicks less than a jump near a peak. A raised-cosine edge
-removes the jump whatever the phase.</p></details>
+<p><b>Exercise 43.2 (notation).</b> Write the frequency of ^G4 in 36-ET and compare it with the exact golden fifth above
+C4.</p>
+<details class="answer"><summary>Answer</summary><p>G4 is MIDI 67, so $s = 202$ and $f = 440\cdot 2^{-5/36} = 399.62$ Hz. The exact
+golden fifth is $261.63\cdot 4/\varphi^2 = 399.73$ Hz; 36-ET is 0.49 c flat.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 43.3 (proof).</b> Show that on a golden spectrum the golden seventh $8/\varphi^3$ above a root has partials
-$2^{m+3}\varphi^{n-3}$, and say which of them coincide with root partials.</p>
-<details class="answer"><summary>Answer</summary><p>$\tfrac{8}{\varphi^3}\cdot 2^m\varphi^n = 2^{m+3}\varphi^{n-3}$. It is a root
-partial (of the form $2^{m'}\varphi^{n'}$ with $n' \ge 0$) exactly when $n \ge 3$.</p></details>
+<p><b>Exercise 43.3 (calculation).</b> On the strict path C → A♭ (bass C held), the voices C4, E4 and G3 move to C4, E♭4 and
+A♭3. Compute $P_1$ and name it.</p>
+<details class="answer"><summary>Answer</summary><p>In sixth-steps: C4 180 → 180; E4 192 → 189, so $P_1$ = 191 (vE4); G3 165 → 168,
+so $P_1$ = 166 (^G3). $P_1$ = C, vE, ^G = Cg: the golden triad is one third of the way from C to A♭, exactly as the
+table above reports.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 43.4 (calculation).</b> Two tones of 300 and 400 Hz pass through a saturator. At which frequencies do the
-third-order intermodulation tones appear, and what musical relation do they have to the input?</p>
-<details class="answer"><summary>Answer</summary><p>$2\cdot 300 - 400 = 200$ Hz and $2\cdot 400 - 300 = 500$ Hz. With the input
-a fourth (4:3), the new tones make the frequencies 200, 300, 400, 500 Hz: harmonics 2–5 of 100 Hz.</p></details>
+<p><b>Exercise 43.4 (writing).</b> Write a harmony string for I – vi – IV – V – I in C in which the IV → V move passes through
+the golden escalator and the V → I move through the golden six-four, each bar of four beats.</p>
+<details class="answer"><summary>Answer</summary><p>One solution: <code>"C:1 Am:1 F:0.5 ~g:0.25 ~g:0.25 G:0.5 ~:0.25 ~:0.25 C:1"</code>.
+It resolves to C – Am – F – vF♯g – ^F♯g – G – vE♭T13/G – vCg/G – C.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 43.5 (design).</b> You want a golden pad on which the golden seventh chord is as smooth as possible. Which
-setting matters most: the attack, the rolloff, or the spectrum? Why?</p>
-<details class="answer"><summary>Answer</summary><p>The spectrum: golden partials make the chord's partials coincide exactly
-(§43.3). Rolloff changes how much the upper partials, and their few near misses, contribute; attack changes only the
-onset.</p></details>
+<p><b>Exercise 43.5 (spelling).</b> Spell the golden7 scale on D (every note two semitones higher than on C).</p>
+<details class="answer"><summary>Answer</summary><p>Add 6 sixth-steps to 0, 3, 11, 14, 22, 25, 33: 6, 9, 17, 20, 28, 31, 3, that is
+D, E♭, vF♯, vG, ^A, ^B♭, C♯.</p></details>
 </div>
 </section>

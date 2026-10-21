@@ -467,11 +467,23 @@ parts:
           - {id: neighbour-chords, title: "Golden neighbour chords"}
           - {id: reharmonization, title: "Reharmonizing a melody with golden chords"}
           - {id: catalogue, title: "A catalogue of strategies"}
+      - id: ch40
+        title: "Golden melody across scales"
+        summary: "Writing golden melodies from the whole family of golden scales, from the golden pentatonic to the decatonic and golden13, and melodies that move between scales: common-tone subsets, chain modulation, growing and shrinking scales, and melodies that cross between golden and Western keys."
+        mirror: [ch13, ch30]
+        sections:
+          - {id: palette, title: "The palette: what each golden scale gives a melody"}
+          - {id: pentatonic-melody, title: "Melody in the golden pentatonic"}
+          - {id: seven-ten, title: "Melody in golden7 and the decatonic"}
+          - {id: common-subsets, title: "Common-tone subsets: holding one scale inside another"}
+          - {id: changing-scales, title: "Changing systems: melodic modulation and the growing scale"}
+          - {id: crossing-worlds, title: "Melodies that cross between golden and Western keys"}
+          - {id: recipes, title: "Recipes and worked melodies"}
   - id: part9
     title: "Part IX. Mind, history and speculation"
     summary: "What beats may do in the brain, and how the ear has changed over centuries."
     chapters:
-      - id: ch40
+      - id: ch41
         title: "Beats and the brain"
         summary: "Binaural beats and entrainment; the golden-ratio EEG hypothesis; quasi-periodicity; the bliss conjecture and how to test it."
         sections:
@@ -480,7 +492,7 @@ parts:
           - {id: quasi-periodic, title: "Quasi-periodicity and KAM theory"}
           - {id: conjecture, title: "The bliss conjecture"}
           - {id: testing, title: "How to test it"}
-      - id: ch41
+      - id: ch42
         title: "The evolving ear"
         summary: "From organum's fifths to thirds, sevenths and extended harmony; acculturation; golden tones as a next color."
         sections:
@@ -494,7 +506,7 @@ parts:
     title: "Part X. Making it"
     summary: "Writing, synthesizing and visualizing golden music with SongMap."
     chapters:
-      - id: ch42
+      - id: ch43
         title: "Music as text: SongMap"
         summary: "Song maps, 36edo notation, passing placeholders and voiced styles."
         sections:
@@ -502,7 +514,7 @@ parts:
           - {id: golden-notation, title: "Golden notation in SongMap"}
           - {id: passing, title: "Passing placeholders: ~ and ~g"}
           - {id: voiced, title: "Voiced styles"}
-      - id: ch43
+      - id: ch44
         title: "Synthesis from scratch"
         summary: "Clean additive tones, timbre design, golden spectra, mixing without distortion."
         sections:
@@ -510,7 +522,7 @@ parts:
           - {id: clean, title: "Clean, stable tones"}
           - {id: golden-timbres, title: "Designing golden timbres"}
           - {id: mixing, title: "Mixing for clarity"}
-      - id: ch44
+      - id: ch45
         title: "Seeing music"
         summary: "Notation with ups and downs, 36-row piano rolls, circle and chord-space diagrams, tablature and animation."
         sections:
@@ -518,7 +530,7 @@ parts:
           - {id: pianoroll, title: "Piano rolls in 36-ET"}
           - {id: diagrams, title: "Circles and chord spaces"}
           - {id: animation, title: "Tablature and animation"}
-      - id: ch45
+      - id: ch46
         title: "AI as a collaborator"
         summary: "How this system was explored: the division of labor between a person and a machine."
         sections:

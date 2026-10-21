@@ -1079,3 +1079,143 @@ separately for ch39 and are not printed by elastic.py.)
 4. Golden reharmonization favours semitone, major-third and fourth melodic steps. Which melodies (chromatic, pentatonic,
    golden7) does it suit best, measured by the cost table?
 5. Extend overshoot to seventh chords (G7 → C, Cmaj7 targets) and to golden sevenths as overshoot chords.
+
+---
+
+## 16. Golden melody across scales
+
+Textbook Chapter 40 (*Golden melody across scales*). Every number is printed by
+[reference/golden/melody.py](../reference/golden/melody.py) (`.venv/Scripts/python reference/golden/melody.py`, sections
+**[me §n]**; §7 expands all 17 SongMap examples of `textbook/audio/ch40` and checks every melody and harmony note against
+the scale claimed for its bars: 0 notes outside). Scales are on C: golden pentatonic A = C D vF ^G ^A (chain −2, 0, 2, 4,
+6), pentatonic B = C# vE vF# ^Ab B (its complement in 35), golden7 = [−3, 3], 35 = [−3, 6], 53 = [−6, 3], golden10
+(SongMap) = [−4, 5], golden13 = [−6, 6].
+
+### 16.1 The palette [Theorem + Exhaustive, me §1]
+- **The n − k rule** [Theorem]: in a window of n consecutive chain notes the interval of chain distance k occurs exactly
+  n − k times (in the golden pentatonic, a window of golden fifths, chain distance 2m occurs 5 − m times). So the interval
+  content of every golden scale is read off one table:
+
+| k | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 15 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 36-ET ic | 11 | 14 | 3 | 8 | 17 | 6 | 5 | 16 | 9 | 2 | 13 | 12 | 1 | 15 |
+| exact (c) | 366.91 | 466.18 | 99.27 | 267.64 | 565.45 | 198.54 | 168.37 | 535.28 | 297.81 | 69.10 | 436.01 | 397.08 | 30.17 | 496.35 |
+
+- **Western-sized intervals** follow: a whole tone (k = 6, 198.54 c) needs n ≥ 7 (golden7 has 1, the decatonic 4,
+  golden13 7); a minor third (k = 9, 297.81 c) n ≥ 10 (decatonic 1, golden13 4); a major third (k = 12, 397.08 c) n = 13
+  (golden13 1, B♭–D); the first near-fourth (k = 15, 496.35 c, 1.69 c below 4/3) lies outside every golden scale up to 13
+  notes. **No golden scale of up to 13 notes contains a fourth or fifth**; the nearest is the golden fifth (733.82 c,
+  31.86 c wide of 3/2) and its inversion the golden fourth (466.18 c).
+- **Character table** (36-ET steps; semitone pairs = steps of 3 sixth-steps, exact 99.27 c in chain scales):
+
+| Scale | Steps | Semitone pairs | Golden 3rds/5ths (pairs) | Golden triads | Golden 7ths | Western triads |
+|---|---|---|---|---|---|---|
+| golden3 | 11 11 14 | 0 | 2 / 1 | 1 | 0 | 0 |
+| golden4 | 11 11 3 11 | 1 (^G–^A♭) | 3 / 2 | 2 | 1 | 0 |
+| golden pentatonic | 6 8 8 6 8 | 0 | 0 / 4 | 0 | 0 | 0 |
+| golden7 | 3 8 3 8 3 8 3 | 4 | 6 / 5 | 5 | 4 | 0 |
+| decatonic (35, 53) | 3 and 5 | 7 | 9 / 8 | 8 | 7 | 0 |
+| golden13 | 3 and 2 | 10 | 12 / 11 | 11 | 10 | 0 |
+| silver13 | 1, 2, 3, 4 | 10 | 2 / 4 | 0 (7 silver, 7 bronze) | 0 | 0 |
+| golden Ionian C D vE F ^G A B | 3–7 (five sizes) | 1 (B–C) | 3 / 2 | 2 | 1 | F, Dm (+ B dim) |
+| (3,2) hybrid C ^C D E F vA A | 1–11 (six sizes) | 1 | 3 / 2 | 2 | 1 | F, Dm, Am |
+| decatonic 44 | 3 and 4 | 4 | 8 / 6 | 6 | 4 | 0 (4 fourths, 3 tritones) |
+
+- **Leaning pairs**: golden7 B–C, C–C♯, vE–vF, ^G–^A♭ (three layer clusters {B C C♯}, {vE vF}, {^G ^A♭}); 35 adds C♯–D,
+  vF–vF♯, ^A♭–^A (clusters {B C C♯ D}, {vE vF vF♯}, {^G ^A♭ ^A}); every golden scale from golden7 up has both B and C♯
+  around C, and from golden7 up a semitone step keeps the layer while every other step changes it (the golden pentatonic is the exception: its whole tone C–D also keeps the layer). The hybrids contain sixth-step "steps" (C–^C, vA–A, 33.33 c), inflections rather than steps.
+
+### 16.2 The golden pentatonic [Theorem + Exhaustive, me §2]
+- Steps 267.64 c × 3 and 198.54 c × 2 (36-ET 8 and 6), **chroma = the golden limma** (69.10 c, chain span 10, as for
+  golden10). Anhemitonic, and without golden thirds or sixths: its intervals are golden fifths/fourths (4 pairs), 267.64
+  (3), whole tones (2) and 535.28 c (1). Generic intervals: seconds 6/8, thirds 14/16, fourths 20/22, fifths 28/30.
+- **Five modes** on C (b|a = golden-fifth-chain notes below|above the tonic; each lowers one note of the previous by a
+  limma): 4|0 C vE♭ ^F ^G B♭ (brightness 76), 3|1 C vE♭ vF ^G B♭ (74), 2|2 C vE♭ vF ^G ^A (72, symmetric about C),
+  **1|3 C D vF ^G ^A** (70, pentatonic A, symmetric about vF), 0|4 C D vF vG ^A (68, no golden fifth on C).
+- **No golden triad** (a golden triad spans chain r, r − 1, r − 2, both parities). Each of the four golden fifths implies
+  exactly one golden triad: C–^G → Cg, vF–C → vFg, ^A–vF → ^Ag, D–^A → Dg, and every missing third (vE, ^A♭, C♯, vF♯)
+  lies in pentatonic B. Consecutive chords Cg – vFg – ^Ag – Dg share exactly the melody's common tone (C, vF, ^A): the
+  **common-tone chain**. Western mirror: C D E G A contains the triads C and Am.
+- Transposition: pentatonic A and T_s(A) share 0 notes if c(s) is odd and 5 − |c(s)|/2 if even (a golden fifth keeps 4, a
+  golden third 0). A and B are disjoint and A ∪ B = 35. Golden pentatonics inside: golden7 0, 35 2, 53 2, golden13 5
+  (the only other MOS 5-subset of golden13 is the cluster B♭ B C C♯ D). A golden pentatonic shares at most 2 notes with
+  any Western major, minor (natural, harmonic, melodic) or pentatonic scale on any of the 36 tonics.
+
+### 16.3 golden7 and the decatonic [Theorem + Exhaustive, me §3]
+- Degree chords: golden7 on 1-3-5 gives 5 golden triads (not on ^G, B); the decatonic on 1-4-7 gives 8 (not on ^G:
+  ^G B D, or on B: B D vF♯; both contain the one minor third B–D). Proof: a decatonic step is chain +3 (small) or −7
+  (large); three steps make the golden third (chain −1) iff they contain exactly one large step, which 9 of the 10
+  three-step windows do.
+- **Inversion**: x → −x maps golden7 and golden13 to themselves and **exchanges 35 and 53** (D, vF♯, ^A ↔ B♭, ^F♯,
+  vE♭); 35 is self-inverse only about the axis 1.5 sixth-steps (x → 3 − x, C ↔ C♯), pentatonic A about vF (x → 28 − x).
+  Inversion maps golden triads to golden triads (Cg ↔ vFg, C♯g ↔ vEg, ^A♭g fixed), so a golden7 phrase and its exact
+  mirror can be harmonized by mirrored progressions.
+- Real chain sequences: T25 keeps n − 1 notes (golden7: B → ^A, −5; 35: B → ^B♭, −2; golden13: B♭ → ^B♭, +1); T11 (up a
+  golden third): golden7 C♯ → vE♭ (+5), 35 D → vE♭ (+2), golden13 D → vD (−1). A motif built on a golden triad and the
+  scale note above its root stays in 35 under T25 for roots Cg, ^A♭g, vFg, C♯g; at ^Ag it must bend (tonal sequence).
+- Approaches to C (golden triad holding the approach note; VL to Cg): B (+3): vEg 3 in golden7 and 35; in 53 also ^Gg
+  (6) and Bg (9, all voices rise); C♯ (−3): C♯g 9 (all fall); vE (−11) and ^G (+14): Cg itself.
+- Western (12-ET) cells live inside the layer clusters only: of C major's three-note cells within a fourth, exactly the
+  chromatic ones (semitone + whole tone) fit in 35 (e.g. B C D and the turn D C B C); do-re-mi does not (no major third).
+
+### 16.4 Common-tone subsets [Theorem + Exhaustive, me §4]
+- Inclusions on C: golden3 ⊂ golden4 ⊂ golden7 ⊂ 35, 53, golden10 ⊂ golden13; pentatonic A ⊂ 35 ⊂ golden13;
+  **35 ∩ 53 = golden7, 35 ∪ 53 = golden13**; golden13 − 35 = vE♭g, golden13 − 53 = Dg.
+- **Theorem (window overlap)**: for n ≤ 18, golden-n on C and on s share max(0, n − |c(s)|) notes (the two windows then
+  span at most 36 chain positions; it fails for larger n, e.g. n = 30, c = 10 gives 24, not 20; checked for n = 3, 4, 7,
+  10, 13, all 36 s). 53 shares at most 3 notes with major, natural, harmonic and melodic minor keys and 2 with pentatonics. Chain step (vE, ^A♭): n − 1; golden fifth: n − 2; apotome (C♯, B): n − 3; limma (vC♯, ^B): golden13 keeps 3 = a
+  golden triad (vE♭g resp. Dg), every smaller scale 0; **sixth-step (^C, vC): 0 for every golden scale**.
+- A golden triad lies in n − 2 keys of golden-n: Cg in 2 golden4, 5 golden7 (C, vE, ^G, ^A♭, B), 8 decatonic and 11
+  golden13 keys; no Western scale holds two of its notes.
+- Golden ∩ Western on C: golden7 ∩ C major = {C, B}; 35 ∩ C major = golden13 ∩ C major = {B, C, D}; 53 ∩ C major = {C, B};
+  pentatonic A ∩ C major = {C, D}; with C natural minor: golden7 {C}, 35 {C, D}, 53 {C, B♭}, golden13 {C, D, B♭}.
+  Maxima over all 36 tonics: golden pentatonic 2 and golden7 2 (every family); 35: 3 with major, natural, harmonic and
+  melodic minor (2 with pentatonics); golden13: 3 with major and natural minor, **4 with harmonic and melodic minor, for one
+  key each** (B harmonic and B melodic minor: B C♯ D A♯).
+- Ranking of pivot cells (size, then content): chain-step neighbours (n − 1 notes, n − 3 golden triads) ≫ a whole
+  golden triad (limma between golden13 keys) ≫ a golden fifth or third ≫ the semitone pair B–C (golden7 vs C major) ≫ a
+  single note.
+
+### 16.5 Changing scales [Exhaustive, me §5]
+- **Chroma of one chain step** (the note that changes, exact): pentatonic (generator a golden fifth) −69.10 (limma);
+  golden3 +99.27 (apotome); golden4 −267.64; **golden7 −168.37 (5 sixth-steps, not an apotome)**; golden10 −69.10 (limma);
+  golden13 +30.17 (comma); golden23 −38.92. The apotome belongs to golden3, as the Pythagorean apotome belongs to the diatonic. The growing golden chain
+  reaches its first semitone at 4 notes; the chain of fifths at 6 (F to E).
+- Walks up the chain: golden7 C → ^A♭ (B → ^A) → vF (^G → vF♯) → C♯ (vE → D) → ^A (C → ^B♭) → vF♯ → D → ^B♭ (0 notes
+  left after 7 steps); 35 C → ^A♭ (B → ^B♭) → vF (^G → vG) → …; golden-third key cycle (one chain step down): golden7
+  C♯ → vE♭ (+5) etc., 35 D → vE♭ (+2), golden13 D → vD (−1).
+- **The growing scale** C, vE, ^G, ^A♭, B, vF, C♯, ^A, vF♯, D, vE♭, ^F♯, B♭ (chain order around the tonic triad): two step
+  sizes exactly at n = 2, 3, 4, 7, 10, 13, three sizes in between (36-ET and exact golden tuning agree); golden triads
+  0, 1, 2, …, 11 (= n − 2). Western mirror with pure fifths: two sizes at 2, 3, 5, 7, 12.
+- **Alternation**: 35 → 53 on C raises three notes by a limma (D vF♯ ^A → vE♭ ^F♯ B♭), keeps golden7; Western mirror C
+  major → C minor lowers three by a semitone (E A B → E♭ A♭ B♭), keeps 4. Pentatonic A ↔ B: disjoint, union 35.
+- **Limma key change**: golden13 C → vC♯ keeps vE♭g, the leaving ten notes are exactly 35 on C and each arriving note
+  lies one sixth-step below a leaving one; C → ^B keeps Dg, the leaving notes are 53 on C, each arriving note one
+  sixth-step above.
+
+### 16.6 Crossing worlds [Exhaustive + Theorem, me §6]
+- C golden7 shares two notes with 13 of the 36 major keys: C and G ({C, B}), C♯ and A♭ ({C, C♯}), D, E, F♯, A, B
+  ({C♯, B}), ^E♭ and ^A♭ ({^G, ^A♭}), vF and vC ({vE, vF}). {B, C} lies in only two major keys (C, G) but in 4 golden7, 7
+  decatonic and 10 golden13 keys.
+- B lies in G, Em, E, B, Bm, G♯m and in vEg, ^Gg, Bg; C lies in C, F, A♭, Cm, Fm, Am and in Cg, vFg, ^A♭g. The shared
+  cadence B → C is harmonized G → C (Western), vEg → Cg (golden7: π(iii) → π(I)) or Bg → Cg (53; all voices rise).
+- **Projection inflection** [Theorem, me §6]: bending a C major melody by the projection of the chord under it, (C major
+  − X) ∪ π(X), gives under Cg (and vEg) the golden Ionian C D vE F ^G A B, under Fg (and vAg) ^C D E F G vA B, under Gg
+  C ^D E F G A vB, under vDg C vD E ^F G A B: the two inflections at the (2, 2) point of §8.4's frontier plus the two
+  two-note inflections at (3, 1) (the frontier holds 3 / 6 / 2 / 2 scales at (6,0) / (3,1) / (2,2) / (0,3)).
+
+### 16.7 Audio (textbook/audio/ch40; all expanded and note-checked by me §7)
+`palette`, `pentatonic_chain`, `pentatonic_mirror`, `golden7_tendency`, `golden7_mirror`, `decatonic_sequence`,
+`decatonic_alternation`, `pivot_subset`, `chain_walk`, `growing_scale`, `limma_pivot`, `cross_inflection`, `cross_hinge`,
+`worked_pentatonic`, `worked_golden7`, `worked_decatonic`, `worked_crossing` (14–37 s each, plus a 3 s tail).
+
+### 16.8 Open questions
+1. Does a golden-pentatonic melody, which has no semitone and no golden third, sound "golden" at all without its harmony,
+   or does the ear hear it as a slightly stretched Western pentatonic? A listening test with and without the chords.
+2. Tendency: are B → C and C♯ → C heard as equally strong closes in golden7, and does the parallel Bg → Cg (53) close
+   more strongly than vEg → Cg? (Chapter 31's question about golden function, asked melodically.)
+3. How long must a melody dwell on a common subset for the ear to accept the new key underneath (§7.4's criterion, for
+   melodic pivots)?
+4. The growing scale passes through three-size stages (5, 6, 8, 9, 11, 12 notes). Are these heard as unstable, as the MOS
+   stages are heard as resting points? A probe-tone design would test it.
+5. Which Western tunes survive projection inflection best (melodies on chord tones bend most; stepwise ones least)?

@@ -1,0 +1,23 @@
+# ch40 changing-scales: the melody starts on the three notes of golden3 (Cg), adds ^Ab (golden4), then B vF C#
+# (golden7), then ^A vF# D (the 35 decatonic), then vEb ^F# Bb (golden13), and releases to C major.
+songmap: 0.2
+title: "The growing scale: golden3 to golden13"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 40
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ, low: clean/bass}
+mix:
+  keys: {gain_db: -3, send: {hall: 0.25}}
+  pad: {gain_db: -12, send: {hall: 0.25}}
+  low: {gain_db: -10}
+sections:
+  - {name: g3, bars: 2, harmony: "Cg:2", parts: {keys: {notes: "c4 ve8 ^g8 c+4 ^g4 | ve4 ^g8 ve8 c2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: g4, bars: 1, harmony: "^Abg:1", parts: {keys: {notes: "c4 ^ab-8 c8 ve4 ^g8 ^ab8"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: g7, bars: 2, harmony: "vEg:1 C#g:1", parts: {keys: {notes: "^g4 b8 c+8 b4 ^g4 | vf4 c#8 vf8 ^ab4 c#+4"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: d35, bars: 2, harmony: "^Ag:1 Dg:1", parts: {keys: {notes: "^a4 c#+8 ^a8 vf#4 vf4 | d4 vf#8 ^a8 d+4 ^a4"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: g13, bars: 2, harmony: "Bg:1 vEbg:1", parts: {keys: {notes: "^f#4 b8 ^f#8 veb4 b-4 | veb4 ^f#8 bb8 b4 c+4"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: home, bars: 2, harmony: "Cg:1 C:1", parts: {keys: {notes: "c+4 ^g8 ve8 c4 ^g4 | g4 e4 c2"}, pad: hold, low: {style: roots, role: bass}}}
+master: clean

@@ -1,0 +1,20 @@
+# ch40 seven-ten: the 35 decatonic (C C# D vE vF vF# ^G ^Ab ^A B). A motif (root, the decatonic note above it,
+# third, fifth, third) is moved one golden-chain step at a time over Cg ^Abg vFg C#g (real sequence), then bent
+# to fit over ^Ag and Dg (tonal sequence); a chromatic turn D C B C over C#g, the golden Neapolitan C#g -> Cg,
+# and the release.
+songmap: 0.2
+title: "A chain sequence in the decatonic"
+tempo: 88
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 40
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ, low: clean/bass}
+mix:
+  keys: {gain_db: -3, send: {hall: 0.25}}
+  pad: {gain_db: -12, send: {hall: 0.25}}
+  low: {gain_db: -10}
+sections:
+  - {name: tune, bars: 9, harmony: "Cg:1 ^Abg:1 vFg:1 C#g:1 ^Ag:1 Dg:1 C#g:1 Cg:1 C:1", parts: {keys: {notes: "c4 c#8 ve8 ^g4 ve4 | ^ab-4 ^a-8 c8 ve4 c4 | vf4 vf#8 ^ab8 c+4 ^ab4 | c#4 d8 vf8 ^ab4 vf4 | ^a4 b8 c#+8 vf+4 c#+4 | d+4 c#+8 b8 ^a4 vf#4 | c#4 d8 c8 b-8 c8 c#4 | c1 | c1"}, pad: hold, low: {style: roots, role: bass}}}
+master: clean
