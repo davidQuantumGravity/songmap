@@ -450,17 +450,36 @@ def _apply_opts(evs: list[XEv], spec, sec, span: SectionSpan):
             e.art = str(art)
 
 
+def _vary(ctx, sec, span: SectionSpan, role: str, spec, evs: list[XEv]) -> list[XEv]:
+    """Per-bar variants: in a variant's bars, its notes replace the part's. A note belongs to the
+    bar it starts in (like drop/stop), so a chord held across the boundary keeps sounding."""
+    def bar_of(e):
+        return int((e.beat - span.start) // ctx.bpb + 1e-9)
+
+    taken = {b for bars, _ in spec.variants for b in bars}
+    out = [e for e in evs if bar_of(e) not in taken]
+    for bars, v in spec.variants:
+        if v.opts.get("mute"):
+            continue
+        vevs = _expand_part(ctx, sec, span, role, v)
+        _apply_opts(vevs, v, sec, span)
+        out += [e for e in vevs if bar_of(e) in bars]
+    return out
+
+
 def expand(song: Song) -> Arrangement:
     from .events import apply_mutes, expand_events
     ctx = _Ctx(song)
     parts: dict[str, list[XEv]] = defaultdict(list)
     for sec, span in zip(song.sections, ctx.tl.sections):
         for role, spec in sec.parts.items():
-            if spec.opts.get("mute"):
+            if spec.opts.get("mute") and not spec.variants:
                 continue
             try:
-                evs = _expand_part(ctx, sec, span, role, spec)
+                evs = [] if spec.opts.get("mute") else _expand_part(ctx, sec, span, role, spec)
                 _apply_opts(evs, spec, sec, span)
+                if spec.variants:
+                    evs = _vary(ctx, sec, span, role, spec, evs)
             except NotationError as e:
                 raise SongError(str(e), file=song.file, line=sec.line, section=sec.name) from None
             except SongError as e:

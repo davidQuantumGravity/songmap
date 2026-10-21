@@ -31,6 +31,9 @@ class PartSpec:
     notes_mode: str = "letter"    # letter | deg | rel (for inline `notes`/`deg`/`rel`)
     steps: dict[str, str] = field(default_factory=dict)
     opts: dict = field(default_factory=dict)    # dyn art oct transpose gain_db gate order mute feel voicing auto ...
+    # per-bar variants: (bar offsets from the section start, PartSpec). In those bars the variant's
+    # notes replace this spec's (notes are kept by the bar they start in); see expand._vary
+    variants: list = field(default_factory=list)
 
     def source(self) -> str:
         return ("style" if self.style else "motifs" if self.motifs else "notes" if self.notes

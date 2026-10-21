@@ -24,7 +24,7 @@ TOP_KEYS = ("songmap", "title", "tempo", "meter", "key", "tuning", "fps", "seed"
             "instruments", "groove", "parts_feel", "harmony", "motifs", "sections", "events", "cues", "mix",
             "returns", "master", "qa")
 SECTION_KEYS = ("name", "bars", "parts", "like", "add", "drop", "harmony", "dyn", "feel", "tempo", "key")
-PART_SOURCES = ("style", "motif", "motifs", "notes", "deg", "rel", "steps")
+PART_SOURCES = ("style", "motif", "motifs", "notes", "deg", "rel", "steps", "vary")
 PART_OPTS = ("mods", "dyn", "art", "oct", "transpose", "feel", "voicing", "auto", "mute", "gain_db", "gate",
              "order", "octaves", "fills", "crash", "pan", "len", "role")
 MOTIF_KEYS = ("notes", "deg", "rel", "octave", "key")
@@ -353,6 +353,8 @@ def parse_part(role: str, value, motifs: dict, *, file=None, line=None, section=
             p.notes, p.notes_mode = str(v), "letter" if k == "notes" else k
         elif k == "steps":
             p.steps.update({str(a): b for a, b in dict(v).items()})
+        elif k == "vary":
+            p.variants += _variants(role, v, motifs, file=file, line=line, section=section)
         elif k in PART_OPTS:
             p.opts[k] = _plain(v)
         elif role in KIT_ROLES and isinstance(v, (str, dict)):
@@ -365,6 +367,27 @@ def parse_part(role: str, value, motifs: dict, *, file=None, line=None, section=
         raise SongError(f"part {role}: give one of style, motifs or notes (steps may add to a style)",
                         file=file, line=line, section=section)
     return p
+
+
+def _variants(role, v, motifs, *, file, line, section) -> list:
+    """vary: [{bars: [3, 7], part: eighths}, ...]; bars are offsets from the section start (like name+3)."""
+    if not isinstance(v, list):
+        raise SongError(f"part {role}: vary is a list like [{{bars: [3, 7], part: eighths}}]", file=file,
+                        line=line, section=section)
+    out = []
+    for item in v:
+        if not isinstance(item, dict) or "bars" not in item or "part" not in item:
+            raise SongError(f"part {role}: each vary item needs bars: and part:", file=file, line=line,
+                            section=section, suggestion="e.g. {bars: [7], part: {style: eighths}}")
+        bars = item["bars"] if isinstance(item["bars"], list) else [item["bars"]]
+        if not all(isinstance(b, int) and not isinstance(b, bool) and b >= 0 for b in bars):
+            raise SongError(f"part {role}: vary bars are whole bar offsets >= 0, got {item['bars']}", file=file,
+                            line=line, section=section)
+        sub = parse_part(role, item["part"], motifs, file=file, line=line, section=section)
+        if sub.variants:
+            raise SongError(f"part {role}: a vary part can't vary again", file=file, line=line, section=section)
+        out.append((tuple(bars), sub))
+    return out
 
 
 def _sections(secs, song: Song, file) -> list[Section]:
