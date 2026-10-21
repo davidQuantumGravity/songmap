@@ -30,7 +30,8 @@
 :root, [data-part="front"] { --pc: #9a6b3f; }
 [data-part="part1"] { --pc: #0e8a8c; } [data-part="part2"] { --pc: #2a6fb0; } [data-part="part3"] { --pc: #5a49b8; }
 [data-part="part4"] { --pc: #2c8a55; } [data-part="part5"] { --pc: #b23d5f; } [data-part="part6"] { --pc: #c48a12; }
-[data-part="part7"] { --pc: #b86a12; } [data-part="part8"] { --pc: #9447a6; } [data-part="part9"] { --pc: #337a9b; }
+[data-part="part7"] { --pc: #b86a12; } [data-part="part8"] { --pc: #a8781a; } [data-part="part9"] { --pc: #9447a6; }
+[data-part="part10"] { --pc: #337a9b; }
 [data-part="appendices"] { --pc: #647083; }
 :root, [data-part] {
   --pc-ink: color-mix(in oklab, var(--pc) 88%, black);
@@ -137,7 +138,7 @@ h1 { font: 650 42px/1.12 var(--display); letter-spacing: -.01em; margin: 4px 0 1
 .onpage a:hover, .onpage a.on { border-color: var(--pc); background: var(--pc-soft); }
 
 /* sections as cards */
-main > section:not(.partcard) { background: var(--card); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow);
+main > section:not(.partcard):not(.book-cover):not(.book-sheet) { background: var(--card); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow);
   padding: 8px 34px 26px; margin: 26px 0; }
 h2 { font: 620 28px/1.25 var(--display); margin: 22px 0 12px; display: flex; align-items: center; gap: 14px; letter-spacing: -.005em; }
 .secnum { flex: none; display: inline-grid; place-items: center; min-width: 46px; height: 32px; padding: 0 10px; border-radius: 99px;
@@ -280,7 +281,7 @@ table.aidx audio { width: 100%; height: 32px; }
   .hero, .hero.cover { grid-template-columns: 1fr; padding: 22px 20px; border-radius: 20px; }
   .hero-art { display: none; }
   h1, .cover h1 { font-size: 31px; } h2 { font-size: 23px; } .hero .summary { font-size: 17px; }
-  main > section:not(.partcard) { padding: 2px 14px 16px; border-radius: 18px; }
+  main > section:not(.partcard):not(.book-cover):not(.book-sheet) { padding: 2px 14px 16px; border-radius: 18px; }
   .layer, aside.mirror, aside.box, .exercise { padding: 9px 12px; }
   .secnum { min-width: 40px; height: 28px; font-size: 13px; }
   .trio, .pn { grid-template-columns: 1fr; }
@@ -293,5 +294,46 @@ table.aidx audio { width: 100%; height: 32px; }
 @media print {
   header.top, aside.side, .progress, .totop, .onpage, .pn { display: none; }
   .wrap { display: block; } main { max-width: none; padding: 0; }
-  main > section:not(.partcard), .hero { box-shadow: none; break-inside: auto; }
+  main > section:not(.partcard):not(.book-cover):not(.book-sheet), .hero { box-shadow: none; break-inside: auto; }
+}
+
+/* book front: cover, title page, copyright page, epigraph */
+.book-cover { position: relative; overflow: hidden; min-height: min(86vh, 760px); border-radius: 28px; margin: 0 0 26px;
+  background: #0c0b09; color: #f3ead2; box-shadow: 0 20px 60px rgba(0, 0, 0, .35); display: flex; align-items: flex-end; }
+.cover-art { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cv-sq { fill: none; stroke: #e3b54a; stroke-opacity: .22; stroke-width: 1.2; }
+.cv-spiral { fill: none; stroke: #f0c75e; stroke-width: 3.2; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(240, 199, 94, .55)); }
+.cv-ring { fill: none; stroke: #f3ead2; stroke-opacity: .25; stroke-width: 1.2; }
+.cv-dot.l0 { fill: #c9d3dd; } .cv-dot.l1 { fill: #f0b543; } .cv-dot.l2 { fill: #6cc9e6; }
+.cv-tri { fill-opacity: .10; stroke-width: 1.6; stroke-opacity: .85; }
+.cv-tri.l0 { fill: #c9d3dd; stroke: #c9d3dd; } .cv-tri.l1 { fill: #f0b543; stroke: #f0b543; } .cv-tri.l2 { fill: #6cc9e6; stroke: #6cc9e6; }
+.cv-text { position: relative; padding: 120px 54px 48px; width: 100%;
+  background: linear-gradient(180deg, rgba(12, 11, 9, 0), rgba(12, 11, 9, .78) 34%, rgba(12, 11, 9, .9)); }
+.cv-text > * { max-width: 640px; }
+.cv-kicker { font: 600 12px var(--ui); letter-spacing: .22em; text-transform: uppercase; color: #e3b54a; margin: 0 0 14px; }
+.cv-title { font: 700 clamp(40px, 6.4vw, 74px)/1.02 var(--display); letter-spacing: -.02em; margin: 0 0 16px;
+  background: linear-gradient(100deg, #fff4d6, #f0c75e 45%, #c98b1a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.cv-sub { font: italic 20px/1.45 var(--serif); color: #e9dfc6; margin: 0 0 26px; }
+.cv-author { font: 600 22px var(--display); color: #fff; margin: 0; letter-spacing: .02em; }
+.cv-ed { font: 500 13px var(--ui); color: #b7ab92; margin: 6px 0 0; letter-spacing: .06em; }
+.cv-open { position: absolute; right: 24px; bottom: 20px; font: 600 13px var(--ui); color: #f0c75e; text-decoration: none;
+  border: 1px solid rgba(240, 199, 94, .5); border-radius: 99px; padding: 6px 14px; background: rgba(12, 11, 9, .6); }
+.book-sheet { background: var(--card); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow);
+  margin: 22px 0; padding: 64px 48px; text-align: center; }
+.title-page h1 { font-size: 46px; margin: 6px 0 14px; }
+.tp-orn { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px;
+  font: 700 34px var(--display); color: #fff; background: radial-gradient(circle at 30% 30%, #f3cf6a, #b8860b); }
+.tp-sub { font: italic 20px/1.5 var(--serif); color: var(--muted); max-width: 560px; margin: 0 auto 40px; }
+.tp-author { font: 600 24px var(--display); margin: 0 0 70px; }
+.tp-pub { font: 500 13px var(--ui); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.copyright-page { text-align: left; padding: 40px 48px; font: 14px/1.6 var(--ui); color: var(--muted); }
+.copyright-page div { max-width: 560px; } .copyright-page b { color: var(--fg); }
+.epigraph { padding: 80px 48px; }
+.epigraph blockquote { font: italic 26px/1.5 var(--display); border: 0; background: none; max-width: 620px; margin: 0 auto; color: var(--fg); }
+.ep-src { font: 500 14px var(--ui); color: var(--muted); margin-top: 14px; }
+.contents-title { font-size: 34px; margin-top: 40px; scroll-margin-top: 70px; }
+@media (max-width: 640px) {
+  .book-cover { min-height: 78vh; border-radius: 20px; }
+  .cv-text { padding: 90px 22px 64px; }
+  .cv-sub { font-size: 17px; } .book-sheet { padding: 40px 22px; } .title-page h1 { font-size: 32px; }
 }

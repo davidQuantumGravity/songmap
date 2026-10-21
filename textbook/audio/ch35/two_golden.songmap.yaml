@@ -1,0 +1,17 @@
+# ch35: two different golden chords from C major's IV to ^C major's iii (GOLDEN_BLENDING D9).
+# The natural engine (~g ~g) resolves F -> ^Em through vFg and ^Eg; a cadence then confirms ^C major.
+songmap: 0.2
+title: "Two golden chords across a layer"
+tempo: 76
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 361
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix:
+  organ: {gain_db: -6, send: {hall: 0.25}}
+  low: {gain_db: -6}
+sections:
+  - {name: all, bars: 8, harmony: "C:1 F:1 ~g:0.5 ~g:0.5 ^Em:1 ^Am:1 ^F:0.5 ^G7:0.5 ^C:2", parts: {organ: hold, low: bassline}}
+master: clean

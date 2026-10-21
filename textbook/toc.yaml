@@ -6,6 +6,13 @@
 title: "Music Theory of Golden Harmony"
 subtitle: "Music theory from first principles, from the harmonic series to golden tones in 36-ET"
 author: "David Chester"
+edition: "First edition (draft)"
+year: 2026
+publisher: "Published by the author"
+epigraph: "The truth is more subtle, and perhaps golden tones are here to stay."
+epigraph_source: "David Chester, from the preface"
+rights: "All rights reserved."
+note: "The golden tonal system, the averaging principle and the systems of golden passing harmony are the author's. Mathematical results are proved or checked by exhaustive computation, as marked in the text; statements about perception are labelled as measurements or hypotheses."
 
 parts:
   - id: front
@@ -391,10 +398,79 @@ parts:
           - {id: golden-spectralism, title: "Golden spectralism"}
 
   - id: part8
-    title: "Part VIII. Mind, history and speculation"
-    summary: "What beats may do in the brain, and how the ear has changed over centuries."
+    title: "Part VIII. Golden harmony beyond passing"
+    summary: "Key changes by golden intervals, golden pivot chords between keys, golden modes and hybrid scales, and textures that blend golden and Western harmony."
     chapters:
       - id: ch34
+        title: "Modulation by golden intervals"
+        summary: "The golden comma, limma and apotome as key changes; sixth-step and third-step lifts; the comma pump; a map of the 36-ET keys."
+        mirror: [ch08, ch11, ch32]
+        sections:
+          - {id: units, title: "The comma, the limma and the apotome as key changes"}
+          - {id: lifts, title: "Lifting a key: sixth-steps and third-steps"}
+          - {id: midpoint, title: "The golden midpoint of the limma lift"}
+          - {id: comma-pump, title: "The comma pump: thirteen steps to ^C"}
+          - {id: golden-circle-keys, title: "The golden circle as a modulation engine"}
+          - {id: key-map, title: "A map of the 36-ET keys"}
+      - id: ch35
+        title: "Golden pivot chords"
+        summary: "The golden projection of a triad; neo-Riemannian moves through it; keys a silver third apart and their three golden pivots."
+        mirror: [ch10, ch11, ch18]
+        sections:
+          - {id: projection, title: "The golden projection of a triad"}
+          - {id: plr, title: "Neo-Riemannian moves through the golden lens"}
+          - {id: silver-third-keys, title: "Keys a silver third apart"}
+          - {id: hinges, title: "Golden hinges and the passing engine across layers"}
+          - {id: reinterpretation, title: "One golden chord, three meanings"}
+          - {id: golden-western-keys, title: "Between golden keys and Western keys"}
+      - id: ch36
+        title: "Golden scales and modes"
+        summary: "The smallest golden scales; the seven modes of golden7; the golden decatonic, a double pentatonic made by splitting golden7's large step; golden13 and maximal evenness; melodies and harmony from these scales."
+        mirror: [ch06, ch19]
+        sections:
+          - {id: small-scales, title: "Two, three and four notes: the smallest golden scales"}
+          - {id: golden7-modes, title: "The seven modes of golden7"}
+          - {id: decatonic, title: "The golden decatonic: splitting the large step"}
+          - {id: decatonic-modes, title: "Modes of the decatonic: 35, 53 and 44"}
+          - {id: golden13-modes, title: "golden13 and maximal evenness"}
+          - {id: melody-harmony, title: "Golden melodies and how to harmonize them"}
+      - id: ch37
+        title: "Blending techniques"
+        summary: "Golden planing as three-key polytonality; golden pedals and Western drones; approach chords; golden sequences; bridge scales and passing keys."
+        mirror: [ch15, ch18, ch22]
+        sections:
+          - {id: golden-planing, title: "Golden planing and three-key polytonality"}
+          - {id: pedals-drones, title: "Golden pedals, Western drones"}
+          - {id: approach, title: "Approach chords: the golden Neapolitan"}
+          - {id: sequences, title: "Golden sequences: giant steps and the golden-third cycle"}
+          - {id: passing-keys, title: "Bridge scales and passing keys"}
+
+      - id: ch38
+        title: "Hybrid scales and golden colour"
+        summary: "Golden inflections of the major scale, centroid scales, the hybrid limit, and golden chords borrowed into Western keys as colour."
+        mirror: [ch06, ch11]
+        sections:
+          - {id: inflections, title: "Golden inflections of the major scale"}
+          - {id: centroid-scales, title: "Centroid scales"}
+          - {id: hybrid-limit, title: "The hybrid limit"}
+          - {id: colour-chords, title: "Golden colour chords"}
+      - id: ch39
+        title: "Elastic harmony: strategies from tradition"
+        summary: "Ways to join golden and Western chords beyond passing, modelled on the classical embellishments: overshoot and settle, golden appoggiatura chords, suspensions, anticipations, neighbour and escape chords, and golden reharmonization."
+        mirror: [ch12, ch14, ch29]
+        sections:
+          - {id: overshoot, title: "Overshoot and settle: elastic resolution"}
+          - {id: appoggiatura-chords, title: "Golden appoggiatura chords"}
+          - {id: suspensions, title: "Golden suspensions and retardations"}
+          - {id: anticipation-escape, title: "Anticipations and escape chords"}
+          - {id: neighbour-chords, title: "Golden neighbour chords"}
+          - {id: reharmonization, title: "Reharmonizing a melody with golden chords"}
+          - {id: catalogue, title: "A catalogue of strategies"}
+  - id: part9
+    title: "Part IX. Mind, history and speculation"
+    summary: "What beats may do in the brain, and how the ear has changed over centuries."
+    chapters:
+      - id: ch40
         title: "Beats and the brain"
         summary: "Binaural beats and entrainment; the golden-ratio EEG hypothesis; quasi-periodicity; the bliss conjecture and how to test it."
         sections:
@@ -403,7 +479,7 @@ parts:
           - {id: quasi-periodic, title: "Quasi-periodicity and KAM theory"}
           - {id: conjecture, title: "The bliss conjecture"}
           - {id: testing, title: "How to test it"}
-      - id: ch35
+      - id: ch41
         title: "The evolving ear"
         summary: "From organum's fifths to thirds, sevenths and extended harmony; acculturation; golden tones as a next color."
         sections:
@@ -413,11 +489,11 @@ parts:
           - {id: acculturation, title: "Acculturation"}
           - {id: next-color, title: "A next color"}
 
-  - id: part9
-    title: "Part IX. Making it"
+  - id: part10
+    title: "Part X. Making it"
     summary: "Writing, synthesizing and visualizing golden music with SongMap."
     chapters:
-      - id: ch36
+      - id: ch42
         title: "Music as text: SongMap"
         summary: "Song maps, 36edo notation, passing placeholders and voiced styles."
         sections:
@@ -425,7 +501,7 @@ parts:
           - {id: golden-notation, title: "Golden notation in SongMap"}
           - {id: passing, title: "Passing placeholders: ~ and ~g"}
           - {id: voiced, title: "Voiced styles"}
-      - id: ch37
+      - id: ch43
         title: "Synthesis from scratch"
         summary: "Clean additive tones, timbre design, golden spectra, mixing without distortion."
         sections:
@@ -433,7 +509,7 @@ parts:
           - {id: clean, title: "Clean, stable tones"}
           - {id: golden-timbres, title: "Designing golden timbres"}
           - {id: mixing, title: "Mixing for clarity"}
-      - id: ch38
+      - id: ch44
         title: "Seeing music"
         summary: "Notation with ups and downs, 36-row piano rolls, circle and chord-space diagrams, tablature and animation."
         sections:
@@ -441,7 +517,7 @@ parts:
           - {id: pianoroll, title: "Piano rolls in 36-ET"}
           - {id: diagrams, title: "Circles and chord spaces"}
           - {id: animation, title: "Tablature and animation"}
-      - id: ch39
+      - id: ch45
         title: "AI as a collaborator"
         summary: "How this system was explored: the division of labor between a person and a machine."
         sections:

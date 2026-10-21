@@ -58,7 +58,7 @@ reference $A_0$, so doubling the amplitude adds $20\log_{10}2 = 6.02$ dB and a f
 (<a href="ch:ch01#frequency">Chapter 1</a>). The inverse of the logarithm is the exponential: a tone whose amplitude
 decays as $e^{-t/\tau}$ loses $20\log_{10}e = 8.69$ dB every $\tau$ seconds, and it is 60 dB down after
 $\tau\ln 1000 = 6.9078\,\tau$ seconds, which is how decay times are specified for the synthesized tones of
-<a href="ch:ch37#additive">Chapter 37</a>.</p>
+<a href="ch:ch43#additive">Chapter 43</a>.</p>
 
 <h3>Irrational logarithms</h3>
 <p><b>Proposition.</b> $\log_2 3$ is irrational. <i>Proof.</i> If $\log_2 3 = m/n$ with whole numbers $m, n > 0$,
@@ -70,7 +70,7 @@ number of octaves. For $\log_2\varphi$ a different argument is needed (<a href="
 (<a href="ch:ch01#cents">§1.5</a>), the harmonic series in cents (<a href="ch:ch02#partials">§2.2</a>), commas and
 tuning (<a href="ch:ch05#comma">§5.4</a>, <a href="ch:ch07#equal">§7.3</a>), golden intervals
 (<a href="ch:ch23#golden-intervals">§23.2</a>), sixth-steps (<a href="ch:ch24#sixth-steps">§24.1</a>), decay and
-loudness (<a href="ch:ch37#additive">§37.1</a>, <a href="ch:ch37#mixing">§37.4</a>).</p>
+loudness (<a href="ch:ch43#additive">§43.1</a>, <a href="ch:ch43#mixing">§43.4</a>).</p>
 
 <div class="exercise">
 <p><b>Exercise A.1.</b> Compute the cents of 6/5 and of 5/4, and check that their sum is the cents of the just fifth.</p>
@@ -413,17 +413,17 @@ its convergents improve as slowly as possible. <b>Hurwitz's theorem</b> (1891): 
 infinitely many fractions with $|\alpha - p/q| &lt; 1/(\sqrt5\,q^2)$, and $\sqrt5$ cannot be replaced by a larger
 constant, because of $\varphi$. The bound is tight for $\varphi$: $|\varphi - 13/8| = 0.006966 &lt; 1/(\sqrt5 \cdot 64) =
 0.006988$, while 21/13 just misses, $0.0026494 > 0.0026462$ (<a href="ch:ch23#phi">§23.1</a>,
-<a href="ch:ch34#eeg">§34.2</a>).</p>
+<a href="ch:ch40#eeg">§40.2</a>).</p>
 <aside class="box note"><p><b>Two different numbers.</b> Hurwitz's theorem is about $\varphi$ as a frequency ratio,
-which matters for beats and quasi-periodicity (<a href="ch:ch34#quasi-periodic">§34.3</a>). Whether a chain of
+which matters for beats and quasi-periodicity (<a href="ch:ch40#quasi-periodic">§40.3</a>). Whether a chain of
 golden sixths closes up at the octave is governed by $\log_2\varphi$, whose continued fraction is not all ones.</p></aside>
 
 <p><b>Where continued fractions are used.</b> Why twelve (<a href="ch:ch05#continued-fractions">§5.5</a>), the
 three-gap theorem and well-formed scales (<a href="ch:ch06#three-gap">§6.1</a>, <a href="ch:ch06#stern-brocot">§6.3</a>),
 other equal divisions (<a href="ch:ch07#edos">§7.5</a>), $\varphi$ and Fibonacci (<a href="ch:ch23#phi">§23.1</a>),
 golden scales (<a href="ch:ch23#golden-scales">§23.5</a>), why 36 (<a href="ch:ch24#why-36">§24.4</a>), realignment
-and KAM theory (<a href="ch:ch34#eeg">§34.2</a>, <a href="ch:ch34#quasi-periodic">§34.3</a>), the golden intervals as
-fractions (<a href="ch:ch35#next-color">§35.5</a>), proofs in <a href="ch:appD#tuning">Appendix D</a>.</p>
+and KAM theory (<a href="ch:ch40#eeg">§40.2</a>, <a href="ch:ch40#quasi-periodic">§40.3</a>), the golden intervals as
+fractions (<a href="ch:ch41#next-color">§41.5</a>), proofs in <a href="ch:appD#tuning">Appendix D</a>.</p>
 
 <div class="exercise">
 <p><b>Exercise A.14.</b> The just major third is $\log_2(5/4) = [0; 3, 9, 2, 2, \ldots]$ octaves. Compute the first
@@ -498,25 +498,25 @@ chords are computed (<a href="ch:ch03#beats">§3.1</a>, <a href="ch:ch26#beats">
 $1/f_0$ with $f_0$ the largest frequency of which all are whole multiples: 200 Hz and 300 Hz repeat 100 times a
 second, which is one way to see the missing fundamental (<a href="ch:ch03#harmonicity">§3.3</a>). If some ratio is
 irrational, the sum never repeats; it is <b>quasi-periodic</b>, as is any pair of tones a golden ratio apart
-(<a href="ch:ch34#quasi-periodic">§34.3</a>). A tone whose partials are not whole multiples of one frequency, such as
+(<a href="ch:ch40#quasi-periodic">§40.3</a>). A tone whose partials are not whole multiples of one frequency, such as
 a bell or the digital golden-spectrum tones with partials at $2^m\varphi^n$ times the fundamental, is still a sum of sines,
 but not a Fourier series of any period: its spectrum is <b>inharmonic</b> (<a href="ch:ch02#partials">§2.2</a>,
 <a href="ch:ch26#golden-spectra">§26.2</a>).</p>
 
 <h3>Synthesis and analysis</h3>
 <p>Additive synthesis runs the series forward: choose the partials' frequencies, amplitudes and phases and add the
-sines (<a href="ch:ch37#additive">§37.1</a>). Analysis runs it backward on sampled sound: for $N$ samples
+sines (<a href="ch:ch43#additive">§43.1</a>). Analysis runs it backward on sampled sound: for $N$ samples
 $x_0, \dots, x_{N-1}$ taken at rate $f_s$, the discrete Fourier transform
 $X_k = \sum_{n=0}^{N-1} x_n e^{-2\pi i kn/N}$ measures the component at $k f_s/N$ Hz, so the frequency resolution is
 $f_s/N$. The fast Fourier transform computes all $N$ values in about $N\log_2 N$ steps. This is how spectra and beat
-rates are measured from the rendered audio (<a href="ch:ch39#verification">§39.2</a>).</p>
+rates are measured from the rendered audio (<a href="ch:ch45#verification">§45.2</a>).</p>
 
 <p><b>Where Fourier series are used.</b> Fourier's idea (<a href="ch:ch02#fourier">§2.3</a>), timbre as a spectrum
 (<a href="ch:ch02#timbre">§2.4</a>), beats and roughness (<a href="ch:ch03#beats">§3.1</a>,
 <a href="ch:ch03#roughness">§3.2</a>), harmonicity (<a href="ch:ch03#harmonicity">§3.3</a>), instruments as spectra
 (<a href="ch:ch17#instruments">§17.1</a>), golden spectra and beats (<a href="ch:ch26#golden-spectra">§26.2</a>,
-<a href="ch:ch26#beats">§26.4</a>), quasi-periodicity (<a href="ch:ch34#quasi-periodic">§34.3</a>), additive synthesis
-(<a href="ch:ch37#additive">§37.1</a>).</p>
+<a href="ch:ch26#beats">§26.4</a>), quasi-periodicity (<a href="ch:ch40#quasi-periodic">§40.3</a>), additive synthesis
+(<a href="ch:ch43#additive">§43.1</a>).</p>
 
 <div class="exercise">
 <p><b>Exercise A.18.</b> Middle C (261.63 Hz) and a slightly sharp C at 264.00 Hz sound together. How fast do they beat,

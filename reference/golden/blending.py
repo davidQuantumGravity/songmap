@@ -1,14 +1,25 @@
 """Golden harmony beyond passing chords: modulation, key maps, bridges, modes, hybrid scales and
 blending techniques. Every table in docs/GOLDEN_BLENDING.md is printed by this script.
 
-    .venv/Scripts/python reference/golden/blending.py            # everything
+    .venv/Scripts/python reference/golden/blending.py            # everything (section 5 takes a few minutes)
     .venv/Scripts/python reference/golden/blending.py 3 7       # only sections 3 and 7
+
+Sections:  1 comma/limma/apotome, chain distance c(s)   2 the comma pump (golden13 walks), d = |c| theorem
+           3 map of keys (CT and VL)                    4 lifts by sixth-steps and third-steps
+           5 passing engine across layers (slow)        6 golden geodesic hinges; lift midpoints
+           7 the golden projection, PLR through it      8 projection pivots between keys; golden7 <-> Western
+           9 bridge scales, interstitial scales         10 the golden escalator as keys (negative)
+          11 modes of golden7/golden13, evenness        12 golden inflections of C major (3^7)
+          13 centroid scales (averages of 3 modes)      14 all 7-note scales: hybrid frontier, Myhill, ME
+          15 golden planing = polytonality              16 pedals and drones (roughness)
+          17 approach chords, golden Neapolitan         18 sequences (giant steps, golden-third keys)
+          19 roughness of the chords used               20 SongMap sketches D1..D21 (parse + expand)
 
 Conventions: pitch classes are sixth-steps mod 36 (C = 0, ^C = 1, vC# = 2, C# = 3, ...); the layer of p
 is p mod 3. Names come from songmap.theory.passing.name36. Voice-leading distance between two chords or
 scales of equal size is the minimum, over bijections, of the summed circular distances (sixth-steps).
 Roughness is the Sethares model of reference/golden/explore.py (harmonic partials 1..8, amplitudes
-0.88^k, close position from C4 = 261.63 Hz unless stated); it is a measurement in a model.
+0.88^(k-1), k = 1..8, close position from C4 = 261.63 Hz unless stated); it is a measurement in a model.
 """
 from __future__ import annotations
 
@@ -203,7 +214,7 @@ def _diss(fr, am):
 
 
 def roughness(steps_abs, f0=261.63, spectrum="harmonic"):
-    """steps_abs: absolute sixth-steps above f0 (a voicing). Harmonic partials 1..8, amps 0.88^k."""
+    """steps_abs: absolute sixth-steps above f0 (a voicing). Harmonic partials 1..8, amps 0.88^(k-1), k = 1..8."""
     if spectrum == "harmonic":
         parts = list(range(1, 9))
     else:
@@ -281,6 +292,14 @@ def s2_comma_pump():
         assert walk[-1][1] == target and walk[-1][5] == T(G13, target)
         assert all(abs(w[4]) == 1 for w in walk)
         print(f"   end = golden13 on {name36(target)} (verified); every step moves exactly one note by one sixth-step")
+    # the tonic golden triads of the walk are consecutive golden-circle chords
+    tonics = [0] + [w[1] for w in golden13_walk(0, 13, +1)]
+    steps_ = [fold(b - a) for a, b in zip(tonics, tonics[1:])]
+    print("\n  Tonic golden triads of the 13-step walk: " + " ".join(name36(t) + "g" for t in tonics))
+    print(f"   root steps {set(steps_)} (= -11: one golden-circle step each; the fifth rises a semitone and becomes"
+          f" the root); 13 x (-11) = {13 * -11} = {fold(13 * -11)} mod 36")
+    for t in tonics:
+        assert chord(t, "g") <= T(G13, t)
     # theorem: VL distance between golden13 keys = |chain distance| for |c| <= 13
     print("\n  Voice-leading distance between C golden13 and its 36 transpositions vs chain distance |c(s)|:")
     rows = []
@@ -331,6 +350,9 @@ def s3_key_map():
     print("\n  Notes per layer (tonic layer first): golden7", [len([x for x in G7 if x % 3 == l]) for l in (0, 1, 2)],
           " golden13", [len([x for x in G13 if x % 3 == l]) for l in (0, 1, 2)],
           " silver13", [len([x for x in S13 if x % 3 == l]) for l in (0, 1, 2)])
+    print("\n  13-note families: nearest silver13 keys to C golden13 by VL (and CT):")
+    r13 = sorted((vl(G13, T(S13, s)), len(G13 & T(S13, s)), name36(s)) for s in range(EDO))[:5]
+    print("   " + ", ".join(f"{n} silver13 (VL {d}, CT {c})" for d, c, n in r13))
     print("\n  Major-key VL by transposition (the 'pitch-near, tone-far' profile):")
     print("   " + "  ".join(f"{name36(s)}:{vl(MAJOR, T(MAJOR, s))}" for s in range(0, 19)))
 
@@ -344,8 +366,6 @@ def s4_lifts():
         d, mv, _ = vl_moves(I, Y)
         sc = sorted(MAJOR)
         tgt = T(MAJOR, s)
-        best = min(permutations(sorted(tgt)), key=lambda p: sum(cd(x, y) for x, y in zip(sc, p))) \
-            if False else None
         # optimal scale matching via cyclic shifts with explicit moves
         b = sorted(tgt)
         cand = []
@@ -377,11 +397,10 @@ def diatonic_triads(S):
 
 def s5_engine():
     H("5. Pivot and passing paths across layers via the passing engine (strict ~ and natural ~g)")
-    targets = [("^C major", T(MAJOR, 1)), ("vC# major", T(MAJOR, 2)), ("^C minor", T(NMINOR, 1)),
-               ("vC major", T(MAJOR, 35)), ("^A minor", T(NMINOR, 28))]
-    X = diatonic_triads(MAJOR)
+    targets = [("^C major", T(MAJOR, 1)), ("vC# major", T(MAJOR, 2)), ("^Eb major (= ^C minor)", T(MAJOR, 10))]
+    X = key_triads(MAJOR)                        # the six consonant triads (slow: about a minute per target)
     for tname, K in targets:
-        Y = diatonic_triads(K)
+        Y = key_triads(K)
         tot = Counter()
         golden_list = Counter()
         ex = []
@@ -390,6 +409,8 @@ def s5_engine():
                 ch, l1, l2 = evaluate(xr, TRI[xq], yr, TRI[yq], natural, pref)
                 kinds = (l1.kind, l2.kind)
                 g = sum(k == "golden" for k in kinds)
+                if g == 2 and l1.name.split("/")[0] == l2.name.split("/")[0]:
+                    g = 1                                   # one golden chord held over P1 and P2
                 gp = sum(k == "golden_pedal" for k in kinds)
                 tag = "nat" if natural else "str"
                 tot[(tag, "pairs")] += 1
@@ -404,12 +425,12 @@ def s5_engine():
                     ex.append((-g, motion, f"{cname(xr, xq)} - {l1.name} - {l2.name} - {cname(yr, yq)}"))
         print(f"\n  C major diatonic triads -> {tname} diatonic triads ({len(X)} x {len(Y)} pairs)")
         for tag in ("str", "nat"):
-            print(f"   {tag}: pairs {tot[(tag, 'pairs')]}, >=1 exact golden {tot[(tag, '>=1 golden')]}, two golden "
+            print(f"   {tag}: pairs {tot[(tag, 'pairs')]}, >=1 exact golden {tot[(tag, '>=1 golden')]}, two different golden "
                   f"{tot[(tag, '2 golden')]}, golden incl. over-pedal {tot[(tag, 'golden or pedal')]}")
             gl = sorted(((n, c) for (t, n), c in golden_list.items() if t == tag), key=lambda x: -x[1])
             if gl:
                 print("        golden chords used:", ", ".join(f"{n} x{c}" for n, c in gl))
-        for _, m, s in sorted(ex)[:8]:
+        for _, m, s in sorted(ex)[:24]:
             print(f"     natural, motion {m:2d}: {s}")
 
 
@@ -450,6 +471,16 @@ def s6_hinges():
             print("   hinge chords:", ", ".join(f"{k} x{v}" for k, v in hingecount.most_common()))
         for _, r in sorted(rows)[:10]:
             print("    ", r)
+    print("\n  Lifts of a single triad X -> X + s (all 24 major/minor triads on layer 0; exact geodesic golden hinges):")
+    for sh in (1, 2, 4, 5, -1, -2):
+        res = Counter()
+        for q in ("", "m"):
+            for r in range(0, EDO, 3):
+                A = chord(r, q)
+                dxy, hs = geodesic_hinges(A, T(A, sh), 0)
+                res[(q, dxy, tuple(sorted(fold(g - r) for _, g in hs)))] += 1
+        print(f"   s = {sh:+d}: " + "; ".join(f"{'major' if q == '' else 'minor'} d={d} hinge roots at offset {offs} ({n})"
+                                        for (q, d, offs), n in sorted(res.items())))
     print("\n  Theorem check (layer betweenness): for X on layer 0 and Y = X + 1, no golden triad lies on a geodesic.")
     bad = 0
     for q in ("", "m", "dim", "aug"):
@@ -645,6 +676,14 @@ def s10_escalator_keys():
             print(f"   {name36(t)} {fn:8s}: {names(S)}")
             print(f"       shares with C major {len(S & K1)} ({names(S & K1)}), with D major {len(S & K2)} ({names(S & K2)})"
                   + (f", VL {vl(K1, S)} / {vl(S, K2)}" if len(S) == 7 else ""))
+    for a, b, g1, g2 in ((0, 6, 2, 4), (15, 21, 17, 19)):
+        for fn, F in (("golden7", G7), ("golden10", G10), ("golden13", G13), ("silver13", S13)):
+            hits = [s for s in range(EDO) if chord(g1, "g") <= T(F, s) and chord(g2, "g") <= T(F, s)]
+            print(f"   {fn:8s} keys containing both {name36(g1)}g and {name36(g2)}g: "
+                  + (", ".join(f"{name36(s)} (shares {len(T(F, s) & MAJOR)} with C major, "
+                               f"{len(T(F, s) & T(MAJOR, b if a == 0 else 21))} with {name36(b if a == 0 else 21)} major)"
+                               for s in hits) or "none"))
+        print(f"   circle positions of {name36(g1)}g, {name36(g2)}g: {fold(23 * g1)}, {fold(23 * g2)}")
     S1, S2 = T(G7, 2), T(G7, 4)
     print(f"   vC# golden7 vs ^C# golden7: common {len(S1 & S2)}, VL {vl(S1, S2)}, chain distance {abs(chain_pos(2))}")
     print(f"   direct C major -> D major: common {len(K1 & K2)}, VL {vl(K1, K2)}")
@@ -658,7 +697,8 @@ def s10_escalator_keys():
 def s11_modes():
     H("11. Modes: rotations of golden7 and golden13 (step patterns, chain position, tonic chords)")
     for fn, F, m in (("golden7", G7, 3), ("golden13", G13, 6)):
-        print(f"\n  {fn} on C, modes by tonic (sorted by chain position = brightness: higher = more notes raised):")
+        print(f"\n  {fn} on C, modes by tonic, brightest first (brightness = sum of the C-mode's degrees in sixth-steps;"
+              f" consecutive modes differ in exactly one degree, by the chroma):")
         rows = []
         for t in sorted(F):
             S = T(F, -t)                       # mode on t, transposed to C
@@ -668,8 +708,12 @@ def s11_modes():
             tonic = chord(0, "g") <= S
             sev = frozenset((0, 11, 22, 33)) <= S
             rows.append((j, t, st, gtr, tonic, sev, S))
-        for j, t, st, gtr, tonic, sev, S in sorted(rows, reverse=True):
-            print(f"   chain {j:+3d} on {name36(t):>3s}: steps {' '.join(map(str, st)):28s} tonic golden triad {'yes' if tonic else 'no ':3s}"
+        rows.sort(key=lambda r: -sum(r[6]))
+        for a_, b_ in zip(rows, rows[1:]):
+            assert all(x >= y for x, y in zip(sorted(a_[6]), sorted(b_[6])))
+            assert sum(x != y for x, y in zip(sorted(a_[6]), sorted(b_[6]))) == 1
+        for j, t, st, gtr, tonic, sev, S in rows:
+            print(f"   brightness {sum(S):4d} chain {j:+3d} on {name36(t):>3s}: steps {' '.join(map(str, st)):28s} tonic golden triad {'yes' if tonic else 'no ':3s}"
                   f"  tonic g7 {'yes' if sev else 'no '}  golden triads {len(gtr)}  as C-mode: {names(S)}")
     print("\n  Step-size structure and evenness checks:")
     for fn, S in (("C major (in 36)", MAJOR), ("golden7", G7), ("golden10", G10), ("golden13", G13), ("golden23", G23),
@@ -723,8 +767,6 @@ def s13_centroids():
     H("13. Centroid scales: degree-by-degree averages of three modes on C (always on the 36-ET grid)")
     nm = list(MODES7)
     rows = []
-    for combo in combinations(range(len(nm)) if False else range(len(nm)), 1):
-        pass
     for a, b, c in [(i, j, k) for i in range(len(nm)) for j in range(i, len(nm)) for k in range(j, len(nm))]:
         A, B, Cc = MODES7[nm[a]], MODES7[nm[b]], MODES7[nm[c]]
         avg = tuple((x + y + z) // 3 for x, y, z in zip(A, B, Cc))
@@ -793,6 +835,20 @@ def s14_exhaustive_hybrids():
             S = frozenset(key)
             print(f"      {names(S):36s} Myhill {myhill(S)} MOS {is_mos(S)} [" +
                   ", ".join(triad_label(chord(r, q)) for r, q in triads_in(S, ('', 'm', 'g'))) + "]")
+    # Myhill's property, vectorized over all 1.6M scales
+    arr = np.array([(0,) + c for c in combinations(range(1, EDO), 6)], dtype=np.int16)
+    my = np.ones(len(arr), dtype=bool)
+    me = np.ones(len(arr), dtype=bool)
+    for k in range(1, 7):
+        d = (np.roll(arr, -k, axis=1) - arr) % EDO
+        d.sort(axis=1)
+        nd = 1 + (np.diff(d, axis=1) != 0).sum(axis=1)
+        my &= nd == 2
+        me &= (nd == 1) | ((nd == 2) & (d[:, -1] - d[:, 0] == 1))
+    print(f"  Myhill scales: {int(my.sum())} (containing C); with W >= 1: {int((my & (W >= 1)).sum())}, with G >= 1: "
+          f"{int((my & (G >= 1)).sum())}, with both: {int((my & (W >= 1) & (G >= 1)).sum())}")
+    print(f"  maximally even 7-note scales containing C: {int(me.sum())}; their W, G:",
+          sorted(set(zip(W[me].tolist(), G[me].tolist()))), "silver triads:", sorted(set(cnt['s'][me].tolist())))
     # scales with both W >= 2 and G >= 2
     both = (W >= 2) & (G >= 2)
     print(f"  scales with W >= 2 and G >= 2: {int(both.sum())};  W >= 3 and G >= 2: {int(((W >= 3) & (G >= 2)).sum())}")
@@ -900,52 +956,87 @@ def s18_sequences():
     d = vl_moves(chord(0, ""), chord(11, ""))
     print(f"   tonic triads C -> vE major: VL {d[0]}, moves {d[1]};  C -> Cg -> vEg -> vE: "
           f"{vl(chord(0, ''), chord(0, 'g'))} + {vl(chord(0, 'g'), chord(11, 'g'))} + {vl(chord(11, 'g'), chord(11, ''))}")
+    for s_ in (11, 25):
+        dxy, hs = geodesic_hinges(chord(0, ""), chord(s_, ""), 0)
+        print(f"   geodesic golden hinges C -> {name36(s_)} major (d = {dxy}): " + ", ".join(name36(r) + "g" for _, r in hs))
     print("\n  Layer-prism sequence: a cadence on C, ^C, vC#, C# (each tonic one sixth-step higher; 3 steps = a semitone)")
 
 
 SKETCHES = [
-    # (name, key, harmony)
-    ("comma lift", "C major", "C:1 F:0.5 G:0.5 C:1 ^C:1 ^F:0.5 ^G:0.5 ^C:2"),
-    ("third-step lift via shared shadows", "C major", "C:1 F:0.5 G7:0.5 C:1 vC#:1 vF#:0.5 vG#:0.5 vC#:2"),
-    ("projection pivot to ^Eb", "C major", "C:1 Am:1 F:1 Fg:1 ^Fm:1 ^Bb7:1 ^Eb:2"),
-    ("projection pivot to vA", "C major", "C:1 F:1 Dm:1 G:1 Am:1 vAg:1 vA:2"),
-    ("projection pivot V=iii", "C major", "C:1 Dm:1 G:1 Gg:1 ^Gm:1 ^Ab:1 ^Bb:1 ^Eb:1"),
-    ("golden giant steps", "C major", "C:1 ~:1 Ab:1 ~:1 E:1 ~:1 C:2"),
-    ("golden giant steps explicit", "C major", "C:1 Cg:1 Ab:1 Abg:1 E:1 Eg:1 C:2"),
-    ("golden-third key cycle", "C major", "C:1 Cg:1 vEg:1 vE:1 vEg:1 ^Gg:1 ^G:1 ^Gg:1 Bg:1 B:2"),
-    ("escalator keys", "C major", "C:1 G:1 C:1 ~g:0.5 ~g:0.5 D:1 A:1 D:2"),
-    ("escalator explicit", "C major", "C:1 G7:1 C:1 vC#g:1 ^C#g:1 D:1 A7:1 D:1"),
-    ("golden pedal C", "C major", "C:1 Cg:1 ^Abg:1 vFg:1 Cg:1 C:2"),
-    ("golden Neapolitan", "C golden7", "Cg:1 C#g:1 Cg:1 vEg:1 Cg:2"),
-    ("projection modal mixture", "C major", "C:1 Fg:1 G:1 C:1 Am:1 vAg:1 Dm:1 Gg:1 C:2"),
-    ("comma pump harmony", "C major", "C:1 Cg7:1 ^Abg:1 vFg:1 C#g:1 ^Ag:1 vF#g:1 Dg:1 ^C:2"),
-    ("passing across layers", "C major", "G:1 ~g:0.5 ~g:0.5 ^C:2"),
-    ("passing to vC#", "C major", "C:1 ~g:0.5 ~g:0.5 vC#:2"),
-    ("strict to vC# from Em", "C major", "Em:1 ~:0.5 ~:0.5 vC#:2"),
+    # (id, technique, key, harmony): every string is parsed and expanded by SongMap in section 20
+    ("D1", "sixth-step lift (planing modulation)", "C major", "C:1 F:0.5 G7:0.5 C:1 ^C:1 ^F:0.5 ^G7:0.5 ^C:2"),
+    ("D2", "third-step lift through its golden midpoint", "C major", "C:1 F:0.5 G7:0.5 C:1 ^Cg:1 vC#:1 vF#:0.5 vG#7:0.5 vC#:2"),
+    ("D2b", "third-step lift, engine-chosen midpoint", "C major", "C:1 ~g:1 vC#:2"),
+    ("D3", "comma pump: 13 golden-circle steps from Cg to ^Cg", "C major",
+     "C:1 Cg:0.5 ^Abg:0.5 vFg:0.5 C#g:0.5 ^Ag:0.5 vF#g:0.5 Dg:0.5 ^Bbg:0.5 vGg:0.5 Ebg:0.5 ^Bg:0.5 vAbg:0.5 Eg:0.5 ^Cg:1 ^C:2"),
+    ("D4", "limma pump: 10 forward circle steps from Cg to vC#g", "C major",
+     "C:1 Cg:0.5 vEg:0.5 ^Gg:0.5 Bg:0.5 vEbg:0.5 ^F#g:0.5 Bbg:0.5 vDg:0.5 ^Fg:0.5 Ag:0.5 vC#g:1 vC#:2"),
+    ("D5", "apotome pump: 3 backward circle steps from Cg to C#g", "C major", "C:1 Cg:1 ^Abg:1 vFg:1 C#g:1 C#:2"),
+    ("D6", "projection pivot C major -> ^Eb major (IV = ii via Fg)", "C major", "C:1 Am:1 F:1 Fg:1 ^Fm:1 ^Bb7:1 ^Eb:2"),
+    ("D7", "projection pivot C major -> vA major (vi = I via vAg)", "C major", "C:1 F:1 G:1 Am:1 vAg:1 vA:1 vE7:1 vA:2"),
+    ("D8", "projection pivot C major -> ^Eb major (V = iii via Gg)", "C major", "C:1 Dm:1 G:1 Gg:1 ^Gm:1 ^Ab:1 ^Bb7:1 ^Eb:1"),
+    ("D9", "two golden chords across layers (natural engine)", "C major", "F:1 ~g:0.5 ~g:0.5 ^Em:2"),
+    ("D10", "golden hinge vi -> ^I", "C major", "Am:1 ~g:1 ^C:2"),
+    ("D11", "golden modal mixture by projection (colour chords)", "C major", "C:1 Fg:1 G7:1 C:1 Am:1 vAg:1 Dm:1 Gg:1 C:2"),
+    ("D12", "golden Ionian C D vE F ^G A B", "C major", "F:1 Dm:1 Cg:1 vEg:1 Dm:1 Cg:2"),
+    ("D13", "hybrid (W, G) = (3, 2): C ^C D E F vA A", "C major", "F:1 Dm:1 Fg:1 vAg:1 Am:1 Fg:1 F:2"),
+    ("D14", "golden planing = three-key polytonality", "C major", "Cg:0.5 Dg:0.5 Eg:0.5 Fg:0.5 Gg:0.5 Ag:0.5 Bg:0.5 Cg:0.5 C:2"),
+    ("D15", "golden pedal on C (three circle chords share C)", "C major", "C:1 Cg/C:1 ^Abg/C:1 vFg/C:1 ^Abg/C:1 Cg/C:1 C:2"),
+    ("D16", "golden Neapolitan and leading-tone chord", "C golden7", "Cg:1 C#g:1 Cg:1 vEg:1 Cg:1 C:2"),
+    ("D17", "golden giant steps (major-third cycle, strict passing)", "C major", "C:1 ~:1 Ab:1 ~:1 E:1 ~:1 C:2"),
+    ("D18", "golden-third key cycle through projections", "C major",
+     "C:1 Cg:1 vEg:1 vE:1 vEg:1 ^Gg:1 ^G:1 ^Gg:1 Bg:1 B:2"),
+    ("D19", "layer-prism sequence (ii-V-I rising by sixth-steps)", "C major",
+     "Dm7:0.5 G7:0.5 C:1 ^Dm7:0.5 ^G7:0.5 ^C:1 vEbm7:0.5 vAb7:0.5 vC#:1 Ebm7:0.5 Ab7:0.5 C#:2"),
+    ("D20", "F harmonic minor <-> C golden7 by shared projections", "F minor",
+     "Fm:1 Db:1 Abaug:1 C:1 Cg:1 C#g:1 vFg:1 ^Abg:1 Cg:1 C:1 Fm:2"),
+    ("D21", "golden escalator as passing keys", "C major", "C:1 G7:1 C:1 ~g:0.5 ~g:0.5 D:1 A7:1 D:2"),
 ]
 
 
-def s19_sketches():
-    H("19. Audio sketches: parsed and expanded by SongMap (resolved chord symbols)")
+def s19_roughness():
+    H("19. Roughness of the chords used (Sethares model; close position, root C4; measurement)")
+    rows = [("C major", (0, 12, 21)), ("C minor", (0, 9, 21)), ("C aug", (0, 12, 24)), ("C dim", (0, 9, 18)),
+            ("Cg golden", (0, 11, 22)), ("Cs silver", (0, 10, 20)), ("CT13 bronze", (0, 13, 26)),
+            ("C(v3) = C vE G", (0, 11, 21)), ("C(^3) = C ^E G", (0, 13, 21)), ("C(^5) = C E ^G", (0, 12, 22)),
+            ("Cmaj7", (0, 12, 21, 33)), ("Cg7", (0, 11, 22, 33))]
+    print(f"  {'chord':18s} {'harmonic':>9s} {'golden spectrum':>16s}")
+    for n, v in rows:
+        print(f"  {n:18s} {roughness(list(v)):9.3f} {roughness(list(v), spectrum='golden'):16.3f}")
+    print("  (all golden triads are transpositions of one shape: in this model their roughness differs only by register)")
+    print("\n  Register check, Cg on each 12-ET root of the octave from C4 (harmonic):",
+          " ".join(f"{name36(r)}:{roughness([r, r + 11, r + 22]):.2f}" for r in range(0, 36, 3)))
+
+
+def s20_sketches():
+    H("20. Audio sketches: parsed and expanded by SongMap (resolved chord symbols)")
     from songmap.arrange.expand import expand
     from songmap.parse import yaml_form
     tpl = ("songmap: 0.2\ntitle: \"t\"\ntempo: 72\nmeter: \"4/4\"\nkey: \"{key}\"\ntuning: 36edo\nseed: 1\n"
            "tail_seconds: 1\ninstruments: {{organ: clean/organ, low: clean/bass}}\nsections:\n"
            "  - {{name: a, bars: {bars:g}, harmony: \"{h}\", parts: {{organ: hold, low: bassline}}}}\nmaster: clean\n")
-    for name, key, h in SKETCHES:
+    from songmap.theory.keys import parse_key
+    walk = [0] + [w[1] for w in golden13_walk(0, 13, +1)]
+    for t in walk:
+        pc, sc = parse_key(name36(t) + " golden13")
+        assert frozenset(round((pc + x) * 3) % EDO for x in sc) == T(G13, t)
+    print("  keys 'X golden13' parse to the expected sets for every tonic of the comma pump:",
+          ", ".join(name36(t) for t in walk))
+    for sid, name, key, h in SKETCHES:
         bars = sum(float(t.rsplit(":", 1)[1]) for t in h.split())
         try:
             song = yaml_form.from_raw(yaml_form.load_raw_text(tpl.format(key=key, bars=bars, h=h)))
             arr = expand(song)
             syms = " ".join(s.chord.symbol if s.chord else "N.C." for s in arr.harmony.spans)
-            print(f"  OK  {name:36s} {h}\n      -> {syms}" + (f"   warnings: {arr.warnings}" if arr.warnings else ""))
+            print(f"  OK  {sid:4s} {name}  [key: {key}]\n      {h}\n      -> {syms}"
+                  + (f"   warnings: {arr.warnings}" if arr.warnings else ""))
         except Exception as e:  # noqa: BLE001
-            print(f"  ERR {name:36s} {h}\n      -> {type(e).__name__}: {e}")
+            print(f"  ERR {sid:4s} {name}\n      {h}\n      -> {type(e).__name__}: {e}")
 
 
 SECTIONS = [s1_units, s2_comma_pump, s3_key_map, s4_lifts, s5_engine, s6_hinges, s7_projection, s8_projection_pivots,
             s9_bridges, s10_escalator_keys, s11_modes, s12_inflections, s13_centroids, s14_exhaustive_hybrids,
-            s15_polytonal, s16_pedals, s17_applied, s18_sequences, s19_sketches]
+            s15_polytonal, s16_pedals, s17_applied, s18_sequences, s19_roughness, s20_sketches]
 
 if __name__ == "__main__":
     want = {int(a) for a in sys.argv[1:]}

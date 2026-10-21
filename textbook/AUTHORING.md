@@ -35,7 +35,7 @@ The first checks structure and references. The second renders your chapter's aud
   - `<div class="layer understand">`: concepts, notation, worked examples, light math (fractions, logs with explanation), tables.
   - `<div class="layer derive">`: definitions, theorems, proofs or proof sketches, exact values, formulas, small code-like algorithms. Point to `ch:appD` for long proofs.
 
-  Every chapter in Parts I–IX must use all three layers. A purely historical section may skip Derive.
+  Every chapter in Parts I–X must use all three layers. A purely historical section may skip Derive.
 - **Boxes:**
   - `<aside class="mirror">` (Western chapters: how this idea reappears in the golden system, with a link);
   - `<aside class="box math">`, `<aside class="box history">`, `<aside class="box note">`;
@@ -249,7 +249,7 @@ Report:
   are never "rough visitors" or "the tension" in a golden piece on real instruments; arriving on one is release.
 - The golden triad is a **local minimum** in the author's model: a delicate, metastable home one can dwell in.
   State this as the author's model and listening experience (with its extended-listening effect as a personal
-  observation / hypothesis, Part VIII). Do not mention chi or energy. Measurement on harmonic tones does NOT
+  observation / hypothesis, Part IX). Do not mention chi or energy. Measurement on harmonic tones does NOT
   show a local minimum (docs/GOLDEN_THEORY.md §3.0 gives the numbers); say so where measurement is discussed.
 - The timbre flip is a **laboratory exercise**: on the digital golden spectrum the exact golden triad is a strict
   local minimum and smoother than major (measured). Use it to immerse in golden harmony on its own terms, then

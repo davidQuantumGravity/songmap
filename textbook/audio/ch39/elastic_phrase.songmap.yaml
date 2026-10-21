@@ -1,0 +1,22 @@
+# ch39: I - IV - V - I - vi - IV - V - I with every chord change a leap of all voices; each new chord
+# first lands just beyond its target on a golden chord (the partial overshoot: two voices go one or two
+# sixth-steps past, one lands) and settles back by sixth-steps. The last arrival uses the full overshoot vC#g.
+songmap: 0.2
+title: "An elastic phrase"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 39
+tail_seconds: 2.5
+instruments: {keys: keys/still, low: clean/bass}
+mix: {keys: {gain_db: -5, send: {hall: 0.3}}, low: {gain_db: -6}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: phrase
+    bars: 9
+    harmony: "C:1 ^Fg:0.25 F:0.75 vGg:0.25 G:0.75 ^Cg:0.25 C:0.75 ^Abg:0.25 Am:0.75 ^Fg:0.25 F:0.75 vGg:0.25 G:0.75 vC#g:0.25 C:0.75 C:1"
+    parts:
+      keys: {notes: "=mp [c,e,g]1 [^f,a,vc#+]4 [f,a,c+]2. [vg-,^bb-,d]4 [g-,b-,d]2. [^c,e,vab]4 [c,e,g]2. [^ab-,c,ve]4 [a-,c,e]2. [^f,a,vc#+]4 [f,a,c+]2. [vg-,^bb-,d]4 [g-,b-,d]2. [vc#,^e,ab]4 [c,e,g]2. [c,e,g]1"}
+      low: {notes: "=mp c-1 ^f-4 f-2. vg--4 g--2. ^c-4 c-2. ^ab--4 a--2. ^f-4 f-2. vg--4 g--2. vc#-4 c-2. c-1"}
+master: clean

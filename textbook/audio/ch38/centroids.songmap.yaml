@@ -1,0 +1,22 @@
+# ch38 centroid-scales: C major and C minor; their centroid (2 major + minor)/3 = C D vE F G vA vB with
+# its tonic C vE G (no named triad); the silver centroid (Ionian + Aeolian + Locrian)/3 = C vD ^Eb F vG ^Ab ^Bb
+# with Cs and vDs; and (harm. minor + Lydian aug. + harm. major)/3 = C D vE ^F ^G ^Ab B with Cg ^Abg vEg.
+songmap: 0.2
+title: "Centroid scales"
+tempo: 112
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ}
+mix:
+  keys: {gain_db: -4}
+  pad: {gain_db: -9}
+sections:
+  - {name: major, bars: 2, harmony: "N.C.:1 C:1", parts: {keys: {notes: "c8 d8 e8 f8 g8 a8 b8 c+8 | r2. r8. c16@0"}, pad: hold}}
+  - {name: minor, bars: 2, harmony: "N.C.:1 Cm:1", parts: {keys: {notes: "c8 d8 eb8 f8 g8 ab8 bb8 c+8 | r2. r8. c16@0"}, pad: hold}}
+  - {name: twothirds, bars: 3, harmony: "N.C.:1 C(v3):2", parts: {keys: {notes: "c8 d8 ve8 f8 g8 va8 vb8 c+8 | r1 | r2. r8. c16@0"}, pad: hold}}
+  - {name: silver, bars: 3, harmony: "N.C.:1 Cs:1 vDs:1", parts: {keys: {notes: "c8 vd8 ^eb8 f8 vg8 ^ab8 ^bb8 c+8 | r1 | r2. r8. c16@0"}, pad: hold}}
+  - {name: golden, bars: 3, harmony: "N.C.:1 Cg:0.5 ^Abg:0.5 vEg:0.5 Cg:0.5", parts: {keys: {notes: "c8 d8 ve8 ^f8 ^g8 ^ab8 b8 c+8 | r1 | r2. r8. c16@0"}, pad: hold}}
+master: clean

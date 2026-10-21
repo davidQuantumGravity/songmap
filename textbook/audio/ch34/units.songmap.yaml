@@ -1,0 +1,19 @@
+# ch34: the three small golden intervals as key changes, in 36-ET. The tonic triad C major moves
+# up a golden comma (1 sixth-step, ^C), a golden limma (2, vC#) and a golden apotome (3, C#), each
+# time from C. Only the apotome lands back on the 12-ET layer.
+songmap: 0.2
+title: "Comma, limma, apotome"
+tempo: 88
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 341
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass, keys: clean/keys}
+mix:
+  organ: {gain_db: -7}
+  low: {gain_db: -6}
+  keys: {gain_db: -6}
+sections:
+  - {name: units, bars: 8, harmony: "C:1 ^C:1 C:1 vC#:1 C:1 C#:1 C:2", parts: {organ: hold, low: {style: roots, role: bass}, keys: top}}
+master: clean

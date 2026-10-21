@@ -1,0 +1,23 @@
+# ch36 decatonic: the 35 decatonic is two golden pentatonics a golden third apart.
+# Pentatonic A = C D vF ^G ^A (keys), pentatonic B = C# vE vF# ^Ab B (pluck), then the two interleaved
+# (= C C# D vE vF vF# ^G ^Ab ^A B), then a call in A, its answer in B, and both together (golden thirds).
+songmap: 0.2
+title: "The double pentatonic"
+tempo: 108
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys, pluck: string_pluck/still}
+mix:
+  keys: {gain_db: -4}
+  pluck: {gain_db: -4}
+sections:
+  - {name: pentA, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 d8 vf8 ^g8 ^a8 c+8 ^a8 ^g8 | vf8 d8 c2."}}}
+  - {name: pentB, bars: 2, harmony: "N.C.:2", parts: {pluck: {notes: "c#8 ve8 vf#8 ^ab8 b8 c#+8 b8 ^ab8 | vf#8 ve8 c#2."}}}
+  - {name: both, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 r8 d8 r8 vf8 r8 ^g8 r8 | ^a8 r8 c+2."}, pluck: {notes: "r8 c#8 r8 ve8 r8 vf#8 r8 ^ab8 | r8 b8 b2."}}}
+  - {name: call, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "^g4 ^a8 ^g8 vf4 d4 | vf4 d8 ^a-8 c2"}}}
+  - {name: response, bars: 2, harmony: "N.C.:2", parts: {pluck: {notes: "b4 c#+8 b8 ^ab4 vf#4 | ^ab4 vf#8 c#8 ve2"}}}
+  - {name: together, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "^g4 ^a8 ^g8 vf4 d4 | vf4 d8 ^a-8 c2"}, pluck: {notes: "b4 c#+8 b8 ^ab4 vf#4 | ^ab4 vf#8 c#8 ve2"}}}
+master: clean

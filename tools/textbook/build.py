@@ -422,7 +422,7 @@ KATEX_CDN = ('<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist
              '<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>')
 THEME_BOOT = ("<script>try{var t=localStorage.getItem('tb-theme');if(t)document.documentElement.setAttribute('data-theme',t)}"
               "catch(e){}</script>")
-GOLDEN_PARTS = {"part6", "part7"}
+GOLDEN_PARTS = {"part6", "part7", "part8"}
 
 
 def chap_num(ch):
@@ -564,18 +564,90 @@ def placeholder(ch):
     return secs
 
 
+def cover_art() -> str:
+    """The cover: the classical golden spiral of quarter circles in nested golden rectangles, the 36-note ring at
+    its eye, and three golden triads, one rooted on each layer (C, ^C, vC#), in the three layer colours."""
+    phi = (1 + 5 ** 0.5) / 2
+    S = 560.0
+    x, y, w, h = 40.0, 70.0, S * phi, S
+    sq, arcs = [], []
+    for i in range(12):
+        d = i % 4
+        if d == 0:
+            s_ = h; sq.append((x, y, s_)); arcs.append(((x, y + h), (x + h, y), s_)); x, w = x + h, w - h
+        elif d == 1:
+            s_ = w; sq.append((x, y, s_)); arcs.append(((x, y), (x + w, y + w), s_)); y, h = y + w, h - w
+        elif d == 2:
+            s_ = h; sq.append((x + w - h, y, s_)); arcs.append(((x + w, y), (x + w - h, y + h), s_)); w = w - h
+        else:
+            s_ = w; sq.append((x, y + h - w, s_)); arcs.append(((x + w, y + h), (x, y + h - w), s_)); h = h - w
+    eye = (x + w / 2, y + h / 2)
+    rects = "".join(f'<rect x="{a:.1f}" y="{b:.1f}" width="{c:.1f}" height="{c:.1f}" class="cv-sq"/>' for a, b, c in sq)
+    path = "M {:.1f} {:.1f} ".format(*arcs[0][0]) + " ".join(
+        f"A {r:.2f} {r:.2f} 0 0 1 {e[0]:.2f} {e[1]:.2f}" for _, e, r in arcs)
+    R0 = 128.0
+    pos = lambda k, r=R0: (eye[0] + r * math.sin(2 * math.pi * k / 36), eye[1] - r * math.cos(2 * math.pi * k / 36))  # noqa: E731
+    dots = "".join(f'<circle cx="{pos(k)[0]:.1f}" cy="{pos(k)[1]:.1f}" r="{4.2 if k % 3 == 0 else 2.6}" class="cv-dot l{k % 3}"/>'
+                   for k in range(36))
+    tris = ""
+    for root, layer in ((0, 0), (1, 1), (2, 2)):
+        pts = " ".join("{:.1f},{:.1f}".format(*pos(root + iv)) for iv in (0, 11, 22))
+        tris += f'<polygon points="{pts}" class="cv-tri l{layer}"/>'
+    # drawn upside down (eye at the top right, clear of the title); a golden triad's mirror image is a golden triad
+    return (f'<svg class="cover-art" viewBox="0 0 1000 720" preserveAspectRatio="xMaxYMin slice" aria-hidden="true">'
+            f'<defs><radialGradient id="cvg" cx="{eye[0] / 10:.1f}%" cy="{(720 - eye[1]) / 7.2:.1f}%" r="75%">'
+            f'<stop offset="0" stop-color="#3a2c10"/><stop offset="1" stop-color="#0c0b09"/></radialGradient></defs>'
+            f'<rect width="1000" height="720" fill="url(#cvg)"/><g transform="translate(0 720) scale(1 -1)">'
+            f'{rects}<path d="{path}" class="cv-spiral"/>'
+            f'<circle cx="{eye[0]:.1f}" cy="{eye[1]:.1f}" r="{R0}" class="cv-ring"/>{tris}{dots}</g></svg>')
+
+
+def _build_stamp() -> str:
+    try:
+        h = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        h = ""
+    import datetime
+    return datetime.date.today().isoformat() + (f", commit {h}" if h else "")
+
+
+def front_pages(toc) -> str:
+    t, sub, au = (html.escape(toc.get(k, "")) for k in ("title", "subtitle", "author"))
+    year, ed = toc.get("year", ""), html.escape(str(toc.get("edition", "")))
+    pub = html.escape(toc.get("publisher", ""))
+    cover = (f'<section class="book-cover">{cover_art()}<div class="cv-text">'
+             f'<p class="cv-kicker">A textbook in ten parts</p><h1 class="cv-title">{t}</h1>'
+             f'<p class="cv-sub">{sub}</p><p class="cv-author">{au}</p>'
+             f'<p class="cv-ed">{ed} · {year}</p></div>'
+             f'<a class="cv-open" href="#contents">Open the book ↓</a></section>')
+    title = (f'<section class="book-sheet title-page"><p class="tp-orn">φ</p><h1>{t}</h1><p class="tp-sub">{sub}</p>'
+             f'<p class="tp-author">{au}</p><p class="tp-pub">{pub} · {year}</p></section>')
+    copy = (f'<section class="book-sheet copyright-page"><div>'
+            f'<p><b>{t}</b><br>{ed}, {year}</p>'
+            f'<p>Copyright © {year} {au}. {html.escape(toc.get("rights", ""))}</p>'
+            f'<p>{pub}. No ISBN has been assigned to this edition.</p>'
+            f'<p>{html.escape(toc.get("note", ""))}</p>'
+            f'<p>Every audio and video example was generated from text with SongMap, the engine described in Part X: '
+            f'clean additive instruments, exact 36-ET or exact-ratio tuning, no compression. Set for the web in Fraunces, '
+            f'Source Serif 4 and Inter; mathematics typeset with KaTeX.</p>'
+            f'<p>Built {_build_stamp()}.</p>'
+            f'<p>Cite as: {au}, <i>{t}</i>, {ed.lower()} ({year}).</p></div></section>')
+    epi = ""
+    if toc.get("epigraph"):
+        epi = (f'<section class="book-sheet epigraph"><blockquote>{html.escape(toc["epigraph"])}</blockquote>'
+               f'<p class="ep-src">{html.escape(toc.get("epigraph_source", ""))}</p></section>')
+    return cover + title + copy + epi
+
+
 def index_body(toc, chapters):
-    out = [f'<header class="hero cover"><div class="hero-text"><div class="kicker"><span class="chip">A textbook</span>'
-           f'Western harmony and golden tones, side by side</div><h1>{html.escape(toc["title"])}</h1>'
-           f'<p class="summary">{html.escape(toc["subtitle"])}</p><p class="by">by {html.escape(toc["author"])}</p></div>'
-           f'<div class="hero-art">{hero_art("golden")}</div></header>',
+    out = [front_pages(toc), '<h2 class="contents-title" id="contents">Contents</h2>',
            '<div class="trio">'
            '<div class="tri hear"><b>Hear it</b><p>Listening and intuition, in plain language with audio. No formulas.</p></div>'
            '<div class="tri understand"><b>Understand it</b><p>Concepts, notation, worked examples and tables, with light mathematics.</p></div>'
            '<div class="tri derive"><b>Derive it</b><p>Definitions, theorems, proofs and exact numbers, for the full fire hose.</p></div>'
            '</div>',
            '<p class="lead">Every chapter is written in these three layers; the Depth buttons at the top of each chapter '
-           'show or hide them. Western theory (Parts I–V) and the golden tonal system (Parts VI–VII) mirror each other '
+           'show or hide them. Western theory (Parts I–V) and the golden tonal system (Parts VI–VIII) mirror each other '
            'chapter by chapter, and golden mirror boxes connect the two.</p>']
     for part in toc["parts"]:
         chip, name = part_bits(part)

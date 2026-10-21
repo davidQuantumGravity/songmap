@@ -215,7 +215,7 @@ Further four-part realizations:
 - **The golden triad as a local minimum** is the author's model of how golden harmony *feels*: a metastable
   resting place, unstable relative to C major yet somewhere one can dwell and return to, and whose effect on
   the overtones over extended listening is the motivation for this whole project (a personal experience and a
-  hypothesis, Part VIII). **Measured** on harmonic tones, the standard models do *not* show a local minimum:
+  hypothesis, Part IX). **Measured** on harmonic tones, the standard models do *not* show a local minimum:
   in the (third, fifth) plane, Sethares roughness and triad harmonic entropy both fall steadily from the exact
   golden triad toward the just major triad (golden 1.498, C major 1.319; the lowest value within 5 c of golden
   is 0.007 lower, within 30 c 0.197 lower; the only grid minima nearby are just major 386/702 c and 386/772 c).

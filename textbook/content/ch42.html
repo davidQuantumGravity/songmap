@@ -37,22 +37,22 @@ bottom:</p>
 <tr><th>Field</th><th>Meaning</th></tr>
 <tr><td><code>songmap</code>, <code>title</code></td><td>format version (0.2) and a name</td></tr>
 <tr><td><code>tempo</code>, <code>meter</code>, <code>key</code></td><td>90 beats per minute, four beats per bar, home key C major</td></tr>
-<tr><td><code>tuning</code></td><td><code>12edo</code> or <code>36edo</code>: which pitch grid the song may use (§36.2)</td></tr>
+<tr><td><code>tuning</code></td><td><code>12edo</code> or <code>36edo</code>: which pitch grid the song may use (§42.2)</td></tr>
 <tr><td><code>seed</code></td><td>every random choice the engine makes derives from it, so a render is reproducible</td></tr>
 <tr><td><code>tail_seconds</code></td><td>silence after the last bar, for the sound to ring out</td></tr>
 <tr><td><code>instruments</code></td><td>the ensemble: part name → <code>instrument/preset</code></td></tr>
 <tr><td><code>motifs</code></td><td>named melodies; <code>rel</code> means chord-relative: R = root, 3 = third, 5 = fifth, R+ = root an octave up, 8 = eighth notes</td></tr>
 <tr><td><code>sections</code></td><td>the form: each section has a length in bars, a harmony and a part list</td></tr>
-<tr><td><code>harmony</code></td><td><code>Chord:bars</code> tokens; <code>~</code> is a passing-chord placeholder (§36.3)</td></tr>
-<tr><td><code>parts</code></td><td>which parts play, and in which style (§36.4)</td></tr>
+<tr><td><code>harmony</code></td><td><code>Chord:bars</code> tokens; <code>~</code> is a passing-chord placeholder (§42.3)</td></tr>
+<tr><td><code>parts</code></td><td>which parts play, and in which style (§42.4)</td></tr>
 <tr><td><code>mix</code></td><td>per-part gain in decibels and the amount sent to a hall reverb</td></tr>
-<tr><td><code>master</code></td><td><code>clean</code>: scale the final peak and nothing else (<a href="ch:ch37#mixing">Chapter 37</a>)</td></tr>
+<tr><td><code>master</code></td><td><code>clean</code>: scale the final peak and nothing else (<a href="ch:ch43#mixing">Chapter 43</a>)</td></tr>
 </table>
 <p><b>Why text.</b> A song as a short text file has practical virtues. It can be read, compared line by line with an
 earlier version, and changed by a person or by a program; it is small enough for a language model to write and revise;
 and it is <i>exact</i>: the file, not a mouse gesture, is the score. The engine behind it is written once and improves
 over time, while each song stays a few lines long. The same file can also drive video: SongMap writes the time and video
-frame of every section and event to a <code>cues.json</code> file (<a href="ch:ch38#animation">Chapter 38</a>).</p>
+frame of every section and event to a <code>cues.json</code> file (<a href="ch:ch44#animation">Chapter 44</a>).</p>
 <p><b>The pipeline.</b> Rendering goes through fixed stages:</p>
 <table>
 <tr><th>Stage</th><th>What happens</th></tr>
@@ -60,7 +60,7 @@ frame of every section and event to a <code>cues.json</code> file (<a href="ch:c
 <tr><td>arrange</td><td>harmony strings become a timeline of chords, placeholders become passing chords, styles and motifs become notes</td></tr>
 <tr><td>perform</td><td>articulation sets how long each written note is held; notes are played on the grid as written
 (a performance layer with groove and humanizing is planned, and the clean examples do not need it)</td></tr>
-<tr><td>instruments</td><td>each note is synthesized from scratch (<a href="ch:ch37#additive">Chapter 37</a>)</td></tr>
+<tr><td>instruments</td><td>each note is synthesized from scratch (<a href="ch:ch43#additive">Chapter 43</a>)</td></tr>
 <tr><td>mix and master</td><td>parts are balanced, sent to reverb and summed; the clean master scales the peak</td></tr>
 <tr><td>export</td><td>audio, per-part stems, <code>cues.json</code> and a QA report of measured numbers</td></tr>
 </table>
@@ -85,7 +85,7 @@ that beats do not land on whole frames.</p>
 section (progressions loop). In the example each harmony string sums to $1+1+1+0.5+0.25+0.25 = 4$ bars, the section
 length.</p>
 <p><b>Reproducibility.</b> A render depends only on the file and the engine version: the seed fixes every random
-choice, and the clean instruments use none (§37.2). The engine's test suite keeps a hash of the complete expanded note
+choice, and the clean instruments use none (§43.2). The engine's test suite keeps a hash of the complete expanded note
 list of a set of locked example songs (the ported soundtrack examples and the first golden étude), so any change in
 their output is detected.</p>
 </div>
@@ -275,11 +275,11 @@ and bass figures (<code>roots</code>, half-note roots; <code>root5</code>, root 
 voicings in the range D3–D5, the one that moves least from the previous chord (Derive layer).</li>
 <li><b>Passing paths</b> are played as the passing engine computed them. A chord produced by <code>~</code>,
 <code>~g</code> or <code>~g7</code>, and the two chords at the ends of its path, are played on the engine's own four
-lines (§36.3): the bass and the three upper voices, ordered low to high. The whole path is moved by one octave shift
+lines (§42.3): the bass and the three upper voices, ordered low to high. The whole path is moved by one octave shift
 toward the middle of the part's range, so every sub-chromatic line, slash bass included, is heard exactly as computed.
 The chord names do not change.</li>
 </ul>
-<p>So in the strict F → G example the held organ plays the System 1 roll of §36.3 note for note: the bass climbs
+<p>So in the strict F → G example the held organ plays the System 1 roll of §42.3 note for note: the bass climbs
 F – vF♯ – ^F♯ – G two sixth-steps at a time, so that ^F♯ sounds as the slash bass of vA♭g7(v7)/^F♯, and the arrival G is
 the engine's G–G–B–G, with the fifth omitted. Because the octave shift is chosen from the three upper voices, the
 engine's bass can lie below the style's range: here it is F2, and the <code>bassline</code> style, an octave lower
@@ -317,32 +317,32 @@ $\mu = 62$, so $k = 0$. The ordinary chords after a path are voice-led from its 
 </div>
 <h3>Exercises</h3>
 <div class="exercise">
-<p><b>Exercise 36.1 (reading).</b> How long is a song with <code>tempo: 72</code>, <code>meter: "4/4"</code>, two sections of
+<p><b>Exercise 42.1 (reading).</b> How long is a song with <code>tempo: 72</code>, <code>meter: "4/4"</code>, two sections of
 4 bars and <code>tail_seconds: 2</code>? Do its beats land on whole frames at 30 fps?</p>
 <details class="answer"><summary>Answer</summary><p>A bar lasts $60\cdot 4/72 = 3.333$ s; 8 bars = 26.67 s; plus 2 s = 28.67 s.
 $60\cdot 30/72 = 25$ frames per beat, an integer: yes.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 36.2 (notation).</b> Write the frequency of ^G4 in 36-ET and compare it with the exact golden fifth above
+<p><b>Exercise 42.2 (notation).</b> Write the frequency of ^G4 in 36-ET and compare it with the exact golden fifth above
 C4.</p>
 <details class="answer"><summary>Answer</summary><p>G4 is MIDI 67, so $s = 202$ and $f = 440\cdot 2^{-5/36} = 399.62$ Hz. The exact
 golden fifth is $261.63\cdot 4/\varphi^2 = 399.73$ Hz; 36-ET is 0.49 c flat.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 36.3 (calculation).</b> On the strict path C → A♭ (bass C held), the voices C4, E4 and G3 move to C4, E♭4 and
+<p><b>Exercise 42.3 (calculation).</b> On the strict path C → A♭ (bass C held), the voices C4, E4 and G3 move to C4, E♭4 and
 A♭3. Compute $P_1$ and name it.</p>
 <details class="answer"><summary>Answer</summary><p>In sixth-steps: C4 180 → 180; E4 192 → 189, so $P_1$ = 191 (vE4); G3 165 → 168,
 so $P_1$ = 166 (^G3). $P_1$ = C, vE, ^G = Cg: the golden triad is one third of the way from C to A♭, exactly as the
 table above reports.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 36.4 (writing).</b> Write a harmony string for I – vi – IV – V – I in C in which the IV → V move passes through
+<p><b>Exercise 42.4 (writing).</b> Write a harmony string for I – vi – IV – V – I in C in which the IV → V move passes through
 the golden escalator and the V → I move through the golden six-four, each bar of four beats.</p>
 <details class="answer"><summary>Answer</summary><p>One solution: <code>"C:1 Am:1 F:0.5 ~g:0.25 ~g:0.25 G:0.5 ~:0.25 ~:0.25 C:1"</code>.
 It resolves to C – Am – F – vF♯g – ^F♯g – G – vE♭T13/G – vCg/G – C.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 36.5 (spelling).</b> Spell the golden7 scale on D (every note two semitones higher than on C).</p>
+<p><b>Exercise 42.5 (spelling).</b> Spell the golden7 scale on D (every note two semitones higher than on C).</p>
 <details class="answer"><summary>Answer</summary><p>Add 6 sixth-steps to 0, 3, 11, 14, 22, 25, 33: 6, 9, 17, 20, 28, 31, 3, that is
 D, E♭, vF♯, vG, ^A, ^B♭, C♯.</p></details>
 </div>

@@ -1,0 +1,18 @@
+# ch34: the sixth-step lift (doc demo D1). A cadence in C major, then the same cadence one
+# sixth-step higher in ^C major: a modulation by a golden comma, every voice up 33 c, no note kept.
+songmap: 0.2
+title: "The comma lift"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 342
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass, keys: clean/keys}
+mix:
+  organ: {gain_db: -7, send: {hall: 0.2}}
+  low: {gain_db: -6}
+  keys: {gain_db: -6, send: {hall: 0.25}}
+sections:
+  - {name: lift, bars: 7, harmony: "C:1 F:0.5 G7:0.5 C:1 ^C:1 ^F:0.5 ^G7:0.5 ^C:2", parts: {organ: hold, low: {style: roots, role: bass}, keys: top}}
+master: clean

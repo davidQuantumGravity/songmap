@@ -3,7 +3,7 @@ chord symbols, Roman numerals, scales, the symbols of the Derive layers, and the
 example is written. The tables of notes, chord qualities, scales, instruments and styles were generated from the
 same code that renders the examples (the naming rule of <code>tools/textbook/build.py</code> and the parsers in
 <code>songmap/</code>), so they agree with it by construction. <a href="ch:ch24#notation">Chapter 24</a>,
-<a href="ch:ch25#naming">Chapter 25</a> and <a href="ch:ch36">Chapter 36</a> explain the ideas; this page only lists.</p>
+<a href="ch:ch25#naming">Chapter 25</a> and <a href="ch:ch42">Chapter 42</a> explain the ideas; this page only lists.</p>
 
 <section id="notes">
 <h2>Note names</h2>
@@ -33,7 +33,7 @@ $440\cdot 2^{(s - 207)/36}$ Hz. In the piano-roll figures each row is one sixth-
 <p><b>Spelling chords.</b> Chord tones are named by their own standard spelling, not by "the root's third with an
 arrow": ^Cg = ^C E vA♭ and ^Gg = ^G B vE♭. A staff for performers may prefer letter-faithful spellings that keep the
 letters of stacked thirds (^^D for the fifth of ^Gg); both name the same pitch
-(<a href="ch:ch38#staff">§38.1</a>). In SongMap the same prefixes are typed in ASCII: <code>^c4</code>,
+(<a href="ch:ch44#staff">§44.1</a>). In SongMap the same prefixes are typed in ASCII: <code>^c4</code>,
 <code>ve8</code>, <code>^^g</code>, <code>vEb</code>.</p>
 
 <h3>Intervals</h3>
@@ -179,7 +179,7 @@ also written 1 to 7 with carets in prose (3 → 2 → 1).</p>
 
 <section id="songmap">
 <h2>SongMap syntax</h2>
-<p>Every audio example is a SongMap song: a YAML text file (<a href="ch:ch36#songmap">§36.1</a>). This section lists
+<p>Every audio example is a SongMap song: a YAML text file (<a href="ch:ch42#songmap">§42.1</a>). This section lists
 the parts of the format the book uses, checked against the parser in <code>songmap/parse/</code> and the engine in
 <code>songmap/theory/</code> and <code>songmap/arrange/</code>. The full format, including the drum, groove and
 video features that the book does not need, is in <code>docs/SONGMAP_SPEC.md</code>.</p>
@@ -243,7 +243,7 @@ engine:</p>
 <code>clean/sine</code> (a pure sine), <code>clean/keys</code> (struck), <code>clean/bass</code>, <code>clean/lead</code>,
 <code>clean/glass</code> (digital golden spectrum, bell), <code>clean/golden_pad</code> (golden spectrum, sustained), and the
 stable variants <code>keys/still</code>, <code>epiano/still</code>, <code>pad/still</code> and
-<code>string_pluck/still</code> (<a href="ch:ch37#clean">§37.2</a>).</p>
+<code>string_pluck/still</code> (<a href="ch:ch43#clean">§43.2</a>).</p>
 
 <h3>Harmony strings</h3>
 <p>A harmony string is a sequence of <code>Chord:bars</code> tokens separated by spaces; <code>|</code> may separate
@@ -252,7 +252,7 @@ bare symbol lasts <code>chord_bars</code> bars (default 1). <code>N.C.</code> is
 <code>harmony:</code> is either such a string or the name of a progression defined under
 <code>harmony: progressions:</code>; it is laid along the section's bars and loops if it is shorter.</p>
 <p><b>Passing placeholders.</b> A token beginning with <code>~</code> asks the engine for the passing chord that the
-voice leading from the previous chord to the next picks out (<a href="ch:ch36#passing">§36.3</a>):</p>
+voice leading from the previous chord to the next picks out (<a href="ch:ch42#passing">§42.3</a>):</p>
 <table>
 <tr><th>Token</th><th>Meaning</th></tr>
 <tr><td><code>~</code></td><td>System 1, the strict path: every voice moves uniformly (a half step 1 + 1 + 1, a whole step 2 + 2 + 2 sixth-steps)</td></tr>
@@ -310,7 +310,7 @@ inline <code>notes:</code>, <code>deg:</code> or <code>rel:</code> (base octave 
 tuning (range D3–D5, MIDI 50–74, each chord placed to move least from the previous one), and play some of those voices:
 <code>hold</code> (all four, struck at each change and held), <code>comp</code> (all four on the rhythm
 <code>x..x.x..x..x.x..</code> plus every change), <code>pulse</code> (every quarter note), <code>top</code> (the
-soprano, an octave up) and <code>bassline</code> (the lowest voice, an octave down) (<a href="ch:ch36#voiced">§36.4</a>).
+soprano, an octave up) and <code>bassline</code> (the lowest voice, an octave down) (<a href="ch:ch42#voiced">§42.4</a>).
 Passing chords that come from placeholders are the exception: the voiced styles play the passing engine's own four
 lines for them, moved by whole octaves toward the middle of the part's range, so a held or melodic part sounds exactly
 the computed sub-chromatic voice leading.
@@ -323,7 +323,7 @@ is needed when the part has another name, as in <code>low: {style: roots, role: 
 <p><code>mix: {part: {gain_db: -6, pan: 0.1, send: {hall: 0.3}}}</code> sets a part's level in decibels, its stereo
 position and its send to a reverb return; the return <code>hall</code> is defined by default. The book's examples use
 <code>master: clean</code>: the mix is scaled so its highest peak is at −1 dBFS, with no equalization, compression,
-limiting or saturation (<a href="ch:ch37#mixing">§37.4</a>).</p>
+limiting or saturation (<a href="ch:ch43#mixing">§43.4</a>).</p>
 
 <h3>Command line</h3>
 <table>

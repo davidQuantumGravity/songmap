@@ -1,0 +1,18 @@
+# ch34: the comma lift has no golden chord between the two tonics, but vi -> ^I has two
+# golden hinges (doc demo D10): Am -> vAg -> ^C, then a cadence in ^C major.
+songmap: 0.2
+title: "The submediant door"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 345
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass, keys: clean/keys}
+mix:
+  organ: {gain_db: -7, send: {hall: 0.2}}
+  low: {gain_db: -6}
+  keys: {gain_db: -6, send: {hall: 0.25}}
+sections:
+  - {name: door, bars: 8, harmony: "C:1 F:0.5 G7:0.5 Am:1 vAg:1 ^C:1 ^F:0.5 ^G7:0.5 ^C:2", parts: {organ: hold, low: {style: roots, role: bass}, keys: top}}
+master: clean

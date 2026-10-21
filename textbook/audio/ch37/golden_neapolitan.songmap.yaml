@@ -1,0 +1,33 @@
+# ch37: approach chords into Cg, on harmonic tones.
+# 1. Definition: the Western slide Db -> C (every voice falls a semitone), then the golden
+#    Neapolitan C#g -> Cg (every voice falls a semitone: C# -> C, vF -> vE, ^Ab -> ^G; in exact
+#    golden tuning each fall is a golden apotome, 99.27 c), then its mirror Bg -> Cg (every voice
+#    rises a semitone) and vEg -> Cg (only B rises, to C).
+# 2. A phrase in C golden7: Cg - ^Abg - vFg - C#g - Cg - vEg - Cg, releasing onto C major
+#    (doc demo D16, extended by the falling side of the golden7 circle walk).
+songmap: 0.2
+title: "The golden Neapolitan"
+tempo: 72
+meter: "4/4"
+key: "C golden7"
+tuning: 36edo
+seed: 374
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix:
+  organ: {gain_db: -6, send: {hall: 0.25}}
+  low: {gain_db: -7}
+sections:
+  - name: definition
+    bars: 4
+    harmony: "Db:0.5 C:0.5 C#g:0.5 Cg:0.5 Bg:0.5 Cg:0.5 vEg:0.5 Cg:0.5"
+    parts:
+      organ: {notes: "=mf [db,f,ab]2 [c,e,g] | [c#,vf,^ab] [c,ve,^g] | [b-,veb,^f#] [c,ve,^g] | [b-,ve,^g] [c,ve,^g]"}
+      low: {notes: "=mf db-2 c- | c#- c- | b-- c- | ve- c-"}
+  - name: phrase
+    bars: 7
+    harmony: "Cg:1 ^Abg:0.5 vFg:0.5 C#g:1 Cg:1 vEg:0.5 Cg:0.5 C:2"
+    parts:
+      organ: {notes: "=mf [c,ve,^g]1 | [c,ve,^ab]2 [c,vf,^ab] | [c#,vf,^ab]1 | [c,ve,^g]1 | [b-,ve,^g]2 [c,ve,^g] | [c,e,g]1 | [c,e,g]1"}
+      low: {notes: "=mf c-1 | ^ab--2 vf-- | c#-1 | c-1 | ve-2 c- | c-1 | c-1"}
+master: clean

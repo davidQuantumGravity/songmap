@@ -1,0 +1,21 @@
+# ch38 inflections: four points of the frontier of golden inflections of C major, each scale then its
+# chords: C major (6 Western, 0 golden); C vD E ^F G A B (3, 1: vDg); the golden Ionian (2, 2: F Dm vEg Cg);
+# C vD vE ^F ^G A B (0, 3: vDg vEg Cg).
+songmap: 0.2
+title: "Trading Western for golden triads"
+tempo: 112
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ}
+mix:
+  keys: {gain_db: -4}
+  pad: {gain_db: -9}
+sections:
+  - {name: w60, bars: 3, harmony: "N.C.:1 Dm:0.5 G:0.5 C:1", parts: {keys: {notes: "c8 d8 e8 f8 g8 a8 b8 c+8 | r1 | r2. r8. c16@0"}, pad: hold}}
+  - {name: w31, bars: 3, harmony: "N.C.:1 vDg:1 C:1", parts: {keys: {notes: "c8 vd8 e8 ^f8 g8 a8 b8 c+8 | r1 | r2. r8. c16@0"}, pad: hold}}
+  - {name: w22, bars: 3, harmony: "N.C.:1 F:0.5 Dm:0.5 vEg:0.5 Cg:0.5", parts: {keys: {notes: "c8 d8 ve8 f8 ^g8 a8 b8 c+8 | r1 | r2. r8. c16@0"}, pad: hold}}
+  - {name: w03, bars: 3, harmony: "N.C.:1 vDg:0.5 vEg:0.5 Cg:1", parts: {keys: {notes: "c8 vd8 ve8 ^f8 ^g8 a8 b8 c+8 | r1 | r2. r8. c16@0"}, pad: hold}}
+master: clean

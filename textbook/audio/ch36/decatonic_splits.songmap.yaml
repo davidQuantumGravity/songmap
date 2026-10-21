@@ -1,0 +1,20 @@
+# ch36 decatonic: golden7 (steps 3 8 3 8 3 8 3), then each large step split three ways:
+# 35 = C C# D vE vF vF# ^G ^Ab ^A B, 53 = C C# vEb vE vF ^F# ^G ^Ab Bb B, 44 = C C# ^D vE vF F# ^G ^Ab vBb B.
+songmap: 0.2
+title: "Splitting golden7's large step"
+tempo: 132
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys, low: clean/bass}
+mix:
+  keys: {gain_db: -4}
+  low: {gain_db: -10}
+sections:
+  - {name: golden7, bars: 3, harmony: "N.C.:3", parts: {keys: {notes: "c8 c#8 ve8 vf8 ^g8 ^ab8 b8 c+8 | c+8 b8 ^ab8 ^g8 vf8 ve8 c#8 c8 | [c,ve,^g]1"}, low: {notes: "c-1 | c-1 | c-1"}}}
+  - {name: s35, bars: 4, harmony: "N.C.:4", parts: {keys: {notes: "c8 c#8 d8 ve8 vf8 vf#8 ^g8 ^ab8 | ^a8 b8 c+2. | c+8 b8 ^a8 ^ab8 ^g8 vf#8 vf8 ve8 | d8 c#8 c2."}, low: {notes: "c-1 | c-1 | c-1 | c-1"}}}
+  - {name: s53, bars: 4, harmony: "N.C.:4", parts: {keys: {notes: "c8 c#8 veb8 ve8 vf8 ^f#8 ^g8 ^ab8 | bb8 b8 c+2. | c+8 b8 bb8 ^ab8 ^g8 ^f#8 vf8 ve8 | veb8 c#8 c2."}, low: {notes: "c-1 | c-1 | c-1 | c-1"}}}
+  - {name: s44, bars: 4, harmony: "N.C.:4", parts: {keys: {notes: "c8 c#8 ^d8 ve8 vf8 f#8 ^g8 ^ab8 | vbb8 b8 c+2. | c+8 b8 vbb8 ^ab8 ^g8 f#8 vf8 ve8 | ^d8 c#8 c2."}, low: {notes: "c-1 | c-1 | c-1 | c-1"}}}
+master: clean

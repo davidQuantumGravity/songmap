@@ -60,10 +60,10 @@ mean a reliable state change for a listener.</td><td>hypothesis</td></tr>
 <p>This book takes the cautious reading. Binaural beats are real percepts, they can be designed precisely, and their
 effects on mind and brain are modest and contested. In the golden project they are a <i>design parameter</i> for
 listening experiments, not a treatment.</p>
-<p><b>The golden beat ladder.</b> The second example uses a design from the bliss hypothesis (§34.4): beat rates
+<p><b>The golden beat ladder.</b> The second example uses a design from the bliss hypothesis (§40.4): beat rates
 $B,\ B/\varphi,\ B/\varphi^2$, here 10, 6.18 and 3.82 Hz. Its one exact property is self-similarity: the difference of
 two neighbouring rates is the next rate down, $10 - 6.18 = 3.82$. So the rhythm of the rhythms is again on the
-ladder. Whether that matters to a listener is exactly the kind of thing §34.5 shows how to test.</p>
+ladder. Whether that matters to a listener is exactly the kind of thing §40.5 shows how to test.</p>
 </div>
 <div class="layer derive">
 <p><b>Monaural beats (theorem).</b> By the sum-to-product identity,</p>
@@ -122,7 +122,7 @@ never fall back into step, and, in the sense of Hurwitz's theorem, their near-re
 any pair of rhythms. That is the Derive layer.</p>
 <aside class="box note"><p><b>A bridge, not a proof.</b> Even if brain rhythms are spaced by φ, nothing follows yet about
 music. Sound at 6 Hz is not a brain rhythm at 6 Hz, and a chord in golden ratios is not a brain in golden ratios.
-The bridge from one to the other is the conjecture of §34.4.</p></aside>
+The bridge from one to the other is the conjecture of §40.4.</p></aside>
 </div>
 <div class="layer derive">
 <p><b>Realignment (theorem).</b> Let two oscillators have frequencies $f_1$ and $f_2 = r f_1$. If $r = p/q$ in lowest
@@ -184,7 +184,7 @@ Fibonacci numbers:</p>
 repeats once a second). The exact chain is quasi-periodic. In a short excerpt the two are indistinguishable: they differ
 by a hundredth of a hertz or so. Over minutes the difference is a breath-slow drift of 25 to 120 seconds. Periodicity
 as such is therefore not something the ear hears directly; what the ear hears are the beats and roughness that the
-frequencies create. Keep that in mind in §34.4.</p>
+frequencies create. Keep that in mind in §40.4.</p>
 <p><b>Locking.</b> When oscillators interact, nearby rational ratios attract them. Christiaan Huygens noticed in 1665 that
 two pendulum clocks hanging from the same beam fell into step. In general, coupled oscillators tend to
 <i>mode-lock</i> onto a rational frequency ratio p/q, and the ratios with small denominators have the widest basins of
@@ -273,7 +273,7 @@ stimulus that invites attention without entraining it.</p></aside>
 <tr><td>On the digital golden spectrum the golden triad is the smoothest triad compared, and a strict local minimum of roughness</td><td>measurement, Sethares roughness model (<a href="ch:ch26#timbre-flip">Chapter 26</a>)</td></tr>
 <tr><td>On harmonic tones (all physical instruments) the golden triad is not a local minimum of roughness or harmonic entropy; C major is smoother</td><td>measurement, same models</td></tr>
 <tr><td>The golden triad is a delicate local home; extended listening changes how one feels</td><td>the author's model and personal observation; hypothesis</td></tr>
-<tr><td>φ is the frequency ratio most resistant to locking</td><td>theorem in number theory and dynamics (§34.2, §34.3)</td></tr>
+<tr><td>φ is the frequency ratio most resistant to locking</td><td>theorem in number theory and dynamics (§40.2, §40.3)</td></tr>
 <tr><td>EEG bands are spaced by about φ</td><td>published hypothesis, not established</td></tr>
 <tr><td>Binaural beats affect memory, attention, anxiety and pain perception</td><td>meta-analytic measurement (pooled $g = 0.45$, few and varied studies); EEG entrainment unsettled</td></tr>
 <tr><td>Golden-at-every-scale sound induces calm or bliss</td><td><b>conjecture, untested</b></td></tr>
@@ -291,7 +291,7 @@ music on harmonic tones.</li>
 <li><b>Safety and honesty.</b> Moderate levels, no strong infrasound, binaural layers optional and on headphones only, no
 flashing visuals, and descriptions that describe the sound rather than promise a state.</li>
 </ol>
-<p><b>An honest difficulty.</b> §34.3 showed that periodicity itself is inaudible over short spans: the Fibonacci-integer
+<p><b>An honest difficulty.</b> §40.3 showed that periodicity itself is inaudible over short spans: the Fibonacci-integer
 drone and the exact golden drone sound the same for minutes. Whatever a listener responds to, it is not the abstract
 irrationality but its audible consequences: which beats occur, at which rates, how rough the sound is. A good test must
 therefore name the audible variable it changes.</p>
@@ -345,7 +345,7 @@ know either (double-blind): a script assigns the labels and keeps the key.</li>
 preference cannot be attributed to either.</li>
 <li><b>Matched everything else.</b> Same length, same envelope, same register (unless register is the variable) and the
 same integrated loudness. Louder usually wins a comparison, so loudness must be matched by measurement (ITU-R BS.1770
-loudness, which SongMap's QA computes; <a href="ch:ch37#mixing">Chapter 37</a>), not by ear.</li>
+loudness, which SongMap's QA computes; <a href="ch:ch43#mixing">Chapter 43</a>), not by ear.</li>
 <li><b>Randomized and counterbalanced order.</b> Half the trials present the golden excerpt first. Order effects are
 large in listening tests.</li>
 <li><b>Fixed scales, decided in advance.</b> Ratings from 1 to 7 for calm, interest, pleasantness and absorption, plus a
@@ -397,36 +397,36 @@ key = {i: ("A=" + a, "B=" + b) for i, (a, b) in enumerate(order)}  # sealed unti
 </div>
 <h3>Exercises</h3>
 <div class="exercise">
-<p><b>Exercise 34.1 (calculation).</b> A binaural ladder starts at 8 Hz and divides by φ at each rung. Give the first four
+<p><b>Exercise 40.1 (calculation).</b> A binaural ladder starts at 8 Hz and divides by φ at each rung. Give the first four
 rates, and check that each is the difference of the two above it.</p>
 <details class="answer"><summary>Answer</summary><p>8, 8/φ = 4.944, 8/φ² = 3.056, 8/φ³ = 1.889 Hz. Indeed 8 − 4.944 = 3.056
 and 4.944 − 3.056 = 1.889, because $\varphi^{-k} = \varphi^{-k-1} + \varphi^{-k-2}$.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 34.2 (calculation).</b> At what root $f_0$ does an exact close-voiced Cg7 have its slowest beat at 8 Hz,
+<p><b>Exercise 40.2 (calculation).</b> At what root $f_0$ does an exact close-voiced Cg7 have its slowest beat at 8 Hz,
 and what are its four beat rates?</p>
 <details class="answer"><summary>Answer</summary><p>$f_0 = 8\varphi^6 = 143.55$ Hz. The beats are 8.00, 8·2/φ = 9.89,
 8·4/φ² = 12.22 and 16.00 Hz.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 34.3 (listening).</b> In the blind pair of §34.5, which excerpt did you rate calmer? Which one is on the
+<p><b>Exercise 40.3 (listening).</b> In the blind pair of §40.5, which excerpt did you rate calmer? Which one is on the
 golden spectrum?</p>
 <details class="answer"><summary>Answer</summary><p>A is on the golden spectrum (partials $2^m\varphi^n$), B on the harmonic
 spectrum (partials 1, 2, 3, …). Under the Sethares roughness model the golden triad is the smoothest of the triads compared on the golden
 spectrum, while on the harmonic spectrum it is rougher than major, minor and augmented
 (<a href="ch:ch26#timbre-flip">Chapter 26</a>). The model ranks chords within one timbre; it does not say which of the two
-excerpts is smoother overall. Your rating is one data point; the protocol of §34.5 needs many, blind
+excerpts is smoother overall. Your rating is one data point; the protocol of §40.5 needs many, blind
 and counterbalanced. Note that this exercise was <i>not</i> counterbalanced: A was golden for every reader.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 34.4 (proof).</b> Show that if $f_2/f_1 = p/q$ in lowest terms, the two oscillators realign first after
+<p><b>Exercise 40.4 (proof).</b> Show that if $f_2/f_1 = p/q$ in lowest terms, the two oscillators realign first after
 exactly $q$ cycles of the first.</p>
 <details class="answer"><summary>Answer</summary><p>They are in step at time $t$ when both $f_1 t$ and $f_2 t$ are integers.
 If $f_1 t = m$ then $f_2 t = mp/q$, an integer exactly when $q \mid mp$, i.e. (since $\gcd(p,q) = 1$) when $q \mid m$.
 The smallest positive $m$ is $q$.</p></details>
 </div>
 <div class="exercise">
-<p><b>Exercise 34.5 (design).</b> In a test of 20 blind forced-choice trials a listener prefers the golden excerpt 14 times.
+<p><b>Exercise 40.5 (design).</b> In a test of 20 blind forced-choice trials a listener prefers the golden excerpt 14 times.
 Is that significant at the one-sided 5% level? What would you do next?</p>
 <details class="answer"><summary>Answer</summary><p>No: $P(K \ge 14) = 0.0577$ for $n = 20$; 15 would be needed
 ($P = 0.0207$). Next: decide in advance on a larger number of trials (about 37 for 80% power if the true rate were 0.70)

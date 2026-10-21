@@ -1,0 +1,22 @@
+# ch36 golden13-modes: golden7 (lumpy: steps 3 and 8), golden13 on C (steps 3 and 2: maximally even),
+# its brightest mode (on Bb) and darkest mode (on D) moved to C, and finally the maximally even 7-note
+# scale of 36-ET, C vD ^Eb F vG ^Ab Bb (steps 5 and 6), with its silver triad Cs.
+songmap: 0.2
+title: "golden13 and evenness"
+tempo: 120
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys, low: clean/bass}
+mix:
+  keys: {gain_db: -4}
+  low: {gain_db: -10}
+sections:
+  - {name: golden7, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 c#8 ve8 vf8 ^g8 ^ab8 b8 c+8 | [c,ve,^g]1"}, low: {notes: "c-1 | c-1"}}}
+  - {name: golden13, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 c#8 d8 veb8 ve8 vf8 vf#8 ^f#8 | ^g8 ^ab8 ^a8 bb8 b8 c+4."}, low: {notes: "c-1 | c-1"}}}
+  - {name: bright, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 c#8 d8 eb8 e8 vf8 vf#8 vg8 | vab8 ^ab8 ^a8 ^bb8 ^b8 c+4."}, low: {notes: "c-1 | c-1"}}}
+  - {name: dark, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 vc#8 vd8 veb8 ve8 ^e8 ^f8 ^f#8 | ^g8 ab8 a8 bb8 b8 c+4."}, low: {notes: "c-1 | c-1"}}}
+  - {name: me7, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 vd8 ^eb8 f8 vg8 ^ab8 bb8 c+8 | [c,^eb,vg]1"}, low: {notes: "c-1 | c-1"}}}
+master: clean
