@@ -55,7 +55,7 @@ The rest of this document makes that vision precise, measurable, writable and re
 
 ### 1.2 The golden chain, its scales, and the three layers
 - Chain note *j* (j golden sixths above the start) sits on layer *j* mod 3.
-- The chain closes into well-formed two-step-size scales at **3, 10, 13 and 36 notes**:
+- The chain closes into well-formed two-step-size scales at **2, 3, 4, 7, 10, 13, 23 and 36 notes** (Stern–Brocot denominators of log₂φ); the most useful are:
 
 | Scale | Notes (centred on C) | Steps (sixth-steps) |
 |---|---|---|
@@ -101,7 +101,7 @@ The rest of this document makes that vision precise, measurable, writable and re
 | **golden fifth** | **69%** |
 
 - **Reading:**
-  1. With harmonic timbres the golden triad is **unstable**: rougher than major, minor and augmented, with its tension concentrated in the **golden fifth**, one of the most ambiguous intervals there is. It is a good passing chord, as the vision says. (Diminished is rougher still, so "least stable" holds among the consonant-family triads it sits between.)
+  1. With harmonic timbres the golden triad is **unstable**: rougher than major, minor and augmented, with its tension concentrated in the **golden fifth**, one of the most ambiguous intervals there is. It is a good passing chord, as the vision says. (Diminished is rougher still: the golden triad is rougher than every common Western triad except diminished.)
   2. With **golden-spectrum timbres** the golden triad becomes the **smoothest** chord and major and minor become rough. Timbre decides which world is at rest: a second new color, and a tool for the bliss texture (§4).
 
 ### 1.5 Self-similar combination tones (why golden chords can "glow")
@@ -115,7 +115,7 @@ The rest of this document makes that vision precise, measurable, writable and re
   - The golden seventh Cg7 (1 : 2/φ : 4/φ² : 8/φ³) beats at 6.13, 7.58 and 9.37 Hz = f₀·φ⁻⁶ × (1, 2/φ, 4/φ²): the golden *triad* in rhythm.
   - Cg7 also beats at 12.26 Hz, the golden seventh against the root's octave, because **8/φ³ = 2 − 2φ⁻⁶**.
   - A beat at the golden seventh's own ratio (11.58 Hz) does not occur.
-  - At f₀ = 110 Hz the rates are 6.13, 7.58, 9.37 and 12.26 Hz.
+  - For a golden chord on f₀ = 110 Hz (A2) the rates are 6.13, 7.58, 9.37 and 12.26 Hz.
 - These three knobs (**voicing** chain vs close, **tuning** exact vs 36-ET, **register**) let us design the beat rates a golden chord produces. This is the technical bridge to the bliss goal (§4).
 
 ### 1.6 The silver triad and the micro-altered family
@@ -202,7 +202,7 @@ Passing is the main use. The golden major and golden major seventh can also be *
 
 ## 4. Bliss: beats, binaural and self-similar sound
 
-The original aim is a blissful state, akin to binaural beats. The engine can't claim effects on the brain. Evidence for binaural-beat entrainment and mood effects is mixed: some studies report small effects on anxiety or relaxation, while reviews find the results inconsistent. What the engine *can* do is **design and measure the beating precisely**, so listening experiments are repeatable.
+The original aim is a blissful state, akin to binaural beats. The engine can't claim effects on the brain. Evidence for binaural-beat entrainment and mood effects is mixed: a 2019 meta-analysis reports a medium pooled effect on memory, attention, anxiety and pain (g = 0.45), while a 2023 systematic review of EEG entrainment (Ingendoh, Posny & Heine) found 5 of 14 studies consistent with entrainment and 8 contradicting it. What the engine *can* do is **design and measure the beating precisely**, so listening experiments are repeatable.
 
 | Mechanism | What creates it | Engine control |
 |---|---|---|
@@ -271,9 +271,8 @@ tuning: 36edo           # unifying tuning: Western exact, golden within 0.75 c
   - `~` = System 1 (strict).
   - `~g` / `~g7` = System 2 (natural, golden preferred).
   - Runs of two placeholders ask for P1 and P2. Progressions loop, so a placeholder can bridge back to the start.
-- ✅ The `voiced` styles (`hold`, `comp`, `pulse`, `top`, `bassline`) voice-lead chords in the song's tuning, so the sub-chromatic lines are actually played. `top` turns the soprano into a melody.
-- If none exists it errors with the nearest options: `C -> Dm: no synchronous golden chord; staggered options vFg, Ag`.
-- `songmap theory pass C F` prints the analysis.
+- ✅ The `voiced` styles (`hold`, `comp`, `pulse`, `top`, `bassline`) play the passing engine's own four lines for every passing run (bass + three upper voices, one octave shift per run), and voice-lead all other chords in the song's tuning. `top` turns the soprano into a melody.
+- Planned (not implemented): an error listing the nearest options when no golden chord exists, and a `songmap theory pass X Y` command that prints the analysis. Today `songmap check` shows the resolved chords.
 
 ### 5.5 Example (first-focus étude)
 ```
@@ -320,7 +319,7 @@ b  4 | bell:sustain strings:sustain(dyn=pp) prog=shine -keys | !swell@+2(part=st
 |---|---|---|
 | **G0: Theory spec** | ✅ Vision captured (§0). Still open: names, silver fifth, exact vs 36-ET defaults (§9) | §9 answered |
 | **G1: 36-ET core ✅** | `Tuning(36)`, `GoldenExact`, ups/downs parsing, `g`/`g7`, alteration lists, `@chain` | §5.5 parses; FFT-measured pitches within 1 c |
-| **G2: Passing engine ✅** | `theory/passing.py`, `~g`/`~g7`, `songmap theory pass` | §2.2–2.3 tables reproduce from the CLI |
+| **G2: Passing engine ✅** | `theory/passing.py`, `~`/`~g`/`~g7` (a `songmap theory pass` command is planned) | §2.2–2.3 tables reproduce from the CLI |
 | **G3: First études ✅ (first pass)**: `golden_audio/index.html`, 15 technique portfolios | 3–4 short pieces on golden major and golden maj7 only: (1) passing light (§5.5); (2) Cmaj7 ↔ Cg7 shimmer; (3) a chromatic slide with staggered golden sevenths; (4) a bliss drone with chain voicing | The author approves by ear |
 | **G4: Analysis and bliss tools** | Beat spectrum, combination-tone map, curves in QA; `binaural`/`pulse`/`beats` | Étude 4's measured beat rates land in the requested band |
 | **G5: Golden timbres** | `spectrum:` param + presets | §1.4's roughness ordering reproduces from rendered audio |

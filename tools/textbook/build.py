@@ -93,6 +93,10 @@ def svg_pianoroll(attrs) -> str:
     pitches = [[note_steps(n) for n in c] for c in cols]
     flat = [p for c in pitches for p in c]
     sounding = set(flat)
+    spelled = {}                                             # step -> the spelling written in `notes`
+    for c in cols:
+        for n in c:
+            spelled.setdefault(note_steps(n), n.replace("#", "♯").replace("b", "♭") if len(n) > 1 else n)
     step = 3 if edo == 12 else 1
     lo, hi = min(flat) - step, max(flat) + step
     rows = list(range(lo, hi + 1, step))
@@ -116,7 +120,7 @@ def svg_pianoroll(attrs) -> str:
         y = top + i * rh + rh / 2 + 3
         col = next(c for c in range(4) if all(abs(y - py) >= 9 or pc != c for py, pc in placed))
         placed.append((y, col))
-        out.append(f'<text x="{lw - 4 - 25 * col}" y="{y:.1f}" class="lab on" text-anchor="end">{name36(r)}{(r // 3) // 12 - 1}</text>')
+        out.append(f'<text x="{lw - 4 - 25 * col}" y="{y:.1f}" class="lab on" text-anchor="end">{html.escape(spelled.get(r, name36(r) + str((r // 3) // 12 - 1)))}</text>')
     for i, r in enumerate(reversed(rows)):
         natural = r % 3 == 0 and (r // 3) % 12 in ((0, 2, 4, 5, 7, 9, 11) if edo == 12 else (0, 4, 7))
         y = top + i * rh + rh / 2 + 3
@@ -444,18 +448,32 @@ def sidebar(toc, chapters, current_id, depth_prefix):
     return "".join(out)
 
 
+_ASSET_TEXT: dict = {}
+
+
+def inline_assets(prefix: str) -> str:
+    """Site CSS, KaTeX CSS and the page script inlined, so a page looks right however it is opened
+    (file viewers and previews often refuse to load neighbouring files). Fonts stay as files."""
+    if not _ASSET_TEXT:
+        _ASSET_TEXT["css"] = open(os.path.join(ASSETS, "style.css"), encoding="utf-8").read()
+        _ASSET_TEXT["js"] = open(os.path.join(ASSETS, "app.js"), encoding="utf-8").read()
+        k = os.path.join(KATEX_DIST, "katex.min.css")
+        _ASSET_TEXT["katex"] = open(k, encoding="utf-8").read() if os.path.exists(k) else ""
+    katex = _ASSET_TEXT["katex"].replace("url(fonts/", f"url({prefix}assets/katex/fonts/")
+    return (f"<style>{_ASSET_TEXT['css']}</style><style>{katex}</style>"
+            f"<script>{_ASSET_TEXT['js']}</script>")
+
+
 def page(title, body, toc, chapters, current_id, prefix, layers=True, part_id="front"):
     layer_ui = ('<div class="layers" role="group" aria-label="Depth"><span>Depth</span>'
                 '<button data-layer="hear" aria-pressed="true">Hear it</button>'
                 '<button data-layer="understand" aria-pressed="true">Understand it</button>'
                 '<button data-layer="derive" aria-pressed="true">Derive it</button></div>') if layers else ""
-    math_head = (f'<link rel="stylesheet" href="{prefix}assets/katex/katex.min.css">'
-                 + (KATEX_CDN if CLIENT_MATH else ""))
+    math_head = KATEX_CDN if CLIENT_MATH else ""
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>{THEME_BOOT}{FONTS}
-<link rel="stylesheet" href="{prefix}assets/style.css">{math_head}
-<script defer src="{prefix}assets/app.js"></script></head>
+{inline_assets(prefix)}{math_head}</head>
 <body data-part="{part_id}"><div class="progress"><i></i></div>
 <header class="top"><button class="menu" aria-label="Contents">☰</button>
 <a class="book" href="{prefix}index.html"><span class="phi">φ</span>{html.escape(toc["title"])}</a>{layer_ui}
@@ -589,10 +607,11 @@ def main():
                         ignore=shutil.ignore_patterns("*.ttf", "*.woff"))
     for cid, (idx, ch, frag) in bodies.items():
         if cid == "appG":
-            rows = "".join(f'<tr><td><a href="{c}.html">{c}</a></td><td>{html.escape(n)}</td><td>{cap}</td>'
+            rows = "".join(f'<tr><td><a href="{c}.html">{c}</a></td>'
+                           f'<td>{html.escape(n.rsplit(".", 1)[0].replace("_", " "))}</td><td>{cap}</td>'
                            f'<td><audio controls preload="none" src="../{rel}"></audio></td></tr>'
                            for c, n, cap, rel in audio_list)
-            frag = re.sub(r'(<section id="index">.*?)(</section>)', lambda m: m[1] + f'<table class="aidx"><tr><th>Chapter</th><th>Example</th><th>Description</th><th></th></tr>{rows}</table>' + m[2], frag, flags=re.S) \
+            frag = re.sub(r'(<section id="index">.*?)(</section>)', lambda m: m[1] + f'<table class="aidx"><tr><th>Ch.</th><th>Example</th><th>Description</th><th>Listen</th></tr>{rows}</table>' + m[2], frag, flags=re.S) \
                 if '<section id="index">' in frag else frag + f'<table class="aidx">{rows}</table>'
         with open(os.path.join(OUT, "chapters", cid + ".html"), "w", encoding="utf-8") as f:
             f.write(page(ch["title"] + " · " + toc["title"], chapter_body(ch, frag, chapters, idx), toc, chapters, cid, "../",

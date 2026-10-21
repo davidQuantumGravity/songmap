@@ -296,8 +296,9 @@ stretched octave (2.1:1).</p>
 <audio-ex src="stretched" caption="Octaves on 220 Hz. Harmonic tones: 2:1 (smooth), then 2.1:1 (beating, sour). Stretched tones: 2:1 (now beating), then 2.1:1 (now smooth). The tone decides which octave is pure."></audio-ex>
 <p>On harmonic tones the true octave is smooth, with no beats, and the stretched one is sour. On the stretched tones it is the
 other way round: the true octave beats, and the "wrong" octave is pure. Now the same experiment with chords: a C major
-triad and a golden triad, first on harmonic tones and then on tones whose partials follow the golden ratio.</p>
-<audio-ex src="timbre_flip" caption="On harmonic tones: C major (smooth), then the golden triad (tenser). On golden-spectrum tones: the golden triad (now the smooth one), then C major (now rough). The same two chords trade places."></audio-ex>
+triad and a golden triad, first on harmonic tones and then on tones whose partials follow the golden ratio (tones that
+exist only as digital synthesis).</p>
+<audio-ex src="timbre_flip" caption="On harmonic tones: C major (smooth), then the golden triad (tenser). On digital golden-spectrum tones: the golden triad (now the smooth one), then C major (now the rougher one). The same two chords trade places."></audio-ex>
 <pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4" labels="C ; Cg" title="C major and the golden triad on C4 (the golden triad is played exactly; nearest 36-ET notes shown)"></pianoroll>
 </div>
 <div class="layer understand">
@@ -323,16 +324,18 @@ order of frequency; dyads on 220 Hz; triads on C4, the golden triad tuned exactl
 <tr><td>diminished</td><td>1.67</td><td>3.19</td></tr>
 </table>
 <p>On harmonic tones the golden triad is rougher than major, minor and augmented but smoother than diminished. On golden
-tones it is by far the smoothest chord, and all the Western triads become rough. (For comparison, a just major triad
+tones it is by far the smoothest chord, and all the Western triads measure rougher. (For comparison, a just major triad
 4:5:6 on harmonic tones measures 1.19, against 1.32 for the 12-ET major triad.)</p>
 <p><b>What timbre does not decide.</b> Roughness is one ingredient of consonance. Harmonicity, entropy, and above all
 musical context and familiarity also shape what we hear as stable. A listener raised on harmonic instruments and major
 and minor chords brings expectations that no spectrum changes overnight. How the ear's preferences have changed over
 history is the subject of <a href="ch:ch35#acculturation">Chapter 35</a>.</p>
-<aside class="mirror">This is the acoustic foundation of the golden system. With harmonic timbres, golden chords are
-tense and make natural passing chords between Western ones. With golden-spectrum timbres the roles reverse: the golden
-triad becomes the place of rest and Western chords become the tension. Chapter 26 measures this <b>timbre flip</b> in
-detail (<a href="ch:ch26#timbre-flip">Chapter 26</a>), and <a href="ch:ch17#timbre-harmony">Chapter 17</a> follows the
+<aside class="mirror">This is the acoustic foundation of the golden system. Physical instruments have (nearly) harmonic
+spectra, so on them C major is the deepest rest, the global minimum of tension, and golden chords are tense: natural
+passing chords between Western ones, or, in the author's model, a delicate local rest. Golden spectra exist only
+digitally. On them the roughness model reverses the order, and the golden triad measures as the smoothest chord.
+Chapter 26 measures this <b>timbre flip</b> and uses it as a laboratory for studying golden harmony on its own terms
+(<a href="ch:ch26#timbre-flip">Chapter 26</a>), and <a href="ch:ch17#timbre-harmony">Chapter 17</a> follows the
 same idea through orchestration.</aside>
 </div>
 <div class="layer derive">
@@ -355,35 +358,35 @@ $\varphi$ and its octave relatives become "pure" intervals of this timbre.</li>
 they make precise the sense in which <em>consonance depends on timbre</em>.</p>
 </div>
 <div class="exercise">
-<p><b>1.</b> Two strings sound 440 Hz and 444 Hz. What is the beat rate? If you tighten the second string and the beats
+<p><b>Exercise 3.1.</b> Two strings sound 440 Hz and 444 Hz. What is the beat rate? If you tighten the second string and the beats
 speed up, which way should you turn the peg?</p>
 <details class="answer"><summary>Answer</summary><p>4 beats per second. Speeding up means the gap grew, so the second string
 was already sharp: loosen it.</p></details>
 </div>
 <div class="exercise">
-<p><b>2.</b> The 12-ET major third C4–E4 beats at 10.38 Hz. How fast does C3–E3 beat? And C5–E5?</p>
+<p><b>Exercise 3.2.</b> The 12-ET major third C4–E4 beats at 10.38 Hz. How fast does C3–E3 beat? And C5–E5?</p>
 <details class="answer"><summary>Answer</summary><p>Beat rates scale with frequency: about 5.19 Hz an octave down and 20.76 Hz an
 octave up.</p></details>
 </div>
 <div class="exercise">
-<p><b>3.</b> Derive the location of the peak of Sethares' curve, $\Delta^* = \ln(b_2/b_1)/((b_2 - b_1)s)$, and evaluate it
+<p><b>Exercise 3.3.</b> Derive the location of the peak of Sethares' curve, $\Delta^* = \ln(b_2/b_1)/((b_2 - b_1)s)$, and evaluate it
 at $f_1 = 440$ Hz.</p>
 <details class="answer"><summary>Answer</summary><p>Differentiate $e^{-b_1 s\Delta} - e^{-b_2 s\Delta}$ and set it to zero:
 $b_1 e^{-b_1 s \Delta} = b_2 e^{-b_2 s\Delta}$, so $e^{(b_2 - b_1)s\Delta} = b_2/b_1$. At 440 Hz,
 $s = 0.24/(0.0207\cdot440 + 18.96) \approx 0.008551$ and $\Delta^* \approx 0.4964/(2.25 \cdot 0.008551) \approx 25.80$ Hz.</p></details>
 </div>
 <div class="exercise">
-<p><b>4.</b> With eight harmonics per tone, how many partials coincide in a just major sixth 5/3? In a just whole tone 9/8?</p>
+<p><b>Exercise 3.4.</b> With eight harmonics per tone, how many partials coincide in a just major sixth 5/3? In a just whole tone 9/8?</p>
 <details class="answer"><summary>Answer</summary><p>$\lfloor 8/5\rfloor = 1$ for 5/3 (harmonic 3 of the upper tone meets harmonic 5
 of the lower), and $\lfloor 8/9\rfloor = 0$ for 9/8.</p></details>
 </div>
 <div class="exercise">
-<p><b>5.</b> Compute Euler's gradus for 6/5 and for the chord 4:5:6:7.</p>
+<p><b>Exercise 3.5.</b> Compute Euler's gradus for 6/5 and for the chord 4:5:6:7.</p>
 <details class="answer"><summary>Answer</summary><p>$\Gamma(30) = 1 + 1 + 2 + 4 = 8$. For 4:5:6:7, $\operatorname{lcm} = 420 =
 2^2\cdot3\cdot5\cdot7$, so $\Gamma = 1 + 2 + 2 + 4 + 6 = 15$.</p></details>
 </div>
 <div class="exercise">
-<p><b>6.</b> (Listening.) In the timbre-flip example, which chord sounds more at rest in the first half, and which in the
+<p><b>Exercise 3.6.</b> (Listening.) In the timbre-flip example, which chord sounds more at rest in the first half, and which in the
 second? Does your answer agree with the measured roughness?</p>
 <details class="answer"><summary>Answer</summary><p>The measurements predict C major in the first half (1.32 against 1.50) and the
 golden triad in the second (2.08 against 3.17). Your own judgment is a measurement too, and it may also reflect

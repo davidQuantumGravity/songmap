@@ -1,11 +1,12 @@
 <section id="staff">
 <h2>Staff notation with ups and downs</h2>
 <div class="layer hear">
-<p>Five chords, each written on a staff in the figure below: C major; the golden triad Cg, in which E is lowered and G
+<p>Five chords, the first four of them written on a staff in the figure below: C major; the golden triad Cg, in which E is lowered and G
 raised by a sixth-step; the golden seventh Cg7, which adds B; and two steps of the golden circle, vEg and ^Gg. As you
 listen, notice how little the notation has to change to show the new color: the noteheads sit where a C major chord's
 would, and two small marks say "a little lower" and "a little higher".</p>
 <audio-ex src="spelled" caption="C (C E G), Cg (C vE ^G), Cg7 (C vE ^G B), vEg (vE ^G B), ^Gg (^G B vE♭). Compare the sound with the spelling in the staff figure."></audio-ex>
+<pianoroll edo="36" notes="G3 C4 E4 C5 ; ^G3 C4 vE4 C5 ; ^G3 B3 vE4 C5 ; ^G3 B3 vE4 B4 ; ^G3 B3 vEb4 B4" labels="C ; Cg ; Cg7 ; vEg ; ^Gg" title="The five chords as the example voices them"></pianoroll>
 </div>
 <div class="layer understand">
 <p><b>The problem.</b> Staff notation was designed for seven letter names and five chromatic alterations. A 36-ET piece
@@ -92,11 +93,12 @@ chord is the golden triad Cg itself, a third of the way from C to A♭.</p>
 <div class="layer derive">
 <p><b>Rows.</b> A note with MIDI number $m$ (C4 = 60), $u$ ups and $d$ downs occupies row $s = 3m + u - d$; its layer is
 $s \bmod 3$ (0 for the 12-ET layer, 1 for up, 2 for down). In the book's figure renderer a roll spans the rows from two
-steps below the lowest note to two steps above the highest, and each row is drawn with height $h$ (8 pixels in 36-ET), so
-a note at row $s$ is drawn at height $y = y_0 + (s_{\max} - s)\,h$.</p>
+step below the lowest note to one step above the highest, and each row is drawn with height $h$ (5 units in 36-ET, 8
+in a 12-ET roll, whose rows are semitones), so a note at row $s$ is drawn at height $y = y_0 + (s_{\max} - s)\,h$.</p>
 <p><b>Distances you can read off.</b> A sixth-step is one row, a semitone three, a golden third 11, a major third 12, a
 golden fifth 22, a perfect fifth 21. In the C → A♭ roll, the voice E4 → E♭4 moves $-3$ rows in $-1, -1, -1$ and G3 → A♭3
-moves $+3$ in $+1, +1, +1$; the passing chords are $(2X + Y)/3$ and $(X + 2Y)/3$ voice by voice.</p>
+moves $+3$ in $+1, +1, +1$; the passing chords are $(2X + Y)/3$ and $(X + 2Y)/3$ voice by voice, except the bass,
+which would leap a major third and is held instead (C3 under both passing chords, then A♭2).</p>
 </div>
 </section>
 
@@ -104,11 +106,14 @@ moves $+3$ in $+1, +1, +1$; the passing chords are $(2X + Y)/3$ and $(X + 2Y)/3$
 <h2>Circles and chord spaces</h2>
 <div class="layer hear">
 <p>Two motions that are easiest to understand as pictures. First, the golden circle: golden triads on a golden-spectrum
-pad, each root a golden third above the last, so that at every step one voice falls by a semitone and two stay. Then a
+pad, each root a golden third above the last, so that at every step one note of the chord falls by a semitone and the
+other two stay (where the voicing doubles that note, both copies fall, an octave apart). Then a
 straight line in chord space: augmented, golden, silver, diminished, one sixth-step of the third and two of the fifth at
 each step, and back.</p>
-<audio-ex src="golden_circle" caption="Seven chords of the golden circle, 4 s each: Cg – vEg – ^Gg – Bg – vE♭g – ^F♯g – B♭g. At each step one voice moves down a semitone."></audio-ex>
+<audio-ex src="golden_circle" caption="Seven chords of the golden circle, 4 s each: Cg – vEg – ^Gg – Bg – vE♭g – ^F♯g – B♭g. At each step one note of the chord moves down a semitone."></audio-ex>
+<pianoroll edo="36" notes="^G3 C4 vE4 C5 ; ^G3 B3 vE4 B4 ; ^G3 B3 vEb4 B4 ; ^F#3 B3 vEb4 B4 ; ^F#3 Bb3 vEb4 Bb4 ; ^F#3 Bb3 vD4 Bb4 ; ^F3 Bb3 vD4 Bb4" labels="Cg ; vEg ; ^Gg ; Bg ; vEbg ; ^F#g ; Bbg" title="The golden circle as the example voices it"></pianoroll>
 <audio-ex src="equal_third_line" caption="The equal-third line: Caug – Cg – Cs – Cdim and back. The root holds; the third falls one sixth-step and the fifth two at each step."></audio-ex>
+<pianoroll edo="36" notes="Ab3 C4 E4 Ab4 ; ^G3 C4 vE4 ^G4 ; vG3 C4 ^Eb4 vG4 ; F#3 C4 Eb4 F#4" labels="Caug ; Cg ; Cs ; Cdim" title="The equal-third line, downward half (fifth doubled)"></pianoroll>
 </div>
 <div class="layer understand">
 <p><b>Pitch-class circles.</b> A pitch-class circle places the octave's steps around a circle, like a clock. In 12-ET the
@@ -190,7 +195,7 @@ existing format.</p>
 <tr><td>three-layer MIDI</td><td>one MIDI channel per layer, each with a fixed pitch bend of 0, +1 or −1 sixth-step, so any synthesizer can play 36-ET</td><td>planned</td></tr>
 <tr><td>MPE</td><td>per-note pitch bend, for glides and staggered passing tones</td><td>planned</td></tr>
 <tr><td>Scala files</td><td>a <code>.scl</code> tuning file for 36-ET, for synthesizers that load tunings</td><td>planned</td></tr>
-<tr><td>layered tablature</td><td>fret numbers as for a 12-ET instrument, each with an up or down mark (a proposal of this book: e.g. 5^ = fifth fret, a sixth-step sharp)</td><td>proposal</td></tr>
+<tr><td>layered tablature</td><td>fret numbers as for a 12-ET instrument, each with an up or down mark (a proposal of this book: e.g. ^5 = fifth fret, a sixth-step sharp, with the mark as a prefix as everywhere in this book)</td><td>proposal</td></tr>
 </table>
 <p>Layered tablature suits instruments that can bend or that have movable frets; on a fixed-fret guitar a 36-ET part
 would need three instruments tuned a sixth-step apart, or a refretted neck with three frets per semitone.</p>

@@ -189,7 +189,9 @@ layer 0; all have three distinct pitch classes at both ends; the 288 resulting p
 transposition and reversal. <i>Proof:</i> <a href="ch:ch27#four-path">Chapter 27</a>, Derive layer. In brief: the residue
 of each $d_i$ is forced; residue 0 allows only $d_i = 0$ and residues 1 and 2 allow two values each; distinctness follows
 because golden intervals ($\pm 11$, $\pm 14$ mod 36) cannot equal displacement differences of size at most 8; and no path is
-fixed by a non-trivial symmetry. Of the 288 paths, 240 have Western triads at both ends (one type ends on a suspended
+fixed by a non-trivial symmetry. (The count of 288 and the orbit size 24 both use the never-twice theorem, D.13, whose
+proof is independent: no path has golden chords at both positions, so each path is counted once and reversal really moves
+its golden chord to the other position.) Of the 288 paths, 240 have Western triads at both ends (one type ends on a suspended
 fourth) and 48 end on non-tertian sets (finite check: <code>classify.py</code> §A).</p>
 
 <h3>D.13 Never twice</h3>
@@ -228,9 +230,12 @@ relations; reversal moves the chord to position 2, keeping it "nearer" the same 
 the table, no other pair has one. (2) A direct enumeration of all $24 \cdot 23 = 552$ ordered pairs of major and minor
 triads, all voice assignments, all $d$ and both positions, found exactly 144 pairs with a golden passing chord, all of the
 same quality with roots 3, 4 or 5 semitones apart, each with exactly one golden chord (new check; it agrees with
-<code>classify.py</code> §E on the 68 pairs listed there).</p>
+<code>classify.py</code> §E on the major and minor pairs among the 68 listed there).</p>
+<p><b>Equivalent form.</b> The 144 pairs are exactly the pairs of triads two neo-Riemannian moves apart. From C major the
+six two-move compositions give PL: A♭, PR: E♭, LP: E, LR: G, RP: A, RL: F, the six major triads whose roots lie 3, 4 or 5
+semitones from C, and by the P/L/R symmetry between major and minor the same holds for minor triads; $24 \times 6 = 144$.</p>
 <p><b>Golden sevenths (finite check).</b> With four voices, 96 uniform paths join Western chords through a golden seventh,
-in 4 types up to transposition (<code>classify.py</code> §D).</p>
+in 4 types up to transposition and reversal (<code>classify.py</code> §D; $4 \times 24 = 96$).</p>
 
 <h3>D.16 The asymmetry theorem</h3>
 <p><b>Theorem.</b> No uniform stepwise path in three voices between two different golden triads has a single-layer passing
@@ -259,7 +264,8 @@ golden triad; it can be a golden seventh only if the two voices are 3 (equivalen
 <p><b>Finite check (new).</b> For every ordered pair of triads with qualities in {major, minor, diminished, augmented} and
 roots a semitone apart, all three-voice assignments (doublings allowed), stepwise displacements and System 2 schedules
 were enumerated. No pair of major or minor triads has a golden passing chord; some pairs involving a diminished or
-augmented triad do (for example Bdim → C through vCg).</p>
+augmented triad do (for example Bdim → C through vCg). Allowing every voice to move up to three semitones (split
+3 + 3 + 3) gives the same answer for major and minor pairs.</p>
 
 <h3>D.18 What the census is</h3>
 <p>The dictionary numbers (870 ordered pairs; System 1: 32 exact golden chords and 122 over a pedal; System 2: 227 and 299;

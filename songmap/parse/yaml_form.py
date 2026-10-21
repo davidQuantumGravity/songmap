@@ -26,7 +26,8 @@ TOP_KEYS = ("songmap", "title", "tempo", "meter", "key", "tuning", "fps", "seed"
 SECTION_KEYS = ("name", "bars", "parts", "like", "add", "drop", "harmony", "dyn", "feel", "tempo", "key")
 PART_SOURCES = ("style", "motif", "motifs", "notes", "deg", "rel", "steps", "vary")
 PART_OPTS = ("mods", "dyn", "art", "oct", "transpose", "feel", "voicing", "auto", "mute", "gain_db", "gate",
-             "order", "octaves", "fills", "crash", "pan", "len", "role", "voices", "range", "rhythm", "voice", "vel")
+             "order", "octaves", "fills", "crash", "pan", "len", "role", "voices", "range", "rhythm", "voice", "vel",
+             "octave")
 MOTIF_KEYS = ("notes", "deg", "rel", "octave", "key")
 MASTER_KEYS = ("mode", "target_lufs", "ceiling_db", "glue", "preserve_contrast")
 

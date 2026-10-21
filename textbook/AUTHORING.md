@@ -1,4 +1,4 @@
-# Authoring guide: "Harmony, Rational and Golden"
+# Authoring guide: "Music Theory of Golden Harmony"
 
 Read this whole file before writing. The table of contents is canonical: `textbook/toc.yaml`.
 
@@ -142,7 +142,7 @@ The author cares about precision above everything. A wrong number or a wrong his
 2. **Label the status of every claim:** *theorem* (proved, or checked exhaustively), *measurement* (depends on a model: roughness, entropy, timbre, register), or *conjecture or hypothesis* (the bliss idea, EEG links). Never present a hypothesis as fact.
 3. **History:** state only well-established facts. Use "c." or a range when a date is uncertain. Never invent quotations, page numbers or citations. If unsure, say less.
 4. **Known pitfalls, stated correctly:**
-   - **Bach did not invent equal temperament.** Zhu Zaiyu (1584) and Simon Stevin (c. 1605) computed it, and Mersenne popularized it (1636). Bach's *Well-Tempered Clavier* (Book I 1722, Book II 1742) used a well temperament across all 24 keys.
+   - **Bach did not invent equal temperament.** Zhu Zaiyu (1584) and Simon Stevin (c. 1605) computed it, and Mersenne popularized it (1636). Bach's *Well-Tempered Clavier* (Book I 1722, Book II 1742) showcases all 24 keys; his own tuning is undocumented and most likely an unequal well temperament ("well-tempered" does not by itself exclude equal temperament). Do not use φ(n) for Euler's totient: φ is the golden ratio in this book.
    - **Parallel fourths and fifths are early medieval *organum* (9th–10th c.), not Gregorian chant**, which is monophonic.
    - **Golden-seventh beats:** a close-voiced Cg7 on harmonic tones beats at $f_0\varphi^{-6}\times(1, 2/\varphi, 4/\varphi^2)$, the golden *triad* in rhythm. It also beats at $2f_0\varphi^{-6}$, the golden seventh against the root's octave, because $8/\varphi^3 = 2 - 2\varphi^{-6}$. No beat occurs at the golden seventh's own ratio. At 110 Hz: 6.13, 7.58, 9.37 and 12.26 Hz.
    - **The golden seventh** 8/φ³ = 1100.73 c. 36-ET renders it as 33 sixth-steps = exactly the 12-ET major seventh; the exact value is 0.73 c sharper.
@@ -240,3 +240,17 @@ Report:
   toward its length. Make the section exactly as long as the material (or pad with a silent `c16@0`).
 - Roughness tables for SongMap examples must state the voicing measured and whether unison doublings
   between parts are counted once.
+
+## 10. Framing of golden home and the timbre flip (the author's instruction, 2026-10-21)
+
+- Physical instruments are rational: strings, winds and voices have (nearly) harmonic spectra. Golden spectra
+  (2^m·φ^n) exist only digitally. Never write that an instrument "becomes golden".
+- Western consonance (C major) is the **global minimum** of tension and the ultimate release. Western chords
+  are never "rough visitors" or "the tension" in a golden piece on real instruments; arriving on one is release.
+- The golden triad is a **local minimum** in the author's model: a delicate, metastable home one can dwell in.
+  State this as the author's model and listening experience (with its extended-listening effect as a personal
+  observation / hypothesis, Part VIII). Do not mention chi or energy. Measurement on harmonic tones does NOT
+  show a local minimum (docs/GOLDEN_THEORY.md §3.0 gives the numbers); say so where measurement is discussed.
+- The timbre flip is a **laboratory exercise**: on the digital golden spectrum the exact golden triad is a strict
+  local minimum and smoother than major (measured). Use it to immerse in golden harmony on its own terms, then
+  bring what was learned back to harmonic instruments and to a more developed theory.

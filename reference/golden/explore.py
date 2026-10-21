@@ -5,7 +5,7 @@
 Sections:
   1. interval approximations (exact golden vs 36-ET)
   2. why 36: continued fraction of log2(phi), the identity phi^3 ~ 4 * 2^(1/12)
-  3. the golden chain, its MOS scales (3, 10, 13, 36 notes) and the three 12-ET layers
+  3. the golden chain, its MOS scales (2, 3, 4, 7, 10, 13, 23, 36 notes; scales printed as chains j = 0..n-1, not centred on C) and the three 12-ET layers
   4. the golden triad as the centroid of major / minor / augmented
   5. voice-leading resolutions of the golden triad (in sixth-steps)
   6. stability: Sethares roughness (harmonic vs golden spectra) and harmonic entropy
@@ -54,7 +54,7 @@ def main():
         h.append(ai * h[-1] + h[-2])
         k.append(ai * k[-1] + k[-2])
     print("  log2(phi) =", a, "...  convergents:", list(zip(h[2:], k[2:])))
-    print("  -> MOS scale sizes of the golden chain: 3, 10, 13, 36 (36 = where phi is ~exact: 25/36)")
+    print("  -> MOS scale sizes of the golden chain: 2, 3, 4, 7, 10, 13, 23, 36 (36 = where phi is ~exact: 25/36)")
     print(f"  phi^3 / 4 = {PHI ** 3 / 4:.5f}  vs  2^(1/12) = {2 ** (1 / 12):.5f}"
           f"  ({cents(PHI ** 3 / 4):.2f} c): three golden sixths = two octaves + ~one semitone")
 
@@ -192,7 +192,7 @@ def beat_spectrum(f0=110.0, partials=6):
     print("  Cg7 (1 : 2/phi : 4/phi^2 : 8/phi^3): f0 phi^-6 x (1, 2/phi, 4/phi^2) = the golden TRIAD in rhythm,")
     print("       plus 2 f0 phi^-6 = the golden seventh against the root's octave, since 8/phi^3 = 2 - 2 phi^-6.")
     print("       No beat occurs at the golden seventh's own ratio (8/phi^3 x f0 phi^-6 = 11.58 Hz at 110 Hz).")
-    print("  With more partials, non-chain beats (sqrt5, 3 x unit) appear above ~13 Hz.")
+    print("  With 8 partials the Cg7 beats below 15 Hz (at 110 Hz) are still exactly these four rates.")
     print("  Beat rates scale linearly with f0, so register tunes the beat ladder (f0 = 55 Hz halves them).")
 
 

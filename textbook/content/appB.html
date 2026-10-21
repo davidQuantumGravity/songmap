@@ -1,0 +1,338 @@
+<p>This appendix is the complete reference for the notation of the book: note names in 12-ET and 36-ET, interval and
+chord symbols, Roman numerals, scales, the symbols of the Derive layers, and the SongMap syntax in which every audio
+example is written. The tables of notes, chord qualities, scales, instruments and styles were generated from the
+same code that renders the examples (the naming rule of <code>tools/textbook/build.py</code> and the parsers in
+<code>songmap/</code>), so they agree with it by construction. <a href="ch:ch24#notation">Chapter 24</a>,
+<a href="ch:ch25#naming">Chapter 25</a> and <a href="ch:ch36">Chapter 36</a> explain the ideas; this page only lists.</p>
+
+<section id="notes">
+<h2>Note names</h2>
+
+<h3>12-ET</h3>
+<p>Notes are named with the letters A–G, sharps and flats, and an octave number that begins at each C: <b>C4 is
+middle C</b> (MIDI note 60) and <b>A4 = 440 Hz</b> (MIDI 69). A note with MIDI number $m$ has frequency
+$440\cdot 2^{(m-69)/12}$ Hz and pitch class $m \bmod 12$. Prose uses ♯ and ♭; code and SongMap files use <code>#</code>
+and <code>b</code>. In the Western chapters pitch classes are numbered in semitones from C = 0; in the golden chapters
+in sixth-steps, where a 12-ET pitch class $p$ becomes $3p$.</p>
+<table><tr><th>Pitch class</th><th>Name</th><th>SongMap</th><th>MIDI (octave 4)</th><th>Hz (octave 4)</th><th>36-ET step</th></tr><tr><td>0</td><td>C</td><td><code>C</code></td><td>60</td><td>261.63</td><td>0</td></tr><tr><td>1</td><td>C♯ / D♭</td><td><code>C# / Db</code></td><td>61</td><td>277.18</td><td>3</td></tr><tr><td>2</td><td>D</td><td><code>D</code></td><td>62</td><td>293.66</td><td>6</td></tr><tr><td>3</td><td>E♭ / D♯</td><td><code>Eb / D#</code></td><td>63</td><td>311.13</td><td>9</td></tr><tr><td>4</td><td>E</td><td><code>E</code></td><td>64</td><td>329.63</td><td>12</td></tr><tr><td>5</td><td>F</td><td><code>F</code></td><td>65</td><td>349.23</td><td>15</td></tr><tr><td>6</td><td>F♯ / G♭</td><td><code>F# / Gb</code></td><td>66</td><td>369.99</td><td>18</td></tr><tr><td>7</td><td>G</td><td><code>G</code></td><td>67</td><td>392.00</td><td>21</td></tr><tr><td>8</td><td>A♭ / G♯</td><td><code>Ab / G#</code></td><td>68</td><td>415.30</td><td>24</td></tr><tr><td>9</td><td>A</td><td><code>A</code></td><td>69</td><td>440.00</td><td>27</td></tr><tr><td>10</td><td>B♭ / A♯</td><td><code>Bb / A#</code></td><td>70</td><td>466.16</td><td>30</td></tr><tr><td>11</td><td>B</td><td><code>B</code></td><td>71</td><td>493.88</td><td>33</td></tr></table>
+
+<h3>36-ET: sixth-steps, ups and downs</h3>
+<p>36-ET divides the octave into 36 <b>sixth-steps</b> of $1200/36 = 33.33$ c. A prefix <b>^</b> (up) raises a note by
+one sixth-step and <b>v</b> (down) lowers it by one; they combine with sharps and flats and with each other
+(^^C is two sixth-steps above C). The marks follow Kite Giedraitis' "ups and downs" notation for equal divisions of
+the octave. The <b>standard spelling</b> uses at most one arrow: write a pitch class as $p = 3q + r$ with
+$r \in \{0, 1, 2\}$; its name is the 12-ET name of $q$ if $r = 0$, ^ plus that name if $r = 1$, and v plus the name of
+$q + 1$ if $r = 2$. So step 2 is vC♯, not ^^C, and ^E (13) and vF (14) are different notes. Every step's
+<b>layer</b> is $r$: 0 for the twelve 12-ET notes, 1 for the ^ notes, 2 for the v notes.</p>
+<pianoroll edo="36" notes="C4 ; ^C4 ; vC#4 ; C#4 ; ^C#4 ; vD4 ; D4 ; ^D4 ; vEb4 ; Eb4 ; ^Eb4 ; vE4 ; E4" labels="C ; ^C ; vC♯ ; C♯ ; ^C♯ ; vD ; D ; ^D ; vE♭ ; E♭ ; ^E♭ ; vE ; E" title="Steps 0 to 12 of 36-ET: each 12-ET note (layer 0), then the note a sixth-step up (^) and the note a sixth-step below the next one (v)"></pianoroll>
+<p>The complete table, with the frequency of each note in the octave of middle C:</p>
+<table><tr><th>Step</th><th>Name</th><th>SongMap</th><th>Cents</th><th>Layer</th><th>Other spellings</th><th>Hz (octave 4)</th></tr><tr><td>0</td><td><b>C</b></td><td><code>C</code></td><td>0.00</td><td>0 (12-ET)</td><td></td><td>261.63</td></tr><tr><td>1</td><td><b>^C</b></td><td><code>^C</code></td><td>33.33</td><td>1 (^)</td><td>vvC♯</td><td>266.71</td></tr><tr><td>2</td><td><b>vC♯</b></td><td><code>vC#</code></td><td>66.67</td><td>2 (v)</td><td>vD♭, ^^C</td><td>271.90</td></tr><tr><td>3</td><td><b>C♯</b></td><td><code>C#</code></td><td>100.00</td><td>0 (12-ET)</td><td>D♭</td><td>277.18</td></tr><tr><td>4</td><td><b>^C♯</b></td><td><code>^C#</code></td><td>133.33</td><td>1 (^)</td><td>^D♭, vvD</td><td>282.57</td></tr><tr><td>5</td><td><b>vD</b></td><td><code>vD</code></td><td>166.67</td><td>2 (v)</td><td>^^C♯</td><td>288.06</td></tr><tr><td>6</td><td><b>D</b></td><td><code>D</code></td><td>200.00</td><td>0 (12-ET)</td><td></td><td>293.66</td></tr><tr><td>7</td><td><b>^D</b></td><td><code>^D</code></td><td>233.33</td><td>1 (^)</td><td>vvE♭</td><td>299.37</td></tr><tr><td>8</td><td><b>vE♭</b></td><td><code>vEb</code></td><td>266.67</td><td>2 (v)</td><td>vD♯, ^^D</td><td>305.19</td></tr><tr><td>9</td><td><b>E♭</b></td><td><code>Eb</code></td><td>300.00</td><td>0 (12-ET)</td><td>D♯</td><td>311.13</td></tr><tr><td>10</td><td><b>^E♭</b></td><td><code>^Eb</code></td><td>333.33</td><td>1 (^)</td><td>^D♯, vvE</td><td>317.18</td></tr><tr><td>11</td><td><b>vE</b></td><td><code>vE</code></td><td>366.67</td><td>2 (v)</td><td>^^E♭</td><td>323.34</td></tr><tr><td>12</td><td><b>E</b></td><td><code>E</code></td><td>400.00</td><td>0 (12-ET)</td><td></td><td>329.63</td></tr><tr><td>13</td><td><b>^E</b></td><td><code>^E</code></td><td>433.33</td><td>1 (^)</td><td>vvF</td><td>336.04</td></tr><tr><td>14</td><td><b>vF</b></td><td><code>vF</code></td><td>466.67</td><td>2 (v)</td><td>^^E</td><td>342.57</td></tr><tr><td>15</td><td><b>F</b></td><td><code>F</code></td><td>500.00</td><td>0 (12-ET)</td><td></td><td>349.23</td></tr><tr><td>16</td><td><b>^F</b></td><td><code>^F</code></td><td>533.33</td><td>1 (^)</td><td>vvF♯</td><td>356.02</td></tr><tr><td>17</td><td><b>vF♯</b></td><td><code>vF#</code></td><td>566.67</td><td>2 (v)</td><td>vG♭, ^^F</td><td>362.94</td></tr><tr><td>18</td><td><b>F♯</b></td><td><code>F#</code></td><td>600.00</td><td>0 (12-ET)</td><td>G♭</td><td>369.99</td></tr><tr><td>19</td><td><b>^F♯</b></td><td><code>^F#</code></td><td>633.33</td><td>1 (^)</td><td>^G♭, vvG</td><td>377.19</td></tr><tr><td>20</td><td><b>vG</b></td><td><code>vG</code></td><td>666.67</td><td>2 (v)</td><td>^^F♯</td><td>384.52</td></tr><tr><td>21</td><td><b>G</b></td><td><code>G</code></td><td>700.00</td><td>0 (12-ET)</td><td></td><td>392.00</td></tr><tr><td>22</td><td><b>^G</b></td><td><code>^G</code></td><td>733.33</td><td>1 (^)</td><td>vvA♭</td><td>399.62</td></tr><tr><td>23</td><td><b>vA♭</b></td><td><code>vAb</code></td><td>766.67</td><td>2 (v)</td><td>vG♯, ^^G</td><td>407.38</td></tr><tr><td>24</td><td><b>A♭</b></td><td><code>Ab</code></td><td>800.00</td><td>0 (12-ET)</td><td>G♯</td><td>415.30</td></tr><tr><td>25</td><td><b>^A♭</b></td><td><code>^Ab</code></td><td>833.33</td><td>1 (^)</td><td>^G♯, vvA</td><td>423.38</td></tr><tr><td>26</td><td><b>vA</b></td><td><code>vA</code></td><td>866.67</td><td>2 (v)</td><td>^^A♭</td><td>431.61</td></tr><tr><td>27</td><td><b>A</b></td><td><code>A</code></td><td>900.00</td><td>0 (12-ET)</td><td></td><td>440.00</td></tr><tr><td>28</td><td><b>^A</b></td><td><code>^A</code></td><td>933.33</td><td>1 (^)</td><td>vvB♭</td><td>448.55</td></tr><tr><td>29</td><td><b>vB♭</b></td><td><code>vBb</code></td><td>966.67</td><td>2 (v)</td><td>vA♯, ^^A</td><td>457.27</td></tr><tr><td>30</td><td><b>B♭</b></td><td><code>Bb</code></td><td>1000.00</td><td>0 (12-ET)</td><td>A♯</td><td>466.16</td></tr><tr><td>31</td><td><b>^B♭</b></td><td><code>^Bb</code></td><td>1033.33</td><td>1 (^)</td><td>^A♯, vvB</td><td>475.23</td></tr><tr><td>32</td><td><b>vB</b></td><td><code>vB</code></td><td>1066.67</td><td>2 (v)</td><td>^^B♭</td><td>484.46</td></tr><tr><td>33</td><td><b>B</b></td><td><code>B</code></td><td>1100.00</td><td>0 (12-ET)</td><td></td><td>493.88</td></tr><tr><td>34</td><td><b>^B</b></td><td><code>^B</code></td><td>1133.33</td><td>1 (^)</td><td>vvC</td><td>503.48</td></tr><tr><td>35</td><td><b>vC</b></td><td><code>vC</code></td><td>1166.67</td><td>2 (v)</td><td>^^B</td><td>513.27</td></tr></table>
+<p><b>With octaves.</b> ^C4, vE♭4 and so on. The absolute position in sixth-steps is three times the MIDI number plus
+the ups minus the downs: middle C is 180, A4 is 207, vE4 is $3 \cdot 64 - 1 = 191$, and a note at step $s$ sounds at
+$440\cdot 2^{(s - 207)/36}$ Hz. In the piano-roll figures each row is one sixth-step and rows are shaded by layer.</p>
+<p><b>Spelling chords.</b> Chord tones are named by their own standard spelling, not by "the root's third with an
+arrow": ^Cg = ^C E vA♭ and ^Gg = ^G B vE♭. A staff for performers may prefer letter-faithful spellings that keep the
+letters of stacked thirds (^^D for the fifth of ^Gg); both name the same pitch
+(<a href="ch:ch38#staff">§38.1</a>). In SongMap the same prefixes are typed in ASCII: <code>^c4</code>,
+<code>ve8</code>, <code>^^g</code>, <code>vEb</code>.</p>
+
+<h3>Intervals</h3>
+<p>Western intervals are named by size and quality: P (perfect), M (major), m (minor), A (augmented), d (diminished),
+with the number of letter steps: m3 is a minor third, P5 a perfect fifth, A4/d5 the tritone. In 36-ET an interval of
+$3q + r$ sixth-steps is named like a note: the 12-ET interval of $q$ semitones, with ^ if $r = 1$, or v on the next
+interval up if $r = 2$. So the golden third is vM3, the golden fifth ^P5 and the golden sixth ^m6
+(<a href="ch:ch24#notation">§24.3</a>).</p>
+<table><tr><th>Sixth-steps</th><th>Name</th><th>Cents</th><th>Golden-system role</th></tr><tr><td>0</td><td>P1</td><td>0.00</td><td></td></tr><tr><td>1</td><td>^P1</td><td>33.33</td><td>golden comma in 36-ET (exact 30.17 c)</td></tr><tr><td>2</td><td>vm2</td><td>66.67</td><td>golden limma in 36-ET (exact 69.10 c)</td></tr><tr><td>3</td><td>m2</td><td>100.00</td><td>golden apotome in 36-ET (exact 99.27 c)</td></tr><tr><td>4</td><td>^m2</td><td>133.33</td><td></td></tr><tr><td>5</td><td>vM2</td><td>166.67</td><td></td></tr><tr><td>6</td><td>M2</td><td>200.00</td><td></td></tr><tr><td>7</td><td>^M2</td><td>233.33</td><td></td></tr><tr><td>8</td><td>vm3</td><td>266.67</td><td>golden7's large step in 36-ET (exact 267.64 c)</td></tr><tr><td>9</td><td>m3</td><td>300.00</td><td></td></tr><tr><td>10</td><td>^m3</td><td>333.33</td><td>silver third (exact chain third 336.74 c)</td></tr><tr><td>11</td><td>vM3</td><td>366.67</td><td>golden third 2/φ (exact 366.91 c)</td></tr><tr><td>12</td><td>M3</td><td>400.00</td><td></td></tr><tr><td>13</td><td>^M3</td><td>433.33</td><td>bronze third (exact chain third 436.01 c)</td></tr><tr><td>14</td><td>vP4</td><td>466.67</td><td>inverted golden fifth (exact 466.18 c)</td></tr><tr><td>15</td><td>P4</td><td>500.00</td><td></td></tr><tr><td>16</td><td>^P4</td><td>533.33</td><td></td></tr><tr><td>17</td><td>vA4/d5</td><td>566.67</td><td></td></tr><tr><td>18</td><td>A4/d5</td><td>600.00</td><td></td></tr><tr><td>19</td><td>^A4/d5</td><td>633.33</td><td></td></tr><tr><td>20</td><td>vP5</td><td>666.67</td><td></td></tr><tr><td>21</td><td>P5</td><td>700.00</td><td></td></tr><tr><td>22</td><td>^P5</td><td>733.33</td><td>golden fifth 4/φ² (exact 733.82 c)</td></tr><tr><td>23</td><td>vm6</td><td>766.67</td><td></td></tr><tr><td>24</td><td>m6</td><td>800.00</td><td></td></tr><tr><td>25</td><td>^m6</td><td>833.33</td><td>golden sixth φ (exact 833.09 c)</td></tr><tr><td>26</td><td>vM6</td><td>866.67</td><td></td></tr><tr><td>27</td><td>M6</td><td>900.00</td><td></td></tr><tr><td>28</td><td>^M6</td><td>933.33</td><td></td></tr><tr><td>29</td><td>vm7</td><td>966.67</td><td></td></tr><tr><td>30</td><td>m7</td><td>1000.00</td><td></td></tr><tr><td>31</td><td>^m7</td><td>1033.33</td><td></td></tr><tr><td>32</td><td>vM7</td><td>1066.67</td><td></td></tr><tr><td>33</td><td>M7</td><td>1100.00</td><td>golden seventh 8/φ³ in 36-ET (exact 1100.73 c)</td></tr><tr><td>34</td><td>^M7</td><td>1133.33</td><td></td></tr><tr><td>35</td><td>vP8</td><td>1166.67</td><td></td></tr><tr><td>36</td><td>P8</td><td>1200.00</td><td></td></tr></table>
+<p>Intervals are also given as ratios (3/2, 5/4, φ) and in cents ($1200\log_2$ of the ratio, two decimals), and chord
+shapes as <b>step notation</b>, the list of notes above the root: (0, 4, 7) in semitones for a major triad, (0, 12, 21)
+for the same triad in sixth-steps, (0, 11, 22) for the golden triad.</p>
+
+<h3>The golden chain</h3>
+<p>Chain note $j$ is $j$ golden sixths above C, folded into the octave: exactly $1200\{j\log_2\varphi\}$ cents
+($\{\cdot\}$ the fractional part), and in 36-ET step $25j \bmod 36$. The <b>chain distance</b> of two notes is the
+difference of their $j$. Chain note $j = -1$ is the golden third vE, $j = -2$ the golden fifth ^G, $j = 3$ the golden
+apotome C♯, $j = 13$ the golden comma ^C (<a href="ch:ch23#chain">§23.3</a>). The inverse rule is $j \equiv 13t \pmod{36}$ for
+pitch class $t$ (<a href="ch:appA#modular">Appendix A</a>).</p>
+
+<h3>Symbols of the Derive layers</h3>
+<table>
+<tr><th>Symbol</th><th>Meaning</th><th>Introduced</th></tr>
+<tr><td>$c(r) = 1200\log_2 r$</td><td>size of the ratio $r$ in cents</td><td><a href="ch:ch01#cents">§1.5</a></td></tr>
+<tr><td>$\varphi$, $\psi$</td><td>$(1+\sqrt5)/2 = 1.6180339887$ and $(1-\sqrt5)/2 = -1/\varphi$</td><td><a href="ch:ch23#phi">§23.1</a></td></tr>
+<tr><td>$F_n$</td><td>Fibonacci numbers, $F_0 = 0$, $F_1 = 1$, $F_{n+1} = F_n + F_{n-1}$</td><td><a href="ch:ch23#phi">§23.1</a></td></tr>
+<tr><td>$g = \log_2\varphi$</td><td>the golden sixth in octaves, 0.6942419 (833.09 c)</td><td><a href="ch:ch23#golden-intervals">§23.2</a></td></tr>
+<tr><td>$A$, $L$, $K$</td><td>golden apotome $\varphi^3/4$, golden limma $2^7/\varphi^{10}$, golden comma $\varphi^{13}/2^9$</td><td><a href="ch:ch23#golden-comma">§23.4</a></td></tr>
+<tr><td>$\mathbb{Z}_{12}$, $\mathbb{Z}_{36}$</td><td>pitch classes of 12-ET and 36-ET (integers mod 12, mod 36)</td><td><a href="ch:ch08#pitch-classes">§8.1</a>, <a href="ch:ch24#sixth-steps">§24.1</a></td></tr>
+<tr><td>$\lambda(p) = p \bmod 3$</td><td>the layer of a 36-ET pitch class</td><td><a href="ch:ch24#layers">§24.2</a></td></tr>
+<tr><td>$T_n$, $I_n$</td><td>transposition $x \mapsto x + n$ and inversion $x \mapsto n - x$</td><td><a href="ch:ch08#pitch-classes">§8.1</a>, <a href="ch:ch20#operations">§20.2</a></td></tr>
+<tr><td>$T_n = \{0, n, 2n\}$</td><td>the equal-third triad with thirds of $n$ sixth-steps (T8, T13, …); read from context, since $T_n$ also denotes transposition</td><td><a href="ch:ch25#metallic">§25.4</a></td></tr>
+<tr><td>$M_k$</td><td>multiplication $x \mapsto kx$ ($M_5$, $M_7$ in $\mathbb{Z}_{12}$; $M_{11}$, $M_{13}$ in $\mathbb{Z}_{36}$)</td><td><a href="ch:ch20#multiplication">§20.3</a>, <a href="ch:ch33#m11">§33.2</a></td></tr>
+<tr><td>$P$, $R$, $I$, $RI$ (rows)</td><td>prime, retrograde, inversion and retrograde inversion forms of a row</td><td><a href="ch:ch21#forms">§21.2</a></td></tr>
+<tr><td>$P$, $L$, $R$ (triads)</td><td>parallel, leading-tone exchange and relative moves of neo-Riemannian theory</td><td><a href="ch:ch04#tonnetz">§4.4</a></td></tr>
+<tr><td>$G_r$, $G7_r$</td><td>golden triad $\{r, r+11, r+22\}$ and golden seventh $\{r, \dots, r+33\}$</td><td><a href="ch:ch25#golden-triad">§25.1</a></td></tr>
+<tr><td>$X$, $Y$, $d$, $P_k$</td><td>start and end voicings, voice displacements, and the path chords $P_k = X + kd$</td><td><a href="ch:ch27#uniform-path">§27.2</a></td></tr>
+<tr><td>$\mu$</td><td>the layer mirror $3q + e \mapsto 3q - e$ (swaps ^ and v)</td><td><a href="ch:ch23#golden13">§23.7</a></td></tr>
+<tr><td>$[a_0; a_1, a_2, \ldots]$, $p_i/q_i$</td><td>continued fraction and its convergents</td><td><a href="ch:ch05#continued-fractions">§5.5</a></td></tr>
+<tr><td>$\{x\}$, $\lfloor x \rfloor$</td><td>fractional part and whole part</td><td><a href="ch:ch05#stacking">§5.1</a></td></tr>
+</table>
+</section>
+
+<section id="chords">
+<h2>Chord symbols</h2>
+
+<h3>Anatomy of a symbol</h3>
+<p>A chord symbol has up to four parts, written without spaces: a <b>root</b> (a note name, possibly with ^ or v), a
+<b>quality</b>, an optional <b>alteration list</b> in parentheses, and an optional <b>slash bass</b>:
+$$\underbrace{\text{v}C}_{\text{root}}\ \underbrace{\text{g}}_{\text{quality}}\ \underbrace{\text{(…)}}_{\text{alterations}}\ \underbrace{/\text{G}}_{\text{bass}}$$
+The arrows on the root move the whole chord; the rest of the chord is built on the moved root. Every Western symbol is
+valid in 36-ET, on any layer: ^C is C major a sixth-step higher (^C ^E ^G), vE♭m is vE♭ vG♭ vB♭ (standard spelling vE♭ vF♯
+vB♭).</p>
+
+<h3>Qualities</h3>
+<p>The qualities SongMap accepts, shown on C (generated from <code>songmap/theory/harmony.py</code>; in 36-ET the
+interval lists are stored in semitones, so a sixth-step is 1/3):</p>
+<table><tr><th>Symbol on C</th><th>Quality</th><th>Notes</th><th>Semitones (as stored)</th><th>Sixth-steps</th></tr><tr><td><code>C</code></td><td>major</td><td>C E G</td><td>0, 4, 7</td><td>0, 12, 21</td></tr><tr><td><code>Cm</code></td><td>minor</td><td>C E♭ G</td><td>0, 3, 7</td><td>0, 9, 21</td></tr><tr><td><code>Cdim</code></td><td>diminished</td><td>C E♭ F♯</td><td>0, 3, 6</td><td>0, 9, 18</td></tr><tr><td><code>Caug</code></td><td>augmented</td><td>C E A♭</td><td>0, 4, 8</td><td>0, 12, 24</td></tr><tr><td><code>C5</code></td><td>power chord (root and fifth)</td><td>C G</td><td>0, 7</td><td>0, 21</td></tr><tr><td><code>Csus2</code></td><td>suspended second</td><td>C D G</td><td>0, 2, 7</td><td>0, 6, 21</td></tr><tr><td><code>Csus4</code></td><td>suspended fourth</td><td>C F G</td><td>0, 5, 7</td><td>0, 15, 21</td></tr><tr><td><code>C6</code></td><td>major sixth chord</td><td>C E G A</td><td>0, 4, 7, 9</td><td>0, 12, 21, 27</td></tr><tr><td><code>Cm6</code></td><td>minor sixth chord</td><td>C E♭ G A</td><td>0, 3, 7, 9</td><td>0, 9, 21, 27</td></tr><tr><td><code>C7</code></td><td>dominant seventh</td><td>C E G B♭</td><td>0, 4, 7, 10</td><td>0, 12, 21, 30</td></tr><tr><td><code>Cmaj7</code></td><td>major seventh</td><td>C E G B</td><td>0, 4, 7, 11</td><td>0, 12, 21, 33</td></tr><tr><td><code>Cm7</code></td><td>minor seventh</td><td>C E♭ G B♭</td><td>0, 3, 7, 10</td><td>0, 9, 21, 30</td></tr><tr><td><code>Cm7b5</code></td><td>half-diminished seventh</td><td>C E♭ F♯ B♭</td><td>0, 3, 6, 10</td><td>0, 9, 18, 30</td></tr><tr><td><code>Cdim7</code></td><td>diminished seventh</td><td>C E♭ F♯ A</td><td>0, 3, 6, 9</td><td>0, 9, 18, 27</td></tr><tr><td><code>Cadd9</code></td><td>added ninth</td><td>C E G D</td><td>0, 4, 7, 14</td><td>0, 12, 21, 42</td></tr><tr><td><code>Cmadd9</code></td><td>minor added ninth</td><td>C E♭ G D</td><td>0, 3, 7, 14</td><td>0, 9, 21, 42</td></tr><tr><td><code>C9</code></td><td>dominant ninth</td><td>C E G B♭ D</td><td>0, 4, 7, 10, 14</td><td>0, 12, 21, 30, 42</td></tr><tr><td><code>Cmaj9</code></td><td>major ninth</td><td>C E G B D</td><td>0, 4, 7, 11, 14</td><td>0, 12, 21, 33, 42</td></tr><tr><td><code>Cm9</code></td><td>minor ninth</td><td>C E♭ G B♭ D</td><td>0, 3, 7, 10, 14</td><td>0, 9, 21, 30, 42</td></tr><tr><td><code>Cg</code></td><td>golden triad (36edo)</td><td>C vE ^G</td><td>0, 11/3, 22/3</td><td>0, 11, 22</td></tr><tr><td><code>Cg7</code></td><td>golden seventh (36edo)</td><td>C vE ^G B</td><td>0, 11/3, 22/3, 11</td><td>0, 11, 22, 33</td></tr><tr><td><code>Cs</code></td><td>silver triad (36edo)</td><td>C ^E♭ vG</td><td>0, 10/3, 20/3</td><td>0, 10, 20</td></tr><tr><td><code>CT13</code></td><td>bronze triad (36edo)</td><td>C ^E vA</td><td>0, 13/3, 26/3</td><td>0, 13, 26</td></tr></table>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; C4 ^Eb4 vG4 ; C4 ^E4 vA4 ; C4 vE4 ^G4 B4 ; G3 vC4 ^Eb4" labels="C ; Cg ; Cs ; CT13 ; Cg7 ; vCg/G" title="The golden-system qualities on C, and a slash chord: the golden six-four vCg/G"></pianoroll>
+<p>In prose the Western chapters also write ° for diminished (vii°), + for augmented (I+) and ø for half-diminished
+(iiø7). The chord T8 = C vE♭ ^F, silver reflected through diminished, has no quality symbol; it is written as an
+altered chord, Cdim(v3,vv5).</p>
+
+<h3>Alterations</h3>
+<p>A parenthesis after the quality bends named chord tones by sixth-steps. Each item is a run of ^ or v marks followed
+by the degree 3, 5, 7 or 9, items are separated by commas, and the chord must have that tone:</p>
+<table>
+<tr><th>Symbol</th><th>Notes</th><th>Sixth-steps</th><th>Comment</th></tr>
+<tr><td>C(v3,^5)</td><td>C vE ^G</td><td>0, 11, 22</td><td>= Cg</td></tr>
+<tr><td>Cmaj7(v3,^5)</td><td>C vE ^G B</td><td>0, 11, 22, 33</td><td>= Cg7</td></tr>
+<tr><td>Cm(^3)</td><td>C ^E♭ G</td><td>0, 10, 21</td><td>the "Picardy step" of the averaging table</td></tr>
+<tr><td>C(^5)</td><td>C E ^G</td><td>0, 12, 22</td><td>touches two layers</td></tr>
+<tr><td>Cm(^3,v5)</td><td>C ^E♭ vG</td><td>0, 10, 20</td><td>= Cs</td></tr>
+<tr><td>Cdim(v3,vv5)</td><td>C vE♭ ^F</td><td>0, 8, 16</td><td>= T8</td></tr>
+<tr><td>Gg7(^^3,^5)</td><td>G ^B vE♭ F♯</td><td>21, 34, 8, 18</td><td>a dictionary chord (<a href="ch:ch28#dictionary">§28.4</a>)</td></tr>
+</table>
+
+<h3>Slash chords</h3>
+<p>The note after / is the lowest note: C/E is C major in first inversion, vCg/G is the golden triad vC ^E♭ G with G in
+the bass (G is its fifth: the golden six-four). The bass may carry arrows too (vCg/vA♭, G/^F♯), and it need not belong
+to the chord: vFg/C is a golden triad "over a pedal" when C is not one of its notes.</p>
+
+<h3>Names produced by the passing engine</h3>
+<p>When SongMap fills a placeholder (§B.4) it names the chord it found, in the same notation: golden (vCg/G),
+equal-third (vE♭T13/G, Cs), Western on the 12-ET layer, <b>planing</b> (a Western chord on another layer, such as ^Em),
+or <b>micro-altered</b>, the nearest named chord with alterations (vF♯dim(v3), vA♭g7(v7)/^F♯). A set that is none of
+these is printed as its notes in braces, as in {C F F♯}. The engine also recognizes mmaj7 (minor-major seventh, steps
+0, 9, 21, 33), so dictionary entries such as Fmmaj7(v3,^7) appear in <a href="ch:ch29#plagal">§29.2</a>; that quality
+is a label only, and the parser does not accept it as input.</p>
+
+<h3>Roman numerals</h3>
+<p>Chords in a key are numbered by the scale degree of their root: upper case for major, lower case for minor, ° for
+diminished, + for augmented, 7 for a seventh: I ii iii IV V vi vii° in major, i ii° ♭III iv v (or V) ♭VI ♭VII in
+minor. Chromatic chords take ♭ or ♯ on the numeral (♭II, ♭III, ♭VI, ♭VII); secondary dominants are written V/x ("five
+of x"); inversions take figured-bass superscripts (I⁶ = C/E, I⁶₄ = C/G; seventh chords 7, 6/5, 4/3, 4/2)
+(<a href="ch:ch09#inversions">§9.2</a>, <a href="ch:ch11#secondary">§11.3</a>).</p>
+<p>The golden chapters add the sixth-step arrows and the golden qualities, relative to the key. In C major:</p>
+<table>
+<tr><th>Numeral</th><th>Chord</th><th>Numeral</th><th>Chord</th></tr>
+<tr><td>vIg</td><td>vCg (vC ^E♭ G)</td><td>Ig</td><td>Cg</td></tr>
+<tr><td>vIVg</td><td>vFg (vF ^A♭ C)</td><td>IIg, IIg7</td><td>Dg, Dg7</td></tr>
+<tr><td>♭VIg</td><td>A♭g</td><td>v♭VIg</td><td>vA♭g</td></tr>
+<tr><td>v♯IVg, ^♯IVg</td><td>vF♯g, ^F♯g</td><td>vIg/V</td><td>vCg over G (the golden six-four)</td></tr>
+<tr><td>v♭IIIT13/V</td><td>vE♭T13 over G</td><td>I(^m3)</td><td>C with a third of 10 sixth-steps = Cm(^3)</td></tr>
+</table>
+<p>For example the golden ii–V–I is Dm – Dg – vGg/D – G – vE♭T13/G – vCg/G – C, or ii – IIg – vVg/II – V –
+v♭IIIT13/V – vIg/V – I (<a href="ch:ch29#authentic">§29.1</a>).</p>
+
+<h3>Paths</h3>
+<p>A passing progression is written X → P₁ → P₂ → Y or with dashes, G – vE♭T13/G – vCg/G – C. "At 1/3" and "at 2/3"
+(P₁ and P₂) name the two positions of a three-step path (<a href="ch:ch27#uniform-path">§27.2</a>).</p>
+</section>
+
+<section id="scales">
+<h2>Scales</h2>
+
+<h3>Western scales and modes</h3>
+<p>The SongMap column gives the key name to write after <code>key:</code> (the modes are those of
+<code>songmap/theory/keys.py</code>; the others are named in the book but are not SongMap keys).</p>
+<table><tr><th>Scale or mode</th><th>SongMap key</th><th>Notes on C</th><th>Steps (semitones)</th></tr><tr><td>major</td><td><code>C major</code></td><td>C D E F G A B</td><td>2 2 1 2 2 2 1</td></tr><tr><td>ionian</td><td><code>C ionian</code></td><td>C D E F G A B</td><td>2 2 1 2 2 2 1</td></tr><tr><td>dorian</td><td><code>C dorian</code></td><td>C D E♭ F G A B♭</td><td>2 1 2 2 2 1 2</td></tr><tr><td>phrygian</td><td><code>C phrygian</code></td><td>C C♯ E♭ F G A♭ B♭</td><td>1 2 2 2 1 2 2</td></tr><tr><td>lydian</td><td><code>C lydian</code></td><td>C D E F♯ G A B</td><td>2 2 2 1 2 2 1</td></tr><tr><td>mixolydian</td><td><code>C mixolydian</code></td><td>C D E F G A B♭</td><td>2 2 1 2 2 1 2</td></tr><tr><td>minor</td><td><code>C minor</code></td><td>C D E♭ F G A♭ B♭</td><td>2 1 2 2 1 2 2</td></tr><tr><td>aeolian</td><td><code>C aeolian</code></td><td>C D E♭ F G A♭ B♭</td><td>2 1 2 2 1 2 2</td></tr><tr><td>harmonic minor</td><td><code>C harmonic_minor</code></td><td>C D E♭ F G A♭ B</td><td>2 1 2 2 1 3 1</td></tr><tr><td>melodic minor</td><td><code>C melodic_minor</code></td><td>C D E♭ F G A B</td><td>2 1 2 2 2 2 1</td></tr><tr><td>locrian</td><td>—</td><td>C C♯ E♭ F F♯ A♭ B♭</td><td>1 2 2 1 2 2 2</td></tr><tr><td>major pentatonic</td><td>—</td><td>C D E G A</td><td>2 2 3 2 3</td></tr><tr><td>minor pentatonic</td><td>—</td><td>C E♭ F G B♭</td><td>3 2 2 3 2</td></tr><tr><td>whole-tone</td><td>—</td><td>C D E F♯ A♭ B♭</td><td>2 2 2 2 2 2</td></tr><tr><td>octatonic (half–whole)</td><td>—</td><td>C C♯ E♭ E F♯ G A B♭</td><td>1 2 1 2 1 2 1 2</td></tr><tr><td>chromatic</td><td>—</td><td>C C♯ D E♭ E F F♯ G A♭ A B♭ B</td><td>1 1 1 1 1 1 1 1 1 1 1 1</td></tr></table>
+<p>A key can also be written <code>Em</code> (minor) or <code>F#</code> (major), and every tonic may carry arrows:
+<code>^D minor</code> is D minor a sixth-step up. 36-ET has 36 tonics, each major and minor: the <b>72 keys</b>
+(<a href="ch:ch24#keys">§24.6</a>).</p>
+
+<h3>Golden scales</h3>
+<p>Golden scales are windows of consecutive notes of the golden chain, centred near the tonic; silver13 is golden13
+with every ^ and v exchanged (the layer mirror). The well-formed sizes of the golden chain are 2, 3, 4, 7, 10, 13, 23
+and 36; full 36-ET is the 36-note case. Step sizes, exact tunings and contents are tabulated in
+<a href="ch:appC#golden-scales">Appendix C</a>.</p>
+<table><tr><th>Scale</th><th>SongMap key</th><th>Notes</th><th>Chain window</th><th>Notes on C</th><th>Steps (sixth-steps)</th></tr><tr><td>golden3</td><td><code>C golden3</code></td><td>3</td><td>−2 … 0</td><td>C vE ^G</td><td>11 11 14</td></tr><tr><td>golden4</td><td><code>C golden4</code></td><td>4</td><td>−2 … 1</td><td>C vE ^G ^A♭</td><td>11 11 3 11</td></tr><tr><td>golden7</td><td><code>C golden7</code></td><td>7</td><td>−3 … 3</td><td>C C♯ vE vF ^G ^A♭ B</td><td>3 8 3 8 3 8 3</td></tr><tr><td>golden10</td><td><code>C golden10</code></td><td>10</td><td>−4 … 5</td><td>C C♯ vE♭ vE vF vF♯ ^G ^A♭ ^A B</td><td>3 5 3 3 3 5 3 3 5 3</td></tr><tr><td>golden13</td><td><code>C golden13</code></td><td>13</td><td>−6 … 6</td><td>C C♯ D vE♭ vE vF vF♯ ^F♯ ^G ^A♭ ^A B♭ B</td><td>3 3 2 3 3 3 2 3 3 3 2 3 3</td></tr><tr><td>golden23</td><td><code>C golden23</code></td><td>23</td><td>−11 … 11</td><td>C vC♯ C♯ vD D vE♭ E♭ vE ^E vF ^F vF♯ ^F♯ vG ^G vA♭ ^A♭ A ^A B♭ ^B♭ B ^B</td><td>2 1 2 1 2 1 2 2 1 2 1 2 1 2 1 2 2 1 2 1 2 1 2</td></tr><tr><td>silver13</td><td><code>C silver13</code></td><td>13</td><td>layer mirror of golden13</td><td>C C♯ D ^E♭ ^E ^F vF♯ ^F♯ vG vA♭ vA B♭ B</td><td>3 3 4 3 3 1 2 1 3 3 4 3 3</td></tr></table>
+<pianoroll edo="36" notes="C4 ; C#4 ; vE4 ; vF4 ; ^G4 ; ^Ab4 ; B4 ; C5" labels="C ; C♯ ; vE ; vF ; ^G ; ^A♭ ; B ; C" title="golden7 on C: small steps of 3 sixth-steps and large steps of 8"></pianoroll>
+<p>Golden keys are written like Western ones, with arrows on the tonic where needed: <code>key: vE golden13</code>,
+<code>key: "^Ab golden7"</code>. golden13 and silver13 each have 36 distinct transpositions: the <b>72 golden
+scales</b>.</p>
+
+<h3>Scale degrees</h3>
+<p>In scale-degree notation degree 0 is the tonic and degrees count scale steps, wrapping into the next octave after
+the last note: in golden7, degree 0 is C, 1 C♯, 2 vE, 3 vF, 4 ^G, 5 ^A♭, 6 B and 7 the octave; in golden13 degree 13 is
+the octave. Negative degrees go down. Alterations ♯/♭ (<code>#4</code>, <code>b7</code>) and arrows
+(<code>^3</code>, <code>v5</code>) bend a degree by a semitone or a sixth-step. In the Western chapters degrees are
+also written 1 to 7 with carets in prose (3 → 2 → 1).</p>
+</section>
+
+<section id="songmap">
+<h2>SongMap syntax</h2>
+<p>Every audio example is a SongMap song: a YAML text file (<a href="ch:ch36#songmap">§36.1</a>). This section lists
+the parts of the format the book uses, checked against the parser in <code>songmap/parse/</code> and the engine in
+<code>songmap/theory/</code> and <code>songmap/arrange/</code>. The full format, including the drum, groove and
+video features that the book does not need, is in <code>docs/SONGMAP_SPEC.md</code>.</p>
+
+<h3>A complete song</h3>
+<pre><code>songmap: 0.2
+title: "V to I, strict path"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2
+instruments: {organ: clean/organ, low: clean/bass, bell: clean/glass}
+motifs:
+  m1: {rel: "R8 3 5 R+ 5 3 R 3"}
+sections:
+  - {name: a, bars: 4, harmony: "G:1 ~:0.5 ~:0.5 C:2", parts: {organ: hold, low: bassline}}
+  - {name: b, bars: 4, like: a, add: {bell: {motifs: [m1]}}}
+mix: {organ: {gain_db: -6}, low: {gain_db: -4}, bell: {gain_db: -6, send: {hall: 0.3}}}
+master: clean</code></pre>
+
+<h3>Top-level keys</h3>
+<table>
+<tr><th>Key</th><th>Value</th><th>Default</th></tr>
+<tr><td><code>songmap</code></td><td>format version; this engine reads 0.2 (a file without it is read as v0.1 and migrated, with a warning)</td><td>—</td></tr>
+<tr><td><code>title</code></td><td>a name</td><td>untitled</td></tr>
+<tr><td><code>tempo</code></td><td>beats per minute</td><td>120</td></tr>
+<tr><td><code>meter</code></td><td><code>"4/4"</code>, <code>"3/4"</code>, <code>"6/8"</code>, …</td><td>4/4</td></tr>
+<tr><td><code>key</code></td><td>tonic and mode or scale (§B.3)</td><td>C major</td></tr>
+<tr><td><code>tuning</code></td><td><code>12edo</code> or <code>36edo</code> (also accepted: 36-ET, 36et)</td><td>12edo</td></tr>
+<tr><td><code>seed</code></td><td>every random choice derives from it, so renders are reproducible</td><td>7</td></tr>
+<tr><td><code>tail_seconds</code></td><td>silence after the last bar</td><td>3</td></tr>
+<tr><td><code>fps</code></td><td>video frame rate for the cue sheet</td><td>30</td></tr>
+<tr><td><code>instruments</code></td><td>part → instrument (below)</td><td>built-in ensemble</td></tr>
+<tr><td><code>harmony</code></td><td><code>{default: [...], chord_bars: n, progressions: {name: "..."}}</code></td><td>—</td></tr>
+<tr><td><code>motifs</code></td><td>name → melody (below)</td><td>—</td></tr>
+<tr><td><code>sections</code></td><td>the form: a list of sections (below); required</td><td>—</td></tr>
+<tr><td><code>mix</code>, <code>returns</code></td><td>per-part level, pan and reverb sends; reverb definitions</td><td>a hall return</td></tr>
+<tr><td><code>master</code></td><td><code>clean</code> (peak to −1 dBFS, nothing else), <code>standard</code> or <code>legacy</code>; the book always uses clean</td><td>standard</td></tr>
+</table>
+<p>The format has further keys for video work (<code>video</code>, <code>cues</code>, <code>events</code>,
+<code>groove</code>, <code>parts_feel</code>, <code>qa</code>, <code>mood</code>); keys starting with <code>x-</code> are
+ignored, which is useful for YAML anchors. An unknown key is an error that suggests the nearest valid one.</p>
+
+<h3>Tuning</h3>
+<p><code>tuning: 36edo</code> allows sixth-step pitches anywhere: ^/v prefixes on notes, degrees, chord-relative tones,
+chord roots, bass notes and keys, the qualities g, g7, s and T13, alteration lists, golden keys and passing
+placeholders. In a <code>12edo</code> song any pitch off the 12-ET grid is an error whose message names the fix, so a
+Western example cannot drift off the grid by a typo. The accent mark ^ is a <i>suffix</i> after the duration and never
+clashes with the up prefix: <code>^c4^</code> is C up, a quarter note, accented.</p>
+
+<h3>Instruments and presets</h3>
+<p>Each part is a named role playing one instrument: <code>organ: clean/organ</code> (instrument/preset) or a mapping
+with parameter overrides, <code>{use: clean/organ, attack: 0.08, release: 0.5}</code> or
+<code>{use: clean/organ, spectrum: 1}</code> (the clean tone with digital golden-spectrum partials; no physical instrument has them). Unknown parameters are errors. Part names are
+free; a part without an entry uses the instrument of its own name if there is one. The instruments and presets in the
+engine:</p>
+<table><tr><th>Instrument</th><th>Presets</th></tr><tr><td><code>bass</code></td><td><code>bass/sub</code>, <code>bass/v0</code></td></tr><tr><td><code>clap</code></td><td><code>clap/v0</code></td></tr><tr><td><code>clean</code></td><td><code>clean/bass</code>, <code>clean/glass</code>, <code>clean/golden_pad</code>, <code>clean/keys</code>, <code>clean/lead</code>, <code>clean/organ</code>, <code>clean/sine</code></td></tr><tr><td><code>epiano</code></td><td><code>epiano/still</code></td></tr><tr><td><code>hat</code></td><td><code>hat/v0</code>, <code>hat/v0_open</code></td></tr><tr><td><code>impact</code></td><td><code>impact/v0</code></td></tr><tr><td><code>keys</code></td><td><code>keys/still</code></td></tr><tr><td><code>kick</code></td><td><code>kick/v0</code></td></tr><tr><td><code>lead</code></td><td><code>lead/v0</code></td></tr><tr><td><code>pad</code></td><td><code>pad/dark</code>, <code>pad/still</code>, <code>pad/warm</code></td></tr><tr><td><code>pluck</code></td><td><code>pluck/dark</code>, <code>pluck/v0</code></td></tr><tr><td><code>riser</code></td><td><code>riser/v0</code></td></tr><tr><td><code>snare</code></td><td><code>snare/v0</code></td></tr><tr><td><code>string_pluck</code></td><td><code>string_pluck/still</code></td></tr><tr><td><code>tick</code></td><td><code>tick/v0</code></td></tr><tr><td><code>zap</code></td><td><code>zap/v0</code></td></tr></table>
+<p>The book uses the stable ones: <code>clean/organ</code> (8 harmonics at $1/k^{1.2}$, sustained),
+<code>clean/sine</code> (a pure sine), <code>clean/keys</code> (struck), <code>clean/bass</code>, <code>clean/lead</code>,
+<code>clean/glass</code> (digital golden spectrum, bell), <code>clean/golden_pad</code> (golden spectrum, sustained), and the
+stable variants <code>keys/still</code>, <code>epiano/still</code>, <code>pad/still</code> and
+<code>string_pluck/still</code> (<a href="ch:ch37#clean">§37.2</a>).</p>
+
+<h3>Harmony strings</h3>
+<p>A harmony string is a sequence of <code>Chord:bars</code> tokens separated by spaces; <code>|</code> may separate
+bars for readability. The length is in bars of the meter, and fractions are fine (<code>G:0.5</code> is half a bar). A
+bare symbol lasts <code>chord_bars</code> bars (default 1). <code>N.C.</code> is silence. A section's
+<code>harmony:</code> is either such a string or the name of a progression defined under
+<code>harmony: progressions:</code>; it is laid along the section's bars and loops if it is shorter.</p>
+<p><b>Passing placeholders.</b> A token beginning with <code>~</code> asks the engine for the passing chord that the
+voice leading from the previous chord to the next picks out (<a href="ch:ch36#passing">§36.3</a>):</p>
+<table>
+<tr><th>Token</th><th>Meaning</th></tr>
+<tr><td><code>~</code></td><td>System 1, the strict path: every voice moves uniformly (a half step 1 + 1 + 1, a whole step 2 + 2 + 2 sixth-steps)</td></tr>
+<tr><td><code>~g</code></td><td>System 2, the natural path: monotone uneven splits allowed, golden chords preferred</td></tr>
+<tr><td><code>~g7</code></td><td>System 2, golden sevenths preferred</td></tr>
+<tr><td>two in a row</td><td>both passing chords P₁ and P₂ of one path (at most two between two chords)</td></tr>
+<tr><td><code>~@1/3</code>, <code>~g@2/3</code></td><td>a single placeholder forced to position 1 or 2</td></tr>
+</table>
+<p>A single placeholder takes the better of the two chords, ranked golden, golden over a pedal, equal-third, Western
+or planing, micro-altered. Because progressions loop, a placeholder at the end of a string bridges back to its first
+chord. Examples, as resolved by the engine:</p>
+<table>
+<tr><th>Harmony string</th><th>Chords</th></tr>
+<tr><td><code>G:1 ~:0.5 ~:0.5 C:2</code></td><td>G – vE♭T13/G – vCg/G – C</td></tr>
+<tr><td><code>G:1 ~:1 C:2</code></td><td>G – vCg/G – C</td></tr>
+<tr><td><code>C:1.5 ~:0.5 F:2</code></td><td>C – vFg/C – F</td></tr>
+<tr><td><code>F:1 ~g:0.5 ~g:0.5 G:2</code></td><td>F – vF♯g – ^F♯g – G</td></tr>
+<tr><td><code>G7:1.5 ~g7:0.5 Abmaj7:2</code></td><td>G7 – vCg/vA♭ – A♭maj7</td></tr>
+</table>
+
+<h3>Motifs and the note language</h3>
+<p>A motif is a string (letter notes, base octave 4) or a mapping with exactly one of <code>notes:</code>,
+<code>deg:</code> or <code>rel:</code>, plus optional <code>octave:</code> and <code>key:</code>:
+<code>tune: {deg: "0/4 2 4 6 | 7/2 6/4 4 | 3/4 2 1 2 | 0/1", key: "C golden7", octave: 5}</code>. A part can also carry
+inline <code>notes:</code>, <code>deg:</code> or <code>rel:</code> (base octave 4; shift with <code>oct:</code>).</p>
+<table>
+<tr><th>Token</th><th>Meaning</th></tr>
+<tr><td><code>c d e f g a b</code>, then <code>#</code>/<code>b</code>, then <code>+</code>/<code>-</code></td><td>letter pitch; + and − shift octaves from the motif's octave (<code>c</code> is C4 by default)</td></tr>
+<tr><td><code>^c</code>, <code>ve</code>, <code>veb+</code></td><td>a sixth-step up or down (prefix, 36edo)</td></tr>
+<tr><td><code>0 1 -3 #4 b7 ^3</code></td><td>scale degree in <code>deg:</code> mode; the duration follows a slash, <code>3/8.</code></td></tr>
+<tr><td><code>R 3 5 7 9 b7 #11 R+ v3 ^5</code></td><td>chord-relative tone in <code>rel:</code> mode (R = root of the chord sounding); in golden chords 3 and 5 are the golden third and fifth; the duration follows R or an octave mark directly (<code>R8</code>, <code>R+8</code>) or a slash (<code>5/8</code>)</td></tr>
+<tr><td><code>1 2 4 8 16 32 64</code>, dots, <code>t</code></td><td>duration (whole to 64th), dotted, triplet; <b>sticky</b>: omitted durations repeat the last one</td></tr>
+<tr><td><code>r</code></td><td>rest</td></tr>
+<tr><td><code>[c,e,g]</code>, <code>[0,2,4]</code>, <code>[c,ve,^g]</code></td><td>notes sounding together</td></tr>
+<tr><td><code>=pp =p =mp =mf =f =ff</code> (and ppp, fff), <code>&lt;</code> <code>&gt;</code></td><td>dynamics and hairpins</td></tr>
+<tr><td>suffix <code>^ ! ' _ ~</code></td><td>accent, marcato, staccato, tenuto, slur or glide</td></tr>
+<tr><td><code>@96</code>, <code>(e8)</code>, <code>{d}e4</code></td><td>explicit velocity, ghost note, grace note</td></tr>
+<tr><td><code>|</code></td><td>bar line, checked: a bar with the wrong number of beats is an error that names the bar</td></tr>
+</table>
+
+<h3>Sections and parts</h3>
+<p>Each section is a mapping with <code>name</code> (a word) and <code>bars</code>, and optionally
+<code>harmony</code>, <code>parts</code>, <code>like</code> (copy an earlier section's parts and harmony),
+<code>add</code>, <code>drop</code>, <code>dyn</code> (a dynamic arc such as <code>pp&lt;mp</code>), <code>tempo</code> and
+<code>key</code>. A part's value is a style name (<code>organ: hold</code>), a motif name or list
+(<code>bell: [m1]</code>), or a mapping with one source, <code>style</code>, <code>motif</code>/<code>motifs</code>, or
+<code>notes</code>/<code>deg</code>/<code>rel</code>, plus options: <code>oct</code> (octave shift),
+<code>transpose</code>, <code>dyn</code>, <code>art</code>, <code>gain_db</code>, <code>gate</code>, <code>mute</code>,
+<code>role</code> (which family of styles to use), and for voiced styles <code>voices</code>, <code>range</code>
+(MIDI numbers), <code>rhythm</code>, <code>voice</code> and <code>vel</code>.</p>
+
+<h3>Styles</h3>
+<table><tr><th>Role</th><th>Styles</th><th>Aliases</th></tr><tr><td>arp</td><td><code>dark</code>, <code>gentle8</code>, <code>roll16</code>, <code>up</code></td><td></td></tr><tr><td>bass</td><td><code>eighths</code>, <code>root5</code>, <code>roots</code>, <code>sub</code></td><td><code>8ths</code></td></tr><tr><td>drums</td><td><code>four_floor</code>, <code>full</code>, <code>half</code>, <code>half_kick</code></td><td></td></tr><tr><td>fx</td><td><code>ticks</code></td><td></td></tr><tr><td>pad</td><td><code>dark</code>, <code>warm</code></td><td></td></tr><tr><td>voiced (any part)</td><td><code>bassline</code>, <code>comp</code>, <code>hold</code>, <code>pulse</code>, <code>top</code></td><td></td></tr></table>
+<p>The <b>voiced</b> styles serve every part. They voice the song's chords once, as four voice-led parts in the song's
+tuning (range D3–D5, MIDI 50–74, each chord placed to move least from the previous one), and play some of those voices:
+<code>hold</code> (all four, struck at each change and held), <code>comp</code> (all four on the rhythm
+<code>x..x.x..x..x.x..</code> plus every change), <code>pulse</code> (every quarter note), <code>top</code> (the
+soprano, an octave up) and <code>bassline</code> (the lowest voice, an octave down) (<a href="ch:ch36#voiced">§36.4</a>).
+Passing chords that come from placeholders are the exception: the voiced styles play the passing engine's own four
+lines for them, moved by whole octaves toward the middle of the part's range, so a held or melodic part sounds exactly
+the computed sub-chromatic voice leading.
+Chord-relative styles belong to a role: arpeggios <code>{style: gentle8, role: arp}</code> and
+<code>{style: roll16, role: arp}</code>, bass figures <code>{style: roots, role: bass}</code> (half-note roots) and
+<code>{style: root5, role: bass}</code> (root and fifth; a golden chord gives its golden fifth). The <code>role</code>
+is needed when the part has another name, as in <code>low: {style: roots, role: bass}</code>.</p>
+
+<h3>Mix and master</h3>
+<p><code>mix: {part: {gain_db: -6, pan: 0.1, send: {hall: 0.3}}}</code> sets a part's level in decibels, its stereo
+position and its send to a reverb return; the return <code>hall</code> is defined by default. The book's examples use
+<code>master: clean</code>: the mix is scaled so its highest peak is at −1 dBFS, with no equalization, compression,
+limiting or saturation (<a href="ch:ch37#mixing">§37.4</a>).</p>
+
+<h3>Command line</h3>
+<table>
+<tr><th>Command</th><th>What it does</th></tr>
+<tr><td><code>songmap check song.songmap.yaml</code></td><td>parse, validate and expand; prints sections, bars, tempo, length, frames and note counts per part, or a precise error</td></tr>
+<tr><td><code>songmap render song.songmap.yaml -o build/x</code></td><td>writes <code>song.wav</code>, <code>stems/</code>, <code>cues.json</code>, <code>qa.json</code> and <code>render.log</code>; options <code>--mp3</code>, <code>--no-stems</code>, <code>--master clean|standard|legacy</code></td></tr>
+<tr><td><code>songmap migrate old.yaml -o new.yaml</code></td><td>rewrite a v0.1 song map as v0.2</td></tr>
+</table>
+<p>Exit codes are 0 (ok), 1 (an error in the song) and 2 (a usage error). The book's own examples live in
+<code>textbook/audio/&lt;chapter&gt;/</code>, and <code>tools/textbook/build.py --test-audio --chapters chNN</code> renders
+a chapter's examples and reports any error.</p>
+</section>

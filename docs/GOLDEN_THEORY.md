@@ -89,7 +89,7 @@ The author's description ("the golden third is 2/3 major, 1/3 minor; the golden 
 - **Admissibility:** P_k can be golden only if the voice leading contains one voice of each class (hold, rising, falling). This follows from the layer theorem.
 - **Four-path theorem:**
   - Fix a golden triad and a position k. The hold voice must have d = 0, and each other voice has exactly two stepwise choices of its class. That gives exactly **4** paths with layer-0 endpoints.
-  - Over all 36 golden triads and both positions that is **288 ordered paths**. 240 have tertian endpoints; the rest end on a non-tertian set such as {C, F, F#}.
+  - Over all 36 golden triads and both positions that is **288 ordered paths**. 240 have Western endpoints (one of the 12 types ends on a sus4, C♯dim → Esus4); the rest end on a non-tertian set such as {C, F, F#}.
   - Up to semitone transposition and reversal there are **12 types**.
 
 | Root layer | Motion (root, third, fifth) | X | P₁ | P₂ | Y |
@@ -156,7 +156,7 @@ The author's description ("the golden third is 2/3 major, 1/3 minor; the golden 
 All the Romantic **chromatic mediants** qualify, so golden harmony is native to Schubert-to-film-score mediant harmony. The 68 ordered pairs in C major plus common chromatic chords are listed in `classify.py` §E and in the dictionary.
 
 ### 2.5 Golden sevenths
-Strict paths reach a golden seventh between Western chords in only **4 types** (up to transposition):
+Strict paths reach a golden seventh between Western chords in only **4 types** (up to transposition and reversal; 96 paths):
 - **m7 ↔ maj7 a semitone lower**: C#m7 → ^Cg7 → ^G T13 → Cmaj7, and C#m7 → vC#g7 → A♭ T13 → C#maj7.
 - **augmented ↔ diminished seventh**: Caug → ^Cg7 → … → C#dim7.
 
@@ -185,7 +185,7 @@ Golden sevenths become common on **natural paths**, as parallel or chromatic sev
 | ii → iii | Dm – **^Dg – E♭g** – Em |
 | ♭VII → I | B♭ – **vBg – ^Bg** – C |
 
-**Half-step theorem:** parallel half-step motion (iii → IV, vii° → I in parallel) puts every voice in one class, so the passing chords are *planing* (^Em, vF …), never golden. Revoicing does not help: an exhaustive check (every voice assignment, every voice moving up to three semitones either way, any monotone split into parts of at most a semitone) finds no golden passing chord between major or minor triads whose roots are a half step apart. Golden color there needs an intermediate chord.
+**Half-step theorem:** parallel half-step motion (iii → IV, vii° → I in parallel) puts every voice in one class, so the passing chords are *planing* (^Em, vF …), never golden. Revoicing does not help: an exhaustive check (every voice assignment, every voice moving up to three semitones either way, any monotone split into parts of at most a semitone) finds no golden passing chord between major or minor triads whose roots are a half step apart (the result is the same for moves of up to two or up to three semitones, with or without doublings). Golden color there needs an intermediate chord.
 
 ### 2.7 Four-part realizations (worked)
 **V → I (strict, unique):**
@@ -206,7 +206,25 @@ Further four-part realizations:
 
 ---
 
-## 3. Part II: golden home, rational visitors (the inversion)
+## 3. Part II: golden home and rational release (the inversion)
+
+### 3.0 What "golden home" means (the author's framing)
+- **Western consonance is the global minimum of tension.** Physical instruments (strings, winds, voices) have
+  (nearly) harmonic spectra, so on any real instrument a Western triad, C major above all, is the deepest rest.
+  Arriving on a Western chord from golden harmony is the ultimate release, never a "rough visit".
+- **The golden triad as a local minimum** is the author's model of how golden harmony *feels*: a metastable
+  resting place, unstable relative to C major yet somewhere one can dwell and return to, and whose effect on
+  the overtones over extended listening is the motivation for this whole project (a personal experience and a
+  hypothesis, Part VIII). **Measured** on harmonic tones, the standard models do *not* show a local minimum:
+  in the (third, fifth) plane, Sethares roughness and triad harmonic entropy both fall steadily from the exact
+  golden triad toward the just major triad (golden 1.498, C major 1.319; the lowest value within 5 c of golden
+  is 0.007 lower, within 30 c 0.197 lower; the only grid minima nearby are just major 386/702 c and 386/772 c).
+  The "local minimum" is therefore a musical and psychological claim to test, not a property of these models.
+- **The timbre flip is a laboratory, not a claim about instruments.** Golden spectra (partials 2^m·φ^n) exist
+  only digitally. On them the exact golden triad *is* a strict local minimum of roughness (every triad within
+  5–30 c is rougher, by 0.11–0.46) and lies below major (2.08 vs 3.17). The flip is an exercise: immerse in golden
+  harmony on its own terms, to ground oneself in it and study it, then carry what was learned back to real,
+  harmonic instruments, where C major is home and golden is the delicate local rest.
 
 ### 3.1 Asymmetry theorem
 **No uniform path golden → Western → golden exists** (exhaustive). Rational chords are not natural *passing* chords between golden homes.
@@ -218,7 +236,7 @@ Golden homes therefore move by their own operations:
 | **Circle step** | G_r → G_{r+11} (or G_{r−11}): two common tones; one voice moves a semitone, staying on its layer. Exact tuning: 99.27 c = φ³/4 |
 | **Planing** | G_r → G_{r±1}: every voice glides one sixth-step (33 c); the whole chord changes layer color |
 | **Breathing** | G_r ↔ G7_r ↔ G_{r+11}: add the chain neighbour (Cg + B = Cg7), then drop the root (= vEg) |
-| **Visit** | G → W → G, a rational neighbour and back: Cg ↔ C (2 sixth-steps), Cm (3), Caug (3), A♭ (4) |
+| **Visit** | G → W → G, a release to the nearest rational chord and back: Cg ↔ C (2 sixth-steps), Cm (3), Caug (3), A♭ (4) |
 
 ### 3.2 The golden circle
 Cg → vEg → ^Gg → Bg → vE♭g → ^F#g → B♭g → vDg → ^Fg → Ag → vC#g → ^Eg → A♭g → …
@@ -231,10 +249,10 @@ Cg → vEg → ^Gg → Bg → vE♭g → ^F#g → B♭g → vDg → ^Fg → Ag �
 ### 3.3 Acoustics: why golden can be home
 | Fact | Detail |
 |---|---|
-| **Timbre flips consonance** | Roughness (Sethares). Harmonic overtones: major 1.32, golden 1.50. Golden-spectrum overtones 2^m·φ^n: golden **2.08** vs major 3.17, minor 3.26. On golden timbres the golden triad is the smoothest chord and Western chords are the rough visitors |
+| **Timbre flips consonance** | Roughness (Sethares). Harmonic overtones: major 1.32, golden 1.50. Golden-spectrum overtones 2^m·φ^n (0 ≤ m, n ≤ 3, below 9: 11 partials; adding φ⁴ gives golden 2.40, major 3.53, minor 3.62): golden **2.08** vs major 3.17, minor 3.26. On this digital timbre (the laboratory, §3.0) the golden triad is the smoothest chord measured |
 | **Self-similar combination tones** | φⁿ − φⁿ⁻¹ = φⁿ⁻², so the exact chain voicing 1 : φ : φ² : φ³ makes **every** f₂−f₁ and 2f₁−f₂ combination tone land on a golden-chain pitch (0 Hz error) |
 | **Fibonacci tuning** | Exact φ powers on f₀ = 55 Hz are ≈ 55, 89, 144, 233, 377, 610 Hz: the **Fibonacci numbers**, off by about 0.01 Hz. With integer Fibonacci frequencies, combination tones are again Fibonacci numbers (Fₙ₊₁ − Fₙ = Fₙ₋₁), but the drone becomes periodic (1 s period). Exact φ is truly quasi-periodic. The two differ by beats of 0.008 Hz (89, 144), 0.016 Hz (233), 0.024 Hz (377) and 0.041 Hz (610): a "breath" of about 25–120 s |
-| **Beat spectrum of close voicings** | Lowest beats of exact close voicings on harmonic tones. **Cg:** f₀·φ⁻⁶ × (1, 2/φ), plus 2f₀·φ⁻⁶ from a doubled harmonic pair. **Cg7 (1 : 2/φ : 4/φ² : 8/φ³):** f₀·φ⁻⁶ × (1, 2/φ, 4/φ²), the golden *triad* in rhythm, plus 2f₀·φ⁻⁶, the golden seventh against the root's octave, since 8/φ³ = 2 − 2φ⁻⁶. No beat occurs at the golden seventh's own ratio. The base rate f₀(13 − 8φ) = f₀·φ⁻⁶ comes from the Fibonacci approximant 13/8 ≈ φ. At f₀ = 110 Hz the rates are 6.13, 7.58, 9.37 and 12.26 Hz; register sets the band (f₀ = 10·φ⁶ ≈ 179 Hz puts the base beat at 10 Hz) |
+| **Beat spectrum of close voicings** | Lowest beats of exact close voicings on harmonic tones. **Cg:** f₀·φ⁻⁶ × (1, 2/φ), plus 2f₀·φ⁻⁶ from a doubled harmonic pair. **Cg7 (1 : 2/φ : 4/φ² : 8/φ³):** f₀·φ⁻⁶ × (1, 2/φ, 4/φ²), the golden *triad* in rhythm, plus 2f₀·φ⁻⁶, the golden seventh against the root's octave, since 8/φ³ = 2 − 2φ⁻⁶. No beat occurs at the golden seventh's own ratio. The base rate f₀(13 − 8φ) = f₀·φ⁻⁶ comes from the Fibonacci approximant 13/8 ≈ φ. With root f₀ = 110 Hz (A2) the rates are 6.13, 7.58, 9.37 and 12.26 Hz; register sets the band (f₀ = 10·φ⁶ ≈ 179 Hz puts the base beat at 10 Hz) |
 | **Quasi-periodicity** | Tones in φ ratios never realign into a common period. φ is the number hardest to approximate by fractions (all-ones continued fraction), so in dynamical systems a φ frequency ratio is the most robust against mode-locking (golden-mean tori are the last to break in KAM theory; the golden rotation number is the last to lock in the circle map). A golden drone is maximally resistant to settling into a periodic pulse |
 
 ### 3.4 Bliss hypothesis
@@ -246,7 +264,7 @@ Cg → vEg → ^Gg → Bg → vE♭g → ^F#g → B♭g → vDg → ^Fg → Ag �
 **Supporting threads (to be stated carefully):**
 - Pletzer, Kerschbaum & Klimesch (2010, *Brain Research*), "When frequencies never synchronize: the golden mean and the resting EEG": argues that EEG frequency bands relate by ≈ φ, because golden ratios minimize spurious cross-frequency synchronization.
 - Roopun et al. (2008, *Frontiers in Neuroscience*) observed ratios near φ between cortical rhythm bands.
-- Binaural-beat research is mixed: a 2019 meta-analysis (Garcia-Argibay et al.) found small effects on anxiety, attention and memory, while EEG-entrainment studies are inconsistent.
+- Binaural-beat research is mixed: a 2019 meta-analysis (Garcia-Argibay et al., 22 studies) found a medium pooled effect (g = 0.45) on memory, attention, anxiety and pain, while EEG-entrainment studies are inconsistent.
 
 **Status:** these are hypotheses to test by listening, not effects to claim. The music and videos describe sounds, never promise states of mind.
 
@@ -265,7 +283,7 @@ Cg → vEg → ^Gg → Bg → vE♭g → ^F#g → B♭g → vDg → ^Fg → Ag �
 | **Golden drone I** (chain) | f₀ = 55 Hz chain 55·φ^{0..3} (exact) on a golden-spectrum pad; window slides one chain step every 13 or 21 s (the golden circle); 4 s crossfades |
 | **Golden drone II** (beating) | Close-voiced Cg7 on harmonic-spectrum strings at f₀ ≈ 110 Hz (beats 6.1–12.3 Hz, theta to alpha); slow breathing Cg ↔ Cg7 ↔ vEg |
 | **Golden drone III** (binaural ladder) | Chain drone + headphone layer with per-voice L/R detunes 10, 6.18, 3.82 Hz; every 21 bars the ladder shifts down by φ |
-| **Visitation** | Within a golden home, a brief rational chord (C major, 3–5 s) then return. On golden timbres the Western chord is the rough, bright tension; returning to Cg is the release |
+| **Visitation** | Within a golden home, a brief rational chord (C major, 3–5 s) then return. On harmonic timbres the Western chord is the release and the return to Cg re-enters the delicate local rest; on the digital golden timbre (the laboratory) the roles flip |
 
 ---
 
@@ -322,7 +340,7 @@ Voice lines for each are in [GOLDEN_PROGRESSIONS.md](GOLDEN_PROGRESSIONS.md) und
 | **Golden circle walk** | Cg – vEg – ^Gg – Bg – vE♭g – … (one voice down a semitone each step; 13 or 21 s per chord) | Chain voicing, exact φ, golden-spectrum pad |
 | **Golden breathing** | Cg – Cg7 – vEg – vEg7 – ^Gg … (add the next chain tone, then release the oldest) | The window grows to 4 and shrinks to 3: a breath |
 | **Layer prism** | Cg – ^Cg – vC#g – C#g (planing by sixth-steps: the same shape in three layer colors) | Slow glides (3–5 s portamento) |
-| **Rational visitation** | Cg – C – Cg … Cg – A♭ – Cg … Cg – Cm – Cg | Golden timbre throughout, so the Western chords are the tension |
+| **Rational visitation** | Cg – C – Cg … Cg – A♭ – Cg … Cg – Cm – Cg | On harmonic timbres each Western chord is a moment of full release; on a golden-spectrum pad (laboratory) the roles flip |
 | **Fibonacci ascent** | Drone on 55·φ^k, adding one chain tone every Fibonacci number of bars (1, 1, 2, 3, 5, 8, 13) until the golden seventh is complete | Golden-spectrum bells and pad |
 | **Golden beat cadence** | Close-voiced Cg7 at f₀ = 179 Hz (beats from 10 Hz), descending the golden circle until f₀·φ⁻⁶ is near 6 Hz | Harmonic strings; beats cross alpha → theta |
 
@@ -350,7 +368,7 @@ Rendered by `python reference/golden/render_examples.py` into `reference/golden/
 | `05_golden_andalusian.wav` | Golden chords on ♭VI and #IV, ending in sub-chromatic planing into E |
 | `06_golden_pop_axis.wav` | I–V–vi–IV with the golden deceptive motion V – vA♭g – A♭g – vi |
 | `07_golden_circle_drone.wav` | Golden home: an exact-φ chain window (55·φʲ, octave-folded) on a golden-spectrum pad, walking the golden circle, 13 s per chord |
-| `08_beating_golden_seventh.wav` | Golden home with beats: close-voiced Cg → Cg7 → vEg at f₀ = 110 Hz on a harmonic pad. Beats at 6.13, 7.58 and 9.37 Hz (the golden triad in rhythm) and 12.26 Hz (the golden seventh against the octave) |
+| `08_beating_golden_seventh.wav` | Golden home with beats: close-voiced golden triad → golden seventh → next golden triad with root f₀ = 110 Hz (A2) on a harmonic pad. Beats at 6.13, 7.58 and 9.37 Hz (the golden triad in rhythm) and 12.26 Hz (the golden seventh against the octave) |
 
 ## 6. Questions: resolved and open
 

@@ -1,4 +1,4 @@
-/* Harmony, Rational and Golden: site styles. Each part has its own hue (--pc); golden parts are gold. */
+/* Music Theory of Golden Harmony: site styles. Each part has its own hue (--pc); golden parts are gold. */
 :root {
   --bg: #f7f4ee; --fg: #1f1c17; --muted: #6a645a; --card: #ffffff; --line: #e5dfd3; --line2: #d6cebf;
   --accent: #b8860b; --accent2: #23709a; --tag: #f1ead9; --shadow: 0 1px 2px rgba(60, 45, 20, .06), 0 6px 22px rgba(60, 45, 20, .07);
@@ -259,7 +259,12 @@ blockquote { margin: 16px 0; padding: 8px 20px; border-left: 4px solid var(--pc)
 .tile .ts { font: 13px/1.45 var(--ui); color: var(--muted); margin-top: 3px; }
 
 .todo { color: var(--muted); font-style: italic; } .err { color: #c0392b; font-family: var(--ui); }
-table.aidx audio { width: 220px; height: 34px; }
+table.aidx { display: table; table-layout: fixed; width: 100%; }
+table.aidx th:nth-child(1), table.aidx td:nth-child(1) { width: 58px; }
+table.aidx th:nth-child(2), table.aidx td:nth-child(2) { width: 120px; overflow-wrap: anywhere; font-weight: 600; }
+table.aidx th:nth-child(4), table.aidx td:nth-child(4) { width: 180px; }
+table.aidx td { font-size: 13.5px; line-height: 1.4; padding: 6px 8px; }
+table.aidx audio { width: 100%; height: 32px; }
 
 @media (max-width: 980px) {
   .wrap { grid-template-columns: 1fr; } main { padding: 18px 16px 90px; }
@@ -276,6 +281,9 @@ table.aidx audio { width: 220px; height: 34px; }
   .secnum { min-width: 40px; height: 28px; font-size: 13px; }
   .trio, .pn { grid-template-columns: 1fr; }
   .layers span { display: none; }
+  table.aidx, table.aidx tbody, table.aidx tr, table.aidx td { display: block; width: auto !important; }
+  table.aidx tr:first-child { display: none; } table.aidx tr { border-bottom: 1px solid var(--line); padding: 6px 0; }
+  table.aidx td { border: 0; padding: 2px 8px; }
   header .book { font-size: 14px; }
 }
 @media print {

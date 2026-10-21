@@ -73,8 +73,8 @@ System 2 yields 227 and 299, with 46 pairs passing through two different golden 
 <h2>Verifying instead of trusting</h2>
 <div class="layer hear">
 <p>Here is a claim you can check with your own ears. Two chords, in exact ratios on 110 Hz: the golden triad, then the
-golden seventh. Listen to the beating inside each. The triad's strongest beats are at about 6.1 and 7.6 per second, with a
-faster one at about 12.3. The seventh adds a beat at about 9.4. An early summary of this project got the relation between
+golden seventh. Listen to the beating inside each. The triad's strongest beats are at about 6.1 and 7.6 per second, with
+fainter, faster ones from about 12.3 up. The seventh adds a beat at about 9.4. An early summary of this project got the relation between
 these numbers wrong, and the author caught it.</p>
 <audio-ex src="beat_claim" caption="Exact close-voiced Cg on 110 Hz (beats 6.13, 7.58 and 12.26 Hz), then Cg7 (adds 9.37 Hz). The rates of the triad's beats are not a golden triad; those of the seventh's are."></audio-ex>
 <p>And a second one. The founding vision of the project said that golden chords, built on the most irrational number,
@@ -82,6 +82,7 @@ must be "the least stable chords". Listen to six triads in close position on mid
 ranks them for harmonic tones: sus4, major, minor, augmented, golden, diminished. The golden triad is near the rough end,
 but it is not last.</p>
 <audio-ex src="stability_order" caption="Close triads on C4 in measured roughness order for harmonic tones: Csus4, C, Cm, Caug, Cg (36-ET), Cdim. Golden is rougher than major, minor and augmented, but diminished is rougher still."></audio-ex>
+<pianoroll edo="36" notes="C4 F4 G4 ; C4 E4 G4 ; C4 Eb4 G4 ; C4 E4 G#4 ; C4 vE4 ^G4 ; C4 Eb4 Gb4" labels="Csus4 ; C ; Cm ; Caug ; Cg ; Cdim" title="The six triads of the example, smoothest to roughest (model)"></pianoroll>
 </div>
 <div class="layer understand">
 <p><b>The habit.</b> A language model writes fluent, plausible text, and a plausible wrong number reads exactly like a right
@@ -93,12 +94,12 @@ code, or by both:</p>
 <table>
 <tr><th>Claim as first made</th><th>How it was checked</th><th>What is true</th></tr>
 <tr><td>The beats of a close golden triad, at rates proportional to 1 : 2/φ : 2, form "a golden triad in rhythm"</td><td>The author pointed out that 1 : 2/φ : 2 is a golden third and an octave, not a golden triad; the beat spectrum was recomputed</td><td>The golden <i>seventh</i> beats at $f_0\varphi^{-6}\times(1, 2/\varphi, 4/\varphi^2)$, a golden triad in rhythm, plus $2f_0\varphi^{-6}$; no beat occurs at the seventh's own ratio (theorem; <a href="ch:ch26#beats">Chapter 26</a>)</td></tr>
-<tr><td>Golden chords are "the least stable chords"</td><td>Roughness and harmonic entropy computed for all triads</td><td>With harmonic timbres the golden triad (1.50) is rougher than major (1.32), minor (1.34) and augmented (1.45) but smoother than diminished (1.67); its instability is concentrated in the golden fifth (measurement)</td></tr>
+<tr><td>Golden chords are "the least stable chords"</td><td>Roughness and harmonic entropy computed for all triads</td><td>With harmonic timbres the golden triad (1.50) is rougher than major (1.32), minor (1.34) and augmented (1.45) but smoother than diminished (1.67); its instability is concentrated in the golden fifth (measurement). The author's view of the golden triad as a delicate local home is a musical model, not something these numbers show</td></tr>
 <tr><td>There may be a natural 9-note golden scale, since 13 golden sixths ≈ 9 octaves</td><td>Three-gap computation on the golden chain</td><td>9 is not a well-formed size; the sizes are 2, 3, 4, 7, 10, 13, 23, 36, and golden7 is the golden diatonic (theorem)</td></tr>
 <tr><td>Bach invented equal temperament (a widespread misattribution)</td><td>Historical sources</td><td>Zhu Zaiyu (1584) and Simon Stevin (c. 1605) computed it; Mersenne popularized it (1636); Bach's <i>Well-Tempered Clavier</i> used a well temperament</td></tr>
 <tr><td>Medieval chant was sung in parallel fifths (a common simplification)</td><td>Historical sources</td><td>Chant is monophonic; parallel fourths and fifths are organum, 9th–10th centuries (<a href="ch:ch35#organum">Chapter 35</a>)</td></tr>
 <tr><td>A design note describes a command <code>songmap theory pass</code></td><td>Running the command-line tool while writing Chapter 36</td><td>The tool has only <code>check</code>, <code>render</code> and <code>migrate</code>; the analysis exists as a Python function</td></tr>
-<tr><td>The voiced styles play the passing engine's four lines</td><td>Comparing expanded notes with the engine's paths while writing Chapter 36</td><td>They voice-lead each chord's pitch classes independently and do not force slash basses (<a href="ch:ch36#voiced">Chapter 36</a>)</td></tr>
+<tr><td>The voiced styles play the passing engine's four lines</td><td>Comparing expanded notes with the engine's paths while writing Chapter 36</td><td>At the time they re-voiced each chord's pitch classes independently and did not force slash basses. The engine was then changed: passing chords in voiced styles now play the engine's own four lines, chord names unchanged (<a href="ch:ch36#voiced">Chapter 36</a>)</td></tr>
 <tr><td>Schroeder phases give a low crest factor</td><td>Measuring crest factors while writing Chapter 37</td><td>True for flat spectra; for the presets' falling spectra, plain sine phases do as well or better (<a href="ch:ch37#clean">Chapter 37</a>)</td></tr>
 </table>
 <p>Errors came from every side. The first correction was the author's, of the machine. The second corrected the

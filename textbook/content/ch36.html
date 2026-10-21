@@ -4,7 +4,8 @@
 <p>Every example in this book was made the same way: someone wrote a short text file, and a program turned it into
 sound. Here is one of them. Listen first: a four-chord progression on an organ with a bass, played twice, the second
 time with a glass bell arpeggiating each chord, and at the end of each phrase a dominant chord that slides into the
-tonic through two passing chords, its upper voices climbing in steps of a third of a semitone.</p>
+tonic through two passing chords over a held G: one inner voice climbs B – ^B – vC – C one sixth-step (a third of a
+semitone) at a time, and the top voice climbs D – vE♭ – ^E♭ – E two sixth-steps at a time.</p>
 <audio-ex src="first_song" caption="“A first song map”: C – Am – F – G and the strict V → I path, twice (the second time with a bell arpeggio), then the final C. The whole piece is the 17-line text file shown below."></audio-ex>
 <p>The program is <b>SongMap</b>, written for this project. Nothing in the file says how to make an organ sound, how to
 voice a chord or how loud anything is in decibels of raw signal: those things live in a fixed engine. The file says only
@@ -29,7 +30,9 @@ sections:
   - {name: end, bars: 1, harmony: "C:1", parts: {organ: hold, low: {style: roots, role: bass}}}
 mix: {organ: {gain_db: -6}, low: {gain_db: -4}, bell: {gain_db: -9, send: {hall: 0.3}}}
 master: clean</code></pre>
-<p>It is written in YAML, a plain-text format of keys and values. Reading it top to bottom:</p>
+<p>It is written in YAML, a plain-text format of keys and values. (SongMap also reads songs written in its own compact
+language, <code>.sm</code> files, which compile to the same thing; this book's examples all use YAML.) Reading it top to
+bottom:</p>
 <table>
 <tr><th>Field</th><th>Meaning</th></tr>
 <tr><td><code>songmap</code>, <code>title</code></td><td>format version (0.2) and a name</td></tr>
@@ -55,7 +58,8 @@ frame of every section and event to a <code>cues.json</code> file (<a href="ch:c
 <tr><th>Stage</th><th>What happens</th></tr>
 <tr><td>parse</td><td>the YAML is read and validated; errors say what is wrong and, where possible, how to fix it</td></tr>
 <tr><td>arrange</td><td>harmony strings become a timeline of chords, placeholders become passing chords, styles and motifs become notes</td></tr>
-<tr><td>perform</td><td>dynamics and articulation turn written notes into played notes</td></tr>
+<tr><td>perform</td><td>articulation sets how long each written note is held; notes are played on the grid as written
+(a performance layer with groove and humanizing is planned, and the clean examples do not need it)</td></tr>
 <tr><td>instruments</td><td>each note is synthesized from scratch (<a href="ch:ch37#additive">Chapter 37</a>)</td></tr>
 <tr><td>mix and master</td><td>parts are balanced, sent to reverb and summed; the clean master scales the peak</td></tr>
 <tr><td>export</td><td>audio, per-part stems, <code>cues.json</code> and a QA report of measured numbers</td></tr>
@@ -65,6 +69,8 @@ frame of every section and event to a <code>cues.json</code> file (<a href="ch:c
 ok: A first song map
   3 sections, 9 bars at 90 BPM 4/4, 0:27.00 (810 frames @ 30 fps)
   parts: organ 13, low 14, bell 32</code></pre>
+<p>(A last line, omitted here, gives the number of events and a fingerprint of the expanded note list.) The counts are
+note events: the organ strikes 13 chords, the bass plays 14 notes, and the bell plays 32 eighth notes in section b.</p>
 </div>
 <div class="layer derive">
 <p><b>Timing.</b> With tempo $T$ beats per minute and $b$ beats per bar, one beat lasts $60/T$ seconds and one bar
@@ -80,7 +86,8 @@ section (progressions loop). In the example each harmony string sums to $1+1+1+0
 length.</p>
 <p><b>Reproducibility.</b> A render depends only on the file and the engine version: the seed fixes every random
 choice, and the clean instruments use none (§37.2). The engine's test suite keeps a hash of the complete expanded note
-list of every example song in the repository, so any change in output is detected.</p>
+list of a set of locked example songs (the ported soundtrack examples and the first golden étude), so any change in
+their output is detected.</p>
 </div>
 </section>
 
@@ -92,7 +99,8 @@ and Cdim, then their average Cs. It ends by playing <code>Cg</code> and then <co
 the same chord, which sound identical.</p>
 <audio-ex src="golden_chords" caption="C – Cm – Caug – Cg (the bright average), C – Cm – Cdim – Cs (the dark average), then Cg and C(v3,^5): the same chord written two ways."></audio-ex>
 <p>The second example is a melody written as scale degrees of the golden diatonic, golden7, over golden chords taken
-from the same scale. The bell climbs the scale's tones C, vE, ^G, B and the octave, and falls back by step.</p>
+from the same scale. The bell climbs the scale's tones C, vE, ^G, B and the octave, then falls back, mostly by step,
+and turns around vE before landing on C.</p>
 <audio-ex src="golden7_melody" caption="A melody in scale degrees of C golden7 (C C♯ vE vF ^G ^A♭ B) on a golden-spectrum bell, over Cg – Cg7 – vEg – Cg on a golden pad."></audio-ex>
 </div>
 <div class="layer understand">
@@ -150,8 +158,7 @@ swapped.</p>
 <section id="passing">
 <h2>Passing placeholders: ~ and ~g</h2>
 <div class="layer hear">
-<p>The dominant chord G does not usually go straight to F, but F to G, IV to V, is one of the most common moves there is.
-The example plays it twice, with two passing chords in between each time. The first time the passing chords come from
+<p>F to G, IV to V, is one of the most common moves there is. The example plays it twice, with two passing chords in between each time. The first time the passing chords come from
 <b>System 1</b>, the strict path: every voice moves in equal steps. The second time they come from <b>System 2</b>, the
 natural path, where two golden chords in a row carry the music up the "golden escalator". Both were written with
 placeholders, not chord names: the engine worked out which chords lie on the way.</p>
@@ -190,16 +197,19 @@ step or a half step in equal parts, and the chords in between are a micro-altere
 golden seventh: neither is golden, as the quality theorem predicts for a move between roots a whole step apart
 (<a href="ch:ch27#quality">Chapter 27</a>). On the natural path two voices split unevenly, and both passing chords become
 golden triads on the chromatic root between F and G: the golden escalator of
-<a href="ch:ch28#escalator">Chapter 28</a>.</p>
+<a href="ch:ch28#escalator">Chapter 28</a>. The two piano rolls show the engine's four lines for each system; they are
+also exactly what the example's held organ plays.</p>
+<pianoroll edo="36" notes="F2 A3 C4 F4 ; vF#2 ^Ab3 vC4 vF#4 ; ^F#2 vAb3 ^B3 ^F#4 ; G2 G3 B3 G4" labels="F ; vF#dim(v3) ; vAbg7(v7)/^F# ; G" title="System 1, the engine's four lines: F → G"></pianoroll>
 <pianoroll edo="36" notes="F2 A3 C4 F4 ; vF#2 ^A3 C#4 vF#4 ; ^F#2 Bb3 vD4 ^F#4 ; G2 B3 D4 G4" labels="F ; vF#g ; ^F#g ; G" title="System 2, the engine's four lines: F → vF♯g → ^F♯g → G"></pianoroll>
 </div>
 <div class="layer derive">
 <p><b>The passing-path algorithm.</b> For a move $X \to Y$ the engine works entirely in integer sixth-steps.</p>
 <ol>
-<li><b>Voices.</b> Four lines: a bass on the root (in E2–G3) and three upper voices (in G3–G4). For a triad the upper
-voices are its three tones; for a seventh chord, third–fifth–seventh or third–seventh–root.</li>
+<li><b>Voices.</b> Four lines: a bass on the root, in the octave from E2 up, and three upper voices, each in the octave
+from G3 up. For a triad the upper voices are its three tones, or (with a penalty) the root doubled with the third and
+no fifth; for a seventh chord, third–fifth–seventh or (with a smaller penalty) third–seventh–root.</li>
 <li><b>Targets.</b> Every assignment of $Y$'s upper tones to the three upper voices is tried. Each voice's displacement
-$D$ is the nearest-way distance, in $(-18, 18]$ sixth-steps. Assignments in which every voice moves at most a whole
+$D$ is the nearest-way distance, in $[-18, 18)$ sixth-steps. Assignments in which every voice moves at most a whole
 step ($|D| \le 6$) are preferred; otherwise the ones with least total motion.</li>
 <li><b>Schedules.</b> Each displacement is split into three moves $(d_1, d_2, d_3)$, one per step of the path
 $X \to P_1 \to P_2 \to Y$:
@@ -214,14 +224,14 @@ possible.</li>
 Western, planing (a Western chord off the 12-ET layer) or micro-altered (nearest chord plus alterations).</li>
 <li><b>Choice.</b> Among all candidates the engine prefers, in strict order of priority: more golden sevenths (when
 <code>~g7</code> asks for them); more golden chords, counting golden over a pedal (when <code>~g</code> asks); more exact
-golden chords; $P_1 
-e P_2$; fewer parallel fifths or octaves between $X$ and $Y$; less total motion (with a penalty for a
-seventh that rises); and finally more even splits.</li>
+golden chords; $P_1 \ne P_2$; fewer parallel fifths or octaves between $X$ and $Y$; less total motion (plus the small
+penalties for incomplete voicings); and finally more even splits.</li>
 </ol>
 <p>For System 1 the uniform schedule makes the path unique once the targets are chosen, and voice by voice</p>
 $$P_1 = \tfrac{2X + Y}{3}, \qquad P_2 = \tfrac{X + 2Y}{3},$$
-<p>the averaging principle of <a href="ch:ch25#averaging">Chapter 25</a>. For V → I in C the engine's lines, in sixth-steps
-(C4 = 180), are</p>
+<p>the averaging principle of <a href="ch:ch25#averaging">Chapter 25</a> (voices that leap are held instead, as the bass
+is here). For V → I in C the engine's lines, in sixth-steps (C4 = 180), are</p>
+<pianoroll edo="36" notes="G2 G3 B3 D4 ; G2 G3 ^B3 vEb4 ; G2 G3 vC4 ^Eb4 ; C3 G3 C4 E4" labels="G ; vEbT13/G ; vCg/G ; C" title="V → I, strict path: the engine's lines"></pianoroll>
 <table>
 <tr><th>voice</th><th>G</th><th>$P_1$</th><th>$P_2$</th><th>C</th><th>moves</th></tr>
 <tr><td>soprano</td><td>186 (D4)</td><td>188 (vE♭4)</td><td>190 (^E♭4)</td><td>192 (E4)</td><td>+2 +2 +2</td></tr>
@@ -246,32 +256,38 @@ through sixth-steps.</p>
 </div>
 <div class="layer understand">
 <p><b>Styles as data.</b> A style is a small YAML file in the engine. The <i>voiced</i> styles share one idea: the
-song's chords are voiced once, as four voice-led parts in the song's tuning, and each style plays some of those voices
-in some rhythm. Because the voicing is shared, a <code>top</code> melody is exactly the soprano of the <code>hold</code>
+song's chords are voiced once, as four parts in the song's tuning, and each style plays some of those voices in some
+rhythm. Because the voicing is shared, a <code>top</code> melody is exactly the soprano of the <code>hold</code>
 chords, and a <code>bassline</code> exactly their lowest voice.</p>
 <table>
 <tr><th>Style</th><th>Plays</th><th>Rhythm</th></tr>
 <tr><td><code>hold</code></td><td>all four voices</td><td>struck on each chord change, held</td></tr>
-<tr><td><code>comp</code></td><td>all four voices</td><td><code>x..x.x..x..x.x..</code> (sixteenths): 1, and-of-2, 3, and-of-4, plus every change</td></tr>
+<tr><td><code>comp</code></td><td>all four voices</td><td><code>x..x.x..x..x.x..</code> (one character per sixteenth): the downbeat, then 0.75, 1.25, 2, 2.75 and 3.25 beats after it, plus every chord change</td></tr>
 <tr><td><code>pulse</code></td><td>all four voices</td><td>every quarter note</td></tr>
 <tr><td><code>top</code></td><td>the soprano, an octave up</td><td>one note per chord</td></tr>
 <tr><td><code>bassline</code></td><td>the lowest voice, an octave down</td><td>one note per chord</td></tr>
 </table>
 <p>Other styles are chord-relative patterns rather than voiced parts: arpeggios (<code>gentle8</code>, <code>roll16</code>)
 and bass figures (<code>roots</code>, half-note roots; <code>root5</code>, root and fifth).</p>
-<p><b>What "voice-led" means here.</b> The voiced styles do not copy the passing engine's four lines. They take each
-chord's pitch classes and choose, among all playable voicings in the range D3–D5, the one that moves least from the
-previous chord. In 36-ET that minimum often <i>is</i> a sub-chromatic line, which is why the passing chords are heard as
-gliding voices. But it need not match the engine's lines, and the voiced styles do not force a slash chord's bass note.
-For the System 2 escalator F → vF♯g → ^F♯g → G the hold voicing happens to move by exactly the engine's four lines, with the
-bass and the A–B line placed an octave higher. For the strict path F → G it does not:</p>
-<pianoroll edo="36" notes="F3 C4 F4 A4 ; vF#3 vC4 vF#4 ^Ab4 ; vAb3 ^B3 ^F#4 vAb4 ; G3 B3 D4 G4" labels="F ; vF#dim(v3) ; vAbg7(v7)/^F# ; G" title="System 1, F → G as the hold style voices it"></pianoroll>
-<p>Here the chords are right (each has the pitch classes the engine computed) but the bass climbs F – vF♯ – vA♭ – G
-instead of the engine's uniform F – vF♯ – ^F♯ – G, and the lowest voice is not the slash bass ^F♯. When the exact lines
-matter, as in the piano roll of <a href="ch:ch38#pianoroll">Chapter 38</a>, an example can spell the chords out as
-explicit notes instead.</p>
-<aside class="box note"><p><b>A habit of the voicer.</b> Because the voicing cost only mildly penalizes a bass that is not
-the root, held chords often come out with the fifth in the bass (C as G–C–E–C). Several examples in this book therefore
+<p><b>What "voice-led" means here.</b> There are two cases.</p>
+<ul>
+<li><b>Ordinary chords</b> are voice-led: the style takes the chord's pitch classes and chooses, among all playable
+voicings in the range D3–D5, the one that moves least from the previous chord (Derive layer).</li>
+<li><b>Passing paths</b> are played as the passing engine computed them. A chord produced by <code>~</code>,
+<code>~g</code> or <code>~g7</code>, and the two chords at the ends of its path, are played on the engine's own four
+lines (§36.3): the bass and the three upper voices, ordered low to high. The whole path is moved by one octave shift
+toward the middle of the part's range, so every sub-chromatic line, slash bass included, is heard exactly as computed.
+The chord names do not change.</li>
+</ul>
+<p>So in the strict F → G example the held organ plays the System 1 roll of §36.3 note for note: the bass climbs
+F – vF♯ – ^F♯ – G two sixth-steps at a time, so that ^F♯ sounds as the slash bass of vA♭g7(v7)/^F♯, and the arrival G is
+the engine's G–G–B–G, with the fifth omitted. Because the octave shift is chosen from the three upper voices, the
+engine's bass can lie below the style's range: here it is F2, and the <code>bassline</code> style, an octave lower
+still, plays F1. When two passing paths in a progression share a chord (… F ~g ~g G ~ ~ C …), the second path continues
+from the voicing on which the first arrived, but only if that gives the same passing chords; otherwise it starts from
+its own standard voicing, so a chord's name never depends on its neighbours.</p>
+<aside class="box note"><p><b>A habit of the voicer.</b> Outside passing paths, because the voicing cost only mildly
+penalizes a bass that is not the root, held chords often come out with the fifth in the bass (C as G–C–E–C). Several examples in this book therefore
 add a separate bass part, either a written bass line or the <code>roots</code> style, for a firm cadence.</p></aside>
 </div>
 <div class="layer derive">
@@ -292,6 +308,12 @@ $$c^\ast = \arg\min_c\ \sum_{i=1}^{4} |c_i - p_i| + 0.05\,\big|\bar c - \mu\big|
 C3–C4–E4–G4 is outside the default range (C3 = 48), and the second-inversion voicing G3–C4–E4–C5 scores
 $0.75 + 1.7 + 0.5 = 2.95$, the lowest of all candidates, against $3.75 + 1.2 + 0 = 4.95$ for the root-position
 C4–E4–G4–C5: that is the arithmetic behind the box above.</p>
+<p><b>Passing paths.</b> A placeholder's chord and the two chords at the ends of its path carry the engine's lines
+$(\ell_0, \ell_1, \ell_2, \ell_3)$ in semitones, bass first, the upper lines ordered by their pitch in the first chord. A
+four-voice style plays $\ell_i + 12k$, with one integer $k$ for the whole path, fixed by the path's first chord:</p>
+$$k = \operatorname{round}\!\left(\frac{\mu - \tfrac13(\ell_1 + \ell_2 + \ell_3)}{12}\right).$$
+<p>For F → G the upper lines start at A3, C4, F4 (MIDI 57, 60, 65), whose mean 60.67 is within half an octave of
+$\mu = 62$, so $k = 0$. The ordinary chords after a path are voice-led from its arrival voicing by the rule above.</p>
 </div>
 <h3>Exercises</h3>
 <div class="exercise">

@@ -42,8 +42,8 @@ $$\lambda = \frac{v}{f},$$
 over an enormous range of strengths. What reaches the eardrum is a single wiggly line, pressure against time, however many
 instruments are playing. Everything we call pitch, loudness, color and harmony has to be read out of that one line.</p>
 <aside class="box note">Sound in air is a <em>longitudinal</em> wave: the air moves along the direction the wave travels.
-A wave on a string is <em>transverse</em>: the string moves sideways while the wave runs along it. The mathematics of the
-two is the same, which is why a string's vibration passes so faithfully into the air around it.</aside>
+A wave on a string is <em>transverse</em>: the string moves sideways while the wave runs along it. The two obey the same
+wave equation (<a href="ch:ch02#strings">Chapter 2</a>), so the same mathematics describes both.</aside>
 </div>
 <div class="layer derive">
 <p><b>Why sines.</b> Let a mass $m$ sit on a spring. If it is displaced by $x$ from rest, the spring pulls it back with
@@ -58,7 +58,7 @@ $-(k/m)\,x$ exactly when $(2\pi f)^2 = k/m$. That these are <em>all</em> the sol
 theorem for linear differential equations: a solution is fixed by its starting position and velocity, and the two free
 numbers $A$ and $\theta$ can match any such pair. $\square$</p>
 <p>The frequency depends on stiffness and mass, not on amplitude: a spring swings at the same rate whether it swings
-widely or barely. That is why a struck bell or a plucked string keeps its pitch as it fades. Almost any system near a
+widely or barely. That is why a struck bell or a plucked string keeps very nearly the same pitch as it fades. Almost any system near a
 stable resting point behaves like a spring for small motions, since the restoring force is then approximately
 proportional to the displacement. Sines are therefore the natural vibrations of the physical world. (For example,
 $k = 100$ N/m and $m = 0.01$ kg give $f = \frac{1}{2\pi}\sqrt{10^4} \approx 15.92$ Hz.)</p>
@@ -73,8 +73,8 @@ formula above.</p>
 <h2>Frequency, pitch and loudness</h2>
 <div class="layer hear">
 <p>Speed up a vibration and the tone rises; slow it down and it falls. The next example glides a pure tone from 55 to
-1760 vibrations per second. Listen to how steady the climb sounds, and notice that the very low and very high ends seem
-quieter even though the sweep's strength never changes.</p>
+1760 vibrations per second. Listen to how steady the climb sounds, and notice that the low end seems quieter even
+though the sweep's strength never changes.</p>
 <audio-ex src="sweep" caption="A pure tone gliding from 55 Hz to 1760 Hz in 15 seconds: the pitch rises at an even pace. Notice that the low end sounds weaker than the middle, at the same physical strength."></audio-ex>
 <p>Now keep the rate fixed and change only the size of the swing. The pitch stays put while the tone grows quieter.</p>
 <audio-ex src="loudness" caption="One 440 Hz tone at five levels, each with half the amplitude of the one before (6 decibels lower): same pitch, falling loudness."></audio-ex>
@@ -144,8 +144,9 @@ second, then raises it by the same <em>ratio</em> every second.</p>
 <b>interval</b>, and the conclusion of the experiment is:</p>
 <p style="text-align:center"><em>an interval is a ratio of frequencies.</em></p>
 <p>The equal-hertz steps above have ratios $2/1, 3/2, 4/3, 5/4, 6/5, 7/6, 8/7$, which get smaller and smaller. That is
-exactly what you heard. (These particular ratios will turn out to be the most important intervals in music; see
-<a href="ch:ch02#intervals-in-series">Chapter 2</a>.)</p>
+exactly what you heard. (The first of these ratios, 2/1, 3/2, 4/3, 5/4 and 6/5, will turn out to be among the most
+important intervals in music; see <a href="ch:ch02#intervals-in-series">Chapter 2</a>.)</p>
+<pianoroll edo="12" notes="A2 ; A3 ; E4 ; A4 ; C#5 ; E5 ; G5 ; A5" labels="110 ; 220 ; 330 ; 440 ; 550 ; 660 ; 770 ; 880" title="The equal-hertz run at its nearest 12-ET notes (550 and 770 Hz lie 14 c and 31 c below C♯5 and G5): the steps shrink"></pianoroll>
 <p>To turn ratios into distances we can add, we use the <b>logarithm</b>. The base-2 logarithm of a number $x$, written
 $\log_2 x$, answers the question "2 to what power gives $x$?"</p>
 <table>
@@ -226,8 +227,9 @@ $2^{1/12} \approx 1.059463$. Some useful values:</p>
 <p>A <b>pitch class</b> is a note name with the octave forgotten: "C", meaning every C. Twelve-tone music has twelve
 pitch classes, which <a href="ch:ch08#pitch-classes">Chapter 8</a> arranges on a circle and studies as a group.</p>
 <aside class="box note">Why the octave sounds so smooth is a question about the inside of a tone, not its rate. The
-answer, in <a href="ch:ch02#intervals-in-series">Chapter 2</a> and <a href="ch:ch03#roughness">Chapter 3</a>, is that
-every component of the upper note coincides with a component of the lower one.</aside>
+answer, in <a href="ch:ch02#intervals-in-series">Chapter 2</a> and <a href="ch:ch03#roughness">Chapter 3</a>, is that for
+the harmonic tones of most instruments every component of the upper note coincides with a component of the lower
+one.</aside>
 </div>
 <div class="layer derive">
 <p><b>Equal-tempered frequencies.</b> The note with MIDI number $n$ has frequency</p>
@@ -280,6 +282,7 @@ matter throughout the book; the ratios come from the harmonic series of <a href=
 <tr><td>16/15</td><td>111.73</td><td>semitone</td><td>100</td></tr>
 <tr><td>7/4</td><td>968.83</td><td>harmonic seventh</td><td>1000</td></tr>
 </table>
+<pianoroll edo="12" notes="C4 G4 ; C4 F4 ; C4 E4 ; C4 Eb4 ; C4 A4 ; C4 Ab4 ; C4 D4 ; C4 C#4 ; C4 Bb4" labels="3/2 ; 4/3 ; 5/4 ; 6/5 ; 5/3 ; 8/5 ; 9/8 ; 16/15 ; 7/4" title="The table's ratios above C4, at their nearest 12-ET notes"></pianoroll>
 <p><b>Computing cents.</b> With a calculator that only has base-10 logarithms, use
 $\text{cents}(r) = 1200\,\log_{10} r / \log_{10} 2 \approx 3986.31\,\log_{10} r$. To go back from cents to a ratio, use
 $r = 2^{c/1200}$.</p>
@@ -292,7 +295,8 @@ $701.96 + 498.04 = 1200$. That additivity is the whole point of cents.</p>
 the golden ratio $\varphi = (1+\sqrt5)/2 \approx 1.618$, which in cents is 833.09 c, a slightly wide minor sixth. Its
 inversion, the <b>golden third</b> $2/\varphi$, is 366.91 c, between the minor third (300) and the major third (400). The
 golden system's grid, 36-ET, divides the octave into 36 equal <em>sixth-steps</em> of 33.33 c each
-(<a href="ch:ch23#golden-intervals">Chapter 23</a>, <a href="ch:ch24#sixth-steps">Chapter 24</a>).</aside>
+(<a href="ch:ch23#golden-intervals">Chapter 23</a>, <a href="ch:ch24#sixth-steps">Chapter 24</a>).
+<pianoroll edo="36" notes="C4 Ab4 ; C4 ^Ab4 ; C4 E4 ; C4 vE4 ; C4 Eb4" labels="m6 ; φ ; M3 ; 2/φ ; m3" title="The golden sixth and golden third on C4 at their nearest 36-ET notes, beside 12-ET sixths and thirds"></pianoroll></aside>
 </div>
 <div class="layer derive">
 <p><b>Definition.</b> $c(r) = 1200\log_2 r$ for a ratio $r > 0$. It is the unique continuous measure of interval size
@@ -308,37 +312,40 @@ octave. For example $c(4/3) = 1200 - c(3/2)$.</li>
 </ul>
 <p><b>Theorem.</b> The perfect fifth, $c(3/2) = 701.955\ldots$, is irrational, and more generally $c(p/q)$ is irrational
 for every ratio of whole numbers $p/q$ that is not a power of 2.</p>
-<p><b>Proof.</b> Suppose $1200\log_2(p/q) = a/b$ with whole numbers $a, b$, $b > 0$. Then $(p/q)^{1200b} = 2^{a}$, so
-$p^{1200b} = 2^{a}q^{1200b}$. By unique factorization into primes, any odd prime dividing $p$ or $q$ would appear on one
-side and not the other with the same exponent; so $p$ and $q$ are powers of 2, and $p/q$ is a power of 2. $\square$</p>
-<p>So no pure interval other than octaves ever lands exactly on the 12-ET grid, or on any grid of equal steps. This small
+<p><b>Proof.</b> Write $p/q$ in lowest terms and suppose $1200\log_2(p/q) = a/b$ with integers $a, b$, $b > 0$. Then
+$(p/q)^{1200b} = 2^{a}$. If $a \ge 0$ this says $p^{1200b} = 2^{a}q^{1200b}$; if $a &lt; 0$ it says
+$2^{-a}p^{1200b} = q^{1200b}$. Either way, an odd prime dividing $p$ would divide $q$, and an odd prime dividing $q$ would
+divide $p$, which lowest terms forbid. By unique factorization into primes, $p$ and $q$ are then powers of 2, and so is
+$p/q$. $\square$</p>
+<p>So no pure interval other than octaves ever lands exactly on the 12-ET grid, or on the grid of any equal division of
+the octave. This small
 fact is the root of the whole history of tuning (<a href="ch:ch04#commas-preview">Chapter 4</a>,
 <a href="ch:ch05#comma">Chapter 5</a>).</p>
 </div>
 <div class="exercise">
-<p><b>1.</b> What are the period and the wavelength in air (343 m/s) of middle C, 261.63 Hz?</p>
+<p><b>Exercise 1.1.</b> What are the period and the wavelength in air (343 m/s) of middle C, 261.63 Hz?</p>
 <details class="answer"><summary>Answer</summary><p>$T = 1/261.63 \approx 3.82$ ms; $\lambda = 343/261.63 \approx 1.31$ m.</p></details>
 </div>
 <div class="exercise">
-<p><b>2.</b> Find the frequency seven semitones above A4 in 12-ET, and compare it with $\tfrac32 \cdot 440$ Hz. How many
+<p><b>Exercise 1.2.</b> Find the frequency seven semitones above A4 in 12-ET, and compare it with $\tfrac32 \cdot 440$ Hz. How many
 cents apart are they?</p>
 <details class="answer"><summary>Answer</summary><p>$440 \cdot 2^{7/12} \approx 659.26$ Hz (E5), against 660 Hz. The gap is
 $1200\log_2(660/659.26) \approx 1.96$ c: the 12-ET fifth is 1.96 c narrower than the pure fifth, $701.96 - 700$.</p></details>
 </div>
 <div class="exercise">
-<p><b>3.</b> A tone is raised by 1 percent ($r = 1.01$). How many cents is that? What ratio is 1 cent?</p>
+<p><b>Exercise 1.3.</b> A tone is raised by 1 percent ($r = 1.01$). How many cents is that? What ratio is 1 cent?</p>
 <details class="answer"><summary>Answer</summary><p>$1200\log_2 1.01 \approx 17.23$ c. One cent is $2^{1/1200} \approx 1.000578$,
 about 0.058 percent.</p></details>
 </div>
 <div class="exercise">
-<p><b>4.</b> Show that the inversion of an inversion is the original interval, and that an interval and its inversion
+<p><b>Exercise 1.4.</b> Show that the inversion of an inversion is the original interval, and that an interval and its inversion
 always add to 1200 c. Which interval is its own inversion?</p>
 <details class="answer"><summary>Answer</summary><p>Inversion sends $r \mapsto 2/r$; applying it twice gives $2/(2/r) = r$. Then
 $c(r) + c(2/r) = c(2) = 1200$. An interval is its own inversion when $r = 2/r$, i.e. $r = \sqrt2$, which is 600 c, the
 equal-tempered tritone.</p></details>
 </div>
 <div class="exercise">
-<p><b>5.</b> (Listening.) Play the cents example and write down the smallest step you can reliably hear. Then repeat it
+<p><b>Exercise 1.5.</b> (Listening.) Play the cents example and write down the smallest step you can reliably hear. Then repeat it
 at a lower volume. Does your threshold change?</p>
 <details class="answer"><summary>Answer</summary><p>There is no single right answer: it is a measurement on you. Many
 listeners hear 10 c in this setting and fewer hear 5 c; very soft levels usually make small differences harder to

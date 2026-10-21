@@ -1,9 +1,9 @@
-# The canonical table of contents of "Harmony, Rational and Golden" (working title).
+# The canonical table of contents of "Music Theory of Golden Harmony".
 # The site is built from this file: python tools/textbook/build.py
 # Each chapter's content lives in textbook/content/<id>.html; its audio in textbook/audio/<id>/.
 # `mirror` links a Western chapter to its golden counterpart(s) and back.
 
-title: "Harmony, Rational and Golden"
+title: "Music Theory of Golden Harmony"
 subtitle: "Music theory from first principles, from the harmonic series to golden tones in 36-ET"
 author: "David Chester"
 

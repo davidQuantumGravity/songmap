@@ -1,4 +1,4 @@
-# Voice-led chords on a comping rhythm (1, and-of-2, 3, and-of-4) plus every chord change.
+# Voice-led chords on a syncopated comping rhythm (hits at 0, 0.75, 1.25, 2, 2.75 and 3.25 beats of each bar) plus every chord change.
 style: comp
 voiced: true
 voices: 4

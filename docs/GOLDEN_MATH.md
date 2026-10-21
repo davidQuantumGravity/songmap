@@ -21,7 +21,7 @@ A **Pythagorean-type scale** is made by stacking one interval, the *generator*, 
 | Next comma | 53 fifths ≈ 31 octaves (3.6 c) | 36 golden sixths ≈ 25 octaves: φ³⁶/2²⁵ = **−8.75 c** |
 | Unifying temperament | — | **36-ET** removes the 36-comma: golden sixth = 25 steps, within 0.24 c; it also contains 12-ET exactly |
 
-**Why 36:** 36-ET is to the golden chain what 12-ET is to the fifths. It removes a golden comma, here the 36-chain one, so the golden circle closes after 36 steps. On top of that it contains Western 12-ET exactly. No other small tuning does both.
+**Why 36:** 36-ET closes the golden chain into a circle, as 53-ET does for fifths (13-ET is the golden analogue of 12-ET). It removes a golden comma, here the 36-chain one, so the golden circle closes after 36 steps. On top of that it contains Western 12-ET exactly. No other small tuning does both.
 
 ## 2. Limma, apotome, comma
 
@@ -172,12 +172,12 @@ Only golden and bronze thirds walk through every note, because only 11 and 13 sh
 ## 8. History (brief)
 
 **Pythagorean tuning and its successors**
-- **Origins.** The fifth-generated scale is attributed to Pythagoras (6th c. BCE) by later writers. Philolaus (5th c. BCE) and Plato's *Timaeus* (c. 360 BCE) describe its ratios, including the tone 9/8 and the limma 256/243. Boethius (*De institutione musica*, early 6th c. CE) carried this theory into medieval Europe, together with the terms limma, apotome and comma.
+- **Origins.** The fifth-generated scale is attributed to Pythagoras (6th c. BCE) by later writers. Plato's *Timaeus* (c. 360 BCE) gives its ratios explicitly, including the tone 9/8 and the limma 256/243; Philolaus (5th c. BCE) is reported by later writers to have discussed them. Boethius (*De institutione musica*, early 6th c. CE) carried this theory into medieval Europe, together with the terms limma, apotome and comma.
 - **The comma problem** drove the history of temperament:
   - meantone tunings in the Renaissance (described by Zarlino in the 16th century);
   - equal temperament computed by Zhu Zaiyu (1584) and Simon Stevin (c. 1605), and popularized by Mersenne (1636);
   - the *well* temperaments of Werckmeister (1691) and others.
-- **Bach's *Well-Tempered Clavier*** (Book I 1722, Book II 1742) demonstrated music in all 24 major and minor keys under such a temperament. It is the model for this project's *Well-Tempered Golden Clavier*: 72 major and minor keys plus 36 golden13 and 36 silver13 scales, at a much faster harmonic rhythm.
+- **Bach's *Well-Tempered Clavier*** (Book I 1722, Book II 1742) demonstrated music in all 24 major and minor keys, most likely under such a temperament (Bach's own tuning is undocumented). It is the model for this project's *Well-Tempered Golden Clavier*: 72 major and minor keys plus 36 golden13 and 36 silver13 scales, at a much faster harmonic rhythm.
 
 **36-ET and microtonal notation**
 - **Busoni**, in *Sketch of a New Esthetic of Music* (1907), proposed dividing the whole tone into thirds and combining two such series, which amounts to sixth-tones, i.e. 36-ET.
@@ -207,4 +207,4 @@ Only golden and bronze thirds walk through every note, because only 11 and 13 sh
 - **Harmonic entropy:** Paul Erlich (1990s).
 - **Chord geometry:** Dmitri Tymoczko, "The Geometry of Musical Chords" (*Science*, 2006) and *A Geometry of Music* (2011).
 - **The golden-mean EEG hypothesis:** Pletzer, Kerschbaum & Klimesch (2010, *Brain Research*) and Roopun et al. (2008, *Frontiers in Neuroscience*). It suggests that golden ratios between brain rhythms avoid unwanted synchronization.
-- **Binaural beats:** a 2019 meta-analysis (Garcia-Argibay, Santed & Reales) found small effects on anxiety, memory and attention. These are hypotheses for this project's listening experiments, not claims.
+- **Binaural beats:** a 2019 meta-analysis (Garcia-Argibay, Santed & Reales; 22 studies) found a medium pooled effect (g = 0.45) on memory, attention, anxiety and pain perception. These are hypotheses for this project's listening experiments, not claims.

@@ -331,8 +331,10 @@ def portfolios():
     P.append(dict(
         id="P10", title="The golden circle (golden home)", system="golden home",
         technique="When golden harmony is home, it moves by <b>circle steps</b>. Cg → vEg → ^Gg → Bg → …: neighbours share two "
-                  "notes, one voice moves down a semitone, and the circle visits all 36 golden triads. On golden-spectrum "
-                  "tones (partials 2^m·φ^n) these chords are the smoothest, so the walk is calm rather than tense.",
+                  "notes, one voice moves down a semitone, and the circle visits all 36 golden triads. On real, harmonic instruments "
+                  "each golden triad is a delicate local rest above C major's deeper home; on the digital golden-spectrum pad "
+                  "used here (partials 2^m·φ^n, a laboratory timbre no physical instrument has) these chords measure "
+                  "smoothest, so the walk sounds calm.",
         definition=song("Definition: the golden circle", 60, 110, {"gpad": GPAD, "low": CBASS},
                         [{"name": "definition", "bars": 6, "harmony": " ".join(f"{c}:1" for c in circ[:5]) + " Cg:1",
                           "parts": {"gpad": "hold", "low": "bassline"}}], dry=True),
@@ -347,9 +349,10 @@ def portfolios():
     P.append(dict(
         id="P11", title="Golden breathing and the timbre flip", system="golden home",
         technique="<b>Breathing</b>: the triad gains its chain neighbour (Cg + B = Cg7) and then drops its root (= vEg), so "
-                  "the harmony inhales and exhales one golden tone at a time. Played first on golden-spectrum tones "
-                  "(where golden chords are smooth), then on a harmonic organ (where the same chords are tense), then "
-                  "golden again: <b>timbre decides which world is at rest</b>.",
+                  "the harmony inhales and exhales one golden tone at a time. Played first on the digital golden-spectrum pad "
+                  "(the laboratory, where golden chords measure smoothest), then on a harmonic organ (a real-instrument "
+                  "spectrum, where they are delicate, unstable rests), then golden again: <b>timbre decides how deep each "
+                  "rest is</b>.",
         definition=song("Definition: golden breathing", 60, 112, {"gpad": GPAD, "low": CBASS},
                         [{"name": "definition", "bars": 6, "harmony": "Cg:1 Cg7:1 vEg:1 vEg7:1 ^Gg:2",
                           "parts": {"gpad": "hold", "low": "bassline"}}], dry=True),
@@ -380,10 +383,11 @@ def portfolios():
     # 13 rational visitation
     v = "Cg:3 C:1 Cg:3 Ab:1 Cg:3 Cm:1 Cg:3 Caug:1"
     P.append(dict(
-        id="P13", title="Rational visitation (golden home, Western visitors)", system="golden home",
-        technique="The inversion of ordinary harmony. A golden home is visited by its rational neighbours, 2–4 sixth-steps "
-                  "away: C, A♭, Cm and Caug. On golden-spectrum tones the Western chords are the rough, bright tension and "
-                  "returning to Cg is the release.",
+        id="P13", title="Rational visitation (golden home, rational release)", system="golden home",
+        technique="The inversion of ordinary harmony. A golden home opens briefly onto its nearest rational chords, 2–4 "
+                  "sixth-steps away: C, A♭, Cm and Caug. On real, harmonic instruments each Western chord is a moment of "
+                  "release (C major the deepest), and the return re-enters the golden local rest. This version plays on the "
+                  "digital golden-spectrum pad, the laboratory, where the roles flip and Cg measures smoother than its visitors.",
         definition=song("Definition: rational visitation", 60, 116, {"gpad": GPAD, "low": CBASS},
                         [{"name": "definition", "bars": 8, "harmony": "Cg:1.5 C:0.5 Cg:1.5 Ab:0.5 Cg:1.5 Cm:0.5 Cg:2",
                           "parts": {"gpad": "hold", "low": "bassline"}}], dry=True),
@@ -851,17 +855,21 @@ def run_group(name: str) -> list:
 
 def refresh_texts(entries: list) -> list:
     """Re-read every description from the source definitions (no rendering)."""
-    by_title = {}
+    by_title, by_id = {}, {}
     for p in portfolios():
-        by_title[p["title"]] = {"text": p["technique"], "system": p["system"],
-                                "audio": [{"text": p["def_text"]},
-                                          {"text": p["piece_text"], "label": f"In music: “{p['piece']['title']}”"}]}
+        by_title[p["title"]] = by_id[p["id"]] = {
+            "title": p["title"], "text": p["technique"], "system": p["system"],
+            "audio": [{"text": p["def_text"]}, {"text": p["piece_text"], "label": f"In music: “{p['piece']['title']}”"}]}
     for _, _, info in dictionary_songs() + wtc_song():
         by_title[info["title"]] = {"text": info["text"]}
     for _, _, title, text in REFS:
         by_title[title] = {"text": text}
     for e in entries:
         src = by_title.get(e["title"])
+        if not src and e.get("audio"):                       # a retitled portfolio: match by its file id (P13a_...)
+            src = by_id.get(str(e["audio"][0].get("file", ""))[:3])
+            if src:
+                e["title"] = src["title"]
         if not src:
             print("  (no source for)", e["title"])
             continue

@@ -49,9 +49,11 @@ mental state. Two different questions hide in that claim, and the evidence for t
 <table>
 <tr><th>Question</th><th>What the evidence says</th><th>Status</th></tr>
 <tr><td>Do binaural beats change measurable behaviour or mood?</td><td>A 2019 meta-analysis by Garcia-Argibay, Santed and
-Reales pooled controlled studies and found small effects on anxiety, memory and attention.</td><td>small effects, measured</td></tr>
-<tr><td>Do they drive EEG rhythms to the beat frequency?</td><td>EEG entrainment studies are inconsistent: some report
-changes at the beat frequency, others find none, and methods differ widely.</td><td>unsettled</td></tr>
+Reales pooled 22 studies of memory, attention, anxiety and pain perception and reported an overall effect of medium size
+(Hedges' $g = 0.45$). The studies were few and varied in design, so the estimate is uncertain.</td><td>effects reported in pooled studies</td></tr>
+<tr><td>Do they drive EEG rhythms to the beat frequency?</td><td>EEG entrainment studies are inconsistent. A 2023 systematic
+review (Ingendoh, Posny and Heine) found 14 studies: 5 with results consistent with entrainment, 8 contradicting it and
+1 mixed, with methods that differ widely.</td><td>unsettled</td></tr>
 <tr><td>Do they induce a particular state (calm, focus, bliss)?</td><td>Not established. Small average effects do not
 mean a reliable state change for a listener.</td><td>hypothesis</td></tr>
 </table>
@@ -116,8 +118,8 @@ Neuroscience</i>) had reported ratios near φ between coexisting cortical rhythm
 rhythms are organized. They are cited here because they inspired the project, not because they are established; band
 definitions are conventions, and alternative accounts of the spacing of brain rhythms exist.</p>
 <p><b>What this book can say for certain</b> is the mathematical part: two periodic processes in golden frequency ratio
-never fall back into step, and they come close to doing so less often than any other pair of rhythms. That is the
-Derive layer.</p>
+never fall back into step, and, in the sense of Hurwitz's theorem, their near-returns to step are the least exact of
+any pair of rhythms. That is the Derive layer.</p>
 <aside class="box note"><p><b>A bridge, not a proof.</b> Even if brain rhythms are spaced by φ, nothing follows yet about
 music. Sound at 6 Hz is not a brain rhythm at 6 Hz, and a chord in golden ratios is not a brain in golden ratios.
 The bridge from one to the other is the conjecture of §34.4.</p></aside>
@@ -210,8 +212,9 @@ standard map with strength $k$ is</p>
 $$p_{n+1} = p_n + \frac{k}{2\pi}\sin(2\pi x_n), \qquad x_{n+1} = x_n + p_{n+1}.$$
 <p>For $k=0$ every orbit rotates uniformly with rotation number $\omega = p$. KAM theory says that for small $k$ the
 orbits with <i>Diophantine</i> rotation numbers, those with $|\omega - p/q| \ge c/q^{\tau}$ for all fractions, survive as
-invariant curves. Hurwitz's theorem shows that φ (equivalently $1/\varphi$) has the largest possible constant $c$ for
-$\tau = 2$, which is why it is the natural candidate for the last survivor.</p>
+invariant curves. Hurwitz's theorem shows that, for $\tau = 2$ and large $q$, φ (equivalently $1/\varphi$) admits the
+largest possible constant: the products $q^2|\varphi - p/q|$ of its best approximations converge to $1/\sqrt5$, and no
+irrational number keeps them larger in the limit. That is why it is the natural candidate for the last survivor.</p>
 <p><b>Greene's residue criterion (measurement, numerical).</b> Approximate the golden rotation number by the Fibonacci
 ratios $F_{j-1}/F_j$ and find the corresponding periodic orbits. For an orbit of period $q$ with monodromy matrix $M$
 (the Jacobian of $q$ steps), the residue is $R = (2 - \operatorname{tr} M)/4$. Greene's criterion: the golden torus
@@ -248,9 +251,17 @@ out that rational, harmonic relations between rhythms are what the brain falls i
 hypersynchrony. (Epileptic seizures do involve abnormally excessive or synchronous neural activity; that much is
 standard neurology.) The author turned the objection around. If rational relations invite locking, perhaps the most
 irrational relations invite something else: activity that stays coherent without ever locking.</p>
+<p>A second thread is personal. In the author's model of how golden harmony feels, the golden triad is a <i>local</i>
+minimum of tension: a delicate, metastable home one can dwell in, while C major remains the global minimum and the
+ultimate release. He also reports that extended listening to golden harmony changes how he feels. That is a personal
+observation, and it is the motivation for the conjecture below, not evidence for it. Measurement does not settle it
+either way: on harmonic tones, the spectra of all physical instruments, the standard roughness and entropy models show
+no local minimum at the golden triad (C major is smoother), and only on the digital golden spectrum is the golden triad
+a strict local minimum (<a href="ch:ch26#timbre-flip">Chapter 26</a>).</p>
 <p><b>The conjecture, stated honestly.</b> This is the author's hypothesis, and this book states it as one:</p>
 <aside class="box math"><p><b>Bliss conjecture (hypothesis).</b> Sound whose structure is golden at several scales at once,
-with pitches in golden ratios, beat rates in golden ratios and a timbre on which golden chords are smooth, and which
+with pitches in golden ratios, beat rates in golden ratios and (optionally) a digital golden-spectrum timbre on which
+golden chords are smooth, and which
 contains no steady rational pulse, tends to be experienced as calmer and more absorbing than matched sound built on
 rational ratios. The proposed mechanism is "coherence without locking": a structured, self-similar, never-periodic
 stimulus that invites attention without entraining it.</p></aside>
@@ -259,10 +270,12 @@ stimulus that invites attention without entraining it.</p></aside>
 <tr><th>Ingredient</th><th>Status</th></tr>
 <tr><td>A close-voiced Cg7 on harmonic tones beats at $f_0\varphi^{-6}\times(1,\ 2/\varphi,\ 4/\varphi^2)$ and $2f_0\varphi^{-6}$</td><td>theorem, for exact tuning and harmonic partials (<a href="ch:ch26#beats">Chapter 26</a>)</td></tr>
 <tr><td>The chain voicing 1 : φ : φ² : φ³ has all its first-order combination tones on the chain</td><td>theorem (<a href="ch:ch26#combination-tones">Chapter 26</a>)</td></tr>
-<tr><td>On golden-spectrum timbres the golden triad is the smoothest triad</td><td>measurement, Sethares roughness model (<a href="ch:ch26#timbre-flip">Chapter 26</a>)</td></tr>
+<tr><td>On the digital golden spectrum the golden triad is the smoothest triad compared, and a strict local minimum of roughness</td><td>measurement, Sethares roughness model (<a href="ch:ch26#timbre-flip">Chapter 26</a>)</td></tr>
+<tr><td>On harmonic tones (all physical instruments) the golden triad is not a local minimum of roughness or harmonic entropy; C major is smoother</td><td>measurement, same models</td></tr>
+<tr><td>The golden triad is a delicate local home; extended listening changes how one feels</td><td>the author's model and personal observation; hypothesis</td></tr>
 <tr><td>φ is the frequency ratio most resistant to locking</td><td>theorem in number theory and dynamics (§34.2, §34.3)</td></tr>
 <tr><td>EEG bands are spaced by about φ</td><td>published hypothesis, not established</td></tr>
-<tr><td>Binaural beats have small effects on anxiety, memory, attention</td><td>meta-analytic measurement, small effects</td></tr>
+<tr><td>Binaural beats affect memory, attention, anxiety and pain perception</td><td>meta-analytic measurement (pooled $g = 0.45$, few and varied studies); EEG entrainment unsettled</td></tr>
 <tr><td>Golden-at-every-scale sound induces calm or bliss</td><td><b>conjecture, untested</b></td></tr>
 </table>
 <p><b>Design principles that follow.</b> If one wants to test the conjecture, the music must embody it cleanly
@@ -272,7 +285,9 @@ stimulus that invites attention without entraining it.</p></aside>
 the close-voicing beat spectrum or a binaural ladder), section lengths in Fibonacci numbers of bars (8, 13, 21).</li>
 <li><b>No rational lock.</b> No drums or strict metric pulse in the sections under test; the motion comes from the beats
 and from slow walks around the golden circle.</li>
-<li><b>Golden timbres</b> for the sustained chords, where golden chords are acoustically smooth.</li>
+<li><b>Golden timbres</b> for the sustained chords, where golden chords are acoustically smooth. These spectra exist
+only digitally (no physical instrument has them), so they are a laboratory condition, to be compared with the same
+music on harmonic tones.</li>
 <li><b>Safety and honesty.</b> Moderate levels, no strong infrasound, binaural layers optional and on headphones only, no
 flashing visuals, and descriptions that describe the sound rather than promise a state.</li>
 </ol>
@@ -295,8 +310,13 @@ octave. To put the slowest beat at a chosen rate $B$, take $f_0 = B\varphi^6$, w
 <tr><td>6 Hz</td><td>107.67 Hz</td><td>6.00, 7.42, 9.17, 12.00</td></tr>
 <tr><td>10 Hz</td><td>179.44 Hz</td><td>10.00, 12.36, 15.28, 20.00</td></tr>
 </table>
-<p>A direct count of near-coincident partial pairs (8 harmonics per tone, differences below 25 Hz) confirms these rates
-for the 110 Hz and 179.44 Hz chords; the strongest is $b_4$, then $b_1$ and $b_2$, then $b_3$.</p>
+<pianoroll edo="36" notes="A2 vC#3 ^E3 G#3" labels="Ag7" title="Close golden seventh on A2 = 110 Hz (36-ET spelling)"></pianoroll>
+<p>The 36-ET spelling only names the notes: the example and the beat rates use the exact ratios
+1 : 2/φ : 4/φ² : 8/φ³, which lie within 0.75 c of these sixth-steps.</p>
+<p>A direct count of near-coincident partial pairs (8 harmonics per tone, differences below 25 Hz) finds these four rates
+for the 110 Hz and 179.44 Hz chords, plus weaker, faster beats (at 110 Hz: 15.15, 19.84 and 24.52 Hz). Weighting each pair
+by the product of its partial amplitudes $1/m \cdot 1/n$, the strongest is $b_4$ (root partial 2 against the seventh, and
+root partial 6 against fifth partial 4), then $b_1$ and $b_2$ equally (two pairs each), then $b_3$ (one pair).</p>
 <p><b>The conjecture as a statistical hypothesis.</b> Let $X$ be a golden stimulus and $Y$ a matched rational stimulus that
 differs from $X$ in one named variable. For a rating scale $s$ (calm, interest, pleasantness, absorption) let
 $D_s = s(X) - s(Y)$ for a listener. The conjecture predicts $\mathbb{E}[D_{\text{calm}}] > 0$ and
@@ -363,8 +383,8 @@ $$P(K \ge k) = 2^{-n}\sum_{i=k}^{n}\binom{n}{i}.$$
 </table>
 <p><b>How many trials are needed (power).</b> If the true preference rate is $\pi$, the probability of reaching
 significance is $P(K \ge k^\ast)$ under $\mathrm{Binomial}(n,\pi)$. The smallest $n$ giving 80% power at the one-sided 5%
-level: about 23 trials for $\pi = 0.75$, 37 for $\pi = 0.70$, 69 for $\pi = 0.65$, and 158 for $\pi = 0.60$. Small
-effects, the kind the binaural literature reports, need many trials.</p>
+level: about 23 trials for $\pi = 0.75$, 37 for $\pi = 0.70$, 69 for $\pi = 0.65$, and 158 for $\pi = 0.60$. Preference
+rates close to one half need many trials.</p>
 <p><b>Ratings.</b> For each scale, the paired differences $D_s$ can be tested with the Wilcoxon signed-rank test. With four
 scales tested, a simple Bonferroni correction uses $\alpha = 0.05/4 = 0.0125$ for each.</p>
 <p><b>Randomization in code.</b> A seeded script makes the blind key reproducible and auditable:</p>
@@ -392,8 +412,10 @@ and what are its four beat rates?</p>
 <p><b>Exercise 34.3 (listening).</b> In the blind pair of §34.5, which excerpt did you rate calmer? Which one is on the
 golden spectrum?</p>
 <details class="answer"><summary>Answer</summary><p>A is on the golden spectrum (partials $2^m\varphi^n$), B on the harmonic
-spectrum (partials 1, 2, 3, …). Under the Sethares roughness model the golden triad is smoother on the golden spectrum
-(<a href="ch:ch26#timbre-flip">Chapter 26</a>). Your rating is one data point; the protocol of §34.5 needs many, blind
+spectrum (partials 1, 2, 3, …). Under the Sethares roughness model the golden triad is the smoothest of the triads compared on the golden
+spectrum, while on the harmonic spectrum it is rougher than major, minor and augmented
+(<a href="ch:ch26#timbre-flip">Chapter 26</a>). The model ranks chords within one timbre; it does not say which of the two
+excerpts is smoother overall. Your rating is one data point; the protocol of §34.5 needs many, blind
 and counterbalanced. Note that this exercise was <i>not</i> counterbalanced: A was golden for every reader.</p></details>
 </div>
 <div class="exercise">
