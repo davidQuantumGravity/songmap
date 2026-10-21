@@ -432,6 +432,7 @@ parts:
           - {id: golden7-modes, title: "The seven modes of golden7"}
           - {id: decatonic, title: "The golden decatonic: splitting the large step"}
           - {id: decatonic-modes, title: "Modes of the decatonic: 35, 53 and 44"}
+          - {id: pentatonic-mirror, title: "The decatonic as the golden pentatonic"}
           - {id: golden13-modes, title: "golden13 and maximal evenness"}
           - {id: melody-harmony, title: "Golden melodies and how to harmonize them"}
       - id: ch37
