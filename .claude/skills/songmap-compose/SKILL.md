@@ -83,7 +83,13 @@ The engine plays exactly what you write: no swing, no timing humanisation and no
   |---|---|---|---|---|---|---|
   | Gain | −11 dB | −6 dB | −2.6 dB | 0 | +2.3 dB | +3 to +4 dB |
 
-  **`ff` saturates:** velocities cap at 1.0, and accented hits are already there. A peak is made by **arrangement** (more parts, an octave doubling, open hats or 16th hats, a higher register) and by **making the section before it quieter**, not by `ff` alone.
+  **`ff` saturates:** velocities cap at 1.0, and accented hits are already there. In a real mix a section's measured loudness moves only about **1–3 dB per `dyn` step**, because sustained notes, reverb tails and the master blunt it. For a big difference, **change the arrangement**: add parts, an octave doubling, open or 16th hats or a higher register for the peak, and **remove parts** before it. `dyn` alone won't do it.
+- **The pre-peak dip** works even for short builds. On the peak's line, `!drop:1@-1(keep=[pad, keys])` silences everything but the pad and keys for the bar before it, while the riser keeps rising:
+
+  ```
+  build 2 | drums:full bass:eighths pad:warm arp:up dyn=mp<f
+  peak  2 | like=build lead:theme dyn=f | !drop:1@-1(keep=[pad, arp]) !riser:1 !impact
+  ```
 - **The master normalises the whole song** to −14 LUFS, so only the differences between sections count.
 - **`qa.json`, what to read:**
 
@@ -123,7 +129,9 @@ mix drums -6 | fx -6 | keys 0 | lead 6
   | an expression | `role:pocket+{ohat: "..x."}` |
   | remove an inherited part | `-role` |
 
-- **Settings:** `like=<section>` copies its parts and settings, including `chords`. Others: `dyn=`, `chords="Am:2 G:2"`, `prog=<name>`, `key=`, `tempo=<bpm>`.
+- **Settings:** `like=<section>` copies its parts and settings, including `chords`. Anything written after it on the line replaces what was inherited: a `role:` replaces that part, and `chords=` replaces the chords. Others: `dyn=`, `chords="Am:2 G:2"`, `prog=<name>`, `key=`, `tempo=<bpm>`.
+- **Key.** `key=` is a section setting only (it can't go inside a part's `{...}` map). It re-keys the section's deg notes; chord names stay absolute.
+- **Multi-bar patterns.** Notes in every mode (deg, letter, rel) may span several bars with `|`, and they loop to fill the section. Example: a bass that rests to re-enter after a stop, `{rel: "R/1 | r/2 R/2", oct: -2}`.
 - **Events** are written **`!type[:length][@position][(options)]`**, in that order: `!zaps@+2:3(count=3)`, `!impact@cue:bird(size=xl)`.
   - Lengths are in bars (`:2`) or beats (`:2b`).
   - Positions are `@+bar:beat` (from this section, so `@-1:3` is beat 3 of the bar before), `@bar` (absolute), `@f123` or `@cue:x`.
@@ -137,6 +145,9 @@ mix drums -6 | fx -6 | keys 0 | lead 6
   | `!drop:2(keep=[pad, bass])` | every part not kept goes silent for 2 bars: breakdowns |
   | `hit crash swell fill downlifter cloud ...` | **silent for now:** written to `cues.json` only; they render from later phases |
 
+  - **Lengths.** An impact rings about 3 s (`xl` about 4.5 s). A riser lasts exactly its bars (`:1` is 2 s at 120 BPM).
+  - **Hits for list items** (n items appearing): use a small impact or a `!zaps` per item, or better, a new layer or melody note per item, and keep the big impact for the last one.
+
 - **Loops, per-bar edits, repeats:** use definitions and `form:` ([cinematic_build.sm](examples/cinematic_build.sm), `docs/LANGUAGE.md`):
   - `for i in 1..3:`, `if i == last:`;
   - `every 4 bars: bass = eighths`, `bar -1: lead = none`;
@@ -147,6 +158,14 @@ mix drums -6 | fx -6 | keys 0 | lead 6
 - **Frames per bar.** `fps × beats_per_bar × 60 / tempo`, which is 60 at 120 BPM, 4/4, 30 fps (a beat is 15 frames) and 80 at 90 BPM. The whole-frame tempos at 30 fps are 60, 72, 75, 90, 100, 120, 150 and 180. Bars count from **0**.
 - **Length.** The song is all bars plus `tail` seconds. With `video=Comp:frames`, `check` compares the two: it warns when they differ by less than a bar and fails beyond. So the bars are `(frames − tail × fps) / frames_per_bar`.
   - When that isn't whole, use a fractional tail (`tail=2.5`) or a fractional last section (`end 2.5`). For example, 1,500 frames at 120 BPM with `tail=3` leaves 1,410 frames, which is 23.5 bars.
+  - At 30 fps and 120 BPM:
+
+    | tail | 1 | 2 | 3 | 4 |
+    |---|---|---|---|---|
+    | frames | 30 (half a bar) | 60 (1 bar) | 90 (1.5 bars) | 120 (2 bars) |
+
+    So 2,100 frames with `tail=4` is (2100 − 120) / 60 = 33 bars.
+- **Frame → position.** Divide by frames per bar, then turn the fraction into a beat: f1230 / 60 = 20.5 = bar 20, beat 3, which is `@20:3`. Use a `cue` when it isn't a whole beat (or 16th).
 - **Scene starts** round to bars. **Off-grid moments** get `cue name=f1145` and `!impact@cue:name`. Cues snap to the nearest 16th, with a warning if that moves one by more than a frame.
 - **Positions:**
 

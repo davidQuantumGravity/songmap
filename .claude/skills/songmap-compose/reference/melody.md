@@ -31,7 +31,7 @@ bar 1: 4/8 (.5) + 2 (.5) + 0/4 (1) + 2/8 (.5) + 4 (.5) + 5/4 (1) = 4 ✓
 bar 2: 5/4. (1.5) + 4/8 (.5) + 2/2 (2)                       = 4 ✓
 ```
 
-**Expression inside the line:**
+**Expression inside the line.** Marks go **after** the note and its duration: `4/4^`, `0/8'`, `c4^`, `R/8^`. A `^` before a note is reserved for microtones and is an error. Marks belong to one note, while durations are sticky, so `0/8' 2' 4'` is three staccato 8ths.
 
 | Mark | Meaning |
 |---|---|
