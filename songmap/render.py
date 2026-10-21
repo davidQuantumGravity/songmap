@@ -18,12 +18,14 @@ from .export import qa as qa_mod
 from .export.wav import write_float, write_wav24
 from .instruments import Note
 from .instruments.dsp import SR, as_stereo, n_samples, pan_mono, undb
+from .instruments.sampler.library import licenses_md
 from .mix.fx import convolve, reverb_ir, sidechain_env
 from .mix.master import master, master_legacy
 from .model import Song
 from .perform.pipeline import GATE
 
 RR_SLOTS = 8      # round-robin: each kit piece / part cycles through 8 seeded variations
+CHOKE_FADE = int(0.006 * SR)   # SFZ off_mode=fast: a choked note fades out over 6 ms
 
 
 @dataclass
@@ -33,6 +35,7 @@ class RenderResult:
     premaster: np.ndarray
     stems: dict[str, np.ndarray]           # per part (post fader, post sidechain) + returns
     stats: dict = field(default_factory=dict)
+    sources: list[dict] = field(default_factory=list)   # sample libraries used (-> LICENSES.md)
 
     @property
     def song(self) -> Song:
@@ -50,6 +53,29 @@ def _place(buf: np.ndarray, start: int, sig: np.ndarray, gain: float, pan: float
     s = s[: len(buf) - start]
     if len(s):
         buf[start:start + len(s)] += s * gain
+
+
+def _apply_chokes(placed: list) -> None:
+    """SFZ-style choke: a note whose off_by is G is cut (fast fade) when a later note of group G
+    starts in the same part. `placed` holds [start, y, gain, pan, group, off_by]; y is replaced."""
+    starts = {}
+    for start, _, _, _, group, _ in placed:
+        starts.setdefault(group, []).append(start)
+    for item in placed:
+        start, y, _, _, _, off_by = item
+        if not off_by or off_by not in starts:
+            continue
+        later = [s for s in starts[off_by] if s > start]
+        if not later:
+            continue
+        cut = min(later) - start
+        if cut >= len(y):
+            continue
+        nf = min(CHOKE_FADE, cut)
+        fade = 0.5 + 0.5 * np.cos(np.pi * np.arange(1, nf + 1) / nf)     # ends exactly at 0
+        y = y[:cut].copy()
+        y[cut - nf:] *= fade[:, None] if y.ndim == 2 else fade
+        item[1] = y
 
 
 def held_beats(e: XEv) -> float:
@@ -71,6 +97,7 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
     for part, evs in arr.parts.items():
         buf = buses.setdefault(part, np.zeros((n, 2)))
         slot: dict = {}
+        placed: list = []
         for e in evs:
             inst = ens.instrument(part, e.piece, e.patch)
             voice = ens.voice(part, e.piece)
@@ -84,17 +111,21 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
             for p in e.pitches or (60.0,):
                 key = (id(inst), round(float(p), 4), round(e.vel, 5), round(gate, 5), seed,
                        tuple(sorted(e.params.items())))
+                note = Note(float(p), float(e.vel), gate, seed=seed, rr=k % RR_SLOTS, params=dict(e.params))
                 y = cache.get(key)
                 if y is None:
-                    y = inst.render(Note(float(p), float(e.vel), gate, seed=seed, params=dict(e.params)))
+                    y = inst.render(note)
                     cache[key] = y
                     rendered += 1
                 else:
                     hits += 1
-                _place(buf, int(round(t * SR)), y, gain, pan)
+                placed.append([int(round(t * SR)), y, gain, pan, *inst.choke(note)])
             for name in (e.piece, part):
                 if name:
                     triggers.setdefault(name, []).append(t)
+        _apply_chokes(placed)
+        for start, y, gain, pan, _, _ in placed:
+            _place(buf, start, y, gain, pan)
     # --- mix: fader, sidechain, sends -> returns -----------------------------------------
     sends: dict[str, np.ndarray] = {}
     stems: dict[str, np.ndarray] = {}
@@ -133,7 +164,10 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
              "audio_seconds": round(n / SR, 3), "master": mode, "digest": arr.digest()}
     if log:
         log(f"rendered {n / SR:.1f}s of audio in {stats['seconds']}s ({rendered} notes synthesized, {hits} cached)")
-    return RenderResult(arr, as_stereo(out), mix, stems, stats)
+    sources = {s["program"]: s for s in (i.source for i in ens.instruments() if hasattr(i, "source"))}
+    if sources:
+        stats["samples"] = sorted(s["name"] for s in sources.values())
+    return RenderResult(arr, as_stereo(out), mix, stems, stats, list(sources.values()))
 
 
 def write_outputs(r: RenderResult, out_dir: str, *, stems: bool = True) -> dict[str, str]:
@@ -153,6 +187,10 @@ def write_outputs(r: RenderResult, out_dir: str, *, stems: bool = True) -> dict[
         json.dump(report, f, indent=1)
     with open(paths["log"], "w", encoding="utf-8") as f:
         f.write(render_log(r))
+    if r.sources:
+        paths["licenses"] = os.path.join(out_dir, "LICENSES.md")
+        with open(paths["licenses"], "w", encoding="utf-8") as f:
+            f.write(licenses_md(r.sources))
     return paths
 
 
