@@ -16,6 +16,9 @@ Chords are songmap Chord objects; everything inside works in integer sixth-steps
 """
 from __future__ import annotations
 
+import hashlib
+import os
+import pickle
 from dataclasses import dataclass
 from functools import lru_cache
 from itertools import permutations, product
@@ -187,9 +190,46 @@ def evaluate(xr: int, xivs: tuple, yr: int, yivs: tuple, natural: bool = True, p
     return chords, l1, l2
 
 
-@lru_cache(maxsize=4096)
-def _cached(xr, xivs, yr, yivs, natural, prefer):
-    return evaluate(xr, xivs, yr, yivs, natural, prefer)
+# evaluate() is a pure, exhaustive search that takes seconds per chord pair, so results are cached in
+# memory and on disk (keyed by a hash of this file, so any change to the engine starts a fresh cache).
+# The Studio re-checks a song on every edit, which made this matter.
+_DISK: dict | None = None
+_DISK_PATH = os.path.join(os.path.expanduser("~"), ".cache", "songmap",
+                          "passing-" + hashlib.sha1(open(__file__, "rb").read()).hexdigest()[:12] + ".pkl")
+
+
+def _disk() -> dict:
+    global _DISK
+    if _DISK is None:
+        try:
+            with open(_DISK_PATH, "rb") as f:
+                _DISK = pickle.load(f)
+        except (OSError, EOFError, pickle.UnpicklingError, AttributeError):
+            _DISK = {}
+    return _DISK
+
+
+def _disk_put(key, value) -> None:
+    d = _disk()
+    d[key] = value
+    try:
+        os.makedirs(os.path.dirname(_DISK_PATH), exist_ok=True)
+        tmp = _DISK_PATH + f".{os.getpid()}.tmp"
+        with open(tmp, "wb") as f:
+            pickle.dump(d, f)
+        os.replace(tmp, _DISK_PATH)
+    except OSError:
+        pass                                   # a read-only home: memory cache only
+
+
+@lru_cache(maxsize=8192)
+def _cached(xr, xivs, yr, yivs, natural, prefer, start=None):
+    key = (xr, xivs, yr, yivs, natural, prefer, start)
+    hit = _disk().get(key)
+    if hit is None:
+        hit = evaluate(xr, xivs, yr, yivs, natural, prefer, start=start)
+        _disk_put(key, hit)
+    return hit
 
 
 def label_chord(lab: Label):
@@ -229,7 +269,7 @@ def passing_path(X, Y, tokens: list[str], start: tuple | None = None):
     if start is not None:
         s = tuple(int(round(p * 3)) for p in start)
         if len(s) == 4:
-            c2, m1, m2 = evaluate(xr, xivs, yr, yivs, natural, prefer, start=s)
+            c2, m1, m2 = _cached(xr, xivs, yr, yivs, natural, prefer, s)
             if (m1.name, m2.name) == (l1.name, l2.name):
                 chords = c2
     if len(tokens) == 2:

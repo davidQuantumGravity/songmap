@@ -158,6 +158,12 @@ def cmd_describe(args) -> int:
     return 0
 
 
+def cmd_gui(args) -> int:
+    from .gui.server import serve
+    serve(args.song, port=args.port, open_browser=not args.no_browser)
+    return 0
+
+
 def main(argv=None) -> int:
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -208,6 +214,11 @@ def main(argv=None) -> int:
     p.add_argument("--compact", action="store_true", help="the ~500-token version for an LLM's context")
     p.add_argument("-o", "--out", help="write here instead of stdout")
     p.set_defaults(fn=cmd_describe)
+    p = sub.add_parser("gui", help="SongMap Studio: edit songs, instruments, mixes and videos in the browser")
+    p.add_argument("song", nargs="?", help="a song to open")
+    p.add_argument("--port", type=int, default=8765)
+    p.add_argument("--no-browser", action="store_true", help="don't open a browser window")
+    p.set_defaults(fn=cmd_gui)
     args = ap.parse_args(argv)
     try:
         return args.fn(args)

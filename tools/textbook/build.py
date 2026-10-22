@@ -518,6 +518,35 @@ def inline_assets(prefix: str) -> str:
             f"<script>{_ASSET_TEXT['js']}</script>")
 
 
+def social_meta(toc, chapters, current_id, title) -> str:
+    """Description, canonical link, Open Graph and Twitter-card tags (absolute URLs from toc.yaml site_url)."""
+    site = toc.get("site_url", "")
+    ch = next((c for c in chapters if c["id"] == current_id), None) if current_id else None
+    desc = (ch.get("summary") if ch else None) or toc.get("description") or toc.get("subtitle", "")
+    tags = [f'<meta name="description" content="{html.escape(desc)}">',
+            f'<meta name="author" content="{html.escape(toc.get("author", ""))}">']
+    if site:
+        # the Worker serves /chapters/x.html by redirecting to /chapters/x (auto-trailing-slash): use the final URL
+        url = site + (f"chapters/{current_id}" if current_id else "")
+        img = site + "assets/og-cover.png"
+        og_title = html.escape(title)
+        tags += [f'<link rel="canonical" href="{url}">',
+                 '<meta property="og:type" content="' + ("article" if ch else "book") + '">',
+                 f'<meta property="og:site_name" content="{html.escape(toc["title"])}">',
+                 f'<meta property="og:title" content="{og_title}">',
+                 f'<meta property="og:description" content="{html.escape(desc)}">',
+                 f'<meta property="og:url" content="{url}">',
+                 f'<meta property="og:image" content="{img}">',
+                 '<meta property="og:image:type" content="image/png">',
+                 '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">',
+                 f'<meta property="og:image:alt" content="{html.escape(toc["title"])}: the golden spiral and the 36-note circle">',
+                 '<meta name="twitter:card" content="summary_large_image">',
+                 f'<meta name="twitter:title" content="{og_title}">',
+                 f'<meta name="twitter:description" content="{html.escape(desc)}">',
+                 f'<meta name="twitter:image" content="{img}">']
+    return "".join(tags)
+
+
 def page(title, body, toc, chapters, current_id, prefix, layers=True, part_id="front"):
     layer_ui = ('<div class="layers" role="group" aria-label="Depth"><span>Depth</span>'
                 '<button data-layer="hear" aria-pressed="true">Hear it</button>'
@@ -526,7 +555,7 @@ def page(title, body, toc, chapters, current_id, prefix, layers=True, part_id="f
     math_head = KATEX_CDN if CLIENT_MATH else ""
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{html.escape(title)}</title>{THEME_BOOT}{FONTS}
+<title>{html.escape(title)}</title>{social_meta(toc, chapters, current_id, title)}{THEME_BOOT}{FONTS}
 {inline_assets(prefix)}{math_head}</head>
 <body data-part="{part_id}"><div class="progress"><i></i></div>
 <header class="top"><button class="menu" aria-label="Contents">☰</button>

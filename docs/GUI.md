@@ -1,166 +1,206 @@
-# SongMap Studio: GUI plan
+# SongMap Studio: the GUI (design v2, 2026-10-22)
 
-A local app for **designing sounds with knobs**, auditioning them by velocity and pitch, tuning groove and feel, building arbitrary instruments, and scoring against the actual video. It is a front-end to the same engine the CLI uses: **no DSP is duplicated in JavaScript**.
+A local app in which songs, instruments, mixes and videos are made **both as text and visually**, and every visual
+edit is written back to the same text files the language and the LLM use. It replaces the v1 plan, which predated
+the language, the sampler, 36-ET, the performance stage, moods and the video renderer.
 
 ## 1. Goals
 
-1. **Every instrument gets knobs automatically.** That covers the kick, snare, clap, hats, bass, pad, pluck, lead, keys, strings, patch instruments and plugins. Knobs are generated from the instrument's `PARAMS` schema (`Instrument.schema()` is already JSON-ready and tested). Adding an instrument in Python makes it appear in the GUI with no GUI code.
-2. **Instant audition.** Changing a knob re-renders and replays the sound within about 50 ms for single hits. Loops update at the next loop boundary.
-3. **Presets** (`presets/<instrument>/<name>.yaml`), with A/B compare, diff, randomize and morph.
-4. **Arbitrary instruments** through a patch editor that writes the YAML module graphs of [INSTRUMENTS.md §7](INSTRUMENTS.md).
-5. **Feel and groove tuning** for the performance layer ([PERFORMANCE.md](PERFORMANCE.md)).
-6. **Song view synced to the video:** sections, cues and events over the rendered MP4, with QA readouts.
-7. **Everything round-trips to text.** "Copy as songmap" puts the current settings on the clipboard as a compact `inst`/`kit`/`feel` line or YAML, so the LLM and the GUI edit the same files.
+1. **One model, two views.** The `.sm` program and the visual editors are views of one song tree. Typing in the code
+   pane updates every visual pane; turning a knob, drawing a note or dragging a fader rewrites the code (printed by
+   `songmap fmt`, so it stays readable).
+2. **Every instrument editable, every instrument buildable.** All 17 native instruments, the sampler, and new ones:
+   knobs for every parameter, and a **patch editor** where an instrument is a graph of modules wired together, so its
+   definition and wiring can be changed, not only its knob values.
+3. **DAW basics.** Arrangement timeline, piano roll (36-ET aware), step grid, mixer (volume, pan, mute/solo, sends,
+   insert effects), transport with loop and scrub, audition from an on-screen keyboard.
+4. **Every output.** WAV, MP3, stems, MIDI, `cues.json`, MP4 video, PNG/SVG images (poster frame, score page, piano
+   roll), QA report.
+5. **Videos designed in the GUI.** What appears where, how it looks and when: layers, positions, sizes, colours,
+   fonts, which parts, how notes are named, with a live frame preview.
+6. **The engine stays the single source of truth.** No DSP in JavaScript. The browser plays audio the engine
+   rendered.
 
-## 2. Architecture
+## 2. What the GUI has to handle: a study of the engine (2026-10-22)
+
+### 2.1 Instruments
+
+Every instrument declares its knobs as `PARAMS` (`Param`: name, default, range, unit, knob curve, group, doc), so
+**knob panels are generated, never hand-written**. The table lists what each one is internally, because the patch
+editor (§4.1) has to express all of it.
+
+| Instrument | Params (groups) | Signal chain | Velocity → timbre |
+|---|---|---|---|
+| `kick` | 12 (pitch, amp, tone, velocity, variation) | sine with exponential pitch sweep → t60 env; + sub sine; + band-passed noise click; → tanh drive | sweep depth, click level |
+| `snare` | 11 (+ filter) | two sine modes (shell) + noise HP→LP (wires) + band-passed snap → drive | wire brightness and length |
+| `clap` | 8 | 1–8 noise bursts (jittered spacing, burst envelope) → band-pass | brightness |
+| `hat` | 9 | six detuned squares (metal) + noise → band-pass → high-pass → AD env | decay, brightness |
+| `bass` | 16, mono | saw + square + sub sine (glide) → resonant SVF with filter env → drive → ADSR | cutoff |
+| `pad` | 15 | N unison saws with slow drift, spread across stereo → SVF with LFO → ADSR | cutoff |
+| `pluck` | 11 | pulse + saw → SVF with filter env → t60 env × ADSR | cutoff |
+| `lead` | 16, mono | N unison saws with delayed vibrato and glide + breath noise → SVF → ADSR | cutoff |
+| `string_pluck` | 9 | filtered noise burst, pick-position comb → Karplus-Strong string → body EQ peaks | excitation brightness |
+| `keys` | 13 | modal piano: stiff-string partials, hammer comb, two-stage decay, two-string detune + thump noise; pitch-dependent pan | hammer hardness (spectral tilt) |
+| `epiano` | 10 | 2-op FM with decaying index + 14:1 tine transient → t60 → tremolo auto-pan | FM index ("bark") |
+| `organ` | 14 | nine drawbar sines + percussion + key click → rotary (Doppler + AM) | none (organs are velocity-blind) |
+| `clean` | 11 | additive partials (harmonic, golden 2^m·φ^n, or odd spectrum), damping, raised-cosine envelope | rolloff |
+| `riser`, `impact`, `zap`, `tick` | 3–9 | noise sweeps, sine sweeps, square chirps, sine pings | some |
+| `sampler/<library>` | 6 + the SFZ program | regions by key, velocity and round robin; crossfaded layers; repitched; release samples; chokes | layer choice |
+
+Presets (`presets/<instrument>/<name>.yaml`, 27 today incl. the stable `*/still` and `clean/*` sets) are parameter
+sets on top of an instrument. **Gaps:** an instrument's *structure* is Python code, so today nothing can be rewired;
+only the sampler loads its structure from data.
+
+### 2.2 Songs, performance, mix, master, video
+
+- **Songs:** `.sm` language (variables, `with`, form, loops, `every`, per-bar variants) or YAML; both compile to the
+  same tree; `songmap fmt` prints either losslessly. Notes are mostly *generated* (styles, chord-relative figures,
+  motifs with transforms), not stored note by note.
+- **Performance stage** (`perform/play.py`): moods (`balanced` default, `v0`, `cinematic`, `lofi`, …) set groove,
+  humanize and per-part feel (offset, strum, arch, high_loud, gate).
+- **Mix today:** per part gain, pan, sends to reverb returns, sidechain from a kit piece; master `standard`, `clean`
+  or `legacy`. **Gaps:** no per-part insert effects (EQ, compressor, delay, chorus, saturation, filter), no automation
+  lanes, no meters.
+- **Video today** (`visual/`): one fixed layout (header, letter names, grand staff, piano roll) with a theme, size,
+  page length and part list. **Gaps:** no layout control, layers, colours per part, or images.
+- **Exports today:** WAV 24-bit, MP3, stems (float WAV), `cues.json`, `qa.json` + `qa.png`, MP4 + poster.
+  **Gap:** MIDI.
+
+## 3. Principles
+
+1. **Edits are operations on the song tree,** not text patches: `set part`, `set mix`, `set note clip`, `set
+   instrument param`, `move section`… Each operation is validated, applied, and the file is re-printed. Comments and
+   variables the user wrote by hand are preserved where the operation does not touch them (the printer keeps the
+   header comment; operations rewrite only the lines they own).
+2. **Generated vs. written notes.** A part played by a style or a motif is shown in the piano roll as *generated*
+   (hatched). Editing it first **bakes** that part in that section into a clip of explicit notes, which then writes
+   back as a `notes:` value (36-ET pitches included). Un-baking restores the style.
+3. **Schema-driven UI.** Instruments, patch modules, effects and video layers all expose `PARAMS`-style schemas; the
+   GUI draws knobs from schemas, so engine additions appear without GUI code.
+4. **Incremental rendering.** The server keeps the last arrangement and caches rendered notes and per-part buses; an
+   edit re-renders only the parts it touched. Single notes for audition render in milliseconds.
+
+## 4. Engine foundations the GUI needs (built before or with the screens)
+
+### 4.1 Patch instruments (rewiring)
+`instruments/patch.py`: an instrument defined as a YAML graph of modules (INSTRUMENTS.md §7), compiled at load time.
+- **Modules** (each with a `PARAMS` schema): `osc` (sine, saw, square/pulse, triangle, supersaw/unison, additive with
+  harmonic/golden/odd spectra), `fm` (operator), `noise` (white, pink, bursts), `env` (adsr, ad, t60, raised-cosine,
+  burst train), `lfo` and `drift`, `filter` (SVF lp/bp/hp with modulated cutoff, RBJ peak/shelf, one-pole), `shaper`
+  (drive, fold), `ks` (Karplus-Strong with pick comb), `modal` (partial bank with inharmonicity and two-stage decay),
+  `comb`, `delay`, `rotary`, `pan`/`spread`, `mix`, `vca`, `sampler` (an SFZ program as a source).
+- **Wires** connect outputs to inputs and to **modulation targets** (cutoff, pitch, amplitude, pan, index).
+- **Expressions** in any numeric field (`"2500 * 2**(1.5*(vel-0.7))"`) use `vel`, `pitch`, `freq`, `t`, `gate`,
+  `rand` and macro names, through a safe AST evaluator (no `eval`).
+- **Macros** map one knob to several parameters; macros are the instrument's knobs everywhere else.
+- **Every native instrument ships as a patch template** (`patches/native/kick.yaml`, …) that renders the same sound
+  (checked against the native instrument by a test), so "open kick as a patch" shows its real wiring and lets you
+  change it. The native classes stay as the fast path.
+
+### 4.2 Insert effects and the mixer model
+`mix/fx.py` gains schema'd effect units: `eq` (bands), `compressor`, `drive`, `filter`, `delay` (ping-pong, synced),
+`chorus`, `reverb` (as an insert or a return), `gain`, `width`. A part's `mix` entry gets `inserts: [{fx: eq, …}]`;
+returns and the master get chains too. Meters (peak/LUFS per part, per section) come back with every render.
+
+### 4.3 Clips and the note writer
+`parse/clip.py`: explicit notes for a part in a section (onset, length, pitch as float MIDI, velocity, articulation),
+and a writer that prints them as note-language text: sticky durations, chords, `^`/`v` sixth-step prefixes, `@vel`.
+Baking a generated part produces a clip; the round trip clip → text → parse is exact (tested).
+
+### 4.4 Views: what a video or image shows
+`visual/view.py`: a **view spec** (YAML, stored with the song as `view:` or in `<song>.view.yaml`): canvas size, fps,
+background (colour, gradient, image), and a list of **layers**, each with a schema: `title`, `section_banner`,
+`chords`, `letters`, `staff` (grand/single, which parts, colour per part), `piano_roll` (window, 36-row or 12-row,
+colour per part, golden layers tinted), `waveform`, `spectrum`, `text`, `image`, `timeline`, positioned by a
+rectangle and z-order, with visibility over time (always, or per section). The current fixed layout becomes the
+default view. The same spec renders MP4s, posters and stills.
+
+### 4.5 MIDI export
+`export/midi.py` (mido): one track per part, velocities, played timing, pitch bend for sixth-steps (36-ET notes as
+MPE-style per-note bend or one channel per layer), drums on channel 10.
+
+## 5. Architecture
 
 ```
- browser (Vite + React + TypeScript)           Python (FastAPI + uvicorn, already installed)
- ┌───────────────────────────────┐   HTTP     ┌─────────────────────────────────────────┐
- │ Rack · Editor · Keyboard · Pads│◄────────► │ /api/instruments  (schemas)             │
- │ Presets · Steps · Feel · Song  │  JSON     │ /api/presets/...  (YAML files on disk)  │
- │ Patch editor (node graph)      │           │ /api/render/note|pattern|song           │
- │ WebAudio playback, Web MIDI in │◄─ WS ───► │ /ws  live param changes → PCM back      │
- └───────────────────────────────┘ float32   │   songmap engine (instruments, perform, │
-                                    PCM        │   mix) — the same code as the CLI      │
-                                               └─────────────────────────────────────────┘
+ browser: React + TypeScript (Vite build, served by the Python server)
+ ┌───────────────────────────────────────────────────────────────┐
+ │ Code · Arrangement · Piano roll · Steps · Mixer · Rack ·        │   REST: load/save, operations, exports
+ │ Instrument editor · Patch graph · Video designer · Exports · QA │◄────────────────────────────────────►
+ │ WebAudio player (buffers from the server)                       │   WebSocket: render progress, audio,
+ └───────────────────────────────────────────────────────────────┘   meters, check diagnostics
+ python: FastAPI + uvicorn (songmap/gui/)
+   project (song tree + arrangement + render cache) · operations · audition · render jobs · exports
+   → the songmap engine, unchanged in kind (parse, expand, perform, instruments, mix, master, visual)
 ```
 
-**Why this stack:**
-- Python stays the single source of DSP truth.
-- React matches the Remotion video stack.
-- A browser UI runs in the desktop app's browser pane or any browser.
-- FastAPI, uvicorn and node/npm are already on this machine.
+- **Launch:** `songmap gui [song.sm]` starts the server on 127.0.0.1:8765 and opens the browser (`.claude/launch.json`
+  has the `songmap-gui` entry).
+- **Audio:** the server renders and sends 16-bit or float PCM (or MP3 for long renders); the browser plays it with
+  WebAudio, keeps the playhead in sync with the views, and loops a range. Audition notes are rendered on demand and
+  cached by (instrument, params, pitch, velocity, gate).
+- **Files:** the server reads and writes the song files in the repo (`songs/…`, `examples/…`), presets
+  (`songmap/presets/`), patches (`songmap/patches/`) and views. Every write is atomic and keeps a `.bak`.
 
-**Audio path:**
-- **One-shot:** the server renders a note into a float32 stereo buffer and sends it as a binary WebSocket frame with a JSON header. The browser builds an `AudioBuffer` and plays it.
-- **Renders are cached** by `hash(instrument, params, pitch, vel, gate, seed)`, so dragging a knob back to a previous value is instant.
-- **Rate limiting:** while a knob is dragged, requests are coalesced to at most one in flight plus the latest pending one (about 20–30 renders per second).
-- **Loop audition** (a 1–4 bar pattern or section): the server renders the loop; the browser plays it with `loop=true`. On a parameter change the server re-renders in a background task and the browser swaps buffers at the next loop start with a 5 ms crossfade.
-- **Budget:** the sketch renders 23 s of a full 6-part mix in about 5.7 s on this machine, including first-run numba compilation. A single drum hit or 1 s note takes a few ms. Keep any instrument above 20 ms per second of audio off the live path (render it in the background).
-- **MIDI keyboard:** the Web MIDI API sends note-ons to `/ws`, the server renders the note and returns it. Latency is about 20–60 ms: fine for auditioning, not for performing. Real-time play is a non-goal for v1.
-
-## 3. Screens
+## 6. Screens
 
 ```
-┌──────────────────────────────────────────────────────────────────────────────────────┐
-│ SongMap Studio   [song: week_oct13_swarm.sm ▾]  [Render ▶]  LUFS -14.1  TP -1.0  ✓QA  │
-├───────────────┬──────────────────────────────────────────────────────────────────────┤
-│ RACK          │ KICK · preset kick/punchy  [A|B] [Save] [Save as] [Rand ±10%] [Init]  │
-│ ▸ drums       │ ┌─ pitch ───────────┐ ┌─ amp ──────┐ ┌─ click ────────┐ ┌─ tone ──┐  │
-│   kick  ●     │ │ (tune) (sweep)    │ │ (decay)    │ │ (click)(tone)  │ │ (drive) │  │
-│   snare       │ │  50Hz   34st      │ │  0.38s     │ │  0.55  4.2k    │ │  2.2x   │  │
-│   clap        │ │ (sweep_time)      │ │ (sub)      │ └────────────────┘ └─────────┘  │
-│   hat / ohat  │ └───────────────────┘ └────────────┘ ┌─ velocity ─────┐ ┌─ var ───┐  │
-│ ▸ bass        │  [waveform + spectrum of last hit]   │(vel_sweep)(vel_│ │ (rr)    │  │
-│ ▸ pad         │  [pitch-env / amp-env curves drawn]  │ click)(curve)  │ └─────────┘  │
-│ ▸ keys        │                                      └────────────────┘              │
-│ + instrument  │ VELOCITY PADS  ░▒▓█ (click height = velocity)   [p] [mf] [ff] [sweep] │
-│ + patch       │ KEYBOARD  |█|█||█|█|█||█|█||   oct [-][+]   MIDI in: ● Arturia        │
-├───────────────┴──────────────────────────────────────────────────────────────────────┤
-│ STEPS  kick  X . . . . . x . . . x . . . . .  │ swing 0.56/16  tpl mpc  hum 4/3/.04  [▶] │
-│        snare . . . . X . . o . . . . X . o o  │ feel snare +6ms           [Copy songmap] │
-└──────────────────────────────────────────────────────────────────────────────────────┘
+┌ SongMap Studio ── songs/golden/02_deceptive_light.sm ─ [▶ ■ ⟲ 1:04.2] ── LUFS −17.5 ─ [Export ▾] ─────────┐
+│ FILES │ CODE (.sm, live check)            │ ARRANGEMENT: sections, parts lanes, events, cues, video thumbs│
+│ songs │ song "Deceptive Light" 120 4/4 G  │ intro│verse     │pre│chorus    │post│verse_2  │…             │
+│ presets│ chords …                         │ drums ▮▮▮▮ ▮▮▮▮ ▮▮ ▮▮▮▮ …                                     │
+│ patches│ verse 8 | drums:pocket …         ├───────────────────────────────────────────────────────────────┤
+│ views │ ✓ ok · 77 bars · 2:37            │ PIANO ROLL (36-ET rows; golden notes tinted; generated hatched)│
+├───────┴──────────────────────────────────┴───────────────────────────────────────────────────────────────┤
+│ MIXER: per part fader, pan, mute/solo, sends, inserts (knobs), meters · returns · master                   │
+│ RACK / INSTRUMENT: knobs by group, presets A/B, keyboard + velocity pads · [Open as patch] → PATCH GRAPH     │
+│ VIDEO: layers list · properties · live frame preview at the playhead · [Render MP4] [Save PNG]             │
+└────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 3.1 Rack
-The parts of the loaded song, or a scratch rack. Each entry shows its instrument, preset, mute/solo, and a level meter. **+ instrument** picks from the registry, including samplers and plugins. **+ patch** opens the patch editor.
+Panes are dockable tabs. Each one is a view of the same project state; selecting a part in any pane selects it
+everywhere (rack, mixer strip, piano-roll lane, code line).
 
-### 3.2 Instrument editor (auto-generated)
-- One **panel per `Param.group`** (pitch, amp, filter, tone, velocity, variation…), knobs in schema order.
-- **Knob behaviour:**
-  - Vertical drag; Shift for fine adjustment; mouse wheel; double-click resets to the default; Ctrl/Cmd-click types a value.
-  - `log` params use exponential mapping, and units are formatted (Hz/kHz, ms/s, st, oct, dB).
-  - The tooltip shows `Param.doc` and the range.
-  - A small **velocity ring** shows the param's `vel_*` modulation amount.
-  - A lock icon excludes the param from randomize.
-- **Visualizers:**
-  - Waveform and spectrum of the last render.
-  - Envelope curves drawn from params (ADSR, pitch sweep, filter env), computed server-side by rendering control curves through the same functions.
-- **Velocity strip:** auditions p / mf / ff, and **sweep** plays 8 hits from vel 0.2 to 1.0. That is the fastest way to hear velocity-to-timbre mapping.
-
-### 3.3 Presets
-- Browser by instrument and tag, with a text search over descriptions.
-- **A/B:** two slots per instrument, toggled instantly. **Diff** lists the params that differ.
-- **Morph:** a slider interpolating A→B (log-aware).
-- **Randomize ±N%:** respects locks and stays within ranges. **Mutate** applies small random steps, for exploring nearby sounds.
-- Saving writes YAML with a description, tags and a `base:` reference, ready to commit to the repo.
-
-### 3.4 Steps and Feel
-- **Step grid** per kit piece. Clicking cycles `. o - x X`; right-click sets `f` (flam) or `r` (ratchet). Per-bar resolution is 16, 12 or 24, and patterns can be up to 4 bars. It writes step strings.
-- **Feel controls:** swing, grid, template, groove amount, humanize (time, drift, vel), per-part offset ms, metric, high_loud, arch, gate. A **played-offset view** draws each note's actual time and velocity against the grid.
-- **Loop playback** of the pattern with the current kit and feel.
-
-### 3.5 Song view (scoring against the picture)
-- Load a `.sm`/`.yaml` song and its video (the Remotion-rendered MP4, or a Remotion preview URL).
-- **Timeline:** sections as colored blocks, cues as frame-exact markers, events as glyphs (impact, riser span, hits). A frame ruler and a bar:beat ruler sit above.
-- **Video player synced to the audio:** scrubbing either one moves both. Selecting an event jumps to its frame. Markers can be dragged; on release they snap to the 16th grid and update the song file.
-- **Mixer strip** per part: gain, pan, sends, sidechain depth, mute/solo. Changes write the `mix` line.
-- **QA panel:** LUFS, true peak, section contrast table, band balance per section, spectrogram with section lines. Failing `qa:` rules turn red.
-- **Render ▶** renders the full song (background, progress over WS) and loads the new audio when done.
-
-### 3.6 Patch editor (arbitrary instruments)
-- **v1 (form-based):** a list of modules, each row with a type dropdown and its params as knobs, plus an inputs selector. Expression fields accept `vel`, `pitch`, `t` and macros, validated live.
-- **v2 (node graph):** drag-and-drop modules and wires, using litegraph.js or Rete.js. Each node shows its knobs and a mini scope, and validation rejects feedback between modules.
-- A **macro builder** lets you pick params and ranges for each macro knob. Macros appear as the instrument's knobs everywhere else.
-- **Templates:** "subtractive mono", "FM bell", "KS pluck", "modal mallet", "formant voice", "noise percussion".
-- **Export as Python:** generates an `Instrument` subclass skeleton from the patch, for promoting a patch into a first-class, faster engine instrument.
-
-### 3.7 Copy as songmap
-Every panel has **Copy as songmap**:
-- `inst bass=bass/acid_sub(cutoff=640,res=2.1)`
-- `kit kick=kick/punchy(decay=.35)`
-- `feel snare offset=6`
-- a step-string line
-- or the YAML equivalent
-
-This is how a sound tuned by ear gets back into an LLM-authored song.
-
-## 4. API
-
-| Method | Path | Body / response |
+| Screen | What it does | Writes back to |
 |---|---|---|
-| GET | `/api/instruments` | `[schema]`: name, family, mono, params |
-| GET | `/api/presets?instrument=kick` | List with descriptions and tags |
-| GET/PUT/DELETE | `/api/presets/{inst}/{name}` | Preset YAML ↔ JSON (DELETE moves it to `presets/.trash/`) |
-| POST | `/api/render/note` | `{instrument, params, pitch, vel, gate, seed}` → binary PCM |
-| POST | `/api/render/pattern` | `{kit/parts, steps/motifs, feel, bars, tempo}` → binary PCM |
-| POST | `/api/render/song` | `{path}` → job id; progress and result over WS |
-| GET | `/api/song?path=` | Parsed song tree + `cues.json` + last `qa.json` |
-| PUT | `/api/song` | Apply an edit (section line, cue, mix) and write the file |
-| POST | `/api/patch/validate` | Patch YAML → errors or the compiled schema |
-| WS | `/ws` | `{type: param, inst, name, value}` → re-render; `{type: midi, note, vel}` → render note; server pushes `audio`, `progress`, `qa` |
+| **Code** | the `.sm`/YAML source with syntax colouring, live `check` diagnostics (line + suggestion), `fmt` | the file |
+| **Arrangement** | sections as blocks (drag to resize/reorder), part lanes, events and cues on a frame/bar ruler | section lines, events, cues |
+| **Piano roll** | notes of one part (or all, coloured); 12- or 36-row grid; draw, move, resize, velocity lane; bake/un-bake | clips (`notes:`) |
+| **Steps** | kit lanes as step grids (16/12/24 per bar), velocity per step, flam/ratchet | step strings |
+| **Mixer** | faders, pan, mute/solo, sends, insert chains, returns, master; live meters | `mix`, `returns`, `master` |
+| **Rack + instrument** | parts and their instruments; generated knob panels; presets (A/B, diff, save); keyboard (36-ET aware) and velocity pads | `inst` lines, presets |
+| **Patch graph** | modules as nodes, wires, modulation, macros; templates incl. every native instrument | `patches/*.yaml` |
+| **Feel** | mood, groove, humanize, per-part feel with a played-vs-written view | `groove`, `feel`, `mood` |
+| **Video** | view layers, properties, preview at the playhead; render MP4/PNG | the view spec |
+| **Exports** | WAV, MP3, stems, MIDI, cues, MP4, PNG/SVG, QA | files under `build/` or `songs/…/renders/` |
+| **QA / Listen** | `qa.json` numbers, section loudness, spectrogram, `songmap listen` findings | — |
 
-## 5. File layout
+## 7. API (server)
 
-```
-songmap/gui/
-  server.py            # FastAPI app, routes, WS, render cache, background jobs
-  cache.py             # LRU of rendered buffers keyed by stable hash
-  web/                 # Vite + React + TS app
-    src/components/Knob.tsx, KnobPanel.tsx, VelocityPads.tsx, Keyboard.tsx,
-                   StepGrid.tsx, Scope.tsx, Spectrum.tsx, EnvelopeView.tsx,
-                   PresetBar.tsx, Timeline.tsx, VideoSync.tsx, Mixer.tsx, QAPanel.tsx,
-                   PatchEditor.tsx
-    src/audio.ts       # WebAudio playback, loop swap with crossfade, Web MIDI
-    src/api.ts
-  static/              # built web app, served by FastAPI
-```
-
-Launch with `songmap gui [song.sm]`, which starts uvicorn on 127.0.0.1:8765 and opens the browser. Add a `.claude/launch.json` entry so Claude Code can open it in the browser pane for verification.
-
-## 6. Milestones
-
-| Milestone | Scope | Done when |
+| Method | Path | Purpose |
 |---|---|---|
-| **G1 — Knobs & audition** | Server with `/api/instruments` and `/api/render/note`; Knob component; auto-generated editor; velocity pads; keyboard; waveform view; render cache | Every registered instrument is editable; a knob change is heard in ≤ 100 ms for drums; the schema of a newly added instrument appears without GUI changes |
-| **G2 — Presets** | Save/load/A-B/diff/randomize/morph; tags; Copy as songmap | Presets round-trip YAML↔GUI byte-stable; a song referencing `kick/punchy` renders the same sound as the GUI |
-| **G3 — Steps & Feel** | Step grid, loop playback with background re-render and swap, feel panel, played-offset view | 4-bar loop edits swap at the loop boundary without clicks; the step strings written match the spec grammar |
-| **G4 — Song & video** | Song view, timeline, video sync, mixer, QA panel, full render jobs | Scrubbing the video and the audio together stays in sync within 1 frame; dragging a cue updates the `.sm` file |
-| **G5 — Patch editor** | Form editor, then node graph; macros; templates; export-as-Python | A user builds an FM bell from a template, saves it, and uses it in a song without writing Python |
-| **G6 — Plugins & samplers** | Plugin parameter panels (DawDreamer), sampler zone viewer | A Surge XT preset and an SFZ piano are playable and savable like native instruments |
+| GET | `/api/files` | songs, presets, patches, views in the repo |
+| GET/PUT | `/api/project?path=` | load a song: source text, tree (JSON), arrangement summary, diagnostics; save text |
+| POST | `/api/check` | source text → diagnostics + summary (fast, no audio) |
+| POST | `/api/op` | apply an operation to the tree → new source text + tree |
+| GET | `/api/catalog` | instruments (schemas), presets, styles, moods, effects, patch modules, view layers |
+| POST | `/api/audition` | instrument + params + pitch/vel/gate → PCM |
+| POST | `/api/render` | render the song (or a range or part solo) → job; audio + meters + QA over the WebSocket |
+| GET | `/api/notes?part=&section=` | written/played notes for the piano roll (with generated flags) |
+| POST | `/api/frame` | view spec + time → PNG |
+| POST | `/api/export` | formats → files |
+| WS | `/ws` | progress, audio ready, diagnostics |
 
-**Testing:**
-- API tests run under pytest with FastAPI's TestClient: schema endpoint, deterministic render hashes, preset round-trip.
-- UI checks run in the desktop app's browser pane: knob drag, A/B, loop swap, video sync.
-- The audio path is exercised by asserting rendered PCM equals the engine's offline render for the same inputs.
+## 8. Milestones
+
+| | Scope | Done when |
+|---|---|---|
+| **S1 — Studio shell** | server, project load/save, code pane with live check, render + playback with transport, arrangement overview, exports (WAV/MP3/stems/cues/MP4/PNG) | open any song in `songs/`, edit its text, hear it, export every existing format, all from the GUI |
+| **S2 — Rack and knobs** | catalog endpoint, generated knob panels for all 17 instruments + sampler, presets, keyboard audition, writes `inst` lines | every instrument audible and editable; a knob change writes the song and is heard |
+| **S3 — Mixer** | insert-effect units (§4.2), mixer screen, meters | volume, pan, mute/solo, sends and inserts edit the song and are heard; meters match `qa.json` |
+| **S4 — Piano roll and steps** | clips and the note writer (§4.3), piano roll (36-ET), step grid, bake/un-bake | drawing and editing notes round-trips exactly through the text |
+| **S5 — Patch instruments** | patch engine (§4.1), patch graph screen, native instruments as templates | open any native instrument as a patch, rewire it, save it, use it in a song |
+| **S6 — Video designer** | view spec (§4.4), video screen with live preview | change layers/positions/colours and see the frame; render the MP4 with that view |
+| **S7 — Feel and MIDI** | feel screen, MIDI export (§4.5) | mood/groove edits are heard; MIDI opens in a DAW with 36-ET pitch bends |
+
+**Testing:** API tests with FastAPI's TestClient (load/check/op/render/export); round-trip tests for every operation
+(tree → text → tree identical); patch templates against native renders; UI checks in the desktop app's browser pane.

@@ -20,6 +20,7 @@ from .instruments import Note
 from .instruments.dsp import SR, as_stereo, n_samples, pan_mono, undb
 from .instruments.sampler.library import licenses_md
 from .mix.fx import convolve, reverb_ir, sidechain_env
+from .mix.inserts import apply_chain
 from .mix.master import master, master_clean, master_legacy
 from .model import Song
 from .perform.pipeline import GATE
@@ -85,14 +86,24 @@ def held_beats(e: XEv) -> float:
     return e.dur * frac
 
 
-def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderResult:
+def inst_key(inst) -> tuple:
+    """An instrument's identity for the note cache: its class, params and (samplers) its program."""
+    src = getattr(inst, "source", None)
+    return (type(inst).__name__, getattr(inst, "name", ""), tuple(sorted((k, repr(v)) for k, v in inst.p.items())),
+            src.get("program") if isinstance(src, dict) else None)
+
+
+def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: dict | None = None) -> RenderResult:
+    """`note_cache`: a dict kept across renders (the Studio's) so notes that didn't change aren't synthesized
+    again; keys are (instrument identity, pitch, velocity, gate, seed, params)."""
     t0 = time.time()
     arr = expand(song)
     tl, ens = arr.timeline, arr.ensemble
     n = n_samples(tl.seconds)
     buses: dict[str, np.ndarray] = {}
     triggers: dict[str, list[float]] = {}
-    cache: dict = {}
+    cache: dict = {} if note_cache is None else note_cache
+    ikeys: dict[int, tuple] = {}
     rendered = hits = 0
     from .perform.play import play, played_digest
     played = play(arr)                     # the performance stage (mood v0: the written notes as they are)
@@ -111,7 +122,10 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
             gain = float(undb(voice.gain_db + e.gain_db))
             pan = float(np.clip(voice.pan + e.pan, -1, 1))
             for p in e.pitches or (60.0,):
-                key = (id(inst), round(float(p), 4), round(e.vel, 5), round(gate, 5), seed,
+                ik = ikeys.get(id(inst))
+                if ik is None:
+                    ik = ikeys[id(inst)] = inst_key(inst) if note_cache is not None else (id(inst),)
+                key = (ik, round(float(p), 4), round(e.vel, 5), round(gate, 5), seed,
                        tuple(sorted(e.params.items())))
                 note = Note(float(p), float(e.vel), gate, seed=seed, rr=k % RR_SLOTS, params=dict(e.params))
                 y = cache.get(key)
@@ -133,6 +147,8 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
     stems: dict[str, np.ndarray] = {}
     for part, buf in buses.items():
         m = ens.mix.get(part, {})
+        if m.get("inserts"):                          # insert effects, before the fader
+            buf = apply_chain(buf, m["inserts"], {"tempo": song.tempo, "seed": seed_for(song.seed, "insert", part)})
         buf *= float(undb(float(m.get("gain_db", 0))))
         if m.get("pan"):
             p = float(m["pan"])
@@ -164,6 +180,8 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
         # the stem is the layer's whole effect on the mix: its tones, minus the music they replace
         stems["binaural"] = render_layer(layer, tl, n, music, SR) - (carve(layer, music, SR) if layer.carve else 0)
     mix = sum(stems.values()) if stems else np.zeros((n, 2))
+    if (ens.mix.get("master") or {}).get("inserts"):  # the master's insert chain, before mastering
+        mix = apply_chain(mix, ens.mix["master"]["inserts"], {"tempo": song.tempo, "seed": seed_for(song.seed, "insert")})
     mode = master_mode or song.master.mode
     if mode == "legacy":
         out = master_legacy(mix)

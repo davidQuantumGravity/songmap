@@ -6,6 +6,9 @@
 title: "Music Theory of Golden Harmony"
 subtitle: "Music theory from first principles, from the harmonic series to golden tones in 36-ET"
 author: "David Chester"
+# public address of the site (social previews and canonical links need absolute URLs; keep the trailing slash)
+site_url: "https://deeperresearch.ai/music_theory_of_golden_harmony/"
+description: "A textbook that builds Western harmony from the harmonic series, then extends it to golden tones in 36-ET: golden chords, scales, modulation and melody, with hundreds of audio and video examples."
 edition: "First edition (draft)"
 year: 2026
 publisher: "Published by the author"

@@ -44,8 +44,8 @@ def _is_setting(key, v, progressions=()) -> bool:
 PART_KEYS = PART_SOURCES + PART_OPTS
 KEYWORDS = {"for", "in", "if", "elif", "else", "every", "def", "return", "form", "with", "and", "or", "not",
             "true", "false", "none", "as", "at", "bars"}
-DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "master", "qa", "set",
-              "binaural")
+DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "inserts", "master",
+              "qa", "set", "binaural")
 MIX_KEYS = ("pan", "width", "send", "sidechain", "eq", "bus_comp")
 STEP_RANK = {".": 0, "o": 1, "-": 2, "x": 3, "r": 4, "f": 5, "X": 6}
 
@@ -89,7 +89,7 @@ class Line:
 
 
 def _lex(text: str, file: str | None) -> list[Line]:
-    lines, cur, depth, no, line_start = [], [], 0, 1, 0
+    lines, cur, depth, no, line_start, blank = [], [], 0, 1, 0, []
     indent = None
     pos = 0
     while pos < len(text):
@@ -109,11 +109,17 @@ def _lex(text: str, file: str | None) -> list[Line]:
             if depth == 0 and cur:
                 lines.append(Line(cur, indent, cur[0].line, text))
                 cur = []
-            indent = None
+            if cur:
+                blank.append((m.start(), m.end()))    # inside brackets: the logical line goes on, same indent
+            else:
+                indent = None
         elif kind == "ws":
             if "\t" in m.group() and not cur and depth == 0:
                 raise SongError("tab in indentation", file=file, line=no, suggestion="indent with spaces")
-        elif kind != "comment":
+        elif kind == "comment":
+            if cur:
+                blank.append((m.start(), m.end()))
+        else:
             v = m.group()
             if kind == "num":
                 v = float(v) if "." in v else int(v)
@@ -134,6 +140,15 @@ def _lex(text: str, file: str | None) -> list[Line]:
                         suggestion="close every ( [ {")
     if cur:
         lines.append(Line(cur, indent, cur[0].line, text))
+    if blank:
+        # raw slices (`Line.raw`) read the text with the newlines and comments inside a logical line blanked
+        # to spaces: the same length, so token offsets still index it
+        flat = list(text)
+        for a, b in blank:
+            flat[a:b] = " " * (b - a)
+        flat = "".join(flat)
+        for ln in lines:
+            ln.text = flat
     return lines
 
 
@@ -197,7 +212,9 @@ class _Expr:
         if not self.at(value):
             p = self.peek()
             got = f"'{p.value}'" if p else "end of line"
-            raise SongError(f"expected '{value}', got {got}", file=self.file, line=(p or self.t[-1]).line)
+            raise SongError(f"expected '{value}', got {got}", file=self.file, line=(p or self.t[-1]).line,
+                            suggestion={",": "separate items with ','; inside brackets a line break is only a space",
+                                        ":": "write map entries as key: value"}.get(value))
         self.i += 1
         return self.t[self.i - 1]
 
@@ -1634,6 +1651,9 @@ class _Interp:
             if eq:
                 if k == "video":
                     comp, _, frames = v.partition(":")
+                    if frames and not re.fullmatch(r"[0-9]+", frames):
+                        self.err(f"song: video frames '{frames}' must be a whole number", line,
+                                 "write video=Composition:4530")
                     s["video"] = {"composition": comp, **({"frames": int(frames)} if frames else {})}
                 elif k in keys:
                     s[keys[k]] = _scalar(v)
@@ -1737,7 +1757,33 @@ class _Interp:
                     m[k] = _value(v)
                 else:
                     self.err(f"mix {part}: unknown option '{k}'", line, did_you_mean(k, ("sc", *MIX_KEYS, *sends)))
-            self.song.setdefault("mix", {})[part] = m
+            old = self.song.setdefault("mix", {}).get(part) or {}
+            self.song["mix"][part] = {**({"inserts": old["inserts"]} if "inserts" in old else {}), **m}
+
+    _UNIT = re.compile(r"\s*([A-Za-z_]\w*)(?:\(([^)]*)\))?")
+
+    def d_inserts(self, args, raw, line):
+        """`inserts lead eq(high=2) comp(threshold=-20) | master eq(low=1)`: each part's effect chain."""
+        from ..mix.inserts import make
+        for chunk in split_top(self._rest(raw), "|"):
+            words = chunk.split(None, 1)
+            if not words:
+                continue
+            part, body, chain = words[0], (words[1] if len(words) > 1 else ""), []
+            pos = 0
+            while pos < len(body.rstrip()):
+                m = self._UNIT.match(body, pos)
+                if not m or m.end() == pos:
+                    self.err(f"inserts {part}: '{body[pos:].split()[0]}' not understood", line,
+                             "write inserts lead eq(high=2) comp(threshold=-20, ratio=3)")
+                try:
+                    spec = {"fx": m[1], **(_kv(m[2]) if m[2] else {})}
+                    make(spec)                                     # validate the unit and its params here
+                except (SongError, ValueError) as e:
+                    self.err(f"inserts {part}: {getattr(e, 'message', None) or e}", line)
+                chain.append(spec)
+                pos = m.end()
+            self.song.setdefault("mix", {}).setdefault(part, {})["inserts"] = chain
 
     def d_qa(self, args, raw, line):
         q = self.song.setdefault("qa", {})
@@ -1808,6 +1854,8 @@ class _Interp:
             if a in ("deg", "rel"):
                 mode = a
             elif a.startswith("oct="):
+                if not re.fullmatch(r"-?[0-9]+", a[4:]):
+                    self.err(f"motif {name}: octave '{a[4:]}' must be a whole number", line, "write oct=5")
                 m["octave"] = int(a[4:])
             elif a.startswith("key="):
                 m["key"] = a[4:]

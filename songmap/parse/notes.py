@@ -9,7 +9,7 @@ Motif grammar (whitespace-separated tokens; `|` bar lines are checked against th
     degree    0 1 -3 #4 b7                 in `deg:` motifs, degrees of the key (0 = tonic)
     chord     [c,e,g]  [0,2,4]             simultaneous notes
     rest      r
-    duration  1 2 4 8 16 32, dots `.`, triplet `t`   e.g. 4.  8t  16
+    duration  1 2 4 8 16 32, dots `.`, triplet `t`   e.g. 4.  8t  16;  *N for N of them: 1*2 = two whole notes
               STICKY: a note without a duration repeats the previous one (LilyPond rule)
               in deg mode durations follow a slash: 3/8, 0/4.
     marks     ^ accent   ! marcato   ' staccato   _ tenuto   ~ slur into next (glide on mono)
@@ -17,6 +17,7 @@ Motif grammar (whitespace-separated tokens; `|` bar lines are checked against th
     velocity  @0..127 explicit, overrides dynamics
     ghost     (e8)  parenthesized note = ghost (very soft)
     grace     {d}e4  quick grace note(s) just before the main note
+    layer     &      starts another voice from the beginning: "c1 & e4 f g a" (a held c under a line)
 
 Examples
     "=mf e4^ d8' c' e4_ g | a2~ g4 (e8) r"
@@ -66,23 +67,23 @@ class EvList(list):
 
 
 def parse_duration(d: str, beat_unit: int = 4) -> float:
-    """'4' -> 1 beat, '8.' -> 0.75, '8t' -> 1/3, in beats of `beat_unit` notes."""
-    m = re.fullmatch(r"(1|2|4|8|16|32|64)(\.*)(t?)", d)
-    if not m:
-        raise NotationError(f"bad duration '{d}'; use 1 2 4 8 16 32 with optional dots or t")
+    """'4' -> 1 beat, '8.' -> 0.75, '8t' -> 1/3, '1*3' -> 12 (three whole notes), in beats of `beat_unit` notes."""
+    m = re.fullmatch(r"(1|2|4|8|16|32|64)(\.*)(t?)(?:\*(\d+))?", d)
+    if not m or (m[4] is not None and int(m[4]) < 1):
+        raise NotationError(f"bad duration '{d}'; use 1 2 4 8 16 32 with optional dots or t, and *N for N of them")
     base = beat_unit / int(m[1])
     total, add = base, base
     for _ in m[2]:
         add /= 2
         total += add
-    return total * (2 / 3 if m[3] else 1)
+    return total * (2 / 3 if m[3] else 1) * (int(m[4]) if m[4] else 1)
 
 
 _PITCH_TOK = re.compile(r"""^
     (?P<open>\()?
     (?:\{(?P<grace>[^}]+)\})?
     (?:(?P<rest>r)|\[(?P<chord>[^\]]+)\]|(?P<pitch>[\^v]*[a-g](?:\#|b)?[+-]*))
-    (?P<dur>(?:1|2|4|8|16|32|64)\.*t?)?
+    (?P<dur>(?:1|2|4|8|16|32|64)\.*t?(?:\*\d+)?)?
     (?P<marks>[\^!'_~]*)
     (?:@(?P<vel>\d{1,3}))?
     (?P<close>\))?
@@ -93,7 +94,7 @@ _DEG_TOK = re.compile(r"""^
     (?P<open>\()?
     (?:\{(?P<grace>[^}]+)\})?
     (?:(?P<rest>r)|\[(?P<chord>[^\]]+)\]|(?P<pitch>[\^v]*[\#b]?-?\d+))
-    (?:/(?P<dur>(?:1|2|4|8|16|32|64)\.*t?))?
+    (?:/(?P<dur>(?:1|2|4|8|16|32|64)\.*t?(?:\*\d+)?))?
     (?P<marks>[\^!'_~]*)
     (?:@(?P<vel>\d{1,3}))?
     (?P<close>\))?
@@ -103,7 +104,7 @@ $""", re.X)
 # rel mode: chord tones relative to the chord sounding at that moment. `R` = root; numbers are
 # chord degrees (3 = the chord's own third, 7 = its seventh, b7/#11 = altered). Durations go
 # straight after `R` or an octave mark (`R8`, `5+8`), else after a slash (`5/8`).
-_DUR = r"(?:1|2|4|8|16|32|64)\.*t?"
+_DUR = r"(?:1|2|4|8|16|32|64)\.*t?(?:\*\d+)?"
 _REL_TOK = re.compile(rf"""^
     (?P<open>\()?
     (?:\{{(?P<grace>[^}}]+)\}})?
@@ -163,7 +164,22 @@ def parse_motif(text: str, *, deg: bool = False, rel: bool = False, key: str = "
     """Parse one motif string into events (beats relative to motif start).
 
     rel=True: chord-relative tokens; events carry `rel` instead of `pitches` until expansion.
+    A standalone `&` starts another layer from the motif's start (voices that overlap, e.g. a held
+    note under a moving line); the layers are merged, and the motif is as long as its longest layer.
     """
+    words = text.split()
+    if "&" in words:
+        layers, cur = [], []
+        for w in words + ["&"]:
+            if w == "&":
+                if cur:
+                    layers.append(parse_motif(" ".join(cur), deg=deg, rel=rel, key=key, octave=octave,
+                                              beats_per_bar=beats_per_bar, name=name))
+                cur = []
+            else:
+                cur.append(w)
+        merged = sorted((e for layer in layers for e in layer), key=lambda e: e.beat)
+        return EvList(merged, length=max((layer.length for layer in layers), default=0.0))
     tok_re = _REL_TOK if rel else _DEG_TOK if deg else _PITCH_TOK
 
     def pitch_of(p: str):
@@ -239,8 +255,8 @@ def parse_motif(text: str, *, deg: bool = False, rel: bool = False, key: str = "
             gp = [pitch_of(g) for g in m["grace"].split(",")]
             for k, g in enumerate(gp):
                 off = 0.08 * (len(gp) - k)
-                evs.append(Ev(beat - off, 0.07, () if rel else (g,), vel * 0.7, "staccato", tags={"grace"},
-                              rel=(g,) if rel else ()))
+                evs.append(Ev(beat - off, 0.07, () if rel else (g,), vel * 0.7, "staccato", explicit_vel=explicit,
+                              tags={"grace"}, rel=(g,) if rel else ()))
         pitches = tuple(pitch_of(p) for p in m["chord"].split(",")) if m["chord"] else (pitch_of(m["pitch"]),)
         if rel:
             evs.append(Ev(beat, dur, (), vel, art, "~" in marks, explicit, tags, rel=pitches))

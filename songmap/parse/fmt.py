@@ -307,7 +307,16 @@ class _Printer:
 
     def trailer(self):
         s = self.song
+        chains = {}
         for part, m in s.mix.items():
+            if isinstance(m, dict) and isinstance(m.get("inserts"), list) and all(
+                    isinstance(u, dict) and isinstance(u.get("fx"), str) and all(
+                        isinstance(v, (int, float)) and not isinstance(v, bool) for k, v in u.items() if k != "fx")
+                    for u in m["inserts"]):
+                chains[part] = m["inserts"]
+                m = {k: v for k, v in m.items() if k != "inserts"}
+                if not m:
+                    continue
             ok = isinstance(m, dict) and isinstance(m.get("gain_db"), (int, float)) and not isinstance(
                 m.get("gain_db"), bool) and set(m) <= {"gain_db", "pan", "width", "send", "sidechain", "eq", "bus_comp"}
             if ok:
@@ -315,6 +324,10 @@ class _Printer:
                 self.lines.append(f"mix {part} {_num(m['gain_db'])}" + (f" {rest}" if rest else ""))
             else:
                 self.set(f"mix.{part}", m)
+        if chains:
+            unit = lambda u: u["fx"] + ("(" + ", ".join(f"{k}={_num(v)}" for k, v in u.items() if k != "fx") + ")"  # noqa: E731
+                                        if len(u) > 1 else "")
+            self.lines.append("inserts " + " | ".join(f"{p} " + " ".join(unit(u) for u in c) for p, c in chains.items()))
         if s.returns:
             self.set("returns", s.returns)
         master = _master_raw(s.master)
