@@ -236,8 +236,10 @@ Report:
   labelled in bold), so several per section are fine. Keep each roll to the notes under discussion.
 - Passing placeholders (`~`, `~g`, `~g7`) in voiced styles play the passing engine's own four lines
   (bass + three upper voices, low to high), not an independent re-voicing; chord names are unchanged.
-- SongMap pitfall: a `notes:` string shorter than its section loops, and a trailing rest does not count
-  toward its length. Make the section exactly as long as the material (or pad with a silent `c16@0`).
+- SongMap pitfall: a `notes:` string shorter than its section loops. Since engine commit cc1ee30 a trailing
+  rest counts toward its length (before, it did not; the book's existing examples are unaffected, checked by
+  event digest). Still make each section exactly as long as its material. A related pitfall remains: a `rel:`
+  figure shorter than a bar is padded to a whole bar, not repeated, so "[R,3,5]/2" strikes once per bar.
 - Roughness tables for SongMap examples must state the voicing measured and whether unison doublings
   between parts are counted once.
 
