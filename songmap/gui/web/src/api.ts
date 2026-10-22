@@ -14,13 +14,26 @@ export type Section = { name: string; index: number; bar: number; bars: number; 
 export type Note = [number, number, number | null, number, string];
 export type PartMix = { gain_db: number; pan: number; send: Record<string, number>; sidechain: boolean };
 export type Part = { name: string; kit: boolean; instrument: string | null; count: number; notes: Note[]; mix: PartMix };
+export type Voice = {
+  use: string; instrument: string; preset: string | null;
+  params: Record<string, number | string>;              // the song's overrides
+  values: Record<string, number | string>;              // every param, resolved (default < preset < song)
+  preset_values?: Record<string, number | string>;
+};
+export type PartVoice = ({ kit: false } & Voice) | { kit: true; pieces: Record<string, Voice> } | { error: string; kit?: undefined };
+export type ParamSpec = { name: string; default: number; lo: number; hi: number; unit: string; curve: "lin" | "log"; group: string; doc: string };
+export type InstrumentSpec = { name: string; family: string; mono: boolean; params: ParamSpec[] };
+export type Preset = { name: string; ref: string; description: string; tags: string[]; params: Record<string, number> };
+export type Catalog = { instruments: InstrumentSpec[]; presets: Record<string, Preset[]>; samplers: { name: string; title: string; license: string; family: string }[] };
+export type AuditionNote = { t: number; pitch: number; vel: number; gate: number };
+
 export type SongEvent = { type: string; at: string; time: number; start: number; section: string | null };
 
 export type Summary = {
   title: string; tempo: number; meter: string; key: string; tuning: string; mood: string | null; fps: number;
   bars: number; seconds: number; music_seconds: number; frames: number; length: string; digest: string;
   sections: Section[]; parts: Part[]; events: SongEvent[]; bar_times: number[];
-  chords: [number, number, string][]; returns: string[];
+  chords: [number, number, string][]; returns: string[]; voices: Record<string, PartVoice>;
 };
 
 // What the video shows and how (docs/GUI.md §4.4; S6 grows this into layers).
@@ -67,6 +80,12 @@ export const api = {
   frameUrl: async (path: string, text: string, t: number, view: object) => {
     const res = await post("/api/frame", { path, text, t, view });
     if (!res.ok) throw new Error(`${res.status}`);
+    return URL.createObjectURL(await res.blob());
+  },
+  catalog: () => json<Catalog>(fetch("/api/catalog")),
+  audition: async (path: string, text: string, part: string, notes: AuditionNote[], piece: string | null, overrides: object) => {
+    const res = await post("/api/audition", { path, text, part, notes, piece, overrides });
+    if (!res.ok) { let d = res.statusText; try { d = (await res.json()).detail ?? d; } catch { /* */ } throw new Error(d); }
     return URL.createObjectURL(await res.blob());
   },
   fileUrl: (path: string) => `/api/file?path=${encodeURIComponent(path)}`,

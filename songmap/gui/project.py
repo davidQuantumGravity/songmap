@@ -246,6 +246,7 @@ class Project:
 def summarize(arr) -> dict:
     """What the arrangement and transport panes need: timing, sections, parts with their notes, events, cues."""
     from ..render import held_beats
+    from .rack import voices
     song, tl = arr.song, arr.timeline
     sections = [{"name": s.name, "index": s.index, "bar": s.start_bar, "bars": s.bars,
                  "start": round(tl.beat_to_sec(s.start), 4), "end": round(tl.beat_to_sec(s.end), 4),
@@ -284,7 +285,7 @@ def summarize(arr) -> dict:
         "bars": tl.total_bars, "seconds": round(tl.seconds, 4), "music_seconds": round(tl.music_seconds, 4),
         "frames": tl.frames, "length": _mmss(tl.seconds), "digest": arr.digest()[:16],
         "sections": sections, "parts": parts, "events": events, "chords": chords,
-        "returns": sorted(arr.ensemble.returns),
+        "returns": sorted(arr.ensemble.returns), "voices": voices(arr.ensemble, arr.parts),
         "bar_times": [round(tl.beat_to_sec(b * tl.bpb), 4) for b in range(int(tl.total_bars) + 1)],
     }
 

@@ -77,3 +77,31 @@ def test_api_check_op_render_and_ranges(client):
     part = client.get(rr["audio"], headers={"Range": "bytes=100-199"})
     assert part.status_code == 206 and part.content == whole.content[100:200]
     assert client.get("/api/project", params={"path": "../outside.sm"}).status_code == 400
+
+
+def test_rack_edits_inst_and_kit_lines():
+    from songmap.gui import rack
+    song = SONG.replace("mix keys", "inst keys=keys/still(hardness=.3) bass(cutoff=480)  # voices\nmix keys")
+    out = rack.set_voice(song, "keys", params={"hardness": 0.45, "t60": 5})
+    assert "inst keys=keys/still(hardness=.45, t60=5) bass(cutoff=480)  # voices" in out
+    assert "keys=keys/still bass" in rack.set_voice(song, "keys", params={"hardness": None})
+    assert "lead=lead/v0(vib_depth=12)" in rack.set_voice(song, "lead", params={"vib_depth": 12}, current_use="lead/v0")
+    assert "keys=epiano bass" in rack.set_voice(song, "keys", use="epiano", clear=True)
+    kit = rack.set_voice(song, "drums", piece="snare", params={"tone": 180}, current_use="snare/v0")
+    assert "kit snare=snare/v0(tone=180)" in kit
+    parsed = parse_text(kit, "x.sm")
+    assert parsed.instruments["drums"]["kit"]["snare"] == {"use": "snare/v0", "tone": 180}
+
+
+def test_rack_catalog_voices_and_audition():
+    from songmap.arrange.expand import expand
+    from songmap.gui import rack
+    cat = rack.catalog()
+    names = {i["name"] for i in cat["instruments"]}
+    assert {"keys", "kick", "clean", "sampler"} <= names and cat["presets"]["pad"]
+    arr = expand(parse_text(SONG, "x.sm"))
+    v = rack.voices(arr.ensemble, arr.parts)
+    assert v["keys"]["values"] and not v["keys"]["kit"]
+    audio = rack.audition(arr.song, "keys", [{"t": 0, "pitch": 60}, {"t": 0.2, "pitch": 64.333, "vel": 1}],
+                          overrides={"hardness": 0.9})
+    assert audio.shape[1] == 2 and 0 < np.abs(audio).max() <= 0.9

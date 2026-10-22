@@ -1,14 +1,15 @@
 // SongMap Studio (docs/GUI.md): files, arrangement, code / mixer dock, inspector, transport.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { api, type Check, type Files, type QA, type Summary, type View } from "./api";
+import { api, type Catalog, type Check, type Files, type QA, type Summary, type View } from "./api";
 import { CodeEditor } from "./CodeEditor";
 import { Arrangement } from "./Arrangement";
 import { Mixer, type MixEdit } from "./Mixer";
 import { ExportPanel, Problems, QAPanel, VideoPanel } from "./Panels";
+import { Rack, type VoiceEdit } from "./Rack";
 import { Splitter, useStored } from "./ui";
 
 type Tab = "problems" | "qa" | "video" | "export";
-type Dock = "code" | "mixer";
+type Dock = "code" | "mixer" | "rack";
 const fmt = (t: number) => `${Math.floor(t / 60)}:${(t % 60).toFixed(1).padStart(4, "0")}`;
 const css = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 const baseName = (s: string) => s.replace(/[_\s-]*\d+$/, "");
@@ -60,6 +61,7 @@ function FileBrowser({ files, current, onOpen, onNew }: {
 
 export function App() {
   const [files, setFiles] = useState<Files | null>(null);
+  const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [path, setPath] = useState<string | null>(null);
   const [text, setText] = useState("");
   const [saved, setSaved] = useState("");
@@ -107,7 +109,10 @@ export function App() {
   }, [summary]);
 
   // ------------------------------------------------------------------ files
-  useEffect(() => { api.files().then(setFiles).catch((e) => setStatus(String(e))); }, []);
+  useEffect(() => {
+    api.files().then(setFiles).catch((e) => setStatus(String(e)));
+    api.catalog().then(setCatalog).catch((e) => setStatus(String(e)));
+  }, []);
   const open = useCallback(async (p: string) => {
     if (dirty && !confirm("Discard unsaved changes?")) return;
     audio.current.pause();
@@ -223,17 +228,19 @@ export function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listenKey]);
 
-  // a mixer edit: rewrite the mix line, then remix if there's audio to remix
-  const mixEdit = async (part: string, edit: MixEdit, defaultGain: number) => {
+  // a GUI edit is a text operation on the server; the new text is the state
+  const applyOp = async (op: string, args: object, remix: boolean) => {
     if (!path) return;
     try {
-      const r = await api.op(path, latest.current.text, "mix", { part, ...edit, default_gain: defaultGain });
+      const r = await api.op(path, latest.current.text, op, args);
       latest.current = { ...latest.current, text: r.text };
       setText(r.text); setCheck(r.check);
       if (r.check.summary) setSummary(r.check.summary);
-      if (rendered) render();
+      if (remix && rendered) render();
     } catch (e) { setStatus(String(e)); }
   };
+  const mixEdit = (part: string, edit: MixEdit, defaultGain: number) => applyOp("mix", { part, ...edit, default_gain: defaultGain }, true);
+  const voiceEdit = (e: VoiceEdit) => applyOp("voice", e, false);
 
   const section = summary?.sections.find((s) => time >= s.start && time < s.end) ?? null;
   const jump = (dir: 1 | -1) => {
@@ -272,6 +279,7 @@ export function App() {
       else if (e.key === "]") jump(1);
       else if (e.key === "l") setLoop((l) => (l ? null : section ? [section.start, section.end] : null));
       else if (e.key === "m") setDock((d) => (d === "mixer" ? "code" : "mixer"));
+      else if (e.key === "i") setDock((d) => (d === "rack" ? "code" : "rack"));
     };
     window.addEventListener("keydown", k);
     return () => window.removeEventListener("keydown", k);
@@ -288,7 +296,7 @@ export function App() {
   const cols = `${filesOpen ? filesW : 0}px ${filesOpen ? 4 : 0}px minmax(0, 1fr) 4px ${inspW}px`;
 
   return (
-    <div className="app" style={{ gridTemplateColumns: cols }}>
+    <div className="app" style={{ gridTemplateColumns: cols, gridTemplateRows: `46px ${arrH}px 4px minmax(0, 1fr) 58px` }}>
       <header>
         <button className="ghost icon" title="Show or hide the file list" onClick={() => setFilesOpen((o) => !o)}>☰</button>
         <span className="logo"><Logo /> SongMap <em>Studio</em></span>
@@ -306,9 +314,8 @@ export function App() {
           {check.ok ? `✓ checked · ${check.ms} ms` : `✗ ${nErr} error${nErr === 1 ? "" : "s"}`}</span>}
         <button disabled={!path || !dirty} onClick={save} title="Ctrl+S">Save</button>
       </header>
-      {filesOpen ? <FileBrowser files={files} current={path} onOpen={(p) => open(p).catch((e) => setStatus(String(e)))} onNew={create} /> : <div />}
-      {filesOpen ? <Splitter dir="x" value={filesW} set={setFilesW} min={160} max={480} /> : <div />}
-      <main style={{ gridTemplateRows: `${arrH}px 4px minmax(0, 1fr)` }}>
+      {filesOpen ? <FileBrowser files={files} current={path} onOpen={(p) => open(p).catch((e) => setStatus(String(e)))} onNew={create} /> : <div className="files" />}
+      {filesOpen ? <Splitter area="s1" dir="x" value={filesW} set={setFilesW} min={160} max={480} /> : <div style={{ gridArea: "s1" }} />}
         {summary ? (
           <Arrangement summary={summary} time={time} loop={loop} mute={mute} solo={solo} colorOf={colorOf} sectionColor={sectionColor}
                        onSeek={seek} onLoop={setLoop} onSection={gotoSection} onMute={toggle(setMute)} onSolo={toggle(setSolo)} />
@@ -321,10 +328,11 @@ export function App() {
             </div>
           </div>
         )}
-        <Splitter dir="y" value={arrH} set={setArrH} min={120} max={900} />
+        <Splitter area="sy" dir="y" value={arrH} set={setArrH} min={120} max={900} />
         <div className="dock">
           <nav className="dock-tabs">
             <button className={dock === "code" ? "on" : ""} onClick={() => setDock("code")}>Code</button>
+            <button className={dock === "rack" ? "on" : ""} onClick={() => setDock("rack")} disabled={!summary}>Instruments <kbd>I</kbd></button>
             <button className={dock === "mixer" ? "on" : ""} onClick={() => setDock("mixer")} disabled={!summary}>Mixer <kbd>M</kbd></button>
             <span className="spacer" />
             {dock === "code" && <span className="muted small">Ctrl+S save · Ctrl+Enter render · Space play · [ ] sections · L loop</span>}
@@ -333,14 +341,16 @@ export function App() {
             {path && <div className="code-wrap" style={{ display: dock === "code" ? "block" : "none" }}>
               <CodeEditor value={text} onChange={setText} diagnostics={check?.diagnostics ?? []} gotoLine={goto} />
             </div>}
+            {dock === "rack" && summary && path && (
+              <Rack path={path} text={text} summary={summary} catalog={catalog} onEdit={voiceEdit} colorOf={colorOf} time={time} />
+            )}
             {dock === "mixer" && summary && (
               <Mixer summary={summary} qa={qa} mute={mute} solo={solo} busy={rendering === "remix"} colorOf={colorOf}
                      onMute={toggle(setMute)} onSolo={toggle(setSolo)} onEdit={mixEdit} />
             )}
           </div>
         </div>
-      </main>
-      <Splitter dir="x" value={inspW} set={setInspW} min={260} max={720} invert />
+      <Splitter area="s2" dir="x" value={inspW} set={setInspW} min={260} max={720} invert />
       <section className="inspector">
         <nav>{tabs.map(([k, l, n]) => <button key={k} className={tab === k ? "on" : ""} onClick={() => setTab(k)}>
           {l}{n > 0 && <span className={"badge" + (nErr ? " bad" : "")}>{n}</span>}</button>)}</nav>

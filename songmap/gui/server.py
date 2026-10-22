@@ -137,9 +137,39 @@ def op(path: str = Body(...), text: str = Body(...), op: str = Body(...), args: 
         from .mixer import set_mix
         new = set_mix(text, args["part"], gain_db=args.get("gain_db"), pan=args.get("pan"), sends=args.get("sends"),
                       default_gain=float(args.get("default_gain", 0)))
+    elif op == "voice":
+        if not pr.path.endswith((".sm", ".sml")):
+            raise HTTPException(400, "the rack edits .sm songs (convert a YAML song with `songmap fmt --to sm`)")
+        from .rack import set_voice
+        try:
+            new = set_voice(text, args["part"], use=args.get("use"), params=args.get("params"), piece=args.get("piece"),
+                            current_use=args.get("current_use"), clear=bool(args.get("clear")))
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from None
     else:
         raise HTTPException(400, f"unknown op {op}")
     return {"text": new, "check": pr.check(new)}
+
+
+@app.get("/api/catalog")
+def get_catalog():
+    from .rack import catalog
+    return catalog()
+
+
+@app.post("/api/audition")
+def audition(path: str = Body(...), text: str = Body(...), part: str = Body(...), notes: list[dict] = Body(...),
+             piece: str | None = Body(None), overrides: dict = Body(default={})):
+    """A few notes played by one part's voice (with unsaved knob overrides), as WAV."""
+    from ..parse.errors import NotationError, SongError
+    from .project import parse_text, wav_bytes
+    from .rack import audition as play
+    pr = project(path)
+    try:
+        audio = play(parse_text(text, pr.path), part, notes[:64], piece, overrides)
+    except (SongError, NotationError, ValueError) as e:
+        raise HTTPException(400, getattr(e, "message", None) or str(e)) from None
+    return Response(wav_bytes(audio), media_type="audio/wav", headers={"Cache-Control": "no-store"})
 
 
 # ---------------------------------------------------------------------------------------------- visuals
