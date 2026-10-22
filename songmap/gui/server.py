@@ -146,9 +146,39 @@ def op(path: str = Body(...), text: str = Body(...), op: str = Body(...), args: 
                             current_use=args.get("current_use"), clear=bool(args.get("clear")))
         except ValueError as e:
             raise HTTPException(400, str(e)) from None
+    elif op in ("bake", "clip", "steps"):
+        from ..arrange.expand import expand
+        from .clips import bake, set_steps, write_clip
+        from .project import parse_text
+        try:
+            arr = expand(parse_text(text, pr.path))
+            i = int(args["index"])
+            new = (bake(text, arr, i, args["part"]) if op == "bake"
+                   else set_steps(text, arr, i, args["piece"], args["steps"]) if op == "steps"
+                   else write_clip(text, arr, i, args["part"], args["notes"]))
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from None
     else:
         raise HTTPException(400, f"unknown op {op}")
     return {"text": new, "check": pr.check(new)}
+
+
+@app.post("/api/clip")
+def clip(path: str = Body(...), text: str = Body(...), index: int = Body(...), part: str = Body(...)):
+    """A part's notes in one section, in beats (the piano roll)."""
+    from ..arrange.expand import expand
+    from ..parse.errors import NotationError, SongError
+    from .clips import section_clip, section_hits
+    from .project import parse_text
+    pr = project(path)
+    try:
+        arr = expand(parse_text(text, pr.path))
+        c = section_hits(arr, index, part, text) if arr.ensemble.is_kit(part) else section_clip(arr, index, part)
+        c["kit"] = arr.ensemble.is_kit(part)
+    except (SongError, NotationError, ValueError) as e:
+        raise HTTPException(400, getattr(e, "message", None) or str(e)) from None
+    c["shared"] = sum(1 for s in arr.song.sections if c["line"] and s.line == c["line"])
+    return c
 
 
 @app.get("/api/catalog")

@@ -286,3 +286,57 @@ main { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; min-h
 .pad-btn { width: 96px; height: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 600; border-radius: 10px; }
 .pad-btn small { font-weight: 400; color: var(--muted); font-size: 10px; }
 .pad-btn:active { background: var(--accent-soft); }
+
+/* ---------------------------------------------------------------- piano roll */
+.roll { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.roll-tools { display: flex; align-items: center; gap: 12px; padding: 6px 12px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.field-inline { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.field-inline select { color: var(--ink); font-size: 12.5px; }
+.field-inline input[type="range"] { width: 80px; }
+.ok-pill { background: color-mix(in srgb, var(--ok) 14%, transparent); color: var(--ok); }
+.roll-scroll { flex: 1; overflow: auto; min-height: 0; position: relative; background: var(--panel); }
+.roll-inner { position: relative; }
+.roll-keys { position: sticky; left: 0; z-index: 2; width: 46px; background: var(--panel); border-right: 1px solid var(--line2); float: left; }
+.rk { border-bottom: 1px solid var(--line); font-size: 9px; color: var(--muted); padding-left: 4px; display: flex; align-items: flex-end; cursor: pointer; background: #fffdf8; box-sizing: border-box; overflow: hidden; line-height: 1; }
+.rk.black { background: #3a352d; }
+.rk.micro { background: var(--band2); border-bottom-style: dotted; }
+.rk:hover { background: var(--accent-soft); }
+.roll-svg { position: absolute; top: 0; display: block; user-select: none; touch-action: none; }
+.roll-svg.editable { cursor: crosshair; }
+.row-white { fill: var(--panel); }
+.row-black { fill: var(--band2); }
+.row-micro { fill: color-mix(in srgb, var(--band2) 50%, var(--panel)); }
+.gl-bar { stroke: var(--line2); stroke-width: 1.2; }
+.gl-beat { stroke: var(--line); }
+.gl-sub { stroke: var(--line); stroke-opacity: .45; }
+.bar-num { font-size: 10px; fill: var(--muted); pointer-events: none; }
+.note rect:first-child { stroke: rgba(0,0,0,.25); stroke-width: 1; }
+.note.sel rect:first-child { stroke: var(--ink); stroke-width: 2; }
+.note.ghost { pointer-events: none; }
+.note.ghost rect:first-child { stroke-dasharray: 3 2; }
+.note.grace rect:first-child { fill-opacity: .4 !important; }
+.roll-svg.editable .note { cursor: grab; }
+.note-handle { fill: transparent; cursor: ew-resize; }
+.note-label { font-size: 9px; fill: #fff; pointer-events: none; font-weight: 600; }
+.vel-bg { fill: var(--panel2); }
+.vel-bar { stroke-width: 4; stroke-linecap: round; cursor: ns-resize; }
+.vel-bar.sel { stroke-width: 6; }
+.roll-playhead { stroke: var(--accent); stroke-width: 2; pointer-events: none; }
+.roll-foot { padding: 4px 12px; border-top: 1px solid var(--line); }
+
+/* ---------------------------------------------------------------- step grid */
+.steps { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.steps-tools { display: flex; align-items: center; gap: 12px; padding: 6px 12px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.steps-scroll { overflow: auto; flex: 1; min-height: 0; padding: 8px 12px; }
+.steps-table { border-collapse: collapse; }
+.steps-table th { position: sticky; left: 0; background: var(--panel); text-align: left; padding: 0 10px 0 0; font-size: 12px; font-weight: 600; white-space: nowrap; z-index: 1; }
+.steps-table th i { color: var(--accent); font-style: normal; }
+.steps-table tr.written th { color: var(--accent); }
+.steps-table td { padding: 2px 1px; cursor: pointer; }
+.steps-table td.beat { padding-left: 4px; }
+.steps-table td.bar { padding-left: 9px; }
+.steps-table td.now .cell { box-shadow: 0 0 0 2px var(--accent); }
+.cell { display: block; width: 18px; height: 22px; border-radius: 4px; background: var(--band2); border: 1px solid var(--line); }
+.cell.cX { border-color: var(--ink); }
+.cell.co { height: 22px; border-style: dashed; }
+.steps-table td:hover .cell { border-color: var(--accent); }

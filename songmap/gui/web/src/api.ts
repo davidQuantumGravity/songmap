@@ -83,6 +83,8 @@ export const api = {
     return URL.createObjectURL(await res.blob());
   },
   catalog: () => json<Catalog>(fetch("/api/catalog")),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  clip: (path: string, text: string, index: number, part: string) => json<any>(post("/api/clip", { path, text, index, part })),
   audition: async (path: string, text: string, part: string, notes: AuditionNote[], piece: string | null, overrides: object) => {
     const res = await post("/api/audition", { path, text, part, notes, piece, overrides });
     if (!res.ok) { let d = res.statusText; try { d = (await res.json()).detail ?? d; } catch { /* */ } throw new Error(d); }

@@ -58,6 +58,7 @@ class XEv:
     slur: bool = False
     tags: frozenset = frozenset()
     section: str = ""
+    explicit_vel: bool = False       # written @NN: section and part dynamics leave it alone
 
     def key(self) -> str:
         f = lambda x: f"{x:.6f}"  # noqa: E731
@@ -195,7 +196,7 @@ def _resolve_rel(ctx: _Ctx, e: Ev, beat: float, oct_: int) -> tuple | None:
 def _from_ev(part, e: Ev, beat, pitches, sec, **kw) -> "XEv":
     kw.setdefault("tags", frozenset(e.tags))
     return XEv(part=part, beat=beat, dur=e.dur, pitches=tuple(pitches), vel=e.vel, art=e.art, slur=e.slur,
-               section=sec, **kw)
+               section=sec, explicit_vel=e.explicit_vel, **kw)
 
 
 def _kit(ctx: _Ctx, sec, span: SectionSpan, role: str, style: Style | None, mods: list[str],
@@ -541,7 +542,7 @@ def _apply_opts(evs: list[XEv], spec, sec, span: SectionSpan):
     art = spec.opts.get("art")
     width = max(span.end - span.start, 1e-9)
     for e in evs:
-        for sh in shapes:
+        for sh in shapes if not e.explicit_vel else ():
             e.vel = float(min(1.0, e.vel * shape_at(sh, (e.beat - span.start) / width) / DYN["mf"]))
         if tr and e.pitches:
             e.pitches = tuple(p + tr for p in e.pitches)

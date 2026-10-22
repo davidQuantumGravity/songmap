@@ -6,10 +6,11 @@ import { Arrangement } from "./Arrangement";
 import { Mixer, type MixEdit } from "./Mixer";
 import { ExportPanel, Problems, QAPanel, VideoPanel } from "./Panels";
 import { Rack, type VoiceEdit } from "./Rack";
+import { PianoRoll } from "./PianoRoll";
 import { Splitter, useStored } from "./ui";
 
 type Tab = "problems" | "qa" | "video" | "export";
-type Dock = "code" | "mixer" | "rack";
+type Dock = "code" | "mixer" | "rack" | "roll";
 const fmt = (t: number) => `${Math.floor(t / 60)}:${(t % 60).toFixed(1).padStart(4, "0")}`;
 const css = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 const baseName = (s: string) => s.replace(/[_\s-]*\d+$/, "");
@@ -237,10 +238,11 @@ export function App() {
       setText(r.text); setCheck(r.check);
       if (r.check.summary) setSummary(r.check.summary);
       if (remix && rendered) render();
-    } catch (e) { setStatus(String(e)); }
+    } catch (e) { setStatus(String(e)); throw e; }
   };
-  const mixEdit = (part: string, edit: MixEdit, defaultGain: number) => applyOp("mix", { part, ...edit, default_gain: defaultGain }, true);
-  const voiceEdit = (e: VoiceEdit) => applyOp("voice", e, false);
+  const mixEdit = (part: string, edit: MixEdit, defaultGain: number) =>
+    applyOp("mix", { part, ...edit, default_gain: defaultGain }, true).catch(() => undefined);
+  const voiceEdit = (e: VoiceEdit) => applyOp("voice", e, false).catch(() => undefined);
 
   const section = summary?.sections.find((s) => time >= s.start && time < s.end) ?? null;
   const jump = (dir: 1 | -1) => {
@@ -280,6 +282,7 @@ export function App() {
       else if (e.key === "l") setLoop((l) => (l ? null : section ? [section.start, section.end] : null));
       else if (e.key === "m") setDock((d) => (d === "mixer" ? "code" : "mixer"));
       else if (e.key === "i") setDock((d) => (d === "rack" ? "code" : "rack"));
+      else if (e.key === "p") setDock((d) => (d === "roll" ? "code" : "roll"));
     };
     window.addEventListener("keydown", k);
     return () => window.removeEventListener("keydown", k);
@@ -332,6 +335,7 @@ export function App() {
         <div className="dock">
           <nav className="dock-tabs">
             <button className={dock === "code" ? "on" : ""} onClick={() => setDock("code")}>Code</button>
+            <button className={dock === "roll" ? "on" : ""} onClick={() => setDock("roll")} disabled={!summary}>Piano roll <kbd>P</kbd></button>
             <button className={dock === "rack" ? "on" : ""} onClick={() => setDock("rack")} disabled={!summary}>Instruments <kbd>I</kbd></button>
             <button className={dock === "mixer" ? "on" : ""} onClick={() => setDock("mixer")} disabled={!summary}>Mixer <kbd>M</kbd></button>
             <span className="spacer" />
@@ -341,6 +345,10 @@ export function App() {
             {path && <div className="code-wrap" style={{ display: dock === "code" ? "block" : "none" }}>
               <CodeEditor value={text} onChange={setText} diagnostics={check?.diagnostics ?? []} gotoLine={goto} />
             </div>}
+            {dock === "roll" && summary && path && (
+              <PianoRoll path={path} text={text} summary={summary} time={time} partHint={null} colorOf={colorOf} onSeek={seek}
+                         onApply={(op, args) => applyOp(op, args, false)} />
+            )}
             {dock === "rack" && summary && path && (
               <Rack path={path} text={text} summary={summary} catalog={catalog} onEdit={voiceEdit} colorOf={colorOf} time={time} />
             )}
