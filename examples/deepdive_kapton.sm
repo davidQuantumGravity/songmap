@@ -1,6 +1,6 @@
 # Deep Dive — Inside the 56 Movies (5:03), faithful v0.2 port of the original track. Compact form.
 # Same notes as examples/v0.2_yaml/deepdive_kapton.songmap.yaml (tests/test_lang.py checks the digest).
-song "Deep Dive — Inside the 56 Movies" 120 4/4 Am fps=30 mood=documentary tail=3 seed=7 video=DeepDive:9090
+song "Deep Dive — Inside the 56 Movies" 120 4/4 Am fps=30 mood=v0 tail=3 seed=7 video=DeepDive:9090
 inst bass(cutoff=600)
 chords Am F C G /2
 master legacy

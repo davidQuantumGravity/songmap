@@ -1,0 +1,13 @@
+# Machine-tight electronic: drums forward, straight time, only a touch of human variation.
+mood: techno
+description: tight, straight, drums forward
+mix:
+  drums: {gain_db: -3}
+  fx:    {gain_db: -6}
+  lead:  {gain_db: 6}
+groove: {swing: 0.5, template: straight, humanize: {time_ms: 1.5, drift_ms: 1, vel: 0.02}, metric: 0.3}
+parts_feel:
+  kick: {hum_scale: 0}
+  bass: {hum_scale: 0.3}
+  arp:  {hum_scale: 0.2}
+  pad:  {hum_scale: 1.5, strum_ms: 3}

@@ -1,6 +1,6 @@
 # Bench / Fields / Thruster (2:31), faithful v0.2 port of the original Oct-13 track. Compact form.
 # Same notes as examples/v0.2_yaml/week_oct13_bench.songmap.yaml (tests/test_lang.py checks the digest).
-song "Week of Oct 13 — Bench / Fields / Thruster" 120 4/4 Dm fps=30 mood=cinematic tail=3 seed=7 video=WeekBench:4530
+song "Week of Oct 13 — Bench / Fields / Thruster" 120 4/4 Dm fps=30 mood=v0 tail=3 seed=7 video=WeekBench:4530
 chords Dm Bb F C /2
 master legacy
 motif m1 deg oct=5 "4/4. 3/8 2/4 4 | 7/2 6/4 4"

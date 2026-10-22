@@ -279,8 +279,6 @@ def from_raw(raw: dict, file: str | None = None) -> Song:
     s.events = _events(raw.get("events") or [], file)
     if not s.sections:
         raise SongError("no sections", file=file, suggestion="add sections: [{name: intro, bars: 4, parts: {...}}]")
-    if s.groove or s.parts_feel:
-        s.warnings.append("groove/parts_feel are parsed; the performance layer applies them from P3")
     return s
 
 

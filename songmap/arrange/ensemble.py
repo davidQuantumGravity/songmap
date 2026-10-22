@@ -69,17 +69,25 @@ class Ensemble:
         self.part_fallback: dict = d.get("part_fallback", {})
         self.single: dict[str, Voice] = {}
         self.kits: dict[str, dict[str, Voice]] = {}
+        from .moods import get_mood
+        self.mood = get_mood(song.mood, song.file)            # defaults < mood < the song
         for role, entry in d["instruments"].items():
+            self._set(role, entry, defaults_pass=True)
+        for role, entry in (self.mood.get("instruments") or {}).items():
             self._set(role, entry, defaults_pass=True)
         for role, entry in (song.instruments or {}).items():
             self._set(role, entry)
         self.mix: dict[str, dict] = {k: dict(v) for k, v in d.get("mix", {}).items()}
+        for part, m in (self.mood.get("mix") or {}).items():
+            self.mix[part] = {**self.mix.get(part, {}), **m}
         for part, m in (song.mix or {}).items():
             if not isinstance(m, dict):
                 raise SongError(f"mix {part}: write a mapping like {{gain_db: -3, send: {{hall: 0.2}}}}",
                                 file=song.file)
             self.mix[part] = {**self.mix.get(part, {}), **m}
         self.returns: dict[str, dict] = {k: dict(v) for k, v in d.get("returns", {}).items()}
+        for name, r in (self.mood.get("returns") or {}).items():
+            self.returns[name] = {**self.returns.get(name, {}), **r}
         for name, r in (song.returns or {}).items():
             self.returns[name] = {**self.returns.get(name, {}), **r}
         self._cache: dict = {}

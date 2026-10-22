@@ -61,8 +61,6 @@ def cmd_check(args) -> int:
     arr = expand(song)
     arr.ensemble.check(song.parts())
     warnings = list(song.warnings) + arr.warnings + _video_check(arr)
-    if song.mood:
-        warnings.append(f"mood '{song.mood}': mood presets arrive in P4; using the default (synth_v0) ensemble")
     if not arr.timeline.whole_frame_beats():
         warnings.append(f"60*fps/tempo is not an integer: beats do not land on whole video frames")
     print(_summary(arr))

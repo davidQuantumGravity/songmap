@@ -1,0 +1,25 @@
+# The default for new songs: drums and fx sit under the music, the lead can be heard, and every
+# part is played with a light human feel (timing drift, velocity variation, rolled chords).
+mood: balanced
+description: even mix, light human feel (the default)
+mix:
+  drums: {gain_db: -6}
+  fx:    {gain_db: -6}
+  lead:  {gain_db: 7}
+groove: {swing: 0.5, template: straight, humanize: {time_ms: 5, drift_ms: 3, vel: 0.035}, metric: 0.5}
+parts_feel:
+  kick:   {hum_scale: 0.15}
+  snare:  {offset_ms: 4}
+  clap:   {offset_ms: 4}
+  fill:   {hum_scale: 0.5}
+  bass:   {hum_scale: 0.6, offset_ms: -2}
+  arp:    {hum_scale: 0.4}
+  pad:    {hum_scale: 1.5, strum_ms: 6}
+  keys:   {hum_scale: 1.2, strum_ms: 10, high_loud: 0.4, arch: 0.4}
+  piano:  {hum_scale: 1.2, strum_ms: 10, high_loud: 0.4, arch: 0.4}
+  epiano: {hum_scale: 1.2, strum_ms: 8, arch: 0.3}
+  organ:  {hum_scale: 0.8}
+  gtr:    {hum_scale: 1.0, strum_ms: 18}
+  guitar: {hum_scale: 1.0, strum_ms: 18}
+  lead:   {hum_scale: 0.8, high_loud: 0.3, arch: 0.4}
+  fx:     {hum_scale: 0.4}

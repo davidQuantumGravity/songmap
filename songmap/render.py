@@ -68,7 +68,9 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
     triggers: dict[str, list[float]] = {}
     cache: dict = {}
     rendered = hits = 0
-    for part, evs in arr.parts.items():
+    from .perform.play import play, played_digest
+    played = play(arr)                     # the performance stage (mood v0: the written notes as they are)
+    for part, evs in played.items():
         buf = buses.setdefault(part, np.zeros((n, 2)))
         slot: dict = {}
         for e in evs:
@@ -130,7 +132,8 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
     else:
         out = master(mix, song.master.target_lufs, song.master.ceiling_db, glue=song.master.glue != "none")
     stats = {"seconds": round(time.time() - t0, 2), "notes_rendered": rendered, "cache_hits": hits,
-             "audio_seconds": round(n / SR, 3), "master": mode, "digest": arr.digest()}
+             "audio_seconds": round(n / SR, 3), "master": mode, "digest": arr.digest(),
+             "performed": played is not arr.parts, "played_digest": played_digest(played)}
     if log:
         log(f"rendered {n / SR:.1f}s of audio in {stats['seconds']}s ({rendered} notes synthesized, {hits} cached)")
     return RenderResult(arr, as_stereo(out), mix, stems, stats)

@@ -373,7 +373,7 @@ These were the prototype's open questions. Each is now settled and implemented, 
 ```
 # The Swarm (2:03): the v0.2 port (examples/v0.2_yaml/week_oct13_swarm.songmap.yaml) in the
 # SongMap language. Same notes, same digest (tests/test_lang.py).
-song "Week of Oct 13 — The Swarm" 120 4/4 Em fps=30 seed=7 mood=techno tail=3 video=WeekSwarm:3690
+song "Week of Oct 13 — The Swarm" 120 4/4 Em fps=30 seed=7 mood=v0 tail=3 video=WeekSwarm:3690
 inst bass(cutoff=700)
 chords Em C G D /2
 master legacy
