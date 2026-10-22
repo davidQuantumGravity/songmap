@@ -1,0 +1,60 @@
+# 2. Deceptive Light (2:27). G major, 120 BPM, upbeat pop. Golden chords as quick sparkle inside the pop axis.
+# Technique (docs/GOLDEN_THEORY.md §4.2):
+#   - golden deceptive cadence V - v♭VIg - ♭VIg - vi (System 2, ~g ~g): D -> vEbg -> Ebg -> Em in two 8ths,
+#     so the bass climbs D - vEb - Eb - E like a pop walk-up, one sixth-step at a time;
+#   - the pre-chorus climbs the golden escalator IV - v#IVg - ^#IVg - V (C -> vC#g -> ^C#g -> D) and lands
+#     on the golden authentic chord vGg/D, a golden six-four that pulls into the chorus;
+#   - the bridge slows the deceptive cadence to whole beats so you can hear it, looping V back to vi;
+#   - the ending is golden modal mixture: IV - IVg - iv - I (C - Cg - Cm - G), the golden centroid
+#     between major and minor.
+# Craft: the melody rests or changes chord tone on every golden 8th; arps and the bass follow the chord.
+songmap: 0.2
+title: "Deceptive Light"
+tempo: 120
+meter: "4/4"
+key: G
+tuning: "36edo"
+fps: 30
+seed: 22
+tail_seconds: 3
+
+instruments:
+  lead: clean/lead
+  ep: epiano/still
+  wash: pad/still
+  bell: clean/glass
+
+harmony:
+  progressions: {verse: "G:1 D:0.75 ~g:0.125 ~g:0.125 Em:1 C:1", pre: "Am:1 Bm:1 C:0.5 ~g:0.25 ~g:0.25 D:0.75 vGg/D:0.25", chorus: "G:1 D:0.75 ~g:0.125 ~g:0.125 Em:1 C:1 G:1 D:1 C:1 D:0.75 vGg/D:0.25", slow: "Em:1 C:1 G:1 D:0.5 ~g:0.25 ~g:0.25", coda: "C:1 Cg:0.5 Cm:0.5 G:2"}
+
+sections:
+  - {name: intro, bars: 4, parts: {ep: comp, arp: dark}, harmony: verse, dyn: "p<mp"}
+  - {name: verse, bars: 8, parts: {ep: comp, drums: {steps: {kick: X.......X......., snare: "....X.......X...", hat: {steps: x.x.x.x.x.x.x.x., vel: [0.6, 0.3, 0.45, 0.3, 0.6, 0.3, 0.45, 0.35]}}}, bass: {rel: "R/4 R R R/8 R", oct: -2}, lead: {deg: "=mp r/8 2/8 4 4 5/4 4/8 2 | 1/4 2/8 1 0/4 r/4 | r/8 2/8 4 4 5/4 4/8 2 | 4/2 0/2 | r/8 4/8 5 5 7/4 5/8 4 | 4/4 5/8 4 2/4 r/4 | r/8 2/8 4 4 5/4 4/8 2 | 1/2. r/4"}}, harmony: verse, dyn: mp}
+  - {name: pre, bars: 4, parts: {ep: pulse, drums: {steps: {kick: X.......X......., snare: "....X.......X...", hat: {steps: x.x.x.x.x.x.x.x., vel: [0.6, 0.3, 0.45, 0.3, 0.6, 0.3, 0.45, 0.35]}}}, bass: {rel: "R/8 R+ R R+ R R+ R R", oct: -2}, wash: hold, arp: dark, lead: {deg: "=mp < 0/2 2/2 | 3/2 5/2 | 4/2. 5/4 | 6/2. r/4 =mf"}}, harmony: pre, dyn: mp}
+  - {name: chorus, bars: 8, parts: {ep: comp, drums: full+open, bass: {rel: "R/8 R+ R R+ R R+ R R", oct: -2}, wash: hold, arp: up, lead: {deg: "=f 7/4 7/8 9 7/4 4 | 8/4. 7/8 8/4 r/4 | 9/4 9/8 11 9/4 7 | 7/2 4/2 | 7/4 7/8 9 7/4 4 | 8/4. 9/8 11/2 | 11/4. 9/8 7/2 | 8/2. r/4"}}, harmony: chorus, dyn: mf}
+  - {name: verse_2, bars: 8, parts: {ep: comp, drums: {steps: {kick: X.......X......., snare: "....X.......X...", hat: {steps: x.x.x.x.x.x.x.x., vel: [0.6, 0.3, 0.45, 0.3, 0.6, 0.3, 0.45, 0.35]}, ghost: ".......o......o."}}, bass: {rel: "R/4 R R R/8 R", oct: -2}, lead: {deg: "=mp r/8 2/8 4 4 5/4 4/8 2 | 1/4 2/8 1 0/4 r/4 | r/8 2/8 4 4 5/4 4/8 2 | 4/2 0/2 | r/8 4/8 5 5 7/4 5/8 4 | 4/4 5/8 4 2/4 r/4 | r/8 2/8 4 4 5/4 4/8 2 | 1/2. r/4"}}, harmony: verse, dyn: mp}
+  - {name: pre_2, bars: 4, parts: {ep: pulse, drums: {steps: {kick: X.......X......., snare: "....X.......X...", hat: {steps: x.x.x.x.x.x.x.x., vel: [0.6, 0.3, 0.45, 0.3, 0.6, 0.3, 0.45, 0.35]}}}, bass: {rel: "R/8 R+ R R+ R R+ R R", oct: -2}, wash: hold, arp: dark, lead: {deg: "=mp < 0/2 2/2 | 3/2 5/2 | 4/2. 5/4 | 6/2. r/4 =mf"}}, harmony: pre, dyn: mp}
+  - {name: chorus_2, bars: 8, parts: {ep: comp, drums: full+open, bass: {rel: "R/8 R+ R R+ R R+ R R", oct: -2}, wash: hold, arp: up, lead: {deg: "=f 7/4 7/8 9 7/4 4 | 8/4. 7/8 8/4 r/4 | 9/4 9/8 11 9/4 7 | 7/2 4/2 | 7/4 7/8 9 7/4 4 | 8/4. 9/8 11/2 | 11/4. 9/8 7/2 | 8/2. r/4"}}, harmony: chorus, dyn: mf}
+  - {name: bridge, bars: 8, parts: {ep: hold, wash: hold, drums: half, bass: {rel: "R/4 R R R/8 R", oct: -2}, lead: {deg: "=mp 4/2 5/4 4 | 2/1 | 4/2 7/4 5 | 4/2 r/2"}}, harmony: slow, dyn: "p<mp"}
+  - {name: chorus_3, bars: 8, parts: {ep: comp, drums: full+open+hats16, bass: {rel: "R/8 R+ R R+ R R+ R R", oct: -2}, wash: hold, arp: up, lead: {deg: "=f 7/4 7/8 9 7/4 4 | 8/4. 7/8 8/4 r/4 | 9/4 9/8 11 9/4 7 | 7/2 4/2 | 7/4 7/8 9 7/4 4 | 8/4. 9/8 11/2 | 11/4. 9/8 7/2 | 8/2. r/4"}, bell: {deg: "=f 7/4 7/8 9 7/4 4 | 8/4. 7/8 8/4 r/4 | 9/4 9/8 11 9/4 7 | 7/2 4/2 | 7/4 7/8 9 7/4 4 | 8/4. 9/8 11/2 | 11/4. 9/8 7/2 | 8/2. r/4", oct: 1}}, harmony: chorus, dyn: ff}
+  - {name: outro, bars: 4, parts: {ep: hold, wash: hold, bass: {rel: R/1, oct: -2}, lead: {deg: "=mp 4/1 | 4/2 3/2 | 4/1 | 4/1"}}, harmony: coda, dyn: "mp>p"}
+
+events:
+  - {at: chorus, type: riser, bars: 1}
+  - {at: chorus, type: impact, size: m}
+  - {at: chorus_2, type: riser, bars: 1}
+  - {at: chorus_3-1, type: drop, bars: 1, keep: [ep, wash]}
+  - {at: chorus_3, type: riser, bars: 1}
+  - {at: chorus_3, type: impact, size: m}
+  - {at: outro+2, type: impact, size: s}
+mix:
+  drums: {gain_db: -9}
+  fx: {gain_db: -9}
+  bass: {gain_db: -1}
+  lead: {gain_db: 16, send: {hall: 0.25}}
+  ep: {gain_db: -16, send: {hall: 0.15}}
+  wash: {gain_db: -24, send: {hall: 0.3}}
+  arp: {gain_db: -2}
+  bell: {gain_db: -6, send: {hall: 0.35}}
+
+master: clean

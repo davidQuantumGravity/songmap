@@ -1,0 +1,49 @@
+# 4. Andalusian Gold (1:40). A minor / E Phrygian, 100 BPM, flamenco-tinged. The same cadence, plain then golden.
+# Technique (docs/GOLDEN_THEORY.md §4.2, golden Andalusian): the descent Am - G - F - E with golden chords
+# in its gaps, Am -> Abg -> vAbg -> G -> ^F#g -> vF#g -> F (System 2, ~g ~g), and the last half step
+# taken by planing, F -> vF -> ^E -> E, because no golden chord joins chords a half step apart
+# (the half-step theorem). Under it the bass walks down the whole tetrachord in sixth-steps:
+# A - Ab - vAb - G - ^F# - vF# - F - vF - ^E - E.
+# Form: the plain Western cadence first, so the ear knows it; then the golden one, where the voice sings
+# two beats and the guitar answers in gold; a falseta in the relative major; the golden cadence at full
+# strength; and a flamenco ending that hangs on E.
+songmap: 0.2
+title: "Andalusian Gold"
+tempo: 100
+meter: "4/4"
+key: Am
+tuning: "36edo"
+fps: 30
+seed: 24
+tail_seconds: 4
+
+instruments:
+  gtr: {use: string_pluck/still, brightness: 0.8}
+  lead: clean/lead
+  bell: clean/glass
+
+harmony:
+  progressions: {plain: "Am:1 G:1 F:1 E:1", golden: "Am:0.5 ~g:0.25 ~g:0.25 G:0.5 ~g:0.25 ~g:0.25 F:0.5 vF:0.25 ^E:0.25 E:1", falseta: "Dm:0.75 ~:0.25 Am:1 Dm:0.75 ~:0.25 Am:1 F:1 G:1 F:0.5 vF:0.25 ^E:0.25 E:1"}
+
+sections:
+  - {name: intro, bars: 4, parts: {gtr: {rel: "[R,5,R+,3+]/4 [R,5,R+,3+]/8 [R,5,R+,3+] r/8 [R,5,R+,3+] [R,5,R+,3+]/4"}}, harmony: plain, dyn: "p<mf"}
+  - {name: plain, bars: 8, parts: {gtr: {rel: "[R,5,R+,3+]/4 [R,5,R+,3+]/8 [R,5,R+,3+] r/8 [R,5,R+,3+] [R,5,R+,3+]/4"}, bass: {rel: "R/4 R R R", oct: -2}, drums: {steps: {kick: X.......x......., clap: {steps: X..x..x...x.x..., vel: [0.9, 0.55, 0.7, 0.55, 0.65]}, hat: {steps: "-.-.-.-.-.-.-.-.", vel: [0.3]}}}, lead: {deg: "=mf 4/4. 5/8 4/4 2 | 1/4. 2/8 1/2 | 0/4 1/8 0 -2/2 | {-2}-3/1 | 7/4. 8/8 7/4 5 | 6/4. 7/8 6/2 | 5/4 6/8 5 3/2 | {5}4/1"}}, harmony: plain, dyn: mp}
+  - {name: gold, bars: 8, parts: {gtr: {rel: "[R,5,R+,3+]/4 [R,5,R+,3+]/8 [R,5,R+,3+] r/8 [R,5,R+,3+] [R,5,R+,3+]/4"}, bass: {rel: "R/4 R R R", oct: -2}, drums: {steps: {kick: X.......x......., clap: {steps: X..x..x...x.x..., vel: [0.9, 0.55, 0.7, 0.55, 0.65]}, hat: {steps: "-.-.-.-.-.-.-.-.", vel: [0.3]}}}, lead: {deg: "=f 4/4. 5/8 r/2 | 1/4. 2/8 r/2 | 0/4 1/8 0 r/2 | {-2}-3/1 | 7/4. 8/8 r/2 | 6/4. 7/8 r/2 | 5/4 6/8 5 r/2 | {5}4/1"}}, harmony: golden, dyn: mf}
+  - {name: falseta, bars: 8, parts: {gtr: {rel: "[R,5,R+,3+]/4 [R,5,R+,3+]/8 [R,5,R+,3+] r/8 [R,5,R+,3+] [R,5,R+,3+]/4"}, bass: {rel: "R/4 R R R", oct: -2}, lead: {deg: "=mp 3/4 2 0/4 r/4 | 0/2 2/4 4 | 5/4 4 3/4 r/4 | 2/1 | 0/4 2 0 -2 | 1/4 -1 1 2 | 0/4 -2/4 r/2 | {-2}-3/1"}}, harmony: falseta, dyn: mp}
+  - {name: gold_full, bars: 8, parts: {gtr: {rel: "[R,5,R+,3+]/4 [R,5,R+,3+]/8 [R,5,R+,3+] r/8 [R,5,R+,3+] [R,5,R+,3+]/4"}, bass: {rel: "R/4 R R R", oct: -2}, drums: {steps: {kick: X.......x......., clap: {steps: X..x..x...x.x..., vel: [0.9, 0.55, 0.7, 0.55, 0.65]}, hat: {steps: "-.-.-.-.-.-.-.-.", vel: [0.3]}, ohat: "......x.......x."}}, lead: {deg: "=f 4/4. 5/8 r/2 | 1/4. 2/8 r/2 | 0/4 1/8 0 r/2 | {-2}-3/1 | 7/4. 8/8 r/2 | 6/4. 7/8 r/2 | 5/4 6/8 5 r/2 | {5}4/1"}, bell: {deg: "=f 4/4. 5/8 r/2 | 1/4. 2/8 r/2 | 0/4 1/8 0 r/2 | {-2}-3/1 | 7/4. 8/8 r/2 | 6/4. 7/8 r/2 | 5/4 6/8 5 r/2 | {5}4/1", oct: 1}}, harmony: golden, dyn: f}
+  - {name: hang, bars: 4, parts: {gtr: {rel: "[R,5,R+,3+]/4 [R,5,R+,3+]/8 [R,5,R+,3+] r/8 [R,5,R+,3+] [R,5,R+,3+]/4"}, bass: {rel: "R/4 R R R", oct: -2}}, harmony: golden, dyn: "mf>p"}
+
+events:
+  - {at: gold, type: impact, size: s}
+  - {at: gold_full-1, type: drop, bars: 1, keep: [gtr]}
+  - {at: gold_full, type: impact}
+  - {at: hang+3, type: impact, size: s}
+mix:
+  drums: {gain_db: -8}
+  fx: {gain_db: -8}
+  gtr: {gain_db: -6, send: {hall: 0.2}}
+  lead: {gain_db: 17, send: {hall: 0.25}}
+  bass: {gain_db: -2}
+  bell: {gain_db: -16, send: {hall: 0.4}}
+
+master: clean

@@ -537,6 +537,16 @@ parts:
           - {id: workflow, title: "The workflow"}
           - {id: verification, title: "Verifying instead of trusting"}
           - {id: limits, title: "What a machine cannot judge"}
+      - id: ch47
+        title: "Five songs: golden harmony in Western music"
+        summary: "Five complete songs, each built on one golden technique, and the craft that keeps golden colour tasteful."
+        sections:
+          - {id: blend, title: "Blending: the craft"}
+          - {id: lullaby, title: "Passing light: “Golden Hour Lullaby”"}
+          - {id: deceptive, title: "Sparkle: “Deceptive Light”"}
+          - {id: colour, title: "Colour: “Tape Bloom”"}
+          - {id: descent, title: "Descent: “Andalusian Gold”"}
+          - {id: silver, title: "Pivot and home: “The Silver Third”"}
 
   - id: appendices
     title: "Appendices"

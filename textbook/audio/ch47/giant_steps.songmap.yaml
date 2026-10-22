@@ -1,0 +1,26 @@
+songmap: 0.2
+title: "The Silver Third: golden giant steps"
+tempo: 90
+meter: "4/4"
+key: C
+tuning: "36edo"
+fps: 30
+seed: 25
+tail_seconds: 4
+
+instruments:
+  keys: keys/still
+  wash: pad/still
+  lead: clean/lead
+  low: clean/bass
+
+sections:
+  - {name: x, bars: 6, parts: {keys: hold, wash: hold, low: bassline, lead: {deg: "=mf 7/1 | 7/2 b5/2 | b5/1 | 2/1 | 2/2 0/2 | 0/1", oct: 1}}, harmony: "C:1 ~:0.5 Ab:1 ~:0.5 E:1 ~:0.5 C:1.5", dyn: "mf>mp"}
+
+mix:
+  keys: {gain_db: -9, send: {hall: 0.2}}
+  wash: {gain_db: -26, send: {hall: 0.3}}
+  lead: {gain_db: 18, send: {hall: 0.25}}
+  low: {gain_db: -4}
+
+master: clean

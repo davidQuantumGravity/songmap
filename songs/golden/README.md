@@ -3,13 +3,15 @@
 Five complete songs written with the `songmap-compose` skill in 36-ET (`tuning=36edo`). Western harmony is home in all
 five. Golden chords come in as passing light, sparkle, colour, a pivot between keys, and in one case a home of their own.
 Each song explores one technique from [docs/GOLDEN_THEORY.md](../../docs/GOLDEN_THEORY.md) and
-[docs/GOLDEN_BLENDING.md](../../docs/GOLDEN_BLENDING.md). Open [index.html](index.html) to listen to all five on one page.
+[docs/GOLDEN_BLENDING.md](../../docs/GOLDEN_BLENDING.md). Open [index.html](index.html) to listen to all five on one page. The textbook's Chapter 47, *Five songs: golden harmony
+in Western music* ([textbook/content/ch47.html](../../textbook/content/ch47.html)), teaches each technique with short
+excerpts, piano rolls of the exact voicings, the theory behind it, and exercises.
 
 | # | Song | Key, tempo | Golden technique | Length |
 |---|---|---|---|---|
 | 1 | [Golden Hour Lullaby](01_golden_hour_lullaby.sm) | C major, 72 | Passing chords: I–IV and V–I through one golden chord, the golden escalator into V, the four-chord golden authentic cadence, a golden plagal amen | 2:17 |
 | 2 | [Deceptive Light](02_deceptive_light.sm) | G major, 120, pop | The golden deceptive cadence V – v♭VIg – ♭VIg – vi as a bass walk-up (D – vE♭ – E♭ – E), the escalator in the pre-chorus, golden modal mixture at the end (C – Cg – Cm – G) | 2:11 |
-| 3 | [Tape Bloom](03_tape_bloom.sm) | A minor, 90, lo-fi | Golden colour chords by projection, held like borrowed chords: Fmaj7 → Fg, E7 → Eg (a "blue" dominant), Am → vAg; ends on the golden Picardy third Am – Am(^3) – Ag – A | 2:01 |
+| 3 | [Tape Bloom](03_tape_bloom.sm) | A minor, 90, lo-fi | Golden colour chords by projection, held like borrowed chords: Fmaj7 → Fg, E7 → Eg (third down to vG♯, seventh up to the golden D♯), Am → vAg; ends on the golden Picardy third Am – Am(^3) – Ag – A | 2:01 |
 | 4 | [Andalusian Gold](04_andalusian_gold.sm) | A minor / E Phrygian, 100 | The golden Andalusian cadence Am – A♭g – vA♭g – G – ^F#g – vF#g – F – vF – ^E – E: the bass walks the tetrachord down in sixth-steps. Played plain first, then golden | 1:40 |
 | 5 | [The Silver Third](05_silver_third.sm) | C → ^E♭ → golden home → C, 90 | Pivot-chord modulation between keys that share no note (C and ^E♭ share Fg and Gg); a golden-home interlude on golden-spectrum timbres; golden giant steps C – Cg – A♭ – A♭g – E – Eg – C | 2:07 |
 

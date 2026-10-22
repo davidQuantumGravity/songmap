@@ -1,0 +1,306 @@
+<section id="blend">
+<h2>Blending: the craft</h2>
+<div class="layer hear">
+<p>The chapters before this one took golden harmony apart: one cadence, one theorem, one example at a time. This chapter
+puts it back together in five complete songs. Each is an ordinary piece of Western music, a lullaby, a pop song, a lo-fi
+groove, a flamenco cadence and a cinematic theme, with one golden technique woven into it. Western harmony stays home
+in all five; golden chords come in as passing light, as sparkle, as colour, as a descent, and once as a home of their own.</p>
+<p>Listen to the songs whole before reading about them. The question to ask is not "where are the golden chords?" but
+"does anything sound wrong?" If the craft works, the golden moments sound like part of the music: a glide, a shimmer,
+a bend, never a mistake.</p>
+<audio-ex src="golden_hour_lullaby" caption="“Golden Hour Lullaby”, the complete song (2:17): a C major lullaby whose chord changes glide through golden passing chords on the weak beats."></audio-ex>
+<p>Every song in the chapter follows the same three rules. They are stated here once, and each section shows them at
+work.</p>
+</div>
+<div class="layer understand">
+<p><b>Rule 1: short and weak.</b> A golden chord that passes between two Western chords lasts one beat or less and sits on
+a weak beat (2 or 4). A golden colour chord, one that replaces a Western chord rather than joining two, lasts half a
+bar. The only long golden stretch in the five songs is the golden home of §47.6, and it changes the instruments first.</p>
+<p><b>Rule 2: the melody never fights the gold.</b> When the harmony turns golden, the melody either rests or holds a
+note the golden chord keeps. Every golden passing chord and every golden projection shares at least one note with a
+Western neighbour, so a common tone is always available: C over vFg/C, F over Fg, E over Eg and vAg.</p>
+<p><b>Rule 3: whatever sounds must change with the chord.</b> A pad or a held chord that is still sounding the old
+Western chord when the golden one arrives produces two notes a sixth-step apart: 33.33 cents, a sour rub that no
+listener hears as intended. So the accompaniment uses the voiced styles of <a href="ch:ch43#voiced">Chapter 43</a>,
+which move every voice through the passing chords, or chord-relative figures (<code>rel</code>), which resolve each
+note against the chord sounding when it starts.</p>
+<table>
+<tr><th>Song</th><th>Key, tempo</th><th>Golden technique</th><th>Theory</th></tr>
+<tr><td>Golden Hour Lullaby</td><td>C major, 72</td><td>passing chords, the escalator, the golden authentic cadence</td><td><a href="ch:ch27#six-four">Ch. 27</a>, <a href="ch:ch28#escalator">28</a>, <a href="ch:ch29#authentic">29</a></td></tr>
+<tr><td>Deceptive Light</td><td>G major, 120</td><td>the golden deceptive cadence as a bass walk-up; golden modal mixture</td><td><a href="ch:ch29#deceptive">Ch. 29</a></td></tr>
+<tr><td>Tape Bloom</td><td>A minor, 90</td><td>golden colour chords by projection; the golden Picardy third</td><td><a href="ch:ch38#colour-chords">Ch. 38</a>, <a href="ch:ch29#mixture">29</a></td></tr>
+<tr><td>Andalusian Gold</td><td>A minor, 100</td><td>the golden Andalusian cadence and sub-chromatic planing</td><td><a href="ch:ch29#staircase">Ch. 29</a>, <a href="ch:ch28#half-step">28</a></td></tr>
+<tr><td>The Silver Third</td><td>C, ^E♭, C; 90</td><td>a pivot between layers, a golden home, golden giant steps</td><td><a href="ch:ch35#silver-third-keys">Ch. 35</a>, <a href="ch:ch31#circle">31</a>, <a href="ch:ch37#sequences">37</a></td></tr>
+</table>
+<p><b>Instruments.</b> All five songs use the stable instruments of <a href="ch:ch44#clean">Chapter 44</a>: a piano,
+electric piano, pad and guitar with no detune, drift or tremolo, and clean additive leads and basses. A chorus effect
+that wobbles each note by ten cents would smear the very sixth-steps the songs are about.</p>
+</div>
+<div class="layer derive">
+<p><b>Why a common tone always exists.</b> For passing chords this is part of the path construction of
+<a href="ch:ch27#uniform-path">Chapter 27</a>: a passing chord is a voice-by-voice weighted mean
+$P_1 = (2X + Y)/3$ of its neighbours, so any voice that holds in the progression holds through it. For colour chords
+it is the projection theorem of <a href="ch:ch35#projection">Chapter 35</a> (<i>theorem</i>): the nearest golden triad
+to a major triad $M_r$ is $G_r$, at voice-leading distance 2, keeping the root and moving the third and fifth by one
+sixth-step each; for a minor triad $m_r$ it is $G_{r-1}$, keeping the fifth.</p>
+<p><b>The rub check</b> (<i>measurement</i>). Rule 3 can be checked mechanically. A short script,
+<code>tools/rubs.py</code>, expands a song into its notes and lists every pair of notes that sound together for at least
+a quarter beat at an interval of 1, 2, 34 or 35 sixth-steps modulo the octave, that is 33.33 or 66.67 cents away from a
+unison or octave. Golden chords themselves never contain those intervals: their steps are 11, 22 and 33 (and 3, 14,
+25 between their upper notes), so every hit is an accident of layering. All five songs pass, with one deliberate
+exception explained in §47.2.</p>
+<div class="exercise"><p><b>Exercise 1.</b> A golden triad's notes are 0, 11 and 22 sixth-steps above its root, and a
+golden seventh adds 33. List every interval between two of these four notes, reduced modulo 36. Show that none is 1, 2,
+34 or 35, so a golden seventh chord can never trip the rub check by itself.</p>
+<details class="answer"><summary>Answer</summary><p>The differences are 11, 22, 33 (from the root), 11, 22 (from the
+third) and 11 (from the fifth). Reduced modulo 36 and taken both ways round, they are 11, 22, 33 and their complements
+25, 14, 3. None is 1, 2, 34 or 35. The smallest interval in the chord is 3 sixth-steps, a 12-ET semitone, between the
+golden seventh and the octave of the root.</p></details></div>
+</div>
+</section>
+
+<section id="lullaby">
+<h2>Passing light: “Golden Hour Lullaby”</h2>
+<div class="layer hear">
+<p>The lullaby is in C major at 72 beats per minute. A piano plays held chords, a second piano sings the tune, a
+guitar rippling in eighth notes and a pad join from the second verse, and a glass bell doubles the tune in the bridge. The chords are the
+plainest in Western music, I, IV, V and vi, but nearly every change slides: on the fourth beat of the bar the piano's
+voices move a third of a semitone at a time into the next chord.</p>
+<p>Listen to four bars from the verse. In the second bar, F climbs to G through two golden chords, the golden
+escalator; in the third, G falls into C through one. The tune rests during the escalator and holds G, a note the next
+golden chord keeps, in the third bar.</p>
+<audio-ex src="lullaby_escalator" caption="Am – F – vF♯g – ^F♯g – G – vCg/G – C: the escalator into V and a one-chord golden V → I, with the melody resting or holding G."></audio-ex>
+<p>The bridge ends on the full golden authentic cadence, four chords over a held G in the bass.</p>
+<audio-ex src="lullaby_authentic" caption="F – G – vE♭T13/G – vCg/G – C: one inner voice climbs B – ^B – vC – C in single sixth-steps, the top voice D – vE♭ – ^E♭ – E in double ones."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>The harmony.</b> The verse is one eight-bar progression, written with passing placeholders:</p>
+<pre><code>C:0.75 ~:0.25  F:0.75 ~:0.25  C:0.75 ~:0.25  G:1  Am:1  F:0.5 ~g:0.25 ~g:0.25  G:0.75 ~:0.25  C:1</code></pre>
+<p>A <code>~</code> asks for the one strict golden chord between its neighbours (System 1), and <code>~g ~g</code> for
+the two chords of a natural path (System 2). The engine resolves them to C – vFg/C – F, F – vFg/F – C, C – vCg/C – G,
+the escalator F – vF♯g – ^F♯g – G, and G – vCg/G – C. All of them fall on the fourth beat of a bar.</p>
+<pianoroll edo="36" notes="A3 C4 F4 ; ^A3 C#4 vF#4 ; Bb3 vD4 ^F#4 ; B3 D4 G4 ; vC4 ^Eb4 G4 ; C4 E4 G4" labels="F ; vF#g ; ^F#g ; G ; vCg/G ; C" title="The escalator and V → I, upper three voices as the piano plays them"></pianoroll>
+<p><b>Uneven steps.</b> In the escalator the top voice climbs F – vF♯ – ^F♯ – G in three equal steps of two sixth-steps
+(66.67 cents each). The inner voices split their whole step unevenly: A – ^A – B♭ – B moves by 1, 2 and 3 sixth-steps,
+and C – C♯ – vD – D by 3, 2 and 1. That unevenness is what System 2 allows and System 1 forbids
+(<a href="ch:ch28#uneven">Chapter 28</a>).</p>
+<p><b>The melody.</b> The tune is diatonic throughout. It rests through the escalator, and over every one-chord golden
+passage it holds a note the golden chord shares with its neighbours: C over C – vFg/C and G over G – vCg/G. The bridge
+melody stops on beat 3 of its last bar, so the four-chord cadence sounds with the piano alone.</p>
+<p><b>The deliberate exception.</b> The rub check flags one kind of moment in this song: a golden chord over the held
+bass of the chord before it (vFg/C over C, vCg/G over G). The bass note and the golden root sit a sixth-step apart for
+one beat. That is the golden six-four of <a href="ch:ch27#six-four">Chapter 27</a>, a passing dissonance over a pedal,
+and it is left in on purpose; nothing in the song rubs for longer than a beat.</p>
+<audio-ex src="golden_hour_lullaby" caption="The whole lullaby again: listen for the glides on beat 4, and for the bridge, where the bell doubles the tune an octave higher."></audio-ex>
+</div>
+<div class="layer derive">
+<p><b>Where the passing chords come from</b> (<i>theorem</i>, <a href="ch:ch27#quality">Chapter 27</a>). Strict golden
+passing chords join only triads of the same quality whose roots are a third or a fifth apart, and each such pair has
+exactly one. The lullaby's strict passages, I – IV, IV – I, I – V and V – I, are all major–major pairs a fourth or fifth
+apart, so each has its single golden chord; the bridge adds two minor pairs, vi – iii and ii – vi, which the engine resolves
+to Am – Eg/A – Em and Dm – Ag/D – Am. The IV – V step is a whole step, outside System 1 entirely; System 2 splits
+it into the two golden chords on the chromatic root between, the escalator (<a href="ch:ch28#escalator">Chapter 28</a>).</p>
+<p><b>The four-chord cadence.</b> G – vE♭T13/G – vCg/G – C is the strict V → I path with both passing chords. One is
+bronze (T13), the other golden: by the partner theorem a strict path never holds two golden chords
+(<a href="ch:ch27#partner">Chapter 27</a>). The voices move B → C in three sixth-steps of 33.33 cents, and D → E in
+three steps of 66.67 cents, each arriving exactly together.</p>
+</div>
+</section>
+
+<section id="deceptive">
+<h2>Sparkle: “Deceptive Light”</h2>
+<div class="layer hear">
+<p>The second song is a pop song in G major at 120 beats per minute, built on the most worn-out progression in
+popular music: I – V – vi – IV, G – D – Em – C. Drums, bass, electric piano, a pad, a plucked arpeggio and a lead melody
+play it as such songs are played. The golden harmony lives in one place: every time D moves to Em, it does so through
+two golden chords lasting an eighth note each.</p>
+<p>Listen to the same two bars twice: first the plain V – vi, then the golden one. The bass, which plays eighth notes on
+the chord root, makes the difference obvious. The first time it jumps from D to E; the second time it climbs
+D – vE♭ – E♭ – E like a pop walk-up, with a step only a third of a semitone wide at the start.</p>
+<audio-ex src="deceptive_ab" caption="D – Em plain, then D – vE♭g – E♭g – Em, twice: the bass walks up D – vE♭ – E♭ – E on the last two eighth notes of the bar."></audio-ex>
+<audio-ex src="deceptive_light" caption="“Deceptive Light”, the complete song (2:11): the golden deceptive cadence in every verse and chorus, the escalator in the pre-chorus, the cadence slowed down in the bridge, and C – Cg – Cm – G at the end."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>The golden deceptive cadence</b> is V – v♭VIg – ♭VIg – vi (<a href="ch:ch29#deceptive">Chapter 29</a>): in G
+major, D – vE♭g – E♭g – Em. Both golden chords have roots on ♭VI, so the cadence passes through the key's ♭VI in
+golden form and lands on vi. In the song it is written</p>
+<pre><code>D:0.75 ~g:0.125 ~g:0.125 Em:1</code></pre>
+<p>and the electric piano voices it as follows.</p>
+<pianoroll edo="36" notes="D3 A3 D4 F#4 ; vEb3 Bb3 vEb4 ^F#4 ; Eb3 ^Bb3 Eb4 vG4 ; E3 B3 E4 G4" labels="D ; vEbg ; Ebg ; Em" title="The golden deceptive cadence in G, as the electric piano voices it"></pianoroll>
+<p>The top voice rises F♯ – ^F♯ – vG – G by single sixth-steps. The lowest voice, doubled by the bass, rises D – vE♭ – E♭ – E
+by 2, 1 and 3 sixth-steps. Because the bass part is chord-relative eighth notes (<code>R8 R+ R R+ R R+ R R</code>, with
+plain roots on the last two eighths), it follows the golden roots automatically.</p>
+<p><b>The other golden moments.</b> The pre-chorus climbs the escalator C – vC♯g – ^C♯g – D and lands on vGg/D, the
+golden passing chord of D → G, as a quarter-note upbeat into the chorus. The bridge slows the deceptive cadence to
+whole beats so it can be heard clearly, and loops it, V back to vi. The ending is golden modal mixture
+(<a href="ch:ch29#mixture">Chapter 29</a>): C – Cg – Cm – G, where Cg sits halfway between the major and minor
+subdominant.</p>
+<p><b>Shape.</b> The loudness of each section (<i>measurement</i>, from the render) rises from −21.5 LUFS in the verses
+to −17.6 in the choruses, drops to −24.9 in the bridge, and peaks at −12.9 in the last chorus, 4.7 dB above any other
+section, after a one-bar drop that leaves only the electric piano and pad.</p>
+</div>
+<div class="layer derive">
+<p><b>Why vE♭g and E♭g</b> (<i>exhaustive</i>, <a href="ch:ch28#dictionary">Chapter 28</a>). D major and E minor
+differ in quality, so the quality theorem rules out a strict golden path between them. System 2 admits natural paths
+in which a whole step may split unevenly; for V → vi the engine's natural path puts both golden chords on the chromatic
+root between D and E, a sixth-step apart: vE♭g = (8, 19, 30) and E♭g = (9, 20, 31) in sixth-steps above C.</p>
+<p><b>Golden modal mixture.</b> Cg is the average of C, Cm and Caug (the averaging principle,
+<a href="ch:ch25#averaging">Chapter 25</a>): its third, 11 sixth-steps, lies between the minor third (9) and the major
+third (12). So C – Cg – Cm moves the third 12 → 11 → 9 while C and G hold.</p>
+<div class="exercise"><p><b>Exercise 2.</b> Listen to the bridge of “Deceptive Light”, where the cadence is slowed to
+whole beats. Then write the golden deceptive cadence in C major, naming the four chords and the bass line.</p>
+<details class="answer"><summary>Answer</summary><p>G – vA♭g – A♭g – Am. The golden chords sit on ♭VI = A♭, a sixth-step
+apart; the bass climbs G – vA♭ – A♭ – A.</p></details></div>
+</div>
+</section>
+
+<section id="colour">
+<h2>Colour: “Tape Bloom”</h2>
+<div class="layer hear">
+<p>“Tape Bloom” is a lo-fi piece in A minor at 90 beats per minute: swung hi-hats on a triplet grid, a lazy kick, an
+electric piano comping in rootless ninth chords, a bass that slides, and a soft piano melody. Its golden chords are not
+passing chords at all. A Western chord bends into its golden counterpart and stays there for half a bar, the way a
+borrowed chord colours a progression. Two notes of the chord slide by a third of a semitone and the rest hold, so the
+effect resembles the slow pitch wobble of a worn tape: felt more than announced.</p>
+<audio-ex src="colour_bend" caption="Fmaj7 for a bar, Fmaj7 bending into Fg (A sinks to vA while E and G hold), then E7 bending into Eg, resolving to Am9; the melody holds F, then E."></audio-ex>
+<p>The song ends with a golden Picardy third. In A minor the final chord turns major, but on the way the third climbs
+through the silver and golden thirds, one sixth-step at a time, under a melody that holds A.</p>
+<audio-ex src="golden_picardy" caption="E7 – Am – Am(^3) – Ag – A: the third of A climbs C – ^C – vC♯ – C♯, from minor through silver and golden to major."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Colour chords by projection</b> (<a href="ch:ch38#colour-chords">Chapter 38</a>). Replace a diatonic triad X by
+the golden triad nearest to it, π(X). The song uses three:</p>
+<table>
+<tr><th>Western chord</th><th>Golden colour</th><th>Holds</th><th>Bends</th></tr>
+<tr><td>F (F A C)</td><td>Fg (F vA ^C)</td><td>F</td><td>A ↓ to vA, C ↑ to ^C</td></tr>
+<tr><td>E (E G♯ B)</td><td>Eg (E vG♯ ^B)</td><td>E</td><td>G♯ ↓ to vG♯, B ↑ to ^B</td></tr>
+<tr><td>Am (A C E)</td><td>vAg (vA ^C E)</td><td>E</td><td>A ↓ to vA, C ↑ to ^C</td></tr>
+</table>
+<p>The electric piano does not play triads. It voices each chord as its third, seventh and ninth
+(<code>[3,7,9]</code>), resolving them against the chord sounding at that moment:</p>
+<pianoroll edo="36" notes="A3 E4 G4 ; vA3 E4 G4 ; Ab3 D4 F#4 ; vAb3 Eb4 F#4 ; C4 G4 B4" labels="Fmaj7 ; Fg ; E7 ; Eg ; Am9" title="The rootless voicings of the colour chords"></pianoroll>
+<p>Over F, the seventh is E. The golden seventh, 33 sixth-steps above the root, is exactly a 12-ET major seventh, so the
+E stays and Fmaj7 → Fg is the golden seventh chord Fg7 with only its third moving, A → vA. Over E7 the seventh is D;
+Eg has no seventh of its own, so the voicing takes the golden one, D♯, and E7 → Eg moves two voices: the third sinks
+G♯ → vG♯ and the seventh rises D → D♯.</p>
+<p><b>Rules 1–3 in practice.</b> The colour chords last half a bar. The melody holds F over Fg and E over Eg and vAg,
+the notes each projection keeps. The electric piano strikes on beat 3, where the colour begins: an early draft of the
+comping rhythm skipped beat 3, and the bend was then heard only in the bass.</p>
+<audio-ex src="tape_bloom" caption="“Tape Bloom”, the complete song (2:01): colour chords in the loop and the bridge, the tonic's golden shadow vAg in the drum-less interlude, and the golden Picardy at the end."></audio-ex>
+</div>
+<div class="layer derive">
+<p><b>The projection</b> (<i>theorem</i>, <a href="ch:ch35#projection">Chapter 35</a>). For a major triad $M_r$ the
+unique nearest golden triad is $G_r$; for a minor triad $m_r$ it is $G_{r-1}$; both lie at distance 2 and no Western
+triad is at distance 1 from a golden one. In sixth-steps above C: F = {15, 27, 0} and Fg = {15, 26, 1};
+Am = {27, 0, 12} and vAg = {26, 1, 12}. Each pair shares one note and moves the other two by one step in opposite
+directions.</p>
+<p><b>The golden Picardy</b> (<a href="ch:ch29#mixture">Chapter 29</a>). The third above A takes the values 9, 10, 11
+and 12 sixth-steps: 300, 333.33, 366.67 and 400 cents. 10 is the silver third, the third of As; 11 renders the golden
+third 2/φ = 366.91 c. In the chord symbols, Am(^3) raises only the third; Ag also raises the fifth to ^E (22 steps), so
+the fifth touches ^E once and returns.</p>
+<div class="exercise"><p><b>Exercise 3.</b> Using the projection theorem, find π(Dm) and say which note it keeps and
+which two it bends.</p>
+<details class="answer"><summary>Answer</summary><p>Dm = m_6 (D = 6 sixth-steps above C), so π(Dm) = G_5 = vDg = vD ^F A.
+It keeps A, the fifth; D sinks to vD and F rises to ^F.</p></details></div>
+</div>
+</section>
+
+<section id="descent">
+<h2>Descent: “Andalusian Gold”</h2>
+<div class="layer hear">
+<p>The Andalusian cadence, A minor falling to G, F and E, is the harmonic signature of flamenco and of a thousand songs
+since. “Andalusian Gold” plays it on a guitar strummed in a flamenco rhythm, with handclaps, a bass and a singing lead.
+The song first plays the cadence plainly, so the ear knows it, and then golden: each step down takes two golden chords,
+and the bass walks the whole descent in sixth-steps.</p>
+<audio-ex src="andalusian_ab" caption="Am – G – F – E plain, then golden: Am – A♭g – vA♭g – G – ^F♯g – vF♯g – F – vF – ^E – E, the bass falling a sixth-step at a time."></audio-ex>
+<p>In the golden sections the voice sings for two beats and stops; the guitar answers in gold for the other two. Call and
+response between the two worlds runs through the whole song.</p>
+<audio-ex src="andalusian_gold" caption="“Andalusian Gold”, the complete song (1:40): plain, golden, a falseta in the relative major, the golden cadence at full strength, and an ending that hangs on E."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>The golden Andalusian cadence</b> (<a href="ch:ch29#staircase">Chapter 29</a>) is
+vi – ♭VIg – v♭VIg – V – ^♯IVg – v♯IVg – IV – vIV – ^III – III; in A minor:</p>
+<pre><code>Am:0.5 ~g:0.25 ~g:0.25  G:0.5 ~g:0.25 ~g:0.25  F:0.5 vF:0.25 ^E:0.25  E:1</code></pre>
+<p>The bass plays the chord root on every beat, so its line is the cadence in one voice:</p>
+<pianoroll edo="36" notes="A1 ; Ab1 ; vAb1 ; G1 ; ^F#1 ; vF#1 ; F1 ; vF1 ; ^E1 ; E1" labels="Am ; Abg ; vAbg ; G ; ^F#g ; vF#g ; F ; vF ; ^E ; E" title="The bass of the golden Andalusian cadence"></pianoroll>
+<p>From A to G the bass falls a semitone, then a sixth-step, then two: 3 + 1 + 2 sixth-steps. From G to F it falls in three
+equal steps of two sixth-steps, 2 + 2 + 2. From F to E it falls one sixth-step at a time, 1 + 1 + 1, but the chords on that last step are not golden. vF and ^E
+are Western major triads moved onto another layer: the whole chord slides in parallel. That is the half-step theorem at
+work.</p>
+<p><b>Form.</b> After a four-bar introduction on the guitar alone: the plain cadence (8 bars), golden (8), a falseta in the relative major (8), the golden cadence at full
+strength with a glass bell doubling the voice an octave higher (8), and a coda on the golden cadence that hangs on E,
+the Phrygian half cadence that flamenco ends on.</p>
+</div>
+<div class="layer derive">
+<p><b>The half-step theorem</b> (<i>theorem</i>, <a href="ch:ch28#half-step">Chapter 28</a>). Chords a half step
+apart in parallel motion can never pass through a golden triad: each voice moves by three sixth-steps, and a uniform
+split of three is 1 + 1 + 1, which keeps every voice on a single path through the layers. The passing chords are
+therefore planing, the same Western chord shifted by one sixth-step and then two: F → vF → ^E → E.</p>
+<p><b>Why the two golden chords per whole step.</b> Am → G and G → F are stepwise moves between triads a whole step
+apart. In System 2, as in the escalator, both golden chords stand on the chromatic root between them: A♭g and vA♭g
+(one sixth-step apart) between A and G, ^F♯g and vF♯g (two sixth-steps apart) between G and F.</p>
+<div class="exercise"><p><b>Exercise 4.</b> Why does the song not end with a golden chord between F and E?</p>
+<details class="answer"><summary>Answer</summary><p>F and E are a half step apart. By the half-step theorem no golden
+triad lies on a path between chords a half step apart in parallel motion; the passing chords are the planed Western
+chords vF and ^E.</p></details></div>
+</div>
+</section>
+
+<section id="silver">
+<h2>Pivot and home: “The Silver Third”</h2>
+<div class="layer hear">
+<p>The last song does three things Western harmony cannot do. Its theme, in C major, modulates to a key that shares not
+a single note with C: ^E♭ major, 333.33 cents higher, on another layer of 36-ET. The theme returns there unchanged, a
+"silver third" up. Then the Western instruments fall silent, and a pad and bell with golden spectra breathe through a
+chain of golden chords, a golden home. A G7 chord arrives as a visitor and leads back to C. The finale walks Coltrane's
+major-third cycle through its golden passing chords.</p>
+<audio-ex src="silver_pivot" caption="G – F – Fg – ^Fm – ^B♭7 – ^E♭: the golden chord Fg is golden IV in C and golden ii in ^E♭, so it pivots between two keys with no note in common."></audio-ex>
+<audio-ex src="golden_home" caption="Golden home on golden-spectrum timbres: ^E♭g – ^E♭g7 – Gg – Gg7 – vBg – Gg7 – Gg, each seventh adding the next tone of the golden chain; then G7 and C on the piano."></audio-ex>
+<audio-ex src="giant_steps" caption="Golden giant steps: C – Cg – A♭ – A♭g – E – Eg – C, while the melody holds the common tone of each step: C, then A♭, then E, then C."></audio-ex>
+<audio-ex src="silver_third" caption="“The Silver Third”, the complete song (2:07): theme in C, pivot, the theme in ^E♭, golden home, homecoming, and golden giant steps."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>The pivot.</b> C major and ^E♭ major are 10 sixth-steps apart. They share no note, but they share three golden
+chords: Cg, Fg and Gg are the golden I, IV and V of C and the golden vi, ii and iii of ^E♭
+(<a href="ch:ch35#silver-third-keys">Chapter 35</a>). The song uses Fg:</p>
+<pianoroll edo="36" notes="F3 C4 F4 A4 ; F3 ^C4 F4 vA4 ; ^F3 ^C4 ^F4 ^Ab4 ; ^D3 ^Bb3 ^F4 ^Ab4 ; ^Eb3 ^Bb3 ^Eb4 ^G4" labels="F ; Fg ; ^Fm ; ^Bb7 ; ^Eb" title="The pivot from C to ^E♭ through Fg"></pianoroll>
+<p>F → Fg keeps F and bends A and C by a sixth-step each; Fg → ^Fm keeps ^C and bends the other two. Every voice moves
+by at most one sixth-step at the pivot, and after it the progression is an ordinary ii – V7 – I in the new key. The
+melody holds F into the pivot and rests while the keys change, then plays the theme again in ^E♭.</p>
+<p><b>Golden home</b> (<a href="ch:ch31#breathing-planing">Chapter 31</a>, <a href="ch:ch26#timbre-flip">Chapter 26</a>).
+For eight bars the piano and pad stop, and a pad and a bell whose partials follow $2^m\varphi^n$ take over. The chords
+breathe along the golden circle: a golden triad, then its golden seventh, which adds the next tone of the golden chain,
+then the next triad, which drops the oldest tone. A glass bell plays chord tones only.</p>
+<pianoroll edo="36" notes="G3 vB3 ^Eb4 ; G3 ^D4 ^Eb4 vB4 ; G3 ^D4 vB4 ; G3 ^D4 F#4 vB4 ; F#3 ^D4 vB4 ; G3 D4 F4 B4" labels="^Ebg ; ^Ebg7 ; Gg ; Gg7 ; vBg ; G7" title="Golden breathing, then the Western visitor (doubled notes omitted)"></pianoroll>
+<p>On harmonic instruments a Western chord is the deepest release there is; here G7 arrives as a visitor after the
+golden passage and resolves home to C. The golden-spectrum timbres are a laboratory setting
+(<a href="ch:ch26#timbre-flip">Chapter 26</a>): on them the exact golden triad measures smoother than major, which is
+why the passage can rest on golden chords at all. Treating the golden triad as a delicate, metastable home is the
+author's model and listening experience; roughness measured on harmonic tones does not show it.</p>
+<p><b>Golden giant steps.</b> The finale's progression is</p>
+<pre><code>C:1 ~:0.5 Ab:1 ~:0.5 E:1 ~:0.5 C:1.5</code></pre>
+<pianoroll edo="36" notes="C3 G3 C4 E4 ; C3 ^G3 C4 vE4 ; Ab2 Ab3 C4 Eb4 ; Ab2 Ab3 vC4 ^Eb4 ; E2 Ab3 B3 E4 ; E2 vAb3 ^B3 E4 ; C3 G3 C4 E4" labels="C ; Cg ; Ab ; Abg ; E ; Eg ; C" title="Golden giant steps"></pianoroll>
+<p>Each golden chord keeps the root of the chord before it: C in Cg, A♭ in A♭g, E in Eg. Each of those roots is also a
+note of the next chord (C in A♭, A♭ = G♯ in E, E in C), so the melody holds one note across each step: C6, A♭5, E5,
+C5. The section peaks below the homecoming before it, as a coda should: −18.0 against −16.2 LUFS (<i>measurement</i>).</p>
+</div>
+<div class="layer derive">
+<p><b>Projection pivots</b> (<i>exhaustive</i>, <a href="ch:ch35#silver-third-keys">Chapter 35</a>). Keys a silver
+third apart (±10 sixth-steps) share exactly three golden chords, the most possible for keys on different layers, and
+each pivot is a geodesic of total motion 2 + 2 = 4 sixth-steps with every voice monotone. In sixth-steps above C:
+F = {15, 27, 0}, Fg = {15, 26, 1}, ^Fm = {16, 25, 1}. Fg is π(F) and also π(^Fm), since $\pi(m_r) = G_{r-1}$ with
+$r = 16$.</p>
+<p><b>Golden giant steps</b> (<i>exhaustive</i>, <a href="ch:ch37#sequences">Chapter 37</a>). C → A♭ → E → C is a
+cycle of same-quality pairs a major third apart, so by the quality theorem each step has exactly one strict golden
+passing chord, on the upper root: Cg, A♭g, Eg. They sit at positions 0, 12 and −12 of the 36-chord golden circle,
+dividing it in three as the major-third cycle divides the octave.</p>
+<div class="exercise"><p><b>Exercise 5.</b> Name the three golden chords that C major shares with vA major, and give their
+functions in each key.</p>
+<details class="answer"><summary>Answer</summary><p>vDg, vEg and vAg: the golden ii, iii and vi of C, and the golden IV,
+V and I of vA.</p></details></div>
+<div class="exercise"><p><b>Exercise 6.</b> Write golden giant steps starting on G, and the note the melody holds at
+each step.</p>
+<details class="answer"><summary>Answer</summary><p>G – Gg – E♭ – E♭g – B – Bg – G. The melody holds G, then E♭ (= D♯ in
+B major), then B, then G.</p></details></div>
+</div>
+</section>

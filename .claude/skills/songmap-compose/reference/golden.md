@@ -39,6 +39,8 @@ each built on one technique below, are in `songs/golden/`.
 - **Everything that sounds must change chord with it.** Use the voiced styles (`hold`, `comp`, `pulse`, `bassline`,
   `top`) or `rel:` figures. A `pad:warm` or a whole-bar `rel` pad keeps ringing the old chord into the golden one. Give
   comping a strike where a colour chord starts, or the bend goes unheard.
+- **Write figures a full bar long.** A `rel:` figure shorter than a bar is padded with rest to a whole bar, not repeated:
+  `"[R,3,5]/2"` strikes once per bar and misses a chord change on beat 3. Write `"[R,3,5]/2 [R,3,5]"`.
 - **Section ends.** A `~` at the end of a progression resolves toward the progression's *first* chord, because it loops.
   Spell the golden chords out (`vCg/G`) when the next section starts somewhere else.
 - **Stable instruments.** `keys/still`, `epiano/still`, `pad/still`, `string_pluck/still`, `clean/*`, and `master clean`.

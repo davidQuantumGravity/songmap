@@ -1,0 +1,45 @@
+# 1. Golden Hour Lullaby (2:17). C major, 72 BPM. Western harmony is home; golden chords are passing light.
+# Technique: System 1/2 golden passing chords (docs/GOLDEN_THEORY.md §2, §4.2) inside an ordinary lullaby:
+#   I-IV and V-I through one golden chord (~), IV-V through the golden escalator (~g ~g: vF#g ^F#g),
+#   the bridge closes with the four-chord golden authentic cadence G - vEbT13/G - vCg/G - C,
+#   and the coda is the golden plagal amen (ii - IV - golden - I).
+# Craft: golden chords sit on weak beats and only the voice-led piano, bass and pad move through them;
+# the melody rests or holds a common tone there, so every golden moment is a gentle glide, never a rub.
+songmap: 0.2
+title: "Golden Hour Lullaby"
+tempo: 72
+meter: "4/4"
+key: C
+tuning: "36edo"
+fps: 30
+seed: 21
+tail_seconds: 4
+
+instruments:
+  keys: keys/still
+  mel: {use: keys/still, hardness: 0.3}
+  gtr: string_pluck/still
+  low: clean/bass
+  wash: pad/still
+  bell: clean/glass
+
+harmony:
+  progressions: {lull: "C:0.75 ~:0.25 F:0.75 ~:0.25 C:0.75 ~:0.25 G:1 Am:1 F:0.5 ~g:0.25 ~g:0.25 G:0.75 ~:0.25 C:1", dusk: "Am:0.75 ~:0.25 Em:1 F:0.75 ~:0.25 C:1 Dm:0.75 ~:0.25 Am:1 F:1 G:0.5 vEbT13/G:0.25 vCg/G:0.25", open: "C:1 F:0.75 ~:0.25 C:1 G:0.75 ~:0.25", amen: "Dm:1 F:0.75 ~:0.25 C:2"}
+
+sections:
+  - {name: intro, bars: 4, parts: {keys: hold}, harmony: open, dyn: "pp<p"}
+  - {name: verse, bars: 8, parts: {keys: hold, low: bassline, mel: {deg: "=p 4/4 2 0/2 | 5/4. 3/8 0/2 | 0/4 2 4/2 | 5/4 4 3 1 | 0/2. r/4 | 5/4 3 r/2 | 1/4 3 4/2 | 0/1", oct: 1}}, harmony: lull, dyn: p}
+  - {name: answer, bars: 8, parts: {keys: hold, low: bassline, mel: {deg: "=mp 4/4 5 7/2 | 11/4. 9/8 7/2 | 9/4 7 4/2 | 8/4 7 6 5 | 7/2. r/4 | 9/4 7 r/2 | 6/4 8 4/2 | 7/1", oct: 1}, gtr: {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5"}, wash: hold}, harmony: lull, dyn: "p<mp"}
+  - {name: glow, bars: 8, parts: {keys: hold, low: bassline, mel: {deg: "=mp < 2/4 4 5/2 | 4/2. r/4 | 5/4 9 7/2 | 7/1 | 8/4 7 5/2 | 4/4 5 7/2 | 9/2 8/4 7 | 6/2 r/2 =mf", oct: 1}, gtr: {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5"}, wash: hold, bell: {deg: "=mp < 2/4 4 5/2 | 4/2. r/4 | 5/4 9 7/2 | 7/1 | 8/4 7 5/2 | 4/4 5 7/2 | 9/2 8/4 7 | 6/2 r/2 =mf", oct: 2}}, harmony: dusk, dyn: "mp<mf"}
+  - {name: home, bars: 8, parts: {keys: hold, low: bassline, mel: {deg: "=mp 4/4 5 7/2 | 11/4. 9/8 7/2 | 9/4 7 4/2 | 8/4 7 6 5 | 7/2. r/4 | 9/4 7 r/2 | 6/4 8 4/2 | 7/1", oct: 1}, gtr: {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5"}, wash: hold}, harmony: lull, dyn: "mp>p"}
+  - {name: amen, bars: 4, parts: {keys: hold, wash: hold, low: bassline, mel: {deg: "r/1 | r/1 | 0/1 | 0/1", oct: 1}}, harmony: amen, dyn: "p>pp"}
+
+mix:
+  keys: {gain_db: -4, send: {hall: 0.2}}
+  mel: {gain_db: 4, send: {hall: 0.3}}
+  gtr: {gain_db: -6, send: {hall: 0.25}}
+  low: {gain_db: -4}
+  wash: {gain_db: -25, send: {hall: 0.35}}
+  bell: {gain_db: -12, send: {hall: 0.45}}
+
+master: clean

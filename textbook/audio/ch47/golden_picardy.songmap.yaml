@@ -1,0 +1,24 @@
+songmap: 0.2
+title: "Tape Bloom: the golden Picardy third"
+tempo: 90
+meter: "4/4"
+key: Am
+tuning: "36edo"
+fps: 30
+seed: 23
+tail_seconds: 4
+
+instruments:
+  ep: epiano/still
+  keys: {use: keys/still, hardness: 0.3}
+  bass: {cutoff: 480, glide: 0.08}
+
+sections:
+  - {name: x, bars: 4, parts: {ep: {rel: "[R,3,5]/2 [R,3,5]"}, bass: {rel: R/1, oct: -2}, keys: {deg: "=mp 4/2 #6/2 | 7/1 | 7/1 | 7/1"}}, harmony: "E7:1 Am:0.5 Am(^3):0.5 Ag:1 A:1", dyn: "mp>p"}
+
+mix:
+  bass: {gain_db: -2}
+  ep: {gain_db: -11, send: {hall: 0.2}}
+  keys: {gain_db: 3, send: {hall: 0.25}}
+
+master: clean

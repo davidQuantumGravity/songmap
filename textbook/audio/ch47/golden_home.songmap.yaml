@@ -1,0 +1,27 @@
+songmap: 0.2
+title: "The Silver Third: golden home on golden-spectrum timbres, then G7 and C"
+tempo: 90
+meter: "4/4"
+key: C
+tuning: "36edo"
+fps: 30
+seed: 25
+tail_seconds: 4
+
+instruments:
+  gold: clean/golden_pad
+  bell: clean/glass
+  keys: keys/still
+  low: clean/bass
+
+sections:
+  - {name: home, bars: 8, parts: {gold: hold, bell: {rel: "5/2 3+ | R+/1", oct: 1}}, harmony: "^Ebg:1 ^Ebg7:1 Gg:1 Gg7:1 vBg:1 Gg7:1 Gg:1 G7:1", dyn: "p<mp"}
+  - {name: end, bars: 1, parts: {keys: hold, low: bassline}, harmony: "C:1", dyn: mp}
+
+mix:
+  gold: {gain_db: -12, send: {hall: 0.35}}
+  bell: {gain_db: -9, send: {hall: 0.4}}
+  keys: {gain_db: -9, send: {hall: 0.2}}
+  low: {gain_db: -4}
+
+master: clean

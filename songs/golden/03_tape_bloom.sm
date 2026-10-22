@@ -3,7 +3,7 @@
 # its nearest golden triad π(X) for half a bar. One note stays, the other two slide a sixth-step:
 #   Fmaj7 -> Fg   (A falls to vA, C rises to ^C over a steady F; the 7th E stays, since the golden
 #                  seventh 8/φ³ is exactly a 12-ET major seventh, so Fg + E is the true golden seventh Fg7)
-#   E7    -> Eg   (a dominant whose third sags a sixth-step: a "blue" dominant)
+#   E7    -> Eg   (the third sinks to vG#, and the voiced seventh D rises to D#, the golden seventh)
 #   Am    -> vAg  (the tonic's golden shadow, in the drum-less bridge)
 # In lo-fi the bend reads as tape wow, so the colour is felt rather than announced.
 # The coda is the golden Picardy third: Am - Am(^3) - Ag - A, the third climbing 9 -> 10 -> 11 -> 12 sixth-steps
@@ -38,7 +38,7 @@ tune_a     8 | like=walk keys:tune dyn=mp
 bloom      8 | like=walk keys:bloom_tune prog=bloom dyn=mp<mf
 alone      4 | ep:{rel: "[3,7,9]/1"} keys:lonely prog=shade dyn=p
 tune_b     8 | like=tune_a dyn=mp                                             | !impact(size=s)
-picardy    4 | ep:{rel: "[R,3,5]/2"} bass:{rel: "R/1", oct: -2} keys:last prog=home dyn=mp>p
+picardy    4 | ep:{rel: "[R,3,5]/2 [R,3,5]"} bass:{rel: "R/1", oct: -2} keys:last prog=home dyn=mp>p
 
 mix drums -6 | fx -4 | bass -2 | ep -11 hall=.2 | keys 3 hall=.25
 master clean
