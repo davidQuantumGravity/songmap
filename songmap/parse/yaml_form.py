@@ -262,7 +262,7 @@ def from_raw(raw: dict, file: str | None = None) -> Song:
         except ValueError as e:
             raise SongError(str(e), file=file) from None
     s.fps = int(_num(raw.get("fps", s.fps), "fps", file))
-    s.seed = int(raw.get("seed", s.seed))
+    s.seed = int(_num(raw.get("seed", s.seed), "seed", file, positive=False))
     s.tail_seconds = _num(raw.get("tail_seconds", s.tail_seconds), "tail_seconds", file, positive=False)
     s.mood = raw.get("mood")
     s.video = dict(raw.get("video") or {})
@@ -303,7 +303,7 @@ def _harmony(h, file) -> HarmonySpec:
     default = h.get("default") or []
     if isinstance(default, str):
         default = default.replace("|", " ").split()
-    return HarmonySpec(default=[str(c) for c in default], chord_bars=float(h.get("chord_bars", 1)),
+    return HarmonySpec(default=[str(c) for c in default], chord_bars=float(_num(h.get("chord_bars", 1), "chord_bars", file)),
                        progressions={k: str(v) for k, v in (h.get("progressions") or {}).items()},
                        voicing=_plain(h.get("voicing") or {}))
 
@@ -322,7 +322,8 @@ def _motifs(ms, file) -> dict[str, Motif]:
         if len(modes) != 1:
             raise SongError(f"motif {name}: give exactly one of notes:, deg:, rel:", file=file, line=_line(m))
         mode = modes[0]
-        out[name] = Motif(name, str(m[mode]), "letter" if mode == "notes" else mode, int(m.get("octave", 4)),
+        out[name] = Motif(name, str(m[mode]), "letter" if mode == "notes" else mode,
+                          int(_num(m.get("octave", 4), f"motif {name}: octave", file, _line(m), positive=False)),
                           m.get("key"), _line(m))
     return out
 
