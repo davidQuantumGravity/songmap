@@ -1,0 +1,54 @@
+# ch37: golden planing is three-key polytonality. Every voice is a plain major-key line: the
+# lowest in C major, the middle in vE major (a golden third higher, layer v), the top in ^G
+# major (a golden fifth higher, layer ^). The three keys share no note. Sounding together,
+# every vertical is a golden triad on the lowest note.
+# 1. Definition: the C major scale descending, planed in golden triads, then release onto C major.
+# 2. A short tune: the C major line alone, then with its vE major copy (golden thirds),
+#    then with the ^G major copy as well (golden triads), then release onto C major.
+songmap: 0.2
+title: "Golden planing: three keys at once"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 371
+tail_seconds: 3
+instruments: {low: clean/organ, mid: clean/keys, top: clean/lead}
+mix:
+  low: {gain_db: -6, pan: -0.35, send: {hall: 0.2}}
+  mid: {gain_db: -5, pan: 0.0, send: {hall: 0.2}}
+  top: {gain_db: -8, pan: 0.35, send: {hall: 0.2}}
+sections:
+  - name: scale
+    bars: 5
+    harmony: "Cg:0.5 Bg:0.5 Ag:0.5 Gg:0.5 Fg:0.5 Eg:0.5 Dg:0.5 Cg:0.5 C:1"
+    parts:
+      low: {notes: "=mf c+2 b | a g | f e | d c | c1"}
+      mid: {notes: "=mf ve+2 vd#+ | vc#+ vb | va vg# | vf# ve | e1"}
+      top: {notes: "=mf ^g+2 ^f#+ | ^e+ ^d+ | ^c+ ^b | ^a ^g | g1"}
+  - name: one_key
+    bars: 2
+    harmony: "N.C.:2"
+    parts:
+      low: {notes: "=mf e4 g a g | e8 d c d c2"}
+  - name: two_keys
+    bars: 2
+    harmony: "N.C.:2"
+    parts:
+      low: {notes: "=mf e4 g a g | e8 d c d c2"}
+      mid: {notes: "=mf vg#4 vb vc#+ vb | vg#8 vf# ve vf# ve2"}
+  - name: three_keys
+    bars: 2
+    harmony: "Eg:0.25 Gg:0.25 Ag:0.25 Gg:0.25 Eg:0.125 Dg:0.125 Cg:0.125 Dg:0.125 Cg:0.5"
+    parts:
+      low: {notes: "=mf e4 g a g | e8 d c d c2"}
+      mid: {notes: "=mf vg#4 vb vc#+ vb | vg#8 vf# ve vf# ve2"}
+      top: {notes: "=mf ^b4 ^d+ ^e+ ^d+ | ^b8 ^a ^g ^a ^g2"}
+  - name: release
+    bars: 1
+    harmony: "C:1"
+    parts:
+      low: {notes: "=mf c1"}
+      mid: {notes: "=mf e1"}
+      top: {notes: "=mf g1"}
+master: clean

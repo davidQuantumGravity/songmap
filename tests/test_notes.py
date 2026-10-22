@@ -61,3 +61,14 @@ def test_rel_durations_and_ambiguity():
         N.parse_motif("516", rel=True)
     with pytest.raises(NotationError, match="out of range"):
         N.parse_motif("58", rel=True)
+
+
+def test_trailing_rests_count_in_the_written_length():
+    evs = N.parse_motif("c1 | r1 | r1 | r1", name="t")
+    assert len(evs) == 1 and N.motif_length(evs) == 16
+
+
+def test_a_phrase_ending_in_rests_loops_at_its_written_length(make_song):
+    from songmap.arrange.expand import expand
+    s = make_song({"sections": [{"name": "a", "bars": 8, "parts": {"keys": {"notes": "c1 | r1 | r1 | r1"}}}]})
+    assert [e.beat for e in expand(s).parts["keys"]] == [0, 16]

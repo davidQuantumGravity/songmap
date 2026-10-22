@@ -75,8 +75,8 @@ Notes on the grammar:
 - `set` writes any field of the YAML form that has no directive (`returns`, `harmony.voicing`, an `fx` kit). `songmap fmt` uses it so that printing is lossless.
 
 **Defaults:**
-- Every song plays on the default ensemble: the synth_v0 port for now; mood presets arrive in P4. `inst`, `kit` and `mix` change only what they name.
-- `groove` and `feel` are stored in the song and applied by the performance layer from P3. `qa` rules are evaluated from P2.
+- Every song plays on the default ensemble, shaped by its mood (`mood=balanced` unless the song names one: cinematic, documentary, ambient, techno, lofi, or v0 for the original synth_v0 sound). `inst`, `kit` and `mix` change only what they name.
+- `groove` and `feel` are played by the performance layer (swing, templates, timing offsets and humanize), on top of the mood's own feel. `qa` rules are evaluated from P2. `songmap listen` (the automated ear) and every render's `review.json` report what a listener would notice.
 - Events land at the section start. A riser *ends* at its position.
 
 **Part roles** can be any name. A role without an instrument entry uses the instrument of the same name or the part fallback (`keys` → keys, `gtr` → string_pluck); `inst` sets it explicitly.

@@ -1,0 +1,21 @@
+# ch34: three nearest neighbours of C major under three metrics. G major (6 common tones,
+# voice-leading 3); ^C major (no common tone, but the nearest key on another layer, voice-leading 7);
+# ^Eb major (no common tone, voice-leading 10, but three shared golden projections: here via Fg).
+songmap: 0.2
+title: "Three maps, three neighbours"
+tempo: 88
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 350
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass, keys: clean/keys}
+mix:
+  organ: {gain_db: -7, send: {hall: 0.2}}
+  low: {gain_db: -6}
+  keys: {gain_db: -6, send: {hall: 0.25}}
+sections:
+  - {name: common_tones, bars: 3, harmony: "C:1 D7:0.5 G:1.5", parts: {organ: hold, low: {style: roots, role: bass}, keys: top}}
+  - {name: voice_leading, bars: 3, harmony: "C:1 ^C:2", parts: {organ: hold, low: {style: roots, role: bass}, keys: top}}
+  - {name: projection, bars: 6, harmony: "C:1 F:1 Fg:1 ^Fm:0.5 ^Bb7:0.5 ^Eb:2", parts: {organ: hold, low: {style: roots, role: bass}, keys: top}}
+master: clean

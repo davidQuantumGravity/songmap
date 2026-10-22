@@ -1,0 +1,18 @@
+# Ch. 28: four entries of the natural-path dictionary, each written X ~g ~g Y:
+# ii -> V (Dm - Dg - vGg/D - G), vii° -> I (Bdim - ^Bs - vCg - C), bVII -> I (Bb - vBg - ^Bg - C),
+# V7 -> I (G7 - Gg7(^^3,^5) - vCg/G - C).
+songmap: 0.2
+title: "A dictionary tour"
+tempo: 104
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2.5
+instruments: {organ: clean/organ}
+mix: {organ: {gain_db: -6}}
+sections:
+  - {name: tour, bars: 16,
+     harmony: "Dm:1 ~g:0.5 ~g:0.5 G:1 N.C.:1 Bdim:1 ~g:0.5 ~g:0.5 C:1 N.C.:1 Bb:1 ~g:0.5 ~g:0.5 C:1 N.C.:1 G7:1 ~g:0.5 ~g:0.5 C:2",
+     parts: {organ: {style: hold, voices: 4, range: [50, 74]}}}
+master: clean

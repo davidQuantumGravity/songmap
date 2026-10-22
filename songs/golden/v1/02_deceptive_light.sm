@@ -1,0 +1,48 @@
+# 2. Deceptive Light (2:27). G major, 120 BPM, upbeat pop. Golden chords as quick sparkle inside the pop axis.
+# Technique (docs/GOLDEN_THEORY.md §4.2):
+#   - golden deceptive cadence V - v♭VIg - ♭VIg - vi (System 2, ~g ~g): D -> vEbg -> Ebg -> Em in two 8ths,
+#     so the bass climbs D - vEb - Eb - E like a pop walk-up, one sixth-step at a time;
+#   - the pre-chorus climbs the golden escalator IV - v#IVg - ^#IVg - V (C -> vC#g -> ^C#g -> D) and lands
+#     on the golden authentic chord vGg/D, a golden six-four that pulls into the chorus;
+#   - the bridge slows the deceptive cadence to whole beats so you can hear it, looping V back to vi;
+#   - the ending is golden modal mixture: IV - IVg - iv - I (C - Cg - Cm - G), the golden centroid
+#     between major and minor.
+# Craft: the melody rests or changes chord tone on every golden 8th; arps and the bass follow the chord.
+song "Deceptive Light" 120 4/4 G fps=30 seed=22 tail=3 tuning=36edo
+inst lead=clean/lead ep=epiano/still wash=pad/still bell=clean/glass
+
+prog verse  "G:1 D:0.75 ~g:0.125 ~g:0.125 Em:1 C:1"
+prog pre    "Am:1 Bm:1 C:0.5 ~g:0.25 ~g:0.25 D:0.75 vGg/D:0.25"
+prog chorus "G:1 D:0.75 ~g:0.125 ~g:0.125 Em:1 C:1 G:1 D:1 C:1 D:0.75 vGg/D:0.25"
+prog slow   "Em:1 C:1 G:1 D:0.5 ~g:0.25 ~g:0.25"
+prog coda   "C:1 Cg:0.5 Cm:0.5 G:2"
+
+# deg 0 = G4. Verse: conversational 8ths that answer themselves; every golden beat gets a rest.
+vq = "=mp r/8 2/8 4 4 5/4 4/8 2 | 1/4 2/8 1 0/4 r/4 | r/8 2/8 4 4 5/4 4/8 2 | 4/2 0/2"
+va = "r/8 4/8 5 5 7/4 5/8 4 | 4/4 5/8 4 2/4 r/4 | r/8 2/8 4 4 5/4 4/8 2 | 1/2. r/4"
+# Chorus: the hook leaps to G5 and B5; the line breathes on each golden cadence.
+ch = "=f 7/4 7/8 9 7/4 4 | 8/4. 7/8 8/4 r/4 | 9/4 9/8 11 9/4 7 | 7/2 4/2 | 7/4 7/8 9 7/4 4 | 8/4. 9/8 11/2 | 11/4. 9/8 7/2 | 8/2. r/4"
+verse_tune = {deg: vq + " | " + va}
+hook = {deg: ch}
+# Bridge: a slow call in the epiano's register, answered by silence.
+call = {deg: "=mp 4/2 5/4 4 | 2/1 | 4/2 7/4 5 | 4/2 r/2"}
+
+walk = {rel: "R/4 R R R/8 R", oct: -2}        # the last beat in 8ths follows both golden chords
+drive = {rel: "R/8 R+ R R+ R R+ R R", oct: -2}     # octave bounce, then two plain roots so golden 8ths climb
+beat = {kick: "X.......X.......", snare: "....X.......X...", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.6, 0.3, 0.45, 0.3, 0.6, 0.3, 0.45, 0.35]}}
+lift = !riser:1 !impact(size=m)
+
+# name    bars | parts and settings                                                       | events
+intro       4 | ep:comp arp:dark prog=verse dyn=p<mp
+verse       8 | ep:comp drums:beat bass:walk lead:verse_tune prog=verse dyn=mp
+pre         4 | ep:pulse drums:beat bass:drive wash:hold arp:dark lead:{deg: "=mp < 0/2 2/2 | 3/2 5/2 | 4/2. 5/4 | 6/2. r/4 =mf"} prog=pre dyn=mp
+chorus      8 | ep:comp drums:full+open bass:drive wash:hold arp:up lead:hook prog=chorus dyn=mf  | !lift
+verse_2     8 | like=verse drums:beat+{ghost: ".......o......o."} dyn=mp
+pre_2       4 | like=pre
+chorus_2    8 | like=chorus                                                                    | !riser:1
+bridge      8 | ep:hold wash:hold drums:half bass:walk lead:call prog=slow dyn=p<mp
+chorus_3    8 | like=chorus drums:full+open+hats16 bell:{deg: ch, oct: 1} dyn=ff                                       | !drop:1@-1(keep=[ep, wash]) !lift
+outro       4 | ep:hold wash:hold bass:{rel: "R/1", oct: -2} lead:{deg: "=mp 4/1 | 4/2 3/2 | 4/1 | 4/1"} prog=coda dyn=mp>p | !impact@+2(size=s)
+
+mix drums -9 | fx -9 | bass -1 | lead 16 hall=.25 | ep -16 hall=.15 | wash -24 hall=.3 | arp -2 | bell -6 hall=.35
+master clean

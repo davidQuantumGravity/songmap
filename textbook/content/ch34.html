@@ -1,0 +1,529 @@
+<p>Chapter 32 described the three kinds of key change in 36-ET: within a layer, across layers, and between golden
+scales. This chapter measures them with the golden chain's own small intervals. The golden comma, limma and apotome of
+<a href="ch:ch23#golden-comma">Chapter 23</a> turn out to be exactly the key changes by one, two and three sixth-steps,
+and each has its own way of moving: the comma lift is a pure change of plane, the limma lift passes through a golden
+triad at its exact midpoint, and a walk of thirteen golden13 keys raises a key by a comma one note at a time. The chapter
+ends with a map of all 36-ET keys under three different measures of distance.</p>
+
+<section id="units">
+<h2>The comma, the limma and the apotome as key changes</h2>
+<div class="layer hear">
+<p>Western music has a favourite blunt key change: the whole song steps up a semitone for its last chorus. 36-ET offers
+three smaller steps of the same kind: one sixth-step, two, and three (a semitone). Listen to C major moving each distance and
+coming back. The first two moves leave the ordinary keyboard altogether; the third lands back on it, a semitone
+higher.</p>
+<audio-ex src="units" caption="C – ^C – C – vC♯ – C – C♯ – C: the tonic triad lifted by one, two and three sixth-steps, each time from C. Listen for the first two lifts as 'off the keyboard' and the third, C♯, as an ordinary semitone."></audio-ex>
+<p>These three distances are not arbitrary. They are the three small intervals of the golden chain: one sixth-step is
+how 36-ET renders the golden comma, two the golden limma, three the golden apotome. A key change by a sixth-step
+is a modulation by a golden comma.</p>
+</div>
+<div class="layer understand">
+<h3>Three intervals, three key changes</h3>
+<p>Recall the chain distance of <a href="ch:ch23#chain">Chapter 23</a>: note $j$ of the golden chain lies $j$ golden
+sixths above C. 36-ET renders the golden sixth as 25 sixth-steps, so chain distance $j$ becomes $25j$ sixth-steps,
+reduced mod 36. The three small golden intervals land on the three smallest steps:</p>
+<table>
+<caption>The small golden intervals as modulation units (exhaustive check, <code>blending.py</code> §1)</caption>
+<tr><th>Interval</th><th>Exact ratio</th><th>Exact cents</th><th>Chain distance $j$</th><th>$25j \bmod 36$</th><th>36-ET</th><th>Key change from C</th></tr>
+<tr><td>golden comma</td><td>$\varphi^{13}/2^9$</td><td>30.17</td><td>13</td><td>1</td><td>33.33 c</td><td>C → ^C</td></tr>
+<tr><td>golden limma</td><td>$2^7/\varphi^{10}$</td><td>69.10</td><td>−10</td><td>2</td><td>66.67 c</td><td>C → vC♯</td></tr>
+<tr><td>golden apotome</td><td>$\varphi^3/4$</td><td>99.27</td><td>3</td><td>3</td><td>100.00 c</td><td>C → C♯</td></tr>
+<tr><td>chain 23</td><td>$\varphi^{23}/2^{16}$</td><td>−38.92</td><td>23</td><td>−1</td><td>−33.33 c</td><td>C → vC</td></tr>
+<tr><td>36-comma</td><td>$\varphi^{36}/2^{25}$</td><td>−8.75</td><td>36</td><td>0</td><td>0</td><td>none</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 E4 G4 ; ^C4 ^E4 ^G4 ; vC#4 vF4 vAb4 ; C#4 F4 Ab4" labels="C ; ^C (comma) ; vC♯ (limma) ; C♯ (apotome)" title="C major lifted by a golden comma, a golden limma and a golden apotome"></pianoroll>
+<p>The bookkeeping of Chapter 23 carries over: the apotome is the limma plus the comma (99.27 = 69.10 + 30.17 c),
+and in 36-ET 3 = 2 + 1. Only the apotome is a multiple of 3, so only it returns to the 12-ET layer: C♯ major shares two
+notes with C major (E♯ = F and B♯ = C), while ^C and vC♯ major share none (<a href="ch:ch32#layer-modulation">Chapter 32</a>).</p>
+<aside class="mirror"><b>Golden mirror of the Pythagorean units.</b> The chain of fifths has the same three small
+intervals (<a href="ch:ch05#limma-apotome">Chapter 5</a>): the Pythagorean comma (12 fifths, 23.46 c), the limma
+(−5 fifths, 90.22 c) and the apotome (7 fifths, 113.69 c). 12-ET renders them as 0, 1 and 1 semitones: it erases the
+comma and merges the two semitones (<a href="ch:ch05#comma">the comma</a>). 36-ET does not do the golden analogue. It
+keeps all three golden intervals distinct, as 1, 2 and 3 steps, the way 53-ET keeps the Pythagorean ones as 1, 4 and 5
+steps. What 36-ET erases instead is the much smaller 36-comma (−8.75 c).</aside>
+<h3>The chain distance of every key change</h3>
+<p>Every transposition by $s$ sixth-steps is also a number of steps along the golden chain. Write $c(s)$ for it, folded
+into the range −18 to 17. Because $25 \times 13 = 325 = 9 \times 36 + 1$, the number 13 undoes the golden sixth, and
+$c(s) = 13s \bmod 36$. This table is the key to the whole chapter:</p>
+<table>
+<caption>Chain distance $c(s)$ of a transposition by $s$ sixth-steps (exhaustive, <code>blending.py</code> §1)</caption>
+<tr><th>$s$</th><th>tonic</th><th>$c(s)$</th><th>$s$</th><th>tonic</th><th>$c(s)$</th><th>$s$</th><th>tonic</th><th>$c(s)$</th><th>$s$</th><th>tonic</th><th>$c(s)$</th></tr>
+<tr><td>0</td><td>C</td><td>0</td><td>9</td><td>E♭</td><td>9</td><td>18</td><td>F♯</td><td>−18</td><td>27</td><td>A</td><td>−9</td></tr>
+<tr><td>1</td><td>^C</td><td>13</td><td>10</td><td>^E♭</td><td>−14</td><td>19</td><td>^F♯</td><td>−5</td><td>28</td><td>^A</td><td>4</td></tr>
+<tr><td>2</td><td>vC♯</td><td>−10</td><td>11</td><td>vE</td><td>−1</td><td>20</td><td>vG</td><td>8</td><td>29</td><td>vB♭</td><td>17</td></tr>
+<tr><td>3</td><td>C♯</td><td>3</td><td>12</td><td>E</td><td>12</td><td>21</td><td>G</td><td>−15</td><td>30</td><td>B♭</td><td>−6</td></tr>
+<tr><td>4</td><td>^C♯</td><td>16</td><td>13</td><td>^E</td><td>−11</td><td>22</td><td>^G</td><td>−2</td><td>31</td><td>^B♭</td><td>7</td></tr>
+<tr><td>5</td><td>vD</td><td>−7</td><td>14</td><td>vF</td><td>2</td><td>23</td><td>vA♭</td><td>11</td><td>32</td><td>vB</td><td>−16</td></tr>
+<tr><td>6</td><td>D</td><td>6</td><td>15</td><td>F</td><td>15</td><td>24</td><td>A♭</td><td>−12</td><td>33</td><td>B</td><td>−3</td></tr>
+<tr><td>7</td><td>^D</td><td>−17</td><td>16</td><td>^F</td><td>−8</td><td>25</td><td>^A♭</td><td>1</td><td>34</td><td>^B</td><td>10</td></tr>
+<tr><td>8</td><td>vE♭</td><td>−4</td><td>17</td><td>vF♯</td><td>5</td><td>26</td><td>vA</td><td>14</td><td>35</td><td>vC</td><td>−13</td></tr>
+</table>
+<p>Read it as a dictionary between two senses of "near". <b>Pitch-near is chain-far</b>: ^C, only 33 c away, is 13
+chain steps from C; C♯, 100 c away, only 3; vE, a golden third away, 1. The golden scales care about chain distance,
+because a golden scale is a window of the chain. Western keys care about pitch distance and layers.</p>
+<h3>Two meanings of one sixth-step</h3>
+<p>The table also shows 36-ET's own enharmonic identification. One sixth-step up is chain distance 13, the golden comma
+(+30.17 c); one sixth-step down is chain distance 23 (−38.92 c). In exact golden tuning these are different intervals,
+and "comma up" followed by "chain-23 down" does not return home: it leaves you 8.75 c flat, the 36-comma. 36-ET makes them
+exact inverses, just as 12-ET makes B♯ and C the same note (<a href="ch:ch24#why-36">Chapter 24</a>).</p>
+<div class="exercise"><p><b>Exercise 34.1.</b> Find $c(5)$ for the key change C → vD. How many notes do C golden13 and vD
+golden13 share?</p>
+<details class="answer"><summary>Answer</summary><p>$13 \times 5 = 65 = 72 - 7$, so $c(5) = -7$. golden13 windows seven chain
+steps apart share $13 - 7 = 6$ notes (<a href="ch:ch24#keys">Chapter 24</a>). A small pitch move (167 c) is a fairly long
+chain move.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> For $s \in \mathbb{Z}_{36}$ let $c(s) \in [-18, 18)$ be the representative of $13s \bmod 36$. Since
+$25 \cdot 13 \equiv 1 \pmod{36}$, $c(s)$ is the unique chain position $j$ (in that range) with $25j \equiv s$.</p>
+<p><b>Proposition (units).</b> $c(1) = 13$, $c(2) = -10$, $c(3) = 3$, and $c(35) = -13$, while chain distance 23 is
+rendered as $25 \cdot 23 = 575 = 16 \cdot 36 - 1$, i.e. one sixth-step down. <i>Proof:</i> $13 \cdot 25 = 9 \cdot 36 + 1$,
+$-10 \cdot 25 = -7 \cdot 36 + 2$, $3 \cdot 25 = 2 \cdot 36 + 3$. ∎ In cents, with $g = 1200\log_2\varphi = 833.09$:
+comma $13g - 10800 = 30.17$, limma $8400 - 10g = 69.10$, apotome $3g - 2400 = 99.27$, chain 23
+$23g - 19200 = -38.92$, and $30.17 - 38.92 = -8.75$, the 36-comma $36g - 30000$.</p>
+<p><b>Proposition (chroma).</b> Moving a golden$n$ window one chain step removes one note and adds a note $n$ chain steps
+from it, so the altered note moves by the chain-$n$ interval, the scale's chroma. In 36-ET (exhaustive, <code>blending.py</code>
+§1):</p>
+<table>
+<tr><th>Scale</th><th>golden3</th><th>golden4</th><th>golden7</th><th>golden10</th><th>golden13</th><th>golden23</th></tr>
+<tr><td>Change (sixth-steps)</td><td>+3</td><td>−8</td><td>−5</td><td>−2</td><td><b>+1</b></td><td>−1</td></tr>
+<tr><td>Exact (cents)</td><td>+99.27</td><td>−267.64</td><td>−168.37</td><td>−69.10</td><td><b>+30.17</b></td><td>−38.92</td></tr>
+</table>
+<p>So golden13 (and golden23) are the scales whose neighbouring keys differ by a single sixth-step; golden10's differ by a
+limma. The Western mirror: the diatonic scale is the window of 7 fifths, and its chroma is the 7-fifth interval, the
+apotome (a semitone in 12-ET).</p>
+</div>
+</section>
+
+<section id="lifts">
+<h2>Lifting a key: sixth-steps and third-steps</h2>
+<div class="layer hear">
+<p>The simplest way to change key by a golden interval is to stop and continue somewhere else. Listen to a cadence in C
+major followed by the same cadence a sixth-step higher. Nothing is shared and nothing is prepared; the whole music
+simply moves to a slightly brighter plane.</p>
+<audio-ex src="comma_lift" caption="C – F – G7 – C, then ^C – ^F – ^G7 – ^C: a modulation by a golden comma. Listen for every voice rising 33 c at once, the top voice from C to ^C."></audio-ex>
+<p>The Well-Tempered Golden Clavier uses this lift as its spine: its tonics rise by sixth-steps through all 36 notes
+(<a href="ch:ch31#wtgc">Chapter 31</a>).</p>
+<audio-ref file="W1_well_tempered_golden_clavier.mp3" caption="The Well-Tempered Golden Clavier: 36 tonics, each a sixth-step above the last: its tonic plan is a chain of comma lifts."></audio-ref>
+</div>
+<div class="layer understand">
+<h3>Lifts</h3>
+<p>A <b>lift</b> by $s$ sixth-steps transposes the whole key. Chapter 32 called it a <i>direct shift</i>
+(<a href="ch:ch32#layer-modulation">Chapter 32</a>); in pop music it is the "truck-driver" key change, there a semitone
+or a whole tone. Lifts by one and two sixth-steps are the golden-sized ones: modulation by a comma and by a limma. How far
+does each move the music? Measure it by voice-leading distance, the total motion in sixth-steps when each note of one
+chord or scale moves to a note of the other, matched as smoothly as possible
+(<a href="ch:ch14#distance">Chapter 14</a>).</p>
+<table>
+<caption>Lifts of C major (exhaustive, <code>blending.py</code> §4)</caption>
+<tr><th>Lift</th><th>Target</th><th>Tonic triad distance</th><th>Triad moves (C, E, G)</th><th>Scale distance</th><th>Scale moves (C D E F G A B)</th></tr>
+<tr><td>+1 (comma)</td><td>^C major</td><td>3</td><td>+1 each</td><td>7</td><td>all +1</td></tr>
+<tr><td>+2 (limma)</td><td>vC♯ major</td><td>6</td><td>+2 each</td><td>14</td><td>all +2</td></tr>
+<tr><td>−1</td><td>vC major</td><td>3</td><td>−1 each</td><td>7</td><td>all −1</td></tr>
+<tr><td>−2</td><td>^B major</td><td>6</td><td>−2 each</td><td>14</td><td>all −2</td></tr>
+<tr><td>+3 (apotome)</td><td>C♯ major</td><td>9</td><td>+3 each</td><td>15</td><td>0, −3, −3, 0, −3, −3, −3</td></tr>
+<tr><td>+4</td><td>^C♯ major</td><td>12</td><td>+4 each</td><td>12</td><td>+1, −2, −2, +1, −2, −2, −2</td></tr>
+<tr><td>+5</td><td>vD major</td><td>15</td><td>+5 each</td><td>9</td><td>+2, −1, −1, +2, −1, −1, −1</td></tr>
+</table>
+<p>For the tonic triad, the cost grows with the lift: 3 per sixth-step. For the whole scale it does not. From +3 on, the
+smoothest way to reach the new scale is no longer to move every note up: C♯ major keeps C (as B♯) and F (as E♯) and moves
+the other five notes <i>down</i> a semitone. And vD major, five sixth-steps up, is only 9 away from C major as a scale,
+nearer than vC♯ (14). Pitch distance and scale distance part company quickly.</p>
+<p>Minor targets give a second surprise: from C major, ^C minor is only 4 away as a tonic triad (moves +1, −2, +1), one
+sixth-step more than the parallel minor Cm (3) and nearer than vC♯ minor (5) or vC minor (6) (exhaustive,
+<code>blending.py</code> §4). <i>Measurement:</i> a lift preserves every interval, so in the roughness model
+only the register changes: C 1.3189 → ^C 1.3008, Cg 1.4980 → ^Cg 1.4810, a drop of about 0.018 each, close position from
+C4 and from ^C4.</p>
+<h3>No golden chord on the way</h3>
+<p>Can the comma lift be smoothed by a golden chord in the middle, as the passing engine smooths C → A♭ with Cg
+(<a href="ch:ch27#quality">Chapter 27</a>)? No. Every voice of C major must move at least one sixth-step to reach ^C major,
+and the plain lift already achieves exactly that, so any chord on a smoothest path must have each of its notes either at
+the old note or at the new one. Such a chord uses only two layers, and a golden triad needs all three.</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; ^C4 ^E4 ^G4 ; C4 E4 G4 ; C4 vE4 ^G4 ; ^C4 ^E4 ^G4" labels="C ; ^C ; C ; Cg ; ^C" title="The comma lift: direct (3 sixth-steps), and the detour through Cg (2 + 3 = 5)"></pianoroll>
+<p>The best a golden chord can do is a detour: C → Cg → ^C costs 2 + 3 = 5 against the direct 3
+(<a href="ch:ch32#golden-pivots">Chapter 32</a>). For scales the detour is worse still: no golden7 scale lies between C
+major and ^C major, and the cheapest golden7 detour, through ^C golden7 or E golden7, costs 15 against the direct 7
+(exhaustive, <code>blending.py</code> §9). <b>Modulation by a golden comma is a pure change of plane.</b></p>
+<h3>The submediant door</h3>
+<p>The theorem is about the tonic triads. Other chords of the two keys can still meet in gold. The shortest example: the vi
+chord of C major and the I chord of ^C major, Am → ^C, have two golden chords exactly on their smoothest path, ^Cg and vAg
+(distance 7, exhaustive, <code>blending.py</code> §6). So a comma lift can be entered through a golden door, from the
+submediant (<a href="ch:ch35#hinges">Chapter 35</a> studies such hinges systematically).</p>
+<audio-ex src="door" caption="C – F – G7 – Am, then vAg, then ^C – ^F – ^G7 – ^C. Listen for Am bending into vAg (A down, C up a sixth-step, E held), which already holds ^C and lands softly in the new key."></audio-ex>
+<pianoroll edo="36" notes="A3 C4 E4 C5 ; vA3 ^C4 E4 ^C5 ; ^G3 ^C4 ^E4 ^C5" labels="Am ; vAg ; ^C" title="vi of C → vAg → I of ^C: 2 + 5 = 7, a smoothest path through gold"></pianoroll>
+<div class="exercise"><p><b>Exercise 34.2.</b> vD major is vD vE vF♯ vG vA vB vC♯. Check that its scale distance from C
+major is 9 by writing the move of each note of C major.</p>
+<details class="answer"><summary>Answer</summary><p>C → vC♯ (+2), D → vD (−1), E → vE (−1), F → vF♯ (+2), G → vG (−1),
+A → vA (−1), B → vB (−1): 2 + 1 + 1 + 2 + 1 + 1 + 1 = 9. Five notes fall a sixth-step; C and F, whose lower neighbours vC and vF
+are not in vD major, rise two. The plain lift (every note +5) would cost 35.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Theorem (layer betweenness).</b> Let $X$ be a pitch-class set on one layer and $Y = X + 1$. Then $d(X, Y) = |X|$, and
+every chord $G$ on a smoothest voice leading between them (a <b>geodesic hinge</b>, $d(X,G) + d(G,Y) = d(X,Y)$) is a subset
+of $X \cup Y$. In particular no golden, silver or bronze triad lies on a smoothest voice leading from $X$ to $X + 1$.
+<i>Status:</i> theorem; also checked exhaustively over all 48 major, minor, augmented and diminished triads on layer 0
+(0 golden hinges, <code>blending.py</code> §6).</p>
+<p><i>Proof.</i> $X$ and $Y$ lie on different layers, so every voice moves at least one sixth-step: $d \ge |X|$, and the
+uniform $+1$ attains it. Let $G$ be a hinge with optimal bijections $\sigma: G \to X$ and $\tau: G \to Y$. Then
+$\tau\sigma^{-1}$ is a bijection $X \to Y$ of cost at most
+$\sum_g \big(|g - \sigma g| + |g - \tau g|\big) = d(X,G) + d(G,Y) = |X|$. Each pair $(\sigma g, \tau g)$ costs at least 1, so
+each costs exactly 1 and each triangle inequality is tight: $g$ lies on the shortest arc between two points one sixth-step
+apart, so $g \in \{\sigma g, \tau g\}$. Hence $G \subseteq X \cup Y$, which touches only two layers, while a golden triad has
+one note on each (<a href="ch:ch25#layer-theorem">the layer theorem</a>). ∎</p>
+<p><b>Lifts of a triad by $s$</b> (exhaustive over the 24 major and minor triads on layer 0, <code>blending.py</code> §6): golden geodesic hinges exist for none at $s = \pm 1$, exactly one at $s = \pm 2$ (next section), four at $s = \pm 4$ and seven at
+$s = \pm 5$, for every one of the 24 triads.</p>
+</div>
+</section>
+
+<section id="midpoint">
+<h2>The golden midpoint of the limma lift</h2>
+<div class="layer hear">
+<p>Lift the key by two sixth-steps instead of one, and something new appears. There is now room for a chord in the
+middle, and the chord that fits is golden. Listen to C major moving to vC♯ major through ^Cg.</p>
+<audio-ex src="limma_lift" caption="C – F – G7 – C, then ^Cg, then vC♯ – vF♯ – vG♯7 – vC♯: a modulation by a golden limma. Listen for the top voice climbing C – ^C – vC♯ while the golden chord sits exactly halfway."></audio-ex>
+<p>Slowed down and dry, the midpoint is easy to follow, and it works the same way from a minor triad. The last part of the
+example asks the passing engine for one chord between C and vC♯, without telling it what to choose. It chooses the same
+golden chord.</p>
+<audio-ex src="midpoint" caption="C – ^Cg – vC♯, then Am – Ag – vB♭m, then C – (engine's choice) – vC♯. Listen for one voice holding, one moving a sixth-step and one moving two at the midpoint, then the roles exchanging."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Theorem (golden midpoint).</b> For every major triad on the 12-ET layer, the limma lift X → X + 2 has exactly one
+golden chord on its smoothest paths: the golden triad a sixth-step above X (written ^Xg), and it sits at the exact midpoint,
+3 + 3 sixth-steps. For a minor triad the unique golden hinge is the golden triad on the same root, Xg. For the downward lift
+X → X − 2, the hinges are the golden triads a sixth-step below the root (vXg) for major and two sixth-steps below for minor.
+<i>Status:</i> theorem, and exhaustive for all 24 triads in both directions (<code>blending.py</code> §6).</p>
+<table>
+<caption>C major → vC♯ major through ^Cg</caption>
+<tr><th>Voice</th><th>C</th><th>^Cg</th><th>vC♯</th><th>Moves</th></tr>
+<tr><td>root</td><td>C</td><td>^C</td><td>vC♯</td><td>+1, +1</td></tr>
+<tr><td>third</td><td>E</td><td>E</td><td>vE♯ (= vF)</td><td>0, +2</td></tr>
+<tr><td>fifth</td><td>G</td><td>vA♭</td><td>vA♭ (= vG♯)</td><td>+2, 0</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 E4 G4 ; ^C4 E4 vAb4 ; vC#4 vF4 vAb4" labels="C ; ^Cg ; vC♯" title="The golden midpoint of the limma lift: each voice moves 2, split as 1 + 1, 0 + 2 and 2 + 0"></pianoroll>
+<p>Every voice travels two sixth-steps. At the midpoint the three voices have travelled 0, 1 and 2: one note on each layer,
+which is exactly what a golden triad is. The minor case is the mirror image:</p>
+<pianoroll edo="36" notes="A3 C4 E4 ; A3 vC#4 ^E4 ; vBb3 vC#4 vF4" labels="Am ; Ag ; vB♭m" title="Am → Ag → vB♭m: A holds then rises 2, C rises 2 then holds, E rises 1 and 1"></pianoroll>
+<p>and the downward lift goes through the golden triad a sixth-step below:</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; vC4 ^Eb4 G4 ; ^B3 ^Eb4 ^F#4" labels="C ; vCg ; ^B" title="C → vCg → ^B: the downward limma lift"></pianoroll>
+<p>The four-part version of the dry example voices C as G3 C4 E4 C5 and moves to vA♭3 ^C4 E4 ^C5, then vA♭3 vC♯4 vF4
+vC♯5: the lowest voice rises two and then holds, the next rises one and one, the third holds and then rises two, and
+the doubled root follows the second.
+The passing engine (System 2, <a href="ch:ch28#escalator">Chapter 28</a>) finds the same chord when asked for one passing
+chord between C and vC♯, and likewise F – ^Fg – vF♯ and G – ^Gg – vA♭ (<code>blending.py</code> §5 and §20).</p>
+<h3>Comma and limma, side by side</h3>
+<table>
+<caption>The two golden lifts (theorems)</caption>
+<tr><th></th><th>Comma lift C → ^C</th><th>Limma lift C → vC♯</th></tr>
+<tr><td>Sixth-steps</td><td>1</td><td>2</td></tr>
+<tr><td>Tonic triad distance</td><td>3</td><td>6</td></tr>
+<tr><td>Golden chords on a smoothest path</td><td>none (a pure change of plane)</td><td>exactly one, ^Cg, at the midpoint</td></tr>
+<tr><td>Best golden route</td><td>C → Cg → ^C, 2 + 3 = 5 (a detour)</td><td>C → ^Cg → vC♯, 3 + 3 = 6 (no detour)</td></tr>
+</table>
+<p>The limma lift passes <i>through</i> gold. Whether the ear hears it as smoother or more inevitable than the plain comma
+lift is a <b>hypothesis</b> to test by listening; the theorem only says that the golden chord costs nothing extra.</p>
+<aside class="mirror"><b>Western mirror.</b> In 12-ET, a key change by a whole tone (C → D) can be split the same way:
+move the three voices of C major by 0, 1 and 2 semitones in each of the six possible orders. Exactly two orders give
+consonant triads, F major (C, F, A) and A major (C♯, E, A), and each lies halfway, 3 + 3 semitones, on a smoothest path
+to D major (computed): IV of the old key, V of the new. Chromatic voice-leading modulation of this kind is old
+(<a href="ch:ch11#modulation">Chapter 11</a>). The golden midpoint is the same counting one level down, with sixth-steps in
+place of semitones, and the chord it finds is golden because "one voice per layer" is the definition of gold.</aside>
+<div class="exercise"><p><b>Exercise 34.3.</b> Find the golden midpoint of F → vF♯ and write the moves of each voice.</p>
+<details class="answer"><summary>Answer</summary><p>By the theorem it is ^Fg = ^F A vC♯ (16, 27, 2). F (15) → ^F (16) →
+vF♯ (17): +1, +1. A (27) → A → vB♭ (29): 0, +2. C (0) → vC♯ (2) → vC♯: +2, 0. Each voice moves 2, and the
+midpoint has moved 1, 0, 2.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Proof of the golden midpoint theorem.</b> A major or minor triad contains no semitone, so the cheapest move of each
+voice into $X + 2$ is $+2$ (a move of $-1$ would need a chord note a semitone below another): $d(X, X+2) = 6$, attained only
+by the uniform lift. As in the betweenness proof, every note of a hinge lies on the arc from $x_i$ to $x_i + 2$, so
+$G = \{x_i + e_i\}$ with $e_i \in \{0, 1, 2\}$. $G$ can be golden only if its notes lie on three layers, that is, if
+$(e_1, e_2, e_3)$ is a permutation of $(0, 1, 2)$, and then $\sum e_i = 3$: the midpoint. For C major $(0, 12, 21)$ only
+$(+1, 0, +2)$ gives a golden triad, $\{1, 12, 23\} = G_1 = {}^{\wedge}$Cg; for A minor, transposed to C minor $(0, 9, 21)$,
+only $(0, +2, +1)$ gives one, $\{0, 11, 22\} = G_0$. The other permutations give non-golden sets (checked: six each). ∎
+Transposition carries the result to every root; the downward case follows by the inversion $x \mapsto -x$.</p>
+</div>
+</section>
+
+<section id="comma-pump">
+<h2>The comma pump: thirteen steps to ^C</h2>
+<div class="layer hear">
+<p>A lift moves every note at once. There is a gentler way to rise a sixth-step: move one note at a time. Take thirteen
+steps through golden13 keys, each key the neighbour of the last on the golden chain. At every step exactly one note of the scale
+rises a sixth-step, and after thirteen steps every note has risen once: the key has been lifted by a comma, by stealth.
+In the example the keys play, at each new key, the note that leaves and then its replacement.</p>
+<audio-ex src="comma_pump" caption="C major, then the tonic golden triads of thirteen pump steps, Cg – ^A♭g – vFg – … – Eg – ^Cg, then ^C major. Over each chord the keys play the changing note, B♭ – ^B♭, ^F♯ – vG, vE♭ – E♭, …, D – ^D: thirteen tiny rises. Listen for two notes held at every chord change."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>One note, one sixth-step</h3>
+<p>golden13 on C is the chain window from B♭ (chain −6) to D (chain +6). Moving the tonic one chain step up, a golden sixth
+from C to ^A♭, slides the window by one: B♭ leaves and the chain note +7 enters. That note is B♭'s chain neighbour thirteen
+steps on, B♭ plus a golden comma: ^B♭. Every step of the walk does the same to the next note.</p>
+<pianoroll edo="36" notes="C4 C#4 D4 vEb4 vE4 vF4 vF#4 ^F#4 ^G4 ^Ab4 ^A4 Bb4 B4 ; C4 C#4 D4 vEb4 vE4 vF4 vF#4 ^F#4 ^G4 ^Ab4 ^A4 ^Bb4 B4" labels="C golden13 ; ^A♭ golden13" title="One step of the pump: B♭ rises to ^B♭, the other twelve notes stay"></pianoroll>
+<table>
+<caption>The comma pump: C golden13 → ^C golden13 (exhaustive, <code>blending.py</code> §2; CT = notes in common)</caption>
+<tr><th>Step</th><th>Tonic</th><th>Note out → in</th><th>Move</th><th>CT with C major</th><th>CT with ^C major</th></tr>
+<tr><td>0</td><td>C</td><td></td><td></td><td>3</td><td>2</td></tr>
+<tr><td>1</td><td>^A♭</td><td>B♭ → ^B♭</td><td>+1</td><td>3</td><td>2</td></tr>
+<tr><td>2</td><td>vF</td><td>^F♯ → vG</td><td>+1</td><td>3</td><td>2</td></tr>
+<tr><td>3</td><td>C♯</td><td>vE♭ → E♭</td><td>+1</td><td>3</td><td>2</td></tr>
+<tr><td>4</td><td>^A</td><td>B → ^B</td><td>+1</td><td>2</td><td>3</td></tr>
+<tr><td>5</td><td>vF♯</td><td>^G → vA♭</td><td>+1</td><td>2</td><td>2</td></tr>
+<tr><td>6</td><td>D</td><td>vE → E</td><td>+1</td><td>3</td><td>2</td></tr>
+<tr><td>7</td><td>^B♭</td><td>C → ^C</td><td>+1</td><td>2</td><td>3</td></tr>
+<tr><td>8</td><td>vG</td><td>^A♭ → vA</td><td>+1</td><td>2</td><td>3</td></tr>
+<tr><td>9</td><td>E♭</td><td>vF → F</td><td>+1</td><td>3</td><td>3</td></tr>
+<tr><td>10</td><td>^B</td><td>C♯ → ^C♯</td><td>+1</td><td>3</td><td>3</td></tr>
+<tr><td>11</td><td>vA♭</td><td>^A → vB♭</td><td>+1</td><td>3</td><td>2</td></tr>
+<tr><td>12</td><td>E</td><td>vF♯ → F♯</td><td>+1</td><td>3</td><td>2</td></tr>
+<tr><td>13</td><td>^C</td><td>D → ^D</td><td>+1</td><td>2</td><td>3</td></tr>
+</table>
+<pianoroll edo="36" notes="Bb4 ^Bb4 ; ^F#4 vG4 ; vEb4 Eb4 ; B4 ^B4 ; ^G4 vAb4 ; vE4 E4 ; C5 ^C5 ; ^Ab4 vA4 ; vF4 F4 ; C#5 ^C#5 ; ^A4 vBb4 ; vF#4 F#4 ; D5 ^D5" labels="1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8 ; 9 ; 10 ; 11 ; 12 ; 13" title="The thirteen changes: in each column the note that leaves and, one sixth-step above it, the note that replaces it"></pianoroll>
+<p>The notes leave in chain order, −6 to +6: B♭, ^F♯, vE♭, B, ^G, vE, C, ^A♭, vF, C♯, ^A, vF♯, D. Each comes back one
+sixth-step higher. After thirteen steps all thirteen have been raised once, and the result is golden13 on ^C. Along the way
+every golden13 key shares two or three notes with C major and two or three with ^C major; the keys on E♭ (step 9) and ^B
+(step 10) share three with both. <i>Status:</i> exhaustive; every step was checked to move exactly one note by exactly one
+sixth-step.</p>
+<aside class="mirror"><b>The Pythagorean comma pump.</b> The same walk exists for fifths, one level up. One Pythagorean
+chromatic scale on C is the window of twelve fifths from E♭ to G♯ (<a href="ch:ch05#chain">Chapter 5</a>). Move it up one fifth
+and E♭ leaves while D♯ enters, twelve fifths further on: D♯ is E♭ raised by a Pythagorean comma, 23.46 c. Then B♭ becomes
+A♯, F becomes E♯, C becomes B♯, and so on; after twelve steps every note has been raised by a comma (computed). In 12-ET
+this walk is silent: it is pure enharmonic respelling, the circle of fifths of <a href="ch:ch08#circle">Chapter 8</a> closing
+on itself. In 36-ET the golden comma is a real step of the grid, so the golden walk is heard, one sixth-step at a
+time.</aside>
+<h3>The harmony of the pump: the golden circle backwards</h3>
+<p>The tonic golden triad of each key also belongs to the next key, and consecutive tonic triads are neighbours on the
+golden circle of <a href="ch:ch31#circle">Chapter 31</a>, walked in the opposite direction (exhaustive, <code>blending.py</code>
+§2):</p>
+<p style="text-align:center">Cg → ^A♭g → vFg → C♯g → ^Ag → vF♯g → Dg → ^B♭g → vGg → E♭g → ^Bg → vA♭g → Eg → ^Cg</p>
+<pianoroll edo="36" notes="^G3 C4 vE4 ; ^Ab3 C4 vE4 ; ^Ab3 C4 vF4 ; ^Ab3 C#4 vF4 ; ^A3 C#4 vF4 ; ^A3 C#4 vF#4 ; ^A3 D4 vF#4 ; ^Bb3 D4 vF#4 ; ^Bb3 D4 vG4 ; ^Bb3 Eb4 vG4 ; ^B3 Eb4 vG4 ; ^B3 Eb4 vAb4 ; ^B3 E4 vAb4 ; ^C4 E4 vAb4" labels="Cg ; ^A♭g ; vFg ; C♯g ; ^Ag ; vF♯g ; Dg ; ^B♭g ; vGg ; E♭g ; ^Bg ; vA♭g ; Eg ; ^Cg" title="The tonic triads of the pump: at each step one voice rises a semitone, in turn"></pianoroll>
+<p>Each step keeps two notes and raises the third a semitone (an exact golden apotome in exact tuning). The forward circle
+step lowers a voice: Cg → vEg takes C down to B. The pump raises one: Cg → ^A♭g takes ^G up to ^A♭, which becomes the new
+root. Thirteen such steps lift the chord by one sixth-step, from Cg to ^Cg. In close position the three voices climb by
+15, 12 and 12 sixth-steps over the walk, 39 in all, three per step (computed), so the register drifts upwards; the
+example's organ climbs with it, from ^G3 C4 vE4 to ^C4 E4 vA♭4, and only its doubled top voice drops back once.</p>
+<pc-circle edo="36" marks="0 1" path="0 25 14 3 28 17 6 31 20 9 34 23 12 1" title="The tonics of the comma pump on the 36-ET circle: thirteen golden sixths from C to ^C"></pc-circle>
+<h3>Down by ten, up by a limma; up by three, up by an apotome</h3>
+<p>Walk the other way, down the chain, and each step <i>lowers</i> one note by a sixth-step: C golden13 → vE golden13
+lowers D to vD, then vF♯ falls to ^F, ^A to A, and so on. Thirteen steps down reach vC golden13. Now stop after ten. The
+tenth key is vC♯ golden13, which is C golden13 raised by two sixth-steps. Ten notes have each fallen a sixth-step, three
+have stayed, and the scale as a whole has <i>risen</i> by a golden limma.</p>
+<audio-ex src="limma_pump" caption="C major, then ten steps forwards on the golden circle, Cg – vEg – ^Gg – … – Ag – vC♯g, then vC♯ major. The keys play each falling note (D – vD, vF♯ – ^F, …, B – vB). Every step goes down; listen for the arrival, which is higher than the start."></audio-ex>
+<pianoroll edo="36" notes="D5 vD5 ; vF#4 ^F4 ; ^A4 A4 ; C#5 vC#5 ; vF4 ^E4 ; ^Ab4 Ab4 ; C5 vC5 ; vE4 ^Eb4 ; ^G4 G4 ; B4 vB4" labels="1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8 ; 9 ; 10" title="The limma pump: ten notes each fall a sixth-step (from the upper to the lower row of each column)"></pianoroll>
+<p>There is no paradox. A scale is a set: ten lowered notes plus three kept notes can be the same set as all thirteen
+notes raised by two. The harmony shows it too: the walk is ten steps <i>forwards</i> on the golden circle, Cg → vEg → ^Gg →
+Bg → vE♭g → ^F♯g → B♭g → vDg → ^Fg → Ag → vC♯g, each step lowering one voice a semitone, and the last chord is Cg raised by
+a limma. Three steps up the chain give the third golden unit: C → ^A♭ → vF → C♯ golden13 raises B♭, ^F♯ and vE♭ by a
+sixth-step each, and the key has risen by a golden apotome, back onto the 12-ET layer.</p>
+<audio-ex src="apotome_pump" caption="C – Cg – ^A♭g – vFg – C♯g – C♯: three pump steps (B♭ – ^B♭, ^F♯ – vG, vE♭ – E♭ in the keys) reach C♯ major, a semitone above the start."></audio-ex>
+<aside class="mirror"><b>Western mirror: five flats up a semitone.</b> The diatonic has the same paradox. Move C major
+five fifths down, C → F → B♭ → E♭ → A♭ → D♭: each step lowers one note by an apotome (B → B♭, E → E♭, A → A♭, D → D♭,
+G → G♭), yet D♭ major is C major raised by a Pythagorean limma, 90.22 c (five fifths down, chain −5). And seven fifths
+up, C → C♯ major, raises all seven notes by an apotome. The golden pairs are thirteen notes with (13, 10, 3) steps for
+(comma, limma, apotome); the Pythagorean chromatic window has twelve notes with (12, 5, 7) (computed).</aside>
+<h3>Exact tuning: 3.16 c short</h3>
+<p>In exact golden tuning there is no ^C; there is only the chain. Thirteen exact steps up raise each of the thirteen notes by
+an exact golden comma, so the walk lands 30.17 c above C. 36-ET's ^C is 33.33 c above C. The exact pump therefore arrives
+3.16 c below 36-ET's ^C. The other two walks miss by less: the exact limma pump arrives at 69.10 c (36-ET: 66.67, 2.43 c
+sharper than 36-ET), the apotome pump at 99.27 c (36-ET: 100, 0.73 c flatter). These are exact values (theorem). Whether the
+3.16 c gap is audible against a sustained 36-ET reference is an open question; here is a first probe. Above C5 the two
+notes are 0.97 Hz apart, so on pure tones they beat about once a second.</p>
+<audio-ex src="pump_gap" caption="C5; then 36-ET's ^C5 (33.33 c up); then the exact arrival of the comma pump (30.17 c up); then both together on pure tones, beating about once a second; then both on an organ tone, where the upper partials beat faster."></audio-ex>
+</div>
+<div class="layer derive">
+<p><b>Proposition (window shift).</b> golden13 on tonic $t$ is $W(k) = \{25j : k-6 \le j \le k+6\}$ with $k = c(t)$. Then
+$W(k+1) = W(k) \setminus \{25(k-6)\} \cup \{25(k-6) + 1\}$, and $W(k-1) = W(k) \setminus \{25(k+6)\} \cup \{25(k+6) - 1\}$.
+<i>Proof:</i> the entering note is $25(k+7) = 25(k-6) + 25 \cdot 13 \equiv 25(k-6) + 1$; downward symmetrically. ∎ Hence
+$W(13)$, golden13 on $25 \cdot 13 \equiv 1$ = ^C, is $W(0) + 1$: every chain position $-6, \ldots, 6$ has been raised once,
+in that order.</p>
+<p><b>The limma walk.</b> $W(-10)$ is golden13 on $25 \cdot (-10) \equiv 2$ = vC♯, so $W(-10) = W(0) + 2$. By the
+proposition it is also $W(0)$ with the ten positions $6, 5, \ldots, -3$ each lowered by 1. Both descriptions agree because
+$-10 \equiv 26 = 2 \cdot 13 \pmod{36}$: lowering ten notes by one sixth-step and raising all thirteen by two give the same set
+(checked). <b>The apotome walk.</b> $W(3) = W(0) + 3$ with positions $-6, -5, -4$ raised (B♭, ^F♯, vE♭).</p>
+<p><b>Harmony.</b> The tonic triad of $W(k)$ is $G_{25k}$. With $G_t = \{t, t+11, t+22\}$,
+$G_{t+25} = \{t+25, t+36, t+47\} = \{t+25, t, t+11\}$, so the step keeps $t$ and $t+11$ and replaces $t + 22$ by
+$t + 25$, a rise of 3; since $25 \equiv -11$, it is the golden-circle step $G_t \to G_{t+11}$ reversed. Since $13 \cdot 25 \equiv 1$, thirteen steps give $G_1$ = ^Cg. Reaching $G_s$ from $G_0$
+this way takes $|c(s)|$ steps, forwards or backwards.</p>
+<p><b>Exact values.</b> $13g - 10800 = 30.17$ c against $1200/36 = 33.33$ c, a gap of 3.16 c (equivalently $13 \times
+0.243$ c, the 36-ET rendering error of chain distance 13, <a href="ch:ch23#chain">Chapter 23</a>). Beat rate above
+$f = 523.25$ Hz: $f\,(2^{33.33/1200} - 2^{30.17/1200}) = 0.97$ Hz (0.49 Hz above C4).</p>
+</div>
+</section>
+
+<section id="golden-circle-keys">
+<h2>The golden circle as a modulation engine</h2>
+<div class="layer hear">
+<p>How far apart are two golden13 keys? Play each one from C and count what changes. The neighbour a golden third up
+changes one note by one sixth-step. Two steps away, two notes have moved by one sixth-step each. The key a sixth-step up,
+nearest in pitch, has every note moved.</p>
+<audio-ex src="neighbour_keys" caption="golden13 on C, on vE (D becomes vD), on ^G (also vF♯ becomes ^F), and on ^C (all thirteen notes a sixth-step higher), each over its tonic golden triad. Listen for one, two, then thirteen changed notes."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>A perfect circle</h3>
+<p><b>Theorem.</b> The voice-leading distance between golden13 on C and golden13 on any tonic $s$ equals the chain distance:
+$d = |c(s)|$. <i>Status:</i> theorem for $|c(s)| \le 13$, exhaustive check for all 36 tonics (<code>blending.py</code> §2).</p>
+<pianoroll edo="36" notes="C4 C#4 D4 vEb4 vE4 vF4 vF#4 ^F#4 ^G4 ^Ab4 ^A4 Bb4 B4 ; C4 C#4 vD4 vEb4 vE4 vF4 vF#4 ^F#4 ^G4 ^Ab4 ^A4 Bb4 B4 ; C4 C#4 vD4 vEb4 vE4 vF4 ^F4 ^F#4 ^G4 ^Ab4 ^A4 Bb4 B4 ; ^C4 ^C#4 ^D4 Eb4 E4 F4 F#4 vG4 vAb4 vA4 vBb4 ^Bb4 ^B4" labels="C golden13 ; vE (d 1) ; ^G (d 2) ; ^C (d 13)" title="golden13 keys at chain distance 0, 1, 2 and 13: total motion 0, 1, 2 and 13 sixth-steps"></pianoroll>
+<p>So the 36 golden13 keys, measured by total voice motion, form a 36-cycle in which every neighbour is exactly one sixth-step
+away and every key is as far as its chain distance. A few values: vE and ^A♭ at 1; vF and ^G at 2; C♯ and B at 3; D and B♭
+at 6; ^C and vC at 13; F and G at 15; F♯, the far side, at 18.</p>
+<aside class="mirror"><b>Western mirror.</b> The same is true of the diatonic in 12-ET: the voice-leading distance from C
+major to any major key, in semitones, equals the number of fifths between them (G and F 1, D and B♭ 2, … F♯ 6; computed
+for all twelve keys). Each step around the circle of fifths moves one note by one semitone, the chroma
+(<a href="ch:ch08#keys">Chapter 8</a>). golden13 in 36-ET is the exact counterpart, with the golden sixth for the fifth and
+the comma for the chromatic semitone. That is one reason to call it the golden diatonic of 36-ET; it is also maximally even
+there (<a href="ch:ch36#golden13-modes">Chapter 36</a>).</aside>
+<p>Compare the other families. The 36 major keys of 36-ET form three separate circles of fifths, one per layer, with
+distance 3 per fifth (one note moves a semitone, 3 sixth-steps); the circles are joined
+only by lifts, and the shortest bridges, to ^C and vC major, cost 7 (exhaustive, <code>blending.py</code> §3). golden7 keys
+change by five sixth-steps per chain step, so the circle is uneven: from C golden7 the nearest keys are vE and ^A♭ (5),
+then ^C and vC (7, sharing no note), then vF, ^G, ^E♭ and vA (10) (exhaustive, <code>blending.py</code> §2).</p>
+<table>
+<caption>Three key families, seen from C (voice-leading distance in sixth-steps)</caption>
+<tr><th>Family</th><th>Step of its circle</th><th>Nearest keys</th><th>Shape</th></tr>
+<tr><td>major</td><td>a fifth (3)</td><td>F, G (3); then ^C, vC (7), off the layer</td><td>three 12-cycles joined by lifts</td></tr>
+<tr><td>golden7</td><td>a chain step (5)</td><td>vE, ^A♭ (5); ^C, vC (7)</td><td>uneven</td></tr>
+<tr><td>golden13</td><td>a chain step (1)</td><td>vE, ^A♭ (1); vF, ^G (2)</td><td>one perfect 36-cycle</td></tr>
+</table>
+<h3>Driving the engine</h3>
+<p>Because the tonic triads of neighbouring golden13 keys are neighbours on the golden circle, the circle of chords is a
+modulation engine: to reach the key on tonic $s$, walk $|c(s)|$ circle steps, backwards if $c(s) > 0$, forwards if
+$c(s) &lt; 0$. To ^Cg it is 13 steps back, to vC♯g 10 forwards, to C♯g 3 back. Each step keeps two notes of the chord and
+changes one note of the key by one sixth-step: the smoothest long modulation that 36-ET allows.</p>
+<p>A complete comma-pump modulation from C major to ^C major then reads: C major → Cg (two voices bend, distance 2) → 13
+circle steps (3 each) → ^Cg → ^C major (distance 2). <b>Proposal:</b> its total motion is 2 + 39 + 2 = 43 sixth-steps, for a
+change the plain lift makes in 3, so its value is not economy but continuity: every chord shares two notes with the next,
+and every key differs from the last by one comma. Does a thirteen-step walk register as a key change at all, or as a drift?
+What pacing would make the arrival on ^C feel like a cadence? Fibonacci phrase lengths are one candidate. These are open
+questions for listening.</p>
+<div class="exercise"><p><b>Exercise 34.4.</b> How many circle steps, and in which direction, lead from Cg to the tonic triad
+of A golden13? How many notes of the key change on the way?</p>
+<details class="answer"><summary>Answer</summary><p>$c(27) = 13 \times 27 = 351 = 9 \times 36 + 27 \equiv -9$: nine steps
+forwards, Cg → vEg → ^Gg → Bg → vE♭g → ^F♯g → B♭g → vDg → ^Fg → Ag. Nine notes are each lowered by one sixth-step, and the
+voice-leading distance between the two scales is 9.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Proof of the theorem for $0 &lt; c \le 13$.</b> Shifting the window by $c$ chain steps removes positions
+$-6, \ldots, -7 + c$ and adds $7, \ldots, 6 + c$. Pair $j$ with $j + 13$: each pair differs by $25 \cdot 13 \equiv 1$ sixth-step,
+so $d \le c$. Conversely the two windows share exactly $13 - c$ notes (<a href="ch:ch32#scale-modulation">Chapter 32</a>,
+window overlap), so at least $c$ notes must move, each by at least 1: $d \ge c$. ∎ The case $c &lt; 0$ is symmetric. For
+$14 \le |c| \le 18$ the windows share no note and the pairing argument no longer applies directly; the equality $d = |c|$
+there is an exhaustive check (for example F♯, $|c| = 18$, $d = 18$).</p>
+<p><b>Diatonic check.</b> For the major scale in $\mathbb{Z}_{12}$, $d(D_0, D_{7k}) = |k|$ semitones for $|k| \le 6$ (computed;
+for $|k| \le 5$ the same pairing proof works with window 7 and chroma 1).</p>
+</div>
+</section>
+
+<section id="key-map">
+<h2>A map of the 36-ET keys</h2>
+<div class="layer hear">
+<p>"Near" means different things. A key can be near because it shares many notes, because every voice has only a little
+way to go, or because the two keys share chords of some kind. Listen to three neighbours of C major, one for each meaning:
+G major, which shares six notes; ^C major, which shares none but is (with vC major) the nearest key on another layer; and ^E♭ major, which
+shares no note and is farther by voice leading, but is reached through a golden chord that belongs, as the golden image of
+a diatonic chord, to both keys.</p>
+<audio-ex src="three_metrics" caption="C – D7 – G (six common tones); C – ^C (no common tone, every voice up a sixth-step); C – F – Fg – ^Fm – ^B♭7 – ^E♭ (no common tone, joined by the golden chord Fg). Listen for three different kinds of closeness."></audio-ex>
+</div>
+<div class="layer understand">
+<h3>The map from C major</h3>
+<p>The table lists every tonic of 36-ET and five key families on it, compared with C major: common tones (CT) and, for the
+seven-note families, voice-leading distance (d). It is long, but it is the whole map.</p>
+<table>
+<caption>Common tones and voice-leading distance from C major (exhaustive, <code>blending.py</code> §3)</caption>
+<tr><th>$s$</th><th>Tonic</th><th>major CT/d</th><th>nat. minor CT/d</th><th>golden7 CT/d</th><th>golden13 CT</th><th>silver13 CT</th></tr>
+<tr><td>0</td><td>C</td><td>7/0</td><td>4/9</td><td>2/8</td><td>3</td><td>3</td></tr>
+<tr><td>1</td><td>^C</td><td>0/7</td><td>0/10</td><td>2/7</td><td>2</td><td>2</td></tr>
+<tr><td>2</td><td>vC♯</td><td>0/14</td><td>0/11</td><td>1/10</td><td>2</td><td>3</td></tr>
+<tr><td>3</td><td>C♯</td><td>2/15</td><td>3/12</td><td>2/15</td><td>3</td><td>3</td></tr>
+<tr><td>4</td><td>^C♯</td><td>0/12</td><td>0/17</td><td>1/16</td><td>3</td><td>2</td></tr>
+<tr><td>5</td><td>vD</td><td>0/9</td><td>0/10</td><td>1/13</td><td>2</td><td>2</td></tr>
+<tr><td>6</td><td>D</td><td>5/6</td><td>6/3</td><td>1/12</td><td>3</td><td>3</td></tr>
+<tr><td>7</td><td>^D</td><td>0/13</td><td>0/8</td><td>1/13</td><td>2</td><td>2</td></tr>
+<tr><td>8</td><td>vE♭</td><td>0/16</td><td>0/13</td><td>1/16</td><td>3</td><td>2</td></tr>
+<tr><td>9</td><td>E♭</td><td>4/9</td><td>2/18</td><td>2/15</td><td>3</td><td>3</td></tr>
+<tr><td>10</td><td>^E♭</td><td>0/10</td><td>0/13</td><td>1/10</td><td>2</td><td>3</td></tr>
+<tr><td>11</td><td>vE</td><td>0/11</td><td>0/8</td><td>2/7</td><td>2</td><td>2</td></tr>
+<tr><td>12</td><td>E</td><td>3/12</td><td>6/3</td><td>2/8</td><td>3</td><td>3</td></tr>
+<tr><td>13</td><td>^E</td><td>0/17</td><td>0/10</td><td>1/13</td><td>2</td><td>2</td></tr>
+<tr><td>14</td><td>vF</td><td>0/10</td><td>0/17</td><td>1/16</td><td>3</td><td>2</td></tr>
+<tr><td>15</td><td>F</td><td>6/3</td><td>3/12</td><td>2/11</td><td>3</td><td>3</td></tr>
+<tr><td>16</td><td>^F</td><td>0/8</td><td>0/11</td><td>1/10</td><td>2</td><td>3</td></tr>
+<tr><td>17</td><td>vF♯</td><td>0/13</td><td>0/10</td><td>1/11</td><td>2</td><td>3</td></tr>
+<tr><td>18</td><td>F♯</td><td>2/18</td><td>4/9</td><td>2/14</td><td>3</td><td>3</td></tr>
+<tr><td>19</td><td>^F♯</td><td>0/13</td><td>0/16</td><td>1/19</td><td>3</td><td>2</td></tr>
+<tr><td>20</td><td>vG</td><td>0/8</td><td>0/13</td><td>1/14</td><td>2</td><td>2</td></tr>
+<tr><td>21</td><td>G</td><td>6/3</td><td>5/6</td><td>1/11</td><td>3</td><td>3</td></tr>
+<tr><td>22</td><td>^G</td><td>0/10</td><td>0/9</td><td>2/10</td><td>2</td><td>2</td></tr>
+<tr><td>23</td><td>vA♭</td><td>0/17</td><td>0/12</td><td>1/13</td><td>3</td><td>3</td></tr>
+<tr><td>24</td><td>A♭</td><td>3/12</td><td>2/15</td><td>2/18</td><td>2</td><td>2</td></tr>
+<tr><td>25</td><td>^A♭</td><td>0/11</td><td>0/14</td><td>1/13</td><td>3</td><td>3</td></tr>
+<tr><td>26</td><td>vA</td><td>0/10</td><td>0/7</td><td>2/10</td><td>2</td><td>2</td></tr>
+<tr><td>27</td><td>A</td><td>4/9</td><td>7/0</td><td>1/11</td><td>3</td><td>3</td></tr>
+<tr><td>28</td><td>^A</td><td>0/16</td><td>0/7</td><td>1/14</td><td>2</td><td>2</td></tr>
+<tr><td>29</td><td>vB♭</td><td>0/13</td><td>0/14</td><td>1/19</td><td>3</td><td>2</td></tr>
+<tr><td>30</td><td>B♭</td><td>5/6</td><td>2/15</td><td>2/14</td><td>3</td><td>3</td></tr>
+<tr><td>31</td><td>^B♭</td><td>0/9</td><td>0/12</td><td>1/11</td><td>2</td><td>3</td></tr>
+<tr><td>32</td><td>vB</td><td>0/12</td><td>0/9</td><td>1/10</td><td>2</td><td>3</td></tr>
+<tr><td>33</td><td>B</td><td>2/15</td><td>5/6</td><td>2/11</td><td>3</td><td>3</td></tr>
+<tr><td>34</td><td>^B</td><td>0/14</td><td>0/13</td><td>1/16</td><td>3</td><td>2</td></tr>
+<tr><td>35</td><td>vC</td><td>0/7</td><td>0/16</td><td>1/13</td><td>2</td><td>2</td></tr>
+</table>
+<p>What the map shows (all exhaustive):</p>
+<ul>
+<li><b>Western keys</b> form three circles of fifths, one per layer, with $d = 3 \times$ (number of fifths). Across layers the
+nearest keys are ^C and vC major and their relatives ^A and vA minor ($d = 7$), then ^F and vG major (8). The key nearest in
+pitch shares nothing.</li>
+<li><b>golden7 and C major</b> never share more than two notes. The golden7 keys nearest to C major by voice leading are ^C
+golden7 and vE golden7 (7), then C golden7 (8); from C golden7 the nearest major keys are ^A♭ and vC major (7), then A♭ and C
+(8).</li>
+<li><b>golden13 and silver13</b> share two or three notes with C major, never more. Nineteen golden13 keys share three: C, C♯,
+^C♯, D, vE♭, E♭, E, vF, F, F♯, ^F♯, G, vA♭, ^A♭, A, vB♭, B♭, B and ^B.</li>
+<li><b>Layers:</b> a golden7 scale has 3, 2 and 2 notes on its tonic's layer and the other two; golden13 and silver13 have 5, 4
+and 4. A golden key is never on one layer, so it is never cut off from a major or natural minor key: every golden7 key
+shares at least one note with each, every golden13 or silver13 key at least two. (Harmonic minor can be cut off: vG and ^B♭
+harmonic minor share no note with C golden7.)</li>
+<li><b>golden13 and silver13 on C</b> share 7 notes at distance 12; the nearest silver13 keys to C golden13 are C (12), then B,
+C♯, ^A♭ and vE (13).</li>
+</ul>
+<pianoroll edo="36" notes="C4 D4 E4 F4 G4 A4 B4 ; C4 D4 E4 F#4 G4 A4 B4 ; ^C4 ^D4 ^E4 ^F4 ^G4 ^A4 ^B4 ; C4 C#4 D4 vEb4 vE4 vF4 vF#4 ^F#4 ^G4 ^Ab4 ^A4 Bb4 B4" labels="C major ; G major (6 CT, d 3) ; ^C major (0 CT, d 7) ; C golden13 (3 CT)" title="Neighbours of C major: by common tones, by voice leading, and the best a golden13 key can do"></pianoroll>
+<h3>Three metrics, three maps</h3>
+<ol>
+<li><b>Common tones.</b> Western keys on other layers are infinitely far: they share nothing
+(<a href="ch:ch32#layer-modulation">Chapter 32</a>). golden13 and silver13 keys are never far and never near: two or three notes, always.</li>
+<li><b>Voice leading.</b> Everything is connected. The lift (7) is the shortest bridge between layers for Western scales; the
+golden13 keys form one perfect circle.</li>
+<li><b>Projection pivots.</b> C major is linked to ^E♭ major and vA major by three golden pivot chords each, although by voice
+leading they are 10 away and by common tones infinitely far. The example's Fg is one of them: golden IV of C and golden ii of
+^E♭ (<a href="ch:ch35#silver-third-keys">Chapter 35</a>).</li>
+</ol>
+<pianoroll edo="36" notes="A3 C4 F4 ; vA3 ^C4 F4 ; ^Ab3 ^C4 ^F4" labels="F ; Fg ; ^Fm" title="A projection pivot: F (IV of C) → Fg → ^Fm (ii of ^E♭), 2 + 2 sixth-steps, every voice moving one way"></pianoroll>
+<table>
+<caption>Golden-third and golden-fifth relations in three families (exhaustive, <code>blending.py</code> §3)</caption>
+<tr><th>Relation</th><th>Western (C → vE or ^G major)</th><th>golden7</th><th>golden13</th></tr>
+<tr><td>golden third (+11, chain −1)</td><td>0 CT, scale d 11, tonic d 7</td><td>6 CT, d 5</td><td>12 CT, d 1</td></tr>
+<tr><td>golden fifth (+22, chain −2)</td><td>0 CT, scale d 10, tonic d 8</td><td>5 CT, d 10</td><td>11 CT, d 2</td></tr>
+</table>
+<h3>A picture of the whole</h3>
+<p><b>Proposal</b> for picturing the map: three concentric 12-cycles of Western keys, one per layer, crossed by the 36-cycle of
+golden13 keys as a helix. Each step of the helix is one chain step: it visits layer 0, then ^, then v, and returns to the 12-ET
+layer every third step, a semitone higher (C, C♯, D, … are golden13 keys three chain steps apart, at distance 3). The
+pc-circle below draws the helix flat: the 36 golden13 tonics in chain order, with the twelve 12-ET tonics marked.</p>
+<pc-circle edo="36" marks="0 3 6 9 12 15 18 21 24 27 30 33" path="0 25 14 3 28 17 6 31 20 9 34 23 12 1 26 15 4 29 18 7 32 21 10 35 24 13 2 27 16 5 30 19 8 33 22 11 0" title="The circle of golden13 keys (each step one sixth-step of motion); every third tonic is a 12-ET note, a semitone higher than the last"></pc-circle>
+<div class="exercise"><p><b>Exercise 34.5.</b> Which golden13 keys share three notes with C major <i>and</i> are within
+voice-leading distance 3 of C golden13?</p>
+<details class="answer"><summary>Answer</summary><p>Within distance 3 means $|c(s)| \le 3$: C, vE, ^A♭, vF, ^G, C♯, B. Of these, the
+list of nineteen contains C, ^A♭, vF, C♯ and B. vE and ^G share only two notes with C major (vE golden13 has lost D).</p></details></div>
+<div class="exercise"><p><b>Exercise 34.6 (listening).</b> In the limma pump, every step lowers a note. Before reading the
+last chord's name, did you hear the arrival as higher or lower than the start?</p>
+<details class="answer"><summary>Answer</summary><p>The key is two sixth-steps higher (vC♯ against C), but the organ's voices drift
+down over the walk: its first chord is G3 C4 E4 C5 and its last vF3 vA♭3 vC♯4 vA♭4. Pitch class and register point in opposite
+directions, so either impression is defensible; which one wins for you is the point of the exercise.</p></details></div>
+</div>
+<div class="layer derive">
+<p><b>Proposition (at most three).</b> No golden13 key shares more than three notes with C major. <i>Proof:</i> in chain
+coordinates C major is $\{-15, -9, -3, 0, 6, 12, 15\}$ (G, A, B, C, D, E, F), with gaps 6, 6, 3, 6, 6, 3, 6 around the
+36-cycle. A golden13 key is a window of 13 consecutive positions, spanning 12. Four positions of C major would need three
+consecutive gaps summing to at most 12, but every three consecutive gaps sum to at least 15. ∎ The minimum, 2, and the list of
+nineteen keys with 3 are exhaustive (<code>blending.py</code> §3).</p>
+<p><b>Western keys.</b> Major scales on the same layer are the 12-ET case scaled by 3, so $d = 3k$ for keys $k$ fifths apart
+(computed: F 3, D 6, E♭ 9, E 12, C♯ 15, F♯ 18). Across layers the cosets are disjoint and every voice must change layer,
+so $d \ge 7$, attained by the lifts ±1.</p>
+</div>
+</section>

@@ -1,0 +1,24 @@
+# Ch. 27: a short phrase that closes with the golden six-four (G ~ ~ C, System 1).
+songmap: 0.2
+title: "A phrase with the golden six-four"
+tempo: 76
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 3
+tail_seconds: 3
+instruments: {piano: keys/still, pad: pad/still, low: clean/bass, bell: clean/glass}
+motifs:
+  bassline: {notes: "=mp f--1 | c-1 | d-1 | g--1 | g--1 | c-1 | c-1"}
+mix:
+  piano: {gain_db: -5, send: {hall: 0.25}}
+  pad:   {gain_db: -12, send: {hall: 0.35}}
+  low:   {gain_db: -5, send: {hall: 0.05}}
+  bell:  {gain_db: -8, send: {hall: 0.35}}
+returns:
+  hall: {type: reverb, seconds: 2.8, predelay: 0.025, damping: 0.5}
+sections:
+  - {name: phrase, bars: 7, harmony: "F:1 C:1 Dm:1 G:1 ~:0.5 ~:0.5 C:2",
+     parts: {piano: {style: gentle8, role: arp}, pad: {style: hold, voices: 3, range: [55, 77]},
+             low: {motifs: [bassline]}, bell: top}}
+master: clean

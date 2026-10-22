@@ -1,0 +1,73 @@
+# 3. Tape Bloom (about 2:23). A minor, 90 BPM, lo-fi hip-hop / neo-soul: warm, late-night, a little hazy.
+# Golden colour chords, held like borrowed chords.
+# Technique (docs/GOLDEN_BLENDING.md §9, golden modal mixture by projection): a diatonic chord bends into
+# its nearest golden triad π(X) for half a bar. One note stays, the other two slide a sixth-step:
+#   Fmaj7 -> Fg   (A falls to vA, C rises to ^C over a steady F; the 7th E stays, since the golden
+#                  seventh 8/φ³ is exactly a 12-ET major seventh, so Fg + E is the true golden seventh Fg7)
+#   E7    -> Eg   (the third sinks to vG#, and the voiced seventh D rises to D#, the golden seventh)
+#   Am    -> vAg  (the tonic's golden shadow, held a whole bar in the drum-less interlude)
+# In lo-fi the bend reads as tape wow, so the colour is felt rather than announced.
+# The coda is the golden Picardy third: Am - Am(^3) - Ag - A, the third climbing C - ^C - vC# - C#
+# under a held A, from minor through silver and golden to major.
+# Craft: the melodies hold the common tone (F over Fg, E over Eg and vAg) or rest on every colour chord;
+# every sounding part changes with the chord (rel figures with a strike on beat 3, voiced `hold` pad).
+#
+# Form (52 bars + 4 s tail):
+#   dusk     4  electric piano, a faint pad and vinyl crackle, the loop  Am9 Dm9 Fmaj7|Fg E7
+#   walk     4  groove in: kick and swung hats, the snare joins in bar 3, sliding bass
+#   theme_a  8  the piano theme (t1 question, t2 answer), full swung kit with ghosts and a bar-4 fill
+#   bloom    8  theme B over Cmaj7 Fmaj7|Fg Dm7 E7|Eg: pad and glass sparkles enter, rim clicks
+#   shade    8  drum-less interlude: Am - vAg, the tonic's golden shadow, lonely piano over pad
+#   solo     8  flute solo over the loop, nylon-guitar ripples, a busier kit; one-bar drop before the peak
+#   reprise  8  the peak: theme A' climbs to E6, flute countermelody crossing under it, guitar, pad,
+#               bells, claps and open hats, a bouncing bass
+#   picardy  4  the beat stops; E7 then the golden Picardy, A held over the climbing third
+# Instruments: epiano/still (rootless 9ths), keys/still (melody), bass (glide), swung kit, fx ticks,
+# pad/still (wash: hold), string_pluck/still (gtr), clean/lead (flute), clean/glass (bell).
+songmap: 0.2
+title: "Tape Bloom"
+tempo: 90
+meter: "4/4"
+key: Am
+tuning: "36edo"
+fps: 30
+seed: 23
+tail_seconds: 4
+
+instruments:
+  ep: epiano/still
+  keys: {use: keys/still, hardness: 0.3}
+  bass: {cutoff: 480, glide: 0.08}
+  wash: pad/still
+  gtr: {use: string_pluck/still, brightness: 0.55}
+  flute: clean/lead
+  bell: clean/glass
+
+harmony:
+  progressions: {loop: "Am9:1 Dm9:1 Fmaj7:0.5 Fg:0.5 E7:1", loop7: "Am7:1 Dm7:1 Fmaj7:0.5 Fg:0.5 E7:1", bloom: "Cmaj7:1 Fmaj7:0.5 Fg:0.5 Dm7:1 E7:0.5 Eg:0.5", shade: "Am:1 vAg:1 Fmaj7:0.5 Fg:0.5 Dm9:1 Am:1 vAg:1 Fmaj7:0.5 Fg:0.5 E7:1", home: "E7:1 Am:0.5 Am(^3):0.5 Ag:1 A:1"}
+
+sections:
+  - {name: dusk, bars: 4, parts: {ep: {rel: "[3,7,9]/2 [3,7,9]/4 r/8t r [3,7,9]"}, wash: hold, fx: ticks}, harmony: loop, dyn: "p<mp"}
+  - {name: walk, bars: 4, parts: {ep: {rel: "[3,7,9]/2 [3,7,9]/4 r/8t r [3,7,9]"}, fx: ticks, drums: {steps: {kick: "x.....x..x..|x.....x.....", hat: {steps: x.xx.xx.xx.x, vel: [0.5, 0.25, 0.45, 0.22, 0.5, 0.25, 0.42, 0.3]}, snare: "............|............|...X.....X..|...X..o..XoX"}}, bass: {rel: "R/4. r/8 5/4~ R", oct: -2}}, harmony: loop, dyn: "p<mp"}
+  - {name: theme_a, bars: 8, parts: {ep: {rel: "[3,7,9]/2 [3,7,9]/4 r/8t r [3,7,9] | [3,5,7]/2 [3,5,7]/4 r/8t r [3,5,7] | [3,7,9]/2 [3,7,9]/4 r/8t r [3,7,9] | [3,7,9]/2 [3,7,9]/4 r/8t r [3,7,9]"}, fx: ticks, drums: {steps: {kick: "x.....x..x..|x.....x.....|x.....x..x..|x..x..x.....", snare: "...X.....X.o|...X..o..X..|...X.....X.o|...X..o..XoX", hat: {steps: x.xx.xx.xx.x, vel: [0.5, 0.25, 0.45, 0.22, 0.5, 0.25, 0.42, 0.3]}}}, bass: {rel: "R/4. r/8 5/4~ R", oct: -2}, keys: {deg: "=mp r/4 4/8 2 0/4 2/8 4 | 3/4. 2/8 0/2 | 5/4 4/8 2 r/2 | 1/2. r/4 | r/4 7/8 6 4/4 2/8 4 | 3/4. 4/8 5/2 | 4/4 2/8 4 5/2 | 4/2 #6/4 r/4"}}, harmony: loop, dyn: mp}
+  - {name: bloom, bars: 8, parts: {ep: {rel: "[3,5,9]/2 [3,5,9]/4 r/8t r [3,5,9] | [3,7,9]/2 [3,7,9]/4 r/8t r [3,7,9] | [3,5,7]/2 [3,5,7]/4 r/8t r [3,5,7] | [3,7,9]/2 [3,7,9]/4 r/8t r [3,7,9]"}, fx: ticks, drums: {steps: {kick: "x.....x..x..|x.....x.....|x.....x..x..|x..x..x.....", snare: "...X.....X.o|...X..o..X..|...X.....X.o|...X..o..XoX", hat: {steps: x.xx.xx.xx.x, vel: [0.5, 0.25, 0.45, 0.22, 0.5, 0.25, 0.42, 0.3]}, rim: "............|......-....."}}, bass: {rel: "R/4. r/8 5/4~ R", oct: -2}, keys: {deg: "=mf 4/4 6/8 7 9/4 7 | 8/4. 7/8 5/2 | 5/4 3 2 3 | 4/2 r/2 | 4/4 6/8 7 9/4 7 | 9/4. 8/8 5/2 | 5/4 3 2 3 | 4/1"}, wash: hold, bell: {deg: "=pp r/2 11/8' 9' r/4 | r/1 | r/2. 7/8' 10' | r/1"}}, harmony: bloom, dyn: "mp<mf"}
+  - {name: shade, bars: 8, parts: {ep: {rel: "[3,5,7]/2 [3,5,7] | [3,7,9]/2 [3,7,9] | [3,7,9]/2 [3,7,9] | [3,7,9]/2 [3,7,9]"}, wash: hold, keys: {deg: "=mp 0/4 2 4/2 | 4/1 | 5/4 4 5/2 | 3/4 2 0/2 | r/4 2 4 7 | 4/2. r/4 | 5/4 7 5/2 | 4/2 r/2"}, fx: ticks}, harmony: shade, dyn: "p<mp"}
+  - {name: solo, bars: 8, parts: {ep: {rel: "[3,7,9]/4 r/8t r [3,7,9] [3,7,9]/2 | [3,5,7]/4 r/8t r [3,5,7] [3,5,7]/2 | [3,7,9]/4 r/8t r [3,7,9] [3,7,9]/2 | [3,7,9]/4 r/8t r [3,7,9] [3,7,9]/2"}, drums: {steps: {kick: "x.....x..x.x|x.....x..x..|x.....x..x.x|x..x..x.....", snare: "...X..o..X.o|...X.....X.o|...X..o..X.o|...X..o.oXoX", hat: {steps: x.xx.xx.xx.x, vel: [0.5, 0.25, 0.45, 0.22, 0.5, 0.25, 0.42, 0.3]}, ohat: "............|............|............|.........x.."}}, bass: {rel: "R/4. r/8 5/4~ R", oct: -2}, gtr: {rel: "5-/8t R 3 5/4 5-/8t R 3 R+/4"}, flute: {deg: "=mp r/8t 2 4 7/4 6/8t 7 6 4/4 | 5/4. 3/8 2/8t 3 5 7/4 | 9/4 7/8 4 5/2 | 4/4 #6/8t 8 #6 4/2 | < r/4 11/8t 9 8 7/4 6/8 4 =mf | 5/8 6 5 3 2/2 | 2/8t 3 4 5/2. | 8/4. #6/8 4/2"}, fx: ticks}, harmony: loop7, dyn: "mp<mf"}
+  - {name: reprise, bars: 8, parts: {ep: {rel: "[3,7,9]/2 [3,7,9]/4 r/8t r [3,7,9] | [3,5,7]/2 [3,5,7]/4 r/8t r [3,5,7] | [3,7,9]/2 [3,7,9]/4 r/8t r [3,7,9] | [3,7,9]/2 [3,7,9]/4 r/8t r [3,7,9]"}, drums: {steps: {kick: "x.....x..x..|x.....x.....|x.....x..x..|x..x..x.....", snare: "...X.....X.o|...X..o..X..|...X.....X.o|...X..o..XoX", hat: {steps: x.xx.xx.xx.x, vel: [0.5, 0.25, 0.45, 0.22, 0.5, 0.25, 0.42, 0.3]}, clap: "...-.....-..", ohat: "............|.........x.."}}, bass: {rel: "R/4 r/8t R R+ 5/4~ R/8 R+", oct: -2}, gtr: {rel: "5-/8t R 3 5/4 5-/8t R 3 R+/4"}, flute: {deg: "=mp 11/2. 9/4 | 10/2 9/2 | 9/2 r/2 | 8/2 #6/2 | 4/2 0/2 | 3/1 | 2/2 r/2 | 1/1"}, fx: ticks, keys: {deg: "=mf r/4 4/8 2 0/4 2/8 {5}4 | 3/4. 2/8 0/2 | 5/4 4/8 2 r/2 | 1/2. r/4 | r/4 7/8 9 11/4^ 9/8 7 | 9/4. 7/8 5/2 | 4/4 2/8 4 5/2 | 4/2 #6/4 r/4"}, wash: hold, bell: {deg: "=pp r/2. 11/8' 9' | r/1 | r/1 | r/1 | r/2. 9/8' 11' | r/2 10/8' 9' r/4 | r/1 | r/1"}}, harmony: loop7, dyn: "mf<f"}
+  - {name: picardy, bars: 4, parts: {ep: {rel: "[R,3,5]/2 [R,3,5]"}, wash: hold, bass: {rel: R/1, oct: -2}, keys: {deg: "=mp 4/2 #6/2 | 7/1 | 7/1 | 7/1"}, gtr: {rel: "r/1 | r/1 | r/1 | [R,5,R+,3+]/1"}, bell: {deg: "r/1 | r/1 | r/1 | =p r/4 11/4' #9/2"}, fx: ticks}, harmony: home, dyn: "mp>p"}
+
+events:
+  - {at: reprise, type: impact, size: s}
+  - {at: reprise-1, type: drop, bars: 1, keep: [ep, flute, fx]}
+mix:
+  drums: {gain_db: -6}
+  fx: {gain_db: -4}
+  bass: {gain_db: -2}
+  ep: {gain_db: -11, send: {hall: 0.2}}
+  keys: {gain_db: 5, send: {hall: 0.25}}
+  wash: {gain_db: -24, send: {hall: 0.3}}
+  gtr: {gain_db: -6, send: {hall: 0.25}}
+  flute: {gain_db: -1, send: {hall: 0.3}}
+  bell: {gain_db: -10, send: {hall: 0.4}}
+
+master: clean

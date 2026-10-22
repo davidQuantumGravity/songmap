@@ -1,0 +1,19 @@
+# ch19: Messiaen's mode 3 at T0, T1, T2, T3 and T4, each played as its notes from C4 up to B4.
+# T4 gives exactly the notes of T0: the mode has only four transpositions.
+songmap: 0.2
+title: "Mode 3 has four transpositions"
+tempo: 144
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 19
+tail_seconds: 2
+instruments: {keys: clean/keys}
+mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+sections:
+  - {name: t0, bars: 2, parts: {keys: {notes: "c8 d d# e f# g g# a# b r8 r4 r2"}}}
+  - {name: t1, bars: 2, parts: {keys: {notes: "c8 c# d# e f g g# a b r8 r4 r2"}}}
+  - {name: t2, bars: 2, parts: {keys: {notes: "c8 c# d e f f# g# a a# r8 r4 r2"}}}
+  - {name: t3, bars: 2, parts: {keys: {notes: "c#8 d d# f f# g a a# b r8 r4 r2"}}}
+  - {name: t4, bars: 2, parts: {keys: {notes: "c8 d d# e f# g g# a# b r8 r4 r2"}}}
+master: clean

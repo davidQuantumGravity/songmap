@@ -1,0 +1,20 @@
+# ch38 inflections: C major, then the golden Ionian C D vE F ^G A B (E and G bent by a sixth-step),
+# then a tune in it over its four triads: F Dm Cg vEg Dm Cg (GOLDEN_BLENDING demo D12).
+songmap: 0.2
+title: "The golden Ionian"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ, low: clean/bass}
+mix:
+  keys: {gain_db: -3, send: {hall: 0.2}}
+  pad: {gain_db: -10, send: {hall: 0.25}}
+  low: {gain_db: -9}
+sections:
+  - {name: major, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 d8 e8 f8 g8 a8 b8 c+8"}}}
+  - {name: goldenionian, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 d8 ve8 f8 ^g8 a8 b8 c+8"}}}
+  - {name: tune, bars: 7, harmony: "F:1 Dm:1 Cg:1 vEg:1 Dm:1 Cg:2", parts: {keys: {notes: "a4 c+4 b8 a8 f4 | d4 f8 a8 f2 | ^g4 ve8 f8 ve2 | b4 ^g8 a8 ^g2 | a4 f8 ve8 d2 | c4 ve4 ^g2 | c+1"}, pad: hold, low: {style: roots, role: bass}}}
+master: clean

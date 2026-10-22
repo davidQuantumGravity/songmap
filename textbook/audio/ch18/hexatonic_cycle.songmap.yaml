@@ -1,0 +1,16 @@
+# ch18: Cohn's hexatonic cycle C - Cm - Ab - Abm - E - Em - C, alternating P and L; one voice moves one semitone per chord.
+# Then the hexatonic pole: C straight to Abm (every voice moves a semitone) and back.
+songmap: 0.2
+title: "The hexatonic cycle"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 18
+tail_seconds: 2
+instruments: {organ: clean/organ}
+mix: {organ: {gain_db: -5, send: {hall: 0.25}}}
+sections:
+  - {name: cycle, bars: 4, parts: {organ: {notes: "[c,e,g]2 [c,eb,g]2 | [c,eb,ab]2 [b-,eb,ab]2 | [b-,e,ab]2 [b-,e,g]2 | [c,e,g]1"}}}
+  - {name: pole, bars: 3, parts: {organ: {notes: "[c,e,g]2 [b-,eb,ab]2 | [c,e,g]2 [b-,eb,ab]2 | [c,e,g]1"}}}
+master: clean

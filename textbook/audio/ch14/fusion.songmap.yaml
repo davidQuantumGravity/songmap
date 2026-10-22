@@ -1,0 +1,20 @@
+# One melody (C D E F G) with a second voice four ways: in parallel octaves, parallel fifths,
+# parallel thirds, and contrary motion (A3 G3 E3 D3 C3). Same organ tone for both voices.
+songmap: 0.2
+title: "Parallel and contrary"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 14
+tail_seconds: 2
+instruments: {up: clean/organ, lo: clean/organ}
+mix: {up: {gain_db: -5, send: {hall: 0.15}}, lo: {gain_db: -5, send: {hall: 0.15}}}
+returns: {hall: {type: reverb, seconds: 1.8, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: four
+    bars: 8
+    parts:
+      up: {notes: "=mf c4 d e f | g2 r | c4 d e f | g2 r | c4 d e f | g2 r | c4 d e f | g2 r"}
+      lo: {notes: "=mf c-4 d- e- f- | g-2 r | f-4 g- a- bb- | c2 r | a-4 b- c d | e2 r | a-4 g- e- d- | c-2 r"}
+master: clean

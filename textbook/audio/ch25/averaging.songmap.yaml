@@ -1,0 +1,16 @@
+# The averaging principle. C, Cm, Caug, then their average Cg = C vE ^G; then C, Cm, Cdim and
+# their average Cs = C ^Eb vG (silver). Root position, bass C under every chord.
+songmap: 0.2
+title: "Averages of chords"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 3
+tail_seconds: 2.5
+instruments: {organ: clean/organ, low: clean/bass}
+mix: {organ: {gain_db: -5}, low: {gain_db: -8}}
+sections:
+  - {name: bright, bars: 4, harmony: "C:1 Cm:1 Caug:1 Cg:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+  - {name: dark, bars: 4, harmony: "C:1 Cm:1 Cdim:1 Cs:1", parts: {organ: hold, low: {style: roots, role: bass}}}
+master: clean

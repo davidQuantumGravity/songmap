@@ -1,0 +1,16 @@
+# The timbre flip. Cg - C - Cg on a harmonic organ (C is the arrival, the deepest rest; Cg hangs around it),
+# then the same three chords on the digital golden-spectrum pad (the laboratory: Cg now measures smoother, C rougher).
+songmap: 0.2
+title: "The timbre flip"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 26
+tail_seconds: 3.5
+instruments: {organ: clean/organ, gpad: clean/golden_pad}
+mix: {organ: {gain_db: -5}, gpad: {gain_db: -4}}
+sections:
+  - {name: harmonic, bars: 3, harmony: "Cg:1 C:1 Cg:1", parts: {organ: hold}}
+  - {name: golden, bars: 3, harmony: "Cg:1 C:1 Cg:1", parts: {gpad: hold}}
+master: clean

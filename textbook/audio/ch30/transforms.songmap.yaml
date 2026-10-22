@@ -1,0 +1,29 @@
+# ch30: a golden7 motif and its transformations, written out degree by degree:
+# original, inversion about C (exact = tonal in golden7), retrograde,
+# real transposition up one chain step (into ^Ab golden7, which brings in ^A),
+# and tonal transposition up one degree inside C golden7 (the step pattern changes).
+songmap: 0.2
+title: "A golden motif and its transformations"
+tempo: 92
+meter: "4/4"
+key: "C golden7"
+tuning: 36edo
+seed: 33
+tail_seconds: 3
+instruments: {bell: clean/glass, gpad: clean/golden_pad}
+motifs:
+  orig:  {deg: "0/8 1 2 4 2/4 1 | 0/1", octave: 5}
+  inv:   {deg: "0/8 -1 -2 -4 -2/4 -1 | 0/1", octave: 5}
+  retro: {deg: "0/1 | 1/4 2 4/8 2 1 0", octave: 5}
+  real:  {deg: "0/8 1 2 4 2/4 1 | 0/1", octave: 4, key: "^Ab golden7"}
+  tonal: {deg: "1/8 2 3 5 3/4 2 | 1/1", octave: 5}
+mix:
+  bell: {gain_db: -5, send: {hall: 0.25}}
+  gpad: {gain_db: -10, send: {hall: 0.3}}
+sections:
+  - {name: orig, bars: 2, harmony: "Cg:2", parts: {bell: {motifs: [orig]}, gpad: hold}}
+  - {name: inv, bars: 2, harmony: "Cg:2", parts: {bell: {motifs: [inv]}, gpad: hold}}
+  - {name: retro, bars: 2, harmony: "Cg:2", parts: {bell: {motifs: [retro]}, gpad: hold}}
+  - {name: real, bars: 2, harmony: "^Abg:2", parts: {bell: {motifs: [real]}, gpad: hold}}
+  - {name: tonal, bars: 2, harmony: "C#g:2", parts: {bell: {motifs: [tonal]}, gpad: hold}}
+master: clean

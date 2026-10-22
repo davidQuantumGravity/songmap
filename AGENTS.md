@@ -14,9 +14,10 @@ Its catalog, [catalog.txt](.claude/skills/songmap-compose/catalog.txt), lists ev
 
 1. `songmap describe --compact`: read the catalog and use only its names.
 2. Spot the video. Frames per bar = `fps × beats_per_bar × 60 / tempo`, which is 60 at 120 BPM, 4/4, 30 fps.
-3. Write `song.sm`: header lines, then one line per section, `name bars | parts | !events`.
-4. `songmap check song.sm`: fix each error as its suggestion says, until it prints `ok:` with the right frame count.
-5. `songmap render song.sm -o build/<name>`, then read `qa.json`, then revise by replacing section lines.
+3. Write `songs/<collection>/<name>.sm`: header lines, then one line per section, `name bars | parts | !events`. Songs live in the repo, never in temp folders. Every file under `songs/` appears in the textbook's Songbook (appendix H) for the user to review.
+4. `songmap check FILE`: fix each error as its suggestion says, until it prints `ok:` with the right frame count.
+5. `songmap listen FILE`: the automated ear. Fix the clashes, crowding and repetition it reports.
+6. `songmap render FILE -o songs/<collection>/renders/<name>`, then read `review.json` and `qa.json`, look at `qa.png`, and revise by replacing section lines.
 
 Express music as song-map text. Don't change engine code to get a musical result.
 

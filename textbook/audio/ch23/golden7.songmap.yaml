@@ -1,0 +1,19 @@
+# The diatonic scale, then golden7 (C C# vE vF ^G ^Ab B), the golden diatonic, on the same struck tone.
+songmap: 0.2
+title: "Diatonic and golden7"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 23
+tail_seconds: 2
+instruments: {keys: clean/keys, pad: clean/organ}
+motifs:
+  diat: {deg: "0/8 1 2 3 4 5 6 7 | 7/8 6 5 4 3 2 1 0", octave: 4, key: "C major"}
+  gold: {deg: "0/8 1 2 3 4 5 6 7 | 7/8 6 5 4 3 2 1 0", octave: 4, key: "C golden7"}
+mix: {keys: {gain_db: -3}, pad: {gain_db: -8}}
+sections:
+  - {name: diatonic, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [diat]}}}
+  - {name: golden, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [gold]}}}
+  - {name: triads, bars: 6, harmony: "Cg:1 vEg:1 ^Abg:1 vFg:1 C#g:1 Cg7:1", parts: {pad: hold}}
+master: clean

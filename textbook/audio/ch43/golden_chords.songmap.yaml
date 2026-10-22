@@ -1,0 +1,19 @@
+# The averaging principle, written as chord symbols (36edo):
+#   bright: C - Cm - Caug - Cg   (Cg = C vE ^G = the voice-by-voice average of the three)
+#   dark:   C - Cm - Cdim - Cs   (Cs = C ^Eb vG = the average of C, Cm and Cdim)
+#   then Cg and its alteration-list spelling C(v3,^5): the same chord, written two ways
+songmap: 0.2
+title: "Golden and silver chords as symbols"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {organ: {use: clean/organ, attack: 0.08, release: 0.5}}
+sections:
+  - {name: bright, bars: 5, harmony: "C:1 Cm:1 Caug:1 Cg:2", parts: {organ: hold}}
+  - {name: dark, bars: 5, harmony: "C:1 Cm:1 Cdim:1 Cs:2", parts: {organ: hold}}
+  - {name: same, bars: 2, harmony: "Cg:1 C(v3,^5):1", parts: {organ: hold}}
+mix: {organ: {gain_db: -6}}
+master: clean

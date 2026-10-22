@@ -1,0 +1,24 @@
+# Fourth species (syncopation): the upper voice enters on the second half of each bar and is held
+# across the bar line, so it is dissonant (a seventh) on every downbeat and resolves down by step to a
+# sixth: a chain of 7-6 suspensions over a descending scale, ending on the octave.
+#   lower: C4 B3 A3 G3 F3 E3 D3 C3    upper: A4 G4 F4 E4 D4 C4 B3 C4 (offset by half a bar)
+songmap: 0.2
+title: "A chain of suspensions"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 15
+tail_seconds: 2.5
+instruments: {lo: clean/organ, hi: clean/organ}
+mix:
+  lo: {gain_db: -5, pan: -0.3, send: {hall: 0.25}}
+  hi: {gain_db: -5, pan: 0.3, send: {hall: 0.25}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: chain
+    bars: 8
+    parts:
+      lo: {notes: "=mf c1 | b- | a- | g- | f- | e- | d- | c-"}
+      hi: {notes: "=mf r2 a1 g f e d c b-2 c1"}
+master: clean

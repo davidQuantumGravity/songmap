@@ -1,0 +1,25 @@
+# Ch. 29: the golden staircase I - ii - iii - IV - V - vi. Escalators (~g ~g) on every whole step,
+# sub-chromatic planing (~ ~) on the half step iii -> IV.
+songmap: 0.2
+title: "The golden staircase"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 6
+tail_seconds: 3
+instruments: {piano: keys/still, pad: pad/still, low: clean/bass, bell: clean/glass}
+motifs:
+  bassline: {notes: "=mp c-1 | vc#-2 c#- | d-1 | ^d-2 eb- | e-1 | ^e-2 vf- | f-1 | vf#-2 ^f#- | g-1 | vab-2 ab- | a-1 | a-1"}
+mix:
+  piano: {gain_db: -5, send: {hall: 0.25}}
+  pad:   {gain_db: -12, send: {hall: 0.35}}
+  low:   {gain_db: -5, send: {hall: 0.05}}
+  bell:  {gain_db: -9, send: {hall: 0.35}}
+returns:
+  hall: {type: reverb, seconds: 2.8, predelay: 0.025, damping: 0.5}
+sections:
+  - {name: stairs, bars: 12, harmony: "C:1 ~g:0.5 ~g:0.5 Dm:1 ~g:0.5 ~g:0.5 Em:1 ~:0.5 ~:0.5 F:1 ~g:0.5 ~g:0.5 G:1 ~g:0.5 ~g:0.5 Am:2",
+     parts: {piano: {style: gentle8, role: arp}, pad: {style: hold, voices: 3, range: [55, 77]},
+             low: {motifs: [bassline]}, bell: top}}
+master: clean

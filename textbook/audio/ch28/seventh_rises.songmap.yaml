@@ -1,0 +1,21 @@
+# Ch. 28: V7 -> I in exact four-part writing. Strict path first (G7 - vFsus2(^2,v5)/G - ^Em(v3,^5)/G - C,
+# the seventh falls F vF ^E E). Then the natural path G7 - Gg7(^^3,^5) - vCg/G - C, where the seventh
+# rises F F# G in an inner voice and the leading tone climbs B ^B vC C.
+songmap: 0.2
+title: "V7 to I: strict, then natural"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2.5
+instruments: {organ: clean/organ}
+motifs:
+  strict:  {notes: "=mf [g--,g-,b-,f]2 [g--,g-,^b-,vf]4 [g--,g-,vc,^e] | [c-,g-,c,e]1"}
+  natural: {notes: "=mf [g--,b-,d,f]2 [g--,^b-,veb,f#]4 [g--,vc,^eb,g] | [c-,c,e,g]1"}
+mix: {organ: {gain_db: -6}}
+sections:
+  - {name: strict, bars: 2, parts: {organ: {motifs: [strict]}}}
+  - {name: gap, bars: 2, parts: {}}
+  - {name: natural, bars: 2, parts: {organ: {motifs: [natural]}}}
+master: clean

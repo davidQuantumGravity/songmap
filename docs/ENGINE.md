@@ -11,7 +11,7 @@ The sketch (`reference/sketch_v1/`) was moved into the package in P1, definition
 | Note language (letter, deg and chord-relative `rel:` modes), step strings, keys, chord symbols | `songmap/parse/notes.py`, `steps.py`, `songmap/theory/keys.py`, `harmony.py` | ✅ sticky durations, marks, ghosts, hairpins, deg and rel modes, bar-check error text |
 | Positions, tempo map, progressions + harmony timeline | `songmap/parse/positions.py`, `songmap/arrange/timeline.py`, `songmap/theory/harmony.py` | ✅ all position forms, frame snapping, synth_v0 chord registers |
 | YAML parser with v0.1 migration; styles as data; expansion; events; ensemble defaults | `songmap/parse/yaml_form.py`, `songmap/arrange/` | ✅ inheritance, errors with line + suggestion, every style, golden hashes |
-| Performance pipeline, groove templates, voice leading | `songmap/perform/`, `songmap/theory/voicing.py` | ✅ seeded, crescendo shaping, swing, smooth C→F (wired into render in P3) |
+| Performance pipeline, groove templates, voice leading | `songmap/perform/`, `songmap/theory/voicing.py` | ✅ seeded, crescendo shaping, swing, smooth C→F; `perform/play.py` plays every render (moods in `arrange/moods/`) |
 | Buses, reverb IR, compressor, sidechain, limiter, BS.1770 LUFS, true peak, master + synth_v0's legacy master, QA | `songmap/mix/`, `songmap/export/qa.py` | ✅ EBU 3341 case 1 (−23.0 LUFS), limiter ceiling, master hits −14 |
 | Render, 24-bit WAV, stems, `cues.json` (+ validator), CLI | `songmap/render.py`, `songmap/export/`, `songmap/cli.py` | ✅ deterministic renders, cues validation, CLI |
 | Original prototype | [reference/synth_v0.py](../reference/synth_v0.py) | the port check runs it as an oracle (`tools/v0_oracle.py`) |
@@ -59,7 +59,7 @@ songmap/
     base.py               # Param, Note, Instrument, registry, describe()
     dsp/                  # osc, filters, env, noise, physical models, fx kernels (numba)
     drums/ bass/ keys/ mallets/ strings/ brass/ winds/ voice/ synth/ fx/
-    sampler.py            # SFZ subset
+    sampler/              # SFZ subset: sfz.py parser, resample.py (sinc), library.py (find + LICENSES.md)
     plugin.py             # DawDreamer host (optional extra)
     patch.py              # YAML module-graph instruments + safe expression evaluator
   presets/                # <instrument>/<name>.yaml

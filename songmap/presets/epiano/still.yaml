@@ -1,0 +1,4 @@
+instrument: epiano
+description: "FM electric piano without tremolo or per-hit variation"
+tags: [epiano, stable, 36edo]
+params: {trem_depth: 0, rr: 0, index: 1.0}

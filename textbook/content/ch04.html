@@ -1,0 +1,356 @@
+<section id="just">
+<h2>Just intervals</h2>
+<div class="layer hear">
+<p>The harmonic series hands us a set of smooth, beat-free intervals: the octave 2:1, the fifth 3:2, the major third
+5:4 and their relatives. Tuning intervals to these exact ratios is called <b>just intonation</b>. Modern keyboards do
+not use it. Listen to the difference it makes in a single major third.</p>
+<audio-ex src="just_vs_equal_third" caption="A major third on middle C, first tuned just (5:4, perfectly still), then as on a piano (12-ET, about 14 cents wider: listen for a fast flutter, about ten beats a second)."></audio-ex>
+<p>The just third is calm and glassy. The piano's third shimmers with a rapid beat; we are so used to it that it sounds
+normal, but next to the just third it is clearly restless. A whole chord shows the same contrast.</p>
+<audio-ex src="just_vs_equal_triad" caption="C major tuned 4:5:6 (just: still, fused, almost one tone), then in 12-ET (a gentle shimmer from the beating third)."></audio-ex>
+</div>
+<div class="layer understand">
+<p>A <b>just interval</b> is one whose frequency ratio is a fraction of small whole numbers. The ones that matter most come
+straight from the harmonic series (<a href="ch:ch02#intervals-in-series">Chapter 2</a>):</p>
+<table>
+<tr><th>Interval</th><th>Just ratio</th><th>Cents</th><th>12-ET</th><th>12-ET minus just</th></tr>
+<tr><td>unison</td><td>1/1</td><td>0.00</td><td>0</td><td>0</td></tr>
+<tr><td>semitone</td><td>16/15</td><td>111.73</td><td>100</td><td>−11.73</td></tr>
+<tr><td>whole tone (major)</td><td>9/8</td><td>203.91</td><td>200</td><td>−3.91</td></tr>
+<tr><td>whole tone (minor)</td><td>10/9</td><td>182.40</td><td>200</td><td>+17.60</td></tr>
+<tr><td>minor third</td><td>6/5</td><td>315.64</td><td>300</td><td>−15.64</td></tr>
+<tr><td>major third</td><td>5/4</td><td>386.31</td><td>400</td><td>+13.69</td></tr>
+<tr><td>perfect fourth</td><td>4/3</td><td>498.04</td><td>500</td><td>+1.96</td></tr>
+<tr><td>perfect fifth</td><td>3/2</td><td>701.96</td><td>700</td><td>−1.96</td></tr>
+<tr><td>minor sixth</td><td>8/5</td><td>813.69</td><td>800</td><td>−13.69</td></tr>
+<tr><td>major sixth</td><td>5/3</td><td>884.36</td><td>900</td><td>+15.64</td></tr>
+<tr><td>minor seventh</td><td>9/5</td><td>1017.60</td><td>1000</td><td>−17.60</td></tr>
+<tr><td>major seventh</td><td>15/8</td><td>1088.27</td><td>1100</td><td>+11.73</td></tr>
+<tr><td>octave</td><td>2/1</td><td>1200.00</td><td>1200</td><td>0</td></tr>
+</table>
+<p>12-ET fifths and fourths are within 2 cents of just, close enough to beat only slowly. Its thirds and sixths are 14 to
+16 cents off, enough to beat quickly (<a href="ch:ch03#beats">Chapter 3</a>).</p>
+<p><b>The just major scale.</b> The classic way to tune a major scale justly is to make its three main triads pure: F–A–C,
+C–E–G and G–B–D, each 4:5:6. The result:</p>
+<table>
+<tr><th>Note</th><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>A</td><td>B</td><td>C</td></tr>
+<tr><th>Ratio</th><td>1</td><td>9/8</td><td>5/4</td><td>4/3</td><td>3/2</td><td>5/3</td><td>15/8</td><td>2</td></tr>
+<tr><th>Cents</th><td>0</td><td>203.91</td><td>386.31</td><td>498.04</td><td>701.96</td><td>884.36</td><td>1088.27</td><td>1200</td></tr>
+<tr><th>Step to next</th><td>9/8</td><td>10/9</td><td>16/15</td><td>9/8</td><td>10/9</td><td>9/8</td><td>16/15</td><td></td></tr>
+</table>
+<p>It has two sizes of whole tone, 9/8 and 10/9, and a semitone 16/15. Against a drone, its notes lock in with a stillness
+equal temperament cannot match.</p>
+<audio-ex src="scale_over_drone" caption="A C major scale over a held C–G drone: first in just intonation (each note settles against the drone), then in 12-ET (E, A and B shimmer against it)."></audio-ex>
+<p>But the scale has a flaw hidden inside it. The fifth from D up to A is $\frac{5/3}{9/8} = \frac{40}{27}$, which is
+680.45 cents, more than 21 cents narrower than a pure fifth, and the minor third D–F is $\frac{4/3}{9/8} = \frac{32}{27}$
+(294.13 c) instead of 6/5. A D minor chord in this scale is badly out of tune. Fixing it means moving D, which spoils
+G–B–D. That tension, between pure intervals and a fixed set of notes, runs through the whole history of tuning, and its
+size is the <b>syntonic comma</b> of the last section.</p>
+<aside class="box history">Ptolemy (2nd century CE) described a division of the fourth into steps 16/15, 9/8 and 10/9,
+the same three steps, in a different order, as the lower half of the just scale above. In the sixteenth century Gioseffo Zarlino (<em>Le istitutioni
+harmoniche</em>, 1558) championed the ratios built from the numbers 1 to 6, his <em>senario</em>, as the basis of
+consonance, which gave the just major and minor thirds (5/4 and 6/5) a secure place among the consonances alongside the
+fifth.</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> An interval is <b>just</b> if its ratio is rational. In practice "just intonation" means using ratios
+of small numbers, usually with prime factors from a small set (next section).</p>
+<p><b>Theorem (the just major scale).</b> Requiring F–A–C, C–E–G and G–B–D to be 4:5:6 triads, with C = 1, and folding every
+note into $[1, 2)$, forces the scale $1, \frac98, \frac54, \frac43, \frac32, \frac53, \frac{15}{8}$.</p>
+<p><b>Proof.</b> C–E–G gives E = 5/4, G = 3/2. G–B–D gives B = G·5/4 = 15/8 and D = G·3/2 = 9/4, folded to 9/8. F–A–C,
+with C as its fifth, gives F = 2/(3/2) = 4/3 and A = F·5/4 = 5/3. Every step is forced. $\square$</p>
+<p><b>The broken fifth.</b> In this scale, $A/D = \frac{5/3}{9/8} = \frac{40}{27} = \frac32\cdot\frac{80}{81}$: the pure
+fifth lowered by the syntonic comma $81/80$, $701.96 - 21.51 = 680.45$ c. Any just tuning of the seven notes must break
+at least one of the four fifths F–C, C–G, G–D, D–A or the major third F–A; the reason is the comma
+identity $\left(\frac32\right)^4 = \frac54\cdot 4\cdot\frac{81}{80}$ (four fifths overshoot two octaves and a major third by
+the comma), worked out in the last section.</p>
+</div>
+</section>
+
+<section id="primes">
+<h2>Prime limits</h2>
+<div class="layer hear">
+<p>The harmonic series does not stop at 6. Harmonic 7 gives a seventh lower than any on the piano, and the chord
+4:5:6:7 is a pure, beat-free version of a "dominant seventh".</p>
+<audio-ex src="harmonic_seventh" caption="C–E–G with a seventh: first the harmonic seventh 4:5:6:7 (the seventh 31 cents lower than a piano's B♭: smooth, almost fused), then the piano's dominant seventh C–E–G–B♭ (brighter, restless)."></audio-ex>
+<pianoroll edo="36" notes="C3 E3 G3 vBb3 ; C3 E3 G3 Bb3" labels="4:5:6:7 ; C7 (12-ET)" title="The harmonic seventh chord at its nearest 36-ET notes (7/4 ≈ vB♭, 2.16 c away), then the 12-ET C7"></pianoroll>
+<p>The harmonic seventh chord sounds unusually sweet and unified, a little "barbershop". It also sounds slightly out of
+tune to ears raised on pianos, because its seventh is far from the piano's. It belongs to a different family of intervals
+from the major third, and the family is named by a prime number.</p>
+</div>
+<div class="layer understand">
+<p>Every whole number greater than 1 factors into primes in exactly one way: $12 = 2^2\cdot3$, $45 = 3^2\cdot5$, $81 = 3^4$. So every
+ratio can be written as a product of primes with positive or negative exponents:</p>
+$$\frac{5}{4} = 2^{-2}\cdot5,\qquad \frac{6}{5} = 2\cdot3\cdot5^{-1},$$
+$$\frac{15}{8} = 2^{-3}\cdot3\cdot5,\qquad \frac{81}{80} = 2^{-4}\cdot3^4\cdot5^{-1}.$$
+<p>Each prime contributes its own kind of interval.</p>
+<ul>
+<li><b>2</b>: the octave. Powers of 2 only move a note between octaves.</li>
+<li><b>3</b>: the fifth (3/2) and fourth (4/3), and everything built from stacked fifths: <b>Pythagorean tuning</b>
+(<a href="ch:ch05#stacking">Chapter 5</a>).</li>
+<li><b>5</b>: the just major third (5/4), minor third (6/5) and sixths (5/3, 8/5).</li>
+<li><b>7</b>: the harmonic seventh (7/4, 968.83 c), the septimal minor third (7/6, 266.87 c), the septimal tritone
+(7/5, 582.51 c) and whole tone (8/7, 231.17 c).</li>
+<li><b>11</b> and <b>13</b>: intervals such as 11/8 (551.32 c, between the fourth and the tritone) and 13/8 (840.53 c,
+between the minor and major sixth).</li>
+</ul>
+<p>The <b>prime limit</b> of a tuning is the largest prime it uses. Pythagorean tuning is <b>3-limit</b>; the just major
+scale is <b>5-limit</b>; the harmonic seventh chord is <b>7-limit</b>. Traditional Western harmony is usually explained in
+the 5-limit: its consonances are octaves, fifths, fourths, thirds and sixths. Composers and theorists of extended just
+intonation, such as Harry Partch, have worked with 7, 11 and beyond (<a href="ch:ch22#microtonal">Chapter 22</a>).</p>
+<table>
+<tr><th>Limit</th><th>Ratios built from</th><th>Typical intervals</th><th>Systems</th></tr>
+<tr><td>2</td><td>2</td><td>octaves only</td><td></td></tr>
+<tr><td>3</td><td>2, 3</td><td>3/2, 4/3, 9/8, 256/243</td><td>Pythagorean</td></tr>
+<tr><td>5</td><td>2, 3, 5</td><td>5/4, 6/5, 5/3, 16/15, 81/80</td><td>just intonation, meantone (<a href="ch:ch07#syntonic">Ch. 7</a>)</td></tr>
+<tr><td>7</td><td>2, 3, 5, 7</td><td>7/4, 7/6, 7/5, 8/7, 64/63</td><td>extended just intonation</td></tr>
+</table>
+</div>
+<div class="layer derive">
+<p><b>Monzos.</b> By the fundamental theorem of arithmetic, every positive rational $r$ has a unique expression
+$r = 2^{e_2}3^{e_3}5^{e_5}7^{e_7}\cdots$ with integer exponents, almost all zero. The exponent vector
+$[e_2, e_3, e_5, \dots]$ is sometimes called a <b>monzo</b>. Multiplying ratios adds their vectors, so the $p$-limit
+ratios form a group isomorphic to $\mathbb{Z}^k$, where $k$ is the number of primes up to $p$ ($\mathbb{Z}^2$ for the
+3-limit, $\mathbb{Z}^3$ for the 5-limit).</p>
+<p><b>Cents are linear.</b> $c(r) = 1200\,(e_2 + e_3\log_2 3 + e_5\log_2 5 + \cdots)$, with
+$1200\log_2 3 \approx 1901.96$ and $1200\log_2 5 \approx 2786.31$.</p>
+<p><b>Theorem (the primes are independent).</b> The numbers $1, \log_2 3, \log_2 5, \log_2 7, \dots$ are linearly
+independent over the rationals. In particular $\log_2 3$ is irrational, and no stack of pure fifths ever equals a stack of
+octaves.</p>
+<p><b>Proof.</b> Suppose $a_0 + a_1\log_2 3 + a_2\log_2 5 + \cdots = 0$ with rational $a_i$, not all zero; clear
+denominators so they are integers. Exponentiating base 2 gives $2^{a_0}3^{a_1}5^{a_2}\cdots = 1$. Moving negative
+exponents to the other side gives two products of primes that are equal, with no prime on both sides; by unique
+factorization every exponent is zero, a contradiction. $\square$</p>
+<p>The theorem says that each prime is a genuinely new direction of musical space: no combination of fifths and thirds
+ever reproduces an octave exactly, and no combination of fifths ever reproduces a just third. Every tuning system is a way
+of living with this fact.</p>
+</div>
+</section>
+
+<section id="lattice">
+<h2>The ratio lattice</h2>
+<div class="layer hear">
+<p>If we forget octaves, a 5-limit note is reached from C by some number of pure fifths and some number of pure major
+thirds. That suggests drawing notes on a grid: fifths in one direction, thirds in the other. The next example plays the
+three triads that build the just major scale, F, C and G, which are three neighbouring triangles on that grid, and then
+the scale itself.</p>
+<audio-ex src="three_triads" caption="The just triads F–A–C, C–E–G and G–B–D (each 4:5:6), C again, then the just C major scale they generate. Each triad is a small triangle on the ratio lattice."></audio-ex>
+<pianoroll edo="12" notes="F4 A4 C5 ; C4 E4 G4 ; G3 B3 D4 ; C4 E4 G4" labels="F ; C ; G ; C" title="The three triads of the just major scale, each tuned 4:5:6 (shown at the nearest 12-ET keys)"></pianoroll>
+</div>
+<div class="layer understand">
+<p>Octave equivalence lets us ignore the exponent of 2. A 5-limit pitch class is then fixed by two whole numbers: how many
+fifths ($a$) and how many major thirds ($b$) it lies from C. Plot each as the point $(a, b)$ and you get the <b>ratio
+lattice</b>, a grid of notes in which moving right multiplies by 3/2 and moving up multiplies by 5/4 (both folded back into
+one octave).</p>
+<figure class="svgfig"><svg class="fig" viewBox="0 0 640 300" role="img" aria-label="The 5-limit ratio lattice around C"><line x1="66.0" y1="70.0" x2="158.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="158.0" y1="70.0" x2="250.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="250.0" y1="70.0" x2="342.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="342.0" y1="70.0" x2="434.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="434.0" y1="70.0" x2="526.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="66.0" y1="165.0" x2="158.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="66.0" y1="165.0" x2="66.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="158.0" y1="165.0" x2="250.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="158.0" y1="165.0" x2="158.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="250.0" y1="165.0" x2="342.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="250.0" y1="165.0" x2="250.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="342.0" y1="165.0" x2="434.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="342.0" y1="165.0" x2="342.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="434.0" y1="165.0" x2="526.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="434.0" y1="165.0" x2="434.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="526.0" y1="165.0" x2="526.0" y2="70.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="66.0" y1="260.0" x2="158.0" y2="260.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="66.0" y1="260.0" x2="66.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="158.0" y1="260.0" x2="250.0" y2="260.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="158.0" y1="260.0" x2="158.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="250.0" y1="260.0" x2="342.0" y2="260.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="250.0" y1="260.0" x2="250.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="342.0" y1="260.0" x2="434.0" y2="260.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="342.0" y1="260.0" x2="342.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="434.0" y1="260.0" x2="526.0" y2="260.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="434.0" y1="260.0" x2="434.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="526.0" y1="260.0" x2="526.0" y2="165.0" style="stroke:var(--muted)" stroke-width="1" /><circle cx="66" cy="70" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="66.0" y="68.0" class="cl" text-anchor="middle">D</text><text x="66.0" y="82.0" class="lab" text-anchor="middle">10/9</text><circle cx="158" cy="70" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="158.0" y="68.0" class="cl" text-anchor="middle">A</text><text x="158.0" y="82.0" class="lab" text-anchor="middle">5/3</text><circle cx="250" cy="70" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="250.0" y="68.0" class="cl" text-anchor="middle">E</text><text x="250.0" y="82.0" class="lab" text-anchor="middle">5/4</text><circle cx="342" cy="70" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="342.0" y="68.0" class="cl" text-anchor="middle">B</text><text x="342.0" y="82.0" class="lab" text-anchor="middle">15/8</text><circle cx="434" cy="70" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="434.0" y="68.0" class="cl" text-anchor="middle">F♯</text><text x="434.0" y="82.0" class="lab" text-anchor="middle">45/32</text><circle cx="526" cy="70" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="526.0" y="68.0" class="cl" text-anchor="middle">C♯</text><text x="526.0" y="82.0" class="lab" text-anchor="middle">135/128</text><circle cx="66" cy="165" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="66.0" y="163.0" class="cl" text-anchor="middle">B♭</text><text x="66.0" y="177.0" class="lab" text-anchor="middle">16/9</text><circle cx="158" cy="165" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="158.0" y="163.0" class="cl" text-anchor="middle">F</text><text x="158.0" y="177.0" class="lab" text-anchor="middle">4/3</text><circle cx="250" cy="165" r="25" style="fill:var(--card);stroke:var(--accent)" stroke-width="2"/><text x="250.0" y="163.0" class="cl" text-anchor="middle">C</text><text x="250.0" y="177.0" class="lab" text-anchor="middle">1</text><circle cx="342" cy="165" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="342.0" y="163.0" class="cl" text-anchor="middle">G</text><text x="342.0" y="177.0" class="lab" text-anchor="middle">3/2</text><circle cx="434" cy="165" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="434.0" y="163.0" class="cl" text-anchor="middle">D</text><text x="434.0" y="177.0" class="lab" text-anchor="middle">9/8</text><circle cx="526" cy="165" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="526.0" y="163.0" class="cl" text-anchor="middle">A</text><text x="526.0" y="177.0" class="lab" text-anchor="middle">27/16</text><circle cx="66" cy="260" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="66.0" y="258.0" class="cl" text-anchor="middle">G♭</text><text x="66.0" y="272.0" class="lab" text-anchor="middle">64/45</text><circle cx="158" cy="260" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="158.0" y="258.0" class="cl" text-anchor="middle">D♭</text><text x="158.0" y="272.0" class="lab" text-anchor="middle">16/15</text><circle cx="250" cy="260" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="250.0" y="258.0" class="cl" text-anchor="middle">A♭</text><text x="250.0" y="272.0" class="lab" text-anchor="middle">8/5</text><circle cx="342" cy="260" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="342.0" y="258.0" class="cl" text-anchor="middle">E♭</text><text x="342.0" y="272.0" class="lab" text-anchor="middle">6/5</text><circle cx="434" cy="260" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="434.0" y="258.0" class="cl" text-anchor="middle">B♭</text><text x="434.0" y="272.0" class="lab" text-anchor="middle">9/5</text><circle cx="526" cy="260" r="25" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="526.0" y="258.0" class="cl" text-anchor="middle">F</text><text x="526.0" y="272.0" class="lab" text-anchor="middle">27/20</text><text x="20.0" y="22.0" class="t" text-anchor="start">Right: × 3/2 (a pure fifth). Up: × 5/4 (a pure major third). Ratios are folded into one octave.</text></svg></figure>
+<p>Reading the lattice:</p>
+<ul>
+<li><b>Rows</b> are chains of pure fifths: B♭–F–C–G–D–A is Pythagorean (<a href="ch:ch05#chain">Chapter 5</a>).</li>
+<li><b>Columns</b> are chains of pure major thirds: A♭–C–E.</li>
+<li>A <b>major triad</b> is a small right triangle: a root, its fifth to the right and its major third above (C, G,
+E). A <b>minor triad</b> is the triangle on the other side of the third: A, its fifth E to the right, and C below E
+(A–C–E). The two share the edge C–E.</li>
+<li>The just major scale is the three neighbouring major triads F–A–C, C–E–G, G–B–D.</li>
+</ul>
+<p>The lattice also shows what went wrong with the just scale. There are <b>two D's</b> in the picture. One is two fifths
+up from C, $9/8$, in the middle row. The other is a fifth below A in the top row, $10/9$. They differ by
+$\frac{9/8}{10/9} = \frac{81}{80}$: four steps right and one step down. The just scale's D is the first; the D that would
+make D–F–A a pure minor triad is the second. On the lattice they are different points, and no amount of re-tuning
+within the 5-limit makes them the same. Likewise B♭ appears as 16/9 (two fifths down) and 9/5 (two fifths up and a major third down),
+and F as 4/3 and 27/20.</p>
+<aside class="box history">Leonhard Euler drew a version of this lattice, with fifths and major thirds as its two
+directions, in his <em>Tentamen novae theoriae musicae</em> (1739). The lattice was taken up in the nineteenth century by
+Arthur von Oettingen and Hugo Riemann; in German it is the <em>Tonnetz</em>, "tone network".</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> The 5-limit pitch-class lattice is $\mathbb{Z}^2$, with $(a, b)$ standing for the pitch class of
+$3^a 5^b$. Its pitch in cents above C is</p>
+$$c(a, b) = \big(1901.96\,a + 2786.31\,b\big) \bmod 1200.$$
+<p><b>Theorem (the lattice never closes).</b> Distinct points of the lattice are distinct pitch classes.</p>
+<p><b>Proof.</b> If $(a, b) \ne (a', b')$ gave the same class, then $3^{a - a'}5^{b - b'} = 2^e$ for some integer $e$,
+contradicting the independence of $1, \log_2 3, \log_2 5$ (previous section). $\square$</p>
+<p>So the 5-limit has infinitely many pitch classes, and every closed-looking loop of pure intervals actually ends
+somewhere new. The step $(4, -1)$ is the syntonic comma $81/80$; $(12, 0)$ is the Pythagorean comma; $(0, 3)$, three
+major thirds, falls short of the octave by $128/125$.</p>
+<p><b>Distance.</b> A natural size for an interval $2^{e_2}3^{a}5^{b}$ is its Tenney height
+$\log_2(n d) = |e_2| + |a|\log_2 3 + |b|\log_2 5$ for the reduced fraction $n/d$: the length of its path when each step is
+weighted by $\log_2$ of its prime (<a href="ch:ch03#harmonicity">Chapter 3</a>). Short lattice paths are simple ratios.</p>
+</div>
+</section>
+
+<section id="tonnetz">
+<h2>The Tonnetz</h2>
+<div class="layer hear">
+<p>On a piano, the two D's of the last section are the same key. Equal temperament folds the infinite lattice up so that
+it closes. The lattice drawn with triangles, folded or not, is called the <b>Tonnetz</b>, and it has a beautiful property:
+neighbouring triangles are chords that share two notes. Walk from triangle to triangle and only one note moves at a time.</p>
+<audio-ex src="tonnetz_walk" caption="A walk on the Tonnetz in 12-ET: C, A minor, F, D minor, B♭, G minor, E♭. At each change exactly one of the three upper notes moves, by a step; the other two hold."></audio-ex>
+<pianoroll edo="12" notes="C4 E4 G4 ; C4 E4 A4 ; C4 F4 A4 ; D4 F4 A4 ; D4 F4 Bb4 ; D4 G4 Bb4 ; Eb4 G4 Bb4" labels="C ; Am ; F ; Dm ; B♭ ; Gm ; E♭" title="The Tonnetz walk, upper voices: one note moves at each change"></pianoroll>
+<p>The progression drifts a long way, from C to E♭, yet every step is as smooth as it could be. This kind of motion is
+common in nineteenth-century and film music.</p>
+</div>
+<div class="layer understand">
+<p>The Tonnetz in its common modern form uses three directions instead of two: fifths along one axis, major thirds along
+another, and minor thirds along the third. Every small triangle is then a major or a minor triad, and two triangles that
+share an edge share two notes.</p>
+<figure class="svgfig"><svg class="fig" viewBox="0 0 640 235" role="img" aria-label="A patch of the Tonnetz with the C major, A minor and E minor triangles"><polygon points="300.0,205.0 384.0,205.0 342.0,132.3" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent)" stroke-width="1.5"/><text x="342.0" y="184.8" class="cl" text-anchor="middle">C</text><polygon points="300.0,205.0 342.0,132.3 258.0,132.3" style="fill:var(--accent2);fill-opacity:.22;stroke:var(--accent2)" stroke-width="1.5"/><text x="300.0" y="160.5" class="cl" text-anchor="middle">Am</text><polygon points="342.0,132.3 384.0,205.0 426.0,132.3" style="fill:var(--derive);fill-opacity:.22;stroke:var(--derive)" stroke-width="1.5"/><text x="384.0" y="160.5" class="cl" text-anchor="middle">Em</text><line x1="48.0" y1="205.0" x2="132.0" y2="205.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="48.0" y1="205.0" x2="90.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="132.0" y1="205.0" x2="216.0" y2="205.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="132.0" y1="205.0" x2="174.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="132.0" y1="205.0" x2="90.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="216.0" y1="205.0" x2="300.0" y2="205.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="216.0" y1="205.0" x2="258.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="216.0" y1="205.0" x2="174.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="300.0" y1="205.0" x2="384.0" y2="205.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="300.0" y1="205.0" x2="342.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="300.0" y1="205.0" x2="258.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="384.0" y1="205.0" x2="468.0" y2="205.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="384.0" y1="205.0" x2="426.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="384.0" y1="205.0" x2="342.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="468.0" y1="205.0" x2="552.0" y2="205.0" style="stroke:var(--muted)" stroke-width="1" /><line x1="468.0" y1="205.0" x2="510.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="468.0" y1="205.0" x2="426.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="552.0" y1="205.0" x2="594.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="552.0" y1="205.0" x2="510.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="90.0" y1="132.3" x2="174.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="90.0" y1="132.3" x2="132.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="90.0" y1="132.3" x2="48.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="174.0" y1="132.3" x2="258.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="174.0" y1="132.3" x2="216.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="174.0" y1="132.3" x2="132.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="258.0" y1="132.3" x2="342.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="258.0" y1="132.3" x2="300.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="258.0" y1="132.3" x2="216.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="342.0" y1="132.3" x2="426.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="342.0" y1="132.3" x2="384.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="342.0" y1="132.3" x2="300.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="426.0" y1="132.3" x2="510.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="426.0" y1="132.3" x2="468.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="426.0" y1="132.3" x2="384.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="510.0" y1="132.3" x2="594.0" y2="132.3" style="stroke:var(--muted)" stroke-width="1" /><line x1="510.0" y1="132.3" x2="552.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="510.0" y1="132.3" x2="468.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="594.0" y1="132.3" x2="552.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="48.0" y1="59.5" x2="132.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="132.0" y1="59.5" x2="216.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="216.0" y1="59.5" x2="300.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="300.0" y1="59.5" x2="384.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="384.0" y1="59.5" x2="468.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><line x1="468.0" y1="59.5" x2="552.0" y2="59.5" style="stroke:var(--muted)" stroke-width="1" /><circle cx="48.0" cy="205.0" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="48.0" y="209.0" class="cl" text-anchor="middle">E♭</text><circle cx="132.0" cy="205.0" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="132.0" y="209.0" class="cl" text-anchor="middle">B♭</text><circle cx="216.0" cy="205.0" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="216.0" y="209.0" class="cl" text-anchor="middle">F</text><circle cx="300.0" cy="205.0" r="15" style="fill:var(--card);stroke:var(--accent)" stroke-width="1.5"/><text x="300.0" y="209.0" class="cl" text-anchor="middle">C</text><circle cx="384.0" cy="205.0" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="384.0" y="209.0" class="cl" text-anchor="middle">G</text><circle cx="468.0" cy="205.0" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="468.0" y="209.0" class="cl" text-anchor="middle">D</text><circle cx="552.0" cy="205.0" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="552.0" y="209.0" class="cl" text-anchor="middle">A</text><circle cx="90.0" cy="132.3" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="90.0" y="136.3" class="cl" text-anchor="middle">G</text><circle cx="174.0" cy="132.3" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="174.0" y="136.3" class="cl" text-anchor="middle">D</text><circle cx="258.0" cy="132.3" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="258.0" y="136.3" class="cl" text-anchor="middle">A</text><circle cx="342.0" cy="132.3" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="342.0" y="136.3" class="cl" text-anchor="middle">E</text><circle cx="426.0" cy="132.3" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="426.0" y="136.3" class="cl" text-anchor="middle">B</text><circle cx="510.0" cy="132.3" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="510.0" y="136.3" class="cl" text-anchor="middle">F♯</text><circle cx="594.0" cy="132.3" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="594.0" y="136.3" class="cl" text-anchor="middle">C♯</text><circle cx="48.0" cy="59.5" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="48.0" y="63.5" class="cl" text-anchor="middle">E</text><circle cx="132.0" cy="59.5" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="132.0" y="63.5" class="cl" text-anchor="middle">B</text><circle cx="216.0" cy="59.5" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="216.0" y="63.5" class="cl" text-anchor="middle">F♯</text><circle cx="300.0" cy="59.5" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="300.0" y="63.5" class="cl" text-anchor="middle">C♯</text><circle cx="384.0" cy="59.5" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="384.0" y="63.5" class="cl" text-anchor="middle">A♭</text><circle cx="468.0" cy="59.5" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="468.0" y="63.5" class="cl" text-anchor="middle">E♭</text><circle cx="552.0" cy="59.5" r="15" style="fill:var(--card);stroke:var(--line)" stroke-width="1.5"/><text x="552.0" y="63.5" class="cl" text-anchor="middle">B♭</text><text x="20.0" y="20.0" class="t" text-anchor="start">One step right: a fifth up. Up and to the right: a major third up. Down and to the right: a minor third up.</text></svg></figure>
+<p>Three moves between neighbouring triangles have names, from <b>neo-Riemannian theory</b>:</p>
+<table>
+<tr><th>Move</th><th>From C major</th><th>Shared notes</th><th>What moves</th></tr>
+<tr><td><b>P</b> (parallel)</td><td>C minor</td><td>C, G</td><td>the third, down a semitone (E → E♭)</td></tr>
+<tr><td><b>R</b> (relative)</td><td>A minor</td><td>C, E</td><td>the fifth, up a whole tone (G → A)</td></tr>
+<tr><td><b>L</b> (leading-tone exchange)</td><td>E minor</td><td>E, G</td><td>the root, down a semitone (C → B)</td></tr>
+</table>
+<pianoroll edo="12" notes="C4 E4 G4 ; C4 Eb4 G4 ; C4 E4 A4 ; B3 E4 G4" labels="C ; P: Cm ; R: Am ; L: Em" title="P, R and L applied to C major"></pianoroll>
+<p>Each move is its own inverse (applying R twice returns to C), and any major or minor triad can be reached from any
+other by a chain of them. The audio example alternates R and L. Chapter 10 develops these moves as harmony
+(<a href="ch:ch10#neo-riemannian">Chapter 10</a>), and Chapter 18 follows their cycles
+(<a href="ch:ch18#cycles">Chapter 18</a>).</p>
+<p>In 12-ET the Tonnetz wraps around. Four fifths up and one major third down is a <em>unison</em> (the syntonic comma
+has disappeared), and three major thirds make an octave. The flat sheet rolls up in both directions into the surface of
+a doughnut, a <b>torus</b>, with 12 notes, 36 edges and 24 triangles (12 major and 12 minor triads). On the pitch-class
+circle the same triad is just three marked points:</p>
+<pc-circle edo="12" marks="0 4 7" path="0 7 2 9 4 11 6 1 8 3 10 5 0" title="C major on the pitch-class circle, with the circle of fifths drawn in"></pc-circle>
+<aside class="box history">Neo-Riemannian theory was developed from the 1980s by David Lewin and others, and extended in
+the 1990s, notably by Richard Cohn, as a way to analyse chromatic triadic music that functional harmony explains poorly.
+The name honours Hugo Riemann, whose late-nineteenth-century theory of chord relations used similar transformations.</aside>
+</div>
+<div class="layer derive">
+<p><b>The Tonnetz as a quotient.</b> Map the lattice to 12-ET pitch classes by $(a, b) \mapsto 7a + 4b \pmod{12}$: a fifth
+is 7 semitones, a major third 4. This is a surjective group homomorphism $\mathbb{Z}^2 \to \mathbb{Z}_{12}$. Its kernel is
+the sublattice spanned by two vectors:</p>
+<ul>
+<li>$(4, -1)$, four fifths up and a major third down: the syntonic comma;</li>
+<li>$(0, 3)$, three major thirds: the diesis 128/125 (downward).</li>
+</ul>
+<p>Check: $28 - 4 = 24 \equiv 0$ and $12 \equiv 0 \pmod{12}$; the two vectors have determinant $4\cdot3 - (-1)\cdot 0 = 12$,
+so they span a sublattice of index 12, which equals the kernel because the image has 12 elements. Hence
+$\mathbb{Z}^2/\langle(4,-1), (0,3)\rangle \cong \mathbb{Z}_{12}$: <b>12-ET is the 5-limit lattice with the syntonic comma and
+the diesis tempered out</b>. The kernel acts on the triangulated plane by translations, and the plane divided by translations along a rank-2
+lattice is a torus, so the 12-ET Tonnetz is a torus.</p>
+<p><b>Theorem (the triangulated torus).</b> The 12-ET Tonnetz has $V = 12$ vertices, $E = 36$ edges (12 fifths, 12 major
+thirds, 12 minor thirds) and $F = 24$ triangles, and $V - E + F = 0$, the Euler characteristic of a torus.</p>
+<p><b>Proof.</b> There are 12 major and 12 minor triads. Each triad has three edges, and each edge (an interval class
+of 3, 4 or 5 semitones between two specific pitch classes) lies in exactly two triads, one major and one minor; so
+$E = 3 \cdot 24 / 2 = 36$, twelve of each interval class. (Checked by enumeration.) $\square$</p>
+<p><b>P, L, R as involutions.</b> Writing a triad as root and quality, $P(r^+) = r^-$, $R(r^+) = (r + 9)^-$ and
+$L(r^+) = (r + 4)^-$, with the inverses on minor triads. Each is an involution, and $P, L, R$ generate a group acting
+simply transitively on the 24 triads (it is isomorphic to the dihedral group of order 24).</p>
+</div>
+</section>
+
+<section id="commas-preview">
+<h2>Small gaps: a first look at commas</h2>
+<div class="layer hear">
+<p>We have met the same small gap three times now: between the two D's, in the broken fifth of the just scale, and in
+the wrapping of the Tonnetz. It is the <b>syntonic comma</b>, about a fifth of a semitone. Here it is in sound. First a
+major third reached by four pure fifths (and two octaves down), then a just major third, then the two upper notes
+alone, one after the other and then together.</p>
+<audio-ex src="syntonic_comma" caption="C with a Pythagorean third (four pure fifths up, 81/64), then with a just third (5/4): the first is noticeably higher and harsher, beating fast against the C. Then the two E's alone, one after the other and then together, beating about four times a second."></audio-ex>
+<p>Now something stranger. The next example plays the progression C – A minor – D minor – G – C in just intonation.
+Every chord is perfectly pure, and every note the chords have in common is held exactly. Yet the final C chord is not
+the one we started from.</p>
+<audio-ex src="comma_pump" caption="C – Am – Dm – G – C, each chord pure and every common tone held: then the first C chord and the last one side by side. The last is a syntonic comma (21.51 cents) lower; their top C's, played together, beat about three times a second."></audio-ex>
+<pianoroll edo="12" notes="C3 G3 C4 E4 ; A2 A3 C4 E4 ; D3 A3 D4 F4 ; G2 B3 D4 G4 ; C3 C4 E4 G4" labels="C ; Am ; Dm ; G ; C′" title="The comma pump at the nearest 12-ET keys: each common tone stays on its row; the last C chord is a comma low"></pianoroll>
+<p>A choir singing pure intervals and holding its common tones would drift downward a comma with every pass through this
+progression. This is the <b>comma pump</b>, and it shows why an instrument with fixed pitches, such as a keyboard, cannot keep every
+interval pure.</p>
+</div>
+<div class="layer understand">
+<p>A <b>comma</b> is a small interval that measures the mismatch between two routes to "the same" note. The important
+ones:</p>
+<table>
+<tr><th>Comma</th><th>Ratio</th><th>Cents</th><th>Two routes</th></tr>
+<tr><td>syntonic</td><td>81/80</td><td>21.51</td><td>four fifths (81/64) vs two octaves and a major third (5/4)</td></tr>
+<tr><td>Pythagorean</td><td>531441/524288</td><td>23.46</td><td>twelve fifths vs seven octaves</td></tr>
+<tr><td>lesser diesis</td><td>128/125</td><td>41.06</td><td>an octave vs three major thirds</td></tr>
+<tr><td>greater diesis</td><td>648/625</td><td>62.57</td><td>four minor thirds vs an octave</td></tr>
+<tr><td>septimal comma</td><td>64/63</td><td>27.26</td><td>16/9 (two fourths) vs the harmonic seventh 7/4</td></tr>
+<tr><td>schisma</td><td>32805/32768</td><td>1.95</td><td>the Pythagorean comma minus the syntonic comma</td></tr>
+</table>
+<p>Each comma is a closed-looking loop on the lattice that does not close. A tuning system has to decide what to do with
+them:</p>
+<ul>
+<li><b>Just intonation</b> keeps every interval pure and lets the commas show up as drift or as duplicate notes.</li>
+<li><b>Pythagorean tuning</b> keeps fifths pure and accepts very wide thirds: 81/64 is 407.82 c, a comma above 5/4
+(<a href="ch:ch05#comma">Chapter 5</a>).</li>
+<li><b>Meantone</b> narrows every fifth by a fraction of the syntonic comma so that thirds come out (nearly) pure
+(<a href="ch:ch07#syntonic">Chapter 7</a>).</li>
+<li><b>12-ET</b> tempers out both the syntonic comma and the diesis, as the Tonnetz showed, and the Pythagorean comma
+too, at the cost of making every third and sixth impure (<a href="ch:ch07#equal">Chapter 7</a>).</li>
+</ul>
+<aside class="mirror">Golden intervals are not on the ratio lattice at all. The golden ratio $\varphi = (1 + \sqrt5)/2$ is
+irrational, so no product of primes equals it, and the golden third $2/\varphi$ (366.91 c) and golden fifth $4/\varphi^2$
+(733.82 c) are not just intervals of any limit (<a href="ch:ch23#golden-intervals">Chapter 23</a>). Yet the golden system
+has commas of its own, built the same way. Thirteen golden sixths overshoot nine octaves by the <b>golden comma</b>
+$\varphi^{13}/2^9 = 30.17$ c (<a href="ch:ch23#golden-comma">Chapter 23</a>), and thirty-six golden sixths fall short of
+twenty-five octaves by 8.75 c, the comma that 36-ET tempers out.</aside>
+</div>
+<div class="layer derive">
+<p><b>Commas as lattice vectors.</b> With octaves ignored, write each comma by its exponents of 3 and 5:</p>
+<ul>
+<li>syntonic $81/80 = 2^{-4}3^4 5^{-1}$: $(4, -1)$;</li>
+<li>Pythagorean $3^{12}/2^{19}$: $(12, 0)$;</li>
+<li>lesser diesis $128/125 = 2^7 5^{-3}$: $(0, -3)$;</li>
+<li>schisma $32805/32768 = 2^{-15}3^8 5$: $(8, 1) = (12, 0) - (4, -1)$, so its size is
+$23.46 - 21.51 = 1.95$ c.</li>
+</ul>
+<p><b>The comma identity.</b> $\left(\frac32\right)^4 = \frac{81}{16} = 4\cdot\frac54\cdot\frac{81}{80}$. In cents,
+$4 \cdot 701.955 = 2807.82 = 2400 + 386.31 + 21.51$.</p>
+<p><b>Theorem (the comma pump).</b> In 5-limit just intonation, the progression C – Am – Dm – G – C with every common tone
+held and every new note forming a pure fifth or major third ends a syntonic comma below where it began.</p>
+<p><b>Proof.</b> Track roots on the lattice, starting from C at $(0, 0)$. Each chord shares a note with the next, and pure
+intervals fix each new root:</p>
+<ul>
+<li>C → Am: keeping C and E, the new note A makes A–C–E a pure minor triad, so A lies a pure fifth below E (and a pure
+minor third below C): $A = 5/3$, the point $(-1, 1)$.</li>
+<li>Am → Dm: keeping A, D is a pure fifth below A, $(-2, 1)$, i.e. $10/9$.</li>
+<li>Dm → G: keeping D, G is a pure fifth below D (up a fourth), $(-3, 1)$, i.e. $40/27$.</li>
+<li>G → C: keeping G, C is a pure fifth below G, $(-4, 1)$, i.e. $80/81$.</li>
+</ul>
+<p>The final root differs from the first by $(-4, 1)$, the syntonic comma downward, $1200\log_2(80/81) = -21.51$ c.
+$\square$ At C4 = 261.63 Hz the final C is $261.63 \cdot 80/81 \approx 258.40$ Hz, 3.23 Hz lower, the beat in the audio
+example.</p>
+<p>In general a just progression with held common tones moves its pitch level by the lattice vector of its root path. The
+path C–A–D–G–C looks closed on a keyboard but is not closed on the lattice; only temperament, which identifies lattice
+points, can close it. The full story begins with the Pythagorean comma in <a href="ch:ch05#comma">Chapter 5</a>.</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 4.1.</b> In the just C major scale, compute the fifth D–A and the minor third D–F in cents. Which pure intervals do
+they miss, and by how much?</p>
+<details class="answer"><summary>Answer</summary><p>D–A $= 40/27 = 680.45$ c, a syntonic comma (21.51 c) below 3/2. D–F $= 32/27 =
+294.13$ c, a syntonic comma below 6/5 (315.64 c).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 4.2.</b> Show that $\log_2 3$ is irrational.</p>
+<details class="answer"><summary>Answer</summary><p>If $\log_2 3 = p/q$ with whole numbers $p, q > 0$, then $3^q = 2^p$. The left
+side is odd and the right side is even. Contradiction.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 4.3.</b> Find F♯ on the lattice as 45/32 (a fifth above B, or a major third above D: two fifths and a third above C) and
+G♭ as 64/45. How far apart are they?</p>
+<details class="answer"><summary>Answer</summary><p>45/32 $= 3^2\cdot5/2^5$ is $(2, 1)$, 590.22 c. 64/45 $= 2^6/(3^2\cdot5)$ is
+$(-2, -1)$, 609.78 c. They differ by $\frac{64/45}{45/32} = \frac{2048}{2025}$, 19.55 c (the <em>diaschisma</em>), the vector
+$(-4, -2)$ (plus octaves).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 4.4.</b> Which neo-Riemannian move takes A minor to F major? Write the progression C – Am – F – Dm as a word in P, L
+and R.</p>
+<details class="answer"><summary>Answer</summary><p>A minor → F major keeps A and C and moves E up to F: that is L (applied to a
+minor triad, the fifth moves up a semitone). C – Am – F – Dm is R, then L, then R.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 4.5.</b> Using the lattice vectors, show that the Pythagorean comma, the syntonic comma and the schisma satisfy
+Pythagorean = syntonic + schisma, and check it in cents.</p>
+<details class="answer"><summary>Answer</summary><p>$(12, 0) = (4, -1) + (8, 1)$, and $21.51 + 1.95 = 23.46$ c (more precisely
+$21.5063 + 1.9537 = 23.4600$).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 4.6.</b> (Listening.) In the comma-pump example, can you hear the drift during the progression itself, or only in the
+side-by-side comparison? Why might choirs not drift as much in practice?</p>
+<details class="answer"><summary>Answer</summary><p>Most listeners hear it only in the comparison: each step is pure, and 21.51 c
+spread over four chords is gradual. Real singers do not hold every common tone with perfect exactness and also hold on to
+a remembered reference pitch, so they compromise between pure intervals and a stable pitch level; how they do so is a
+question of performance practice and measurement, not of theory.</p></details>
+</div>
+</section>

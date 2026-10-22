@@ -1,0 +1,8 @@
+# The lowest voice of the hold voicing, an octave down, as a smooth bass line.
+style: bassline
+voiced: true
+voices: 4
+range: [50, 74]
+voice: bottom
+oct: -1
+gate: 0.95

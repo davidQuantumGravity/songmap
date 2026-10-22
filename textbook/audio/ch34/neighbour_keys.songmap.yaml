@@ -1,0 +1,26 @@
+# ch34: golden13 keys by voice-leading distance. C golden13; vE golden13 (1 chain step: D -> vD,
+# total motion 1); ^G golden13 (2 chain steps: also vF# -> ^F, total motion 2); ^C golden13
+# (13 chain steps: every note one sixth-step higher, total motion 13). Tonic golden triad held.
+songmap: 0.2
+title: "Neighbouring golden13 keys"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 349
+tail_seconds: 3
+instruments: {keys: clean/keys, organ: clean/organ}
+motifs:
+  gc:  {notes: "c8 c# d veb ve vf vf# ^f# | ^g8 ^ab ^a bb b c+4.", octave: 4}
+  ge:  {notes: "c8 c# vd veb ve vf vf# ^f# | ^g8 ^ab ^a bb b c+4.", octave: 4}
+  gg:  {notes: "c8 c# vd veb ve vf ^f ^f# | ^g8 ^ab ^a bb b c+4.", octave: 4}
+  gcu: {notes: "^c8 ^c# ^d eb e f f# vg | vab8 va vbb ^bb ^b ^c+4.", octave: 4}
+mix:
+  keys: {gain_db: -5, send: {hall: 0.2}}
+  organ: {gain_db: -13, send: {hall: 0.25}}
+sections:
+  - {name: on_c, bars: 2, harmony: "Cg:2", parts: {keys: {motifs: [gc]}, organ: hold}}
+  - {name: on_ve, bars: 2, harmony: "vEg:2", parts: {keys: {motifs: [ge]}, organ: hold}}
+  - {name: on_g, bars: 2, harmony: "^Gg:2", parts: {keys: {motifs: [gg]}, organ: hold}}
+  - {name: on_upc, bars: 2, harmony: "^Cg:2", parts: {keys: {motifs: [gcu]}, organ: hold}}
+master: clean

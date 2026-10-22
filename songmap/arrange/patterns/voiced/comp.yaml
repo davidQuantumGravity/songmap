@@ -1,0 +1,9 @@
+# Voice-led chords on a syncopated comping rhythm (hits at 0, 0.75, 1.25, 2, 2.75 and 3.25 beats of each bar) plus every chord change.
+style: comp
+voiced: true
+voices: 4
+range: [50, 74]
+rhythm: "x..x.x..x..x.x.."
+gate: 0.8
+accent: 1.15
+vel: 0.55

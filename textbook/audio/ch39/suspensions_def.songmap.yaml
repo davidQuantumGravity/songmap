@@ -1,0 +1,41 @@
+# ch39: (a) Em -> vEg -> Cg -> C: B rises to C while vE and ^G are held (a golden double suspension);
+# then vE rises (retardation) and ^G falls (suspension) together. (b) the same two bends one at a time:
+# Cg -> C(^5) -> C and Cg -> C(v3) -> C. (c) a falling chain: C#g -> vFg -> ^Abg -> Cg -> C, voices falling
+# a semitone in turn over a C pedal, then the projection straightens.
+songmap: 0.2
+title: "Golden suspensions"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 39
+tail_seconds: 2.5
+instruments: {up: clean/organ, keys: keys/still, low: clean/bass}
+mix: {up: {gain_db: -6, send: {hall: 0.15}}, keys: {gain_db: -5, send: {hall: 0.35}}, low: {gain_db: -5}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: double
+    bars: 2
+    harmony: "Em/B:0.5 vEg/B:0.5 Cg:0.5 C:0.5"
+    parts:
+      up: {notes: "=mp [b-,e,g]2 [b-,ve,^g]2 [c,ve,^g]2 [c,e,g]2"}
+      low: {notes: "=mp b--2 b--2 c-2 c-2"}
+  - name: staggered
+    bars: 2
+    harmony: "Cg:0.5 C(^5):0.25 C:0.25 Cg:0.5 C(v3):0.25 C:0.25"
+    parts:
+      up: {notes: "=mp [c,ve,^g]2 [c,e,^g]4 [c,e,g]4 [c,ve,^g]2 [c,ve,g]4 [c,e,g]4"}
+      low: {notes: "=mp c-2 c-4 c-4 c-2 c-4 c-4"}
+  - name: chain
+    bars: 2
+    harmony: "C#g:0.25 vFg/C:0.25 ^Abg/C:0.25 Cg:0.25 C:1"
+    parts:
+      up: {notes: "=mp [c#,vf,^ab]4 [c,vf,^ab]4 [c,ve,^ab]4 [c,ve,^g]4 [c,e,g]1"}
+      low: {notes: "=mp c#-4 c-4 c-4 c-4 c-1"}
+  - name: phrase
+    bars: 2
+    harmony: "Am:0.5 Em/B:0.5 vEg/B:0.25 Cg:0.25 C:0.5"
+    parts:
+      keys: {notes: "=mp [a-,c,e]2 [b-,e,g]2 [b-,ve,^g]4 [c,ve,^g]4 [c,e,g]2"}
+      low: {notes: "=mp a--2 b--2 b--4 c-4 c-2"}
+master: clean

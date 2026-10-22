@@ -1,0 +1,368 @@
+<section id="golden-triad">
+<h2>The golden triad</h2>
+<div class="layer hear">
+<p>Western harmony is built from triads: three notes stacked in thirds. Golden harmony is built the same way, with
+golden thirds. Two golden thirds on C give <b>Cg</b>, the <b>golden triad</b>: C, a slightly lowered E, and a slightly
+raised G. Next to C major it sounds like the same chord drained of certainty. The third is neither bright nor dark,
+and the fifth leans outward. Nudge its third up and its fifth down by one small step each, and it settles into C
+major.</p>
+<audio-ex src="golden_triad" caption="C major and Cg alternating; then Cg moving to its three nearest Western chords: C (two sixth-steps away), C minor and C augmented (three each), and back to Cg."></audio-ex>
+<p>In exact golden ratios the chord can also be spread out along the golden chain, each note a golden sixth above
+the last. That spacing has a calmer, more open sound.</p>
+<audio-ex src="exact_triad" caption="The golden triad in exact golden ratios: close position C vE ^G; then the chain voicing ^G3 vE4 C5, each note a golden sixth above the last, arpeggiated then held; then the 36-ET close triad, practically identical to the exact one."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Definition.</b> The golden triad on C is <b>Cg = C vE ^G</b>, at (0, 11, 22) sixth-steps above C, with exact
+frequency ratios</p>
+$$1 : \frac{2}{\varphi} : \frac{4}{\varphi^2} = 1 : 1.2361 : 1.5279.$$
+<p>On middle C (261.63 Hz) its exact frequencies are 261.63, 323.39 and 399.73 Hz. Its intervals are two golden
+thirds of 366.91 c, closed to the octave by 466.18 c. In 36-ET these are 11, 11 and 14 sixth-steps.</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 Eb4 G4 ; C4 E4 G#4 ; C4 vE4 ^G4" labels="C ; Cm ; Caug ; Cg" title="C major, C minor, C augmented and the golden triad Cg"></pianoroll>
+<p>The piano roll shows the three layers in colour: each row is a sixth-step. C major, C minor and C augmented use
+only layer-0 rows; Cg has its third one row below E and its fifth one row above G.</p>
+<p><b>Neighbours.</b> Counting voice-leading distance in sixth-steps (the total motion of the voices), Cg is 2 from C
+major (third up one, fifth down one), 3 from C minor (third down two, fifth down one), 3 from C augmented (third up
+one, fifth up two) and 4 from A♭ major (third down two, fifth up two). It sits in the middle of the Western triads on
+C, which is the averaging principle of this chapter.</p>
+<p><b>Chain form.</b> The chord can also be voiced as three consecutive notes of the golden chain, 1 : φ : φ². With
+the fifth at the bottom: ^G3, a golden sixth up to vE4, another to C5 (199.86, 323.39 and 523.25 Hz). So 1 : φ : φ²
+is Cg in second inversion with the third in the middle: the chain read upward goes fifth, third, root. The golden
+triad is the three chain notes $j = 0, -1, -2$ (<a href="ch:ch23#chain">Chapter 23</a>), read downward from the
+root.</p>
+<aside class="box note"><p><b>Is it the least stable chord?</b> No. With ordinary harmonic tones (strings, voices,
+organ) it is rougher than major, minor and augmented, but smoother than diminished, and most of its tension sits
+in the golden fifth (<a href="ch:ch26#measured">Chapter 26</a>). With golden-spectrum tones, which exist only as
+digital synthesis, it becomes the smoothest triad of all. Those are measurements in a model, not facts about every
+instrument. In the author's model the golden triad is also a local minimum of tension on ordinary instruments, a
+delicate home beside the global one of C major; the roughness models do not show that dip, and
+<a href="ch:ch26#timbre-flip">Chapter 26</a> sets out what is measured and what is his listening experience.</p></aside>
+<aside class="box note"><p><b>Western mirror.</b> Chapter 9 builds major, minor, diminished and augmented triads from
+major and minor thirds (<a href="ch:ch09#triads">Triads</a>). The golden triad uses one intermediate third twice,
+like the diminished and augmented triads, which use the minor or major third twice
+(<a href="ch:ch09#symmetric">the symmetric chords</a>).</p></aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> For $r \in \mathbb{Z}_{36}$, the golden triad on $r$ is $G_r = \{r, r+11, r+22\}$. Exactly,
+it is $f \cdot (1, 2/\varphi, 4/\varphi^2)$ for a root frequency $f$.</p>
+<p><b>Proposition.</b> (i) The 36 golden triads $G_0, \ldots, G_{35}$ are distinct. (ii) Each is inversionally
+symmetric: $-G_r = G_{14 - r}$. (Theorem.)</p>
+<p><i>Proof.</i> (i) $G_r = G_s$ would make $s - r$ a symmetry of $\{0, 11, 22\}$, i.e. $\{0,11,22\} + t = \{0,11,22\}$
+for some $t \ne 0$; but the gaps 11, 11, 14 are not a rotation of themselves except trivially. (ii)
+$-G_r = \{-r, -r-11, -r-22\} = \{-r-22, (-r-22)+11, (-r-22)+22\} = G_{-r-22} = G_{14-r}$, since $-22 \equiv 14$.
+For $r = 0$: $-\{0, 11, 22\} = \{0, 25, 14\} = G_{14}$, the golden triad on vF. ∎</p>
+<p>The exact triad has the same symmetry: any chord $\{1, a, a^2\}$ with two equal stacked intervals is its own
+inversion (around the middle note).</p>
+</div>
+</section>
+
+<section id="golden-seventh">
+<h2>The golden seventh</h2>
+<div class="layer hear">
+<p>Add a third golden third on top of Cg and you arrive at the major seventh: <b>Cg7</b>, the golden seventh chord. In
+36-ET its top note is exactly B; in exact golden tuning it is 0.73 cents higher, far too little to hear. So Cg7 is
+C major seventh with its third and fifth bent: the third down a little, the fifth up a little. Alternate the two chords and the outer voices stand still while the middle shimmers. Then
+listen to the golden triad "breathe": it gains a note (Cg becomes Cg7) and then loses its root, which leaves the
+golden triad on vE.</p>
+<audio-ex src="golden_seventh" caption="Cmaj7 and Cg7 alternating over a low C: only the inner voices move, by one sixth-step each. Then breathing: Cg, Cg7, vEg."></audio-ex>
+<audio-ref file="P08a_golden_seventh_shimmer_definition.mp3" caption="From the golden audio suite: the maj7 ↔ g7 shimmer as a definition clip."></audio-ref>
+</div>
+<div class="layer understand">
+<p><b>Definition.</b> The golden seventh chord on C is three stacked golden thirds, <b>Cg7 = C vE ^G B</b>, at
+(0, 11, 22, 33) sixth-steps, with exact ratios</p>
+$$1 : \frac2\varphi : \frac4{\varphi^2} : \frac8{\varphi^3} = 1 : 1.2361 : 1.5279 : 1.8885.$$
+<p>In cents its notes are 0, 366.91, 733.82 and <b>1100.73</b>. 36-ET renders the seventh as 33 sixth-steps, which is
+exactly the 12-ET major seventh B (1100 c); the exact golden seventh is 0.73 c sharper. So in 36-ET</p>
+<p style="text-align:center"><b>Cg7 = Cmaj7(v3,^5).</b></p>
+<pianoroll edo="36" notes="C4 E4 G4 B4 ; C4 vE4 ^G4 B4 ; C4 E4 G4 B4 ; C4 vE4 ^G4 B4" labels="Cmaj7 ; Cg7 ; Cmaj7 ; Cg7" title="The shimmer: Cmaj7 and Cg7 share their outer voices"></pianoroll>
+<p><b>One golden semitone below the octave.</b> The golden seventh satisfies</p>
+$$\frac{8}{\varphi^3} = 2 - 2\varphi^{-6},$$
+<p>so it lies exactly $2\varphi^{-6}$ below the octave, and the octave lies a golden apotome ($\varphi^3/4$ = 99.27 c)
+above it. This identity produces one of the beats of the golden seventh (<a href="ch:ch26#beats">Chapter 26</a>).</p>
+<p><b>Chain form.</b> Octave-equivalently, Cg7 is the chain chord 1 : φ : φ² : φ³: B, ^G, vE, C going up by golden
+sixths. The seventh is the bottom of the chain and the root is its top, three golden sixths higher. In this sense
+the golden seventh is "the chord of φ³".</p>
+<p><b>Breathing.</b> Cg7 is the union of two neighbouring golden triads: Cg (C vE ^G) and vEg (vE ^G B). Adding B to
+Cg and then dropping C moves the harmony one step along the golden circle (<a href="ch:ch31#breathing-planing">Chapter
+31</a>).</p>
+<pianoroll edo="36" notes="C4 vE4 ^G4 ; C4 vE4 ^G4 B4 ; vE4 ^G4 B4" labels="Cg ; Cg7 ; vEg" title="Breathing: Cg + B = Cg7; drop C and vEg remains"></pianoroll>
+<p>golden7 (<a href="ch:ch23#golden7">Chapter 23</a>) contains four golden sevenths: Cg7, C♯g7, vFg7 and ^A♭g7.</p>
+<aside class="box note"><p><b>Western mirror.</b> Chapter 9's major seventh chord is also three stacked thirds,
+major–minor–major (<a href="ch:ch09#sevenths">Seventh chords</a>). The golden seventh uses three equal thirds, so it is
+the golden counterpart of the major seventh in spelling but of the diminished seventh in construction. The two differ
+at the top: after the diminished seventh's three minor thirds, a fourth minor third returns exactly to the octave, while
+after three golden thirds only a golden apotome (99.27 c) is left below the octave, so a fourth golden third would
+overshoot it.</p></aside>
+</div>
+<div class="layer derive">
+<p><b>Proposition.</b> $8/\varphi^3 = 2 - 2\varphi^{-6} = 8\sqrt5 - 16$. (Theorem.)</p>
+<p><i>Proof.</i> $\varphi^3 = 2\varphi + 1 = 2 + \sqrt5$ and $\varphi^{-3} = 1/(2+\sqrt5) = \sqrt5 - 2$, so
+$\varphi^3 - \varphi^{-3} = 4$. Dividing by $\varphi^3$: $1 - \varphi^{-6} = 4\varphi^{-3}$, and multiplying by 2:
+$2 - 2\varphi^{-6} = 8/\varphi^3$. Numerically $\varphi^{-6} = 9 - 4\sqrt5 = 0.055728$, and
+$2 - 0.111456 = 1.888544$. ∎</p>
+<p><b>Layers.</b> $33 \equiv 0 \pmod 3$, so the seventh is on the root's layer: Cg7 has two notes on its root's layer
+(C, B) and one on each other layer (^G, vE).</p>
+<p><b>As a chain window.</b> $\{0, 11, 22, 33\} = \{25j : j = 0, -1, -2, -3\}$. Hence $G7_r = G_r \cup G_{r+11}$:
+the golden seventh on $r$ is the union of the golden triads on $r$ and on $r + 11$, which share two notes.</p>
+</div>
+</section>
+
+<section id="averaging">
+<h2>The averaging principle</h2>
+<div class="layer hear">
+<p>The golden triad is not a stranger to Western harmony. It is the exact average of three familiar chords:
+C major, C minor and C augmented, voice by voice. Hear the three chords, then their average. A darker average also
+exists: C major, C minor and C diminished average to the <b>silver triad</b> Cs, with a third a little above minor
+and a fifth a little below perfect.</p>
+<audio-ex src="averaging" caption="C, Cm, Caug, then their average Cg; then C, Cm, Cdim, then their average, the silver triad Cs = C ^E♭ vG."></audio-ex>
+<audio-ref file="P06a_light_and_shade_definition.mp3" caption="From the golden audio suite: Cg as the centroid of major, minor and augmented, and the golden Picardy third climbing Cm → C(^m3) → Cg → C."></audio-ref>
+</div>
+<div class="layer understand">
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 Eb4 G4 ; C4 E4 G#4 ; C4 vE4 ^G4 ; C4 Eb4 F#4 ; C4 ^Eb4 vG4" labels="C ; Cm ; Caug ; Cg ; Cdim ; Cs" title="C + Cm + Caug average to Cg; C + Cm + Cdim average to Cs"></pianoroll>
+<p>Write each triad on C as (third, fifth) in sixth-steps: major (12, 21), minor (9, 21), augmented (12, 24),
+diminished (9, 18). Averaging three of them voice by voice always gives whole numbers of sixth-steps, because three
+semitone positions divided by 3 are always a whole number of thirds of a semitone. In particular</p>
+$$\text{Cg} = \frac{\text{C} + \text{Cm} + \text{Caug}}{3}: \quad \text{third } \frac{12 + 9 + 12}{3} = 11,\quad \text{fifth } \frac{21 + 21 + 24}{3} = 22,$$
+$$\text{Cs} = \frac{\text{C} + \text{Cm} + \text{Cdim}}{3}: \quad \text{third } \frac{12 + 9 + 9}{3} = 10,\quad \text{fifth } \frac{21 + 21 + 18}{3} = 20.$$
+<p>This is the author's original description made exact: the golden third is "2/3 major, 1/3 minor", the golden fifth
+"2/3 perfect, 1/3 augmented". Golden is the balance point of the bright triads, silver of the dark ones.</p>
+<p>There are 20 ways to choose three of the four triads (repetition allowed), and they give 16 different averages.
+All 16, with every combination that produces each:</p>
+<table>
+<tr><th>(third, fifth)</th><th>Chord on C</th><th>Average of</th></tr>
+<tr><td>(9, 18)</td><td>C E♭ F♯</td><td>dim + dim + dim (diminished)</td></tr>
+<tr><td>(9, 19)</td><td>C E♭ ^F♯</td><td>min + dim + dim</td></tr>
+<tr><td>(9, 20)</td><td>C E♭ vG</td><td>min + min + dim</td></tr>
+<tr><td>(9, 21)</td><td>C E♭ G</td><td>min + min + min (minor)</td></tr>
+<tr><td>(10, 19)</td><td>C ^E♭ ^F♯</td><td>maj + dim + dim</td></tr>
+<tr><td>(10, 20)</td><td><b>C ^E♭ vG (silver)</b></td><td><b>maj + min + dim</b>, or aug + dim + dim</td></tr>
+<tr><td>(10, 21)</td><td>C ^E♭ G</td><td>maj + min + min, or min + aug + dim (the Picardy step)</td></tr>
+<tr><td>(10, 22)</td><td>C ^E♭ ^G</td><td>min + min + aug</td></tr>
+<tr><td>(11, 20)</td><td>C vE vG</td><td>maj + maj + dim</td></tr>
+<tr><td>(11, 21)</td><td>C vE G</td><td>maj + maj + min, or maj + aug + dim</td></tr>
+<tr><td>(11, 22)</td><td><b>C vE ^G (golden)</b></td><td><b>maj + min + aug</b>, or aug + aug + dim</td></tr>
+<tr><td>(11, 23)</td><td>C vE vA♭</td><td>min + aug + aug</td></tr>
+<tr><td>(12, 21)</td><td>C E G</td><td>maj + maj + maj (major)</td></tr>
+<tr><td>(12, 22)</td><td>C E ^G</td><td>maj + maj + aug</td></tr>
+<tr><td>(12, 23)</td><td>C E vA♭</td><td>maj + aug + aug</td></tr>
+<tr><td>(12, 24)</td><td>C E A♭</td><td>aug + aug + aug (augmented)</td></tr>
+</table>
+<p><b>Exact or tempered?</b> The averaging principle is a statement about 36-ET. Averaging cents gives
+$(400 + 400 + 300)/3 = 366.67$ c, the 36-ET golden third, while the exact golden third $2/\varphi$ is 366.91 c, 0.24
+c higher (and the fifth 0.49 c higher). Averaging just triads instead (5/4, 6/5, 3/2, 25/16) would give a third of
+362.76 c and a fifth of 725.51 c, further from golden. So averaging does not <i>derive</i> $\varphi$; it explains
+where the golden chord sits among Western chords, to within a quarter of a cent.</p>
+<p><b>Passing chords are averages too.</b> On the strict passing paths of <a href="ch:ch27#uniform-path">Chapter 27</a>,
+the two passing chords between $X$ and $Y$ are $P_1 = (2X + Y)/3$ and $P_2 = (X + 2Y)/3$, voice by voice. For example
+Cg $= (2\cdot\text{C} + \text{A♭/C})/3$ on the move C → A♭.</p>
+<p><b>A caution.</b> <i>Every</i> 36-ET chord is the average of three 12-ET chords, because any sixth-step pitch is a sum
+of three semitone pitches divided by 3. The principle has musical content only when the averaged chords are related:
+same root, neighbouring qualities, or neighbours in a progression.</p>
+<p><b>Geometry.</b> In Tymoczko's chord spaces ("The Geometry of Musical Chords", <i>Science</i>, 2006), voice leading
+is distance and the augmented triad, the most even triad, lies at the centre (<a href="ch:ch09#chord-space">Chapter
+9</a>). Averaging is moving along straight lines in that space. Golden and silver are near-central points, which is
+one reason they connect efficiently to many chords and make good passing chords.</p>
+</div>
+<div class="layer derive">
+<p><b>Proposition (the centroids).</b> Among averages of three triads from {major, minor, augmented, diminished} on a
+common root, Cg arises exactly from maj + min + aug and from aug + aug + dim; Cs arises exactly from maj + min + dim and
+from aug + dim + dim. (Theorem.)</p>
+<p><i>Proof.</i> Let $n_{\text{maj}}, n_{\text{min}}, n_{\text{aug}}, n_{\text{dim}} \ge 0$ count the chords, with sum 3.
+The third is 12 for major and augmented and 9 otherwise, and the fifth is $21 + 3$ for augmented, $21 - 3$ for
+diminished and 21 otherwise. So the average is</p>
+$$(\text{third}, \text{fifth}) = \big(9 + n_{\text{maj}} + n_{\text{aug}},\ 21 + n_{\text{aug}} - n_{\text{dim}}\big).$$
+<p>Golden (11, 22) needs $n_{\text{maj}} + n_{\text{aug}} = 2$ and $n_{\text{aug}} = n_{\text{dim}} + 1$; with the sum 3
+this forces $n_{\text{maj}} = n_{\text{min}} = 1 - n_{\text{dim}}$, so $n_{\text{dim}} = 0$ (maj + min + aug) or
+$n_{\text{dim}} = 1$ (aug + aug + dim). Silver (10, 20) needs $n_{\text{maj}} + n_{\text{aug}} = 1$ and
+$n_{\text{dim}} = n_{\text{aug}} + 1$, forcing $n_{\text{maj}} = n_{\text{min}} = 1 - n_{\text{aug}}$: maj + min + dim
+or aug + dim + dim. ∎</p>
+<p>The same formula gives the whole table: the 20 multisets map onto 16 points, with exactly four points hit twice:
+(10, 20), (10, 21), (11, 21) and (11, 22). (Checked by enumeration.)</p>
+</div>
+</section>
+
+<section id="metallic">
+<h2>The equal-third line: silver, golden, bronze</h2>
+<div class="layer hear">
+<p>The diminished triad stacks two minor thirds; the augmented stacks two major thirds. Golden stacks two thirds in
+between. 36-ET offers one more third between minor and major (the silver third, just above minor) and one beyond each
+end, and stacking each one twice gives a whole family of chords in a row: from a chord narrower than diminished, through diminished, silver, golden and augmented,
+to <b>bronze</b>, wider than augmented. One smooth path also runs straight along this row: from C augmented to Cg to
+Cs to C diminished, every voice gliding.</p>
+<audio-ex src="equal_thirds" caption="First the single uniform path Caug → Cg → Cs → Cdim (root still, third falling one sixth-step and fifth two per chord); then the whole equal-third line T8, diminished, silver, golden, augmented, bronze."></audio-ex>
+<audio-ref file="P07a_metallic_means_definition.mp3" caption="From the golden audio suite: Caug → Cg → Cs → Cdim and back, then V → I with its bronze-then-golden passing pair."></audio-ref>
+</div>
+<div class="layer understand">
+<p>Stack two equal thirds of $n$ sixth-steps: $T_n = \{0, n, 2n\}$.</p>
+<table>
+<tr><th>$n$</th><th>Third (36-ET)</th><th>Name</th><th>Notes on C</th><th>Remarks</th></tr>
+<tr><td>8</td><td>266.67 c</td><td>T8</td><td>C vE♭ ^F</td><td>silver reflected through diminished; ^F = vvF♯</td></tr>
+<tr><td>9</td><td>300.00 c</td><td>diminished</td><td>C E♭ F♯</td><td>Western</td></tr>
+<tr><td>10</td><td>333.33 c</td><td><b>silver</b></td><td>C ^E♭ vG</td><td>average of maj + min + dim; exact chain third 336.74 c (≈ 17/14, 336.13 c)</td></tr>
+<tr><td>11</td><td>366.67 c</td><td><b>golden</b></td><td>C vE ^G</td><td>average of maj + min + aug; exact $2/\varphi$ = 366.91 c</td></tr>
+<tr><td>12</td><td>400.00 c</td><td>augmented</td><td>C E A♭</td><td>Western; the centre of chord space</td></tr>
+<tr><td>13</td><td>433.33 c</td><td><b>bronze</b> (T13)</td><td>C ^E vA</td><td>golden reflected through augmented; exact chain third 436.01 c (≈ 9/7, 435.08 c)</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 vEb4 ^F4 ; C4 Eb4 F#4 ; C4 ^Eb4 vG4 ; C4 vE4 ^G4 ; C4 E4 G#4 ; C4 ^E4 vA4" labels="T8 ; dim ; silver ; golden ; aug ; bronze" title="The equal-third line on C: the third rises one row, the fifth two rows, chord by chord"></pianoroll>
+<p>"Exact chain third" means the nearest golden-chain interval: the silver third is chain distance 14 inverted and
+the bronze third chain distance 11 inverted (<a href="ch:ch23#chain">Chapter 23</a>). Silver is defined by averaging and
+lives naturally in 36-ET; its exact tuning is a choice, not a consequence.</p>
+<p><b>One line.</b> These chords are evenly spaced points on a single straight line of chord space, and one uniform
+path runs along it: Caug → Cg → Cs → Cdim, the root holding while the third falls one sixth-step and the fifth two per
+chord. Bronze is golden reflected through augmented ($2 \cdot \text{aug} - \text{golden}$), and T8 is silver reflected
+through diminished.</p>
+<p><b>Golden's partner.</b> On every strict passing path between two major triads (or two minor triads) a third or
+fifth apart, the passing chord that is not golden is bronze; between augmented and diminished it is silver. Over all
+240 strict golden paths with Western chords at both ends (these also include a few with a diminished or suspended
+endpoint, such as C♯dim → Esus4, whose partner is bronze), the partner is bronze in 168 and silver in 72. Example: V → I passes G – vE♭T13 – vCg – C
+(<a href="ch:ch27#partner">Chapter 27</a>).</p>
+<p><b>Which stacked thirds walk through all 36 notes?</b></p>
+<table>
+<tr><th>Third</th><th>minor (9)</th><th>silver (10)</th><th>golden (11)</th><th>major (12)</th><th>bronze (13)</th></tr>
+<tr><td>Notes before repeating</td><td>4</td><td>18</td><td><b>36</b></td><td>3</td><td><b>36</b></td></tr>
+</table>
+<p>Only golden and bronze thirds share no factor with 36, so only they generate all 36 notes. That is why the golden
+circle of 36 triads exists (<a href="ch:ch31#circle">Chapter 31</a>). Silver does not need to cycle: it is defined
+by averaging, not by stacking.</p>
+<aside class="box note"><p><b>On the names.</b> "Silver" is fixed by the averaging principle (the dark-side centroid).
+"Bronze" continues the sequence of metallic means, golden (1), silver (2), bronze (3). The metallic-mean numbers
+themselves, $1 + \sqrt2$ and $(3 + \sqrt{13})/2$, are <i>not</i> the ratios of these chords; the names follow the
+ordering, not the numbers.</p></aside>
+</div>
+<div class="layer derive">
+<p><b>Proposition.</b> (i) The points $T_n = (0, n, 2n) = n\,(0, 1, 2)$ lie on one line through the origin of
+$\mathbb{R}^3$, evenly spaced; with the voices paired root–root, third–third, fifth–fifth, the total voice-leading
+distance from $T_n$ to $T_m$ is $3|n - m|$ sixth-steps. (ii) $T_{13} = 2T_{12} - T_{11}$ and $T_8 = 2T_9 - T_{10}$.
+(iii) Stacking a third of $n$ sixth-steps returns to the start after $36/\gcd(n, 36)$ steps. (Theorem.)</p>
+<p><i>Proof.</i> (i) $|n - m| + 2|n - m|$. (ii) $(0, 24, 48) - (0, 11, 22) = (0, 13, 26)$ and
+$(0, 18, 36) - (0, 10, 20) = (0, 8, 16)$. (iii) The order of $n$ in $\mathbb{Z}_{36}$. ∎</p>
+<p>The path Caug → Cg → Cs → Cdim is $P_k = (0, 12, 24) + k\,(0, -1, -2)$, $k = 0, 1, 2, 3$: a uniform path with
+displacement (0, −1, −2) semitones, which is the first of the twelve path types of
+<a href="ch:ch27#four-path">Chapter 27</a>.</p>
+</div>
+</section>
+
+<section id="layer-theorem">
+<h2>The layer theorem</h2>
+<div class="layer hear">
+<p>Move C major up a sixth-step and every note moves to the next layer together: the chord keeps its character and
+only its overall pitch changes. The golden triad cannot be moved onto a single layer, because its notes already sit
+on all three: C on the ordinary layer, ^G on the up layer, vE on the down layer. This is what makes it sound like a
+chord from somewhere else rather than a mistuned Western chord.</p>
+<audio-ex src="layer_colors" caption="C major on the three layers (C, ^C, vC♯), each a normal major triad; then C again and Cg, whose three notes come one from each layer."></audio-ex>
+</div>
+<div class="layer understand">
+<p>Recall the layer of a 36-ET note: 0 for the 12-ET notes, 1 for ^ notes, 2 for v notes
+(<a href="ch:ch24#layers">Chapter 24</a>).</p>
+<p><b>The layer theorem.</b> A golden triad has exactly one note on each of the three layers. Western chords live on
+one layer.</p>
+<pc-circle edo="36" marks="0 11 22" title="Cg on the 36-ET circle: C (layer 0), vE (layer 2), ^G (layer 1)"></pc-circle>
+<p>A golden seventh has two notes on its root's layer (the root and the seventh) and one on each other layer. Call
+the number of layers a chord touches its <b>irrationality degree</b>: Western chords have degree 1, golden triads the
+maximum, 3. Micro-altered chords sit in between: C(^5) = C E ^G has degree 2.</p>
+<p><b>Why it matters.</b> In a passing progression between two Western chords (both on layer 0), the passing chords
+are reached by moving each voice up or down by sixth-steps. For a passing chord to be golden it must touch all three
+layers, so the voice leading must contain one voice that holds, one that moves into the ^ layer and one that moves
+into the v layer. That single condition, the admissibility condition, is what makes golden passing chords rare and
+predictable (<a href="ch:ch27#four-path">the four-path theorem</a>).</p>
+<p><b>Not only golden.</b> The theorem's argument works for every equal-third triad whose third is not a multiple of 3
+sixth-steps: silver (10), bronze (13) and T8 also have one note per layer. The converse fails too: the cluster
+C ^C vC♯ has one note per layer but is nothing like a triad. (It is carried onto Cg by multiplication by 11,
+<a href="ch:ch33#m11">Chapter 33</a>.) The layer theorem says golden chords are fully irrational; it does not single
+them out.</p>
+</div>
+<div class="layer derive">
+<p><b>Theorem (layer theorem).</b> With $\lambda(p) = p \bmod 3$: $\lambda(r + 11) = \lambda(r) + 2$ and
+$\lambda(r + 22) = \lambda(r) + 1$ (mod 3), so $\{\lambda(r), \lambda(r+11), \lambda(r+22)\} = \{0, 1, 2\}$.</p>
+<p><i>Proof.</i> $11 \equiv 2$ and $22 \equiv 1 \pmod 3$. ∎</p>
+<p><b>Generalization.</b> A three-note chord $\{r, r + a, r + b\}$ has one note per layer if and only if
+$\{0, a \bmod 3, b \bmod 3\} = \{0, 1, 2\}$. For $T_n$ ($a = n$, $b = 2n$) this holds exactly when $3 \nmid n$.</p>
+<p><b>Chain reading.</b> $G_{25j} = \{25j, 25(j-1), 25(j-2)\}$ has layers $j, j-1, j-2 \pmod 3$: three consecutive
+chain notes are on three different layers, because the chain itself cycles through the layers.</p>
+</div>
+</section>
+
+<section id="naming">
+<h2>Naming chords in 36-ET</h2>
+<div class="layer hear">
+<p>A chord name should tell you what to play. In 36-ET a name has up to four parts: the root (possibly with an up or
+down arrow), the quality, any bent chord tones, and the bass note. For example vCg/G is the golden triad on vC (a
+sixth-step below C) with G in the bass: the golden counterpart of the cadential six-four, heard here on its way to C.</p>
+<audio-ref file="P01a_the_golden_six_four_definition.mp3" caption="From the golden audio suite: V → vE♭T13/G → vCg/G → I. Listen for vCg/G just before the final C chord."></audio-ref>
+</div>
+<div class="layer understand">
+<p><b>Golden-system symbols.</b></p>
+<table>
+<tr><th>Symbol</th><th>Notes</th><th>Sixth-steps</th><th>Exact</th></tr>
+<tr><td>Cg</td><td>C vE ^G</td><td>0, 11, 22</td><td>1 : 2/φ : 4/φ²</td></tr>
+<tr><td>Cg7</td><td>C vE ^G B</td><td>0, 11, 22, 33</td><td>1 : 2/φ : 4/φ² : 8/φ³</td></tr>
+<tr><td>Cs (silver)</td><td>C ^E♭ vG</td><td>0, 10, 20</td><td>(36-ET object)</td></tr>
+<tr><td>CT13 (bronze)</td><td>C ^E vA</td><td>0, 13, 26</td><td>(36-ET object)</td></tr>
+</table>
+<p><b>Roots.</b> The root is a 36-ET note name in standard spelling (<a href="ch:ch24#notation">Chapter 24</a>), and the
+chord is built from it. So ^Cg is ^C, then 11 sixth-steps higher (E), then 22 (vA♭): <b>^Cg = ^C E vA♭</b>. The notes
+are named by their own standard spelling, not by "the root's third with an arrow".</p>
+<p>The twelve golden triads on 12-ET roots:</p>
+<table>
+<tr><th>Cg</th><th>C♯g</th><th>Dg</th><th>E♭g</th><th>Eg</th><th>Fg</th></tr>
+<tr><td>C vE ^G</td><td>C♯ vF ^A♭</td><td>D vF♯ ^A</td><td>E♭ vG ^B♭</td><td>E vA♭ ^B</td><td>F vA ^C</td></tr>
+<tr><th>F♯g</th><th>Gg</th><th>A♭g</th><th>Ag</th><th>B♭g</th><th>Bg</th></tr>
+<tr><td>F♯ vB♭ ^C♯</td><td>G vB ^D</td><td>A♭ vC ^E♭</td><td>A vC♯ ^E</td><td>B♭ vD ^F</td><td>B vE♭ ^F♯</td></tr>
+</table>
+<p>The other 24 are these shifted one sixth-step up (^Cg = ^C E vA♭, …) or down (vCg = vC ^E♭ G, …).</p>
+<pianoroll edo="36" notes="vC4 ^Eb4 G4 ; C4 vE4 ^G4 ; ^C4 E4 vAb4 ; G3 vC4 ^Eb4" labels="vCg ; Cg ; ^Cg ; vCg/G" title="Golden triads on vC, C and ^C, and vCg with G in the bass"></pianoroll>
+<p><b>Alterations.</b> A parenthesis after a Western chord bends named chord tones by sixth-steps:</p>
+<ul>
+<li>C(v3,^5) = C vE ^G = Cg, and Cmaj7(v3,^5) = Cg7;</li>
+<li>Cm(^3) = C ^E♭ G (the "Picardy step" of the averaging table), C(^5) = C E ^G;</li>
+<li>Cm(^3,v5) = C ^E♭ vG = Cs, and Cdim(v3,vv5) = C vE♭ ^F = T8.</li>
+</ul>
+<p><b>Slash chords</b> name the bass: vCg/G is vC ^E♭ G with G lowest (G is the fifth of vCg).</p>
+<p><b>Roman numerals</b> carry the same arrows, relative to the key: in C major, vIg = vCg, vIVg = vFg, IIg = Dg, ♭VIg =
+A♭g and v♭VIg = vA♭g, v♯IVg = vF♯g and ^♯IVg = ^F♯g. The golden ii–V–I, for example, is Dm – Dg – vGg/D – G –
+vE♭T13/G – vCg/G – C (<a href="ch:ch29#authentic">Chapter 29</a>).</p>
+<p><b>In SongMap</b> (<a href="ch:ch43#golden-notation">Chapter 43</a>) the same symbols are typed in ASCII:
+<code>Cg</code>, <code>Cg7</code>, <code>Cs</code>, <code>CT13</code>, <code>^C</code>, <code>vEbm</code>,
+<code>C(v3,^5)</code>, <code>vCg/G</code>.</p>
+<aside class="box note"><p><b>Western mirror.</b> Chapter 9's chord symbols (<a href="ch:ch09#inversions">inversions
+and voicing</a>) carry over unchanged: every Western symbol is still valid in 36-ET, on any layer. The golden system
+only adds roots with arrows, four qualities (g, g7, s, T13) and bent chord tones.</p></aside>
+</div>
+<div class="layer derive">
+<p><b>From symbol to pitch classes.</b> A symbol $R\,Q(\text{alts})/B$ denotes the set
+$\{\text{steps}(R) + q_i + a_i\}$, where $q_i$ are the quality's sixth-step offsets (Western qualities have offsets
+divisible by 3; g = (0, 11, 22), g7 = (0, 11, 22, 33), s = (0, 10, 20), T13 = (0, 13, 26)), $a_i$ is the alteration
+of chord tone $i$ (number of ^ minus number of v), and the bass $B$ is placed lowest.</p>
+<p><b>Uniqueness of golden names.</b> Because the 36 golden triads are distinct (first section), every golden triad
+has exactly one symbol $R$g with $R$ in standard spelling. Among the equal-third triads $T_n$ only the augmented triad has
+more than one root ($\{0, 12, 24\}$ is invariant under $+12$, so it has three); every other $T_n$ in the table,
+golden included, has exactly one.</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 25.1.</b> Give the notes of vEg, ^A♭g and vFg7, and say which of them are in golden7 on C.</p>
+<details class="answer"><summary>Answer</summary><p>vEg = vE ^G B (11, 22, 33); ^A♭g = ^A♭ C vE (25, 0, 11);
+vFg7 = vF ^A♭ C vE (14, 25, 0, 11). All three are in golden7 = C C♯ vE vF ^G ^A♭ B.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 25.2.</b> Using the formula (third, fifth) = $(9 + n_{\text{maj}} + n_{\text{aug}},\ 21 + n_{\text{aug}} - n_{\text{dim}})$,
+which averages of three triads give C E ^G? Check against the table.</p>
+<details class="answer"><summary>Answer</summary><p>(12, 22): $n_{\text{maj}} + n_{\text{aug}} = 3$, so $n_{\text{min}} = n_{\text{dim}} = 0$,
+and $n_{\text{aug}} = 1$: maj + maj + aug, the only solution.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 25.3.</b> Show that $-T_{13} = T_{13}$ shifted, and find the shift.</p>
+<details class="answer"><summary>Answer</summary><p>$-\{0, 13, 26\} = \{0, 23, 10\} = \{10, 23, 36\} = 10 + \{0, 13, 26\}$:
+the shift is 10, the bronze triad on ^E♭.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 25.4.</b> How many layers do C(^5), Cm(^3,v5) and Cg7 touch?</p>
+<details class="answer"><summary>Answer</summary><p>C(^5) = {0, 12, 22}: layers 0, 0, 1, so 2. Cm(^3,v5) = Cs =
+{0, 10, 20}: layers 0, 1, 2, so 3. Cg7 = {0, 11, 22, 33}: layers 0, 2, 1, 0, so 3.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 25.5 (listening).</b> In the averaging example, is Cg closer in sound to C or to Cm? Compare with the
+distances (2 and 3 sixth-steps).</p>
+<details class="answer"><summary>Answer</summary><p>You may well hear Cg as nearer to C major: its third is one
+sixth-step below E and two above E♭, and its fifth one above G. The distances agree: 2 to C, 3 to Cm. (A listening
+judgement; your ear may differ.)</p></details>
+</div>
+</section>

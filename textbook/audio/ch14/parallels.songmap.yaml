@@ -1,0 +1,22 @@
+# I-IV-V-I twice. First with independent voices (the soprano holds C, inner voices move by step,
+# the bass moves against them). Then as parallel root-position blocks: every chord is the previous
+# one moved bodily, so bass and tenor move in parallel fifths and bass and alto in parallel octaves.
+songmap: 0.2
+title: "Independent voices, then parallel blocks"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 14
+tail_seconds: 2.5
+instruments: {organ: clean/organ}
+mix: {organ: {gain_db: -5, send: {hall: 0.2}}}
+returns: {hall: {type: reverb, seconds: 2.2, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: voices
+    bars: 2
+    parts: {organ: {notes: "=mf [c-,g-,e,c+]2 [f--,a-,f,c+] | [g--,g-,d,b] [c-,g-,e,c+]"}}
+  - name: blocks
+    bars: 3
+    parts: {organ: {notes: "r1 | =mf [c-,g-,c,e]2 [f-,c,f,a] | [g-,d,g,b] [c,g,c+,e+]"}}
+master: clean

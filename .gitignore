@@ -10,3 +10,18 @@ node_modules/
 # large binary sources: recoverable from the weekly_videos folder (see README)
 assets/**/*.mp3
 assets/**/*.mp4
+# sample libraries (sampler backend): never committed, see docs/INSTRUMENTS.md §5.1
+samples/
+*.flac
+
+# rendered golden audio suite (rebuild: python tools/golden_suite.py)
+golden_audio/
+
+# agents' scratch work (never commit)
+scratchpad/
+
+# built textbook site (rebuild: python tools/textbook/build.py)
+textbook_site/
+
+# song renders (rebuild from the .sm next to them)
+songs/**/renders/

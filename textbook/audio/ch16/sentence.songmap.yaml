@@ -1,0 +1,23 @@
+# An eight-bar sentence written for this book. Presentation: basic idea on I (bars 1-2), repeated on
+# V (bars 3-4). Continuation: the idea's first bar fragmented and sequenced on IV and ii (bars 5-6),
+# then a cadence V-I (bars 7-8). Harmonic rhythm: two bars per chord, then one.
+songmap: 0.2
+title: "A sentence"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 16
+tail_seconds: 2
+instruments: {lead: clean/lead, keys: clean/keys, bass: clean/bass}
+mix: {lead: {gain_db: -2, send: {hall: 0.2}}, keys: {gain_db: -11, send: {hall: 0.2}}, bass: {gain_db: -7}}
+returns: {hall: {type: reverb, seconds: 1.8, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: sentence
+    bars: 8
+    harmony: "C:2 G:2 F:1 Dm:1 G:1 C:1"
+    parts:
+      lead: {notes: "=mf e4 g c+ g | e2 c | d4 g b g | d2 b- | f4 a c+ a | d4 f a f | b8 c+ d+ b g4 b | c+1", oct: 1}
+      keys: hold
+      bass: {style: roots, role: bass}
+master: clean

@@ -1,0 +1,40 @@
+# ch39 (proposal): V -> I by a parallel leap down; overshoot ^Bg, then settle directly (a); or settle through
+# Cg (b), where the fifth swings G-1 -> G+1 -> G while the third creeps up; (c) ii -> I with the fifth swinging
+# twice, vAb -> vG -> ^G -> G (G+2, G-1, G+1, G: amplitudes 2, 1, 1), through vAbg, ^Bg and Cg.
+songmap: 0.2
+title: "A damped settle"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 39
+tail_seconds: 2.5
+instruments: {up: clean/organ, keys: keys/still, low: clean/bass}
+mix: {up: {gain_db: -6, send: {hall: 0.15}}, keys: {gain_db: -5, send: {hall: 0.35}}, low: {gain_db: -5}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: direct
+    bars: 2
+    harmony: "G:0.5 ^Bg:0.25 C:0.75 N.C.:0.5"
+    parts:
+      up: {notes: "=mp [g,b,d+]2 [^b-,eb,vg]4 [c,e,g]2. r4. r16 c16@0"}
+      low: {notes: "=mp g-2 ^b--4 c-2. r4. r16 c16@0"}
+  - name: one_swing
+    bars: 2
+    harmony: "G:0.5 ^Bg:0.25 Cg:0.25 C:0.5 N.C.:0.5"
+    parts:
+      up: {notes: "=mp [g,b,d+]2 [^b-,eb,vg]4 [c,ve,^g]4 [c,e,g]2 r4. r16 c16@0"}
+      low: {notes: "=mp g-2 ^b--4 c-4 c-2 r4. r16 c16@0"}
+  - name: two_swings
+    bars: 2
+    harmony: "Dm:0.5 vAbg:0.25 ^Bg:0.25 Cg:0.25 C:0.75"
+    parts:
+      up: {notes: "=mp [f-,d,a]2 [vab-,^b-,eb]4 [vg-,^b-,eb]4 [^g-,c,ve]4 [g-,c,e]2."}
+      low: {notes: "=mp d-2 ^b--4 ^b--4 c-4 c-2."}
+  - name: phrase
+    bars: 2
+    harmony: "Am:0.5 G:0.5 ^Bg:0.25 Cg:0.25 C:0.5"
+    parts:
+      keys: {notes: "=mp [a-,c,e]2 [g,b,d+]2 [^b-,eb,vg]4 [c,ve,^g]4 [c,e,g]2"}
+      low: {notes: "=mp a--2 g-2 ^b--4 c-4 c-2"}
+master: clean

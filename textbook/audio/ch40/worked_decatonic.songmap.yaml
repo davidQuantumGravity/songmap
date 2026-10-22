@@ -1,0 +1,22 @@
+# ch40 recipes, worked melody 3: twelve bars in the 35 decatonic. Bars 1-4 outline golden triads by degrees
+# 1-4-7; bars 5-8 sequence a motif up the golden chain; bars 9-12 turn to the 53 decatonic (vEb ^F# Bb) and close
+# by Bg -> Cg, all three voices rising a semitone; release to C major.
+songmap: 0.2
+title: "Worked melody 3: a decatonic song with a 53 turn"
+tempo: 92
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 40
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ, low: clean/bass}
+mix:
+  keys: {gain_db: -3, send: {hall: 0.25}}
+  pad: {gain_db: -12, send: {hall: 0.25}}
+  low: {gain_db: -10}
+sections:
+  - {name: a35, bars: 4, harmony: "Cg:1 vEg:1 ^Abg:1 Cg:1", parts: {keys: {notes: "c4 ve8 ^g8 b4 ^g4 | ve4 ^g8 b8 d+4 b4 | ^ab4 c+8 ve+8 c+4 ^ab4 | ^g4 vf8 ve8 c2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: seq35, bars: 4, harmony: "^Abg:1 vFg:1 C#g:1 ^Ag:1", parts: {keys: {notes: "^ab4 ^a8 c+8 ve+4 c+4 | vf4 vf#8 ^ab8 c+4 ^ab4 | c#4 d8 vf8 ^ab4 vf4 | ^a4 c#+8 ^a8 vf#4 vf4"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: turn53, bars: 4, harmony: "Cg:1 ^Gg:1 Bg:1 Cg:1", parts: {keys: {notes: "ve4 veb8 ve8 ^g4 bb4 | b4 ^g8 ^f#8 veb4 ^f#4 | b4 bb8 ^f#8 veb4 b-4 | c1"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: home, bars: 1, harmony: "C:1", parts: {keys: {notes: "c1"}, pad: hold, low: {style: roots, role: bass}}}
+master: clean

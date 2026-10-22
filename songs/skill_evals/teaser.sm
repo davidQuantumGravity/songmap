@@ -1,0 +1,57 @@
+# Inkwell teaser, 45 s, 120 BPM (60 frames per bar), C major. 23 bars = 1380 frames + 2 s tail = 1440.
+# Concept: a bright hook that is first scattered (problem), then lands whole (Meet Inkwell),
+# is revealed in 2-bar pieces (features), and sings in full (happy users).
+song "Inkwell Teaser" 120 4/4 C fps=30 seed=5 tail=2 video=Inkwell:1440
+inst keys(hardness=.45, t60=6) gtr=string_pluck(brightness=.8) bass(cutoff=650, glide=.08) lead(vib_depth=14, glide=.05)
+chords C G Am F /1
+
+# deg 0 = C. One bar per chord (C G Am F). Chord tones on the strong beats, a long note ends each bar.
+b1 = "2/8 4 4/4.^ 2/8 4/4"
+b2 = "4/8 6 7/4.^ 6/8 4/4"
+b3 = "5/8 7 9/4.^ 7/8 5/4"
+b4 = "5/8 7 8/4. 7/8 5/4"
+b5 = "5/8 8 9/4.^ 8/8 5/4"
+b6 = "6/8 8 9/4.^ 8/8 6/4"
+e1 = "6/4. 7/8 6/4 4/4"
+
+q_hook  = {deg: "=mf " + b1 + " | " + b2, oct: 0}
+q_hook1 = {deg: "=mf " + b1 + " | " + b2, oct: 1}
+a_hook  = {deg: "=mf " + b3 + " | " + b4, oct: 0}
+a_hook1 = {deg: "=mf " + b3 + " | " + b4, oct: 1}
+up_hook = {deg: "=mf " + b5 + " | " + b6, oct: 0}
+up_hook1 = {deg: "=mf " + b5 + " | " + b6, oct: 1}
+full    = {deg: "=mf " + b1 + " | " + b2 + " | " + b3 + " | " + e1, oct: 0}
+full1   = {deg: "=mf " + b1 + " | " + b2 + " | " + b3 + " | " + e1, oct: 1}
+tag     = {deg: "=mf 4/4 2 0/2", oct: 0}
+
+# grooves
+shuf = {kick: "X.....x..x.x|X..x..x.....", snare: "...X.....X.o", hat: {steps: "x.xx.xx.xx.x", vel: [0.5, 0.25, 0.45, 0.22, 0.5, 0.25, 0.42, 0.3]}}
+shuf_in = {kick: "X.....x..x.x", hat: {steps: "x.xx.xx.xx.x", vel: [0.4, 0.2, 0.35, 0.2]}}
+pocket = {kick: "X.....x...x.....", snare: "....X..o....X.o.", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.55, 0.3, 0.45, 0.3, 0.55, 0.3, 0.45, 0.35]}}
+drive = {kick: "X.....x...x.....|X.....x...x...x.", snare: "....X..o....X.o.", hat16: {steps: "xxxxxxxxxxxxxxxx", vel: [0.5, 0.2, 0.35, 0.2]}}
+build = {kick: "X.....x...x.....|X.....x...x.x.xx", snare: "....X..o....X.o.|....X.x.x.x.xXXX", hat16: {steps: "xxxxxxxxxxxxxxxx", vel: [0.5, 0.2, 0.35, 0.2]}, ohat: "..x...x...x...x."}
+joy = {kick: "X.....x...x.....|X.....x...x.....|X.....x...x.....|X.....x...x.x.xx", snare: "....X..o....X.o.|....X..o....X.o.|....X..o....X.o.|....X.x.x.xxxXXX", hat16: {steps: "xxxxxxxxxxxxxxxx", vel: [0.55, 0.2, 0.4, 0.2]}, ohat: "..x...x...x...x."}
+
+# bass / guitar / keys figures
+walk  = {rel: "R/4. R/8 r/8 5/8 R+/4", oct: -2}
+hop   = {rel: "R/4 R/8t r R 5/4 5/8t r R", oct: -2}
+ripple = {rel: "R/8^ 5 R+ 3+ 5+ 3+ R+ 5"}
+harp  = {rel: "R/8 3 5 R+ 3+ 5+ R+ 3+"}
+cheeky = {rel: "R/8t' r r 3' r 5' r r 3' 5' r r | r/8t R' r 5' r r 3' r 5' R+' r r"}
+stab  = {rel: "r/4 [3,5,7]/8t' r r r/2"}
+chimes = {rel: "[R,5,3+]/1"}
+strum = {rel: "[R,3,5]/8 r [3,5,R+] r [R,3,5]/8 [3,5,R+] r [R,3,5]"}
+cap = !riser:2 !impact(size=l)
+
+# name      bars | parts and settings                                              | events
+logo          1 | keys:chimes gtr:harp pad:warm chords="C:1" dyn=mf>mp               | !impact(size=l)
+groove_in     1 | drums:shuf_in bass:hop gtr:ripple chords="G:1" dyn=p
+trouble       6 | drums:shuf bass:hop gtr:cheeky keys:stab chords="Dm7:1 G7:1 Em7:1 A7:1 F:1 G:1" dyn=p<mp | !zaps@+2:3(count=3) !zaps@+4:3(count=4)
+meet          2 | drums:pocket bass:walk keys:q_hook lead:q_hook1 pad:warm gtr:strum chords="C:1 G:1" dyn=f | !riser:2 !impact(size=l) !stop:2b@-1:3
+feat1         2 | drums:pocket bass:walk keys:a_hook gtr:ripple pad:warm chords="Am:1 F:1" dyn=p<mp | !impact(size=s)
+feat2         2 | drums:pocket+{ohat: "..x...x...x...x."} bass:eighths keys:q_hook arp:up gtr:ripple pad:warm chords="C:1 G:1" dyn=mp<mf | !impact(size=s) !zaps@+1:3(count=4)
+feat3         2 | drums:drive bass:eighths keys:a_hook lead:a_hook1 arp:up gtr:strum pad:warm chords="Am:1 F:1" dyn=mf | !impact(size=m)
+feat4         2 | drums:build bass:eighths keys:up_hook lead:up_hook1 arp:up gtr:strum pad:warm chords="Dm:1 G:1" dyn=mf<f | !impact(size=m)
+joy           4 | drums:joy bass:eighths keys:full lead:full1 arp:up gtr:strum pad:warm chords="C:1 G:1 Am:1 G:1" dyn=f<ff | !riser:2 !impact(size=xl)
+endcard       1 | keys:tag gtr:harp pad:warm bass:{rel: "R/1", oct: -2} chords="C:1" dyn=mf>p | !impact(size=l)
+mix keys 1 | lead 8 | arp 2 | drums -4 | bass -2

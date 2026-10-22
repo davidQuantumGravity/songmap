@@ -1,0 +1,60 @@
+# 1. Golden Hour Lullaby (2:31). C major, 72 BPM. A bedtime song: a music box, a felt piano tune, then
+# harp, bass, flute and strings gather and swell, and everything settles back to sleep.
+# Golden technique: System 1/2 golden passing chords (docs/GOLDEN_THEORY.md §2, §4.2) inside a Western lullaby:
+#   I-IV, IV-I, I-V and V-I through one strict golden chord (~) on beat 4; IV-V through the golden escalator
+#   (F:0.5 ~g ~g G); the bridge closes with the four-chord golden authentic cadence G - vEbT13/G - vCg/G - C;
+#   the coda is the golden plagal amen (ii - IV - golden - I).
+# Craft: golden chords sit on weak beats and every sounding part moves through them (voice-led hold/pulse
+# piano and strings, voice-led bass, rel arpeggios); the melodies rest or hold a common tone there
+# (C over C->F and F->C, G over C->G and G->C), so every golden moment is a glide, never a rub.
+# Form (44 bars + 4 s):
+#   intro 4      music box (glass) plays the opening phrase over soft piano chords
+#   verse 8      felt piano alone: left-hand broken chords and the tune (question)
+#   verse2 8     harp ripples, warm bass, the piano answer; the flute sings a countermelody
+#   bridge 8     strings swell under the bridge tune (doubled by the music box), ends on the golden authentic cadence
+#   interlude 4  the flute takes the tune over harp, bass and soft brushes; half cadence on G
+#   finale 8     fullest, the peak: piano tune doubled an octave below by the flute, music-box descant,
+#                pulsing piano, strings, harp, bass and brushes (rim clicks added)
+#   coda 4       golden plagal amen; piano, strings and bass thin out under a last music-box echo
+song "Golden Hour Lullaby" 72 4/4 C fps=30 seed=21 tail=4 tuning=36edo
+inst keys=keys/still mel=keys/still(hardness=.3) gtr=string_pluck/still low=clean/bass wash=pad/still bell=clean/glass flute=clean/lead
+
+prog lull "C:0.75 ~:0.25 F:0.75 ~:0.25 C:0.75 ~:0.25 G:1 Am:1 F:0.5 ~g:0.25 ~g:0.25 G:0.75 ~:0.25 C:1"
+prog dusk "Am:0.75 ~:0.25 Em:1 F:0.75 ~:0.25 C:1 Dm:0.75 ~:0.25 Am:1 F:1 G:0.5 vEbT13/G:0.25 vCg/G:0.25"
+prog open "C:1 F:0.75 ~:0.25 C:1 G:0.75 ~:0.25"
+prog amen "Dm:1 F:0.75 ~:0.25 C:2"
+
+# deg 0 = C4; oct 1 puts the tunes at C5. The question rises to G and rests on C; each golden beat gets a
+# held common tone or a rest.
+q = "=p 4/4 2 0/2 | 5/4. 3/8 0/2 | 0/4 2 4/2 | 5/4 4 3 1 | 0/2. r/4 | 5/4 3 r/2 | 1/4 3 4/2 | 0/1"
+a = "=mp 4/4 5 7/2 | 11/4. 9/8 7/2 | 9/4 7 4/2 | 8/4. 7/8 6/4 5 | 7/2. r/4 | 9/4 7 r/2 | 6/4 8 4/2 | 7/1"
+br = "=mp < 2/4 4 5/2 | 4/2. r/4 | 5/4 9 7/2 | 7/1 | 8/4 7 5/2 | 4/4 5 7/2 | 9/2 8/4 7 | 6/2 r/2 =mf"
+# Music-box opening: the question's first phrase, its last bar holding G over the golden G->C.
+box = "=p 4/4 2 0/2 | 5/4. 3/8 0/2 | 0/4 2 4/2 | 5/4 4/2."
+# Flute countermelody under the answer (C5-A5): moves where the tune holds, echoes the opening at the end.
+c1 = "=p r/2 2/4 0 | 5/2. 0/4 | 2/2. 4/4 | 1/2. -1/4 | r/4 0 2 4 | 5/4 3 r/2 | 1/2 -1/4 r/4 | 4/4 2 0/2"
+# Music-box descant over the final verse (two octaves up: G5-A6).
+c2 = "=mp 2/2. 0/4 | 5/2 3/4 0 | 2/4 0 2 4 | 1/2 -1/2 | r/4 -2 0 2 | 3/2 r/2 | -1/2 1/4 4 | 4/4 2 0/2"
+# Coda: a falling sigh, then the opening motif one last time, answered by the music box.
+sigh = "=p 3/2 2/8 1/4. | 0/1 | 4/4 2 0/2 | 0/1"
+echo = "r/1 | r/1 | r/2 4/4 2 | 0/1"
+
+tune_q = {deg: q, oct: 1}
+tune_a = {deg: a, oct: 1}
+bridge_tune = {deg: br, oct: 1}
+lh = {rel: "R/8 5 3+ 5 R+ 5 3+ 5", oct: -1}            # felt-piano left hand, re-voiced on every chord
+ripple = {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5"}               # harp
+brush = {kick: {steps: "x.........-.....", vel: [0.5, 0.35]}, hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.3, 0.15, 0.22, 0.15]}}
+brush_rim = brush + {rim: {steps: "....-.......-...", vel: [0.3, 0.25]}}
+
+# name      bars | parts and settings                                                                  | events
+intro          4 | keys:hold bell:{deg: box, oct: 2} prog=open dyn=p
+verse          8 | keys:lh mel:tune_q prog=lull dyn=p<mp
+verse2         8 | keys:hold gtr:ripple low:bassline mel:tune_a flute:{deg: c1, oct: 1} prog=lull dyn=p<mp
+bridge         8 | keys:hold wash:hold gtr:ripple low:bassline mel:bridge_tune bell:{deg: br, oct: 2} prog=dusk dyn=p<mf
+interlude      4 | keys:hold gtr:ripple low:bassline drums:brush flute:{deg: q, oct: 1} prog=lull dyn=mp
+finale         8 | keys:pulse(vel=.42) wash:hold gtr:ripple low:bassline drums:brush_rim mel:tune_q flute:{deg: q} bell:{deg: c2, oct: 2} prog=lull dyn=mf<f
+coda           4 | keys:hold wash:hold low:bassline mel:{deg: sigh, oct: 1} bell:{deg: echo, oct: 2} prog=amen dyn=p>pp
+
+mix keys -5 hall=.2 | mel 4 hall=.3 | gtr -6 hall=.25 | low -4 hall=.1 | wash -25 hall=.35 | bell -12 hall=.45 | flute 0 hall=.3 | drums -14 | fx -9
+master clean

@@ -24,6 +24,23 @@ from .yaml_form import PART_OPTS, PART_SOURCES, VERSION, LineDict, from_raw
 EXTS = (".sm", ".sml")
 LIMIT = 4096                       # loop iterations, list items, step-string length, sections
 SECTION_SETTINGS = ("harmony", "chords", "prog", "dyn", "feel", "tempo", "key", "bars")   # chords/prog: aliases of harmony
+
+
+def _is_setting(key, v, progressions=()) -> bool:
+    """`chords` is the harmony setting only when its value is a progression; otherwise it is a part
+    named `chords` (the voiced styles: `chords: hold`, `chords: comp`)."""
+    if key != "chords":
+        return key in SECTION_SETTINGS
+    if not isinstance(v, str):
+        return False
+    if v in progressions:
+        return True
+    from ..theory.harmony import parse_progression
+    try:
+        parse_progression(v)
+    except Exception:
+        return False
+    return True
 PART_KEYS = PART_SOURCES + PART_OPTS
 KEYWORDS = {"for", "in", "if", "elif", "else", "every", "def", "return", "form", "with", "and", "or", "not",
             "true", "false", "none", "as", "at", "bars"}
@@ -80,6 +97,11 @@ def _lex(text: str, file: str | None) -> list[Line]:
             raise SongError(f"unexpected character '{text[pos]}'", file=file, line=no,
                             suggestion="strings use \"...\"; comments start with #")
         kind = m.lastgroup
+        if kind == "comment" and pos > line_start and text[pos - 1] not in " \t":
+            # `#` glued to a word is a sharp (`chords C#m F#`), not a comment: comments need a space before them
+            cur.append(Tok("op", "#", no, pos, pos + 1))
+            pos += 1
+            continue
         if kind == "nl":
             no += 1
             line_start = m.end()
@@ -1871,6 +1893,9 @@ class _Compiler:
     def err(self, msg, line, section=None, suggestion=None):
         raise SongError(msg, file=self.file, line=line, section=section, suggestion=suggestion)
 
+    def _progressions(self):
+        return (self.it.song.get("harmony") or {}).get("progressions") or {}
+
     def check_style(self, role, name, line, section, opts):
         from ..arrange.styles import get_style, load_styles
         r = opts.get("role", role)
@@ -1967,7 +1992,7 @@ class _Compiler:
         by_role: dict[str, list] = {}
         for (sel, path, op, val, line), from_form in edits:
             role = path[0]
-            if role in SECTION_SETTINGS:
+            if role in SECTION_SETTINGS and _is_setting(role, inst.section.get(role), self._progressions()):
                 self.err(f"per-bar edits change parts, not the section's {role}", line, inst.name,
                          "split the section to change its harmony, dyn or tempo")
             if from_form and role not in inst.section:
@@ -2120,7 +2145,7 @@ class _Compiler:
             roles = list(x.section) + [r for r in x.vary if r not in x.section]
             for key in roles:
                 v = x.section.get(key)
-                if key in SECTION_SETTINGS:
+                if _is_setting(key, v, self._progressions()):
                     if key != "bars":
                         sec["harmony" if key in ("chords", "prog") else key] = _plain(v)
                     continue

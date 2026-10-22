@@ -1,0 +1,27 @@
+# ch40 crossing-worlds: a tune in C major over C F G C, then the same tune with every chord replaced by its golden
+# projection (Cg Fg Gg Cg) and the chord tones bent with it (E->vE, G->^G under Cg; A->vA, C->^C under Fg;
+# B->vB, D->^D under Gg); then home to C major.
+songmap: 0.2
+title: "A Western tune bent into gold"
+tempo: 92
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 40
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ, low: clean/bass}
+mix:
+  keys: {gain_db: -3, send: {hall: 0.25}}
+  pad: {gain_db: -12, send: {hall: 0.25}}
+  low: {gain_db: -10}
+sections:
+  - {name: w1, bars: 1, harmony: "C:1", parts: {keys: {notes: "e4 g8 e8 c4 g4"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: w2, bars: 1, harmony: "F:1", parts: {keys: {notes: "a4 c+8 a8 f2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: w3, bars: 1, harmony: "G:1", parts: {keys: {notes: "d4 g8 b8 d+4 b4"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: w4, bars: 1, harmony: "C:1", parts: {keys: {notes: "c+4 g8 e8 c2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: g1, bars: 1, harmony: "Cg:1", parts: {keys: {notes: "ve4 ^g8 ve8 c4 ^g4"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: g2, bars: 1, harmony: "Fg:1", parts: {keys: {notes: "va4 ^c+8 va8 f2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: g3, bars: 1, harmony: "Gg:1", parts: {keys: {notes: "^d4 g8 vb8 ^d+4 vb4"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: g4, bars: 1, harmony: "Cg:1", parts: {keys: {notes: "c+4 ^g8 ve8 c2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: home, bars: 1, harmony: "C:1", parts: {keys: {notes: "g4 e4 c2"}, pad: hold, low: {style: roots, role: bass}}}
+master: clean

@@ -1,0 +1,19 @@
+# ch40 pentatonic-melody: a melody using only C D vF ^G ^A (no semitones), over the four golden triads whose
+# root and fifth it contains, Cg vFg ^Ag Dg and back; each chord shares one note with the next and the third
+# of every chord (vE, ^Ab, C#, vF#) comes from the other pentatonic. Release to C major.
+songmap: 0.2
+title: "The golden pentatonic on its chain of golden fifths"
+tempo: 92
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 40
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ, low: clean/bass}
+mix:
+  keys: {gain_db: -3, send: {hall: 0.25}}
+  pad: {gain_db: -12, send: {hall: 0.25}}
+  low: {gain_db: -10}
+sections:
+  - {name: tune, bars: 8, harmony: "Cg:1 vFg:1 ^Ag:1 Dg:1 ^Ag:1 vFg:1 Cg:1 C:1", parts: {keys: {notes: "^g4 vf8 d8 c2 | c4 d8 vf8 ^a4 vf4 | vf4. ^g8 ^a2 | ^a4 ^g8 vf8 d2 | d4 vf8 ^g8 ^a4 c+4 | d+4 c+8 ^a8 c+2 | ^g4 vf8 ^g8 d4 ^a-4 | c1"}, pad: hold, low: {style: roots, role: bass}}}
+master: clean

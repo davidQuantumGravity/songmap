@@ -1,0 +1,17 @@
+# A melody written in scale degrees of C golden7 (C C# vE vF ^G ^Ab B), over golden chords of the scale.
+songmap: 0.2
+title: "A golden7 melody in scale degrees"
+tempo: 76
+meter: "4/4"
+key: "C golden7"
+tuning: 36edo
+seed: 7
+tail_seconds: 3
+instruments: {pad: clean/golden_pad, bell: clean/glass}
+motifs:
+  tune: {deg: "0/4 2 4 6 | 7/2 6/4 4 | 3/4 2 1 2 | 0/1", octave: 5}
+sections:
+  - {name: a, bars: 4, harmony: "Cg:1 Cg7:1 vEg:1 Cg:1", parts: {pad: hold, bell: {motifs: [tune]}}}
+  - {name: b, bars: 4, harmony: "Cg:1 Cg7:1 vEg:1 Cg:1", parts: {pad: hold, bell: {motifs: [tune]}}}
+mix: {pad: {gain_db: -7, send: {hall: 0.3}}, bell: {gain_db: -6, send: {hall: 0.35}}}
+master: clean

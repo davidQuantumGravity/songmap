@@ -1,0 +1,20 @@
+# ch30: the golden7 scale, then a short melody in golden7 over golden-home chords.
+songmap: 0.2
+title: "A melody in golden7"
+tempo: 76
+meter: "4/4"
+key: "C golden7"
+tuning: 36edo
+seed: 30
+tail_seconds: 3
+instruments: {bell: clean/glass, gpad: clean/golden_pad}
+motifs:
+  scale: {deg: "0/8 1 2 3 4 5 6 7 | 7/8 6 5 4 3 2 1 0 | 0/4 1 2 3 | 4/4 5 6 7", octave: 5}
+  tune:  {deg: "0/4 2 4/2 | 5/4. 4/8 2/2 | 6/4 4 2 4 | 7/4 6 7/2", octave: 5}
+mix:
+  bell: {gain_db: -5, send: {hall: 0.25}}
+  gpad: {gain_db: -9, send: {hall: 0.3}}
+sections:
+  - {name: scale, bars: 4, harmony: "Cg:4", parts: {bell: {motifs: [scale]}, gpad: hold}}
+  - {name: tune, bars: 4, harmony: "Cg:1 ^Abg:1 vEg:1 Cg:1", parts: {bell: {motifs: [tune]}, gpad: hold}}
+master: clean

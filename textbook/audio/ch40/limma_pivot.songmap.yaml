@@ -1,0 +1,24 @@
+# ch40 changing-scales: golden13 on C and golden13 on vC# (a golden limma higher) share exactly the golden triad
+# vEbg = vEb ^F# Bb. The melody walks from Cg to vEbg in C golden13, sings the pivot motif on vEbg, crosses into
+# vC# golden13 (Bbg, vC#g), returns through the same pivot and comes home: Cg, then C major.
+songmap: 0.2
+title: "Through a golden triad to golden13 a limma higher"
+tempo: 88
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 40
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ, low: clean/bass}
+mix:
+  keys: {gain_db: -3, send: {hall: 0.25}}
+  pad: {gain_db: -12, send: {hall: 0.25}}
+  low: {gain_db: -10}
+sections:
+  - {name: inC, bars: 2, harmony: "Cg:1 Bg:1", parts: {keys: {notes: "c+4 ve+8 c+8 ^g4 ^f#4 | b4 veb+8 b8 ^f#2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: pivot, bars: 1, harmony: "vEbg:1", parts: {keys: {notes: "bb4 ^f#8 veb8 ^f#4 bb4"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: invCs, bars: 2, harmony: "Bbg:1 vC#g:1", parts: {keys: {notes: "vd+4 bb8 ^f8 bb4 vd+4 | vc#+4 ab8 ^e8 ab4 bb4"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: pivot2, bars: 1, harmony: "vEbg:1", parts: {keys: {notes: "^f#4 bb8 ^f#8 veb2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: back, bars: 2, harmony: "Bg:1 Cg:1", parts: {keys: {notes: "veb4 ^f#8 b8 c#+4 b4 | c+4 b8 c+8 ^g2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: home, bars: 1, harmony: "C:1", parts: {keys: {notes: "g4 e4 c2"}, pad: hold, low: {style: roots, role: bass}}}
+master: clean

@@ -1,0 +1,18 @@
+# ch35: P, L and R from C major, then their images under the golden projection:
+# P -> planing down a sixth-step (Cg -> vCg), L -> one golden-circle step (Cg -> vEg),
+# R -> golden root down a silver third (Cg -> vAg).
+songmap: 0.2
+title: "P, L and R through the golden projection"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 352
+tail_seconds: 3
+instruments: {organ: clean/organ}
+mix:
+  organ: {gain_db: -6}
+sections:
+  - {name: western, bars: 3, harmony: "C:0.5 Cm:0.5 C:0.5 Em:0.5 C:0.5 Am:0.5", parts: {organ: hold}}
+  - {name: golden, bars: 4, harmony: "Cg:0.5 vCg:0.5 Cg:0.5 vEg:0.5 Cg:0.5 vAg:0.5 Cg:0.5 C:0.5", parts: {organ: hold}}
+master: clean

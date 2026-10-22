@@ -1,0 +1,20 @@
+# The twelve-bar blues in C with dominant sevenths on I, IV and V.
+songmap: 0.2
+title: "Twelve-bar blues"
+tempo: 132
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {chords: clean/organ, bass: clean/bass}
+mix: {chords: {gain_db: -6, send: {hall: 0.25}}, bass: {gain_db: -4}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 12
+    harmony: "C7:1 F7:1 C7:2 F7:2 C7:2 G7:1 F7:1 C7:1 G7:1"
+    parts:
+      chords: comp
+      bass: {style: roots, role: bass}
+master: clean

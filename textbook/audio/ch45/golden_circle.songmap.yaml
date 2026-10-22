@@ -1,0 +1,15 @@
+# Six steps of the golden circle (each root 11 sixth-steps above the last), on the golden-spectrum pad:
+# Cg - vEg - ^Gg - Bg - vEbg - ^F#g - Bbg. One voice moves down a semitone at each step.
+songmap: 0.2
+title: "Around the golden circle"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 11
+tail_seconds: 4
+instruments: {pad: {use: clean/golden_pad, attack: 1.0, release: 2.0}}
+sections:
+  - {name: a, bars: 7, harmony: "Cg:1 vEg:1 ^Gg:1 Bg:1 vEbg:1 ^F#g:1 Bbg:1", parts: {pad: hold}}
+mix: {pad: {gain_db: -6, send: {hall: 0.3}}}
+master: clean

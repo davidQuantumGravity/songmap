@@ -15,6 +15,7 @@ gui = ["fastapi", "uvicorn"]
 plugin = ["dawdreamer"]
 sampler = ["soundfile"]
 dev = ["pytest"]
+textbook = ["playwright", "pypdf"]       # tools/textbook/pdf.py (uses the installed Chrome or Edge)
 
 [project.scripts]
 songmap = "songmap.cli:main"

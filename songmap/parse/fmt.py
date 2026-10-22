@@ -230,7 +230,7 @@ class _Printer:
             if isinstance(e, str) and _USE.fullmatch(e):
                 inst.append(f"{part}={e}")
             elif isinstance(e, dict) and part == "drums" and list(e) == ["kit"] and isinstance(e["kit"], dict) \
-                    and all(self.voice(v) is not None for v in e["kit"].values()):
+                    and e["kit"] and all(self.voice(v) is not None for v in e["kit"].values()):   # an empty kit has no `kit` line
                 kit += [f"{piece}={self.voice(v)}" for piece, v in e["kit"].items()]
             elif isinstance(e, dict) and not ("kit" in e or (part in KIT_ROLES and "use" not in e)):
                 params = {k: v for k, v in e.items() if k != "use"}

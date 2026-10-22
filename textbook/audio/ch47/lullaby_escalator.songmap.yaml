@@ -1,0 +1,24 @@
+songmap: 0.2
+title: "Lullaby: the escalator and V-I through gold"
+tempo: 72
+meter: "4/4"
+key: C
+tuning: "36edo"
+fps: 30
+seed: 21
+tail_seconds: 3
+
+instruments:
+  keys: keys/still
+  mel: {use: keys/still, hardness: 0.3}
+  low: clean/bass
+
+sections:
+  - {name: x, bars: 4, parts: {keys: hold, low: bassline, mel: {deg: "=p 0/2. r/4 | 5/4 3 r/2 | 1/4 3 4/2 | 0/1", oct: 1}}, harmony: "Am:1 F:0.5 ~g:0.25 ~g:0.25 G:0.75 ~:0.25 C:1"}
+
+mix:
+  keys: {gain_db: -4, send: {hall: 0.2}}
+  mel: {gain_db: 4, send: {hall: 0.3}}
+  low: {gain_db: -4}
+
+master: clean

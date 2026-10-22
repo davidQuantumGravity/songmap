@@ -1,0 +1,19 @@
+# 36edo. C to E, Ab, A, Eb, each through its strict uniform path (System 1):
+# C - vC E ^G - Eg - E;  C - Cg - (C ^Eb vAb) - Ab;  C - ^Cg - (vC# E ^Ab) - A;  C - (^B vE G) - ^Ebg - Eb.
+songmap: 0.2
+title: "Mediant gold"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 1
+tail_seconds: 2
+instruments: {up: clean/organ}
+mix: {up: {gain_db: -6, send: {hall: 0.25}}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 8
+    parts:
+      up: {notes: "=mp [c,e,g]2 [vc,e,^g]4 [^b-,e,vab]4 [b-,e,g#]1 [c,e,g]2 [c,ve,^g]4 [c,^eb,vab]4 [c,eb,ab]1 [c,e,g]2 [^c,e,vab]4 [vc#,e,^ab]4 [c#,e,a]1 [c,e,g]2 [^b-,ve,g]4 [vb-,^eb,g]4 [bb-,eb,g]1"}
+master: clean

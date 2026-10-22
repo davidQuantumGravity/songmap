@@ -1,0 +1,22 @@
+songmap: 0.2
+title: "Deceptive Light: V-vi plain, then through gold"
+tempo: 120
+meter: "4/4"
+key: G
+tuning: "36edo"
+fps: 30
+seed: 22
+tail_seconds: 2
+
+instruments:
+  ep: epiano/still
+
+sections:
+  - {name: x, bars: 8, parts: {ep: hold, bass: {rel: "R/8 R+ R R+ R R+ R R", oct: -2}, drums: {steps: {kick: X.......X......., snare: "....X.......X...", hat: {steps: x.x.x.x.x.x.x.x., vel: [0.6, 0.3, 0.45, 0.3]}}}}, harmony: "D:1 Em:1 D:0.75 ~g:0.125 ~g:0.125 Em:1", dyn: mf}
+
+mix:
+  drums: {gain_db: -9}
+  bass: {gain_db: -1}
+  ep: {gain_db: -16, send: {hall: 0.15}}
+
+master: clean

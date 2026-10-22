@@ -14,6 +14,7 @@ theme_low = {deg: q + " | " + a}               # an octave down, to double the l
 
 pocket = {kick: "X.....x...x.....", snare: "....X..o....X.o.", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.55, 0.3, 0.45, 0.3, 0.55, 0.3, 0.45, 0.35]}}
 walk = {rel: "R/4. R/8 r/8 5/8 R+/4", oct: -2}  # lands with the kick: beats 1, 2&, 3&
+light = {kick: "X.......x.......", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.45, 0.25, 0.35, 0.25]}}   # the build: no backbeat yet
 broken = {rel: "[R,3,5]/2 [3,5,R+]/4 [5,R+,3+]"}
 ripple = {rel: "R/8^ 5 R+ 3+ 5+ 3+ R+ 5"}
 spark = !riser:1 !impact
@@ -21,8 +22,8 @@ spark = !riser:1 !impact
 # name   bars | parts and settings                                         | events
 intro      4 | keys:broken dyn=pp<p
 verse      8 | gtr:ripple bass:walk keys:theme dyn=p<mp
-lift       8 | like=verse drums:pocket pad:warm keys:broken lead:theme dyn=mp<f | !spark
+lift       8 | like=verse -gtr drums:light pad:warm keys:broken lead:theme dyn=p<mp | !spark
 breath     4 | keys:{rel: "[R,5,9]/1"} pad:dark chords="Bm:2 Gmaj7:2" dyn=pp
-home       8 | like=lift keys:theme_low drums:pocket+{ohat: "..x...x...x...x."} dyn=f | !spark
+home       8 | like=lift keys:theme_low gtr:ripple drums:pocket+{ohat: "..x...x...x...x."} dyn=f | !spark
 outro      4 | keys:broken gtr:ripple chords="G:2 D:2" dyn=mp>pp           | !impact@+2(size=s)
-mix drums -6 | fx -6 | keys 0 | lead 6
+mix keys 0                                   # the piano carries the tune: lift it a little

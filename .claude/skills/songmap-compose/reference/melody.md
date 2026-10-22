@@ -76,18 +76,43 @@ verse 8 | keys:tune pad:warm
 - **Sentence** (1+1+2): a one-bar idea, the same idea varied, then a two-bar continuation that runs to the cadence.
 - **Antecedent → consequent across sections:** the verse asks and the chorus answers.
 
-## Developing it by hand (no transform syntax yet)
+## Developing a theme: transforms
 
-Write each variation as its own note string:
+Write the theme once, then derive its variations by **transforming** it.
 
-| Device | How | Example from `0/8 2 4/4 2/2` |
+**Where transforms go:**
+- **On a part, after the variable or motif name**, chained with `:`: `lead:theme:aug`, `keys:theme:t+2:oct-1`.
+- **As a part option:** `{deg: theme_notes, oct: 1, transform: "aug t+2"}`. In a definition, use a section map: `verse = {lead: theme with {transform: "inv"}}`.
+- **Inside a motif list:** `lead:m1,m1:t+2,m1:inv` (the motif cycle; see placement above).
+
+A transformed part loops to fill its section like any other, at its new length: an `aug` of a 2-bar theme is 4 bars long.
+
+| Transform | Musical effect | `0/8 2 4/4 2/2` (1 bar) becomes |
 |---|---|---|
-| **Sequence** (moving it up the scale: a lift) | add the same number to every degree | `1/8 3 5/4 3/2` |
-| **Rhythmic augmentation** (grand, slow) | double every duration | `0/4 2 4/2 2/1` (now 2 bars) |
-| **Fragmentation** (urgency, a question) | repeat only the head | `0/8 2 0 2 0/8 2 4/4` |
-| **Inversion of contour** (mirror, doubt) | flip the direction of each step | `0/8 -2 -4/4 -2/2` |
-| **Octave displacement** (a climax) | the same notes, `oct` + 1 | `{deg: ..., oct: 2}` |
-| **Re-harmonisation** (new meaning) | the same melody over new chords | `chords="F G Em Am"` on the section |
+| `t+1`, `t+2`, `t-1` | **sequence**: the theme moved up or down the scale, a lift or a sigh (scale steps in deg mode, semitones in letter mode) | `t+1`: `1/8 3 5/4 3/2` |
+| `oct+1`, `oct-1` | **octave displacement**: the climax, or a hushed low statement | the same notes an octave up |
+| `inv` | **inversion**: the contour mirrored around the first note (doubt, a mirror image) | `0/8 -2 -4/4 -2/2` |
+| `rev` | **retrograde**: the line backwards, rhythm included (rests at the end now lead) | `2/2 4/4 2/8 0` |
+| `aug`, `dim` | **augmentation**: half speed, grand or hushed (2 bars long); **diminution**: double speed, urgent | `aug`: `0/4 2 4/2 2/1` |
+| `frag=1`, `frag=-1` | **fragmentation**: only the first (or last) n bars, a question or urgency | the first bar of a longer theme |
+| `x2` | repeat the theme twice in a row | 2 bars |
+| `thin=0.5` | keep only the strongest half of the notes (by beat position): a skeleton of the theme | the downbeat notes |
+| `canon=3@8` | 3 copies, each entering an 8th later: a round, a crowd, an echo | overlapping entries |
+| `dyn=p` | re-level the written dynamics (accents keep their ratio). On section lines `:dyn=` is the part's arc instead, so use `transform: "dyn=p"` there | the same notes, softer |
+
+**Chain them** from left to right: `theme:aug:t+2` slows the theme, then lifts it two steps.
+
+**Re-harmonisation** is not a transform: play the same melody over new chords (`chords="F G Em Am"` on the section), or re-key it with `key=`.
+
+**A typical arc for one theme:**
+
+| Section | Statement |
+|---|---|
+| intro | `keys:theme:frag=1:oct-1` (a hint) |
+| verse | `keys:theme` (stated) |
+| bridge | `keys:theme:inv` or `theme:t-2` (questioned) |
+| climax | `lead:theme:oct+1` doubled by `keys:theme` (triumphant) |
+| coda | `keys:theme:aug` with the section's `dyn=p` (remembered) |
 
 ## Counter-melody and call and response
 

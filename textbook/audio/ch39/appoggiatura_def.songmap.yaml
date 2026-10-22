@@ -1,0 +1,40 @@
+# ch39: (a) G -> Cg on the downbeat -> C: the tonic arrives bent (third a sixth-step low, fifth a sixth-step
+# high) and straightens. (b) ii6 -> Gg on the downbeat -> G: the dominant arrives the same way. (c) IV -> vCg/G on
+# beat 3 -> G -> C: a golden cadential six-four that falls into V (vC -> B, ^Eb -> D) like the Western one.
+songmap: 0.2
+title: "Golden appoggiatura chords"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 39
+tail_seconds: 2.5
+instruments: {up: clean/organ, keys: keys/still, low: clean/bass}
+mix: {up: {gain_db: -6, send: {hall: 0.15}}, keys: {gain_db: -5, send: {hall: 0.35}}, low: {gain_db: -5}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: tonic
+    bars: 2
+    harmony: "G:1 Cg:0.5 C:0.5"
+    parts:
+      up: {notes: "=mp [g-,b-,d]1 [c,ve,^g]2 [c,e,g]2"}
+      low: {notes: "=mp g--1 c-2 c-2"}
+  - name: dominant
+    bars: 2
+    harmony: "Dm/F:1 Gg:0.5 G:0.5"
+    parts:
+      up: {notes: "=mp [f-,a-,d]1 [g-,vb-,^d]2 [g-,b-,d]2"}
+      low: {notes: "=mp f--1 g--2 g--2"}
+  - name: six_four
+    bars: 3
+    harmony: "F:0.5 vCg/G:0.5 G:0.5 C:0.5 C:1"
+    parts:
+      up: {notes: "=mp [f-,a-,c]2 [g-,vc,^eb]2 [g-,b-,d]2 [g-,c,e]2 [g-,c,e]1"}
+      low: {notes: "=mp f--2 g--2 g--2 c-2 c-1"}
+  - name: phrase
+    bars: 3
+    harmony: "Dm/F:0.5 vCg/G:0.5 G:1 Cg:0.5 C:0.5"
+    parts:
+      keys: {notes: "=mp [f-,a-,d]2 [g-,vc,^eb]2 [g-,b-,d]1 [c,ve,^g]2 [c,e,g]2"}
+      low: {notes: "=mp f--2 g--2 g--1 c-2 c-2"}
+master: clean

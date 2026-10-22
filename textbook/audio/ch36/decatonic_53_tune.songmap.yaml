@@ -1,0 +1,19 @@
+# ch36 melody-harmony: a tune in the 53 decatonic (C C# vEb vE vF ^F# ^G ^Ab Bb B), harmonized
+# Cg vEg ^Gg Bg vEbg Bg Cg C: out along the circle, then Bg -> Cg (every voice rises a semitone)
+# and the release to C major.
+songmap: 0.2
+title: "A tune in the 53 decatonic"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 36
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ, low: clean/bass}
+mix:
+  keys: {gain_db: -3, send: {hall: 0.2}}
+  pad: {gain_db: -10, send: {hall: 0.25}}
+  low: {gain_db: -9}
+sections:
+  - {name: tune, bars: 8, harmony: "Cg:1 vEg:1 ^Gg:1 Bg:1 vEbg:1 Bg:1 Cg:1 C:1", parts: {keys: {notes: "c4 ve8 ^g8 c+4 b4 | b4 ^g8 ^ab8 ^g4 ve4 | ^g4 b8 bb8 b4 veb+4 | veb+4 b8 bb8 b4 ^f#4 | ^f#4 bb8 b8 bb4 veb4 | veb4 ^f#4 b2 | c+2 ^g4 ve4 | e2 c2"}, pad: hold, low: {style: roots, role: bass}}}
+master: clean

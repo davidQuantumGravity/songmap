@@ -1,0 +1,40 @@
+# ch39: (a) V -> vi through Cg on beat 4: the alto reaches C early (anticipation) while G and D pass up by
+# sixth-steps (no detour). (b) V -> vi through ^F#g: every voice steps away from A minor, then leaps up into it
+# (a golden escape chord). (c) V -> I through Gg/G: B steps away (to vB), D passes up, then C.
+songmap: 0.2
+title: "Golden anticipation and escape chords"
+tempo: 66
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 39
+tail_seconds: 2.5
+instruments: {up: clean/organ, keys: keys/still, low: clean/bass}
+mix: {up: {gain_db: -6, send: {hall: 0.15}}, keys: {gain_db: -5, send: {hall: 0.35}}, low: {gain_db: -5}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: anticipation
+    bars: 2
+    harmony: "G:0.75 Cg/G:0.25 Am:1"
+    parts:
+      up: {notes: "=mp [g-,b-,d]2. [^g-,c,ve]4 [a-,c,e]1"}
+      low: {notes: "=mp g--2. g--4 a--1"}
+  - name: escape
+    bars: 2
+    harmony: "G:0.75 ^F#g/G:0.25 Am:1"
+    parts:
+      up: {notes: "=mp [g-,b-,d]2. [^f#-,bb-,vd]4 [a-,c,e]1"}
+      low: {notes: "=mp g--2. g--4 a--1"}
+  - name: mild_escape
+    bars: 2
+    harmony: "G:0.75 Gg:0.25 C:1"
+    parts:
+      up: {notes: "=mp [g-,b-,d]2. [g-,vb-,^d]4 [g-,c,e]1"}
+      low: {notes: "=mp g--2. g--4 c-1"}
+  - name: phrase
+    bars: 4
+    harmony: "C:0.5 G:0.25 Cg/G:0.25 Am:0.5 F:0.5 G:0.75 Gg:0.25 C:1"
+    parts:
+      keys: {notes: "=mp [g-,c,e]2 [g-,b-,d]4 [^g-,c,ve]4 [a-,c,e]2 [a-,c,f]2 [g-,b-,d]2. [g-,vb-,^d]4 [g-,c,e]1"}
+      low: {notes: "=mp c-2 g--4 g--4 a--2 f--2 g--2. g--4 c-1"}
+master: clean

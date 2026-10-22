@@ -1,0 +1,321 @@
+<p>Chapter 36 stayed inside the golden scales, where every chord is golden and no Western triad can appear. This chapter
+mixes the two worlds. It asks three questions about scales and one about harmony. What happens if the notes of C major
+are bent by a sixth-step, one at a time? What scales does the averaging principle give when it is applied to whole
+scales instead of chords? How many Western and how many golden triads can one seven-note scale hold at once? And how can
+a Western key borrow golden chords as colour, the way C major borrows from C minor? The answers are exact, several of
+them are negative, and together they draw a clear line: hybrid scales exist, but they are colour collections, never new
+diatonics. All counts are exhaustive enumerations from <code>reference/golden/blending.py</code> (sections 12–14) and
+<code>docs/GOLDEN_BLENDING.md</code> §8–9, recomputed for this chapter; the roughness values were computed for it in the same
+model.</p>
+
+<section id="inflections">
+<h2>Golden inflections of the major scale</h2>
+<div class="layer hear">
+<p>Start with C major and bend two of its notes: lower E by a sixth-step and raise G by a sixth-step. The tonic triad
+C E G becomes the golden triad C vE ^G, while F, A, D and B are untouched. The result, C D vE F ^G A B, still sounds like a
+major scale with a strange, soft middle. Its subdominant side is Western (F, Dm) and its tonic side is golden (Cg, vEg).</p>
+<audio-ex src="golden_ionian" caption="C major, then the golden Ionian C D vE F ^G A B, then a tune in it over F, Dm, Cg, vEg, Dm, Cg. The Western chords and the golden chords share one scale."></audio-ex>
+<p>Bend more notes and you trade Western triads for golden ones. Here are four scales along the way: none bent, two bent
+toward one golden chord, two bent toward two, and four bent toward three.</p>
+<audio-ex src="inflection_frontier" caption="Four inflections of C major, each scale and then its chords: C major (Dm G C); C vD E ^F G A B (vDg, C); the golden Ionian (F Dm vEg Cg); C vD vE ^F ^G A B (vDg vEg Cg, no Western triad left)."></audio-ex>
+</div>
+<div class="layer understand">
+<p>An <b>inflection</b> of C major moves each of its seven notes by −1, 0 or +1 sixth-step: $3^7 = 2187$ scales, from C
+major itself to its two lifts (all notes up, all notes down). Counting their triads (computed for all 2187):</p>
+<ul>
+<li>419 inflections contain at least one golden triad: 354 contain one, 63 two and only 2 contain three. None contains
+more than three.</li>
+<li>The golden triads that occur are exactly the six <b>golden projections</b> of C major's consonant triads
+(<a href="ch:ch35#projection">Chapter 35</a>): Cg = π(C), vDg = π(Dm), vEg = π(Em), Fg = π(F), Gg = π(G) and
+vAg = π(Am). Each occurs in 81 inflections (its three notes are fixed, the other four free: $3^4 = 81$).</li>
+</ul>
+<p>Write W for the number of consonant Western triads (major or minor) and G for the number of golden triads. More of one
+costs some of the other. The <b>Pareto frontier</b>, the inflections that cannot gain a triad of one kind without losing
+one of the other, is:</p>
+<table>
+<caption>The frontier of golden inflections of C major (fewest bent notes shown)</caption>
+<tr><th>(W, G)</th><th>Scale</th><th>Bent notes</th><th>Triads</th></tr>
+<tr><td>(6, 0)</td><td>C D E F G A B</td><td>none</td><td>C, F, G, Dm, Em, Am</td></tr>
+<tr><td>(3, 1)</td><td>C vD E ^F G A B</td><td>D, F</td><td>C, Em, Am, vDg</td></tr>
+<tr><td>(3, 1)</td><td>C ^D E F G A vB</td><td>D, B</td><td>C, F, Am, Gg</td></tr>
+<tr><td><b>(2, 2)</b></td><td><b>C D vE F ^G A B</b> (golden Ionian)</td><td>E, G</td><td>F, Dm, <b>Cg, vEg</b></td></tr>
+<tr><td>(2, 2)</td><td>^C D E F G vA B</td><td>C, A</td><td>G, Em, Fg, vAg</td></tr>
+<tr><td>(0, 3)</td><td>C vD vE ^F ^G A B</td><td>D, E, F, G</td><td>Cg, vDg, vEg</td></tr>
+<tr><td>(0, 3)</td><td>^C ^D E F G vA vB</td><td>C, D, A, B</td><td>Fg, Gg, vAg</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 D4 E4 F4 G4 A4 B4 C5 ; C4 vD4 E4 ^F4 G4 A4 B4 C5 ; C4 D4 vE4 F4 ^G4 A4 B4 C5 ; C4 vD4 vE4 ^F4 ^G4 A4 B4 C5" labels="(6, 0) ; (3, 1) ; (2, 2) ; (0, 3)" title="Four inflections of C major on the frontier: each bend trades Western triads for golden ones"></pianoroll>
+<p><b>Why bends come in pairs.</b> Each projection keeps one note of its triad and bends the other two (Chapter 35):
+Cg needs E↓ and G↑ and keeps C; vEg needs the same two bends and keeps B. So Cg and vEg come together for the price of two
+bent notes, and that pair is the golden Ionian. Similarly Fg and vAg both need C↑ and A↓. Other pairs clash: Cg keeps C,
+while Fg must raise it; Gg keeps G, while Cg must raise it. Working through the six projections, the largest clash-free
+sets are {Cg, vDg, vEg} and {Fg, Gg, vAg}, which is why three is the maximum.</p>
+<h3>The golden Ionian</h3>
+<p>The golden Ionian, <b>C D vE F ^G A B</b>, is the best inflection of the major scale in the sense of the frontier. It
+bends exactly the two notes the tonic needs to become golden. It keeps the subdominant side of the key Western: F and Dm,
+and also the diminished triad B D F. And it gains vEg = vE ^G B, the circle neighbour of Cg, which reaches Cg by the
+leading tone B rising to C. Its steps are 6 5 4 7 5 6 3 sixth-steps, five different sizes: it is neither well formed nor
+Myhill. The name is a proposal (<code>GOLDEN_BLENDING.md</code> §14, question 9).</p>
+<pianoroll edo="36" notes="F4 A4 C5 ; D4 F4 A4 ; C4 vE4 ^G4 ; vE4 ^G4 B4 ; D4 F4 A4 ; C4 vE4 ^G4" labels="F ; Dm ; Cg ; vEg ; Dm ; Cg" title="The chords of the golden Ionian tune: Western subdominant side, golden tonic side"></pianoroll>
+<p><b>Well-formed inflections.</b> Only 7 of the 2187 inflections have Myhill's property: C major, its two lifts, and four
+silver scales, C D E ^F ^G vA vB (5 silver triads), ^C D vE ^F G vA vB, ^C D vE ^F G A vB and ^C D vE ^F ^G A vB (3 silver
+triads each). None of them contains a golden triad. Bending the major scale toward gold always breaks its regularity.</p>
+<aside class="box note"><b>Western mirror.</b> The Western analogue of an inflection is chromatic alteration within one
+key: the harmonic minor raises one degree of the natural minor and the melodic minor two, and the modes of
+<a href="ch:ch06#modes">Chapter 6</a>, taken on one tonic in order of brightness, differ from their neighbours by one note. Those alterations move a note by a semitone
+and stay on the 12-ET grid; golden inflections move notes by a third of a semitone and change their layer.</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> For $\epsilon \in \{-1, 0, 1\}^7$ the inflection of C major is $\{d_i + \epsilon_i\}$, where
+$d = (0, 6, 12, 15, 21, 27, 33)$ in sixth-steps.</p>
+<p><b>Proposition (golden triads of an inflection).</b> The golden triads contained in inflections of C major are exactly
+the projections of its six major and minor triads, and a set of them can occur together exactly when no bend required by one
+contradicts a note kept or bent the other way by another. The maximal compatible sets are {Cg, vDg, vEg} (bends D↓ E↓ F↑ G↑)
+and {Fg, Gg, vAg} (bends C↑ D↑ A↓ B↓). Compatible pairs: (Cg, vEg), (Cg, vDg), (vDg, vEg), (Fg, vAg), (Fg, Gg), (Gg, vAg),
+(Fg, vEg). (Exhaustive over 2187 inflections; the pair counts are 26, 2, 2, 26, 2, 2 and 3 inflections with exactly those two
+golden triads.)</p>
+<p><b>Frontier.</b> A pair $(W, G)$ is on the Pareto frontier if no inflection has $W' \ge W$ and $G' \ge G$ with one
+inequality strict. The frontier points are (6, 0), (3, 1), (2, 2), (0, 3). (Exhaustive.)</p>
+</div>
+</section>
+
+<section id="centroid-scales">
+<h2>Centroid scales</h2>
+<div class="layer hear">
+<p>The averaging principle says that the golden triad is the average of three Western triads: Cg is the centre of C
+major, C minor and C augmented (<a href="ch:ch25#averaging">Chapter 25</a>). Apply the same idea to whole scales: average
+two parts C major with one part C minor, degree by degree. Every degree that differs moves a third of the way toward
+minor. The result sounds like a major scale seen through smoked glass. Its tonic chord, C vE G, has a golden-sized third but
+a plain fifth, and it is not one of the named chords at all.</p>
+<audio-ex src="centroids" caption="C major and C minor; their centroid (2 major + minor)/3 = C D vE F G vA vB with its tonic C vE G; the silver centroid C vD ^E♭ F vG ^A♭ ^B♭ with Cs and vDs; and the centroid C D vE ^F ^G ^A♭ B with three golden triads."></audio-ex>
+</div>
+<div class="layer understand">
+<p>Write each 7-note mode on C as seven numbers of sixth-steps (C major = 0 6 12 15 21 27 33). The <b>centroid</b> of three
+modes is their degree-by-degree average. A sum of three multiples of 3, divided by 3, is a whole number, so the centroid of
+any three 12-ET modes lies exactly on the 36-ET grid. Averages of two do not: (Ionian + Aeolian)/2 puts its third at 10.5
+sixth-steps, between grid points.</p>
+<p>Taking 11 modes on C (the seven diatonic modes, harmonic and melodic minor, Lydian augmented and harmonic major) and
+all $\binom{13}{3} = 286$ ways of choosing three of them with repetition gives <b>225 distinct centroid scales</b>. Of
+these, 44 contain a golden triad and 16 contain the tonic golden triad Cg. Some named centroids:</p>
+<table>
+<caption>Centroid scales on C (triads of all seven named types: major, minor, augmented, diminished, golden, silver, bronze)</caption>
+<tr><th>Centroid</th><th>Scale</th><th>Triads</th><th>Myhill</th></tr>
+<tr><td>(2·Ionian + Aeolian)/3</td><td>C D vE F G vA vB</td><td><b>none</b></td><td>no</td></tr>
+<tr><td>(Ionian + 2·Aeolian)/3</td><td>C D ^E♭ F G ^A♭ ^B♭</td><td>none</td><td>no</td></tr>
+<tr><td>(2·Ionian + Lydian)/3</td><td>C D E ^F G A B</td><td>C, G, Em, Am</td><td>no</td></tr>
+<tr><td>(Ionian + Aeolian + Lydian aug.)/3</td><td>C D vE ^F ^G vA vB</td><td>Cg, Ds, ^Fs, ^Gs, vBs</td><td>no</td></tr>
+<tr><td>(Ionian + harm. minor + Lydian aug.)/3</td><td>C D vE ^F ^G vA B</td><td>Cg, vEg, Ds, ^Fs</td><td>no</td></tr>
+<tr><td>(harm. minor + Lydian aug. + harm. major)/3</td><td>C D vE ^F ^G ^A♭ B</td><td>Cg, vEg, ^A♭g</td><td>no</td></tr>
+<tr><td><b>(Ionian + Aeolian + Locrian)/3</b></td><td>C vD ^E♭ F vG ^A♭ ^B♭</td><td><b>Cs, vDs, ^B♭s</b></td><td><b>yes</b></td></tr>
+</table>
+<pianoroll edo="36" notes="C4 D4 E4 F4 G4 A4 B4 C5 ; C4 D4 Eb4 F4 G4 Ab4 Bb4 C5 ; C4 D4 vE4 F4 G4 vA4 vB4 C5 ; C4 vE4 G4" labels="major ; minor ; (2M + m)/3 ; C vE G" title="Two parts major, one part minor: every altered degree moves a third of the way, and the tonic becomes C vE G"></pianoroll>
+<h3>Three findings, two of them negative</h3>
+<p><b>1. (2·major + minor)/3 has no chord.</b> The author's natural first candidate, two parts major to one part minor,
+gives C D vE F G vA vB. Its tonic chord is C vE G, written C(v3): a golden third under a perfect fifth. That is none of the
+seven named triad types, and in fact the scale contains no triad of any of those types anywhere (computed). In the roughness
+model on harmonic tones C(v3) measures 1.346 in close position from C4, slightly above C major (1.319) and C minor (1.342) and
+well below Cg (1.498) (measurement). It is a coloured major chord, not a new kind of home.</p>
+<p><b>2. Cg needs Lydian augmented.</b> For the centroid to contain Cg its third must average to 11 sixth-steps and its fifth
+to 22. The third is easy (two major thirds and one minor: 12 + 12 + 9 = 33). The fifth is not: among the eleven modes, fifths
+are 21 (perfect), 18 (Locrian) or 24 (Lydian augmented only), and $21 + 21 + 24 = 66$ or $18 + 24 + 24 = 66$ are the only
+ways to reach 22. Both need Lydian augmented, so every one of the 21 mode triples whose centroid contains Cg includes it.
+The golden fifth lies a third of the way from the perfect fifth to the augmented fifth, and a scale has to supply the
+augmented fifth for the average to find it.</p>
+<p><b>3. The silver centroid is maximally even.</b> (Ionian + Aeolian + Locrian)/3 averages the three modes whose tonic
+triads are C, Cm and Cdim, so it is the scale version of Cs = (C + Cm + Cdim)/3. It is C vD ^E♭ F vG ^A♭ ^B♭, steps
+5 5 5 5 5 6 5: the maximally even 7-note scale of 36-ET, unique up to transposition (<a href="ch:ch36#golden13-modes">Chapter
+36</a> gives the transposition C vD ^E♭ F vG ^A♭ B♭), with exactly three triads, all silver. The averaging principle produces a regular scale only on the silver side.</p>
+<pc-circle edo="36" marks="0 5 10 15 20 25 31" title="The silver centroid (Ionian + Aeolian + Locrian)/3: steps 5 and 6, maximally even"></pc-circle>
+<pianoroll edo="36" notes="C4 D4 vE4 ^F4 ^G4 ^Ab4 B4 C5 ; C4 vE4 ^G4 ; ^Ab3 C4 vE4 ; vE4 ^G4 B4" labels="centroid ; Cg ; ^A♭g ; vEg" title="(harm. minor + Lydian aug. + harm. major)/3 and its three golden triads"></pianoroll>
+<p>The best golden centroid, (harmonic minor + Lydian augmented + harmonic major)/3 = C D vE ^F ^G ^A♭ B, holds three golden
+triads, Cg, vEg and ^A♭g, consecutive on the golden circle, and shares five notes (C vE ^G ^A♭ B) with golden7. It is
+irregular, like every golden centroid; the averaging principle explains single chords better than it builds scales.</p>
+</div>
+<div class="layer derive">
+<p><b>Theorem (grid).</b> If $x, y, z \in 3\mathbb{Z}$ (12-ET pitches in sixth-steps) then $(x + y + z)/3 \in \mathbb{Z}$, so
+the centroid of three 12-ET scales is a 36-ET scale. For two scales, $(x + y)/2 \in \mathbb{Z}$ iff $x \equiv y \pmod 2$.
+Since $x \equiv y \pmod 3$ already, this means $x \equiv y \pmod 6$, a difference of an even number of semitones, and then
+the average $x + (y - x)/2$ is again a multiple of 3: a 12-ET pitch. ∎</p>
+<p><b>Counts</b> (exhaustive over the 286 multisets of 3 of the 11 modes): 225 distinct centroids; 44 contain a golden triad;
+16 distinct centroids, from 21 multisets, contain Cg, and all 21 multisets include Lydian augmented. Twenty of them reach the
+golden fifth as $(21 + 21 + 24)/3$ and one, (Locrian + 2·Lydian aug.)/3, as $(18 + 24 + 24)/3$; it gives the same scale,
+C vD vE vF♯ ^G vA vB, as (Phrygian + Lydian + Lydian aug.)/3.</p>
+<p><b>Silver centroid.</b> Ionian $(0, 6, 12, 15, 21, 27, 33)$ + Aeolian $(0, 6, 9, 15, 21, 24, 30)$ + Locrian
+$(0, 3, 9, 15, 18, 24, 30)$ $= (0, 15, 30, 45, 60, 75, 93)$, divided by 3: $(0, 5, 10, 15, 20, 25, 31)$.</p>
+</div>
+</section>
+
+<section id="hybrid-limit">
+<h2>The hybrid limit</h2>
+<div class="layer hear">
+<p>If bending C major is not the best way to mix Western and golden chords, what is? Search every seven-note scale of
+36-ET and the best mixtures turn out to be small and specific. Here is one that holds three Western and two golden
+triads: C ^C D E F vA A. It is the pentachord C D E F A with two extra notes, vA and ^C, which turn F and A minor into their
+golden projections Fg and vAg.</p>
+<audio-ex src="hybrid_32" caption="The hybrid scale C ^C D E F vA A and a tune over its chords F, Dm, Fg, vAg, Am, Fg, F: three Western and two golden triads in one seven-note collection."></audio-ex>
+</div>
+<div class="layer understand">
+<p>There are $\binom{35}{6} = 1{,}623{,}160$ seven-note scales of 36-ET that contain C. For each one, count its consonant
+Western triads W and its golden triads G. The results (exhaustive):</p>
+<ul>
+<li>W can reach 7 (14 scales; for example C C♯ D E F A♭ A, a 12-ET collection with the triads C♯, F, A, C♯m, Dm, Fm, Am) and
+G can reach 5 (only golden7 itself, in the 7 transpositions that contain C).</li>
+<li>As soon as a scale has one golden triad it has at most 3 Western ones, and as soon as it has one Western triad it has
+at most 3 golden ones.</li>
+<li>The Pareto frontier is <b>(7, 0), (3, 2), (2, 3), (0, 5)</b>, reached by 14, 56, 28 and 7 scales. 672 scales have
+W ≥ 2 and G ≥ 2; 56 have W ≥ 3 and G ≥ 2.</li>
+</ul>
+<table>
+<caption>Scales at the frontier of the hybrid limit</caption>
+<tr><th>(W, G)</th><th>Example</th><th>Triads</th></tr>
+<tr><td>(7, 0)</td><td>C C♯ D E F A♭ A</td><td>C♯, F, A, C♯m, Dm, Fm, Am</td></tr>
+<tr><td>(3, 2)</td><td>C ^C D E F vA A</td><td>F, Dm, Am, Fg, vAg</td></tr>
+<tr><td>(2, 3)</td><td>C ^C ^C♯ E F vA A</td><td>F, Am, ^C♯g, Fg, vAg</td></tr>
+<tr><td>(0, 5)</td><td>golden7 on C♯: C C♯ D vF vF♯ ^A♭ ^A</td><td>C♯g, Dg, vFg, vF♯g, ^Ag</td></tr>
+</table>
+<pianoroll edo="36" notes="C4 ^C4 D4 E4 F4 vA4 A4 C5 ; F4 A4 C5 ; D4 F4 A4 ; A3 C4 E4 ; F4 vA4 ^C5 ; vA3 ^C4 E4" labels="scale ; F ; Dm ; Am ; Fg ; vAg" title="The (3, 2) hybrid C ^C D E F vA A and its five triads"></pianoroll>
+<p>The best hybrids are not inflections of C major. The (3, 2) scale keeps the Western pentachord C D E F A and adds vA and
+^C, which are exactly the two notes that turn F (F A C) and Am (A C E) into Fg (^C F vA) and vAg (vA ^C E). F and Am are an
+L-pair (they share A and C), so their projections are neighbours on the golden circle. The best inflection, the golden
+Ionian, reaches only (2, 2).</p>
+<h3>No well-formed hybrid</h3>
+<p>The most important result is a negative one. Of the 1,623,160 scales, 70 are well formed (Myhill) and contain C. Seven of
+them contain a Western consonant triad (the diatonic scale, in its seven transpositions that contain C), seven contain a
+golden triad (golden7, likewise), and <b>none contains both</b>. Listing every seven-note well-formed scale of 36-ET by its generator shows
+why: each generator builds triads of one family only.</p>
+<table>
+<caption>The seven-note well-formed scales of 36-ET, one per generator (chain centred on C)</caption>
+<tr><th>Generator (sixth-steps, cents)</th><th>Scale</th><th>Steps</th><th>Triads</th></tr>
+<tr><td>1, 2 (33.33, 66.67 c)</td><td>clusters</td><td>1/30, 2/24</td><td>none</td></tr>
+<tr><td>3 (100 c)</td><td>C C♯ D E♭ A B♭ B</td><td>3, 18</td><td>1 diminished</td></tr>
+<tr><td>4 (133.33 c)</td><td>C ^C♯ vE♭ E A♭ ^A vB</td><td>4, 12</td><td>3 augmented</td></tr>
+<tr><td>5 (166.67 c)</td><td>C vD ^E♭ F G vA ^B♭</td><td>5, 6</td><td>3 silver (maximally even)</td></tr>
+<tr><td>10 (333.33 c, silver third)</td><td>C D ^E♭ ^F vG vA B♭</td><td>4, 6</td><td>5 silver</td></tr>
+<tr><td>11 (366.67 c, golden third)</td><td>golden7: C C♯ vE vF ^G ^A♭ B</td><td>3, 8</td><td>5 golden</td></tr>
+<tr><td>15 (500 c, fourth)</td><td>C D E♭ F G A B♭</td><td>3, 6</td><td>3 major, 3 minor, 1 diminished</td></tr>
+<tr><td>16 (533.33 c)</td><td>C ^C♯ E ^F vG A♭ vB</td><td>4, 8</td><td>3 augmented</td></tr>
+<tr><td>17 (566.67 c)</td><td>C vC♯ F vF♯ ^F♯ G ^B</td><td>2, 13</td><td>none</td></tr>
+</table>
+<p>(Generator 8 also gives a two-step-size set, but inside a 9-note cycle, so it is not Myhill.) A Western triad needs the
+fifth chain and a golden triad needs the golden chain; a single well-formed scale follows one chain. So a scale that holds
+both kinds is necessarily irregular. <b>Hybrid scales are colour collections, not new diatonics.</b> The maximally even
+7-note scale, finally, has W = G = 0 and three silver triads.</p>
+</div>
+<div class="layer derive">
+<p><b>Method.</b> Each scale is a 36-bit mask containing bit 0; each triad type has 36 masks; W and G are counted by
+mask inclusion over all $\binom{35}{6}$ scales. Myhill's property is tested by computing, for each generic interval
+$k = 1, \dots, 6$, the set of its specific sizes and requiring exactly two. (Exhaustive.)</p>
+<p><b>Theorem (no well-formed hybrid).</b> No 7-note well-formed scale of 36-ET contains both a major or minor triad and a
+golden triad. (Exhaustive; the table lists one scale per generator class, and every Myhill scale containing C is a rotation
+or transposition of one of them.)</p>
+<p><b>Why the frontier example works.</b> π(F) = Fg = ^C F vA and π(Am) = vAg = vA ^C E (Chapter 35): the two
+projections bend the same two notes, C up and A down. Adding the bent copies ^C and vA to a collection that keeps C and A
+keeps both Western triads and gains both golden ones, at the cost of two extra notes: C ^C E F vA A has F, Am, Fg and vAg in
+six notes. The seventh note can add one more Western triad, and only one (W ≤ 3 once G ≥ 1): Dm with D, as in the example, or
+C with G, A with C♯, Fm with A♭ (computed).</p>
+</div>
+</section>
+
+<section id="colour-chords">
+<h2>Golden colour chords</h2>
+<div class="layer hear">
+<p>Western harmony enriches a major key by borrowing chords from the parallel minor: F minor in C major, or A♭ major
+(<a href="ch:ch11#borrowed">Chapter 11</a>). A golden key can lend chords the same way. In C major, replace F by its golden
+image Fg, A minor by vAg, G by Gg: the chord keeps one note and bends the other two by a sixth-step. Held on a strong beat,
+the golden chord is not a passing chord but a colour, and the next Western chord is a release.</p>
+<audio-ex src="colour_chords" caption="C major with golden colour chords: I, golden IV (Fg), V7, I, vi, golden vi (vAg), ii, golden V (Gg), I. Over each colour chord the melody starts and ends on the common tone (F, E, G), touching one bent note in between."></audio-ex>
+<p>The colour chords come in pairs that are neighbours on the golden circle, so the two of a pair can follow each other
+directly.</p>
+<audio-ex src="colour_pairs" caption="C, Cg, vEg, Em, then F, Fg, vAg, Am, then C: each Western chord passes to its golden image, steps once along the golden circle, and lands on the Western chord that the second golden chord images."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Definition.</b> A <b>golden colour chord</b> in a Western key is the golden projection π(X) of a diatonic triad X,
+used in place of X on a strong beat or held, rather than as a passing chord between two other chords. It is golden modal
+mixture: the chord is borrowed from the golden layer of the key, not from the parallel mode.</p>
+<table>
+<caption>The six colour chords of C major (π = the nearest golden triad, distance 2 sixth-steps)</caption>
+<tr><th>Diatonic triad</th><th>Colour chord</th><th>Notes</th><th>Bends</th><th>Common tone</th></tr>
+<tr><td>I = C</td><td>golden I = Cg</td><td>C vE ^G</td><td>E −1, G +1</td><td>C</td></tr>
+<tr><td>ii = Dm</td><td>golden ii = vDg</td><td>vD ^F A</td><td>D −1, F +1</td><td>A</td></tr>
+<tr><td>iii = Em</td><td>golden iii = vEg</td><td>vE ^G B</td><td>E −1, G +1</td><td>B</td></tr>
+<tr><td>IV = F</td><td>golden IV = Fg</td><td>F vA ^C</td><td>C +1, A −1</td><td>F</td></tr>
+<tr><td>V = G</td><td>golden V = Gg</td><td>G vB ^D</td><td>D +1, B −1</td><td>G</td></tr>
+<tr><td>vi = Am</td><td>golden vi = vAg</td><td>vA ^C E</td><td>C +1, A −1</td><td>E</td></tr>
+</table>
+<p>A major triad keeps its root and bends its third down and its fifth up (Cg = C(v3,^5)); a minor triad keeps its fifth and
+bends its root down and its third up. Every colour chord is exactly two sixth-steps from its diatonic original, and no Western
+triad is closer than that to any golden triad (<a href="ch:ch35#projection">Chapter 35</a>). The diminished vii° = B D F is
+farther from gold: its nearest golden triad, ^B♭g, is four sixth-steps away, so it has no colour chord in this sense.</p>
+<pianoroll edo="36" notes="C4 E4 G4 ; C4 vE4 ^G4 ; F4 A4 C5 ; F4 vA4 ^C5 ; G4 B4 D5 ; G4 vB4 ^D5 ; A4 C5 E5 ; vA4 ^C5 E5" labels="C ; Cg ; F ; Fg ; G ; Gg ; Am ; vAg" title="Four diatonic triads of C major and their colour chords: one note stays, two bend by a sixth-step"></pianoroll>
+<h3>Three facts about colour chords</h3>
+<ul>
+<li><b>Colour pairs.</b> The projection turns the leading-tone exchange (L: C ↔ Em, F ↔ Am, G ↔ Bm) into one step of the
+golden circle (<a href="ch:ch35#plr">Chapter 35</a>). So Cg → vEg (golden I to golden iii) and Fg → vAg (golden IV to golden vi)
+move one voice by a semitone, and the pairs can be used as two-chord colour gestures. The third pair, Gg → vBg = π(Bm), leaves
+the key, since Bm is not diatonic in C.</li>
+<li><b>Colour chords are pivots.</b> The same golden chord images a diatonic triad of a second key a silver third away
+(<a href="ch:ch35#silver-third-keys">Chapter 35</a>): Fg is golden IV of C major and golden ii of ^E♭ major. A colour chord
+held long enough can turn into a modulation.</li>
+<li><b>The cost in roughness</b> (measurement, harmonic tones, Sethares model of <code>explore.py</code>). With each diatonic
+triad in close root position (root between C4 and B4) and its colour chord reached by the smoothest motion, the colour chord
+is rougher by 0.18 to 0.20 on every degree: C 1.319 → Cg 1.498, Dm 1.238 → vDg 1.417, Em 1.149 → vEg 1.333, F 1.090 → Fg
+1.284, G 1.020 → Gg 1.220, Am 0.977 → vAg 1.175. (The one triad that gets smoother, Bdim 1.201 → ^B♭g 1.135, is the one
+without a colour chord at distance 2.) So on harmonic instruments a colour chord adds a measurable veil, and the return to
+the diatonic triad is a release.</li>
+</ul>
+<h3>Using them (proposals)</h3>
+<ol>
+<li>Anchor the melody on the common tone (F over Fg, E over vAg, G over Gg). The colour then happens around a steady line, as in
+the first example, where the melody touches one bent note and returns.</li>
+<li>Follow a colour chord by a diatonic chord that contains its bent notes' Western originals, or by the original itself: the
+release undoes the bend.</li>
+<li>Use the circle pairs (Cg → vEg, Fg → vAg) as short golden excursions inside a Western phrase.</li>
+<li>Keep the arrival Western. Golden V (Gg) before I colours the dominant but weakens the leading tone, since B becomes vB;
+the first example risks it once, after ii, and the phrase still lands on C, which is heard as the release.</li>
+</ol>
+<aside class="box note"><b>Western mirror.</b> Borrowing iv into a major key changes one note of IV by a semitone
+(F A C → F A♭ C). A golden colour chord changes two notes, each by a third of a semitone, and keeps one.
+Modal mixture moves within 12-ET; golden mixture moves between its layers. Both are colour, and both are heard against the
+diatonic chord they replace.</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> π(X) is the golden triad at minimal voice-leading distance from X. For a major triad $M_r$,
+π$(M_r) = G_r$; for a minor triad $m_r$, π$(m_r) = G_{r-1}$; both at distance 2, uniquely. (Theorem with exhaustive check,
+<a href="ch:ch35#projection">Chapter 35</a>.)</p>
+<p><b>Lower bound.</b> A golden triad has one note on each layer of 36-ET and a Western triad has all three on one layer, so
+at least two voices change layer, and the distance is at least 2. ∎</p>
+<p><b>The six colour chords of a major key on $t$</b> have golden roots $t + \{0, 5, 11, 15, 21, 26\}$: the major triads on
+0, 15, 21 keep their roots and the minor triads on 6, 12, 27 project to 5, 11, 26. The circle pairs are the roots differing
+by 11 (one golden-circle step): $(0, 11)$ and $(15, 26)$; $(21, 32)$ would need π(Bm) = vBg, outside the key.
+(Theorem.)</p>
+<p><b>Roughness table</b> (measurement): close position of X from its root in octave 4; π(X) voiced by the minimal motion
+from that voicing (for C: C4 vE4 ^G4). Harmonic partials $k = 1, \dots, 8$ with amplitudes $0.88^{k-1}$.</p>
+</div>
+<div class="exercise">
+<p><b>Exercise 38.1.</b> Which two notes of C major does the golden Ionian bend, and which two golden triads does that
+create? Why is Fg impossible in the same scale?</p>
+<details class="answer"><summary>Answer</summary><p>E down to vE and G up to ^G, creating Cg = C vE ^G and vEg = vE ^G B. Fg =
+^C F vA needs C raised to ^C, but Cg keeps C, so the two cannot share an inflection (the scale has one note per degree).</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 38.2.</b> Compute the centroid (Ionian + Ionian + Aeolian)/3 degree by degree and check that its third is a
+golden third.</p>
+<details class="answer"><summary>Answer</summary><p>Thirds $(12 + 12 + 9)/3 = 11$ (vE), sixths $(27 + 27 + 24)/3 = 26$ (vA),
+sevenths $(33 + 33 + 30)/3 = 32$ (vB); the other degrees are equal in both modes. So C D vE F G vA vB, with a golden third
+C–vE of 11 sixth-steps; the fifth stays G (21), so the tonic chord is C(v3), not Cg.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 38.3.</b> Show that a scale containing both F and Fg needs at least five notes, and find one with F, Am, Fg
+and vAg in six notes.</p>
+<details class="answer"><summary>Answer</summary><p>F = F A C and Fg = ^C F vA share only F, so together they need 5 notes:
+C ^C F vA A. Adding E gives Am (A C E) and vAg (vA ^C E): C ^C E F vA A, six notes with F, Am, Fg, vAg. Adding D (for Dm)
+gives the (3, 2) hybrid of the text.</p></details>
+</div>
+<div class="exercise">
+<p><b>Exercise 38.4 (listening).</b> In the colour-chord example, which colour chord sounds most like a coloured version of
+its original, and which most like a different chord? Is the measured roughness difference a guide?</p>
+<details class="answer"><summary>Answer</summary><p>A matter for the ear; there is no single right answer. The measured
+increase is nearly the same for all six (0.18 to 0.20), so roughness does not explain a difference. What differs is context:
+Fg follows I and keeps F under the melody, so it is heard as a veiled IV; Gg follows ii and replaces the dominant, so its bent
+leading tone vB makes it sound less like V.</p></details>
+</div>
+</section>

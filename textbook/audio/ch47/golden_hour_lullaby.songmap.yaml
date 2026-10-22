@@ -1,0 +1,61 @@
+# 1. Golden Hour Lullaby (2:31). C major, 72 BPM. A bedtime song: a music box, a felt piano tune, then
+# harp, bass, flute and strings gather and swell, and everything settles back to sleep.
+# Golden technique: System 1/2 golden passing chords (docs/GOLDEN_THEORY.md §2, §4.2) inside a Western lullaby:
+#   I-IV, IV-I, I-V and V-I through one strict golden chord (~) on beat 4; IV-V through the golden escalator
+#   (F:0.5 ~g ~g G); the bridge closes with the four-chord golden authentic cadence G - vEbT13/G - vCg/G - C;
+#   the coda is the golden plagal amen (ii - IV - golden - I).
+# Craft: golden chords sit on weak beats and every sounding part moves through them (voice-led hold/pulse
+# piano and strings, voice-led bass, rel arpeggios); the melodies rest or hold a common tone there
+# (C over C->F and F->C, G over C->G and G->C), so every golden moment is a glide, never a rub.
+# Form (44 bars + 4 s):
+#   intro 4      music box (glass) plays the opening phrase over soft piano chords
+#   verse 8      felt piano alone: left-hand broken chords and the tune (question)
+#   verse2 8     harp ripples, warm bass, the piano answer; the flute sings a countermelody
+#   bridge 8     strings swell under the bridge tune (doubled by the music box), ends on the golden authentic cadence
+#   interlude 4  the flute takes the tune over harp, bass and soft brushes; half cadence on G
+#   finale 8     fullest, the peak: piano tune doubled an octave below by the flute, music-box descant,
+#                pulsing piano, strings, harp, bass and brushes (rim clicks added)
+#   coda 4       golden plagal amen; piano, strings and bass thin out under a last music-box echo
+songmap: 0.2
+title: "Golden Hour Lullaby"
+tempo: 72
+meter: "4/4"
+key: C
+tuning: "36edo"
+fps: 30
+seed: 21
+tail_seconds: 4
+
+instruments:
+  keys: keys/still
+  mel: {use: keys/still, hardness: 0.3}
+  gtr: string_pluck/still
+  low: clean/bass
+  wash: pad/still
+  bell: clean/glass
+  flute: clean/lead
+
+harmony:
+  progressions: {lull: "C:0.75 ~:0.25 F:0.75 ~:0.25 C:0.75 ~:0.25 G:1 Am:1 F:0.5 ~g:0.25 ~g:0.25 G:0.75 ~:0.25 C:1", dusk: "Am:0.75 ~:0.25 Em:1 F:0.75 ~:0.25 C:1 Dm:0.75 ~:0.25 Am:1 F:1 G:0.5 vEbT13/G:0.25 vCg/G:0.25", open: "C:1 F:0.75 ~:0.25 C:1 G:0.75 ~:0.25", amen: "Dm:1 F:0.75 ~:0.25 C:2"}
+
+sections:
+  - {name: intro, bars: 4, parts: {keys: hold, bell: {deg: "=p 4/4 2 0/2 | 5/4. 3/8 0/2 | 0/4 2 4/2 | 5/4 4/2.", oct: 2}}, harmony: open, dyn: p}
+  - {name: verse, bars: 8, parts: {keys: {rel: "R/8 5 3+ 5 R+ 5 3+ 5", oct: -1}, mel: {deg: "=p 4/4 2 0/2 | 5/4. 3/8 0/2 | 0/4 2 4/2 | 5/4 4 3 1 | 0/2. r/4 | 5/4 3 r/2 | 1/4 3 4/2 | 0/1", oct: 1}}, harmony: lull, dyn: "p<mp"}
+  - {name: verse2, bars: 8, parts: {keys: hold, gtr: {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5"}, low: bassline, mel: {deg: "=mp 4/4 5 7/2 | 11/4. 9/8 7/2 | 9/4 7 4/2 | 8/4. 7/8 6/4 5 | 7/2. r/4 | 9/4 7 r/2 | 6/4 8 4/2 | 7/1", oct: 1}, flute: {deg: "=p r/2 2/4 0 | 5/2. 0/4 | 2/2. 4/4 | 1/2. -1/4 | r/4 0 2 4 | 5/4 3 r/2 | 1/2 -1/4 r/4 | 4/4 2 0/2", oct: 1}}, harmony: lull, dyn: "p<mp"}
+  - {name: bridge, bars: 8, parts: {keys: hold, wash: hold, gtr: {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5"}, low: bassline, mel: {deg: "=mp < 2/4 4 5/2 | 4/2. r/4 | 5/4 9 7/2 | 7/1 | 8/4 7 5/2 | 4/4 5 7/2 | 9/2 8/4 7 | 6/2 r/2 =mf", oct: 1}, bell: {deg: "=mp < 2/4 4 5/2 | 4/2. r/4 | 5/4 9 7/2 | 7/1 | 8/4 7 5/2 | 4/4 5 7/2 | 9/2 8/4 7 | 6/2 r/2 =mf", oct: 2}}, harmony: dusk, dyn: "p<mf"}
+  - {name: interlude, bars: 4, parts: {keys: hold, gtr: {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5"}, low: bassline, drums: {steps: {kick: {steps: x.........-....., vel: [0.5, 0.35]}, hat: {steps: x.x.x.x.x.x.x.x., vel: [0.3, 0.15, 0.22, 0.15]}}}, flute: {deg: "=p 4/4 2 0/2 | 5/4. 3/8 0/2 | 0/4 2 4/2 | 5/4 4 3 1 | 0/2. r/4 | 5/4 3 r/2 | 1/4 3 4/2 | 0/1", oct: 1}}, harmony: lull, dyn: mp}
+  - {name: finale, bars: 8, parts: {keys: {style: pulse, vel: 0.42}, wash: hold, gtr: {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5"}, low: bassline, drums: {steps: {kick: {steps: x.........-....., vel: [0.5, 0.35]}, hat: {steps: x.x.x.x.x.x.x.x., vel: [0.3, 0.15, 0.22, 0.15]}, rim: {steps: "....-.......-...", vel: [0.3, 0.25]}}}, mel: {deg: "=p 4/4 2 0/2 | 5/4. 3/8 0/2 | 0/4 2 4/2 | 5/4 4 3 1 | 0/2. r/4 | 5/4 3 r/2 | 1/4 3 4/2 | 0/1", oct: 1}, flute: {deg: "=p 4/4 2 0/2 | 5/4. 3/8 0/2 | 0/4 2 4/2 | 5/4 4 3 1 | 0/2. r/4 | 5/4 3 r/2 | 1/4 3 4/2 | 0/1"}, bell: {deg: "=mp 2/2. 0/4 | 5/2 3/4 0 | 2/4 0 2 4 | 1/2 -1/2 | r/4 -2 0 2 | 3/2 r/2 | -1/2 1/4 4 | 4/4 2 0/2", oct: 2}}, harmony: lull, dyn: "mf<f"}
+  - {name: coda, bars: 4, parts: {keys: hold, wash: hold, low: bassline, mel: {deg: "=p 3/2 2/8 1/4. | 0/1 | 4/4 2 0/2 | 0/1", oct: 1}, bell: {deg: "r/1 | r/1 | r/2 4/4 2 | 0/1", oct: 2}}, harmony: amen, dyn: "p>pp"}
+
+mix:
+  keys: {gain_db: -5, send: {hall: 0.2}}
+  mel: {gain_db: 4, send: {hall: 0.3}}
+  gtr: {gain_db: -6, send: {hall: 0.25}}
+  low: {gain_db: -4, send: {hall: 0.1}}
+  wash: {gain_db: -25, send: {hall: 0.35}}
+  bell: {gain_db: -12, send: {hall: 0.45}}
+  flute: {gain_db: 0, send: {hall: 0.3}}
+  drums: {gain_db: -14}
+  fx: {gain_db: -9}
+
+master: clean

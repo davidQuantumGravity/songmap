@@ -1,0 +1,18 @@
+# ch40 seven-ten: golden7's four semitone pairs (B-C, C-C#, vE-vF, ^G-^Ab) as leaning tones: ^Ab falls to ^G,
+# C rises to C# and the phrase stops there (open), vF falls to vE, then B rises to C (closed); release to C major.
+songmap: 0.2
+title: "Leaning tones in golden7"
+tempo: 84
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 40
+tail_seconds: 3
+instruments: {keys: clean/keys, pad: clean/organ, low: clean/bass}
+mix:
+  keys: {gain_db: -3, send: {hall: 0.25}}
+  pad: {gain_db: -12, send: {hall: 0.25}}
+  low: {gain_db: -10}
+sections:
+  - {name: tune, bars: 5, harmony: "Cg:1 ^Abg:1 C#g:1 vEg:1 Cg:0.5 C:0.5", parts: {keys: {notes: "c4 ve8 vf8 ^g4 ^ab8 ^g8 | c+4 ^ab8 ^g8 ^ab2 | c4 c#8 vf8 c#2 | vf4 ve8 vf8 ve4 b-4 | c1"}, pad: hold, low: {style: roots, role: bass}}}
+master: clean

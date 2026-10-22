@@ -1,0 +1,17 @@
+# ch35: the submediant as the door to ^C major (GOLDEN_BLENDING D10). The natural passing engine
+# (~g) chooses the golden chord between Am and ^C itself; the tonic lift C -> ^C has no golden hinge.
+songmap: 0.2
+title: "vi to ^I through the passing engine"
+tempo: 76
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 358
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix:
+  organ: {gain_db: -6, send: {hall: 0.25}}
+  low: {gain_db: -6}
+sections:
+  - {name: all, bars: 8, harmony: "C:1 F:0.5 G:0.5 Am:1 ~g:1 ^C:1 ^F:0.5 ^G7:0.5 ^C:2", parts: {organ: hold, low: bassline}}
+master: clean

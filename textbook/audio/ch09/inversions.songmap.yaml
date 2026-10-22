@@ -1,0 +1,20 @@
+# Same upper notes over C, E, G in the bass (root position, first, second inversion);
+# then close and open voicings of root-position C.
+songmap: 0.2
+title: "Inversions and voicing"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 1
+tail_seconds: 2
+instruments: {up: clean/organ, low: clean/bass}
+mix: {up: {gain_db: -6, send: {hall: 0.25}}, low: {gain_db: -5}}
+returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 4
+    parts:
+      up: {notes: "=mp [c,e,g]2. [c,e,g]2. [c,e,g]2. r4 [e-,g-,c]2. [g-,e,c+]2."}
+      low: {notes: "=mp c-2. e-2. g-2. r4 c-2. c-2."}
+master: clean

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Five Golden Songs</title>
+<style>
+  :root { --bg: #fbfaf7; --fg: #1f1d1a; --muted: #6b665e; --card: #ffffff; --line: #e6e1d8; --gold: #b07a12; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #161513; --fg: #ece8e1; --muted: #a39d93; --card: #1f1d1a; --line: #33302b; --gold: #e0ad4a; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  .lede { color: var(--muted); margin: 0 0 28px; }
+  article { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; margin: 0 0 16px; }
+  h2 { font-size: 19px; margin: 0; }
+  .meta { color: var(--muted); font-size: 14px; margin: 2px 0 10px; }
+  .tech { color: var(--gold); font-weight: 600; font-size: 14px; margin: 0 0 6px; }
+  p { margin: 0 0 10px; }
+  audio { width: 100%; margin-top: 4px; }
+  code { font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Five Golden Songs</h1>
+  <p class="lede">Western harmony is home in all five; golden chords (36-ET, stacked golden thirds) come in as passing light,
+    sparkle, colour, a pivot between keys, and once as a home of their own. Scores and notes are in README.md.</p>
+
+  <article>
+    <h2>1. Golden Hour Lullaby</h2>
+    <div class="meta">C major · 72 BPM · 2:31 · music box, felt piano, harp, flute, strings, bass, soft brushes</div>
+    <div class="tech">Golden passing chords</div>
+    <p>A plain lullaby whose chord changes glide through golden chords on the weak beats: C → vFg → F, the escalator
+      F → vF#g → ^F#g → G, and the bridge closes with the four-chord golden authentic cadence G – vE♭T13/G – vCg/G – C.
+      The melody rests or holds a shared note while the piano voices slide by sixth-steps.</p>
+    <audio controls preload="none" src="renders/01_golden_hour_lullaby/song.mp3"></audio>
+  </article>
+
+  <article>
+    <h2>2. Deceptive Light</h2>
+    <div class="meta">G major · 120 BPM · 2:37 · drums, bass, electric piano, guitar, pluck arp, pad, lead, bell</div>
+    <div class="tech">Golden deceptive cadence, escalator, golden modal mixture</div>
+    <p>A pop song on I–V–vi–IV. Every D → Em passes through vE♭g and E♭g in two quick 8ths, so the bass climbs
+      D – vE♭ – E♭ – E like a walk-up. The pre-chorus climbs the golden escalator into V, the bridge slows the deceptive
+      cadence down so you can hear it, and the ending bends IV through its golden centroid into iv: C – Cg – Cm – G.</p>
+    <audio controls preload="none" src="renders/02_deceptive_light/song.mp3"></audio>
+  </article>
+
+  <article>
+    <h2>3. Tape Bloom</h2>
+    <div class="meta">A minor · 90 BPM · 2:23 · swung drums, crackle, electric piano, sliding bass, piano, guitar, flute, bells</div>
+    <div class="tech">Golden colour chords, golden Picardy third</div>
+    <p>Lo-fi chords that bloom into their golden shadows for half a bar: Fmaj7 → Fg (A sinks to vA, C lifts to ^C, F and E
+      stay), E7 → Eg, whose third sinks while its seventh rises to the golden seventh D♯, and Am → vAg in the drum-less bridge. It reads as tape wow. The coda climbs the
+      third of A from minor through silver and golden to major: Am – Am(^3) – Ag – A.</p>
+    <audio controls preload="none" src="renders/03_tape_bloom/song.mp3"></audio>
+  </article>
+
+  <article>
+    <h2>4. Andalusian Gold</h2>
+    <div class="meta">A minor / E Phrygian · 100 BPM · 2:14 · two guitars, palmas and cajón, bass, strings, lead, violin line, bell</div>
+    <div class="tech">Golden Andalusian cadence</div>
+    <p>The flamenco descent Am – G – F – E, first plain, then golden: Am – A♭g – vA♭g – G – ^F#g – vF#g – F – vF – ^E – E.
+      The bass walks the whole tetrachord down in sixth-steps. The voice sings two beats and the guitar answers in gold;
+      the ending hangs on E.</p>
+    <audio controls preload="none" src="renders/04_andalusian_gold/song.mp3"></audio>
+  </article>
+
+  <article>
+    <h2>5. The Silver Third</h2>
+    <div class="meta">C → ^E♭ → golden home → C · 90 BPM · 2:39 · piano, strings, harp, drums, bass, lead, horn, organ choir, bells, golden pad</div>
+    <div class="tech">Pivot between layers, golden home, golden giant steps</div>
+    <p>The theme modulates to ^E♭ major, a "silver third" (333 cents) up, a key that shares no note with C, through the
+      golden chord they share (Fg). Then the Western instruments fall silent and golden-spectrum timbres breathe along the
+      golden circle, until G7 arrives as a visitor and leads home. The finale walks Coltrane's major-third cycle through its
+      golden passing chords: C – Cg – A♭ – A♭g – E – Eg – C.</p>
+    <audio controls preload="none" src="renders/05_silver_third/song.mp3"></audio>
+  </article>
+</main>
+</body>
+</html>

@@ -12,7 +12,7 @@ Name parts by role. The six default parts (`drums bass pad arp lead fx`) have in
 | `gtr` (string_pluck) | Karplus-Strong guitar, harp or koto | arpeggios, ripples, folk warmth | 40–84 | `string_pluck(brightness=.6)` nylon-ish; `.85` steel/harp; `pick_pos=.1` thin; `body=.8` woody |
 | `pad` (detuned saws) | wide, soft attack | harmony bed, atmosphere | 48–76 | styles `warm` and `dark` (triads); write rel for 7ths; `inst pad(attack=.8, cutoff=1200)` darker and slower |
 | `arp` (pluck) | short synth plucks | motion, tech, data | 55–84 | `arp:up` brightens over 8 bars; `arp:dark` filtered; `order=[...]` sets the figure |
-| `lead` (mono synth) | vibrato, glides with `~` | featured melody, hooks | 60–88 | `inst lead(vib_depth=20, glide=.08)`. Its default level is low, so **for a featured melody add `mix lead 6`** |
+| `lead` (mono synth) | vibrato, glides with `~` | featured melody, hooks | 60–88 | `inst lead(vib_depth=20, glide=.08)`. The moods lift it to a featured level (in `v0` it is quiet) |
 | `bass` (mono synth) | saw plus sub, a filter envelope | low end | 28–55 | `bass(cutoff=500)` round; `cutoff=1200` growl; `glide=.08` with `~` slides |
 | `drums` (kit) | kick snare clap hat ohat hat16 fill ghost rim | groove | — | `kit kick=kick/v0(tune=44, decay=.6)` deeper and longer kick |
 | `fx` (kit) | riser impact zap tick | events, transitions, data texture | — | via events (`!riser`, `!impact(size=xl)`, `!zaps(count=6)`) and `fx:ticks` |
@@ -52,6 +52,8 @@ There are no field recordings. Suggest the world with musical gestures, kept qui
 - **Density follows the story.** Start sparse (2–3 parts), add one layer per section or scene, peak with everything, then subtract. Entries and exits are themselves events: a new instrument entering on a cut is a free "hit".
 - **Contrast between sections:** a change of texture (who plays), register, rhythm density or harmonic rhythm. Changing only the drums is weak; change two things.
 - **Leave room for the voice-over.** In a narrated video, keep the melody sparse and mid-low under speech, and bring it forward between lines.
-- **Balance.** Start new songs with `mix drums -6 | fx -6 | lead 6` (the defaults are tuned to the drum-heavy Oct-13 tracks). After rendering, look at `qa.json`: `stems` holds per-part LUFS over the whole song (a part that plays less reads lower), and `sections` holds the contrast.
-  - **Melody.** A featured melody belongs within a few dB of the loudest accompaniment: `mix keys 0` to `2` for a piano tune, `mix lead 6` to `8`.
+- **Balance.** The mood sets the levels (`balanced` by default: drums under the music, the lead audible). After rendering, check two things:
+  - `review.json`: the ear flags a buried melody, among other things;
+  - `qa.json`: `stems` holds per-part LUFS over the whole song (a part that plays less reads lower), and `sections` holds the contrast.
+  - **Melody.** A featured melody belongs within a few dB of the loudest accompaniment: `mix keys 0` to `2` for a piano tune, `mix lead 9` to lift the lead further.
   - **Soft pieces.** For a soft or reflective piece, go further: `mix drums -9`.

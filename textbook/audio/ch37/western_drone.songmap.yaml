@@ -1,0 +1,37 @@
+# ch37: Western chords over two drones, on harmonic tones. The same progression C - Am - F - G - C
+# is played first over a C major drone (C3 E3 G3), then over a Cg drone (C3 vE3 ^G3); the last
+# chord returns to the C major drone, the deepest rest. In the roughness model (harmonic partials
+# 1..8, triads in close root position from C4..B4) every Western triad of C major is rougher over
+# the Cg drone, by 0.18 (F) to 1.00 (Em).
+songmap: 0.2
+title: "Western chords over a golden drone"
+tempo: 80
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 373
+tail_seconds: 3
+instruments: {organ: clean/organ, drone: clean/organ}
+mix:
+  organ: {gain_db: -6, pan: 0.2, send: {hall: 0.2}}
+  drone: {gain_db: -9, pan: -0.2, send: {hall: 0.2}}
+sections:
+  - name: over_c
+    bars: 5
+    harmony: "C:1 Am:1 F:1 G:1 C:1"
+    parts:
+      organ: {notes: "=mf [c,e,g]1 | [c,e,a]1 | [c,f,a]1 | [b-,d,g]1 | [c,e,g]1"}
+      drone: {notes: "=mp [c-,e-,g-]1 | [c-,e-,g-]1 | [c-,e-,g-]1 | [c-,e-,g-]1 | [c-,e-,g-]1"}
+  - name: over_cg
+    bars: 5
+    harmony: "C:1 Am:1 F:1 G:1 C:1"
+    parts:
+      organ: {notes: "=mf [c,e,g]1 | [c,e,a]1 | [c,f,a]1 | [b-,d,g]1 | [c,e,g]1"}
+      drone: {notes: "=mp [c-,ve-,^g-]1 | [c-,ve-,^g-]1 | [c-,ve-,^g-]1 | [c-,ve-,^g-]1 | [c-,ve-,^g-]1"}
+  - name: home
+    bars: 2
+    harmony: "C:2"
+    parts:
+      organ: {notes: "=mf [c,e,g]1 | [c,e,g]1"}
+      drone: {notes: "=mp [c-,e-,g-]1 | [c-,e-,g-]1"}
+master: clean

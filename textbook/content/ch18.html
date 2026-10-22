@@ -1,0 +1,267 @@
+<section id="chromaticism">
+<h2>Chromaticism inside tonality</h2>
+<div class="layer hear">
+<p>Play a short chain of chords that stays inside the C major scale, and then the same plan again with a few
+"wrong" notes slipped in: a B♭ here, an A♭ there, a C♯ on the way to D minor. The second version is no less in
+C major. Its home is the same and its cadence is the same, but it has gained a line you can sing along the top: C, B♭, A, A♭, G, sliding down
+by semitones. That is the core of <b>chromatic harmony</b>: notes from outside the scale that do not leave the key, but
+make its voices move by the smallest step the keyboard has.</p>
+<audio-ex src="chromatic_line" caption="First diatonic (C F Dm G7 C), then chromatic (C C7 F Fm C/E A7 Dm G7 C): listen for the top voice sliding C, B♭, A, A♭, G."></audio-ex>
+<pianoroll edo="12" notes="G3 E4 C5 ; G3 E4 Bb4 ; C4 F4 A4 ; C4 F4 Ab4 ; C4 E4 G4 ; C#4 E4 G4 ; D4 F4 A4 ; B3 F4 G4 ; C4 E4 G4" labels="C ; C7 ; F ; Fm ; C/E ; A7 ; Dm ; G7 ; C" title="The chromatic version, upper voices (bass omitted): the top line falls C, B♭, A, A♭, G"></pianoroll>
+<p>Romantic music from Schubert to Wagner, Liszt, Franck and Richard Strauss used such chords more and more densely, until in
+some passages almost every chord contains a note foreign to the key. Listen for two things that chromatic
+harmony does at once: it <i>colors</i> (a minor subdominant in a major key sounds shaded, a secondary dominant
+sounds bright and urgent), and it <i>connects</i>, because the foreign notes almost always sit a semitone from
+the notes they replace.</p>
+</div>
+<div class="layer understand">
+<p>Most chromatic chords of the tonal era belong to a few families you have met already:</p>
+<table>
+<tr><th>Family</th><th>Example in C major</th><th>Foreign note</th><th>What it does</th></tr>
+<tr><td>Secondary dominant (<a href="ch:ch11#secondary">Chapter 11</a>)</td><td>A7 → Dm (V7/ii)</td><td>C♯</td><td>borrows the pull of a dominant for a chord other than I</td></tr>
+<tr><td>Mixture (<a href="ch:ch11#borrowed">Chapter 11</a>)</td><td>Fm, A♭, B♭ from C minor</td><td>A♭, E♭, B♭</td><td>darkens the major key without leaving it</td></tr>
+<tr><td>Neapolitan sixth</td><td>D♭/F → G7</td><td>D♭</td><td>a major triad on the lowered second degree, falling a semitone to the leading tone</td></tr>
+<tr><td>Augmented sixth chords</td><td>A♭–C–F♯ (Italian), A♭–C–D–F♯ (French), A♭–C–E♭–F♯ (German)</td><td>A♭, F♯</td><td>two voices a semitone from G spread outward onto the octave G–G</td></tr>
+<tr><td>Chromatic mediant (<a href="ch:ch11#mediants">Chapter 11</a>)</td><td>C → E, C → A♭</td><td>G♯ or A♭, and others</td><td>a root a third away, quality kept, with a common tone</td></tr>
+</table>
+<p>All of these chords have one property in common: each foreign note lies a semitone from a note of the chords
+around it. In the example above, B♭ lies between C and A, A♭ between A and G, and C♯ between C and D. The
+chromatic note is a <b>passing</b> or <b>leading</b> note blown up into a chord. The augmented sixth makes this
+literal: A♭ and F♯ exist only to move a semitone outward to G.</p>
+<p>So chromatic harmony is mainly a matter of voice leading. Two chords sound close when their voices can move to each other by
+small steps, whatever their positions in the key. That principle, measured in
+<a href="ch:ch14#distance">Chapter 14</a>, becomes the main tool of the rest of this chapter.</p>
+<aside class="box history"><b>When.</b> Chromatic chords are old: augmented sixths and the Neapolitan were standard by the
+18th century, and Gesualdo's madrigals (around 1600) already move by startling chromatic steps. What changed in the
+19th century was density and independence: chromatic chords began to follow each other directly, with the tonic
+reached late or only implied.</aside>
+<aside class="mirror"><b>Golden mirror.</b> Chromaticism splits the whole tone into two semitones and lets voices travel by the smaller
+step. 36-ET splits the semitone again, into three sixth-steps, and the same smooth voice leading can then pass through
+golden chords (<a href="ch:ch27#subchromatic">Chapter 27</a>). The full chromatic toolkit of this Part, carried
+into 36 pitch classes, is <a href="ch:ch33">Chapter 33</a>.</aside>
+<aside class="mirror"><b>Golden mirror.</b> The Neapolitan has a golden counterpart: C♯g, the golden triad a semitone above
+Cg, falls into it with every voice moving a semitone, in exact tuning each by a golden apotome. It mirrors the direct slide
+D♭ → C rather than the usual N⁶ → V. The augmented sixth has none:
+no golden triad or seventh contains an interval that opens onto an octave by equal contrary steps
+(<a href="ch:ch37#approach">Chapter 37</a>).</aside>
+</div>
+<div class="layer derive">
+<p><b>A measure of chromatic distance.</b> Write a chord as a list of pitch classes in $\mathbb{Z}_{12}$. The
+voice-leading distance from $X = (x_1,\dots,x_n)$ to $Y$ is the smallest total motion</p>
+$$d(X,Y) = \min_{\sigma} \sum_{i=1}^{n} \bigl| y_{\sigma(i)} - x_i \bigr|_{12},$$
+<p>where $\sigma$ runs over the ways of assigning the notes of $Y$ to the voices of $X$, and $|k|_{12}$ is the
+shorter way round the circle (between 0 and 6 semitones). This is the "taxicab" distance of
+<a href="ch:ch14#geometry">Chapter 14</a>, folded into pitch classes.</p>
+<p><b>Computed (exhaustive over the 24 major and minor triads).</b> From C major:</p>
+<table>
+<tr><th>Distance (semitones)</th><th>Triads</th></tr>
+<tr><td>0</td><td>C</td></tr>
+<tr><td>1</td><td>Cm, Em</td></tr>
+<tr><td>2</td><td>Am, A♭, E, Fm, C♯m</td></tr>
+<tr><td>3</td><td>F, G, E♭, A, C♯, B, A♭m</td></tr>
+<tr><td>4</td><td>E♭m, Gm, Bm</td></tr>
+<tr><td>5</td><td>Dm, F♯m, B♭m</td></tr>
+<tr><td>6</td><td>D, F♯, B♭</td></tr>
+</table>
+<p>The table tells you something a key signature cannot. The chromatic mediants A♭ and E (distance 2) are <i>closer</i>
+to C, by this measure, than the dominant G and subdominant F (distance 3). Closeness of keys (common notes in the scale,
+<a href="ch:ch08#distance">Chapter 8</a>) and closeness of chords (small voice motion) are different things. Tonal
+harmony rests on the first; Romantic chromaticism increasingly used the second.</p>
+</div>
+</section>
+
+<section id="tristan">
+<h2>The Tristan chord</h2>
+<div class="layer hear">
+<p>Wagner's <i>Tristan und Isolde</i> (composed 1857–59, first performed in Munich in 1865) opens with a phrase that ends on a
+chord of four notes: F, B, D♯ and G♯. It is probably the most discussed chord in Western music. Listen to it alone first.
+It is not a major or minor triad, nor a dominant seventh, and it does not sound like a destination. Then
+listen to it move: the top voice rises G♯, A, A♯, B while the lower notes slip by semitones, and the music lands on a
+dominant seventh chord on E. That chord does not resolve either. In the opera the phrase stops there, in silence.</p>
+<audio-ex src="tristan" caption="A reduction made for this book: the Tristan chord F–B–D♯–G♯ alone, then with its top voice rising G♯–A–A♯–B as the harmony moves to E7."></audio-ex>
+<p>Now hear the same four notes treated two ways. First they go as in <i>Tristan</i>, to E7. Then they are respelled
+F–A♭–C♭–E♭ and treated as an ordinary "half-diminished" chord on the second degree of E♭ minor, moving to B♭7 and E♭ minor. The
+sound is identical, but the meaning changes completely.</p>
+<audio-ex src="tristan_two_ways" caption="The same four pitch classes resolved two ways: to E7, as in Tristan; then respelled F–A♭–C♭–E♭ and resolved as ii∅7–V7–i in E♭ minor."></audio-ex>
+</div>
+<div class="layer understand">
+<pianoroll edo="12" notes="F3 B3 D#4 G#4 ; F3 B3 D#4 A4 ; E3 G#3 D4 A#4 ; E3 G#3 D4 B4" labels="Tristan chord ; top voice to A ; E7, top A♯ ; E7, top B" title="The Tristan chord's motion (reduction for this book)"></pianoroll>
+<p>What kind of chord is it? Several answers have been defended for more than a century, and each is partly right:</p>
+<ul>
+<li><b>A half-diminished seventh.</b> Respelled, F–A♭–C♭–E♭ stacks minor third, minor third, major third: the
+"half-diminished" seventh chord (Fm7♭5). This reading accounts for its sound, but not for where it goes.</li>
+<li><b>An augmented sixth chord with an appoggiatura.</b> Take the top G♯ as an
+<i>appoggiatura</i> (an accented non-chord tone, <a href="ch:ch12#suspension">Chapter 12</a>) to A. When the top voice
+reaches A, the chord is F–A–B–D♯, a French augmented sixth in A minor, which goes normally to E (the dominant of A minor).
+This reading explains the destination and the voice leading.</li>
+<li><b>A chord of voice leading.</b> Each voice moves by semitone into the next chord, and the chord's identity matters
+less than the motion. This is the reading this chapter develops.</li>
+</ul>
+<p>The key of A minor is implied by the E7 and never confirmed by an A minor chord at this point. That
+<i>suspended</i> tonality is a large part of the effect. Harmony that implies a tonic and then withholds it is one of
+the paths by which Romantic chromaticism leads to the music of the next chapters.</p>
+<aside class="box history"><b>A caution about the score.</b> The audio and the figure here are a four-voice reduction
+written for this book, so that you can hear the chord and its motion clearly. They are not Wagner's orchestration or exact
+voicing. What is certain is the chord's pitch content (F, B, D♯, G♯), the top line's rise G♯–A–A♯–B, and the arrival on
+a dominant seventh on E.</aside>
+<aside class="mirror"><b>Golden mirror.</b> The two semitone moves that take the Tristan chord to E7 (F → E and D♯ → D)
+would each take three sixth-steps in 36-ET, and the chords in between are new four-note sonorities. None of them is
+golden, even if the two voices move at different times (computed): both moving voices fall, and a golden passing chord
+needs one voice that holds, one that rises and one that falls. That rule, and the general machinery of sub-chromatic
+passing chords, are in <a href="ch:ch27#uniform-path">Chapter 27</a>. Set-class thinking in
+36 pitch classes, which is how one would classify a "golden Tristan chord", is in
+<a href="ch:ch33#z36">Chapter 33</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>The chord as a set class.</b> As pitch classes, the Tristan chord is $\{5, 11, 3, 8\}$. Its prime form (the
+most compact representative up to transposition and inversion, <a href="ch:ch20#operations">Chapter 20</a>) is
+$\{0,2,5,8\}$, Forte's set class 4-27. The dominant seventh $\{0,4,7,10\}$ and the half-diminished seventh
+$\{0,3,6,10\}$ also belong to this class, because each is the inversion of the other. Its interval vector is
+$\langle 0,1,2,1,1,1\rangle$ (computed). So the Tristan chord <i>is</i>, abstractly, an inverted dominant seventh,
+which is one reason it sounds tense but not chaotic.</p>
+<p><b>The voice leading (computed).</b> The smallest voice leading from $\{F, B, D♯, G♯\}$ to the E7 chord
+$\{E, G♯, B, D\}$ is</p>
+$$F \to E,\quad B \to B,\quad D♯ \to D,\quad G♯ \to G♯,$$
+<p>a total of 2 semitones: two voices fall by a semitone and two hold. Measured by the distance of the previous section,
+the Tristan chord is as close to E7 as C major is to A♭ major. The famous rising top line is an
+embellishment above this skeleton.</p>
+</div>
+</section>
+
+<section id="cycles">
+<h2>Hexatonic and octatonic cycles</h2>
+<div class="layer hear">
+<p>Start on C major and change one note at a time, by a single semitone: lower E to E♭ (C minor), raise G to A♭ (A♭
+major), lower C to B (A♭ minor, spelled G♯ minor), raise E♭ to E (E major), lower A♭ to G (E minor), raise B to C, and you are
+home. Six chords, each a hair's breadth from the last, and a full circle through keys that are far apart in the circle of
+fifths. Listen to the cycle, and then to its most surprising pair: C major straight to A♭ minor, where every voice moves a semitone.</p>
+<audio-ex src="hexatonic_cycle" caption="The hexatonic cycle C–Cm–A♭–A♭m–E–Em–C, one voice moving a semitone per chord; then C and A♭ minor, its two poles, alternating."></audio-ex>
+<p>A second cycle alternates a semitone move with a whole-tone move: C, C minor, E♭ major, E♭ minor, F♯ major, F♯ minor,
+A major, A minor, and back to C. It takes eight chords, and the roots climb by minor thirds.</p>
+<audio-ex src="octatonic_cycle" caption="The octatonic cycle C–Cm–E♭–E♭m–F♯–F♯m–A–Am–C: roots rising by minor thirds while the voices barely move."></audio-ex>
+</div>
+<div class="layer understand">
+<p>The first cycle uses only six pitch classes: C, E♭, E, G, A♭, B. That collection is a <b>hexatonic scale</b>, which
+alternates semitones and minor thirds. All six chords of the cycle (three major, three minor) live inside it. The
+second cycle uses eight pitch classes, C, C♯, E♭, E, F♯, G, A, B♭, the <b>octatonic scale</b>, which alternates
+semitones and whole tones (<a href="ch:ch19#octatonic">Chapter 19</a>).</p>
+<pianoroll edo="12" notes="C4 E4 G4 ; C4 Eb4 G4 ; C4 Eb4 Ab4 ; B3 Eb4 Ab4 ; B3 E4 Ab4 ; B3 E4 G4 ; C4 E4 G4" labels="C ; Cm ; A♭ ; A♭m ; E ; Em ; C" title="The hexatonic cycle: one voice moves a semitone per chord"></pianoroll>
+<pianoroll edo="12" notes="C4 E4 G4 ; C4 Eb4 G4 ; Bb3 Eb4 G4 ; Bb3 Eb4 Gb4 ; Bb3 Db4 Gb4 ; A3 Db4 Gb4 ; A3 Db4 E4 ; A3 C4 E4 ; G3 C4 E4" labels="C ; Cm ; E♭ ; E♭m ; F♯ ; F♯m ; A ; Am ; C" title="The octatonic cycle: semitone and whole-tone moves alternate"></pianoroll>
+<pc-circle edo="12" marks="0 3 4 7 8 11" path="0 8 4 0" title="Hexatonic collection; roots C, A♭, E"></pc-circle>
+<pc-circle edo="12" marks="0 1 3 4 6 7 9 10" path="0 3 6 9 0" title="Octatonic collection; roots C, E♭, F♯, A"></pc-circle>
+<p>The music theorist Richard Cohn, in work from the 1990s, showed how much late-Romantic music is organized by such
+cycles, and named their systems:</p>
+<ul>
+<li>There are exactly <b>four hexatonic systems</b>, each containing six triads. Every major or minor triad belongs to exactly one.</li>
+<li>There are exactly <b>three octatonic systems</b>, each containing eight triads. Again every triad belongs to exactly one.</li>
+<li>Within a hexatonic system, the two triads that share no note, such as C major and A♭ minor, are
+<b>hexatonic poles</b>. They are as far apart as two chords of the system can be, yet only three semitones of motion
+separate them. Cohn associated this pole relation with uncanny or otherworldly moments in late-Romantic music.</li>
+</ul>
+<p>The augmented triad sits at the center of each hexatonic system. Move any one of its notes by a semitone, up or down, and you
+get a major or minor triad: from C–E–G♯ you reach C, A minor, A♭ (spelled with G♯), F minor, E and C♯ minor, six triads in all (computed).
+Cohn calls these six the augmented triad's <b>Weitzmann region</b>, after Carl Friedrich Weitzmann's 1853 study of the augmented
+triad. The augmented triad itself is symmetric (<a href="ch:ch09#symmetric">Chapter 9</a>), which is why it can lead equally well to
+all six.</p>
+<p>Roots in a hexatonic system move by major thirds (C, A♭, E). This is the familiar <b>chromatic mediant</b> of
+<a href="ch:ch11#mediants">Chapter 11</a>, now seen as part of a cycle. In an octatonic system the roots move by minor
+thirds (C, E♭, F♯, A), the relation behind many Romantic sequences.</p>
+<aside class="mirror"><b>Golden mirror.</b> Collapse each pair of moves in the hexatonic cycle (C → Cm → A♭) into one
+major-third root move, C → A♭. The smoothest voice leading holds C and moves E down and G up a semitone each, and in
+36-ET its uniform path is C – Cg – ^E♭T13 – A♭ (computed with <code>reference/golden/passing.py</code>): a
+golden triad on the first root, then its bronze partner. The same holds for A♭ → E and E → C, so the hexatonic cycle
+of major chords becomes a cycle of golden passing chords. This is the quality theorem at work (same-quality triads a third apart,
+<a href="ch:ch27#quality">Chapter 27</a>), and <a href="ch:ch29#mediant">Chapter 29</a> makes music of it. The golden
+counterpart of the hexatonic collection itself, the nine notes of Cg, Eg and A♭g, is in
+<a href="ch:ch33#symmetric-36">Chapter 33</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Theorem (computed exhaustively).</b> Let $\mathcal{T}$ be the 24 major and minor triads.</p>
+<ol>
+<li>The unions $H_k = \{k, k+3, k+4, k+7, k+8, k+11\}$, $k = 0,1,2,3$, are the four hexatonic collections. Each is a
+union of two augmented triads, $\{k, k+4, k+8\} \cup \{k+3, k+7, k+11\}$, and they partition $\mathcal{T}$ into four
+classes of six.</li>
+<li>The unions $O_k = \{k, k+1, k+3, k+4, k+6, k+7, k+9, k+10\}$, $k = 0,1,2$, are the three octatonic collections.
+Each is a union of two diminished seventh chords, and they partition $\mathcal{T}$ into three classes of eight.</li>
+</ol>
+<p><i>Why the numbers.</i> A hexatonic collection is determined by its augmented-triad halves, which are cosets of the
+subgroup $\{0,4,8\}$ of $\mathbb{Z}_{12}$. There are four such cosets, and adjacent pairs give four collections. An
+octatonic collection is a union of two cosets of $\{0,3,6,9\}$, of which there are three, so there are three
+collections. The group theory behind this is <a href="ch:ch19#subgroups">Chapter 19</a>.</p>
+<p><b>The hexatonic pole (computed).</b> C major $\{0,4,7\}$ and A♭ minor $\{8,11,3\}$ share no pitch class, and the
+smallest voice leading between them is $C \to B$, $E \to E♭$, $G \to A♭$: three voices by one semitone each, a total
+of 3. That is the minimum for two triads with no common tone (computed over all 132 disjoint pairs of major and minor
+triads). The only other disjoint pairs that reach it are same-quality triads a semitone apart, such as C and C♯, where all
+three voices slide in parallel. The pole reaches the same distance with contrary motion and a change of quality.</p>
+</div>
+</section>
+
+<section id="parsimony">
+<h2>Parsimonious voice leading</h2>
+<div class="layer hear">
+<p>Here are the three smallest moves a major triad can make to another consonant triad, each there and back. In the first,
+E falls to E♭: C major becomes C minor. In the second, C falls to B: C major becomes E minor. In the third, G rises to A:
+C major becomes A minor. In each case two notes stay and one moves by step. These moves are the
+<b>parsimonious</b> moves, from the Latin for "thrifty".</p>
+<audio-ex src="plr" caption="P (C to C minor), L (C to E minor), R (C to A minor): in each, two notes hold and one moves by step."></audio-ex>
+</div>
+<div class="layer understand">
+<p>Neo-Riemannian theory (<a href="ch:ch10#neo-riemannian">Chapter 10</a>) names the three moves:</p>
+<pianoroll edo="12" notes="C4 E4 G4 ; C4 Eb4 G4 ; C4 E4 G4 ; B3 E4 G4 ; C4 E4 G4 ; C4 E4 A4" labels="C ; P: Cm ; C ; L: Em ; C ; R: Am" title="P, L and R from C major: two notes hold, one moves"></pianoroll>
+<table>
+<tr><th>Move</th><th>Name</th><th>From C major</th><th>Voice that moves</th><th>Common tones</th></tr>
+<tr><td><b>P</b></td><td>parallel</td><td>C → Cm</td><td>third, by a semitone (E → E♭)</td><td>C, G</td></tr>
+<tr><td><b>L</b></td><td>leading-tone exchange</td><td>C → Em</td><td>root, by a semitone (C → B)</td><td>E, G</td></tr>
+<tr><td><b>R</b></td><td>relative</td><td>C → Am</td><td>fifth, by a whole tone (G → A)</td><td>C, E</td></tr>
+</table>
+<p>Each move is its own undo: doing P twice returns you to the start. Combining them gives every chromatic relation
+of the previous sections:</p>
+<ul>
+<li>alternating P and L gives the hexatonic cycle (six chords);</li>
+<li>alternating P and R gives the octatonic cycle (eight chords);</li>
+<li>alternating L and R gives a chain of rising thirds, C, Em, G, Bm, D, …, which visits <i>all 24</i> triads before it returns;</li>
+<li>compound moves name the chromatic mediants: C → A♭ is P then L, and C → E is L then P.</li>
+</ul>
+<p>Cohn's insight, building on earlier work by David Lewin and Brian Hyer, was that these moves describe triadic music that
+no single key explains. A passage can be perfectly smooth and perfectly logical in P, L and R while its keys wander
+through all twelve. "Smooth" here has the exact meaning given by voice-leading distance: P and L move 1 semitone, R
+moves 2.</p>
+<aside class="mirror"><b>Golden mirror.</b> In 36-ET a "parsimonious" move can be a single sixth-step, a third of a
+semitone. The averaging principle (<a href="ch:ch25#averaging">Chapter 25</a>) is parsimony refined: each note of the
+golden triad Cg lies within two sixth-steps of the corresponding note of C major, C minor and C augmented (total motion
+2, 3 and 3 sixth-steps). The arithmetic of 36 pitch classes (its subgroups, multipliers and symmetric sets) is the
+subject of <a href="ch:ch33#z36">Chapter 33</a>.</aside>
+</div>
+<div class="layer derive">
+<p><b>Definition.</b> Write a major triad as $(r, +)$ with pitch classes $\{r, r+4, r+7\}$ and a minor triad as $(r,-)$
+with $\{r, r+3, r+7\}$. Then</p>
+$$P(r,\pm) = (r,\mp),\qquad L(r,+) = (r+4,-),\ L(r,-) = (r+8,+),\qquad R(r,+) = (r+9,-),\ R(r,-) = (r+3,+),$$
+<p>with roots mod 12. Each of $P, L, R$ is an involution ($X^2 = \text{identity}$), and each keeps two pitch classes and
+moves the third by 1 (P, L) or 2 (R) semitones.</p>
+<p><b>Theorem (computed).</b> The permutations $P$, $L$, $R$ of the 24 triads generate a group of order 24, with 13
+elements of order 2 and 4 of order 12. These are the counts of the dihedral group of order 24, the symmetry group
+of a regular 12-gon, and the group is indeed dihedral. This is the well-known "neo-Riemannian group". It has the same
+size and shape as the group of transpositions and inversions of <a href="ch:ch20#operations">Chapter 20</a>, but acts
+differently: $T_n$ and $I_n$ move chords as rigid shapes, while $P$, $L$, $R$ are defined by common tones, and the two
+actions commute.</p>
+<p><b>Cycle lengths (computed).</b> $(PL)^3 = (PR)^4 = (LR)^{12} = \text{identity}$, and no smaller power is, so the
+PL-cycle has 6 triads, the PR-cycle 8 and the LR-cycle all 24.</p>
+</div>
+<div class="exercise"><p><b>Exercise 18.1 (listening).</b> In the octatonic cycle, which moves are a semitone and which a whole tone?
+Name the voice that moves at each step.</p>
+<details class="answer"><summary>Answer</summary><p>C→Cm: E→E♭ (semitone, P). Cm→E♭: C→B♭ (whole tone, R). E♭→E♭m: G→G♭
+(semitone, P). E♭m→G♭: E♭→D♭ (whole tone, R). And so on: P moves are semitones, R moves whole tones, alternating.</p></details></div>
+<div class="exercise"><p><b>Exercise 18.2.</b> Which hexatonic system contains D major? List its six triads.</p>
+<details class="answer"><summary>Answer</summary><p>D = {2, 6, 9}. The collection is {1, 2, 5, 6, 9, 10} (C♯, D, F, F♯, A, B♭),
+with triads D, Dm, B♭, B♭m, F♯, F♯m.</p></details></div>
+<div class="exercise"><p><b>Exercise 18.3.</b> Show that C → A♭ equals P followed by L, and compute the voice-leading distance.</p>
+<details class="answer"><summary>Answer</summary><p>P(C) = Cm = {C, E♭, G}; L(Cm) = L(0,−) = (8,+) = A♭ = {A♭, C, E♭}. Directly,
+C–E–G → C–E♭–A♭ holds C, moves E down 1 and G up 1: distance 2.</p></details></div>
+<div class="exercise"><p><b>Exercise 18.4.</b> Find the hexatonic pole of E minor.</p>
+<details class="answer"><summary>Answer</summary><p>The triad in the same hexatonic system with no common tone: E minor = {4, 7, 11}
+lies in {0, 3, 4, 7, 8, 11}, and the major triad there with no common tone is A♭ = {8, 0, 3}. Voice leading E→E♭, G→A♭, B→C.</p></details></div>
+<div class="exercise"><p><b>Exercise 18.5.</b> Explain why the Tristan chord and the dominant seventh have the same interval vector.</p>
+<details class="answer"><summary>Answer</summary><p>The Tristan chord, respelled F–A♭–C♭–E♭, is a half-diminished seventh
+{0, 3, 6, 10}, which is the inversion of the dominant seventh {0, 4, 7, 10}: $I_{10}$ maps 0, 4, 7, 10 to 10, 6, 3, 0.
+Inversion preserves interval classes, so the vectors agree.</p></details></div>
+</section>

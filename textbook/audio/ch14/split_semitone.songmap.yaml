@@ -1,0 +1,21 @@
+# V -> I/5 twice: first directly (each voice moves a half step or holds), then on the strict path of
+# 36-ET, where every half step is split into three sixth-steps: G - vEbT13/G - vCg/G - C/G.
+# Upper voices G3 B3 D4 G4 -> G3 C4 E4 G4 (displacement 0, +1, +2, 0 semitones), bass G2 held.
+songmap: 0.2
+title: "Splitting the half step"
+tempo: 60
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 14
+tail_seconds: 3
+instruments: {organ: clean/organ, low: clean/bass}
+mix: {organ: {gain_db: -5, send: {hall: 0.2}}, low: {gain_db: -6, send: {hall: 0.05}}}
+returns: {hall: {type: reverb, seconds: 2.2, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: a
+    bars: 6
+    parts:
+      organ: {notes: "=mp [g-,b-,d,g]1 [g-,c,e,g]1 r1 [g-,b-,d,g]1 [g-,^b-,veb,g]2 [g-,vc,^eb,g]2 [g-,c,e,g]1"}
+      low: {notes: "=mp g--1 g--1 r1 g--1 g--2 g--2 g--1"}
+master: clean

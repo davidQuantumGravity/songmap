@@ -1,0 +1,4 @@
+instrument: clean
+description: "Clean melodic lead: 6 harmonics, odd-leaning, short sustain"
+tags: [clean, lead]
+params: {partials: 6, rolloff: 1.3, even: 0.5, attack: 0.012, decay: 2.5, damp: 0.3, release: 0.2, vel_bright: 0.6}

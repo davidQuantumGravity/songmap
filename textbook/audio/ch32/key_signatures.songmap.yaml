@@ -1,0 +1,26 @@
+# ch32: neighbouring golden keys, both scales played from C. C golden7, then vE golden7
+# (C# is replaced by vEb, 5 sixth-steps higher). C golden13, then vE golden13 (D is replaced by
+# vD, one sixth-step lower: the golden comma).
+songmap: 0.2
+title: "Golden key signatures"
+tempo: 96
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 323
+tail_seconds: 3
+instruments: {bell: clean/glass, gpad: clean/golden_pad}
+motifs:
+  g7c:  {notes: "c8 c# ve vf ^g ^ab b c+ | c+2 r2", octave: 4}
+  g7e:  {notes: "c8 veb ve vf ^g ^ab b c+ | c+2 r2", octave: 4}
+  g13c: {notes: "c8 c# d veb ve vf vf# ^f# | ^g8 ^ab ^a bb b c+4.", octave: 4}
+  g13e: {notes: "c8 c# vd veb ve vf vf# ^f# | ^g8 ^ab ^a bb b c+4.", octave: 4}
+mix:
+  bell: {gain_db: -5, send: {hall: 0.2}}
+  gpad: {gain_db: -11, send: {hall: 0.3}}
+sections:
+  - {name: g7_on_c, bars: 2, harmony: "Cg:2", parts: {bell: {motifs: [g7c]}, gpad: hold}}
+  - {name: g7_on_ve, bars: 2, harmony: "vEg:2", parts: {bell: {motifs: [g7e]}, gpad: hold}}
+  - {name: g13_on_c, bars: 2, harmony: "Cg:2", parts: {bell: {motifs: [g13c]}, gpad: hold}}
+  - {name: g13_on_ve, bars: 2, harmony: "vEg:2", parts: {bell: {motifs: [g13e]}, gpad: hold}}
+master: clean

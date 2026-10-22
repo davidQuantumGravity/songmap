@@ -1,0 +1,33 @@
+# A six-chord progression I-vi-IV-ii-V-I in four parts (soprano, alto, tenor, bass), written note
+# by note: the bass alone, then the soprano alone, then all four voices together.
+#   S: E5 E5 F5 F5 D5 C5   A: G4 A4 A4 A4 G4 E4   T: C4 C4 C4 D4 B3 C4   B: C3 A2 F2 D2 G2 C3
+songmap: 0.2
+title: "Four voices"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 14
+tail_seconds: 2.5
+instruments: {s: clean/organ, a: clean/organ, t: clean/organ, b: clean/organ}
+mix:
+  s: {gain_db: -6, pan: 0.25, send: {hall: 0.2}}
+  a: {gain_db: -7, pan: 0.1, send: {hall: 0.2}}
+  t: {gain_db: -7, pan: -0.1, send: {hall: 0.2}}
+  b: {gain_db: -5, pan: -0.25, send: {hall: 0.2}}
+returns: {hall: {type: reverb, seconds: 2.2, predelay: 0.02, damping: 0.5}}
+sections:
+  - name: bass
+    bars: 3
+    parts: {b: {notes: "=mf c-2 a-- | f-- d-- | g-- c-"}}
+  - name: soprano
+    bars: 4
+    parts: {s: {notes: "r1 | =mf e+2 e+ | f+ f+ | d+ c+"}}
+  - name: all
+    bars: 4
+    parts:
+      s: {notes: "r1 | =mf e+2 e+ | f+ f+ | d+ c+"}
+      a: {notes: "r1 | =mf g2 a | a a | g e"}
+      t: {notes: "r1 | =mf c2 c | c d | b- c"}
+      b: {notes: "r1 | =mf c-2 a-- | f-- d-- | g-- c-"}
+master: clean

@@ -1,0 +1,16 @@
+# ch18: a reduction of the Tristan chord's motion (made for this book, not Wagner's scoring):
+# F B D# G#, the top voice rising G#-A, then E7 with the top voice A#-B.
+songmap: 0.2
+title: "The Tristan chord and its resolution"
+tempo: 48
+meter: "4/4"
+key: "A minor"
+tuning: 12edo
+seed: 18
+tail_seconds: 3
+instruments: {winds: clean/organ, top: clean/lead}
+mix: {winds: {gain_db: -6, send: {hall: 0.3}}, top: {gain_db: -5, send: {hall: 0.3}}}
+sections:
+  - {name: alone, bars: 1, parts: {winds: {notes: "[f-,b-,d#]2. r4"}, top: {notes: "g#2. r4"}}}
+  - {name: motion, bars: 2, parts: {winds: {notes: "[f-,b-,d#]2. [e-,g#-,d]4 | [e-,g#-,d]1"}, top: {notes: "g#2 a4 a#4 | b1"}}}
+master: clean

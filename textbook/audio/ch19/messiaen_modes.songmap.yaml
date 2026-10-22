@@ -1,0 +1,20 @@
+# ch19: Messiaen's seven modes of limited transposition, each on C, ascending to the octave.
+songmap: 0.2
+title: "Messiaen's seven modes"
+tempo: 132
+meter: "4/4"
+key: "C major"
+tuning: 12edo
+seed: 19
+tail_seconds: 2
+instruments: {keys: clean/keys}
+mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+sections:
+  - {name: mode1, bars: 2, parts: {keys: {notes: "c8 d e f# g# a# c+2."}}}
+  - {name: mode2, bars: 2, parts: {keys: {notes: "c8 c# d# e f# g a a# c+4 r4 r2"}}}
+  - {name: mode3, bars: 2, parts: {keys: {notes: "c8 d d# e f# g g# a# b c+4 r8 r4 r4"}}}
+  - {name: mode4, bars: 2, parts: {keys: {notes: "c8 c# d f f# g g# b c+4 r4 r2"}}}
+  - {name: mode5, bars: 2, parts: {keys: {notes: "c8 c# f f# g b c+2."}}}
+  - {name: mode6, bars: 2, parts: {keys: {notes: "c8 d e f f# g# a# b c+4 r4 r2"}}}
+  - {name: mode7, bars: 2, parts: {keys: {notes: "c8 c# d d# f f# g g# a b c+4 r2"}}}
+master: clean

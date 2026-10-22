@@ -1,0 +1,16 @@
+# ch32: Cg as a hub between the three layers. Its three nearest Western triads, two sixth-steps
+# away each, lie on three different layers: C (keeps C), ^Cm (keeps ^G), vEaug (keeps vE).
+songmap: 0.2
+title: "Cg as a hub of three layers"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 322
+tail_seconds: 3
+instruments: {organ: clean/organ}
+mix:
+  organ: {gain_db: -6, send: {hall: 0.2}}
+sections:
+  - {name: hub, bars: 8, harmony: "C:1 Cg:1 ^Cm:1 Cg:1 vEaug:1 Cg:1 C:2", parts: {organ: hold}}
+master: clean

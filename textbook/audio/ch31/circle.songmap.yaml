@@ -1,0 +1,19 @@
+# ch31: thirteen steps of the golden circle, G_r -> G_{r+11}. Each step keeps two notes and
+# moves one voice down a semitone (the root of the old chord becomes the seventh's position).
+songmap: 0.2
+title: "The golden circle"
+tempo: 72
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 311
+tail_seconds: 4
+instruments:
+  gpad: clean/golden_pad
+  bell: clean/glass
+mix:
+  gpad: {gain_db: -6, send: {hall: 0.3}}
+  bell: {gain_db: -9, send: {hall: 0.35}}
+sections:
+  - {name: walk, bars: 7, harmony: "Cg:0.5 vEg:0.5 ^Gg:0.5 Bg:0.5 vEbg:0.5 ^F#g:0.5 Bbg:0.5 vDg:0.5 ^Fg:0.5 Ag:0.5 vC#g:0.5 ^Eg:0.5 Abg:1", parts: {gpad: hold, bell: top}}
+master: clean

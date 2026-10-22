@@ -1,0 +1,9 @@
+# Voice-led chords re-struck on every quarter note.
+style: pulse
+voiced: true
+voices: 4
+range: [50, 74]
+rhythm: "x.x.x.x."
+gate: 0.7
+vel: 0.5
+accent: 1.2

@@ -1,0 +1,49 @@
+# The Return of the Bittern (75 s, 120 BPM = 60 frames per bar, so every scene start is a bar line).
+# bars: dawn 0-3 | narrator 4-11 | restoring 12-19 | storm 20-25 | boom 26 | bird 27-30 (f1620) | sunset 31-36 | tail 1 s
+song "The Return of the Bittern" 120 4/4 Dm fps=30 seed=5 tail=1 video=Bittern:2250
+inst keys(hardness=.3, t60=8) gtr=string_pluck(brightness=.55) bass(cutoff=420)
+chords Dm Bb Gm A /2
+cue bird=f1620
+
+# deg 0 = D (D minor: 2=F 4=A 5=Bb 6=C 7=D'). The bittern motif: three repeated A's, then a leap up.
+q = "=p 4/8 4 4/4 7/2 | 6/4. 5/8 4/4 2/4 | 5/8 5 5/4 8/2 | 7/4. 6/8 5/2"
+a = "=p 4/8 4 4/4 7/2 | 6/4. 5/8 4/4 5/4 | 4/2 3/4 1/4 | 0/1"
+theme = {deg: q + " | " + a, oct: 0}
+
+# restoration: the same rhythm turned hopeful, centred on F major (phrase 1 asks, phrase 2 climbs and leans on A)
+hope1 = {deg: "=mp 4/8 4 6/4 9/2 | 8/4. 7/8 6/4 4/4 | 5/8 5 7/4 10/2 | 9/4. 8/8 7/2", oct: 0}
+hope2 = {deg: "=mf 6/8 6 8/4 11/2 | 10/4. 9/8 8/4 6/4 | 7/8 7 9/4 12/2 | 10/4. 8/8 7/2", oct: 0}
+
+# storm: only the head of the motif, fragmented, pressing on the A / Bb semitone
+fragA = {deg: "=p r/2 4/8 4 4/4 | r/4 5/2. | r/2 4/8 4 4/4", oct: 0}
+fragB = {deg: "=mp 4/8 4 4/4 5/2 | 5/8 5 5/4 6/4. 7/8 | 7/4 r/4 r/2", oct: 0}
+
+# the bird: motif at its warmest, rising to the one high Bb on the strong beat of bar 3
+peak = {deg: "=mf 4/8 4 4/4 9/2 | 9/4. 8/8 9/4 11/4 | 12/2 11/4 10/4 | 11/4. 10/8 8/2", oct: 0}
+
+# sunset: the same theme in D major (key=D), settled
+sun = {deg: "=mp 4/8 4 4/4 7/2 | 6/4. 5/8 4/4 2/4 | 5/8 5 5/4 8/2 | 7/4. 6/8 4/2 | 7/2 4/4 2/4 | 0/1", oct: 0}
+
+sparkle = {deg: "=pp r/2 11/4 r/4 | r/1 | r/4 9/4 r/2 | 11/1", oct: 0}
+open = {rel: "[R,5,9]/1"}
+ripple = {rel: "R/8^ 5 R+ 3+ 5+ 3+ R+ 5"}
+slowrip = {rel: "R/4 5 R+ 3+"}
+walk = {rel: "R/2 5/4 R+", oct: -2}
+root = {rel: "R/1", oct: -2}
+boom = {rel: "R/4 r/4 R/4 r/4", oct: -1}
+
+gentle = {kick: "X.......x.......", rim: "........o.......", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.35, 0.15, 0.25, 0.15]}}
+heart = {kick: "X.x.....X.x....."}
+heart2 = {kick: "X.x.X.x.X.x.X.x.", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.3, 0.15, 0.2, 0.15]}}
+
+# name    bars | parts and settings                                                               | events
+dawn        4 | pad:dark keys:open gtr:sparkle chords="Dsus2:2 Bbmaj7:2" dyn=pp<p
+narr        8 | pad:warm keys:theme bass:root chords="Dm:2 Bb:2 Gm:2 A:1 Dm:1" dyn=p<mp
+grow_a      4 | pad:warm gtr:ripple bass:walk keys:hope1 chords="F:1 C:1 Bb:1 C:1" dyn=p<mp
+grow_b      4 | like=grow_a keys:hope2 drums:gentle chords="F:1 C:1 Bb:1 A:1" dyn=mp
+storm1      3 | pad:dark bass:sub keys:fragA drums:heart arp:dark(order=[0, 1, 2, 1]) chords="Dm:2 Eb:1" dyn=p<mp
+storm2      3 | like=storm1 keys:fragB drums:heart2 fx:ticks chords="Dm:1 Eb:1 A:1" dyn=mp<mf     | !riser:2@25:3 !stop:2b@25:3
+clear       1 | pad:warm keys:open bass:boom chords="Dsus2:1" dyn=pp<p
+bird        4 | pad:warm keys:peak lead:peak gtr:ripple bass:walk drums:gentle chords="Bb:1 F:1 Gm:1 A:1" dyn=f<ff | !impact@cue:bird(size=m)
+sunset      6 | pad:warm keys:sun gtr:slowrip bass:root key=D chords="D:1 Bm:1 G:1 A:1 D:2" dyn=mp>pp
+mix keys 2 | drums -9 | fx -9 | bass -3 | lead 3 | pad 1

@@ -16,6 +16,7 @@ Good scores come from **composing first and typing second**. Follow the method i
 | [reference/melody.md](reference/melody.md) | writing motifs and phrases, bar math, scale degrees in major and minor, developing a theme |
 | [reference/rhythm.md](reference/rhythm.md) | grooves, swing, ghost notes, fills, builds, bass lines, arpeggios |
 | [reference/instruments.md](reference/instruments.md) | each instrument's sound and settings, ambience and sound-design moves, arrangement |
+| [reference/golden.md](reference/golden.md) | golden harmony in 36-ET inside a Western song: spelling, five techniques, rules that keep it tasteful, the rub check |
 | [examples/](examples/) | three complete, rendered and balanced scores to imitate (§8) |
 | [catalog.txt](catalog.txt) | every style, mod, instrument and event name (`songmap describe --compact`) |
 
@@ -26,9 +27,14 @@ From the repo root, activate `.venv` (`.venv/Scripts/activate` on Windows, `sour
 | Command | What it does |
 |---|---|
 | `songmap check song.sm` | parse, validate, expand. Milliseconds. Prints bars, length and frames, or one error per line with a fix |
-| `songmap render song.sm -o build/x` | `song.wav`, `stems/`, `cues.json`, `qa.json` (about 5–30 s) |
+| `songmap listen song.sm [--render DIR]` | **the automated ear**: melody-against-chord clashes, crowded registers, mechanical repetition, flat dynamics, too many hits, the ending. `--render DIR` also judges loudness and balance from that **existing** render's `qa.json`; it doesn't render. Every `songmap render` writes the full report to `review.json` |
+| `songmap render song.sm -o DIR` | `song.wav`, `stems/`, `cues.json`, `qa.json`, `review.json` (the ear's report) and `qa.png` (spectrogram and loudness), in about 5–30 s |
 | `songmap describe --compact` | the catalog (what [catalog.txt](catalog.txt) holds) |
 | `songmap fmt x.yaml --to sm` | convert YAML ↔ `.sm` losslessly |
+
+**Where songs go.** Every song lives in the repo, never in a temp folder: `songs/<collection>/<name>.sm`. Use an existing collection or make a new folder with a one-line `README.md`. Render into `songs/<collection>/renders/<name>/`, which is gitignored. Every song in `songs/` appears automatically in the textbook's **Songbook** (appendix H, built by `tools/textbook/build.py`) for the user to review, with its player, spectrogram, loudness and the ear's report.
+- **Intent.** Start each file with comment lines saying what the music is for and what to listen for; the Songbook shows them.
+- **Verdicts.** The user's verdict goes on a line `# review: approved — …` or `# review: rework — …`. When they give feedback in words, add or update that line.
 
 ## 2. The method
 
@@ -46,12 +52,23 @@ From the repo root, activate `.venv` (`.venv/Scripts/activate` on Windows, `sour
    - Peak once, late. Subtract for caveats.
    - Vary something every 4–8 bars, and make neighbouring sections contrast.
 6. **Express** with the checklist in §3.
-7. **Check → render → read the numbers** (§4). Run `check` until `ok:` with the exact frame count. Render, then compare `qa.json` with the targets in §4 and fix with `dyn=`, `mix` and arrangement.
+7. **Check → listen → render → read the numbers** (§4).
+   - Run `check` until `ok:` with the exact frame count.
+   - Run `songmap listen` and fix its problems and warnings (or decide they're intended).
+   - Render, then read `review.json` (the ear with loudness) and `qa.json`, and look at `qa.png`.
+   - Fix with arrangement, `dyn=` and `mix`.
 8. **Revise by line.** Map feedback in musical terms ("pad too bright in barrier", "bigger hit at 970 M") to a section-line edit, then check and render again.
 
 ## 3. Lifelike, not robotic: the checklist
 
-The engine plays exactly what you write: no swing, no timing humanisation and no motif transforms yet (the performance layer arrives in P3). **All of the feel has to be in the text.**
+**The performance layer plays your notes like players would.** The song's mood (§4) sets:
+- timing drift (the kick stays tight, pads and keys breathe);
+- velocity variation;
+- rolled chords on keys and guitar;
+- a phrase arch and metric accents;
+- swing.
+
+That gives every song a human base, but it can't invent musical ideas: **accents, phrasing, variation and contrast still have to be written.**
 
 1. **Dynamic shape.** Give most sections an arc (`dyn=p<mf`, `dyn=mf>p`). A flat `dyn=mp` is fine when the sections around it move. Velocity also changes timbre (pianos brighten, filters open), so dynamics are colour, not just volume.
 2. **Velocity varies inside patterns.**
@@ -61,7 +78,10 @@ The engine plays exactly what you write: no swing, no timing humanisation and no
 4. **Phrases breathe.** End phrases on long notes or rests every 2–4 bars, written as question and answer. Leave room for other instruments and the voice-over.
 5. **Something changes every 4–8 bars.** A new layer, a fill (a multi-bar lane or `bar -1:`), a register shift, a new voicing, the melody moving to another instrument, the harmonic rhythm doubling.
 6. **Syncopation and anticipation.** Push a chord or bass note a 16th or a triplet early (`r/8t [3,7,9]`), and land the bass with the kick.
-7. **Swing is written on the 12-step grid.** `x.xx.xx.xx.x` gives shuffled hats, and each lane has its own grid, so a swung hat can sit over a straight kick. Triplets in notes are `/8t`.
+7. **Swing and groove.**
+   - `groove swing=.56/16 tpl=laid_back` swings and pushes or lays back the whole song.
+   - `feel snare offset=6` makes one player lay back; section feel (`swing=.6`) and the mood set defaults.
+   - For a hard triplet shuffle, write it on the 12-step grid (`x.xx.xx.xx.x`). Each lane has its own grid, so a swung hat can sit over a straight kick. Triplets in notes are `/8t`.
 8. **Rich, moving harmony.** Use 7ths and 9ths and inversions in rel voicings (`[3,7,9]`, `[5-,R,3]`). `pad:warm` and `pad:dark` are triads only.
 9. **Separate registers.** Bass below C3, chords C3–C5, melody above them.
 10. **Contrast and arc.** Adjacent sections differ (texture, register, density, harmony). The peak comes once; a quiet section before it makes it land.
@@ -70,13 +90,27 @@ The engine plays exactly what you write: no swing, no timing humanisation and no
 
 ## 4. Loudness, contrast and balance
 
-- **Start every new song with a balanced mix line**, then adjust from the stems:
+- **Pick a mood** on the `song` line (`mood=cinematic`). It sets the mix, the reverb and the feel; `balanced` is the default.
 
-  ```
-  mix drums -6 | fx -6 | lead 6
-  ```
+  | Mood | Sound |
+  |---|---|
+  | `balanced` | even mix (drums under the music, the lead audible), light human feel |
+  | `cinematic` | wider reverb, phrases that swell, impacts forward |
+  | `documentary` | soft drums, intimate, room for a voice-over |
+  | `ambient` | long reverb, pads forward, drums distant |
+  | `techno` | tight and straight, drums forward |
+  | `lofi` | swung 8ths laid back, soft drums, warm keys |
+  | `v0` | the original Oct-13 synth sound, unperformed (the faithful ports) |
 
-  The default levels match the original Oct-13 tracks, where the drums sit about 10 dB above the melody and the lead is quiet. For a piano melody, add `| keys 0` to `2`.
+  Adjust from the stems with `mix <part> <dB>`. **`mix` sets the part's fader level; it replaces the mood's value instead of adding to it.** In `balanced` the lead's fader is +7, so `mix lead 3` makes it *quieter*. The moods' levels:
+
+  | Part | balanced | cinematic | documentary | ambient | techno | lofi |
+  |---|---|---|---|---|---|---|
+  | drums | −6 | −5 | −9 | −12 | −3 | −6 |
+  | lead | 7 | 6 | 5 | 4 | 6 | 5 |
+  | fx | −6 | −3 | −8 | −8 | −6 | −8 |
+
+  The other parts sit at their defaults: keys and piano −4, epiano −11, organ −19, gtr −2.5, pad 1.4, arp 2.5, bass −1.7. Moves happen from there; a piano melody usually wants `mix keys 0` to `2`.
 - **`dyn` levels relative to `mf`**, before mastering:
 
   | Level | pp | p | mp | mf | f | ff |
@@ -104,7 +138,7 @@ The engine plays exactly what you write: no swing, no timing humanisation and no
 ## 5. The `.sm` format
 
 ```
-song "Title" 120 4/4 Em fps=30 seed=7 tail=3 video=Comp:3690       # tail is in seconds
+song "Title" 120 4/4 Em fps=30 seed=7 tail=3 mood=cinematic video=Comp:3690   # tail in seconds
 inst keys(hardness=.35) gtr=string_pluck(brightness=.6)          # shape instruments
 chords Em C G D /2                                               # bars per chord; loops from bar 0
 theme = {deg: "=mp 0/8 2 4/4 2/2 | 4/4. 2/8 0/2", oct: 1}        # a melody kept in a variable
@@ -113,7 +147,8 @@ lift = !impact !riser:2                                          # a named event
 # name   bars | parts and settings                               | events
 intro      4 | keys:{rel: "[R,3,5]/2 [3,5,R+]"} dyn=pp<p
 verse      8 | like=intro keys:theme bass:{rel: "R/4. R/8 r/8 5/8 R+/4", oct: -2} drums:pocket dyn=p<mf | !lift
-mix drums -6 | fx -6 | keys 0 | lead 6
+again      8 | like=verse keys:theme:t+2 lead:theme:aug tempo="rit 120>100"     # the theme developed, slowing
+mix keys 0
 ```
 
 - **Parts:**
@@ -128,9 +163,13 @@ mix drums -6 | fx -6 | keys 0 | lead 6
   | a drum lane | `kick="X..."` |
   | an expression | `role:pocket+{ohat: "..x."}` |
   | remove an inherited part | `-role` |
+  | a developed theme | `role:theme:aug`, `role:m1:t+2:inv`: transforms `t±n` (scale steps), `oct±n`, `inv`, `rev`, `aug`, `dim`, `frag=n`, `xN`, `thin=.5`, `canon=3@8`, chained left to right |
 
-- **Settings:** `like=<section>` copies its parts and settings, including `chords`. Anything written after it on the line replaces what was inherited: a `role:` replaces that part, and `chords=` replaces the chords. Others: `dyn=`, `chords="Am:2 G:2"`, `prog=<name>`, `key=`, `tempo=<bpm>`.
-- **Key.** `key=` is a section setting only (it can't go inside a part's `{...}` map). It re-keys the section's deg notes; chord names stay absolute.
+- **Settings:** `like=<section>` copies its parts and settings, including `chords`. Anything written after it on the line replaces what was inherited: a `role:` replaces that part, and `chords=` replaces the chords. Others: `dyn=`, `chords="Am:2 G:2"`, `prog=<name>`, `key=`, `tempo=<bpm>`, a ramp across the section `tempo="rit 120>96"` / `"accel 90>120"`, and section feel `swing=.6`.
+- **Key.** `key=` is a section setting only (it can't go inside a part's `{...}` map).
+  - It re-keys the section's deg notes: `key=D` is D major, `key=Dm` is D minor, and `key="D dorian"` names a mode (also lydian, mixolydian, phrygian, harmonic_minor, melodic_minor).
+  - Chord names stay absolute, so write the section's `chords=` to match.
+  - `pad:` styles, `arp:` and rel parts follow `chords=`.
 - **Multi-bar patterns.** Notes in every mode (deg, letter, rel) may span several bars with `|`, and they loop to fill the section. Example: a bass that rests to re-enter after a stop, `{rel: "R/1 | r/2 R/2", oct: -2}`.
 - **Events** are written **`!type[:length][@position][(options)]`**, in that order: `!zaps@+2:3(count=3)`, `!impact@cue:bird(size=xl)`.
   - Lengths are in bars (`:2`) or beats (`:2b`).
@@ -140,7 +179,7 @@ mix drums -6 | fx -6 | keys 0 | lead 6
   |---|---|
   | `!impact(size=s\|m\|l\|xl)` | a boom and crash starting at the position. `l` is the default; `xl` is longer and bigger |
   | `!riser:2` | a 2-bar sweep that **ends** at the position, leading into it |
-  | `!zaps(count=6, every=8)` | a run of rising chirps, one per 8th note: lists, data |
+  | `!zaps(count=6, every=8)` | a run of bright chirps rising in pitch, one per note value of `every` (8 = 8th notes, 4 = quarters, 16 = 16ths; the default count is 4): lists, data. Quiet enough for intros at `mix fx -9` |
   | `!stop:2b` | stop-time: every section part goes silent for 2 beats (notes starting in the span are removed); the fx keep sounding |
   | `!drop:2(keep=[pad, bass])` | every part not kept goes silent for 2 bars: breakdowns |
   | `hit crash swell fill downlifter cloud ...` | **silent for now:** written to `cues.json` only; they render from later phases |
@@ -188,28 +227,38 @@ mix drums -6 | fx -6 | keys 0 | lead 6
 - **Motif cycling.** `motif` plus `role:m1,m2` cycles in blocks anchored at **bar 0 of the song**, so a section starting mid-cycle begins mid-motif. Prefer melodies as inline-note variables (`theme = {deg: "...", oct: 1}`), which start with their section.
 - **Pad and slash chords.** `pad:warm` and `pad:dark` voice triads, so 7ths and 9ths need a rel voicing. Slash chords (`C/E`) still put the root in the bass.
 - **Part names and levels.** Parts named `keys`, `piano`, `epiano`, `organ`, `gtr` or `guitar` get their instrument and a calibrated level; any other name needs an `inst` line and a `mix` level.
-- **Section names.** Avoid style, motif and keyword names (`return`, `if`, `for`, …): a section is also a variable.
-- **Not available yet:** tempo ramps (`rit`), motif transforms (`m1:aug`), humanised timing and swing (the `groove` line is stored for P3), and instruments outside the catalog (strings, brass, bells, real field recordings). For ambience and nature sounds, see [instruments.md](reference/instruments.md).
+- **Section names.**
+  - **Reserved** (errors): `for in if elif else every def return form with and or not true false none as at bars`, and the builtins `euclid rot rev len min max`.
+  - **Avoid:** style and motif names (`warm`, `dark`, `up`, `full`, `sub`, your motif names), because a section is also a variable and `pad:warm` would pick up a section called `warm`.
+  - **Allowed:** directive words (`groove`, `mix`, `feel`, …) work as section names.
+- **Not available yet:** the re-harmonising transform `to=`, and instruments outside the catalog (strings, brass, bells, real field recordings). For ambience and nature sounds, see [instruments.md](reference/instruments.md).
+- **Tempo ramps and video.** A ramp keeps cues and frames exact, but beats no longer land on whole frames inside it, so keep ramps to endings and transitions.
 
 ## 8. Examples (complete, checked, rendered and balanced)
 
-- [examples/hopeful_explainer.sm](examples/hopeful_explainer.sm), D major, 1:15:
+Each passes `songmap listen` clean (only expressive notes), with its peak at least 2 dB above every other section.
+- [examples/hopeful_explainer.sm](examples/hopeful_explainer.sm), D major, 1:15, mood `balanced`:
   - a piano question/answer theme;
-  - guitar ripples, a pocket groove with ghosts and a bass that locks to the kick;
+  - guitar ripples, a groove with ghosts and a bass that locks to the kick;
+  - the build holds back its backbeat until `home`;
   - the synth lead takes the tune;
-  - a caveat 11 dB under its neighbours, and a plagal ending.
-- [examples/cinematic_build.sm](examples/cinematic_build.sm), E minor, 1:40, a form block:
+  - a caveat 9 dB under its neighbours, and a plagal ending.
+- [examples/cinematic_build.sm](examples/cinematic_build.sm), E minor, 1:40, a form block, mood `balanced`:
   - three rising waves driven by a loop index (dynamics and euclid hats);
-  - risers into drops, per-bar fills, the lead resting in the last bar;
-  - a stop-time before a held caveat with a borrowed-chord turnaround, then a bigger finale.
-- [examples/lofi_late_notes.sm](examples/lofi_late_notes.sm), D dorian, 90 BPM:
+  - risers into the drops, per-bar fills, the lead resting in the last bar;
+  - a stop-time before a held caveat with a borrowed-chord turnaround;
+  - 16th and open hats saved for the finale;
+  - a plagal close on E minor.
+- [examples/lofi_late_notes.sm](examples/lofi_late_notes.sm), D dorian, 90 BPM, mood `lofi`:
   - a 12-step shuffle, rootless 9th chords with an anticipation, a bass slide;
   - a piano melody with a grace note and breathing rests;
-  - a drum-less bridge.
+  - a drum-less bridge, and a fuller reprise with an open pad;
+  - a resolution to Dm9.
 
 Section loudness measured from the renders:
 
 | Example | Sections, in order (LUFS) |
 |---|---|
-| hopeful explainer | intro −21.2, verse −16.5, lift −12.6, **breath −23.3**, home −12.3, outro −17.5 |
-| cinematic build | intro −26.5, waves −20.5 / −18.0 / −15.6, drop −13.1, **held −22.5**, finale −11.8, coda −22.7 |
+| hopeful explainer | intro −20.3, verse −15.7, lift −13.7, **breath −22.1**, home −11.5, outro −16.5 |
+| cinematic build | intro −25.5, waves −20.0 / −17.4 / −15.2, drops −13.5 / −13.7, **held −22.3**, finale −11.5, coda −21.1 |
+| lo-fi | dusk −26.9, walk −15.2, tune_a −14.8, **alone −19.6**, tune_b −12.0, fade −21.4 |

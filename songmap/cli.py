@@ -1,10 +1,12 @@
 """songmap command line.
 
     songmap check  song.sm|song.yaml          parse, validate, expand; prints a summary or precise errors
-    songmap render song.sm [-o build/x]       song.wav (24-bit), stems/, cues.json, qa.json, render.log
+    songmap render song.sm [-o build/x]       song.wav (24-bit), stems/, cues.json, qa.json, render.log  [--mp3]
     songmap migrate old.yaml [-o new.yaml]    rewrite a v0.1 song map as v0.2
     songmap fmt song.yaml --to sm [-o x.sm]   print a song map as .sm or YAML (lossless)
+    songmap listen song.sm [--render DIR]     an automated ear: what a listener would notice (exit 2 on problems)
     songmap describe [--compact]              the catalog an LLM needs: styles, instruments, events, syntax
+    songmap video  song.sm [-o song.mp4]      MP4 with letter names, staff and piano roll, sounding notes lit
 
 Song maps are `.sm` (the SongMap language, docs/LANGUAGE.md; `.sml` is an alias) or YAML (`.yaml`, `.yml`).
 Exit codes: 0 ok, 1 song error, 2 usage error.
@@ -20,14 +22,8 @@ from .parse.errors import NotationError, SongError
 
 
 def _load(path: str):
-    from .parse import lang
-    ext = os.path.splitext(path)[1].lower()
-    if not os.path.isfile(path):
-        raise SongError(f"no such file: {path}")
-    if ext in lang.EXTS:
-        return lang.load(path)
-    from .parse import yaml_form          # .yaml, .yml (and anything else)
-    return yaml_form.load(path)
+    from .parse import load
+    return load(path)
 
 
 def _summary(arr) -> str:
@@ -74,11 +70,30 @@ def cmd_render(args) -> int:
     song = _load(args.song)
     out = args.out or os.path.join("build", os.path.splitext(os.path.basename(args.song))[0].split(".")[0])
     r = render(song, master_mode=args.master, log=print)
-    paths = write_outputs(r, out, stems=not args.no_stems)
+    paths = write_outputs(r, out, stems=not args.no_stems, mp3=args.mp3)
     print(_summary(r.arrangement))
     for w in list(song.warnings) + r.arrangement.warnings + _video_check(r.arrangement):
         print(f"  warning: {w}")
-    print(f"wrote {paths['song']}, {paths['cues']}, {paths['qa']}" + (", stems/" if "stems" in paths else ""))
+    print(f"wrote {paths['song']}, {paths['cues']}, {paths['qa']}" + (", stems/" if "stems" in paths else "")
+          + (f", {paths['mp3']}" if "mp3" in paths else ""))
+    return 0
+
+
+def cmd_video(args) -> int:
+    from .visual import write_poster, write_video
+    song = _load(args.song)
+    stem = os.path.splitext(os.path.basename(args.song))[0].split(".")[0]
+    out = args.out or os.path.join("build", stem, stem + ".mp4")
+    try:
+        w, h = (int(x) for x in args.size.lower().split("x"))
+    except ValueError:
+        print(f"error: --size must look like 1280x720, not {args.size}", file=sys.stderr)
+        return 2
+    parts = args.parts.split(",") if args.parts else None
+    if args.poster:
+        print("wrote", write_poster(song, args.poster, size=(w, h), theme=args.theme, parts=parts))
+    write_video(song, out, fps=args.fps, size=(w, h), theme=args.theme, parts=parts, master_mode=args.master, log=print)
+    print(f"wrote {out}")
     return 0
 
 
@@ -123,6 +138,16 @@ def cmd_fmt(args) -> int:
     return 0
 
 
+def cmd_listen(args) -> int:
+    from .listen import listen_file
+    rep = listen_file(args.song, qa_path=args.qa, render_dir=args.render)
+    print(rep.text())
+    if args.json:
+        import json
+        _write(json.dumps(rep.to_dict(), indent=1) + "\n", args.json)
+    return 2 if rep.counts()["problem"] else 0
+
+
 def cmd_describe(args) -> int:
     from .describe import catalog
     _write(catalog(compact=args.compact), args.out)
@@ -146,8 +171,19 @@ def main(argv=None) -> int:
     p.add_argument("song", help="a .sm (.sml) or .yaml song map")
     p.add_argument("-o", "--out", help="output folder (default build/<song>)")
     p.add_argument("--no-stems", action="store_true", help="skip stems/*.wav")
-    p.add_argument("--master", choices=["standard", "legacy"], help="override the song's master")
+    p.add_argument("--mp3", action="store_true", help="also write song.mp3 (needs ffmpeg)")
+    p.add_argument("--master", choices=["standard", "legacy", "clean"], help="override the song's master")
     p.set_defaults(fn=cmd_render)
+    p = sub.add_parser("video", help="render an MP4: letter names, staff and piano roll with the sounding notes lit")
+    p.add_argument("song", help="a .sm (.sml) or .yaml song map")
+    p.add_argument("-o", "--out", help="output .mp4 (default build/<song>/<song>.mp4)")
+    p.add_argument("--size", default="1280x720", help="frame size WxH (default 1280x720)")
+    p.add_argument("--fps", type=int, default=30)
+    p.add_argument("--theme", choices=["light", "dark"], default="light")
+    p.add_argument("--parts", help="comma-separated parts to show (default: every pitched part)")
+    p.add_argument("--poster", help="also write one frame as a PNG here")
+    p.add_argument("--master", choices=["standard", "legacy", "clean"], help="override the song's master")
+    p.set_defaults(fn=cmd_video)
     p = sub.add_parser("migrate", help="rewrite a v0.1 song map as v0.2")
     p.add_argument("song")
     p.add_argument("-o", "--out", help="write here instead of stdout")
@@ -157,6 +193,13 @@ def main(argv=None) -> int:
     p.add_argument("--to", choices=["sm", "compact", "sml", "yaml"], required=True, help="output format")
     p.add_argument("-o", "--out", help="write here instead of stdout")
     p.set_defaults(fn=cmd_fmt)
+    p = sub.add_parser("listen", help="an automated ear: clashes, crowding, repetition, flat dynamics, contrast")
+    p.add_argument("song", help="a .sm (.sml) or .yaml song map")
+    p.add_argument("--render", metavar="DIR", help="also judge loudness from an existing render folder's qa.json "
+                   "(it does not render; `songmap render` writes the full report to review.json)")
+    p.add_argument("--qa", help="a qa.json to judge loudness from")
+    p.add_argument("--json", metavar="FILE", help="also write the report as JSON")
+    p.set_defaults(fn=cmd_listen)
     p = sub.add_parser("describe", help="the catalog for writing song maps: styles, instruments, events, syntax")
     p.add_argument("--compact", action="store_true", help="the ~500-token version for an LLM's context")
     p.add_argument("-o", "--out", help="write here instead of stdout")

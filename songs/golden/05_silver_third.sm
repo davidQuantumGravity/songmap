@@ -1,0 +1,99 @@
+# 5. The Silver Third (2:39). An expedition finds a new world: C major -> ^Eb major -> golden home -> C major,
+# 90 BPM, cinematic. Wonder at dawn, a theme that sets out, a build, a hush where the ground shifts by a
+# "silver third", the theme in the new land, a golden home where only golden-spectrum timbres sound, a
+# homecoming (the peak), and a finale on golden giant steps.
+# Golden techniques (docs/GOLDEN_BLENDING.md ranks 1 and 4, and the golden home of GOLDEN_THEORY.md §4.3):
+#   - Pivot between layers. C major and ^Eb major (+10 sixth-steps, 333 cents: a "silver third") share no
+#     note, but they share the golden chords Cg, Fg, Gg (I, IV, V of C = vi, ii, iii of ^Eb). The pivot runs
+#     F -> Fg (golden IV in C = golden ii in ^Eb) -> ^Fm -> ^Bb7 -> ^Eb. The lead holds F, the one tone F and Fg
+#     share, the bell rings Fg's golden third, and the horn climbs ^C - ^D - ^Eb into the new key; then the
+#     theme returns a silver third higher (key=^Eb re-keys every deg line).
+#   - Golden home. The Western instruments stop. A golden-spectrum pad (partials 2^m·φ^n), a glass bell on
+#     chord tones and a low glass gong breathe along the golden circle ^Ebg - ^Ebg7 - Gg - Gg7 - vBg - Gg7 - Gg,
+#     each golden seventh adding the next chain tone. On harmonic instruments Western chords are the deepest
+#     release; golden-spectrum timbres are a digital laboratory in which golden chords measure smoothest, so
+#     only they play here. Then G7 arrives on the piano as a Western visitor (Gg -> G, the projection
+#     reversed) and leads home to C.
+#   - Golden giant steps. The finale walks Coltrane's major-third cycle C -> Ab -> E -> C, each step through
+#     its one strict golden passing chord (C - Cg - Ab - Abg - E - Eg - C). The voiced parts play the engine's
+#     sub-chromatic lines; the lead and bell hold each step's common tone, C6 - Ab5 - E5 - C5, and a tom
+#     pickup on every golden chord drives into each arrival.
+# Golden chords elsewhere are only the half-bar Fg of the pivot and the half-bar passing chords of the finale.
+#
+# Form (58 bars + 4 s tail):
+#   dawn 4        pad, piano arpeggio, the bell sings the theme's head
+#   theme 8       the lead's theme in C (a half cadence), piano arpeggio, pad, bass
+#   build 8       the answer climbs to E6 and lands on C; harp ostinato, piano pulse and low drums enter,
+#                 the horn counter-line joins at bar 5, toms roll into...
+#   pivot 4       a hush: F - Fg - ^Fm - ^Bb7 - ^Eb (piano, pad, bass, lead, horn, bell)
+#   silver 8      the theme in ^Eb, fuller: horn counter-melody, harp, piano pulse, drums
+#   golden_home 7 golden pad, glass bell, glass gong only; the last Gg stops at mid-bar so the pad has
+#                 released before G7 sounds
+#   visitor 1     G7 on the piano (a riser into the homecoming)
+#   homecoming 8  the peak: the theme in C with a new climax (E6), bell an octave up, organ choir, horn,
+#                 harp in 16ths, the fullest drums
+#   giant 6       golden giant steps
+#   coda 4        F/C - Fm/C - C over a low C: the bell's head motif once more
+# Instruments: piano (keys/still), string pad (pad/still), harp ostinato (string_pluck/still), low drums
+# (kick, deep snare and two toms built from kick/v0), bass (clean/bass), lead (clean/lead), horn (clean/organ,
+# softened), organ choir (clean/organ), glass bell and gong (clean/glass), golden pad (clean/golden_pad).
+song "The Silver Third" 90 4/4 C fps=30 seed=25 tail=4 tuning=36edo
+inst keys=keys/still wash=pad/still harp=string_pluck/still(brightness=.8, t60=2.2, body=.6) gold=clean/golden_pad(release=1.5) bell=clean/glass deep=clean/glass(decay=9, damp=.4) lead=clean/lead low=clean/bass horn=clean/organ(partials=7, rolloff=1.6, even=.7, attack=.09, release=.45, vel_bright=.7) choir=clean/organ(partials=6, rolloff=1.9, attack=.4, release=1.2)
+kit kick=kick/v0(tune=42, sweep=20, decay=1.1, sub=.35, click=.1, drive=1.3) snare=snare/v0(tone=150, tone_mix=.65, tone_decay=.25, noise_decay=.32, noise_lp=5000, snap=.15) ghost=kick/v0(tune=66, sweep=9, sweep_time=.05, decay=.6, click=.15, drive=1.2) rim=kick/v0(tune=88, sweep=8, sweep_time=.04, decay=.45, click=.18, drive=1.2)
+
+prog dawn    "C:1 Am:1 F:1 G:1"
+prog theme   "C:1 Em:1 F:1 G:1 Am:1 F:1 Dm:1 G:1"
+prog answer  "Am:1 F:1 C:1 G:1 Am:1 F:1 G:1 C:1"
+prog pivot   "F:0.5 Fg:0.5 ^Fm:1 ^Bb7:1 ^Eb:1"
+prog theme_e "^Eb:1 ^Gm:1 ^Ab:1 ^Bb:1 ^Cm:1 ^Ab:1 ^Fm:1 ^Bb:1"
+prog home    "^Ebg:1 ^Ebg7:1 Gg:1 Gg7:1 vBg:1 Gg7:1 Gg:0.5 N.C.:0.5"
+prog giant   "C:1 ~:0.5 Ab:1 ~:0.5 E:1 ~:0.5 C:1.5"
+prog coda    "F/C:1 Fm/C:1 C:2"
+
+# --- melodies (deg 0 = the key's tonic in octave 4; oct: 1 lifts to octave 5) ---
+# The theme climbs to B, falls through A, and ends on the 5th of V (a half cadence).
+theme_tune = "=mp 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 7/4. 6/8 4/2 | 5/4 4 3/2 | 1/2 3/2 | 1/1"
+tune = {deg: theme_tune, oct: 1}
+# The answer: rises through the chord to E6, falls back and closes on the tonic.
+answer_tune = {deg: "=mp 5/2 4/4 2 | 3/4 5 7/2 | =mf 9/2. 7/4 | 8/1 | 7/4. 6/8 5/2 | 5/4 4 3/2 | 1/2 4/4 6 | 7/1", oct: 1}
+# Homecoming: the theme's first half, then a new climax on E6 and a half cadence on D6.
+hero_text = "=f 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 9/2.^ 7/4 | 7/2 5/2 | 8/2 5/2 | 8/1"
+hero = {deg: hero_text, oct: 1}
+# Horn counter-lines (octave 4): long notes in contrary motion, chord tones only.
+counter = {deg: "=mp 2/2 4 | 4/2 -1 | 0/1 | -1/2 1 | 2/1 | 3/2 0 | -2/1 | -1/2 -3"}
+answer_counter = {deg: "r/1 | r/1 | r/1 | r/1 | =mp 0/2 2 | 3/2 0 | -1/2 1 | 0/1"}
+# The bell's motif: the theme's head (G E C), first heard at dawn.
+dawn_bell = {deg: "=f r/1 | 4/4 2 r/2 | 0/1 | r/1", oct: 1}
+coda_bell = {deg: "=f r/1 | r/1 | 4/4 2 0/2 | r/1", oct: 1}
+# Golden home: the bell walks chord tones (rel), so every note belongs to the golden chord under it.
+chain = {rel: "5/2 3+ | R+/1", oct: 1}
+# Finale: common tones of the giant steps, C6 - Ab5 - E5 - C5.
+steps = {deg: "=f 7/1 | 7/2 b5/2 | b5/1 | 2/1 | 2/2 0/2 | 0/1", oct: 1}
+
+# --- accompaniment figures (full bars; rel follows every chord, golden ones included) ---
+ripple = {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5", oct: -1}
+ostinato = {rel: "R/8 5 R+ 5 3 5 R+ 5"}
+ostinato16 = {rel: "R/16 5 R+ 5 3 5 R+ 5 R 5 R+ 5 3 5 R+ 5"}
+drive_bass = {rel: "R/2 r/8 R/4.", oct: -2}
+
+# --- drums: a deep kick, a deep snare, a low tom (ghost) and a high tom (rim) ---
+build_drums = { kick:  "X...............|X.........x.....|X...............|X.........x.....|X.......X.......|X.........x.....|X.......X.......|X.......X.......", ghost: "................|................|..........x.....|..........x..x..|......x.......x.|......x...x...x.|......x.......x.|-.-.x.x.x.x.X.XX", rim:   "................|................|................|................|................|................|...........x..x.|........-.x.x.xX", snare: "................|................|................|................|........X.......|........X.......|........X.......|........X...x.x."}
+silver_drums = { kick:  "X.........x.....|X.........x.....|X.........x.....|X.......x.x.....|X.........x.....|X.........x.....|X.........x.....|X...............", snare: "........X.......|........X.......|........X.......|........X.....x.|........X.......|........X.......|........X.......|................", ghost: "......x.......x.|......x.......x.|......x.......x.|......x...x.x.xx|......x.......x.|......x.......x.|......x.......x.|................", hat:   {steps: "x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|................", vel: [0.32, 0.16, 0.24, 0.16]}}
+home_drums = { kick:  "X.........x.....|X.........x.....|X.........x.....|X.......x.x.x...|X.........x.....|X.........x.....|X.........x.....|X.......X.......", snare: "........X.......|........X.......|........X.......|........X...x.x.|........X.......|........X.......|........X.......|........X...x.xX", ghost: "......x.......x.|......x.......x.|......x.......x.|......x...x.x.xx|......x.......x.|......x.......x.|......x.......x.|....x.x.x.x.x.xx", rim:   "...x.......x....|...x.......x....|...x.......x....|.........x.x.x..|...x.......x....|...x.......x....|...x.......x....|..x.x.x.x.x.x.x.", hat:   {steps: "x.x.x.x.x.x.x.x.", vel: [0.4, 0.2, 0.3, 0.2]}, ohat:  "..x...x...x...x."}
+# Finale: a kick on every arrival (C, Ab, E, C) and a tom pickup on every golden passing chord.
+giant_drums = { kick:  "X...............|........X.......|................|X...............|........X.......|................", ghost: "................|-.-.x.xX........|........-.-.x.xX|................|-.-.x.xX........|................", snare: "................|........X.......|................|X...............|........X.......|................"}
+
+# name        bars | parts and settings                                                               | events
+dawn            4 | keys:ripple wash:hold bell:dawn_bell prog=dawn dyn=p<mp
+theme           8 | keys:ripple wash:hold low:bassline lead:tune prog=theme dyn=mp
+build           8 | keys:pulse wash:hold low:drive_bass lead:answer_tune harp:ostinato horn:answer_counter drums:build_drums prog=answer dyn=mp<mf
+pivot           4 | keys:hold wash:hold low:bassline lead:{deg: "=mp 3/1 | r/1 | r/1 | r/1", oct: 1} horn:{deg: "=p 3/1 | ^0/1 | ^1/1 | ^b2/1"} bell:{rel: "=mf r/2 3+/2 | r/1 | r/1 | R+/1"} prog=pivot dyn=p<mp
+silver          8 | keys:pulse wash:hold low:drive_bass lead:tune horn:counter harp:ostinato drums:silver_drums prog=theme_e key=^Eb dyn=mf | !riser:1 !impact(size=m)
+golden_home     7 | gold:hold bell:chain deep:{rel: "R/1", oct: -1} prog=home dyn=p<mp
+visitor         1 | keys:hold low:bassline chords="G7:1" dyn=mp | !riser:2b@+1
+homecoming      8 | keys:pulse wash:hold low:drive_bass lead:hero bell:{deg: hero_text, oct: 2} horn:counter choir:hold(range=[60,81]) harp:ostinato16 drums:home_drums prog=theme dyn=f | !impact
+giant           6 | keys:hold(voices=3) wash:hold(voices=3) choir:hold(range=[60,81]) low:bassline lead:steps bell:steps drums:giant_drums prog=giant dyn=f>mf | !impact@+4:3(size=xl)
+coda            4 | keys:ripple wash:hold choir:hold(range=[60,81]) low:{deg: "0/1 | 0/1 | 0/1 | 0/1", oct: -2} horn:{deg: "=p 0/1 | 0/1 | 0/1 | 0/1"} bell:coda_bell prog=coda dyn=mp>pp
+
+mix drums -12 | fx -10 | keys -8 hall=.2 | wash -24 hall=.3 | harp -5 hall=.3 pan=.25 | gold -12 hall=.35 | bell -10 hall=.4 pan=.15 | deep -6 hall=.4 | lead 18 hall=.25 | horn -11 hall=.35 pan=-.25 | choir -22 hall=.4 | low -4
+master clean

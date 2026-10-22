@@ -147,11 +147,20 @@ class Ensemble:
         v = self.voice(part, piece)
         key = (v.use, tuple(sorted(v.params.items())), patch)
         if key not in self._cache:
+            where = f"instruments {part}{'.' + piece if piece else ''}"
             try:
-                self._cache[key] = make(v.use, **{**v.params, **dict(patch)})
+                inst = make(v.use, **{**v.params, **dict(patch)})
             except ParamError as e:
-                raise SongError(f"instruments {part}{'.' + piece if piece else ''}: {e}", file=self.song.file) from None
+                raise SongError(f"{where}: {e}", file=self.song.file) from None
+            except SongError as e:      # e.g. a sampler library that isn't installed
+                raise SongError(f"{where}: {e.message}", file=self.song.file, suggestion=e.suggestion) from None
+            self.song.warnings += [w for w in getattr(inst, "warnings", ()) if w not in self.song.warnings]
+            self._cache[key] = inst
         return self._cache[key]
+
+    def instruments(self) -> list:
+        """Every instrument built so far (one per distinct voice + params)."""
+        return list(self._cache.values())
 
     def check(self, parts) -> None:
         """Build every instrument a song uses (validates names and params)."""

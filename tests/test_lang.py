@@ -430,3 +430,13 @@ NEW_ERRORS = [
 @pytest.mark.parametrize("src,line,what,hint", NEW_ERRORS, ids=[e[2][:28] for e in NEW_ERRORS])
 def test_new_feature_errors(src, line, what, hint):
     test_errors_carry_file_line_and_a_suggestion(src, line, what, hint)
+
+
+def test_sharp_glued_to_a_word_is_not_a_comment():
+    s = lang.loads('song "T" 120 4/4 C#m\nchords C#m F#:2 G#7  # a real comment\nintro 2 | pad:warm\n', "t.sm")
+    assert s.key == "C#m" and s.harmony.default == ["C#m", "F#:2", "G#7"]
+
+
+def test_a_part_named_chords_is_not_the_harmony_setting():
+    s = lang.loads('song "T" 120 4/4 C\nchords C F\na 2 | chords:hold chords="Am:1 G:1"\n', "t.sm")
+    assert s.sections[0].harmony == "Am:1 G:1" and s.sections[0].parts["chords"].style == "hold"

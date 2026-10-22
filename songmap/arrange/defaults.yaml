@@ -55,4 +55,5 @@ returns:
 kit_fallback: {fill: snare, hat16: hat, ohat: hat, ghost: snare, rim: snare}
 
 # Parts without an instrument entry use the instrument of the same name, or this.
-part_fallback: {keys: keys, piano: keys, gtr: string_pluck, guitar: string_pluck, organ: organ, epiano: epiano}
+part_fallback: {keys: keys, piano: keys, gtr: string_pluck, guitar: string_pluck, organ: organ, epiano: epiano,
+                voiced: clean, chords: clean, melody: clean}

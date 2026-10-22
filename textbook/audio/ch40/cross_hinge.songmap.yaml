@@ -1,0 +1,23 @@
+# ch40 crossing-worlds: Western calls in C major (lead) end D-B-C over G -> C; golden answers in golden7 (pluck)
+# end C#-B-C over vEg -> Cg. B and C are the only notes the two scales share; the last word is C major.
+songmap: 0.2
+title: "Two worlds, one cadence"
+tempo: 92
+meter: "4/4"
+key: "C major"
+tuning: 36edo
+seed: 40
+tail_seconds: 3
+instruments: {lead: clean/lead, pluck: string_pluck/still, pad: clean/organ, low: clean/bass}
+mix:
+  lead: {gain_db: -6, send: {hall: 0.25}}
+  pluck: {gain_db: -3, send: {hall: 0.25}}
+  pad: {gain_db: -12, send: {hall: 0.25}}
+  low: {gain_db: -10}
+sections:
+  - {name: call1, bars: 2, harmony: "C:1 G:0.5 C:0.5", parts: {lead: {notes: "e4 g8 f8 e4 d4 | d4 b-4 c2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: answer1, bars: 2, harmony: "Cg:1 vEg:0.5 Cg:0.5", parts: {pluck: {notes: "ve4 ^g8 vf8 ve4 c#4 | c#4 b-4 c2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: call2, bars: 2, harmony: "F:1 G7:0.5 C:0.5", parts: {lead: {notes: "a4 c+8 a8 g4 f4 | d4 b-4 c2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: answer2, bars: 2, harmony: "vFg:1 vEg:0.5 Cg:0.5", parts: {pluck: {notes: "^ab4 c+8 ^ab8 ^g4 vf4 | c#4 b-4 c2"}, pad: hold, low: {style: roots, role: bass}}}
+  - {name: home, bars: 1, harmony: "C:1", parts: {lead: {notes: "c1"}, pluck: {notes: "c+1"}, pad: hold, low: {style: roots, role: bass}}}
+master: clean
