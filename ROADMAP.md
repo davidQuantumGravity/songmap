@@ -8,6 +8,24 @@ P0 setup ─► P1 core engine ─► P2 QA ─► P3 performance ─► P4 soun
                  └─► P7 GUI (G1–G3 can run in parallel from here)            └─► P6 compact + LLM tooling ─► P8 video helpers ─► P9 variety
 ```
 
+**Status update (2026-10-22): feel, moods, ears and review**
+
+- **P3, partly done.**
+  - The performance stage is wired between expand and render (`perform/play.py`): swing, groove templates, per-part timing offsets, humanize drift, velocity variation, metric accents, high-loud and arch, rolled chords. It is seeded, and event hits stay frame-exact.
+  - Motif transforms: `t±n oct±n inv rev aug dim dyn= frag= xN thin= canon=` (`theory/transforms.py`).
+  - Not yet: voicing styles, automation lanes, MIDI export, `to=`.
+- **P4, partly done.** Mood presets (`arrange/moods/`):
+  - `balanced` is the default for new songs.
+  - `cinematic`, `documentary`, `ambient`, `techno` and `lofi` are the others.
+  - `v0` keeps the Oct-13 ports exactly as synth_v0 played them.
+  - Not yet: mood-specific instruments, `preserve_contrast` mastering.
+- **P2, partly done.**
+  - Every render writes `qa.png` (a spectrogram plus section loudness) and `review.json`.
+  - `songmap listen` is an automated ear: melody/chord rubs, register crowding, mechanical repetition, flat dynamics, density, hit budget, range, the ending, and contrast and balance from a render.
+  - Not yet: the `qa:` rule exit codes and `songmap why`.
+- **P9, partly done.** Tempo ramps per section (`rit 120>96`, `accel`) integrate exactly, so frames and cues stay exact.
+- **Review loop.** The textbook's **Songbook** (appendix H, `tools/textbook/songbook.py`) renders every song in `songs/**` and the skill's examples at build time, with the ear's report, loudness, a spectrogram and a `# review:` status.
+
 **Status (2026-10-20):**
 - Design docs are v0.2.
 - **P0 and P1 are done.**

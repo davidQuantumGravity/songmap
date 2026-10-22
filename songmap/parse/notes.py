@@ -57,6 +57,14 @@ class Ev:
     rel: tuple = ()              # rel mode: ((degree, octave shift), ...), resolved against the chord at expand time
 
 
+class EvList(list):
+    """Parsed events plus their written length in beats (trailing rests count)."""
+
+    def __init__(self, items=(), length: float | None = None):
+        super().__init__(items)
+        self.length = max((e.beat + e.dur for e in self), default=0.0) if length is None else length
+
+
 def parse_duration(d: str, beat_unit: int = 4) -> float:
     """'4' -> 1 beat, '8.' -> 0.75, '8t' -> 1/3, in beats of `beat_unit` notes."""
     m = re.fullmatch(r"(1|2|4|8|16|32|64)(\.*)(t?)", d)
@@ -244,9 +252,7 @@ def parse_motif(text: str, *, deg: bool = False, rel: bool = False, key: str = "
             idx = DYN_ORDER.index(min(DYN, key=lambda k: abs(DYN[k] - l0)))
             target = DYN[DYN_ORDER[min(max(idx + (1 if d == "<" else -1), 0), len(DYN_ORDER) - 1)]]
             _apply_ramp(evs, i0, l0, target)
-    phrase = Phrase(evs)
-    phrase.length = beat          # trailing rests count: "c1 | r1" is two bars long
-    return phrase
+    return EvList(evs, length=beat)    # trailing rests count: "c1 | r1" is two bars long
 
 
 def _apply_ramp(evs: list[Ev], i0: int, l0: float, l1: float):
@@ -261,9 +267,7 @@ def _apply_ramp(evs: list[Ev], i0: int, l0: float, l1: float):
         e.vel = min(1.0, base * ratio)
 
 
-class Phrase(list):
-    """A parsed motif: its events, plus its written length in beats (rests included)."""
-    length: float = 0.0
+Phrase = EvList          # a parsed motif: its events plus its written length (rests included)
 
 
 def motif_length(evs: list[Ev]) -> float:

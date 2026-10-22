@@ -25,6 +25,7 @@ from ..parse.steps import parse_steps
 from ..perform.pipeline import parse_shape, shape_at
 from ..theory.harmony import HarmonyTimeline, build_harmony, parse_progression
 from ..theory.keys import tonic_midi
+from ..theory import transforms
 from ..theory.tuning import on_grid, octaves, parse_tuning
 from .ensemble import Ensemble
 from .styles import Style, get_style
@@ -159,10 +160,7 @@ class _Ctx:
     def motif(self, ref: str, sec_name: str) -> list[Ev]:
         if ref in self._motif_cache:
             return self._motif_cache[ref]
-        name = ref.split(":")[0]
-        if ":" in ref:
-            raise SongError(f"motif transform '{ref}' arrives in P3", file=self.song.file, section=sec_name,
-                            suggestion=f"use '{name}' for now")
+        name, _, chain = ref.partition(":")
         if name not in self.song.motifs:
             raise SongError(f"unknown motif '{name}'", file=self.song.file, section=sec_name,
                             suggestion=did_you_mean(name, self.song.motifs) if self.song.motifs else
@@ -171,8 +169,11 @@ class _Ctx:
         try:
             evs = parse_motif(m.text, deg=m.mode == "deg", rel=m.mode == "rel", key=m.key or self.song.key,
                               octave=m.octave, beats_per_bar=self.bpb, name=f"motif {name}")
+            if chain:
+                evs = transforms.apply(evs, chain, key=m.key or self.song.key, deg=m.mode == "deg",
+                                       beats_per_bar=self.bpb, name=f"motif {ref}")
         except NotationError as e:
-            raise SongError(str(e), file=self.song.file, line=m.line) from None
+            raise SongError(str(e), file=self.song.file, line=m.line, section=sec_name) from None
         self._motif_cache[ref] = evs
         return evs
 
@@ -428,8 +429,22 @@ def _arp(ctx, sec, span, role, style, spec, p_oct, patch) -> list[XEv]:
     return out
 
 
-def _motifs(ctx, sec, span, role, refs, p_oct) -> list[XEv]:
+def _part_transform(ctx, sec, evs, spec, deg: bool, key: str):
+    """A part's `transform:` option (e.g. "aug t+2") applied to its parsed notes."""
+    chain = spec.opts.get("transform")
+    if not chain:
+        return evs
+    try:
+        return transforms.apply(evs, str(chain), key=key, deg=deg, beats_per_bar=ctx.bpb, name=f"{sec.name} transform")
+    except NotationError as e:
+        raise SongError(str(e), file=ctx.song.file, line=sec.line, section=sec.name) from None
+
+
+def _motifs(ctx, sec, span, role, refs, p_oct, spec=None) -> list[XEv]:
     mots = [(r, ctx.motif(r, sec.name)) for r in refs]
+    if spec is not None and spec.opts.get("transform"):
+        mots = [(r, _part_transform(ctx, sec, evs, spec, ctx.song.motifs[r.split(":")[0]].mode == "deg",
+                                    ctx.song.motifs[r.split(":")[0]].key or ctx.song.key)) for r, evs in mots]
     lens = [_whole_bars(motif_length(evs), ctx.bpb) for _, evs in mots]
     out = []
     if len(set(lens)) == 1:            # synth_v0: blocks anchored at the song start
@@ -466,6 +481,7 @@ def _inline(ctx, sec, span, role, spec, p_oct) -> list[XEv]:
                           beats_per_bar=ctx.bpb, name=f"{sec.name} {role}")
     except NotationError as e:
         raise SongError(str(e), file=ctx.song.file, line=sec.line, section=sec.name) from None
+    evs = _part_transform(ctx, sec, evs, spec, spec.notes_mode == "deg", sec.key or ctx.song.key)
     L = _whole_bars(motif_length(evs), ctx.bpb)
     out, base = [], span.start
     while base < span.end - 1e-9:
@@ -511,7 +527,7 @@ def _expand_part(ctx: _Ctx, sec, span: SectionSpan, role: str, spec) -> list[XEv
     if is_kit:
         raise SongError(f"{role} is a kit: give it a style or step strings")
     if spec.motifs:
-        return _motifs(ctx, sec, span, role, spec.motifs, p_oct)
+        return _motifs(ctx, sec, span, role, spec.motifs, p_oct, spec)
     if spec.notes:
         return _inline(ctx, sec, span, role, spec, p_oct)
     return []

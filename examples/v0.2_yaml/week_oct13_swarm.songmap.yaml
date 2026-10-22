@@ -11,7 +11,7 @@ meter: "4/4"
 key: "E minor"
 fps: 30
 seed: 7
-mood: techno
+mood: v0              # synth_v0's ensemble, unperformed: a faithful port (the scene calls for techno)
 tail_seconds: 3
 video: {composition: WeekSwarm, frames: 3690}
 

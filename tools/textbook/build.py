@@ -713,6 +713,16 @@ def main():
     for idx, ch in enumerate(chapters):
         if args.chapters and ch["id"] not in args.chapters:
             continue
+        if ch.get("generated") == "songbook":          # every song in songs/** (tools/textbook/songbook.py)
+            if TOOLS not in sys.path:
+                sys.path.insert(0, TOOLS)
+            import songbook
+            secs, frag = songbook.chapter(render=not (args.check or args.no_audio or args.test_audio),
+                                          out_site=OUT, jobs=args.jobs)
+            ch["sections"] = secs
+            check_structure(ch, frag, problems)
+            bodies[ch["id"]] = (idx, ch, frag)
+            continue
         path = os.path.join(CONTENT, ch["id"] + ".html")
         if os.path.exists(path):
             frag = open(path, encoding="utf-8").read()

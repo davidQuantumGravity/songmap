@@ -78,7 +78,7 @@ Music/
 │   ├── arrange/                  ← timeline, styles + patterns/*.yaml, expand, events, ensemble + defaults.yaml
 │   ├── instruments/              ← contract, registry, presets loader, dsp/ and 16 instruments
 │   ├── presets/                  ← <instrument>/<name>.yaml (the synth_v0 voices: kick/v0, pad/warm, ...)
-│   ├── perform/  mix/  export/   ← performance layer (wired in P3), mixing/mastering, wav/cues/qa
+│   ├── perform/  mix/  export/   ← performance layer (play.py: swing, humanize, rolled chords), mixing/mastering, wav/cues/qa/qa.png
 ├── tests/                        ← pytest; golden/ holds event-list hashes of every example
 ├── tools/                        ← port_check, v0_oracle (synth_v0's own notes), calibrate_v0, update_golden, demo
 ├── examples/

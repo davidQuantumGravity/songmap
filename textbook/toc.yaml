@@ -568,3 +568,6 @@ parts:
       - {id: appE, title: "E. Glossary", summary: "Every term in the book, defined.", sections: [{id: terms, title: "Terms"}]}
       - {id: appF, title: "F. Bibliography", summary: "Sources and further reading.", sections: [{id: sources, title: "Sources"}]}
       - {id: appG, title: "G. Audio index", summary: "Every audio example in the book.", sections: [{id: index, title: "Index"}]}
+      - {id: songbook, title: "H. Songbook: songs for review", generated: songbook,
+         summary: "Every song in the repository (songs/ and the skill's examples), rendered from source, with the automated ear's report and a review status.",
+         sections: []}

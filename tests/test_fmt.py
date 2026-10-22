@@ -26,13 +26,21 @@ def reparse_yaml(song):
 
 @pytest.mark.parametrize("path", EXAMPLES, ids=[os.path.relpath(p, ROOT) for p in EXAMPLES])
 def test_examples_round_trip(path):
+    # the same song tree expands to the same notes (expand is a pure function of it), so comparing trees
+    # is enough here; test_round_trip_keeps_the_notes checks the digests on the ports
     song = load(path)
     want = fmt.song_to_raw(song)
     for back in (reparse_sm(song), reparse_yaml(song)):
         assert fmt.song_to_raw(back) == want
-        assert expand(back).digest() == expand(song).digest()
     printed = fmt.to_sm(song)
     assert fmt.to_sm(lang.loads(printed, "printed.sm")) == printed        # printing is idempotent
+
+
+@pytest.mark.parametrize("name", ["week_oct13_swarm", "week_oct13_bench", "deepdive_kapton"])
+def test_round_trip_keeps_the_notes(name):
+    song = load(os.path.join(ROOT, "examples", "v0.2_yaml", f"{name}.songmap.yaml"))
+    for back in (reparse_sm(song), reparse_yaml(song)):
+        assert expand(back).digest() == expand(song).digest()
 
 
 def test_printed_swarm_reads_like_the_hand_written_one():

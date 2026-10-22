@@ -1525,16 +1525,31 @@ class _Interp:
         """`full+fill`, `8ths(art=staccato)`, `up(order=[0,2,1,3])`, `m1,m2,m3`, `theme:t+2`, `lattice:dyn=pp`."""
         if text.startswith(("{", "[")):
             return _value(text, self, self.env)
+        from ..theory import transforms as tfm
         items = split_top(text, ",")
         split = [split_top(it, ":") for it in items]
-        opts = {}
+
+        def is_tf(seg):                       # on section lines `:dyn=pp` stays the part's dyn option
+            return tfm.is_transform(seg) and not seg.startswith("dyn=")
+
+        opts, tfs = {}, []
         for segs in split:
+            tfs.append([s for s in segs[1:] if is_tf(s)])
             for seg in segs[1:]:
-                if "=" in seg:
-                    k, _, v = seg.partition("=")
-                    opts[k] = _value(v, self, self.env)
-        if len(items) > 1 or any("=" not in seg for segs in split for seg in segs[1:]):
-            refs = [":".join([segs[0]] + [x for x in segs[1:] if "=" not in x]) for segs in split]
+                if is_tf(seg):
+                    continue
+                if "=" not in seg:
+                    self.err(f"'{seg}' in '{text}' is not a transform or an option", line,
+                             "transforms: t+2 oct-1 inv rev aug dim frag=2 x2 thin=.5 canon=3@8; options: k=v")
+                k, _, v = seg.partition("=")
+                opts[k] = _value(v, self, self.env)
+        head = split[0][0]
+        if len(items) == 1 and tfs[0] and head in self.env and isinstance(self.env[head], (dict, Part)):
+            p = self.as_part(self.env[head], line)        # a melody variable: theme:aug -> transform option
+            chain = " ".join(filter(None, [str(p.opt_dict().get("transform") or ""), *tfs[0]]))
+            return self.with_(p, {**opts, "transform": chain}, line)
+        if len(items) > 1 or tfs[0]:
+            refs = [":".join([segs[0], *tf]) for segs, tf in zip(split, tfs)]
             return Part(opts=(("motifs", refs), *opts.items()), line=line)
         m = re.fullmatch(r"(\w+)((?:\+\w+)*)(?:\((.*)\))?", split[0][0], re.S)
         if not m:                                 # any expression: pocket + {ohat: "..x."}, four(acc=1)

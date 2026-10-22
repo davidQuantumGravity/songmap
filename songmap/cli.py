@@ -4,6 +4,7 @@
     songmap render song.sm [-o build/x]       song.wav (24-bit), stems/, cues.json, qa.json, render.log  [--mp3]
     songmap migrate old.yaml [-o new.yaml]    rewrite a v0.1 song map as v0.2
     songmap fmt song.yaml --to sm [-o x.sm]   print a song map as .sm or YAML (lossless)
+    songmap listen song.sm [--render DIR]     an automated ear: what a listener would notice (exit 2 on problems)
     songmap describe [--compact]              the catalog an LLM needs: styles, instruments, events, syntax
     songmap video  song.sm [-o song.mp4]      MP4 with letter names, staff and piano roll, sounding notes lit
 
@@ -21,14 +22,8 @@ from .parse.errors import NotationError, SongError
 
 
 def _load(path: str):
-    from .parse import lang
-    ext = os.path.splitext(path)[1].lower()
-    if not os.path.isfile(path):
-        raise SongError(f"no such file: {path}")
-    if ext in lang.EXTS:
-        return lang.load(path)
-    from .parse import yaml_form          # .yaml, .yml (and anything else)
-    return yaml_form.load(path)
+    from .parse import load
+    return load(path)
 
 
 def _summary(arr) -> str:
@@ -62,8 +57,6 @@ def cmd_check(args) -> int:
     arr = expand(song)
     arr.ensemble.check(song.parts())
     warnings = list(song.warnings) + arr.warnings + _video_check(arr)
-    if song.mood:
-        warnings.append(f"mood '{song.mood}': mood presets arrive in P4; using the default (synth_v0) ensemble")
     if not arr.timeline.whole_frame_beats():
         warnings.append(f"60*fps/tempo is not an integer: beats do not land on whole video frames")
     print(_summary(arr))
@@ -145,6 +138,16 @@ def cmd_fmt(args) -> int:
     return 0
 
 
+def cmd_listen(args) -> int:
+    from .listen import listen_file
+    rep = listen_file(args.song, qa_path=args.qa, render_dir=args.render)
+    print(rep.text())
+    if args.json:
+        import json
+        _write(json.dumps(rep.to_dict(), indent=1) + "\n", args.json)
+    return 2 if rep.counts()["problem"] else 0
+
+
 def cmd_describe(args) -> int:
     from .describe import catalog
     _write(catalog(compact=args.compact), args.out)
@@ -190,6 +193,13 @@ def main(argv=None) -> int:
     p.add_argument("--to", choices=["sm", "compact", "sml", "yaml"], required=True, help="output format")
     p.add_argument("-o", "--out", help="write here instead of stdout")
     p.set_defaults(fn=cmd_fmt)
+    p = sub.add_parser("listen", help="an automated ear: clashes, crowding, repetition, flat dynamics, contrast")
+    p.add_argument("song", help="a .sm (.sml) or .yaml song map")
+    p.add_argument("--render", metavar="DIR", help="also judge loudness from an existing render folder's qa.json "
+                   "(it does not render; `songmap render` writes the full report to review.json)")
+    p.add_argument("--qa", help="a qa.json to judge loudness from")
+    p.add_argument("--json", metavar="FILE", help="also write the report as JSON")
+    p.set_defaults(fn=cmd_listen)
     p = sub.add_parser("describe", help="the catalog for writing song maps: styles, instruments, events, syntax")
     p.add_argument("--compact", action="store_true", help="the ~500-token version for an LLM's context")
     p.add_argument("-o", "--out", help="write here instead of stdout")

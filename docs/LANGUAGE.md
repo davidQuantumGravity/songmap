@@ -60,7 +60,7 @@ qa [lufs=<x>|<a>..<b>] [contrast=<quiet><<loud>:<dB>,...] [silent!=<a>,<b>] [low
 set <key>[.<key>...]=<value>                               set returns={hall: {type: "reverb", seconds: 2.4}}
 ```
 
-`set` writes any field of the YAML form that has no directive, such as `returns`, `harmony.voicing` or an `fx` kit. Each other directive maps onto a field of the song: `instruments`, `groove`, `parts_feel`, `harmony`, `motifs`, `cues`, `mix`, `master` or `qa` ([SONGMAP_SPEC.md](SONGMAP_SPEC.md)). In `mix`, `sc=` and the sends change only the depth or send they name; the rest of the part's default sidechain and sends is kept. `groove` and `feel` are stored now, and the performance layer applies them from P3. `qa` rules are evaluated from P2.
+`set` writes any field of the YAML form that has no directive, such as `returns`, `harmony.voicing` or an `fx` kit. Each other directive maps onto a field of the song: `instruments`, `groove`, `parts_feel`, `harmony`, `motifs`, `cues`, `mix`, `master` or `qa` ([SONGMAP_SPEC.md](SONGMAP_SPEC.md)). In `mix`, `sc=` and the sends change only the depth or send they name; the rest of the part's default sidechain and sends is kept. `groove` and `feel` are played by the performance layer, on top of the song's mood. `qa` rules are evaluated from P2.
 
 **Values:**
 
@@ -373,7 +373,7 @@ These were the prototype's open questions. Each is now settled and implemented, 
 ```
 # The Swarm (2:03): the v0.2 port (examples/v0.2_yaml/week_oct13_swarm.songmap.yaml) in the
 # SongMap language. Same notes, same digest (tests/test_lang.py).
-song "Week of Oct 13 — The Swarm" 120 4/4 Em fps=30 seed=7 mood=techno tail=3 video=WeekSwarm:3690
+song "Week of Oct 13 — The Swarm" 120 4/4 Em fps=30 seed=7 mood=v0 tail=3 video=WeekSwarm:3690
 inst bass(cutoff=700)
 chords Em C G D /2
 master legacy

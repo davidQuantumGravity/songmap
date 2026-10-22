@@ -47,11 +47,11 @@ cap = !riser:2 !impact(size=l)
 logo          1 | keys:chimes gtr:harp pad:warm chords="C:1" dyn=mf>mp               | !impact(size=l)
 groove_in     1 | drums:shuf_in bass:hop gtr:ripple chords="G:1" dyn=p
 trouble       6 | drums:shuf bass:hop gtr:cheeky keys:stab chords="Dm7:1 G7:1 Em7:1 A7:1 F:1 G:1" dyn=p<mp | !zaps@+2:3(count=3) !zaps@+4:3(count=4)
-meet          2 | drums:pocket bass:walk keys:q_hook lead:q_hook1 pad:warm gtr:strum chords="C:1 G:1" dyn=f | !riser:2 !impact(size=l) !stop:2b@-1:3
+meet          2 | drums:pocket bass:walk keys:q_hook lead:q_hook1 pad:warm gtr:strum chords="C:1 G:1" dyn=mf<f | !riser:2 !impact(size=l) !stop:2b@-1:3
 feat1         2 | drums:pocket bass:walk keys:a_hook gtr:ripple pad:warm chords="Am:1 F:1" dyn=p<mp | !impact(size=s)
 feat2         2 | drums:pocket+{ohat: "..x...x...x...x."} bass:eighths keys:q_hook arp:up gtr:ripple pad:warm chords="C:1 G:1" dyn=mp<mf | !impact(size=s) !zaps@+1:3(count=4)
 feat3         2 | drums:drive bass:eighths keys:a_hook lead:a_hook1 arp:up gtr:strum pad:warm chords="Am:1 F:1" dyn=mf | !impact(size=m)
 feat4         2 | drums:build bass:eighths keys:up_hook lead:up_hook1 arp:up gtr:strum pad:warm chords="Dm:1 G:1" dyn=mf<f | !impact(size=m)
-joy           4 | drums:joy bass:eighths keys:full lead:full1 arp:up gtr:strum pad:warm chords="C:1 G:1 Am:1 G:1" dyn=f<ff | !riser:2 !impact(size=xl)
+joy           4 | drums:joy bass:eighths keys:full lead:full1 arp:up gtr:strum pad:warm epiano:{rel: "[3,5,R+]/2 [5,R+,3+]/2"} chords="C:1 G:1 Am:1 G:1" dyn=ff | !riser:2 !impact(size=xl)
 endcard       1 | keys:tag gtr:harp pad:warm bass:{rel: "R/1", oct: -2} chords="C:1" dyn=mf>p | !impact(size=l)
 mix keys 1 | lead 8 | arp 2 | drums -4 | bass -2

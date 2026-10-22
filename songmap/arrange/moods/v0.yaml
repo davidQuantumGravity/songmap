@@ -1,0 +1,5 @@
+# The synth_v0 ensemble exactly as the Oct-13 tracks had it: default levels, no performance layer.
+# The faithful ports use it, so they keep matching synth_v0 note for note and level for level.
+mood: v0
+description: synth_v0's sound, unperformed (for the faithful ports)
+perform: false

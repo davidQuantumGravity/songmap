@@ -12,7 +12,11 @@ Each character is one step: `X` accent, `x` hit, `-` soft, `o` ghost, `.` rest, 
 
 1. **Shape the hats.** Velocities should follow the beat (strong on the beat, weaker off it, a lift before the backbeat), never all the same.
 2. **Ghost notes** (`o`) on the snare just before or after the backbeat: the groove gets a pulse.
-3. **Swing** comes from the 12-step grid: `x.xx.xx.xx.x` is shuffled 8ths. The `groove swing=` line is stored but takes effect only when the performance layer lands (P3), so write the swing into the steps now.
+3. **Swing.**
+   - `groove swing=.56/16` swings 16ths and `swing=.58/8` swings 8ths (0.5 is straight, 0.66 is a full triplet shuffle).
+   - `tpl=push|laid_back|mpc|dilla` adds a groove template; `feel snare offset=6` lays one player back.
+   - A hard triplet shuffle can also be written on the 12-step grid: `x.xx.xx.xx.x`.
+   - The mood adds human timing and velocity on top (the kick stays tight).
 4. **Push.** A kick or bass a 16th before the beat (step 16 of the previous bar) anticipates and propels.
 5. **Vary every 4 or 8 bars.** Use a multi-bar lane (`"…|…|…|x..x..x.xxxxxxxx"`), a fill (`bar -1: drums.snare = "........xxxxXXXX"` in a form block), or drop the kick for a bar before a section change.
 6. **Lock bass to kick.** Bass notes land on the kick hits, and the bass rests where the kick rests.

@@ -94,7 +94,9 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
     triggers: dict[str, list[float]] = {}
     cache: dict = {}
     rendered = hits = 0
-    for part, evs in arr.parts.items():
+    from .perform.play import play, played_digest
+    played = play(arr)                     # the performance stage (mood v0: the written notes as they are)
+    for part, evs in played.items():
         buf = buses.setdefault(part, np.zeros((n, 2)))
         slot: dict = {}
         placed: list = []
@@ -163,7 +165,8 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
     else:
         out = master(mix, song.master.target_lufs, song.master.ceiling_db, glue=song.master.glue != "none")
     stats = {"seconds": round(time.time() - t0, 2), "notes_rendered": rendered, "cache_hits": hits,
-             "audio_seconds": round(n / SR, 3), "master": mode, "digest": arr.digest()}
+             "audio_seconds": round(n / SR, 3), "master": mode, "digest": arr.digest(),
+             "performed": played is not arr.parts, "played_digest": played_digest(played)}
     if log:
         log(f"rendered {n / SR:.1f}s of audio in {stats['seconds']}s ({rendered} notes synthesized, {hits} cached)")
     sources = {s["program"]: s for s in (i.source for i in ens.instruments() if hasattr(i, "source"))}
@@ -190,6 +193,20 @@ def write_outputs(r: RenderResult, out_dir: str, *, stems: bool = True, mp3: boo
     report["render"] = r.stats
     with open(paths["qa"], "w", encoding="utf-8") as f:
         json.dump(report, f, indent=1)
+    from .listen import listen
+    review = listen(r.arrangement, report)
+    paths["review"] = os.path.join(out_dir, "review.json")
+    with open(paths["review"], "w", encoding="utf-8") as f:
+        json.dump(review.to_dict(), f, indent=1)
+    try:
+        from .export.qa_plot import write_png
+        tl = r.arrangement.timeline
+        paths["png"] = write_png(os.path.join(out_dir, "qa.png"), r.audio, r.section_spans(),
+                                 [(e.type, tl.beat_to_sec(e.beat)) for e in r.arrangement.events],
+                                 {s["name"]: s.get("loudness") for s in report.get("sections", [])},
+                                 r.arrangement.song.title)
+    except ImportError:                       # matplotlib is optional for the picture
+        pass
     with open(paths["log"], "w", encoding="utf-8") as f:
         f.write(render_log(r))
     if r.sources:

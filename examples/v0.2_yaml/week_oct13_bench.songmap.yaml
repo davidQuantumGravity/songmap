@@ -11,7 +11,7 @@ meter: "4/4"
 key: "D minor"
 fps: 30
 seed: 7
-mood: cinematic
+mood: v0              # synth_v0's ensemble, unperformed: a faithful port (the scene calls for cinematic)
 tail_seconds: 3
 video: {composition: WeekBench, frames: 4530}
 
