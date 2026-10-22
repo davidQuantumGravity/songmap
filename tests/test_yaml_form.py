@@ -74,7 +74,7 @@ def test_errors_name_the_problem(make_song, raw, msg):
     ({"bass": "eigths"}, "did you mean 'eighths'"),
     ({"drums": "full+fil"}, "did you mean 'fill'"),
     ({"lead": ["m9"]}, "unknown motif 'm9'"),
-    ({"lead": ["m1:t+2"]}, "arrives in P3"),
+    ({"lead": ["m1:wobble"]}, "unknown transform .wobble."),
     ({"zither": "warm"}, "no styles for role"),
 ])
 def test_expand_errors_carry_section_and_suggestion(make_song, parts, msg):
