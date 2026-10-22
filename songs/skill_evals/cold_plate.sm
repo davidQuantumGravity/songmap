@@ -1,0 +1,16 @@
+# Lab Notes: The Cold Plate (1:03). The first skill evaluation: a fresh agent with only the skill and a scene
+# timeline wrote this and it passed `check` on the first try. Calm curiosity, building tension, a cooling
+# counter that lands at f1140, an honest quiet caveat, three summary hits, a warm end card.
+song "Lab Notes: The Cold Plate" 120 4/4 Am fps=30 seed=11 tail=3 video=ColdPlate:1890
+inst bass(cutoff=700)
+chords Am F C G /2
+motif m1 deg oct=5 "0/4 2 4 3 | 2/2 0"
+# name     bars | parts and settings                                   | events
+title        4 | pad:dark arp:dark dyn=pp<p
+problem      6 | drums:half bass:sub arp:dark fx:ticks pad:dark dyn=p<mf | !riser:2@10
+idea        6 | drums:four_floor bass:8ths arp:up pad:warm lead:m1 dyn=mf<f | !impact@+0 !riser:2@16
+counter      3 | drums:full+fill bass:8ths arp:up pad:warm lead:m1 dyn=f<ff | !riser:3@19
+reveal       1 | drums:full bass:8ths pad:warm lead:m1 dyn=ff | !impact@19
+caveat       2 | pad:dark dyn=pp
+summary      4 | drums:half bass:sub arp:up pad:warm dyn=mp<mf | !impact@22 !impact@23 !impact@24
+end_card     4 | pad:warm dyn=mp>pp
