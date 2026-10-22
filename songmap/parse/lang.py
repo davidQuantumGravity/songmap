@@ -88,7 +88,7 @@ class Line:
 
 
 def _lex(text: str, file: str | None) -> list[Line]:
-    lines, cur, depth, no, line_start = [], [], 0, 1, 0
+    lines, cur, depth, no, line_start, blank = [], [], 0, 1, 0, []
     indent = None
     pos = 0
     while pos < len(text):
@@ -108,11 +108,17 @@ def _lex(text: str, file: str | None) -> list[Line]:
             if depth == 0 and cur:
                 lines.append(Line(cur, indent, cur[0].line, text))
                 cur = []
-            indent = None
+            if cur:
+                blank.append((m.start(), m.end()))    # inside brackets: the logical line goes on, same indent
+            else:
+                indent = None
         elif kind == "ws":
             if "\t" in m.group() and not cur and depth == 0:
                 raise SongError("tab in indentation", file=file, line=no, suggestion="indent with spaces")
-        elif kind != "comment":
+        elif kind == "comment":
+            if cur:
+                blank.append((m.start(), m.end()))
+        else:
             v = m.group()
             if kind == "num":
                 v = float(v) if "." in v else int(v)
@@ -133,6 +139,15 @@ def _lex(text: str, file: str | None) -> list[Line]:
                         suggestion="close every ( [ {")
     if cur:
         lines.append(Line(cur, indent, cur[0].line, text))
+    if blank:
+        # raw slices (`Line.raw`) read the text with the newlines and comments inside a logical line blanked
+        # to spaces: the same length, so token offsets still index it
+        flat = list(text)
+        for a, b in blank:
+            flat[a:b] = " " * (b - a)
+        flat = "".join(flat)
+        for ln in lines:
+            ln.text = flat
     return lines
 
 
@@ -196,7 +211,9 @@ class _Expr:
         if not self.at(value):
             p = self.peek()
             got = f"'{p.value}'" if p else "end of line"
-            raise SongError(f"expected '{value}', got {got}", file=self.file, line=(p or self.t[-1]).line)
+            raise SongError(f"expected '{value}', got {got}", file=self.file, line=(p or self.t[-1]).line,
+                            suggestion={",": "separate items with ','; inside brackets a line break is only a space",
+                                        ":": "write map entries as key: value"}.get(value))
         self.i += 1
         return self.t[self.i - 1]
 
@@ -1608,6 +1625,9 @@ class _Interp:
             if eq:
                 if k == "video":
                     comp, _, frames = v.partition(":")
+                    if frames and not re.fullmatch(r"[0-9]+", frames):
+                        self.err(f"song: video frames '{frames}' must be a whole number", line,
+                                 "write video=Composition:4530")
                     s["video"] = {"composition": comp, **({"frames": int(frames)} if frames else {})}
                 elif k in keys:
                     s[keys[k]] = _scalar(v)
@@ -1782,6 +1802,8 @@ class _Interp:
             if a in ("deg", "rel"):
                 mode = a
             elif a.startswith("oct="):
+                if not re.fullmatch(r"-?[0-9]+", a[4:]):
+                    self.err(f"motif {name}: octave '{a[4:]}' must be a whole number", line, "write oct=5")
                 m["octave"] = int(a[4:])
             elif a.startswith("key="):
                 m["key"] = a[4:]

@@ -440,3 +440,65 @@ def test_sharp_glued_to_a_word_is_not_a_comment():
 def test_a_part_named_chords_is_not_the_harmony_setting():
     s = lang.loads('song "T" 120 4/4 C\nchords C F\na 2 | chords:hold chords="Am:1 G:1"\n', "t.sm")
     assert s.sections[0].harmony == "Am:1 G:1" and s.sections[0].parts["chords"].style == "hold"
+
+
+# ----------------------------------------------------------------------------
+# brackets join physical lines: a map, list or call written over several lines is its one-line form
+# ----------------------------------------------------------------------------
+MULTILINE = [
+    ('pocket = {kick: "X.....x...x.....", snare: "....X..o....X.o.", hat: "x-x-x-x-x-x-x-x-"}\n'
+     'intro 2 | drums:pocket\n',
+     'pocket = {kick: "X.....x...x.....",\n'
+     '          snare: "....X..o....X.o.",   # backbeat\n'
+     '\n'
+     '          hat: "x-x-x-x-x-x-x-x-"}\n'
+     'intro 2 | drums:pocket\n'),
+    ('intro 2 | drums:{kick: "X...x...", hat: "x-x-x-x-"} bass:sub | !impact !riser:1(size=xl)\n',
+     'intro 2 | drums:{kick: "X...x...",\n'
+     '                 hat: "x-x-x-x-"} bass:sub | !impact !riser:1(size=\n'
+     '   xl)\n'),
+    ('v = {drums: {kick: "x...", hat: {steps: "-.x.", vel: [0.4, 0.9]}}, arp: up(order=[0, 2, 1]), lead: [a, b]}\n'
+     'form:\n  v 2:\n    bar 2: drums += {clap: "..x."}\n',
+     'v = {\n'
+     '  drums: {kick: "x...",\n'
+     '          hat: {steps: "-.x.",\n'
+     '                vel: [0.4,\n'
+     '                      0.9]}},  # nested\n'
+     '  arp: up(order=[0,\n'
+     '                 2, 1]),\n'
+     '  lead: [a,\n'
+     '         b]\n'
+     '}\n'
+     'form:\n  v 2:\n    bar 2: drums += {clap:\n                     "..x."}\n'),
+]
+
+
+@pytest.mark.parametrize("one,multi", MULTILINE, ids=["variable", "section_line", "nested"])
+def test_multiline_brackets_parse_like_one_line(one, multi):
+    assert arr(multi).digest() == arr(one).digest()
+
+
+def test_multiline_lines_keep_their_line_numbers():
+    s = lang.loads(HEAD + 'pocket = {kick: "x...",\n          hat: "x-x-"}\n'
+                   'intro 2 | drums:pocket\nlater 2 | drums:pocket bass:sub\n', "song.sml")
+    assert [(x.name, x.line) for x in s.sections] == [("intro", 7), ("later", 8)]
+
+
+@pytest.mark.parametrize("src,line,what,hint", [
+    ('pocket = {kick: "x...",\n          snare: "....X..."\n          hat: "x-x-"}\nintro 2 | drums:pocket\n',
+     7, "expected ',', got 'hat'", "separate items with ','"),
+    ('pocket = {kick: "x...",\n          hat: "x-x-"\nintro 2 | drums:pocket\n', 5, "unclosed bracket", "close every"),
+], ids=["missing_comma", "unclosed"])
+def test_malformed_multiline_map_is_a_song_error(src, line, what, hint):
+    test_errors_carry_file_line_and_a_suggestion(src, line, what, hint)
+
+
+@pytest.mark.parametrize("src,what", [
+    ('song "T" 120 4/4 Am video=Clip:12ab\nchords Am\na 2 | pad:warm\n', "video frames '12ab'"),
+    ('song "T" 120 4/4 Am\nchords Am\nmotif m deg oct=x5 "0 2"\na 2 | lead:m\n', "octave 'x5'"),
+    ('song "T" 120 4/4 Am seed=7x\nchords Am\na 2 | pad:warm\n', "seed must be a number"),
+])
+def test_bad_numbers_in_header_lines_are_song_errors(src, what):
+    with pytest.raises(SongError, match=re.escape(what)) as ei:
+        lang.loads(src, "t.sm")
+    assert ei.value.file == "t.sm"
