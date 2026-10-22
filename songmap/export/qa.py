@@ -24,7 +24,9 @@ def lufs(x: np.ndarray) -> float:
     blk, hop = n_samples(0.4), n_samples(0.1)
     if len(y) < blk:
         return -70.0
-    ms = np.array([np.mean(y[i:i + blk] ** 2, 0).sum() for i in range(0, len(y) - blk + 1, hop)])
+    cs = np.concatenate([[0.0], np.cumsum((y ** 2).sum(1))])      # block power from a running sum
+    starts = np.arange(0, len(y) - blk + 1, hop)
+    ms = (cs[starts + blk] - cs[starts]) / blk
     l = -0.691 + 10 * np.log10(ms + 1e-15)
     ms = ms[l > -70]
     if not len(ms):

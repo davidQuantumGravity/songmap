@@ -14,7 +14,7 @@ dependencies = ["numpy", "scipy", "numba", "pyyaml", "mido", "matplotlib"]
 gui = ["fastapi", "uvicorn"]
 plugin = ["dawdreamer"]
 sampler = ["soundfile"]
-dev = ["pytest"]
+dev = ["pytest", "httpx2"]           # httpx2: the Studio API tests (starlette TestClient)
 textbook = ["playwright", "pypdf"]       # tools/textbook/pdf.py (uses the installed Chrome or Edge)
 
 [project.scripts]
@@ -25,6 +25,7 @@ include = ["songmap*"]
 
 [tool.setuptools.package-data]
 "*" = ["*.yaml"]
+"songmap.gui" = ["static/*", "static/assets/*"]   # the built Studio web app (songmap/gui/web: npm run build)
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
