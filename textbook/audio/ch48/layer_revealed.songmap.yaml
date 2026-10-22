@@ -1,0 +1,35 @@
+# The layer revealed (ch48, HEADPHONES): four bars in the manner of "Moon on the Water" (golden pad, lead, glass
+# bells on Ag), then three bars in which the music stops and only the hidden layer is left: pure tones on A3, A4/phi
+# and A5/phi^2, beating between the ears at 10, 6.18 and 3.82 Hz. Then the music comes back over it.
+songmap: 0.2
+title: "The layer revealed"
+tempo: 48
+meter: "4/4"
+key: "A golden7"
+tuning: "36edo"
+fps: 30
+seed: 5
+tail_seconds: 4
+
+instruments:
+  gold: {use: clean/golden_pad, release: 2.5}
+  bell: clean/glass
+  lead: clean/lead
+
+sections:
+  - {name: music, bars: 4, parts: {gold: hold, lead: {deg: "=p 2/4 4 7/2 | 6/4. 4/8 2/2 | 4/4 2 0/2 | 2/2. r/4"}, bell: {rel: "=pp r/4 5+/2. | 3+/4 R++/2.", oct: 0}}, harmony: "Ag:1 Ag7:2 Ag:1", dyn: p}
+  - {name: layer, bars: 3, parts: {gold: {notes: r1}}, harmony: "Ag:3"}
+  - {name: again, bars: 3, parts: {gold: hold, lead: {deg: "=p 2/4 4 7/2 | 0/1 | 0/1"}}, harmony: "Ag:3", dyn: p}
+
+mix:
+  gold: {gain_db: -9, send: {hall: 0.35}}
+  lead: {gain_db: -2, send: {hall: 0.35}}
+  bell: {gain_db: -12, send: {hall: 0.5}}
+
+master: clean
+binaural:
+  carriers: [A3, "A4*phi^-1", "A5*phi^-2"]
+  beat: 10
+  level_db: -12
+  fade: 2
+  glide: 2

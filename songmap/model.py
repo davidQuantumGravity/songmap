@@ -50,6 +50,7 @@ class Section:
     feel: dict = field(default_factory=dict)
     tempo: float | None = None
     key: str | None = None
+    binaural: dict = field(default_factory=dict)   # {beat, carriers, gain_db} (mix/binaural.py); carries over
     line: int | None = None
 
 
@@ -103,6 +104,7 @@ class Song:
     returns: dict = field(default_factory=dict)        # name -> {type, seconds, ...}
     master: MasterSpec = field(default_factory=MasterSpec)
     qa: dict = field(default_factory=dict)
+    binaural: dict = field(default_factory=dict)       # a binaural-beat layer (mix/binaural.py); {} = none
     file: str | None = None
     warnings: list[str] = field(default_factory=list)
 

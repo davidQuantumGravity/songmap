@@ -60,6 +60,10 @@ def cmd_check(args) -> int:
     if not arr.timeline.whole_frame_beats():
         warnings.append(f"60*fps/tempo is not an integer: beats do not land on whole video frames")
     print(_summary(arr))
+    if song.binaural:
+        from .mix.binaural import describe, plan
+        for i, line in enumerate(describe(plan(song, arr.timeline))):
+            print(("  binaural (headphones): " if i == 0 else " " * 26) + line)
     for w in warnings:
         print(f"  warning: {w}")
     return 0

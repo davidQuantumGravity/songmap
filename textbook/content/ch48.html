@@ -1,0 +1,382 @@
+<p><a href="ch:ch41#conjecture">Chapter 41</a> ended with a conjecture and a list of design principles: sound that
+is golden at every scale, with pitches in golden ratios, beat rates in golden ratios, no steady rational pulse, and,
+where binaural beats are used, a golden ladder of rates. This chapter is that list carried out as music. <i>Still
+Water</i> is a suite of five songs, eighteen minutes in all, meant to be heard in one sitting on headphones. On the
+surface each is an ordinary piece: a felt piano, a harp, strings, a golden-spectrum pad, glass bells, a choir, and no
+drums. Underneath, from the first second to the last, runs a binaural layer: pure tones a few hertz apart in the two
+ears. It walks the golden beat ladder down from the alpha range into theta and back up. It is pitched on the chords' own notes, so it hides
+in the harmony the way a code can hide in a picture: the picture is all you notice, and the code is there in every
+part of it.</p>
+<p><b>How to read this chapter.</b> As in <a href="ch:ch41#binaural">Chapter 41</a>, every claim is labelled. The
+signal design is exact and checked by measurement. What the music does to a listener is a <i>hypothesis</i>: the
+suite was designed to give the bliss conjecture its best chance, using the best evidence available for each choice,
+but nothing here is a treatment and nothing promises a state of mind. Listen on headphones at a moderate level,
+seated or lying down, never while driving. If you have epilepsy or are sensitive to rhythmic stimulation, be cautious
+with any sustained pulsing sound.</p>
+<table>
+<tr><th>Song</th><th>Length</th><th>Harmony</th><th>Hidden carriers</th><th>Beat rates (Hz)</th><th>Tempo (BPM)</th><th>Breath</th></tr>
+<tr><td>1. Dusk on the Water</td><td>3:33</td><td>A major</td><td>A3, E4</td><td>16.18 and 10, slowing to 10 and 6.18</td><td>60 → 54</td><td>8.0 → 8.9 s</td></tr>
+<tr><td>2. The Slow Tide</td><td>3:43</td><td>A major, turning golden: D → vDg</td><td>A3, E4 → A3·φ</td><td>10 and 6.18, slowing to 6.18 and 3.82</td><td>54 → 48</td><td>8.9 → 10 s</td></tr>
+<tr><td>3. Deep Water</td><td>3:57</td><td>vDg, ^Fg, vDg7, A♯g</td><td>A3, A3·φ, A3·φ² (→ A4/φ)</td><td>6.18, 3.82, 2.36</td><td>44</td><td>10.9 s</td></tr>
+<tr><td>4. Moon on the Water</td><td>3:38</td><td>^Fg → Ag, Ag7, ^Fg7</td><td>A3, A4/φ, A5/φ²</td><td>rising to 10, 6.18, 3.82</td><td>48</td><td>10 s</td></tr>
+<tr><td>5. First Light</td><td>3:05</td><td>Ag opening into A major</td><td>A3, A4/φ, A5/φ² → A3, E4</td><td>10 and 6.18, then up to 16.18</td><td>48 → 56</td><td>10 → 8.6 s</td></tr>
+</table>
+
+<section id="hidden-layer">
+<h2>A layer hidden in the music</h2>
+<div class="layer hear">
+<p>Before the songs, the trick itself. In the example below, four bars of golden music play over the hidden layer;
+then the music stops for three bars and the layer is left alone; then the music returns over it. On headphones you
+will hear the layer as three soft, steady pure tones, A3 and two golden tones above it. Inside them, faintly, is a
+flutter, made by your brain from the difference between the ears: about ten a second, six a second and four a
+second at once. When the music comes back, the tones melt into the chord again. They were there all along.</p>
+<audio-ex src="layer_revealed" caption="Headphones. Golden music on Ag over the layer; three bars of the layer alone (pure tones on A3, vC♯4 and ^E4, beating between the ears at 10, 6.18 and 3.82 Hz); the music again."></audio-ex>
+<p>The layer has three rules. It never stops: one pair of tones on A3 runs through all five songs, and each song
+begins with exactly the tones and rates the previous one ended on. Its tones are always notes of the chord that is
+sounding, so it never rubs against the music. And the music makes room for it: wherever a pair sounds, the music
+gives up a narrow band of frequencies around that pitch, and the pair takes the music's place there. The second
+example plays the same eight seconds twice: a soft organ holding A3 and E4 over the layer, first without that room,
+then with it. In the first half each ear hears a pulse of its own, five times a second; in the second it is gone.</p>
+<audio-ex src="carve_ab" caption="Headphones. A held organ A3 and E4 over the layer at 10 and 6.18 Hz, without carving (a pulse in each ear at half the binaural rate, 5 and 3.09 Hz), then with carving (only the binaural beat between the ears)."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>The ladder.</b> The beat rates are the golden ladder of <a href="ch:ch41#binaural">§41.1</a>: $10\varphi^k$
+hertz, which gives 16.18, 10, 6.18, 3.82 and 2.36 Hz for $k = 1, 0, -1, -2, -3$. Each pair of carriers gets a rung:
+the first pair beats at the song's top rate $B$, the second at $B/\varphi$, the third at $B/\varphi^2$. So whenever
+three pairs sound, their rates are three neighbouring rungs, and each rate is the difference of the two above it.
+Over the suite the top rate starts in the beta range at 16.18 Hz, settles to 10 Hz (alpha), descends to 6.18 Hz
+(theta) with rungs at 3.82 and 2.36 Hz below it, climbs back to 10 Hz with the whole three-rung ladder of
+Chapter 41, and ends where it began, at 16.18 Hz. The figure is computed from the five song files.</p>
+<figure class="svgfig"><svg class="fig" viewBox="0 0 640 300" role="img" aria-label="The binaural beat rates of Still Water over its eighteen minutes"><text x="60" y="16" class="t">Beat rates of the hidden layer across the suite (log scale); gold = the A3 pair</text><line x1="60" y1="234.9" x2="620" y2="234.9" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.6"/><text x="54" y="238.9" text-anchor="end" class="lab">2.36</text><line x1="60" y1="191.0" x2="620" y2="191.0" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.6"/><text x="54" y="195.0" text-anchor="end" class="lab">3.82</text><line x1="60" y1="147.1" x2="620" y2="147.1" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.6"/><text x="54" y="151.1" text-anchor="end" class="lab">6.18</text><line x1="60" y1="103.2" x2="620" y2="103.2" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.6"/><text x="54" y="107.2" text-anchor="end" class="lab">10</text><line x1="60" y1="59.3" x2="620" y2="59.3" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.6"/><text x="54" y="63.3" text-anchor="end" class="lab">16.18</text><line x1="60.0" y1="34" x2="60.0" y2="250" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><text x="64.0" y="30" class="lab">1</text><line x1="170.8" y1="34" x2="170.8" y2="250" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><text x="174.8" y="30" class="lab">2</text><line x1="287.1" y1="34" x2="287.1" y2="250" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><text x="291.1" y="30" class="lab">3</text><line x1="410.5" y1="34" x2="410.5" y2="250" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><text x="414.5" y="30" class="lab">4</text><line x1="523.9" y1="34" x2="523.9" y2="250" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><text x="527.9" y="30" class="lab">5</text><polyline fill="none" stroke="var(--gold)" stroke-width="3" points="60.0,59.3 61.0,59.3 62.1,59.3 63.1,59.3 64.2,59.3 65.2,59.3 66.2,59.3 67.3,59.3 68.3,59.3 69.4,59.3 70.4,59.3 71.4,60.6 72.5,61.8 73.5,63.1 74.6,64.3 75.6,65.6 76.7,66.8 77.7,68.1 78.7,69.3 79.8,70.6 80.8,71.8 81.9,73.1 82.9,74.3 83.9,75.5 85.0,76.8 86.0,78.0 87.1,79.3 88.1,80.0 89.1,80.7 90.2,81.4 91.2,82.1 92.3,82.8 93.3,83.5 94.3,84.2 95.4,84.9 96.4,85.6 97.5,86.3 98.5,87.0 99.5,87.7 100.6,88.4 101.6,89.1 102.7,89.8 103.7,90.5 104.7,90.9 105.8,91.4 106.8,91.9 107.9,92.4 108.9,92.8 110.0,93.3 111.0,93.8 112.0,94.3 113.1,94.7 114.1,95.2 115.2,95.7 116.2,96.2 117.2,96.6 118.3,97.1 119.3,97.6 120.4,98.0 121.4,98.5 122.4,99.0 123.5,99.5 124.5,99.9 125.6,100.4 126.6,100.9 127.6,101.4 128.7,101.8 129.7,102.3 130.8,102.8 131.8,103.2 132.8,103.2 133.9,103.2 134.9,103.2 136.0,103.2 137.0,103.2 138.0,103.2 139.1,103.2 140.1,103.2 141.2,103.2 142.2,103.2 143.3,103.2 144.3,103.2 145.3,103.2 146.4,103.2 147.4,103.2 148.5,103.2 149.5,103.2 150.5,103.2 151.6,103.2 152.6,103.2 153.7,103.2 154.7,103.2 155.7,103.2 156.8,103.2 157.8,103.2 158.9,103.2 159.9,103.2 160.9,103.2 162.0,103.2 163.0,103.2 164.1,103.2 165.1,103.2 166.1,103.2 167.2,103.2 168.2,103.2 169.3,103.2 170.3,103.2"/><polyline fill="none" stroke="var(--gold)" stroke-width="3" points="170.8,103.2 171.9,103.2 172.9,103.2 174.0,103.2 175.0,103.2 176.0,103.2 177.1,103.2 178.1,103.2 179.2,103.2 180.2,103.2 181.2,103.2 182.3,103.2 183.3,103.9 184.4,104.7 185.4,105.5 186.4,106.2 187.5,107.0 188.5,107.8 189.6,108.5 190.6,109.3 191.6,110.1 192.7,110.9 193.7,111.6 194.8,112.4 195.8,113.2 196.9,114.0 197.9,114.7 198.9,115.5 200.0,116.3 201.0,117.0 202.1,117.7 203.1,118.3 204.1,118.9 205.2,119.6 206.2,120.2 207.3,120.8 208.3,121.5 209.3,122.1 210.4,122.7 211.4,123.4 212.5,124.0 213.5,124.7 214.5,125.3 215.6,125.9 216.6,126.6 217.7,127.2 218.7,127.8 219.7,128.4 220.8,128.9 221.8,129.5 222.9,130.0 223.9,130.5 224.9,131.1 226.0,131.6 227.0,132.1 228.1,132.6 229.1,133.2 230.2,133.7 231.2,134.2 232.2,134.7 233.3,135.1 234.3,135.4 235.4,135.8 236.4,136.2 237.4,136.6 238.5,137.0 239.5,137.4 240.6,137.8 241.6,138.2 242.6,138.6 243.7,139.0 244.7,139.3 245.8,139.7 246.8,140.1 247.8,140.5 248.9,140.9 249.9,141.3 251.0,141.7 252.0,142.1 253.0,142.5 254.1,142.8 255.1,143.2 256.2,143.6 257.2,144.0 258.2,144.4 259.3,144.8 260.3,145.2 261.4,145.6 262.4,146.0 263.5,146.4 264.5,146.7 265.5,147.1 266.6,147.1 267.6,147.1 268.7,147.1 269.7,147.1 270.7,147.1 271.8,147.1 272.8,147.1 273.9,147.1 274.9,147.1 275.9,147.1 277.0,147.1 278.0,147.1 279.1,147.1 280.1,147.1 281.1,147.1 282.2,147.1 283.2,147.1 284.3,147.1 285.3,147.1 286.3,147.1"/><polyline fill="none" stroke="var(--gold)" stroke-width="3" points="287.1,147.1 288.1,147.1 289.2,147.1 290.2,147.1 291.3,147.1 292.3,147.1 293.3,147.1 294.4,147.1 295.4,147.1 296.5,147.1 297.5,147.1 298.5,147.1 299.6,147.1 300.6,147.1 301.7,147.1 302.7,147.1 303.7,147.1 304.8,147.1 305.8,147.1 306.9,147.1 307.9,147.1 309.0,147.1 310.0,147.1 311.0,147.1 312.1,147.1 313.1,147.1 314.2,147.1 315.2,147.1 316.2,147.1 317.3,147.1 318.3,147.1 319.4,147.1 320.4,147.1 321.4,147.1 322.5,147.1 323.5,147.1 324.6,147.1 325.6,147.1 326.6,147.1 327.7,147.1 328.7,147.1 329.8,147.1 330.8,147.1 331.8,147.1 332.9,147.1 333.9,147.1 335.0,147.1 336.0,147.1 337.0,147.1 338.1,147.1 339.1,147.1 340.2,147.1 341.2,147.1 342.3,147.1 343.3,147.1 344.3,147.1 345.4,147.1 346.4,147.1 347.5,147.1 348.5,147.1 349.5,147.1 350.6,147.1 351.6,147.1 352.7,147.1 353.7,147.1 354.7,147.1 355.8,147.1 356.8,147.1 357.9,147.1 358.9,147.1 359.9,147.1 361.0,147.1 362.0,147.1 363.1,147.1 364.1,147.1 365.1,147.1 366.2,147.1 367.2,147.1 368.3,147.1 369.3,147.1 370.3,147.1 371.4,147.1 372.4,147.1 373.5,147.1 374.5,147.1 375.6,147.1 376.6,147.1 377.6,147.1 378.7,147.1 379.7,147.1 380.8,147.1 381.8,147.1 382.8,147.1 383.9,147.1 384.9,147.1 386.0,147.1 387.0,147.1 388.0,147.1 389.1,147.1 390.1,147.1 391.2,147.1 392.2,147.1 393.2,147.1 394.3,147.1 395.3,147.1 396.4,147.1 397.4,147.1 398.4,147.1 399.5,147.1 400.5,147.1 401.6,147.1 402.6,147.1 403.6,147.1 404.7,147.1 405.7,147.1 406.8,147.1 407.8,147.1 408.9,147.1 409.9,147.1"/><polyline fill="none" stroke="var(--gold)" stroke-width="3" points="410.5,147.1 411.5,144.9 412.5,142.7 413.6,140.5 414.6,138.3 415.7,136.1 416.7,133.9 417.7,131.7 418.8,129.6 419.8,127.4 420.9,125.2 421.9,123.0 422.9,120.8 424.0,118.6 425.0,116.4 426.1,114.2 427.1,112.0 428.2,109.8 429.2,107.6 430.2,105.4 431.3,103.2 432.3,103.2 433.4,103.2 434.4,103.2 435.4,103.2 436.5,103.2 437.5,103.2 438.6,103.2 439.6,103.2 440.6,103.2 441.7,103.2 442.7,103.2 443.8,103.2 444.8,103.2 445.8,103.2 446.9,103.2 447.9,103.2 449.0,103.2 450.0,103.2 451.0,103.2 452.1,103.2 453.1,103.2 454.2,103.2 455.2,103.2 456.2,103.2 457.3,103.2 458.3,103.2 459.4,103.2 460.4,103.2 461.5,103.2 462.5,103.2 463.5,103.2 464.6,103.2 465.6,103.2 466.7,103.2 467.7,103.2 468.7,103.2 469.8,103.2 470.8,103.2 471.9,103.2 472.9,103.2 473.9,103.2 475.0,103.2 476.0,103.2 477.1,103.2 478.1,103.2 479.1,103.2 480.2,103.2 481.2,103.2 482.3,103.2 483.3,103.2 484.3,103.2 485.4,103.2 486.4,103.2 487.5,103.2 488.5,103.2 489.5,103.2 490.6,103.2 491.6,103.2 492.7,103.2 493.7,103.2 494.8,103.2 495.8,103.2 496.8,103.2 497.9,103.2 498.9,103.2 500.0,103.2 501.0,103.2 502.0,103.2 503.1,103.2 504.1,103.2 505.2,103.2 506.2,103.2 507.2,103.2 508.3,103.2 509.3,103.2 510.4,103.2 511.4,103.2 512.4,103.2 513.5,103.2 514.5,103.2 515.6,103.2 516.6,103.2 517.6,103.2 518.7,103.2 519.7,103.2 520.8,103.2 521.8,103.2 522.8,103.2"/><polyline fill="none" stroke="var(--gold)" stroke-width="3" points="523.9,103.2 524.9,103.2 526.0,103.2 527.0,103.2 528.1,103.2 529.1,103.2 530.1,103.2 531.2,103.2 532.2,103.2 533.3,103.2 534.3,103.2 535.3,103.2 536.4,103.2 537.4,103.2 538.5,103.2 539.5,103.2 540.5,103.2 541.6,103.2 542.6,103.2 543.7,103.2 544.7,103.2 545.7,103.2 546.8,103.2 547.8,103.2 548.9,103.2 549.9,103.2 550.9,103.2 552.0,103.2 553.0,103.2 554.1,103.2 555.1,103.2 556.1,103.2 557.2,103.2 558.2,103.2 559.3,103.2 560.3,103.2 561.4,103.2 562.4,103.2 563.4,103.2 564.5,103.2 565.5,103.2 566.6,103.2 567.6,103.2 568.6,103.2 569.7,103.2 570.7,103.2 571.8,103.2 572.8,103.2 573.8,103.2 574.9,103.2 575.9,103.2 577.0,103.2 578.0,103.2 579.0,103.2 580.1,103.2 581.1,103.2 582.2,103.2 583.2,103.2 584.2,103.2 585.3,103.2 586.3,103.2 587.4,103.2 588.4,103.2 589.4,103.2 590.5,103.2 591.5,103.2 592.6,103.2 593.6,103.2 594.7,103.2 595.7,103.2 596.7,103.2 597.8,103.0 598.8,100.5 599.9,97.9 600.9,95.4 601.9,92.9 603.0,90.4 604.0,87.9 605.1,85.4 606.1,82.9 607.1,80.3 608.2,77.8 609.2,75.3 610.3,72.8 611.3,70.3 612.3,67.8 613.4,65.3 614.4,62.7 615.5,60.2 616.5,59.3 617.5,59.3 618.6,59.3 619.6,59.3"/><polyline fill="none" stroke="currentColor" stroke-width="2" points="60.0,103.2 61.0,103.2 62.1,103.2 63.1,103.2 64.2,103.2 65.2,103.2 66.2,103.2 67.3,103.2 68.3,103.2 69.4,103.2 70.4,103.2 71.4,104.5 72.5,105.7 73.5,107.0 74.6,108.2 75.6,109.5 76.7,110.7 77.7,111.9 78.7,113.2 79.8,114.4 80.8,115.7 81.9,116.9 82.9,118.2 83.9,119.4 85.0,120.7 86.0,121.9 87.1,123.2 88.1,123.9 89.1,124.6 90.2,125.3 91.2,126.0 92.3,126.7 93.3,127.4 94.3,128.1 95.4,128.8 96.4,129.5 97.5,130.2 98.5,130.9 99.5,131.6 100.6,132.3 101.6,133.0 102.7,133.7 103.7,134.4 104.7,134.8 105.8,135.3 106.8,135.8 107.9,136.3 108.9,136.7 110.0,137.2 111.0,137.7 112.0,138.1 113.1,138.6 114.1,139.1 115.2,139.6 116.2,140.0 117.2,140.5 118.3,141.0 119.3,141.5 120.4,141.9 121.4,142.4 122.4,142.9 123.5,143.4 124.5,143.8 125.6,144.3 126.6,144.8 127.6,145.3 128.7,145.7 129.7,146.2 130.8,146.7 131.8,147.1 132.8,147.1 133.9,147.1 134.9,147.1 136.0,147.1 137.0,147.1 138.0,147.1 139.1,147.1 140.1,147.1 141.2,147.1 142.2,147.1 143.3,147.1 144.3,147.1 145.3,147.1 146.4,147.1 147.4,147.1 148.5,147.1 149.5,147.1 150.5,147.1 151.6,147.1 152.6,147.1 153.7,147.1 154.7,147.1 155.7,147.1 156.8,147.1 157.8,147.1 158.9,147.1 159.9,147.1 160.9,147.1 162.0,147.1 163.0,147.1 164.1,147.1 165.1,147.1 166.1,147.1 167.2,147.1 168.2,147.1 169.3,147.1 170.3,147.1"/><polyline fill="none" stroke="currentColor" stroke-width="2" points="170.8,147.1 171.9,147.1 172.9,147.1 174.0,147.1 175.0,147.1 176.0,147.1 177.1,147.1 178.1,147.1 179.2,147.1 180.2,147.1 181.2,147.1 182.3,147.1 183.3,147.8 184.4,148.6 185.4,149.3 186.4,150.1 187.5,150.9 188.5,151.7 189.6,152.4 190.6,153.2 191.6,154.0 192.7,154.8 193.7,155.5 194.8,156.3 195.8,157.1 196.9,157.9 197.9,158.6 198.9,159.4 200.0,160.2 201.0,160.9 202.1,161.6 203.1,162.2 204.1,162.8 205.2,163.5 206.2,164.1 207.3,164.7 208.3,165.4 209.3,166.0 210.4,166.6 211.4,167.3 212.5,167.9 213.5,168.5 214.5,169.2 215.6,169.8 216.6,170.4 217.7,171.1 218.7,171.7 219.7,172.3 220.8,172.8 221.8,173.4 222.9,173.9 223.9,174.4 224.9,174.9 226.0,175.5 227.0,176.0 228.1,176.5 229.1,177.1 230.2,177.6 231.2,178.1 232.2,178.6"/><polyline fill="none" stroke="currentColor" stroke-width="2" points="233.3,155.2 234.3,171.3 235.4,179.7 236.4,180.1 237.4,180.5 238.5,180.9 239.5,181.3 240.6,181.7 241.6,182.1 242.6,182.4 243.7,182.8 244.7,183.2 245.8,183.6 246.8,184.0 247.8,184.4 248.9,184.8 249.9,185.2 251.0,185.6 252.0,186.0 253.0,186.3 254.1,186.7 255.1,187.1 256.2,187.5 257.2,187.9 258.2,188.3 259.3,188.7 260.3,189.1 261.4,189.5 262.4,189.8 263.5,190.2 264.5,190.6 265.5,191.0 266.6,191.0 267.6,191.0 268.7,191.0 269.7,191.0 270.7,191.0 271.8,191.0 272.8,191.0 273.9,191.0 274.9,191.0 275.9,191.0 277.0,191.0 278.0,191.0 279.1,191.0 280.1,191.0 281.1,191.0 282.2,191.0 283.2,191.0 284.3,191.0 285.3,191.0 286.3,191.0"/><polyline fill="none" stroke="currentColor" stroke-width="2" points="287.1,191.0 288.1,191.0 289.2,191.0 290.2,191.0 291.3,191.0 292.3,191.0 293.3,191.0 294.4,191.0 295.4,191.0 296.5,191.0 297.5,191.0 298.5,191.0 299.6,191.0 300.6,191.0 301.7,191.0 302.7,191.0 303.7,191.0 304.8,191.0 305.8,191.0 306.9,191.0 307.9,191.0 309.0,191.0 310.0,191.0 311.0,191.0 312.1,191.0 313.1,191.0 314.2,191.0 315.2,191.0 316.2,191.0 317.3,191.0 318.3,191.0 319.4,191.0 320.4,191.0 321.4,191.0 322.5,191.0 323.5,191.0 324.6,191.0 325.6,191.0 326.6,191.0 327.7,191.0 328.7,191.0 329.8,191.0 330.8,191.0 331.8,191.0 332.9,191.0 333.9,191.0 335.0,191.0 336.0,191.0 337.0,191.0 338.1,191.0 339.1,191.0 340.2,191.0 341.2,191.0 342.3,191.0 343.3,191.0 344.3,191.0 345.4,191.0 346.4,191.0 347.5,191.0 348.5,191.0 349.5,191.0 350.6,191.0 351.6,191.0 352.7,191.0 353.7,191.0 354.7,191.0 355.8,191.0 356.8,191.0 357.9,191.0 358.9,191.0 359.9,191.0 361.0,191.0 362.0,191.0 363.1,191.0 364.1,191.0 365.1,191.0 366.2,191.0 367.2,191.0 368.3,191.0 369.3,191.0 370.3,191.0 371.4,191.0 372.4,191.0 373.5,191.0 374.5,191.0 375.6,191.0 376.6,191.0 377.6,191.0 378.7,191.0 379.7,191.0 380.8,191.0 381.8,191.0 382.8,191.0 383.9,191.0 384.9,191.0 386.0,191.0 387.0,191.0 388.0,191.0 389.1,191.0 390.1,191.0 391.2,191.0 392.2,191.0 393.2,191.0 394.3,191.0 395.3,191.0 396.4,191.0 397.4,191.0 398.4,191.0 399.5,191.0 400.5,191.0 401.6,191.0 402.6,191.0 403.6,191.0 404.7,191.0 405.7,191.0 406.8,191.0 407.8,191.0 408.9,191.0 409.9,191.0"/><polyline fill="none" stroke="currentColor" stroke-width="2" points="410.5,191.0 411.5,188.8 412.5,186.6 413.6,184.4 414.6,182.2 415.7,180.0 416.7,177.8 417.7,175.6 418.8,173.4 419.8,171.2 420.9,169.0 421.9,166.9 422.9,164.7 424.0,162.5 425.0,160.3 426.1,158.1 427.1,155.9 428.2,153.7 429.2,151.5 430.2,149.3 431.3,147.1 432.3,147.1"/><polyline fill="none" stroke="currentColor" stroke-width="2" points="523.9,147.1 524.9,147.1 526.0,147.1 527.0,147.1 528.1,147.1 529.1,147.1 530.1,147.1 531.2,147.1 532.2,147.1 533.3,147.1 534.3,147.1 535.3,147.1 536.4,147.1 537.4,147.1 538.5,147.1 539.5,147.1 540.5,147.1 541.6,147.1 542.6,147.1 543.7,147.1 544.7,147.1"/><polyline fill="none" stroke="currentColor" stroke-width="2" points="548.9,147.1 549.9,147.1 550.9,147.1 552.0,147.1 553.0,147.1 554.1,147.1 555.1,147.1 556.1,147.1 557.2,147.1 558.2,147.1 559.3,147.1 560.3,147.1 561.4,147.1 562.4,147.1 563.4,147.1 564.5,147.1 565.5,147.1 566.6,147.1 567.6,147.1 568.6,147.1 569.7,147.1 570.7,147.1 571.8,147.1 572.8,147.1 573.8,147.1 574.9,147.1 575.9,147.1 577.0,147.1 578.0,147.1 579.0,147.1 580.1,147.1 581.1,147.1 582.2,147.1 583.2,147.1 584.2,147.1 585.3,147.1 586.3,147.1 587.4,147.1 588.4,147.1 589.4,147.1 590.5,147.1 591.5,147.1 592.6,147.1 593.6,147.1 594.7,147.1 595.7,147.1 596.7,147.1 597.8,146.9 598.8,144.3 599.9,141.8 600.9,139.3 601.9,136.8 603.0,134.3 604.0,131.8 605.1,129.3 606.1,126.7 607.1,124.2 608.2,121.7 609.2,119.2 610.3,116.7 611.3,114.2 612.3,111.7 613.4,109.1 614.4,106.6 615.5,104.1 616.5,103.2 617.5,103.2 618.6,103.2 619.6,103.2"/><polyline fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 3" points="303.7,188.6 304.8,214.0 305.8,234.9 306.9,234.9 307.9,234.9 309.0,234.9 310.0,234.9 311.0,234.9 312.1,234.9 313.1,234.9 314.2,234.9 315.2,234.9 316.2,234.9 317.3,234.9 318.3,234.9 319.4,234.9 320.4,234.9 321.4,234.9 322.5,234.9 323.5,234.9 324.6,234.9 325.6,234.9 326.6,234.9 327.7,234.9 328.7,234.9 329.8,234.9 330.8,234.9 331.8,234.9 332.9,234.9 333.9,234.9 335.0,234.9 336.0,234.9 337.0,234.9 338.1,234.9 339.1,234.9 340.2,234.9 341.2,234.9 342.3,234.9 343.3,234.9 344.3,234.9 345.4,234.9 346.4,234.9 347.5,234.9 348.5,234.9 349.5,234.9 350.6,234.9 351.6,234.9 352.7,234.9 353.7,234.9 354.7,234.9 355.8,234.9 356.8,234.9 357.9,234.9 358.9,234.9 359.9,234.9 361.0,234.9 362.0,234.9 363.1,234.9 364.1,234.9 365.1,234.9 366.2,234.9 367.2,234.9 368.3,234.9 369.3,234.9 370.3,234.9 371.4,234.9 372.4,234.9 373.5,234.9 374.5,234.9 375.6,234.9 376.6,234.9 377.6,234.9 378.7,234.9 379.7,234.9 380.8,234.9 381.8,234.9 382.8,234.9 383.9,234.9 384.9,234.9"/><polyline fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 3" points="386.0,186.6 387.0,211.4 388.0,234.9 389.1,234.9 390.1,234.9 391.2,234.9 392.2,234.9 393.2,234.9 394.3,234.9 395.3,234.9 396.4,234.9 397.4,234.9 398.4,234.9 399.5,234.9 400.5,234.9 401.6,234.9 402.6,234.9 403.6,234.9 404.7,234.9 405.7,234.9 406.8,234.9 407.8,234.9 408.9,234.9 409.9,234.9"/><polyline fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 3" points="410.5,234.9 411.5,232.7 412.5,230.5 413.6,228.3 414.6,226.1 415.7,223.9 416.7,221.7 417.7,219.5 418.8,217.3 419.8,215.1 420.9,212.9 421.9,210.7 422.9,208.5 424.0,206.4 425.0,204.2 426.1,202.0 427.1,199.8 428.2,197.6 429.2,195.4 430.2,193.2 431.3,191.0 432.3,177.9 433.4,166.4 434.4,156.3 435.4,147.1 436.5,147.1 437.5,147.1 438.6,147.1 439.6,147.1 440.6,147.1 441.7,147.1 442.7,147.1 443.8,147.1 444.8,147.1 445.8,147.1 446.9,147.1 447.9,147.1 449.0,147.1 450.0,147.1 451.0,147.1 452.1,147.1 453.1,147.1 454.2,147.1 455.2,147.1 456.2,147.1 457.3,147.1 458.3,147.1 459.4,147.1 460.4,147.1 461.5,147.1 462.5,147.1 463.5,147.1 464.6,147.1 465.6,147.1 466.7,147.1 467.7,147.1 468.7,147.1 469.8,147.1 470.8,147.1 471.9,147.1 472.9,147.1 473.9,147.1 475.0,147.1 476.0,147.1 477.1,147.1 478.1,147.1 479.1,147.1 480.2,147.1 481.2,147.1 482.3,147.1 483.3,147.1 484.3,147.1 485.4,147.1 486.4,147.1 487.5,147.1 488.5,147.1 489.5,147.1 490.6,147.1 491.6,147.1 492.7,147.1 493.7,147.1 494.8,147.1 495.8,147.1 496.8,147.1 497.9,147.1 498.9,147.1 500.0,147.1 501.0,147.1 502.0,147.1 503.1,147.1 504.1,147.1 505.2,147.1 506.2,147.1 507.2,147.1 508.3,147.1 509.3,147.1 510.4,147.1 511.4,147.1 512.4,147.1 513.5,147.1 514.5,147.1 515.6,147.1 516.6,147.1 517.6,147.1 518.7,147.1 519.7,147.1 520.8,147.1 521.8,147.1 522.8,147.1"/><polyline fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 3" points="434.4,160.0 435.4,191.0 436.5,191.0 437.5,191.0 438.6,191.0 439.6,191.0 440.6,191.0 441.7,191.0 442.7,191.0 443.8,191.0 444.8,191.0 445.8,191.0 446.9,191.0 447.9,191.0 449.0,191.0 450.0,191.0 451.0,191.0 452.1,191.0 453.1,191.0 454.2,191.0 455.2,191.0 456.2,191.0 457.3,191.0 458.3,191.0 459.4,191.0 460.4,191.0 461.5,191.0 462.5,191.0 463.5,191.0 464.6,191.0 465.6,191.0 466.7,191.0 467.7,191.0 468.7,191.0 469.8,191.0 470.8,191.0 471.9,191.0 472.9,191.0 473.9,191.0 475.0,191.0 476.0,191.0 477.1,191.0 478.1,191.0 479.1,191.0 480.2,191.0 481.2,191.0 482.3,191.0 483.3,191.0 484.3,191.0 485.4,191.0 486.4,191.0 487.5,191.0 488.5,191.0 489.5,191.0 490.6,191.0 491.6,191.0 492.7,191.0 493.7,191.0 494.8,191.0 495.8,191.0 496.8,191.0 497.9,191.0 498.9,191.0 500.0,191.0 501.0,191.0 502.0,191.0 503.1,191.0 504.1,191.0 505.2,191.0 506.2,191.0 507.2,191.0 508.3,191.0 509.3,191.0 510.4,191.0 511.4,191.0 512.4,191.0 513.5,191.0 514.5,191.0 515.6,191.0 516.6,191.0 517.6,191.0 518.7,191.0 519.7,191.0 520.8,191.0 521.8,191.0 522.8,191.0"/><polyline fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 3" points="523.9,191.0 524.9,191.0 526.0,191.0 527.0,191.0 528.1,191.0 529.1,191.0 530.1,191.0 531.2,191.0 532.2,191.0 533.3,191.0 534.3,191.0 535.3,191.0 536.4,191.0 537.4,191.0 538.5,191.0 539.5,191.0 540.5,191.0 541.6,191.0 542.6,191.0 543.7,191.0 544.7,191.0"/><text x="60.0" y="268" text-anchor="middle" class="lab">0:00</text><text x="153.7" y="268" text-anchor="middle" class="lab">3:00</text><text x="247.3" y="268" text-anchor="middle" class="lab">6:00</text><text x="341.0" y="268" text-anchor="middle" class="lab">9:00</text><text x="434.6" y="268" text-anchor="middle" class="lab">12:00</text><text x="528.3" y="268" text-anchor="middle" class="lab">15:00</text><text x="340.0" y="288" text-anchor="middle" class="lab">minutes; songs 1-5 marked above; rates in Hz at left</text></svg><figcaption>The hidden layer of the whole suite, computed from the five song files: the A3 pair (gold) and the second and third pairs (solid, dashed). Every steady rate is a rung of the ladder $10\varphi^k$ Hz (dotted lines): 16.18, 10, 6.18, 3.82 and 2.36. Ramps between rungs are geometric; a pair that enters or leaves crossfades.</figcaption></figure>
+<p><b>The carriers.</b> A binaural beat is heard most clearly on carriers of a few hundred hertz
+(<a href="ch:ch41#binaural">§41.1</a>), and every carrier here lies between 220 and 576 Hz. While the harmony is
+Western the carriers are A3 and E4, the root and fifth of A major, common to most of its chords. When the harmony
+turns golden they move onto the golden chain through A: A3·φ = 355.97 Hz (written ^F4), A3·φ² = 575.97 Hz (vD5),
+A4/φ = 271.93 Hz (vC♯4) and A5/φ² = 336.13 Hz (^E4). These are the exact chain ratios, within half a cent of the
+36-ET notes the music plays. The carriers always belong to the chord. Songs 2 and 3 live on vDg and ^Fg, which share
+A and ^F; song 4 lives on Ag, whose close voicing is A, vC♯, ^E. A note held under the harmony in this way is a pedal
+point, and the music treats it as one. <code>songmap listen</code> checks every chord: a carrier a sixth-step from a
+chord tone (a sour rub) is a problem, and a half step (a pedal point's tension) is a note.</p>
+<pianoroll edo="36" notes="A3 E4 ; A3 ^F4 ; A3 ^F4 vD5 ; A3 vC#4 ^F4 ; A3 vC#4 ^E4 ; A3 ; A3 E4" labels="songs 1, 2 ; song 2, golden ; song 3 ; song 3 end ; song 4 ; dawn ; song 5" title="The hidden carriers through the suite: A3 never leaves"></pianoroll>
+<p><b>Why these choices.</b> Each design choice answers a question, and the evidence behind the answers is uneven.
+The table says which is which.</p>
+<table>
+<tr><th>Choice</th><th>Reason</th><th>Status of the reason</th></tr>
+<tr><td>beats walk from alpha into theta and back</td><td>alpha is the rhythm of relaxed wakefulness; theta is linked with drowsiness and with some meditative states</td><td>band associations are conventional; entrainment by binaural beats is unsettled (§41.1)</td></tr>
+<tr><td>several rungs at once, in golden ratio</td><td>rates that never lock to one another: "coherence without locking"</td><td>the bliss conjecture: a hypothesis</td></tr>
+<tr><td>start and end at 16.18 Hz</td><td>meet the listener near an ordinary waking state and return them to it</td><td>a design convention, untested here</td></tr>
+<tr><td>phrases two bars long, slowing to 10 s</td><td>invite slow breathing near six a minute</td><td>slow breathing near six a minute is the rate used in heart-rate-variability biofeedback (reviewed by Lehrer and Gevirtz, 2014); whether music paces it here is untested</td></tr>
+<tr><td>slow tempos, no drums, pauses at phrase ends</td><td>lower arousal</td><td>Bernardi, Porta and Sleight (2006) found that faster music raised breathing and heart rate, and that during a short pause between pieces heart rate, blood pressure and ventilation fell below baseline; a measurement in a small study</td></tr>
+<tr><td>a release into A major at the end; new voices entering at peaks</td><td>moments listeners report as chills or deep pleasure</td><td>Sloboda (1991) tied reported shivers to new or unexpected harmonies; Blood and Zatorre (2001) imaged brain activity during reported chills; the effect here is a hypothesis</td></tr>
+<tr><td>the layer hidden in the harmony, 12 LU below the music</td><td>keep the music the thing one listens to</td><td>a design assumption: whether a binaural beat under music acts as one alone does is not known</td></tr>
+</table>
+</div>
+<div class="layer derive">
+<p><b>The signals (theorem).</b> A carrier $f$ with beat $\Delta(t)$ sends $x_L(t) = \sin\theta_L(t)$ to the left ear
+and $x_R(t) = \sin\theta_R(t)$ to the right, with
+$$\theta_L(t) = 2\pi\int_0^t \big(f - \tfrac12\Delta(s)\big)\,ds, \qquad \theta_R(t) = 2\pi\int_0^t \big(f + \tfrac12\Delta(s)\big)\,ds.$$
+Each ear's envelope is constant, and the interaural phase difference $\theta_R - \theta_L = 2\pi\int_0^t \Delta(s)\,ds$
+turns at the instantaneous rate $\Delta(t)$. The engine integrates the phases sample by sample, so a changing rate
+never causes a jump: a click would be a discontinuity in $\theta$, and an integral has none.</p>
+<p><b>Ramps.</b> Within a section the top rate moves geometrically from $B_0$ to $B_1$:
+$B(t) = B_0\,(B_1/B_0)^{(t - t_0)/(t_1 - t_0)}$. A geometric ramp takes equal time for each step of the ladder: from
+16.18 to 10 Hz, and from 10 to 6.18 Hz, is the same ratio φ.</p>
+<p><b>Why the music must make room (theorem).</b> Suppose the music holds a tone at the carrier's own frequency $f$.
+In the left ear it meets $f - \Delta/2$ and, by the sum-to-product identity of <a href="ch:ch41#binaural">§41.1</a>,
+the two make a monaural beat at $\Delta/2$; so does the right ear. With $\Delta = 10$ Hz each ear would pulse at 5 Hz,
+a rate off the ladder, a rational relation (one half) to the binaural rate, and audible on loudspeakers too. Carving
+removes it. While a pair sounds, the engine subtracts from the music a band-pass copy of the music centred on $f$, of
+half-width $\Delta_{\max}/2 + 3$ Hz ($\Delta_{\max}$ is that pair's largest rate in the song), weighted by the pair's
+own fade. In "Dusk on the Water" the A3 band is 220 ± 11.09 Hz and the E4 band 329.63 ± 8 Hz. Measured in the
+mastered render, the music left at a carrier's centre frequency is at least 51 dB below that carrier (ten seconds in one section of
+each song).</p>
+<p><b>Level.</b> The layer's integrated loudness is set relative to the music's: 12 LU below it (11 LU in "Deep
+Water"). A slow swell of 3 dB, once every two bars, rides on it in step with the phrases, the same in both ears, so
+it adds no interaural difference.</p>
+</div>
+</section>
+
+<section id="dusk">
+<h2>Dusk on the Water: arriving</h2>
+<div class="layer hear">
+<p>Evening on a lake, in A major. Harp and strings hold a pedal on A; a glass bell calls three notes, C♯, E, A, that
+will open every statement of the suite's theme. Then a felt piano sings the theme: a leap up to A and a slow,
+settling fall. The question ends on C♯, the answer comes home to A. Nothing here is golden yet except the layer: two
+pairs, on A3 and E4, the organ's own notes, whose beats begin at 16.18 and 10 Hz and slow to 10 and 6.18 Hz by the
+reflection.</p>
+<audio-ex src="dusk_on_the_water" caption="“Dusk on the Water” (3:33), headphones: felt piano, harp, strings, flute, bass, glass bell and a soft organ; the layer on A3 and E4 slows from 16.18 and 10 Hz to 10 and 6.18 Hz."></audio-ex>
+<table>
+<tr><th>Time</th><th>Section</th><th>What you hear</th><th>The layer</th></tr>
+<tr><td>0:00</td><td>dusk</td><td>harp in quarter notes, strings, piano chords; the bell calls the theme's head</td><td>16.18 and 10 Hz</td></tr>
+<tr><td>0:20</td><td>theme</td><td>the piano sings the theme: question and answer, eight bars</td><td>slowing to 13 and 8.03</td></tr>
+<tr><td>0:52</td><td>answer</td><td>the theme again; a flute countermelody; harp in eighths</td><td>to 11.5 and 7.11</td></tr>
+<tr><td>1:24</td><td>reflection</td><td>a new thirteen-bar melody over D, Bm7, F♯m, C♯m; the tempo eases from 60 to 56</td><td>to 10 and 6.18</td></tr>
+<tr><td>2:18</td><td>homeward</td><td>the loudest passage: piano and flute an octave apart</td><td>10 and 6.18</td></tr>
+<tr><td>2:52</td><td>settle</td><td>a coda; the tempo eases to 54; home on A</td><td>10 and 6.18</td></tr>
+</table>
+</div>
+<div class="layer understand">
+<p><b>A pedal that is also a code.</b> The organ holds A3 and E4 in every bar, and the strings and piano often double
+them. Under C♯m these make A, C♯, E, G♯, which is Amaj7; under E7 they make an eleventh chord that resolves to A. That
+is ordinary pedal-point harmony, and the ear checks them as pedal points: the only notes from
+<code>songmap listen</code> are half steps of tension (A against G♯), none of them sixth-step rubs. Because the music
+gives up the bands at 220 and 329.63 Hz, the organ's fundamentals there are the binaural pairs themselves.</p>
+<p><b>The theme.</b> In scale degrees of A major (0 = A), the question is <code>2 4 7 | 6 4 2 | 3 2 1 | 2</code> and
+the answer <code>2 4 7 | 8 7 6 | 5 4 1 | 0</code>. It has one rhythmic idea, a dotted quarter and an eighth, and one
+memorable interval, the leap of a fourth from E up to A. Every later song transforms it: at half speed in song 2,
+remembered in fragments in song 3, projected into gold and sung in canon in song 4, and complete in A major in song 5.</p>
+</div>
+<div class="layer derive">
+<p><b>The rates in the homeward section.</b> With $B = 10$ and the golden ladder, the A3 pair beats at 10 Hz and the
+E4 pair at $10/\varphi = 6.1803$ Hz. The left ear receives 215 and 326.54 Hz, the right 225 and 332.72 Hz. The suite's
+measured separation (the energy of a left-ear tone in the right channel, and vice versa, measured over ten seconds
+in one section of each song) is at least 59 dB in the WAVs and at least 47 dB in the MP3s, which is written with separate left and right channels (no joint stereo) whenever a song has a layer.</p>
+<div class="exercise"><p><b>Exercise 1.</b> In song 1's reflection the top rate falls from 11.5 to 10 Hz over 13
+bars while the tempo eases from 60 to 56 BPM. Which two frequencies does the right ear receive at the end of the
+section?</p>
+<details class="answer"><summary>Answer</summary><p>At the end $B = 10$, so the A3 pair is 215 / 225 Hz and the E4
+pair beats at $10/\varphi = 6.18$ Hz: 326.54 / 332.72 Hz. The right ear receives 225 and 332.72 Hz. The tempo plays no
+part: rates are set in hertz, not in beats of the music.</p></details></div>
+</div>
+</section>
+
+<section id="tide">
+<h2>The Slow Tide: into gold</h2>
+<div class="layer hear">
+<p>The theme returns at half speed, rising and falling like a tide over A, C♯m, Bm7 and F♯m. Then the music turns. A
+D major chord holds, the melody comes to rest on A, and the chord sinks: D becomes vDg, its root a sixth-step lower,
+its third two sixth-steps lower, its A unchanged. From here on there is no piano and no harp: a golden-spectrum pad,
+glass bells on the golden chords' tones, and a low glass gong. The layer follows the harmony: its second pair fades
+from E4 to A3·φ, the golden chain's next tone, as the chord turns, and the rates slow from 10 and 6.18 Hz to 6.18
+and 3.82 Hz, from alpha into theta.</p>
+<audio-ex src="the_slow_tide" caption="“The Slow Tide” (3:43), headphones: the theme at half speed, then the turn into golden water (vDg, ^Fg) on golden pad, glass bells and gong; the layer slows from 10 and 6.18 Hz to 6.18 and 3.82 Hz."></audio-ex>
+<table>
+<tr><th>Time</th><th>Section</th><th>What you hear</th><th>The layer</th></tr>
+<tr><td>0:00</td><td>drift</td><td>A, F♯m, D; harp in quarter notes, strings, piano chords</td><td>A3, E4: 10 and 6.18 Hz</td></tr>
+<tr><td>0:22</td><td>tide</td><td>the theme's question at half speed on the piano</td><td>slowing to 8.6 and 5.32</td></tr>
+<tr><td>0:58</td><td>ebb</td><td>the answer at half speed, home on A</td><td>to 7.6 and 4.70</td></tr>
+<tr><td>1:33</td><td>turning</td><td>F♯m, Bm7, D; the melody settles on A; the tempo eases from 54 to 48</td><td>to 7.1 and 4.39</td></tr>
+<tr><td>1:57</td><td>undertow</td><td>D has become vDg: golden pad, bells, gong; vDg and ^Fg alternate</td><td>E4 fades to A3·φ; to 6.18 and 3.82</td></tr>
+<tr><td>3:02</td><td>slack water</td><td>almost still; it ends on vDg</td><td>6.18 and 3.82 Hz</td></tr>
+</table>
+</div>
+<div class="layer understand">
+<p><b>The turn through the note that stays.</b> D major is D, F♯, A; vDg is vD, ^F, A. Two notes sink, by one and by
+two sixth-steps, and A does not move. The melody holds A through the change, so it never fights the gold
+(<a href="ch:ch47#lullaby">Chapter 47's</a> second rule), and the carrier A3 is a chord tone on both sides of it.
+After the turn, the golden chords that keep A are the ones the song uses: vDg = vD ^F A and ^Fg = ^F A vC♯, which
+share A and ^F, exactly the two carriers. The bells sing the theme's fragments in the golden scale A golden7
+(A, A♯, vC♯, vD, ^E, ^F, G♯), on chord tones only.</p>
+<pianoroll edo="36" notes="D3 F#3 A3 ; vD3 ^F3 A3 ; ^F3 A3 vC#4" labels="D ; vDg ; ^Fg" title="The turn: D sinks into vDg around its A; ^Fg keeps A and ^F"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>The crossfade.</b> When a section changes the set of carriers, a pair that leaves fades out over the song's
+glide time (6 s here) and a pair that enters fades in over the same time. Neither pair changes pitch, so nothing
+slides. A pair that stays but moves to a different rung, such as A3 in song 4, keeps its pitch and glides only its
+beat rate. Interval check: E4 against vDg is at least 1.33 semitones from every chord tone (E to ^F, and E to vD
+counted the other way), so the outgoing pair never rubs while it fades.</p>
+</div>
+</section>
+
+<section id="deep">
+<h2>Deep Water: the stillest point</h2>
+<div class="layer hear">
+<p>The deepest point of the suite, at 44 beats a minute. Only golden-spectrum timbres sound: a golden pad, glass
+bells, a softer glass voice and a low gong. The bells fall in a rhythm of long and short notes that never settles
+into a pattern; the theme comes back only as long, remembered notes. For a while the harmony visits A♯g, the one
+chord here without an A, and the pedal leans against it. Then the music thins until only the pad remains, and the
+layer is nearly all there is. Three pairs now: on A3, A3·φ and A3·φ², beating at 6.18, 3.82 and 2.36 Hz.</p>
+<audio-ex src="deep_water" caption="“Deep Water” (3:57), headphones: golden pad, glass bells on a Fibonacci-word rhythm, glass voice and gong; the layer on A3, A3·φ and A3·φ² beats at 6.18, 3.82 and 2.36 Hz."></audio-ex>
+<table>
+<tr><th>Time</th><th>Section</th><th>What you hear</th><th>The layer</th></tr>
+<tr><td>0:00</td><td>descent</td><td>vDg alone on the golden pad; the gong</td><td>A3, A3·φ: 6.18 and 3.82 Hz</td></tr>
+<tr><td>0:27</td><td>depth</td><td>Fibonacci-word bells; the theme remembered in long notes; vDg, ^Fg, vDg7, A♯g</td><td>A3·φ² joins at 2.36 Hz</td></tr>
+<tr><td>2:22</td><td>stillness</td><td>the golden pad alone, one gong stroke</td><td>three pairs: 6.18, 3.82, 2.36 Hz</td></tr>
+<tr><td>3:06</td><td>rising</td><td>^Fg; the bells return</td><td>A3·φ² fades to A4/φ</td></tr>
+</table>
+<p>The excerpt below plays one note, A3 on the golden pad, and then the layer of this song alone. Last it plays both
+together, as in the song.</p>
+<audio-ex src="golden_a3" caption="Headphones. A3 on the golden pad (partials 220, 355.97, 440, 575.97 Hz, ...); then pure-tone pairs on its first, second and fourth partials, beating at 6.18, 3.82 and 2.36 Hz; then both, the pad giving up those three bands."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>The code is the timbre.</b> A golden-spectrum tone (<a href="ch:ch26#golden-spectra">Chapter 26</a>) has
+partials at $2^m\varphi^n$ times its fundamental: 1, φ, 2, φ², 2φ, … On A3 that is 220, 355.97, 440, 575.97 Hz. The
+three carriers of "Deep Water" are exactly the first, second and fourth of these. So the golden pad's A3, the host
+note held in every bar, is the binaural layer: its fundamental and its two lowest partials that are not octaves of it are split between the ears, each
+with its own small detune. They are also the chord vDg in the golden chain voicing of
+<a href="ch:ch41#binaural">§41.1</a>, 1 : φ : φ².</p>
+<p><b>Bells that never repeat.</b> The bells follow the Fibonacci word <code>abaababaabaababaababa</code>, with
+a = dotted half and b = half: thirteen longs and eight shorts, 55 beats, on chord tones of whatever chord is
+sounding. Listen to the comparison: first the periodic rhythm long, short, long, short, which comes back into line
+with the bar every five bars, then the Fibonacci word, which never does.</p>
+<audio-ex src="fibonacci_bells" caption="Glass bells over vDg: five bars of long–short alternation (it lines up with the bar every 5 bars), then eight bars of the Fibonacci word, which never lines up again."></audio-ex>
+</div>
+<div class="layer derive">
+<p><b>The Fibonacci word (theorem).</b> The word is the fixed point of the substitution a → ab, b → a. Its prefixes
+a, ab, aba, abaab, abaababa, … have Fibonacci lengths, and the prefix of length $F_n$ has $F_{n-1}$ a's and
+$F_{n-2}$ b's. With a = 3 beats and b = 2 beats, that prefix lasts $3F_{n-1} + 2F_{n-2} = F_{n+2}$ beats, because
+$F_{n+2} = F_{n+1} + F_n = 2F_n + F_{n-1} = 3F_{n-1} + 2F_{n-2}$. For the 21-letter figure: $3\cdot 13 + 2\cdot 8 = 55$.
+The ratio of longs to shorts tends to φ. The Fibonacci word is Sturmian, so it is not eventually periodic: however
+long the bells play, the pattern of longs and shorts never settles into a cycle. (In the song the 55-beat figure is
+padded to 14 bars and loops, so over minutes it does repeat; within any 14 bars it does not.)</p>
+<p><b>The deep rung.</b> With $B = 6.18$ the three rates are $6.1803, 3.8197, 2.3607$ Hz, and
+$6.1803 - 3.8197 = 2.3607$: the ladder of §41.1 one rung lower, its lowest rate at the edge of the delta range. The
+next rung would be 1.4590 Hz; the suite does not go there.</p>
+<div class="exercise"><p><b>Exercise 2.</b> "Deep Water" is in 4/4 at 44 BPM and its phrases are two bars long. How
+long is a phrase, and how many phrases (breaths) fit in a minute? Do the same for song 1 at 60 BPM.</p>
+<details class="answer"><summary>Answer</summary><p>Two bars are 8 beats; at 44 BPM a beat is 60/44 = 1.364 s, so a
+phrase lasts 10.91 s, 5.5 a minute. At 60 BPM a phrase is 8 s, 7.5 a minute. The suite moves from the second toward
+the first and back.</p></details></div>
+</div>
+</section>
+
+<section id="moon">
+<h2>Moon on the Water: the whole ladder</h2>
+<div class="layer hear">
+<p>The centre of the suite. The harmony turns from ^Fg to the golden tonic Ag, and the theme is sung whole in gold at
+last, by a soft lead with glass doubling it. Then one chord holds, the golden seventh Ag7, and over it the theme
+enters three times, in three registers, a canon of glass and lead. Under the canon a low organ holds the same chord in
+close voicing, and its partials beat softly in the air. A choir blooms on ^Fg7, the loudest moment of the gold, and
+the music settles on Ag. The layer is now the ladder of Chapter 41 exactly, three rungs at once: 10, 6.18 and 3.82 Hz,
+on A3 and the golden triad's other two tones.</p>
+<audio-ex src="moon_on_the_water" caption="“Moon on the Water” (3:38), headphones: golden pad, lead, glass, choir and a low organ; the theme in gold, then in canon over Ag7; the layer is the full golden ladder, 10, 6.18 and 3.82 Hz."></audio-ex>
+<table>
+<tr><th>Time</th><th>Section</th><th>What you hear</th><th>The layer</th></tr>
+<tr><td>0:00</td><td>moonrise</td><td>^Fg, ^Fg7, Ag; bells</td><td>rising from 6.18, 3.82, 2.36 to 10, 6.18, 3.82 Hz</td></tr>
+<tr><td>0:40</td><td>light</td><td>the theme in gold on the lead, glass shimmer above</td><td>pairs move to Ag's tones: A3, vC♯4, ^E4</td></tr>
+<tr><td>1:45</td><td>coherence</td><td>Ag7 held; three-voice canon; the low organ's golden seventh</td><td>10, 6.18, 3.82 Hz</td></tr>
+<tr><td>2:25</td><td>bloom</td><td>^Fg7; the choir enters; the peak</td><td>10, 6.18, 3.82 Hz</td></tr>
+<tr><td>2:50</td><td>afterglow</td><td>Ag; the theme's last fragment</td><td>10, 6.18, 3.82 Hz</td></tr>
+</table>
+<p>The low organ chord alone, on loudspeakers, is the sound <a href="ch:ch41#conjecture">§41.4</a> describes:
+several soft pulsations at their own rates, none lining up with the others.</p>
+<audio-ex src="bliss_chord" caption="The low organ chord of the canon alone: Ag7 in close voicing on A2, a harmonic tone. Its partials beat near 6, 7.5, 9.5 and 12 Hz."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>The theme projected into gold.</b> Song 4 keeps the theme's scale degrees and changes the scale. In A golden7
+(A, A♯, vC♯, vD, ^E, ^F, G♯) the head <code>2 4 7</code> becomes vC♯, ^E, A instead of C♯, E, A: the same contour,
+each third a sixth-step narrower. With one degree changed (a 1 on a strong beat would be A♯, which no chord here
+contains), every note of the golden theme on a strong beat is a tone of Ag, Ag7, vDg or ^Fg.</p>
+<pianoroll edo="36" notes="C#5 E5 A5 ; vC#5 ^E5 A5" labels="head in A major ; head in A golden7" title="The theme's head, Western and golden"></pianoroll>
+<p><b>Golden at every scale.</b> In this song the conjecture's list is complete. The pitches are golden, from Ag and
+its seventh on golden-spectrum timbres. The binaural rates are golden: 10, 10/φ, 10/φ². The beats in the air are
+golden, from the low organ's close golden seventh. The bells follow the Fibonacci word. The section lengths are 8,
+13, 8, 5 and 8 bars. There is no drum and no steady pulse; the only regular things are the slow tempo and the
+breath-length phrases.</p>
+<pianoroll edo="36" notes="A2 vC#3 ^E3 G#3" labels="Ag7 close" title="The bliss chord: Ag7 in close voicing on A2"></pianoroll>
+</div>
+<div class="layer derive">
+<p><b>The beats of the low chord (theorem and measurement).</b> For an exact close golden seventh on $f_0 = 110$ Hz
+with harmonic partials, <a href="ch:ch41#conjecture">§41.4</a> gives the beat rates
+$f_0\varphi^{-6}\,(1, 2/\varphi, 4/\varphi^2)$ and $2f_0\varphi^{-6}$: 6.13, 7.58, 9.37 and 12.26 Hz. The music plays the
+36-ET notes, 0, 11, 22 and 33 sixth-steps above A2 (110, 135.95, 168.02, 207.65 Hz), which miss the exact ratios by
+under 0.75 cent. A direct count of near-coincident partial pairs (eight harmonics per tone, differences under 25 Hz)
+finds each exact beat split in two: 6.04 and 6.21, 7.46 and 7.67, 9.48, 12.07 and 12.35 Hz. One of the 12 Hz pairs
+uses the root's second partial, 220 Hz, which lies inside the A3 carrier's carved band, so in the song that pair is
+given to the binaural tones. The other, root partial 6 (660 Hz) against ^E3's partial 4 (672.07 Hz), remains.</p>
+<p><b>The rung change.</b> In "light" the carriers change from A3, A3·φ, A4/φ to A3, A4/φ, A5/φ². A3 stays on the
+top rung. A4/φ moves from the third rung to the second, so its beat glides from 3.82 to 6.18 Hz over 8 s at
+constant pitch. A3·φ fades out and A5/φ² fades in on the third rung.</p>
+<div class="exercise"><p><b>Exercise 3.</b> Listen to "The layer revealed" twice, on headphones and then on
+loudspeakers. What changes in the three bars where the layer is alone, and why?</p>
+<details class="answer"><summary>Answer</summary><p>On headphones each ear hears three steady tones, and the flutter
+is the faint binaural beat. On loudspeakers both channels reach both ears and mix in the air, so each ear receives
+both members of every pair, and the beats become ordinary monaural beats at 10, 6.18 and 3.82 Hz: louder, clearly
+pulsing, and no longer binaural. The rates are the same; the mechanism is different.</p></details></div>
+</div>
+</section>
+
+<section id="first-light">
+<h2>First Light: the return</h2>
+<div class="layer hear">
+<p>Before dawn the golden home holds, on Ag. At dawn the golden triad opens: its third rises a sixth-step from vC♯
+to C♯, its fifth from ^E to E, and A major arrives on strings, piano and choir, after four songs of gold. In this
+book's framing (<a href="ch:ch47#silver">Chapter 47</a>), Western consonance is the deepest release, and the suite
+saves it for here. The theme, complete and in A major for the first time since song 1, carries the morning. In
+the last bars the glass bell plays the theme's first three notes, as it did at the very beginning, and the layer
+climbs back to 16.18 Hz, where song 1 began.</p>
+<audio-ex src="first_light" caption="“First Light” (3:05), headphones: golden pad and bells, then A major on piano, strings, choir, harp, flute and bass; the layer returns to A3 and E4 and climbs from 10 to 16.18 Hz."></audio-ex>
+<table>
+<tr><th>Time</th><th>Section</th><th>What you hear</th><th>The layer</th></tr>
+<tr><td>0:00</td><td>before dawn</td><td>Ag and ^Fg on the golden pad; bells; a piano fragment in gold</td><td>A3, vC♯4, ^E4: 10, 6.18, 3.82 Hz</td></tr>
+<tr><td>0:40</td><td>dawn</td><td>Ag alone for a bar</td><td>the golden pairs fade; A3 alone</td></tr>
+<tr><td>0:45</td><td>sunrise</td><td>A major: strings, choir, piano; the tempo quickens from 48 to 54</td><td>E4 returns: 10 and 6.18 Hz</td></tr>
+<tr><td>1:46</td><td>morning</td><td>the theme complete, the loudest passage: piano, flute descant, harp, strings, bass</td><td>10 and 6.18 Hz</td></tr>
+<tr><td>2:22</td><td>awake</td><td>a coda; the bell's three notes; home on A</td><td>climbing to 16.18 and 10 Hz</td></tr>
+</table>
+<audio-ex src="dawn" caption="Headphones. The dawn of “First Light”: ^Fg and Ag on the golden pad; the golden pairs fade under Ag, leaving A3; A major arrives (vC♯ → C♯, ^E → E) and E4 returns to the layer."></audio-ex>
+</div>
+<div class="layer understand">
+<p><b>Order matters at dawn.</b> If the layer changed with the chord, the pairs on vC♯4 and ^E4 would still be
+fading while C♯ and E sounded: tones a sixth-step apart, 33 cents, the sourest rub there is. So the golden pairs leave
+first, during the one bar of Ag, where they are chord tones; A3 holds alone; and E4 enters with A major. The glide in
+this song is 3 s, shorter than a bar at 48 BPM (5 s), so each fade finishes inside its bar.</p>
+<pianoroll edo="36" notes="A3 vC#4 ^E4 ; A3 C#4 E4" labels="Ag ; A" title="Dawn: the golden triad opens into A major"></pianoroll>
+<p><b>Ending awake.</b> The coda raises the top rate geometrically from 10 to 16.18 Hz and quickens the tempo
+slightly. The suite therefore ends where it began, in the beta range. A listener who stops here is meant to be
+returned to ordinary alertness, not left at the bottom of the ladder.</p>
+</div>
+<div class="layer derive">
+<p><b>Continuity (checked).</b> For each pair of consecutive songs, the last state of one and the first state of the
+next have the same carriers and the same rate: 10 Hz between songs 1 and 2, 6.18 Hz between 2 and 3 and between 3
+and 4, and 10 Hz between 4 and 5. The A3 pair is present in every section of all five songs. The test suite checks
+both facts from the song files (<code>tests/test_binaural.py</code>). Played in order, the five files form one
+unbroken layer, except for the files' own fades: 8 s out at the end of each song and 8 s in at the start of the
+next.</p>
+<div class="exercise"><p><b>Exercise 4.</b> At dawn, suppose the pair on vC♯4 were still sounding at full level
+when the strings played C♯4. How far apart are the two pitches in cents and in hertz, and what would each ear hear?</p>
+<details class="answer"><summary>Answer</summary><p>vC♯4 (exactly A4/φ = 271.93 Hz) lies 33.1 cents below C♯4
+(277.18 Hz), 5.25 Hz apart. Each ear would hear C♯4 beating against its own detuned carrier tone: about 5.25 ± 3.09 Hz,
+that is 8.3 Hz in the left ear and 2.2 Hz in the right, if the vC♯4 pair sat on the 6.18 Hz rung. That is a slow rub,
+heard as out of tune. Carving would not save it either: that pair's band (265.84 to 278.02 Hz) reaches 277.18 Hz, so
+it would take the strings' new third away. Only the order of events fixes it.</p></details></div>
+</div>
+</section>
+
+<section id="testing">
+<h2>Listening, and testing it</h2>
+<div class="layer hear">
+<p>To hear the suite as it was designed: use headphones, not earbuds pressed hard or loudspeakers, and set a moderate
+level during the first song, which is the most varied in loudness; every song is mastered to the same integrated
+loudness, −23 LUFS, so the level can stay where it is for all five. Sit or lie still, close your eyes if you like,
+and play the five songs in order without pausing between them. Breathing with the phrases is allowed, not required.</p>
+<p>What the suite cannot tell you is whether any of it works. A listener who feels calm after eighteen minutes of slow,
+soft music with eyes closed has learned something about slow, soft music. The question the conjecture asks is
+narrower: does the golden structure, or the hidden ladder, add anything to that?</p>
+</div>
+<div class="layer understand">
+<p><b>Controls that differ in one variable.</b> <a href="ch:ch41#testing">§41.5</a> gives the method: blind,
+randomized, counterbalanced, matched loudness, fixed scales decided in advance, catch trials, several listeners and
+sessions. Because every property of these songs is one line of a text file, a matched control is one edit away:</p>
+<table>
+<tr><th>Variable</th><th>The suite</th><th>Control (one edit)</th><th>What a difference would show</th></tr>
+<tr><td>binaural layer</td><td>as written</td><td>beat rates near zero (<code>beat=0.05 ladder=same</code>): each ear hears the same tones</td><td>whether the beats add anything beyond the tones</td></tr>
+<tr><td>ladder shape</td><td>golden ladder</td><td><code>ladder=same</code>: every pair at the top rate</td><td>whether several golden rates matter, or one rate is enough</td></tr>
+<tr><td>beat band</td><td>alpha → theta → back</td><td>rates held at 10 Hz throughout</td><td>whether the descent matters</td></tr>
+<tr><td>golden harmony</td><td>songs 3 and 4 golden</td><td>the same songs with the golden chords projected back (Ag → A, vDg → D)</td><td>golden against rational harmony, with the layer unchanged</td></tr>
+<tr><td>rhythm</td><td>Fibonacci-word bells</td><td>long–short alternation</td><td>whether quasi-periodicity is noticed at all</td></tr>
+</table>
+<p>The first row is the most important, and the hardest to make blind: on headphones the binaural flutter is faint
+but audible, so some listeners will notice which version has it. Report that honestly, as an awareness check, rather
+than hiding it.</p>
+</div>
+<div class="layer derive">
+<p><b>How many sessions.</b> With the sign test of §41.5, a forced choice between the suite and its no-beat control
+needs about 37 independent blind trials for 80% power if the true preference rate is 0.70, and 158 if it is 0.60. Each
+trial here is eighteen minutes long, so one listener cannot supply that many in a week. A realistic test uses many
+listeners, one or two sessions each, with order counterbalanced across listeners, and the analysis fixed in advance.</p>
+<div class="exercise"><p><b>Exercise 5.</b> In the no-beat control the layer's rates are 0.05 Hz. How long does one
+cycle of the interaural phase take, and how many cycles happen in the whole suite? Is that close enough to "no
+beat"?</p>
+<details class="answer"><summary>Answer</summary><p>One cycle takes 1/0.05 = 20 s; the suite lasts about 1076 s, so
+about 54 cycles. That is a very slow drift of the sound's position between the ears, not a flutter. A purist control
+would use identical tones in both ears (a rate of exactly zero); the engine requires a positive rate, so set it as low
+as the test allows and say so.</p></details></div>
+<div class="exercise"><p><b>Exercise 6.</b> Explain why carving cannot be switched off in the control without
+changing a second variable.</p>
+<details class="answer"><summary>Answer</summary><p>Carving removes the music's own energy near each carrier. Turning
+it off in the control only would change the music as well as the layer, and would add monaural beats at half the
+binaural rate wherever a held note sits on a carrier (§48.1). Keep carving on in both versions, so the music is
+identical and only the beats differ.</p></details></div>
+</div>
+</section>

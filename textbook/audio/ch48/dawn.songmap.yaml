@@ -1,0 +1,39 @@
+# Dawn (ch48, HEADPHONES for the layer): the turn of "First Light". The golden home ^Fg, Ag on the golden pad; the
+# golden carriers vC#4 and ^E4 fade while Ag still sounds, leaving A3 alone for a bar; then A major arrives (vC# rises
+# to C#, ^E to E) on strings, piano and choir, and E4 returns to the layer.
+songmap: 0.2
+title: Dawn
+tempo: 48
+meter: "4/4"
+key: A
+tuning: "36edo"
+fps: 30
+seed: 6
+tail_seconds: 4
+
+instruments:
+  gold: {use: clean/golden_pad, release: 2.5}
+  mel: {use: keys/still, hardness: 0.3}
+  strings: pad/still
+  choir: {use: clean/organ, partials: 6, rolloff: 1.9, attack: 0.7, release: 1.8}
+  low: clean/bass
+
+sections:
+  - {name: before, bars: 3, parts: {gold: hold, mel: {deg: "=p r/1 | 4/2 2/2 | 0/1"}}, harmony: "^Fg:1 Ag:2", dyn: p, key: "A golden7"}
+  - {name: dawn, bars: 1, parts: {gold: hold}, harmony: "Ag:1", dyn: p, key: "A golden7", binaural: {carriers: [A3]}}
+  - {name: sunrise, bars: 4, parts: {mel: {deg: "=mp 2/4 4 7/2 | 7/1 | 5/4. 3/8 0/2 | 2/1"}, strings: hold, choir: {style: hold, range: [60, 81]}, low: bassline}, harmony: "A:2 D:1 A:1", dyn: mp, binaural: {carriers: [A3, E4]}}
+
+mix:
+  gold: {gain_db: -9, send: {hall: 0.35}}
+  mel: {gain_db: 3, send: {hall: 0.3}}
+  strings: {gain_db: -22, send: {hall: 0.35}}
+  choir: {gain_db: -22, send: {hall: 0.4}}
+  low: {gain_db: -7, send: {hall: 0.1}}
+
+master: clean
+binaural:
+  carriers: [A3, "A4*phi^-1", "A5*phi^-2"]
+  beat: 10
+  level_db: -12
+  fade: 2
+  glide: 3

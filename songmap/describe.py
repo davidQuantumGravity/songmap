@@ -12,7 +12,8 @@ SM = """header  song "T" 120 4/4 Em fps=30 seed=7 tail=3 video=Comp:3690 | inst 
 line    name bars | role:style+mod role:m1,m2 role:style(k=v) kick="X..." -role like=prev dyn=p<f prog=p | !events
 event   !type[:bars|:Nb][@+bar:beat|@bar|@f123|@cue:x][(k=v)]; risers END at @; lift = !impact !riser:2 -> !lift
 more    lit = up(order=[0,2,1,3]); form: verse 8 x2 / for i in 1..4: / if i == last: / every 4 bars: bass = 8ths
-        / bar -1: lead = [m2]; b = a with {pad: none}; euclid(3,8) rot rev &  (docs/LANGUAGE.md)"""
+        / bar -1: lead = [m2]; b = a with {pad: none}; euclid(3,8) rot rev &  (docs/LANGUAGE.md)
+        binaural A3 E4 beat=10 (headphones; section beat=10>6.18)"""
 
 
 def _styles() -> dict:

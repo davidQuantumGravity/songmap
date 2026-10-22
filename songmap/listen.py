@@ -216,9 +216,44 @@ def listen(arr, qa: dict | None = None) -> Report:
     except Exception:                                                # noqa: BLE001
         pass
 
-    # 9. loudness, from a render
+    # 9. a binaural layer hides in the music only if its carriers are chord tones (a held pure tone a
+    # sixth-step from a chord tone is a sour rub; a half step is a pedal point's tension)
+    facts_extra = {}
+    if song.binaural:
+        from .mix.binaural import beat_rates, plan
+        bp = plan(song, tl)
+        facts_extra["binaural beats (Hz)"] = " ".join(f"{r:g}" for r in beat_rates(bp))
+        sour, tense = defaultdict(list), defaultdict(list)
+        for st, span in zip(bp.states, tl.sections):
+            for hs in harm.spans:
+                if hs.chord is None or hs.end <= span.start + 1e-9 or hs.start >= span.end - 1e-9:
+                    continue
+                tones = [hs.chord.root + i for i in hs.chord.intervals]
+                for c in st.carriers:
+                    p = 69 + 12 * np.log2(c.hz / 440.0)
+                    d = min(_pc_dist(p, t) for t in tones)
+                    if 0.15 < d < 0.85:
+                        sour[c.label].append((max(hs.start, span.start), hs.chord.symbol))
+                    elif 0.85 <= d < 1.15:
+                        tense[c.label].append((max(hs.start, span.start), hs.chord.symbol))
+        for label, hits in sour.items():
+            b, sym = hits[0]
+            out.append(Finding("problem", "binaural", _where(tl, b),
+                               f"the binaural carrier {label} rubs a fraction of a semitone against {sym}"
+                               + (f" (and {len(hits) - 1} more chords)" if len(hits) > 1 else ""),
+                               "choose carriers that are tones of every chord they sound under, or change the "
+                               "section's carriers"))
+        for label, hits in tense.items():
+            b, sym = hits[0]
+            out.append(Finding("note", "binaural", _where(tl, b),
+                               f"the binaural carrier {label} is a half step from a tone of {sym}"
+                               + (f" (and {len(hits) - 1} more)" if len(hits) > 1 else "") + ": a pedal point's tension",
+                               "fine if it resolves; otherwise move the carrier to a common tone"))
+
+    # 10. loudness, from a render
     facts = {"bars": tl.total_bars, "seconds": round(tl.seconds, 1), "sections": len(song.sections),
-             "parts": len(arr.parts), "impacts": len(impacts), "melody notes checked against chords": checked}
+             "parts": len(arr.parts), "impacts": len(impacts), "melody notes checked against chords": checked,
+             **facts_extra}
     if qa:
         out += _loudness_findings(qa, song)
         facts["lufs"] = qa.get("lufs")

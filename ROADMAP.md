@@ -24,6 +24,11 @@ P0 setup ─► P1 core engine ─► P2 QA ─► P3 performance ─► P4 soun
   - `songmap listen` is an automated ear: melody/chord rubs, register crowding, mechanical repetition, flat dynamics, density, hit budget, range, the ending, and contrast and balance from a render.
   - Not yet: the `qa:` rule exit codes and `songmap why`.
 - **P9, partly done.** Tempo ramps per section (`rit 120>96`, `accel`) integrate exactly, so frames and cues stay exact.
+- **Binaural layer.** `binaural:` (`.sm`: `binaural A3 E4 beat=10`, section `beat=10>6.18`) renders exact,
+  phase-continuous pure-tone pairs per ear on a golden (or any) beat ladder, crossfading carriers and gliding beats
+  at section starts, at a level relative to the music. It carves a narrow band of the music at each carrier so held
+  notes don't beat against the ear tones (`mix/binaural.py`). `listen` checks that carriers are chord tones.
+  First use: *Still Water* (`songs/still_water/`, textbook Chapter 48).
 - **Review loop.** The textbook's **Songbook** (appendix H, `tools/textbook/songbook.py`) renders every song in `songs/**` and the skill's examples at build time, with the ear's report, loudness, a spectrogram and a `# review:` status.
 
 **Status (2026-10-20):**

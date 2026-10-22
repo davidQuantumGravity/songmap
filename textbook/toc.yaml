@@ -546,6 +546,17 @@ parts:
           - {id: colour, title: "Tape Bloom: golden colour chords"}
           - {id: descent, title: "Andalusian Gold: the golden Andalusian cadence"}
           - {id: silver, title: "The Silver Third: pivot, golden home, giant steps"}
+      - id: ch48
+        title: "Still Water: five songs on the golden beat ladder"
+        summary: "A suite of five songs built from the bliss conjecture: a binaural layer hidden in the harmony walks the golden beat ladder down from alpha into theta and back, under music that is golden at every scale."
+        sections:
+          - {id: hidden-layer, title: "A layer hidden in the music"}
+          - {id: dusk, title: "Dusk on the Water: arriving"}
+          - {id: tide, title: "The Slow Tide: into gold"}
+          - {id: deep, title: "Deep Water: the stillest point"}
+          - {id: moon, title: "Moon on the Water: the whole ladder"}
+          - {id: first-light, title: "First Light: the return"}
+          - {id: testing, title: "Listening, and testing it"}
 
   - id: appendices
     title: "Appendices"

@@ -1,0 +1,36 @@
+# 3. Deep Water. Still Water, song 3 of 5 (textbook Chapter 48). The deepest point of the suite: golden harmony on
+# golden-spectrum timbres only (a golden pad, glass bells, a low glass gong), 44 BPM, no drums and no steady pulse.
+# The bells fall on a Fibonacci-word rhythm (long, short, long, long, short, ...: 13 dotted halves and 8 halves,
+# 55 beats), which never settles into a repeating bar. The harmony stays on the golden chords that keep A
+# (vDg, ^Fg, vDg7), with one visit to A#g, the only chord here without it. Near the end the music thins to the
+# golden pad alone, so the hidden layer is nearly all there is; then the harmony turns towards ^Fg and song 4.
+# Hidden layer (headphones): pairs on the golden chain A3 : A3*phi : A3*phi^2 (220, 355.97, 575.97 Hz,
+# the notes of vDg; the third joins in `depth`), beating at 6.18, 3.82 and 2.36 Hz (theta, with a delta undertone);
+# the three are the first, second and fourth partials of a golden-spectrum A3. In `rising` the top pair
+# crossfades to A4/phi (271.93 Hz, vC#4) so all three are tones of ^Fg.
+# Breath: two-bar phrases of 10.9 s (5.5 a minute); the layer swells once per phrase.
+# Form (42 bars): descent 5, depth 21, stillness 8, rising 8.
+song "Deep Water" 44 4/4 "A golden7" fps=30 seed=50 tail=8 tuning=36edo mood=ambient
+inst gold=clean/golden_pad(release=2.5) bell=clean/glass voice=clean/glass(decay=6, damp=.6) gong=clean/glass(decay=9, damp=.4) host=clean/golden_pad(release=3)
+binaural A3 A3*phi beat=6.18 ladder=golden level=-11 fade=8 glide=8 breathe=2 breath=3
+
+prog descent   "vDg:5"
+prog depth     "vDg:3 ^Fg:2 vDg7:3 A#g:2 vDg:3 ^Fg:3 vDg7:2 ^Fg:3"
+prog stillness "vDg:8"
+prog rising    "^Fg:3 vDg7:2 ^Fg:3"
+
+# drops: the Fibonacci word abaababaabaababaababa, a = dotted half, b = half (13 a, 8 b: 55 beats), on chord tones
+drops = {rel: "=pp 5/2. 3+/2 R+/2. 5+/2. 3+/2 5/2. 3+/2 R+/2. 5+/2. 3+/2 5/2. 3+/2. R+/2 5+/2. 3+/2 5/2. 3+/2. R+/2 5+/2. 3+/2 5/2.", oct: 1}
+# the theme remembered, slowly, on chord tones (key A golden7: 0 A, 1 A#, 2 vC#, 3 vD, 4 ^E, 5 ^F, 6 G#)
+memory = {deg: "=p 5/1 | 3/1 | 0/1 | 2/1 | r/1 | 0/2. 2/4 | 3/1 | r/1 | 1/1 | 3/1 | 5/1 | 7/2 5/2 | 3/1 | 2/1 | 0/1 | r/1 | 2/2 3/2 | 5/1 | 5/1 | 7/1 | r/1"}
+last_light = {deg: "=pp r/1 | 5/1 | 7/1 | r/1 | 2/1 | 0/1 | 5/1 | r/1"}
+gong = {rel: "R/1 | r/1 | r/1", oct: -1}
+host = {notes: "=pp a-1 | =p a-1"}
+
+descent    5 | gold:hold gong:gong host:host prog=descent dyn=pp<p
+depth     21 | gold:hold bell:drops voice:memory gong:gong host:host prog=depth dyn=p binaural={carriers: [A3, "A3*phi", "A3*phi^2"]}
+stillness  8 | gold:hold host:host gong:{rel: "R/1 | r/1 | r/1 | r/1 | r/1 | r/1 | r/1 | r/1", oct: -1} prog=stillness dyn=p>pp
+rising     8 | gold:hold bell:drops voice:last_light host:host prog=rising dyn=pp<p binaural={carriers: [A3, "A3*phi", "A4*phi^-1"]}
+
+mix gold -8 hall=.35 | bell -12 hall=.5 pan=.2 | voice -5 hall=.4 pan=-.1 | gong -6 hall=.4 | host -14 hall=.2
+master standard lufs=-23 glue=none

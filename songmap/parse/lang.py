@@ -23,7 +23,7 @@ from .yaml_form import PART_OPTS, PART_SOURCES, VERSION, LineDict, from_raw
 
 EXTS = (".sm", ".sml")
 LIMIT = 4096                       # loop iterations, list items, step-string length, sections
-SECTION_SETTINGS = ("harmony", "chords", "prog", "dyn", "feel", "tempo", "key", "bars")   # chords/prog: aliases of harmony
+SECTION_SETTINGS = ("harmony", "chords", "prog", "dyn", "feel", "tempo", "key", "bars", "binaural")   # chords/prog: aliases of harmony
 
 
 def _is_setting(key, v, progressions=()) -> bool:
@@ -44,7 +44,8 @@ def _is_setting(key, v, progressions=()) -> bool:
 PART_KEYS = PART_SOURCES + PART_OPTS
 KEYWORDS = {"for", "in", "if", "elif", "else", "every", "def", "return", "form", "with", "and", "or", "not",
             "true", "false", "none", "as", "at", "bars"}
-DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "master", "qa", "set")
+DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "master", "qa", "set",
+              "binaural")
 MIX_KEYS = ("pan", "width", "send", "sidechain", "eq", "bus_comp")
 STEP_RANK = {".": 0, "o": 1, "-": 2, "x": 3, "r": 4, "f": 5, "X": 6}
 
@@ -1466,7 +1467,7 @@ class _Interp:
                          did_you_mean(likes[0], maps) if maps else "like= needs a section defined above")
             sec = dict(base)
         pieces = self.kit_pieces()
-        settings = ("dyn", "prog", "chords", "feel", "swing", "tempo", "key", "auto")
+        settings = ("dyn", "prog", "chords", "feel", "swing", "tempo", "key", "auto", "beat", "binaural")
         for item in items:
             if item.startswith("like="):
                 continue
@@ -1509,6 +1510,15 @@ class _Interp:
             sec["tempo"] = _scalar(v) if re.fullmatch(r"\d+(\.\d+)?", v) else re.sub(r"^(rit|accel)\s*", r"\1 ", v)
         elif key == "key":
             sec["key"] = v
+        elif key in ("beat", "binaural"):
+            try:
+                new = _value(v) if v.startswith("{") else {"beat": _scalar(v)}
+            except SongError as e:
+                self.err(f"{name}: binaural={v}: {e.message}", line,
+                         'quote notes with sixth-step accidentals: binaural={carriers: [A3, "^F4"]}')
+            if not isinstance(new, dict):
+                self.err(f"{name}: binaural={v} not understood", line, "write beat=10>6.18 or binaural={beat: 6.18, gain_db: -3}")
+            sec["binaural"] = {**(sec.get("binaural") or {}), **new}
         elif key == "auto":
             m = re.fullmatch(r"([A-Za-z_]\w*)\.([A-Za-z_]\w*):(.+)", v)
             if not m:
@@ -1523,9 +1533,25 @@ class _Interp:
 
     def compact_part(self, text, line):
         """`full+fill`, `8ths(art=staccato)`, `up(order=[0,2,1,3])`, `m1,m2,m3`, `theme:t+2`, `lattice:dyn=pp`."""
-        if text.startswith(("{", "[")):
-            return _value(text, self, self.env)
         from ..theory import transforms as tfm
+        if text.startswith(("{", "[")):
+            segs = split_top(text, ":")             # an inline map may take transforms too: {deg: q}:aug
+            try:
+                v = _value(segs[0], self, self.env)
+            except SongError as e:
+                if e.line:
+                    raise
+                self.err(f"part value '{text}' not understood: {e.message}", line,
+                         "write {deg: \"...\"} or a variable; transforms follow a colon: {deg: q}:aug")
+            if len(segs) == 1:
+                return v
+            bad = [s for s in segs[1:] if not tfm.is_transform(s)]
+            if bad or not isinstance(v, (dict, Part)):
+                self.err(f"'{bad[0] if bad else segs[1]}' in '{text}' is not a transform of a melody", line,
+                         "transforms: t+2 oct-1 inv rev aug dim frag=2 x2 thin=.5 canon=3@8")
+            p = self.as_part(v, line)
+            chain = " ".join(filter(None, [str(p.opt_dict().get("transform") or ""), *segs[1:]]))
+            return self.with_(p, {"transform": chain}, line)
         items = split_top(text, ",")
         split = [split_top(it, ":") for it in items]
 
@@ -1809,6 +1835,24 @@ class _Interp:
             else:
                 self.err(f"master: unknown option '{k}'", line, did_you_mean(k, keys))
         self.song["master"] = m["mode"] if list(m) == ["mode"] else m
+
+    def d_binaural(self, args, raw, line):
+        """binaural A3 E4 beat=10 ladder=golden level=-12 fade=6 glide=4 breathe=2 breath=3 (mix/binaural.py)."""
+        keys = {"beat": "beat", "ladder": "ladder", "level": "level_db", "level_db": "level_db", "fade": "fade",
+                "glide": "glide", "gain": "gain_db", "gain_db": "gain_db", "breathe": "breathe", "breath": "breath_db",
+                "breath_db": "breath_db", "carve": "carve"}
+        b, carriers = {}, []
+        for a in split_top(self._rest(raw)):
+            k, eq, v = a.partition("=")
+            if not eq:
+                carriers.append(_scalar(a))
+            elif k in keys:
+                b[keys[k]] = _value(v)
+            else:
+                self.err(f"binaural: unknown option '{k}'", line, did_you_mean(k, keys))
+        if carriers:
+            b = {"carriers": carriers, **b}
+        self.song["binaural"] = {**(self.song.get("binaural") or {}), **b}
 
 
 # ----------------------------------------------------------------------------

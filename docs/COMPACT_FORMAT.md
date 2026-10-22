@@ -43,6 +43,8 @@ directive :=
   master [legacy|standard] [lufs=<x>] [ceiling=<x>] [glue=none|gentle|punchy] [contrast=<dB>]
   qa    [lufs=<x>|<a>..<b>] [contrast=<quiet><<loud>:<dB>,...] [silent!=<a>,<b>] [low<=<x>] [peak<=<dB>] [hits=true]
   set   <key>[.<key>...]=<value>                                 # any YAML field: set returns={hall: {type: reverb}}
+  binaural <carrier>... [beat=<Hz>|<a>><b>] [ladder=golden|same|[..]] [level=<LU>] [fade=<s>] [glide=<s>]
+           [breathe=<bars>] [breath=<dB>] [gain=<dB>] [carve=true|false]   # binaural A3 A3*phi beat=10 (headphones)
 
 definition := <name> = <value>                                    # lit = up(order=[0,2,1,3]); see LANGUAGE.md
             | <name> = !<event> ...                               # a named event list: lift = !impact !riser:2
@@ -53,12 +55,14 @@ part      := <role>:<style>[+<mod>...][(k=v,...)]       drums:full+fill   bass:8
            | <role>:{<map>}                              bass:{style: "sub", vary: [{bars: [3], part: "eighths"}]}
            | <role>:<variable>                           arp:lit   (any part or beat defined above)
            | <role>:<motif>[:<transform>][,<motif>...]   lead:m1,m2,m3,m4   lead:theme,answer:t+2
+           | <role>:{<map>}:<transform>...              mel:{deg: q}:aug
            | <role>:<value>:<k>=<v>                      keys:lattice:dyn=pp
            | <role>="<note language>"                    keys="=p [e,b]1 | [c,g]"
            | <piece>="<step string>"                     kick="X...x...|X..x...."   (a drums lane)
            | -<role>                                     remove an inherited part
 setting   := like=<section> | dyn=<shape> | prog=<name> | chords="<chord:bars ...>" | feel=<template>
            | swing=<x> | tempo=<bpm>|rit<a>><b> | key=<key>
+           | beat=<Hz>|<a>><b> | binaural={carriers: [A3, "^F4"], beat: 6.18, gain_db: -3}   (the binaural layer)
            | auto=<part>.<param>:<a>><b>                 auto="arp.cutoff:1500>4000 exp" (quote it with a space)
 event     := !<type>[:<length>][@<position>][(k=v,...)] | !<named list>
 length    := <bars> | <beats>b                           !riser:2   !stop:2b

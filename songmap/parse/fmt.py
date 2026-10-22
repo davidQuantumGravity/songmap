@@ -50,6 +50,15 @@ def _master_raw(m: MasterSpec):
     return d["mode"] if list(d) == ["mode"] else d
 
 
+def _bin_word(v) -> str:
+    """A binaural value as a bare word when it reads back the same (10, 16.18>10), else quoted/structured."""
+    if isinstance(v, (int, float)) and not isinstance(v, bool):
+        return _num(v)
+    if isinstance(v, str) and re.fullmatch(r"\d+(\.\d+)?>\d+(\.\d+)?|[A-Za-z_]\w*", v) and v not in ("true", "false", "none"):
+        return v
+    return value(v)
+
+
 def song_to_raw(song: Song) -> dict:
     """The mapping `yaml_form.from_raw` reads, without line numbers: the comparison key for round trips."""
     raw: dict = {"songmap": 0.2, "title": song.title, "tempo": song.tempo,
@@ -92,6 +101,8 @@ def song_to_raw(song: Song) -> dict:
                 d[k] = getattr(s, k)
         if s.feel:
             d["feel"] = s.feel
+        if s.binaural:
+            d["binaural"] = s.binaural
         raw["sections"].append(d)
     if song.events:
         raw["events"] = [{"at": e.at, "type": e.type, **e.params} for e in song.events]
@@ -103,6 +114,8 @@ def song_to_raw(song: Song) -> dict:
         raw["master"] = master
     if song.qa:
         raw["qa"] = song.qa
+    if song.binaural:
+        raw["binaural"] = song.binaural
     return raw
 
 
@@ -327,6 +340,32 @@ class _Printer:
                     self.set(f"qa.{k}", v)
             if words:
                 self.lines.append("qa " + " ".join(words))
+        if s.binaural:
+            line = self.binaural_line(s.binaural)
+            if line:
+                self.lines.append(line)
+            else:
+                self.set("binaural", s.binaural)
+
+    @staticmethod
+    def binaural_line(b: dict) -> str | None:
+        names = {"beat": "beat", "ladder": "ladder", "level_db": "level", "fade": "fade", "glide": "glide",
+                 "gain_db": "gain", "breathe": "breathe", "breath_db": "breath", "carve": "carve"}
+        cs = b.get("carriers")
+        if not isinstance(cs, list) or not cs or set(b) - {"carriers", *names}:
+            return None
+        words = []
+        for c in cs:
+            if isinstance(c, (int, float)) and not isinstance(c, bool):
+                words.append(_num(c))
+            elif isinstance(c, str) and re.fullmatch(r"[\^v]*[A-Za-z][\w#.*^]*", c):
+                words.append(c)
+            else:
+                return None
+        for k, v in b.items():
+            if k != "carriers":
+                words.append(f"{names[k]}={_bin_word(v)}")
+        return "binaural " + " ".join(words)
 
     @staticmethod
     def qa_word(k, v) -> str | None:
@@ -387,20 +426,23 @@ class _Printer:
                 out.append(f"tempo={_num(v)}" if isinstance(v, (int, float)) else f"tempo={_quote(str(v))}")
             elif k == "key":
                 out.append(f"key={v}" if _WORD.fullmatch(str(v)) else f"key={_quote(str(v))}")
+            elif k == "binaural":
+                out.append(f"beat={_bin_word(v['beat'])}" if list(v) == ["beat"] else f"binaural={value(v)}")
         return out
 
     def tokens(self, d: dict, taken: set) -> list[str]:
         return [self.part_token(r, p, taken) for r, p in d["parts"].items()] + self.settings(
-            {k: d[k] for k in ("harmony", "dyn", "feel", "tempo", "key") if k in d})
+            {k: d[k] for k in ("harmony", "dyn", "feel", "tempo", "key", "binaural") if k in d})
 
     def like_tokens(self, d, base, taken) -> list[str] | None:
         """Tokens for `like=<base>` + the differences, or None when like= can't express d."""
-        settings = ("harmony", "dyn", "feel", "tempo", "key")
+        settings = ("harmony", "dyn", "feel", "tempo", "key", "binaural")
         for k in settings:
             if k in base and k not in d:
                 return None                     # a setting can't be removed
-            if k == "feel" and "feel" in base and not (base["feel"].items() <= d["feel"].items()):
-                return None                     # feel= merges, so the base's feel must be part of d's
+            if k in ("feel", "binaural") and k in base and not all(
+                    x in d[k] and d[k][x] == v for x, v in base[k].items()):
+                return None                     # feel= and binaural= merge, so the base's must be part of d's
         # like= keeps the base's part order, so changed parts follow it and new parts come last (a printed
         # file prints the same again)
         roles = [r for r in base["parts"] if r in d["parts"]] + [r for r in d["parts"] if r not in base["parts"]]

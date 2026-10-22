@@ -1,0 +1,20 @@
+# The bliss chord of "Moon on the Water" (ch48), alone: Ag7 voiced close on A2 (A2 vC#3 ^E3 G#3) on a harmonic
+# organ tone, held. No binaural layer: loudspeakers are fine. Its partials beat in the air near 6, 7.5, 9.5 and
+# 12 Hz (36-ET splits the exact golden seventh's 6.13, 7.58, 9.37 and 12.26 Hz a little).
+songmap: 0.2
+title: "The bliss chord"
+tempo: 48
+meter: "4/4"
+key: "A golden7"
+tuning: "36edo"
+fps: 30
+seed: 4
+tail_seconds: 3
+
+instruments:
+  bliss: {use: clean/organ, partials: 8, rolloff: 1.3, attack: 1.2, release: 2.2}
+
+sections:
+  - {name: x, bars: 5, parts: {bliss: {notes: "=mp [a--,vc#-,^e-,g#-]1"}}, harmony: "Ag7:5", dyn: mp}
+
+master: clean

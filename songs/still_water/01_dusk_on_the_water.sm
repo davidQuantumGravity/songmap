@@ -1,0 +1,40 @@
+# 1. Dusk on the Water. Still Water, a suite in five songs on the golden beat ladder (textbook Chapter 48).
+# A major, 60 slowing to 54 BPM, no drums. Evening on a lake: a felt piano sings the suite's theme over harp
+# ripples, strings and a soft organ that hosts the binaural layer.
+# Hidden layer (headphones): two pure-tone pairs, A3 (220 Hz) and E4, each split between the ears. Their beats
+# walk the golden ladder from 16.18 and 10 Hz (the beta and alpha rungs, 10*phi and 10) down to 10 and 6.18 Hz by
+# the reflection; the carriers are the organ's own notes, A and E, chord tones of every bar.
+# Breath: phrases are two bars (8 s, slowing to 8.9 s), and the layer swells once per phrase.
+# Form (50 bars): dusk 5, theme 8, answer 8, reflection 13, homeward 8, settle 8.
+song "Dusk on the Water" 60 4/4 A fps=30 seed=48 tail=6 tuning=36edo mood=ambient
+inst mel=keys/still(hardness=.3) keys=keys/still(hardness=.25) harp=string_pluck/still(brightness=.7, t60=2.4, body=.6) strings=pad/still low=clean/bass bell=clean/glass flute=clean/lead host=clean/organ(partials=4, rolloff=2.2, attack=1.4, release=2.6)
+binaural A3 E4 beat=16.18 ladder=golden level=-12 fade=8 glide=6 breathe=2 breath=3
+
+prog dusk   "A:2 D/A:1 Bm7/A:1 A:1"
+prog theme  "A:1 C#m:1 Bm7:1 F#m:1 A:1 E:0.5 D:0.5 E7:1 A:1"
+prog wander "D:2 Bm7:2 F#m:2 C#m:2 D:1 E:1 F#m:1 D:1 E:1"
+prog settle "A:2 E/G#:1 F#m:1 Bm7:1 A:3"
+
+# The suite's theme: a leap up to A, then a slow settling fall (question ends on C#, answer on A).
+q = "=p 2/4 4 7/2 | 6/4. 4/8 2/2 | 3/4 2 1/2 | 2/2. r/4"
+a = "=p 2/4 4 7/2 | 8/4. 7/8 6/2 | 5/4 4 1/2 | 0/1"
+tune = {deg: q + " | " + a}
+loud_tune = {deg: "=mp 2/4 4 7/2 | 6/4. 4/8 2/2 | 3/4 2 1/2 | 2/2. r/4 | =mf 2/4 4 7/2 | 8/4. 7/8 6/2 | 5/4 4 1/2 | 0/1"}
+wander_tune = {deg: "=p 5/2. 4/4 | 3/1 | 1/2. 3/4 | 5/2 4/2 | 2/2. 1/4 | 0/1 | 2/2 4/2 | 6/1 | 5/4 4 3/2 | 4/2. 6/4 | =mp 7/2. 5/4 | 5/4 4 3 2 | 1/1"}
+coda_tune = {deg: "=p 2/2 4/2 | 7/1 | 6/2. 4/4 | 2/1 | 1/1 | 0/1 | 0/1 | r/1"}
+head = {deg: "=p r/1 | 2/4 4 7/2 | r/1 | 2/4 4 7/2 | r/1", oct: 1}
+counter = {deg: "=p r/1 | 4/2 2 | 1/1 | -1/1 | r/1 | 1/2 0 | 1/1 | 2/1", oct: 0}
+
+ripple = {rel: "R/8^ 5 R+ 3+ 5+ 3+ R+ 5"}
+slow_ripple = {rel: "R/4^ 5 R+ 3+"}
+host = {notes: "=pp [a-,e]1"}
+
+dusk        5 | keys:hold strings:hold harp:slow_ripple bell:head host:host prog=dusk dyn=pp<p
+theme       8 | mel:tune keys:hold harp:slow_ripple strings:hold low:bassline host:host prog=theme dyn=p beat=16.18>13
+answer      8 | mel:tune flute:counter harp:ripple strings:hold low:bassline host:host prog=theme dyn=p<mp beat=13>11.5
+reflection 13 | mel:wander_tune keys:hold harp:slow_ripple strings:hold low:bassline host:host prog=wander dyn=p tempo="rit 60>56" beat=11.5>10
+homeward    8 | mel:loud_tune flute:{deg: q + " | " + a, oct: 1} harp:ripple strings:hold low:bassline host:host prog=theme dyn=mp<mf tempo=56 beat=10
+settle      8 | mel:coda_tune keys:hold harp:slow_ripple strings:hold low:bassline host:host prog=settle dyn=p>pp tempo="rit 56>54"
+
+mix mel 3 hall=.3 | keys -9 hall=.25 | harp -8 hall=.3 pan=.2 | strings -22 hall=.35 | low -7 hall=.1 | bell -13 hall=.45 pan=-.15 | flute -4 hall=.35 pan=-.1 | host -16 hall=.15
+master standard lufs=-23 glue=none

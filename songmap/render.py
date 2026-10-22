@@ -156,6 +156,13 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
                        damping=float(r.get("damping", 0.5)), early=int(r.get("early", 10)),
                        width=float(r.get("width", 1.0)), seed=seed_for(song.seed, "return", ret) % 2**31)
         stems[f"return_{ret}"] = convolve(x, ir)
+    layer = None
+    if song.binaural:                       # dry, after the returns: a reverb would mix the ears
+        from .mix.binaural import carve, plan as binaural_plan, render_layer
+        layer = binaural_plan(song, tl)
+        music = sum(stems.values()) if stems else np.zeros((n, 2))
+        # the stem is the layer's whole effect on the mix: its tones, minus the music they replace
+        stems["binaural"] = render_layer(layer, tl, n, music, SR) - (carve(layer, music, SR) if layer.carve else 0)
     mix = sum(stems.values()) if stems else np.zeros((n, 2))
     mode = master_mode or song.master.mode
     if mode == "legacy":
@@ -167,6 +174,8 @@ def render(song: Song, *, master_mode: str | None = None, log=None) -> RenderRes
     stats = {"seconds": round(time.time() - t0, 2), "notes_rendered": rendered, "cache_hits": hits,
              "audio_seconds": round(n / SR, 3), "master": mode, "digest": arr.digest(),
              "performed": played is not arr.parts, "played_digest": played_digest(played)}
+    if layer is not None:
+        stats["binaural"] = layer.summary
     if log:
         log(f"rendered {n / SR:.1f}s of audio in {stats['seconds']}s ({rendered} notes synthesized, {hits} cached)")
     sources = {s["program"]: s for s in (i.source for i in ens.instruments() if hasattr(i, "source"))}
@@ -182,7 +191,8 @@ def write_outputs(r: RenderResult, out_dir: str, *, stems: bool = True, mp3: boo
     write_wav24(paths["song"], r.audio)
     if mp3:
         from .export.wav import write_mp3
-        paths["mp3"] = write_mp3(os.path.join(out_dir, "song.mp3"), paths["song"])
+        paths["mp3"] = write_mp3(os.path.join(out_dir, "song.mp3"), paths["song"],
+                                 joint_stereo=not r.song.binaural)       # keep the ears' tones apart
     if stems:
         for name, x in r.stems.items():
             write_float(os.path.join(out_dir, "stems", f"{name}.wav"), x)

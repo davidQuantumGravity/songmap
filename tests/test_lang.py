@@ -440,3 +440,11 @@ def test_sharp_glued_to_a_word_is_not_a_comment():
 def test_a_part_named_chords_is_not_the_harmony_setting():
     s = lang.loads('song "T" 120 4/4 C\nchords C F\na 2 | chords:hold chords="Am:1 G:1"\n', "t.sm")
     assert s.sections[0].harmony == "Am:1 G:1" and s.sections[0].parts["chords"].style == "hold"
+
+
+def test_an_inline_map_takes_transforms():
+    s = lang.loads('song "T" 60 4/4 C\nq = "=p 0/4 2 4/2"\nx 2 | lead:{deg: q}:aug\n', "t.sm")
+    assert s.sections[0].parts["lead"].opts["transform"] == "aug"
+    with pytest.raises(SongError) as e:
+        lang.loads('song "T" 60 4/4 C\nx 2 | lead:{deg: "0/1"}:wobble\n', "t.sm")
+    assert "t.sm:2" in str(e.value) and "transforms:" in str(e.value)

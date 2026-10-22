@@ -22,8 +22,8 @@ from .notes import _DEG_TOK, _PITCH_TOK, _REL_TOK
 VERSION = "0.2"
 TOP_KEYS = ("songmap", "title", "tempo", "meter", "key", "tuning", "fps", "seed", "tail_seconds", "mood", "video",
             "instruments", "groove", "parts_feel", "harmony", "motifs", "sections", "events", "cues", "mix",
-            "returns", "master", "qa")
-SECTION_KEYS = ("name", "bars", "parts", "like", "add", "drop", "harmony", "dyn", "feel", "tempo", "key")
+            "returns", "master", "qa", "binaural")
+SECTION_KEYS = ("name", "bars", "parts", "like", "add", "drop", "harmony", "dyn", "feel", "tempo", "key", "binaural")
 PART_SOURCES = ("style", "motif", "motifs", "notes", "deg", "rel", "steps", "vary")
 PART_OPTS = ("mods", "dyn", "art", "oct", "transpose", "feel", "voicing", "auto", "mute", "gain_db", "gate",
              "order", "octaves", "fills", "crash", "pan", "len", "role", "voices", "range", "rhythm", "voice", "vel",
@@ -273,6 +273,7 @@ def from_raw(raw: dict, file: str | None = None) -> Song:
     s.mix = _plain(raw.get("mix") or {})
     s.returns = _plain(raw.get("returns") or {})
     s.qa = _plain(raw.get("qa") or {})
+    s.binaural = _binaural(raw.get("binaural"), "binaural", file)
     s.master = _master(raw.get("master"), file)
     s.harmony = _harmony(raw.get("harmony") or {}, file)
     s.motifs = _motifs(raw.get("motifs") or {}, file)
@@ -428,9 +429,23 @@ def _sections(secs, song: Song, file) -> list[Section]:
         sec.feel = {**sec.feel, **_plain(raw.get("feel") or {})}
         sec.tempo = raw.get("tempo")
         sec.key = raw.get("key")
+        sec.binaural = _binaural(raw.get("binaural"), f"section {name}: binaural", file, line, beat_only=True)
         seen[name] = sec
         out.append(sec)
     return out
+
+
+def _binaural(v, what, file, line=None, beat_only=False) -> dict:
+    """A song's or section's binaural block (checked in full by mix/binaural.plan); a section's bare value is its beat."""
+    if v is None:
+        return {}
+    if beat_only and isinstance(v, (int, float, str)) and not isinstance(v, bool):
+        return {"beat": v}
+    if not isinstance(v, dict):
+        raise SongError(f"{what} must be a mapping", file=file, line=line,
+                        suggestion="e.g. binaural: {carriers: [A3, E4], beat: 10}" if not beat_only
+                        else "e.g. binaural: {beat: 10>6.18} or binaural: 6.18")
+    return _plain(v)
 
 
 def _events(evs, file) -> list[EventSpec]:

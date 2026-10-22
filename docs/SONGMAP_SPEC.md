@@ -302,6 +302,30 @@ qa:
 
 Full design in [GOLDEN_HARMONY.md](GOLDEN_HARMONY.md). Accent `^` stays a suffix, so `^c4^` is a C-up quarter note, accented.
 
+## 12a. A binaural layer (headphones)
+
+`binaural:` adds exact pure-tone pairs, one frequency in each ear ([songmap/mix/binaural.py](../songmap/mix/binaural.py);
+the textbook's Chapters 41 and 48). Each carrier `f` is split into `f - d/2` (left) and `f + d/2` (right); carrier `i`
+beats at `beat * ladder[i]`.
+
+```yaml
+binaural:
+  carriers: [A3, "A3*phi", "A4*phi^-1"]   # note names in the song's tuning, MIDI numbers, "220hz", "A3*phi^k"
+  beat: 10                                 # Hz; "16.18>10" ramps geometrically across a section
+  ladder: golden                           # 1, 1/phi, 1/phi^2, ...; or same; or [1, 0.5]
+  level_db: -12                            # integrated loudness relative to the music (LU)
+  fade: 8                                  # s, in at the start and out at the end
+  glide: 6                                 # s: carriers crossfade and beats glide at section starts
+  breathe: 2                               # optional swell, one cycle per 2 bars; breath_db: 3 its depth
+  carve: true                              # the music gives up a band of +-(widest beat/2 + 3 Hz) at each carrier
+sections:
+  - {name: deep, bars: 21, binaural: {beat: "10>6.18", carriers: [A3, "A3*phi"], gain_db: -2}}   # or binaural: 6.18
+```
+
+Unset section values carry over (a ramp's end value holds). The layer is a dry stem (`binaural`: its tones minus the
+music it carves); `songmap check` prints its plan, and `songmap listen` flags a carrier a sixth-step from a chord tone
+(a problem) or a half step (a pedal point, a note). MP3s of songs with a layer are coded without joint stereo.
+
 ## 13. Outputs
 
 | File | Contents |

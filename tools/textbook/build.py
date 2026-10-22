@@ -185,18 +185,23 @@ def audio_source(chid, name):
     return None
 
 
-def _write_mp3(x: np.ndarray, path: str):
+def _write_mp3(x: np.ndarray, path: str, normalize: bool = True):
+    """normalize: peak to -1 dBFS (Python examples, `master: clean` songs). A song mastered to a loudness target
+    keeps its level (only a peak above -1 dBFS is trimmed), so the songs of a suite stay matched."""
     from scipy.io import wavfile
     x = np.asarray(x, dtype=np.float64)
     if x.ndim == 1:
         x = np.stack([x, x], 1)
     peak = np.max(np.abs(x)) or 1.0
-    x = x / peak * 10 ** (-1 / 20)
+    if normalize or peak > 10 ** (-1 / 20):
+        x = x / peak * 10 ** (-1 / 20)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with tempfile.TemporaryDirectory() as d:
         w = os.path.join(d, "a.wav")
         wavfile.write(w, SR, x.astype(np.float32))
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", w, "-codec:a", "libmp3lame", "-q:a", "2", path], check=True)
+        # separate left/right coding: binaural examples need each ear's tone intact
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", w, "-codec:a", "libmp3lame", "-q:a", "2",
+                        "-joint_stereo", "0", path], check=True)
 
 
 def _visual_hash() -> str:
@@ -216,7 +221,7 @@ def render_song_media(src: str, mp3: str, mp4: str | None) -> None:
     from songmap.render import render
     song = yaml_form.load(src)
     r = render(song)
-    _write_mp3(r.audio, mp3)
+    _write_mp3(r.audio, mp3, normalize=song.master.mode == "clean")
     if mp4:
         from songmap.export.wav import write_wav24
         from songmap.visual import write_poster, write_video
@@ -249,8 +254,9 @@ def render_audio(src: str, dst: str):
     else:
         from songmap.parse import yaml_form
         from songmap.render import render
-        r = render(yaml_form.load(src))
-        _write_mp3(r.audio, dst)
+        song = yaml_form.load(src)
+        r = render(song)
+        _write_mp3(r.audio, dst, normalize=song.master.mode == "clean")
 
 
 def file_hash(p):

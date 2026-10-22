@@ -1,0 +1,26 @@
+# Fibonacci bells (ch48): glass bells on the golden pad's chord tones over vDg, first in a periodic rhythm, long
+# short long short (dotted half, half: the pattern repeats every 5 beats, so every 5 bars it lines up with the
+# bar again), then on the Fibonacci word a b a a b a b a a b a a (8 longs, 4 shorts), which never repeats.
+songmap: 0.2
+title: "Fibonacci bells"
+tempo: 44
+meter: "4/4"
+key: "A golden7"
+tuning: "36edo"
+fps: 30
+seed: 2
+tail_seconds: 4
+
+instruments:
+  gold: {use: clean/golden_pad, release: 2.5}
+  bell: clean/glass
+
+sections:
+  - {name: periodic, bars: 5, parts: {gold: hold, bell: {rel: "=p 5/2. 3+/2 R+/2. 5+/2 3+/2. 5/2 R+/2. 3+/2", oct: 1}}, harmony: "vDg:5", dyn: p}
+  - {name: fibonacci, bars: 8, parts: {gold: hold, bell: {rel: "=p 5/2. 3+/2 R+/2. 5+/2. 3+/2 5/2. 3+/2 R+/2. 5+/2. 3+/2 5/2. 3+/2.", oct: 1}}, harmony: "vDg:8", dyn: p}
+
+mix:
+  gold: {gain_db: -8, send: {hall: 0.35}}
+  bell: {gain_db: -8, send: {hall: 0.45}}
+
+master: clean
