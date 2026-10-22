@@ -137,6 +137,17 @@ def op(path: str = Body(...), text: str = Body(...), op: str = Body(...), args: 
         from .mixer import set_mix
         new = set_mix(text, args["part"], gain_db=args.get("gain_db"), pan=args.get("pan"), sends=args.get("sends"),
                       default_gain=float(args.get("default_gain", 0)))
+    elif op == "inserts":
+        if not pr.path.endswith((".sm", ".sml")):
+            raise HTTPException(400, "the mixer edits .sm songs (convert a YAML song with `songmap fmt --to sm`)")
+        from ..mix.inserts import make
+        from .mixer import set_inserts
+        try:
+            for u in args.get("chain") or []:
+                make(u)
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from None
+        new = set_inserts(text, args["part"], args.get("chain") or [])
     elif op == "voice":
         if not pr.path.endswith((".sm", ".sml")):
             raise HTTPException(400, "the rack edits .sm songs (convert a YAML song with `songmap fmt --to sm`)")

@@ -44,7 +44,8 @@ def _is_setting(key, v, progressions=()) -> bool:
 PART_KEYS = PART_SOURCES + PART_OPTS
 KEYWORDS = {"for", "in", "if", "elif", "else", "every", "def", "return", "form", "with", "and", "or", "not",
             "true", "false", "none", "as", "at", "bars"}
-DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "master", "qa", "set")
+DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "inserts", "master",
+              "qa", "set")
 MIX_KEYS = ("pan", "width", "send", "sidechain", "eq", "bus_comp")
 STEP_RANK = {".": 0, "o": 1, "-": 2, "x": 3, "r": 4, "f": 5, "X": 6}
 
@@ -1731,7 +1732,33 @@ class _Interp:
                     m[k] = _value(v)
                 else:
                     self.err(f"mix {part}: unknown option '{k}'", line, did_you_mean(k, ("sc", *MIX_KEYS, *sends)))
-            self.song.setdefault("mix", {})[part] = m
+            old = self.song.setdefault("mix", {}).get(part) or {}
+            self.song["mix"][part] = {**({"inserts": old["inserts"]} if "inserts" in old else {}), **m}
+
+    _UNIT = re.compile(r"\s*([A-Za-z_]\w*)(?:\(([^)]*)\))?")
+
+    def d_inserts(self, args, raw, line):
+        """`inserts lead eq(high=2) comp(threshold=-20) | master eq(low=1)`: each part's effect chain."""
+        from ..mix.inserts import make
+        for chunk in split_top(self._rest(raw), "|"):
+            words = chunk.split(None, 1)
+            if not words:
+                continue
+            part, body, chain = words[0], (words[1] if len(words) > 1 else ""), []
+            pos = 0
+            while pos < len(body.rstrip()):
+                m = self._UNIT.match(body, pos)
+                if not m or m.end() == pos:
+                    self.err(f"inserts {part}: '{body[pos:].split()[0]}' not understood", line,
+                             "write inserts lead eq(high=2) comp(threshold=-20, ratio=3)")
+                try:
+                    spec = {"fx": m[1], **(_kv(m[2]) if m[2] else {})}
+                    make(spec)                                     # validate the unit and its params here
+                except (SongError, ValueError) as e:
+                    self.err(f"inserts {part}: {getattr(e, 'message', None) or e}", line)
+                chain.append(spec)
+                pos = m.end()
+            self.song.setdefault("mix", {}).setdefault(part, {})["inserts"] = chain
 
     def d_qa(self, args, raw, line):
         q = self.song.setdefault("qa", {})

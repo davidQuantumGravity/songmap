@@ -11,7 +11,7 @@ import re
 
 import numpy as np
 
-REMIXABLE = ("gain_db", "pan", "send")
+REMIXABLE = ("gain_db", "pan", "send")              # (+ the master's inserts, applied after the stems)
 
 
 def effective_mix(song) -> dict[str, dict]:
@@ -21,8 +21,9 @@ def effective_mix(song) -> dict[str, dict]:
 
 
 def strip_mix(text: str) -> str:
-    """The text without its top-level `mix` lines (.sm): equal stripped texts differ only in the mix."""
-    return "\n".join(ln for ln in text.splitlines() if not re.match(r"mix\s", ln))
+    """The text without its top-level `mix` and `inserts` lines (.sm): equal stripped texts differ only in
+    the mix (`remixable` then decides whether the stems can be reused)."""
+    return "\n".join(ln for ln in text.splitlines() if not re.match(r"(mix|inserts)\s", ln))
 
 
 def _balance(p: float) -> np.ndarray:
@@ -35,6 +36,8 @@ def _undb(db: float) -> float:
 
 def remixable(old: dict[str, dict], new: dict[str, dict], parts) -> bool:
     for part in parts:
+        if part == "master":
+            continue
         a, b = old.get(part, {}), new.get(part, {})
         if {k: v for k, v in a.items() if k not in REMIXABLE} != {k: v for k, v in b.items() if k not in REMIXABLE}:
             return False
@@ -79,6 +82,9 @@ def remix(r, old: dict[str, dict], new: dict[str, dict], mute=(), solo=()) -> np
                        width=float(rc.get("width", 1.0)), seed=seed_for(song.seed, "return", ret) % 2**31)
         stems[f"return_{ret}"] = convolve(x, ir)
     mix = sum(stems.values()) if stems else np.zeros((n, 2))
+    if (new.get("master") or {}).get("inserts"):
+        from ..mix.inserts import apply_chain
+        mix = apply_chain(mix, new["master"]["inserts"], {"tempo": song.tempo, "seed": seed_for(song.seed, "insert")})
     mode = r.stats.get("master") or song.master.mode
     if mode == "legacy":
         return master_legacy(mix)
@@ -162,3 +168,40 @@ def _first_section_line(lines: list[str]) -> int:
         else:
             break
     return last
+
+
+def _unit_text(u: dict) -> str:
+    args = ", ".join(f"{k}={_num(v)}" for k, v in u.items() if k != "fx")
+    return u["fx"] + (f"({args})" if args else "")
+
+
+def set_inserts(text: str, part: str, chain: list[dict]) -> str:
+    """Set a part's (or `master`'s) insert chain on the song's `inserts` lines; an empty chain removes it."""
+    lines = text.split("\n")
+    new_chunk = f"{part} " + " ".join(_unit_text(u) for u in chain) if chain else None
+    for i, ln in enumerate(lines):
+        if not re.match(r"inserts\s", ln):
+            continue
+        body, hash_, comment = _split_comment(ln[len("inserts"):])
+        chunks = [c.strip() for c in body.split("|") if c.strip()]
+        for j, ch in enumerate(chunks):
+            if ch.split()[0] == part:
+                if new_chunk:
+                    chunks[j] = new_chunk
+                else:
+                    chunks.pop(j)
+                if chunks:
+                    lines[i] = "inserts " + " | ".join(chunks) + (("  #" + comment) if hash_ else "")
+                else:
+                    lines.pop(i)
+                return "\n".join(lines)
+    if not new_chunk:
+        return text
+    ins = [i for i, ln in enumerate(lines) if re.match(r"inserts\s", ln)]
+    if ins:
+        body, hash_, comment = _split_comment(lines[ins[-1]])
+        lines[ins[-1]] = body.rstrip() + " | " + new_chunk + (("  #" + comment) if hash_ else "")
+        return "\n".join(lines)
+    at = max([i + 1 for i, ln in enumerate(lines) if re.match(r"(mix|inserts)\s", ln)], default=0) or _first_section_line(lines)
+    lines.insert(at, "inserts " + new_chunk)
+    return "\n".join(lines)

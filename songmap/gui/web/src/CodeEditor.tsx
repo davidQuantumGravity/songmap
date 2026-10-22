@@ -8,7 +8,7 @@ import { linter, lintGutter, type Diagnostic as CMDiagnostic } from "@codemirror
 import { tags } from "@lezer/highlight";
 import type { Diagnostic } from "./api";
 
-const DIRECTIVES = new Set(["song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "master", "qa", "set"]);
+const DIRECTIVES = new Set(["song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "inserts", "master", "qa", "set"]);
 const KEYWORDS = new Set(["for", "in", "if", "elif", "else", "every", "def", "return", "form", "with", "and", "or", "not",
   "true", "false", "none", "as", "at", "bars", "bar", "song"]);
 

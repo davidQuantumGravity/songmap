@@ -340,3 +340,22 @@ main { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; min-h
 .cell.cX { border-color: var(--ink); }
 .cell.co { height: 22px; border-style: dashed; }
 .steps-table td:hover .cell { border-color: var(--accent); }
+
+/* ---------------------------------------------------------------- inserts */
+.mixer { display: flex; flex-direction: column; }
+.mixer .strips { flex: 1; min-height: 0; }
+.slots { display: flex; flex-direction: column; gap: 2px; width: 100%; }
+.slot { display: flex; align-items: center; gap: 5px; padding: 1px 6px; font-size: 11px; border-radius: 4px; text-align: left; width: 100%;
+  background: var(--panel2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.slot i { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); flex: none; }
+.slot.bypassed { opacity: .55; text-decoration: line-through; }
+.slot.bypassed i { background: var(--muted); }
+.slot.on { border-color: var(--accent); background: var(--accent-soft); }
+.slot-add { font-size: 11px; padding: 1px 4px; width: 100%; color: var(--muted); }
+.unit-editor { border-top: 1px solid var(--line); background: var(--panel); padding: 6px 12px 10px; }
+.ue-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.ue-head button { padding: 1px 9px; font-size: 12px; }
+.ue-groups { display: flex; gap: 10px; flex-wrap: wrap; }
+.mixer { overflow: hidden; }
+.mixer .strips { overflow: auto; min-height: 150px; }
+.unit-editor { flex: none; max-height: 55%; overflow: auto; position: relative; z-index: 2; box-shadow: 0 -4px 10px -6px rgba(0,0,0,.2); }

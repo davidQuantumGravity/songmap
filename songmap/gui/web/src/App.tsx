@@ -1,6 +1,6 @@
 // SongMap Studio (docs/GUI.md): files, arrangement, code / mixer dock, inspector, transport.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { api, type Catalog, type Check, type Files, type QA, type Summary, type View } from "./api";
+import { api, type Catalog, type Check, type Files, type InsertSpec, type QA, type Summary, type View } from "./api";
 import { CodeEditor } from "./CodeEditor";
 import { Arrangement } from "./Arrangement";
 import { Mixer, type MixEdit } from "./Mixer";
@@ -174,7 +174,7 @@ export function App() {
         again.current = false;
         const { path: p, text: t, mute: m, solo: s } = latest.current;
         if (!p) break;
-        setRendering(rendered && rendered.text.replace(/^mix\s.*$/gm, "") === t.replace(/^mix\s.*$/gm, "") ? "remix" : "render");
+        setRendering(rendered && rendered.text.replace(/^(mix|inserts)\s.*$/gm, "") === t.replace(/^(mix|inserts)\s.*$/gm, "") ? "remix" : "render");
         setStatus("rendering…");
         const r = await api.render(p, t, [...m], [...s]);
         setCheck(r.check);
@@ -243,6 +243,7 @@ export function App() {
   const mixEdit = (part: string, edit: MixEdit, defaultGain: number) =>
     applyOp("mix", { part, ...edit, default_gain: defaultGain }, true).catch(() => undefined);
   const voiceEdit = (e: VoiceEdit) => applyOp("voice", e, false).catch(() => undefined);
+  const insertsEdit = (part: string, chain: InsertSpec[]) => applyOp("inserts", { part, chain }, true).catch(() => undefined);
 
   const section = summary?.sections.find((s) => time >= s.start && time < s.end) ?? null;
   const jump = (dir: 1 | -1) => {
@@ -353,8 +354,8 @@ export function App() {
               <Rack path={path} text={text} summary={summary} catalog={catalog} onEdit={voiceEdit} colorOf={colorOf} time={time} />
             )}
             {dock === "mixer" && summary && (
-              <Mixer summary={summary} qa={qa} mute={mute} solo={solo} busy={rendering === "remix"} colorOf={colorOf}
-                     onMute={toggle(setMute)} onSolo={toggle(setSolo)} onEdit={mixEdit} />
+              <Mixer summary={summary} qa={qa} mute={mute} solo={solo} busy={rendering === "remix"} colorOf={colorOf} catalog={catalog}
+                     onMute={toggle(setMute)} onSolo={toggle(setSolo)} onEdit={mixEdit} onInserts={insertsEdit} />
             )}
           </div>
         </div>

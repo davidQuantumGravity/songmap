@@ -51,6 +51,28 @@ def wav_bytes(audio: np.ndarray, sr: int = 48000) -> bytes:
     return buf.getvalue()
 
 
+class NoteCache(dict):
+    """The Studio's note cache, shared by every render: after a render it keeps only the notes that render
+    used, so it holds at most one song's notes, and an edit re-synthesizes only the notes it changed."""
+
+    def __init__(self):
+        super().__init__()
+        self.used: set = set()
+
+    def get(self, key, default=None):
+        self.used.add(key)
+        return super().get(key, default)
+
+    def prune(self) -> None:
+        for k in [k for k in self if k not in self.used]:
+            del self[k]
+        self.used = set()
+
+
+NOTES = NoteCache()
+NOTES_LOCK = threading.Lock()
+
+
 def _mmss(t: float) -> str:
     return f"{int(t // 60)}:{t % 60:04.1f}"
 
@@ -151,7 +173,10 @@ class Project:
                               mix, stripped, True, audio, tuple(mute), tuple(solo))
             else:
                 from ..render import render
-                r = render(song)
+                with NOTES_LOCK:                 # one render at a time uses (and prunes) the shared cache
+                    NOTES.used = set()
+                    r = render(song, note_cache=NOTES)
+                    NOTES.prune()
                 audio = r.audio
                 if mute or solo:
                     audio = remix(r, mix, mix, mute, solo)
@@ -267,7 +292,7 @@ def summarize(arr) -> dict:
         parts.append({"name": name, "kit": kit, "instrument": voice, "count": len(evs), "notes": notes,
                       "mix": {"gain_db": float(m.get("gain_db", 0)), "pan": float(m.get("pan", 0) or 0),
                               "send": {k: float(v) for k, v in (m.get("send") or {}).items()},
-                              "sidechain": bool(m.get("sidechain"))}})
+                              "sidechain": bool(m.get("sidechain")), "inserts": list(m.get("inserts") or [])}})
     events = [{"type": e.type, "at": e.at, "time": round(tl.beat_to_sec(e.beat), 4),
                "start": round(tl.beat_to_sec(e.start), 4), "section": e.section} for e in arr.events]
     chords: list[list] = []                              # [start, end, symbol], repeats of one chord merged
@@ -286,6 +311,7 @@ def summarize(arr) -> dict:
         "frames": tl.frames, "length": _mmss(tl.seconds), "digest": arr.digest()[:16],
         "sections": sections, "parts": parts, "events": events, "chords": chords,
         "returns": sorted(arr.ensemble.returns), "voices": voices(arr.ensemble, arr.parts),
+        "master_inserts": list((arr.ensemble.mix.get("master") or {}).get("inserts") or []),
         "bar_times": [round(tl.beat_to_sec(b * tl.bpb), 4) for b in range(int(tl.total_bars) + 1)],
     }
 

@@ -12,7 +12,8 @@ export type Diagnostic = {
 export type Section = { name: string; index: number; bar: number; bars: number; start: number; end: number; line: number | null };
 // [start s, length s, pitch (MIDI, float) | null for drums, velocity 0..1, kit piece]
 export type Note = [number, number, number | null, number, string];
-export type PartMix = { gain_db: number; pan: number; send: Record<string, number>; sidechain: boolean };
+export type InsertSpec = { fx: string } & Record<string, number | string>;
+export type PartMix = { gain_db: number; pan: number; send: Record<string, number>; sidechain: boolean; inserts: InsertSpec[] };
 export type Part = { name: string; kit: boolean; instrument: string | null; count: number; notes: Note[]; mix: PartMix };
 export type Voice = {
   use: string; instrument: string; preset: string | null;
@@ -24,7 +25,8 @@ export type PartVoice = ({ kit: false } & Voice) | { kit: true; pieces: Record<s
 export type ParamSpec = { name: string; default: number; lo: number; hi: number; unit: string; curve: "lin" | "log"; group: string; doc: string };
 export type InstrumentSpec = { name: string; family: string; mono: boolean; params: ParamSpec[] };
 export type Preset = { name: string; ref: string; description: string; tags: string[]; params: Record<string, number> };
-export type Catalog = { instruments: InstrumentSpec[]; presets: Record<string, Preset[]>; samplers: { name: string; title: string; license: string; family: string }[] };
+export type UnitSpec = { name: string; doc: string; params: ParamSpec[] };
+export type Catalog = { instruments: InstrumentSpec[]; presets: Record<string, Preset[]>; samplers: { name: string; title: string; license: string; family: string }[]; inserts: UnitSpec[] };
 export type AuditionNote = { t: number; pitch: number; vel: number; gate: number };
 
 export type SongEvent = { type: string; at: string; time: number; start: number; section: string | null };
@@ -33,7 +35,7 @@ export type Summary = {
   title: string; tempo: number; meter: string; key: string; tuning: string; mood: string | null; fps: number;
   bars: number; seconds: number; music_seconds: number; frames: number; length: string; digest: string;
   sections: Section[]; parts: Part[]; events: SongEvent[]; bar_times: number[];
-  chords: [number, number, string][]; returns: string[]; voices: Record<string, PartVoice>;
+  chords: [number, number, string][]; returns: string[]; voices: Record<string, PartVoice>; master_inserts: InsertSpec[];
 };
 
 // What the video shows and how (docs/GUI.md §4.4; S6 grows this into layers).

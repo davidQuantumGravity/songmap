@@ -35,8 +35,9 @@ def catalog() -> dict:
     except Exception:                                    # noqa: BLE001  (the sampler backend is optional)
         pass
     from ..instruments import Sampler
+    from ..mix.inserts import UNITS
     return {"instruments": [cls.schema() for cls in REGISTRY.values()] + [Sampler.schema()], "presets": presets,
-            "samplers": samplers}
+            "samplers": samplers, "inserts": [u.schema() for u in UNITS.values()]}
 
 
 def voice_info(ens, part: str, piece: str | None = None) -> dict:
