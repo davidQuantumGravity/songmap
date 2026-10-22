@@ -1,0 +1,34 @@
+# 1. Golden Hour Lullaby (2:17). C major, 72 BPM. Western harmony is home; golden chords are passing light.
+# Technique: System 1/2 golden passing chords (docs/GOLDEN_THEORY.md §2, §4.2) inside an ordinary lullaby:
+#   I-IV and V-I through one golden chord (~), IV-V through the golden escalator (~g ~g: vF#g ^F#g),
+#   the bridge closes with the four-chord golden authentic cadence G - vEbT13/G - vCg/G - C,
+#   and the coda is the golden plagal amen (ii - IV - golden - I).
+# Craft: golden chords sit on weak beats and only the voice-led piano, bass and pad move through them;
+# the melody rests or holds a common tone there, so every golden moment is a gentle glide, never a rub.
+song "Golden Hour Lullaby" 72 4/4 C fps=30 seed=21 tail=4 tuning=36edo
+inst keys=keys/still mel=keys/still(hardness=.3) gtr=string_pluck/still low=clean/bass wash=pad/still bell=clean/glass
+
+prog lull "C:0.75 ~:0.25 F:0.75 ~:0.25 C:0.75 ~:0.25 G:1 Am:1 F:0.5 ~g:0.25 ~g:0.25 G:0.75 ~:0.25 C:1"
+prog dusk "Am:0.75 ~:0.25 Em:1 F:0.75 ~:0.25 C:1 Dm:0.75 ~:0.25 Am:1 F:1 G:0.5 vEbT13/G:0.25 vCg/G:0.25"
+prog open "C:1 F:0.75 ~:0.25 C:1 G:0.75 ~:0.25"
+prog amen "Dm:1 F:0.75 ~:0.25 C:2"
+
+# deg 0 = C5. The question rises to G and rests on C; each golden beat gets a held common tone or a rest.
+q = "=p 4/4 2 0/2 | 5/4. 3/8 0/2 | 0/4 2 4/2 | 5/4 4 3 1 | 0/2. r/4 | 5/4 3 r/2 | 1/4 3 4/2 | 0/1"
+a = "=mp 4/4 5 7/2 | 11/4. 9/8 7/2 | 9/4 7 4/2 | 8/4 7 6 5 | 7/2. r/4 | 9/4 7 r/2 | 6/4 8 4/2 | 7/1"
+br = "=mp < 2/4 4 5/2 | 4/2. r/4 | 5/4 9 7/2 | 7/1 | 8/4 7 5/2 | 4/4 5 7/2 | 9/2 8/4 7 | 6/2 r/2 =mf"
+tune_q = {deg: q, oct: 1}
+tune_a = {deg: a, oct: 1}
+bridge = {deg: br, oct: 1}
+ripple = {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5"}
+
+# name   bars | parts and settings                                                 | events
+intro      4 | keys:hold prog=open dyn=pp<p
+verse      8 | keys:hold low:bassline mel:tune_q prog=lull dyn=p
+answer     8 | like=verse gtr:ripple wash:hold mel:tune_a dyn=p<mp
+glow       8 | like=answer mel:bridge bell:{deg: br, oct: 2} prog=dusk dyn=mp<mf
+home       8 | like=answer dyn=mp>p
+amen       4 | keys:hold wash:hold low:bassline mel:{deg: "r/1 | r/1 | 0/1 | 0/1", oct: 1} prog=amen dyn=p>pp
+
+mix keys -4 hall=.2 | mel 4 hall=.3 | gtr -6 hall=.25 | low -4 | wash -25 hall=.35 | bell -12 hall=.45
+master clean

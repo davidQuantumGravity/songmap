@@ -1,17 +1,42 @@
-# 5. The Silver Third (2:07). C major -> ^Eb major -> golden home -> C major, 90 BPM, cinematic.
-# Techniques that Western harmony cannot do (docs/GOLDEN_BLENDING.md, ranks 1, 4 and the golden home of
-# GOLDEN_THEORY.md §4.3):
-#   - Projection pivot between layers. C major and ^Eb major (+10 sixth-steps, 333 cents: a "silver
-#     third") share no note, but they share the golden chords Cg, Fg, Gg (I, IV, V of C = vi, ii, iii of
-#     ^Eb). The theme modulates through Fg: F -> Fg (golden IV in C) = golden ii in ^Eb -> ^Fm -> ^Bb7 -> ^Eb,
-#     and the same theme returns a silver third higher.
-#   - Golden home. The Western instruments fall silent and a golden-spectrum pad and bell (partials
-#     2^m·φ^n, where golden chords are the smoothest) breathe along the golden circle: ^Ebg - ^Ebg7 - Gg - Gg7
-#     - vBg - Gg7 - Gg, each golden seventh adding the next chain tone. Then G7 arrives as a visitor:
-#     Gg -> G (the projection reversed) is the release that leads home to C.
-#   - Golden giant steps. Coltrane's major-third cycle C -> Ab -> E -> C, each step through its one strict
-#     golden passing chord (C - Cg - Ab - Abg - E - Eg - C). The melody holds the common tone of every
-#     step: C, then Ab, then E, then C.
+# 5. The Silver Third (2:39). An expedition finds a new world: C major -> ^Eb major -> golden home -> C major,
+# 90 BPM, cinematic. Wonder at dawn, a theme that sets out, a build, a hush where the ground shifts by a
+# "silver third", the theme in the new land, a golden home where only golden-spectrum timbres sound, a
+# homecoming (the peak), and a finale on golden giant steps.
+# Golden techniques (docs/GOLDEN_BLENDING.md ranks 1 and 4, and the golden home of GOLDEN_THEORY.md §4.3):
+#   - Pivot between layers. C major and ^Eb major (+10 sixth-steps, 333 cents: a "silver third") share no
+#     note, but they share the golden chords Cg, Fg, Gg (I, IV, V of C = vi, ii, iii of ^Eb). The pivot runs
+#     F -> Fg (golden IV in C = golden ii in ^Eb) -> ^Fm -> ^Bb7 -> ^Eb. The lead holds F, the one tone F and Fg
+#     share, the bell rings Fg's golden third, and the horn climbs ^C - ^D - ^Eb into the new key; then the
+#     theme returns a silver third higher (key=^Eb re-keys every deg line).
+#   - Golden home. The Western instruments stop. A golden-spectrum pad (partials 2^m·φ^n), a glass bell on
+#     chord tones and a low glass gong breathe along the golden circle ^Ebg - ^Ebg7 - Gg - Gg7 - vBg - Gg7 - Gg,
+#     each golden seventh adding the next chain tone. On harmonic instruments Western chords are the deepest
+#     release; golden-spectrum timbres are a digital laboratory in which golden chords measure smoothest, so
+#     only they play here. Then G7 arrives on the piano as a Western visitor (Gg -> G, the projection
+#     reversed) and leads home to C.
+#   - Golden giant steps. The finale walks Coltrane's major-third cycle C -> Ab -> E -> C, each step through
+#     its one strict golden passing chord (C - Cg - Ab - Abg - E - Eg - C). The voiced parts play the engine's
+#     sub-chromatic lines; the lead and bell hold each step's common tone, C6 - Ab5 - E5 - C5, and a tom
+#     pickup on every golden chord drives into each arrival.
+# Golden chords elsewhere are only the half-bar Fg of the pivot and the half-bar passing chords of the finale.
+#
+# Form (58 bars + 4 s tail):
+#   dawn 4        pad, piano arpeggio, the bell sings the theme's head
+#   theme 8       the lead's theme in C (a half cadence), piano arpeggio, pad, bass
+#   build 8       the answer climbs to E6 and lands on C; harp ostinato, piano pulse and low drums enter,
+#                 the horn counter-line joins at bar 5, toms roll into...
+#   pivot 4       a hush: F - Fg - ^Fm - ^Bb7 - ^Eb (piano, pad, bass, lead, horn, bell)
+#   silver 8      the theme in ^Eb, fuller: horn counter-melody, harp, piano pulse, drums
+#   golden_home 7 golden pad, glass bell, glass gong only; the last Gg stops at mid-bar so the pad has
+#                 released before G7 sounds
+#   visitor 1     G7 on the piano (a riser into the homecoming)
+#   homecoming 8  the peak: the theme in C with a new climax (E6), bell an octave up, organ choir, horn,
+#                 harp in 16ths, the fullest drums
+#   giant 6       golden giant steps
+#   coda 4        F/C - Fm/C - C over a low C: the bell's head motif once more
+# Instruments: piano (keys/still), string pad (pad/still), harp ostinato (string_pluck/still), low drums
+# (kick, deep snare and two toms built from kick/v0), bass (clean/bass), lead (clean/lead), horn (clean/organ,
+# softened), organ choir (clean/organ), glass bell and gong (clean/glass), golden pad (clean/golden_pad).
 songmap: 0.2
 title: "The Silver Third"
 tempo: 90
@@ -25,37 +50,49 @@ tail_seconds: 4
 instruments:
   keys: keys/still
   wash: pad/still
-  gold: clean/golden_pad
+  harp: {use: string_pluck/still, brightness: 0.8, t60: 2.2, body: 0.6}
+  gold: {use: clean/golden_pad, release: 1.5}
   bell: clean/glass
+  deep: {use: clean/glass, decay: 9, damp: 0.4}
   lead: clean/lead
   low: clean/bass
+  horn: {use: clean/organ, partials: 7, rolloff: 1.6, even: 0.7, attack: 0.09, release: 0.45, vel_bright: 0.7}
+  choir: {use: clean/organ, partials: 6, rolloff: 1.9, attack: 0.4, release: 1.2}
+  drums: {kit: {kick: {use: kick/v0, tune: 42, sweep: 20, decay: 1.1, sub: 0.35, click: 0.1, drive: 1.3}, snare: {use: snare/v0, tone: 150, tone_mix: 0.65, tone_decay: 0.25, noise_decay: 0.32, noise_lp: 5000, snap: 0.15}, ghost: {use: kick/v0, tune: 66, sweep: 9, sweep_time: 0.05, decay: 0.6, click: 0.15, drive: 1.2}, rim: {use: kick/v0, tune: 88, sweep: 8, sweep_time: 0.04, decay: 0.45, click: 0.18, drive: 1.2}}}
 
 harmony:
-  progressions: {theme: "C:1 Em:1 F:1 G:1 Am:1 F:1 Dm:1 G:1", pivot: "F:0.5 Fg:0.5 ^Fm:1 ^Bb7:1 ^Eb:1", theme_e: "^Eb:1 ^Gm:1 ^Ab:1 ^Bb:1 ^Cm:1 ^Ab:1 ^Fm:1 ^Bb:1", home: "^Ebg:1 ^Ebg7:1 Gg:1 Gg7:1 vBg:1 Gg7:1 Gg:1 G7:1", giant: "C:1 ~:0.5 Ab:1 ~:0.5 E:1 ~:0.5 C:1.5"}
+  progressions: {dawn: "C:1 Am:1 F:1 G:1", theme: "C:1 Em:1 F:1 G:1 Am:1 F:1 Dm:1 G:1", answer: "Am:1 F:1 C:1 G:1 Am:1 F:1 G:1 C:1", pivot: "F:0.5 Fg:0.5 ^Fm:1 ^Bb7:1 ^Eb:1", theme_e: "^Eb:1 ^Gm:1 ^Ab:1 ^Bb:1 ^Cm:1 ^Ab:1 ^Fm:1 ^Bb:1", home: "^Ebg:1 ^Ebg7:1 Gg:1 Gg7:1 vBg:1 Gg7:1 Gg:0.5 N.C.:0.5", giant: "C:1 ~:0.5 Ab:1 ~:0.5 E:1 ~:0.5 C:1.5", coda: "F/C:1 Fm/C:1 C:2"}
 
 sections:
-  - {name: dawn, bars: 4, parts: {keys: hold, wash: hold}, harmony: theme, dyn: "p<mp"}
-  - {name: theme, bars: 8, parts: {keys: comp, wash: hold, low: bassline, lead: {deg: "=mp 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 7/4. 6/8 4/2 | 5/4 4 2 0 | 1/2 3/2 | 1/1", oct: 1}}, harmony: theme, dyn: mp}
-  - {name: pivot, bars: 4, parts: {keys: hold, wash: hold, low: bassline, lead: {deg: "3/1 | r/1 | r/1 | r/1", oct: 1}}, harmony: pivot, dyn: "mp<mf"}
-  - {name: silver, bars: 8, parts: {keys: comp, wash: hold, low: bassline, lead: {deg: "=mp 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 7/4. 6/8 4/2 | 5/4 4 2 0 | 1/2 3/2 | 1/1", oct: 1}, drums: {steps: {kick: X.......x......., snare: "........X.......", hat: {steps: x.x.x.x.x.x.x.x., vel: [0.45, 0.25, 0.35, 0.25]}}}}, harmony: theme_e, dyn: mf, key: "^Eb"}
-  - {name: golden_home, bars: 8, parts: {gold: hold, bell: {rel: "5/2 3+ | R+/1", oct: 1}}, harmony: home, dyn: "p<mp"}
-  - {name: homecoming, bars: 8, parts: {keys: comp, wash: hold, low: bassline, lead: {deg: "=mp 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 7/4. 6/8 4/2 | 5/4 4 2 0 | 1/2 3/2 | 1/1", oct: 1}, drums: {steps: {kick: X.......x......., snare: "........X.......", hat: {steps: x.x.x.x.x.x.x.x., vel: [0.45, 0.25, 0.35, 0.25]}, ohat: "......x.......x."}}, bell: {deg: "=mp 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 7/4. 6/8 4/2 | 5/4 4 2 0 | 1/2 3/2 | 1/1", oct: 2}}, harmony: theme, dyn: f, key: C}
-  - {name: giant, bars: 6, parts: {keys: hold, wash: hold, low: bassline, lead: {deg: "=f 7/1 | 7/2 b5/2 | b5/1 | 2/1 | 2/2 0/2 | 0/1", oct: 1}, bell: {deg: "=f 7/1 | 7/2 b5/2 | b5/1 | 2/1 | 2/2 0/2 | 0/1", oct: 1}}, harmony: giant, dyn: "mf>mp"}
+  - {name: dawn, bars: 4, parts: {keys: {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5", oct: -1}, wash: hold, bell: {deg: "=f r/1 | 4/4 2 r/2 | 0/1 | r/1", oct: 1}}, harmony: dawn, dyn: "p<mp"}
+  - {name: theme, bars: 8, parts: {keys: {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5", oct: -1}, wash: hold, low: bassline, lead: {deg: "=mp 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 7/4. 6/8 4/2 | 5/4 4 3/2 | 1/2 3/2 | 1/1", oct: 1}}, harmony: theme, dyn: mp}
+  - {name: build, bars: 8, parts: {keys: pulse, wash: hold, low: {rel: "R/2 r/8 R/4.", oct: -2}, lead: {deg: "=mp 5/2 4/4 2 | 3/4 5 7/2 | =mf 9/2. 7/4 | 8/1 | 7/4. 6/8 5/2 | 5/4 4 3/2 | 1/2 4/4 6 | 7/1", oct: 1}, harp: {rel: "R/8 5 R+ 5 3 5 R+ 5"}, horn: {deg: "r/1 | r/1 | r/1 | r/1 | =mp 0/2 2 | 3/2 0 | -1/2 1 | 0/1"}, drums: {steps: {kick: "X...............|X.........x.....|X...............|X.........x.....|X.......X.......|X.........x.....|X.......X.......|X.......X.......", ghost: "................|................|..........x.....|..........x..x..|......x.......x.|......x...x...x.|......x.......x.|-.-.x.x.x.x.X.XX", rim: "................|................|................|................|................|................|...........x..x.|........-.x.x.xX", snare: "................|................|................|................|........X.......|........X.......|........X.......|........X...x.x."}}}, harmony: answer, dyn: "mp<mf"}
+  - {name: pivot, bars: 4, parts: {keys: hold, wash: hold, low: bassline, lead: {deg: "=mp 3/1 | r/1 | r/1 | r/1", oct: 1}, horn: {deg: "=p 3/1 | ^0/1 | ^1/1 | ^b2/1"}, bell: {rel: "=mf r/2 3+/2 | r/1 | r/1 | R+/1"}}, harmony: pivot, dyn: "p<mp"}
+  - {name: silver, bars: 8, parts: {keys: pulse, wash: hold, low: {rel: "R/2 r/8 R/4.", oct: -2}, lead: {deg: "=mp 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 7/4. 6/8 4/2 | 5/4 4 3/2 | 1/2 3/2 | 1/1", oct: 1}, horn: {deg: "=mp 2/2 4 | 4/2 -1 | 0/1 | -1/2 1 | 2/1 | 3/2 0 | -2/1 | -1/2 -3"}, harp: {rel: "R/8 5 R+ 5 3 5 R+ 5"}, drums: {steps: {kick: "X.........x.....|X.........x.....|X.........x.....|X.......x.x.....|X.........x.....|X.........x.....|X.........x.....|X...............", snare: "........X.......|........X.......|........X.......|........X.....x.|........X.......|........X.......|........X.......|................", ghost: "......x.......x.|......x.......x.|......x.......x.|......x...x.x.xx|......x.......x.|......x.......x.|......x.......x.|................", hat: {steps: "x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|................", vel: [0.32, 0.16, 0.24, 0.16]}}}}, harmony: theme_e, dyn: mf, key: "^Eb"}
+  - {name: golden_home, bars: 7, parts: {gold: hold, bell: {rel: "5/2 3+ | R+/1", oct: 1}, deep: {rel: R/1, oct: -1}}, harmony: home, dyn: "p<mp"}
+  - {name: visitor, bars: 1, parts: {keys: hold, low: bassline}, harmony: "G7:1", dyn: mp}
+  - {name: homecoming, bars: 8, parts: {keys: pulse, wash: hold, low: {rel: "R/2 r/8 R/4.", oct: -2}, lead: {deg: "=f 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 9/2.^ 7/4 | 7/2 5/2 | 8/2 5/2 | 8/1", oct: 1}, bell: {deg: "=f 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 9/2.^ 7/4 | 7/2 5/2 | 8/2 5/2 | 8/1", oct: 2}, horn: {deg: "=mp 2/2 4 | 4/2 -1 | 0/1 | -1/2 1 | 2/1 | 3/2 0 | -2/1 | -1/2 -3"}, choir: {style: hold, range: [60, 81]}, harp: {rel: "R/16 5 R+ 5 3 5 R+ 5 R 5 R+ 5 3 5 R+ 5"}, drums: {steps: {kick: "X.........x.....|X.........x.....|X.........x.....|X.......x.x.x...|X.........x.....|X.........x.....|X.........x.....|X.......X.......", snare: "........X.......|........X.......|........X.......|........X...x.x.|........X.......|........X.......|........X.......|........X...x.xX", ghost: "......x.......x.|......x.......x.|......x.......x.|......x...x.x.xx|......x.......x.|......x.......x.|......x.......x.|....x.x.x.x.x.xx", rim: "...x.......x....|...x.......x....|...x.......x....|.........x.x.x..|...x.......x....|...x.......x....|...x.......x....|..x.x.x.x.x.x.x.", hat: {steps: x.x.x.x.x.x.x.x., vel: [0.4, 0.2, 0.3, 0.2]}, ohat: "..x...x...x...x."}}}, harmony: theme, dyn: f}
+  - {name: giant, bars: 6, parts: {keys: {style: hold, voices: 3}, wash: {style: hold, voices: 3}, choir: {style: hold, range: [60, 81]}, low: bassline, lead: {deg: "=f 7/1 | 7/2 b5/2 | b5/1 | 2/1 | 2/2 0/2 | 0/1", oct: 1}, bell: {deg: "=f 7/1 | 7/2 b5/2 | b5/1 | 2/1 | 2/2 0/2 | 0/1", oct: 1}, drums: {steps: {kick: "X...............|........X.......|................|X...............|........X.......|................", ghost: "................|-.-.x.xX........|........-.-.x.xX|................|-.-.x.xX........|................", snare: "................|........X.......|................|X...............|........X.......|................"}}}, harmony: giant, dyn: "f>mf"}
+  - {name: coda, bars: 4, parts: {keys: {rel: "R/8 5 R+ 3+ 5+ 3+ R+ 5", oct: -1}, wash: hold, choir: {style: hold, range: [60, 81]}, low: {deg: "0/1 | 0/1 | 0/1 | 0/1", oct: -2}, horn: {deg: "=p 0/1 | 0/1 | 0/1 | 0/1"}, bell: {deg: "=f r/1 | r/1 | 4/4 2 0/2 | r/1", oct: 1}}, harmony: coda, dyn: "mp>pp"}
 
 events:
+  - {at: silver, type: riser, bars: 1}
   - {at: silver, type: impact, size: m}
-  - {at: golden_home+7, type: impact, size: s}
-  - {at: homecoming, type: riser, bars: 1}
+  - {at: visitor+1, type: riser, beats: 2}
   - {at: homecoming, type: impact}
   - {at: "giant+4:3", type: impact, size: xl}
 mix:
   drums: {gain_db: -12}
   fx: {gain_db: -10}
-  keys: {gain_db: -9, send: {hall: 0.2}}
-  wash: {gain_db: -26, send: {hall: 0.3}}
+  keys: {gain_db: -8, send: {hall: 0.2}}
+  wash: {gain_db: -24, send: {hall: 0.3}}
+  harp: {gain_db: -5, send: {hall: 0.3}, pan: 0.25}
   gold: {gain_db: -12, send: {hall: 0.35}}
-  bell: {gain_db: -9, send: {hall: 0.4}}
+  bell: {gain_db: -10, send: {hall: 0.4}, pan: 0.15}
+  deep: {gain_db: -6, send: {hall: 0.4}}
   lead: {gain_db: 18, send: {hall: 0.25}}
+  horn: {gain_db: -11, send: {hall: 0.35}, pan: -0.25}
+  choir: {gain_db: -22, send: {hall: 0.4}}
   low: {gain_db: -4}
 
 master: clean

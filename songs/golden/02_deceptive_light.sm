@@ -1,48 +1,97 @@
-# 2. Deceptive Light (2:27). G major, 120 BPM, upbeat pop. Golden chords as quick sparkle inside the pop axis.
+# 2. Deceptive Light (2:37). G major, 120 BPM, bright driving pop with sparkle. Golden chords as quick
+# flashes of light inside the pop axis I - V - vi - IV.
 # Technique (docs/GOLDEN_THEORY.md §4.2):
 #   - golden deceptive cadence V - v♭VIg - ♭VIg - vi (System 2, ~g ~g): D -> vEbg -> Ebg -> Em in two 8ths,
-#     so the bass climbs D - vEb - Eb - E like a pop walk-up, one sixth-step at a time;
+#     so the bass climbs D - vEb - Eb - E like a pop walk-up, one sixth-step at a time (plain roots on the
+#     last two 8ths of every bass figure);
 #   - the pre-chorus climbs the golden escalator IV - v#IVg - ^#IVg - V (C -> vC#g -> ^C#g -> D) and lands
 #     on the golden authentic chord vGg/D, a golden six-four that pulls into the chorus;
-#   - the bridge slows the deceptive cadence to whole beats so you can hear it, looping V back to vi;
+#   - the deceptive cadence is also the song's form device: chorus 2 and the final chorus end on it, so
+#     the music "fakes out" into Em (the bridge, then the outro) instead of going home;
+#   - the bridge slows the deceptive cadence to whole beats (bass walks D - vEb - Eb - E in quarters);
 #   - the ending is golden modal mixture: IV - IVg - iv - I (C - Cg - Cm - G), the golden centroid
 #     between major and minor.
-# Craft: the melody rests or changes chord tone on every golden 8th; arps and the bass follow the chord.
+# Craft: the melodies rest on every golden chord (or hold a common tone: C over Cg - Cm); every
+# sounding part changes with the chord (voiced styles, rel figures, arps).
+# Form (77 bars + 3 s tail): intro 4 (epiano, pad, dark arp, glass bell plays the hook) - intro_b 4
+# (+drums, bass) - verse 8 - pre 4 (escalator) - chorus 8 - post 4 (bell hook, lead rests) - verse_2 8
+# (+strummed guitar, ghost snares) - pre_2 4 - chorus_2 8 (+bell countermelody; ends deceptive) -
+# bridge 8 (breakdown, slowed cadence, call and bell answer) - build 4 (snare roll, riser, one-bar drop)
+# - chorus_3 8 (biggest: hats16, guitar, bell doubles the hook an octave up; ends deceptive) - outro 5.
+# Instruments: drums, synth bass, epiano/still (comp/pulse/hold), string_pluck/still guitar (rel strums),
+# synth pluck arp, pad/still (hold), clean/lead, clean/glass bell, fx risers and impacts.
 song "Deceptive Light" 120 4/4 G fps=30 seed=22 tail=3 tuning=36edo
-inst lead=clean/lead ep=epiano/still wash=pad/still bell=clean/glass
+inst lead=clean/lead ep=epiano/still wash=pad/still bell=clean/glass gtr=string_pluck/still(brightness=.7)
 
 prog verse  "G:1 D:0.75 ~g:0.125 ~g:0.125 Em:1 C:1"
 prog pre    "Am:1 Bm:1 C:0.5 ~g:0.25 ~g:0.25 D:0.75 vGg/D:0.25"
 prog chorus "G:1 D:0.75 ~g:0.125 ~g:0.125 Em:1 C:1 G:1 D:1 C:1 D:0.75 vGg/D:0.25"
+prog fake   "G:1 D:0.75 ~g:0.125 ~g:0.125 Em:1 C:1 G:1 D:1 C:1 D:0.75 vEbg:0.125 Ebg:0.125"
 prog slow   "Em:1 C:1 G:1 D:0.5 ~g:0.25 ~g:0.25"
-prog coda   "C:1 Cg:0.5 Cm:0.5 G:2"
+prog build  "Em:1 Am:1 C:0.5 ~g:0.25 ~g:0.25 D:0.75 vGg/D:0.25"
+prog coda   "Em:1 C:1 Cg:0.5 Cm:0.5 G:2"
 
 # deg 0 = G4. Verse: conversational 8ths that answer themselves; every golden beat gets a rest.
 vq = "=mp r/8 2/8 4 4 5/4 4/8 2 | 1/4 2/8 1 0/4 r/4 | r/8 2/8 4 4 5/4 4/8 2 | 4/2 0/2"
 va = "r/8 4/8 5 5 7/4 5/8 4 | 4/4 5/8 4 2/4 r/4 | r/8 2/8 4 4 5/4 4/8 2 | 1/2. r/4"
-# Chorus: the hook leaps to G5 and B5; the line breathes on each golden cadence.
-ch = "=f 7/4 7/8 9 7/4 4 | 8/4. 7/8 8/4 r/4 | 9/4 9/8 11 9/4 7 | 7/2 4/2 | 7/4 7/8 9 7/4 4 | 8/4. 9/8 11/2 | 11/4. 9/8 7/2 | 8/2. r/4"
+vq2 = "=mp r/8 2/8 4 4 5/4 4/8 2 | 1/4 2/8 1 0/4 r/4 | r/8 2/8 4 5 7/4 5/8 4 | 4/2 3/4 2"
+va2 = "r/8 4/8 5 5 7/4 5/8 4 | 4/4 5/8 4 2/4 r/4 | r/8 7/8 9 7 5/4 4/8 2 | 3/2 2/4 r/4"
 verse_tune = {deg: vq + " | " + va}
+verse_tune2 = {deg: vq2 + " | " + va2}
+# Pre-chorus: climbs chord tone by chord tone, rests while the golden escalator climbs for it.
+pre_tune = {deg: "=mp < r/8 1/8 3 4 5/2 | r/8 2/8 4 5 6/2 | 4/8 5 7/4 r/2 | 6/4 8/2 r/4 =f"}
+# Chorus: the hook leaps to G5 and B5; the line breathes on each golden cadence.
+h4 = "7/4 7/8 9 7/4 4 | 8/4. 7/8 8/4 r/4 | 9/4 9/8 11 9/4 7 | 7/2 4/2"
+ch = "=f " + h4 + " | 7/4 7/8 9 7/4 4 | 8/4. 9/8 11/2 | 11/4. 9/8 7/2 | 8/2. r/4"
+ch3 = "=f " + h4 + " | 7/4 7/8 9 7/4 4 | 8/4. 9/8 11/2 | 11/4. 12/8 11/2 | 11/2. r/4"
 hook = {deg: ch}
-# Bridge: a slow call in the epiano's register, answered by silence.
-call = {deg: "=mp 4/2 5/4 4 | 2/1 | 4/2 7/4 5 | 4/2 r/2"}
+hook3 = {deg: ch3}
+bell_hook = {deg: "=mf " + h4}
+# Chorus 2 countermelody: a glass halo above the lead, one tone per chord, resting on the golden 8ths.
+halo = {deg: "=mp 4/1 | 4/2. r/4 | 5/2. 7/8 5 | 5/2 3/2 | 4/1 | 6/1 | 7/2 5/2 | 6/2. r/4", oct: 1}
+# Bridge: a slow call in the epiano's register; the bell answers it.
+call = {deg: "=mp 4/2 5/4 4 | 2/1 | 4/2 7/4 5 | 4/2 r/2 | r/1 | r/1 | r/1 | r/1"}
+answer = {deg: "=mp r/1 | r/1 | r/1 | r/1 | 7/2 5/4 4 | 4/1 | 2/2 4/4 5 | 4/2 r/2"}
+build_tune = {deg: "=mp < 7/2 5/2 | 5/2 3/2 | 4/8 5 7/4 r/2 | 8/2. r/4 =f"}
+# Outro: holds C, the tone that C, Cg and Cm keep, then comes home.
+coda_tune = {deg: "=mf 9/2 7/4 5 | 4/2 3/2 | 3/1 | 2/2 4/2 | 7/1"}
 
-walk = {rel: "R/4 R R R/8 R", oct: -2}        # the last beat in 8ths follows both golden chords
-drive = {rel: "R/8 R+ R R+ R R+ R R", oct: -2}     # octave bounce, then two plain roots so golden 8ths climb
-beat = {kick: "X.......X.......", snare: "....X.......X...", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.6, 0.3, 0.45, 0.3, 0.6, 0.3, 0.45, 0.35]}}
+# Bass: plain roots on the last two 8ths of every figure, so the golden 8ths climb.
+vbass = {rel: "R/4. R/8 r/8 5/8 R R", oct: -2}           # locks with the pocket kick (1, 2&, 3&)
+drive = {rel: "R/8 R+ R R+ R R+ R R", oct: -2}
+pump = {rel: "R/4 R R R/8 R", oct: -2}                  # pre-chorus: quarters, the last beat in 8ths
+slowbass = {rel: "R/2 R/4 R", oct: -2}                   # quarters on beats 3-4 walk the slowed cadence
+codabass = {rel: "R/2 R", oct: -2}
+# Guitar: strums on 1, 2, 2&, 3&, 4, 4&; the 4 and 4& strums land on the golden chords.
+strum = {rel: "[R,5,R+,3+]/4 [R,5,R+,3+]/8 [R,5,R+,3+] r/8 [R,5,R+,3+] [R,5,R+,3+] [R,5,R+,3+]"}
+
+E1 = "................"
+E4 = E1 + "|" + E1 + "|" + E1 + "|" + E1
+roll = {steps: E1 + "|" + E1 + "|" + E1 + "|........xxxxxxxx", vel: [0.4, 0.46, 0.52, 0.58, 0.64, 0.7, 0.76, 0.84]}
+fill4 = {fill: roll}
+fill8 = {fill: {steps: E4 + "|" + E1 + "|" + E1 + "|" + E1 + "|........xxxxxxxx", vel: [0.4, 0.46, 0.52, 0.58, 0.64, 0.7, 0.76, 0.84]}}
+hats = {steps: "x.x.x.x.x.x.x.x.", vel: [0.6, 0.3, 0.45, 0.3, 0.6, 0.3, 0.45, 0.35]}
+pocket = {kick: "X.....x...x.....", snare: "....X.......X...", hat: hats}
+intro_beat = {kick: "X.......X.......", hat: {steps: "-.x.-.x.-.x.-.x.", vel: [0.35, 0.5]}} + fill4
+pre_beat = {kick: "X.......X.......|X.......X.......|X...X...X...X...|X...X...X...X...", snare: "....X.......X...", hat: hats, ohat: "..............x.", fill: roll}
+bridge_beat = {kick: E4 + "|X.........x.....|X.........x.....|X.........x.....|X.........x.x...", rim: E4 + "|........x.......|........x.......|........x.......|........x...x.x.", hat: {steps: E4 + "|-.x.-.x.-.x.-.x.|-.x.-.x.-.x.-.x.|-.x.-.x.-.x.-.x.|-.x.-.x.-.x.-.x.", vel: [0.3, 0.45]}}
+build_beat = {kick: "X...X...X...X...", snare: {steps: "x...x...x...x...|x.x.x.x.x.x.x.x.|xxxxxxxxxxxxxxxx|" + E1, vel: [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9]}, hat: "x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|x...x...x...x...|" + E1}
 lift = !riser:1 !impact(size=m)
 
 # name    bars | parts and settings                                                       | events
-intro       4 | ep:comp arp:dark prog=verse dyn=p<mp
-verse       8 | ep:comp drums:beat bass:walk lead:verse_tune prog=verse dyn=mp
-pre         4 | ep:pulse drums:beat bass:drive wash:hold arp:dark lead:{deg: "=mp < 0/2 2/2 | 3/2 5/2 | 4/2. 5/4 | 6/2. r/4 =mf"} prog=pre dyn=mp
-chorus      8 | ep:comp drums:full+open bass:drive wash:hold arp:up lead:hook prog=chorus dyn=mf  | !lift
-verse_2     8 | like=verse drums:beat+{ghost: ".......o......o."} dyn=mp
-pre_2       4 | like=pre
-chorus_2    8 | like=chorus                                                                    | !riser:1
-bridge      8 | ep:hold wash:hold drums:half bass:walk lead:call prog=slow dyn=p<mp
-chorus_3    8 | like=chorus drums:full+open+hats16 bell:{deg: ch, oct: 1} dyn=ff                                       | !drop:1@-1(keep=[ep, wash]) !lift
-outro       4 | ep:hold wash:hold bass:{rel: "R/1", oct: -2} lead:{deg: "=mp 4/1 | 4/2 3/2 | 4/1 | 4/1"} prog=coda dyn=mp>p | !impact@+2(size=s)
+intro       4 | ep:comp wash:hold arp:dark bell:bell_hook prog=verse dyn=p<mp
+intro_b     4 | like=intro drums:intro_beat bass:vbass dyn=p<mp                            | !impact(size=s)
+verse       8 | ep:comp drums:pocket+fill8 bass:vbass lead:verse_tune prog=verse dyn=mp
+pre         4 | ep:pulse drums:pre_beat bass:pump wash:hold arp:dark lead:pre_tune prog=pre dyn=mp<mf
+chorus      8 | ep:comp drums:full+open+fill8 bass:drive wash:hold arp:up lead:hook prog=chorus dyn=mf | !lift
+post        4 | ep:comp drums:full+open+fill4 bass:drive wash:hold arp:up bell:bell_hook prog=verse dyn=mf
+verse_2     8 | like=verse drums:pocket+fill8+{ghost: ".......o......o."} gtr:strum lead:verse_tune2
+pre_2       4 | like=pre gtr:strum
+chorus_2    8 | like=chorus bell:halo prog=fake                                            | !lift
+bridge      8 | ep:hold wash:hold drums:bridge_beat bass:slowbass lead:call bell:answer prog=slow dyn=p<mp
+build       4 | ep:pulse wash:hold drums:build_beat bass:drive arp:dark lead:build_tune prog=build dyn=mp<f
+chorus_3    8 | like=chorus drums:full+open+hats16+fill8 gtr:strum bell:{deg: ch3, oct: 1} lead:hook3 prog=fake dyn=f | !drop:1@-1(keep=[ep, wash, lead]) !riser:2 !impact(size=xl)
+outro       5 | ep:hold wash:hold bass:codabass lead:coda_tune prog=coda dyn=mf>p      | !impact@+3(size=s)
 
-mix drums -9 | fx -9 | bass -1 | lead 16 hall=.25 | ep -16 hall=.15 | wash -24 hall=.3 | arp -2 | bell -6 hall=.35
+mix drums -9 | fx -9 | bass -3 | lead 16 hall=.25 | ep -16 hall=.15 | wash -24 hall=.3 | arp -2 | bell -10 hall=.35 | gtr -13 hall=.2
 master clean

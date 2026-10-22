@@ -539,14 +539,13 @@ parts:
           - {id: limits, title: "What a machine cannot judge"}
       - id: ch47
         title: "Five songs: golden harmony in Western music"
-        summary: "Five complete songs, each built on one golden technique, and the craft that keeps golden colour tasteful."
+        summary: "Five complete songs, two to three minutes each, each built on one golden technique; with listening guides and excerpts for analysis."
         sections:
-          - {id: blend, title: "Blending: the craft"}
-          - {id: lullaby, title: "Passing light: “Golden Hour Lullaby”"}
-          - {id: deceptive, title: "Sparkle: “Deceptive Light”"}
-          - {id: colour, title: "Colour: “Tape Bloom”"}
-          - {id: descent, title: "Descent: “Andalusian Gold”"}
-          - {id: silver, title: "Pivot and home: “The Silver Third”"}
+          - {id: lullaby, title: "Golden Hour Lullaby: passing light"}
+          - {id: deceptive, title: "Deceptive Light: the golden deceptive cadence"}
+          - {id: colour, title: "Tape Bloom: golden colour chords"}
+          - {id: descent, title: "Andalusian Gold: the golden Andalusian cadence"}
+          - {id: silver, title: "The Silver Third: pivot, golden home, giant steps"}
 
   - id: appendices
     title: "Appendices"

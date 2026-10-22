@@ -4,16 +4,18 @@ Five complete songs written with the `songmap-compose` skill in 36-ET (`tuning=3
 five. Golden chords come in as passing light, sparkle, colour, a pivot between keys, and in one case a home of their own.
 Each song explores one technique from [docs/GOLDEN_THEORY.md](../../docs/GOLDEN_THEORY.md) and
 [docs/GOLDEN_BLENDING.md](../../docs/GOLDEN_BLENDING.md). Open [index.html](index.html) to listen to all five on one page. The textbook's Chapter 47, *Five songs: golden harmony
-in Western music* ([textbook/content/ch47.html](../../textbook/content/ch47.html)), teaches each technique with short
-excerpts, piano rolls of the exact voicings, the theory behind it, and exercises.
+in Western music* ([textbook/content/ch47.html](../../textbook/content/ch47.html)), features each full song with a timed
+listening guide, then short excerpts, piano rolls of the exact voicings, the theory behind it, and exercises.
 
-| # | Song | Key, tempo | Golden technique | Length |
-|---|---|---|---|---|
-| 1 | [Golden Hour Lullaby](01_golden_hour_lullaby.sm) | C major, 72 | Passing chords: I–IV and V–I through one golden chord, the golden escalator into V, the four-chord golden authentic cadence, a golden plagal amen | 2:17 |
-| 2 | [Deceptive Light](02_deceptive_light.sm) | G major, 120, pop | The golden deceptive cadence V – v♭VIg – ♭VIg – vi as a bass walk-up (D – vE♭ – E♭ – E), the escalator in the pre-chorus, golden modal mixture at the end (C – Cg – Cm – G) | 2:11 |
-| 3 | [Tape Bloom](03_tape_bloom.sm) | A minor, 90, lo-fi | Golden colour chords by projection, held like borrowed chords: Fmaj7 → Fg, E7 → Eg (third down to vG♯, seventh up to the golden D♯), Am → vAg; ends on the golden Picardy third Am – Am(^3) – Ag – A | 2:01 |
-| 4 | [Andalusian Gold](04_andalusian_gold.sm) | A minor / E Phrygian, 100 | The golden Andalusian cadence Am – A♭g – vA♭g – G – ^F#g – vF#g – F – vF – ^E – E: the bass walks the tetrachord down in sixth-steps. Played plain first, then golden | 1:40 |
-| 5 | [The Silver Third](05_silver_third.sm) | C → ^E♭ → golden home → C, 90 | Pivot-chord modulation between keys that share no note (C and ^E♭ share Fg and Gg); a golden-home interlude on golden-spectrum timbres; golden giant steps C – Cg – A♭ – A♭g – E – Eg – C | 2:07 |
+| # | Song | Style | Instruments | Golden technique | Length |
+|---|---|---|---|---|---|
+| 1 | [Golden Hour Lullaby](01_golden_hour_lullaby.sm) | C major lullaby, 72 BPM | music box, felt piano, harp, flute, strings, bass, soft brushes | passing chords on the weak beats, the golden escalator into V, the four-chord golden authentic cadence, the golden plagal amen | 2:31 |
+| 2 | [Deceptive Light](02_deceptive_light.sm) | G major pop, 120 BPM | drums with claps and fills, bass, electric piano, strummed guitar, pluck arpeggio, pad, lead, glass bell | the golden deceptive cadence D – vE♭g – E♭g – Em as a bass walk-up, and as the form's surprise ending of choruses 2 and 3; the escalator; golden modal mixture C – Cg – Cm – G | 2:37 |
+| 3 | [Tape Bloom](03_tape_bloom.sm) | A minor lo-fi, 90 BPM | swung drums, vinyl crackle, electric piano, sliding bass, piano melody, nylon guitar, flute, pad, bells | golden colour chords by projection (Fmaj7 → Fg, E7 → Eg, Am → vAg); the golden Picardy third Am – Am(^3) – Ag – A | 2:23 |
+| 4 | [Andalusian Gold](04_andalusian_gold.sm) | A minor flamenco, 100 BPM | rasgueado and picado guitars, palmas and cajón, walking bass, strings, cante lead, violin line, bell | the golden Andalusian cadence Am – A♭g – vA♭g – G – ^F#g – vF#g – F – vF – ^E – E, played plain first, then golden | 2:14 |
+| 5 | [The Silver Third](05_silver_third.sm) | cinematic, 90 BPM | piano, strings, harp ostinato, drums and toms, bass, lead, horn, organ choir, bells, golden pad | a pivot from C to ^E♭ through Fg (keys with no note in common); a golden home on golden-spectrum timbres; golden giant steps C – Cg – A♭ – A♭g – E – Eg – C | 2:39 |
+
+The first, shorter versions (1:40–2:17, fewer instruments) are kept in [v1/](v1/).
 
 ## How the golden moments were kept tasteful
 
@@ -33,11 +35,11 @@ excerpts, piano rolls of the exact voicings, the theory behind it, and exercises
 
 | Song | Integrated loudness | True peak | Loudest section, and its margin over every other section |
 |---|---|---|---|
-| Golden Hour Lullaby | −21.6 LUFS | −0.95 dBTP | `glow` (the bridge), +3.2 dB |
-| Deceptive Light | −18.2 | −0.99 | `chorus_3`, +4.7 dB |
-| Tape Bloom | −19.2 | −0.99 | `bloom`, +1.9 dB |
-| Andalusian Gold | −18.8 | −0.99 | `gold_full`, +1.8 dB |
-| The Silver Third | −18.9 | −0.99 | `homecoming`, +1.8 dB |
+| Golden Hour Lullaby | −22.2 LUFS | −0.99 dBTP | `finale`, +2.9 dB |
+| Deceptive Light | −17.5 | −0.95 | `chorus_3`, +3.0 dB |
+| Tape Bloom | −22.2 | −0.86 | `reprise`, +3.1 dB |
+| Andalusian Gold | −19.5 | −0.95 | `climax`, +3.2 dB |
+| The Silver Third | −19.6 | −0.99 | `homecoming`, +3.0 dB |
 
 None clips. The melody stem sits within about 2 dB of the loudest accompaniment in every song.
 

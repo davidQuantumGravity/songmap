@@ -1,0 +1,43 @@
+# 5. The Silver Third (2:07). C major -> ^Eb major -> golden home -> C major, 90 BPM, cinematic.
+# Techniques that Western harmony cannot do (docs/GOLDEN_BLENDING.md, ranks 1, 4 and the golden home of
+# GOLDEN_THEORY.md §4.3):
+#   - Projection pivot between layers. C major and ^Eb major (+10 sixth-steps, 333 cents: a "silver
+#     third") share no note, but they share the golden chords Cg, Fg, Gg (I, IV, V of C = vi, ii, iii of
+#     ^Eb). The theme modulates through Fg: F -> Fg (golden IV in C) = golden ii in ^Eb -> ^Fm -> ^Bb7 -> ^Eb,
+#     and the same theme returns a silver third higher.
+#   - Golden home. The Western instruments fall silent and a golden-spectrum pad and bell (partials
+#     2^m·φ^n, where golden chords are the smoothest) breathe along the golden circle: ^Ebg - ^Ebg7 - Gg - Gg7
+#     - vBg - Gg7 - Gg, each golden seventh adding the next chain tone. Then G7 arrives as a visitor:
+#     Gg -> G (the projection reversed) is the release that leads home to C.
+#   - Golden giant steps. Coltrane's major-third cycle C -> Ab -> E -> C, each step through its one strict
+#     golden passing chord (C - Cg - Ab - Abg - E - Eg - C). The melody holds the common tone of every
+#     step: C, then Ab, then E, then C.
+song "The Silver Third" 90 4/4 C fps=30 seed=25 tail=4 tuning=36edo
+inst keys=keys/still wash=pad/still gold=clean/golden_pad bell=clean/glass lead=clean/lead low=clean/bass
+
+prog theme   "C:1 Em:1 F:1 G:1 Am:1 F:1 Dm:1 G:1"
+prog pivot   "F:0.5 Fg:0.5 ^Fm:1 ^Bb7:1 ^Eb:1"
+prog theme_e "^Eb:1 ^Gm:1 ^Ab:1 ^Bb:1 ^Cm:1 ^Ab:1 ^Fm:1 ^Bb:1"
+prog home    "^Ebg:1 ^Ebg7:1 Gg:1 Gg7:1 vBg:1 Gg7:1 Gg:1 G7:1"
+prog giant   "C:1 ~:0.5 Ab:1 ~:0.5 E:1 ~:0.5 C:1.5"
+
+# deg 0 = C5. The theme climbs to B, falls through A, and ends on the 5th of V (a half cadence).
+theme_tune = "=mp 4/2 2/4 0 | 2/4 4 6/2 | 5/2 7/4 5 | 4/1 | 7/4. 6/8 4/2 | 5/4 4 2 0 | 1/2 3/2 | 1/1"
+tune = {deg: theme_tune, oct: 1}
+# Golden home: the bell walks chord tones (rel), so every note belongs to the golden chord under it.
+chain = {rel: "5/2 3+ | R+/1", oct: 1}
+# Finale: common tones of the giant steps, C6 - Ab5 - E5 - C5.
+steps = {deg: "=f 7/1 | 7/2 b5/2 | b5/1 | 2/1 | 2/2 0/2 | 0/1", oct: 1}
+beat = {kick: "X.......x.......", snare: "........X.......", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.45, 0.25, 0.35, 0.25]}}
+
+# name      bars | parts and settings                                              | events
+dawn          4 | keys:hold wash:hold prog=theme dyn=p<mp
+theme         8 | keys:comp wash:hold low:bassline lead:tune prog=theme dyn=mp
+pivot         4 | keys:hold wash:hold low:bassline lead:{deg: "3/1 | r/1 | r/1 | r/1", oct: 1} prog=pivot dyn=mp<mf
+silver        8 | keys:comp wash:hold low:bassline lead:tune drums:beat prog=theme_e key=^Eb dyn=mf  | !impact(size=m)
+golden_home   8 | gold:hold bell:chain prog=home dyn=p<mp                                     | !impact@+7(size=s)
+homecoming    8 | like=silver prog=theme key=C bell:{deg: theme_tune, oct: 2} drums:beat+{ohat: "......x.......x."} dyn=f | !riser:1 !impact
+giant         6 | keys:hold wash:hold low:bassline lead:steps bell:steps prog=giant dyn=mf>mp    | !impact@+4:3(size=xl)
+
+mix drums -12 | fx -10 | keys -9 hall=.2 | wash -26 hall=.3 | gold -12 hall=.35 | bell -9 hall=.4 | lead 18 hall=.25 | low -4
+master clean
