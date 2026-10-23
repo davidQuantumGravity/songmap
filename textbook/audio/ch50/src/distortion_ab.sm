@@ -1,0 +1,16 @@
+# Two kinds of distortion (ch50). The same power chords (root, fifth, octave) through ONE distortion after the notes
+# are summed (a drive insert on the part), then through a distortion applied to each note on its own (the patch "axe").
+# First a 12-ET fifth (C), then golden fifths (Cg - ^Abg - vFg - C#g), bus-distorted, then the golden ones per note.
+song "Two kinds of distortion" 138 4/4 C fps=30 seed=1301 tail=2 tuning=36edo
+patch axe str=string(t60=1.6, brightness=.93, pick=.003) sh=shaper(drive=.8) cab=filter(mode=lp, cutoff=4200, q=1.2, keytrack=0) env=env(a=.002, d=.4, s=.85, r=.07) amp=vca out=out(level=.6)
+patch axe str>sh sh>cab cab>amp env>amp.gain amp>out vel>sh.drive*.3
+inst axe=patch/axe bus=string_pluck/still(brightness=.93, t60=1.6)
+inserts bus drive(amount=.8, tone=4200)
+kit kick=kick/v0(tune=55, sweep=26, decay=.28, click=.65, click_tone=4500, drive=2) snare=snare/v0(tone=205, tone_mix=.5, snap=.65, noise_decay=.2, drive=1.5) hat=hat/v0(decay=.045) ride=hat/v0(decay=.3, hp=3500, color=6500, metal=.85, tune=.8) cym=hat/v0_open(decay=1.4, hp=3200, metal=.75)
+pc = {rel: "=f [R,5,R+]/4.^ [R,5,R+]/4. [R,5,R+]/4", oct: -1}
+beat = {kick: "X.....X.X.......", snare: "....X.......X...", hat: "x.x.x.x.x.x.x.x."}
+west    2 | bus:pc drums:beat chords="C:1 F:1" dyn=f
+summed  4 | bus:pc drums:beat chords="Cg:1 ^Abg:1 vFg:1 C#g:1" dyn=f
+pernote 4 | axe:pc drums:beat chords="Cg:1 ^Abg:1 vFg:1 C#g:1" dyn=f
+mix axe -6 | bus -6 | drums -8
+master standard lufs=-14 glue=none

@@ -1,0 +1,14 @@
+# One phrase, three golden modes (ch50): the horn's question from "Blue gold", written in scale degrees, in the
+# brightest mode of golden7 (6|0), in golden7 itself (3|3, the golden Dorian) and in the darkest (0|6), each time
+# over its tonic chord with the mode's colour chord in the fourth bar (Bg, C#g, Dg7).
+song "One phrase, three modes" 168 4/4 C fps=30 seed=1301 tail=3 tuning=36edo
+inst horn=clean/organ(partials=7, rolloff=1.5, even=.6, attack=.035, release=.18, vel_bright=.8) epiano=epiano/still
+kit kick=kick/v0(tune=55, sweep=26, decay=.28, click=.65, click_tone=4500, drive=2) snare=snare/v0(tone=205, tone_mix=.5, snap=.65, noise_decay=.2, drive=1.5) hat=hat/v0(decay=.045) ride=hat/v0(decay=.3, hp=3500, color=6500, metal=.85, tune=.8) cym=hat/v0_open(decay=1.4, hp=3200, metal=.75)
+ask = {deg: "=mf r/8 4/8 2/8 0/8 2/4^ 4/4 | 6/8 7/8 6/8 4/8 2/4. 0/8 | 1/8 2/8 4/8 2/8 0/2 | r/1", oct: 1}
+walk = {rel: "R/4^ 3 5 3 | R^ 5 7 5 | R+^ 7 5 3 | R^ 3 5 7", oct: -2}
+swing = {ride: {steps: "x..x.xx..x.x", vel: [0.5, 0.3, 0.2, 0.42, 0.3, 0.2]}, hat: {steps: "...x.....x..", vel: [0.35]}}
+brightest 4 | horn:ask bass:walk epiano:comp(rhythm="x.....x...x.....", voices=4, range=[52,70]) drums:swing chords="Cg7:3 Bg:1" key="C golden7_60" swing=.66 dyn=mf
+dorian    4 | like=brightest chords="Cg7:3 C#g:1" key="C golden7_33"
+darkest   4 | like=brightest chords="Csus2(vvvv5):3 Dg7:1" key="C golden7_06"
+mix horn -7 hall=.25 | epiano -10 hall=.2 | bass -8 | drums -4
+master standard lufs=-14 glue=none

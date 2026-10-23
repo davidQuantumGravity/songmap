@@ -161,7 +161,7 @@ riff_3            4 | axe:riff bass:riff_bass drums:riff_beat chords="C:1" key="
 verse_2           8 | axe:chug bass:eighths drums:verse_beat2:gain_db=-2 lead:verse_tune organ:hold(range=[48,67]) prog=verse_p key="F harmonic_minor" meter=4/4 dyn=mf
 pre_2             4 | like=pre_1 dyn=mf<f
 chorus_2          8 | axe:power:gain_db=-3 bass:eighths drums:chorus_beat2:gain_db=-2 lead:chorus2_tune organ:hold bell:{deg: "=p < " + phi_a + " =mf | " + phi_b2, oct: 1} prog=chorus2_p key=Ab meter=4/4 dyn=mp<mf | !impact(size=m)
-riff_out          4 | axe:riff bass:riff_bass drums:riff_beat2 chords="C:1" key="C phrygian_dominant" meter="7/8 2+2+3" dyn=f>mf | !stop:2b@+4:2.5
+riff_out          4 | axe:riff bass:riff_bass drums:riff_beat2 chords="C:1" key="C phrygian_dominant" meter="7/8 2+2+3" dyn=f>mf | !stop:2b@+3:2.5
 # ======== II. Blue gold (modal jazz, swung; C dorian -> golden modes -> C major) ========
 head_dorian       8 | horn:head bass:walk epiano:comp(rhythm="x.....x...x.....", voices=4, range=[52,70]) drums:swing_beat prog=dorian_p key="C dorian" tempo=168 swing=.66 dyn=mp
 head_golden       8 | like=head_dorian prog=goldor_p key="C golden7" dyn=mp<mf

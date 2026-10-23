@@ -20,52 +20,53 @@ The loudness column is from `renders/a_comma_higher/qa.json`.
 
 | Section | Starts | Bars | Meter | BPM | Key / mode | LUFS |
 |---|---|---|---|---|---|---|
-| `veil` | 0:00.0 | 12 | 4/4 | 72 | C golden7 | -22.6 |
-| `door` | 0:40.0 | 2 | 4/4 | 72 | — | -20.0 |
-| `riff_1` | 0:46.7 | 8 | 7/8 2+2+3 | 138 | C phrygian_dominant | -14.1 |
-| `riff_2` | 0:58.8 | 8 | 7/8 2+2+3 | 138 | C phrygian_dominant | -12.8 |
-| `verse_1` | 1:11.0 | 16 | 4/4 | 138 | F harmonic_minor | -13.4 |
-| `pre_1` | 1:38.8 | 4 | 5/4 3+2 | 138 | Ab | -12.5 |
-| `chorus_1` | 1:47.5 | 8 | 4/4 | 138 | Ab | -12.7 |
-| `riff_3` | 2:01.4 | 4 | 7/8 2+2+3 | 138 | C phrygian_dominant | -14.2 |
-| `verse_2` | 2:07.5 | 8 | 4/4 | 138 | F harmonic_minor | -12.6 |
-| `pre_2` | 2:21.4 | 4 | 5/4 3+2 | 138 | Ab | -12.2 |
-| `chorus_2` | 2:30.1 | 8 | 4/4 | 138 | Ab | -12.1 |
-| `riff_out` | 2:44.1 | 4 | 7/8 2+2+3 | 138 | C phrygian_dominant | -14.2 |
-| `head_dorian` | 2:50.1 | 8 | 4/4 | 168 | C dorian | -22.0 |
-| `head_golden` | 3:01.6 | 8 | 4/4 | 168 | C golden7 | -20.0 |
-| `head_lift` | 3:13.0 | 8 | 4/4 | 168 | ^C golden7 | -19.1 |
-| `head_home` | 3:24.4 | 8 | 4/4 | 168 | C dorian | -19.7 |
-| `mode_60` | 3:35.9 | 8 | 4/4 | 168 | C golden7_60 | -16.9 |
-| `mode_51` | 3:47.3 | 8 | 4/4 | 168 | C golden7_51 | -17.1 |
+| `veil` | 0:00.0 | 12 | 4/4 | 72 | C golden7 | -22.5 |
+| `door` | 0:40.0 | 2 | 4/4 | 72 | — | -19.9 |
+| `riff_1` | 0:46.7 | 8 | 7/8 2+2+3 | 138 | C phrygian_dominant | -14.0 |
+| `riff_2` | 0:58.8 | 8 | 7/8 2+2+3 | 138 | C phrygian_dominant | -12.7 |
+| `verse_1` | 1:11.0 | 16 | 4/4 | 138 | F harmonic_minor | -13.2 |
+| `pre_1` | 1:38.8 | 4 | 5/4 3+2 | 138 | Ab | -12.4 |
+| `chorus_1` | 1:47.5 | 8 | 4/4 | 138 | Ab | -12.6 |
+| `riff_3` | 2:01.4 | 4 | 7/8 2+2+3 | 138 | C phrygian_dominant | -14.1 |
+| `verse_2` | 2:07.5 | 8 | 4/4 | 138 | F harmonic_minor | -12.5 |
+| `pre_2` | 2:21.4 | 4 | 5/4 3+2 | 138 | Ab | -12.0 |
+| `chorus_2` | 2:30.1 | 8 | 4/4 | 138 | Ab | -11.9 |
+| `riff_out` | 2:44.1 | 4 | 7/8 2+2+3 | 138 | C phrygian_dominant | -14.9 |
+| `head_dorian` | 2:50.1 | 8 | 4/4 | 168 | C dorian | -21.4 |
+| `head_golden` | 3:01.6 | 8 | 4/4 | 168 | C golden7 | -19.9 |
+| `head_lift` | 3:13.0 | 8 | 4/4 | 168 | ^C golden7 | -19.0 |
+| `head_home` | 3:24.4 | 8 | 4/4 | 168 | C dorian | -19.6 |
+| `mode_60` | 3:35.9 | 8 | 4/4 | 168 | C golden7_60 | -16.7 |
+| `mode_51` | 3:47.3 | 8 | 4/4 | 168 | C golden7_51 | -17.2 |
 | `mode_42` | 3:58.7 | 8 | 4/4 | 168 | C golden7_42 | -17.0 |
-| `mode_33` | 4:10.1 | 8 | 4/4 | 168 | C golden7_33 | -16.7 |
-| `mode_24` | 4:21.6 | 8 | 4/4 | 168 | C golden7_24 | -17.2 |
-| `mode_15` | 4:33.0 | 8 | 4/4 | 168 | C golden7_15 | -17.7 |
-| `mode_06` | 4:44.4 | 8 | 4/4 | 168 | C golden7_06 | -18.1 |
-| `cadence` | 4:55.9 | 4 | 4/4 | 168 | — | -20.7 |
-| `giant` | 5:01.6 | 8 | 4/4 | 168 | C | -17.7 |
-| `deca_1` | 5:13.0 | 8 | 7/8 2+2+3 | 138 | C golden10_36 | -13.2 |
-| `deca_2` | 5:25.2 | 8 | 7/8 2+2+3 | 138 | C golden10_36 | -12.7 |
-| `planing` | 5:37.3 | 8 | 7/8 2+2+3 | 138 | — | -13.1 |
-| `deca_13` | 5:49.5 | 8 | 13/16 3+3+3+2+2 | 138 | C golden10_36 | -13.2 |
-| `axe_solo` | 6:00.8 | 16 | 7/8 2+2+3 | 138 | C golden10_36 | -12.9 |
-| `still` | 6:25.2 | 16 | 4/4 | 69 | C golden7 | -21.8 |
-| `pump_a` | 7:20.8 | 6 | 4/4 | 138 | — | -15.7 |
-| `pump_b` | 7:31.3 | 8 | 4/4 | 138 | — | -12.8 |
-| `pump_c` | 7:45.2 | 6 | 4/4 | 138 | — | -12.5 |
-| `pump_d` | 7:55.6 | 2 | 4/4 | 138 | — | -13.6 |
-| `summit_riff` | 7:59.1 | 8 | 7/8 2+2+3 | 138 | ^C phrygian_dominant | -12.7 |
-| `summit_verse` | 8:11.3 | 8 | 4/4 | 138 | ^F harmonic_minor | -13.3 |
+| `mode_33` | 4:10.1 | 8 | 4/4 | 168 | C golden7_33 | -16.4 |
+| `mode_24` | 4:21.6 | 8 | 4/4 | 168 | C golden7_24 | -16.9 |
+| `mode_15` | 4:33.0 | 8 | 4/4 | 168 | C golden7_15 | -17.4 |
+| `mode_06` | 4:44.4 | 8 | 4/4 | 168 | C golden7_06 | -17.9 |
+| `cadence` | 4:55.9 | 4 | 4/4 | 168 | — | -20.5 |
+| `giant` | 5:01.6 | 8 | 4/4 | 168 | C | -17.4 |
+| `deca_1` | 5:13.0 | 8 | 7/8 2+2+3 | 138 | C golden10_36 | -13.0 |
+| `deca_2` | 5:25.2 | 8 | 7/8 2+2+3 | 138 | C golden10_36 | -12.6 |
+| `planing` | 5:37.3 | 8 | 7/8 2+2+3 | 138 | — | -12.9 |
+| `deca_13` | 5:49.5 | 8 | 13/16 3+3+3+2+2 | 138 | C golden10_36 | -13.1 |
+| `axe_solo` | 6:00.8 | 16 | 7/8 2+2+3 | 138 | C golden10_36 | -12.7 |
+| `still` | 6:25.2 | 16 | 4/4 | 69 | C golden7 | -21.6 |
+| `pump_a` | 7:20.8 | 6 | 4/4 | 138 | — | -15.5 |
+| `pump_b` | 7:31.3 | 8 | 4/4 | 138 | — | -12.6 |
+| `pump_c` | 7:45.2 | 6 | 4/4 | 138 | — | -12.4 |
+| `pump_d` | 7:55.6 | 2 | 4/4 | 138 | — | -13.5 |
+| `summit_riff` | 7:59.1 | 8 | 7/8 2+2+3 | 138 | ^C phrygian_dominant | -12.6 |
+| `summit_verse` | 8:11.3 | 8 | 4/4 | 138 | ^F harmonic_minor | -13.1 |
 | `summit_pre` | 8:25.2 | 4 | 5/4 3+2 | 138 | ^Ab | -12.1 |
-| `summit_chorus` | 8:33.9 | 8 | 4/4 | 138 | ^Ab | -12.3 |
-| `last_chorus` | 8:47.8 | 8 | 4/4 | 138 | ^Ab | -9.3 |
-| `coda` | 9:01.7 | 12 | 4/4 | 72 | ^C golden7 | -24.7 |
+| `summit_chorus` | 8:33.9 | 8 | 4/4 | 138 | ^Ab | -12.2 |
+| `last_chorus` | 8:47.8 | 8 | 4/4 | 138 | ^Ab | -9.1 |
+| `coda` | 9:01.7 | 12 | 4/4 | 72 | ^C golden7 | -24.5 |
 
-The whole song measures −14.6 LUFS integrated with a −1.0 dBTP true peak and no clipped samples (`master standard
-lufs=-14 glue=none`). The peak, `last_chorus`, stands 2.8 dB above the next-loudest sections (`chorus_2` and
-`summit_pre`, −12.1). The quiet episodes sit 6–15 dB below the sections around them: the intro, the jazz head, the ballad
-`still` and the coda.
+The whole song measures −14.5 LUFS integrated with a −1.0 dBTP true peak and no clipped samples (`master standard
+lufs=-14 glue=none`). The peak, `last_chorus`, stands 2.8 dB above the next-loudest section (`chorus_2`,
+−11.9 against −9.1). The quiet episodes sit well under the loud sections next to
+them: the intro (−22.5) 8.5 dB under `riff_1`, the jazz head (−21.4) 6.5 dB under `riff_out`, the ballad `still` (−21.6)
+8.9 dB under `axe_solo`, and the coda (−24.5) 15.4 dB under `last_chorus`.
 
 ## Checks
 

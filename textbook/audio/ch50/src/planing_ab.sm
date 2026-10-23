@@ -1,0 +1,11 @@
+# Golden planing (ch37, ch50): a C major line in 7/8 on its own, then with a golden triad on every note (the line in
+# the roots, vE major in the thirds, ^G major in the fifths: three keys with no note in common).
+song "Golden planing" 138 4/4 C fps=30 seed=1301 tail=2 tuning=36edo
+patch axe str=string(t60=1.6, brightness=.93, pick=.003) sh=shaper(drive=.8) cab=filter(mode=lp, cutoff=4200, q=1.2, keytrack=0) env=env(a=.002, d=.4, s=.85, r=.07) amp=vca out=out(level=.6)
+patch axe str>sh sh>cab cab>amp env>amp.gain amp>out vel>sh.drive*.3
+inst axe=patch/axe
+kit kick=kick/v0(tune=55, sweep=26, decay=.28, click=.65, click_tone=4500, drive=2) snare=snare/v0(tone=205, tone_mix=.5, snap=.65, noise_decay=.2, drive=1.5) hat=hat/v0(decay=.045) ride=hat/v0(decay=.3, hp=3500, color=6500, metal=.85, tune=.8) cym=hat/v0_open(decay=1.4, hp=3200, metal=.75)
+line   4 | axe:{notes: "=mf c4^ d8 e8 g4. | a4 g8 e8 d4. | e4 g8 a8 c+4. | b4 a8 g8 e4.", oct: -1} drums:{kick: "X.......X.....", snare: "....X.....X...", ride: "x.x.x.x.x.x.x."} chords="N.C.:4" meter="7/8 2+2+3" dyn=mf
+planed 4 | like=line axe:{notes: "=mf [c,ve,^g]4^ [d,vf#,^a]8 [e,vg#,^b]8 [g,vb,^d+]4. | [a,vc#+,^e+]4 [g,vb,^d+]8 [e,vg#,^b]8 [d,vf#,^a]4. | [e,vg#,^b]4 [g,vb,^d+]8 [a,vc#+,^e+]8 [c+,ve+,^g+]4. | [b,vd#+,^f#+]4 [a,vc#+,^e+]8 [g,vb,^d+]8 [e,vg#,^b]4.", oct: -1}
+mix axe -6 | drums -8
+master standard lufs=-14 glue=none

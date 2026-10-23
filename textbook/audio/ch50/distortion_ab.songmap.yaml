@@ -1,0 +1,32 @@
+# Two kinds of distortion (ch50). The same power chords (root, fifth, octave) through ONE distortion after the notes
+# are summed (a drive insert on the part), then through a distortion applied to each note on its own (the patch "axe").
+# First a 12-ET fifth (C), then golden fifths (Cg - ^Abg - vFg - C#g), bus-distorted, then the golden ones per note.
+songmap: 0.2
+title: "Two kinds of distortion"
+tempo: 138
+meter: "4/4"
+key: C
+tuning: "36edo"
+fps: 30
+seed: 1301
+tail_seconds: 2
+
+instruments:
+  axe: patch/axe
+  bus: {use: string_pluck/still, brightness: 0.93, t60: 1.6}
+  drums: {kit: {kick: {use: kick/v0, tune: 55, sweep: 26, decay: 0.28, click: 0.65, click_tone: 4500, drive: 2}, snare: {use: snare/v0, tone: 205, tone_mix: 0.5, snap: 0.65, noise_decay: 0.2, drive: 1.5}, hat: {use: hat/v0, decay: 0.045}, ride: {use: hat/v0, decay: 0.3, hp: 3500, color: 6500, metal: 0.85, tune: 0.8}, cym: {use: hat/v0_open, decay: 1.4, hp: 3200, metal: 0.75}}}
+
+sections:
+  - {name: west, bars: 2, parts: {bus: {rel: "=f [R,5,R+]/4.^ [R,5,R+]/4. [R,5,R+]/4", oct: -1}, drums: {steps: {kick: X.....X.X......., snare: "....X.......X...", hat: x.x.x.x.x.x.x.x.}}}, harmony: "C:1 F:1", dyn: f}
+  - {name: summed, bars: 4, parts: {bus: {rel: "=f [R,5,R+]/4.^ [R,5,R+]/4. [R,5,R+]/4", oct: -1}, drums: {steps: {kick: X.....X.X......., snare: "....X.......X...", hat: x.x.x.x.x.x.x.x.}}}, harmony: "Cg:1 ^Abg:1 vFg:1 C#g:1", dyn: f}
+  - {name: pernote, bars: 4, parts: {axe: {rel: "=f [R,5,R+]/4.^ [R,5,R+]/4. [R,5,R+]/4", oct: -1}, drums: {steps: {kick: X.....X.X......., snare: "....X.......X...", hat: x.x.x.x.x.x.x.x.}}}, harmony: "Cg:1 ^Abg:1 vFg:1 C#g:1", dyn: f}
+
+mix:
+  bus: {inserts: [{fx: drive, amount: 0.8, tone: 4200}], gain_db: -6}
+  axe: {gain_db: -6}
+  drums: {gain_db: -8}
+
+patches:
+  axe: {modules: {str: {type: string, t60: 1.6, brightness: 0.93, pick: 0.003}, sh: {type: shaper, drive: 0.8}, cab: {type: filter, mode: lp, cutoff: 4200.0, q: 1.2, keytrack: 0.0}, env: {type: env, a: 0.002, d: 0.4, s: 0.85, r: 0.07}, amp: {type: vca}, out: {type: out, level: 0.6}}, wires: ["str>sh", "sh>cab", "cab>amp", "env>amp.gain", "amp>out", "vel>sh.drive*.3"]}
+master:
+  glue: none

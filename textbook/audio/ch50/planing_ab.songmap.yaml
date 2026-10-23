@@ -1,0 +1,28 @@
+# Golden planing (ch37, ch50): a C major line in 7/8 on its own, then with a golden triad on every note (the line in
+# the roots, vE major in the thirds, ^G major in the fifths: three keys with no note in common).
+songmap: 0.2
+title: "Golden planing"
+tempo: 138
+meter: "4/4"
+key: C
+tuning: "36edo"
+fps: 30
+seed: 1301
+tail_seconds: 2
+
+instruments:
+  axe: patch/axe
+  drums: {kit: {kick: {use: kick/v0, tune: 55, sweep: 26, decay: 0.28, click: 0.65, click_tone: 4500, drive: 2}, snare: {use: snare/v0, tone: 205, tone_mix: 0.5, snap: 0.65, noise_decay: 0.2, drive: 1.5}, hat: {use: hat/v0, decay: 0.045}, ride: {use: hat/v0, decay: 0.3, hp: 3500, color: 6500, metal: 0.85, tune: 0.8}, cym: {use: hat/v0_open, decay: 1.4, hp: 3200, metal: 0.75}}}
+
+sections:
+  - {name: line, bars: 4, parts: {axe: {notes: "=mf c4^ d8 e8 g4. | a4 g8 e8 d4. | e4 g8 a8 c+4. | b4 a8 g8 e4.", oct: -1}, drums: {steps: {kick: X.......X....., snare: "....X.....X...", ride: x.x.x.x.x.x.x.}}}, harmony: "N.C.:4", dyn: mf, meter: "7/8 2+2+3"}
+  - {name: planed, bars: 4, parts: {axe: {notes: "=mf [c,ve,^g]4^ [d,vf#,^a]8 [e,vg#,^b]8 [g,vb,^d+]4. | [a,vc#+,^e+]4 [g,vb,^d+]8 [e,vg#,^b]8 [d,vf#,^a]4. | [e,vg#,^b]4 [g,vb,^d+]8 [a,vc#+,^e+]8 [c+,ve+,^g+]4. | [b,vd#+,^f#+]4 [a,vc#+,^e+]8 [g,vb,^d+]8 [e,vg#,^b]4.", oct: -1}, drums: {steps: {kick: X.......X....., snare: "....X.....X...", ride: x.x.x.x.x.x.x.}}}, harmony: "N.C.:4", dyn: mf, meter: "7/8 2+2+3"}
+
+mix:
+  axe: {gain_db: -6}
+  drums: {gain_db: -8}
+
+patches:
+  axe: {modules: {str: {type: string, t60: 1.6, brightness: 0.93, pick: 0.003}, sh: {type: shaper, drive: 0.8}, cab: {type: filter, mode: lp, cutoff: 4200.0, q: 1.2, keytrack: 0.0}, env: {type: env, a: 0.002, d: 0.4, s: 0.85, r: 0.07}, amp: {type: vca}, out: {type: out, level: 0.6}}, wires: ["str>sh", "sh>cab", "cab>amp", "env>amp.gain", "amp>out", "vel>sh.drive*.3"]}
+master:
+  glue: none

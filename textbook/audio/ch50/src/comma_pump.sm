@@ -1,0 +1,8 @@
+# The comma pump (ch34, ch50): C, then fourteen golden triads Cg - ^Abg - vFg - C#g - ^Ag - vF#g - Dg - ^Bbg - vGg -
+# Ebg - ^Bg - vAbg - Eg - ^Cg, each keeping two notes and raising the third a semitone, then ^C major, one sixth-step
+# above the C we started on. The bell sings the voice that rises every third step: G ^G ^Ab ^A ^Bb ^B ^C.
+song "The comma pump" 108 4/4 C fps=30 seed=1301 tail=3 tuning=36edo
+inst gold=clean/golden_pad(release=1.5) organ=clean/organ(partials=9, rolloff=1.25, attack=.02, release=.25) bell=clean/glass low=clean/bass
+pump 16 | organ:hold(range=[55,76]) low:{rel: "=mp R/1", oct: -2} bell:{notes: "=mf g1 | ^g1 | ^ab1 | ^ab1 | ^ab1 | ^a1 | ^a1 | ^a1 | ^bb1 | ^bb1 | ^bb1 | ^b1 | ^b1 | ^b1 | ^c+1 | ^c+1"} chords="C:1 Cg:1 ^Abg:1 vFg:1 C#g:1 ^Ag:1 vF#g:1 Dg:1 ^Bbg:1 vGg:1 Ebg:1 ^Bg:1 vAbg:1 Eg:1 ^Cg:1 ^C:1" dyn=p<mf
+mix organ -10 hall=.25 | bell -6 hall=.35 | low -2
+master standard lufs=-14 glue=none
