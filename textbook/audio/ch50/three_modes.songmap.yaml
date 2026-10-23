@@ -1,0 +1,31 @@
+# One phrase, three golden modes (ch50): the horn's question from "Blue gold", written in scale degrees, in the
+# brightest mode of golden7 (6|0), in golden7 itself (3|3, the golden Dorian) and in the darkest (0|6), each time
+# over its tonic chord with the mode's colour chord in the fourth bar (Bg, C#g, Dg7).
+songmap: 0.2
+title: "One phrase, three modes"
+tempo: 168
+meter: "4/4"
+key: C
+tuning: "36edo"
+fps: 30
+seed: 1301
+tail_seconds: 3
+
+instruments:
+  horn: {use: clean/organ, partials: 7, rolloff: 1.5, even: 0.6, attack: 0.035, release: 0.18, vel_bright: 0.8}
+  epiano: epiano/still
+  drums: {kit: {kick: {use: kick/v0, tune: 55, sweep: 26, decay: 0.28, click: 0.65, click_tone: 4500, drive: 2}, snare: {use: snare/v0, tone: 205, tone_mix: 0.5, snap: 0.65, noise_decay: 0.2, drive: 1.5}, hat: {use: hat/v0, decay: 0.045}, ride: {use: hat/v0, decay: 0.3, hp: 3500, color: 6500, metal: 0.85, tune: 0.8}, cym: {use: hat/v0_open, decay: 1.4, hp: 3200, metal: 0.75}}}
+
+sections:
+  - {name: brightest, bars: 4, parts: {horn: {deg: "=mf r/8 4/8 2/8 0/8 2/4^ 4/4 | 6/8 7/8 6/8 4/8 2/4. 0/8 | 1/8 2/8 4/8 2/8 0/2 | r/1", oct: 1}, bass: {rel: "R/4^ 3 5 3 | R^ 5 7 5 | R+^ 7 5 3 | R^ 3 5 7", oct: -2}, epiano: {style: comp, rhythm: x.....x...x....., voices: 4, range: [52, 70]}, drums: {steps: {ride: {steps: x..x.xx..x.x, vel: [0.5, 0.3, 0.2, 0.42, 0.3, 0.2]}, hat: {steps: "...x.....x..", vel: [0.35]}}}}, harmony: "Cg7:3 Bg:1", dyn: mf, key: "C golden7_60", feel: {swing: 0.66}}
+  - {name: dorian, bars: 4, parts: {horn: {deg: "=mf r/8 4/8 2/8 0/8 2/4^ 4/4 | 6/8 7/8 6/8 4/8 2/4. 0/8 | 1/8 2/8 4/8 2/8 0/2 | r/1", oct: 1}, bass: {rel: "R/4^ 3 5 3 | R^ 5 7 5 | R+^ 7 5 3 | R^ 3 5 7", oct: -2}, epiano: {style: comp, rhythm: x.....x...x....., voices: 4, range: [52, 70]}, drums: {steps: {ride: {steps: x..x.xx..x.x, vel: [0.5, 0.3, 0.2, 0.42, 0.3, 0.2]}, hat: {steps: "...x.....x..", vel: [0.35]}}}}, harmony: "Cg7:3 C#g:1", dyn: mf, key: "C golden7_33", feel: {swing: 0.66}}
+  - {name: darkest, bars: 4, parts: {horn: {deg: "=mf r/8 4/8 2/8 0/8 2/4^ 4/4 | 6/8 7/8 6/8 4/8 2/4. 0/8 | 1/8 2/8 4/8 2/8 0/2 | r/1", oct: 1}, bass: {rel: "R/4^ 3 5 3 | R^ 5 7 5 | R+^ 7 5 3 | R^ 3 5 7", oct: -2}, epiano: {style: comp, rhythm: x.....x...x....., voices: 4, range: [52, 70]}, drums: {steps: {ride: {steps: x..x.xx..x.x, vel: [0.5, 0.3, 0.2, 0.42, 0.3, 0.2]}, hat: {steps: "...x.....x..", vel: [0.35]}}}}, harmony: "Csus2(vvvv5):3 Dg7:1", dyn: mf, key: "C golden7_06", feel: {swing: 0.66}}
+
+mix:
+  horn: {gain_db: -7, send: {hall: 0.25}}
+  epiano: {gain_db: -10, send: {hall: 0.2}}
+  bass: {gain_db: -8}
+  drums: {gain_db: -4}
+
+master:
+  glue: none
