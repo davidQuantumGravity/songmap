@@ -11,7 +11,7 @@ import re
 
 import numpy as np
 
-REMIXABLE = ("gain_db", "pan", "send")              # (+ the master's inserts, applied after the stems)
+REMIXABLE = ("gain_db", "pan", "send")              # (+ the master's and the returns' inserts, applied after the stems)
 
 
 def effective_mix(song) -> dict[str, dict]:
@@ -35,8 +35,10 @@ def _undb(db: float) -> float:
 
 
 def remixable(old: dict[str, dict], new: dict[str, dict], parts) -> bool:
+    """`parts`: the render's stem names. Only their entries are compared, so the master's chain and a return's
+    (`hall`; its stem is `return_hall`) may change freely: remix applies both after the stems."""
     for part in parts:
-        if part == "master":
+        if part == "master" or part.startswith("return_"):
             continue
         a, b = old.get(part, {}), new.get(part, {})
         if {k: v for k, v in a.items() if k not in REMIXABLE} != {k: v for k, v in b.items() if k not in REMIXABLE}:
@@ -52,6 +54,7 @@ def remix(r, old: dict[str, dict], new: dict[str, dict], mute=(), solo=()) -> np
     """The mastered audio of render `r` with mix `new` (it was rendered with `old`), mute and solo applied."""
     from ..arrange.expand import seed_for
     from ..mix.fx import convolve, reverb_ir
+    from ..mix.inserts import apply_chain
     from ..mix.master import master, master_clean, master_legacy
     song = r.arrangement.song
     ens = r.arrangement.ensemble
@@ -80,10 +83,13 @@ def remix(r, old: dict[str, dict], new: dict[str, dict], mute=(), solo=()) -> np
         ir = reverb_ir(float(rc.get("seconds", 2.2)), predelay=float(rc.get("predelay", 0.015)),
                        damping=float(rc.get("damping", 0.5)), early=int(rc.get("early", 10)),
                        width=float(rc.get("width", 1.0)), seed=seed_for(song.seed, "return", ret) % 2**31)
-        stems[f"return_{ret}"] = convolve(x, ir)
+        wet = convolve(x, ir)
+        chain = (new.get(ret) or {}).get("inserts") if ret not in parts else None
+        if chain:                                         # the return's own chain (`inserts hall ...`)
+            wet = apply_chain(wet, chain, {"tempo": song.tempo, "seed": seed_for(song.seed, "insert", ret)})
+        stems[f"return_{ret}"] = wet
     mix = sum(stems.values()) if stems else np.zeros((n, 2))
     if (new.get("master") or {}).get("inserts"):
-        from ..mix.inserts import apply_chain
         mix = apply_chain(mix, new["master"]["inserts"], {"tempo": song.tempo, "seed": seed_for(song.seed, "insert")})
     mode = r.stats.get("master") or song.master.mode
     if mode == "legacy":

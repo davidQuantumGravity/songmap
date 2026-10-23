@@ -22,7 +22,7 @@ from .notes import _DEG_TOK, _PITCH_TOK, _REL_TOK
 VERSION = "0.2"
 TOP_KEYS = ("songmap", "title", "tempo", "meter", "key", "tuning", "fps", "seed", "tail_seconds", "mood", "video",
             "instruments", "groove", "parts_feel", "harmony", "motifs", "sections", "events", "cues", "mix",
-            "returns", "master", "qa", "binaural")
+            "returns", "master", "qa", "binaural", "patches")
 SECTION_KEYS = ("name", "bars", "parts", "like", "add", "drop", "harmony", "dyn", "feel", "tempo", "key", "binaural")
 PART_SOURCES = ("style", "motif", "motifs", "notes", "deg", "rel", "steps", "vary")
 PART_OPTS = ("mods", "dyn", "art", "oct", "transpose", "feel", "voicing", "auto", "mute", "gain_db", "gate",
@@ -235,6 +235,22 @@ def _check_keys(d: dict, valid, what, file, line=None, section=None):
                             suggestion=did_you_mean(k, valid))
 
 
+def _check_patch_refs(song: Song, file) -> None:
+    """Every `patch/<name>` a voice uses must be the song's own patch or one in the library."""
+    from ..instruments.patch import library
+    known = None
+    for role, entry in (song.instruments or {}).items():
+        entries = (entry.get("kit") or {}).items() if isinstance(entry, dict) and "kit" in entry else [(role, entry)]
+        for name, e in entries:
+            use = e if isinstance(e, str) else (e or {}).get("use") if isinstance(e, dict) else None
+            if isinstance(use, str) and use.startswith("patch/"):
+                pname = use.partition("/")[2]
+                known = known if known is not None else {*song.patches, *library()}
+                if pname not in known:
+                    raise SongError(f"instruments {name}: no patch '{pname}'", file=file,
+                                    suggestion=did_you_mean(pname, known) + "; define it with a `patch` line")
+
+
 def from_raw(raw: dict, file: str | None = None) -> Song:
     # `x-...` keys are free-form (e.g. YAML anchors shared by several sections) and ignored.
     _check_keys({k: v for k, v in raw.items() if not str(k).startswith("x-")}, TOP_KEYS, "top-level", file)
@@ -272,6 +288,15 @@ def from_raw(raw: dict, file: str | None = None) -> Song:
     s.cues = dict(raw.get("cues") or {})
     s.mix = _plain(raw.get("mix") or {})
     s.returns = _plain(raw.get("returns") or {})
+    s.patches = _plain(raw.get("patches") or {})
+    for pname, spec in s.patches.items():                 # check the wiring here, where the file is known
+        from ..instruments.base import ParamError
+        from ..instruments.patch import validate
+        try:
+            validate(spec, f"patch {pname}")
+        except ParamError as e:
+            raise SongError(str(e), file=file, suggestion="see docs/INSTRUMENTS.md (patches)") from None
+    _check_patch_refs(s, file)
     s.qa = _plain(raw.get("qa") or {})
     s.binaural = _binaural(raw.get("binaural"), "binaural", file)
     s.master = _master(raw.get("master"), file)

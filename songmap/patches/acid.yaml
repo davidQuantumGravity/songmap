@@ -1,0 +1,18 @@
+# A 303-style acid bass: one saw, a squelchy resonant low-pass, an envelope sweeping the cutoff.
+description: "A single saw through a resonant low-pass; the envelope (and velocity) sweep the cutoff for the squelch."
+modules:
+  osc1: {type: osc, wave: saw, level: 0.8}
+  sweep: {type: env, a: 0.002, d: 0.22, s: 0, r: 0.05}
+  f1: {type: filter, mode: lp, cutoff: 280, q: 9, keytrack: 0.5}
+  amp_env: {type: env, a: 0.003, d: 0.3, s: 0.6, r: 0.06}
+  amp: {type: vca}
+  drive: {type: shaper, drive: 0.35}
+  out: {type: out, level: 0.7}
+wires:
+  - osc1>f1
+  - sweep>f1.cutoff*3
+  - vel>f1.cutoff*1.5
+  - f1>amp
+  - amp_env>amp.gain
+  - amp>drive
+  - drive>out

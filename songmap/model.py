@@ -102,6 +102,7 @@ class Song:
     cues: dict[str, object] = field(default_factory=dict)
     mix: dict = field(default_factory=dict)            # part -> {gain_db, pan, send, sidechain, ...}
     returns: dict = field(default_factory=dict)        # name -> {type, seconds, ...}
+    patches: dict = field(default_factory=dict)        # name -> {modules: {...}, wires: [...]} (instruments/patch.py)
     master: MasterSpec = field(default_factory=MasterSpec)
     qa: dict = field(default_factory=dict)
     binaural: dict = field(default_factory=dict)       # a binaural-beat layer (mix/binaural.py); {} = none

@@ -106,7 +106,7 @@ def song_to_raw(song: Song) -> dict:
         raw["sections"].append(d)
     if song.events:
         raw["events"] = [{"at": e.at, "type": e.type, **e.params} for e in song.events]
-    for k in ("cues", "mix", "returns"):
+    for k in ("cues", "mix", "returns", "patches"):
         if getattr(song, k):
             raw[k] = getattr(song, k)
     master = _master_raw(song.master)
@@ -330,6 +330,10 @@ class _Printer:
             self.lines.append("inserts " + " | ".join(f"{p} " + " ".join(unit(u) for u in c) for p, c in chains.items()))
         if s.returns:
             self.set("returns", s.returns)
+        if s.patches:
+            from ..instruments.patch import to_text, validate
+            for pname, spec in s.patches.items():
+                self.lines.extend(to_text(pname, validate(spec, pname)))
         master = _master_raw(s.master)
         if master is not None:
             if isinstance(master, str):

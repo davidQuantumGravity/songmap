@@ -1,0 +1,12 @@
+# A bell from a resonator bank: partials at a bell's inharmonic ratios, the high ones dying first.
+description: "Modal synthesis: decaying partials at a bell's ratios (1, 2, 2.4, 3, 4.5, ...); velocity brightens it."
+modules:
+  body: {type: modal, body: bell, decay: 4, damp: 0.7, bright: 0.55, level: 0.7}
+  amp_env: {type: env, a: 0.001, d: 5, s: 1, r: 1.5}
+  amp: {type: vca}
+  out: {type: out, level: 0.8, tail: 1}
+wires:
+  - vel>body.bright*0.4
+  - body>amp
+  - amp_env>amp.gain
+  - amp>out

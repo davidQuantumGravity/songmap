@@ -170,7 +170,11 @@ def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: 
         ir = reverb_ir(float(r.get("seconds", 2.2)), predelay=float(r.get("predelay", 0.015)),
                        damping=float(r.get("damping", 0.5)), early=int(r.get("early", 10)),
                        width=float(r.get("width", 1.0)), seed=seed_for(song.seed, "return", ret) % 2**31)
-        stems[f"return_{ret}"] = convolve(x, ir)
+        wet = convolve(x, ir)
+        chain = (ens.mix.get(ret) or {}).get("inserts") if ret not in buses else None
+        if chain:                                     # `inserts hall ...`: the return's own chain, after the reverb
+            wet = apply_chain(wet, chain, {"tempo": song.tempo, "seed": seed_for(song.seed, "insert", ret)})
+        stems[f"return_{ret}"] = wet
     layer = None
     if song.binaural:                       # dry, after the returns: a reverb would mix the ears
         from .mix.binaural import carve, plan as binaural_plan, render_layer

@@ -1,0 +1,17 @@
+# A soft pad: a supersaw, slow attack, a dark low-pass breathing with a slow LFO, and a vibrato that arrives late.
+description: "A supersaw under a slow envelope and a dark filter that breathes; the vibrato fades in after the attack."
+modules:
+  osc1: {type: osc, wave: supersaw, level: 0.6}
+  vib: {type: lfo, rate: 5, shape: sine, depth: 0.12, delay: 0.8}
+  breath: {type: lfo, rate: 0.2, shape: sine, depth: 0.6}
+  f1: {type: filter, mode: lp, cutoff: 1400, q: 1.2, keytrack: 0.5}
+  amp_env: {type: env, a: 0.8, d: 1, s: 0.8, r: 1.6}
+  amp: {type: vca}
+  out: {type: out, level: 0.6, tail: 0.5}
+wires:
+  - vib>osc1.detune
+  - osc1>f1
+  - breath>f1.cutoff
+  - f1>amp
+  - amp_env>amp.gain
+  - amp>out

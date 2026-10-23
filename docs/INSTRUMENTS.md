@@ -185,34 +185,54 @@ params: {tune: 50, sweep: 34, sweep_time: 0.028, decay: 0.38, click: 0.55, click
 
 ## 7. Patch instruments (arbitrary user-defined instruments)
 
-Any instrument can also be described as a **module graph in YAML**, with no Python. The GUI's patch editor writes these, and `PatchInstrument` compiles them at load time.
+An instrument can also be a **patch**: modules connected by wires, written in the song or kept in the library, with
+no Python (`songmap/instruments/patch.py`). SongMap Studio's wiring editor (Instruments tab, Wiring) edits them.
 
-```yaml
-# patches/glass_bell.yaml
-patch: glass_bell
-family: keys
-poly: true
-modules:
-  menv: {type: env, a: 0.001, d: 0.9, s: 0.0, r: 0.6}
-  aenv: {type: env, a: 0.001, d: 3.5, s: 0.0, r: 1.5}
-  mod:  {type: osc, wave: sine, ratio: 3.5}
-  car:  {type: osc, wave: sine, ratio: 1, fm: {from: mod, index: "1.5 + 3*vel", env: menv}}
-  air:  {type: noise, color: pink, level: 0.02, env: menv}
-  sum:  {type: mix, in: [car, air]}
-  tone: {type: filter, mode: lp, cutoff: "6000 * 2**(2*(vel-0.7))", q: 0.8, in: sum}
-  out:  {type: vca, in: tone, env: aenv, gain: "vel**1.4"}
-macros:                     # these become the instrument's knobs
-  brightness: {default: 0.5, map: {mod.ratio: [2.0, 7.0], tone.cutoff_scale: [0.5, 2.0]}}
-  ring:       {default: 0.5, map: {aenv.d: [0.8, 8.0]}}
+```
+patch acid osc1=osc(wave=saw) sweep=env(a=.002, d=.22, s=0, r=.05) f1=filter(cutoff=280, q=9) amp=vca out=out
+patch acid osc1>f1 sweep>f1.cutoff*3 vel>f1.cutoff*1.5 f1>amp sweep>amp.gain amp>out
+inst bass=patch/acid(f1.cutoff=400)
 ```
 
-- **Modules:**
-  - Sources: `osc` (sine, tri, saw, square, pulse, supersaw, wavetable), `noise` (white, pink, crackle), `ks` (string), `modal` (a mode bank from ratios, amps and t60s), `waveguide` (bowed or blown).
-  - Processing: `filter` (lp, bp, hp, notch, ladder, formant), `shaper` (tanh, fold, crush, rectify), `mix`, `vca`, `pan`, `delay`, `chorus`, `eq`.
-  - Control: `env` (adsr, ahdsr, multi-segment), `lfo` (sine, tri, s&h, smooth-random).
-- **Expressions** (`"1.5 + 3*vel"`) may use `vel`, `pitch`, `freq`, `t` (time array), `gate`, `rand` (per-note seed) and macro names. They are evaluated with a restricted AST evaluator (numbers, arithmetic and a whitelist of numpy functions), never with raw `eval`.
-- **Evaluation:** notes render offline, so the graph is evaluated module by module as whole numpy arrays in topological order. FM is phase modulation on arrays. Feedback is allowed only *inside* modules (`ks`, `waveguide`, `delay`), never between them, which keeps the graph acyclic.
-- **Macros** map one knob to several params (linear or log ranges). They are what the song map and the LLM see.
+- **Modules** (`describe()` in patch.py lists their knobs):
+  - Sources: `osc` (sine, saw, square with pulse width, triangle, supersaw), `noise` (white to pink), `string`
+    (Karplus-Strong, plucked internally or excited by what is wired in), `modal` (a resonator bank with bell, bar,
+    glass or plate ratios).
+  - Processing: `filter` (low-, band- or high-pass, resonance, key tracking), `shaper` (tanh drive, wavefolding),
+    `comb` (tuned to the note), `delay`, `vca`, `mix`.
+  - Control: `env` (ADSR), `lfo` (sine, triangle, square, saw, random steps; with a fade-in delay).
+  - `out`: the level, the pan and the tail after the release.
+- **Wires.** `a>b` sends audio from a into b's input. `a>b.knob*amount` moves a knob:
+  - frequencies (cutoff, rate) move in octaves per unit;
+  - pitch (`detune`, `tune`) moves in semitones;
+  - a VCA's `gain` is replaced by what is wired into it (an envelope there is the note's loudness shape);
+  - everything else is added.
+- **Sources:** `vel` (velocity), `key` (octaves above middle C), `gate` (1 while held), `rand` (per note). Wire `vel`
+  into a filter or shaper so velocity changes the timbre, not just the level (§1).
+- **Params:** every knob becomes an instrument param named `<module>.<knob>`, so `inst`/`kit` lines, presets and the
+  Studio's knobs set it like any other param. Values may name choices: `wave=saw`, `mode=hp`, `body=bell`.
+- **Checks:** unknown modules, knobs and sources, audio wired out of an envelope, and loops are SongErrors with
+  suggestions, at the line that wrote them.
+- **Library:** `songmap/patches/*.yaml` (`modules:` and `wires:`, plus a description): acid, bell, glass_pad, pluck,
+  snare808 (two tuned sine shells with a pitch drop, high-passed noise for the wires), wobble. A song's own patch of the
+  same name wins.
+- **Evaluation:** notes render offline, so the graph is evaluated module by module as whole numpy arrays in
+  topological order. Feedback exists only inside modules (`string`, `comb`, `delay`), never between them.
+- **Not built yet:** FM (phase modulation between oscillators), expressions as knob values, macros (one knob mapped to
+  several params), `waveguide` (bowed or blown), wavetables, and native instruments as patch templates.
+
+### Instrument guides
+
+`songmap/instruments/guides.yaml` explains every built-in instrument for the Studio's tutorial view (Instruments tab,
+Learn). For each one it gives:
+
+- what it imitates, a summary, how it is built and why it sounds the way it does;
+- its signal chain as blocks, with the knobs of each block;
+- every knob in plain words (what turning it up or down does);
+- recipes to try, and drum audition patterns.
+
+`tests/test_guides.py` keeps the guides in step with the code: every param covered, recipe values in range, and
+every recipe rendering.
 
 ## 8. Checklist: adding an instrument
 

@@ -1,0 +1,25 @@
+# An 808-style snare from scratch: two tuned sine "shells" with a fast pitch drop, plus noise for the wires.
+description: "Two sine shells (about 208 and 370 Hz) that drop in pitch as they start, and high-passed noise for the snare wires; harder hits open the noise filter."
+modules:
+  shell1: {type: osc, wave: sine, detune: -4, level: 0.7}
+  shell2: {type: osc, wave: sine, detune: 6, level: 0.45}
+  drop: {type: env, a: 0.0005, d: 0.03, s: 0, r: 0.01}
+  shell_env: {type: env, a: 0.001, d: 0.12, s: 0, r: 0.04}
+  shell: {type: vca}
+  noise: {type: noise, color: 0, level: 0.6}
+  wires_filter: {type: filter, mode: hp, cutoff: 1800, q: 0.9, keytrack: 0}
+  noise_env: {type: env, a: 0.001, d: 0.18, s: 0, r: 0.06}
+  snares: {type: vca}
+  out: {type: out, level: 0.65, tail: 0.05}
+wires:
+  - shell1>shell
+  - shell2>shell
+  - drop>shell1.detune*7
+  - drop>shell2.detune*7
+  - shell_env>shell.gain
+  - noise>wires_filter
+  - vel>wires_filter.cutoff*1
+  - wires_filter>snares
+  - noise_env>snares.gain
+  - shell>out
+  - snares>out

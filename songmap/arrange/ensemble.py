@@ -149,7 +149,12 @@ class Ensemble:
         if key not in self._cache:
             where = f"instruments {part}{'.' + piece if piece else ''}"
             try:
-                inst = make(v.use, **{**v.params, **dict(patch)})
+                if v.use.startswith("patch/"):                  # a patch instrument (instruments/patch.py)
+                    from ..instruments.patch import build
+                    pname = v.use.partition("/")[2]
+                    inst = build(pname, self.patch_spec(pname, where), **{**v.params, **dict(patch)})
+                else:
+                    inst = make(v.use, **{**v.params, **dict(patch)})
             except ParamError as e:
                 raise SongError(f"{where}: {e}", file=self.song.file) from None
             except SongError as e:      # e.g. a sampler library that isn't installed
@@ -157,6 +162,19 @@ class Ensemble:
             self.song.warnings += [w for w in getattr(inst, "warnings", ()) if w not in self.song.warnings]
             self._cache[key] = inst
         return self._cache[key]
+
+    def patch_spec(self, name: str, where: str = "") -> dict:
+        """A patch by name: the song's own (`patch` lines, `patches:`), else the library (songmap/patches)."""
+        from ..instruments.patch import library
+        spec = (getattr(self.song, "patches", None) or {}).get(name)
+        if spec is None:
+            lib = library()
+            spec = lib.get(name)
+            if spec is None:
+                raise SongError(f"{where}: no patch '{name}'", file=self.song.file,
+                                suggestion=did_you_mean(name, [*(getattr(self.song, "patches", None) or {}), *lib])
+                                + "; define it with a `patch` line")
+        return spec
 
     def instruments(self) -> list:
         """Every instrument built so far (one per distinct voice + params)."""

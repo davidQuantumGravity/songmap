@@ -167,7 +167,8 @@ X = "variation"
 
 
 def common_vel(curve=1.5):
-    return (Param("vel_curve", curve, 0.3, 3.0, "", "lin", V, "loudness curve: gain = vel**curve"),)
+    return (Param("vel_curve", curve, min(0.3, curve), 3.0, "", "lin", V,
+                  "loudness curve: gain = vel**curve (0 = every note equally loud)"),)
 
 
 RR = Param("rr", 0.3, 0.0, 1.0, "", "lin", X, "per-hit random variation (round-robin feel)")

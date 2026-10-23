@@ -18,7 +18,7 @@ import shlex
 from dataclasses import dataclass, field, replace
 
 from ..model import Song
-from .errors import SongError, did_you_mean
+from .errors import NotationError, SongError, did_you_mean
 from .yaml_form import PART_OPTS, PART_SOURCES, VERSION, LineDict, from_raw
 
 EXTS = (".sm", ".sml")
@@ -44,7 +44,7 @@ def _is_setting(key, v, progressions=()) -> bool:
 PART_KEYS = PART_SOURCES + PART_OPTS
 KEYWORDS = {"for", "in", "if", "elif", "else", "every", "def", "return", "form", "with", "and", "or", "not",
             "true", "false", "none", "as", "at", "bars"}
-DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "inserts", "master",
+DIRECTIVES = ("song", "inst", "kit", "groove", "feel", "chords", "prog", "motif", "cue", "mix", "inserts", "patch", "master",
               "qa", "set", "binaural")
 MIX_KEYS = ("pan", "width", "send", "sidechain", "eq", "bus_comp")
 STEP_RANK = {".": 0, "o": 1, "-": 2, "x": 3, "r": 4, "f": 5, "X": 6}
@@ -1518,6 +1518,8 @@ class _Interp:
         if key == "dyn":
             sec["dyn"] = v
         elif key in ("prog", "chords"):
+            if v not in ((self.song.get("harmony") or {}).get("progressions") or {}) and (":" in v or " " in v.strip()):
+                self.check_prog(v, line, section=name)          # a named progression is checked by `prog`
             sec["harmony"] = v
         elif key == "feel" and v.startswith("{"):
             sec["feel"] = {**(sec.get("feel") or {}), **_value(v)}
@@ -1785,6 +1787,52 @@ class _Interp:
                 pos = m.end()
             self.song.setdefault("mix", {}).setdefault(part, {})["inserts"] = chain
 
+    def d_patch(self, args, raw, line):
+        """`patch acid osc1=osc(wave=saw) f1=filter(cutoff=300, q=8) amp=vca out=out | osc1>f1 f1>amp amp>out`:
+        a patch instrument (instruments/patch.py). Several lines with the same name add to one patch; use it as
+        `inst bass=patch/acid`."""
+        from ..instruments.base import ParamError
+        from ..instruments.patch import MODULES, knob_value
+        words = self._rest(raw).split(None, 1)
+        if len(words) < 2:
+            self.err("patch: write patch <name> <module>=<type>(knob=value, ...) ... and wires a>b, a>b.knob*amount",
+                     line)
+        name, body = words
+        spec = self.song.setdefault("patches", {}).setdefault(name, {"modules": {}, "wires": []})
+        for tok in split_top(body.replace("|", " ")):
+            if ">" in tok:
+                spec["wires"].append(tok)
+                continue
+            m = re.fullmatch(r"([A-Za-z_]\w*)=([A-Za-z_]\w*)(?:\((.*)\))?", tok, re.S)
+            if not m:
+                self.err(f"patch {name}: '{tok}' not understood", line,
+                         "modules are id=type(knob=value, ...), wires are a>b or a>b.knob*amount")
+            mid, typ = m[1], m[2]
+            if typ not in MODULES:
+                self.err(f"patch {name}: unknown module type '{typ}'", line,
+                         did_you_mean(typ, MODULES))
+            knobs = {k.name: k for k in MODULES[typ].knobs}
+            mod = {"type": typ}
+            for item in split_top(m[3] or "", ","):
+                k, eq, v = item.partition("=")
+                k, v = k.strip(), v.strip()
+                if not eq or k not in knobs:
+                    self.err(f"patch {name}.{mid}: '{item.strip()}' is not one of its knobs", line,
+                             did_you_mean(k, knobs))
+                try:
+                    knob_value(MODULES[typ], knobs[k], v if not re.fullmatch(r"-?[\d.]+", v) else float(v))
+                except ParamError as e:
+                    self.err(str(e), line)
+                mod[k] = float(v) if re.fullmatch(r"-?[\d.]+", v) else v
+            spec["modules"][mid] = mod
+        if spec["wires"] and any(t["type"] == "out" for t in spec["modules"].values()):
+            from ..instruments.patch import validate
+            try:
+                validate(spec, f"patch {name}")
+            except ParamError as e:
+                if "no module" not in str(e):                  # a module may come on a later line
+                    self.err(str(e), line)
+
     def d_qa(self, args, raw, line):
         q = self.song.setdefault("qa", {})
         for a in args:
@@ -1832,10 +1880,20 @@ class _Interp:
                     self.err(f"set {m[1]}: '{k}' is not a mapping", line)
             d[last] = _value(m[2])
 
+    def check_prog(self, text, line, prefix="", section=None):
+        """Parse a progression now so a bad chord symbol is reported on the line that wrote it."""
+        from ..theory.harmony import parse_progression
+        try:
+            parse_progression(text)
+        except NotationError as e:
+            raise SongError(f"{prefix}{e}", file=self.file, line=line, section=section) from None
+
     def d_chords(self, args, raw, line):
         h = self.song.setdefault("harmony", {})
         chords = [a for a in args if not a.startswith("/")]
         per = [a for a in args if a.startswith("/")]
+        if chords:
+            self.check_prog(chords, line, "harmony default: ")
         h["default"] = chords
         if per:
             h["chord_bars"] = _scalar(per[0][1:])
@@ -1843,6 +1901,7 @@ class _Interp:
     def d_prog(self, args, raw, line):
         if len(args) != 2:
             self.err('write: prog doubt "Am:2 Dm7:2"', line)
+        self.check_prog(args[1], line, f"prog {args[0]}: ")
         self.song.setdefault("harmony", {}).setdefault("progressions", {})[args[0]] = args[1]
 
     def d_motif(self, args, raw, line):
@@ -1989,15 +2048,20 @@ class _Compiler:
         return (self.it.song.get("harmony") or {}).get("progressions") or {}
 
     def check_style(self, role, name, line, section, opts):
-        from ..arrange.styles import get_style, load_styles
+        from ..arrange.styles import SHARED_ROLE, get_style, load_styles
         r = opts.get("role", role)
         try:
             get_style(r, name)
         except SongError as e:
-            known = set(load_styles().get(r, {})) | self.motifs | {
-                k for k, v in self.it.env.items() if isinstance(v, (Ref, Part))}
-            self.err(e.message if r in load_styles() else f"'{name}' is not a style, motif or variable", line,
-                     section, did_you_mean(name, known))
+            styles = load_styles()
+            groups = [(f"{r} styles", sorted({*styles.get(r, {}), *styles.get(SHARED_ROLE, {})})),
+                      ("motifs", sorted(self.motifs)),
+                      ("variables", sorted(k for k, v in self.it.env.items() if isinstance(v, (Ref, Part))))]
+            known = [n for _, names in groups for n in names]
+            close = did_you_mean(name, known).partition("valid:")[0]
+            listing = "; ".join(f"{label}: {' '.join(names)}" for label, names in groups if names)
+            self.err(e.message if r in styles else f"'{name}' is not a style, motif or variable", line,
+                     section, f"{close}({listing})" if close else f"valid: {listing}")
 
     def is_kit(self, role, p: Part, opts) -> bool:
         from ..arrange.styles import get_style

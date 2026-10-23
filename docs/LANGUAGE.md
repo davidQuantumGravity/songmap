@@ -55,13 +55,14 @@ prog <name> "<chord:bars ...>"
 motif <name> [deg|rel] [oct=<n>] [key=<key>] "<note language>"
 cue <name>=<position>
 mix <part> <gain_db> [sc=<depth>] [hall= room= delay= plate=<send>] [pan=<x>] [width=<x>] [| <part> ...]
-inserts <part|master> <unit>[(k=v, ...)] ... [| <part> ...]   inserts lead eq(high=2) comp(threshold=-20) | master eq(low=1)
+inserts <part|master|return> <unit>[(k=v, ...)] ... [| <part> ...]   inserts lead eq(high=2) comp(threshold=-20) | master eq(low=1)
 master legacy|standard [lufs=] [ceiling=] [glue=none|gentle|punchy] [contrast=<dB>]
+patch <name> <id>=<module>[(knob=value, ...)] ... <src>><dst>[.<knob>][*amount] ...
 qa [lufs=<x>|<a>..<b>] [contrast=<quiet><<loud>:<dB>,...] [silent!=<a>,<b>] [low<=<x>] [peak<=<dB>] [hits=true]
 set <key>[.<key>...]=<value>                               set returns={hall: {type: "reverb", seconds: 2.4}}
 ```
 
-`set` writes any field of the YAML form that has no directive, such as `returns`, `harmony.voicing` or an `fx` kit. Each other directive maps onto a field of the song: `instruments`, `groove`, `parts_feel`, `harmony`, `motifs`, `cues`, `mix`, `master` or `qa` ([SONGMAP_SPEC.md](SONGMAP_SPEC.md)). In `mix`, `sc=` and the sends change only the depth or send they name; the rest of the part's default sidechain and sends is kept. `groove` and `feel` are played by the performance layer, on top of the song's mood. `qa` rules are evaluated from P2.
+`set` writes any field of the YAML form that has no directive, such as `returns`, `harmony.voicing` or an `fx` kit. Each other directive maps onto a field of the song: `instruments`, `groove`, `parts_feel`, `harmony`, `motifs`, `cues`, `mix`, `master` or `qa` ([SONGMAP_SPEC.md](SONGMAP_SPEC.md)). In `mix`, `sc=` and the sends change only the depth or send they name; the rest of the part's default sidechain and sends is kept. `inserts` names a part, `master` (before mastering) or a return such as `hall` or `room` (its wet output, after the reverb and before it joins the mix): `inserts hall eq(lp=6000, low=-4) | master comp(ratio=2)`. `groove` and `feel` are played by the performance layer, on top of the song's mood. `qa` rules are evaluated from P2.
 
 **Values:**
 

@@ -1,0 +1,19 @@
+# A wobble bass: two detuned saws, a low-pass opened and closed by an LFO.
+description: "Two detuned saws through a resonant low-pass; an LFO swings the cutoff (the wobble)."
+modules:
+  osc1: {type: osc, wave: saw, level: 0.6}
+  osc2: {type: osc, wave: saw, fine: 9, level: 0.6}
+  sub: {type: osc, wave: sine, octave: -1, level: 0.5}
+  wob: {type: lfo, rate: 4, shape: sine, depth: 1}
+  f1: {type: filter, mode: lp, cutoff: 500, q: 5, keytrack: 0.3}
+  amp_env: {type: env, a: 0.005, d: 0.1, s: 0.9, r: 0.1}
+  amp: {type: vca}
+  out: {type: out, level: 0.45}
+wires:
+  - osc1>f1
+  - osc2>f1
+  - wob>f1.cutoff*2
+  - f1>amp
+  - sub>amp
+  - amp_env>amp.gain
+  - amp>out
