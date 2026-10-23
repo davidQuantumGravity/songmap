@@ -551,7 +551,9 @@ def page(title, body, toc, chapters, current_id, prefix, layers=True, part_id="f
     layer_ui = ('<div class="layers" role="group" aria-label="Depth"><span>Depth</span>'
                 '<button data-layer="hear" aria-pressed="true">Hear it</button>'
                 '<button data-layer="understand" aria-pressed="true">Understand it</button>'
-                '<button data-layer="derive" aria-pressed="true">Derive it</button></div>') if layers else ""
+                '<button data-layer="derive" aria-pressed="true">Derive it</button>'
+                '<button class="autoplay" aria-pressed="false" title="When an example ends, play the next one on the page">'
+                'Auto-play</button></div>') if layers else ""
     math_head = KATEX_CDN if CLIENT_MATH else ""
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

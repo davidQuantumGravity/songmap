@@ -81,6 +81,9 @@ header .menu { display: none; }
 .layers button[aria-pressed="true"][data-layer="hear"] { background: var(--hear); color: #fff; }
 .layers button[aria-pressed="true"][data-layer="understand"] { background: var(--understand); color: #fff; }
 .layers button[aria-pressed="true"][data-layer="derive"] { background: var(--derive); color: #fff; }
+.layers button.autoplay { margin-left: 6px; border-color: var(--line); }
+.layers button.autoplay[aria-pressed="false"] { text-decoration: none; }
+.layers button.autoplay[aria-pressed="true"] { background: var(--fg); color: var(--card); }
 
 /* layout */
 .wrap { display: grid; grid-template-columns: 300px minmax(0, 1fr); max-width: 1280px; margin: 0 auto; }

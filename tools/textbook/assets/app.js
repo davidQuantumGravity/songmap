@@ -1,7 +1,7 @@
-// Depth toggles (Hear / Understand / Derive), theme toggle, mobile menu, reading progress,
+// Depth toggles (Hear / Understand / Derive), auto-play of the examples, theme toggle, mobile menu, reading progress,
 // current-section chips, and client-side math only when the build could not pre-render it.
 (function () {
-  var KEY = "tb-layers", THEME = "tb-theme";
+  var KEY = "tb-layers", THEME = "tb-theme", AUTO = "tb-autoplay";
   function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
   function save(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } }
   function apply(state) {
@@ -23,6 +23,35 @@
         var anyOn = ["hear", "understand", "derive"].some(function (k) { return state[k] !== false; });
         if (!anyOn) state[l] = true;
         save(KEY, JSON.stringify(state)); apply(state);
+      });
+    });
+
+    // Auto-play: when an example ends, the next one on the page that is shown (its depth layer on) scrolls into
+    // view and plays. Starting any example pauses the others either way.
+    var media = Array.prototype.slice.call(document.querySelectorAll("main video, main audio"));
+    var auto = false;
+    try { auto = localStorage.getItem(AUTO) === "1"; } catch (e) { /* private mode */ }
+    function showAuto() {
+      document.querySelectorAll(".layers .autoplay").forEach(function (b) { b.setAttribute("aria-pressed", auto ? "true" : "false"); });
+    }
+    showAuto();
+    document.querySelectorAll(".layers .autoplay").forEach(function (b) {
+      b.addEventListener("click", function () { auto = !auto; save(AUTO, auto ? "1" : "0"); showAuto(); });
+    });
+    media.forEach(function (el, i) {
+      el.addEventListener("play", function () {
+        media.forEach(function (o) { if (o !== el && !o.paused) o.pause(); });
+      });
+      el.addEventListener("ended", function () {
+        if (!auto) return;
+        for (var j = i + 1; j < media.length; j++) {
+          var next = media[j];
+          if (next.offsetParent === null) continue;          // inside a hidden depth layer
+          next.scrollIntoView({ behavior: "smooth", block: "center" });
+          var p = next.play();
+          if (p && p.catch) p.catch(function () { /* the browser refused: the reader presses play */ });
+          return;
+        }
       });
     });
 
