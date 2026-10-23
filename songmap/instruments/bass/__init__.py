@@ -12,20 +12,22 @@ from ..dsp import (SR, adsr, ad, drive, eq, ks_string, mtof, n_samples, pan_mono
 class Bass(Instrument):
     name, family, mono = "bass", "bass", True
     PARAMS = (
-        Param("saw", 1.0, 0, 1, "", "lin", "osc"),
-        Param("square", 0.0, 0, 1, "", "lin", "osc"),
+        Param("saw", 1.0, 0, 1, "", "lin", "osc", "level of the sawtooth oscillator (all harmonics)"),
+        Param("square", 0.0, 0, 1, "", "lin", "osc", "level of the square oscillator (odd harmonics only)"),
         Param("sub", 0.5, 0, 1, "", "lin", "osc", "sine one octave down"),
-        Param("cutoff", 700, 60, 8000, "Hz", "log", F),
-        Param("res", 1.0, 0.5, 12, "q", "log", F),
+        Param("cutoff", 700, 60, 8000, "Hz", "log", F, "base frequency of the low-pass filter in Hz"),
+        Param("res", 1.0, 0.5, 12, "q", "log", F, "filter resonance (Q): boosts harmonics near the cutoff"),
         Param("env_amt", 2.0, 0, 6, "oct", "lin", F, "filter-envelope depth"),
-        Param("env_decay", 0.15, 0.01, 1.5, "s", "log", F),
-        Param("attack", 0.003, 0.001, 0.2, "s", "log", A),
-        Param("decay", 0.25, 0.01, 2.0, "s", "log", A),
-        Param("sustain", 0.8, 0, 1, "", "lin", A),
-        Param("release", 0.06, 0.01, 1.0, "s", "log", A),
-        Param("drive", 1.4, 1, 8, "x", "log", T),
+        Param("env_decay", 0.15, 0.01, 1.5, "s", "log", F,
+              "how fast the filter closes after the attack (time constant)"),
+        Param("attack", 0.003, 0.001, 0.2, "s", "log", A, "amplitude fade-in time"),
+        Param("decay", 0.25, 0.01, 2.0, "s", "log", A, "time to fall from the peak to the sustain level"),
+        Param("sustain", 0.8, 0, 1, "", "lin", A, "level held while the note is down (0-1)"),
+        Param("release", 0.06, 0.01, 1.0, "s", "log", A, "fade-out after the note is released"),
+        Param("drive", 1.4, 1, 8, "x", "log", T, "tanh saturation after the filter (1 = clean)"),
         Param("glide", 0.04, 0, 0.5, "s", "log", P, "portamento time on slurred notes"),
-        Param("vel_cutoff", 1.5, 0, 4, "oct", "lin", V),
+        Param("vel_cutoff", 1.5, 0, 4, "oct", "lin", V,
+              "octaves the base cutoff moves per unit of velocity around 0.7"),
         *common_vel(1.2), RR,
     )
 

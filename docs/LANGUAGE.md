@@ -57,7 +57,7 @@ cue <name>=<position>
 mix <part> <gain_db> [sc=<depth>] [hall= room= delay= plate=<send>] [pan=<x>] [width=<x>] [| <part> ...]
 inserts <part|master|return> <unit>[(k=v, ...)] ... [| <part> ...]   inserts lead eq(high=2) comp(threshold=-20) | master eq(low=1)
 master legacy|standard [lufs=] [ceiling=] [glue=none|gentle|punchy] [contrast=<dB>]
-patch <name> <id>=<module>[(knob=value, ...)] ... <src>><dst>[.<knob>][*amount] ...
+patch <name> <id>=<module>[(knob=value, ...)] ... <src>><dst>[.<knob>][*amount] ... @<macro>(default=x, mod.knob=a..b)
 qa [lufs=<x>|<a>..<b>] [contrast=<quiet><<loud>:<dB>,...] [silent!=<a>,<b>] [low<=<x>] [peak<=<dB>] [hits=true]
 set <key>[.<key>...]=<value>                               set returns={hall: {type: "reverb", seconds: 2.4}}
 ```

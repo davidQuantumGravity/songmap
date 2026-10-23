@@ -14,12 +14,13 @@ class Kick(Instrument):
     PARAMS = (
         Param("tune", 48, 30, 90, "Hz", "log", P, "resting pitch of the body"),
         Param("sweep", 30, 0, 48, "st", "lin", P, "start pitch above tune"),
-        Param("sweep_time", 0.035, 0.005, 0.2, "s", "log", P),
+        Param("sweep_time", 0.035, 0.005, 0.2, "s", "log", P,
+              "how fast the pitch falls back to tune (exponential time constant in seconds)"),
         Param("decay", 0.45, 0.05, 2.0, "s", "log", A, "t60 of the body"),
         Param("sub", 0.0, 0, 1, "", "lin", A, "extra pure-sine tail (808 boom)"),
         Param("click", 0.3, 0, 1, "", "lin", T, "beater click level"),
-        Param("click_tone", 3500, 1000, 9000, "Hz", "log", T),
-        Param("drive", 1.6, 1, 8, "x", "log", T),
+        Param("click_tone", 3500, 1000, 9000, "Hz", "log", T, "centre frequency of the click's band-pass filter"),
+        Param("drive", 1.6, 1, 8, "x", "log", T, "how hard the sound is pushed into tanh saturation (1 = clean)"),
         Param("vel_sweep", 0.5, 0, 1, "", "lin", V, "harder hits sweep further"),
         Param("vel_click", 0.8, 0, 1, "", "lin", V, "harder hits click more"),
         *common_vel(1.4), RR,
@@ -47,13 +48,13 @@ class Snare(Instrument):
     name, family = "snare", "drum"
     PARAMS = (
         Param("tone", 185, 120, 320, "Hz", "log", P, "shell fundamental"),
-        Param("tone_decay", 0.12, 0.02, 0.5, "s", "log", A),
+        Param("tone_decay", 0.12, 0.02, 0.5, "s", "log", A, "how long the shell rings (t60)"),
         Param("tone_mix", 0.45, 0, 1, "", "lin", T, "shell vs. wires"),
         Param("noise_decay", 0.22, 0.04, 0.8, "s", "log", A, "wire rattle t60"),
-        Param("noise_hp", 1500, 300, 5000, "Hz", "log", F),
-        Param("noise_lp", 9000, 2000, 18000, "Hz", "log", F),
+        Param("noise_hp", 1500, 300, 5000, "Hz", "log", F, "low edge of the wire noise (high-pass cutoff)"),
+        Param("noise_lp", 9000, 2000, 18000, "Hz", "log", F, "top edge of the wire noise (low-pass cutoff)"),
         Param("snap", 0.4, 0, 1, "", "lin", T, "stick transient"),
-        Param("drive", 1.3, 1, 6, "x", "log", T),
+        Param("drive", 1.3, 1, 6, "x", "log", T, "tanh saturation amount (1 = clean)"),
         Param("vel_bright", 1.5, 0, 4, "oct", "lin", V, "ghost notes darker, accents brighter"),
         *common_vel(1.6), RR,
     )
@@ -82,9 +83,9 @@ class Clap(Instrument):
         Param("bursts", 4, 1, 8, "", "lin", T, "number of hand claps in the cluster"),
         Param("spread", 0.011, 0.003, 0.03, "s", "log", T, "gap between bursts"),
         Param("decay", 0.14, 0.03, 0.8, "s", "log", A, "tail of the last burst"),
-        Param("center", 1400, 600, 4000, "Hz", "log", F),
-        Param("q", 1.2, 0.5, 4, "", "lin", F),
-        Param("vel_bright", 1.0, 0, 3, "oct", "lin", V),
+        Param("center", 1400, 600, 4000, "Hz", "log", F, "centre frequency of the band-pass filter"),
+        Param("q", 1.2, 0.5, 4, "", "lin", F, "resonance of the band-pass (higher = narrower band)"),
+        Param("vel_bright", 1.0, 0, 3, "oct", "lin", V, "octaves the band-pass moves per unit of velocity around 0.7"),
         *common_vel(1.5), RR,
     )
 
@@ -116,15 +117,21 @@ class Hat(Instrument):
         Param("tune", 1.0, 0.5, 2.0, "x", "log", P, "scales the metallic partials"),
         Param("decay", 0.05, 0.015, 1.2, "s", "log", A, "0.05 closed, 0.4+ open"),
         Param("metal", 0.6, 0, 1, "", "lin", T, "square-wave metal vs. noise"),
-        Param("hp", 7000, 3000, 12000, "Hz", "log", F),
+        Param("hp", 7000, 3000, 12000, "Hz", "log", F, "high-pass cutoff: nothing below this gets through"),
         Param("color", 10000, 5000, 16000, "Hz", "log", F, "band-pass center"),
         Param("vel_decay", 0.5, 0, 1, "", "lin", V, "harder hits ring longer"),
-        Param("vel_bright", 1.0, 0, 3, "oct", "lin", V),
+        Param("vel_bright", 1.0, 0, 3, "oct", "lin", V, "harder hits are brighter"),
+        Param("choke", 1, 0, 1, "", "lin", A, "1: an open hat (decay 0.2 s or more) is cut by the next hat hit, "
+              "as a closing pedal does; 0: it rings over"),
         *common_vel(1.4), RR,
     )
+    CHOKE_GROUP = 901                                   # every hat hit; open hats are cut by the next one
 
     def tail(self, note):
         return self.p["decay"] * 1.5
+
+    def choke(self, note):
+        return self.CHOKE_GROUP, (self.CHOKE_GROUP if self.p["choke"] >= 0.5 and self.p["decay"] >= 0.2 else 0)
 
     def render(self, note):
         p, v, rng = self.p, note.vel, self.rng(note)

@@ -1,0 +1,10 @@
+# A plucked string (sketch of the built-in string_pluck): a noise burst rings through a tuned delay loop (Karplus-Strong), then a gentle low-pass.
+description: "Karplus-Strong: a short noise burst rings in a delay loop tuned to the note; harder plucks are brighter."
+modules:
+  string: {type: string, t60: 2.5, brightness: 0.85, pick: 0.008}
+  tone: {type: filter, mode: lp, cutoff: 3500, q: 0.7, keytrack: 0.6}
+  out: {type: out, level: 0.9, tail: 0.5}
+wires:
+  - string>tone
+  - vel>tone.cutoff*1.5
+  - tone>out

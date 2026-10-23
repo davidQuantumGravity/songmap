@@ -35,7 +35,8 @@ export type Guide = {
 };
 export type ModuleKnob = { name: string; default: number; lo: number; hi: number; unit: string; curve: string; mod: string; doc: string; choices: string[] };
 export type ModuleSpec = { name: string; kind: string; doc: string; audio_in: boolean; output: string; knobs: ModuleKnob[] };
-export type PatchData = { modules: Record<string, Record<string, number | string>>; wires: string[]; description?: string };
+export type PatchData = { modules: Record<string, Record<string, number | string>>; wires: string[]; description?: string;
+  macros?: Record<string, { default: number; map: Record<string, [number, number]> }> };
 export type Catalog = {
   instruments: InstrumentSpec[]; presets: Record<string, Preset[]>; samplers: { name: string; title: string; license: string; family: string }[];
   inserts: UnitSpec[]; guides: Record<string, Guide>; modules: ModuleSpec[]; sources: string[]; patch_library: Record<string, PatchData>;

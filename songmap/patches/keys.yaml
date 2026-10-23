@@ -1,0 +1,9 @@
+# A patch sketch of the built-in keys (piano): a struck string, a hammer-dependent low-pass, a damper release.
+description: "Sketch of the built-in keys: a string (Karplus-Strong) rings for several seconds, a low-pass stands in for the felt hammer (harder hits open it), and an envelope damps the string when the key is let go. The built-in is modal (24 stiff-string partials), so this is a simplification."
+modules:
+  string: {type: string, t60: 6, brightness: 0.92, pick: 0.004, level: 0.9}
+  hammer: {type: filter, mode: lp, cutoff: 1800, q: 0.7, keytrack: 0.7}
+  damper: {type: env, a: 0.001, d: 6, s: 1, r: 0.25}
+  amp: {type: vca}
+  out: {type: out, level: 0.9, tail: 0.3}
+wires: [string>hammer, vel>hammer.cutoff*2, hammer>amp, damper>amp.gain, amp>out]

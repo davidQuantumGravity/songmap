@@ -56,6 +56,23 @@ def _place(buf: np.ndarray, start: int, sig: np.ndarray, gain: float, pan: float
         buf[start:start + len(s)] += s * gain
 
 
+END_FADE = int(0.003 * SR)     # a note still sounding when its buffer ends fades over its last 3 ms
+
+
+def declick(y: np.ndarray) -> np.ndarray:
+    """A note whose sound is still loud at the end of its buffer would click when it stops: fade its last 3 ms.
+    Notes that already end in silence are returned unchanged."""
+    if len(y) < 2 * END_FADE:
+        return y
+    tail = float(np.max(np.abs(y[-END_FADE:])))
+    if tail <= 1e-3 * max(float(np.max(np.abs(y))), 1e-12):
+        return y
+    y = y.copy()
+    fade = 0.5 + 0.5 * np.cos(np.pi * np.arange(1, END_FADE + 1) / END_FADE)
+    y[-END_FADE:] *= fade[:, None] if y.ndim == 2 else fade
+    return y
+
+
 def _apply_chokes(placed: list) -> None:
     """SFZ-style choke: a note whose off_by is G is cut (fast fade) when a later note of group G
     starts in the same part. `placed` holds [start, y, gain, pan, group, off_by]; y is replaced."""
@@ -130,7 +147,7 @@ def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: 
                 note = Note(float(p), float(e.vel), gate, seed=seed, rr=k % RR_SLOTS, params=dict(e.params))
                 y = cache.get(key)
                 if y is None:
-                    y = inst.render(note)
+                    y = declick(inst.render(note))
                     cache[key] = y
                     rendered += 1
                 else:

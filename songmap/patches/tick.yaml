@@ -1,0 +1,10 @@
+# A patch sketch of the built-in tick: a short high sine ping with a little noise click.
+description: "Sketch of the built-in tick: a sine two octaves and 6 semitones above the note with a very short decay, and a tiny high-passed noise click. Harder hits ping higher."
+modules:
+  ping: {type: osc, wave: sine, octave: 2, detune: 6, level: 0.8}
+  env: {type: env, a: 0.0005, d: 0.03, s: 0, r: 0.01}
+  amp: {type: vca}
+  click: {type: noise, color: 0, level: 0.15}
+  click_hp: {type: filter, mode: hp, cutoff: 6000, q: 0.8, keytrack: 0}
+  out: {type: out, level: 0.8, tail: 0.02}
+wires: [vel>ping.detune*4, ping>amp, click>click_hp, click_hp>amp, env>amp.gain, amp>out]

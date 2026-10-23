@@ -1,0 +1,17 @@
+# A patch sketch of the built-in kick: one sine that starts high and dives to ~48 Hz, a noise click, drive.
+description: "Sketch of the built-in kick: a sine tuned two octaves and 5 semitones under the note (48 Hz for kit hits on C4) whose pitch drops from 30 semitones above, a band-passed noise click, and tanh drive. Harder hits dive further and click more."
+modules:
+  body: {type: osc, wave: sine, octave: -2, detune: -5.3, level: 0.9}
+  drop: {type: env, a: 0.0005, d: 0.09, s: 0, r: 0.02}
+  body_env: {type: env, a: 0.001, d: 0.45, s: 0, r: 0.05}
+  body_amp: {type: vca}
+  click: {type: noise, color: 0, level: 0.5}
+  click_bp: {type: filter, mode: bp, cutoff: 3500, q: 1, keytrack: 0}
+  click_env: {type: env, a: 0.0005, d: 0.012, s: 0, r: 0.005}
+  click_amp: {type: vca}
+  drive: {type: shaper, drive: 0.35}
+  out: {type: out, level: 0.8, tail: 0.05}
+wires: [drop>body.detune*30, vel>body.detune*6, body>body_amp, body_env>body_amp.gain, click>click_bp, click_bp>click_amp,
+        click_env>click_amp.gain, vel>click_amp.gain*0.5, body_amp>drive, click_amp>drive, drive>out]
+macros:
+  punch: {default: 0.5, map: {drop.d: [0.03, 0.2], drive.drive: [0.1, 0.7]}}

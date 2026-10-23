@@ -7,6 +7,7 @@ from songmap.gui.project import parse_text
 from songmap.gui.rack import set_patch, voices
 from songmap.instruments import Note
 from songmap.instruments.base import ParamError
+from songmap.instruments import REGISTRY
 from songmap.instruments.patch import MODULES, build, library, validate
 from songmap.parse.errors import SongError
 from songmap.parse.fmt import to_sm, to_yaml
@@ -72,7 +73,7 @@ def test_song_patches_render_round_trip_and_report_lines():
 
 
 def test_studio_set_patch_and_voice_info():
-    lib = library()["pluck"]
+    lib = library()["string_pluck"]
     t = set_patch(SONG, "mine", lib)
     assert "patch mine string=string(" in t
     arr = expand(parse_text(t.replace("bass=patch/acid", "bass=patch/mine"), "p.sm"))
@@ -80,3 +81,34 @@ def test_studio_set_patch_and_voice_info():
     assert v["bass"]["patch"] == "mine" and v["bass"]["patch_source"] == "song" and "string.t60" in v["bass"]["values"]
     assert v["drums"]["pieces"]["snare"]["patch_source"] == "library"
     assert set_patch(t, "mine", None) == SONG
+
+
+def test_fm_and_macros():
+    song = """song "F" 100 4/4 C fps=30 seed=1 tail=1
+patch ep mod=osc(wave=sine, level=1) car=osc(wave=sine) env=env(d=2, s=.3) amp=vca out=out
+patch ep mod>car car>amp env>amp.gain amp>out
+patch ep @bark(default=.4, car.fm=.5..6, mod.level=.3..1)
+inst keys=patch/ep(bark=.9)
+verse 1 | keys:hold
+"""
+    s = parse_text(song, "f.sm")
+    assert s.patches["ep"]["macros"]["bark"]["map"]["car.fm"] == [0.5, 6.0]
+    assert "@bark(default=.4, car.fm=0.5..6, mod.level=0.3..1)" in to_sm(s)
+    spec = s.patches["ep"]
+    inst = build("ep", spec)
+    assert inst.PARAMS[0].name == "bark" and "car.fm" in inst.PARAMS[0].doc
+
+    def centroid(y):                                             # power-weighted, Hann-windowed (no leakage)
+        sp = np.abs(np.fft.rfft(y[:16384] * np.hanning(16384))) ** 2
+        return (sp * np.arange(len(sp))).sum() / sp.sum()
+    dull, bright = (centroid(build("ep", spec, bark=b).render(Note(60, .7, .5, seed=1))) for b in (0, 1))
+    assert bright > dull * 1.3                                   # FM depth (via the macro) adds harmonics
+    with pytest.raises(ParamError, match="no knob 'fmm'"):
+        validate({**spec, "macros": {"x": {"map": {"car.fmm": [0, 1]}}}})
+
+
+def test_every_builtin_has_a_patch_sketch():
+    lib = library()
+    alias = {"snare": "snare808"}
+    for name in REGISTRY:
+        assert alias.get(name, name) in lib, f"no patch sketch of {name}"

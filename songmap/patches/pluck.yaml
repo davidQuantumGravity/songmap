@@ -1,10 +1,11 @@
-# A plucked string: a noise burst rings through a tuned delay loop (Karplus-Strong), then a gentle low-pass.
-description: "Karplus-Strong: a short noise burst rings in a delay loop tuned to the note; harder plucks are brighter."
+# A patch sketch of the built-in (synth) pluck: pulse + saw through a low-pass that snaps shut, a decaying envelope.
+description: "Sketch of the built-in pluck: a pulse and a saw through a resonant low-pass whose envelope snaps shut in a few tens of milliseconds; the level decays like a plucked note. Harder notes are brighter."
 modules:
-  string: {type: string, t60: 2.5, brightness: 0.85, pick: 0.008}
-  tone: {type: filter, mode: lp, cutoff: 3500, q: 0.7, keytrack: 0.6}
-  out: {type: out, level: 0.9, tail: 0.5}
-wires:
-  - string>tone
-  - vel>tone.cutoff*1.5
-  - tone>out
+  pulse: {type: osc, wave: square, pw: 0.35, level: 0.55}
+  saw: {type: osc, wave: saw, level: 0.45}
+  f1: {type: filter, mode: lp, cutoff: 2500, q: 1.2, keytrack: 0.5}
+  snap: {type: env, a: 0.001, d: 0.08, s: 0, r: 0.05}
+  env: {type: env, a: 0.001, d: 0.6, s: 0, r: 0.15}
+  amp: {type: vca}
+  out: {type: out, level: 0.7}
+wires: [pulse>f1, saw>f1, snap>f1.cutoff*2.5, vel>f1.cutoff*1.5, f1>amp, env>amp.gain, amp>out]

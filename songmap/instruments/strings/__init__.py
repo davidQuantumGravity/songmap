@@ -19,7 +19,8 @@ class StringPluck(Instrument):
         Param("pick_tone", 6000, 800, 16000, "Hz", "log", T, "excitation brightness"),
         Param("body", 0.5, 0, 1, "", "lin", T, "wooden body resonance"),
         Param("release", 0.08, 0.01, 1.0, "s", "log", A, "damping when the note is released"),
-        Param("vel_bright", 2.0, 0, 4, "oct", "lin", V),
+        Param("vel_bright", 2.0, 0, 4, "oct", "lin", V,
+              "octaves the pluck brightness moves per unit of velocity around 0.7"),
         *common_vel(1.3), RR,
     )
 

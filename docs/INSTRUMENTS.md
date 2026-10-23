@@ -56,7 +56,7 @@ Status: ✅ in the sketch · 🟡 planned, technique decided · 🔵 via sampler
 | `kick` | Sine with exponential pitch sweep, band-passed click, optional 808 sub tail, tanh drive | tune, sweep, sweep_time, decay, click, sub, drive, vel_sweep, vel_click | ✅ |
 | `snare` | Two-mode shell + HP/LP-filtered wires + stick snap; velocity → brighter, longer wires | tone, tone_decay, tone_mix, noise_decay, noise_hp/lp, snap, vel_bright | ✅ |
 | `clap` | 1–8 band-passed noise bursts with jittered spacing, long last tail | bursts, spread, decay, center, q | ✅ |
-| `hat` | 808 six-square metal + noise, BP/HP; closed/open by `decay`; **choke group** (open hat cut by closed) | tune, decay, metal, hp, color, vel_decay | ✅ (choke: engine, Phase 1) |
+| `hat` | 808 six-square metal + noise, BP/HP; closed/open by `decay`; **choke group** (open hat cut by closed) | tune, decay, metal, hp, color, vel_decay, choke | ✅ |
 | `tom` | Modal membrane (circular-membrane ratios 1, 1.59, 2.14, 2.30, 2.65) + pitch drop + stick noise | tune, decay, pitch_drop, stick | 🟡 |
 | `cymbal` (ride/crash/china) | 40–80 inharmonic modes + high-passed noise with slow bloom; crash = bloom; ride = bell partials + ping | size, bell, bloom, decay, dark | 🟡 |
 | `shaker`, `tambourine` | Stochastic particle model (PhISEM): Poisson-timed grains through resonant filters | grains, resonance, swing | 🟡 |
@@ -202,7 +202,9 @@ inst bass=patch/acid(f1.cutoff=400)
     `comb` (tuned to the note), `delay`, `vca`, `mix`.
   - Control: `env` (ADSR), `lfo` (sine, triangle, square, saw, random steps; with a fade-in delay).
   - `out`: the level, the pan and the tail after the release.
-- **Wires.** `a>b` sends audio from a into b's input. `a>b.knob*amount` moves a knob:
+- **Wires.** `a>b` sends audio from a into b's input; into an oscillator it is **FM**: it bends the oscillator's phase
+  by its `fm` depth (a sine into a sine at 1:1 is the electric piano, at an inharmonic ratio a bell).
+  `a>b.knob*amount` moves a knob:
   - frequencies (cutoff, rate) move in octaves per unit;
   - pitch (`detune`, `tune`) moves in semitones;
   - a VCA's `gain` is replaced by what is wired into it (an envelope there is the note's loudness shape);
@@ -213,13 +215,17 @@ inst bass=patch/acid(f1.cutoff=400)
   Studio's knobs set it like any other param. Values may name choices: `wave=saw`, `mode=hp`, `body=bell`.
 - **Checks:** unknown modules, knobs and sources, audio wired out of an envelope, and loops are SongErrors with
   suggestions, at the line that wrote them.
-- **Library:** `songmap/patches/*.yaml` (`modules:` and `wires:`, plus a description): acid, bell, glass_pad, pluck,
-  snare808 (two tuned sine shells with a pitch drop, high-passed noise for the wires), wobble. A song's own patch of the
-  same name wins.
+- **Macros:** one 0..1 knob that moves several, `@punch(default=.5, drop.d=.03..0.2, drive.drive=.1..0.7)` on a
+  `patch` line (YAML: `macros: {punch: {default: .5, map: {drop.d: [.03, .2]}}}`). The macro is a param like any
+  other (`inst kick=patch/kick(punch=.8)`); a knob a macro maps follows the macro (log knobs move logarithmically).
+- **Library:** `songmap/patches/*.yaml` (`modules:`, `wires:`, `macros:`, a description). Every built-in instrument has
+  a patch sketch of the same name (`snare808` for the snare): its signal chain rebuilt from modules, so the Studio's
+  "Build a patch" starts from the instrument you are on and you can rewire it. The sketches are simplifications (the
+  hat has three metal squares, not six; the piano is a string, not 24 modal partials; the organ has three drawbars),
+  and each says so in its description. Also: acid, bell, glass_pad, wobble. A song's own patch of the same name wins.
 - **Evaluation:** notes render offline, so the graph is evaluated module by module as whole numpy arrays in
   topological order. Feedback exists only inside modules (`string`, `comb`, `delay`), never between them.
-- **Not built yet:** FM (phase modulation between oscillators), expressions as knob values, macros (one knob mapped to
-  several params), `waveguide` (bowed or blown), wavetables, and native instruments as patch templates.
+- **Not built yet:** expressions as knob values, `waveguide` (bowed or blown) and wavetables.
 
 ### Instrument guides
 

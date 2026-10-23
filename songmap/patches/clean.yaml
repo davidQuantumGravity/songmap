@@ -1,0 +1,10 @@
+# A patch sketch of the built-in clean: a few pure harmonics added together (additive synthesis), a simple envelope.
+description: "Sketch of the built-in clean: the note's first three harmonics as pure sines (1x, 2x, 3x) at falling levels, under an attack-decay-sustain-release envelope; velocity brings up the upper harmonics."
+modules:
+  h1: {type: osc, wave: sine, level: 0.7}
+  h2: {type: osc, wave: sine, octave: 1, level: 0.3}
+  h3: {type: osc, wave: sine, octave: 1, detune: 7.02, level: 0.15}
+  env: {type: env, a: 0.005, d: 0.3, s: 0.6, r: 0.3}
+  amp: {type: vca}
+  out: {type: out, level: 0.65}
+wires: [vel>h2.level*0.3, vel>h3.level*0.3, h1>amp, h2>amp, h3>amp, env>amp.gain, amp>out]

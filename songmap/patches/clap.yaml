@@ -1,0 +1,14 @@
+# A patch sketch of the built-in clap: a few quick noise bursts (several hands) and a longer tail, band-passed.
+description: "Sketch of the built-in clap: noise through a band-pass around 1.2 kHz; a short delay with feedback repeats the first burst three or four times (the separate hands), then a longer tail rings out. Harder claps are brighter."
+modules:
+  noise: {type: noise, color: 0, level: 0.8}
+  burst_env: {type: env, a: 0.0005, d: 0.008, s: 0, r: 0.004}
+  burst: {type: vca}
+  hands: {type: delay, time: 0.011, feedback: 0.55, mix: 0.7}
+  tail_env: {type: env, a: 0.03, d: 0.18, s: 0, r: 0.08}
+  tail: {type: vca}
+  sum: {type: mix}
+  bp: {type: filter, mode: bp, cutoff: 1200, q: 1.6, keytrack: 0}
+  out: {type: out, level: 1.2, tail: 0.1}
+wires: [noise>burst, burst_env>burst.gain, burst>hands, noise>tail, tail_env>tail.gain*0.6, hands>sum, tail>sum, sum>bp,
+        vel>bp.cutoff*1, bp>out]

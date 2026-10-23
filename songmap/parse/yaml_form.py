@@ -37,6 +37,7 @@ MASTER_KEYS = ("mode", "target_lufs", "ceiling_db", "glue", "preserve_contrast")
 # ----------------------------------------------------------------------------
 class LineDict(dict):
     line: int | None = None
+    key_lines: dict | None = None          # key -> the line its `key:` is written on (YAML only)
 
 
 class _Loader(yaml.SafeLoader):
@@ -47,6 +48,7 @@ def _construct_mapping(loader, node):
     loader.flatten_mapping(node)
     d = LineDict(loader.construct_pairs(node, deep=True))
     d.line = node.start_mark.line + 1
+    d.key_lines = {k.value: k.start_mark.line + 1 for k, _ in node.value if isinstance(k, yaml.ScalarNode)}
     return d
 
 
@@ -220,6 +222,11 @@ def _line(x) -> int | None:
     return getattr(x, "line", None)
 
 
+def _key_line(d, key) -> int | None:
+    """The line of `key:` in mapping `d`, else the mapping's own line."""
+    return (getattr(d, "key_lines", None) or {}).get(key) or _line(d)
+
+
 def _num(v, what, file, line=None, section=None, positive=True) -> float:
     if isinstance(v, bool) or not isinstance(v, (int, float)):
         raise SongError(f"{what} must be a number, got '{v}'", file=file, line=line, section=section)
@@ -327,9 +334,11 @@ def _harmony(h, file) -> HarmonySpec:
     default = h.get("default") or []
     if isinstance(default, str):
         default = default.replace("|", " ").split()
+    progs = h.get("progressions") or {}
+    lines = {"default": _key_line(h, "default"), "progressions": {k: _key_line(progs, k) for k in progs}}
     return HarmonySpec(default=[str(c) for c in default], chord_bars=float(_num(h.get("chord_bars", 1), "chord_bars", file)),
-                       progressions={k: str(v) for k, v in (h.get("progressions") or {}).items()},
-                       voicing=_plain(h.get("voicing") or {}))
+                       progressions={k: str(v) for k, v in progs.items()},
+                       voicing=_plain(h.get("voicing") or {}), lines=lines)
 
 
 def _motifs(ms, file) -> dict[str, Motif]:
@@ -441,6 +450,7 @@ def _sections(secs, song: Song, file) -> list[Section]:
                                 suggestion=did_you_mean(raw["like"], seen) if seen else "like: needs an earlier section")
             sec.parts = copy.deepcopy(base.parts)
             sec.harmony, sec.feel, sec.dyn = base.harmony, dict(base.feel), base.dyn
+            sec.harmony_line = base.harmony_line
         for key in ("parts", "add"):
             for role, val in (raw.get(key) or {}).items():
                 sec.parts[role] = parse_part(role, val, song.motifs, file=file, line=line, section=name)
@@ -448,7 +458,8 @@ def _sections(secs, song: Song, file) -> list[Section]:
             if role not in sec.parts:
                 song.warnings.append(f"{file}:{line} {name}: drop '{role}' but the section has no such part")
             sec.parts.pop(role, None)
-        sec.harmony = raw.get("harmony", sec.harmony)
+        if "harmony" in raw:
+            sec.harmony, sec.harmony_line = raw["harmony"], _key_line(raw, "harmony")
         if sec.harmony is not None:
             sec.harmony = str(sec.harmony)
         sec.dyn = raw.get("dyn", sec.dyn)

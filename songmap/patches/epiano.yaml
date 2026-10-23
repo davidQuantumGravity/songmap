@@ -1,0 +1,13 @@
+# A patch sketch of the built-in epiano: two-operator FM (a sine modulating a sine), with velocity bark and tremolo.
+description: "Sketch of the built-in epiano: a sine modulator at the note's pitch bends a sine carrier's phase (FM); an envelope makes the brightness fade after the attack, velocity adds bark, and an LFO pans it like a Rhodes tremolo."
+modules:
+  mod: {type: osc, wave: sine, level: 1}
+  car: {type: osc, wave: sine, fm: 1.2}
+  bright: {type: env, a: 0.001, d: 0.6, s: 0, r: 0.2}
+  env: {type: env, a: 0.001, d: 4, s: 0.2, r: 0.3}
+  amp: {type: vca}
+  trem: {type: lfo, rate: 4.5, shape: sine, depth: 0.25}
+  out: {type: out, level: 0.8, tail: 0.2}
+wires: [mod>car, bright>car.fm*2, vel>car.fm*2.5, car>amp, env>amp.gain, amp>out, trem>out.pan]
+macros:
+  bark: {default: 0.4, map: {car.fm: [0.4, 4]}}

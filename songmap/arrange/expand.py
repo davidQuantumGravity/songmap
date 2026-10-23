@@ -115,23 +115,41 @@ class Arrangement:
 # ----------------------------------------------------------------------------
 def harmony_timeline(song: Song, tl: Timeline) -> HarmonyTimeline:
     bpb = song.beats_per_bar
+    lines = song.harmony.lines or {}
     try:
         default = parse_progression(song.harmony.default, bpb, song.harmony.chord_bars) if song.harmony.default else []
     except NotationError as e:
-        raise SongError(f"harmony default: {e}", file=song.file) from None
+        raise SongError(f"harmony default: {e}", file=song.file, line=lines.get("default")) from None
+    prog_lines = lines.get("progressions") or {}
+    for name, text in song.harmony.progressions.items():     # every progression, used or not, on its own line
+        try:
+            parse_progression(text, bpb)
+        except NotationError as e:
+            raise SongError(f"prog {name}: {e}", file=song.file, line=prog_lines.get(name)) from None
     progs = []
     for sec, span in zip(song.sections, tl.sections):
         prog = None
         if sec.harmony:
+            line = sec.harmony_line or sec.line
             text = song.harmony.progressions.get(sec.harmony, sec.harmony)
             if sec.harmony not in song.harmony.progressions and ":" not in text and " " not in text.strip():
-                raise SongError(f"unknown progression '{sec.harmony}'", file=song.file, line=sec.line,
+                one_chord = True
+                try:
+                    from ..theory.harmony import Chord
+                    Chord.parse(text)
+                except NotationError:
+                    one_chord = False
+                if one_chord:
+                    raise SongError(f"'{sec.harmony}' is one chord with no length", file=song.file, line=line,
+                                    section=sec.name, suggestion=f"give it a length in bars ({sec.harmony}:4), or "
+                                    "name a progression")
+                raise SongError(f"unknown progression '{sec.harmony}'", file=song.file, line=line,
                                 section=sec.name, suggestion=did_you_mean(sec.harmony, song.harmony.progressions)
                                 if song.harmony.progressions else "define it under harmony: progressions:")
             try:
                 prog = parse_progression(text, bpb)
             except NotationError as e:
-                raise SongError(str(e), file=song.file, line=sec.line, section=sec.name) from None
+                raise SongError(str(e), file=song.file, line=line, section=sec.name) from None
         progs.append((span.start, span.end, prog))
     return build_harmony(default, progs, tl.total_beats, tonic_midi(song.key))
 

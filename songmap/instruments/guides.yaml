@@ -10,1812 +10,1597 @@
 # try_next.
 
 kick:
-  title: "Synth kick drum"
+  title: Synth kick drum
   family: drum
-  ancestor: "Descends from the analog drum machines: the TR-909 kick (a sine with a fast pitch drop plus a click) and, with the sub knob up, the long boom of the TR-808. It is a close cousin of both, not a circuit copy: it has no bridged-T resonator or sampled click."
-  summary: "A single low sine wave that starts high and dives to its resting pitch in a few hundredths of a second, with a short noise click on top. The dive is what turns a plain tone into a thump. It ignores the note's pitch: `tune` sets the pitch."
-  how: "Start with a sine at `tune` (48 Hz by default). Make its pitch start `sweep` semitones higher (30 st, about 271 Hz) and fall back exponentially with time constant `sweep_time` (35 ms). Fade the sine out so it reaches -60 dB after `decay` seconds. Optionally add a second pure sine at `tune` that fades in over 10 ms and lasts 1.6 times longer (`sub`). Add a 12 ms burst of white noise through a band-pass at `click_tone` for the beater click, then push everything through tanh saturation (`drive`)."
-  why: "When a stick or beater hits a drum head, the head is stretched tighter for an instant, so its pitch starts high and relaxes; the fast pitch drop copies that, and your ear hears it as punch. A sine has no overtones, so the body is felt more than heard; on small speakers the click and the drive harmonics are what tell you a kick happened. A short decay keeps it tight for fast music; a long decay with `sub` gives the hip-hop 808 boom that carries pitch. Drive rounds the peaks, which adds odd harmonics and makes the kick sound louder without getting taller."
+  ancestor: 'Descends from the analog drum machines: the TR-909 kick (a sine with a fast pitch drop plus a click) and, with
+    the sub knob up, the long boom of the TR-808. It is a close cousin of both, not a circuit copy: it has no bridged-T
+    resonator or sampled click.'
+  summary: 'A single low sine wave that starts high and dives to its resting pitch in a few hundredths of a second, with
+    a short noise click on top. The dive is what turns a plain tone into a thump. It ignores the note''s pitch: `tune` sets
+    the pitch.'
+  how: Start with a sine at `tune` (48 Hz by default). Make its pitch start `sweep` semitones higher (30 st, about 271 Hz)
+    and fall back exponentially with time constant `sweep_time` (35 ms). Fade the sine out so it reaches -60 dB after `decay`
+    seconds. Optionally add a second pure sine at `tune` that fades in over 10 ms and lasts 1.6 times longer (`sub`). Add
+    a 12 ms burst of white noise through a band-pass at `click_tone` for the beater click, then push everything through
+    tanh saturation (`drive`).
+  why: When a stick or beater hits a drum head, the head is stretched tighter for an instant, so its pitch starts high and
+    relaxes; the fast pitch drop copies that, and your ear hears it as punch. A sine has no overtones, so the body is felt
+    more than heard; on small speakers the click and the drive harmonics are what tell you a kick happened. A short decay
+    keeps it tight for fast music; a long decay with `sub` gives the hip-hop 808 boom that carries pitch. Drive rounds the
+    peaks, which adds odd harmonics and makes the kick sound louder without getting taller.
   chain:
-    - id: sweep
-      label: "Pitch drop"
-      kind: pitch
-      what: "Starts the body `sweep` semitones above `tune` and glides down exponentially; harder hits start higher."
-      params: [sweep, sweep_time, vel_sweep, rr]
-      to: [body]
-    - id: body
-      label: "Sine body"
-      kind: osc
-      what: "A sine at the swept pitch with an exponential (t60) fade; `rr` nudges the decay by about 6% per hit."
-      params: [tune, decay, rr]
-      to: [drive]
-    - id: sub
-      label: "808 sub tail"
-      kind: osc
-      what: "An extra steady sine at `tune` that rings 1.6 times longer than the body, for a boomy, pitched tail."
-      params: [sub, tune, decay]
-      to: [drive]
-    - id: click
-      label: "Beater click"
-      kind: noise
-      what: "White noise through a band-pass at `click_tone`, fading out in 12 ms: the sound of the beater on the head."
-      params: [click, click_tone, vel_click]
-      to: [drive]
-    - id: drive
-      label: "Saturation"
-      kind: shaper
-      what: "tanh soft clipping, normalised so quiet parts keep their level; rounds the peaks and adds harmonics."
-      params: [drive]
-      to: [amp]
-    - id: amp
-      label: "Velocity level"
-      kind: amp
-      what: "Scales the whole hit by velocity to the power `vel_curve`."
-      params: [vel_curve]
-      to: [out]
+  - id: sweep
+    label: Pitch drop
+    kind: pitch
+    what: Starts the body `sweep` semitones above `tune` and glides down exponentially; harder hits start higher.
+    params: [sweep, sweep_time, vel_sweep, rr]
+    to: [body]
+  - id: body
+    label: Sine body
+    kind: osc
+    what: A sine at the swept pitch with an exponential (t60) fade; `rr` nudges the decay by about 6% per hit.
+    params: [tune, decay, rr]
+    to: [drive]
+  - id: sub
+    label: 808 sub tail
+    kind: osc
+    what: An extra steady sine at `tune` that rings 1.6 times longer than the body, for a boomy, pitched tail.
+    params: [sub, tune, decay]
+    to: [drive]
+  - id: click
+    label: Beater click
+    kind: noise
+    what: 'White noise through a band-pass at `click_tone`, fading out in 12 ms: the sound of the beater on the head.'
+    params: [click, click_tone, vel_click]
+    to: [drive]
+  - id: drive
+    label: Saturation
+    kind: shaper
+    what: tanh soft clipping, normalised so quiet parts keep their level; rounds the peaks and adds harmonics.
+    params: [drive]
+    to: [amp]
+  - id: amp
+    label: Velocity level
+    kind: amp
+    what: Scales the whole hit by velocity to the power `vel_curve`.
+    params: [vel_curve]
+    to: [out]
   params:
-    tune:
-      says: "The resting pitch of the drum body in Hz, where the sweep ends."
-      up: "a higher, tighter, more 'tom-like' kick"
-      down: "a deeper kick that small speakers may not reproduce"
-    sweep:
-      says: "How many semitones above `tune` the hit starts (12 = one octave)."
-      up: "more snap and punch, eventually a laser 'pew'"
-      down: "a soft, round thud with no attack"
-    sweep_time:
-      says: "How fast the pitch falls back to `tune` (exponential time constant in seconds)."
-      up: "a slow, audible pitch dive, like a zap"
-      down: "a short, hard knock"
-    decay:
-      says: "Time for the body to fade by 60 dB."
-      up: "a long boomy tail that fills the low end"
-      down: "a short, tight kick for fast patterns"
-    sub:
-      says: "Level of an extra pure sine at `tune` that rings longer than the body."
-      up: "808-style boom you can play as a bass note"
-      down: "only the swept body, drier"
-    click:
-      says: "Level of the noise burst that imitates the beater hitting the head."
-      up: "more attack, cuts through on laptop speakers"
-      down: "softer, rounder, more felt beater"
-    click_tone:
-      says: "Centre frequency of the click's band-pass filter."
-      up: "a thin, clicky 'tick'"
-      down: "a duller, woodier knock"
-    drive:
-      says: "How hard the sound is pushed into tanh saturation (1 = clean)."
-      up: "louder-sounding, harmonics, grit and distortion"
-      down: "clean, pure sine"
-    vel_sweep:
-      says: "How much velocity controls the sweep depth (0 = every hit sweeps the same)."
-      up: "soft hits become noticeably rounder than accents"
-      down: "every hit has the same pitch dive"
-    vel_click:
-      says: "How much velocity controls the click level."
-      up: "ghost notes lose their click, accents gain it"
-      down: "the same click on every hit"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "a bigger loudness gap between soft and hard hits"
-      down: "soft and hard hits at nearly the same level"
-    rr:
-      says: "Random per-hit variation of sweep depth (about 5%) and decay (about 6%)."
-      up: "each hit slightly different, like a real drummer"
-      down: "machine-identical hits"
-  velocity: "Harder hits sweep further (sweep is scaled by 1 - vel_sweep + vel_sweep x velocity) and click more (the same formula with vel_click), and get louder by velocity^1.4. So an accent is not just louder, it is punchier and clickier."
+    tune: {says: 'The resting pitch of the drum body in Hz, where the sweep ends.', up: 'a higher, tighter, more ''tom-like''
+        kick', down: a deeper kick that small speakers may not reproduce}
+    sweep: {says: How many semitones above `tune` the hit starts (12 = one octave)., up: 'more snap and punch, eventually
+        a laser ''pew''', down: 'a soft, round thud with no attack'}
+    sweep_time: {says: How fast the pitch falls back to `tune` (exponential time constant in seconds)., up: 'a slow, audible
+        pitch dive, like a zap', down: 'a short, hard knock'}
+    decay: {says: Time for the body to fade by 60 dB., up: a long boomy tail that fills the low end, down: 'a short, tight
+        kick for fast patterns'}
+    sub: {says: Level of an extra pure sine at `tune` that rings longer than the body., up: 808-style boom you can play
+        as a bass note, down: 'only the swept body, drier'}
+    click: {says: Level of the noise burst that imitates the beater hitting the head., up: 'more attack, cuts through on
+        laptop speakers', down: 'softer, rounder, more felt beater'}
+    click_tone: {says: Centre frequency of the click's band-pass filter., up: 'a thin, clicky ''tick''', down: 'a duller,
+        woodier knock'}
+    drive: {says: How hard the sound is pushed into tanh saturation (1 = clean)., up: 'louder-sounding, harmonics, grit
+        and distortion', down: 'clean, pure sine'}
+    vel_sweep: {says: How much velocity controls the sweep depth (0 = every hit sweeps the same)., up: soft hits become
+        noticeably rounder than accents, down: every hit has the same pitch dive}
+    vel_click: {says: How much velocity controls the click level., up: 'ghost notes lose their click, accents gain it',
+      down: the same click on every hit}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: a bigger loudness gap between soft and hard
+        hits, down: soft and hard hits at nearly the same level}
+    rr: {says: Random per-hit variation of sweep depth (about 5%) and decay (about 6%)., up: 'each hit slightly different,
+        like a real drummer', down: machine-identical hits}
+  velocity: Harder hits sweep further (sweep is scaled by 1 - vel_sweep + vel_sweep x velocity) and click more (the same
+    formula with vel_click), and get louder by velocity^1.4. So an accent is not just louder, it is punchier and clickier.
   recipes:
-    - name: "808 boom"
-      set: {tune: 45, sweep: 12, sweep_time: 0.05, decay: 1.2, sub: 0.8, click: 0.1}
-      listen: "A slow one-octave drop and a long pure tail you can almost sing; the low click leaves room for the bass of the tail."
-    - name: "909 punch"
-      set: {tune: 55, sweep: 36, sweep_time: 0.02, decay: 0.35, click: 0.6, drive: 2.5}
-      listen: "A three-octave dive over 20 ms reads as a hard knock, and the extra drive keeps it loud on small speakers."
-    - name: "Soft felt kick"
-      set: {sweep: 14, click: 0, drive: 1, decay: 0.3}
-      listen: "No click and little sweep: the hit is round and polite, like a felt beater on a jazz kit."
-    - name: "Slow laser dive"
-      set: {sweep: 48, sweep_time: 0.12, decay: 0.6}
-      listen: "When the sweep slows down you start to hear it as pitch movement, a 'pew' rather than a punch."
-    - name: "Distorted techno kick"
-      set: {drive: 6, decay: 0.6, click: 0.5}
-      listen: "Heavy saturation flattens the peaks, adds odd harmonics and makes the kick sound bigger without getting louder."
-  pattern: "X...x...X...x..."
-  try_next: "Turn `sweep_time` up slowly until the punch becomes a pitch glide, then compare with `zap`, which is the same idea on a square wave."
-
+  - name: 808 boom
+    set: {tune: 45, sweep: 12, sweep_time: 0.05, decay: 1.2, sub: 0.8, click: 0.1}
+    listen: A slow one-octave drop and a long pure tail you can almost sing; the low click leaves room for the bass of the
+      tail.
+  - name: 909 punch
+    set: {tune: 55, sweep: 36, sweep_time: 0.02, decay: 0.35, click: 0.6, drive: 2.5}
+    listen: A three-octave dive over 20 ms reads as a hard knock, and the extra drive keeps it loud on small speakers.
+  - name: Soft felt kick
+    set: {sweep: 14, click: 0, drive: 1, decay: 0.3}
+    listen: 'No click and little sweep: the hit is round and polite, like a felt beater on a jazz kit.'
+  - name: Slow laser dive
+    set: {sweep: 48, sweep_time: 0.12, decay: 0.6}
+    listen: When the sweep slows down you start to hear it as pitch movement, a 'pew' rather than a punch.
+  - name: Distorted techno kick
+    set: {drive: 6, decay: 0.6, click: 0.5}
+    listen: Heavy saturation flattens the peaks, adds odd harmonics and makes the kick sound bigger without getting louder.
+  pattern: X...x...X...x...
+  try_next: Turn `sweep_time` up slowly until the punch becomes a pitch glide, then compare with `zap`, which is the same
+    idea on a square wave.
 snare:
-  title: "Synth snare drum"
+  title: Synth snare drum
   family: drum
-  ancestor: "Built like the TR-808 and TR-909 snares: a tuned 'shell' tone mixed with filtered white noise for the wires. The shell here uses two sine modes in the ratio of a real drum head, which is closer to an acoustic drum than the 808's circuit, but it is still a simplification with only two modes."
-  summary: "Two short sine tones for the drum shell, a burst of filtered noise for the snare wires, and a tiny high click for the stick. `tone_mix` balances shell against wires, which is most of the difference between a fat 808 snare and a crisp 909 one."
-  how: "Make the shell: a sine at `tone` (185 Hz) plus a quieter sine (0.45 level) at 1.59 times that pitch, both starting 40% sharp and settling within about 8 ms, fading over `tone_decay`. Make the wires: white noise through a high-pass at `noise_hp` and a low-pass at `noise_lp`, fading over `noise_decay`. Make the snap: noise through a band-pass at 5 kHz, gone in 6 ms. Mix shell x `tone_mix` with wires x (1 - `tone_mix`), add the snap, then saturate with `drive`."
-  why: "A drum head vibrates in several modes at once; the first two of an ideal circular membrane are about 1 : 1.59, so two sines in that ratio already sound like a skin, not a beep. The snare wires rattle against the bottom head and produce noise, which is why a snare is mostly hiss above 1-2 kHz. The short pitch bend at the start is the head being stretched by the stick. Brighter noise sounds harder because loud hits excite more high frequencies; the code does exactly that with velocity."
+  ancestor: 'Built like the TR-808 and TR-909 snares: a tuned ''shell'' tone mixed with filtered white noise for the wires.
+    The shell here uses two sine modes in the ratio of a real drum head, which is closer to an acoustic drum than the 808''s
+    circuit, but it is still a simplification with only two modes.'
+  summary: Two short sine tones for the drum shell, a burst of filtered noise for the snare wires, and a tiny high click
+    for the stick. `tone_mix` balances shell against wires, which is most of the difference between a fat 808 snare and
+    a crisp 909 one.
+  how: 'Make the shell: a sine at `tone` (185 Hz) plus a quieter sine (0.45 level) at 1.59 times that pitch, both starting
+    40% sharp and settling within about 8 ms, fading over `tone_decay`. Make the wires: white noise through a high-pass
+    at `noise_hp` and a low-pass at `noise_lp`, fading over `noise_decay`. Make the snap: noise through a band-pass at 5
+    kHz, gone in 6 ms. Mix shell x `tone_mix` with wires x (1 - `tone_mix`), add the snap, then saturate with `drive`.'
+  why: 'A drum head vibrates in several modes at once; the first two of an ideal circular membrane are about 1 : 1.59, so
+    two sines in that ratio already sound like a skin, not a beep. The snare wires rattle against the bottom head and produce
+    noise, which is why a snare is mostly hiss above 1-2 kHz. The short pitch bend at the start is the head being stretched
+    by the stick. Brighter noise sounds harder because loud hits excite more high frequencies; the code does exactly that
+    with velocity.'
   chain:
-    - id: bend
-      label: "Head bend"
-      kind: pitch
-      what: "The shell pitch starts 40% above `tone` and settles in about 8 ms; `rr` moves the pitch by about 1% per hit."
-      params: [tone, rr]
-      to: [shell]
-    - id: shell
-      label: "Two-mode shell"
-      kind: osc
-      what: "Sines at `tone` and 1.59 x `tone` (the drum head's first two modes) with a t60 fade of `tone_decay`."
-      params: [tone, tone_decay]
-      to: [mix]
-    - id: noise
-      label: "White noise"
-      kind: noise
-      what: "Raw noise, the raw material for the wire rattle."
-      params: []
-      to: [hp]
-    - id: hp
-      label: "Wire high-pass"
-      kind: filter
-      what: "Removes the noise below `noise_hp` so the wires do not muddy the shell."
-      params: [noise_hp]
-      to: [lp]
-    - id: lp
-      label: "Wire low-pass"
-      kind: filter
-      what: "Removes hiss above `noise_lp`; velocity moves this cutoff by `vel_bright` octaves per unit around 0.7."
-      params: [noise_lp, vel_bright]
-      to: [wires]
-    - id: wires
-      label: "Wire decay"
-      kind: env
-      what: "Fades the wire noise over `noise_decay` x (0.6 + 0.4 x velocity), varied about 8% per hit by `rr`."
-      params: [noise_decay, rr]
-      to: [mix]
-    - id: snap
-      label: "Stick snap"
-      kind: noise
-      what: "A 6 ms burst of noise band-passed at 5 kHz, scaled by velocity: the stick hitting the head."
-      params: [snap]
-      to: [mix]
-    - id: mix
-      label: "Shell vs wires"
-      kind: mix
-      what: "shell x tone_mix + wires x (1 - tone_mix) x 0.9 + snap."
-      params: [tone_mix]
-      to: [drive]
-    - id: drive
-      label: "Saturation"
-      kind: shaper
-      what: "tanh soft clipping that glues shell and noise together."
-      params: [drive]
-      to: [amp]
-    - id: amp
-      label: "Velocity level"
-      kind: amp
-      what: "Gain = velocity^vel_curve."
-      params: [vel_curve]
-      to: [out]
+  - id: bend
+    label: Head bend
+    kind: pitch
+    what: The shell pitch starts 40% above `tone` and settles in about 8 ms; `rr` moves the pitch by about 1% per hit.
+    params: [tone, rr]
+    to: [shell]
+  - id: shell
+    label: Two-mode shell
+    kind: osc
+    what: Sines at `tone` and 1.59 x `tone` (the drum head's first two modes) with a t60 fade of `tone_decay`.
+    params: [tone, tone_decay]
+    to: [mix]
+  - id: noise
+    label: White noise
+    kind: noise
+    what: Raw noise, the raw material for the wire rattle.
+    params: []
+    to: [hp]
+  - id: hp
+    label: Wire high-pass
+    kind: filter
+    what: Removes the noise below `noise_hp` so the wires do not muddy the shell.
+    params: [noise_hp]
+    to: [lp]
+  - id: lp
+    label: Wire low-pass
+    kind: filter
+    what: Removes hiss above `noise_lp`; velocity moves this cutoff by `vel_bright` octaves per unit around 0.7.
+    params: [noise_lp, vel_bright]
+    to: [wires]
+  - id: wires
+    label: Wire decay
+    kind: env
+    what: Fades the wire noise over `noise_decay` x (0.6 + 0.4 x velocity), varied about 8% per hit by `rr`.
+    params: [noise_decay, rr]
+    to: [mix]
+  - id: snap
+    label: Stick snap
+    kind: noise
+    what: 'A 6 ms burst of noise band-passed at 5 kHz, scaled by velocity: the stick hitting the head.'
+    params: [snap]
+    to: [mix]
+  - id: mix
+    label: Shell vs wires
+    kind: mix
+    what: shell x tone_mix + wires x (1 - tone_mix) x 0.9 + snap.
+    params: [tone_mix]
+    to: [drive]
+  - id: drive
+    label: Saturation
+    kind: shaper
+    what: tanh soft clipping that glues shell and noise together.
+    params: [drive]
+    to: [amp]
+  - id: amp
+    label: Velocity level
+    kind: amp
+    what: Gain = velocity^vel_curve.
+    params: [vel_curve]
+    to: [out]
   params:
-    tone:
-      says: "Pitch of the shell's main mode in Hz."
-      up: "a higher, tighter piccolo-like snare"
-      down: "a deeper, fatter body"
-    tone_decay:
-      says: "How long the shell rings (t60)."
-      up: "a ringing, open shell"
-      down: "a dead, taped-up shell"
-    tone_mix:
-      says: "Balance between shell tone (1) and wire noise (0)."
-      up: "more pitched body, toward a tom"
-      down: "more hiss and rattle, toward a clap"
-    noise_decay:
-      says: "How long the wire rattle lasts (t60)."
-      up: "loose, splashy wires"
-      down: "a short, tight crack"
-    noise_hp:
-      says: "Low edge of the wire noise (high-pass cutoff)."
-      up: "thinner, crisper wires"
-      down: "fuller, chestier noise"
-    noise_lp:
-      says: "Top edge of the wire noise (low-pass cutoff)."
-      up: "bright, sizzling wires"
-      down: "a dark, lo-fi snare"
-    snap:
-      says: "Level of the short stick transient."
-      up: "a sharper, more defined attack"
-      down: "a softer, brushed attack"
-    drive:
-      says: "tanh saturation amount (1 = clean)."
-      up: "denser, louder-sounding, gritty"
-      down: "clean and open"
-    vel_bright:
-      says: "Octaves the wire low-pass moves per unit of velocity."
-      up: "dark ghost notes and bright accents"
-      down: "the same colour at every velocity"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "ghost notes get much quieter"
-      down: "flatter dynamics"
-    rr:
-      says: "Random per-hit variation of shell pitch (about 1%) and wire length (about 8%)."
-      up: "a more human, less machine-gun roll"
-      down: "identical hits"
-  velocity: "Velocity moves the wire low-pass by `vel_bright` octaves per unit around 0.7 (about +0.45 octave at full, -0.6 at 0.3), lengthens the wires (x 0.6 + 0.4 x velocity) and scales the stick snap, before gain = velocity^1.6. Ghost notes come out darker and shorter, as on a real snare."
+    tone: {says: Pitch of the shell's main mode in Hz., up: 'a higher, tighter piccolo-like snare', down: 'a deeper, fatter
+        body'}
+    tone_decay: {says: How long the shell rings (t60)., up: 'a ringing, open shell', down: 'a dead, taped-up shell'}
+    tone_mix: {says: Balance between shell tone (1) and wire noise (0)., up: 'more pitched body, toward a tom', down: 'more
+        hiss and rattle, toward a clap'}
+    noise_decay: {says: How long the wire rattle lasts (t60)., up: 'loose, splashy wires', down: 'a short, tight crack'}
+    noise_hp: {says: Low edge of the wire noise (high-pass cutoff)., up: 'thinner, crisper wires', down: 'fuller, chestier
+        noise'}
+    noise_lp: {says: Top edge of the wire noise (low-pass cutoff)., up: 'bright, sizzling wires', down: 'a dark, lo-fi snare'}
+    snap: {says: Level of the short stick transient., up: 'a sharper, more defined attack', down: 'a softer, brushed attack'}
+    drive: {says: tanh saturation amount (1 = clean)., up: 'denser, louder-sounding, gritty', down: clean and open}
+    vel_bright: {says: Octaves the wire low-pass moves per unit of velocity., up: dark ghost notes and bright accents, down: the
+        same colour at every velocity}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: ghost notes get much quieter, down: flatter
+        dynamics}
+    rr: {says: Random per-hit variation of shell pitch (about 1%) and wire length (about 8%)., up: 'a more human, less machine-gun
+        roll', down: identical hits}
+  velocity: Velocity moves the wire low-pass by `vel_bright` octaves per unit around 0.7 (about +0.45 octave at full, -0.6
+    at 0.3), lengthens the wires (x 0.6 + 0.4 x velocity) and scales the stick snap, before gain = velocity^1.6. Ghost notes
+    come out darker and shorter, as on a real snare.
   recipes:
-    - name: "Deeper 808-style body"
-      set: {tone: 150, tone_decay: 0.3, tone_mix: 0.7, noise_decay: 0.15}
-      listen: "With the shell louder and longer, you hear a pitched 'dum' with a short hiss on top, the classic 808 snare shape."
-    - name: "Tight 909 crack"
-      set: {tone: 230, tone_decay: 0.08, tone_mix: 0.35, snap: 0.9, noise_hp: 2500, drive: 2.5}
-      listen: "A short high shell plus bright, driven noise gives a crack that cuts through a busy mix."
-    - name: "Loose wires"
-      set: {noise_decay: 0.6, tone_mix: 0.25, noise_lp: 14000}
-      listen: "Longer, brighter wire noise sounds like slack snare wires buzzing after the hit."
-    - name: "Dark lo-fi snare"
-      set: {noise_lp: 3000, noise_hp: 600, snap: 0.1}
-      listen: "Closing the low-pass removes the sizzle, like an old sampler or a snare with a towel on it."
-    - name: "Shell only (no wires)"
-      set: {tone_mix: 1.0, snap: 0.2, tone_decay: 0.3}
-      listen: "Without noise the two sine modes sound like a small tom: proof that the wires are what make a snare a snare."
-  pattern: "....X..o....X..o"
-  try_next: "Set `tone_mix` to 0 and compare with `clap`: both are filtered noise, but the clap repeats its burst several times."
-
+  - name: Deeper 808-style body
+    set: {tone: 150, tone_decay: 0.3, tone_mix: 0.7, noise_decay: 0.15}
+    listen: With the shell louder and longer, you hear a pitched 'dum' with a short hiss on top, the classic 808 snare shape.
+  - name: Tight 909 crack
+    set: {tone: 230, tone_decay: 0.08, tone_mix: 0.35, snap: 0.9, noise_hp: 2500, drive: 2.5}
+    listen: A short high shell plus bright, driven noise gives a crack that cuts through a busy mix.
+  - name: Loose wires
+    set: {noise_decay: 0.6, tone_mix: 0.25, noise_lp: 14000}
+    listen: Longer, brighter wire noise sounds like slack snare wires buzzing after the hit.
+  - name: Dark lo-fi snare
+    set: {noise_lp: 3000, noise_hp: 600, snap: 0.1}
+    listen: Closing the low-pass removes the sizzle, like an old sampler or a snare with a towel on it.
+  - name: Shell only (no wires)
+    set: {tone_mix: 1.0, snap: 0.2, tone_decay: 0.3}
+    listen: 'Without noise the two sine modes sound like a small tom: proof that the wires are what make a snare a snare.'
+  pattern: '....X..o....X..o'
+  try_next: 'Set `tone_mix` to 0 and compare with `clap`: both are filtered noise, but the clap repeats its burst several
+    times.'
 clap:
-  title: "Synth hand clap"
+  title: Synth hand clap
   family: drum
-  ancestor: "The TR-808 and TR-909 clap: band-passed noise whose envelope is retriggered a few times in quick succession, then left to decay. Real claps in a group are many hands landing a few milliseconds apart; this copies that idea with up to eight bursts."
-  summary: "A short cluster of noise bursts, a few milliseconds apart, followed by a longer tail, all through one band-pass filter. The cluster is what makes it read as hands rather than a single hit."
-  how: "Take white noise and band-pass it at `center` with resonance `q`. Build an envelope from `bursts` spikes spaced `spread` seconds apart (11 ms by default); each spike dies with a 2.5 ms time constant, except the last one, which fades over `decay` (t60). With `rr` above zero, each gap is nudged randomly by up to about 30% of `spread` x `rr`. Multiply noise by envelope and scale by velocity."
-  why: "Your ear fuses events closer than about 30 ms into one sound, but it still hears the roughness of the separate onsets, which is the 'smear' of several people clapping. The band-pass picks the region where hand claps have most of their energy (around 1-2 kHz). The longer last burst stands in for room reflections. Fewer, tighter bursts sound like one slap; more and wider ones sound like a crowd."
+  ancestor: 'The TR-808 and TR-909 clap: band-passed noise whose envelope is retriggered a few times in quick succession,
+    then left to decay. Real claps in a group are many hands landing a few milliseconds apart; this copies that idea with
+    up to eight bursts.'
+  summary: A short cluster of noise bursts, a few milliseconds apart, followed by a longer tail, all through one band-pass
+    filter. The cluster is what makes it read as hands rather than a single hit.
+  how: Take white noise and band-pass it at `center` with resonance `q`. Build an envelope from `bursts` spikes spaced `spread`
+    seconds apart (11 ms by default); each spike dies with a 2.5 ms time constant, except the last one, which fades over
+    `decay` (t60). With `rr` above zero, each gap is nudged randomly by up to about 30% of `spread` x `rr`. Multiply noise
+    by envelope and scale by velocity.
+  why: Your ear fuses events closer than about 30 ms into one sound, but it still hears the roughness of the separate onsets,
+    which is the 'smear' of several people clapping. The band-pass picks the region where hand claps have most of their
+    energy (around 1-2 kHz). The longer last burst stands in for room reflections. Fewer, tighter bursts sound like one
+    slap; more and wider ones sound like a crowd.
   chain:
-    - id: noise
-      label: "White noise"
-      kind: noise
-      what: "One noise source shared by every burst."
-      params: []
-      to: [bp]
-    - id: bp
-      label: "Band-pass"
-      kind: filter
-      what: "Keeps a band around `center` (moved by velocity) with resonance `q`."
-      params: [center, q, vel_bright]
-      to: [bursts]
-    - id: bursts
-      label: "Burst envelope"
-      kind: env
-      what: "`bursts` short spikes `spread` seconds apart (jittered by `rr`), the last one fading over `decay`."
-      params: [bursts, spread, decay, rr]
-      to: [amp]
-    - id: amp
-      label: "Velocity level"
-      kind: amp
-      what: "Gain = velocity^vel_curve."
-      params: [vel_curve]
-      to: [out]
+  - id: noise
+    label: White noise
+    kind: noise
+    what: One noise source shared by every burst.
+    params: []
+    to: [bp]
+  - id: bp
+    label: Band-pass
+    kind: filter
+    what: Keeps a band around `center` (moved by velocity) with resonance `q`.
+    params: [center, q, vel_bright]
+    to: [bursts]
+  - id: bursts
+    label: Burst envelope
+    kind: env
+    what: '`bursts` short spikes `spread` seconds apart (jittered by `rr`), the last one fading over `decay`.'
+    params: [bursts, spread, decay, rr]
+    to: [amp]
+  - id: amp
+    label: Velocity level
+    kind: amp
+    what: Gain = velocity^vel_curve.
+    params: [vel_curve]
+    to: [out]
   params:
-    bursts:
-      says: "How many claps land in the cluster (rounded to a whole number, 1 to 8)."
-      up: "a bigger group of hands, more smear"
-      down: "a single slap"
-    spread:
-      says: "The gap between bursts in seconds."
-      up: "a looser, flammy crowd"
-      down: "a tight, single-sounding clap"
-    decay:
-      says: "How long the last burst rings (t60), the clap's tail."
-      up: "a roomy clap with a long tail"
-      down: "a dry, short clap"
-    center:
-      says: "Centre frequency of the band-pass filter."
-      up: "a thinner, brighter, papery clap"
-      down: "a thicker, darker, cupped-hands clap"
-    q:
-      says: "Resonance of the band-pass (higher = narrower band)."
-      up: "a pitched, ringing, almost tonal clap"
-      down: "a wide, natural noise burst"
-    vel_bright:
-      says: "Octaves the band-pass moves per unit of velocity around 0.7."
-      up: "soft claps darker, hard claps brighter"
-      down: "one colour for every hit"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "bigger gap between soft and hard claps"
-      down: "flatter dynamics"
-    rr:
-      says: "Random jitter of the gaps between bursts (up to about 30% of `spread` at rr = 1)."
-      up: "each clap lands a little differently"
-      down: "the same burst rhythm every time"
-  velocity: "Velocity moves the band-pass centre by `vel_bright` octaves per unit around 0.7 (one octave by default), so hard claps are brighter, and loudness follows velocity^1.5."
+    bursts: {says: 'How many claps land in the cluster (rounded to a whole number, 1 to 8).', up: 'a bigger group of hands,
+        more smear', down: a single slap}
+    spread: {says: The gap between bursts in seconds., up: 'a looser, flammy crowd', down: 'a tight, single-sounding clap'}
+    decay: {says: 'How long the last burst rings (t60), the clap''s tail.', up: a roomy clap with a long tail, down: 'a
+        dry, short clap'}
+    center: {says: Centre frequency of the band-pass filter., up: 'a thinner, brighter, papery clap', down: 'a thicker,
+        darker, cupped-hands clap'}
+    q: {says: Resonance of the band-pass (higher = narrower band)., up: 'a pitched, ringing, almost tonal clap', down: 'a
+        wide, natural noise burst'}
+    vel_bright: {says: Octaves the band-pass moves per unit of velocity around 0.7., up: 'soft claps darker, hard claps
+        brighter', down: one colour for every hit}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: bigger gap between soft and hard claps, down: flatter
+        dynamics}
+    rr: {says: Random jitter of the gaps between bursts (up to about 30% of `spread` at rr = 1)., up: each clap lands a
+        little differently, down: the same burst rhythm every time}
+  velocity: Velocity moves the band-pass centre by `vel_bright` octaves per unit around 0.7 (one octave by default), so
+    hard claps are brighter, and loudness follows velocity^1.5.
   recipes:
-    - name: "Single slap"
-      set: {bursts: 1, decay: 0.08}
-      listen: "One burst is just a noise hit; compare it with the default four to hear how much the cluster matters."
-    - name: "Big crowd clap"
-      set: {bursts: 7, spread: 0.018, rr: 0.8, decay: 0.3}
-      listen: "Seven loosely spaced bursts with random gaps sound like a group of people clapping together."
-    - name: "Roomy 808 clap"
-      set: {bursts: 4, spread: 0.011, decay: 0.53, center: 2300, q: 0.5}
-      listen: "A wide band and a long tail: this is the `clap/v0` preset, a dance-music clap with built-in room."
-    - name: "Narrow pitched clap"
-      set: {q: 3.5, center: 1000, decay: 0.06}
-      listen: "A narrow band makes the noise ring at one pitch, so the clap starts to sound like a knock on wood."
-  pattern: "....X.......X..."
-  try_next: "Layer it with `snare` on the same steps and lower the snare's `tone_mix`: the classic clap-plus-snare backbeat."
-
+  - name: Single slap
+    set: {bursts: 1, decay: 0.08}
+    listen: One burst is just a noise hit; compare it with the default four to hear how much the cluster matters.
+  - name: Big crowd clap
+    set: {bursts: 7, spread: 0.018, rr: 0.8, decay: 0.3}
+    listen: Seven loosely spaced bursts with random gaps sound like a group of people clapping together.
+  - name: Roomy 808 clap
+    set: {bursts: 4, spread: 0.011, decay: 0.53, center: 2300, q: 0.5}
+    listen: 'A wide band and a long tail: this is the `clap/v0` preset, a dance-music clap with built-in room.'
+  - name: Narrow pitched clap
+    set: {q: 3.5, center: 1000, decay: 0.06}
+    listen: A narrow band makes the noise ring at one pitch, so the clap starts to sound like a knock on wood.
+  pattern: '....X.......X...'
+  try_next: 'Layer it with `snare` on the same steps and lower the snare''s `tone_mix`: the classic clap-plus-snare backbeat.'
 hat:
-  title: "Synth hi-hat"
+  title: Synth hi-hat
   family: drum
-  ancestor: "The TR-808 hi-hat and cymbal circuit: six square-wave oscillators at fixed, unrelated frequencies (205.3, 304.4, 369.6, 522.7, 540 and 800 Hz), mixed and band-passed high. The frequencies here are the 808's; the noise layer is extra, for 909-like hats."
-  summary: "A metallic cloud made by six square waves that do not form a chord, mixed with white noise and filtered so only the high sizzle remains. A short decay is a closed hat, a long one is an open hat. It ignores the note's pitch: `tune` scales the six oscillators."
-  how: "Run six square waves at 205.3, 304.4, 369.6, 522.7, 540 and 800 Hz (each times `tune`), with random starting phases, and average them. Mix that metal with white noise using `metal`. Band-pass the mix around `color` (10 kHz), then high-pass at `hp` (7 kHz). Shape it with a 0.5 ms attack and a decay of `decay` (t60)."
-  why: "Real cymbals have many partials that are not whole-number multiples of each other, so they never fuse into a pitch; six square waves at unrelated frequencies produce hundreds of such partials, which is why the result sounds like metal instead of a note. The filters throw away everything below about 7 kHz, so what you hear is the dense, clashing top of that spectrum. Noise adds the 'tss' of the stick on the cymbal. Decay is the only real difference between closed and open: the pedal clamps the two cymbals together, which kills the ring."
+  ancestor: 'The TR-808 hi-hat and cymbal circuit: six square-wave oscillators at fixed, unrelated frequencies (205.3, 304.4,
+    369.6, 522.7, 540 and 800 Hz), mixed and band-passed high. The frequencies here are the 808''s; the noise layer is extra,
+    for 909-like hats.'
+  summary: 'A metallic cloud made by six square waves that do not form a chord, mixed with white noise and filtered so only
+    the high sizzle remains. A short decay is a closed hat, a long one is an open hat. It ignores the note''s pitch: `tune`
+    scales the six oscillators.'
+  how: Run six square waves at 205.3, 304.4, 369.6, 522.7, 540 and 800 Hz (each times `tune`), with random starting phases,
+    and average them. Mix that metal with white noise using `metal`. Band-pass the mix around `color` (10 kHz), then high-pass
+    at `hp` (7 kHz). Shape it with a 0.5 ms attack and a decay of `decay` (t60).
+  why: 'Real cymbals have many partials that are not whole-number multiples of each other, so they never fuse into a pitch;
+    six square waves at unrelated frequencies produce hundreds of such partials, which is why the result sounds like metal
+    instead of a note. The filters throw away everything below about 7 kHz, so what you hear is the dense, clashing top
+    of that spectrum. Noise adds the ''tss'' of the stick on the cymbal. Decay is the only real difference between closed
+    and open: the pedal clamps the two cymbals together, which kills the ring.'
   chain:
-    - id: metal
-      label: "Six squares"
-      kind: osc
-      what: "Six square waves at the 808 frequencies times `tune`; `rr` detunes each by about 0.3% per hit."
-      params: [tune, rr]
-      to: [mix]
-    - id: noise
-      label: "White noise"
-      kind: noise
-      what: "Stick noise, the 'tss' under the metal."
-      params: []
-      to: [mix]
-    - id: mix
-      label: "Metal vs noise"
-      kind: mix
-      what: "metal x `metal` + noise x 0.5 x (1 - `metal`)."
-      params: [metal]
-      to: [bp]
-    - id: bp
-      label: "Band-pass"
-      kind: filter
-      what: "Keeps a band around `color`, moved by velocity (`vel_bright` octaves per unit)."
-      params: [color, vel_bright]
-      to: [hp]
-    - id: hp
-      label: "High-pass"
-      kind: filter
-      what: "Removes everything below `hp`, so only the sizzle is left."
-      params: [hp]
-      to: [env]
-    - id: env
-      label: "Decay"
-      kind: env
-      what: "0.5 ms attack, then a t60 fade of `decay`, longer on harder hits and varied about 10% by `rr`."
-      params: [decay, vel_decay, rr]
-      to: [amp]
-    - id: amp
-      label: "Velocity level"
-      kind: amp
-      what: "Gain = 2 x velocity^vel_curve."
-      params: [vel_curve]
-      to: [out]
+  - id: metal
+    label: Six squares
+    kind: osc
+    what: Six square waves at the 808 frequencies times `tune`; `rr` detunes each by about 0.3% per hit.
+    params: [tune, rr]
+    to: [mix]
+  - id: noise
+    label: White noise
+    kind: noise
+    what: Stick noise, the 'tss' under the metal.
+    params: []
+    to: [mix]
+  - id: mix
+    label: Metal vs noise
+    kind: mix
+    what: metal x `metal` + noise x 0.5 x (1 - `metal`).
+    params: [metal]
+    to: [bp]
+  - id: bp
+    label: Band-pass
+    kind: filter
+    what: Keeps a band around `color`, moved by velocity (`vel_bright` octaves per unit).
+    params: [color, vel_bright]
+    to: [hp]
+  - id: hp
+    label: High-pass
+    kind: filter
+    what: Removes everything below `hp`, so only the sizzle is left.
+    params: [hp]
+    to: [env]
+  - id: env
+    label: Decay
+    kind: env
+    what: 0.5 ms attack, then a t60 fade of `decay`, longer on harder hits and varied about 10% by `rr`; with `choke` on,
+      an open hat is cut (with a 6 ms fade) when the next hat hits.
+    params: [decay, vel_decay, rr, choke]
+    to: [amp]
+  - id: amp
+    label: Velocity level
+    kind: amp
+    what: Gain = 2 x velocity^vel_curve.
+    params: [vel_curve]
+    to: [out]
   params:
-    tune:
-      says: "Multiplies all six oscillator frequencies (1 = the 808's)."
-      up: "a smaller, brighter, more glassy cymbal"
-      down: "a bigger, clangier, gong-like metal"
-    decay:
-      says: "Ring time (t60): about 0.05 s is closed, 0.4 s and up is open."
-      up: "an open hat, then a ride-like wash"
-      down: "a tight closed 'tick'"
-    metal:
-      says: "Balance between the square-wave metal (1) and plain noise (0)."
-      up: "more clang and ring"
-      down: "a smooth, airy noise hat"
-    hp:
-      says: "High-pass cutoff: nothing below this gets through."
-      up: "thinner, airier"
-      down: "more body and clang"
-    color:
-      says: "Centre of the band-pass, the hat's main colour."
-      up: "bright, sharp sizzle"
-      down: "a darker, softer hat"
-    vel_decay:
-      says: "How much harder hits ring longer."
-      up: "accents open up, ghost notes stay closed"
-      down: "the same length at every velocity"
-    vel_bright:
-      says: "Octaves the band-pass moves per unit of velocity around 0.7."
-      up: "soft hits darker, accents brighter"
-      down: "the same colour at every velocity"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "soft hits recede more"
-      down: "flatter dynamics"
-    rr:
-      says: "Random per-hit variation of oscillator tuning (about 0.3%) and decay (about 10%)."
-      up: "a livelier, less mechanical groove"
-      down: "identical hits"
-  velocity: "Harder hits ring longer (decay x (1 - vel_decay + 1.3 x vel_decay x velocity)) and are brighter (the band-pass moves `vel_bright` octaves per unit around 0.7), with gain velocity^1.4. That is why a pattern with accents and ghosts sounds played, not stamped."
+    tune: {says: Multiplies all six oscillator frequencies (1 = the 808's)., up: 'a smaller, brighter, more glassy cymbal',
+      down: 'a bigger, clangier, gong-like metal'}
+    decay: {says: 'Ring time (t60): about 0.05 s is closed, 0.4 s and up is open.', up: 'an open hat, then a ride-like wash',
+      down: a tight closed 'tick'}
+    metal: {says: Balance between the square-wave metal (1) and plain noise (0)., up: more clang and ring, down: 'a smooth,
+        airy noise hat'}
+    hp: {says: 'High-pass cutoff: nothing below this gets through.', up: 'thinner, airier', down: more body and clang}
+    color: {says: 'Centre of the band-pass, the hat''s main colour.', up: 'bright, sharp sizzle', down: 'a darker, softer
+        hat'}
+    vel_decay: {says: How much harder hits ring longer., up: 'accents open up, ghost notes stay closed', down: the same
+        length at every velocity}
+    vel_bright: {says: Octaves the band-pass moves per unit of velocity around 0.7., up: 'soft hits darker, accents brighter',
+      down: the same colour at every velocity}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: soft hits recede more, down: flatter dynamics}
+    rr: {says: Random per-hit variation of oscillator tuning (about 0.3%) and decay (about 10%)., up: 'a livelier, less
+        mechanical groove', down: identical hits}
+    choke: {says: 'Whether an open hat (decay 0.2 s or more) is cut by the next hat hit, the way a closing pedal stops it.',
+      up: '1: open hats stop as soon as the next hat plays (the classic open-close pattern)', down: '0: open hats ring over
+        the next hits'}
+  velocity: Harder hits ring longer (decay x (1 - vel_decay + 1.3 x vel_decay x velocity)) and are brighter (the band-pass
+    moves `vel_bright` octaves per unit around 0.7), with gain velocity^1.4. That is why a pattern with accents and ghosts
+    sounds played, not stamped.
   recipes:
-    - name: "Open hat"
-      set: {decay: 0.45}
-      listen: "Same sound, longer ring: an open hat. Note the synth hat does not choke, so give the next closed hat some space."
-    - name: "Pure noise hat"
-      set: {metal: 0, decay: 0.06}
-      listen: "Without the square waves it is just filtered noise: smoother and less metallic, closer to a shaker."
-    - name: "Clangy low metal"
-      set: {metal: 1, tune: 0.6, hp: 4000, color: 7000}
-      listen: "Lower oscillators and wider filters let the clashing partials through; it moves toward a cowbell or gong."
-    - name: "Dark lo-fi hat"
-      set: {color: 6000, hp: 3500, vel_bright: 0}
-      listen: "A lower band makes a duller, dusty hat that sits behind the mix."
-    - name: "Ride-like wash"
-      set: {decay: 1.0, tune: 1.4, metal: 0.8}
-      listen: "A long, bright, metallic ring starts to behave like a ride cymbal."
-  pattern: "x-x-X-x-x-x-X-x-"
-  try_next: "Sweep `metal` from 0 to 1 while a pattern loops, to hear where noise turns into metal."
-
+  - name: Open hat
+    set: {decay: 0.45}
+    listen: 'Same sound, longer ring: an open hat. The next hat hit chokes it, as on a real hi-hat (set choke=0 to let it
+      ring).'
+  - name: Pure noise hat
+    set: {metal: 0, decay: 0.06}
+    listen: 'Without the square waves it is just filtered noise: smoother and less metallic, closer to a shaker.'
+  - name: Clangy low metal
+    set: {metal: 1, tune: 0.6, hp: 4000, color: 7000}
+    listen: Lower oscillators and wider filters let the clashing partials through; it moves toward a cowbell or gong.
+  - name: Dark lo-fi hat
+    set: {color: 6000, hp: 3500, vel_bright: 0}
+    listen: A lower band makes a duller, dusty hat that sits behind the mix.
+  - name: Ride-like wash
+    set: {decay: 1.0, tune: 1.4, metal: 0.8}
+    listen: A long, bright, metallic ring starts to behave like a ride cymbal.
+  pattern: x-x-X-x-x-x-X-x-
+  try_next: Sweep `metal` from 0 to 1 while a pattern loops, to hear where noise turns into metal.
 bass:
-  title: "Subtractive synth bass"
+  title: Subtractive synth bass
   family: bass
-  ancestor: "The mono analog synth bass of the Minimoog, SH-101 and their descendants: bright oscillators through a resonant low-pass filter with its own envelope. With high resonance and a short filter envelope it gets close to a TB-303 acid line, although it has no 303 accent or slide circuit."
-  summary: "A sawtooth (and optionally a square) with a sine one octave below, through a resonant low-pass filter that opens on each note and closes again. It is mono: slurred notes glide instead of retriggering."
-  how: "Mix a saw (`saw`), a square (`square`) and a sine one octave below the note (`sub`). Send them through a 12 dB/octave resonant low-pass at `cutoff` with resonance `res`. At the note start, raise the cutoff by `env_amt` x velocity octaves and let that fall back with time constant `env_decay`. Saturate with tanh (`drive`) and shape the level with an ADSR (`attack`, `decay`, `sustain`, `release`). On slurred notes, glide the pitch over `glide` seconds and use only 30% of the filter envelope."
-  why: "A saw contains every harmonic, so it is the richest raw material; removing the top with a low-pass is what 'subtractive' means. The filter envelope makes each note start bright and then darken, which the ear hears as a pluck or 'bow' on the string. Resonance boosts the harmonics near the cutoff, so a moving cutoff becomes the vocal 'wow' of acid bass. The sub sine is pure low energy that you feel on big speakers, while the saw's upper harmonics let you hear the bass line on small ones."
+  ancestor: 'The mono analog synth bass of the Minimoog, SH-101 and their descendants: bright oscillators through a resonant
+    low-pass filter with its own envelope. With high resonance and a short filter envelope it gets close to a TB-303 acid
+    line, although it has no 303 accent or slide circuit.'
+  summary: 'A sawtooth (and optionally a square) with a sine one octave below, through a resonant low-pass filter that opens
+    on each note and closes again. It is mono: slurred notes glide instead of retriggering.'
+  how: Mix a saw (`saw`), a square (`square`) and a sine one octave below the note (`sub`). Send them through a 12 dB/octave
+    resonant low-pass at `cutoff` with resonance `res`. At the note start, raise the cutoff by `env_amt` x velocity octaves
+    and let that fall back with time constant `env_decay`. Saturate with tanh (`drive`) and shape the level with an ADSR
+    (`attack`, `decay`, `sustain`, `release`). On slurred notes, glide the pitch over `glide` seconds and use only 30% of
+    the filter envelope.
+  why: A saw contains every harmonic, so it is the richest raw material; removing the top with a low-pass is what 'subtractive'
+    means. The filter envelope makes each note start bright and then darken, which the ear hears as a pluck or 'bow' on
+    the string. Resonance boosts the harmonics near the cutoff, so a moving cutoff becomes the vocal 'wow' of acid bass.
+    The sub sine is pure low energy that you feel on big speakers, while the saw's upper harmonics let you hear the bass
+    line on small ones.
   chain:
-    - id: osc
-      label: "Saw + square"
-      kind: osc
-      what: "Band-limited saw and square at the note pitch (any float pitch, 36-EDO included); `rr` detunes by up to a few cents."
-      params: [saw, square, rr]
-      to: [filter]
-    - id: subosc
-      label: "Sub sine"
-      kind: osc
-      what: "A pure sine one octave below the played note."
-      params: [sub]
-      to: [filter]
-    - id: glide
-      label: "Glide"
-      kind: pitch
-      what: "On slurred notes the pitch slides from the previous note, fast then settling."
-      params: [glide]
-      to: [osc, subosc]
-    - id: fenv
-      label: "Filter envelope"
-      kind: env
-      what: "Adds `env_amt` x velocity octaves to the cutoff at note-on, decaying with time constant `env_decay` (30% depth on slurs)."
-      params: [env_amt, env_decay]
-      to: [filter]
-    - id: filter
-      label: "Resonant low-pass"
-      kind: filter
-      what: "12 dB/oct state-variable low-pass; velocity also moves the base cutoff by `vel_cutoff` octaves per unit."
-      params: [cutoff, res, vel_cutoff]
-      to: [drive]
-    - id: drive
-      label: "Saturation"
-      kind: shaper
-      what: "tanh soft clipping after the filter."
-      params: [drive]
-      to: [amp]
-    - id: amp
-      label: "ADSR + level"
-      kind: amp
-      what: "Amplitude ADSR around the held gate, times velocity^vel_curve."
-      params: [attack, decay, sustain, release, vel_curve]
-      to: [out]
+  - id: osc
+    label: Saw + square
+    kind: osc
+    what: Band-limited saw and square at the note pitch (any float pitch, 36-EDO included); `rr` detunes by up to a few
+      cents.
+    params: [saw, square, rr]
+    to: [filter]
+  - id: subosc
+    label: Sub sine
+    kind: osc
+    what: A pure sine one octave below the played note.
+    params: [sub]
+    to: [filter]
+  - id: glide
+    label: Glide
+    kind: pitch
+    what: On slurred notes the pitch slides from the previous note, fast then settling.
+    params: [glide]
+    to: [osc, subosc]
+  - id: fenv
+    label: Filter envelope
+    kind: env
+    what: Adds `env_amt` x velocity octaves to the cutoff at note-on, decaying with time constant `env_decay` (30% depth
+      on slurs).
+    params: [env_amt, env_decay]
+    to: [filter]
+  - id: filter
+    label: Resonant low-pass
+    kind: filter
+    what: 12 dB/oct state-variable low-pass; velocity also moves the base cutoff by `vel_cutoff` octaves per unit.
+    params: [cutoff, res, vel_cutoff]
+    to: [drive]
+  - id: drive
+    label: Saturation
+    kind: shaper
+    what: tanh soft clipping after the filter.
+    params: [drive]
+    to: [amp]
+  - id: amp
+    label: ADSR + level
+    kind: amp
+    what: Amplitude ADSR around the held gate, times velocity^vel_curve.
+    params: [attack, decay, sustain, release, vel_curve]
+    to: [out]
   params:
-    saw:
-      says: "Level of the sawtooth oscillator (all harmonics)."
-      up: "brighter, buzzier, more present"
-      down: "rounder, less edge"
-    square:
-      says: "Level of the square oscillator (odd harmonics only)."
-      up: "a hollow, woody tone"
-      down: "only the saw's character"
-    sub:
-      says: "Level of a sine one octave below the note."
-      up: "more weight and low-end you feel"
-      down: "a lighter bass that leaves room for the kick"
-    cutoff:
-      says: "Base frequency of the low-pass filter in Hz."
-      up: "brighter, more aggressive"
-      down: "darker, deeper, toward a pure sub"
-    res:
-      says: "Filter resonance (Q): boosts harmonics near the cutoff."
-      up: "a whistling, squelchy, vocal peak"
-      down: "a smooth, neutral filter"
-    env_amt:
-      says: "How many octaves the filter opens at the start of each note (times velocity)."
-      up: "a strong 'pluck' or 'wow' on every note"
-      down: "a static tone, no movement"
-    env_decay:
-      says: "How fast the filter closes after the attack (time constant)."
-      up: "a slow 'wow', the filter stays open longer"
-      down: "a short, percussive pluck"
-    attack:
-      says: "Amplitude fade-in time."
-      up: "a swelling, bowed start"
-      down: "an instant, punchy start"
-    decay:
-      says: "Time to fall from the peak to the sustain level."
-      up: "a longer initial bloom"
-      down: "a quicker drop to sustain"
-    sustain:
-      says: "Level held while the note is down (0-1)."
-      up: "full, organ-like held notes"
-      down: "plucky notes that fade while held"
-    release:
-      says: "Fade-out after the note is released."
-      up: "notes overlap and blur"
-      down: "tight, staccato ends"
-    drive:
-      says: "tanh saturation after the filter (1 = clean)."
-      up: "growl and grit, louder-sounding"
-      down: "clean and smooth"
-    glide:
-      says: "Portamento time on slurred notes."
-      up: "slow, singing slides between notes"
-      down: "instant pitch changes"
-    vel_cutoff:
-      says: "Octaves the base cutoff moves per unit of velocity around 0.7."
-      up: "accents much brighter than soft notes"
-      down: "the same brightness at every velocity"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "more dynamic range"
-      down: "a more even, compressed bass line"
-    rr:
-      says: "Random per-note detune (0.2% x rr, a few cents at most)."
-      up: "slightly unstable, analog-like pitch"
-      down: "perfectly steady pitch"
-  velocity: "Velocity brightens the base cutoff (`vel_cutoff` octaves per unit around 0.7) and deepens the filter envelope (env_amt x velocity octaves), so accents snap open while soft notes stay dark; gain is velocity^1.2."
+    saw: {says: Level of the sawtooth oscillator (all harmonics)., up: 'brighter, buzzier, more present', down: 'rounder,
+        less edge'}
+    square: {says: Level of the square oscillator (odd harmonics only)., up: 'a hollow, woody tone', down: only the saw's
+        character}
+    sub: {says: Level of a sine one octave below the note., up: more weight and low-end you feel, down: a lighter bass that
+        leaves room for the kick}
+    cutoff: {says: Base frequency of the low-pass filter in Hz., up: 'brighter, more aggressive', down: 'darker, deeper,
+        toward a pure sub'}
+    res: {says: 'Filter resonance (Q): boosts harmonics near the cutoff.', up: 'a whistling, squelchy, vocal peak', down: 'a
+        smooth, neutral filter'}
+    env_amt: {says: How many octaves the filter opens at the start of each note (times velocity)., up: a strong 'pluck'
+        or 'wow' on every note, down: 'a static tone, no movement'}
+    env_decay: {says: How fast the filter closes after the attack (time constant)., up: 'a slow ''wow'', the filter stays
+        open longer', down: 'a short, percussive pluck'}
+    attack: {says: Amplitude fade-in time., up: 'a swelling, bowed start', down: 'an instant, punchy start'}
+    decay: {says: Time to fall from the peak to the sustain level., up: a longer initial bloom, down: a quicker drop to
+        sustain}
+    sustain: {says: Level held while the note is down (0-1)., up: 'full, organ-like held notes', down: plucky notes that
+        fade while held}
+    release: {says: Fade-out after the note is released., up: notes overlap and blur, down: 'tight, staccato ends'}
+    drive: {says: tanh saturation after the filter (1 = clean)., up: 'growl and grit, louder-sounding', down: clean and
+        smooth}
+    glide: {says: Portamento time on slurred notes., up: 'slow, singing slides between notes', down: instant pitch changes}
+    vel_cutoff: {says: Octaves the base cutoff moves per unit of velocity around 0.7., up: accents much brighter than soft
+        notes, down: the same brightness at every velocity}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: more dynamic range, down: 'a more even, compressed
+        bass line'}
+    rr: {says: 'Random per-note detune (0.2% x rr, a few cents at most).', up: 'slightly unstable, analog-like pitch', down: perfectly
+        steady pitch}
+  velocity: Velocity brightens the base cutoff (`vel_cutoff` octaves per unit around 0.7) and deepens the filter envelope
+    (env_amt x velocity octaves), so accents snap open while soft notes stay dark; gain is velocity^1.2.
   recipes:
-    - name: "Acid squelch"
-      set: {saw: 1, sub: 0, cutoff: 250, res: 8, env_amt: 4.5, env_decay: 0.18, drive: 3}
-      listen: "A closed, very resonant filter that the envelope throws open on each note: the 'wow' of acid bass. Accents open it further."
-    - name: "Pure sub"
-      set: {saw: 0, square: 0, sub: 1, cutoff: 300, env_amt: 0}
-      listen: "Only the sine remains, and it plays one octave below the written note: felt more than heard."
-    - name: "Hollow square bass"
-      set: {saw: 0, square: 1, sub: 0.3, cutoff: 1200, env_amt: 1}
-      listen: "A square has only odd harmonics, which gives a hollow, woody tone, like a clarinet an octave down."
-    - name: "Slow swell, long glide"
-      set: {attack: 0.08, glide: 0.2, env_amt: 0}
-      listen: "Notes fade in and slurred notes slide slowly; good for dub or melodic basslines."
-    - name: "Growl"
-      set: {drive: 7, cutoff: 1500, res: 3}
-      listen: "Heavy drive after a bright, resonant filter adds dense harmonics: a distorted, aggressive bass."
-  try_next: "Play the same line on `string_pluck` an octave down to compare a filter-envelope 'pluck' with a physically modelled one."
-
+  - name: Acid squelch
+    set: {saw: 1, sub: 0, cutoff: 250, res: 8, env_amt: 4.5, env_decay: 0.18, drive: 3}
+    listen: 'A closed, very resonant filter that the envelope throws open on each note: the ''wow'' of acid bass. Accents
+      open it further.'
+  - name: Pure sub
+    set: {saw: 0, square: 0, sub: 1, cutoff: 300, env_amt: 0}
+    listen: 'Only the sine remains, and it plays one octave below the written note: felt more than heard.'
+  - name: Hollow square bass
+    set: {saw: 0, square: 1, sub: 0.3, cutoff: 1200, env_amt: 1}
+    listen: A square has only odd harmonics, which gives a hollow, woody tone, like a clarinet an octave down.
+  - name: Slow swell, long glide
+    set: {attack: 0.08, glide: 0.2, env_amt: 0}
+    listen: Notes fade in and slurred notes slide slowly; good for dub or melodic basslines.
+  - name: Growl
+    set: {drive: 7, cutoff: 1500, res: 3}
+    listen: 'Heavy drive after a bright, resonant filter adds dense harmonics: a distorted, aggressive bass.'
+  try_next: Play the same line on `string_pluck` an octave down to compare a filter-envelope 'pluck' with a physically modelled
+    one.
 pad:
-  title: "Unison saw pad"
+  title: Unison saw pad
   family: synth
-  ancestor: "The polysynth string pad (Oberheim, Juno, Prophet) and the 'supersaw' of the JP-8000: several slightly detuned sawtooth waves per note through a slow-moving low-pass filter. Fairly faithful in spirit; there is no chorus effect or per-voice filter."
-  summary: "Each note is a small choir of sawtooth waves, each a few cents apart and drifting slowly, spread across the stereo field and filtered to a soft glow. A slow fade-in and long release make chords blend into each other."
-  how: "For each note, start `voices` saws spread evenly across +/- `detune` cents, each wandering by up to `drift` cents with smooth random motion (about 0.4 Hz). Pan them from left to right by `width` and add them up. Run the sum through a resonant low-pass at `cutoff`, with a sine LFO at `lfo_rate` moving the cutoff up and down by `lfo_depth` octaves. Shape the level with a slow ADSR."
-  why: "Saws a few cents apart drift in and out of phase, which the ear hears as a rich, shimmering 'chorus' instead of one thin tone; this is the same beating you hear in a string section. Spreading the voices left and right makes the sound wide and enveloping. The low-pass removes the buzzy top so the pad sits behind other parts. Slow filter movement and drift keep the sound alive over long held chords."
+  ancestor: 'The polysynth string pad (Oberheim, Juno, Prophet) and the ''supersaw'' of the JP-8000: several slightly detuned
+    sawtooth waves per note through a slow-moving low-pass filter. Fairly faithful in spirit; there is no chorus effect
+    or per-voice filter.'
+  summary: Each note is a small choir of sawtooth waves, each a few cents apart and drifting slowly, spread across the stereo
+    field and filtered to a soft glow. A slow fade-in and long release make chords blend into each other.
+  how: For each note, start `voices` saws spread evenly across +/- `detune` cents, each wandering by up to `drift` cents
+    with smooth random motion (about 0.4 Hz). Pan them from left to right by `width` and add them up. Run the sum through
+    a resonant low-pass at `cutoff`, with a sine LFO at `lfo_rate` moving the cutoff up and down by `lfo_depth` octaves.
+    Shape the level with a slow ADSR.
+  why: Saws a few cents apart drift in and out of phase, which the ear hears as a rich, shimmering 'chorus' instead of one
+    thin tone; this is the same beating you hear in a string section. Spreading the voices left and right makes the sound
+    wide and enveloping. The low-pass removes the buzzy top so the pad sits behind other parts. Slow filter movement and
+    drift keep the sound alive over long held chords.
   chain:
-    - id: saws
-      label: "Unison saws"
-      kind: osc
-      what: "`voices` band-limited saws spread over +/- `detune` cents, each with slow random `drift`; random start phases on every note."
-      params: [voices, detune, drift, rr]
-      to: [spread]
-    - id: spread
-      label: "Stereo spread"
-      kind: mix
-      what: "Pans the voices from left to right by `width`, then sums them."
-      params: [width]
-      to: [filter]
-    - id: lfo
-      label: "Filter LFO"
-      kind: lfo
-      what: "A slow sine that moves the cutoff up and down by `lfo_depth` octaves."
-      params: [lfo_rate, lfo_depth]
-      to: [filter]
-    - id: filter
-      label: "Low-pass"
-      kind: filter
-      what: "Resonant low-pass at `cutoff`, moved by velocity (`vel_cutoff` octaves per unit around 0.7)."
-      params: [cutoff, res, vel_cutoff]
-      to: [amp]
-    - id: amp
-      label: "ADSR + level"
-      kind: amp
-      what: "A soft-curved ADSR around the held gate, times velocity^vel_curve."
-      params: [attack, decay, sustain, release, vel_curve]
-      to: [out]
+  - id: saws
+    label: Unison saws
+    kind: osc
+    what: '`voices` band-limited saws spread over +/- `detune` cents, each with slow random `drift`; random start phases
+      on every note.'
+    params: [voices, detune, drift, rr]
+    to: [spread]
+  - id: spread
+    label: Stereo spread
+    kind: mix
+    what: Pans the voices from left to right by `width`, then sums them.
+    params: [width]
+    to: [filter]
+  - id: lfo
+    label: Filter LFO
+    kind: lfo
+    what: A slow sine that moves the cutoff up and down by `lfo_depth` octaves.
+    params: [lfo_rate, lfo_depth]
+    to: [filter]
+  - id: filter
+    label: Low-pass
+    kind: filter
+    what: Resonant low-pass at `cutoff`, moved by velocity (`vel_cutoff` octaves per unit around 0.7).
+    params: [cutoff, res, vel_cutoff]
+    to: [amp]
+  - id: amp
+    label: ADSR + level
+    kind: amp
+    what: A soft-curved ADSR around the held gate, times velocity^vel_curve.
+    params: [attack, decay, sustain, release, vel_curve]
+    to: [out]
   params:
-    voices:
-      says: "How many saws play each note (rounded to a whole number)."
-      up: "thicker, richer, more 'ensemble'"
-      down: "a single clean saw"
-    detune:
-      says: "How far apart the outer voices are tuned, in cents."
-      up: "a wider, more shimmering, eventually out-of-tune chorus"
-      down: "voices lock together into one tone"
-    drift:
-      says: "Slow random pitch wander per voice, in cents, like an old analog synth."
-      up: "a warbly, tape-like, vintage pad"
-      down: "a perfectly stable pad"
-    cutoff:
-      says: "Low-pass cutoff in Hz."
-      up: "bright, airy, more present"
-      down: "dark, warm, distant"
-    res:
-      says: "Filter resonance (Q)."
-      up: "a whistling peak that the LFO sweeps audibly"
-      down: "a smooth, neutral filter"
-    lfo_rate:
-      says: "Speed of the filter's slow sine movement."
-      up: "a faster wah-like pulse"
-      down: "a slow breathing over several bars"
-    lfo_depth:
-      says: "How many octaves the LFO moves the cutoff."
-      up: "an obvious breathing, opening and closing"
-      down: "a static filter"
-    attack:
-      says: "Fade-in time."
-      up: "a slow swell, chords bloom in"
-      down: "an immediate start, more like an organ"
-    decay:
-      says: "Time from the peak down to the sustain level."
-      up: "a longer initial bloom"
-      down: "settles to sustain quickly"
-    sustain:
-      says: "Level held while the note is down (0-1)."
-      up: "full held chords"
-      down: "chords fade while held"
-    release:
-      says: "Fade-out after the note ends."
-      up: "chords overlap and wash into each other"
-      down: "clean, separate chord changes"
-    width:
-      says: "How far the unison voices are panned left and right."
-      up: "a wide, enveloping pad"
-      down: "a narrow, mono pad"
-    vel_cutoff:
-      says: "Octaves the cutoff moves per unit of velocity around 0.7."
-      up: "loud chords much brighter"
-      down: "the same colour at every velocity"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "more dynamic range"
-      down: "even levels"
-    rr:
-      says: "Per-note variation: currently not read by the pad's code, so it has no audible effect here (each note already gets random phases and its own drift)."
-      up: "no change on this instrument"
-      down: "no change on this instrument"
-  velocity: "Velocity moves the filter cutoff by `vel_cutoff` octaves per unit around 0.7 (one octave by default), so louder chords are also brighter; gain is linear in velocity (vel_curve 1)."
+    voices: {says: How many saws play each note (rounded to a whole number)., up: 'thicker, richer, more ''ensemble''',
+      down: a single clean saw}
+    detune: {says: 'How far apart the outer voices are tuned, in cents.', up: 'a wider, more shimmering, eventually out-of-tune
+        chorus', down: voices lock together into one tone}
+    drift: {says: 'Slow random pitch wander per voice, in cents, like an old analog synth.', up: 'a warbly, tape-like, vintage
+        pad', down: a perfectly stable pad}
+    cutoff: {says: Low-pass cutoff in Hz., up: 'bright, airy, more present', down: 'dark, warm, distant'}
+    res: {says: Filter resonance (Q)., up: a whistling peak that the LFO sweeps audibly, down: 'a smooth, neutral filter'}
+    lfo_rate: {says: Speed of the filter's slow sine movement., up: a faster wah-like pulse, down: a slow breathing over
+        several bars}
+    lfo_depth: {says: How many octaves the LFO moves the cutoff., up: 'an obvious breathing, opening and closing', down: a
+        static filter}
+    attack: {says: Fade-in time., up: 'a slow swell, chords bloom in', down: 'an immediate start, more like an organ'}
+    decay: {says: Time from the peak down to the sustain level., up: a longer initial bloom, down: settles to sustain quickly}
+    sustain: {says: Level held while the note is down (0-1)., up: full held chords, down: chords fade while held}
+    release: {says: Fade-out after the note ends., up: chords overlap and wash into each other, down: 'clean, separate chord
+        changes'}
+    width: {says: How far the unison voices are panned left and right., up: 'a wide, enveloping pad', down: 'a narrow, mono
+        pad'}
+    vel_cutoff: {says: Octaves the cutoff moves per unit of velocity around 0.7., up: loud chords much brighter, down: the
+        same colour at every velocity}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: more dynamic range, down: even levels}
+    rr: {says: 'Per-note variation: each note gets a slightly different detune spread (25% x rr), filter cutoff (12%) and
+        attack time (20%), from its own seed.', up: 'every chord breathes differently, like a played analog synth', down: every
+        note identical (only the phases and drift differ)}
+  velocity: Velocity moves the filter cutoff by `vel_cutoff` octaves per unit around 0.7 (one octave by default), so louder
+    chords are also brighter; gain is linear in velocity (vel_curve 1).
   recipes:
-    - name: "Wide supersaw"
-      set: {voices: 9, detune: 30, width: 1, cutoff: 4000}
-      listen: "Nine saws spread wide shimmer and beat against each other: the trance 'supersaw'."
-    - name: "Still single voice"
-      set: {voices: 1, detune: 0, drift: 0, lfo_depth: 0}
-      listen: "One saw, no movement: a plain, stable tone. Good for hearing microtonal (36-EDO) chords without chorus beating."
-    - name: "Breathing filter"
-      set: {cutoff: 700, res: 3, lfo_rate: 0.5, lfo_depth: 1.5}
-      listen: "The resonant peak sweeps up and down every two seconds, so a held chord seems to breathe."
-    - name: "Dark slow swell"
-      set: {cutoff: 600, attack: 2.0, release: 3.0}
-      listen: "A closed filter and slow envelopes push the pad into the background, ideal under dialogue or a melody."
-    - name: "Tape wobble"
-      set: {drift: 12, voices: 3}
-      listen: "Large slow drift makes the pitch waver like a worn tape, a lo-fi effect."
-  try_next: "Compare with `clean` (preset golden_pad): a pad without any detune, where the only beating comes from the tuning itself."
-
+  - name: Wide supersaw
+    set: {voices: 9, detune: 30, width: 1, cutoff: 4000}
+    listen: 'Nine saws spread wide shimmer and beat against each other: the trance ''supersaw''.'
+  - name: Still single voice
+    set: {voices: 1, detune: 0, drift: 0, lfo_depth: 0}
+    listen: 'One saw, no movement: a plain, stable tone. Good for hearing microtonal (36-EDO) chords without chorus beating.'
+  - name: Breathing filter
+    set: {cutoff: 700, res: 3, lfo_rate: 0.5, lfo_depth: 1.5}
+    listen: The resonant peak sweeps up and down every two seconds, so a held chord seems to breathe.
+  - name: Dark slow swell
+    set: {cutoff: 600, attack: 2.0, release: 3.0}
+    listen: A closed filter and slow envelopes push the pad into the background, ideal under dialogue or a melody.
+  - name: Tape wobble
+    set: {drift: 12, voices: 3}
+    listen: Large slow drift makes the pitch waver like a worn tape, a lo-fi effect.
+  try_next: 'Compare with `clean` (preset golden_pad): a pad without any detune, where the only beating comes from the tuning
+    itself.'
 pluck:
-  title: "Subtractive pluck"
+  title: Subtractive pluck
   family: synth
-  ancestor: "The classic analog synth 'pluck' patch (Juno and SH-101 arpeggios): a bright waveform whose filter snaps shut, so each note sounds plucked. It is a synth sound, not a model of a real string; for that, see `string_pluck`."
-  summary: "A pulse and a saw through a low-pass filter that starts wide open and closes quickly, with a fading amplitude. Short notes in fast patterns become arpeggios that sparkle without getting in the way."
-  how: "Mix a pulse wave of width `pw` with a saw (`saw_mix`). Send them through a resonant low-pass whose cutoff starts `env_amt` octaves above `cutoff` and falls back with time constant `env_decay`. Fade the level so it reaches -60 dB after `decay`, with a 1 ms attack and a `release` at the end of the gate. The note is cut at 1.2 x `decay` even if it is held longer."
-  why: "A plucked string is brightest at the moment it is struck and then loses its high harmonics first; a fast-closing filter fakes exactly that change in colour. The pulse wave's width decides which harmonics are missing (a 50% square has only odd ones), which changes the character from hollow to nasal. Because the sound fades on its own, fast notes do not pile up into mush."
+  ancestor: 'The classic analog synth ''pluck'' patch (Juno and SH-101 arpeggios): a bright waveform whose filter snaps
+    shut, so each note sounds plucked. It is a synth sound, not a model of a real string; for that, see `string_pluck`.'
+  summary: A pulse and a saw through a low-pass filter that starts wide open and closes quickly, with a fading amplitude.
+    Short notes in fast patterns become arpeggios that sparkle without getting in the way.
+  how: Mix a pulse wave of width `pw` with a saw (`saw_mix`). Send them through a resonant low-pass whose cutoff starts
+    `env_amt` octaves above `cutoff` and falls back with time constant `env_decay`. Fade the level so it reaches -60 dB
+    after `decay`, with a 1 ms attack and a `release` at the end of the gate. The note is cut at 1.2 x `decay` even if it
+    is held longer.
+  why: A plucked string is brightest at the moment it is struck and then loses its high harmonics first; a fast-closing
+    filter fakes exactly that change in colour. The pulse wave's width decides which harmonics are missing (a 50% square
+    has only odd ones), which changes the character from hollow to nasal. Because the sound fades on its own, fast notes
+    do not pile up into mush.
   chain:
-    - id: osc
-      label: "Pulse + saw"
-      kind: osc
-      what: "A band-limited pulse of width `pw` mixed with a saw by `saw_mix`, at any float pitch."
-      params: [pw, saw_mix]
-      to: [filter]
-    - id: fenv
-      label: "Filter envelope"
-      kind: env
-      what: "Opens the filter `env_amt` octaves above the cutoff at note-on and closes with time constant `env_decay`."
-      params: [env_amt, env_decay]
-      to: [filter]
-    - id: filter
-      label: "Low-pass"
-      kind: filter
-      what: "Resonant low-pass at `cutoff`, moved by velocity (`vel_cutoff` octaves per unit around 0.7)."
-      params: [cutoff, res, vel_cutoff]
-      to: [amp]
-    - id: amp
-      label: "Decay + level"
-      kind: amp
-      what: "An exponential fade of `decay` (varied about 5% by `rr`), a short release, and gain velocity^vel_curve."
-      params: [decay, release, vel_curve, rr]
-      to: [out]
+  - id: osc
+    label: Pulse + saw
+    kind: osc
+    what: A band-limited pulse of width `pw` mixed with a saw by `saw_mix`, at any float pitch.
+    params: [pw, saw_mix]
+    to: [filter]
+  - id: fenv
+    label: Filter envelope
+    kind: env
+    what: Opens the filter `env_amt` octaves above the cutoff at note-on and closes with time constant `env_decay`.
+    params: [env_amt, env_decay]
+    to: [filter]
+  - id: filter
+    label: Low-pass
+    kind: filter
+    what: Resonant low-pass at `cutoff`, moved by velocity (`vel_cutoff` octaves per unit around 0.7).
+    params: [cutoff, res, vel_cutoff]
+    to: [amp]
+  - id: amp
+    label: Decay + level
+    kind: amp
+    what: An exponential fade of `decay` (varied about 5% by `rr`), a short release, and gain velocity^vel_curve.
+    params: [decay, release, vel_curve, rr]
+    to: [out]
   params:
-    pw:
-      says: "Pulse width: 0.5 is a square, smaller values are thinner pulses."
-      up: "a hollow, square, clarinet-like tone"
-      down: "a thin, nasal, reedy tone"
-    saw_mix:
-      says: "Balance between saw (1) and pulse (0)."
-      up: "brighter and fuller, every harmonic present"
-      down: "the pulse's hollow or nasal colour"
-    cutoff:
-      says: "Where the filter settles after the pluck, in Hz."
-      up: "a brighter tail"
-      down: "a darker, more muted tail"
-    res:
-      says: "Filter resonance (Q)."
-      up: "a resonant 'blip' as the filter sweeps"
-      down: "a smooth sweep"
-    env_amt:
-      says: "How many octaves above `cutoff` the filter starts."
-      up: "a sharper, brighter pluck attack"
-      down: "no pluck, a static tone"
-    env_decay:
-      says: "How fast the filter closes (time constant)."
-      up: "a slower, 'wah'-like close"
-      down: "a tight, clicky pluck"
-    decay:
-      says: "Amplitude fade time (t60); notes stop at 1.2 x this even if held."
-      up: "long ringing notes"
-      down: "short, staccato blips"
-    release:
-      says: "Fade-out when the note is released early."
-      up: "softer note ends"
-      down: "abrupt note ends"
-    vel_cutoff:
-      says: "Octaves the cutoff moves per unit of velocity around 0.7."
-      up: "accented notes much brighter"
-      down: "the same brightness at every velocity"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "more dynamic range"
-      down: "even levels"
-    rr:
-      says: "Random per-note variation of the decay time (about 5%)."
-      up: "notes ring slightly differently"
-      down: "identical notes"
-  velocity: "Velocity moves the filter cutoff by `vel_cutoff` octaves per unit around 0.7 (two octaves by default, the strongest of the synths), so accents ring out bright and soft notes are muted; gain is velocity^1.5."
+    pw: {says: 'Pulse width: 0.5 is a square, smaller values are thinner pulses.', up: 'a hollow, square, clarinet-like
+        tone', down: 'a thin, nasal, reedy tone'}
+    saw_mix: {says: Balance between saw (1) and pulse (0)., up: 'brighter and fuller, every harmonic present', down: the
+        pulse's hollow or nasal colour}
+    cutoff: {says: 'Where the filter settles after the pluck, in Hz.', up: a brighter tail, down: 'a darker, more muted
+        tail'}
+    res: {says: Filter resonance (Q)., up: a resonant 'blip' as the filter sweeps, down: a smooth sweep}
+    env_amt: {says: How many octaves above `cutoff` the filter starts., up: 'a sharper, brighter pluck attack', down: 'no
+        pluck, a static tone'}
+    env_decay: {says: How fast the filter closes (time constant)., up: 'a slower, ''wah''-like close', down: 'a tight, clicky
+        pluck'}
+    decay: {says: Amplitude fade time (t60); notes stop at 1.2 x this even if held., up: long ringing notes, down: 'short,
+        staccato blips'}
+    release: {says: Fade-out when the note is released early., up: softer note ends, down: abrupt note ends}
+    vel_cutoff: {says: Octaves the cutoff moves per unit of velocity around 0.7., up: accented notes much brighter, down: the
+        same brightness at every velocity}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: more dynamic range, down: even levels}
+    rr: {says: Random per-note variation of the decay time (about 5%)., up: notes ring slightly differently, down: identical
+        notes}
+  velocity: Velocity moves the filter cutoff by `vel_cutoff` octaves per unit around 0.7 (two octaves by default, the strongest
+    of the synths), so accents ring out bright and soft notes are muted; gain is velocity^1.5.
   recipes:
-    - name: "Bright resonant pluck"
-      set: {cutoff: 1200, env_amt: 4.5, env_decay: 0.05, res: 3}
-      listen: "The filter jumps four and a half octaves and snaps shut in 50 ms; the resonance makes a little 'blip' as it sweeps."
-    - name: "Hollow square"
-      set: {saw_mix: 0, pw: 0.5}
-      listen: "A pure square has only odd harmonics: a hollow, woody, marimba-ish pluck."
-    - name: "Thin nasal pulse"
-      set: {saw_mix: 0, pw: 0.08}
-      listen: "A narrow pulse has many strong harmonics in a lumpy pattern, which sounds thin and nasal, like a harpsichord."
-    - name: "Long ringing arp"
-      set: {decay: 1.2, env_decay: 0.3}
-      listen: "Longer amplitude and filter decays let notes overlap into a shimmering bed."
-    - name: "Static (no filter pluck)"
-      set: {env_amt: 0, decay: 0.49}
-      listen: "With no filter envelope the colour never changes: compare with the default to hear how much the pluck comes from the filter."
-  try_next: "Play the same arpeggio on `string_pluck` to hear how a physical string darkens by itself, with no filter envelope."
-
+  - name: Bright resonant pluck
+    set: {cutoff: 1200, env_amt: 4.5, env_decay: 0.05, res: 3}
+    listen: The filter jumps four and a half octaves and snaps shut in 50 ms; the resonance makes a little 'blip' as it
+      sweeps.
+  - name: Hollow square
+    set: {saw_mix: 0, pw: 0.5}
+    listen: 'A pure square has only odd harmonics: a hollow, woody, marimba-ish pluck.'
+  - name: Thin nasal pulse
+    set: {saw_mix: 0, pw: 0.08}
+    listen: A narrow pulse has many strong harmonics in a lumpy pattern, which sounds thin and nasal, like a harpsichord.
+  - name: Long ringing arp
+    set: {decay: 1.2, env_decay: 0.3}
+    listen: Longer amplitude and filter decays let notes overlap into a shimmering bed.
+  - name: Static (no filter pluck)
+    set: {env_amt: 0, decay: 0.49}
+    listen: 'With no filter envelope the colour never changes: compare with the default to hear how much the pluck comes
+      from the filter.'
+  try_next: Play the same arpeggio on `string_pluck` to hear how a physical string darkens by itself, with no filter envelope.
 lead:
-  title: "Unison saw lead"
+  title: Unison saw lead
   family: synth
-  ancestor: "The mono synth lead (Minimoog, and later supersaw leads): detuned saws through a low-pass, with glide between slurred notes and a vibrato that fades in like a singer's. The breath noise is a nod to wind instruments."
-  summary: "A monophonic melody voice: several detuned saws, a vibrato that starts after a short delay, glide on slurs, and an optional breathy noise. It is designed to sing a tune over a mix."
-  how: "Start `voices` saws spread over +/- `detune` cents and panned slightly left and right. Wobble their pitch with a sine vibrato at `vib_rate` and `vib_depth` cents, which only fades in after `vib_delay` (ramping up over about 0.33 s). On slurred notes, slide from the previous pitch over `glide`. Add band-passed noise centred at the third harmonic (`breath`). Filter everything with a resonant low-pass at `cutoff` and shape it with an ADSR."
-  why: "Singers and string players start a note straight and add vibrato a moment later; that delay is a big part of why a lead sounds expressive instead of mechanical. Detuned unison saws give the tone width and body so it stands out. Glide joins notes the way a voice or a violin slides between them. A little noise riding the note imitates the air in a flute or a voice."
+  ancestor: 'The mono synth lead (Minimoog, and later supersaw leads): detuned saws through a low-pass, with glide between
+    slurred notes and a vibrato that fades in like a singer''s. The breath noise is a nod to wind instruments.'
+  summary: 'A monophonic melody voice: several detuned saws, a vibrato that starts after a short delay, glide on slurs,
+    and an optional breathy noise. It is designed to sing a tune over a mix.'
+  how: Start `voices` saws spread over +/- `detune` cents and panned slightly left and right. Wobble their pitch with a
+    sine vibrato at `vib_rate` and `vib_depth` cents, which only fades in after `vib_delay` (ramping up over about 0.33
+    s). On slurred notes, slide from the previous pitch over `glide`. Add band-passed noise centred at the third harmonic
+    (`breath`). Filter everything with a resonant low-pass at `cutoff` and shape it with an ADSR.
+  why: Singers and string players start a note straight and add vibrato a moment later; that delay is a big part of why
+    a lead sounds expressive instead of mechanical. Detuned unison saws give the tone width and body so it stands out. Glide
+    joins notes the way a voice or a violin slides between them. A little noise riding the note imitates the air in a flute
+    or a voice.
   chain:
-    - id: vib
-      label: "Delayed vibrato"
-      kind: lfo
-      what: "A sine pitch wobble of `vib_depth` cents at `vib_rate` (varied about 5% by `rr`), fading in after `vib_delay`."
-      params: [vib_rate, vib_depth, vib_delay, rr]
-      to: [saws]
-    - id: glide
-      label: "Glide"
-      kind: pitch
-      what: "Slides from the previous pitch on slurred notes, fast then settling."
-      params: [glide]
-      to: [saws]
-    - id: saws
-      label: "Unison saws"
-      kind: osc
-      what: "`voices` saws over +/- `detune` cents, panned across half the stereo width."
-      params: [voices, detune]
-      to: [filter]
-    - id: breath
-      label: "Breath noise"
-      kind: noise
-      what: "White noise band-passed at three times the note frequency, mixed in at `breath`."
-      params: [breath]
-      to: [filter]
-    - id: filter
-      label: "Low-pass"
-      kind: filter
-      what: "A static resonant low-pass at `cutoff`, moved by velocity (`vel_cutoff` octaves per unit around 0.7)."
-      params: [cutoff, res, vel_cutoff]
-      to: [amp]
-    - id: amp
-      label: "ADSR + level"
-      kind: amp
-      what: "Amplitude ADSR around the held gate, times velocity^vel_curve."
-      params: [attack, decay, sustain, release, vel_curve]
-      to: [out]
+  - id: vib
+    label: Delayed vibrato
+    kind: lfo
+    what: A sine pitch wobble of `vib_depth` cents at `vib_rate` (varied about 5% by `rr`), fading in after `vib_delay`.
+    params: [vib_rate, vib_depth, vib_delay, rr]
+    to: [saws]
+  - id: glide
+    label: Glide
+    kind: pitch
+    what: Slides from the previous pitch on slurred notes, fast then settling.
+    params: [glide]
+    to: [saws]
+  - id: saws
+    label: Unison saws
+    kind: osc
+    what: '`voices` saws over +/- `detune` cents, panned across half the stereo width.'
+    params: [voices, detune]
+    to: [filter]
+  - id: breath
+    label: Breath noise
+    kind: noise
+    what: White noise band-passed at three times the note frequency, mixed in at `breath`.
+    params: [breath]
+    to: [filter]
+  - id: filter
+    label: Low-pass
+    kind: filter
+    what: A static resonant low-pass at `cutoff`, moved by velocity (`vel_cutoff` octaves per unit around 0.7).
+    params: [cutoff, res, vel_cutoff]
+    to: [amp]
+  - id: amp
+    label: ADSR + level
+    kind: amp
+    what: Amplitude ADSR around the held gate, times velocity^vel_curve.
+    params: [attack, decay, sustain, release, vel_curve]
+    to: [out]
   params:
-    voices:
-      says: "How many saws play in unison (rounded to a whole number)."
-      up: "a fatter, wider lead"
-      down: "a single focused saw"
-    detune:
-      says: "Spread of the unison voices in cents."
-      up: "a thicker, chorused, eventually sour tone"
-      down: "a tight, focused tone"
-    cutoff:
-      says: "Low-pass cutoff in Hz."
-      up: "brighter, more cutting"
-      down: "softer, rounder, flute-like"
-    res:
-      says: "Filter resonance (Q)."
-      up: "a nasal, whistling peak"
-      down: "a smooth filter"
-    attack:
-      says: "Fade-in time."
-      up: "a bowed or blown swell"
-      down: "an immediate start"
-    decay:
-      says: "Time from the peak down to sustain."
-      up: "a longer accent at the note start"
-      down: "settles quickly"
-    sustain:
-      says: "Level while the note is held (0-1)."
-      up: "steady held notes"
-      down: "notes that fade while held"
-    release:
-      says: "Fade-out after the note ends."
-      up: "notes trail into each other"
-      down: "crisp note ends"
-    vib_rate:
-      says: "Vibrato speed in Hz."
-      up: "a nervous, fast wobble"
-      down: "a slow, wide, relaxed wave"
-    vib_depth:
-      says: "Vibrato width in cents."
-      up: "an operatic, wide vibrato"
-      down: "a straight tone"
-    vib_delay:
-      says: "How long a note stays straight before vibrato fades in."
-      up: "only long notes get vibrato, like a singer"
-      down: "vibrato from the first moment"
-    glide:
-      says: "Portamento time on slurred notes."
-      up: "slow, expressive slides"
-      down: "clean jumps between notes"
-    breath:
-      says: "Level of noise band-passed at the third harmonic, riding the note."
-      up: "an airy, flute- or voice-like tone"
-      down: "a pure synth tone"
-    vel_cutoff:
-      says: "Octaves the cutoff moves per unit of velocity around 0.7."
-      up: "louder notes much brighter"
-      down: "the same brightness at every velocity"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "more dynamic range"
-      down: "even levels"
-    rr:
-      says: "Random per-note variation of the vibrato rate (about 5%)."
-      up: "each note's vibrato slightly different"
-      down: "identical vibrato on every note"
-  velocity: "Velocity moves the filter cutoff by `vel_cutoff` octaves per unit around 0.7 (1.5 by default), so louder notes are brighter, like a harder-blown horn; gain is velocity^1.2."
+    voices: {says: How many saws play in unison (rounded to a whole number)., up: 'a fatter, wider lead', down: a single
+        focused saw}
+    detune: {says: Spread of the unison voices in cents., up: 'a thicker, chorused, eventually sour tone', down: 'a tight,
+        focused tone'}
+    cutoff: {says: Low-pass cutoff in Hz., up: 'brighter, more cutting', down: 'softer, rounder, flute-like'}
+    res: {says: Filter resonance (Q)., up: 'a nasal, whistling peak', down: a smooth filter}
+    attack: {says: Fade-in time., up: a bowed or blown swell, down: an immediate start}
+    decay: {says: Time from the peak down to sustain., up: a longer accent at the note start, down: settles quickly}
+    sustain: {says: Level while the note is held (0-1)., up: steady held notes, down: notes that fade while held}
+    release: {says: Fade-out after the note ends., up: notes trail into each other, down: crisp note ends}
+    vib_rate: {says: Vibrato speed in Hz., up: 'a nervous, fast wobble', down: 'a slow, wide, relaxed wave'}
+    vib_depth: {says: Vibrato width in cents., up: 'an operatic, wide vibrato', down: a straight tone}
+    vib_delay: {says: How long a note stays straight before vibrato fades in., up: 'only long notes get vibrato, like a
+        singer', down: vibrato from the first moment}
+    glide: {says: Portamento time on slurred notes., up: 'slow, expressive slides', down: clean jumps between notes}
+    breath: {says: 'Level of noise band-passed at the third harmonic, riding the note.', up: 'an airy, flute- or voice-like
+        tone', down: a pure synth tone}
+    vel_cutoff: {says: Octaves the cutoff moves per unit of velocity around 0.7., up: louder notes much brighter, down: the
+        same brightness at every velocity}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: more dynamic range, down: even levels}
+    rr: {says: Random per-note variation of the vibrato rate (about 5%)., up: each note's vibrato slightly different, down: identical
+        vibrato on every note}
+  velocity: Velocity moves the filter cutoff by `vel_cutoff` octaves per unit around 0.7 (1.5 by default), so louder notes
+    are brighter, like a harder-blown horn; gain is velocity^1.2.
   recipes:
-    - name: "Singer vibrato"
-      set: {vib_depth: 30, vib_delay: 0.4, vib_rate: 5}
-      listen: "Long notes start straight and then bloom into a wide vibrato, which is how singers phrase."
-    - name: "Thin single saw"
-      set: {voices: 1, detune: 0}
-      listen: "One saw is thinner and more focused; compare it with the default five to hear what unison adds."
-    - name: "Fat detuned lead"
-      set: {voices: 9, detune: 25}
-      listen: "Nine saws spread 25 cents make a huge, shimmering lead that fills the stereo field."
-    - name: "Breathy flute-ish"
-      set: {voices: 1, cutoff: 1500, breath: 0.3, attack: 0.08}
-      listen: "A dark single voice, a soft attack and noise at the third harmonic move it toward a flute or ocarina."
-    - name: "Resonant scream"
-      set: {cutoff: 2000, res: 6}
-      listen: "Strong resonance makes a nasal, vocal peak near 2 kHz that cuts through anything."
-  try_next: "Play the same melody on `clean` (preset lead) to hear what the detune, vibrato and filter contribute."
-
+  - name: Singer vibrato
+    set: {vib_depth: 30, vib_delay: 0.4, vib_rate: 5}
+    listen: Long notes start straight and then bloom into a wide vibrato, which is how singers phrase.
+  - name: Thin single saw
+    set: {voices: 1, detune: 0}
+    listen: One saw is thinner and more focused; compare it with the default five to hear what unison adds.
+  - name: Fat detuned lead
+    set: {voices: 9, detune: 25}
+    listen: Nine saws spread 25 cents make a huge, shimmering lead that fills the stereo field.
+  - name: Breathy flute-ish
+    set: {voices: 1, cutoff: 1500, breath: 0.3, attack: 0.08}
+    listen: A dark single voice, a soft attack and noise at the third harmonic move it toward a flute or ocarina.
+  - name: Resonant scream
+    set: {cutoff: 2000, res: 6}
+    listen: Strong resonance makes a nasal, vocal peak near 2 kHz that cuts through anything.
+  try_next: Play the same melody on `clean` (preset lead) to hear what the detune, vibrato and filter contribute.
 string_pluck:
-  title: "Plucked string (Karplus-Strong)"
+  title: Plucked string (Karplus-Strong)
   family: string
-  ancestor: "A plucked string: guitar, harp or koto, made with the Karplus-Strong algorithm (1983), the first and simplest physical model of a string. It captures how a real string rings and darkens; the body is only three EQ peaks, so it will not fool a guitarist up close."
-  summary: "A short burst of noise is fed into a delay line one period long that feeds back into itself, slightly filtered on each pass. The loop rings at the note's pitch and gets darker as it fades, just like a real string."
-  how: "Make one period of white noise and low-pass it at `pick_tone` (brighter for harder hits). Subtract a delayed copy of it, delayed by `pick_pos` of a period, to mimic where the string was plucked. Feed it into a delay loop exactly one period long (with fractional delay, so any float pitch, including 36-EDO, is exact), where each pass averages neighbouring samples (`brightness`) and loses enough level to fade by 60 dB in `t60`. Add body resonance with EQ peaks at 110 Hz and 230 Hz and a dip at 2.8 kHz (`body`), damp the string at note-off over `release`, and normalise the peak."
-  why: "A string fixed at both ends repeats its shape once per period, which is exactly what a feedback delay does, so the loop produces a harmonic tone at the right pitch. The averaging filter removes more high frequencies on every pass, so high harmonics die faster than low ones; that natural darkening is why the sound reads as 'string' and not 'synth'. Plucking at a fraction of the length cancels the harmonics that have a node there, which is why plucking near the middle sounds hollow and near the bridge sounds twangy. The body peaks add the wooden boxiness of a guitar."
+  ancestor: 'A plucked string: guitar, harp or koto, made with the Karplus-Strong algorithm (1983), the first and simplest
+    physical model of a string. It captures how a real string rings and darkens; the body is only three EQ peaks, so it
+    will not fool a guitarist up close.'
+  summary: A short burst of noise is fed into a delay line one period long that feeds back into itself, slightly filtered
+    on each pass. The loop rings at the note's pitch and gets darker as it fades, just like a real string.
+  how: Make one period of white noise and low-pass it at `pick_tone` (brighter for harder hits). Subtract a delayed copy
+    of it, delayed by `pick_pos` of a period, to mimic where the string was plucked. Feed it into a delay loop exactly one
+    period long (with fractional delay, so any float pitch, including 36-EDO, is exact), where each pass averages neighbouring
+    samples (`brightness`) and loses enough level to fade by 60 dB in `t60`. Add body resonance with EQ peaks at 110 Hz
+    and 230 Hz and a dip at 2.8 kHz (`body`), damp the string at note-off over `release`, and normalise the peak.
+  why: A string fixed at both ends repeats its shape once per period, which is exactly what a feedback delay does, so the
+    loop produces a harmonic tone at the right pitch. The averaging filter removes more high frequencies on every pass,
+    so high harmonics die faster than low ones; that natural darkening is why the sound reads as 'string' and not 'synth'.
+    Plucking at a fraction of the length cancels the harmonics that have a node there, which is why plucking near the middle
+    sounds hollow and near the bridge sounds twangy. The body peaks add the wooden boxiness of a guitar.
   chain:
-    - id: exc
-      label: "Pick noise"
-      kind: noise
-      what: "One period of white noise, low-passed at `pick_tone`, which velocity moves by `vel_bright` octaves per unit."
-      params: [pick_tone, vel_bright]
-      to: [comb]
-    - id: comb
-      label: "Pick position"
-      kind: filter
-      what: "Subtracts a copy delayed by `pick_pos` of a period, cancelling the harmonics that have a node at the pick point."
-      params: [pick_pos]
-      to: [string]
-    - id: string
-      label: "String loop"
-      kind: physical
-      what: "Karplus-Strong delay loop at the exact pitch, losing level to reach -60 dB in `t60` (varied about 5% by `rr`) and darkening by `brightness`."
-      params: [t60, brightness, rr]
-      to: [body]
-    - id: body
-      label: "Wooden body"
-      kind: filter
-      what: "EQ: +6 x body dB at 110 Hz, +4.2 x body dB at 230 Hz, -3 x body dB at 2.8 kHz."
-      params: [body]
-      to: [amp]
-    - id: amp
-      label: "Damper + level"
-      kind: amp
-      what: "Damps the string over `release` after the gate, normalises the peak to 0.8 and applies velocity^vel_curve."
-      params: [release, vel_curve]
-      to: [out]
+  - id: exc
+    label: Pick noise
+    kind: noise
+    what: One period of white noise, low-passed at `pick_tone`, which velocity moves by `vel_bright` octaves per unit.
+    params: [pick_tone, vel_bright]
+    to: [comb]
+  - id: comb
+    label: Pick position
+    kind: filter
+    what: Subtracts a copy delayed by `pick_pos` of a period, cancelling the harmonics that have a node at the pick point.
+    params: [pick_pos]
+    to: [string]
+  - id: string
+    label: String loop
+    kind: physical
+    what: Karplus-Strong delay loop at the exact pitch, losing level to reach -60 dB in `t60` (varied about 5% by `rr`)
+      and darkening by `brightness`.
+    params: [t60, brightness, rr]
+    to: [body]
+  - id: body
+    label: Wooden body
+    kind: filter
+    what: 'EQ: +6 x body dB at 110 Hz, +4.2 x body dB at 230 Hz, -3 x body dB at 2.8 kHz.'
+    params: [body]
+    to: [amp]
+  - id: amp
+    label: Damper + level
+    kind: amp
+    what: Damps the string over `release` after the gate, normalises the peak to 0.8 and applies velocity^vel_curve.
+    params: [release, vel_curve]
+    to: [out]
   params:
-    t60:
-      says: "How long the string rings while held (time to fade by 60 dB)."
-      up: "harp- or piano-like sustain"
-      down: "a muted, palm-muted pluck"
-    brightness:
-      says: "Loop damping: 0.5 is the classic dull Karplus-Strong, 1 lets high harmonics ring as long as low ones."
-      up: "a bright, steel-string, eventually metallic ring"
-      down: "a soft, nylon, quickly darkening tone"
-    pick_pos:
-      says: "Where along the string it is plucked: 0.5 = middle, small values = near the bridge."
-      up: "rounder and hollow (toward the middle)"
-      down: "thin and twangy (near the bridge)"
-    pick_tone:
-      says: "Brightness of the initial pluck (low-pass on the noise burst)."
-      up: "a sharp pick attack"
-      down: "a soft fingertip pluck"
-    body:
-      says: "Strength of the wooden body resonances."
-      up: "boxier, warmer, more guitar-like"
-      down: "a bare string, like a harp or koto"
-    release:
-      says: "How fast the string is damped after the note is released."
-      up: "notes ring past their length"
-      down: "notes stop abruptly, like a hand on the strings"
-    vel_bright:
-      says: "Octaves the pluck brightness moves per unit of velocity around 0.7."
-      up: "hard plucks much brighter than soft ones"
-      down: "every pluck the same colour"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "more dynamic range"
-      down: "even levels"
-    rr:
-      says: "Random per-note variation of the ring time (about 5%); every note also gets fresh pluck noise."
-      up: "notes ring slightly differently"
-      down: "same ring time on every note"
-  velocity: "Velocity raises the pluck's low-pass by `vel_bright` octaves per unit around 0.7 (two octaves by default), so hard plucks start bright and ring with more high harmonics; the level is normalised, then scaled by velocity^1.3."
+    t60: {says: How long the string rings while held (time to fade by 60 dB)., up: harp- or piano-like sustain, down: 'a
+        muted, palm-muted pluck'}
+    brightness: {says: 'Loop damping: 0.5 is the classic dull Karplus-Strong, 1 lets high harmonics ring as long as low
+        ones.', up: 'a bright, steel-string, eventually metallic ring', down: 'a soft, nylon, quickly darkening tone'}
+    pick_pos: {says: 'Where along the string it is plucked: 0.5 = middle, small values = near the bridge.', up: rounder
+        and hollow (toward the middle), down: thin and twangy (near the bridge)}
+    pick_tone: {says: Brightness of the initial pluck (low-pass on the noise burst)., up: a sharp pick attack, down: a soft
+        fingertip pluck}
+    body: {says: Strength of the wooden body resonances., up: 'boxier, warmer, more guitar-like', down: 'a bare string,
+        like a harp or koto'}
+    release: {says: How fast the string is damped after the note is released., up: notes ring past their length, down: 'notes
+        stop abruptly, like a hand on the strings'}
+    vel_bright: {says: Octaves the pluck brightness moves per unit of velocity around 0.7., up: hard plucks much brighter
+        than soft ones, down: every pluck the same colour}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: more dynamic range, down: even levels}
+    rr: {says: Random per-note variation of the ring time (about 5%); every note also gets fresh pluck noise., up: notes
+        ring slightly differently, down: same ring time on every note}
+  velocity: Velocity raises the pluck's low-pass by `vel_bright` octaves per unit around 0.7 (two octaves by default), so
+    hard plucks start bright and ring with more high harmonics; the level is normalised, then scaled by velocity^1.3.
   recipes:
-    - name: "Nylon guitar"
-      set: {brightness: 0.6, pick_pos: 0.25, pick_tone: 3000, body: 0.8}
-      listen: "A dull loop, a soft pluck and a strong body give a warm classical-guitar tone that darkens quickly."
-    - name: "Twangy bridge pick"
-      set: {pick_pos: 0.05, pick_tone: 12000, brightness: 0.9}
-      listen: "Plucking near the bridge with a bright pick keeps all the high harmonics: thin, twangy, steel-string."
-    - name: "Harp or koto"
-      set: {t60: 8, body: 0.1, pick_pos: 0.35}
-      listen: "Long ring and almost no body: a bare string that sustains, like a harp."
-    - name: "Palm mute"
-      set: {t60: 0.4, brightness: 0.55, body: 0.6}
-      listen: "A very short, dull ring sounds like a hand resting on the strings near the bridge."
-    - name: "Hollow middle pluck"
-      set: {pick_pos: 0.5}
-      listen: "Plucking at the exact middle removes every even harmonic, which sounds hollow and soft."
-  try_next: "Compare with `pluck`, which fakes the same darkening with a filter envelope, and listen for how the physical string keeps changing colour as it fades."
-
+  - name: Nylon guitar
+    set: {brightness: 0.6, pick_pos: 0.25, pick_tone: 3000, body: 0.8}
+    listen: A dull loop, a soft pluck and a strong body give a warm classical-guitar tone that darkens quickly.
+  - name: Twangy bridge pick
+    set: {pick_pos: 0.05, pick_tone: 12000, brightness: 0.9}
+    listen: 'Plucking near the bridge with a bright pick keeps all the high harmonics: thin, twangy, steel-string.'
+  - name: Harp or koto
+    set: {t60: 8, body: 0.1, pick_pos: 0.35}
+    listen: 'Long ring and almost no body: a bare string that sustains, like a harp.'
+  - name: Palm mute
+    set: {t60: 0.4, brightness: 0.55, body: 0.6}
+    listen: A very short, dull ring sounds like a hand resting on the strings near the bridge.
+  - name: Hollow middle pluck
+    set: {pick_pos: 0.5}
+    listen: Plucking at the exact middle removes every even harmonic, which sounds hollow and soft.
+  try_next: Compare with `pluck`, which fakes the same darkening with a filter envelope, and listen for how the physical
+    string keeps changing colour as it fades.
 keys:
-  title: "Modal piano"
+  title: Modal piano
   family: keys
-  ancestor: "The acoustic grand piano, built by modal (additive) synthesis: each string partial is a decaying sine at its real, slightly stretched frequency. It captures stiffness, hammer position, two-stage decay and string beating, but has no soundboard, sustain pedal or sympathetic resonance yet, so it sounds like a clean, intimate piano rather than a recorded one."
-  summary: "A piano note built from up to 48 sine partials, each slightly sharp like a real stiff string, each decaying at its own rate, doubled on two slightly detuned strings. How hard you hit decides how bright the note is."
-  how: "For partials k = 1 to `partials`, place each at k x f0 x sqrt(1 + B x k^2), where B is `inharm`. Give partial k the level k^-tilt (tilt falls as the hammer gets harder) times |sin(pi x k x `hammer_pos`)|. Let it decay in two stages: a fast part (a quarter of its decay time) and a slower `aftersound` part; higher partials decay faster and the whole note decays more slowly in the bass (`t60` halves every 18 semitones up). Play each partial on two strings detuned by `unison` cents, add a short band-passed noise `thump`, damp at note-off over `release`, normalise and pan by pitch with `spread`."
-  why: "Piano strings are stiff steel, so their overtones are not exact multiples of the fundamental but slightly sharp; that stretch (about 34 cents at partial 10 with the default B) is part of the piano's character. A hammer striking at a fraction of the string cannot excite the harmonics that have a node there, which shapes the tone. A hard felt hammer touches the string briefly and excites more high partials, which is why loud piano notes are brighter, not just louder. The quick first decay and the long 'aftersound' come from the string's energy moving between vertical and horizontal vibration, and the two slightly detuned strings beat gently, which makes the note shimmer."
+  ancestor: 'The acoustic grand piano, built by modal (additive) synthesis: each string partial is a decaying sine at its
+    real, slightly stretched frequency. It captures stiffness, hammer position, two-stage decay and string beating, but
+    has no soundboard, sustain pedal or sympathetic resonance yet, so it sounds like a clean, intimate piano rather than
+    a recorded one.'
+  summary: A piano note built from up to 48 sine partials, each slightly sharp like a real stiff string, each decaying at
+    its own rate, doubled on two slightly detuned strings. How hard you hit decides how bright the note is.
+  how: 'For partials k = 1 to `partials`, place each at k x f0 x sqrt(1 + B x k^2), where B is `inharm`. Give partial k
+    the level k^-tilt (tilt falls as the hammer gets harder) times |sin(pi x k x `hammer_pos`)|. Let it decay in two stages:
+    a fast part (a quarter of its decay time) and a slower `aftersound` part; higher partials decay faster and the whole
+    note decays more slowly in the bass (`t60` halves every 18 semitones up). Play each partial on two strings detuned by
+    `unison` cents, add a short band-passed noise `thump`, damp at note-off over `release`, normalise and pan by pitch with
+    `spread`.'
+  why: Piano strings are stiff steel, so their overtones are not exact multiples of the fundamental but slightly sharp;
+    that stretch (about 34 cents at partial 10 with the default B) is part of the piano's character. A hammer striking at
+    a fraction of the string cannot excite the harmonics that have a node there, which shapes the tone. A hard felt hammer
+    touches the string briefly and excites more high partials, which is why loud piano notes are brighter, not just louder.
+    The quick first decay and the long 'aftersound' come from the string's energy moving between vertical and horizontal
+    vibration, and the two slightly detuned strings beat gently, which makes the note shimmer.
   chain:
-    - id: hammer
-      label: "Hammer"
-      kind: filter
-      what: "Sets spectral tilt from `hardness` plus velocity, and notches partials at the strike point `hammer_pos`."
-      params: [hardness, hammer_pos, vel_hard]
-      to: [partials]
-    - id: partials
-      label: "Stiff-string partials"
-      kind: modal
-      what: "Up to `partials` sines at k x f0 x sqrt(1 + B k^2), each with a two-stage decay set by `t60` and `aftersound`; works at any float pitch."
-      params: [partials, inharm, t60, aftersound]
-      to: [strings]
-    - id: strings
-      label: "Two strings"
-      kind: mix
-      what: "Each partial plays twice, detuned by +/- `unison`/2 cents, with random phases on every note."
-      params: [unison, rr]
-      to: [mix]
-    - id: thump
-      label: "Hammer thump"
-      kind: noise
-      what: "Noise band-passed at 300 + 600 x hardness Hz, fading in 40 ms, scaled by `thump` and velocity."
-      params: [thump]
-      to: [mix]
-    - id: mix
-      label: "Damper + level"
-      kind: amp
-      what: "Damps at note-off over `release`, normalises the peak and applies velocity^vel_curve."
-      params: [release, vel_curve]
-      to: [pan]
-    - id: pan
-      label: "Keyboard pan"
-      kind: fx
-      what: "Pans low notes left and high notes right, like sitting at the keyboard; `spread` sets how far."
-      params: [spread]
-      to: [out]
+  - id: hammer
+    label: Hammer
+    kind: filter
+    what: Sets spectral tilt from `hardness` plus velocity, and notches partials at the strike point `hammer_pos`.
+    params: [hardness, hammer_pos, vel_hard]
+    to: [partials]
+  - id: partials
+    label: Stiff-string partials
+    kind: modal
+    what: Up to `partials` sines at k x f0 x sqrt(1 + B k^2), each with a two-stage decay set by `t60` and `aftersound`;
+      works at any float pitch.
+    params: [partials, inharm, t60, aftersound]
+    to: [strings]
+  - id: strings
+    label: Two strings
+    kind: mix
+    what: Each partial plays twice, detuned by +/- `unison`/2 cents, with random phases on every note.
+    params: [unison, rr]
+    to: [mix]
+  - id: thump
+    label: Hammer thump
+    kind: noise
+    what: Noise band-passed at 300 + 600 x hardness Hz, fading in 40 ms, scaled by `thump` and velocity.
+    params: [thump]
+    to: [mix]
+  - id: mix
+    label: Damper + level
+    kind: amp
+    what: Damps at note-off over `release`, normalises the peak and applies velocity^vel_curve.
+    params: [release, vel_curve]
+    to: [pan]
+  - id: pan
+    label: Keyboard pan
+    kind: fx
+    what: Pans low notes left and high notes right, like sitting at the keyboard; `spread` sets how far.
+    params: [spread]
+    to: [out]
   params:
-    partials:
-      says: "How many sine partials make up each note (more = more detail)."
-      up: "a fuller, more detailed top end"
-      down: "a simpler, softer, more organ-like tone"
-    inharm:
-      says: "String stiffness B: partial n sits at n x f0 x sqrt(1 + B n^2)."
-      up: "stretched overtones, toward a bell or an old upright"
-      down: "perfectly harmonic, smoother and more synthetic"
-    hardness:
-      says: "Hammer felt hardness, which sets brightness."
-      up: "a brighter, harder, more percussive piano"
-      down: "a soft, felted, mellow piano"
-    hammer_pos:
-      says: "Where along the string the hammer strikes; partial 1/pos is cancelled."
-      up: "a rounder tone with an earlier notch"
-      down: "a thinner, more complete, brighter tone"
-    t60:
-      says: "Decay time at middle C; lower notes ring longer, higher notes shorter."
-      up: "long, singing sustain"
-      down: "a short, dry, muted piano"
-    aftersound:
-      says: "Weight of the slow second decay stage (the piano's 'bloom')."
-      up: "notes hang on after the initial drop"
-      down: "notes die quickly after the attack"
-    unison:
-      says: "Detune between the two strings of each note, in cents."
-      up: "a chorused, honky-tonk shimmer"
-      down: "a pure, still tone with no beating"
-    thump:
-      says: "Level of the hammer and action noise at the attack."
-      up: "a woody, mechanical, close-miked attack"
-      down: "a clean, idealised attack"
-    release:
-      says: "How fast the damper stops the string after the key is released."
-      up: "notes ring on after release"
-      down: "a quick, dry damper"
-    spread:
-      says: "How far notes are panned by pitch (low left, high right)."
-      up: "a wide, player's-seat image"
-      down: "a centred, mono piano"
-    vel_hard:
-      says: "How much velocity changes hammer hardness."
-      up: "soft notes very mellow, loud notes very bright"
-      down: "the same colour at every dynamic"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "more dynamic range"
-      down: "even levels"
-    rr:
-      says: "Per-note variation: currently not read by this instrument's code, so it has no audible effect (each note already gets random partial phases)."
-      up: "no change on this instrument"
-      down: "no change on this instrument"
-  velocity: "Velocity changes the hammer hardness (hardness + vel_hard x (velocity - 0.7)), which flattens the spectral tilt from k^-2.4 toward k^-0.4, so loud notes have far more high partials; it also scales the thump, and gain is velocity^1.6."
+    partials: {says: How many sine partials make up each note (more = more detail)., up: 'a fuller, more detailed top end',
+      down: 'a simpler, softer, more organ-like tone'}
+    inharm: {says: 'String stiffness B: partial n sits at n x f0 x sqrt(1 + B n^2).', up: 'stretched overtones, toward a
+        bell or an old upright', down: 'perfectly harmonic, smoother and more synthetic'}
+    hardness: {says: 'Hammer felt hardness, which sets brightness.', up: 'a brighter, harder, more percussive piano', down: 'a
+        soft, felted, mellow piano'}
+    hammer_pos: {says: Where along the string the hammer strikes; partial 1/pos is cancelled., up: a rounder tone with an
+        earlier notch, down: 'a thinner, more complete, brighter tone'}
+    t60: {says: 'Decay time at middle C; lower notes ring longer, higher notes shorter.', up: 'long, singing sustain', down: 'a
+        short, dry, muted piano'}
+    aftersound: {says: Weight of the slow second decay stage (the piano's 'bloom')., up: notes hang on after the initial
+        drop, down: notes die quickly after the attack}
+    unison: {says: 'Detune between the two strings of each note, in cents.', up: 'a chorused, honky-tonk shimmer', down: 'a
+        pure, still tone with no beating'}
+    thump: {says: Level of the hammer and action noise at the attack., up: 'a woody, mechanical, close-miked attack', down: 'a
+        clean, idealised attack'}
+    release: {says: How fast the damper stops the string after the key is released., up: notes ring on after release, down: 'a
+        quick, dry damper'}
+    spread: {says: 'How far notes are panned by pitch (low left, high right).', up: 'a wide, player''s-seat image', down: 'a
+        centred, mono piano'}
+    vel_hard: {says: How much velocity changes hammer hardness., up: 'soft notes very mellow, loud notes very bright', down: the
+        same colour at every dynamic}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: more dynamic range, down: even levels}
+    rr: {says: 'Per-note variation: each strike gets a slightly different hammer hardness, decay time (8% x rr) and string
+        detune (30%), from its own seed.', up: repeated notes sound like separate strikes on a real piano, down: repeated
+        notes are identical copies}
+  velocity: Velocity changes the hammer hardness (hardness + vel_hard x (velocity - 0.7)), which flattens the spectral tilt
+    from k^-2.4 toward k^-0.4, so loud notes have far more high partials; it also scales the thump, and gain is velocity^1.6.
   recipes:
-    - name: "Felt piano"
-      set: {hardness: 0.15, thump: 0.3, t60: 4}
-      listen: "A soft hammer kills the upper partials and the thump gets more noticeable: the intimate 'felt piano' sound."
-    - name: "Bright honky-tonk"
-      set: {hardness: 0.9, unison: 4, inharm: 0.001}
-      listen: "A hard hammer, stiff strings and two strings 4 cents apart beat audibly, like an old bar-room upright."
-    - name: "Bell-like stiff strings"
-      set: {inharm: 0.003, aftersound: 0.7, t60: 12}
-      listen: "Very stiff strings stretch the overtones far enough that the tone starts to sound like a bell."
-    - name: "Pure modal tone"
-      set: {unison: 0, thump: 0, inharm: 0}
-      listen: "No beating, no noise, exact harmonics: a clean, still tone for hearing microtonal (36-EDO) chords."
-    - name: "Strike near the end"
-      set: {hammer_pos: 0.05}
-      listen: "Striking very close to the end of the string keeps almost every partial, so the tone gets thinner and brighter."
-  try_next: "Compare with `epiano`, which gets its brightness from FM instead of from adding partials."
-
+  - name: Felt piano
+    set: {hardness: 0.15, thump: 0.3, t60: 4}
+    listen: 'A soft hammer kills the upper partials and the thump gets more noticeable: the intimate ''felt piano'' sound.'
+  - name: Bright honky-tonk
+    set: {hardness: 0.9, unison: 4, inharm: 0.001}
+    listen: A hard hammer, stiff strings and two strings 4 cents apart beat audibly, like an old bar-room upright.
+  - name: Bell-like stiff strings
+    set: {inharm: 0.003, aftersound: 0.7, t60: 12}
+    listen: Very stiff strings stretch the overtones far enough that the tone starts to sound like a bell.
+  - name: Pure modal tone
+    set: {unison: 0, thump: 0, inharm: 0}
+    listen: 'No beating, no noise, exact harmonics: a clean, still tone for hearing microtonal (36-EDO) chords.'
+  - name: Strike near the end
+    set: {hammer_pos: 0.05}
+    listen: Striking very close to the end of the string keeps almost every partial, so the tone gets thinner and brighter.
+  try_next: Compare with `epiano`, which gets its brightness from FM instead of from adding partials.
 epiano:
-  title: "FM electric piano"
+  title: FM electric piano
   family: keys
-  ancestor: "The tine electric piano family: the Fender Rhodes and its famous Yamaha DX7 imitation (E.PIANO 1), which this follows closely: a 1:1 FM pair plus a high 14:1 operator for the metallic attack. Two operators only, so it is the DX7 idea in miniature."
-  summary: "One sine wave bends the phase of another sine at the same frequency; the harder you play, the more it bends, and the brighter and more 'barky' the note gets. A brief high ping at 14 times the pitch adds the metal tine strike."
-  how: "Make a carrier sine at the note frequency. Modulate its phase with a second sine at the same frequency, scaled by an index that starts at `index` plus extra for velocity above 0.5 (`vel_index`) and decays with time constant `index_decay`. Add a modulator at 14 x the frequency, scaled by `tine` x velocity and gone within about 20 ms. Fade the note over `t60` (shorter for higher notes, halving every 24 semitones), damp it over `release`, then auto-pan it with a sine at `trem_rate` and depth `trem_depth`."
-  why: "Phase modulation at a 1:1 ratio adds harmonics of the note itself; the bigger the index, the more harmonics, so a decaying index makes a bright attack that mellows, much like a struck tine. Tying the index to velocity is the 'bark' that makes a Rhodes respond to touch. The 14:1 operator adds inharmonic, bell-like partials for a few milliseconds, which the ear reads as metal being struck. The stereo tremolo is the Rhodes Suitcase auto-pan."
+  ancestor: 'The tine electric piano family: the Fender Rhodes and its famous Yamaha DX7 imitation (E.PIANO 1), which this
+    follows closely: a 1:1 FM pair plus a high 14:1 operator for the metallic attack. Two operators only, so it is the DX7
+    idea in miniature.'
+  summary: One sine wave bends the phase of another sine at the same frequency; the harder you play, the more it bends,
+    and the brighter and more 'barky' the note gets. A brief high ping at 14 times the pitch adds the metal tine strike.
+  how: Make a carrier sine at the note frequency. Modulate its phase with a second sine at the same frequency, scaled by
+    an index that starts at `index` plus extra for velocity above 0.5 (`vel_index`) and decays with time constant `index_decay`.
+    Add a modulator at 14 x the frequency, scaled by `tine` x velocity and gone within about 20 ms. Fade the note over `t60`
+    (shorter for higher notes, halving every 24 semitones), damp it over `release`, then auto-pan it with a sine at `trem_rate`
+    and depth `trem_depth`.
+  why: Phase modulation at a 1:1 ratio adds harmonics of the note itself; the bigger the index, the more harmonics, so a
+    decaying index makes a bright attack that mellows, much like a struck tine. Tying the index to velocity is the 'bark'
+    that makes a Rhodes respond to touch. The 14:1 operator adds inharmonic, bell-like partials for a few milliseconds,
+    which the ear reads as metal being struck. The stereo tremolo is the Rhodes Suitcase auto-pan.
   chain:
-    - id: index
-      label: "Index envelope"
-      kind: env
-      what: "FM depth = (index + vel_index x max(velocity - 0.5, 0)), decaying with time constant `index_decay`."
-      params: [index, index_decay, vel_index]
-      to: [mod]
-    - id: mod
-      label: "1:1 modulator"
-      kind: osc
-      what: "A sine at the note frequency that bends the carrier's phase."
-      params: []
-      to: [carrier]
-    - id: tine
-      label: "14:1 tine"
-      kind: osc
-      what: "A sine at 14 x the frequency, scaled by `tine` x velocity, fading in about 20 ms: the metallic strike."
-      params: [tine]
-      to: [carrier]
-    - id: carrier
-      label: "Carrier"
-      kind: osc
-      what: "The audible sine, phase-modulated by both modulators, at any float pitch; random start phase per note."
-      params: [rr]
-      to: [amp]
-    - id: amp
-      label: "Decay + level"
-      kind: amp
-      what: "A t60 fade (shorter for higher notes), the release damper, and velocity^vel_curve."
-      params: [t60, release, vel_curve]
-      to: [trem]
-    - id: trem
-      label: "Auto-pan"
-      kind: fx
-      what: "Sweeps the note between left and right at `trem_rate` with depth `trem_depth`."
-      params: [trem_rate, trem_depth]
-      to: [out]
+  - id: index
+    label: Index envelope
+    kind: env
+    what: FM depth = (index + vel_index x max(velocity - 0.5, 0)), decaying with time constant `index_decay`.
+    params: [index, index_decay, vel_index]
+    to: [mod]
+  - id: mod
+    label: 1:1 modulator
+    kind: osc
+    what: A sine at the note frequency that bends the carrier's phase.
+    params: []
+    to: [carrier]
+  - id: tine
+    label: 14:1 tine
+    kind: osc
+    what: 'A sine at 14 x the frequency, scaled by `tine` x velocity, fading in about 20 ms: the metallic strike.'
+    params: [tine]
+    to: [carrier]
+  - id: carrier
+    label: Carrier
+    kind: osc
+    what: The audible sine, phase-modulated by both modulators, at any float pitch; random start phase per note.
+    params: [rr]
+    to: [amp]
+  - id: amp
+    label: Decay + level
+    kind: amp
+    what: A t60 fade (shorter for higher notes), the release damper, and velocity^vel_curve.
+    params: [t60, release, vel_curve]
+    to: [trem]
+  - id: trem
+    label: Auto-pan
+    kind: fx
+    what: Sweeps the note between left and right at `trem_rate` with depth `trem_depth`.
+    params: [trem_rate, trem_depth]
+    to: [out]
   params:
-    index:
-      says: "FM depth at medium velocity: how bright the tone is."
-      up: "brighter, more DX7 'glassy', then harsh"
-      down: "a soft, almost pure sine"
-    index_decay:
-      says: "How fast the brightness fades after the attack (time constant)."
-      up: "notes stay bright, like a bell"
-      down: "a quick bright attack, then mellow"
-    tine:
-      says: "Level of the 14:1 metallic attack ping."
-      up: "a clear metal 'ding' on each note"
-      down: "a soft, rounded attack"
-    t60:
-      says: "Decay time at middle C (higher notes decay faster)."
-      up: "long sustaining notes"
-      down: "short, plucky notes"
-    release:
-      says: "Fade after the key is released."
-      up: "notes ring past their length"
-      down: "a quick damper"
-    trem_rate:
-      says: "Speed of the stereo auto-pan, in Hz."
-      up: "a fast, swirling pan"
-      down: "a slow left-right drift"
-    trem_depth:
-      says: "Depth of the stereo auto-pan (0 = centred)."
-      up: "a strong, obvious ping-pong"
-      down: "a still, centred piano"
-    vel_index:
-      says: "Extra FM depth for velocity above 0.5: the 'bark'."
-      up: "hard hits growl and bark"
-      down: "the same brightness at every velocity"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "more dynamic range"
-      down: "even levels"
-    rr:
-      says: "Per-note variation: currently not read by this instrument's code, so it has no audible effect (each note already gets a random phase and pan position)."
-      up: "no change on this instrument"
-      down: "no change on this instrument"
-  velocity: "Above velocity 0.5 the FM index grows by `vel_index` per unit, so hard notes bark and get brighter, and the 14:1 tine ping is scaled by velocity; gain is velocity^1.5. Below 0.5 only the level changes."
+    index: {says: 'FM depth at medium velocity: how bright the tone is.', up: 'brighter, more DX7 ''glassy'', then harsh',
+      down: 'a soft, almost pure sine'}
+    index_decay: {says: How fast the brightness fades after the attack (time constant)., up: 'notes stay bright, like a
+        bell', down: 'a quick bright attack, then mellow'}
+    tine: {says: 'Level of the 14:1 metallic attack ping.', up: a clear metal 'ding' on each note, down: 'a soft, rounded
+        attack'}
+    t60: {says: Decay time at middle C (higher notes decay faster)., up: long sustaining notes, down: 'short, plucky notes'}
+    release: {says: Fade after the key is released., up: notes ring past their length, down: a quick damper}
+    trem_rate: {says: 'Speed of the stereo auto-pan, in Hz.', up: 'a fast, swirling pan', down: a slow left-right drift}
+    trem_depth: {says: Depth of the stereo auto-pan (0 = centred)., up: 'a strong, obvious ping-pong', down: 'a still, centred
+        piano'}
+    vel_index: {says: 'Extra FM depth for velocity above 0.5: the ''bark''.', up: hard hits growl and bark, down: the same
+        brightness at every velocity}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: more dynamic range, down: even levels}
+    rr: {says: 'Per-note variation: each note gets a slightly different FM brightness (15% x rr), tine ping (30%) and decay
+        (8%), from its own seed.', up: 'repeated notes bark a little differently, like real tines', down: repeated notes
+        are identical copies}
+  velocity: Above velocity 0.5 the FM index grows by `vel_index` per unit, so hard notes bark and get brighter, and the
+    14:1 tine ping is scaled by velocity; gain is velocity^1.5. Below 0.5 only the level changes.
   recipes:
-    - name: "Soft ballad Rhodes"
-      set: {index: 0.6, tine: 0.15, vel_index: 1.5}
-      listen: "Low FM depth gives a round, warm tone that only brightens a little when you dig in."
-    - name: "Barky DX7"
-      set: {index: 2.5, vel_index: 5, tine: 0.6}
-      listen: "Loud notes add a lot of FM depth: a bright, growling bark and a clear metal ding."
-    - name: "Fast auto-pan"
-      set: {trem_rate: 7, trem_depth: 0.8}
-      listen: "The note swirls between the speakers; best heard on headphones."
-    - name: "Bell keys"
-      set: {index: 4, index_decay: 2.5, t60: 10}
-      listen: "When the brightness lasts as long as the note, the FM partials ring like a bell or vibraphone."
-    - name: "Dry and centred"
-      set: {trem_depth: 0, index: 1.0}
-      listen: "No auto-pan: a steady, centred tone that is easier to place in a mix (this is close to `epiano/still`)."
-  try_next: "Set `index` to 0 and `tine` to 0: you are left with a pure decaying sine, which shows that all of the colour comes from FM."
-
+  - name: Soft ballad Rhodes
+    set: {index: 0.6, tine: 0.15, vel_index: 1.5}
+    listen: Low FM depth gives a round, warm tone that only brightens a little when you dig in.
+  - name: Barky DX7
+    set: {index: 2.5, vel_index: 5, tine: 0.6}
+    listen: 'Loud notes add a lot of FM depth: a bright, growling bark and a clear metal ding.'
+  - name: Fast auto-pan
+    set: {trem_rate: 7, trem_depth: 0.8}
+    listen: The note swirls between the speakers; best heard on headphones.
+  - name: Bell keys
+    set: {index: 4, index_decay: 2.5, t60: 10}
+    listen: When the brightness lasts as long as the note, the FM partials ring like a bell or vibraphone.
+  - name: Dry and centred
+    set: {trem_depth: 0, index: 1.0}
+    listen: 'No auto-pan: a steady, centred tone that is easier to place in a mix (this is close to `epiano/still`).'
+  try_next: 'Set `index` to 0 and `tine` to 0: you are left with a pure decaying sine, which shows that all of the colour
+    comes from FM.'
 organ:
-  title: "Tonewheel organ"
+  title: Tonewheel organ
   family: keys
-  ancestor: "The Hammond B-3 drawbar organ through a Leslie rotating speaker. The nine drawbars use the Hammond footages and the same 0-8 scale; simplifications: levels are linear (db/8), there is no tonewheel foldback or crosstalk, the percussion fires on every note, and the Leslie is one rotor instead of a horn and a drum."
-  summary: "Nine pure sine waves at fixed harmonic ratios, mixed by drawbars from 0 to 8, plus a key click, an optional percussion ping, and a rotating-speaker effect. Like a real organ, it ignores velocity."
-  how: "For each drawbar, play a sine at the note frequency times its ratio (16' = 0.5, 5 1/3' = 1.5, 8' = 1, 4' = 2, 2 2/3' = 3, 2' = 4, 1 3/5' = 5, 1 1/3' = 6, 1' = 8), at level drawbar/8. Optionally add a sine at 2 x the frequency fading in 0.5 s (`perc`), and a 6 ms burst of noise band-passed at 2.5 kHz (`click`). Start in 3 ms and stop over `release`. For the rotary speaker, shift the sound back and forth in time by up to 12 samples and modulate the left and right levels in opposite directions, both at `rotor` Hz."
-  why: "Each drawbar adds one harmonic, so the drawbar settings literally draw the spectrum; that is additive synthesis by hand, and why '888000000' sounds round and '888888888' sounds full and bright. Organ notes do not decay, so the sound holds as long as the key is down. The key click is the electrical contact closing, and real players love it. The Leslie's moving speaker raises and lowers the pitch slightly (Doppler) and sweeps the sound around the room, which turns a static tone into a moving, singing one."
+  ancestor: 'The Hammond B-3 drawbar organ through a Leslie rotating speaker. The nine drawbars use the Hammond footages
+    and the same 0-8 scale; simplifications: levels are linear (db/8), there is no tonewheel foldback or crosstalk, the
+    percussion fires on every note, and the Leslie is one rotor instead of a horn and a drum.'
+  summary: Nine pure sine waves at fixed harmonic ratios, mixed by drawbars from 0 to 8, plus a key click, an optional percussion
+    ping, and a rotating-speaker effect. Like a real organ, it ignores velocity.
+  how: For each drawbar, play a sine at the note frequency times its ratio (16' = 0.5, 5 1/3' = 1.5, 8' = 1, 4' = 2, 2 2/3'
+    = 3, 2' = 4, 1 3/5' = 5, 1 1/3' = 6, 1' = 8), at level drawbar/8. Optionally add a sine at 2 x the frequency fading
+    in 0.5 s (`perc`), and a 6 ms burst of noise band-passed at 2.5 kHz (`click`). Start in 3 ms and stop over `release`.
+    For the rotary speaker, shift the sound back and forth in time by up to 12 samples and modulate the left and right levels
+    in opposite directions, both at `rotor` Hz.
+  why: Each drawbar adds one harmonic, so the drawbar settings literally draw the spectrum; that is additive synthesis by
+    hand, and why '888000000' sounds round and '888888888' sounds full and bright. Organ notes do not decay, so the sound
+    holds as long as the key is down. The key click is the electrical contact closing, and real players love it. The Leslie's
+    moving speaker raises and lowers the pitch slightly (Doppler) and sweeps the sound around the room, which turns a static
+    tone into a moving, singing one.
   chain:
-    - id: drawbars
-      label: "Nine drawbars"
-      kind: osc
-      what: "Sines at 0.5, 1.5, 1, 2, 3, 4, 5, 6 and 8 x the note frequency, each at drawbar/8; any float pitch."
-      params: [db1, db2, db3, db4, db5, db6, db7, db8, db9]
-      to: [mix]
-    - id: perc
-      label: "Percussion"
-      kind: osc
-      what: "A sine at the 2nd harmonic that fades in 0.5 s (t60), scaled by `perc`."
-      params: [perc]
-      to: [mix]
-    - id: click
-      label: "Key click"
-      kind: noise
-      what: "Noise band-passed at 2.5 kHz, gone in 6 ms."
-      params: [click]
-      to: [mix]
-    - id: mix
-      label: "Gate + level"
-      kind: amp
-      what: "A 3 ms start and a `release` stop; `vel_curve` defaults to 0, so velocity does not change the level."
-      params: [release, vel_curve]
-      to: [rotor]
-    - id: rotor
-      label: "Rotary speaker"
-      kind: fx
-      what: "Doppler (a moving 12-sample time shift) plus opposite left/right level swings, at `rotor` Hz; 0 turns it off."
-      params: [rotor]
-      to: [out]
+  - id: drawbars
+    label: Nine drawbars
+    kind: osc
+    what: Sines at 0.5, 1.5, 1, 2, 3, 4, 5, 6 and 8 x the note frequency, each at drawbar/8; any float pitch.
+    params: [db1, db2, db3, db4, db5, db6, db7, db8, db9]
+    to: [mix]
+  - id: perc
+    label: Percussion
+    kind: osc
+    what: A sine at the 2nd harmonic that fades in 0.5 s (t60), scaled by `perc`.
+    params: [perc]
+    to: [mix]
+  - id: click
+    label: Key click
+    kind: noise
+    what: Noise band-passed at 2.5 kHz, gone in 6 ms.
+    params: [click]
+    to: [mix]
+  - id: mix
+    label: Gate + level
+    kind: amp
+    what: A 3 ms start and a `release` stop; `vel_curve` defaults to 0, so velocity does not change the level.
+    params: [release, vel_curve]
+    to: [rotor]
+  - id: rotor
+    label: Rotary speaker
+    kind: fx
+    what: Doppler (a moving 12-sample time shift) plus opposite left/right level swings, at `rotor` Hz; 0 turns it off.
+    params: [rotor]
+    to: [out]
   params:
-    db1:
-      says: "16' drawbar: a sine one octave below the note."
-      up: "a deep, heavy foundation"
-      down: "a lighter organ"
-    db2:
-      says: "5 1/3' drawbar: a sine a fifth above the note (1.5 x)."
-      up: "a hollow, horn-like quint colour"
-      down: "a plainer tone"
-    db3:
-      says: "8' drawbar: the note's own pitch (the fundamental)."
-      up: "a solid, centred pitch"
-      down: "the pitch seems to float between other drawbars"
-    db4:
-      says: "4' drawbar: one octave above (2 x)."
-      up: "brighter and clearer"
-      down: "darker"
-    db5:
-      says: "2 2/3' drawbar: an octave and a fifth above (3 x)."
-      up: "a reedy, nasal colour"
-      down: "a rounder tone"
-    db6:
-      says: "2' drawbar: two octaves above (4 x)."
-      up: "sparkle and edge"
-      down: "softer top"
-    db7:
-      says: "1 3/5' drawbar: two octaves and a major third above (5 x)."
-      up: "a buzzy, reed-like bite"
-      down: "a smoother top"
-    db8:
-      says: "1 1/3' drawbar: two octaves and a fifth above (6 x)."
-      up: "more brilliance and grit"
-      down: "a softer top"
-    db9:
-      says: "1' drawbar: three octaves above (8 x)."
-      up: "a whistling, glassy shimmer"
-      down: "no top shimmer"
-    perc:
-      says: "Level of a decaying 2nd-harmonic ping at the start of each note."
-      up: "a percussive, jazzy attack"
-      down: "a smooth, pad-like start"
-    click:
-      says: "Level of the key-contact click."
-      up: "a vintage, mechanical attack"
-      down: "a clean, soft attack"
-    rotor:
-      says: "Rotary speaker speed in Hz: 0 off, about 0.7 slow 'chorale', 6.5 fast 'tremolo'."
-      up: "a fast, warbling Leslie"
-      down: "a slow swirl, then a dry static organ at 0"
-    release:
-      says: "How quickly the sound stops after the key is released."
-      up: "a soft fade, a hint of room"
-      down: "an instant stop"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power; the default 0 makes the organ velocity-blind."
-      up: "notes respond to velocity, unlike a real organ"
-      down: "even levels (only the default 0 is fully velocity-blind; the knob's minimum is 0.3)"
-  velocity: "None, on purpose: real organs are velocity-blind, and the default `vel_curve` of 0 makes gain = velocity^0 = 1. Dynamics on an organ come from drawbars and the expression pedal (part gain or automation), not touch."
+    db1: {says: '16'' drawbar: a sine one octave below the note.', up: 'a deep, heavy foundation', down: a lighter organ}
+    db2: {says: '5 1/3'' drawbar: a sine a fifth above the note (1.5 x).', up: 'a hollow, horn-like quint colour', down: a
+        plainer tone}
+    db3: {says: '8'' drawbar: the note''s own pitch (the fundamental).', up: 'a solid, centred pitch', down: the pitch seems
+        to float between other drawbars}
+    db4: {says: '4'' drawbar: one octave above (2 x).', up: brighter and clearer, down: darker}
+    db5: {says: '2 2/3'' drawbar: an octave and a fifth above (3 x).', up: 'a reedy, nasal colour', down: a rounder tone}
+    db6: {says: '2'' drawbar: two octaves above (4 x).', up: sparkle and edge, down: softer top}
+    db7: {says: '1 3/5'' drawbar: two octaves and a major third above (5 x).', up: 'a buzzy, reed-like bite', down: a smoother
+        top}
+    db8: {says: '1 1/3'' drawbar: two octaves and a fifth above (6 x).', up: more brilliance and grit, down: a softer top}
+    db9: {says: '1'' drawbar: three octaves above (8 x).', up: 'a whistling, glassy shimmer', down: no top shimmer}
+    perc: {says: Level of a decaying 2nd-harmonic ping at the start of each note., up: 'a percussive, jazzy attack', down: 'a
+        smooth, pad-like start'}
+    click: {says: Level of the key-contact click., up: 'a vintage, mechanical attack', down: 'a clean, soft attack'}
+    rotor: {says: 'Rotary speaker speed in Hz: 0 off, about 0.7 slow ''chorale'', 6.5 fast ''tremolo''.', up: 'a fast, warbling
+        Leslie', down: 'a slow swirl, then a dry static organ at 0'}
+    release: {says: How quickly the sound stops after the key is released., up: 'a soft fade, a hint of room', down: an
+        instant stop}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power; the default 0 makes the organ velocity-blind.', up: 'notes
+        respond to velocity, unlike a real organ', down: even levels (only the default 0 is fully velocity-blind; the knob's
+        minimum is 0.3)}
+  velocity: 'None, on purpose: real organs are velocity-blind, and the default `vel_curve` of 0 makes gain = velocity^0
+    = 1. Dynamics on an organ come from drawbars and the expression pedal (part gain or automation), not touch.'
   recipes:
-    - name: "Jazz organ with percussion"
-      set: {db1: 8, db2: 8, db3: 8, db4: 0, perc: 0.6, click: 0.5}
-      listen: "'888000000' plus a percussion ping and click: the classic jazz organ attack over a round body."
-    - name: "Full gospel, fast Leslie"
-      set: {db1: 8, db2: 8, db3: 8, db4: 8, db5: 8, db6: 8, db7: 8, db8: 8, db9: 8, rotor: 6.5}
-      listen: "Every drawbar out and the rotor spinning fast: a huge, bright, warbling sound."
-    - name: "Soft flute stop"
-      set: {db1: 0, db2: 0, db3: 8, db4: 4}
-      listen: "Just the fundamental and its octave: a soft, flute-like organ voice."
-    - name: "Hollow quint"
-      set: {db1: 0, db2: 8, db3: 4}
-      listen: "A strong fifth above a weaker fundamental sounds hollow and horn-like; the pitch even seems to shift."
-    - name: "Static, no Leslie"
-      set: {rotor: 0, click: 0}
-      listen: "Without the rotor the organ becomes still and electronic; hear how much life the Leslie added."
-  try_next: "Compare with `clean`, which is also additive sines, but with a rolloff instead of drawbars and no click or rotor."
-
+  - name: Jazz organ with percussion
+    set: {db1: 8, db2: 8, db3: 8, db4: 0, perc: 0.6, click: 0.5}
+    listen: '''888000000'' plus a percussion ping and click: the classic jazz organ attack over a round body.'
+  - name: Full gospel, fast Leslie
+    set: {db1: 8, db2: 8, db3: 8, db4: 8, db5: 8, db6: 8, db7: 8, db8: 8, db9: 8, rotor: 6.5}
+    listen: 'Every drawbar out and the rotor spinning fast: a huge, bright, warbling sound.'
+  - name: Soft flute stop
+    set: {db1: 0, db2: 0, db3: 8, db4: 4}
+    listen: 'Just the fundamental and its octave: a soft, flute-like organ voice.'
+  - name: Hollow quint
+    set: {db1: 0, db2: 8, db3: 4}
+    listen: A strong fifth above a weaker fundamental sounds hollow and horn-like; the pitch even seems to shift.
+  - name: Static, no Leslie
+    set: {rotor: 0, click: 0}
+    listen: Without the rotor the organ becomes still and electronic; hear how much life the Leslie added.
+  try_next: Compare with `clean`, which is also additive sines, but with a rolloff instead of drawbars and no click or rotor.
 clean:
-  title: "Clean additive tone"
+  title: Clean additive tone
   family: keys
-  ancestor: "No acoustic ancestor: it is a lab instrument, the additive (Fourier) synthesis of the tuning-fork and sine-generator tradition. It exists so you can hear tunings, overtones and beats with nothing else in the way, including the golden 2^m x phi^n spectrum."
-  summary: "A sum of exact sine partials with fixed, deterministic phases and click-free envelopes, with no vibrato, detune, noise, filter or saturation. Any beating you hear between chord tones comes only from the tuning, which makes it the reference instrument for 36-EDO and golden harmony."
-  how: "Pick the partial ratios with `spectrum`: harmonic (1, 2, 3...), golden (sorted values of 2^m x phi^n), or odd (1, 3, 5...). Keep the first `partials` of them. Give partial k the level k^-rolloff (and multiply even ones by `even` in the harmonic spectrum), with Schroeder phases so the peak stays low. Optionally let each partial decay, with higher ones faster (`decay`, `damp`). Normalise, apply a raised-cosine `attack` and `release`, and place it in stereo with `pan`."
-  why: "Every pitched sound is a set of sine partials; changing only their number and levels already moves the timbre from a pure flute-like sine to a buzzy saw-like tone. Odd-only harmonics sound hollow, like a clarinet, because the even ones that fill in the octaves are missing. When partials of two notes fall close together they beat; with harmonic partials, just intervals line up and sound smooth, and with the golden spectrum, golden-ratio intervals line up instead. Raised-cosine envelopes avoid clicks, so nothing but the partials reaches your ear."
+  ancestor: 'No acoustic ancestor: it is a lab instrument, the additive (Fourier) synthesis of the tuning-fork and sine-generator
+    tradition. It exists so you can hear tunings, overtones and beats with nothing else in the way, including the golden
+    2^m x phi^n spectrum.'
+  summary: A sum of exact sine partials with fixed, deterministic phases and click-free envelopes, with no vibrato, detune,
+    noise, filter or saturation. Any beating you hear between chord tones comes only from the tuning, which makes it the
+    reference instrument for 36-EDO and golden harmony.
+  how: 'Pick the partial ratios with `spectrum`: harmonic (1, 2, 3...), golden (sorted values of 2^m x phi^n), or odd (1,
+    3, 5...). Keep the first `partials` of them. Give partial k the level k^-rolloff (and multiply even ones by `even` in
+    the harmonic spectrum), with Schroeder phases so the peak stays low. Optionally let each partial decay, with higher
+    ones faster (`decay`, `damp`). Normalise, apply a raised-cosine `attack` and `release`, and place it in stereo with
+    `pan`.'
+  why: Every pitched sound is a set of sine partials; changing only their number and levels already moves the timbre from
+    a pure flute-like sine to a buzzy saw-like tone. Odd-only harmonics sound hollow, like a clarinet, because the even
+    ones that fill in the octaves are missing. When partials of two notes fall close together they beat; with harmonic partials,
+    just intervals line up and sound smooth, and with the golden spectrum, golden-ratio intervals line up instead. Raised-cosine
+    envelopes avoid clicks, so nothing but the partials reaches your ear.
   chain:
-    - id: spectrum
-      label: "Partial ratios"
-      kind: osc
-      what: "Chooses the frequency ratios: 0 harmonic, 1 golden (2^m x phi^n), 2 odd; `partials` of them, at any float pitch."
-      params: [spectrum, partials]
-      to: [levels]
-    - id: levels
-      label: "Partial levels"
-      kind: modal
-      what: "Partial k at k^-rolloff (even harmonics x `even` in the harmonic spectrum), each optionally decaying over decay / (1 + damp (k-1))."
-      params: [rolloff, even, decay, damp, vel_bright]
-      to: [env]
-    - id: env
-      label: "Raised-cosine envelope"
-      kind: env
-      what: "A click-free cosine fade-in and fade-out around the gate."
-      params: [attack, release]
-      to: [amp]
-    - id: amp
-      label: "Level + pan"
-      kind: amp
-      what: "Gain = velocity^vel_curve, then a constant-power pan."
-      params: [vel_curve, pan]
-      to: [out]
+  - id: spectrum
+    label: Partial ratios
+    kind: osc
+    what: 'Chooses the frequency ratios: 0 harmonic, 1 golden (2^m x phi^n), 2 odd; `partials` of them, at any float pitch.'
+    params: [spectrum, partials]
+    to: [levels]
+  - id: levels
+    label: Partial levels
+    kind: modal
+    what: Partial k at k^-rolloff (even harmonics x `even` in the harmonic spectrum), each optionally decaying over decay
+      / (1 + damp (k-1)).
+    params: [rolloff, even, decay, damp, vel_bright]
+    to: [env]
+  - id: env
+    label: Raised-cosine envelope
+    kind: env
+    what: A click-free cosine fade-in and fade-out around the gate.
+    params: [attack, release]
+    to: [amp]
+  - id: amp
+    label: Level + pan
+    kind: amp
+    what: Gain = velocity^vel_curve, then a constant-power pan.
+    params: [vel_curve, pan]
+    to: [out]
   params:
-    partials:
-      says: "How many partials are summed (1 = a pure sine)."
-      up: "a richer, brighter tone"
-      down: "toward a pure sine"
-    rolloff:
-      says: "How fast partial levels fall: partial k = k^-rolloff (1 is saw-like, 2 is soft)."
-      up: "darker, softer, more flute-like"
-      down: "brighter, buzzier, more saw-like"
-    even:
-      says: "Weight of the even harmonics in the harmonic spectrum (0 = odd only, clarinet-like)."
-      up: "a full, open tone"
-      down: "a hollow, clarinet-like tone"
-    spectrum:
-      says: "Which ratios the partials use: 0 harmonic, 1 golden (2^m x phi^n), 2 odd."
-      up: "golden then odd spectra: glassy, then hollow"
-      down: "the ordinary harmonic series"
-    attack:
-      says: "Raised-cosine fade-in time."
-      up: "a slow swell"
-      down: "an instant (still click-free) start"
-    decay:
-      says: "t60 of the fundamental; 0 means the note sustains while held."
-      up: "longer ringing, struck-key or bell-like"
-      down: "at 0, a steady organ-like tone"
-    damp:
-      says: "How much faster higher partials decay: t60_k = decay / (1 + damp (k-1))."
-      up: "the tone darkens as it fades, like a struck string"
-      down: "all partials fade together, like a bell"
-    release:
-      says: "Raised-cosine fade-out after the note ends."
-      up: "a long, soft tail"
-      down: "a quick, clean stop"
-    pan:
-      says: "Static stereo position (-1 left, +1 right)."
-      up: "to the right"
-      down: "to the left"
-    vel_bright:
-      says: "How much harder notes lower the rolloff (more high partials)."
-      up: "loud notes much brighter"
-      down: "the same colour at every velocity"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "more dynamic range"
-      down: "even levels"
-  velocity: "Velocity lowers the rolloff by `vel_bright` per unit around 0.7 (rolloff - vel_bright x (velocity - 0.7)), so loud notes keep more upper partials and sound brighter; gain is velocity^1.2. There is no randomness at all, so the same note always renders the same."
+    partials: {says: How many partials are summed (1 = a pure sine)., up: 'a richer, brighter tone', down: toward a pure
+        sine}
+    rolloff: {says: 'How fast partial levels fall: partial k = k^-rolloff (1 is saw-like, 2 is soft).', up: 'darker, softer,
+        more flute-like', down: 'brighter, buzzier, more saw-like'}
+    even: {says: 'Weight of the even harmonics in the harmonic spectrum (0 = odd only, clarinet-like).', up: 'a full, open
+        tone', down: 'a hollow, clarinet-like tone'}
+    spectrum: {says: 'Which ratios the partials use: 0 harmonic, 1 golden (2^m x phi^n), 2 odd.', up: 'golden then odd spectra:
+        glassy, then hollow', down: the ordinary harmonic series}
+    attack: {says: Raised-cosine fade-in time., up: a slow swell, down: an instant (still click-free) start}
+    decay: {says: t60 of the fundamental; 0 means the note sustains while held., up: 'longer ringing, struck-key or bell-like',
+      down: 'at 0, a steady organ-like tone'}
+    damp: {says: 'How much faster higher partials decay: t60_k = decay / (1 + damp (k-1)).', up: 'the tone darkens as it
+        fades, like a struck string', down: 'all partials fade together, like a bell'}
+    release: {says: Raised-cosine fade-out after the note ends., up: 'a long, soft tail', down: 'a quick, clean stop'}
+    pan: {says: 'Static stereo position (-1 left, +1 right).', up: to the right, down: to the left}
+    vel_bright: {says: How much harder notes lower the rolloff (more high partials)., up: loud notes much brighter, down: the
+        same colour at every velocity}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: more dynamic range, down: even levels}
+  velocity: Velocity lowers the rolloff by `vel_bright` per unit around 0.7 (rolloff - vel_bright x (velocity - 0.7)), so
+    loud notes keep more upper partials and sound brighter; gain is velocity^1.2. There is no randomness at all, so the
+    same note always renders the same.
   recipes:
-    - name: "Pure sine"
-      set: {partials: 1}
-      listen: "One partial: the reference tone. Play two notes together and you can hear their beats directly."
-    - name: "Clarinet-like (odd harmonics)"
-      set: {even: 0, rolloff: 1, partials: 12}
-      listen: "Removing the even harmonics leaves a hollow, woody tone, the signature of a clarinet."
-    - name: "Golden glass"
-      set: {spectrum: 1, partials: 10, rolloff: 1.3, decay: 6, damp: 0.25}
-      listen: "Partials at 2^m x phi^n are not harmonic, so the tone sounds like glass or a bell; golden chords sound smoothest on it."
-    - name: "Struck key"
-      set: {partials: 12, rolloff: 1.5, attack: 0.004, decay: 5, damp: 0.35}
-      listen: "A fast attack and partials that fade faster the higher they are: a clean, piano-like note with nothing but tuning in it."
-    - name: "Bright buzz"
-      set: {partials: 32, rolloff: 0.5}
-      listen: "Many partials with a gentle rolloff approach a buzzy saw; compare with the pure sine to hear what 'brightness' means."
-  try_next: "Play the same chord on `clean` and on `pad`: the pad's detune adds beating that the clean tone does not have."
-
+  - name: Pure sine
+    set: {partials: 1}
+    listen: 'One partial: the reference tone. Play two notes together and you can hear their beats directly.'
+  - name: Clarinet-like (odd harmonics)
+    set: {even: 0, rolloff: 1, partials: 12}
+    listen: Removing the even harmonics leaves a hollow, woody tone, the signature of a clarinet.
+  - name: Golden glass
+    set: {spectrum: 1, partials: 10, rolloff: 1.3, decay: 6, damp: 0.25}
+    listen: Partials at 2^m x phi^n are not harmonic, so the tone sounds like glass or a bell; golden chords sound smoothest
+      on it.
+  - name: Struck key
+    set: {partials: 12, rolloff: 1.5, attack: 0.004, decay: 5, damp: 0.35}
+    listen: 'A fast attack and partials that fade faster the higher they are: a clean, piano-like note with nothing but
+      tuning in it.'
+  - name: Bright buzz
+    set: {partials: 32, rolloff: 0.5}
+    listen: Many partials with a gentle rolloff approach a buzzy saw; compare with the pure sine to hear what 'brightness'
+      means.
+  try_next: 'Play the same chord on `clean` and on `pad`: the pad''s detune adds beating that the clean tone does not have.'
 riser:
-  title: "Noise riser"
+  title: Noise riser
   family: fx
-  ancestor: "The trailer and EDM 'white-noise riser': a synth's noise generator through a band-pass filter that sweeps up into a drop. Simple and faithful to the classic build-up."
-  summary: "Filtered noise that sweeps from low to high over the whole note, with a rising sine underneath, getting louder all the way. It builds tension and stops exactly when the note ends, so place its end on the downbeat."
-  how: "Take white noise and band-pass it (Q 1.4) with a centre frequency that moves from `start` to `end` along the shape (time/length)^`curve`. Add a sine that rises three octaves, from 110 Hz to 880 Hz, over the note, at level `tone`. Fade the whole thing in with (time/length)^2 and scale by velocity. The note length is the gate; the note's pitch is ignored."
-  why: "Rising pitch and rising brightness are heard as rising energy, and the ear expects a release at the top: that expectation is the tension. A curve above 1 keeps the sweep low for most of the note and rushes at the end, which builds anticipation. Getting louder until the very last moment and then cutting off makes the following hit feel bigger by contrast."
+  ancestor: 'The trailer and EDM ''white-noise riser'': a synth''s noise generator through a band-pass filter that sweeps
+    up into a drop. Simple and faithful to the classic build-up.'
+  summary: Filtered noise that sweeps from low to high over the whole note, with a rising sine underneath, getting louder
+    all the way. It builds tension and stops exactly when the note ends, so place its end on the downbeat.
+  how: Take white noise and band-pass it (Q 1.4) with a centre frequency that moves from `start` to `end` along the shape
+    (time/length)^`curve`. Add a sine that rises three octaves, from 110 Hz to 880 Hz, over the note, at level `tone`. Fade
+    the whole thing in with (time/length)^2 and scale by velocity; fade out over the last 15% of the note so it stops cleanly.
+    The note length is the gate; the note's pitch is ignored.
+  why: 'Rising pitch and rising brightness are heard as rising energy, and the ear expects a release at the top: that expectation
+    is the tension. A curve above 1 keeps the sweep low for most of the note and rushes at the end, which builds anticipation.
+    Getting louder until the very last moment and then cutting off makes the following hit feel bigger by contrast.'
   chain:
-    - id: noise
-      label: "White noise"
-      kind: noise
-      what: "The raw hiss to be swept."
-      params: []
-      to: [bp]
-    - id: bp
-      label: "Sweeping band-pass"
-      kind: filter
-      what: "Centre moves from `start` to `end` along (time/length)^curve."
-      params: [start, end, curve]
-      to: [mix]
-    - id: tone
-      label: "Rising sine"
-      kind: osc
-      what: "A sine from 110 Hz to 880 Hz over the note, at level `tone`."
-      params: [tone]
-      to: [mix]
-    - id: mix
-      label: "Swell"
-      kind: amp
-      what: "Sums noise (x 0.8) and sine, fades in with (time/length)^2 and scales by velocity; the sound ends abruptly at the gate."
-      params: []
-      to: [out]
+  - id: noise
+    label: White noise
+    kind: noise
+    what: The raw hiss to be swept.
+    params: []
+    to: [bp]
+  - id: bp
+    label: Sweeping band-pass
+    kind: filter
+    what: Centre moves from `start` to `end` along (time/length)^curve; velocity raises the end and narrows the band.
+    params: [start, end, curve, vel_bright]
+    to: [mix]
+  - id: tone
+    label: Rising sine
+    kind: osc
+    what: A sine from 110 Hz to 880 Hz over the note, at level `tone`.
+    params: [tone]
+    to: [mix]
+  - id: mix
+    label: Swell
+    kind: amp
+    what: Sums noise (x 0.8) and sine, fades in with (time/length)^2 and scales by velocity; the last 15% fades out so it
+      stops without a click.
+    params: []
+    to: [out]
   params:
-    start:
-      says: "Band-pass centre at the beginning, in Hz."
-      up: "starts already bright"
-      down: "starts as a low rumble"
-    end:
-      says: "Band-pass centre at the end, in Hz."
-      up: "ends on a piercing hiss"
-      down: "ends on a muffled whoosh"
-    tone:
-      says: "Level of the rising sine under the noise."
-      up: "an audible pitched siren inside the whoosh"
-      down: "pure noise"
-    curve:
-      says: "Shape of the sweep: 1 is linear, higher values stay low longer and rush at the end."
-      up: "a late, sudden rush"
-      down: "an early, even sweep"
-  velocity: "Velocity only scales the level here (linearly); the riser has no velocity-to-timbre mapping. Use `start`, `end` and the note length to change its intensity."
+    start: {says: 'Band-pass centre at the beginning, in Hz.', up: starts already bright, down: starts as a low rumble}
+    end: {says: 'Band-pass centre at the end, in Hz.', up: ends on a piercing hiss, down: ends on a muffled whoosh}
+    tone: {says: Level of the rising sine under the noise., up: an audible pitched siren inside the whoosh, down: pure noise}
+    curve: {says: 'Shape of the sweep: 1 is linear, higher values stay low longer and rush at the end.', up: 'a late, sudden
+        rush', down: 'an early, even sweep'}
+    vel_bright: {says: How much velocity raises the top of the sweep (octaves per unit around 0.7) and narrows the band.,
+      up: hard risers scream higher and whistle, down: 'every riser sweeps the same, only louder or softer'}
+  velocity: Harder risers sweep higher (the `end` of the sweep moves `vel_bright` octaves per unit of velocity around 0.7)
+    and narrower (the band-pass Q rises), so they whistle; the level also scales with velocity.
   recipes:
-    - name: "Late rush"
-      set: {curve: 4}
-      listen: "The filter hangs low for most of the note and shoots up at the end: maximum anticipation."
-    - name: "Pure noise"
-      set: {tone: 0}
-      listen: "Without the sine it is just a whoosh, less 'siren' and more 'wind'."
-    - name: "Low rumble riser"
-      set: {start: 60, end: 2500}
-      listen: "A darker range builds weight rather than brightness, good under dialogue."
-    - name: "Linear sweep"
-      set: {curve: 1, end: 15000}
-      listen: "An even sweep to a very bright top sounds mechanical and fast, like a jet passing."
-  try_next: "End a riser on the downbeat with an `impact` to hear tension and release."
-
+  - name: Late rush
+    set: {curve: 4}
+    listen: 'The filter hangs low for most of the note and shoots up at the end: maximum anticipation.'
+  - name: Pure noise
+    set: {tone: 0}
+    listen: Without the sine it is just a whoosh, less 'siren' and more 'wind'.
+  - name: Low rumble riser
+    set: {start: 60, end: 2500}
+    listen: A darker range builds weight rather than brightness, good under dialogue.
+  - name: Linear sweep
+    set: {curve: 1, end: 15000}
+    listen: An even sweep to a very bright top sounds mechanical and fast, like a jet passing.
+  try_next: End a riser on the downbeat with an `impact` to hear tension and release.
 impact:
-  title: "Cinematic impact"
+  title: Cinematic impact
   family: fx
-  ancestor: "The trailer 'boom' or sub hit: a very low pitch-dropping sine like a huge bass drum, with a burst of noise and a crash-cymbal-like hiss. A simplification of layered trailer hits, built from three layers."
-  summary: "A low boom that falls from 100 Hz to 30 Hz, a short mid noise burst, and a long high-passed crash, all saturated together. Use it to land a cut or a reveal."
-  how: "Make a sine whose pitch is 30 + 70 x e^(-6t) Hz (100 Hz falling to 30 Hz) and whose level falls as e^(-1.6t), scaled by `boom`. Add white noise low-passed at 2.5 kHz that dies as e^(-3t) (fixed level 0.5). Add white noise high-passed at 5 kHz dying as e^(-1.2t), scaled by `crash`. Saturate the sum with tanh (x1.5) and scale by velocity. The sound lasts exactly `decay` seconds, then stops."
-  why: "A big, slow pitch drop at very low frequency is what huge objects and big drums do, so the brain reads it as size and weight. The mid noise gives the hit a clear start that small speakers can reproduce. The long high hiss acts like a crash cymbal or debris, keeping the sound alive after the boom. Saturation glues the layers and makes the hit sound loud."
+  ancestor: 'The trailer ''boom'' or sub hit: a very low pitch-dropping sine like a huge bass drum, with a burst of noise
+    and a crash-cymbal-like hiss. A simplification of layered trailer hits, built from three layers.'
+  summary: A low boom that falls from 100 Hz to 30 Hz, a short mid noise burst, and a long high-passed crash, all saturated
+    together. Use it to land a cut or a reveal.
+  how: Make a sine whose pitch is 30 + 70 x e^(-6t) Hz (100 Hz falling to 30 Hz) and whose level falls as e^(-1.6t), scaled
+    by `boom`. Add white noise low-passed at 2.5 kHz that dies as e^(-3t) (fixed level 0.5). Add white noise high-passed
+    at 5 kHz dying as e^(-1.2t), scaled by `crash`. Saturate the sum with tanh (x1.5) and scale by velocity. The sound lasts
+    `decay` seconds; below 3 s every layer dies proportionally faster, and the last quarter fades to silence.
+  why: A big, slow pitch drop at very low frequency is what huge objects and big drums do, so the brain reads it as size
+    and weight. The mid noise gives the hit a clear start that small speakers can reproduce. The long high hiss acts like
+    a crash cymbal or debris, keeping the sound alive after the boom. Saturation glues the layers and makes the hit sound
+    loud.
   chain:
-    - id: boom
-      label: "Falling boom"
-      kind: osc
-      what: "A sine sweeping 100 to 30 Hz with an e^(-1.6t) fade, scaled by `boom`."
-      params: [boom]
-      to: [drive]
-    - id: mid
-      label: "Mid noise"
-      kind: noise
-      what: "Noise low-passed at 2.5 kHz, dying as e^(-3t); fixed level."
-      params: []
-      to: [drive]
-    - id: crash
-      label: "Crash hiss"
-      kind: noise
-      what: "Noise high-passed at 5 kHz, dying as e^(-1.2t), scaled by `crash`."
-      params: [crash]
-      to: [drive]
-    - id: drive
-      label: "Saturation"
-      kind: shaper
-      what: "tanh drive x1.5 on the sum, then velocity scaling."
-      params: []
-      to: [length]
-    - id: length
-      label: "Length"
-      kind: amp
-      what: "Cuts the sound at `decay` seconds; it does not change how fast the layers fade."
-      params: [decay]
-      to: [out]
+  - id: boom
+    label: Falling boom
+    kind: osc
+    what: A sine sweeping 100 to 30 Hz with an e^(-1.6t) fade, scaled by `boom`.
+    params: [boom]
+    to: [drive]
+  - id: mid
+    label: Mid noise
+    kind: noise
+    what: Noise low-passed at 2.5 kHz (higher for harder hits), dying as e^(-3t).
+    params: [vel_bright]
+    to: [drive]
+  - id: crash
+    label: Crash hiss
+    kind: noise
+    what: Noise high-passed at 5 kHz, dying as e^(-1.2t), scaled by `crash`.
+    params: [crash]
+    to: [drive]
+  - id: drive
+    label: Saturation
+    kind: shaper
+    what: tanh drive x1.5 on the sum, then velocity scaling.
+    params: []
+    to: [length]
+  - id: length
+    label: Length
+    kind: amp
+    what: The hit lasts `decay` seconds; shorter decays speed up every fade, and the end fades to silence.
+    params: [decay]
+    to: [out]
   params:
-    decay:
-      says: "Total length of the sound in seconds (a hard cut, not a fade rate)."
-      up: "the full tail of the crash is heard"
-      down: "the tail is cut off; below about 2.5 s the cut is audible"
-    boom:
-      says: "Level of the low falling sine."
-      up: "more weight and size"
-      down: "a thinner, higher hit"
-    crash:
-      says: "Level of the long high-passed noise tail."
-      up: "a big cymbal-like wash"
-      down: "a dry, tight boom"
-  velocity: "Velocity only scales the level (linearly); the impact has no velocity-to-timbre mapping. Shape the hit with `boom` and `crash`."
+    decay: {says: 'How long the hit rings, in seconds: shorter decays make every layer die faster, and the sound always
+        fades to silence by the end.', up: the full tail of the crash rings out, down: 'a short, tight hit (no audible cut)'}
+    boom: {says: Level of the low falling sine., up: more weight and size, down: 'a thinner, higher hit'}
+    crash: {says: Level of the long high-passed noise tail., up: a big cymbal-like wash, down: 'a dry, tight boom'}
+    vel_bright: {says: How much velocity opens the mid noise's low-pass (octaves per unit around 0.7) and raises the crash.,
+      up: 'hard hits splash brighter, soft ones stay dark', down: 'every hit has the same colour, only the level changes'}
+  velocity: 'Harder hits are brighter: the mid noise''s low-pass opens `vel_bright` octaves per unit of velocity around
+    0.7 and the crash gets louder; the level also scales with velocity.'
   recipes:
-    - name: "Boom only"
-      set: {crash: 0}
-      listen: "Just the falling sine and the short mid noise: a deep, dry hit for subtle cuts."
-    - name: "Crash only"
-      set: {boom: 0, crash: 1}
-      listen: "Without the boom it is a long hiss, like a cymbal or a burst of static."
-    - name: "Long tail"
-      set: {decay: 8, crash: 0.5}
-      listen: "Letting it run for 8 s lets the crash fade naturally instead of being cut."
-  pattern: "X..............."
-  try_next: "Precede it with a `riser` that ends on the same frame, the classic trailer build and hit."
-
+  - name: Boom only
+    set: {crash: 0}
+    listen: 'Just the falling sine and the short mid noise: a deep, dry hit for subtle cuts.'
+  - name: Crash only
+    set: {boom: 0, crash: 1}
+    listen: Without the boom it is a long hiss, like a cymbal or a burst of static.
+  - name: Long tail
+    set: {decay: 8, crash: 0.5}
+    listen: Letting it run for 8 s lets the crash fade naturally instead of being cut.
+  pattern: X...............
+  try_next: Precede it with a `riser` that ends on the same frame, the classic trailer build and hit.
 zap:
-  title: "Square-wave zap"
+  title: Square-wave zap
   family: fx
-  ancestor: "The laser 'pew' of arcade sound chips and 1980s sci-fi: a square wave whose pitch drops exponentially. Faithful to that chip-sound idea, with a low-pass filter added to tame it."
-  summary: "A square wave that starts high and dives fast toward a floor pitch while fading out. Short settings make a blip for list items or reveals; slow settings make a falling laser. It ignores the note's pitch: `f0` and `floor` set it."
-  how: "Make a square wave whose frequency is f0 x e^(-sweep x t) + floor, so it starts near `f0` + `floor` and falls toward `floor`. Fade it so it reaches -60 dB after `t60`, low-pass it at `cutoff`, and stop it at `length` seconds. Harder hits start higher (`vel_pitch`) and are brighter (`vel_bright`)."
-  why: "A fast downward pitch sweep is heard as something shooting away or powering down, and the ear follows the falling pitch easily, which makes it a clear signal. The square wave's odd harmonics give the hard, buzzy 'game' character. The low-pass removes the harshest top so it does not hurt on headphones."
+  ancestor: 'The laser ''pew'' of arcade sound chips and 1980s sci-fi: a square wave whose pitch drops exponentially. Faithful
+    to that chip-sound idea, with a low-pass filter added to tame it.'
+  summary: 'A square wave that starts high and dives fast toward a floor pitch while fading out. Short settings make a blip
+    for list items or reveals; slow settings make a falling laser. It ignores the note''s pitch: `f0` and `floor` set it.'
+  how: Make a square wave whose frequency is f0 x e^(-sweep x t) + floor, so it starts near `f0` + `floor` and falls toward
+    `floor`. Fade it so it reaches -60 dB after `t60`, low-pass it at `cutoff`, and stop it at `length` seconds. Harder
+    hits start higher (`vel_pitch`) and are brighter (`vel_bright`).
+  why: A fast downward pitch sweep is heard as something shooting away or powering down, and the ear follows the falling
+    pitch easily, which makes it a clear signal. The square wave's odd harmonics give the hard, buzzy 'game' character.
+    The low-pass removes the harshest top so it does not hurt on headphones.
   chain:
-    - id: chirp
-      label: "Pitch dive"
-      kind: pitch
-      what: "Frequency = f0 x e^(-sweep x t) + floor; velocity raises f0 by `vel_pitch` octaves per unit around 0.7."
-      params: [f0, floor, sweep, vel_pitch]
-      to: [osc]
-    - id: osc
-      label: "Square wave"
-      kind: osc
-      what: "A band-limited square wave at the diving pitch, fading over `t60`."
-      params: [t60]
-      to: [filter]
-    - id: filter
-      label: "Low-pass"
-      kind: filter
-      what: "A low-pass at `cutoff`, moved by velocity (`vel_bright` octaves per unit)."
-      params: [cutoff, vel_bright]
-      to: [amp]
-    - id: amp
-      label: "Length + level"
-      kind: amp
-      what: "Stops the sound at `length`, gain 0.5 x velocity^vel_curve."
-      params: [length, vel_curve]
-      to: [out]
+  - id: chirp
+    label: Pitch dive
+    kind: pitch
+    what: Frequency = f0 x e^(-sweep x t) + floor; velocity raises f0 by `vel_pitch` octaves per unit around 0.7.
+    params: [f0, floor, sweep, vel_pitch]
+    to: [osc]
+  - id: osc
+    label: Square wave
+    kind: osc
+    what: A band-limited square wave at the diving pitch, fading over `t60`.
+    params: [t60]
+    to: [filter]
+  - id: filter
+    label: Low-pass
+    kind: filter
+    what: A low-pass at `cutoff`, moved by velocity (`vel_bright` octaves per unit).
+    params: [cutoff, vel_bright]
+    to: [amp]
+  - id: amp
+    label: Length + level
+    kind: amp
+    what: Stops the sound at `length`, gain 0.5 x velocity^vel_curve.
+    params: [length, vel_curve]
+    to: [out]
   params:
-    f0:
-      says: "Start pitch of the chirp in Hz (on top of the floor)."
-      up: "a higher, sharper start"
-      down: "a lower, gentler blip"
-    floor:
-      says: "The pitch the chirp falls toward, in Hz."
-      up: "the chirp ends on a higher buzz"
-      down: "the chirp falls into a low growl"
-    sweep:
-      says: "How fast the pitch falls (exponential rate per second)."
-      up: "a quick 'pew' or click"
-      down: "a slow, audible dive"
-    length:
-      says: "Total length of the sound in seconds (a hard stop)."
-      up: "you hear the whole dive"
-      down: "a short blip"
-    t60:
-      says: "Amplitude fade time; keep it at or below `length` to avoid an audible cut."
-      up: "a sustained buzz"
-      down: "a short, clicky blip"
-    cutoff:
-      says: "Low-pass cutoff in Hz."
-      up: "harsher, buzzier"
-      down: "softer, rounder"
-    vel_pitch:
-      says: "Octaves the start pitch rises per unit of velocity around 0.7."
-      up: "accents start much higher"
-      down: "the same start pitch every time"
-    vel_bright:
-      says: "Octaves the low-pass moves per unit of velocity around 0.7."
-      up: "accents much brighter"
-      down: "the same colour every time"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "more dynamic range"
-      down: "even levels"
-  velocity: "Velocity raises the start pitch (`vel_pitch` octaves per unit around 0.7) and opens the low-pass (`vel_bright`), so a hard zap is higher and brighter; gain is linear in velocity by default."
+    f0: {says: Start pitch of the chirp in Hz (on top of the floor)., up: 'a higher, sharper start', down: 'a lower, gentler
+        blip'}
+    floor: {says: 'The pitch the chirp falls toward, in Hz.', up: the chirp ends on a higher buzz, down: the chirp falls
+        into a low growl}
+    sweep: {says: How fast the pitch falls (exponential rate per second)., up: a quick 'pew' or click, down: 'a slow, audible
+        dive'}
+    length: {says: 'Total length of the sound in seconds; the last 15% fades out, so a long t60 no longer clicks.', up: you
+        hear the whole dive, down: a short blip}
+    t60: {says: Amplitude fade time; keep it at or below `length` to avoid an audible cut., up: a sustained buzz, down: 'a
+        short, clicky blip'}
+    cutoff: {says: Low-pass cutoff in Hz., up: 'harsher, buzzier', down: 'softer, rounder'}
+    vel_pitch: {says: Octaves the start pitch rises per unit of velocity around 0.7., up: accents start much higher, down: the
+        same start pitch every time}
+    vel_bright: {says: Octaves the low-pass moves per unit of velocity around 0.7., up: accents much brighter, down: the
+        same colour every time}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: more dynamic range, down: even levels}
+  velocity: Velocity raises the start pitch (`vel_pitch` octaves per unit around 0.7) and opens the low-pass (`vel_bright`),
+    so a hard zap is higher and brighter; gain is linear in velocity by default.
   recipes:
-    - name: "Laser pew"
-      set: {f0: 6000, sweep: 40, length: 0.15, t60: 0.1}
-      listen: "A very fast dive from a high start: the classic arcade laser."
-    - name: "Slow power-down"
-      set: {sweep: 3, length: 1.5, t60: 1.5}
-      listen: "A slow sweep lets you hear the pitch fall like a machine winding down."
-    - name: "Soft UI blip"
-      set: {cutoff: 1500, f0: 1200, length: 0.1, t60: 0.08}
-      listen: "A low, filtered, short blip is gentle enough for on-screen list items."
-    - name: "Bass dive"
-      set: {f0: 600, floor: 30, sweep: 5, length: 0.8, t60: 0.6}
-      listen: "Starting low and falling to 30 Hz turns it into a sub drop."
-  try_next: "Compare with the `kick`'s pitch sweep: same idea, but a sine instead of a square and a much faster dive."
-
+  - name: Laser pew
+    set: {f0: 6000, sweep: 40, length: 0.15, t60: 0.1}
+    listen: 'A very fast dive from a high start: the classic arcade laser.'
+  - name: Slow power-down
+    set: {sweep: 3, length: 1.5, t60: 1.5}
+    listen: A slow sweep lets you hear the pitch fall like a machine winding down.
+  - name: Soft UI blip
+    set: {cutoff: 1500, f0: 1200, length: 0.1, t60: 0.08}
+    listen: A low, filtered, short blip is gentle enough for on-screen list items.
+  - name: Bass dive
+    set: {f0: 600, floor: 30, sweep: 5, length: 0.8, t60: 0.6}
+    listen: Starting low and falling to 30 Hz turns it into a sub drop.
+  try_next: 'Compare with the `kick`''s pitch sweep: same idea, but a sine instead of a square and a much faster dive.'
 tick:
-  title: "Sine tick"
+  title: Sine tick
   family: fx
-  ancestor: "A clock tick or electronic 'ping': a very short sine burst, the simplest percussive tone. Close in sound to a metronome click or a UI tick."
-  summary: "A sine at `tone` that dies within a few tens of milliseconds, with an optional noise click. Use it for clocks, data textures and on-screen ticks. It ignores the note's pitch: `tone` sets it."
-  how: "Play a sine at `tone` (3.2 kHz by default), shifted by velocity (`vel_pitch`) and nudged about 1% by `rr`. Fade it with a t60 of `t60`, made longer on harder hits by `vel_decay`. Optionally add a 3 ms burst of noise high-passed at 6 kHz (`click`) scaled by velocity. Stop the sound at `length`."
-  why: "A sine burst shorter than about 50 ms is heard more as a click with a pitch colour than as a note, which is why it works as a tick. A high frequency sounds small and precise; a lower one sounds woody. The noise click adds the sharp edge of a mechanical contact."
+  ancestor: 'A clock tick or electronic ''ping'': a very short sine burst, the simplest percussive tone. Close in sound
+    to a metronome click or a UI tick.'
+  summary: 'A sine at `tone` that dies within a few tens of milliseconds, with an optional noise click. Use it for clocks,
+    data textures and on-screen ticks. It ignores the note''s pitch: `tone` sets it.'
+  how: Play a sine at `tone` (3.2 kHz by default), shifted by velocity (`vel_pitch`) and nudged about 1% by `rr`. Fade it
+    with a t60 of `t60`, made longer on harder hits by `vel_decay`. Optionally add a 3 ms burst of noise high-passed at
+    6 kHz (`click`) scaled by velocity. Stop the sound at `length`.
+  why: A sine burst shorter than about 50 ms is heard more as a click with a pitch colour than as a note, which is why it
+    works as a tick. A high frequency sounds small and precise; a lower one sounds woody. The noise click adds the sharp
+    edge of a mechanical contact.
   chain:
-    - id: osc
-      label: "Sine ping"
-      kind: osc
-      what: "A sine at `tone` (velocity shifts it by `vel_pitch` octaves per unit around 0.7; `rr` varies it about 1%)."
-      params: [tone, vel_pitch, rr]
-      to: [env]
-    - id: env
-      label: "Fast decay"
-      kind: env
-      what: "A t60 fade of t60 x (1 - vel_decay + vel_decay x velocity / 0.7)."
-      params: [t60, vel_decay]
-      to: [mix]
-    - id: click
-      label: "Noise click"
-      kind: noise
-      what: "A 3 ms burst of noise high-passed at 6 kHz, scaled by `click` and velocity."
-      params: [click]
-      to: [mix]
-    - id: mix
-      label: "Length + level"
-      kind: amp
-      what: "Sums ping and click, stops at `length`, gain velocity^vel_curve."
-      params: [length, vel_curve]
-      to: [out]
+  - id: osc
+    label: Sine ping
+    kind: osc
+    what: A sine at `tone` (velocity shifts it by `vel_pitch` octaves per unit around 0.7; `rr` varies it about 1%).
+    params: [tone, vel_pitch, rr]
+    to: [env]
+  - id: env
+    label: Fast decay
+    kind: env
+    what: A t60 fade of t60 x (1 - vel_decay + vel_decay x velocity / 0.7).
+    params: [t60, vel_decay]
+    to: [mix]
+  - id: click
+    label: Noise click
+    kind: noise
+    what: A 3 ms burst of noise high-passed at 6 kHz, scaled by `click` and velocity.
+    params: [click]
+    to: [mix]
+  - id: mix
+    label: Length + level
+    kind: amp
+    what: Sums ping and click, stops at `length`, gain velocity^vel_curve.
+    params: [length, vel_curve]
+    to: [out]
   params:
-    tone:
-      says: "Pitch of the ping in Hz."
-      up: "a tiny, glassy tick"
-      down: "a woody, lower knock"
-    t60:
-      says: "Decay time of the ping; keep it at or below `length` to avoid an audible cut."
-      up: "a ringing ping"
-      down: "a dry click"
-    length:
-      says: "Total length of the sound in seconds (a hard stop)."
-      up: "room for a longer ring"
-      down: "a shorter tick"
-    click:
-      says: "Level of a short high noise click on the attack."
-      up: "a sharper, mechanical edge"
-      down: "a pure sine ping"
-    vel_pitch:
-      says: "Octaves the ping rises per unit of velocity around 0.7."
-      up: "accents ping noticeably higher"
-      down: "the same pitch every time"
-    vel_decay:
-      says: "How much harder hits ring longer."
-      up: "accents ring, soft ticks stay dry"
-      down: "the same length every time"
-    vel_curve:
-      says: "Loudness curve: gain = velocity to this power."
-      up: "more dynamic range"
-      down: "even levels"
-    rr:
-      says: "Random per-hit pitch variation (about 1%)."
-      up: "a less mechanical clock"
-      down: "identical ticks"
-  velocity: "Harder ticks ping higher (`vel_pitch` octaves per unit around 0.7), ring longer (`vel_decay`) and click more; gain is linear in velocity by default."
+    tone: {says: Pitch of the ping in Hz., up: 'a tiny, glassy tick', down: 'a woody, lower knock'}
+    t60: {says: Decay time of the ping; keep it at or below `length` to avoid an audible cut., up: a ringing ping, down: a
+        dry click}
+    length: {says: 'Total length of the sound in seconds; the last 15% fades out, so a long t60 no longer clicks.', up: room
+        for a longer ring, down: a shorter tick}
+    click: {says: Level of a short high noise click on the attack., up: 'a sharper, mechanical edge', down: a pure sine
+        ping}
+    vel_pitch: {says: Octaves the ping rises per unit of velocity around 0.7., up: accents ping noticeably higher, down: the
+        same pitch every time}
+    vel_decay: {says: How much harder hits ring longer., up: 'accents ring, soft ticks stay dry', down: the same length
+        every time}
+    vel_curve: {says: 'Loudness curve: gain = velocity to this power.', up: more dynamic range, down: even levels}
+    rr: {says: Random per-hit pitch variation (about 1%)., up: a less mechanical clock, down: identical ticks}
+  velocity: Harder ticks ping higher (`vel_pitch` octaves per unit around 0.7), ring longer (`vel_decay`) and click more;
+    gain is linear in velocity by default.
   recipes:
-    - name: "Wood click"
-      set: {tone: 1200, t60: 0.015, length: 0.03, click: 0.6}
-      listen: "A lower, very short ping with a noise edge sounds like a woodblock or a clock mechanism."
-    - name: "Glass ping"
-      set: {tone: 6000, t60: 0.2, length: 0.25}
-      listen: "A longer ring at a high pitch sounds like tapping a glass."
-    - name: "Hi-hat-like tick"
-      set: {tone: 9000, click: 1, t60: 0.01, length: 0.02}
-      listen: "Very high and mostly click: it sits where a closed hi-hat would, but cleaner."
-    - name: "Melodic accents"
-      set: {vel_pitch: 1.5}
-      listen: "With strong velocity-to-pitch, accented ticks jump up in pitch, so a pattern turns into a little tune."
-  pattern: "X-x-x-x-X-x-x-x-"
-  try_next: "Compare with `hat`: both mark time high up, but the tick is one pure sine and the hat is six clashing square waves."
-
+  - name: Wood click
+    set: {tone: 1200, t60: 0.015, length: 0.03, click: 0.6}
+    listen: A lower, very short ping with a noise edge sounds like a woodblock or a clock mechanism.
+  - name: Glass ping
+    set: {tone: 6000, t60: 0.2, length: 0.25}
+    listen: A longer ring at a high pitch sounds like tapping a glass.
+  - name: Hi-hat-like tick
+    set: {tone: 9000, click: 1, t60: 0.01, length: 0.02}
+    listen: 'Very high and mostly click: it sits where a closed hi-hat would, but cleaner.'
+  - name: Melodic accents
+    set: {vel_pitch: 1.5}
+    listen: With strong velocity-to-pitch, accented ticks jump up in pitch, so a pattern turns into a little tune.
+  pattern: X-x-x-x-X-x-x-x-
+  try_next: 'Compare with `hat`: both mark time high up, but the tick is one pure sine and the hat is six clashing square
+    waves.'
 sampler:
-  title: "Sample player (SFZ)"
+  title: Sample player (SFZ)
   family: keys
-  ancestor: "Sampled instruments: recordings of a real instrument, note by note and at several dynamics, played back by key. This one reads a subset of the SFZ format, used by free libraries such as the Salamander Grand Piano and VSCO-2 Community Edition. Libraries are optional downloads (docs/INSTRUMENTS.md section 5) and are never committed to the repo."
-  summary: "Instead of synthesising a sound, it plays a recording. For each note it picks the recordings that match the key, the velocity and the round-robin slot, retunes them to the exact pitch, and shapes them with a simple envelope. Its sound comes from the library; the knobs only adjust how it is played back."
-  how: "Find the SFZ regions whose key range contains the rounded note pitch and whose round-robin slot matches the part's note counter. Pick the velocity layer, and crossfade two neighbouring layers with an equal-power blend over a zone set by `xfade`. Resample each recording with a windowed-sinc filter from its recorded key to the exact float pitch plus `tune` cents (36-EDO works). Apply a raised-cosine attack (the region's attack plus `attack`) and an exponential release scaled by `release_mul`, then add the library's release samples (key-off noises) at `release_level`."
-  why: "A recording already contains everything a model has to imitate: the real hammer, body, room and noise. Real libraries record several velocity layers because a hard-played note has a different tone, not just more volume; crossfading layers avoids a sudden jump in tone between them. Round-robin recordings of the same note keep repeated notes from sounding like a 'machine gun'. Resampling changes speed and pitch together, so notes far from a recorded key sound slightly unnatural, which is why libraries sample many keys."
+  ancestor: 'Sampled instruments: recordings of a real instrument, note by note and at several dynamics, played back by
+    key. This one reads a subset of the SFZ format, used by free libraries such as the Salamander Grand Piano and VSCO-2
+    Community Edition. Libraries are optional downloads (docs/INSTRUMENTS.md section 5) and are never committed to the repo.'
+  summary: Instead of synthesising a sound, it plays a recording. For each note it picks the recordings that match the key,
+    the velocity and the round-robin slot, retunes them to the exact pitch, and shapes them with a simple envelope. Its
+    sound comes from the library; the knobs only adjust how it is played back.
+  how: Find the SFZ regions whose key range contains the rounded note pitch and whose round-robin slot matches the part's
+    note counter. Pick the velocity layer, and crossfade two neighbouring layers with an equal-power blend over a zone set
+    by `xfade`. Resample each recording with a windowed-sinc filter from its recorded key to the exact float pitch plus
+    `tune` cents (36-EDO works). Apply a raised-cosine attack (the region's attack plus `attack`) and an exponential release
+    scaled by `release_mul`, then add the library's release samples (key-off noises) at `release_level`.
+  why: 'A recording already contains everything a model has to imitate: the real hammer, body, room and noise. Real libraries
+    record several velocity layers because a hard-played note has a different tone, not just more volume; crossfading layers
+    avoids a sudden jump in tone between them. Round-robin recordings of the same note keep repeated notes from sounding
+    like a ''machine gun''. Resampling changes speed and pitch together, so notes far from a recorded key sound slightly
+    unnatural, which is why libraries sample many keys.'
   chain:
-    - id: regions
-      label: "Region choice"
-      kind: mix
-      what: "Selects the recordings by key, velocity layer and round robin; neighbouring layers are crossfaded over `xfade`."
-      params: [xfade]
-      to: [repitch]
-    - id: repitch
-      label: "Repitch"
-      kind: pitch
-      what: "Windowed-sinc resampling from the recorded key to the exact float pitch, plus `tune` cents."
-      params: [tune]
-      to: [env]
-    - id: env
-      label: "Amp envelope"
-      kind: env
-      what: "Raised-cosine attack (region attack + `attack`) and an exponential release (region release x `release_mul`)."
-      params: [attack, release_mul]
-      to: [level]
-    - id: release
-      label: "Release samples"
-      kind: osc
-      what: "The library's key-off recordings, played at note-off at `release_level` (0 = off)."
-      params: [release_level]
-      to: [level]
-    - id: level
-      label: "Level"
-      kind: amp
-      what: "Region volume and velocity tracking (SFZ curve velocity^2), plus `level` dB."
-      params: [level]
-      to: [out]
+  - id: regions
+    label: Region choice
+    kind: mix
+    what: Selects the recordings by key, velocity layer and round robin; neighbouring layers are crossfaded over `xfade`.
+    params: [xfade]
+    to: [repitch]
+  - id: repitch
+    label: Repitch
+    kind: pitch
+    what: Windowed-sinc resampling from the recorded key to the exact float pitch, plus `tune` cents.
+    params: [tune]
+    to: [env]
+  - id: env
+    label: Amp envelope
+    kind: env
+    what: Raised-cosine attack (region attack + `attack`) and an exponential release (region release x `release_mul`).
+    params: [attack, release_mul]
+    to: [level]
+  - id: release
+    label: Release samples
+    kind: osc
+    what: The library's key-off recordings, played at note-off at `release_level` (0 = off).
+    params: [release_level]
+    to: [level]
+  - id: level
+    label: Level
+    kind: amp
+    what: Region volume and velocity tracking (SFZ curve velocity^2), plus `level` dB.
+    params: [level]
+    to: [out]
   params:
-    level:
-      says: "Output level in dB on top of the library's own volume."
-      up: "louder"
-      down: "quieter"
-    tune:
-      says: "Fine tuning in cents on top of the library's tuning (100 cents = 1 semitone)."
-      up: "sharper"
-      down: "flatter"
-    xfade:
-      says: "Width of the crossfade between neighbouring velocity layers (0 = hard switch)."
-      up: "smooth changes in tone as you play louder"
-      down: "distinct jumps between the recorded dynamics"
-    attack:
-      says: "Extra fade-in time added to the library's attack."
-      up: "a softened, swelling start (removes the hammer or pluck)"
-      down: "the attack exactly as recorded"
-    release_mul:
-      says: "Multiplies the library's release time."
-      up: "notes ring on after the key is released"
-      down: "notes stop sharply"
-    release_level:
-      says: "Level of the key-off (release) recordings, if the library has them (0 = off)."
-      up: "more damper and key-release noise, more realism"
-      down: "silent note-offs"
-  velocity: "Velocity picks which recording plays (soft layers are recorded soft, so they are darker), blends neighbouring layers over `xfade`, and sets gain through each region's amp_veltrack using the SFZ curve velocity^2."
+    level: {says: Output level in dB on top of the library's own volume., up: louder, down: quieter}
+    tune: {says: Fine tuning in cents on top of the library's tuning (100 cents = 1 semitone)., up: sharper, down: flatter}
+    xfade: {says: Width of the crossfade between neighbouring velocity layers (0 = hard switch)., up: smooth changes in
+        tone as you play louder, down: distinct jumps between the recorded dynamics}
+    attack: {says: Extra fade-in time added to the library's attack., up: 'a softened, swelling start (removes the hammer
+        or pluck)', down: the attack exactly as recorded}
+    release_mul: {says: Multiplies the library's release time., up: notes ring on after the key is released, down: notes
+        stop sharply}
+    release_level: {says: 'Level of the key-off (release) recordings, if the library has them (0 = off).', up: 'more damper
+        and key-release noise, more realism', down: silent note-offs}
+  velocity: Velocity picks which recording plays (soft layers are recorded soft, so they are darker), blends neighbouring
+    layers over `xfade`, and sets gain through each region's amp_veltrack using the SFZ curve velocity^2.
   recipes:
-    - name: "Hard layer switches"
-      set: {xfade: 0}
-      listen: "Each velocity now plays exactly one recording; on a crescendo you can hear the tone jump between layers."
-    - name: "Long release, more key noise"
-      set: {release_mul: 3, release_level: 1.5}
-      listen: "Notes ring after you let go and the damper and key noises get louder: a more 'in the room' sound."
-    - name: "Swelled attack"
-      set: {attack: 0.6}
-      listen: "Fading in removes the hammer or pluck, so a piano starts to sound like a pad or a reversed tone."
-    - name: "Quarter-tone flat"
-      set: {tune: -50}
-      listen: "Half a semitone down: the recording is resampled, so you can retune a real instrument to any pitch."
-  try_next: "Swap `keys` for `sampler/salamander` in a song (after installing the library) and compare the modal piano with the recorded one."
+  - name: Hard layer switches
+    set: {xfade: 0}
+    listen: Each velocity now plays exactly one recording; on a crescendo you can hear the tone jump between layers.
+  - name: Long release, more key noise
+    set: {release_mul: 3, release_level: 1.5}
+    listen: 'Notes ring after you let go and the damper and key noises get louder: a more ''in the room'' sound.'
+  - name: Swelled attack
+    set: {attack: 0.6}
+    listen: Fading in removes the hammer or pluck, so a piano starts to sound like a pad or a reversed tone.
+  - name: Quarter-tone flat
+    set: {tune: -50}
+    listen: 'Half a semitone down: the recording is resampled, so you can retune a real instrument to any pitch.'
+  try_next: Swap `keys` for `sampler/salamander` in a song (after installing the library) and compare the modal piano with
+    the recorded one.

@@ -13,7 +13,7 @@ class Keys(Instrument):
     """Modal piano: stiff-string partials, hammer comb, two-stage decay, damper release."""
     name, family = "keys", "keys"
     PARAMS = (
-        Param("partials", 24, 4, 48, "", "lin", T),
+        Param("partials", 24, 4, 48, "", "lin", T, "how many sine partials make up each note (more = more detail)"),
         Param("inharm", 0.0004, 0, 0.003, "B", "lin", T, "string stiffness: f_n = n f0 sqrt(1 + B n^2)"),
         Param("hardness", 0.5, 0, 1, "", "lin", T, "hammer felt hardness = brightness"),
         Param("hammer_pos", 0.12, 0.05, 0.3, "", "lin", T, "strike point (notches partial 1/pos)"),
@@ -32,11 +32,12 @@ class Keys(Instrument):
 
     def render(self, note):
         p, v, rng = self.p, note.vel, self.rng(note)
+        rr = self.rr_rng(note)                          # round robin: no two hammer strikes are identical
         f0 = float(mtof(note.pitch))
-        t60 = p["t60"] * 2 ** (-(note.pitch - 60) / 18)
+        t60 = self.vary(rr, p["t60"], 0.08) * 2 ** (-(note.pitch - 60) / 18)
         n = n_samples(min(note.gate, t60 * 1.5) + p["release"])
         t = t_axis(n)
-        hard = np.clip(p["hardness"] + p["vel_hard"] * (v - 0.7), 0, 1.5)
+        hard = np.clip(p["hardness"] + p["vel_hard"] * (v - 0.7) + 0.08 * p["rr"] * rr.standard_normal(), 0, 1.5)
         tilt = np.clip(2.4 - 1.6 * hard, 0.4, 3.0)
         x = np.zeros(n)
         for k in range(1, int(p["partials"]) + 1):
@@ -46,8 +47,9 @@ class Keys(Instrument):
             a = k ** -tilt * abs(np.sin(np.pi * k * p["hammer_pos"]))
             tk = t60 / (1 + 0.25 * (k - 1))
             env = (1 - p["aftersound"]) * np.exp(-6.9 * t / (tk * 0.25)) + p["aftersound"] * np.exp(-6.9 * t / tk)
+            unison = self.vary(rr, p["unison"], 0.3) if k == 1 else unison
             for s in (-0.5, 0.5):
-                x += a * env * np.sin(2 * np.pi * fk * 2 ** (s * p["unison"] / 1200) * t + rng.random() * 6.28)
+                x += a * env * np.sin(2 * np.pi * fk * 2 ** (s * unison / 1200) * t + rng.random() * 6.28)
         x *= np.clip(t / 0.002, 0, 1)
         if p["thump"]:
             x += p["thump"] * v * svf(white(n, rng), 300 + 600 * hard, 0.8, "bp") * t60_env(n, 0.04)
@@ -62,11 +64,12 @@ class EPiano(Instrument):
     name, family = "epiano", "keys"
     PARAMS = (
         Param("index", 1.2, 0, 6, "", "lin", T, "FM brightness at medium velocity"),
-        Param("index_decay", 0.6, 0.05, 4, "s", "log", T),
+        Param("index_decay", 0.6, 0.05, 4, "s", "log", T,
+              "how fast the brightness fades after the attack (time constant)"),
         Param("tine", 0.25, 0, 1, "", "lin", T, "metallic 14:1 attack transient"),
-        Param("t60", 4.0, 0.5, 15, "s", "log", A),
-        Param("release", 0.3, 0.02, 2, "s", "log", A),
-        Param("trem_rate", 4.5, 0.5, 9, "Hz", "lin", "tremolo"),
+        Param("t60", 4.0, 0.5, 15, "s", "log", A, "decay time at middle C (higher notes decay faster)"),
+        Param("release", 0.3, 0.02, 2, "s", "log", A, "fade after the key is released"),
+        Param("trem_rate", 4.5, 0.5, 9, "Hz", "lin", "tremolo", "speed of the stereo auto-pan, in Hz"),
         Param("trem_depth", 0.25, 0, 1, "", "lin", "tremolo", "stereo auto-pan depth"),
         Param("vel_index", 2.5, 0, 6, "", "lin", V, "hard hits bark"),
         *common_vel(1.5), RR,
@@ -74,12 +77,14 @@ class EPiano(Instrument):
 
     def render(self, note):
         p, v, rng = self.p, note.vel, self.rng(note)
+        rr = self.rr_rng(note)                          # round robin: each tine barks a little differently
         f = float(mtof(note.pitch))
-        t60 = p["t60"] * 2 ** (-(note.pitch - 60) / 24)
+        t60 = self.vary(rr, p["t60"], 0.08) * 2 ** (-(note.pitch - 60) / 24)
         n = n_samples(min(note.gate, t60 * 1.5) + p["release"])
         t = t_axis(n)
-        idx = (p["index"] + p["vel_index"] * max(v - 0.5, 0)) * np.exp(-t / p["index_decay"])
-        mod = idx * np.sin(2 * np.pi * f * t) + p["tine"] * v * np.sin(2 * np.pi * 14 * f * t) * np.exp(-t / 0.02)
+        idx = self.vary(rr, p["index"] + p["vel_index"] * max(v - 0.5, 0), 0.15) * np.exp(-t / p["index_decay"])
+        tine = self.vary(rr, p["tine"], 0.3)
+        mod = idx * np.sin(2 * np.pi * f * t) + tine * v * np.sin(2 * np.pi * 14 * f * t) * np.exp(-t / 0.02)
         x = np.sin(2 * np.pi * f * t + mod + rng.random()) * t60_env(n, t60)
         x *= adsr(n, 0.001, 0.01, 1.0, p["release"], note.gate) * self.vel_gain(v)
         pan = p["trem_depth"] * np.sin(2 * np.pi * p["trem_rate"] * t + rng.random() * 6.28)
@@ -98,7 +103,7 @@ class Organ(Instrument):
         Param("perc", 0.0, 0, 1, "", "lin", T, "2nd-harmonic percussion"),
         Param("click", 0.3, 0, 1, "", "lin", T, "key-contact click"),
         Param("rotor", 0.7, 0, 6.5, "Hz", "lin", "rotary", "0 = off, 0.7 chorale, 6.5 tremolo"),
-        Param("release", 0.04, 0.005, 0.5, "s", "log", A),
+        Param("release", 0.04, 0.005, 0.5, "s", "log", A, "how quickly the sound stops after the key is released"),
         *common_vel(0.0),
     )
 

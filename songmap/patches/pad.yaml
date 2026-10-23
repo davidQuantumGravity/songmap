@@ -1,0 +1,14 @@
+# A patch sketch of the built-in pad: detuned saws, a slowly moving low-pass, a slow envelope.
+description: "Sketch of the built-in pad: three saws a few cents apart (the built-in uses five), a low-pass that a slow LFO moves and velocity opens, and a slow attack and release. The warmth macro darkens and narrows it together."
+modules:
+  s1: {type: osc, wave: saw, fine: -12, level: 0.5}
+  s2: {type: osc, wave: saw, level: 0.5}
+  s3: {type: osc, wave: saw, fine: 12, level: 0.5}
+  drift: {type: lfo, rate: 0.15, shape: sine, depth: 0.3}
+  f1: {type: filter, mode: lp, cutoff: 1800, q: 0.8, keytrack: 0.5}
+  env: {type: env, a: 0.35, d: 0.5, s: 0.85, r: 0.8}
+  amp: {type: vca}
+  out: {type: out, level: 0.6, tail: 0.2}
+wires: [s1>f1, s2>f1, s3>f1, drift>f1.cutoff, vel>f1.cutoff*1, f1>amp, env>amp.gain, amp>out]
+macros:
+  warmth: {default: 0.5, map: {f1.cutoff: [6000, 500], s1.fine: [-25, -4], s3.fine: [25, 4]}}

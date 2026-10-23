@@ -1,0 +1,16 @@
+# A patch sketch of the built-in impact: a sub sine that drops, mid noise and a crash tail, saturated.
+description: "Sketch of the built-in impact: a sine falling from about 100 Hz to 30 Hz, low-passed noise for the hit and high-passed noise for the crash, saturated together. Harder hits are brighter."
+modules:
+  boom: {type: osc, wave: sine, octave: -3, detune: -5, level: 0.9}
+  drop: {type: env, a: 0.001, d: 0.4, s: 0, r: 0.1}
+  boom_env: {type: env, a: 0.002, d: 2.5, s: 0, r: 0.3}
+  boom_amp: {type: vca}
+  noise: {type: noise, color: 0.2, level: 0.6}
+  mid: {type: filter, mode: lp, cutoff: 2500, q: 0.7, keytrack: 0}
+  crash: {type: filter, mode: hp, cutoff: 5000, q: 0.7, keytrack: 0}
+  noise_env: {type: env, a: 0.001, d: 1.5, s: 0, r: 0.3}
+  noise_amp: {type: vca}
+  drive: {type: shaper, drive: 0.3}
+  out: {type: out, level: 0.8, tail: 0.5}
+wires: [drop>boom.detune*20, boom>boom_amp, boom_env>boom_amp.gain, noise>mid, noise>crash, vel>mid.cutoff*1, mid>noise_amp,
+        crash>noise_amp, noise_env>noise_amp.gain, boom_amp>drive, noise_amp>drive, drive>out]

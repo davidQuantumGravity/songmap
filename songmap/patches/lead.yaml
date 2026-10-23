@@ -1,0 +1,12 @@
+# A patch sketch of the built-in lead: detuned saws with delayed vibrato, a low-pass, a little breath noise.
+description: "Sketch of the built-in lead: two detuned saws whose pitch gets a vibrato that fades in after the attack, plus a little breath noise, through a low-pass that velocity opens."
+modules:
+  s1: {type: osc, wave: saw, fine: -8, level: 0.55}
+  s2: {type: osc, wave: saw, fine: 8, level: 0.55}
+  vib: {type: lfo, rate: 5.5, shape: sine, depth: 0.15, delay: 0.3}
+  breath: {type: noise, color: 0.5, level: 0.06}
+  f1: {type: filter, mode: lp, cutoff: 3500, q: 0.9, keytrack: 0.6}
+  env: {type: env, a: 0.01, d: 0.2, s: 0.85, r: 0.15}
+  amp: {type: vca}
+  out: {type: out, level: 0.6}
+wires: [vib>s1.detune, vib>s2.detune, s1>f1, s2>f1, breath>f1, vel>f1.cutoff*1, f1>amp, env>amp.gain, amp>out]

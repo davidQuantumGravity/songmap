@@ -10,7 +10,7 @@ modules:
   wires_filter: {type: filter, mode: hp, cutoff: 1800, q: 0.9, keytrack: 0}
   noise_env: {type: env, a: 0.001, d: 0.18, s: 0, r: 0.06}
   snares: {type: vca}
-  out: {type: out, level: 0.65, tail: 0.05}
+  out: {type: out, level: 0.6, tail: 0.05}
 wires:
   - shell1>shell
   - shell2>shell

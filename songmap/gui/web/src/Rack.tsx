@@ -26,7 +26,7 @@ const KIND_COLOR: Record<string, string> = {
   osc: "var(--c1)", noise: "var(--c8)", env: "var(--c5)", lfo: "var(--c6)", filter: "var(--c3)", shaper: "var(--c4)",
   physical: "var(--c7)", modal: "var(--c7)", fx: "var(--c2)", amp: "var(--c4)", mix: "var(--muted)", pitch: "var(--c6)",
 };
-const STARTER: Record<string, string> = { snare: "snare808", bass: "acid", pluck: "pluck", string_pluck: "pluck", clean: "bell", pad: "glass_pad", lead: "acid" };
+const STARTER_ALIAS: Record<string, string> = { snare: "snare808" };     // built-ins whose sketch has another name
 const BLANK: PatchSpec = { modules: { osc1: { type: "osc" }, env1: { type: "env" }, amp: { type: "vca" }, out: { type: "out" } },
                            wires: ["osc1>amp", "env1>amp.gain", "amp>out"] };
 
@@ -275,17 +275,23 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
     voice && onEdit({ part: sel.part, piece, params: Object.fromEntries(Object.entries(set)), current_use: voice.use });
   const buildOwn = async () => {
     if (!voice || !catalog) return;
-    const starter = STARTER[voice.instrument] ?? "";
+    const starter = starterFor(voice.instrument);
     const choice = prompt(`Build a patch for ${sel.part}${piece ? "." + piece : ""}.\nStart from: ${["blank", ...Object.keys(catalog.patch_library)].join(", ")}`, starter || "blank");
     if (!choice) return;
     const base = choice === "blank" ? BLANK : catalog.patch_library[choice];
     if (!base) { setErr(`no starter patch '${choice}'`); return; }
     const name = (prompt("Name your patch (letters, digits, _)", `my_${(piece ?? sel.part).replace(/\W/g, "_")}`) ?? "").trim();
     if (!/^[A-Za-z_]\w*$/.test(name)) return;
-    await onApply("patch", { name, spec: { modules: base.modules, wires: base.wires } });
+    await onApply("patch", { name, spec: { modules: base.modules, wires: base.wires, macros: base.macros } });
     await switchTo(`patch/${name}`, true);
     setView("wiring");
   };
+  // the library's patch sketch of this built-in (same name, or an alias), else a blank patch
+  function starterFor(inst: string) {
+    const lib = catalog?.patch_library ?? {};
+    const n = STARTER_ALIAS[inst] ?? inst;
+    return lib[n] ? n : "blank";
+  }
   const writePattern = () => secNow && onApply("steps", { index: secNow.index, part: sel.part, piece,
     steps: Array.from({ length: secNow.bars }, () => pattern).join("|") });
 
@@ -411,7 +417,7 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
                 <div className="build-own">
                   <b>Build your own</b>
                   <p className="small">Every instrument here is a recipe of oscillators, noise, filters and envelopes. Rebuild this one as a
-                    patch you can rewire module by module{STARTER[voice.instrument] ? ` (starting from ${STARTER[voice.instrument]})` : ""}.</p>
+                    patch you can rewire module by module{starterFor(voice.instrument) !== "blank" ? ` (starting from the ${starterFor(voice.instrument)} sketch)` : ""}.</p>
                   <button onClick={buildOwn}>Build a patch…</button>
                 </div>
               </div>
@@ -433,7 +439,7 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
               <PatchEditor name={patchName!} spec={patchSpec} editable={voice.patch_source === "song"} catalog={catalog}
                            posKey={`patchpos:${path}:${patchName}`}
                            onSave={(s) => onApply("patch", { name: patchName, spec: s })}
-                           onCopy={() => onApply("patch", { name: patchName, spec: { modules: patchSpec.modules, wires: patchSpec.wires } })} />
+                           onCopy={() => onApply("patch", { name: patchName, spec: { modules: patchSpec.modules, wires: patchSpec.wires, macros: patchSpec.macros } })} />
             ) : (
               <div className="pad">
                 <p><b>{voice.instrument}</b> is built in Python, so its wiring is fixed: the Learn view shows its signal flow.</p>

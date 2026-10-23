@@ -1,0 +1,18 @@
+# A patch sketch of the built-in organ: drawbar sines (16 ft, 5 1/3 ft, 8 ft), a key click, a rotary-speaker wobble.
+description: "Sketch of the built-in organ: three pure sines at the 16 ft, 5 1/3 ft and 8 ft drawbars (an octave down, a fifth above, the note), a key-contact click, and an LFO that wobbles pitch and pan like a Leslie. Organs ignore velocity."
+modules:
+  d16: {type: osc, wave: sine, octave: -1, level: 0.6}
+  d513: {type: osc, wave: sine, detune: 7, level: 0.5}
+  d8: {type: osc, wave: sine, level: 0.6}
+  leslie: {type: lfo, rate: 0.7, shape: sine, depth: 0.08}
+  click: {type: noise, color: 0, level: 0.3}
+  click_bp: {type: filter, mode: bp, cutoff: 2500, q: 1, keytrack: 0}
+  click_env: {type: env, a: 0.0005, d: 0.006, s: 0, r: 0.004}
+  click_amp: {type: vca}
+  env: {type: env, a: 0.003, d: 0.01, s: 1, r: 0.04}
+  amp: {type: vca}
+  out: {type: out, level: 0.6}
+wires: [leslie>d16.detune, leslie>d513.detune, leslie>d8.detune, d16>amp, d513>amp, d8>amp, click>click_bp,
+        click_bp>click_amp, click_env>click_amp.gain, click_amp>amp, env>amp.gain, amp>out, leslie>out.pan*4]
+macros:
+  rotor: {default: 0.1, map: {leslie.rate: [0.7, 6.5]}}

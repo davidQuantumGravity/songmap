@@ -26,21 +26,36 @@ LIMIT = 4096                       # loop iterations, list items, step-string le
 SECTION_SETTINGS = ("harmony", "chords", "prog", "dyn", "feel", "tempo", "key", "bars", "binaural")   # chords/prog: aliases of harmony
 
 
+HARMONY_KEYS = ("harmony", "chords", "prog")
+
+
 def _is_setting(key, v, progressions=()) -> bool:
-    """`chords` is the harmony setting only when its value is a progression; otherwise it is a part
-    named `chords` (the voiced styles: `chords: hold`, `chords: comp`)."""
+    """`chords` is the harmony setting when its value is a string (a progression, or a progression's
+    name); otherwise it is a part named `chords` (the voiced styles: `chords: hold`, `chords: comp`).
+    A bare string is never a part, so a bad chord in `chords: "C Qx"` is reported as a chord."""
     if key != "chords":
         return key in SECTION_SETTINGS
-    if not isinstance(v, str):
-        return False
-    if v in progressions:
-        return True
-    from ..theory.harmony import parse_progression
-    try:
-        parse_progression(v)
-    except Exception:
-        return False
-    return True
+    return isinstance(v, str)
+
+
+class _Src(str):
+    """A section's harmony string that remembers the line that wrote it (`verse = {chords: "..."}`,
+    `verse.prog = "..."`), so a bad chord is reported there and not where the section is placed."""
+    line: int | None = None
+
+
+def _tag_harmony(d, line):
+    """A copy of section map `d` whose harmony strings carry `line` (strings already tagged keep theirs)."""
+    if not isinstance(d, dict) or not any(isinstance(d.get(k), str) and not isinstance(d.get(k), _Src)
+                                          for k in HARMONY_KEYS):
+        return d
+    out = dict(d)
+    for k in HARMONY_KEYS:
+        v = out.get(k)
+        if isinstance(v, str) and not isinstance(v, _Src):
+            out[k] = _Src(v)
+            out[k].line = line
+    return out
 PART_KEYS = PART_SOURCES + PART_OPTS
 KEYWORDS = {"for", "in", "if", "elif", "else", "every", "def", "return", "form", "with", "and", "or", "not",
             "true", "false", "none", "as", "at", "bars"}
@@ -1251,11 +1266,11 @@ class _Interp:
         if len(path) == 1:
             if op != "=" and root not in env:
                 self.err(f"'{root}' is not defined yet", line, did_you_mean(root, env) if env else None)
-            env[root] = val if op == "=" else self.binop(op[0], env[root], val, line)
+            env[root] = _tag_harmony(val if op == "=" else self.binop(op[0], env[root], val, line), line)
             return
         if root not in env:
             self.err(f"'{root}' is not defined", line, did_you_mean(root, env) if env else "define it first")
-        env[root] = self.set_path(env[root], path[1:], op, val, line, root)
+        env[root] = _tag_harmony(self.set_path(env[root], path[1:], op, val, line, root), line)
 
     def set_path(self, cur, keys, op, val, line, where):
         """Return a copy of `cur` with the value at `keys` set (=) or combined (+= -=); none removes."""
@@ -1445,7 +1460,7 @@ class _Interp:
             if kind == "assign":
                 _, path, op, expr, line = s
                 val = self.ev(expr, env)
-                inst.section = self.set_path(inst.section, path, op, val, line, inst.base)
+                inst.section = _tag_harmony(self.set_path(inst.section, path, op, val, line, inst.base), line)
             elif kind == "if":
                 self.run_inst(self.pick(s, env), inst, env)
             elif kind == "event":
@@ -1800,6 +1815,25 @@ class _Interp:
         name, body = words
         spec = self.song.setdefault("patches", {}).setdefault(name, {"modules": {}, "wires": []})
         for tok in split_top(body.replace("|", " ")):
+            if tok.startswith("@"):                          # a macro: @bright(default=.5, f1.cutoff=200..4000)
+                mm = re.fullmatch(r"@([A-Za-z_]\w*)\((.*)\)", tok, re.S)
+                if not mm:
+                    self.err(f"patch {name}: macro '{tok}' not understood", line,
+                             "write @bright(default=.5, f1.cutoff=200..4000, drive.drive=0..0.8)")
+                mac = {"default": 0.5, "map": {}}
+                for item in split_top(mm[2], ","):
+                    k, eq, v = (x.strip() for x in item.partition("="))
+                    if k == "default" and eq:
+                        mac["default"] = float(v)
+                    elif eq and ".." in v:
+                        a, _, b = v.partition("..")
+                        mac["map"][k] = [a.strip() if re.search(r"[A-Za-z]", a) else float(a),
+                                         b.strip() if re.search(r"[A-Za-z]", b) else float(b)]
+                    else:
+                        self.err(f"patch {name}: macro {mm[1]}: '{item.strip()}' should be module.knob=low..high "
+                                 "or default=0..1", line)
+                spec.setdefault("macros", {})[mm[1]] = mac
+                continue
             if ">" in tok:
                 spec["wires"].append(tok)
                 continue
@@ -1879,6 +1913,20 @@ class _Interp:
                 if not isinstance(d, dict):
                     self.err(f"set {m[1]}: '{k}' is not a mapping", line)
             d[last] = _value(m[2])
+            if m[1].split(".")[0] == "harmony":
+                self.check_harmony_block(line)
+
+    def check_harmony_block(self, line):
+        """`set harmony...`: check the default chords and every progression now, on the set line."""
+        h = self.song.get("harmony")
+        if not isinstance(h, dict):
+            return
+        if isinstance(h.get("default"), (str, list)) and h["default"]:
+            self.check_prog(h["default"], line, "harmony default: ")
+        progs = h.get("progressions")
+        for name, text in (progs.items() if isinstance(progs, dict) else ()):
+            if isinstance(text, str):
+                self.check_prog(text, line, f"prog {name}: ")
 
     def check_prog(self, text, line, prefix="", section=None):
         """Parse a progression now so a bad chord symbol is reported on the line that wrote it."""
@@ -2025,6 +2073,8 @@ def _steps(role: str, p: Part) -> dict:
 
 
 def _plain(v):
+    if isinstance(v, _Src):
+        return str(v)
     if isinstance(v, Ref):
         return v.name
     if isinstance(v, list):
@@ -2046,6 +2096,28 @@ class _Compiler:
 
     def _progressions(self):
         return (self.it.song.get("harmony") or {}).get("progressions") or {}
+
+    def check_harmony(self, v, inst: "_Inst"):
+        """A section's harmony (chords/prog/harmony) is a progression's name or an inline progression.
+        Check it on the line that wrote it: a definition line (`verse = {chords: "C Am"}`), else the
+        line that placed the section."""
+        progs = self._progressions()
+        line = getattr(v, "line", None) or inst.line
+        name = v.name if isinstance(v, Ref) else v
+        if not isinstance(name, str) or name in progs:
+            return
+        hint = did_you_mean(name, progs) if progs else 'define it: prog name "Am:2 F:2"'
+        if isinstance(v, Ref) or re.fullmatch(r"[a-z_][\w-]*", name):      # a name, not chord symbols
+            self.err(f"unknown progression '{name}'", line, inst.name, hint)
+        from ..theory.harmony import parse_progression
+        try:
+            parse_progression(str(name))
+        except NotationError as e:
+            self.err(str(e), line, inst.name)
+        if ":" not in name and " " not in name.strip():                    # one chord with no length
+            self.err(f"'{name}' is one chord with no length", line, inst.name,
+                     f"give it a length in bars ({name}:4), or name a progression"
+                     + (f"; {hint}" if progs and "did you mean" in hint else ""))
 
     def check_style(self, role, name, line, section, opts):
         from ..arrange.styles import SHARED_ROLE, get_style, load_styles
@@ -2302,6 +2374,8 @@ class _Compiler:
             for key in roles:
                 v = x.section.get(key)
                 if _is_setting(key, v, self._progressions()):
+                    if key in HARMONY_KEYS:
+                        self.check_harmony(v, x)
                     if key != "bars":
                         sec["harmony" if key in ("chords", "prog") else key] = _plain(v)
                     continue

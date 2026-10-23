@@ -1,0 +1,15 @@
+# A patch sketch of the built-in hat: metallic squares and noise, band-passed and high-passed, a short envelope.
+description: "Sketch of the built-in hat: three square waves at inharmonic ratios (the 808's metal is six) and noise, through a high band-pass and a high-pass, with a short envelope. Harder hits are brighter; the open macro lets it ring."
+modules:
+  m1: {type: osc, wave: square, level: 0.5}
+  m2: {type: osc, wave: square, detune: 6.8, level: 0.5}
+  m3: {type: osc, wave: square, detune: 10.4, level: 0.5}
+  noise: {type: noise, color: 0, level: 0.4}
+  color: {type: filter, mode: bp, cutoff: 10000, q: 0.9, keytrack: 0}
+  hp: {type: filter, mode: hp, cutoff: 7000, q: 0.7, keytrack: 0}
+  env: {type: env, a: 0.0005, d: 0.06, s: 0, r: 0.03}
+  amp: {type: vca}
+  out: {type: out, level: 1.5, tail: 0.05}
+wires: [m1>color, m2>color, m3>color, noise>color, vel>color.cutoff*1, color>hp, hp>amp, env>amp.gain, amp>out]
+macros:
+  open: {default: 0, map: {env.d: [0.06, 0.5], env.r: [0.03, 0.3]}}

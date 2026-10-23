@@ -1,0 +1,10 @@
+# A patch sketch of the built-in zap: a square wave whose pitch dives, through a low-pass.
+description: "Sketch of the built-in zap: a square wave starting three octaves above its resting pitch and diving down, through a low-pass, with a quick decay. Harder hits start higher and brighter."
+modules:
+  sq: {type: osc, wave: square, octave: -1, level: 0.6}
+  dive: {type: env, a: 0.0005, d: 0.15, s: 0, r: 0.05}
+  f1: {type: filter, mode: lp, cutoff: 6000, q: 0.7, keytrack: 0}
+  env: {type: env, a: 0.001, d: 0.35, s: 0, r: 0.05}
+  amp: {type: vca}
+  out: {type: out, level: 0.7}
+wires: [dive>sq.detune*24, vel>sq.detune*6, sq>f1, vel>f1.cutoff*1, f1>amp, env>amp.gain, amp>out]

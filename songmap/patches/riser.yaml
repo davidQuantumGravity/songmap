@@ -1,0 +1,11 @@
+# A patch sketch of the built-in riser: noise through a band-pass that sweeps up, a rising sine, a swell.
+description: "Sketch of the built-in riser: white noise through a band-pass whose centre an envelope sweeps up over the note, a sine rising three octaves, and a slow swell. Play it as a long note; harder notes sweep higher."
+modules:
+  noise: {type: noise, color: 0, level: 0.8}
+  sweep: {type: env, a: 2, d: 0.1, s: 1, r: 0.05}
+  bp: {type: filter, mode: bp, cutoff: 300, q: 1.4, keytrack: 0}
+  siren: {type: osc, wave: sine, octave: -1, level: 0.25}
+  swell: {type: env, a: 2, d: 0.1, s: 1, r: 0.05}
+  amp: {type: vca}
+  out: {type: out, level: 0.9}
+wires: [noise>bp, sweep>bp.cutoff*5, vel>bp.cutoff*1, sweep>siren.detune*24, bp>amp, siren>amp, swell>amp.gain, amp>out]

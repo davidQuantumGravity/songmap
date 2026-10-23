@@ -7,7 +7,8 @@
 A **module** is one block (an oscillator, an envelope, a filter, ...) with its own knobs. A **wire** connects
 a source to a destination:
 
-- `a>b`             audio: a's output is added into b's input (oscillator -> filter -> amp -> out);
+- `a>b`             audio: a's output is added into b's input (oscillator -> filter -> amp -> out); into an
+                    oscillator it is FM: it bends the oscillator's phase by its `fm` depth;
 - `a>b.knob*amount` modulation: a's output moves b's knob (envelope -> filter cutoff). How it moves depends
                     on the knob: frequencies move in octaves per unit, pitch in semitones, the rest linearly;
                     a VCA's `gain` is *replaced* by its modulation (env1>amp.gain: the envelope shapes the level).
@@ -17,7 +18,9 @@ key is held), `rand` (a per-note random value in -1..1, from the note's seed). W
 shaper is how a patch makes velocity change the timbre, not just the loudness (instruments/base.py).
 
 Every module knob becomes an instrument param named `<module>.<knob>` (`f1.cutoff`), so songs, presets and the
-Studio's knobs set it like any other instrument's. Patches live in a song (`patch` lines, YAML `patches:`) or
+Studio's knobs set it like any other instrument's. A **macro** is one 0..1 knob that moves several:
+`@bright(default=.5, f1.cutoff=200..4000, drive.drive=0..0.8)` (YAML: `macros: {bright: {default: .5, map:
+{f1.cutoff: [200, 4000]}}}`); a knob a macro maps follows the macro. Patches live in a song (`patch` lines, YAML `patches:`) or
 in the library (songmap/patches/<name>.yaml), and are used as `patch/<name>`.
 """
 from __future__ import annotations
@@ -74,8 +77,10 @@ MODULES: dict[str, ModuleType] = {m.name: m for m in (
         Knob("detune", 0, -24, 24, "st", "lin", "semi", "semitones off the note (modulate it for vibrato or a pitch drop)"),
         Knob("fine", 0, -50, 50, "cents", "lin", "lin", "fine tuning; two oscillators a few cents apart beat and widen"),
         Knob("pw", 0.5, 0.05, 0.95, "", "lin", "lin", "pulse width of the square (0.5 = square, thinner = nasal)"),
+        Knob("fm", 1, 0, 12, "", "lin", "lin", "FM depth: how far audio wired into this oscillator bends its phase "
+             "(frequency modulation: a sine modulating a sine at 1:1 to 14:1 is the electric piano and the bell)"),
         Knob("level", 0.8, 0, 1, "", "lin", "lin", "output level"),
-    ), audio_in=False),
+    ), audio_in=True),
     ModuleType("noise", "noise", "noise: every frequency at once (breath, hiss, drum wires)", (
         Knob("color", 0, 0, 1, "", "lin", "lin", "0 white (hissy, bright) .. 1 pink (softer, like rain)"),
         Knob("level", 0.5, 0, 1, "", "lin", "lin", "output level"),
@@ -228,7 +233,25 @@ def validate(spec: dict, name: str = "patch") -> dict:
                              f"wire it into a knob, e.g. {w.src}>{w.dst}.{t.knobs[0].name}")
         wires.append(w)
     order = _order(norm, wires, name)
-    return {"modules": norm, "wires": wires, "order": order}
+    macros = {}
+    for mname, mac in (spec.get("macros") or {}).items():
+        if not re.fullmatch(r"[A-Za-z_]\w*", str(mname)) or mname in norm or mname in SOURCES:
+            raise ParamError(f"{name}: macro '{mname}' needs a plain name that isn't a module or a source")
+        mac = dict(mac or {})
+        targets = {}
+        for tgt, rng_ in (mac.get("map") or {}).items():
+            mid, _, kname = str(tgt).partition(".")
+            if mid not in norm:
+                raise ParamError(f"{name}: macro {mname}: no module '{mid}'; " + _dym(mid, norm))
+            kn = {k.name: k for k in MODULES[norm[mid]["type"]].knobs}
+            if kname not in kn:
+                raise ParamError(f"{name}: macro {mname}: {mid} has no knob '{kname}'; " + _dym(kname, kn))
+            lo, hi = (knob_value(MODULES[norm[mid]["type"]], kn[kname], x) for x in rng_)
+            targets[f"{mid}.{kname}"] = [min(max(lo, kn[kname].lo), kn[kname].hi), min(max(hi, kn[kname].lo), kn[kname].hi)]
+        if not targets:
+            raise ParamError(f"{name}: macro {mname} moves nothing; map it to knobs, e.g. f1.cutoff=200..4000")
+        macros[mname] = {"default": min(max(float(mac.get("default", 0.5)), 0.0), 1.0), "map": targets}
+    return {"modules": norm, "wires": wires, "order": order, "macros": macros}
 
 
 def _dym(x: str, options) -> str:
@@ -262,13 +285,21 @@ def to_text(name: str, spec: dict) -> list[str]:
                 args.append(f"{k.name}={k.choices[int(round(v))] if k.choices else _num(v)}")
         mods.append(f"{mid}={m['type']}" + (f"({', '.join(args)})" if args else ""))
     wires = [w.text() if isinstance(w, Wire) else parse_wire(w).text() for w in spec.get("wires") or []]
-    return [f"patch {name} " + " ".join(mods)] + ([f"patch {name} " + " ".join(wires)] if wires else [])
+    rng = lambda x: f"{round(float(x), 4):g}"                  # noqa: E731  (0.2, not .2: ".03...2" would misread)
+    macros = [f"@{m}(default={_num(mac['default'])}, " + ", ".join(f"{t}={rng(a)}..{rng(b)}" for t, (a, b) in mac["map"].items())
+              + ")" for m, mac in (spec.get("macros") or {}).items()]
+    return ([f"patch {name} " + " ".join(mods)] + ([f"patch {name} " + " ".join(wires)] if wires else [])
+            + ([f"patch {name} " + " ".join(macros)] if macros else []))
 
 
 def raw_spec(spec: dict) -> dict:
     """A validated spec back to plain data (YAML/JSON): wires as strings."""
-    return {"modules": {k: dict(v) for k, v in spec["modules"].items()},
-            "wires": [w.text() if isinstance(w, Wire) else w for w in spec["wires"]]}
+    out = {"modules": {k: dict(v) for k, v in spec["modules"].items()},
+           "wires": [w.text() if isinstance(w, Wire) else w for w in spec["wires"]]}
+    if spec.get("macros"):
+        out["macros"] = {m: {"default": mac["default"], "map": {t: list(r) for t, r in mac["map"].items()}}
+                         for m, mac in spec["macros"].items()}
+    return out
 
 
 # ---------------------------------------------------------------------------------------------- library
@@ -294,6 +325,9 @@ def build(name: str, spec: dict, **params) -> Instrument:
             d = float(m.get(k.name, k.default))
             doc = f"{mid} ({m['type']}): {k.doc}"
             knobs.append(Param(f"{mid}.{k.name}", d, k.lo, k.hi, k.unit, k.curve, mid, doc))
+    for mname, mac in v["macros"].items():
+        moves = ", ".join(f"{t} {_num(a)}..{_num(b)}" for t, (a, b) in mac["map"].items())
+        knobs.insert(0, Param(mname, mac["default"], 0, 1, "", "lin", "macros", f"macro: moves {moves}"))
     digest = hashlib.sha1(json.dumps(raw_spec(v), sort_keys=True).encode()).hexdigest()[:10]
     cls = type("Patch_" + re.sub(r"\W", "_", name), (PatchInstrument,),
                {"name": f"patch/{name}#{digest}", "PARAMS": tuple(knobs), "SPEC": v, "family": "synth"})
@@ -327,7 +361,7 @@ class PatchInstrument(Instrument):
                 if any(w.knob is None for w in ins) else None
             k = {}
             for kn in mt.knobs:
-                base = self.p_(note, f"{mid}.{kn.name}")
+                base = self._macro(note, f"{mid}.{kn.name}", kn)
                 mods = [(outs[w.src] if w.src in outs else src[w.src]) * w.amount for w in ins if w.knob == kn.name]
                 if not mods:
                     k[kn.name] = base
@@ -350,6 +384,17 @@ class PatchInstrument(Instrument):
         y[-fade:] *= np.linspace(1, 0, fade)
         return pan_mono(y, pan) if abs(pan) > 1e-6 else y
 
+    def _macro(self, note: Note, key: str, kn: Knob) -> float:
+        """A knob's value: set by the macro that maps it (the last one, if several), else its own param."""
+        for mname, mac in reversed(list(self.SPEC.get("macros", {}).items())):
+            if key in mac["map"]:
+                a, b = mac["map"][key]
+                x = float(self.p_(note, mname))
+                if kn.curve == "log" and a > 0 and b > 0:
+                    return float(a * (b / a) ** x)
+                return a + (b - a) * x
+        return self.p_(note, key)
+
     # one module, one note: knob values may be arrays (modulated) or numbers
     def _module(self, typ, k, audio, note, n, t, rng, gate_n):
         def arr(x):
@@ -360,6 +405,12 @@ class PatchInstrument(Instrument):
             f = np.clip(arr(f), 1.0, 0.45 * SR)
             w = int(round(float(np.mean(k["wave"]))))
             ph0 = rng.random()
+            if audio is not None:                          # FM: the wired-in signal bends the phase
+                ph = ph0 + np.cumsum(f) / SR + arr(k["fm"]) * np.asarray(audio, float) / (2 * np.pi)
+                frac = ph % 1.0
+                y = (np.sin(2 * np.pi * ph) if w in (0, 4) else 2 * frac - 1 if w == 1 else
+                     np.where(frac < np.clip(arr(k["pw"]), 0.05, 0.95), 1.0, -1.0) if w == 2 else 2 * np.abs(2 * frac - 1) - 1)
+                return y * arr(k["level"])
             y = (sine(f, n, ph0) if w == 0 else saw(f, n, ph0) if w == 1 else
                  square(f, n, np.clip(arr(k["pw"]), 0.05, 0.95), ph0) if w == 2 else triangle(f, n, ph0) if w == 3 else
                  supersaw(f, n))

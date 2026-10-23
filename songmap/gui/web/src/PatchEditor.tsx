@@ -5,7 +5,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { Catalog } from "./api";
 import { Knob } from "./ui";
 
-export type PatchSpec = { modules: Record<string, Record<string, number | string>>; wires: string[] };
+export type PatchSpec = { modules: Record<string, Record<string, number | string>>; wires: string[];
+  macros?: Record<string, { default: number; map: Record<string, [number, number]> }> };
 type ModType = Catalog["modules"][number];
 type Wire = { src: string; dst: string; knob: string | null; amount: number };
 
@@ -153,7 +154,10 @@ export function PatchEditor({ name, spec, editable, catalog, onSave, onCopy, pos
   const removeModule = (id: string) => {
     const mods = { ...spec.modules };
     delete mods[id];
-    save({ modules: mods, wires: wires.filter((w) => w.src !== id && w.dst !== id).map(wireText) });
+    const macros = Object.fromEntries(Object.entries(spec.macros ?? {})
+      .map(([m, mac]) => [m, { ...mac, map: Object.fromEntries(Object.entries(mac.map).filter(([t]) => !t.startsWith(id + "."))) }] as const)
+      .filter(([, mac]) => Object.keys(mac.map).length));
+    save({ modules: mods, wires: wires.filter((w) => w.src !== id && w.dst !== id).map(wireText), macros });
     setSel(null);
   };
   const setKnob = (id: string, knob: string, v: number) => {
@@ -273,6 +277,16 @@ export function PatchEditor({ name, spec, editable, catalog, onSave, onCopy, pos
               <p className="small"><b>Envelopes</b> and <b>LFOs</b> don't make sound: they move knobs. An envelope into an amplifier's
                 gain is the note's loudness shape; into a filter's cutoff it is the "wah" at each note.</p>
               <p className="small"><b>vel</b> into a filter makes harder notes brighter: the reason real instruments sound alive.</p>
+              <p className="small"><b>FM:</b> wire one oscillator's sound into another's input and it bends its phase
+                (the <code>fm</code> knob sets how far): a sine into a sine is the electric piano and the bell.</p>
+              {spec.macros && Object.keys(spec.macros).length > 0 && (
+                <>
+                  <h4>Macros</h4>
+                  <p className="small muted">One knob that moves several (turn them in the Knobs view):</p>
+                  <ul className="small knob-docs">{Object.entries(spec.macros).map(([m, mac]) => (
+                    <li key={m}><b>{m}</b> moves {Object.entries(mac.map).map(([t, [a, b]]) => `${t} ${a}→${b}`).join(", ")}</li>))}</ul>
+                </>
+              )}
               <p className="small muted">Click a module or a wire to see what it does.</p>
             </>
           )}

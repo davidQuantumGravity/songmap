@@ -52,6 +52,7 @@ class Section:
     key: str | None = None
     binaural: dict = field(default_factory=dict)   # {beat, carriers, gain_db} (mix/binaural.py); carries over
     line: int | None = None
+    harmony_line: int | None = field(default=None, compare=False, repr=False)   # where `harmony:` is written
 
 
 @dataclass
@@ -68,6 +69,7 @@ class HarmonySpec:
     chord_bars: float = 1.0
     progressions: dict[str, str] = field(default_factory=dict)
     voicing: dict = field(default_factory=dict)
+    lines: dict = field(default_factory=dict, compare=False, repr=False)   # "default" / progression name -> line
 
 
 @dataclass

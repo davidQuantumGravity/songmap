@@ -93,6 +93,11 @@ class Instrument:
         """Round-robin variation: value * (1 + rel * rr * N(0,1))."""
         return value * (1.0 + rel * self.p.get("rr", 0.0) * rng.standard_normal())
 
+    def rr_rng(self, note: Note) -> np.random.Generator:
+        """A per-note stream for round-robin variation, separate from `rng` so adding variation to an
+        instrument doesn't move the random draws it already makes (oscillator phases, noise)."""
+        return np.random.default_rng(zlib.crc32((self.name + ":rr").encode()) ^ (note.seed * 2654435761 % 2**32))
+
     def vel_gain(self, v: float) -> float:
         return v ** self.p.get("vel_curve", 1.5)
 

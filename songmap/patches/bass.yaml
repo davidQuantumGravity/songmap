@@ -1,0 +1,13 @@
+# A patch sketch of the built-in bass: saw + square + sub sine, a resonant low-pass with an envelope, drive.
+description: "Sketch of the built-in bass: a saw and a square at the note plus a sine an octave down, through a resonant low-pass that an envelope (and velocity) opens at each note, then drive."
+modules:
+  saw: {type: osc, wave: saw, level: 0.6}
+  square: {type: osc, wave: square, level: 0.3}
+  sub: {type: osc, wave: sine, octave: -1, level: 0.5}
+  f1: {type: filter, mode: lp, cutoff: 700, q: 1.2, keytrack: 0.4}
+  fenv: {type: env, a: 0.002, d: 0.15, s: 0, r: 0.05}
+  drive: {type: shaper, drive: 0.25}
+  amp_env: {type: env, a: 0.003, d: 0.2, s: 0.8, r: 0.08}
+  amp: {type: vca}
+  out: {type: out, level: 0.8}
+wires: [saw>f1, square>f1, sub>f1, fenv>f1.cutoff*1.5, vel>f1.cutoff*1.5, f1>drive, drive>amp, amp_env>amp.gain, amp>out]
