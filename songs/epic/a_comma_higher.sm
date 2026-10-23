@@ -1,0 +1,199 @@
+# A Comma Higher. A through-composed progressive-metal / modal-jazz / golden-modal epic in 36-ET, 9:48.
+# One idea carries it: the song starts on C and ends on ^C, one sixth-step (33 cents, the 36-ET golden comma)
+# higher, after "the comma pump" of textbook Chapter 34 lifts the whole tonality one note at a time.
+# Listen for: the golden pedal intro bending into a C major power chord; a 7/8 Phrygian-dominant riff; a verse
+# and chorus whose tune (the "phi" theme) returns as a modal-jazz solo, a ballad and a coda; a modal jazz head
+# that moves from C dorian to C golden7 (the golden Dorian) and up a comma, like So What's half-step lift; the
+# seven golden7 modes, brightest to darkest, traded between horn and guitar; the golden jazz cadence home to
+# Cmaj7; golden giant steps; a 7/8 decatonic riff built from the two golden pentatonics; golden planing (a C
+# major line in three keys at once); a 13/16 bridge; a guitar solo round the golden circle; a ballad on the
+# golden Neapolitan; then thirteen golden chords climbing to ^Cg, and the riff and chorus a comma higher.
+#
+# Golden techniques and where they are (textbook chapters):
+#   veil, coda      golden pedal: over a held C only Cg, ^Abg and vFg can sound (ch37); the coda does it on ^C
+#   door            the golden projection reversed, Cg -> C: C golden7 opens onto C, the dominant of F
+#                   harmonic minor, the Western key nearest C golden7 (ch35)
+#   chorus_2        golden deceptive cadence Eb - vEg - Eg - Fm (ch29); golden mediant Ab - Cg - C into the riff
+#   head_*          modal key changes: C dorian (12-ET) -> C golden7 (3|3 is the golden Dorian, ch36) -> a
+#                   comma lift to ^C golden7, "a pure change of plane" (ch34) -> back to C dorian
+#   mode_60..06     the seven modes of golden7 on C, brightest to darkest, one note lower each time by 5
+#                   sixth-steps (ch36); the two darkest have no golden tonic (Cdim(^^3,v5), Csus2(vvvv5))
+#   cadence         golden jazz cadence Dg7 - vGg/D - G7 - Baug(v3)/G - ^Ebg(^5)/G - Cmaj7 (ch29); Dg7 is a
+#                   chord of the darkest mode, so it is the pivot out of it
+#   giant           golden giant steps C - Cg - Ab - Abg - E - Eg - C, the horn on the common tones (ch37)
+#   deca_*, axe_solo  the "35" golden decatonic (golden10_36, ch36): a riff alternating its two golden
+#                   pentatonics, the golden circle walk Cg - ^Abg - vFg - C#g - ^Ag - vF#g - Dg and back
+#   planing         golden planing = three-key polytonality: a C major line with vE major and ^G major above it (ch37)
+#   deca_13         13/16 over vEg -> Cg (leading-tone resolution) and C#g -> Cg (the golden Neapolitan, ch37)
+#   still           golden home on golden timbres: the phi theme in C golden7, Bg -> Cg (every voice up a semitone)
+#   pump_a..d       the comma pump: Cg - ^Abg - vFg - C#g - ^Ag - vF#g - Dg - ^Bbg - vGg - Ebg - ^Bg - vAbg - Eg - ^Cg,
+#                   each chord keeping two notes and raising one a semitone (ch34); the lead sings the top voice,
+#                   ^G ^Ab ^A ^Bb ^B ^C, and lands on the new tonic
+#   summit_*        riff, verse, pre-chorus and chorus a comma higher (^C phrygian dominant, ^F harmonic minor,
+#                   ^Ab major); the last chorus has the golden deceptive cadence ^Eb - Eg - ^Eg - ^Fm
+#   coda            golden Picardy ^Cm - ^Cm(^3) - ^Cg - ^C (ch29)
+#
+# Engine extensions used: per-section meters (meter=7/8, "5/4 3+2", "13/16 3+3+3+2+2"), the named golden modes
+# (key="C golden7_51", golden10_36) and the phrygian_dominant mode. The distorted guitar is a patch instrument
+# that distorts each note on its own, so golden chords keep their shape through the distortion.
+song "A Comma Higher" 138 4/4 C fps=30 seed=1301 tail=6 tuning=36edo
+patch axe str=string(t60=1.6, brightness=.93, pick=.003) sh=shaper(drive=.8) cab=filter(mode=lp, cutoff=4200, q=1.2, keytrack=0) env=env(a=.002, d=.4, s=.85, r=.07) amp=vca out=out(level=.6)
+patch axe str>sh sh>cab cab>amp env>amp.gain amp>out vel>sh.drive*.3
+inst axe=patch/axe bass=bass/v0(cutoff=850, drive=2.2, env_amt=1.6, env_decay=.12, sub=.4, glide=.03) lead(voices=3, detune=2, vib_depth=6, vib_delay=.35, cutoff=3800, release=.2) horn=clean/organ(partials=7, rolloff=1.5, even=.6, attack=.035, release=.18, vel_bright=.8) epiano=epiano/still keys=keys/still(hardness=.4) organ=clean/organ(partials=9, rolloff=1.25, attack=.02, release=.25) gold=clean/golden_pad(release=2) bell=clean/glass gtr=string_pluck/still(brightness=.8, t60=2.4) low=clean/bass
+kit kick=kick/v0(tune=55, sweep=26, decay=.28, click=.65, click_tone=4500, drive=2) snare=snare/v0(tone=205, tone_mix=.5, snap=.65, noise_decay=.2, drive=1.5) hat=hat/v0(decay=.045) ride=hat/v0(decay=.3, hp=3500, color=6500, metal=.85, tune=.8) cym=hat/v0_open(decay=1.4, hp=3200, metal=.75) tom1=kick/v0(tune=150, sweep=7, sweep_time=.05, decay=.35, click=.15, drive=1.2) tom2=kick/v0(tune=105, sweep=7, sweep_time=.05, decay=.42, click=.15, drive=1.2) tom3=kick/v0(tune=78, sweep=8, sweep_time=.05, decay=.5, click=.15, drive=1.2)
+
+# --- harmony -------------------------------------------------------------------------------------------
+prog veil_p    "Cg:2 ^Abg:1 vFg:1 Cg:2 ^Abg:1 ^Abg7:1 Cg:1 vFg:1 ^Abg:1 Cg:1"
+prog door_p    "Cg:1 C:1"
+prog verse_p   "Fm:1 Db:1 C:1 Fm:1 Fm:1 Db:1 Bbm:1 C:1"
+prog pre_p     "Db:1 Eb:1 Fm:1 Eb:1"
+prog chorus_p  "Ab:1 Fm:1 Db:1 Eb:1 Db:1 Eb:1 Fm:1 Ab:1"
+prog chorus2_p "Ab:1 Fm:1 Db:1 Eb:1 Db:1 Eb:0.5 vEg:0.25 Eg:0.25 Fm:1 Ab:0.75 Cg:0.25"
+prog dorian_p  "Cm7:2 F7:2 Cm7:2 F7:1 Cm7:1"
+prog goldor_p  "Cg7:2 vFg7:2 Cg7:2 vFg7:1 Cg7:1"
+prog lift_p    "^Cg7:2 Fg7:2 ^Cg7:2 Fg7:1 ^Cg7:1"
+prog m60 "Cg7:3 Bg:1 Cg7:3 Bg:1"
+prog m51 "Cg7:3 ^Gg:1 Cg7:3 ^Abg:1"
+prog m42 "Cg7:3 vFg:1 Cg7:3 vFg7:1"
+prog m33 "Cg7:3 C#g:1 Cg7:3 C#g7:1"
+prog m24 "Cg:3 ^Ag:1 Cg:3 C#g7:1"
+prog m15 "Cdim(^^3,v5):3 vF#g:1 Cdim(^^3,v5):3 ^Abg:1"
+prog m06 "Csus2(vvvv5):3 vFg:1 Csus2(vvvv5):3 Dg7:1"
+prog cadence_p "vGg/D:1 G7:1 Baug(v3)/G:0.5 ^Ebg(^5)/G:0.5 Cmaj7:1"
+prog giant_p   "Cmaj7:1 C:1 Cg:0.5 Ab:1 Abg:0.5 E:1 Eg:0.5 C:2.5"
+prog circle_p  "Cg:1 ^Abg:1 vFg:1 C#g:1 ^Ag:1 vF#g:1 Dg:1 Dg7:1"
+prog thirteen_p "vEg:2 Cg:2 C#g:2 Cg:2"
+prog solo_p    "Cg:1 ^Abg:1 vFg:1 C#g:1 ^Ag:1 vF#g:1 Dg:2 vF#g:1 ^Ag:1 C#g:1 vFg:1 ^Abg:1 Cg:1 C#g:1 Cg:1"
+prog still_p   "Cg:2 ^Abg7:1 Cg:1 ^Abg:1 Cg:0.5 C#g:0.5 ^Abg7:1 Cg:1 vEg:1 Cg:1 ^Abg:1 vFg:1 C#g:1 C#g7:1 Bg:1 Cg:1"
+prog pump_ap   "Cg:2 ^Abg:2 vFg:2"
+prog pump_bp   "C#g:2 ^Ag:2 vF#g:2 Dg:2"
+prog pump_cp   "^Bbg:1 vGg:1 Ebg:1 ^Bg:1 vAbg:1 Eg:1"
+prog verse3_p   "^Fm:1 ^Db:1 ^C:1 ^Fm:1 ^Fm:1 ^Db:1 ^Bbm:1 ^C:1"
+prog pre3_p     "^Db:1 ^Eb:1 ^Fm:1 ^Eb:1"
+prog chorus3_p "^Ab:1 ^Fm:1 ^Db:1 ^Eb:1 ^Db:1 ^Eb:1 ^Fm:1 ^Ab:1"
+prog chorus4_p "^Ab:1 ^Fm:1 ^Db:1 ^Eb:1 ^Db:1 ^Eb:0.5 Eg:0.25 ^Eg:0.25 ^Fm:1 ^Ab:1"
+prog coda_p    "^Cg:2 vAg7:1 ^Cg:1 vAg:1 ^Cg:0.5 ^C#g:0.5 vAg7:1 ^Cg:1 ^Cm:1 ^Cm(^3):1 ^Cg:1 ^C:1"
+
+# --- themes ----------------------------------------------------------------------------------------------
+# phi: the song's tune, in scale degrees so every key and mode recolours it (Ab major in the chorus, C golden7
+# in the ballad, ^C golden7 in the coda). phi_b2 rests where the golden deceptive chords pass.
+phi_a = "4/4. 5/8 4/4 2/4 | 0/4. 1/8 2/2 | 4/4. 5/8 7/4 6/8 5/8 | 4/1"
+phi_b = "5/4. 4/8 2/4 5/4 | 4/4. 2/8 1/2 | 2/4. 4/8 5/4 6/4 | 7/1"
+phi_b2 = "5/4. 4/8 2/4 5/4 | 4/4. 2/8 r/2 | 2/4. 4/8 5/4 6/4 | 7/2. r/4"
+chorus_tune = {deg: "=mf " + phi_a + " | =f " + phi_b, oct: 0}
+chorus2_tune = {deg: "=f " + phi_a + " | =ff " + phi_b2, oct: 0}
+# the riff: C phrygian dominant in 7/8 (2+2+3), accents on the group starts
+riff = {deg: "=f 0/16^ 0 r 0 1/8^ 0/16 r 0 0 4/8^ 3/16 1 | 0/16^ 0 r 0 1/8^ 0/16 r -1 -2 -3/8^ -2/16 -1 | 0/16^ 0 r 0 1/8^ 0/16 r 0 0 4/8^ 5/16 4 | 7/8^ 6/16 5 4/8 3/16 1 0/8^ 0/16 r 0 r", oct: -2}
+riff_bass = {deg: "=f 0/16^ 0 r 0 1/8^ 0/16 r 0 0 4/8^ 3/16 1 | 0/16^ 0 r 0 1/8^ 0/16 r -1 -2 -3/8^ -2/16 -1 | 0/16^ 0 r 0 1/8^ 0/16 r 0 0 4/8^ 5/16 4 | 7/8^ 6/16 5 4/8 3/16 1 0/8^ 0/16 r 0 r", oct: -2}
+riff_counter = {deg: "=mp < 7/2.. | 9/2.. | 11/2..^ =f | 10/8 9/8 8/8 7/2", oct: 0}
+# the verse (F harmonic minor): two eight-bar phrases
+verse_tune = {deg: "=mp 4/4.^ 3/8 2/4 1/8 2/8 | 0/2 r/4 4/8 5/8 | 6/4. 5/8 4/4 2/4 | 4/2. r/4 | 4/4. 3/8 2/4 4/4 | 5/4. 4/8 3/2 | 3/4. 2/8 1/4 3/4 | 6/2. r/4 | =mf 4/4.^ 5/8 6/4 7/4 | 9/2^ r/4 7/8 6/8 | 6/4. 5/8 4/4 2/4 | 4/2. r/4 | 7/4. 6/8 7/4 4/4 | 5/4. 4/8 3/2 | 3/4. 4/8 5/4 4/4 | 6/2. r/4", oct: 0}
+# pre-chorus (Ab major, 5/4 3+2): a climb to the chorus's first note
+pre_tune = {deg: "=mp < 5/2. 3/2 | 4/2. 6/2 | 5/2. 7/2 | 8/2.^ 4/4 6/4 =f", oct: 0}
+# the modal jazz head (8 bars, swung): the same degrees in C dorian, C golden7 and ^C golden7
+head = {deg: "=mf r/8 0/8 2/8 4/8 6/4^ 4/8 2/8 | 0/4. r/8 r/2 | r/8 2/8 4/8 6/8 7/4^ 6/8 4/8 | 5/2. r/4 | r/8 7/8 6/8 4/8 5/8 4/8 2/8 1/8 | 2/2 r/2 | r/8 4/8 3/8 2/8 1/8 0/8 -1/8 1/8 | 0/2. r/4", oct: 1}
+# trading fours through the seven modes: the horn asks, the guitar answers; both rest while the mode's colour
+# chord sounds (bars 4 and 8)
+door_ask = {deg: "=mf r/8 4/8 2/8 0/8 2/4^ 4/4 | 6/8 7/8 6/8 4/8 2/4. 0/8 | 1/8 2/8 4/8 2/8 0/2 | r/1 | r/1 | r/1 | r/1 | r/1", oct: 1}
+door_answer = {deg: "=f r/1 | r/1 | r/1 | r/1 | 7/16^ 6 4 2 0/8 2/8 4/4 6/4 | 7/4.^ 6/8 4/2 | 2/8 4/8 6/8 7/8 9/4^ 7/4 | r/1", oct: 0}
+cadence_horn = {rel: "=mf 5/1 | 7/2 5/2 | 3/2 3/2 | 7/1", oct: 1}
+giant_horn = {deg: "=f 7/1 | 7/1 | 7/1 | b5/1 | b5/2 2/2 | 2/1 | 2/2 4/2 | 7/1", oct: 1}
+# the decatonic riff: bar 1 in the even golden pentatonic (C D vF ^G ^A), bar 2 in the odd one (C# vE vF# ^Ab B)
+deca_riff = {deg: "=f 0/16^ 0 2 0 4/8^ 2/16 0 6/8^ 4/16 2 8/8 | 1/16^ 1 3 1 5/8^ 3/16 1 7/8^ 5/16 3 9/8", oct: -1}
+deca_lead = {deg: "=mp < 6/4.^ 7/8 6/4. | 7/4. 9/8 10/4. | 10/4 9/8 7/8 4/4. | 7/4. 4/8 1/4. | 8/4. 9/8 11/4. | 11/4. 12/8 15/4. | 15/4.^ 18/8 12/4. =f | 11/2..", oct: 0}
+riff13 = {deg: "=f 0/16^ 2 4 1^ 3 5 2^ 4 6 3^ 5 4^ 2", oct: -1}
+# golden planing: a C major line in the roots, vE major in the thirds, ^G major in the fifths
+planed = "=mf < [c,ve,^g]4^ [d,vf#,^a]8 [e,vg#,^b]8 [g,vb,^d+]4. | [a,vc#+,^e+]4 [g,vb,^d+]8 [e,vg#,^b]8 [d,vf#,^a]4. | [e,vg#,^b]4 [g,vb,^d+]8 [a,vc#+,^e+]8 [c+,ve+,^g+]4. | [b,vd#+,^f#+]4 [a,vc#+,^e+]8 [g,vb,^d+]8 [e,vg#,^b]4. | [f,va,^c+]4 [e,vg#,^b]8 [d,vf#,^a]8 [c,ve,^g]4. | [d,vf#,^a]4 [e,vg#,^b]8 [f,va,^c+]8 [a,vc#+,^e+]4. | [g,vb,^d+]4 [f,va,^c+]8 [e,vg#,^b]8 [d,vf#,^a]4. =f | [c,ve,^g]2..^"
+planed_roots = "=mf < c4^ d8 e8 g4. | a4 g8 e8 d4. | e4 g8 a8 c+4. | b4 a8 g8 e4. | f4 e8 d8 c4. | d4 e8 f8 a4. | g4 f8 e8 d4. =f | c2..^"
+axe_solo_line = {deg: "=mf < 6/16^ 7 6 3 0 3 6 9 10/8 9/16 7 6/8 | 7/8 10/16 9 7 3 0 3 7/4. | 4/16 7 10 7 4 7 10 11 10/4. | 11/16 10 7 4 1 4 7 10 11/4. | 11/8 8/16 4 1 4 8 11 8/4. | 8/16 11 12 11 8 5 8 11 15/4. | 15/16 14 12 11 12 14 15 18 15/8 12/8 18/8 | 18/2..^ =f | > 18/16 17 15 14 15 12 11 8 11/4. | 8/16 11 14 11 8 4 1 4 8/4. | 7/8 4/8 1/8 4/16 7 11/4. | =mf < 10/16 7 4 7 10 11 10 7 4/4. | 7/8 10/8 7/8 3/16 0 3/4. | 6/16 9 10 9 6 3 6 9 10/4. | 11/8 10/16 7 4/8 1/8 4/8 7/8 11/8 =f | 10/2..^", oct: 0}
+# the ballad: phi in C golden7, then a new strophe on the bell that leads into the pump's first note (^G)
+still_keys = {deg: "=mp " + phi_a + " | " + phi_b + " | r/1 | r/1 | r/1 | r/1 | r/1 | r/1 | r/1 | r/1", oct: 1}
+still_bell = {deg: "=p r/1 | r/1 | r/1 | r/1 | r/1 | r/1 | r/1 | r/1 | < 6/2 4/4 2/4 | 0/2. 2/4 | 5/4. 4/8 0/2 | 3/2 r/2 =mp | > 1/4. 3/8 5/2 | 7/2 5/2 | r/1 | =p r/2 4/2", oct: 1}
+# the pump's top voice: each golden chord keeps two notes and raises one; this line is the voice that rises
+# every third step, ^G ^Ab ^A ^Bb ^B ^C (written per section)
+coda_tune = {deg: "=mp " + phi_a + " | " + phi_b + " | 7/1 | 7/1 | 7/1 | 7/1", oct: 1}
+
+# --- accompaniment ---------------------------------------------------------------------------------------
+ripple = {rel: "R/8 5 3+ 5 R+ 5 3+ 5", oct: -1}
+chug = {rel: "[R,5]/16^ R R r R R [R,5]/8^ R/16 R r R [R,5]/8^ R/16 r", oct: -1}
+chug7 = {rel: "[R,5]/16^ R R R [R,5]/8^ R/16 R [R,5]/8^ R/16 R R R", oct: -1}
+power = {rel: "[R,5,R+]/8^ [R,5,R+]/16 [R,5,R+] r/8 [R,5,R+]/8^ r/16 [R,5,R+] [R,5,R+]/8 [R,5,R+]/4^", oct: -1}
+power5 = {rel: "[R,5,R+]/4.^ [R,5,R+]/4. [R,5,R+]/4^ [R,5,R+]/8^ [R,5,R+] [R,5,R+]/4", oct: -1}
+eighths = {rel: "R/8^ R R R R^ R R R", oct: -2}
+bass7 = {rel: "R/8^ R/16 R R/8 R R/8 R/16 R R/8", oct: -2}
+bass13 = {rel: "R/8.^ R/8. R/8. R/8^ R/8", oct: -2}
+bass5 = {rel: "R/4.^ R/4. R/4^ R/8 R R/4", oct: -2}
+walk = {rel: "R/4^ 3 5 3 | R^ 5 7 5 | R+^ 7 5 3 | R^ 3 5 7", oct: -2}
+pedal_c = "=p c1"
+
+# --- drums -----------------------------------------------------------------------------------------------
+riff_beat = {kick: "XX.X..X.XX....|XX.X..X.XX....|XX.X..X.XX....|X.....X.X.X.X.", snare: "....X.....X...|....X.....X...|....X.....X...|....X.....X.XX", hat: {steps: "x.x.x.x.x.x.x.", vel: [0.5, 0.3, 0.45, 0.3, 0.5, 0.35, 0.3]}, cym: "X.............|..............|..............|.............."}
+riff_beat2 = riff_beat with {cym: "X.............|..............|X.............|..............", ride: {steps: "x.x.x.x.x.x.x.", vel: [0.45, 0.3, 0.4, 0.3, 0.45, 0.3, 0.3]}, hat: none}
+verse_beat = {kick: "X.X...X.X.X...X.|X.X...X.X.X..XX.", snare: "....X.......X...|....X.......X..o", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.5, 0.25, 0.4, 0.25]}}
+verse_beat2 = {kick: "XxXxXxXxXxXxXxXx", snare: "....X.......X...|....X.......X.XX", ride: {steps: "x.x.x.x.x.x.x.x.", vel: [0.5, 0.3, 0.42, 0.3]}, cym: "X...............|................"}
+pre_beat = {kick: "X..X..X...X..X..X.X.", snare: "......X.........X...|......X.........X...|......X.........X...|......X.....X.X.XXXX", tom1: "....................|....................|....................|..............x.....", tom3: "....................|....................|....................|................x.x.", cym: "X...................|....................|X...................|...................."}
+chorus_beat = {kick: "X.....X.X.....X.|X.....X.X..X..X.", snare: "....X.......X...", ride: {steps: "x.x.x.x.x.x.x.x.", vel: [0.55, 0.3, 0.45, 0.3]}, cym: "X...............|................|................|................"}
+chorus_beat2 = chorus_beat with {kick: "X.X...X.X.X...X.|X.X...X.X.XX..X.", cym: "X...............|................|X...............|................"}
+# jazz: written on the 12-step triplet grid (spang-a-lang ride, hat on 2 and 4, soft feathered kick)
+swing_beat = {ride: {steps: "x..x.xx..x.x", vel: [0.5, 0.3, 0.2, 0.42, 0.3, 0.2]}, hat: {steps: "...x.....x..", vel: [0.35]}, kick: {steps: "x..x..x..x..", vel: [0.18, 0.12, 0.15, 0.12]}, snare: {steps: "........o..o|.....o......|..o.....o...|.....o....oX", vel: [0.2, 0.18, 0.22, 0.6]}}
+swing_fill = swing_beat with {tom1: "............|............|............|......x.x...", tom3: "............|............|............|..........x."}
+deca_beat = {kick: "X..X..X.X..X..|X..X..X.X.X.X.", snare: "....X.....X...", hat: {steps: "xxxxxxxxxxxxxx", vel: [0.45, 0.2, 0.3, 0.2, 0.42, 0.2, 0.3, 0.2, 0.42, 0.2, 0.3, 0.2, 0.3, 0.2]}, cym: "X.............|..............|..............|.............."}
+plane_beat = {kick: "X.......X.....", snare: "....X.....X...", ride: {steps: "x.x.x.x.x.x.x.", vel: [0.4, 0.25, 0.3, 0.25, 0.4, 0.25, 0.3]}}
+beat13 = {kick: "X..X..X..X.X.", snare: "......X....X.", hat: {steps: "x.xx.xx.xx.x.", vel: [0.45, 0.25, 0.3]}, cym: "X............|.............|.............|............."}
+still_beat = {kick: "X...............|................|X.......X.......|................", ride: {steps: "..x...x...x...x.", vel: [0.18, 0.14]}}
+pump_beat_a = {kick: "X.......X.......", snare: "........X.......", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.35, 0.2]}}
+pump_beat_b = {kick: "X...X...X...X...", snare: "....X.......X...", ride: {steps: "x.x.x.x.x.x.x.x.", vel: [0.45, 0.28]}, cym: "X...............|................"}
+pump_beat_c = {kick: "XxXxXxXxXxXxXxXx", snare: "....X.......X...", cym: "X...............", ride: {steps: "x.x.x.x.x.x.x.x.", vel: [0.5, 0.3]}}
+pump_beat_d = {kick: "XxXxXxXxXxXxXxXx", snare: {steps: "x.x.x.x.x.x.x.x.|xxxxxxxxxxxxxxxx", vel: [0.3, 0.34, 0.38, 0.42, 0.46, 0.5, 0.55, 0.6, 0.64, 0.68, 0.72, 0.76, 0.8, 0.84, 0.9, 1.0]}, tom1: "................|........x.x.x.x."}
+summit_beat = riff_beat with {cym: "X.............|X.............|X.............|X.............", ride: {steps: "x.x.x.x.x.x.x.", vel: [0.5, 0.3, 0.45, 0.3, 0.5, 0.35, 0.3]}, hat: none}
+peak_beat = {kick: "XxXxXxXxXxXxXxXx", snare: "....X.......X...|....X.......X.XX", ride: {steps: "x.x.x.x.x.x.x.x.", vel: [0.6, 0.35, 0.5, 0.35]}, cym: "X.......X.......|X..............."}
+
+# name           bars | parts and settings                                                                 | events
+# ======== I. The door (C golden7 -> C phrygian dominant / F minor; metal) ========
+veil             12 | gold:hold gtr:ripple bell:{deg: "=p r/1 | r/1 | 4/4. 5/8 4/4 2/4 | 0/1 | r/1 | 2/4. 4/8 0/2 | 6/2 4/2 | 4/1 | r/1 | 4/4. 5/8 7/4 6/8 5/8 | 4/1 | r/1", oct: 1} low:{notes: pedal_c, oct: -2} prog=veil_p key="C golden7" tempo=72 dyn=p<mp
+door              2 | gold:hold gtr:ripple bell:{deg: "=mp 0/1 | 0/1", oct: 1} low:{notes: pedal_c, oct: -2} prog=door_p tempo=72 dyn=mp | !riser:2@+2
+riff_1            8 | axe:riff bass:riff_bass drums:riff_beat chords="C:1" key="C phrygian_dominant" meter="7/8 2+2+3" dyn=f | !impact
+riff_2            8 | like=riff_1 drums:riff_beat2 lead:riff_counter dyn=f
+verse_1          16 | axe:chug bass:eighths drums:verse_beat lead:verse_tune prog=verse_p key="F harmonic_minor" meter=4/4 dyn=mp<mf
+pre_1             4 | axe:power5 bass:bass5 drums:pre_beat lead:pre_tune organ:hold prog=pre_p key=Ab meter="5/4 3+2" dyn=mp<f
+chorus_1          8 | axe:power:gain_db=-3 bass:eighths drums:chorus_beat:gain_db=-2 lead:chorus_tune prog=chorus_p key=Ab meter=4/4 dyn=mp<mf | !impact(size=m)
+riff_3            4 | axe:riff bass:riff_bass drums:riff_beat chords="C:1" key="C phrygian_dominant" meter="7/8 2+2+3" dyn=f
+verse_2           8 | axe:chug bass:eighths drums:verse_beat2:gain_db=-2 lead:verse_tune organ:hold(range=[48,67]) prog=verse_p key="F harmonic_minor" meter=4/4 dyn=mf
+pre_2             4 | like=pre_1 dyn=mf<f
+chorus_2          8 | axe:power:gain_db=-3 bass:eighths drums:chorus_beat2:gain_db=-2 lead:chorus2_tune organ:hold bell:{deg: "=p < " + phi_a + " =mf | " + phi_b2, oct: 1} prog=chorus2_p key=Ab meter=4/4 dyn=mp<mf | !impact(size=m)
+riff_out          4 | axe:riff bass:riff_bass drums:riff_beat2 chords="C:1" key="C phrygian_dominant" meter="7/8 2+2+3" dyn=f>mf | !stop:2b@+4:2.5
+# ======== II. Blue gold (modal jazz, swung; C dorian -> golden modes -> C major) ========
+head_dorian       8 | horn:head bass:walk epiano:comp(rhythm="x.....x...x.....", voices=4, range=[52,70]) drums:swing_beat prog=dorian_p key="C dorian" tempo=168 swing=.66 dyn=mp
+head_golden       8 | like=head_dorian prog=goldor_p key="C golden7" dyn=mp<mf
+head_lift         8 | like=head_dorian prog=lift_p key="^C golden7" dyn=mf
+head_home         8 | like=head_dorian drums:swing_fill dyn=mf>mp
+mode_60           8 | horn:door_ask axe:door_answer bass:walk epiano:comp(rhythm="x.....x...x.....", voices=4, range=[52,70]) drums:swing_beat prog=m60 key="C golden7_60" tempo=168 swing=.66 dyn=mf
+mode_51           8 | like=mode_60 prog=m51 key="C golden7_51"
+mode_42           8 | like=mode_60 prog=m42 key="C golden7_42"
+mode_33           8 | like=mode_60 prog=m33 key="C golden7_33" drums:swing_fill
+mode_24           8 | like=mode_60 prog=m24 key="C golden7_24"
+mode_15           8 | like=mode_60 prog=m15 key="C golden7_15" dyn=mf>mp
+mode_06           8 | like=mode_60 prog=m06 key="C golden7_06" drums:swing_fill dyn=mp
+cadence           4 | horn:cadence_horn bass:walk epiano:hold(voices=4, range=[52,70]) drums:swing_beat prog=cadence_p tempo=168 swing=.66 dyn=mp<mf
+giant             8 | horn:giant_horn bass:walk epiano:hold(voices=3, range=[52,72]) drums:swing_fill prog=giant_p key=C tempo=168 swing=.66 dyn=mf<f | !stop:2b@+7:3
+# ======== III. Decatonic (7/8, 13/16; the golden circle) ========
+deca_1            8 | axe:deca_riff bass:bass7 organ:hold(range=[52,70]) drums:deca_beat prog=circle_p key="C golden10_36" meter="7/8 2+2+3" dyn=mf | !impact
+deca_2            8 | like=deca_1 lead:deca_lead drums:deca_beat:gain_db=-2 dyn=mf<f
+planing           8 | axe:{notes: planed, oct: -1} bass:{notes: planed_roots, oct: -2} drums:plane_beat chords="N.C.:8" meter="7/8 2+2+3" dyn=mf
+deca_13           8 | axe:riff13 bass:bass13 organ:hold(range=[52,70]) drums:beat13 prog=thirteen_p key="C golden10_36" meter="13/16 3+3+3+2+2" dyn=f
+axe_solo         16 | axe:axe_solo_line bass:bass7 organ:hold(range=[52,70]) drums:deca_beat:gain_db=-2 prog=solo_p key="C golden10_36" meter="7/8 2+2+3" dyn=f | !riser:2@+16
+still            16 | keys:still_keys bell:still_bell gold:hold gtr:ripple low:{rel: "=p R/1", oct: -2} drums:still_beat prog=still_p key="C golden7" tempo=69 meter=4/4 dyn=p<mp | !impact(size=s)
+# ======== IV. Thirteen steps (the comma pump) and the summit, a comma higher ========
+pump_a            6 | gold:hold lead="=mp ^g1 | ^g1 | ^ab1 | ^ab1 | ^ab1 | ^ab1" axe:{rel: "=mp [R,5,R+]/1", oct: -1} bass:{rel: "R/2^ R/2", oct: -2} drums:pump_beat_a prog=pump_ap tempo=138 dyn=mp
+pump_b            8 | gold:hold lead="=mf ^ab1 | ^ab1 | ^a1 | ^a1 | ^a1 | ^a1 | ^a1 | ^a1" axe:power:gain_db=-3 bass:eighths drums:pump_beat_b:gain_db=-3 prog=pump_bp dyn=mp<mf
+pump_c            6 | organ:hold(range=[48,66]) lead="=f ^bb1 | ^bb1 | ^bb1 | ^b1 | ^b1 | ^b1" bell="=f ^bb+1 | ^bb+1 | ^bb+1 | ^b+1 | ^b+1 | ^b+1" axe:chug:gain_db=-3 bass:eighths drums:pump_beat_c:gain_db=-3 prog=pump_cp dyn=f | !riser:4@+8
+pump_d            2 | organ:hold(range=[48,66]) lead="=f ^c+1 | ^c+1" bell="=f ^c++1 | ^c++1" axe:{rel: "=f [R,5,R+]/16 [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+] [R,5,R+]", oct: -1, gain_db: -4} bass:eighths drums:pump_beat_d:gain_db=-7 chords="^Cg:2" dyn=mf<f
+summit_riff       8 | axe:riff bass:riff_bass lead:riff_counter drums:summit_beat chords="^C:1" key="^C phrygian_dominant" meter="7/8 2+2+3" dyn=f | !drop:1@-1(keep=[organ, lead, bell, fx]) !impact(size=xl)
+summit_verse      8 | axe:chug bass:eighths drums:verse_beat2:gain_db=-2 lead:verse_tune organ:hold(range=[48,67]) prog=verse3_p key="^F harmonic_minor" meter=4/4 dyn=mp<mf
+summit_pre        4 | axe:power5 bass:bass5 drums:pre_beat lead:pre_tune organ:hold prog=pre3_p key=^Ab meter="5/4 3+2" dyn=mf<f
+summit_chorus     8 | axe:power:gain_db=-3 bass:eighths drums:chorus_beat2:gain_db=-2 lead:chorus_tune prog=chorus3_p key=^Ab meter=4/4 dyn=mf | !impact(size=m)
+last_chorus       8 | axe:power:gain_db=2 bass:eighths drums:peak_beat:gain_db=1 lead:chorus2_tune horn:{deg: "=f " + phi_a + " | " + phi_b2, oct: -1} bell:{deg: "=mf < " + phi_a + " =f | " + phi_b2, oct: 1} prog=chorus4_p key=^Ab dyn=f | !drop:1@-1(keep=[lead, fx]) !impact
+coda             12 | gold:hold gtr:ripple keys:coda_tune bell:{deg: "=p r/1 | r/1 | r/1 | r/1 | r/1 | r/1 | r/1 | r/1 | 7/1 | 7/1 | 7/1 | 7/1", oct: 2} low:{rel: "=p R/1", oct: -2} prog=coda_p key="^C golden7" tempo=72 dyn=mp>pp
+
+mix axe -6 hall=.08 | bass -8 | lead 13 hall=.2 | horn -7 hall=.25 | epiano -10 hall=.2 | keys 0 hall=.3 | organ -16 hall=.2 | gold -9 hall=.35 | bell -8 hall=.4 pan=.15 | gtr -3 hall=.3 pan=-.2 | low 0 | drums -4 | fx -6
+master standard lufs=-14 glue=none
