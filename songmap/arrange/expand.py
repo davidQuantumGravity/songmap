@@ -114,7 +114,7 @@ class Arrangement:
 # harmony
 # ----------------------------------------------------------------------------
 def harmony_timeline(song: Song, tl: Timeline) -> HarmonyTimeline:
-    bpb = song.beats_per_bar
+    bpb = song.beats_per_bar          # the song's `chords` line counts bars of the song meter
     lines = song.harmony.lines or {}
     try:
         default = parse_progression(song.harmony.default, bpb, song.harmony.chord_bars) if song.harmony.default else []
@@ -147,7 +147,7 @@ def harmony_timeline(song: Song, tl: Timeline) -> HarmonyTimeline:
                                 section=sec.name, suggestion=did_you_mean(sec.harmony, song.harmony.progressions)
                                 if song.harmony.progressions else "define it under harmony: progressions:")
             try:
-                prog = parse_progression(text, bpb)
+                prog = parse_progression(text, span.bpb)
             except NotationError as e:
                 raise SongError(str(e), file=song.file, line=line, section=sec.name) from None
         progs.append((span.start, span.end, prog))
@@ -177,8 +177,8 @@ class _Ctx:
             self.warnings.append(msg)
 
     def motif(self, ref: str, sec_name: str) -> list[Ev]:
-        if ref in self._motif_cache:
-            return self._motif_cache[ref]
+        if (ref, self.bpb) in self._motif_cache:
+            return self._motif_cache[(ref, self.bpb)]
         name, _, chain = ref.partition(":")
         if name not in self.song.motifs:
             raise SongError(f"unknown motif '{name}'", file=self.song.file, section=sec_name,
@@ -193,7 +193,7 @@ class _Ctx:
                                        beats_per_bar=self.bpb, name=f"motif {ref}")
         except NotationError as e:
             raise SongError(str(e), file=self.song.file, line=m.line, section=sec_name) from None
-        self._motif_cache[ref] = evs
+        self._motif_cache[(ref, self.bpb)] = evs
         return evs
 
 
@@ -399,7 +399,7 @@ def _voiced(ctx, sec, span, role, style, spec, p_oct, patch) -> list[XEv]:
         if rhythm:
             bar = str(rhythm).replace(" ", "")
             stepb = ctx.bpb / len(bar)
-            t = math.floor((a + 1e-9) / ctx.bpb) * ctx.bpb
+            t = ctx.tl.bar_start(a + 1e-9)
             while t < z - 1e-9:
                 for i, c in enumerate(bar):
                     hb = t + i * stepb
@@ -593,6 +593,7 @@ def expand(song: Song) -> Arrangement:
     ctx = _Ctx(song)
     parts: dict[str, list[XEv]] = defaultdict(list)
     for sec, span in zip(song.sections, ctx.tl.sections):
+        ctx.bpb = span.bpb                # bars, step grids and bar checks follow the section's meter
         for role, spec in sec.parts.items():
             if spec.opts.get("mute") and not spec.variants:
                 continue
@@ -609,6 +610,7 @@ def expand(song: Song) -> Arrangement:
                 raise SongError(e.message, file=e.file, line=e.line, section=e.section,
                                 suggestion=e.suggestion) from None
             parts[role] += evs
+    ctx.bpb = song.beats_per_bar
     fx_evs, resolved, mutes = expand_events(ctx)
     for e in fx_evs:
         parts[e.part].append(e)

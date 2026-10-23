@@ -59,8 +59,8 @@ class Report:
 def _where(tl, beat: float) -> str:
     s = tl.section_at(beat)
     if s is None:
-        return f"bar {int(beat // tl.bpb)}"
-    return f"{s.name} bar {int((beat - s.start) // tl.bpb) + 1}"
+        return f"bar {tl.bar_index(beat)}"
+    return f"{s.name} bar {int((beat - s.start) // s.bpb + 1e-9) + 1}"
 
 
 def _pc_dist(a: float, b: float) -> float:
@@ -71,7 +71,6 @@ def _pc_dist(a: float, b: float) -> float:
 def listen(arr, qa: dict | None = None) -> Report:
     """arr: an expanded Arrangement. qa: a render's qa.json (optional) for loudness checks."""
     song, tl, harm = arr.song, arr.timeline, arr.harmony
-    bpb = tl.bpb
     out: list[Finding] = []
     kit = {p for p in arr.parts if arr.ensemble.is_kit(p)}
     pitched = {p: evs for p, evs in arr.parts.items() if p not in kit}
@@ -92,8 +91,8 @@ def listen(arr, qa: dict | None = None) -> Report:
         for e in evs:
             if len(e.pitches) != 1 or e.dur < 0.75 or "grace" in e.tags or "ghost" in e.tags:
                 continue
-            pos = e.beat % bpb
-            if not (abs(pos) < 1e-6 or abs(pos - bpb / 2) < 1e-6 or e.dur >= 1.5):
+            pos, bb = tl.beat_in_bar(e.beat), tl.bpb_at(e.beat)
+            if not (abs(pos) < 1e-6 or abs(pos - bb / 2) < 1e-6 or e.dur >= 1.5):
                 continue
             ch = harm.chord_at(e.beat)
             if ch is None:
@@ -146,7 +145,7 @@ def listen(arr, qa: dict | None = None) -> Report:
         for e in evs:
             if any(t.startswith("event:") for t in e.tags):
                 continue
-            bars[int(e.beat // bpb)].append((round(e.beat % bpb, 3), e.piece, tuple(e.pitches), round(e.vel, 2)))
+            bars[tl.bar_index(e.beat)].append((round(tl.beat_in_bar(e.beat), 3), e.piece, tuple(e.pitches), round(e.vel, 2)))
         run, start, best = 1, 0, (1, 0)
         keys = sorted(bars)
         for i in range(1, len(keys)):
@@ -177,11 +176,13 @@ def listen(arr, qa: dict | None = None) -> Report:
 
     # 5. density: too many parts at once
     for span in tl.sections:
-        for bar in range(int(span.start // bpb), int(np.ceil(span.end / bpb - 1e-9))):
+        for bi in range(int(np.ceil(span.bars - 1e-9))):
+            b0 = span.start + bi * span.bpb
+            b1 = min(b0 + span.bpb, span.end)
             playing = {p for p, evs in arr.parts.items() if p != "fx"
-                       and any(bar * bpb <= e.beat < (bar + 1) * bpb for e in evs)}
+                       and any(b0 <= e.beat < b1 for e in evs)}
             if len(playing) > 6:
-                out.append(Finding("warning", "density", _where(tl, bar * bpb),
+                out.append(Finding("warning", "density", _where(tl, b0),
                                    f"{len(playing)} parts play at once ({', '.join(sorted(playing))})",
                                    "keep 5-6 at most; drop a doubling or give a part rests"))
                 break

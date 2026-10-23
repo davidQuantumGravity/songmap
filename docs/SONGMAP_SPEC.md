@@ -252,7 +252,12 @@ Event types: `impact`, `riser`, `downlifter`, `hit` (stab, with `sound:`), `zaps
 sections:
   - {name: outro, bars: 4, tempo: rit 120>96}       # ritardando across the section
   - {name: ballad, bars: 8, tempo: 90}
+  - {name: odd, bars: 8, meter: "7/8 2+2+3"}         # its own meter; groups (eighths) accent the group starts
 ```
+
+A section `meter` changes the length of its own bars: step strings have that many steps per bar (14 sixteenths in
+7/8), bar lines in notes are checked against it, `chords "X:1"` lasts one of its bars, and positions and event
+lengths count bars across meters as written (`@-1` is the bar before, in the meter it has). `like:` keeps it.
 
 Changing tempo breaks whole-frame beats. The engine still exports exact frame numbers in `cues.json`, but it warns when `60*fps/tempo` is not an integer. (Whole-frame tempos at 30 fps: 60, 72, 75, 90, 100, 120, 150, 180.)
 

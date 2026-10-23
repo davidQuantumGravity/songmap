@@ -4,6 +4,11 @@ Each section has a constant tempo (a number, defaulting to the song tempo) or a 
 across the section: `rit 120>96`, `accel 90>120` or just `120>96` (BPM changes linearly with
 beats). Seconds are the exact integral of 60/bpm, so frames and cues stay exact on a ramp.
 Every position resolves to absolute beats.
+
+Each section may also have its own meter (`meter=7/8`), so a bar's length in beats depends on
+the section it is in. `bar_to_beat` and `beat_to_bar` map absolute bars <-> beats piecewise
+(bars before the song use the first section's meter, after it the last one's); `bpb` stays
+the song's meter.
 """
 from __future__ import annotations
 
@@ -25,6 +30,8 @@ class SectionSpan:
     bars: float
     start: float          # beats
     end: float            # beats
+    bpb: float = 4.0      # this section's bar length in beats
+    groups: tuple = ()    # metric groups in beats (7/8 2+2+3 -> (1.0, 1.0, 1.5)); () = none written
 
 
 @dataclass(frozen=True)
@@ -84,8 +91,11 @@ class Timeline:
         beat, bar, t = 0.0, 0.0, 0.0
         for i, s in enumerate(song.sections):
             a, b = parse_tempo(song.tempo if s.tempo is None else s.tempo, song, s)
-            length = s.bars * self.bpb
-            self.sections.append(SectionSpan(s.name, i, bar, s.bars, beat, beat + length))
+            bpb = song.section_bpb(s)
+            meter = s.meter or song.meter
+            groups = tuple(g * 4 / meter[1] for g in meter[2]) if len(meter) > 2 and meter[2] else ()
+            length = s.bars * bpb
+            self.sections.append(SectionSpan(s.name, i, bar, s.bars, beat, beat + length, bpb, groups))
             if length > 0:
                 last = self._segs[-1] if self._segs else None
                 if last and last.bpm0 == last.bpm1 == a == b:
@@ -137,8 +147,63 @@ class Timeline:
     def frame_to_beat(self, frame: float) -> float:
         return self.sec_to_beat(frame / self.fps)
 
+    # --- bars (piecewise across section meters) ------------------------------
+    def _span_bar(self, bar: float) -> SectionSpan | None:
+        for s in self.sections:
+            if s.bars > 0 and bar < s.start_bar + s.bars - 1e-9:
+                return s
+        return None
+
     def bar_to_beat(self, bar: float) -> float:
-        return bar * self.bpb
+        """Absolute bar (from 0, fractional allowed) -> beats."""
+        live = [s for s in self.sections if s.bars > 0]
+        if not live:
+            return bar * self.bpb
+        if bar < live[0].start_bar:
+            return live[0].start + (bar - live[0].start_bar) * live[0].bpb
+        s = self._span_bar(bar) or live[-1]
+        return s.start + (bar - s.start_bar) * s.bpb
+
+    def beat_to_bar(self, beat: float) -> float:
+        """Beats -> absolute bar (fractional)."""
+        live = [s for s in self.sections if s.bars > 0]
+        if not live:
+            return beat / self.bpb
+        if beat < live[0].start:
+            return live[0].start_bar + (beat - live[0].start) / live[0].bpb
+        s = next((s for s in live if beat < s.end - 1e-9), live[-1])
+        return s.start_bar + (beat - s.start) / s.bpb
+
+    def bpb_at(self, beat: float) -> float:
+        """Bar length (beats) of the bar containing `beat`."""
+        live = [s for s in self.sections if s.bars > 0]
+        if not live:
+            return self.bpb
+        return next((s.bpb for s in live if beat < s.end - 1e-9), live[-1].bpb)
+
+    def bar_index(self, beat: float) -> int:
+        """The absolute bar containing `beat`."""
+        return int(math.floor(self.beat_to_bar(beat) + 1e-9))
+
+    def bar_start(self, beat: float) -> float:
+        """Start (beats) of the absolute bar containing `beat`."""
+        return self.bar_to_beat(self.bar_index(beat))
+
+    def beat_in_bar(self, beat: float) -> float:
+        """Beats since the start of the bar containing `beat` (0 on a downbeat)."""
+        return beat - self.bar_start(beat)
+
+    def groups_at(self, beat: float) -> tuple:
+        s = self.section_at(beat)
+        return s.groups if s is not None else ()
+
+    def bars_after(self, beat: float, bars: float) -> float:
+        """The beat `bars` bars after (or, negative, before) `beat`, crossing meters as written."""
+        return self.bar_to_beat(self.beat_to_bar(beat) + bars)
+
+    @property
+    def mixed_meter(self) -> bool:
+        return len({round(s.bpb, 9) for s in self.sections if s.bars > 0}) > 1
 
     # --- song extents ---------------------------------------------------------
     @property

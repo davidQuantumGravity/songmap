@@ -31,14 +31,14 @@ def build(arr) -> dict:
 
     def at(beat):
         t = tl.beat_to_sec(beat)
-        return {"beat": round(beat, 6), "bar": round(beat / bpb, 6), "time_s": round(t, 6),
+        return {"beat": round(beat, 6), "bar": round(tl.beat_to_bar(beat), 6), "time_s": round(t, 6),
                 "frame": tl.sec_to_frame(t)}
 
     secs = []
     for s in tl.sections:
         a, z = tl.beat_to_sec(s.start), tl.beat_to_sec(s.end)
         secs.append({"name": s.name, "index": s.index, "bar": s.start_bar, "bars": s.bars, "beat": s.start,
-                     "beats": s.end - s.start, "start_s": round(a, 6), "end_s": round(z, 6),
+                     "beats": s.end - s.start, "beats_per_bar": s.bpb, "start_s": round(a, 6), "end_s": round(z, 6),
                      "start_frame": tl.sec_to_frame(a), "end_frame": tl.sec_to_frame(z)})
     evs = []
     for e in arr.events:
@@ -58,7 +58,7 @@ def build(arr) -> dict:
         "seconds": round(tl.seconds, 6), "frames": tl.frames, "music_frames": tl.sec_to_frame(tl.music_seconds),
         "sections": secs, "events": evs, "cues": cues,
         "grid": {"beat_frames": [tl.beat_to_frame(b) for b in range(nbeats + 1)],
-                 "bar_frames": [tl.beat_to_frame(b * bpb) for b in range(int(tl.total_bars + 1e-9) + 1)]},
+                 "bar_frames": [tl.beat_to_frame(tl.bar_to_beat(b)) for b in range(int(tl.total_bars + 1e-9) + 1)]},
     }
     if song.video:
         out["video"] = dict(song.video)

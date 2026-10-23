@@ -246,6 +246,8 @@ Milestones G1–G6 exactly as in [docs/GUI.md §6](docs/GUI.md):
 - **Groove extraction from reference loops** (onset timing → template).
 - KTH performance rules (duration contrast, final ritardando, phrase punctuation, leap articulation, harmonic charge).
 - Tempo maps with `rit`/`accel`, plus frame-safety warnings.
+- ✅ Per-section meters: `meter=7/8`, `meter="13/16 3+3+3+2+2"` (accent groups); bars, step grids, `chord:bars`, positions and event lengths follow each section's meter (tests/test_meter.py). Not yet: the Studio GUI still draws the song meter, and swing pairs count from beat 0.
+- ✅ Named golden modes for `key=` (`golden7_60` … `golden7_06`, `golden10_xy`, `golden_penta`) and `phrygian_dominant`.
 - Mood presets for new video types (explainer, promo, calm walkthrough).
 
 ## P10: Golden harmony and 36-ET (≈4–6 sessions after P1 and P3)

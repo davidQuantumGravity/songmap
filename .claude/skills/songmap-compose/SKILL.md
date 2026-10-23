@@ -165,9 +165,10 @@ mix keys 0
   | remove an inherited part | `-role` |
   | a developed theme | `role:theme:aug`, `role:m1:t+2:inv`: transforms `t±n` (scale steps), `oct±n`, `inv`, `rev`, `aug`, `dim`, `frag=n`, `xN`, `thin=.5`, `canon=3@8`, chained left to right |
 
+- **Meter.** `meter=7/8` (or `meter="7/8 2+2+3"`, `meter="13/16 3+3+3+2+2"` with accent groups) gives one section its own bars: drum lanes take that many steps per bar (14 for 16ths in 7/8), notes are checked against it, `chords="C:1"` lasts one of its bars. Swing pairs count from beat 0, so keep odd meters straight.
 - **Settings:** `like=<section>` copies its parts and settings, including `chords`. Anything written after it on the line replaces what was inherited: a `role:` replaces that part, and `chords=` replaces the chords. Others: `dyn=`, `chords="Am:2 G:2"`, `prog=<name>`, `key=`, `tempo=<bpm>`, a ramp across the section `tempo="rit 120>96"` / `"accel 90>120"`, and section feel `swing=.6`.
 - **Key.** `key=` is a section setting only (it can't go inside a part's `{...}` map).
-  - It re-keys the section's deg notes: `key=D` is D major, `key=Dm` is D minor, and `key="D dorian"` names a mode (also lydian, mixolydian, phrygian, harmonic_minor, melodic_minor).
+  - It re-keys the section's deg notes: `key=D` is D major, `key=Dm` is D minor, and `key="D dorian"` names a mode (also lydian, mixolydian, phrygian, harmonic_minor, melodic_minor, phrygian_dominant; golden scales and modes in [golden.md](reference/golden.md)).
   - Chord names stay absolute, so write the section's `chords=` to match.
   - `pad:` styles, `arp:` and rel parts follow `chords=`.
 - **Multi-bar patterns.** Notes in every mode (deg, letter, rel) may span several bars with `|`, and they loop to fill the section. Example: a bass that rests to re-enter after a stop, `{rel: "R/1 | r/2 R/2", oct: -2}`.

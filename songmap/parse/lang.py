@@ -23,7 +23,7 @@ from .yaml_form import PART_OPTS, PART_SOURCES, VERSION, LineDict, from_raw
 
 EXTS = (".sm", ".sml")
 LIMIT = 4096                       # loop iterations, list items, step-string length, sections
-SECTION_SETTINGS = ("harmony", "chords", "prog", "dyn", "feel", "tempo", "key", "bars", "binaural")   # chords/prog: aliases of harmony
+SECTION_SETTINGS = ("harmony", "chords", "prog", "dyn", "feel", "tempo", "key", "meter", "bars", "binaural")   # chords/prog: aliases of harmony
 
 
 HARMONY_KEYS = ("harmony", "chords", "prog")
@@ -1499,7 +1499,7 @@ class _Interp:
                          did_you_mean(likes[0], maps) if maps else "like= needs a section defined above")
             sec = dict(base)
         pieces = self.kit_pieces()
-        settings = ("dyn", "prog", "chords", "feel", "swing", "tempo", "key", "auto", "beat", "binaural")
+        settings = ("dyn", "prog", "chords", "feel", "swing", "tempo", "key", "meter", "auto", "beat", "binaural")
         for item in items:
             if item.startswith("like="):
                 continue
@@ -1544,6 +1544,10 @@ class _Interp:
             sec["tempo"] = _scalar(v) if re.fullmatch(r"\d+(\.\d+)?", v) else re.sub(r"^(rit|accel)\s*", r"\1 ", v)
         elif key == "key":
             sec["key"] = v
+        elif key == "meter":
+            from .yaml_form import parse_meter
+            parse_meter(v, file=self.file, line=line, section=name)
+            sec["meter"] = v
         elif key in ("beat", "binaural"):
             try:
                 new = _value(v) if v.startswith("{") else {"beat": _scalar(v)}

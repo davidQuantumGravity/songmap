@@ -50,6 +50,7 @@ class Section:
     feel: dict = field(default_factory=dict)
     tempo: float | None = None
     key: str | None = None
+    meter: tuple | None = None    # (num, den) or (num, den, (groups...)), e.g. (7, 8, (2, 2, 3)); None = the song's
     binaural: dict = field(default_factory=dict)   # {beat, carriers, gain_db} (mix/binaural.py); carries over
     line: int | None = None
     harmony_line: int | None = field(default=None, compare=False, repr=False)   # where `harmony:` is written
@@ -116,6 +117,12 @@ class Song:
         """Bar length in quarter-note beats (4/4 -> 4, 6/8 -> 3)."""
         num, den = self.meter
         return num * 4 / den
+
+    def section_bpb(self, sec: "Section") -> float:
+        """A section's bar length in quarter-note beats: its own `meter` or the song's."""
+        if sec.meter is None:
+            return self.beats_per_bar
+        return sec.meter[0] * 4 / sec.meter[1]
 
     @property
     def bars(self) -> float:
