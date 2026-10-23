@@ -17,6 +17,7 @@ MODES = {
     "dorian": (0, 2, 3, 5, 7, 9, 10), "phrygian": (0, 1, 3, 5, 7, 8, 10),
     "lydian": (0, 2, 4, 6, 7, 9, 11), "mixolydian": (0, 2, 4, 5, 7, 9, 10),
     "harmonic_minor": (0, 2, 3, 5, 7, 8, 11), "melodic_minor": (0, 2, 3, 5, 7, 9, 11),
+    "phrygian_dominant": (0, 1, 4, 5, 7, 8, 10),        # the 5th mode of harmonic minor (C in F minor)
 }
 
 
@@ -42,13 +43,21 @@ def _layer_mirror(scale: tuple) -> tuple:
 GOLDEN_MODES = {"golden3": _chain(-2, 0), "golden4": _chain(-2, 1), "golden7": _chain(-3, 3),
                 "golden10": _chain(-4, 5), "golden13": _chain(-6, 6), "golden23": _chain(-11, 11)}
 GOLDEN_MODES["silver13"] = _layer_mirror(GOLDEN_MODES["golden13"])
+# The modes of a golden scale (textbook ch36), named by their chain window b|a: b chain notes below
+# the tonic, a above. `golden7_51` is golden7's 5|1 mode (C vEb vE ^F# ^G ^Ab B on C), `golden10_36`
+# the "35" decatonic; golden7 itself is golden7_33 and golden10 is golden10_45.
+for _n in (7, 10):
+    for _b in range(_n):
+        GOLDEN_MODES[f"golden{_n}_{_b}{_n - 1 - _b}"] = _chain(-_b, _n - 1 - _b)
+# the golden pentatonic (ch36): every other note of the decatonic, a chain of golden fifths C D vF ^G ^A
+GOLDEN_MODES["golden_penta"] = tuple(sorted(((25 * j) % 36) / 3 for j in (-2, 0, 2, 4, 6)))
 MODES.update(GOLDEN_MODES)
 
 
 def parse_key(key: str) -> tuple[int, tuple]:
     """'E minor' | 'Em' | 'D dorian' | 'F#' -> (tonic pitch class, scale intervals)."""
     shift, rest = split_updown(key.strip())
-    m = re.fullmatch(r"\s*([A-Ga-g])([#b]?)\s*(m(?!aj)|[a-z_]+\d*)?\s*", rest)
+    m = re.fullmatch(r"\s*([A-Ga-g])([#b]?)\s*(m(?!aj)|[a-z_]+\d*(?:_\d+)?)?\s*", rest)
     if not m:
         raise NotationError(f"key '{key}' not understood; write e.g. 'E minor', 'Em', 'D dorian'")
     pc = pc_semitones(LETTER[m[1].lower()] + {"#": 1, "b": -1, "": 0}[m[2]] + shift)

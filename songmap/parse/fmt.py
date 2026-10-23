@@ -99,6 +99,8 @@ def song_to_raw(song: Song) -> dict:
         for k in ("harmony", "dyn", "tempo", "key"):
             if getattr(s, k) is not None:
                 d[k] = getattr(s, k)
+        if s.meter is not None:
+            d["meter"] = f"{s.meter[0]}/{s.meter[1]}" + (" " + "+".join(map(str, s.meter[2])) if len(s.meter) > 2 else "")
         if s.feel:
             d["feel"] = s.feel
         if s.binaural:
@@ -443,17 +445,19 @@ class _Printer:
                 out.append(f"tempo={_num(v)}" if isinstance(v, (int, float)) else f"tempo={_quote(str(v))}")
             elif k == "key":
                 out.append(f"key={v}" if _WORD.fullmatch(str(v)) else f"key={_quote(str(v))}")
+            elif k == "meter":
+                out.append(f"meter={v}" if " " not in str(v) else f"meter={_quote(str(v))}")
             elif k == "binaural":
                 out.append(f"beat={_bin_word(v['beat'])}" if list(v) == ["beat"] else f"binaural={value(v)}")
         return out
 
     def tokens(self, d: dict, taken: set) -> list[str]:
         return [self.part_token(r, p, taken) for r, p in d["parts"].items()] + self.settings(
-            {k: d[k] for k in ("harmony", "dyn", "feel", "tempo", "key", "binaural") if k in d})
+            {k: d[k] for k in ("harmony", "dyn", "feel", "tempo", "key", "meter", "binaural") if k in d})
 
     def like_tokens(self, d, base, taken) -> list[str] | None:
         """Tokens for `like=<base>` + the differences, or None when like= can't express d."""
-        settings = ("harmony", "dyn", "feel", "tempo", "key", "binaural")
+        settings = ("harmony", "dyn", "feel", "tempo", "key", "meter", "binaural")
         for k in settings:
             if k in base and k not in d:
                 return None                     # a setting can't be removed

@@ -70,11 +70,22 @@ def shape_at(shape: list[tuple[float, float]], x: float) -> float:
     return float(np.interp(x, xs, ys))
 
 
-def metric_weight(beat_in_bar: float, beats_per_bar: float = 4) -> float:
-    """Downbeat 1.08, mid-bar 1.04, beats 1.0, 8th off-beats 0.95, 16ths 0.91."""
+def metric_weight(beat_in_bar: float, beats_per_bar: float = 4, groups: tuple = ()) -> float:
+    """Downbeat 1.08, mid-bar 1.04, beats 1.0, 8th off-beats 0.95, 16ths 0.91. With metric groups
+    (7/8 2+2+3 -> beats 1, 1, 1.5) the start of each group takes the mid-bar 1.04 instead."""
     b = beat_in_bar % beats_per_bar
     if abs(b) < 1e-6:
         return 1.08
+    if groups:
+        starts, acc = [], 0.0
+        for g in groups[:-1]:
+            acc += g
+            starts.append(acc)
+        if any(abs(b - s) < 1e-6 for s in starts):
+            return 1.04
+        if abs(b * 2 - round(b * 2)) < 1e-6:
+            return 0.97 if abs(b - round(b)) < 1e-6 else 0.95
+        return 0.91
     if abs(b - beats_per_bar / 2) < 1e-6:
         return 1.04
     if abs(b - round(b)) < 1e-6:

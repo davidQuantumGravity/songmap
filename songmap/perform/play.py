@@ -115,7 +115,6 @@ class Performer:
             return self.arr.parts
         from ..arrange.expand import seed_for
         out = {}
-        bpb = self.tl.bpb
         for part, evs in self.arr.parts.items():
             kit = self.arr.ensemble.is_kit(part)
             groups: dict = {}
@@ -135,11 +134,12 @@ class Performer:
                         continue                                   # hits stay on their frames
                     v = e.vel
                     if e.pitches and not kit:
-                        v *= 1 + f.metric * (metric_weight(e.beat, bpb) - 1)
+                        v *= 1 + f.metric * (metric_weight(self.tl.beat_in_bar(e.beat), self.tl.bpb_at(e.beat),
+                                                           self.tl.groups_at(e.beat)) - 1)
                         if f.high_loud:
                             v *= 1 + f.high_loud * (float(np.mean(e.pitches)) - mean_p) / 24
                         if f.arch and span is not None:
-                            x = ((e.beat - span.start) % (PHRASE_BARS * bpb)) / (PHRASE_BARS * bpb)
+                            x = ((e.beat - span.start) % (PHRASE_BARS * span.bpb)) / (PHRASE_BARS * span.bpb)
                             v *= 1 + f.arch * (np.sin(np.pi * x) - 0.5) * 0.3
                     b = swing_beat(e.beat, f.swing, f.swing_grid)
                     g_off, g_vf = groove_offset(e.beat, f.template)

@@ -62,6 +62,7 @@ part      := <role>:<style>[+<mod>...][(k=v,...)]       drums:full+fill   bass:8
            | -<role>                                     remove an inherited part
 setting   := like=<section> | dyn=<shape> | prog=<name> | chords="<chord:bars ...>" | feel=<template>
            | swing=<x> | tempo=<bpm>|rit<a>><b> | key=<key>
+           | meter=<n>/<d> | meter="<n>/<d> <groups>"        meter=7/8   meter="13/16 3+3+3+2+2"   (this section's bars)
            | beat=<Hz>|<a>><b> | binaural={carriers: [A3, "^F4"], beat: 6.18, gain_db: -3}   (the binaural layer)
            | auto=<part>.<param>:<a>><b>                 auto="arp.cutoff:1500>4000 exp" (quote it with a space)
 event     := !<type>[:<length>][@<position>][(k=v,...)] | !<named list>

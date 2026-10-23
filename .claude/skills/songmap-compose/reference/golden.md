@@ -15,6 +15,14 @@ each built on one technique below, are in `songs/golden/`.
 | `~`, `~g` in a progression | a placeholder the passing engine fills: `~` = strict (one golden chord), `~g` = natural (two in a row) |
 | `vCg/G` | slash chords work as usual |
 
+## Golden scales and modes (for `key=` and deg notes)
+
+`key="C golden7"` (C C# vE vF ^G ^Ab B), `golden10`, `golden13`, `golden_penta` (C D vF ^G ^A). The modes of golden7 and
+golden10 are named by their chain window b|a (textbook Chapter 36): `golden7_60` (brightest) … `golden7_33` (= golden7, the
+golden Dorian) … `golden7_06` (darkest); `golden10_36` is the "35" decatonic, `golden10_63` the "53". Inside one golden
+scale no two notes are a sixth-step or two apart, so a deg melody in it can't make a microtonal rub with its own chords.
+`songs/epic/a_comma_higher.sm` walks all seven golden7 modes on C.
+
 ## Techniques that blend well (each worked in `songs/golden/`)
 
 1. **Passing chords** (`01`). On a weak beat between I–IV, IV–I, V–I, I–V: `C:0.75 ~:0.25 F:1`. The golden escalator for IV–V:

@@ -146,7 +146,7 @@ The simplest song is one line per section. Each section line **defines** the sec
 | `role="<notes>"` | inline notes for a pitched part | `keys="=p [e,b]1 \| [c,g]"` |
 | `-role` | remove an inherited part | `-gtr` |
 | `like=<section>` | start from an earlier section (applied first) | `like=goals` |
-| `dyn=`, `prog=`, `chords="..."`, `feel=`, `swing=`, `tempo=`, `key=` | section settings | `dyn=p<mf`, `prog=doubt`, `tempo=rit120>96` |
+| `dyn=`, `prog=`, `chords="..."`, `feel=`, `swing=`, `tempo=`, `key=`, `meter=` | section settings | `dyn=p<mf`, `prog=doubt`, `tempo=rit120>96`, `meter="7/8 2+2+3"` |
 | `auto=<part>.<param>:<ramp>` | automation on one part | `auto="arp.cutoff:1500>4000 exp"` |
 
 Events go after the second `|`, or anywhere a token starts with `!`. A line of only events (`!impact@agents+8`) needs absolute positions, and it keeps its place in the event order. Section lines may use any variable defined above them: parts, beats and named events. A file uses either section lines or a `form:` block. Mixing them is an error that says which line to change.

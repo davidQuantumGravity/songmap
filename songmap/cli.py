@@ -29,8 +29,10 @@ def _load(path: str):
 def _summary(arr) -> str:
     tl, song = arr.timeline, arr.song
     m, s = divmod(tl.seconds, 60)
+    meters = sorted({f"{x.meter[0]}/{x.meter[1]}" for x in song.sections if x.meter} - {f"{song.meter[0]}/{song.meter[1]}"})
     lines = [f"ok: {song.title}",
-             f"  {len(tl.sections)} sections, {tl.total_bars:g} bars at {song.tempo:g} BPM {song.meter[0]}/{song.meter[1]}, "
+             f"  {len(tl.sections)} sections, {tl.total_bars:g} bars at {song.tempo:g} BPM {song.meter[0]}/{song.meter[1]}"
+             + (f" (also {', '.join(meters)})" if meters else "") + ", "
              f"{int(m)}:{s:05.2f} ({tl.frames} frames @ {tl.fps} fps)",
              f"  parts: " + ", ".join(f"{p} {n}" for p, n in arr.counts().items()),
              f"  events: {len(arr.events)}   digest {arr.digest()[:16]}"]
@@ -44,7 +46,7 @@ def _video_check(arr) -> list[str]:
     want, got = int(v["frames"]), arr.timeline.frames
     if want == got:
         return []
-    per_bar = arr.timeline.beat_to_frame(arr.timeline.bpb)
+    per_bar = arr.timeline.beat_to_frame(arr.timeline.bpb_at(arr.timeline.total_beats - 1e-9))
     msg = f"song is {got} frames but video {v.get('composition', '')} is {want} ({got - want:+d})"
     if abs(got - want) > per_bar:
         raise SongError(msg, file=arr.song.file, suggestion="check section bars and tail_seconds")

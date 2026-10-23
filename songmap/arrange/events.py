@@ -29,11 +29,13 @@ class Mute:
     keep: frozenset
 
 
-def _length(ev, tl, default_bars: float) -> float:
+def _length(ev, tl, default_bars: float, at: float, sign: int = 1) -> float:
+    """An event's length in beats; bars are counted forward (or, sign -1, backward) from `at`,
+    so they follow the meters they cross."""
     p = ev.params
     if "beats" in p:
         return float(p["beats"])
-    return float(p.get("bars", default_bars)) * tl.bpb
+    return abs(tl.bars_after(at, sign * float(p.get("bars", default_bars))) - at)
 
 
 def expand_events(ctx) -> tuple[list[XEv], list[ResolvedEvent], list[Mute]]:
@@ -57,11 +59,11 @@ def expand_events(ctx) -> tuple[list[XEv], list[ResolvedEvent], list[Mute]]:
         t = ev.type
         if t == "impact":
             size = str(ev.params.get("size", "l"))
-            out.append(XEv("fx", pos.beat, tl.bpb, (), SIZE_VEL.get(size, 1.0), "impact",
+            out.append(XEv("fx", pos.beat, tl.bpb_at(pos.beat), (), SIZE_VEL.get(size, 1.0), "impact",
                            patch=(("decay", 4.5),) if size == "xl" else (), tags=frozenset({"event:impact"}),
                            section=secname or ""))
         elif t == "riser":
-            n = _length(ev, tl, 1)
+            n = _length(ev, tl, 1, pos.beat, -1)
             start = pos.beat - n
             out.append(XEv("fx", start, n, (), 1.0, "riser", length=n, tags=frozenset({"event:riser"}),
                            section=(tl.section_at(start).name if tl.section_at(start) else secname) or ""))
@@ -75,7 +77,7 @@ def expand_events(ctx) -> tuple[list[XEv], list[ResolvedEvent], list[Mute]]:
                                params={"f0": 2000.0 + 600.0 * k}, tags=frozenset({"event:zaps"}),
                                section=(s.name if s else secname) or ""))
         elif t in ("drop", "stop"):
-            n = _length(ev, tl, 2 if t == "drop" else 0.5)
+            n = _length(ev, tl, 2 if t == "drop" else 0.5, pos.beat)
             keep = set(ev.params.get("keep") or []) | ({"fx"} if t == "stop" else set())
             mutes.append(Mute(pos.beat, pos.beat + n, frozenset(keep)))
         else:

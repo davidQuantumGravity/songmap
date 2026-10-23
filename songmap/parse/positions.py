@@ -33,11 +33,11 @@ def resolve(value, tl, cues: dict | None = None, *, section: str | None = None, 
     """Resolve a position to absolute beats against a Timeline."""
     cues = cues or {}
     text = str(value).strip()
-    bpb = tl.bpb
 
-    def beat_in_bar(b: str | None) -> float:
+    def beat_in_bar(b: str | None, at: float = 0.0) -> float:
         if b is None:
             return 0.0
+        bpb = tl.bpb_at(at)
         x = float(b)
         if not 1 <= x < bpb + 1:
             raise SongError(f"position '{text}': beat {b} is outside the bar (1..{bpb:g}.x)")
@@ -63,7 +63,8 @@ def resolve(value, tl, cues: dict | None = None, *, section: str | None = None, 
         return Pos(beat, text, tl.beat_to_frame(beat) - frame)
     m = _BAR.fullmatch(text)
     if m and not text.startswith(("+", "-")):
-        return Pos(tl.bar_to_beat(float(m[1])) + beat_in_bar(m[2]), text)
+        at = tl.bar_to_beat(float(m[1]))
+        return Pos(at + beat_in_bar(m[2], at), text)
     m = _NAMED.fullmatch(text)
     if not m or not (m[1] or m[2]):
         raise SongError(f"position '{text}' not understood",
@@ -75,4 +76,5 @@ def resolve(value, tl, cues: dict | None = None, *, section: str | None = None, 
     else:
         raise SongError(f"relative position '{text}' needs a section", suggestion="write name+8 instead")
     off = float(m[2]) if m[2] else 0.0
-    return Pos(base + tl.bar_to_beat(off) + beat_in_bar(m[3]), text)
+    at = tl.bars_after(base, off) if off else base
+    return Pos(at + beat_in_bar(m[3], at), text)

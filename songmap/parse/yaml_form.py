@@ -23,7 +23,8 @@ VERSION = "0.2"
 TOP_KEYS = ("songmap", "title", "tempo", "meter", "key", "tuning", "fps", "seed", "tail_seconds", "mood", "video",
             "instruments", "groove", "parts_feel", "harmony", "motifs", "sections", "events", "cues", "mix",
             "returns", "master", "qa", "binaural", "patches")
-SECTION_KEYS = ("name", "bars", "parts", "like", "add", "drop", "harmony", "dyn", "feel", "tempo", "key", "binaural")
+SECTION_KEYS = ("name", "bars", "parts", "like", "add", "drop", "harmony", "dyn", "feel", "tempo", "key", "meter",
+                "binaural")
 PART_SOURCES = ("style", "motif", "motifs", "notes", "deg", "rel", "steps", "vary")
 PART_OPTS = ("mods", "dyn", "art", "oct", "transpose", "feel", "voicing", "auto", "mute", "gain_db", "gate",
              "order", "octaves", "fills", "crash", "pan", "len", "role", "voices", "range", "rhythm", "voice", "vel",
@@ -260,11 +261,10 @@ def from_raw(raw: dict, file: str | None = None) -> Song:
         raise SongError(f"songmap version {s.version} not supported", file=file, suggestion="this engine reads 0.2")
     s.title = str(raw.get("title", s.title))
     s.tempo = _num(raw.get("tempo", s.tempo), "tempo", file)
-    meter = str(raw.get("meter", "4/4"))
-    m = re.fullmatch(r"\s*(\d+)\s*/\s*(\d+)\s*", meter)
-    if not m:
-        raise SongError(f"meter '{meter}' not understood", file=file, suggestion="write e.g. 4/4, 3/4, 6/8")
-    s.meter = (int(m[1]), int(m[2]))
+    s.meter = parse_meter(raw.get("meter", "4/4"), file=file)
+    if len(s.meter) > 2:
+        raise SongError(f"meter '{raw['meter']}': metric groups go on sections", file=file,
+                        suggestion=f"write meter: {s.meter[0]}/{s.meter[1]} here and meter: \"{raw['meter']}\" on the sections")
     s.key = str(raw.get("key", s.key))
     try:
         from ..theory.keys import parse_key
@@ -455,10 +455,39 @@ def _sections(secs, song: Song, file) -> list[Section]:
         sec.feel = {**sec.feel, **_plain(raw.get("feel") or {})}
         sec.tempo = raw.get("tempo")
         sec.key = raw.get("key")
+        if raw.get("meter") is not None:
+            sec.meter = parse_meter(raw["meter"], file=file, line=line, section=name)
         sec.binaural = _binaural(raw.get("binaural"), f"section {name}: binaural", file, line, beat_only=True)
         seen[name] = sec
         out.append(sec)
     return out
+
+
+_METER = re.compile(r"\s*(\d+)\s*/\s*(\d+)\s*(?:\(?\s*(\d+(?:\s*\+\s*\d+)+)\s*\)?)?\s*")
+
+
+def parse_meter(value, *, file=None, line=None, section=None) -> tuple:
+    """'7/8' -> (7, 8); '7/8 2+2+3' or '7/8(2+2+3)' -> (7, 8, (2, 2, 3)): metric groups in units of
+    the denominator, which must add up to the numerator."""
+    text = str(value)
+    m = _METER.fullmatch(text)
+    if not m or int(m[1]) < 1 or int(m[2]) not in (1, 2, 4, 8, 16, 32):
+        raise SongError(f"meter '{text}' not understood", file=file, line=line, section=section,
+                        suggestion="write e.g. 4/4, 3/4, 7/8, 5/4, 13/16, or with groups 7/8 2+2+3")
+    num, den = int(m[1]), int(m[2])
+    if not m[3]:
+        return (num, den)
+    groups = tuple(int(g) for g in m[3].split("+"))
+    if sum(groups) != num or 0 in groups:
+        raise SongError(f"meter '{text}': the groups add up to {sum(groups)}, not {num}", file=file, line=line,
+                        section=section, suggestion=f"write groups of 2s and 3s that add up to {num}, "
+                                                    f"e.g. {num}/{den} {'+'.join(_default_groups(num))}")
+    return (num, den, groups)
+
+
+def _default_groups(n: int) -> list[str]:
+    g = ["2"] * (n // 2) if n % 2 == 0 else ["2"] * ((n - 3) // 2) + ["3"]
+    return g or [str(n)]
 
 
 def _binaural(v, what, file, line=None, beat_only=False) -> dict:
