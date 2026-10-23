@@ -105,7 +105,7 @@ export function Mixer({ summary, qa, mute, solo, busy, catalog, onMute, onSolo, 
   const set = (part: string, f: (x: Live[string]) => Live[string]) => setLive((l) => ({ ...l, [part]: f(l[part]) }));
   const units = catalog?.inserts ?? [];
   const chainOf = useMemo(() => {
-    const m: Record<string, InsertSpec[]> = { master: summary.master_inserts ?? [] };
+    const m: Record<string, InsertSpec[]> = { master: summary.master_inserts ?? [], ...(summary.return_inserts ?? {}) };
     for (const p of summary.parts) m[p.name] = p.mix.inserts ?? [];
     return m;
   }, [summary]);
@@ -154,7 +154,11 @@ export function Mixer({ summary, qa, mute, solo, busy, catalog, onMute, onSolo, 
         <div className="strip returns">
           <div className="strip-head"><b>returns</b><small>reverb</small></div>
           {summary.returns.map((r) => (
-            <div key={r} className="ret"><span>{r}</span><b>{qa?.stems[`return_${r}`]?.toFixed(1) ?? "–"}</b></div>
+            <div key={r} className="ret-block">
+              <div className="ret"><span>{r}</span><b>{qa?.stems[`return_${r}`]?.toFixed(1) ?? "–"}</b></div>
+              <Slots part={r} chain={chainOf[r] ?? []} units={units} selected={sel?.part === r ? sel.index : null}
+                     onSelect={(i) => setSel(i === null ? null : { part: r, index: i })} onChain={(c) => onInserts(r, c)} />
+            </div>
           ))}
           <div className="strip-foot">{busy ? "remixing…" : ""}</div>
         </div>

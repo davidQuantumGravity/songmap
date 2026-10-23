@@ -148,6 +148,15 @@ def op(path: str = Body(...), text: str = Body(...), op: str = Body(...), args: 
         except ValueError as e:
             raise HTTPException(400, str(e)) from None
         new = set_inserts(text, args["part"], args.get("chain") or [])
+    elif op == "patch":
+        if not pr.path.endswith((".sm", ".sml")):
+            raise HTTPException(400, "the wiring editor edits .sm songs (convert a YAML song with `songmap fmt --to sm`)")
+        from ..instruments.base import ParamError
+        from .rack import set_patch
+        try:
+            new = set_patch(text, args["name"], args.get("spec"))
+        except ParamError as e:
+            raise HTTPException(400, str(e)) from None
     elif op == "voice":
         if not pr.path.endswith((".sm", ".sml")):
             raise HTTPException(400, "the rack edits .sm songs (convert a YAML song with `songmap fmt --to sm`)")
@@ -192,6 +201,20 @@ def clip(path: str = Body(...), text: str = Body(...), index: int = Body(...), p
     return c
 
 
+@app.post("/api/teach")
+def teach(path: str = Body(...), text: str = Body(...)):
+    """The theory teacher's reading of the song (gui/teach.py)."""
+    from ..arrange.expand import expand
+    from ..parse.errors import NotationError, SongError
+    from .project import parse_text
+    from .teach import analyze
+    pr = project(path)
+    try:
+        return analyze(expand(parse_text(text, pr.path)))
+    except (SongError, NotationError) as e:
+        raise HTTPException(400, getattr(e, "message", None) or str(e)) from None
+
+
 @app.get("/api/catalog")
 def get_catalog():
     from .rack import catalog
@@ -218,17 +241,52 @@ def audition(path: str = Body(...), text: str = Body(...), part: str = Body(...)
 def frame(path: str = Body(...), text: str = Body(...), t: float = Body(0.0), view: dict = Body(default={})):
     """One video frame at time t, as PNG (the video pane's live preview)."""
     pr = project(path)
-    from ..arrange.expand import expand
-    from ..visual.draw import Renderer
-    from ..visual.score import score_of
-    from .project import parse_text
-    song = parse_text(text, pr.path)
-    size = tuple(view.get("size", (1280, 720)))
-    rnd = Renderer(score_of(expand(song), view.get("parts")), size=size, theme=view.get("theme", "light"),
-                   page_seconds=float(view.get("page_seconds", 6.0)))
+    import hashlib
+    import json
+    key = hashlib.sha1((text + json.dumps(view, sort_keys=True)).encode()).hexdigest()
+    rnd = _renderers.get(pr.path)
+    if not rnd or rnd[0] != key:
+        from ..arrange.expand import expand
+        from ..visual.draw import Renderer
+        from ..visual.score import score_of
+        from .project import parse_text
+        song = parse_text(text, pr.path)
+        try:
+            r = Renderer(score_of(expand(song), view.get("parts")), view=view)
+        except ValueError as e:
+            raise HTTPException(400, str(e)) from None
+        rnd = _renderers[pr.path] = (key, r)
     buf = io.BytesIO()
-    rnd.frame(max(0.0, float(t))).save(buf, "PNG")
+    rnd[1].frame(max(0.0, float(t))).save(buf, "PNG")
     return Response(buf.getvalue(), media_type="image/png", headers={"Cache-Control": "no-store"})
+
+
+_renderers: dict[str, tuple] = {}          # per song: the last (text + view) key and its Renderer (its pages cached)
+
+
+@app.get("/api/view")
+def get_view(path: str = Query(...)):
+    """The song's view file (visual/view.py) merged over the default, and whether the file exists."""
+    from ..visual import view as view_mod
+    pr = project(path)
+    raw = view_mod.load(pr.path)
+    try:
+        return {"view": view_mod.resolve(raw), "saved": raw is not None, "file": os.path.relpath(view_mod.path_for(pr.path), ROOT).replace(os.sep, "/"),
+                "default": view_mod.default(), "sizes": view_mod.SIZES}
+    except ValueError as e:
+        return {"view": view_mod.default(), "saved": raw is not None, "error": str(e), "default": view_mod.default(),
+                "sizes": view_mod.SIZES}
+
+
+@app.put("/api/view")
+def put_view(path: str = Body(...), view: dict = Body(...)):
+    from ..visual import view as view_mod
+    pr = project(path)
+    try:
+        p = view_mod.save(pr.path, view)
+    except ValueError as e:
+        raise HTTPException(400, str(e)) from None
+    return {"saved": True, "file": os.path.relpath(p, ROOT).replace(os.sep, "/")}
 
 
 # ---------------------------------------------------------------------------------------------- export

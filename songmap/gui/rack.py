@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import os
 import re
+from dataclasses import asdict
 
 import numpy as np
 import yaml
@@ -37,7 +38,32 @@ def catalog() -> dict:
     from ..instruments import Sampler
     from ..mix.inserts import UNITS
     return {"instruments": [cls.schema() for cls in REGISTRY.values()] + [Sampler.schema()], "presets": presets,
-            "samplers": samplers, "inserts": [u.schema() for u in UNITS.values()]}
+            "samplers": samplers, "inserts": [u.schema() for u in UNITS.values()], **patch_catalog(),
+            "guides": guides()}
+
+
+def guides() -> dict:
+    """The instrument tutorials (instruments/guides.yaml): what each instrument imitates, how it is built, why it
+    sounds the way it does, its signal chain, every knob in plain words, and recipes to try."""
+    path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "instruments", "guides.yaml")
+    if not os.path.isfile(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+
+def patch_catalog() -> dict:
+    """The patch modules (types, knobs, docs) and the library's patches, for the wiring editor."""
+    from ..instruments.patch import MODULES, SOURCES, library, raw_spec, validate
+    mods = [{"name": m.name, "kind": m.kind, "doc": m.doc, "audio_in": m.audio_in, "output": m.output,
+             "knobs": [asdict(k) for k in m.knobs]} for m in MODULES.values()]
+    lib = {}
+    for name, spec in library().items():
+        try:
+            lib[name] = {"description": spec.get("description", ""), **raw_spec(validate(spec, name))}
+        except Exception:                                # noqa: BLE001
+            continue
+    return {"modules": mods, "sources": list(SOURCES), "patch_library": lib}
 
 
 def voice_info(ens, part: str, piece: str | None = None) -> dict:
@@ -49,10 +75,23 @@ def voice_info(ens, part: str, piece: str | None = None) -> dict:
     info = {"use": v.use, "instrument": inst, "preset": v.use.partition("/")[2] or None,
             "params": {k: _jsonable(x) for k, x in v.params.items()}, "values": {}}
     cls = Sampler if inst == "sampler" else REGISTRY.get(inst)
+    if inst == "patch":                                  # a patch instrument: its params are <module>.<knob>
+        from ..instruments.patch import build
+        pname = v.use.partition("/")[2]
+        try:
+            cls = type(build(pname, ens.patch_spec(pname)))
+            info["schema"] = [asdict(q) for q in cls.PARAMS]
+            info["patch"] = pname
+            info["patch_source"] = "song" if pname in (getattr(ens.song, "patches", None) or {}) else "library"
+        except Exception as e:                           # noqa: BLE001  (shown as a check error elsewhere)
+            info["error"] = str(e)
+            cls = None
     if cls is not None:
         try:
             base = {} if cls is Sampler else resolve(v.use)[1]
         except Exception:                                # noqa: BLE001  (shown as a check error elsewhere)
+            base = {}
+        if inst == "patch":
             base = {}
         for q in cls.PARAMS:
             info["values"][q.name] = _jsonable(v.params.get(q.name, base.get(q.name, q.default)))
@@ -157,7 +196,12 @@ def audition(song, part: str, notes: list[dict], piece: str | None = None, overr
     from ..instruments.dsp import SR, as_stereo
     ens = Ensemble(song)
     v = ens.voice(part, piece)
-    inst = make(v.use, **{**v.params, **(overrides or {})})
+    if v.use.startswith("patch/"):
+        from ..instruments.patch import build
+        pname = v.use.partition("/")[2]
+        inst = build(pname, ens.patch_spec(pname), **{**v.params, **(overrides or {})})
+    else:
+        inst = make(v.use, **{**v.params, **(overrides or {})})
     rendered = []
     for k, n in enumerate(notes):
         y = as_stereo(inst.render(Note(float(n.get("pitch", 60)), float(n.get("vel", 0.7)), float(n.get("gate", 0.5)),
@@ -173,3 +217,21 @@ def audition(song, part: str, notes: list[dict], piece: str | None = None, overr
     fade = min(len(out), SR // 100)
     out[-fade:] *= np.linspace(1, 0, fade)[:, None]
     return out
+
+
+# ---------------------------------------------------------------------------------------------- patches
+def set_patch(text: str, name: str, spec: dict | None) -> str:
+    """Rewrite a patch's `patch <name> ...` lines from a spec (None removes the patch). Raises ParamError."""
+    from ..instruments.patch import to_text, validate
+    new = to_text(name, validate(spec, name)) if spec is not None else []
+    lines = text.split("\n")
+    rx = re.compile(rf"patch\s+{re.escape(name)}(\s|$)")
+    hits = [i for i, ln in enumerate(lines) if rx.match(ln)]
+    if hits:
+        at = hits[0]
+        lines = [ln for i, ln in enumerate(lines) if i not in hits]
+    else:
+        from .mixer import _first_section_line
+        at = _first_section_line(lines)
+    lines[at:at] = new
+    return "\n".join(lines)

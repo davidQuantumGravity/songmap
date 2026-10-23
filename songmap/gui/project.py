@@ -242,13 +242,11 @@ class Project:
             if "stems" in p:
                 paths["stems"] = p["stems"]
         song = r.arrangement.song
-        v = view or {}
-        size = tuple(v.get("size", (1280, 720)))
+        v = dict(view or {})
+        t_poster = v.pop("t", None)                   # the poster's time; the rest is a view (visual/view.py)
         if "png" in formats:
             from ..visual.video import write_poster
-            paths["png"] = write_poster(song, os.path.join(out, "poster.png"), t=v.get("t"), size=size,
-                                        theme=v.get("theme", "light"), page_seconds=v.get("page_seconds", 6.0),
-                                        parts=v.get("parts"))
+            paths["png"] = write_poster(song, os.path.join(out, "poster.png"), t=t_poster, view=v)
         if "qa_png" in formats:
             from ..export import qa as qa_mod
             from ..export.qa_plot import write_png
@@ -263,8 +261,7 @@ class Project:
             wav = paths.get("wav") or os.path.join(out, "song.wav")
             if not os.path.exists(wav):
                 write_wav24(wav, r.audio)
-            paths["mp4"] = write_video(song, os.path.join(out, "song.mp4"), size=size, theme=v.get("theme", "light"),
-                                       page_seconds=v.get("page_seconds", 6.0), parts=v.get("parts"), audio_wav=wav)
+            paths["mp4"] = write_video(song, os.path.join(out, "song.mp4"), audio_wav=wav, view=v)
         return {k: os.path.relpath(p, ROOT).replace(os.sep, "/") for k, p in paths.items()}
 
 
@@ -312,8 +309,22 @@ def summarize(arr) -> dict:
         "sections": sections, "parts": parts, "events": events, "chords": chords,
         "returns": sorted(arr.ensemble.returns), "voices": voices(arr.ensemble, arr.parts),
         "master_inserts": list((arr.ensemble.mix.get("master") or {}).get("inserts") or []),
+        "return_inserts": {r: list((arr.ensemble.mix.get(r) or {}).get("inserts") or []) for r in arr.ensemble.returns},
+        "patches": _patches(song),
         "bar_times": [round(tl.beat_to_sec(b * tl.bpb), 4) for b in range(int(tl.total_bars) + 1)],
     }
+
+
+def _patches(song) -> dict:
+    """The song's own patches, validated and as plain data (modules with numeric knobs, wires as text)."""
+    from ..instruments.patch import raw_spec, validate
+    out = {}
+    for name, spec in (getattr(song, "patches", None) or {}).items():
+        try:
+            out[name] = raw_spec(validate(spec, name))
+        except Exception:                                # noqa: BLE001  (the check reports it)
+            continue
+    return out
 
 
 def list_files() -> dict:

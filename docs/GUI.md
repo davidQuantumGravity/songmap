@@ -202,5 +202,18 @@ everywhere (rack, mixer strip, piano-roll lane, code line).
 | **S6 — Video designer** | view spec (§4.4), video screen with live preview | change layers/positions/colours and see the frame; render the MP4 with that view |
 | **S7 — Feel and MIDI** | feel screen, MIDI export (§4.5) | mood/groove edits are heard; MIDI opens in a DAW with 36-ET pitch bends |
 
+**Status (2026-10-22):**
+
+- **S1 to S4 are built.**
+- **S5 is built, except native instruments as templates.** Starter patches stand in for them: "Build a patch" starts a
+  snare from snare808, a bass from acid, and so on.
+- **S6 is built:** the view spec (`visual/view.py`, `<song>.view.yaml`), the designer and exports that use it.
+- **Added beyond the plan:**
+  - a theory **Teacher** tab (`gui/teach.py`: numerals, functions, cadences, voice-leading, each sounding note
+    against its chord, and the automated ear's findings explained);
+  - the **instrument tutorial** (guides.yaml: Learn view, signal-flow diagram, recipes with A/B, waveform and
+    spectrum, Euclidean drum patterns).
+- **S7 is not started.**
+
 **Testing:** API tests with FastAPI's TestClient (load/check/op/render/export); round-trip tests for every operation
 (tree → text → tree identical); patch templates against native renders; UI checks in the desktop app's browser pane.

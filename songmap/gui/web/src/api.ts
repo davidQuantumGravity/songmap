@@ -16,7 +16,8 @@ export type InsertSpec = { fx: string } & Record<string, number | string>;
 export type PartMix = { gain_db: number; pan: number; send: Record<string, number>; sidechain: boolean; inserts: InsertSpec[] };
 export type Part = { name: string; kit: boolean; instrument: string | null; count: number; notes: Note[]; mix: PartMix };
 export type Voice = {
-  use: string; instrument: string; preset: string | null;
+  use: string; instrument: string; preset: string | null; patch?: string; patch_source?: "song" | "library";
+  schema?: ParamSpec[]; error?: string;
   params: Record<string, number | string>;              // the song's overrides
   values: Record<string, number | string>;              // every param, resolved (default < preset < song)
   preset_values?: Record<string, number | string>;
@@ -26,7 +27,19 @@ export type ParamSpec = { name: string; default: number; lo: number; hi: number;
 export type InstrumentSpec = { name: string; family: string; mono: boolean; params: ParamSpec[] };
 export type Preset = { name: string; ref: string; description: string; tags: string[]; params: Record<string, number> };
 export type UnitSpec = { name: string; doc: string; params: ParamSpec[] };
-export type Catalog = { instruments: InstrumentSpec[]; presets: Record<string, Preset[]>; samplers: { name: string; title: string; license: string; family: string }[]; inserts: UnitSpec[] };
+export type GuideBlock = { id: string; label: string; kind: string; what: string; params: string[]; to: string[] };
+export type Guide = {
+  title: string; family: string; ancestor: string; summary: string; how: string; why: string; chain: GuideBlock[];
+  params: Record<string, { says: string; up: string; down: string }>; velocity: string;
+  recipes: { name: string; set: Record<string, number>; listen: string }[]; pattern?: string; try_next: string;
+};
+export type ModuleKnob = { name: string; default: number; lo: number; hi: number; unit: string; curve: string; mod: string; doc: string; choices: string[] };
+export type ModuleSpec = { name: string; kind: string; doc: string; audio_in: boolean; output: string; knobs: ModuleKnob[] };
+export type PatchData = { modules: Record<string, Record<string, number | string>>; wires: string[]; description?: string };
+export type Catalog = {
+  instruments: InstrumentSpec[]; presets: Record<string, Preset[]>; samplers: { name: string; title: string; license: string; family: string }[];
+  inserts: UnitSpec[]; guides: Record<string, Guide>; modules: ModuleSpec[]; sources: string[]; patch_library: Record<string, PatchData>;
+};
 export type AuditionNote = { t: number; pitch: number; vel: number; gate: number };
 
 export type SongEvent = { type: string; at: string; time: number; start: number; section: string | null };
@@ -36,10 +49,15 @@ export type Summary = {
   bars: number; seconds: number; music_seconds: number; frames: number; length: string; digest: string;
   sections: Section[]; parts: Part[]; events: SongEvent[]; bar_times: number[];
   chords: [number, number, string][]; returns: string[]; voices: Record<string, PartVoice>; master_inserts: InsertSpec[];
+  patches: Record<string, PatchData>; return_inserts: Record<string, InsertSpec[]>;
 };
 
 // What the video shows and how (docs/GUI.md §4.4; S6 grows this into layers).
-export type View = { size: [number, number]; theme: "light" | "dark"; page_seconds: number; parts: string[] | null };
+export type Layer = { type: string; box: [number, number, number, number]; show?: boolean; panel?: boolean } & Record<string, unknown>;
+export type View = {
+  size: [number, number]; theme: "light" | "dark"; page_seconds: number; parts: string[] | null;
+  colors: Record<string, string>; color_by: "spelling" | "part"; part_colors: Record<string, string>; layers: Layer[];
+};
 
 export type Check = { ok: boolean; diagnostics: Diagnostic[]; summary: Summary | null; ms: number };
 
@@ -86,11 +104,16 @@ export const api = {
   },
   catalog: () => json<Catalog>(fetch("/api/catalog")),
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  teach: (path: string, text: string) => json<any>(post("/api/teach", { path, text })),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   clip: (path: string, text: string, index: number, part: string) => json<any>(post("/api/clip", { path, text, index, part })),
   audition: async (path: string, text: string, part: string, notes: AuditionNote[], piece: string | null, overrides: object) => {
     const res = await post("/api/audition", { path, text, part, notes, piece, overrides });
     if (!res.ok) { let d = res.statusText; try { d = (await res.json()).detail ?? d; } catch { /* */ } throw new Error(d); }
     return URL.createObjectURL(await res.blob());
   },
+  getView: (path: string) => json<{ view: View; saved: boolean; file: string; default: View; sizes: Record<string, [number, number]>; error?: string }>(
+    fetch(`/api/view?path=${encodeURIComponent(path)}`)),
+  saveView: (path: string, view: View) => json<{ saved: boolean; file: string }>(post("/api/view", { path, view }, "PUT")),
   fileUrl: (path: string) => `/api/file?path=${encodeURIComponent(path)}`,
 };

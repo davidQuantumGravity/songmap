@@ -4,13 +4,15 @@ import { api, type Catalog, type Check, type Files, type InsertSpec, type QA, ty
 import { CodeEditor } from "./CodeEditor";
 import { Arrangement } from "./Arrangement";
 import { Mixer, type MixEdit } from "./Mixer";
-import { ExportPanel, Problems, QAPanel, VideoPanel } from "./Panels";
+import { ExportPanel, Problems, QAPanel } from "./Panels";
+import { VideoDesigner } from "./VideoDesigner";
 import { Rack, type VoiceEdit } from "./Rack";
 import { PianoRoll } from "./PianoRoll";
+import { Teacher } from "./Teacher";
 import { Splitter, useStored } from "./ui";
 
-type Tab = "problems" | "qa" | "video" | "export";
-type Dock = "code" | "mixer" | "rack" | "roll";
+type Tab = "teacher" | "problems" | "qa" | "export";
+type Dock = "code" | "mixer" | "rack" | "roll" | "video";
 const fmt = (t: number) => `${Math.floor(t / 60)}:${(t % 60).toFixed(1).padStart(4, "0")}`;
 const css = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 const baseName = (s: string) => s.replace(/[_\s-]*\d+$/, "");
@@ -68,7 +70,7 @@ export function App() {
   const [saved, setSaved] = useState("");
   const [check, setCheck] = useState<Check | null>(null);
   const [summary, setSummary] = useState<Summary | null>(null);   // the last good one: panes stay up while you type
-  const [tab, setTab] = useState<Tab>("problems");
+  const [tab, setTab] = useState<Tab>("teacher");
   const [dock, setDock] = useState<Dock>("code");
   const [goto, setGoto] = useState<{ line: number; n: number } | null>(null);
   const [rendering, setRendering] = useState<"" | "render" | "remix">("");
@@ -80,7 +82,8 @@ export function App() {
   const [loop, setLoop] = useState<[number, number] | null>(null);
   const [mute, setMute] = useState<Set<string>>(new Set());
   const [solo, setSolo] = useState<Set<string>>(new Set());
-  const [view, setView] = useState<View>({ size: [1280, 720], theme: "light", page_seconds: 6, parts: null });
+  const [view, setView] = useState<View>({ size: [1280, 720], theme: "light", page_seconds: 6, parts: null, colors: {},
+                                           color_by: "spelling", part_colors: {}, layers: [] });
   const [filesW, setFilesW] = useStored("studio.files", 230);
   const [inspW, setInspW] = useStored("studio.insp", 340);
   const [arrH, setArrH] = useStored("studio.arr", 300);
@@ -123,7 +126,7 @@ export function App() {
     setPath(r.path); setText(r.text); setSaved(r.text); setCheck(r.check);
     setSummary(r.check.summary); setRendered(null); setQA(null); setTime(0); setLoop(null);
     setMute(new Set()); setSolo(new Set());
-    setView((v) => ({ ...v, parts: null }));
+    api.getView(r.path).then((x) => setView(x.view)).catch(() => undefined);
     history.replaceState(null, "", `?song=${encodeURIComponent(r.path)}`);
     setStatus(r.check.ok ? `opened · checked in ${r.check.ms} ms` : "opened · has errors");
   }, [dirty]);
@@ -284,6 +287,7 @@ export function App() {
       else if (e.key === "m") setDock((d) => (d === "mixer" ? "code" : "mixer"));
       else if (e.key === "i") setDock((d) => (d === "rack" ? "code" : "rack"));
       else if (e.key === "p") setDock((d) => (d === "roll" ? "code" : "roll"));
+      else if (e.key === "v") setDock((d) => (d === "video" ? "code" : "video"));
     };
     window.addEventListener("keydown", k);
     return () => window.removeEventListener("keydown", k);
@@ -296,7 +300,7 @@ export function App() {
 
   const nErr = check?.diagnostics.filter((d) => d.severity === "error").length ?? 0;
   const nWarn = check?.diagnostics.filter((d) => d.severity === "warning").length ?? 0;
-  const tabs: [Tab, string, number][] = [["problems", "Problems", nErr || nWarn], ["qa", "QA", 0], ["video", "Video", 0], ["export", "Export", 0]];
+  const tabs: [Tab, string, number][] = [["teacher", "Teacher", 0], ["problems", "Problems", nErr || nWarn], ["qa", "QA", 0], ["export", "Export", 0]];
   const cols = `${filesOpen ? filesW : 0}px ${filesOpen ? 4 : 0}px minmax(0, 1fr) 4px ${inspW}px`;
 
   return (
@@ -339,6 +343,7 @@ export function App() {
             <button className={dock === "roll" ? "on" : ""} onClick={() => setDock("roll")} disabled={!summary}>Piano roll <kbd>P</kbd></button>
             <button className={dock === "rack" ? "on" : ""} onClick={() => setDock("rack")} disabled={!summary}>Instruments <kbd>I</kbd></button>
             <button className={dock === "mixer" ? "on" : ""} onClick={() => setDock("mixer")} disabled={!summary}>Mixer <kbd>M</kbd></button>
+            <button className={dock === "video" ? "on" : ""} onClick={() => setDock("video")} disabled={!path}>Video <kbd>V</kbd></button>
             <span className="spacer" />
             {dock === "code" && <span className="muted small">Ctrl+S save · Ctrl+Enter render · Space play · [ ] sections · L loop</span>}
           </nav>
@@ -346,12 +351,16 @@ export function App() {
             {path && <div className="code-wrap" style={{ display: dock === "code" ? "block" : "none" }}>
               <CodeEditor value={text} onChange={setText} diagnostics={check?.diagnostics ?? []} gotoLine={goto} />
             </div>}
+            {dock === "video" && path && (
+              <VideoDesigner path={path} text={text} time={time} summary={summary} view={view} setView={setView} ok={!!check?.ok} onSeek={seek} />
+            )}
             {dock === "roll" && summary && path && (
               <PianoRoll path={path} text={text} summary={summary} time={time} partHint={null} colorOf={colorOf} onSeek={seek}
                          onApply={(op, args) => applyOp(op, args, false)} />
             )}
             {dock === "rack" && summary && path && (
-              <Rack path={path} text={text} summary={summary} catalog={catalog} onEdit={voiceEdit} colorOf={colorOf} time={time} />
+              <Rack path={path} text={text} summary={summary} catalog={catalog} onEdit={voiceEdit} colorOf={colorOf} time={time}
+                    onApply={(op, args) => applyOp(op, args, false)} />
             )}
             {dock === "mixer" && summary && (
               <Mixer summary={summary} qa={qa} mute={mute} solo={solo} busy={rendering === "remix"} colorOf={colorOf} catalog={catalog}
@@ -364,9 +373,9 @@ export function App() {
         <nav>{tabs.map(([k, l, n]) => <button key={k} className={tab === k ? "on" : ""} onClick={() => setTab(k)}>
           {l}{n > 0 && <span className={"badge" + (nErr ? " bad" : "")}>{n}</span>}</button>)}</nav>
         <div className="tab-body">
+          {tab === "teacher" && path && <Teacher path={path} text={text} summary={summary} time={time} onSeek={seek} ok={!!check?.ok} />}
           {tab === "problems" && <Problems check={check} onLine={(line) => { setDock("code"); setGoto({ line, n: Date.now() }); }} />}
           {tab === "qa" && <QAPanel qa={qa} stale={stale} />}
-          {tab === "video" && path && <VideoPanel path={path} text={text} time={time} summary={summary} view={view} setView={setView} ok={!!check?.ok} />}
           {tab === "export" && path && <ExportPanel path={path} text={text} view={view} time={time} ok={!!check?.ok} />}
         </div>
       </section>
