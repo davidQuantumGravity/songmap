@@ -1,0 +1,48 @@
+# 4. Quasicrystal. Golden House, song 4 of 5 (textbook Chapter 49). Tech house in D minor, 124 BPM, straight.
+# Golden techniques, three at once:
+#   - Quasi-periodic percussion (Chapter 41): over a dead-straight kick, a rim and a shaker play the Fibonacci word
+#     (a b a a b a b a a b a a b ...) on the 16th grid, the rim on every b, the shaker on every a. The word is never
+#     periodic, but it nearly repeats after a Fibonacci number of letters: the rim's bar patterns run 1-9, then 1-7
+#     again (144 sixteenths = 9 bars), where dance music loops every 1, 2 or 4 bars. The 16-bar lane restarts with
+#     each section.
+#   - Golden beats against the tempo (Chapter 26): in the breakdown a harmonic organ holds Dg7 in close voicing on D3.
+#     Its partials beat near 8.1, 10.0, 12.7 and 16.5 Hz (36-ET splits each exact golden rate a little); the 16th
+#     notes at 124 BPM tick at 8.27 Hz. The strongest slow beat, 8.06 Hz, drifts a full cycle against the 16ths
+#     about every 5 s; a weaker one, 8.28 Hz, almost locks to them.
+#   - A golden home and golden modal mixture (Chapters 31 and 29): the breakdown walks the golden circle on a
+#     golden-spectrum pad, Dg - Dg7 - vF#g - vF#g7 - ^Ag - vF#g7 - Dg7 - Dg (each chord shares three notes with the
+#     next), and the regroup slides Dg into Dm9: its third falls two sixth-steps, its fifth one.
+# Form (88 bars): intro 16, groove 16, lift 16, breakdown 16, regroup 16, outro 8.
+song "Quasicrystal" 124 4/4 Dm fps=30 seed=64 tail=4 tuning=36edo mood=techno
+inst stab=clean/organ(partials=5, rolloff=1.6, attack=.003, release=.08) shimmer=clean/organ(partials=8, rolloff=1.3, attack=1.5, release=2) bass=bass/v0(cutoff=480, drive=2.2, env_amt=2.4, env_decay=.09, sub=.6) gold=clean/golden_pad(release=2) bell=clean/glass pad(voices=3, detune=3, drift=0, cutoff=1200, attack=.6, release=1)
+kit kick=kick/v0(tune=47, sweep=30, decay=.48, click=.3, drive=2.2) clap=clap/v0 hat=hat/v0 ohat=hat/v0_open rim=kick/v0(tune=86, sweep=8, sweep_time=.04, decay=.35, click=.22, drive=1.3) shaker=hat/v0(decay=.03, hp=8000, metal=.2)
+inserts stab delay(time=0.75, feedback=.45, mix=.3) filter(cutoff=2200, q=1.2)
+
+prog vamp   "Dm9:3 Bbmaj7:0.5 C:0.5"
+prog home   "Dg:2 Dg7:2 vF#g:2 vF#g7:2 ^Ag:2 vF#g7:2 Dg7:2 Dg:2"
+prog back   "Dg:1 Dm9:2 Bbmaj7:0.5 C:0.5 Dm9:3 Bbmaj7:0.5 C:0.5 Dm9:3 Bbmaj7:0.5 C:0.5 Dm9:3 Bbmaj7:0.5 C:0.5"
+prog last   "Dm9:3 Bbmaj7:0.5 C:0.5 Dm9:4"
+
+# the Fibonacci word on the 16th grid, 16 bars: rim on the b's, shaker on the a's
+fib_rim = {steps: ".x..x.x..x..x.x.|.x.x..x..x.x..x.|.x.x..x.x..x..x.|x..x.x..x..x.x..|x..x.x..x.x..x..|x.x..x..x.x..x.x|..x..x.x..x.x..x|..x.x..x..x.x..x|.x..x..x.x..x.x.|.x..x.x..x..x.x.|.x.x..x..x.x..x.|.x.x..x.x..x..x.|x..x.x..x..x.x..|x..x.x..x.x..x..|x.x..x..x.x..x.x|..x..x.x..x.x..x", vel: [0.3, 0.22, 0.27]}
+fib_shaker = {steps: "x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.|xx.x.xx.xx.x.xx.|x.xx.xx.x.xx.x.x|x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.", vel: [0.26, 0.14, 0.2, 0.12]}
+straight = {kick: "X...X...X...X..."}
+groove_beat = straight + {clap: "....X.......X...", rim: fib_rim, shaker: fib_shaker}
+lift_beat = groove_beat + {ohat: {steps: "..x...x...x...x.", vel: [0.45, 0.36]}}
+
+riff = {rel: "R/16^ r/16 R+/16 r/16 r/8 R/16 r/16 5/16 r/16 R/16 r/16 7/16 r/16 R/8", oct: -2}
+stabs = {rel: "r/8 [3,5,7,9]/16'^ r/16 r/2 r/8 ([3,5,7,9]/16') r/16"}
+bells = {deg: "=p r/1 | r/2 9/4^ 7/4 | r/1 | r/2 4/2", oct: 1}
+chain = {rel: "=pp R/16 3 5 7 R+ 7 5 3 R 3 5 7 R+ 7 5 3", oct: 1}
+# the beating chord: Dg7 close on D3 (D3 vF#3 ^A3 C#4), on the chords that contain it; silent on vF#g7 and ^Ag
+beats = {notes: "=mp [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | r1 | r1 | r1 | r1 | r1 | r1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1"}
+
+intro     16 | drums:straight+{shaker: fib_shaker} bass:riff prog=vamp dyn=p<mp
+groove    16 | drums:groove_beat(gain_db=-2) bass:riff stab:stabs pad:hold(range=[48,68]) prog=vamp dyn=p<mp
+lift      16 | drums:lift_beat(gain_db=-2.5) bass:riff stab:stabs pad:hold(range=[48,68]):dyn=mp>p bell:bells prog=vamp dyn=mp | !impact(size=m)
+breakdown 16 | drums:{shaker: fib_shaker} gold:hold shimmer:beats bell:chain prog=home dyn=p<mp | !riser:2@+16
+regroup   16 | drums:lift_beat bass:riff stab:stabs pad:hold(range=[48,68]):dyn=mp>p bell:bells prog=back dyn=f | !drop:1@-1(keep=[gold, shimmer]) !impact
+outro      8 | drums:groove_beat(gain_db=-2) bass:riff stab:stabs prog=last dyn=mf>p
+
+mix stab -10 sc=.3 | shimmer -14 hall=.2 | bass -2 sc=.45 | gold -15 hall=.35 | bell -12 hall=.4 pan=.2 | pad -8 sc=.6 hall=.2 | drums -3 | fx -6
+master standard lufs=-14 glue=none

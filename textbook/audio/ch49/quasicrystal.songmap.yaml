@@ -1,0 +1,63 @@
+# 4. Quasicrystal. Golden House, song 4 of 5 (textbook Chapter 49). Tech house in D minor, 124 BPM, straight.
+# Golden techniques, three at once:
+#   - Quasi-periodic percussion (Chapter 41): over a dead-straight kick, a rim and a shaker play the Fibonacci word
+#     (a b a a b a b a a b a a b ...) on the 16th grid, the rim on every b, the shaker on every a. The word is never
+#     periodic, but it nearly repeats after a Fibonacci number of letters: the rim's bar patterns run 1-9, then 1-7
+#     again (144 sixteenths = 9 bars), where dance music loops every 1, 2 or 4 bars. The 16-bar lane restarts with
+#     each section.
+#   - Golden beats against the tempo (Chapter 26): in the breakdown a harmonic organ holds Dg7 in close voicing on D3.
+#     Its partials beat near 8.1, 10.0, 12.7 and 16.5 Hz (36-ET splits each exact golden rate a little); the 16th
+#     notes at 124 BPM tick at 8.27 Hz. The strongest slow beat, 8.06 Hz, drifts a full cycle against the 16ths
+#     about every 5 s; a weaker one, 8.28 Hz, almost locks to them.
+#   - A golden home and golden modal mixture (Chapters 31 and 29): the breakdown walks the golden circle on a
+#     golden-spectrum pad, Dg - Dg7 - vF#g - vF#g7 - ^Ag - vF#g7 - Dg7 - Dg (each chord shares three notes with the
+#     next), and the regroup slides Dg into Dm9: its third falls two sixth-steps, its fifth one.
+# Form (88 bars): intro 16, groove 16, lift 16, breakdown 16, regroup 16, outro 8.
+songmap: 0.2
+title: Quasicrystal
+tempo: 124
+meter: "4/4"
+key: Dm
+tuning: "36edo"
+fps: 30
+seed: 64
+tail_seconds: 4
+
+mood: techno
+instruments:
+  stab: {use: clean/organ, partials: 5, rolloff: 1.6, attack: 0.003, release: 0.08}
+  shimmer: {use: clean/organ, partials: 8, rolloff: 1.3, attack: 1.5, release: 2}
+  bass: {use: bass/v0, cutoff: 480, drive: 2.2, env_amt: 2.4, env_decay: 0.09, sub: 0.6}
+  gold: {use: clean/golden_pad, release: 2}
+  bell: clean/glass
+  pad: {voices: 3, detune: 3, drift: 0, cutoff: 1200, attack: 0.6, release: 1}
+  drums: {kit: {kick: {use: kick/v0, tune: 47, sweep: 30, decay: 0.48, click: 0.3, drive: 2.2}, clap: clap/v0, hat: hat/v0, ohat: hat/v0_open, rim: {use: kick/v0, tune: 86, sweep: 8, sweep_time: 0.04, decay: 0.35, click: 0.22, drive: 1.3}, shaker: {use: hat/v0, decay: 0.03, hp: 8000, metal: 0.2}}}
+
+harmony:
+  progressions: {vamp: "Dm9:3 Bbmaj7:0.5 C:0.5", home: "Dg:2 Dg7:2 vF#g:2 vF#g7:2 ^Ag:2 vF#g7:2 Dg7:2 Dg:2", back: "Dg:1 Dm9:2 Bbmaj7:0.5 C:0.5 Dm9:3 Bbmaj7:0.5 C:0.5 Dm9:3 Bbmaj7:0.5 C:0.5 Dm9:3 Bbmaj7:0.5 C:0.5", last: "Dm9:3 Bbmaj7:0.5 C:0.5 Dm9:4"}
+
+sections:
+  - {name: intro, bars: 16, parts: {drums: {steps: {kick: X...X...X...X..., shaker: {steps: "x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.|xx.x.xx.xx.x.xx.|x.xx.xx.x.xx.x.x|x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.", vel: [0.26, 0.14, 0.2, 0.12]}}}, bass: {rel: "R/16^ r/16 R+/16 r/16 r/8 R/16 r/16 5/16 r/16 R/16 r/16 7/16 r/16 R/8", oct: -2}}, harmony: vamp, dyn: "p<mp"}
+  - {name: groove, bars: 16, parts: {drums: {steps: {kick: X...X...X...X..., clap: "....X.......X...", rim: {steps: ".x..x.x..x..x.x.|.x.x..x..x.x..x.|.x.x..x.x..x..x.|x..x.x..x..x.x..|x..x.x..x.x..x..|x.x..x..x.x..x.x|..x..x.x..x.x..x|..x.x..x..x.x..x|.x..x..x.x..x.x.|.x..x.x..x..x.x.|.x.x..x..x.x..x.|.x.x..x.x..x..x.|x..x.x..x..x.x..|x..x.x..x.x..x..|x.x..x..x.x..x.x|..x..x.x..x.x..x", vel: [0.3, 0.22, 0.27]}, shaker: {steps: "x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.|xx.x.xx.xx.x.xx.|x.xx.xx.x.xx.x.x|x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.", vel: [0.26, 0.14, 0.2, 0.12]}}, gain_db: -2}, bass: {rel: "R/16^ r/16 R+/16 r/16 r/8 R/16 r/16 5/16 r/16 R/16 r/16 7/16 r/16 R/8", oct: -2}, stab: {rel: "r/8 [3,5,7,9]/16'^ r/16 r/2 r/8 ([3,5,7,9]/16') r/16"}, pad: {style: hold, range: [48, 68]}}, harmony: vamp, dyn: "p<mp"}
+  - {name: lift, bars: 16, parts: {drums: {steps: {kick: X...X...X...X..., clap: "....X.......X...", rim: {steps: ".x..x.x..x..x.x.|.x.x..x..x.x..x.|.x.x..x.x..x..x.|x..x.x..x..x.x..|x..x.x..x.x..x..|x.x..x..x.x..x.x|..x..x.x..x.x..x|..x.x..x..x.x..x|.x..x..x.x..x.x.|.x..x.x..x..x.x.|.x.x..x..x.x..x.|.x.x..x.x..x..x.|x..x.x..x..x.x..|x..x.x..x.x..x..|x.x..x..x.x..x.x|..x..x.x..x.x..x", vel: [0.3, 0.22, 0.27]}, shaker: {steps: "x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.|xx.x.xx.xx.x.xx.|x.xx.xx.x.xx.x.x|x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.", vel: [0.26, 0.14, 0.2, 0.12]}, ohat: {steps: "..x...x...x...x.", vel: [0.45, 0.36]}}, gain_db: -2.5}, bass: {rel: "R/16^ r/16 R+/16 r/16 r/8 R/16 r/16 5/16 r/16 R/16 r/16 7/16 r/16 R/8", oct: -2}, stab: {rel: "r/8 [3,5,7,9]/16'^ r/16 r/2 r/8 ([3,5,7,9]/16') r/16"}, pad: {style: hold, range: [48, 68], dyn: "mp>p"}, bell: {deg: "=p r/1 | r/2 9/4^ 7/4 | r/1 | r/2 4/2", oct: 1}}, harmony: vamp, dyn: mp}
+  - {name: breakdown, bars: 16, parts: {drums: {steps: {shaker: {steps: "x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.|xx.x.xx.xx.x.xx.|x.xx.xx.x.xx.x.x|x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.", vel: [0.26, 0.14, 0.2, 0.12]}}}, gold: hold, shimmer: {notes: "=mp [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | r1 | r1 | r1 | r1 | r1 | r1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1 | [d-,vf#-,^a-,c#]1"}, bell: {rel: "=pp R/16 3 5 7 R+ 7 5 3 R 3 5 7 R+ 7 5 3", oct: 1}}, harmony: home, dyn: "p<mp"}
+  - {name: regroup, bars: 16, parts: {drums: {steps: {kick: X...X...X...X..., clap: "....X.......X...", rim: {steps: ".x..x.x..x..x.x.|.x.x..x..x.x..x.|.x.x..x.x..x..x.|x..x.x..x..x.x..|x..x.x..x.x..x..|x.x..x..x.x..x.x|..x..x.x..x.x..x|..x.x..x..x.x..x|.x..x..x.x..x.x.|.x..x.x..x..x.x.|.x.x..x..x.x..x.|.x.x..x.x..x..x.|x..x.x..x..x.x..|x..x.x..x.x..x..|x.x..x..x.x..x.x|..x..x.x..x.x..x", vel: [0.3, 0.22, 0.27]}, shaker: {steps: "x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.|xx.x.xx.xx.x.xx.|x.xx.xx.x.xx.x.x|x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.", vel: [0.26, 0.14, 0.2, 0.12]}, ohat: {steps: "..x...x...x...x.", vel: [0.45, 0.36]}}}, bass: {rel: "R/16^ r/16 R+/16 r/16 r/8 R/16 r/16 5/16 r/16 R/16 r/16 7/16 r/16 R/8", oct: -2}, stab: {rel: "r/8 [3,5,7,9]/16'^ r/16 r/2 r/8 ([3,5,7,9]/16') r/16"}, pad: {style: hold, range: [48, 68], dyn: "mp>p"}, bell: {deg: "=p r/1 | r/2 9/4^ 7/4 | r/1 | r/2 4/2", oct: 1}}, harmony: back, dyn: f}
+  - {name: outro, bars: 8, parts: {drums: {steps: {kick: X...X...X...X..., clap: "....X.......X...", rim: {steps: ".x..x.x..x..x.x.|.x.x..x..x.x..x.|.x.x..x.x..x..x.|x..x.x..x..x.x..|x..x.x..x.x..x..|x.x..x..x.x..x.x|..x..x.x..x.x..x|..x.x..x..x.x..x|.x..x..x.x..x.x.|.x..x.x..x..x.x.|.x.x..x..x.x..x.|.x.x..x.x..x..x.|x..x.x..x..x.x..|x..x.x..x.x..x..|x.x..x..x.x..x.x|..x..x.x..x.x..x", vel: [0.3, 0.22, 0.27]}, shaker: {steps: "x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.|xx.x.xx.xx.x.xx.|x.xx.xx.x.xx.x.x|x.xx.x.xx.xx.x.x|x.x.xx.xx.x.xx.x|x.x.xx.x.xx.xx.x|.xx.x.xx.xx.x.xx|.xx.x.xx.x.xx.xx|.x.xx.xx.x.xx.x.|xx.xx.x.xx.x.xx.", vel: [0.26, 0.14, 0.2, 0.12]}}, gain_db: -2}, bass: {rel: "R/16^ r/16 R+/16 r/16 r/8 R/16 r/16 5/16 r/16 R/16 r/16 7/16 r/16 R/8", oct: -2}, stab: {rel: "r/8 [3,5,7,9]/16'^ r/16 r/2 r/8 ([3,5,7,9]/16') r/16"}}, harmony: last, dyn: "mf>p"}
+
+events:
+  - {at: lift, type: impact, size: m}
+  - {at: breakdown+16, type: riser, bars: 2}
+  - {at: regroup-1, type: drop, bars: 1, keep: [gold, shimmer]}
+  - {at: regroup, type: impact}
+mix:
+  stab: {inserts: [{fx: delay, time: 0.75, feedback: 0.45, mix: 0.3}, {fx: filter, cutoff: 2200, q: 1.2}], gain_db: -10, sidechain: {from: kick, depth: 0.3}}
+  shimmer: {gain_db: -14, send: {hall: 0.2}}
+  bass: {gain_db: -2, sidechain: {from: kick, depth: 0.45, release: 0.214, attack: 0.0005}}
+  gold: {gain_db: -15, send: {hall: 0.35}}
+  bell: {gain_db: -12, send: {hall: 0.4}, pan: 0.2}
+  pad: {gain_db: -8, sidechain: {from: kick, depth: 0.6, release: 0.214, attack: 0.0005}, send: {hall: 0.2}}
+  drums: {gain_db: -3}
+  fx: {gain_db: -6}
+
+master:
+  glue: none

@@ -1,0 +1,57 @@
+# 5. Silver Lift. Golden House, song 5 of 5 (textbook Chapter 49). Melodic progressive house, 128 BPM: a saw lead,
+# a pluck arpeggio, a sidechained pad, a rolling bass, a piano in the breakdown.
+# Golden techniques: golden giant steps and the pivot between layers (Chapters 37 and 35). The build walks
+# Coltrane's major-third cycle C - Ab - E - C, each step through its golden passing chord, while the lead holds the
+# step's common tone: C, then Ab, then E, then C. Then the dance-music key change, done the golden way: instead of
+# rising a semitone or a tone for the last drop, the song rises a silver third (10 sixth-steps, 333 cents) to ^Eb
+# major, a key with no note in common with C. It pivots through Fg, golden IV in C and golden ii in ^Eb:
+# F - Fg - ^Fm - ^Bb7 - ^Eb, the lead holding F, then ^F, then the new key's leading tone ^D.
+# Form (74 bars): intro 8, drop_1 16, breakdown 16, giant 6, pivot 4, drop_2 16, outro 8.
+songmap: 0.2
+title: "Silver Lift"
+tempo: 128
+meter: "4/4"
+key: C
+tuning: "36edo"
+fps: 30
+seed: 65
+tail_seconds: 4
+
+mood: techno
+instruments:
+  lead: {voices: 3, detune: 3, vib_depth: 3, cutoff: 4200, release: 0.2}
+  arp: {use: pluck/v0, cutoff: 2800, decay: 0.3}
+  pad: {voices: 3, detune: 3, drift: 0, cutoff: 2000, attack: 0.1, release: 0.6}
+  keys: {use: keys/still, hardness: 0.35}
+  bass: {use: bass/v0, cutoff: 650, drive: 2, env_amt: 2, env_decay: 0.1, sub: 0.5}
+  bell: clean/glass
+  drums: {kit: {kick: {use: kick/v0, tune: 49, sweep: 30, decay: 0.48, click: 0.3, drive: 2}, clap: clap/v0, hat: hat/v0, ohat: hat/v0_open, snare: {use: snare/v0, tone: 200, snap: 0.5, noise_decay: 0.25}}}
+
+harmony:
+  progressions: {anthem: "C:1 G:1 Am:1 F:1", slow: "Am:2 F:2 C:2 G:2", giant: "C:1 ~:0.5 Ab:1 ~:0.5 E:1 ~:0.5 C:1.5", pivot: "F:0.5 Fg:0.5 ^Fm:1 ^Bb7:2", anthem2: "^Eb:1 ^Bb:1 ^Cm:1 ^Ab:1", close: "^Eb:1 ^Bb:1 ^Cm:1 ^Ab:1 ^Eb:4"}
+
+sections:
+  - {name: intro, bars: 8, parts: {drums: {steps: {kick: X...X...X...X..., hat: {steps: "..x...x...x...x.", vel: [0.42, 0.34, 0.45, 0.32]}}}, pad: {style: hold, range: [50, 67]}, arp: up}, harmony: anthem, dyn: "p<mp"}
+  - {name: drop_1, bars: 16, parts: {drums: {steps: {kick: X...X...X...X..., hat: {steps: "..x...x...x...x.|..x...x...x...x.|..x...x...x...x.|..x...x...x.x.xx", vel: [0.42, 0.34, 0.45, 0.32]}, clap: "....X.......X..."}, gain_db: -2.5}, bass: {rel: "r/8 R/8^ r/8 R/8 r/8 R/8^ r/8 R/8", oct: -2}, pad: {style: hold, range: [50, 67]}, arp: up, lead: {deg: "=mf 4/8^ 7/8 4/8 2/8 4/4 7/4 | 6/8^ 4/8 1/8 4/8 6/4 8/4 | 5/8^ 7/8 5/8 2/8 4/4 7/4 | 5/8^ 7/8 5/8 3/8 5/4 r/4"}}, harmony: anthem, dyn: "mp<mf"}
+  - {name: breakdown, bars: 16, parts: {pad: {style: hold, range: [50, 67]}, keys: {deg: "=mp 5/2 7/2 | 5/1 | 3/2 5/2 | 5/1 | 4/2 7/2 | 4/1 | 6/2 4/2 | 1/1"}, bell: {deg: "=p r/2 7/2 | r/1 | r/2 7/2 | r/1 | r/2 7/2 | r/1 | r/2 6/2 | r/1", oct: 1}}, harmony: slow, dyn: "p<mp"}
+  - {name: giant, bars: 6, parts: {drums: {steps: {kick: X...X...X...X..., hat: {steps: "..x...x...x...x.", vel: [0.42, 0.34, 0.45, 0.32]}, snare: {steps: "x...x...x...x...|x...x...x...x...|x.x.x.x.x.x.x.x.|x.x.x.x.x.x.x.x.|xxxxxxxxxxxxxxxx|xxxxxxxxxxxxxxxx", vel: [0.25, 0.3, 0.36, 0.42, 0.5, 0.58]}}}, bass: {rel: "r/8 R/8^ r/8 R/8 r/8 R/8^ r/8 R/8", oct: -2}, pad: {style: hold, range: [50, 67]}, arp: up, lead: {deg: "=f 7/1 | 7/2 b5/2 | b5/1 | 2/1 | 2/2 0/2 | 0/1"}}, harmony: giant, dyn: "p<mp"}
+  - {name: pivot, bars: 4, parts: {pad: {style: hold, range: [50, 67]}, bass: {rel: R/1, oct: -2}, lead: {deg: "=mf 3/1 | ^3/1 | ^1/1 | ^3/2 ^1/2"}}, harmony: pivot, dyn: "p<mp"}
+  - {name: drop_2, bars: 16, parts: {drums: {steps: {kick: X...X...X...X..., hat: {steps: xxXxxxXxxxXxxxXx, vel: [0.3, 0.18, 0.4, 0.18]}, clap: "....X.......X...", ohat: {steps: "..x...x...x...x.|..x...x...x...x.|..x...x...x...x.|..x...x.x.x.xxxx", vel: [0.48, 0.4]}}}, bass: {rel: "r/16 R/16^ R/16 R/16 r/16 R/16 R/16 R/16 r/16 R/16^ R/16 R/16 r/16 R/16 R/16 R/16", oct: -2}, pad: {style: hold, range: [50, 67]}, arp: up, lead: {deg: "=mf 4/8^ 7/8 4/8 2/8 4/4 7/4 | 6/8^ 4/8 1/8 4/8 6/4 8/4 | 5/8^ 7/8 5/8 2/8 4/4 7/4 | 5/8^ 7/8 5/8 3/8 5/4 r/4"}, bell: {deg: "=p r/2 7/2 | r/1 | r/2 7/2 | r/1", oct: 1}}, harmony: anthem2, dyn: f, key: "^Eb"}
+  - {name: outro, bars: 8, parts: {drums: {steps: {kick: X...X...X...X..., hat: {steps: "..x...x...x...x.|..x...x...x...x.|..x...x...x...x.|..x...x...x.x.xx", vel: [0.42, 0.34, 0.45, 0.32]}, clap: "....X.......X..."}, gain_db: -2}, bass: {rel: "r/8 R/8^ r/8 R/8 r/8 R/8^ r/8 R/8", oct: -2}, pad: {style: hold, range: [50, 67]}, arp: up}, harmony: close, dyn: "mf>p", key: "^Eb"}
+
+events:
+  - {at: drop_1, type: impact, size: m}
+  - {at: pivot+4, type: riser, bars: 4}
+  - {at: drop_2, type: impact, size: xl}
+mix:
+  lead: {gain_db: 12, send: {hall: 0.25}, inserts: [{fx: delay, time: 0.75, feedback: 0.3, mix: 0.12}]}
+  arp: {gain_db: -4, sidechain: {from: kick, depth: 0.3, release: 0.214, attack: 0.0005}, send: {hall: 0.15}, inserts: [{fx: delay, time: 0.75, feedback: 0.35, mix: 0.22}]}
+  pad: {gain_db: -4, sidechain: {from: kick, depth: 0.7, release: 0.214, attack: 0.0005}, send: {hall: 0.25}}
+  keys: {gain_db: -2, send: {hall: 0.3}}
+  bass: {gain_db: -2, sidechain: {from: kick, depth: 0.5, release: 0.214, attack: 0.0005}}
+  bell: {gain_db: -12, send: {hall: 0.4}}
+  drums: {gain_db: -3}
+  fx: {gain_db: -6}
+
+master:
+  glue: none

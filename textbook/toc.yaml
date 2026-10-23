@@ -560,6 +560,16 @@ parts:
           - {id: moon, title: "Moon on the Water: the whole ladder"}
           - {id: first-light, title: "First Light: the return"}
           - {id: testing, title: "Listening, and testing it"}
+      - id: ch49
+        title: "Golden House: five electronic songs"
+        summary: "Deep house, UK garage, progressive house, tech house and melodic house, each built on a golden technique used the way dance music uses harmony: a chord stab, a bass walk-up, a build, a breakdown, a key change for the last drop."
+        sections:
+          - {id: dance-floor, title: "Golden harmony on the dance floor"}
+          - {id: colour-field, title: "Colour Field: the golden stab"}
+          - {id: two-step, title: "Two-Step Gold: the golden walk-up"}
+          - {id: escalator, title: "Escalator: building on golden steps"}
+          - {id: quasicrystal, title: "Quasicrystal: a groove that never repeats"}
+          - {id: silver-lift, title: "Silver Lift: up a silver third"}
 
   - id: appendices
     title: "Appendices"

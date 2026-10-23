@@ -27,3 +27,15 @@ def test_master_hits_target():
     x = dsp.svf(rng.standard_normal(SR * 6), 2000, 0.7) * 0.1
     y = mix_master.master(np.stack([x, x], 1), -14)
     assert mix_qa.lufs(y) == pytest.approx(-14, abs=0.5) and mix_qa.true_peak_db(y) < -0.5
+
+
+def test_a_send_to_a_missing_return_is_a_song_error_at_check_time():
+    import pytest
+    from songmap.arrange.expand import expand
+    from songmap.parse import lang
+    from songmap.parse.errors import SongError
+    s = lang.loads('song "S" 120 4/4 C\nx 2 | pad:warm lead="e+1 | d+1"\nmix lead 6 delay=.2\n', "s.sm")
+    arr = expand(s)
+    with pytest.raises(SongError) as e:
+        arr.ensemble.check(s.parts())
+    assert "unknown return 'delay'" in str(e.value) and "inserts lead delay(" in str(e.value)

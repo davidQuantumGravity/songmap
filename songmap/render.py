@@ -158,9 +158,8 @@ def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: 
             env = sidechain_env(triggers[sc.get("from", "kick")], n, depth=float(sc.get("depth", 0.5)),
                                 release=float(sc.get("release", 0.15)), attack=float(sc.get("attack", 0.004)))
             buf *= env[:, None]
+        ens.check_sends(part, m)
         for ret, amt in (m.get("send") or {}).items():
-            if ret not in ens.returns:
-                raise ValueError(f"mix {part}: send to unknown return '{ret}' (returns: {', '.join(ens.returns)})")
             sends.setdefault(ret, np.zeros((n, 2)))
             sends[ret] += buf * float(amt)
         stems[part] = buf

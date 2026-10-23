@@ -162,6 +162,16 @@ class Ensemble:
         """Every instrument built so far (one per distinct voice + params)."""
         return list(self._cache.values())
 
+    def check_sends(self, part, m) -> None:
+        """A mix send must name a return the song has (only `hall` unless `set returns=` adds more)."""
+        for ret in (m.get("send") or {}) if isinstance(m, dict) else ():
+            if ret not in self.returns:
+                raise SongError(f"mix {part}: send to unknown return '{ret}' (returns: {', '.join(self.returns)})",
+                                file=self.song.file,
+                                suggestion=f"for an echo use `inserts {part} delay(time=0.75, mix=.2)`, or add the "
+                                f"return: set returns.{ret}={{type: reverb, seconds: 1.2}}"
+                                if ret == "delay" else did_you_mean(ret, self.returns))
+
     def check(self, parts) -> None:
         """Build every instrument a song uses (validates names and params)."""
         for part in parts:
@@ -170,6 +180,8 @@ class Ensemble:
                     self.instrument(part, piece)
             else:
                 self.instrument(part)
+        for part, m in self.mix.items():
+            self.check_sends(part, m)
         for name, r in self.returns.items():
             if r.get("type", "reverb") != "reverb":
                 self.song.warnings.append(f"return {name}: type '{r.get('type')}' arrives in P4; skipped")
