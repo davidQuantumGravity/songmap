@@ -30,8 +30,9 @@ def _arrangement(song):
 
 def write_video(song, out: str, *, fps: int = 30, size=(1280, 720), theme: str = "light",
                 page_seconds: float = 6.0, parts: list[str] | None = None, audio_wav: str | None = None,
-                master_mode: str | None = None, crf: int = 20, log=None) -> str:
-    """Write `out` (.mp4, H.264 + AAC). Returns the path."""
+                master_mode: str | None = None, crf: int = 20, log=None, view: dict | None = None) -> str:
+    """Write `out` (.mp4, H.264 + AAC). Returns the path. `view` (visual/view.py) overrides size, theme,
+    page_seconds and parts, and chooses the layers."""
     tmp = None
     if audio_wav is None:
         from ..export.wav import write_wav24
@@ -44,11 +45,11 @@ def write_video(song, out: str, *, fps: int = 30, size=(1280, 720), theme: str =
     else:
         arr = _arrangement(song)
     try:
-        score = score_of(arr, parts)
-        rend = Renderer(score, size, theme, page_seconds)
+        score = score_of(arr, parts if parts is not None or not view else view.get("parts"))
+        rend = Renderer(score, size, theme, page_seconds, view=view)
         n = max(1, math.ceil(score.seconds * fps))
         os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
-        W, H = size
+        W, H = rend.W, rend.H
         cmd = [_ffmpeg(), "-y", "-loglevel", "error",
                "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(fps), "-i", "-",
                "-i", audio_wav, "-map", "0:v", "-map", "1:a",
@@ -72,12 +73,12 @@ def write_video(song, out: str, *, fps: int = 30, size=(1280, 720), theme: str =
 
 
 def write_poster(song, out: str, *, t: float | None = None, size=(1280, 720), theme: str = "light",
-                 page_seconds: float = 6.0, parts: list[str] | None = None) -> str:
+                 page_seconds: float = 6.0, parts: list[str] | None = None, view: dict | None = None) -> str:
     """One frame as a PNG (video poster / still). Default time: just after the second chord (or the first note)."""
-    score = score_of(_arrangement(song), parts)
+    score = score_of(_arrangement(song), parts if parts is not None or not view else view.get("parts"))
     if t is None:
         first = score.notes[0].start if score.notes else 0.0
         t = score.chords[1].start + 0.05 if len(score.chords) > 1 else min(first + 0.25, score.seconds / 2)
     os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
-    Renderer(score, size, theme, page_seconds).frame(t).save(out)
+    Renderer(score, size, theme, page_seconds, view=view).frame(t).save(out)
     return out

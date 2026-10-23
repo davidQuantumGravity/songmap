@@ -94,9 +94,14 @@ def cmd_video(args) -> int:
         print(f"error: --size must look like 1280x720, not {args.size}", file=sys.stderr)
         return 2
     parts = args.parts.split(",") if args.parts else None
+    from .visual import view as view_mod
+    view = view_mod.load(args.song)                  # <song>.view.yaml (the Studio's video designer writes it)
+    if view is not None:
+        print(f"using {view_mod.path_for(args.song)} (size, theme and layers come from it)")
     if args.poster:
-        print("wrote", write_poster(song, args.poster, size=(w, h), theme=args.theme, parts=parts))
-    write_video(song, out, fps=args.fps, size=(w, h), theme=args.theme, parts=parts, master_mode=args.master, log=print)
+        print("wrote", write_poster(song, args.poster, size=(w, h), theme=args.theme, parts=parts, view=view))
+    write_video(song, out, fps=args.fps, size=(w, h), theme=args.theme, parts=parts, master_mode=args.master,
+                log=print, view=view)
     print(f"wrote {out}")
     return 0
 
