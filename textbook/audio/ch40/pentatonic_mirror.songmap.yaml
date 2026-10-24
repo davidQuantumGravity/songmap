@@ -8,11 +8,21 @@ key: "C major"
 tuning: 36edo
 seed: 40
 tail_seconds: 3
-instruments: {keys: clean/keys, pad: clean/organ, low: clean/bass}
+instruments:
+  keys: sampler/grand_piano
+  pad: sampler/grand_piano
+  low: sampler/double_bass
 mix:
-  keys: {gain_db: -3, send: {hall: 0.25}}
-  pad: {gain_db: -12, send: {hall: 0.25}}
-  low: {gain_db: -10}
+  keys:
+    gain_db: 10.9
+    send:
+      hall: 0.25
+  pad:
+    gain_db: 9.9
+    send:
+      hall: 0.25
+  low:
+    gain_db: 11.2
 sections:
   - {name: western, bars: 4, harmony: "C:1 Am:1 C:1 G:0.5 C:0.5", parts: {keys: {notes: "c4 d8 e8 a4 g4 | e4 d8 c8 a-4 c4 | g4 a8 c+8 a4 g4 | e4 d4 c2"}, pad: hold, low: {style: roots, role: bass}}}
   - {name: golden, bars: 4, harmony: "Cg:1 ^Ag:1 Cg:1 vFg:0.5 Cg:0.5", parts: {keys: {notes: "c4 d8 vf8 ^a4 ^g4 | vf4 d8 c8 ^a-4 c4 | ^g4 ^a8 c+8 ^a4 ^g4 | vf4 d4 c2"}, pad: hold, low: {style: roots, role: bass}}}

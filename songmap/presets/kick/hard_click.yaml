@@ -1,0 +1,12 @@
+instrument: kick
+description: Fast click over a compact body for dense club mixes.
+tags:
+- electronic
+- kick
+params:
+  tune: 57
+  decay: 0.32
+  click: 0.65
+  click_tone: 6500
+  sweep: 33
+  drive: 2.4

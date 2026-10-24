@@ -1,0 +1,9 @@
+# French horn: Rounded sustained horn; cinematic calls and warm inner voices, with natural recorded pitch variation.
+song "French horn" 100 4/4 C fps=30 seed=99 tail=3 tuning=36edo
+inst voice=sampler/horn
+soft 1 | voice:{deg: "0/4 2 4 r/4", oct: 0} dyn=p
+medium 1 | voice:{deg: "0/4 2 4 r/4", oct: 0} dyn=mf
+hard 1 | voice:{deg: "0/4 2 4 r/4", oct: 0} dyn=f
+sixth 1 | voice:{deg: "^0/1", oct: 0} dyn=mp
+mix voice -6 hall=.08
+master standard lufs=-18 glue=none

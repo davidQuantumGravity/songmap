@@ -1,13 +1,17 @@
-# SongMap: compact, expressive, LLM-friendly soundtracks for videos
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/brand/songmap-logo-dark.png">
+    <img src="docs/brand/songmap-logo.png" width="640" alt="SongMap: three musical notes connected across a folded map">
+  </picture>
+</p>
 
-**Status (2026-10-20):**
-- Design v0.2 is complete.
-- **P0 and P1 are done.** The `songmap` package parses YAML song maps (v0.2, and v0.1 with migration), expands them against the harmony timeline with styles-as-data, renders WAV, stems and `cues.json`, and has the `check`, `render` and `migrate` commands.
-- The three Oct-13 tracks are ported in `examples/v0.2_yaml/`:
-  - every note matches the synth_v0 original;
-  - section boundaries are frame-exact against the videos;
-  - per-section loudness correlates 0.999 with the original audio.
-- 114 tests pass, including the 43 moved from the sketch and golden event-list hashes. Next: P2 (QA) and P3 (performance layer).
+# SongMap
+
+Write music as editable text. SongMap compiles `.sm` and YAML scores into audio, stems, QA reports, and frame-accurate video cues. It supports conventional tuning and 36-tone equal temperament, synthesized and sampled instruments, and note-synchronized video.
+
+SongMap Studio edits the same score files through a browser interface. [AI Lab](docs/AI_LAB.md) adds saved instrument comparisons, listening feedback, and previewed application or undo of selected changes. The broader [AI songwriting vision](docs/AI_SONGWRITING_VISION.md) describes future work.
+
+The repository includes the Python engine, Studio, composition guides, song scores, and textbook sources. Downloaded sample libraries and rendered media stay outside Git. Automated QA checks technical properties; musical quality still needs listening review.
 
 ## The idea
 
@@ -21,9 +25,9 @@ song.sm ─► parse ─► arrange (styles, motifs, harmony) ─► perform (dy
                                                               │
                      instruments (velocity → timbre, round-robin, physical models, sampler, plugins)
                                                               │
-                     mix (buses, sidechain, sends) ─► master (contrast-preserving, −14 LUFS, −1 dBTP)
+                     mix (buses, sidechain, sends) ─► master (selected mood and loudness settings)
                                                               │
-               song.wav · stems/ · song.mid · cues.json · qa.json/png  ──►  Remotion video / ffmpeg mux
+               song.wav · stems/ · cues.json · qa.json/png  ──►  Remotion video / ffmpeg mux
 ```
 
 ## A taste of the format
@@ -58,6 +62,8 @@ Drums can be step strings: `"X..x..x.|X.ox.x.r"`.
 | [docs/INSTRUMENTS.md](docs/INSTRUMENTS.md) | The instrument contract, the full suite catalog, realism recipes, sampler and plugin backends, presets, YAML patch instruments |
 | [docs/ENGINE.md](docs/ENGINE.md) | Package layout, data flow, styles-as-data, timing math, contrast-preserving mastering, test strategy, what code exists now |
 | [docs/GUI.md](docs/GUI.md) | SongMap Studio: auto-generated knobs, audition, presets, steps and feel, video-synced song view, patch editor, API, milestones |
+| [docs/AI_SONGWRITING_VISION.md](docs/AI_SONGWRITING_VISION.md) | Product vision for AI songwriting from a blank project through audible choices, selective merges, delegated writing, feedback, and editable song history |
+| [docs/AI_LAB.md](docs/AI_LAB.md) | Implemented instrument usage map, improvement priorities, saved A/B comparisons, text feedback, AI challengers, and applying or undoing selected changes |
 | [docs/SCENE_TIMELINES.md](docs/SCENE_TIMELINES.md) | Frame-by-frame spotting of the three Oct-13 videos |
 | [docs/RESCORE_PLAN.md](docs/RESCORE_PLAN.md) | Through-composed re-scores of those videos: shared motifs, per-scene treatment, production steps |
 | [docs/GOLDEN_HARMONY.md](docs/GOLDEN_HARMONY.md) | Golden-ratio harmony in 36-ET: golden intervals, chords and scales, notation, stability measurements, infrastructure plan (P10) |
@@ -68,7 +74,7 @@ Drums can be step strings: `"X..x..x.|X.ox.x.r"`.
 ## Layout
 
 ```
-Music/
+SongMap/
 ├── README.md · ROADMAP.md · pyproject.toml
 ├── docs/                         ← the documents above
 ├── songmap/                      ← the engine (layout in docs/ENGINE.md §2)
@@ -80,6 +86,8 @@ Music/
 │   ├── presets/                  ← <instrument>/<name>.yaml (the synth_v0 voices: kick/v0, pad/warm, ...)
 │   ├── perform/  mix/  export/   ← performance layer (play.py: swing, humanize, rolled chords), mixing/mastering, wav/cues/qa/qa.png
 ├── tests/                        ← pytest; golden/ holds event-list hashes of every example
+├── songs/                        ← editable scores, listening-page sources and review receipts
+├── textbook/                     ← chapter sources, example scores and build metadata
 ├── tools/                        ← port_check, v0_oracle (synth_v0's own notes), calibrate_v0, update_golden, demo
 ├── examples/
 │   ├── v0.2_yaml/                ← faithful v0.2 ports of the three Oct-13 tracks (render these)
@@ -91,22 +99,46 @@ Music/
     └── synth_v0.py               ← the original prototype (made the Oct-13 tracks)
 ```
 
-**Source assets** for the Oct-13 videos (rendered MP4s, MP3s, and the Remotion + synth source tarball) are in `C:\Users\chest\Documents\Physics\APEC\Monday Meetings\weekly_videos\`. P0 copied them into `assets/oct13/`. The MP3s are not committed; the extracted WAVs are git-ignored.
+The optional Oct-13 comparison tests use original audio in `assets/oct13/`. Those recordings and videos are omitted from Git. Run the portable suite with `python -m pytest -q -m "not port"`; the full suite also runs the original-audio comparisons when those files are available.
 
 ## Try it
 
+For the free recorded instrument pack, run `songmap samples install` and `songmap samples verify`.
+Studio and `songmap describe` expose its individual voices. [Library instructions](docs/SFZ_LIBRARY.md) cover the
+the voice catalog, pinned sources and playback limits; [the SFZ listening edition](songs/sfz_revisited/index.html) compares
+revised songs with their original masters and includes an instrument gallery.
+
+Listening pages need their locally rendered media. The HTML, editable scores, and verification records are versioned; audio and video exports are omitted from Git.
+
+Use Python 3.12 or newer. On Windows PowerShell:
+
+```powershell
+git clone https://github.com/davidQuantumGravity/songmap.git
+cd songmap
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -e ".[dev,gui,sampler]"
+```
+
+On macOS or Linux, activate the environment with `source .venv/bin/activate`. Install FFmpeg and put it on `PATH` for MP3 export and video rendering. Sample recordings install separately; `songmap samples install grand_piano flute` installs just those two voices.
+
 ```bash
-python -m venv .venv && .venv/Scripts/pip install -e .[dev,gui]
 songmap check  examples/week_oct13_swarm.sm                       # the compact form (same notes as the YAML)
 songmap check  examples/v0.2_yaml/week_oct13_swarm.songmap.yaml
 songmap render examples/v0.2_yaml/week_oct13_swarm.songmap.yaml -o build/swarm   # ~4 s
 songmap migrate examples/v0.1_yaml/week_oct13_swarm.songmap.yaml                 # v0.1 -> v0.2 on stdout
 songmap fmt examples/v0.2_yaml/week_oct13_swarm.songmap.yaml --to sm             # YAML -> .sm (lossless)
 songmap describe --compact                # the ~450-token catalog an LLM composes from
-python -m pytest -q                       # 219 tests (-m "not port" skips the 30 s render-vs-original checks)
+python -m pytest -q -m "not port"         # portable suite; no original recordings needed
 python tools/port_check.py --stems        # notes vs synth_v0, loudness vs the original audio, per-part levels
 python tools/demo.py                      # out/demo.wav + out/gallery.wav (every instrument at p, mf, ff)
 ```
+
+## Development workflow
+
+`main` is the shared branch for the engine, Studio, guides, and scores. Develop changes on branches or temporary linked worktrees, run the relevant checks, then merge them into `main`. Tags identify tested releases of the same project.
+
+GitHub Actions runs the portable Python suite on Python 3.12 and 3.14 and builds Studio with Node.js 24. The original-recording comparisons remain available locally through the full test suite. Downloaded sample libraries, render folders, AI Lab sessions, and agent scratch files stay local.
 
 **Running the original prototype:**
 
@@ -139,3 +171,7 @@ python tools/golden_suite.py
 ```
 
 The second command writes every suite song to `examples/golden/suite/` and renders them to `golden_audio/`. Open `golden_audio/index.html` to browse the technique portfolios, the Well-Tempered Golden Clavier, and the System 1 and System 2 dictionaries.
+
+For the expanded bass and drum palette, open [the listening page](songs/rhythm_palette/index.html) or
+[the palette guide](docs/BASS_DRUM_PALETTE.md): recorded basses and acoustic kits, electronic presets,
+42 editable examples and eight groove templates.

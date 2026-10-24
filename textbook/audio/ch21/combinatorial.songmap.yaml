@@ -8,8 +8,18 @@ key: "C major"
 tuning: 12edo
 seed: 21
 tail_seconds: 3
-instruments: {lead: clean/lead, low: clean/organ}
-mix: {lead: {gain_db: -5, send: {hall: 0.2}}, low: {gain_db: -5, send: {hall: 0.2}}}
+instruments:
+  lead: sampler/flute
+  low: sampler/grand_piano
+mix:
+  lead:
+    gain_db: 5.1
+    send:
+      hall: 0.2
+  low:
+    gain_db: 13.0
+    send:
+      hall: 0.2
 sections:
   - {name: counterpoint, bars: 4, parts: {lead: {notes: "c+4 e+ a bb f eb f# c#+ d+ b g ab1"}, low: {notes: "b-4 g- d c# f#- ab- f- bb- a- c e eb1"}}}
 master: clean

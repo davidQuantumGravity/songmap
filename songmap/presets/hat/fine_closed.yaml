@@ -1,0 +1,10 @@
+instrument: hat
+description: Fine short electronic hat with little metallic ring.
+tags:
+- electronic
+- hat
+params:
+  decay: 0.035
+  metal: 0.2
+  hp: 8500
+  color: 12500

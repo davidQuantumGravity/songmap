@@ -9,8 +9,16 @@ key: "C major"
 tuning: 12edo
 seed: 16
 tail_seconds: 1.5
-instruments: {lead: clean/keys, bass: clean/bass}
-mix: {lead: {gain_db: -3, send: {hall: 0.1}}, bass: {gain_db: -4}}
+instruments:
+  lead: sampler/grand_piano
+  bass: sampler/double_bass
+mix:
+  lead:
+    gain_db: 12.2
+    send:
+      hall: 0.1
+  bass:
+    gain_db: 11.2
 returns: {hall: {type: reverb, seconds: 1.4, predelay: 0.02, damping: 0.5}}
 sections:
   - name: threefour

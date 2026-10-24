@@ -1535,11 +1535,10 @@ sampler:
   summary: Instead of synthesising a sound, it plays a recording. For each note it picks the recordings that match the key,
     the velocity and the round-robin slot, retunes them to the exact pitch, and shapes them with a simple envelope. Its
     sound comes from the library; the knobs only adjust how it is played back.
-  how: Find the SFZ regions whose key range contains the rounded note pitch and whose round-robin slot matches the part's
-    note counter. Pick the velocity layer, and crossfade two neighbouring layers with an equal-power blend over a zone set
-    by `xfade`. Resample each recording with a windowed-sinc filter from its recorded key to the exact float pitch plus
-    `tune` cents (36-EDO works). Apply a raised-cosine attack (the region's attack plus `attack`) and an exponential release
-    scaled by `release_mul`, then add the library's release samples (key-off noises) at `release_level`.
+  how: Select recordings by key, velocity, random group and round-robin slot. Follow the SFZ's explicit velocity fades;
+    otherwise `xfade` blends adjacent velocity zones. Read from each sample's offset and repitch with a windowed-sinc
+    filter to the exact float pitch plus `tune` cents. Apply the source's attack, decay and sustain, scale its release
+    with `release_mul`, and add key-off recordings at `release_level`. Explicit sustain and continuous loops are supported.
   why: 'A recording already contains everything a model has to imitate: the real hammer, body, room and noise. Real libraries
     record several velocity layers because a hard-played note has a different tone, not just more volume; crossfading layers
     avoids a sudden jump in tone between them. Round-robin recordings of the same note keep repeated notes from sounding
@@ -1592,7 +1591,7 @@ sampler:
   recipes:
   - name: Hard layer switches
     set: {xfade: 0}
-    listen: Each velocity now plays exactly one recording; on a crescendo you can hear the tone jump between layers.
+    listen: Disables automatic blending between disjoint velocity zones. Explicit crossfade curves in a source SFZ still apply.
   - name: Long release, more key noise
     set: {release_mul: 3, release_level: 1.5}
     listen: 'Notes ring after you let go and the damper and key noises get louder: a more ''in the room'' sound.'
@@ -1602,5 +1601,5 @@ sampler:
   - name: Quarter-tone flat
     set: {tune: -50}
     listen: 'Half a semitone down: the recording is resampled, so you can retune a real instrument to any pitch.'
-  try_next: Swap `keys` for `sampler/salamander` in a song (after installing the library) and compare the modal piano with
-    the recorded one.
+  try_next: Run `songmap samples install`, choose a recorded voice in the sampled-instrument selector, and audition its
+    phrase or velocity sweep. Compare the original and sampled editions in `songs/sfz_revisited/index.html`.

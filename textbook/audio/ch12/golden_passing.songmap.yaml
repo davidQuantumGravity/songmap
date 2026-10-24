@@ -8,8 +8,16 @@ key: "C major"
 tuning: 36edo
 seed: 1
 tail_seconds: 2
-instruments: {chords: clean/organ, bass: clean/bass}
-mix: {chords: {gain_db: -6, send: {hall: 0.25}}, bass: {gain_db: -4}}
+instruments:
+  chords: sampler/grand_piano
+  bass: clean/bass
+mix:
+  chords:
+    gain_db: 15.1
+    send:
+      hall: 0.25
+  bass:
+    gain_db: -4
 returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
 sections:
   - name: system1

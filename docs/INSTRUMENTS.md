@@ -147,7 +147,8 @@ Two optional backends plug into the same `Instrument` contract, so a song can sw
   - Round-robin cycles with `Note.rr`, the part's note counter mod 8.
   - Chokes are applied by the engine across the notes of a part, with a 6 ms fade.
   - Extras beyond the list above: `key`, `default_path`, `amp_veltrack`, `pitch_keytrack`, `rt_decay`, `#define` and `#include`.
-  - Other opcodes are ignored, and the render log warns about them. Loops, filters and LFOs are not supported yet.
+  - Offsets, explicit velocity fades, seeded random groups, decay/sustain, explicit loop points and one-shot playback
+    are also supported. Other opcodes produce warnings; filters, LFOs, live pedals and keyswitches remain unsupported.
   - Knobs: `level`, `tune`, `xfade` (velocity crossfade width), `attack`, `release_mul` and `release_level`.
 
 #### Using Salamander from a song
@@ -159,7 +160,14 @@ Two optional backends plug into the same `Instrument` contract, so a song can sw
 
 For a library with several programs, write `sampler/<library>/<program stem>`. For example, VSCO-2 CE (CC0, <https://github.com/sgossner/VSCO-2-CE/releases/tag/1.1.0>) unpacked as `samples/vsco2/` is used as `sampler/vsco2/<stem>`. If a library is missing, the error says where it looked and where to download it.
 
+The curated free library offers 116 individual voices, including piano, FM keyboard, harp, mallets, orchestral
+instruments, recorded bass techniques and acoustic kit pieces. `songmap samples install` downloads and verifies their pinned source files;
+`songmap samples list` shows availability, and `songmap samples verify` checks the installation. Studio and the AI
+catalog expose the individual names. See [SFZ_LIBRARY.md](SFZ_LIBRARY.md) for references, controls and limitations.
+See [BASS_DRUM_PALETTE.md](BASS_DRUM_PALETTE.md) for drum articulations, electronic presets and groove templates.
+
 ### 5.2 `plugin`: VST3 hosting via DawDreamer
+- **Status: planned.** No plugin host is implemented in the current engine.
 - `pip install dawdreamer`, then load a VST3 instrument, send it the Played notes as MIDI, and render offline. Parameters come from `get_parameters_description()`, and the GUI shows them like native knobs.
 - **Good free instruments:** Surge XT (GPL-3, superb synth), Dexed (DX7 FM), Vital (free tier), OB-Xd. Pianoteq (commercial) is the best non-sample piano.
 - **Caveat:** plugin renders are reproducible only if the plugin is deterministic. Pin plugin versions in `render.log`.

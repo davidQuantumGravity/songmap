@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-23",
+  "chapter": "ch51",
+  "musical_revision": 2,
+  "videos": [
+    {
+      "name": "01_sideways_sun",
+      "source": "textbook/audio/ch51/01_sideways_sun.songmap.yaml",
+      "source_sha256": "808c1ca986d3e5f55aa526757ec9fc5db6a613fe744af0f529a99af6e7c205aa",
+      "event_digest": "17a72cf84c564c0a4882284fc1a941ed3c3b1c712cc5b84c174f7c78755b5653",
+      "canonical_score_identical": true,
+      "video": "textbook_site/video/ch51/01_sideways_sun.mp4",
+      "seconds": 200.555,
+      "frames": 6016,
+      "fps": 30,
+      "size": [
+        1920,
+        1080
+      ],
+      "audio": "AAC stereo 48000 Hz",
+      "visual_revision": 3,
+      "audio_reused_without_changes": true
+    },
+    {
+      "name": "02_pocket_algebra",
+      "source": "textbook/audio/ch51/02_pocket_algebra.songmap.yaml",
+      "source_sha256": "7705871500ecc661dae40ef8d756345fdfce8f44ad1c4a645f47d7972207681a",
+      "event_digest": "47c41d5c93f2db39734ab8de297d4b35d11f88e3b5d1768389ddb972de9793b3",
+      "canonical_score_identical": true,
+      "video": "textbook_site/video/ch51/02_pocket_algebra.mp4",
+      "seconds": 209.714,
+      "frames": 6291,
+      "fps": 30,
+      "size": [
+        1920,
+        1080
+      ],
+      "audio": "AAC stereo 48000 Hz",
+      "visual_revision": 3,
+      "audio_reused_without_changes": true
+    },
+    {
+      "name": "03_parallax_arcade",
+      "source": "textbook/audio/ch51/03_parallax_arcade.songmap.yaml",
+      "source_sha256": "3ae9e17e929b9130fcbb83380562cd8510a505de51528f9ef50d42f74de0512c",
+      "event_digest": "69fdb7829a39689856da948c0623f2a815802be621dcfda97cbd0152a9e2f47d",
+      "canonical_score_identical": true,
+      "video": "textbook_site/video/ch51/03_parallax_arcade.mp4",
+      "seconds": 206.29,
+      "frames": 6188,
+      "fps": 30,
+      "size": [
+        1920,
+        1080
+      ],
+      "audio": "AAC stereo 48000 Hz",
+      "visual_revision": 3,
+      "audio_reused_without_changes": true
+    },
+    {
+      "name": "04_two_windows",
+      "source": "textbook/audio/ch51/04_two_windows.songmap.yaml",
+      "source_sha256": "a250fed077b8d09931c848aea218b95bce42e3c4ff8426afac9f6cdf412a3d65",
+      "event_digest": "66c2b7397b50c1f0ea9568aa9570079d35f3f6a4d17076ed516eeec9426589a4",
+      "canonical_score_identical": true,
+      "video": "textbook_site/video/ch51/04_two_windows.mp4",
+      "seconds": 192.5,
+      "frames": 5775,
+      "fps": 30,
+      "size": [
+        1920,
+        1080
+      ],
+      "audio": "AAC stereo 48000 Hz",
+      "visual_revision": 3,
+      "audio_reused_without_changes": true
+    },
+    {
+      "name": "05_night_orchard",
+      "source": "textbook/audio/ch51/05_night_orchard.songmap.yaml",
+      "source_sha256": "c7a6d18addadac66cef7d8ff260f70861f34871fe8eb1f99afe3a4d0dc14b8f2",
+      "event_digest": "14b4948164064311df24354d4ebad20673a2340c62088a87f53a25e0ec51c37b",
+      "canonical_score_identical": true,
+      "video": "textbook_site/video/ch51/05_night_orchard.mp4",
+      "seconds": 200.0,
+      "frames": 6000,
+      "fps": 30,
+      "size": [
+        1920,
+        1080
+      ],
+      "audio": "AAC stereo 48000 Hz",
+      "visual_revision": 3,
+      "audio_reused_without_changes": true
+    },
+    {
+      "name": "modal_note_comparison",
+      "source": "textbook/audio/ch51/modal_note_comparison.songmap.yaml",
+      "source_sha256": "7ae36cdd9d8f45b4fe06b89c47f865fbcdb9423c33ca8b68fbc12f786fd927d7",
+      "event_digest": "4255cf495cea009a866f56d8792c44c5e8375d7f3cfb59ffa8e3696af678cd9c",
+      "canonical_score_identical": false,
+      "video": "textbook_site/video/ch51/modal_note_comparison.mp4",
+      "seconds": 14.0,
+      "frames": 420,
+      "fps": 30,
+      "size": [
+        1280,
+        720
+      ],
+      "audio": "AAC stereo 48000 Hz"
+    }
+  ],
+  "score_claims_verified": [
+    "F 6|3 to 5|4 replaces Eb by ^D; both defining pitches occur in the revised lead passages",
+    "D 4|2 to 35 retains six pitch classes, removes one, adds four",
+    "D and ^D 35 decatonic sets are disjoint",
+    "Two Windows opening subjects use complementary pentatonics",
+    "A 1|5 omits the tonic golden triad",
+    "Night Orchard has 64 bars"
+  ],
+  "checks": "Current score, audio, backing-event and instrument-range audit: songs/golden_worlds/verification.json. Encoded streams, timing and current chapter score equality checked here."
+}

@@ -8,8 +8,13 @@ key: "C major"
 tuning: 12edo
 seed: 21
 tail_seconds: 2
-instruments: {keys: clean/keys}
-mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+instruments:
+  keys: sampler/grand_piano
+mix:
+  keys:
+    gain_db: 9.8
+    send:
+      hall: 0.2
 sections:
   - {name: wedge, bars: 4, parts: {keys: {notes: "c4 b- c# bb- d a- eb ab- e g- f f#-1"}}}
   - {name: berg, bars: 3, parts: {keys: {notes: "f8 e c a- g- d- ab- db | eb gb bb b2."}}}

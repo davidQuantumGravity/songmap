@@ -10,8 +10,8 @@ tuning: 36edo
 seed: 315
 tail_seconds: 3
 instruments:
-  chords: clean/keys
-  low: clean/bass
+  chords: sampler/grand_piano
+  low: sampler/double_bass
   bell: clean/glass
 harmony:
   progressions:
@@ -20,9 +20,16 @@ harmony:
     gold: "Cg:0.375 vEg:0.25 ^Gg:0.25 Cg7:0.25 ^Abg:0.25 vFg:0.25 C:0.125 Cg:0.25"
     silver: "Cs:0.25 C#s:0.25 Ds:0.25 ^Ebs:0.25 ^Es:0.25 Cm:0.25 Cs:0.5"
 mix:
-  chords: {gain_db: -6, send: {hall: 0.2}}
-  low: {gain_db: -5}
-  bell: {gain_db: -9, send: {hall: 0.3}}
+  chords:
+    gain_db: 8.9
+    send:
+      hall: 0.2
+  low:
+    gain_db: 15.6
+  bell:
+    gain_db: -9
+    send:
+      hall: 0.3
 sections:
   - {name: major, bars: 2, harmony: major, parts: {chords: comp, low: bassline}}
   - {name: minor, bars: 2, harmony: minor, parts: {chords: comp, low: bassline}}

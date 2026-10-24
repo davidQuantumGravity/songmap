@@ -1,0 +1,17 @@
+{
+  "url": "http://127.0.0.1:8865/?song=songs%2Fgolden_adagio%2Fmotif_ab_studio.sm",
+  "studio_render_and_play": true,
+  "paused_ready": true,
+  "section_A_loop": [
+    0,
+    24
+  ],
+  "section_B_loop": [
+    27,
+    51
+  ],
+  "page_errors": [],
+  "score_sha256": "bd40ed5bb7da97945831fdfc1c0a81a19dca88e98603ac59d52115be92c2a749",
+  "audio_key": "957d8eb7d83e71141fbcacb254514bb909e7bb6e",
+  "byte_ranges": true
+}

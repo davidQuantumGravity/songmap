@@ -13,11 +13,36 @@ tail_seconds: 3
 
 mood: techno
 instruments:
-  keys: {use: keys/still, hardness: 0.45}
-  organ: {use: clean/organ, partials: 6, rolloff: 1.5, attack: 0.004, release: 0.1}
-  bass: {use: bass/v0, cutoff: 520, drive: 1.8, env_amt: 1.4, sub: 0.6}
-  pad: {voices: 3, detune: 3, drift: 0, cutoff: 1500, attack: 0.5, release: 1.2}
-  drums: {kit: {kick: {use: kick/v0, tune: 50, sweep: 28, decay: 0.42, click: 0.25, drive: 1.8}, hat: hat/v0}}
+  keys: sampler/grand_piano
+  organ:
+    use: clean/organ
+    partials: 6
+    rolloff: 1.5
+    attack: 0.004
+    release: 0.1
+  bass:
+    use: bass/v0
+    cutoff: 520
+    drive: 1.8
+    env_amt: 1.4
+    sub: 0.6
+  pad:
+    voices: 3
+    detune: 3
+    drift: 0
+    cutoff: 1500
+    attack: 0.5
+    release: 1.2
+  drums:
+    kit:
+      kick:
+        use: kick/v0
+        tune: 50
+        sweep: 28
+        decay: 0.42
+        click: 0.25
+        drive: 1.8
+      hat: hat/v0
 
 groove:
   swing: 0.54
@@ -27,10 +52,30 @@ sections:
   - {name: golden, bars: 4, parts: {drums: {steps: {kick: X...X...X...X..., hat: {steps: "..x...x...x...x.", vel: [0.4, 0.32]}}}, pad: {style: hold, range: [45, 62]}, bass: {rel: "R/8^ r/8 R/8 R+/16 (R/16) r/8 R/8^ 5/8 R/8", oct: -2}, organ: {rel: "r/8 [3,5,7]/8'^ r/4 [3,5,7]/4 r/8 ([3,5,7]/8')", oct: 1}, keys: {deg: "=mf r/8 4/8^ r/16 (4/16) r/8 6/8. 4/16 r/4 | r/8 5/8^ r/16 (5/16) r/8 4/8. 3/16 r/4 | r/8 2/8^ r/16 (2/16) r/8 4/2 | r/8 1/8^ r/16 (1/16) r/8 4/2", oct: 1}}, harmony: "Am7:1 Dm9:1 Fmaj7:0.5 Fg7:0.5 E7:0.5 Eg:0.5", dyn: mf}
 
 mix:
-  keys: {gain_db: -1}
-  organ: {gain_db: -12, sidechain: {from: kick, depth: 0.3}}
-  bass: {gain_db: -3, sidechain: {from: kick, depth: 0.45, release: 0.214, attack: 0.0005}}
-  pad: {gain_db: -5, sidechain: {from: kick, depth: 0.6, release: 0.214, attack: 0.0005}, send: {hall: 0.25}}
-  drums: {gain_db: -6}
+  keys:
+    gain_db: 4.0
+  organ:
+    gain_db: -12
+    sidechain:
+      from: kick
+      depth: 0.3
+  bass:
+    gain_db: -3
+    sidechain:
+      from: kick
+      depth: 0.45
+      release: 0.214
+      attack: 0.0005
+  pad:
+    gain_db: -5
+    sidechain:
+      from: kick
+      depth: 0.6
+      release: 0.214
+      attack: 0.0005
+    send:
+      hall: 0.25
+  drums:
+    gain_db: -6
 
 master: clean

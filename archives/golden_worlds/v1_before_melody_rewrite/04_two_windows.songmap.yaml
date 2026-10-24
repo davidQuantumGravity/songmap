@@ -1,0 +1,59 @@
+# Source: songs/golden_worlds/04_two_windows.sm
+songmap: 0.2
+title: "Two Windows"
+tempo: 96
+meter: "3/4"
+key: "G golden10_36"
+tuning: "36edo"
+fps: 30
+seed: 704
+tail_seconds: 5
+
+mood: documentary
+instruments:
+  keys: sampler/grand_piano
+  lead: sampler/flute
+  harp: sampler/folk_harp
+  low: sampler/double_bass
+
+harmony:
+  progressions: {subject: "Abg7:1 Ag7:1 vCg7:1 Ag7:1 Gg7:1 ^Eg7:1 Ag7:1 Gg7:1", answer: "Ag7:1 vBg:1 Gg7:1 ^Ebg7:1 vBg:1 ^Ebg7:1 Ag7:1 Gg7:1", duet: "vC#g7:1 Ag7:1 vCg7:1 Ag7:1 Gg7:1 ^Eg7:1 Ag7:1 Gg7:1", middle: "Gg7:1 vBg7:1 ^Dg7:1 F#g7:1 ^Ebg7:1 vCg7:1 Abg7:1 Gg7:1", reunion: "Gg7:1 vCg7:1 ^Eg7:1 Ag7:1 vBg:1 ^Ebg7:1 vCg7:1 Gg7:1 Abg7:1 vCg7:1 vBg:1 Gg7:1", close: "vCg7:1 ^Ebg7:1 vBg:1 Gg7:1"}
+
+sections:
+  - {name: paper_light, bars: 8, parts: {harp: {rel: "=mp R/4^ 5/8 3+ R+/4 | =p R/8^ 3 5/4 r/4 | =mp R/4^ 3/8 5 R+/4 | =p R/2^ r/4", oct: -1}, keys: {deg: "=p =p r/2 4/4^ | =mp 2/2 r/4 | =p 0/2^ -3/4 | =p r/4 -5/2 | =p 0/4^ -4/2 | =mp r/4 1/4 -2/4 | =p -2/2^ r/4 | =p 3/4 0/2", oct: 0}}, harmony: subject, dyn: "pp<p"}
+  - {name: first_window, bars: 8, parts: {lead: {deg: "=mp 0/8 2 4/4 6 | =p 8/4 6/8 4 2/4 | =mp 4/4. 2/8 0/4 | =p 2/2 r/4 | =mp 4/8 6 8/4 10 | =p 8/4 6 4 | =mp 2/8 4 6/4 2 | =p 0/2 r/4", oct: 1}, harp: {rel: "=mp R/4^ 5/8 3+ R+/4 | =p R/8^ 3 5/4 r/4 | =mp R/4^ 3/8 5 R+/4 | =p R/2^ r/4", oct: -1}, low: {rel: "=mp R/2^ 5/4 | =p R/2.^ | =mp R/4^ 3/2 | =p R/2^ r/4", oct: -2}}, harmony: subject, dyn: "p<mp"}
+  - {name: second_window, bars: 8, parts: {keys: {deg: "=mp r/4 1/8 3 5/4 | =p 7/8 5 3/4 1 | =mp 3/4 5/8 7 9/4 | =p 7/2 r/4 | =mp 5/4 3/8 1 3/4 | =p 5/8 7 9/4 7 | =mp 5/4. 3/8 1/4 | =p 3/2 r/4", oct: 0}, harp: {rel: "=mp R/4^ 5/8 3+ R+/4 | =p R/8^ 3 5/4 r/4 | =mp R/4^ 3/8 5 R+/4 | =p R/2^ r/4", oct: -1}, low: {rel: "=mp R/2^ 5/4 | =p R/2.^ | =mp R/4^ 3/2 | =p R/2^ r/4", oct: -2}}, harmony: answer, dyn: mp}
+  - {name: interlaced, bars: 8, parts: {lead: {deg: "=mp 0/8 2 4/4 6 | =p 8/4 6/8 4 2/4 | =mp 4/4. 2/8 0/4 | =p 2/2 r/4 | =mp 4/8 6 8/4 10 | =p 8/4 6 4 | =mp 2/8 4 6/4 2 | =p 0/2 r/4", oct: 1}, keys: {deg: "=mp r/4 1/8 3 5/4 | =p 7/8 5 3/4 1 | =mp 3/4 5/8 7 9/4 | =p 7/2 r/4 | =mp 5/4 3/8 1 3/4 | =p 5/8 7 9/4 7 | =mp 5/4. 3/8 1/4 | =p 3/2 r/4", oct: 0}, low: {rel: "=mp R/2^ 5/4 | =p R/2.^ | =mp R/4^ 3/2 | =p R/2^ r/4", oct: -2}}, harmony: duet, dyn: "mp<mf"}
+  - {name: answering_arch, bars: 8, parts: {lead: {deg: "=mp =mp 2/4^ 5/8 8/8 5/4 | =mf 9/4. 6/8 3/4 | =mp 3/8^ 6/8 9/4 6/4 | =p 7/2 r/4 | =mp 3/8^ 6/8 9/4 7/8 6/8 | =mf 3/4 0/8 -3/8 r/4 | =mp -5/4^ -2/4 1/8 -2/8 | =p 0/4 r/4 3/4", oct: 1}, keys: {deg: "=p =p r/2 5/4^ | =mp 3/2 r/4 | =p -4/2^ -7/4 | =p r/4 -10/2 | =p -7/4^ -1/2 | =mp r/4 0/4 -3/4 | =p -2/2^ r/4 | =p 3/4 0/2", oct: 0}, harp: {rel: "=mp R/4^ 5/8 3+ R+/4 | =p R/8^ 3 5/4 r/4 | =mp R/4^ 3/8 5 R+/4 | =p R/2^ r/4", oct: -1}, low: {rel: "=mp R/2^ 5/4 | =p R/2.^ | =mp R/4^ 3/2 | =p R/2^ r/4", oct: -2}}, harmony: answer, dyn: mf}
+  - {name: brighter_glass, bars: 8, parts: {lead: {deg: "=mp =mp 0/4^ 3/8 6/8 3/4 | =mf -1/4. -4/8 -7/4 | =mp -1/8^ 2/8 5/4 2/4 | =p -1/2 r/4 | =mp -3/8^ 0/8 3/4 1/8 0/8 | =mf 0/4 -3/8 -6/8 r/4 | =mp -6/4^ -3/4 0/8 -3/8 | =p 0/4 r/4 3/4", oct: 1}, keys: {deg: "=p =p r/2 3/4^ | =mp 3/2 r/4 | =p 2/2^ -1/4 | =p r/4 2/2 | =p -3/4^ -7/2 | =mp r/4 -3/4 -6/4 | =p -3/2^ r/4 | =p -7/4 -10/2", oct: 0}, harp: {rel: "=mp R/4^ 5/8 3+ R+/4 | =p R/8^ 3 5/4 r/4 | =mp R/4^ 3/8 5 R+/4 | =p R/2^ r/4", oct: -1}, low: {rel: "=mp R/2^ 5/4 | =p R/2.^ | =mp R/4^ 3/2 | =p R/2^ r/4", oct: -2}}, harmony: middle, dyn: "mp<mf", key: "G golden10_63"}
+  - {name: different_shadow, bars: 8, parts: {keys: {deg: "=mp =mp 0/4^ 3/8 6/8 3/4 | =mf -1/4. -4/8 -7/4 | =mp -1/8^ 2/8 5/4 2/4 | =p -1/2 r/4 | =mp -3/8^ 0/8 3/4 1/8 0/8 | =mf 0/4 -3/8 -6/8 r/4 | =mp -6/4^ -3/4 0/8 -3/8 | =p 0/4 r/4 3/4", oct: 1}, harp: {deg: "=p =p r/2 3/4^ | =mp 3/2 r/4 | =p 2/2^ -1/4 | =p r/4 2/2 | =p -3/4^ -7/2 | =mp r/4 -3/4 -6/4 | =p -3/2^ r/4 | =p -7/4 -10/2", oct: 0}, low: {rel: "=mp R/2^ 5/4 | =p R/2.^ | =mp R/4^ 3/2 | =p R/2^ r/4", oct: -2}}, harmony: middle, dyn: "mf>mp", key: "G golden10_63"}
+  - {name: unwritten_space, bars: 8, parts: {keys: {deg: "=p =p r/2 4/4^ | =mp 2/2 r/4 | =p 0/2^ -3/4 | =p r/4 -5/2 | =p 0/4^ -4/2 | =mp r/4 1/4 -2/4 | =p -2/2^ r/4 | =p 3/4 0/2", oct: 0}, harp: {style: hold, voices: 3, range: [55, 72]}}, harmony: subject, dyn: "p>pp"}
+  - {name: mirror_stairs, bars: 8, parts: {lead: {deg: "=mp =mp 1/4^ r/4 4/4 | =mf 5/4 8/4 1/8 -2/8 | =mp 0/4^ -3/8 -6/8 r/4 | =p -8/8 -5/8 -2/4 -4/8 -5/8 | =mp 0/2^ r/4 | =mf 1/8 4/8 7/4 4/4 | =mp 8/4.^ 5/8 2/4 | =p 0/4 3/8 6/8 3/4", oct: 1}, keys: {deg: "=p =p r/2 4/4^ | =mp 2/2 r/4 | =p 0/2^ -3/4 | =p r/4 -5/2 | =p 0/4^ -4/2 | =mp r/4 1/4 -2/4 | =p -2/2^ r/4 | =p 3/4 0/2", oct: 0}, low: {rel: "=mp R/2^ 5/4 | =p R/2.^ | =mp R/4^ 3/2 | =p R/2^ r/4", oct: -2}}, harmony: subject, dyn: "p<mp"}
+  - {name: crossed_hands, bars: 8, parts: {keys: {deg: "=mp =mp 2/4^ 5/8 8/8 5/4 | =mf 9/4. 6/8 3/4 | =mp 3/8^ 6/8 9/4 6/4 | =p 7/2 r/4 | =mp 3/8^ 6/8 9/4 7/8 6/8 | =mf 3/4 0/8 -3/8 r/4 | =mp -5/4^ -2/4 1/8 -2/8 | =p 0/4 r/4 3/4", oct: 1}, harp: {rel: "=mp R/4^ 5/8 3+ R+/4 | =p R/8^ 3 5/4 r/4 | =mp R/4^ 3/8 5 R+/4 | =p R/2^ r/4", oct: -1}, low: {rel: "=mp R/2^ 5/4 | =p R/2.^ | =mp R/4^ 3/2 | =p R/2^ r/4", oct: -2}}, harmony: answer, dyn: "mp<mf"}
+  - {name: both_windows, bars: 12, parts: {lead: {deg: "=mf =mf 0/4^ 3/8 6/8 3/4 | =f 0/4. -3/8 -6/4 | =mf -9/8^ -6/8 -3/4 -6/4 | =mp -8/2 r/4 | =mf -7/8^ -4/8 -1/4 -3/8 -4/8 | =f -7/4 -10/8 -3/8 r/4 | =mf -3/4^ 0/4 3/8 0/8 | =mp 0/4 r/4 3/4 | =mf 1/4^ 4/8 7/8 4/4 | =f 0/4. -3/8 -6/4 | =mf -4/8^ -1/8 -1/4 -1/4 | =mp 0/2 r/4", oct: 1}, keys: {deg: "=p =p r/2 3/4^ | =mp 4/2 r/4 | =p 4/2^ 1/4 | =p r/4 5/2 | =p 3/4^ -1/2 | =mp r/4 0/4 -3/4 | =p 0/2^ r/4 | =p 3/4 0/2 | =p r/2 4/4^ | =mp 4/2 r/4 | =p -1/2^ -4/4 | =p r/4 -7/2", oct: 0}, harp: {rel: "=mp R/4^ 5/8 3+ R+/4 | =p R/8^ 3 5/4 r/4 | =mp R/4^ 3/8 5 R+/4 | =p R/2^ r/4", oct: -1}, low: {rel: "=mp R/2^ 5/4 | =p R/2.^ | =mp R/4^ 3/2 | =p R/2^ r/4", oct: -2}}, harmony: reunion, dyn: "f>mf"}
+  - {name: folded_paper, bars: 8, parts: {lead: {deg: "=p =p 0/2^ -3/4 | =mp 0/4 -3/2 | =p -1/2^ r/4 | =p 0/2.", oct: 1}, keys: {style: hold, voices: 3, range: [48, 68]}, harp: {rel: "=mp R/4^ 5/8 3+ R+/4 | =p R/8^ 3 5/4 r/4 | =mp R/4^ 3/8 5 R+/4 | =p R/2^ r/4", oct: -1}}, harmony: close, dyn: "p>pp"}
+
+mix:
+  keys:
+    gain_db: 10.5
+    send:
+      hall: 0.18
+    pan: -0.18
+  lead:
+    gain_db: 18.3
+    send:
+      hall: 0.2
+    pan: 0.15
+  harp:
+    gain_db: 5.5
+    send:
+      hall: 0.22
+    pan: 0.28
+  low:
+    gain_db: 7.9
+    send:
+      hall: 0.08
+
+master:
+  target_lufs: -18
+  glue: none

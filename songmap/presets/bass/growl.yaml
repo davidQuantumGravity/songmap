@@ -1,0 +1,15 @@
+instrument: bass
+description: Driven saw and square bass for sparse heavy lines.
+tags:
+- electronic
+- bass
+params:
+  saw: 0.7
+  square: 0.45
+  sub: 0.3
+  cutoff: 850
+  res: 2
+  env_amt: 2.2
+  env_decay: 0.23
+  drive: 3
+  release: 0.08

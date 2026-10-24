@@ -1,0 +1,11 @@
+instrument: hat
+description: Low metallic, grainy electronic tick.
+tags:
+- electronic
+- hat
+params:
+  decay: 0.09
+  metal: 1
+  hp: 3700
+  color: 6200
+  tune: 0.78

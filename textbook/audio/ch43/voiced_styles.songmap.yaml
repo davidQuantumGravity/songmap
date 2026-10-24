@@ -8,7 +8,10 @@ key: "C major"
 tuning: 36edo
 seed: 5
 tail_seconds: 3
-instruments: {keys: keys/still, lead: clean/lead, low: clean/bass}
+instruments:
+  keys: sampler/grand_piano
+  lead: sampler/flute
+  low: sampler/double_bass
 harmony:
   progressions:
     walk: "C:1 Am:1 F:1 G:0.5 ~:0.25 ~:0.25"
@@ -19,5 +22,15 @@ sections:
   - {name: lines, bars: 4, harmony: walk, parts: {lead: top, low: bassline}}
   - {name: arp, bars: 4, harmony: walk, parts: {keys: {style: gentle8, role: arp}, low: {style: roots, role: bass}}}
   - {name: end, bars: 1, harmony: "C:1", parts: {keys: hold, low: {style: roots, role: bass}}}
-mix: {keys: {gain_db: -5, send: {hall: 0.2}}, lead: {gain_db: -5, send: {hall: 0.2}}, low: {gain_db: -4}}
+mix:
+  keys:
+    gain_db: 4.8
+    send:
+      hall: 0.2
+  lead:
+    gain_db: 0.2
+    send:
+      hall: 0.2
+  low:
+    gain_db: 16.0
 master: clean

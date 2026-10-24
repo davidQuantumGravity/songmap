@@ -7,7 +7,7 @@ description: Compose, score or revise music with the SongMap engine in this repo
 
 You write **musical decisions as text**, in a `.sm` song map. The engine does the synthesis, mixing and frame-accurate cue export. Never write DSP or edit engine code to change the music. If the engine can't do something, say so and pick the closest thing it can do.
 
-Good scores come from **composing first and typing second**. Follow the method in §2, make it alive with §3, balance it with §4, and use the references for depth:
+Good scores come from **composing first and typing second**. Every composition or musical revision requires deliberate musical decisions, **one instrument at a time: notes first, expression second, then review in the ensemble** (§2.1). Follow the method in §2, make it alive with §3, balance it with §4, and use the references for depth:
 
 | Read | When |
 |---|---|
@@ -38,26 +38,48 @@ From the repo root, activate `.venv` (`.venv/Scripts/activate` on Windows, `sour
 
 ## 2. The method
 
+**Recorded instruments:** run `songmap samples list` before choosing `sampler/<voice>`. The curated piano, harp,
+mallets, strings, winds and percussion appear in `songmap describe`; `songmap samples install` installs the free pack.
+Use installed voices within their published ranges and rebalance from their rendered stems. Recordings retain natural
+tuning and vibrato; keep `clean/golden_pad` and `clean/glass` when their engineered spectra are the point of a passage.
+See `docs/SFZ_LIBRARY.md` and the audition/comparison page `songs/sfz_revisited/index.html`.
+For bass and drums, use `docs/BASS_DRUM_PALETTE.md` and `songs/rhythm_palette/`: recorded bass techniques,
+complete kit lines, individual snares/toms/cymbals, electronic presets and eight editable groove templates.
+
 1. **Brief → concept.** In one sentence each, write:
    - what the viewer should *feel*, and how that changes scene by scene (the arc);
    - one musical idea that carries the piece: "a curious piano question that becomes a confident answer", "the bird's call as the motif".
 2. **Choose the frame.** Pick key and mode, tempo (120 BPM for 30 fps video unless there's a reason), palette (3–5 instruments, each with a job) and a progression per section, using [emotion.md](reference/emotion.md) and [harmony.md](reference/harmony.md).
 3. **Spot the picture** (§6). Turn scene starts into section boundaries, and must-land moments (reveals, counters landing, list items) into events or cues. **Budget the hits:** one big impact per 15–20 s at most, and vary the device (a new layer entering, a fill, a stop-time, a harmonic arrival).
-4. **Write the material.** One motif (1–2 bars) and its answer, a groove, a bass line and a voicing ([melody.md](reference/melody.md), [rhythm.md](reference/rhythm.md)).
-   - **Count every bar.**
-   - **Check every held melody note against the chord under it:** a half step above or below a chord tone, on a strong beat, clashes.
-5. **Arrange.** Decide who plays in each section.
+4. **Plan the arrangement.** Decide who plays in each section and how the parts relate.
    - Start sparse and add a layer per scene.
    - Keep at most 5–6 parts sounding at once (a doubling counts as one).
    - Peak once, late. Subtract for caveats.
    - Vary something every 4–8 bars, and make neighbouring sections contrast.
-6. **Express** with the checklist in §3.
+5. **Compose and express each instrument in turn** (§2.1). Write its complete musical part through the song, then shape its performance before moving to the next instrument. Use [melody.md](reference/melody.md), [rhythm.md](reference/rhythm.md), and the checklist in §3.
+   - **Count every bar.**
+   - **Check every held melody note against the chord under it:** a half step above or below a chord tone, on a strong beat, clashes unless deliberately prepared and resolved.
+6. **Review the ensemble.** Revisit earlier parts as later ones enter. Adjust notes, rests, voicings, articulation and dynamics to preserve the intended foreground, pocket, replies and section arc.
 7. **Check → listen → render → read the numbers** (§4).
    - Run `check` until `ok:` with the exact frame count.
    - Run `songmap listen` and fix its problems and warnings (or decide they're intended).
    - Render, then read `review.json` (the ear with loudness) and `qa.json`, and look at `qa.png`.
    - Fix with arrangement, `dyn=` and `mix`.
 8. **Revise by line.** Map feedback in musical terms ("pad too bright in barrier", "bigger hit at 970 M") to a section-line edit, then check and render again.
+
+### 2.1 Required instrument-by-instrument writing process
+
+For every composition or musical revision, the agent must make deliberate musical decisions as an LLM for each instrument. Choose an order appropriate to the piece; finish one instrument's note and expression passes through all its sections before starting the next, then revisit earlier parts as the ensemble develops. Proceed autonomously between instruments.
+
+1. Establish the part's job, register, technique, entrances and silences, and its relationships to the planned and written parts.
+2. Compose its pitches, voicings, rhythm, durations and rests phrase by phrase across the complete form. Work through answers, transitions, returns and ending; check harmony, voice leading, range and playability.
+3. Make a separate expression pass: choose fitting note-level dynamics, phrase arcs, accents, ghosts, gates, articulations, breathing space and groove placement. Match these to the rest of the song and the chosen instrument's actual capabilities. Global dynamics and automatic humanization do not complete this pass. Use detail where it serves the phrase; a held note, a rest or an unaccented attack can be the expressive choice.
+4. Review the part in the ensemble: kick/bass arrivals, foreground/accompaniment balance, replies, competing rhythms and release tails. Revisit its notes and expression when another part changes their context. Fix musical problems in the score before relying on mix changes.
+5. Keep concise score comments or composing notes recording the musical decisions for that instrument. At render checkpoints, inspect its stem and the full mix; retain the distinction between technical checks and actual listening.
+
+For drums, give each lane its own decisions and review the complete kit as one playable drummer. Leave hands free for fills and choose hat openings, pedal closures and cymbal accents intentionally. For sampled bass, respect the recorded attack technique and available articulations; slur notation alone cannot supply a missing recorded slide or hammer-on.
+
+Templates and scripts may transcribe, expand, check and render the agent's authored decisions. A bulk loop that assigns generic patterns across instruments or changes patches over the same phrase is not a completed composition. Intentional ostinatos, sparse parts and controlled repetitions are valid; make their role and development explicit and preserve material fixed by the user's brief. Score compactness must not limit musical detail: expand phrases and section-specific writing as needed. Complete both passes for every active instrument before declaring the score finished. Automated QA does not replace this musical review.
 
 ## 3. Lifelike, not robotic: the checklist
 
@@ -68,7 +90,7 @@ From the repo root, activate `.venv` (`.venv/Scripts/activate` on Windows, `sour
 - a phrase arch and metric accents;
 - swing.
 
-That gives every song a human base, but it can't invent musical ideas: **accents, phrasing, variation and contrast still have to be written.**
+These controls provide baseline variation. They cannot supply the instrument-specific decisions in §2.1: **accents, phrasing, variation and contrast still have to be written.**
 
 1. **Dynamic shape.** Give most sections an arc (`dyn=p<mf`, `dyn=mf>p`). A flat `dyn=mp` is fine when the sections around it move. Velocity also changes timbre (pianos brighten, filters open), so dynamics are colour, not just volume.
 2. **Velocity varies inside patterns.**

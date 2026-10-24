@@ -9,15 +9,23 @@ key: "C major"
 tuning: 36edo
 seed: 349
 tail_seconds: 3
-instruments: {keys: clean/keys, organ: clean/organ}
+instruments:
+  keys: sampler/grand_piano
+  organ: sampler/grand_piano
 motifs:
   gc:  {notes: "c8 c# d veb ve vf vf# ^f# | ^g8 ^ab ^a bb b c+4.", octave: 4}
   ge:  {notes: "c8 c# vd veb ve vf vf# ^f# | ^g8 ^ab ^a bb b c+4.", octave: 4}
   gg:  {notes: "c8 c# vd veb ve vf ^f ^f# | ^g8 ^ab ^a bb b c+4.", octave: 4}
   gcu: {notes: "^c8 ^c# ^d eb e f f# vg | vab8 va vbb ^bb ^b ^c+4.", octave: 4}
 mix:
-  keys: {gain_db: -5, send: {hall: 0.2}}
-  organ: {gain_db: -13, send: {hall: 0.25}}
+  keys:
+    gain_db: 7.6
+    send:
+      hall: 0.2
+  organ:
+    gain_db: 11.0
+    send:
+      hall: 0.25
 sections:
   - {name: on_c, bars: 2, harmony: "Cg:2", parts: {keys: {motifs: [gc]}, organ: hold}}
   - {name: on_ve, bars: 2, harmony: "vEg:2", parts: {keys: {motifs: [ge]}, organ: hold}}

@@ -8,8 +8,14 @@ key: "C major"
 tuning: 12edo
 seed: 2
 tail_seconds: 3
-instruments: {organ: clean/organ, low: clean/bass}
-mix: {organ: {gain_db: -6}, low: {gain_db: -5}}
+instruments:
+  organ: sampler/grand_piano
+  low: sampler/double_bass
+mix:
+  organ:
+    gain_db: 13.5
+  low:
+    gain_db: 11.7
 sections:
   - {name: round, bars: 7, harmony: "C:0.5 F:0.5 Bb:0.5 Eb:0.5 Ab:0.5 Db:0.5 F#:0.5 B:0.5 E:0.5 A:0.5 D:0.5 G:0.5 C:1", parts: {organ: hold, low: {style: roots, role: bass}}}
 master: clean

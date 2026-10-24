@@ -18,14 +18,19 @@ tail_seconds: 6
 
 mood: ambient
 instruments:
-  mel: {use: keys/still, hardness: 0.3}
-  keys: {use: keys/still, hardness: 0.25}
-  harp: {use: string_pluck/still, brightness: 0.7, t60: 2.4, body: 0.6}
+  mel: sampler/grand_piano
+  keys: sampler/grand_piano
+  harp: sampler/folk_harp
   strings: pad/still
   low: clean/bass
   bell: clean/glass
-  flute: clean/lead
-  host: {use: clean/organ, partials: 4, rolloff: 2.2, attack: 1.4, release: 2.6}
+  flute: sampler/flute
+  host:
+    use: clean/organ
+    partials: 4
+    rolloff: 2.2
+    attack: 1.4
+    release: 2.6
 
 harmony:
   progressions: {dusk: "A:2 D/A:1 Bm7/A:1 A:1", theme: "A:1 C#m:1 Bm7:1 F#m:1 A:1 E:0.5 D:0.5 E7:1 A:1", wander: "D:2 Bm7:2 F#m:2 C#m:2 D:1 E:1 F#m:1 D:1 E:1", settle: "A:2 E/G#:1 F#m:1 Bm7:1 A:3"}
@@ -39,14 +44,41 @@ sections:
   - {name: settle, bars: 8, parts: {mel: {deg: "=p 2/2 4/2 | 7/1 | 6/2. 4/4 | 2/1 | 1/1 | 0/1 | 0/1 | r/1"}, keys: hold, harp: {rel: "R/4^ 5 R+ 3+"}, strings: hold, low: bassline, host: {notes: "=pp [a-,e]1"}}, harmony: settle, dyn: "p>pp", tempo: "rit 56>54"}
 
 mix:
-  mel: {gain_db: 3, send: {hall: 0.3}}
-  keys: {gain_db: -9, send: {hall: 0.25}}
-  harp: {gain_db: -8, send: {hall: 0.3}, pan: 0.2}
-  strings: {gain_db: -22, send: {hall: 0.35}}
-  low: {gain_db: -7, send: {hall: 0.1}}
-  bell: {gain_db: -13, send: {hall: 0.45}, pan: -0.15}
-  flute: {gain_db: -4, send: {hall: 0.35}, pan: -0.1}
-  host: {gain_db: -16, send: {hall: 0.15}}
+  mel:
+    gain_db: 10.6
+    send:
+      hall: 0.3
+  keys:
+    gain_db: 3.6
+    send:
+      hall: 0.25
+  harp:
+    gain_db: 0.8
+    send:
+      hall: 0.3
+    pan: 0.2
+  strings:
+    gain_db: -22
+    send:
+      hall: 0.35
+  low:
+    gain_db: -7
+    send:
+      hall: 0.1
+  bell:
+    gain_db: -13
+    send:
+      hall: 0.45
+    pan: -0.15
+  flute:
+    gain_db: -1.1
+    send:
+      hall: 0.35
+    pan: -0.1
+  host:
+    gain_db: -16
+    send:
+      hall: 0.15
 
 master:
   target_lufs: -23

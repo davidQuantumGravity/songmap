@@ -1,0 +1,14 @@
+# Blonde Bop: hear the kit in a pocket, then exposed articulations.
+# Hat strokes stop during the two-hand tom answer; each cymbal gets room to decay.
+song "Kit: Blonde Bop" 100 4/4 Dm fps=30 seed=82 tail=3 mood=balanced
+kit kick=sampler/blonde_bop_kick(gain_db=0,pan=0) snare=sampler/blonde_bop_snare(gain_db=0,pan=0) rim=sampler/blonde_bop_sidestick(gain_db=0,pan=0) fill=sampler/blonde_bop_snare_edge(gain_db=0,pan=0) hat=sampler/blonde_bop_hat(gain_db=0,pan=0) hat16=sampler/blonde_bop_hat(gain_db=0,pan=0) ohat=sampler/blonde_bop_hat_open(gain_db=0,pan=0) pedal=sampler/blonde_bop_hat_pedal(gain_db=0,pan=0) semi=sampler/blonde_bop_hat_semi(gain_db=0,pan=0) tom_high=sampler/blonde_bop_tom(gain_db=0,pan=0) tom_low=sampler/blonde_bop_floor_tom(gain_db=0,pan=0) tom_edge=sampler/blonde_bop_tom_edge(gain_db=0,pan=0) crash=sampler/blonde_bop_crash(gain_db=0,pan=0) ride=sampler/blonde_bop_ride(gain_db=0,pan=0) bell=sampler/blonde_bop_ride_bell(gain_db=0,pan=0) splash=sampler/blonde_bop_splash(gain_db=0,pan=0) china=sampler/blonde_bop_china(gain_db=0,pan=0)
+groove swing=.54/16
+feel snare offset=7
+pocket 2 | drums:pocket dyn=mp<mf
+edges 1 | drums:{rim: "x...x...x...x...", semi: "..x...x...x...x."} dyn=mp
+hands 1 | drums:{tom_high: "x...x...........", tom_edge: "........x.x.....", tom_low: "............x.x.", kick: "X..............."} dyn=mp<f
+pedal 1 | drums:{ohat: "x.......x.......", pedal: "....x.......x..."} dyn=mp
+metal 2 | drums:{ride: {steps: "x.x.x.x.x.x.x.x.", vel: [.52,.3,.44,.28]}, bell: "......x.......x.", kick: "X.......x.......", snare: "....X.......X..."} dyn=mf
+ending 1 | drums:{kick: "X...............", crash: "X...............", splash: "....x...........", china: "........x......."} dyn=mf>p
+mix drums -5 hall=.025
+master standard lufs=-18 glue=none

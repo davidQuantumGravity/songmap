@@ -1,0 +1,12 @@
+instrument: kick
+description: Punchy synthesized club kick with a firm beater.
+tags:
+- electronic
+- kick
+params:
+  tune: 53
+  decay: 0.42
+  click: 0.42
+  click_tone: 4200
+  sweep: 26
+  drive: 2

@@ -31,11 +31,13 @@ seed: 22
 tail_seconds: 3
 
 instruments:
-  lead: clean/lead
-  ep: epiano/still
+  lead: sampler/flute
+  ep: sampler/fm_piano
   wash: pad/still
   bell: clean/glass
-  gtr: {use: string_pluck/still, brightness: 0.7}
+  gtr:
+    use: string_pluck/still
+    brightness: 0.7
 
 harmony:
   progressions: {verse: "G:1 D:0.75 ~g:0.125 ~g:0.125 Em:1 C:1", pre: "Am:1 Bm:1 C:0.5 ~g:0.25 ~g:0.25 D:0.75 vGg/D:0.25", chorus: "G:1 D:0.75 ~g:0.125 ~g:0.125 Em:1 C:1 G:1 D:1 C:1 D:0.75 vGg/D:0.25", fake: "G:1 D:0.75 ~g:0.125 ~g:0.125 Em:1 C:1 G:1 D:1 C:1 D:0.75 vEbg:0.125 Ebg:0.125", slow: "Em:1 C:1 G:1 D:0.5 ~g:0.25 ~g:0.25", build: "Em:1 Am:1 C:0.5 ~g:0.25 ~g:0.25 D:0.75 vGg/D:0.25", coda: "Em:1 C:1 Cg:0.5 Cm:0.5 G:2"}
@@ -66,14 +68,33 @@ events:
   - {at: chorus_3, type: impact, size: xl}
   - {at: outro+3, type: impact, size: s}
 mix:
-  drums: {gain_db: -9}
-  fx: {gain_db: -9}
-  bass: {gain_db: -3}
-  lead: {gain_db: 16, send: {hall: 0.25}}
-  ep: {gain_db: -16, send: {hall: 0.15}}
-  wash: {gain_db: -24, send: {hall: 0.3}}
-  arp: {gain_db: -2}
-  bell: {gain_db: -10, send: {hall: 0.35}}
-  gtr: {gain_db: -13, send: {hall: 0.2}}
+  drums:
+    gain_db: -9
+  fx:
+    gain_db: -9
+  bass:
+    gain_db: -3
+  lead:
+    gain_db: 18.8
+    send:
+      hall: 0.25
+  ep:
+    gain_db: -5.5
+    send:
+      hall: 0.15
+  wash:
+    gain_db: -24
+    send:
+      hall: 0.3
+  arp:
+    gain_db: -2
+  bell:
+    gain_db: -10
+    send:
+      hall: 0.35
+  gtr:
+    gain_db: -13
+    send:
+      hall: 0.2
 
 master: clean

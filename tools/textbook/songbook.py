@@ -25,6 +25,9 @@ import os
 import re
 import shutil
 import sys
+import tempfile
+from pathlib import Path
+from contextlib import contextmanager
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 if ROOT not in sys.path:
@@ -42,17 +45,8 @@ def _slug(s: str) -> str:
 
 
 def engine_hash() -> str:
-    h = hashlib.sha1()
-    pkg = os.path.join(ROOT, "songmap")
-    for d, dirs, files in sorted(os.walk(pkg)):
-        dirs.sort()
-        if "__pycache__" in d:
-            continue
-        for f in sorted(files):
-            if f.endswith((".py", ".yaml")):
-                h.update(f.encode())
-                h.update(open(os.path.join(d, f), "rb").read())
-    return h.hexdigest()[:12]
+    from audio_editions import audio_engine_hash
+    return audio_engine_hash()
 
 
 def _readme(folder: str) -> tuple[str, str]:
@@ -107,14 +101,19 @@ def entry(path: str) -> dict:
             intent.append(line.lstrip("#").strip())
     m = REVIEW.search(text)
     status = STATUS.get(m[1].lower(), m[1].lower()) if m else "awaiting"
-    e = {"path": path, "rel": os.path.relpath(path, ROOT).replace(os.sep, "/"), "name": song_name(path),
+    from audio_editions import edition_for
+    playback = edition_for(path)
+    playback_text = open(playback, encoding="utf-8").read()
+    e = {"path": path, "playback_path": playback,
+         "playback_rel": os.path.relpath(playback, ROOT).replace(os.sep, "/"),
+         "rel": os.path.relpath(path, ROOT).replace(os.sep, "/"), "name": song_name(path),
          "intent": " ".join(x for x in intent if x), "status": status, "review_note": m[2].strip() if m else "",
-         "hash": hashlib.sha1(text.encode()).hexdigest()[:12]}
+         "hash": hashlib.sha1(playback_text.encode()).hexdigest()[:12]}
     try:
         from songmap.arrange.expand import expand
         from songmap.listen import listen
         from songmap.parse import load
-        song = load(path)
+        song = load(playback)
         arr = expand(song)
         tl = arr.timeline
         mins, secs = divmod(tl.seconds, 60)
@@ -128,19 +127,53 @@ def entry(path: str) -> dict:
     return e
 
 
+@contextmanager
+def _cache_publish(folder):
+    """Serialize the short cache commit; OS locks release after a process exits."""
+    with open(os.path.join(folder, ".publish.lock"), "a+b") as lock:
+        lock.write(b"0")
+        lock.flush()
+        lock.seek(0)
+        if os.name == "nt":
+            import msvcrt
+            msvcrt.locking(lock.fileno(), msvcrt.LK_LOCK, 1)
+        else:
+            import fcntl
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            lock.seek(0)
+            if os.name == "nt":
+                msvcrt.locking(lock.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+
+
 def render_cached(e: dict, ehash: str) -> str | None:
     """Render one song (cached): returns a folder with song.mp3, qa.json, review.json, qa.png."""
     if e.get("error"):
         return None
     d = os.path.join(CACHE, f"{e['name']}-{e['hash']}-{ehash}")
-    if os.path.isfile(os.path.join(d, "review.json")) and os.path.isfile(os.path.join(d, "song.mp3")):
+    complete = ("review.json", "qa.json", "qa.png", "render.log", "song.mp3")
+    if all(os.path.isfile(os.path.join(d, f)) for f in complete):
+        Path(d, "song.wav").unlink(missing_ok=True)
         return d
     from songmap.parse import load
     from songmap.render import render, write_outputs
-    r = render(load(e["path"]))
-    os.makedirs(d, exist_ok=True)
-    write_outputs(r, d, stems=False, mp3=shutil.which("ffmpeg") is not None)
-    os.remove(os.path.join(d, "song.wav")) if os.path.isfile(os.path.join(d, "song.mp3")) else None
+    r = render(load(e.get("playback_path", e["path"])))
+    os.makedirs(CACHE, exist_ok=True)
+    # Separate working files prevent two builds of one edition from removing or
+    # truncating each other's WAV/MP3. Publish the completion marker last.
+    with tempfile.TemporaryDirectory(prefix=".render-", dir=CACHE) as td:
+        assert Path(td).resolve().is_relative_to(Path(CACHE).resolve())
+        write_outputs(r, td, stems=False, mp3=shutil.which("ffmpeg") is not None)
+        if os.path.isfile(os.path.join(td, "song.mp3")):
+            Path(td, "song.wav").unlink(missing_ok=True)
+        os.makedirs(d, exist_ok=True)
+        with _cache_publish(d):
+            for name in sorted(os.listdir(td), key=lambda n: n == "render.log"):
+                os.replace(os.path.join(td, name), os.path.join(d, name))
     return d
 
 
@@ -150,25 +183,36 @@ def _render_job(args):
         return e["path"], render_cached(e, ehash), None
     except Exception as ex:                                            # noqa: BLE001
         return e["path"], None, f"{type(ex).__name__}: {ex}"
+    finally:
+        import gc
+        from songmap.instruments.sampler.library import SAMPLES
+        SAMPLES._data.clear()
+        gc.collect()
 
 
 def render_all(entries: list[dict], jobs: int = 4, log=print) -> dict:
     """{song path: render folder} for every song, rendering only what isn't cached."""
     ehash = engine_hash()
-    todo = [(e, ehash) for e in entries if not e.get("error")]
+    unique = {(e["name"], e["hash"]): e for e in entries if not e.get("error")}
+    todo = [(e, ehash) for e in unique.values()]
     out = {}
     if jobs > 1 and len(todo) > 1:
         from concurrent.futures import ProcessPoolExecutor
         with ProcessPoolExecutor(max_workers=jobs) as pool:
             results = list(pool.map(_render_job, todo))
     else:
-        results = [_render_job(t) for t in todo]
+        results = []
+        for t in todo:
+            result = _render_job(t)
+            results.append(result)
+            log("  songbook " + t[0].get("rel", t[0]["path"]))
     for path, d, err in results:
         if err:
             log(f"PROBLEM songbook render {os.path.relpath(path, ROOT)}: {err}")
         elif d:
             out[path] = d
-    return out
+    return {e["path"]: out[unique[e["name"], e["hash"]]["path"]]
+            for e in entries if not e.get("error") and unique[e["name"], e["hash"]]["path"] in out}
 
 
 # ------------------------------------------------------------------------------------------------
@@ -240,6 +284,9 @@ def fragment(cols: list[dict], entries: dict, renders: dict, media_rel: dict) ->
             parts.append(f'<h3>{html.escape(e.get("title") or e["name"])} '
                          f'<span class="badge" style="background:{color}">{label}</span></h3>')
             parts.append(f'<p class="facts">{html.escape(facts)}<br><code>{html.escape(e["rel"])}</code></p>')
+            if e.get("playback_rel") != e["rel"]:
+                parts.append(f'<p class="sampled-edition">Sampled playback edition: <code>{html.escape(e["playback_rel"])}</code>. '
+                             'The original score is preserved. <a href="../audio-credits.html">Instrument credits</a>.</p>')
             if e.get("review_note"):
                 parts.append(f'<p class="verdict"><b>Review:</b> {html.escape(e["review_note"])}</p>')
             if e.get("intent"):
@@ -277,14 +324,21 @@ def publish(entries: dict, renders: dict, out_site: str) -> dict:
         rel = os.path.join("audio", "songbook", e["hash"][:6] + "-" + e["name"])
         dst = os.path.join(out_site, rel)
         os.makedirs(dst, exist_ok=True)
+        playback = e.get("playback_path", path)
+        with open(os.path.join(dst, "source.json"), "w", encoding="utf-8") as f:
+            json.dump({"source": os.path.relpath(playback, ROOT).replace(os.sep, "/"),
+                       "sha256": hashlib.sha256(open(playback, "rb").read()).hexdigest(),
+                       "engine_hash": engine_hash()}, f, indent=2)
         urls = []
-        for f in ("song.mp3", "qa.png"):
+        for f in ("song.mp3", "qa.png", "qa.json", "review.json", "LICENSES.md"):
             src = os.path.join(d, f)
             if os.path.isfile(src):
                 shutil.copy(src, os.path.join(dst, f))
-                urls.append("../" + (rel + "/" + f).replace(os.sep, "/"))
+                if f in ("song.mp3", "qa.png"):
+                    urls.append("../" + (rel + "/" + f).replace(os.sep, "/"))
             else:
-                urls.append(None)
+                if f in ("song.mp3", "qa.png"):
+                    urls.append(None)
         media[path] = tuple(urls)
     return media
 
@@ -294,6 +348,9 @@ def chapter(render: bool, out_site: str | None = None, jobs: int = 4, log=print)
     cols = collections()
     entries = {p: entry(p) for c in cols for p in c["songs"]}
     renders = render_all(list(entries.values()), jobs, log) if render else {}
+    if render and len(renders) != len(entries):
+        missing = [e["rel"] for p, e in entries.items() if p not in renders]
+        raise RuntimeError("Songbook media missing; website is not ready to publish: " + ", ".join(missing))
     media = publish(entries, renders, out_site) if (render and out_site) else {}
     return sections(cols), fragment(cols, entries, renders, media)
 

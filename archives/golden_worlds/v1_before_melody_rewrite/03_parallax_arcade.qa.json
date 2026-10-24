@@ -1,0 +1,144 @@
+{
+ "lufs": -16.83,
+ "true_peak_db": -1.0,
+ "clipped_samples": 0,
+ "seconds": 206.29,
+ "sections": [
+  {
+   "name": "neon_seed",
+   "start": 0.0,
+   "loudness": -27.8,
+   "low": 0.989,
+   "mid": 0.01,
+   "high": 0.0,
+   "silent": false
+  },
+  {
+   "name": "sign_one",
+   "start": 15.483870967741936,
+   "loudness": -19.5,
+   "low": 0.583,
+   "mid": 0.407,
+   "high": 0.01,
+   "silent": false
+  },
+  {
+   "name": "sign_two",
+   "start": 30.967741935483872,
+   "loudness": -18.1,
+   "low": 0.642,
+   "mid": 0.344,
+   "high": 0.014,
+   "silent": false
+  },
+  {
+   "name": "open_road",
+   "start": 46.45161290322581,
+   "loudness": -16.8,
+   "low": 0.627,
+   "mid": 0.358,
+   "high": 0.015,
+   "silent": false
+  },
+  {
+   "name": "decatonic_drive",
+   "start": 61.935483870967744,
+   "loudness": -16.4,
+   "low": 0.663,
+   "mid": 0.32,
+   "high": 0.017,
+   "silent": false
+  },
+  {
+   "name": "crossing_lights",
+   "start": 77.41935483870968,
+   "loudness": -16.0,
+   "low": 0.627,
+   "mid": 0.356,
+   "high": 0.017,
+   "silent": false
+  },
+  {
+   "name": "empty_lane",
+   "start": 92.90322580645162,
+   "loudness": -25.2,
+   "low": 0.001,
+   "mid": 0.996,
+   "high": 0.003,
+   "silent": false
+  },
+  {
+   "name": "comma_crossing",
+   "start": 108.38709677419355,
+   "loudness": -20.2,
+   "low": 0.571,
+   "mid": 0.428,
+   "high": 0.002,
+   "silent": false
+  },
+  {
+   "name": "new_horizon",
+   "start": 123.87096774193549,
+   "loudness": -17.0,
+   "low": 0.622,
+   "mid": 0.364,
+   "high": 0.014,
+   "silent": false
+  },
+  {
+   "name": "overpass",
+   "start": 139.3548387096774,
+   "loudness": -18.1,
+   "low": 0.606,
+   "mid": 0.382,
+   "high": 0.012,
+   "silent": false
+  },
+  {
+   "name": "arcade_summit",
+   "start": 154.83870967741936,
+   "loudness": -11.7,
+   "low": 0.297,
+   "mid": 0.677,
+   "high": 0.026,
+   "silent": false
+  },
+  {
+   "name": "city_below",
+   "start": 170.32258064516128,
+   "loudness": -16.8,
+   "low": 0.624,
+   "mid": 0.361,
+   "high": 0.015,
+   "silent": false
+  },
+  {
+   "name": "last_pixel",
+   "start": 185.80645161290323,
+   "loudness": -29.3,
+   "low": 0.004,
+   "mid": 0.99,
+   "high": 0.006,
+   "silent": false
+  }
+ ],
+ "stems": {
+  "arp": -43.29,
+  "bass": -30.01,
+  "drums": -20.57,
+  "keys": -28.94,
+  "lead": -19.5,
+  "pad": -50.09,
+  "return_hall": -35.77
+ },
+ "render": {
+  "seconds": 13.92,
+  "notes_rendered": 3956,
+  "cache_hits": 184,
+  "audio_seconds": 206.29,
+  "master": "standard",
+  "digest": "2c6463b11ece55371e90c5f4d6a3cd6db11421808a45a3b198e1b8b41d533dc3",
+  "performed": true,
+  "played_digest": "16efb5cb2af999f5d8910b654b3576907012b0743a78bb0fba7e19eb4124839b"
+ }
+}

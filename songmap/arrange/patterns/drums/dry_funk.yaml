@@ -1,0 +1,18 @@
+# Syncopated kick and snare ghosts; leave space for the bass.
+style: dry_funk
+role: drums
+bars: 2
+steps:
+  kick: X.....x..x......|X..x......x...x.
+  snare: '....X.o.....X.o.|.o..X.......X.o.'
+  hat:
+    steps: x-x-x-x-x-x-x-x-
+    vel:
+    - 0.54
+    - 0.22
+    - 0.38
+    - 0.25
+    - 0.58
+    - 0.24
+    - 0.42
+    - 0.2

@@ -1,0 +1,135 @@
+{
+ "lufs": -16.11,
+ "true_peak_db": -1.0,
+ "clipped_samples": 0,
+ "seconds": 200.556,
+ "sections": [
+  {
+   "name": "slivers",
+   "start": 0.0,
+   "loudness": -33.1,
+   "low": 0.032,
+   "mid": 0.967,
+   "high": 0.0,
+   "silent": false
+  },
+  {
+   "name": "head_one",
+   "start": 8.88888888888889,
+   "loudness": -19.1,
+   "low": 0.445,
+   "mid": 0.546,
+   "high": 0.008,
+   "silent": false
+  },
+  {
+   "name": "head_reply",
+   "start": 26.666666666666668,
+   "loudness": -17.7,
+   "low": 0.504,
+   "mid": 0.482,
+   "high": 0.014,
+   "silent": false
+  },
+  {
+   "name": "streetlights",
+   "start": 44.44444444444444,
+   "loudness": -19.1,
+   "low": 0.803,
+   "mid": 0.174,
+   "high": 0.023,
+   "silent": false
+  },
+  {
+   "name": "ten_windows",
+   "start": 62.22222222222222,
+   "loudness": -15.2,
+   "low": 0.481,
+   "mid": 0.501,
+   "high": 0.018,
+   "silent": false
+  },
+  {
+   "name": "side_door",
+   "start": 80.0,
+   "loudness": -17.9,
+   "low": 0.516,
+   "mid": 0.472,
+   "high": 0.012,
+   "silent": false
+  },
+  {
+   "name": "return_call",
+   "start": 97.77777777777777,
+   "loudness": -16.4,
+   "low": 0.48,
+   "mid": 0.506,
+   "high": 0.015,
+   "silent": false
+  },
+  {
+   "name": "return_answer",
+   "start": 115.55555555555556,
+   "loudness": -15.2,
+   "low": 0.5,
+   "mid": 0.481,
+   "high": 0.019,
+   "silent": false
+  },
+  {
+   "name": "held_breath",
+   "start": 133.33333333333334,
+   "loudness": -30.3,
+   "low": 0.667,
+   "mid": 0.332,
+   "high": 0.0,
+   "silent": false
+  },
+  {
+   "name": "sunburst",
+   "start": 151.11111111111111,
+   "loudness": -13.0,
+   "low": 0.435,
+   "mid": 0.55,
+   "high": 0.014,
+   "silent": false
+  },
+  {
+   "name": "sunburst_reply",
+   "start": 168.88888888888889,
+   "loudness": -15.0,
+   "low": 0.4,
+   "mid": 0.586,
+   "high": 0.014,
+   "silent": false
+  },
+  {
+   "name": "afterimage",
+   "start": 186.66666666666666,
+   "loudness": -27.0,
+   "low": 0.395,
+   "mid": 0.605,
+   "high": 0.001,
+   "silent": false
+  }
+ ],
+ "stems": {
+  "keys": -27.92,
+  "bell": -38.15,
+  "bass": -29.27,
+  "lead": -21.07,
+  "drums": -22.78,
+  "pad": -48.0,
+  "return_hall": -40.22
+ },
+ "render": {
+  "seconds": 11.62,
+  "notes_rendered": 2070,
+  "cache_hits": 30,
+  "audio_seconds": 200.556,
+  "master": "standard",
+  "digest": "367f4b8ffe89015da8c0dae2e9b9082db428e07152f0de05b1d84f0f5b4cd00d",
+  "performed": true,
+  "played_digest": "f5a80e3d89f0f79608aa6a45523f02245d0629332e2f5a00235dda55e52ba324"
+ }
+}

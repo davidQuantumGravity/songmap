@@ -1,0 +1,54 @@
+# Melody revision 2; canonical score: songs/golden_worlds/01_sideways_sun.sm
+songmap: 0.2
+title: "Sideways Sun"
+tempo: 108
+meter: "4/4"
+key: "C golden7"
+tuning: "36edo"
+fps: 30
+seed: 701
+tail_seconds: 5
+
+mood: balanced
+instruments:
+  keys: {use: epiano/still, index: 0.6}
+  lead: {use: sampler/flute, attack: 0.025, release_mul: 0.18}
+  reply: sampler/folk_harp
+  bell: {use: clean/glass, decay: 1.3, release: 0.15}
+  bass: {use: clean/bass, release: 0.09}
+  pad: {use: pad/still, release: 0.25}
+  drums: {kit: {kick: {use: kick/v0, tune: 46, decay: 0.26, drive: 1.15, click: 0.24}, snare: {use: snare/v0, tone: 185, noise_decay: 0.13, snap: 0.3}, hat: {use: hat/v0, decay: 0.035, metal: 0.18}, ohat: {use: hat/v0_open, decay: 0.16}, rim: clap/v0}}
+
+groove:
+  swing: 0.55
+  swing_grid: 16
+  template: laid_back
+harmony:
+  progressions: {shards: "Cg7:1 ^Abg7:1 vFg7:1 vEg:1", head: "Cg7:1 ^Abg7:1 vFg7:1 Cg7:1 C#g7:1 vFg7:1 ^Abg7:1 vEg:1", answer: "Cg7:1 vEg:1 ^Abg7:1 vFg7:1 C#g7:1 ^Abg7:1 vEg:1 Cg7:1", wide: "Cg7:1 Dg7:1 ^Ag7:1 vFg7:1 C#g7:1 vF#g7:1 ^Abg7:1 vEg:1", side: "vEg7:1 ^Abg7:1 Cg7:1 ^Gg:1 vEg7:1 vFg7:1 ^Abg7:1 vEg7:1", close: "vFg7:1 ^Abg7:1 vEg:1 Cg7:1"}
+
+sections:
+  - {name: slivers, bars: 4, parts: {keys: {rel: "=mp r/8 [3,5]/8^' r/4 [R,3,5]/8^' r/8 r/4 | =p [3,5]/4^' r/4 r/8 [R,3]/8^' r/4"}, bell: {rel: "=mp R/8^ 5 3+ 5 R+ 3+ r/4 | =p r/4 3/8 5 R+/4 r/4"}}, harmony: shards, dyn: "pp<p"}
+  - {name: head_one, bars: 8, parts: {keys: {rel: "=mp r/8 [3,5]/8^' r/4 [R,3,5]/8^' r/8 r/4 | =p [3,5]/4^' r/4 r/8 [R,3]/8^' r/4"}, bass: {rel: "=mp R/4.^ r/8 5/8 R/8^ r/8 3/8 | =p R/4^ r/8 R/8^ 5/4 r/4 | =mp R/8^ r/8 3/4 5/8 r/8 R/4^ | =p R/2^ r/8 5/8 R/4^", oct: -2}, lead: {deg: "=p r/8 2/8_ 2/4 0/4 r/4 | =mp 0/4. 2/8 2/4 r/4 | =p r/4 2/8 3/8 3/4 2/4 | =p 2/2 r/2 | =mp r/8 3/8 3/4 1/4 r/4 | =p 0/4. 2/8 3/4 2/4 | =mp 4/4. 2/8 0/4 r/4 | =p 2/2. r/4", oct: 0}, drums: {steps: {kick: "X.....x...x.....|X..x......x.....|X.....x..x....x.|X.......x..x....", snare: "....X..o....X...|....X.......X.o.|....X.o.....X...|....X......oX...", hat: {steps: "x.x..x.x.x.x..x.|x..x.x.x..x.x.x.", vel: [0.38, 0.16, 0.3, 0.21, 0.42, 0.2]}}}}, harmony: head, dyn: "p<mp"}
+  - {name: head_reply, bars: 8, parts: {keys: {rel: "=mp r/8 [3,5]/8^' r/4 [R,3,5]/8^' r/8 r/4 | =p [3,5]/4^' r/4 r/8 [R,3]/8^' r/4"}, bass: {rel: "=mp R/8^ r/8 5/4 r/8 R+/8 3/4 | =p r/8 R/8^ R/4^ 5/4 R/4^ | =mp R/4.^ 3/8 5/8 r/8 R/4^ | =p R/2^ r/2", oct: -2}, lead: {deg: "=p r/4 2/8 2/8 4/4 2/4 | =mp 2/4. 4/8 2/4 r/4 | =p 0/4 0/8 2/8 4/4 r/4 | =p 3/2 2/4 r/4 | =mp 3/4. 1/8 0/4 r/4 | =p 0/4. 2/8 4/4 2/4 | =mp 2/2 4/4 r/4 | =p 2/4 2/8 0/8 0/2", oct: 0}, drums: {steps: {kick: "X..x......x...x.|X.....x..x......|X.......x.x...x.|X..x....x.......", snare: "....X.......X..o|....X..o....X...|....X......oX...|....X.......X.xx", hat: {steps: "x.x.x..x.x..x.x.|x..x.x.x..x.x.x.", vel: [0.4, 0.18, 0.32, 0.15, 0.28]}}}}, harmony: answer, dyn: mp}
+  - {name: streetlights, bars: 8, parts: {keys: {rel: "=mp R/8^ 5 3+ 5 R+ 3+ r/4 | =p r/4 3/8 5 R+/4 r/4"}, bass: {rel: "=mp R/4.^ r/8 5/8 R/8^ r/8 3/8 | =p R/4^ r/8 R/8^ 5/4 r/4 | =mp R/8^ r/8 3/4 5/8 r/8 R/4^ | =p R/2^ r/8 5/8 R/4^", oct: -2}, reply: {deg: "=p r/8 2/8_ 2/4 0/4 r/4 | =mp 0/4. 2/8 2/4 r/4 | =p r/4 2/8 3/8 3/4 2/4 | =p 2/2 r/2 | =mp r/8 3/8 3/4 1/4 r/4 | =p 0/4. 2/8 3/4 2/4 | =mp 4/4. 2/8 0/4 r/4 | =p 2/2. r/4", oct: 0}, drums: {steps: {kick: "X..x......x...x.|X.....x..x......|X.......x.x...x.|X..x....x.......", snare: "....X.......X..o|....X..o....X...|....X......oX...|....X.......X.xx", hat: {steps: "x.x.x..x.x..x.x.|x..x.x.x..x.x.x.", vel: [0.4, 0.18, 0.32, 0.15, 0.28]}}}}, harmony: head, dyn: "mp<mf"}
+  - {name: ten_windows, bars: 8, parts: {keys: {rel: "=mp r/8 [3,5]/8^' r/4 [R,3,5]/8^' r/8 r/4 | =p [3,5]/4^' r/4 r/8 [R,3]/8^' r/4"}, bass: {rel: "=mp R/8^ r/8 5/4 r/8 R+/8 3/4 | =p r/8 R/8^ R/4^ 5/4 R/4^ | =mp R/4.^ 3/8 5/8 r/8 R/4^ | =p R/2^ r/2", oct: -2}, lead: {deg: "=p r/8 3/8 3/4 0/4 r/4 | =mp 2/4. 1/8 2/4 r/4 | =p 4/4 4/8 5/8 7/4 4/4 | =p 3/2 0/4 r/4 | =mp 1/4. 2/8 4/4 r/4 | =p 5/4 4/8 5/8 4/4 r/4 | =mp 3/4. 6/8 6/4 3/4 | =p 3/2. r/4", oct: 0}, pad: {style: hold, voices: 3, range: [48, 65]}, drums: {steps: {kick: "X.....x...x.....|X..x......x.....|X.....x..x....x.|X.......x..x....", snare: "....X..o....X...|....X.......X.o.|....X.o.....X...|....X......oX...", hat: {steps: "x.x..x.x.x.x..x.|x..x.x.x..x.x.x.", vel: [0.38, 0.16, 0.3, 0.21, 0.42, 0.2]}}}}, harmony: wide, dyn: mf, key: "C golden10_36"}
+  - {name: side_door, bars: 8, parts: {keys: {rel: "=mp R/8^ 5 3+ 5 R+ 3+ r/4 | =p r/4 3/8 5 R+/4 r/4"}, bass: {rel: "=mp R/8^ r/8 5/4 r/8 R+/8 3/4 | =p r/8 R/8^ R/4^ 5/4 R/4^ | =mp R/4.^ 3/8 5/8 r/8 R/4^ | =p R/2^ r/2", oct: -2}, lead: {deg: "=p r/8 0/8 0/4 2/4 r/4 | =mp 2/4. 0/8 0/4 r/4 | =p 0/4 2/8 3/8 2/4 0/4 | =p 2/2 r/2 | =mp 0/4. 2/8 2/4 0/4 | =p 1/4 1/8 0/8 1/4 r/4 | =mp 0/4 2/8 0/8 -2/4 r/4 | =p 0/2. r/4", oct: 0}, drums: {steps: {kick: "X..x......x...x.|X.....x..x......|X.......x.x...x.|X..x....x.......", snare: "....X.......X..o|....X..o....X...|....X......oX...|....X.......X.xx", hat: {steps: "x.x.x..x.x..x.x.|x..x.x.x..x.x.x.", vel: [0.4, 0.18, 0.32, 0.15, 0.28]}}}}, harmony: side, dyn: mp, key: "vE golden7"}
+  - {name: return_call, bars: 8, parts: {keys: {rel: "=mp r/8 [3,5]/8^' r/4 [R,3,5]/8^' r/8 r/4 | =p [3,5]/4^' r/4 r/8 [R,3]/8^' r/4"}, bass: {rel: "=mp R/4.^ r/8 5/8 R/8^ r/8 3/8 | =p R/4^ r/8 R/8^ 5/4 r/4 | =mp R/8^ r/8 3/4 5/8 r/8 R/4^ | =p R/2^ r/8 5/8 R/4^", oct: -2}, lead: {deg: "=p r/8 2/8_ 2/4 0/4 r/4 | =mp 0/4. 2/8 2/4 r/4 | =p r/4 2/8 3/8 3/4 2/4 | =p 2/2 r/2 | =mp r/8 3/8 3/4 1/4 r/4 | =p 0/4. 2/8 3/4 2/4 | =mp 4/4. 2/8 0/4 r/4 | =p 2/2. r/4", oct: 0}, bell: {rel: "=mp R/8^ 5 3+ 5 R+ 3+ r/4 | =p r/4 3/8 5 R+/4 r/4"}, drums: {steps: {kick: "X.....x...x.....|X..x......x.....|X.....x..x....x.|X.......x..x....", snare: "....X..o....X...|....X.......X.o.|....X.o.....X...|....X......oX...", hat: {steps: "x.x..x.x.x.x..x.|x..x.x.x..x.x.x.", vel: [0.38, 0.16, 0.3, 0.21, 0.42, 0.2]}}}}, harmony: head, dyn: "mp<mf"}
+  - {name: return_answer, bars: 8, parts: {keys: {rel: "=mp r/8 [3,5]/8^' r/4 [R,3,5]/8^' r/8 r/4 | =p [3,5]/4^' r/4 r/8 [R,3]/8^' r/4"}, bass: {rel: "=mp R/8^ r/8 5/4 r/8 R+/8 3/4 | =p r/8 R/8^ R/4^ 5/4 R/4^ | =mp R/4.^ 3/8 5/8 r/8 R/4^ | =p R/2^ r/2", oct: -2}, lead: {deg: "=p r/4 2/8 2/8 4/4 2/4 | =mp 2/4. 4/8 2/4 r/4 | =p 0/4 0/8 2/8 4/4 r/4 | =p 3/2 2/4 r/4 | =mp 3/4. 1/8 0/4 r/4 | =p 0/4. 2/8 4/4 2/4 | =mp 2/2 4/4 r/4 | =p 2/4 2/8 0/8 0/2", oct: 0}, drums: {steps: {kick: "X..x......x...x.|X.....x..x......|X.......x.x...x.|X..x....x.......", snare: "....X.......X..o|....X..o....X...|....X......oX...|....X.......X.xx", hat: {steps: "x.x.x..x.x..x.x.|x..x.x.x..x.x.x.", vel: [0.4, 0.18, 0.32, 0.15, 0.28]}}}}, harmony: answer, dyn: mf}
+  - {name: held_breath, bars: 8, parts: {keys: {style: hold, voices: 3, range: [48, 65]}, reply: {deg: "=p r/4 2/8 2/8 4/4 2/4 | =mp 2/4. 4/8 2/4 r/4 | =p 0/4 0/8 2/8 4/4 r/4 | =p 3/2 2/4 r/4 | =mp 3/4. 1/8 0/4 r/4 | =p 0/4. 2/8 4/4 2/4 | =mp 2/2 4/4 r/4 | =p 2/4 2/8 0/8 0/2", oct: 0}}, harmony: answer, dyn: "p>pp"}
+  - {name: sunburst, bars: 8, parts: {keys: {rel: "=mp R/8^ 5 3+ 5 R+ 3+ r/4 | =p r/4 3/8 5 R+/4 r/4"}, bass: {rel: "=mp R/4.^ r/8 5/8 R/8^ r/8 3/8 | =p R/4^ r/8 R/8^ 5/4 r/4 | =mp R/8^ r/8 3/4 5/8 r/8 R/4^ | =p R/2^ r/8 5/8 R/4^", oct: -2}, lead: {deg: "=mp r/8 2/8 2/4 0/8 2/8 r/4 | =p 0/4. 2/8 4/4 2/4 | =mp 3/4 3/8 5/8 5/4 3/4 | =p 2/2 r/2 | =mp 3/4. 1/8 0/4 r/4 | =p 2/4 3/8 2/8 0/4 r/4 | =mp 4/4. 2/8 0/4 2/4 | =p 2/2. r/4", oct: 0}, pad: {style: hold, range: [48, 65]}, drums: {steps: {kick: "X.....x...x...x.|X..x......x.....|X.....x..x....x.|X...x...x..x....", snare: "....X..o....X...|....X.......X.o.|....X.o.....X...|....X......oX.xx", hat: {steps: x.x..x.x.x.x..x., vel: [0.45, 0.18, 0.32, 0.21]}, ohat: "..........x....."}}}, harmony: head, dyn: f}
+  - {name: sunburst_reply, bars: 8, parts: {keys: {rel: "=mp r/8 [3,5]/8^' r/4 [R,3,5]/8^' r/8 r/4 | =p [3,5]/4^' r/4 r/8 [R,3]/8^' r/4"}, bass: {rel: "=mp R/8^ r/8 5/4 r/8 R+/8 3/4 | =p r/8 R/8^ R/4^ 5/4 R/4^ | =mp R/4.^ 3/8 5/8 r/8 R/4^ | =p R/2^ r/2", oct: -2}, lead: {deg: "=mp r/4 2/8 2/8 4/4 2/4 | =p 4/4. 2/8 2/4 r/4 | =mp 2/4 4/8 5/8 4/4 2/4 | =p 3/2 r/2 | =mp 3/4 1/8 0/8 0/4 r/4 | =p 0/4. 2/8 2/4 r/4 | =mp 4/4 2/4 2/4 r/4 | =p 2/4 0/4 0/2", oct: 0}, bell: {rel: "=mp R/8^ 5 3+ 5 R+ 3+ r/4 | =p r/4 3/8 5 R+/4 r/4"}, drums: {steps: {kick: "X.....x...x...x.|X..x......x.....|X.....x..x....x.|X...x...x..x....", snare: "....X..o....X...|....X.......X.o.|....X.o.....X...|....X......oX.xx", hat: {steps: x.x..x.x.x.x..x., vel: [0.45, 0.18, 0.32, 0.21]}, ohat: "..........x....."}}}, harmony: answer, dyn: "mf>mp"}
+  - {name: afterimage, bars: 4, parts: {keys: {style: hold, voices: 3, range: [48, 65]}, lead: {deg: "=p 3/2 2/4 r/4 | =pp 0/2. 2/8 0/8 | =p 2/2 r/2 | =pp 0/1", oct: 0}}, harmony: close, dyn: "p>pp"}
+
+mix:
+  keys: {gain_db: -14, send: {hall: 0.14}}
+  lead: {gain_db: 29, send: {hall: 0.15}, pan: -0.08}
+  reply: {gain_db: 5, send: {hall: 0.18}, pan: 0.2}
+  bass: {gain_db: -5}
+  bell: {gain_db: -15, send: {hall: 0.2}, pan: 0.25}
+  pad: {gain_db: -28, send: {hall: 0.2}}
+  drums: {gain_db: -8}
+
+master:
+  target_lufs: -16
+  glue: none

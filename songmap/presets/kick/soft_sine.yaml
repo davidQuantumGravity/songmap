@@ -1,0 +1,11 @@
+instrument: kick
+description: Soft rounded electronic kick for quiet arrangements.
+tags:
+- electronic
+- kick
+params:
+  tune: 49
+  decay: 0.35
+  click: 0.03
+  sweep: 9
+  drive: 1

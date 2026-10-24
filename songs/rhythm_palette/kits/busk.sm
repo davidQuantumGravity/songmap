@@ -1,0 +1,9 @@
+# Hand percussion: left/right cajon and conga samples, played as a conversation.
+song "Kit: Buskman hand percussion" 100 4/4 Dm fps=30 seed=82 tail=2 mood=balanced
+kit kick=sampler/busk_cajon_bass(gain_db=0) snare=sampler/busk_cajon_left(gain_db=0) right=sampler/busk_cajon_right(gain_db=0) low=sampler/busk_conga_low_left(gain_db=0) high=sampler/busk_conga_high_right(gain_db=0) hat=sampler/busk_shaker(gain_db=0,pan=0) bell=sampler/busk_cowbell(gain_db=0)
+groove swing=.55/16
+call 2 | drums:{kick: "X.......x.......", snare: "....x.......x...", right: ".......o.......o", hat: "x-x-x-x-x-x-x-x-"} dyn=p<mp
+answer 2 | drums:{low: "x.....x.........", high: "....x....x..x...", bell: "x...x...x...x..."} dyn=mp<mf
+reply 2 | drums:{kick: "X.....x.........", snare: "....x.......x...", right: ".......o......o.", hat: "x.x.x.x.x.x.x.x."} dyn=mf>p
+mix drums -6 hall=.04
+master standard lufs=-18 glue=none

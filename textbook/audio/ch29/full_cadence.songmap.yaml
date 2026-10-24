@@ -8,14 +8,30 @@ key: "C major"
 tuning: 36edo
 seed: 7
 tail_seconds: 3
-instruments: {piano: keys/still, pad: pad/still, low: clean/bass, bell: clean/glass}
+instruments:
+  piano: sampler/grand_piano
+  pad: pad/still
+  low: clean/bass
+  bell: clean/glass
 motifs:
   bassline: {notes: "=mp c-1 | c-1 | f--1 | vf#--2 ^f#-- | g--1 | g--1 | c-1 | c-1"}
 mix:
-  piano: {gain_db: -5, send: {hall: 0.25}}
-  pad:   {gain_db: -12, send: {hall: 0.35}}
-  low:   {gain_db: -5, send: {hall: 0.05}}
-  bell:  {gain_db: -9, send: {hall: 0.35}}
+  piano:
+    gain_db: 3.0
+    send:
+      hall: 0.25
+  pad:
+    gain_db: -12
+    send:
+      hall: 0.35
+  low:
+    gain_db: -5
+    send:
+      hall: 0.05
+  bell:
+    gain_db: -9
+    send:
+      hall: 0.35
 returns:
   hall: {type: reverb, seconds: 2.8, predelay: 0.025, damping: 0.5}
 sections:

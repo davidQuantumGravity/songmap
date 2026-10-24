@@ -29,11 +29,15 @@ seed: 24
 tail_seconds: 4
 
 instruments:
-  gtr: {use: string_pluck/still, brightness: 0.8}
-  req: {use: string_pluck/still, brightness: 0.9}
+  gtr:
+    use: string_pluck/still
+    brightness: 0.8
+  req:
+    use: string_pluck/still
+    brightness: 0.9
   lead: clean/lead
-  strings: pad/still
-  vln: {use: clean/organ, attack: 0.12, partials: 10, rolloff: 1.1, release: 0.5}
+  strings: sampler/cello
+  vln: sampler/solo_violin
   bell: clean/glass
 
 harmony:
@@ -56,14 +60,38 @@ events:
   - {at: climax, type: impact, size: xl}
   - {at: fin+1, type: impact, size: m}
 mix:
-  drums: {gain_db: -8}
-  fx: {gain_db: -8}
-  gtr: {gain_db: -8, send: {hall: 0.2}, pan: -0.2}
-  req: {gain_db: -2, send: {hall: 0.25}, pan: 0.3}
-  lead: {gain_db: 17, send: {hall: 0.25}}
-  bass: {gain_db: -2}
-  strings: {gain_db: -20, send: {hall: 0.3}}
-  vln: {gain_db: -13, send: {hall: 0.35}, pan: 0.15}
-  bell: {gain_db: -16, send: {hall: 0.4}}
+  drums:
+    gain_db: -8
+  fx:
+    gain_db: -8
+  gtr:
+    gain_db: -8
+    send:
+      hall: 0.2
+    pan: -0.2
+  req:
+    gain_db: -2
+    send:
+      hall: 0.25
+    pan: 0.3
+  lead:
+    gain_db: 17
+    send:
+      hall: 0.25
+  bass:
+    gain_db: -2
+  strings:
+    gain_db: -9.7
+    send:
+      hall: 0.3
+  vln:
+    gain_db: 0.7
+    send:
+      hall: 0.35
+    pan: 0.15
+  bell:
+    gain_db: -16
+    send:
+      hall: 0.4
 
 master: clean

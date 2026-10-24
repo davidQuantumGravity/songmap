@@ -7,8 +7,21 @@ key: "C major"
 tuning: 12edo
 seed: 1
 tail_seconds: 2
-instruments: {chords: epiano/still, bass: clean/bass, lead: clean/lead}
-mix: {chords: {gain_db: -7, send: {hall: 0.25}}, bass: {gain_db: -4}, lead: {gain_db: -5, send: {hall: 0.25}}}
+instruments:
+  chords: sampler/fm_piano
+  bass: sampler/double_bass
+  lead: sampler/flute
+mix:
+  chords:
+    gain_db: 2.7
+    send:
+      hall: 0.25
+  bass:
+    gain_db: 12.4
+  lead:
+    gain_db: -1.6
+    send:
+      hall: 0.25
 returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
 sections:
   - name: a

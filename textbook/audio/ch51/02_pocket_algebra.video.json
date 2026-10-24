@@ -1,0 +1,18 @@
+{
+  "song": "02_pocket_algebra",
+  "musical_revision": 2,
+  "visual_revision": 3,
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "crf": 18,
+  "score_sha256": "290a07cabe764be9ce6290ec38a6c2aa5b051c7b54d3be5c2a74fab1dd0c0195",
+  "wav_sha256": "20ba0496b908e0be1d0ef3136c1fcb32aabb4f2d9d8138d46a40cad96b8ebf42",
+  "source_sha256": "7705871500ecc661dae40ef8d756345fdfce8f44ad1c4a645f47d7972207681a",
+  "view_sha256": "3be14e1b472d0c38d22afaa4450d576d3a0c82750b45f515b1a080a88aa69ed7",
+  "video_sha256": "1cbd68daab9dfb6f4d7b3908e00cc459674adafcf35c87b5b71eb141fd30aa40",
+  "poster_sha256": "aebf4745d4cb5b40df88b46bbd191fbcff8e7cca61f0f16ecafde83ad525dd9e",
+  "audio_reused_without_changes": true
+}

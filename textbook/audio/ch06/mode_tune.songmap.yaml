@@ -8,8 +8,14 @@ key: "C major"
 tuning: 12edo
 seed: 1
 tail_seconds: 2
-instruments: {lead: clean/lead, drone: clean/organ}
-mix: {lead: {gain_db: -5}, drone: {gain_db: -12}}
+instruments:
+  lead: sampler/grand_piano
+  drone: clean/organ
+mix:
+  lead:
+    gain_db: 6.7
+  drone:
+    gain_db: -12
 sections:
   - {name: ionian,     bars: 2, key: "C ionian",     harmony: "N.C.:2", parts: {lead: {deg: "0/8 1 2 4 5/4 4/8 2 | 1/4 -1 0/2"}, drone: {notes: "[c-,g-]1 | [c-,g-]1"}}}
   - {name: dorian,     bars: 2, key: "C dorian",     harmony: "N.C.:2", parts: {lead: {deg: "0/8 1 2 4 5/4 4/8 2 | 1/4 -1 0/2"}, drone: {notes: "[c-,g-]1 | [c-,g-]1"}}}

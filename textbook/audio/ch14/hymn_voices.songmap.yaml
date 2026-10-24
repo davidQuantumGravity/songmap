@@ -9,12 +9,32 @@ key: "C major"
 tuning: 12edo
 seed: 14
 tail_seconds: 2.5
-instruments: {s: clean/organ, a: clean/organ, t: clean/organ, b: clean/organ}
+instruments:
+  s: sampler/grand_piano
+  a: sampler/grand_piano
+  t: sampler/grand_piano
+  b: sampler/grand_piano
 mix:
-  s: {gain_db: -6, pan: 0.25, send: {hall: 0.2}}
-  a: {gain_db: -7, pan: 0.1, send: {hall: 0.2}}
-  t: {gain_db: -7, pan: -0.1, send: {hall: 0.2}}
-  b: {gain_db: -5, pan: -0.25, send: {hall: 0.2}}
+  s:
+    gain_db: 13.3
+    pan: 0.25
+    send:
+      hall: 0.2
+  a:
+    gain_db: 13.1
+    pan: 0.1
+    send:
+      hall: 0.2
+  t:
+    gain_db: 13.5
+    pan: -0.1
+    send:
+      hall: 0.2
+  b:
+    gain_db: 13.3
+    pan: -0.25
+    send:
+      hall: 0.2
 returns: {hall: {type: reverb, seconds: 2.2, predelay: 0.02, damping: 0.5}}
 sections:
   - name: bass

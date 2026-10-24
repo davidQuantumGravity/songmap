@@ -35,12 +35,16 @@ seed: 23
 tail_seconds: 4
 
 instruments:
-  ep: epiano/still
-  keys: {use: keys/still, hardness: 0.3}
-  bass: {cutoff: 480, glide: 0.08}
+  ep: sampler/fm_piano
+  keys: sampler/grand_piano
+  bass:
+    cutoff: 480
+    glide: 0.08
   wash: pad/still
-  gtr: {use: string_pluck/still, brightness: 0.55}
-  flute: clean/lead
+  gtr:
+    use: string_pluck/still
+    brightness: 0.55
+  flute: sampler/flute
   bell: clean/glass
 
 harmony:
@@ -60,14 +64,35 @@ events:
   - {at: reprise, type: impact, size: s}
   - {at: reprise-1, type: drop, bars: 1, keep: [ep, flute, fx]}
 mix:
-  drums: {gain_db: -6}
-  fx: {gain_db: -4}
-  bass: {gain_db: -2}
-  ep: {gain_db: -11, send: {hall: 0.2}}
-  keys: {gain_db: 5, send: {hall: 0.25}}
-  wash: {gain_db: -24, send: {hall: 0.3}}
-  gtr: {gain_db: -6, send: {hall: 0.25}}
-  flute: {gain_db: -1, send: {hall: 0.3}}
-  bell: {gain_db: -10, send: {hall: 0.4}}
+  drums:
+    gain_db: -6
+  fx:
+    gain_db: -4
+  bass:
+    gain_db: -2
+  ep:
+    gain_db: -0.9
+    send:
+      hall: 0.2
+  keys:
+    gain_db: 11.2
+    send:
+      hall: 0.25
+  wash:
+    gain_db: -24
+    send:
+      hall: 0.3
+  gtr:
+    gain_db: -6
+    send:
+      hall: 0.25
+  flute:
+    gain_db: 3.9
+    send:
+      hall: 0.3
+  bell:
+    gain_db: -10
+    send:
+      hall: 0.4
 
 master: clean

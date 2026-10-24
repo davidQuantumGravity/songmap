@@ -1,0 +1,10 @@
+instrument: hat
+description: Long bright electronic sizzle; use sparingly.
+tags:
+- electronic
+- hat
+params:
+  decay: 0.85
+  metal: 0.45
+  hp: 8500
+  color: 14500

@@ -25,7 +25,7 @@ from __future__ import annotations
 import copy
 import os
 
-LAYER_TYPES = ("header", "letters", "staff", "roll", "progress", "sections", "text")
+LAYER_TYPES = ("header", "letters", "staff", "roll", "instrument", "progress", "sections", "text")
 # the classic 1280x720 layout, as fractions (Renderer before views)
 DEFAULT_LAYERS = [
     {"type": "header", "box": [26 / 1280, 26 / 720, 1228 / 1280, 62 / 720], "title": True, "info": True, "chord": True},
@@ -68,6 +68,20 @@ def resolve(view: dict | None) -> dict:
             _bad(f"layer {i + 1} ({layer['type']}): box is [x, y, w, h] as fractions of the frame")
         if box[2] <= 0 or box[3] <= 0:
             _bad(f"layer {i + 1} ({layer['type']}): the box needs a width and a height")
+        if layer["type"] == "instrument":
+            if layer.get("style", "score") not in ("score", "performance"):
+                _bad(f"layer {i + 1}: instrument style is score or performance")
+            for setting in ("note_chips", "pitch_strip", "glow"):
+                if setting in layer and not isinstance(layer[setting], bool):
+                    _bad(f"layer {i + 1}: instrument {setting} must be true or false")
+            if layer.get("mode", "bar") not in ("bar", "active"):
+                _bad(f"layer {i + 1}: instrument mode is bar or active")
+            bars = layer.get("bars", 1)
+            if isinstance(bars, bool) or not isinstance(bars, int) or bars < 1:
+                _bad(f"layer {i + 1}: instrument bars must be a positive integer")
+            parts = layer.get("parts")
+            if parts is not None and (not isinstance(parts, list) or not all(isinstance(p, str) for p in parts)):
+                _bad(f"layer {i + 1}: instrument parts must be a list of part names")
     return v
 
 

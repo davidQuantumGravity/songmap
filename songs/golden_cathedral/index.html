@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>As Above, So Below · Golden Cathedral</title>
+<style>
+:root{color-scheme:dark;--ink:#eee9db;--muted:#b0afa7;--gold:#e3bf75;--aqua:#8ccbbf;--panel:#141f29;--line:#344049}
+*{box-sizing:border-box}body{margin:0;background:#0a131b;color:var(--ink);font:16px/1.65 system-ui,sans-serif}main{max-width:1180px;margin:auto;padding:48px 32px 64px}a{color:var(--gold);text-underline-offset:4px}header{position:relative;padding:34px 0 42px;border-bottom:1px solid var(--line);overflow:hidden}.eyebrow{font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}h1{font:clamp(42px,6vw,76px)/1.06 Georgia,serif;letter-spacing:-2px;margin:18px 0}h1 em{font-weight:400;color:var(--gold)}.intro{max-width:650px;color:#c5c9c8;font-size:18px}h2{font:29px/1.2 Georgia,serif;margin:0 0 18px}h3{font-size:16px;margin:0}p{margin:12px 0}.meta{font-size:12px;color:var(--muted);letter-spacing:1px}header svg{position:absolute;right:0;top:-45px;width:330px;height:340px;opacity:.2;pointer-events:none}.player{padding:28px 0}audio{display:block;width:100%;margin:18px 0 14px}.versions,.landmarks{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;font-size:12px;border:1px solid #536069;background:transparent;color:var(--ink);padding:9px 14px;border-radius:24px;cursor:pointer}button:hover{border-color:var(--gold);background:#e3bf7510}button:focus-visible,a:focus-visible{outline:2px solid var(--aqua);outline-offset:4px}button[aria-pressed=true]{color:#0a131b;background:var(--gold);border-color:var(--gold)}.small{color:var(--muted);font-size:12px}.board{border:1px solid #59616a;border-radius:16px;background:linear-gradient(140deg,#182734,#101923);padding:26px;margin:18px 0 34px}.board-head{display:flex;justify-content:space-between;gap:20px;align-items:start}.section-name{font:32px Georgia,serif;margin:6px 0}.chord{color:var(--gold);font-size:18px}.clock{font:20px ui-monospace,monospace;color:var(--aqua);white-space:nowrap}.progress{height:3px;background:#35414b;margin:22px 0}.progress span{display:block;height:100%;background:var(--gold);width:0}.label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}.instruments{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.card{min-height:94px;padding:13px 14px;border:1px solid #35434f;border-radius:9px;transition:background .3s}.card.sounding{border-color:#a58e58;background:#c49f4a0c}.voice-name{font-size:11px;color:var(--muted);margin-bottom:8px}.notes{font:21px Georgia,serif;min-height:27px;color:#efe1bd;display:flex;gap:7px;flex-wrap:wrap}.note{display:inline-block}.quiet{font:15px Georgia,serif;color:#717f88}.pairs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.pair{border:1px solid #34645e;border-radius:9px;padding:12px;background:#8ccbbf06;min-width:0}.pair strong{font:21px Georgia,serif;color:var(--aqua)}.hz{font:11px/1.9 ui-monospace,monospace;color:#c6d4cf}.rate{font-size:11px;margin-top:6px;color:var(--aqua)}.explain{display:grid;grid-template-columns:1fr 1fr;gap:42px;margin:38px 0}.explain p{font-size:15px;color:#c2c8c9}.formula{border-left:2px solid var(--gold);padding:10px 18px;color:var(--gold);font:17px Georgia,serif;line-height:1.8}details{border-top:1px solid var(--line);padding:18px 0}summary{cursor:pointer;color:var(--gold)}.downloads{display:flex;flex-wrap:wrap;gap:20px;font-size:13px;margin-top:26px}.spectrum{display:block;width:100%;border-radius:8px;margin-top:16px}footer{border-top:1px solid var(--line);margin-top:35px;padding-top:22px;color:var(--muted);font-size:12px}.error{color:#ffbcad}#status{min-height:20px}
+@media(max-width:750px){main{padding:20px 16px 40px}.intro{font-size:16px}header svg{right:-180px}h1{letter-spacing:-1px}.board{padding:16px}.instruments{grid-template-columns:repeat(2,minmax(0,1fr))}.pairs{grid-template-columns:repeat(2,minmax(0,1fr))}.board-head{display:block}.clock{font-size:15px;margin-top:12px}.explain{grid-template-columns:1fr;gap:25px}.section-name{font-size:27px}.chord{font-size:15px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<main>
+<header>
+<svg viewBox="0 0 320 340" aria-hidden="true" fill="none" stroke="#e3bf75" stroke-width="1"><path d="M20 340V180Q20 72 160 10Q300 72 300 180V340M50 340V185Q50 100 160 40Q270 100 270 185V340M80 340V190Q80 130 160 75Q240 130 240 190V340M110 340V198Q110 158 160 115Q210 158 210 198V340M140 340V205Q140 185 160 165Q180 185 180 205V340"/><circle cx="160" cy="210" r="50"/><path d="M20 280H300M20 305H300"/></svg>
+<div class="eyebrow">Golden Cathedral · A headphone fantasia</div>
+<h1>As Above,<br><em>So Below</em></h1>
+<p class="intro">An imagined cathedral built from golden sevenths and ninths. An instrumental choir sings above; a quiet, octave-folded harmonic shadow moves between the ears below.</p>
+<div class="meta">5:00 &nbsp; / &nbsp; 36-ET &nbsp; / &nbsp; ORGAN · CELLO · HORN · FLUTE · GOLDEN CHIMES</div>
+</header>
+<section class="player" aria-label="Audio player">
+<div class="versions" aria-label="Playback version">
+<button data-version="song" aria-pressed="true">Full piece</button>
+<button data-version="music_only" aria-pressed="false">Music only</button>
+<button data-version="binaural_pairs" aria-pressed="false">Binaural pairs</button>
+</div>
+<audio id="player" controls preload="metadata" src="renders/as_above_so_below/song.mp3"></audio>
+<p class="small">Stereo headphones, comfortable volume. Comparison tracks retain the same master gain; the isolated pairs are intentionally quieter. The score display follows the performance, including rests.</p>
+<div class="landmarks" aria-label="Listening landmarks">
+<button data-time="0">0:00 · Threshold</button><button data-time="32">0:32 · Invocation</button><button data-time="80">1:20 · First ninth</button><button data-time="128">2:08 · Distant choir</button><button data-time="176">2:56 · Still point</button><button data-time="192">3:12 · Vaults open</button><button data-time="240">4:00 · Empyrean</button><button data-time="272">4:32 · Final triad</button>
+</div>
+<div id="status" class="small" role="status">Loading the scored performance…</div>
+</section>
+<section class="board" aria-label="Synchronized harmony and instrument notes">
+<div class="board-head"><div><div class="eyebrow">Now sounding</div><div class="section-name" id="section">Threshold</div><div class="chord" id="chord">C golden triad</div><div class="small" id="key">C golden7_42</div></div><div class="clock" id="clock">0:00 / 5:00</div></div>
+<div class="progress" aria-hidden="true"><span id="bar-progress"></span></div>
+<div class="label">Above · played notes, by instrument</div>
+<div class="instruments" id="instruments"></div>
+<div class="label">Below · pure-tone pairs and their octave centers</div>
+<div class="pairs" id="pairs"></div>
+<p class="small" id="bar">Bar 1 of 72 · one bar is four seconds</p>
+</section>
+<section class="explain">
+<div><h2>A motet that opens into light</h2><p>The cello introduces the call; horn and flute answer at different entrances. Dotted phrases, rests and changing answers keep the counterpoint moving. The organ supplies widely spaced golden harmony; sparse chimes extend its golden spectrum.</p><p>The music grows from a seven-note home into a decatonic collection, visits a neighboring key on vE, then withdraws to the still point. The largest wave begins at 3:12 and crests at 4:00. A final triad releases the accumulated ninths.</p><p>The choir here is instrumental. The writing borrows the spaciousness and imitation of sacred polyphony; it is a new fantasia rather than a historical reconstruction.</p></div>
+<div><h2>One harmony, two registers</h2><p>Each binaural pair follows a tone of the current chord. Its midpoint matches an octave reduction of a scored upper note; left and right sit slightly below and above that center. The small ear-to-ear difference creates the headphone effect.</p><div class="formula">Left = center − difference / 2<br>Right = center + difference / 2<br>Differences = B, B/φ, B/φ², B/φ³, B/φ⁴</div><p>Up to five pairs follow each ninth. Faster rates generally sit on higher carriers. Changes crossfade over 0.8 seconds, so common tones remain while the harmonic shadow changes with the music.</p></div>
+</section>
+<details><summary>The golden ninth, tuning and overtones</summary><p>Three golden thirds make the seventh; four make the ninth. In 36-ET the ninth is <strong>0, 11, 22, 33, 44</strong> sixth-steps above its root. The editable score spells this as <code>maj9(v3,^5,^^9)</code>. The ninth on C is vE♭, rather than an unaltered Western D.</p><p>The organ and chimes use exact partial ratios of <code>2^m × φ^n</code> on tempered fundamentals. The sampled cello, horn and flute retain their recorded acoustic timbres. This is golden harmony in 36-ET, with golden-spectrum colors; it is not an exact-φ tuning of every recorded overtone.</p></details>
+<details><summary>What the comparisons demonstrate</summary><p>“Music only” is the original instrumental bed before narrow carrier bands are carved out. “Binaural pairs” is the actual isolated pure-tone renderer, not the subtractive difference stem. Both retain the full piece's master gain. The full version combines the carved bed and those pairs, so it is not simply the sum of the two comparison files.</p><p>The animated notes come from the score's performed events. The ear frequencies come from the same changing carrier and rate curves as the renderer. They describe the signal, not a measured state of the listener's brain. Several simultaneous pairs also create acoustic interactions within each ear.</p></details>
+<details><summary>Listening review and technical checks</summary><p>Exact duration: 300 seconds. All composed pitches and chord tones are in the local golden collection. Every carrier is a chord tone and has a corresponding scored upper octave within its section. The audit checks the left and right frequencies directly in the isolated audio.</p><p>One brief close suspension at 0:43 is prepared by unison and resolves at the next bar. The broad late climax and the bass-heavy still point are intentional. The render has no clipped samples. These are score and audio checks. The user approved the listening draft: “That was great.”</p><img class="spectrum" src="renders/as_above_so_below/qa.png" alt="Spectrogram and loudness plot of the five-minute piece"></details>
+<div class="downloads"><a href="renders/as_above_so_below/song.wav" download>24-bit WAV</a><a href="renders/as_above_so_below/song.mp3" download>MP3</a><a href="as_above_so_below.sm" download>Editable .sm score</a><a href="verification.json">Verification</a><a href="renders/as_above_so_below/LICENSES.md">Sample credits</a></div>
+<footer><p>This is a musical experiment in wonder and spatial harmony. No reliable “maximum” neurological intensity is established here. A <a href="https://www.eneuro.org/content/7/2/ENEURO.0232-19.2020">controlled binaural-beat study</a> found auditory responses without a corresponding mood effect; the piece makes no promise of entrainment or induced bliss.</p><a href="../../textbook_site/chapters/songbook.html#songs-golden-cathedral">Songbook</a> &nbsp; · &nbsp; <a href="../golden_worlds/index.html">Golden Worlds</a></footer>
+</main>
+<script>
+'use strict';
+const audio=document.querySelector('#player'),status=document.querySelector('#status');
+const voices={pedal:'Pedal · organ foundation',nave:'Nave · golden-spectrum organ',tenor:'Tenor · cello',alto:'Alto · horn',cantus:'Cantus · flute',halo:'Halo · golden chimes'};
+const cards={};
+for(const [id,label] of Object.entries(voices)){
+ const card=document.createElement('div');card.className='card';
+ const name=document.createElement('div');name.className='voice-name';name.textContent=label;
+ const notes=document.createElement('div');notes.className='notes';notes.textContent='Rest';
+ card.append(name,notes);document.querySelector('#instruments').append(card);cards[id]={card,notes,previous:''};
+}
+let data=null,lastFrame=0,version='song',switchGeneration=0;
+const clock=t=>`${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+function interp(curve,t){const [ts,vs]=curve;let i=0;while(i<ts.length-2&&ts[i+1]<=t)i++;if(t<=ts[0])return vs[0];if(t>=ts.at(-1))return vs.at(-1);const d=ts[i+1]-ts[i];return d===0?vs[i+1]:vs[i]+(vs[i+1]-vs[i])*(t-ts[i])/d;}
+function update(){
+ if(!data)return;
+ const t=audio.currentTime||0,sec=data.sections.find(s=>s.start<=t&&s.end>t)||data.sections.at(-1);
+ document.querySelector('#section').textContent=t>=288?'Afterglow':sec.name;
+ document.querySelector('#chord').textContent=`${sec.root} · ${sec.quality}`;
+ document.querySelector('#key').textContent=sec.key;
+ document.querySelector('#clock').textContent=`${clock(t)} / 5:00`;
+ document.querySelector('#bar').textContent=t>=288?'Final resonance · twelve-second decay':`Bar ${Math.floor(t/4)+1} of 72 · beat ${Math.floor(t%4)+1} · ${version==='song'?'full piece':version==='music_only'?'instrumental bed':'isolated pairs'}`;
+ document.querySelector('#bar-progress').style.width=`${t>=288?100:(t%4)/4*100}%`;
+ for(const [part,item] of Object.entries(cards)){
+  const notes=[...new Set(data.notes.filter(e=>e.part===part&&e.start<=t&&e.end>t).flatMap(e=>e.names))];
+  const value=notes.join(' ');if(value!==item.previous){item.notes.replaceChildren();
+   if(!notes.length){const rest=document.createElement('span');rest.className='quiet';rest.textContent=t>=288?'Decay':'Rest';item.notes.append(rest);}
+   for(const n of notes){const span=document.createElement('span');span.className='note';span.textContent=n;item.notes.append(span);}
+   item.card.classList.toggle('sounding',!!notes.length);item.previous=value;
+  }
+ }
+ const pairs=document.querySelector('#pairs');pairs.replaceChildren();
+ const B=Math.exp(interp(data.beat_curve,t));
+ const oscillators=t>=300?[]:data.oscillators.filter(o=>interp(o.amp,t)>.05).sort((a,b)=>b.hz-a.hz);
+ for(const o of oscillators){const d=B*interp(o.mul,t),p=document.createElement('div');p.className='pair';p.style.opacity=.4+.6*interp(o.amp,t);
+  const title=document.createElement('strong');title.textContent=o.label;
+  const hz=document.createElement('div');hz.className='hz';hz.textContent=`L ${(o.hz-d/2).toFixed(2)} Hz`;const right=document.createElement('div');right.className='hz';right.textContent=`R ${(o.hz+d/2).toFixed(2)} Hz`;
+  const rate=document.createElement('div');rate.className='rate';rate.textContent=`Δ ${d.toFixed(2)} Hz`;
+  p.append(title,hz,right,rate);pairs.append(p);
+ }
+}
+async function play(){try{await audio.play();status.textContent='';}catch(e){status.textContent='Press the audio play button to begin.';}}
+document.querySelectorAll('[data-time]').forEach(button=>button.addEventListener('click',()=>{audio.currentTime=+button.dataset.time;update();play();}));
+document.querySelectorAll('[data-version]').forEach(button=>button.addEventListener('click',()=>{
+ if(button.dataset.version===version)return;
+ const t=audio.currentTime,wasPlaying=!audio.paused,gen=++switchGeneration;audio.pause();version=button.dataset.version;
+ document.querySelectorAll('[data-version]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+ status.textContent='Loading comparison…';
+ audio.addEventListener('loadedmetadata',()=>{if(gen!==switchGeneration)return;audio.currentTime=Math.min(t,audio.duration);status.textContent='';update();if(wasPlaying)play();},{once:true});
+ audio.src=`renders/as_above_so_below/${version}.mp3`;audio.load();
+}));
+audio.addEventListener('seeked',update);audio.addEventListener('timeupdate',update);
+audio.addEventListener('error',()=>{status.classList.add('error');status.textContent='Audio could not be loaded. Check that the local textbook server is running.';});
+fetch('performance.json').then(r=>{if(!r.ok)throw Error(r.status);return r.json();}).then(d=>{data=d;status.textContent='Ready · the opening unfolds quietly; the late climax has much more headroom.';for(const item of Object.values(cards))item.previous=null;update();}).catch(()=>{status.classList.add('error');status.textContent='Score display unavailable. The audio player remains usable.';});
+function frame(now){if(now-lastFrame>90){if(!audio.paused)update();lastFrame=now;}requestAnimationFrame(frame);}requestAnimationFrame(frame);
+</script>
+</html>

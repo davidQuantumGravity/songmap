@@ -1,0 +1,22 @@
+{
+  "01_sideways_sun": {
+    "score_sha256": "e7ab626c567aaf6f66fc8f50887c4639ba57cffd8bff22ba0402160e7d879c34",
+    "wav_sha256": "2c31259f4969d393bf6b016bd720f87091d619d9a998e6a640c86df208fc851c"
+  },
+  "02_pocket_algebra": {
+    "score_sha256": "290a07cabe764be9ce6290ec38a6c2aa5b051c7b54d3be5c2a74fab1dd0c0195",
+    "wav_sha256": "20ba0496b908e0be1d0ef3136c1fcb32aabb4f2d9d8138d46a40cad96b8ebf42"
+  },
+  "03_parallax_arcade": {
+    "score_sha256": "c14969351c670323b882925a1ef4b921038f01bf8eb80c87947773e867423647",
+    "wav_sha256": "41c9e04f836b844dbc00ea4f7c62fc21c56f8ee684d1031e6fd565dc6862f5e3"
+  },
+  "04_two_windows": {
+    "score_sha256": "de78c416007f0d69a00126fd7aef2172d9da8f97eaa5654d7a7173a165ffb18a",
+    "wav_sha256": "df37691984ecc823e571736f46a47cc1dddd5eee2c32e407072374a28b52c268"
+  },
+  "05_night_orchard": {
+    "score_sha256": "51437a41ff2c623e99f7cabe1b15f950920e3fc2477c4de464fef1a38e8851b5",
+    "wav_sha256": "0928c95301d6372b3c496c16203883b0ba32082a38ab7a6adf4a2b5e1742a098"
+  }
+}

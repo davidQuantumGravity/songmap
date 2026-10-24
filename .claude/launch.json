@@ -22,18 +22,6 @@
         "textbook_site"
       ],
       "port": 8790
-    },
-    {
-      "name": "deeperresearch-out",
-      "runtimeExecutable": ".venv/Scripts/python.exe",
-      "runtimeArgs": [
-        "-m",
-        "http.server",
-        "8791",
-        "--directory",
-        "C:/Users/chest/Documents/Business/Deeper Research/website/landing/out"
-      ],
-      "port": 8791
     }
   ]
 }

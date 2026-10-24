@@ -570,6 +570,28 @@ parts:
           - {id: escalator, title: "Escalator: building on golden steps"}
           - {id: quasicrystal, title: "Quasicrystal: a groove that never repeats"}
           - {id: silver-lift, title: "Silver Lift: up a silver third"}
+      - id: ch50
+        title: "A Comma Higher: a golden epic"
+        summary: "One ten-minute piece in four movements, progressive metal, modal jazz and golden modes, that starts on C and ends one sixth-step higher: the golden techniques of Parts VII and VIII working together at length."
+        sections:
+          - {id: one-piece, title: "One long piece, a comma higher"}
+          - {id: door, title: "I. The door: from a golden pedal into 7/8"}
+          - {id: blue-gold, title: "II. Blue gold: modal jazz through the golden modes"}
+          - {id: decatonic, title: "III. Decatonic: odd meters and three keys at once"}
+          - {id: thirteen-steps, title: "IV. Thirteen steps: the comma pump"}
+          - {id: making, title: "How it was made, and how it was checked"}
+
+      - id: ch51
+        title: "Golden Worlds: five songs with golden harmony as home"
+        summary: "Broken beat, jazz/funk, progressive electronic music, chamber counterpoint and an atmospheric song, with full videos, score-based listening guides and separate one-bar instrument panels."
+        sections:
+          - {id: golden-home, title: "A complete song inside the golden system"}
+          - {id: sideways-sun, title: "Sideways Sun: a broken-beat conversation"}
+          - {id: pocket-algebra, title: "Pocket Algebra: the decatonic in a pocket"}
+          - {id: parallax-arcade, title: "Parallax Arcade: a return one sixth-step higher"}
+          - {id: two-windows, title: "Two Windows: complementary pentatonics"}
+          - {id: night-orchard, title: "Night Orchard: a melody through darker modes"}
+          - {id: reading-video, title: "Reading the instrument windows"}
 
   - id: appendices
     title: "Appendices"

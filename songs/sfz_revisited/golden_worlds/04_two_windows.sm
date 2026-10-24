@@ -1,0 +1,46 @@
+# SFZ edition of songs/golden_worlds/04_two_windows.sm. Original score and renders preserved.
+# Instrumentation and faders revised; written notes, tuning, form, timing and binaural settings retained.
+# Listening candidate: automated measurements are not a human listening verdict.
+# Two Windows
+# Pure golden harmony in 36-ET; ordinary and golden-spectrum timbres are both intentional.
+# A 3/4 chamber invention: complementary pentatonic subjects, exchange of register and instrument, a 53-mode development and a contracted return. Non-chord tones are deliberate moving counterpoint.
+# Listening draft: automated checks are not an auditory approval.
+song "Two Windows" 96 3/4 "G golden10_36" fps=30 seed=704 tail=5 tuning=36edo mood=documentary
+inst keys=sampler/grand_piano lead=sampler/flute harp=sampler/folk_harp low=sampler/double_bass
+
+prog subject "Abg7:1 Ag7:1 vCg7:1 Ag7:1 Gg7:1 ^Eg7:1 Ag7:1 Gg7:1"
+prog answer "Ag7:1 vBg:1 Gg7:1 ^Ebg7:1 vBg:1 ^Ebg7:1 Ag7:1 Gg7:1"
+prog duet "vC#g7:1 Ag7:1 vCg7:1 Ag7:1 Gg7:1 ^Eg7:1 Ag7:1 Gg7:1"
+prog middle "Gg7:1 vBg7:1 ^Dg7:1 F#g7:1 ^Ebg7:1 vCg7:1 Abg7:1 Gg7:1"
+prog reunion "Gg7:1 vCg7:1 ^Eg7:1 Ag7:1 vBg:1 ^Ebg7:1 vCg7:1 Gg7:1 Abg7:1 vCg7:1 vBg:1 Gg7:1"
+prog close "vCg7:1 ^Ebg7:1 vBg:1 Gg7:1"
+
+subject_a = {deg: "=mp 0/8 2 4/4 6 | =p 8/4 6/8 4 2/4 | =mp 4/4. 2/8 0/4 | =p 2/2 r/4 | =mp 4/8 6 8/4 10 | =p 8/4 6 4 | =mp 2/8 4 6/4 2 | =p 0/2 r/4", oct: 1}
+subject_b = {deg: "=mp r/4 1/8 3 5/4 | =p 7/8 5 3/4 1 | =mp 3/4 5/8 7 9/4 | =p 7/2 r/4 | =mp 5/4 3/8 1 3/4 | =p 5/8 7 9/4 7 | =mp 5/4. 3/8 1/4 | =p 3/2 r/4", oct: 0}
+ground_a = {deg: "=p =p r/2 4/4^ | =mp 2/2 r/4 | =p 0/2^ -3/4 | =p r/4 -5/2 | =p 0/4^ -4/2 | =mp r/4 1/4 -2/4 | =p -2/2^ r/4 | =p 3/4 0/2", oct: 0}
+ground_b = {deg: "=p =p r/2 5/4^ | =mp 3/2 r/4 | =p -4/2^ -7/4 | =p r/4 -10/2 | =p -7/4^ -1/2 | =mp r/4 0/4 -3/4 | =p -2/2^ r/4 | =p 3/4 0/2", oct: 0}
+answer_line = {deg: "=mp =mp 2/4^ 5/8 8/8 5/4 | =mf 9/4. 6/8 3/4 | =mp 3/8^ 6/8 9/4 6/4 | =p 7/2 r/4 | =mp 3/8^ 6/8 9/4 7/8 6/8 | =mf 3/4 0/8 -3/8 r/4 | =mp -5/4^ -2/4 1/8 -2/8 | =p 0/4 r/4 3/4", oct: 1}
+develop_reed = {deg: "=mp =mp 0/4^ 3/8 6/8 3/4 | =mf -1/4. -4/8 -7/4 | =mp -1/8^ 2/8 5/4 2/4 | =p -1/2 r/4 | =mp -3/8^ 0/8 3/4 1/8 0/8 | =mf 0/4 -3/8 -6/8 r/4 | =mp -6/4^ -3/4 0/8 -3/8 | =p 0/4 r/4 3/4", oct: 1}
+develop_keys = {deg: "=p =p r/2 3/4^ | =mp 3/2 r/4 | =p 2/2^ -1/4 | =p r/4 2/2 | =p -3/4^ -7/2 | =mp r/4 -3/4 -6/4 | =p -3/2^ r/4 | =p -7/4 -10/2", oct: 0}
+mirror_line = {deg: "=mp =mp 1/4^ r/4 4/4 | =mf 5/4 8/4 1/8 -2/8 | =mp 0/4^ -3/8 -6/8 r/4 | =p -8/8 -5/8 -2/4 -4/8 -5/8 | =mp 0/2^ r/4 | =mf 1/8 4/8 7/4 4/4 | =mp 8/4.^ 5/8 2/4 | =p 0/4 3/8 6/8 3/4", oct: 1}
+reunion_line = {deg: "=mf =mf 0/4^ 3/8 6/8 3/4 | =f 0/4. -3/8 -6/4 | =mf -9/8^ -6/8 -3/4 -6/4 | =mp -8/2 r/4 | =mf -7/8^ -4/8 -1/4 -3/8 -4/8 | =f -7/4 -10/8 -3/8 r/4 | =mf -3/4^ 0/4 3/8 0/8 | =mp 0/4 r/4 3/4 | =mf 1/4^ 4/8 7/8 4/4 | =f 0/4. -3/8 -6/4 | =mf -4/8^ -1/8 -1/4 -1/4 | =mp 0/2 r/4", oct: 1}
+reunion_ground = {deg: "=p =p r/2 3/4^ | =mp 4/2 r/4 | =p 4/2^ 1/4 | =p r/4 5/2 | =p 3/4^ -1/2 | =mp r/4 0/4 -3/4 | =p 0/2^ r/4 | =p 3/4 0/2 | =p r/2 4/4^ | =mp 4/2 r/4 | =p -1/2^ -4/4 | =p r/4 -7/2", oct: 0}
+coda_line = {deg: "=p =p 0/2^ -3/4 | =mp 0/4 -3/2 | =p -1/2^ r/4 | =p 0/2.", oct: 1}
+plucked_ground = {rel: "=mp R/4^ 5/8 3+ R+/4 | =p R/8^ 3 5/4 r/4 | =mp R/4^ 3/8 5 R+/4 | =p R/2^ r/4", oct: -1}
+low_cantus = {rel: "=mp R/2^ 5/4 | =p R/2.^ | =mp R/4^ 3/2 | =p R/2^ r/4", oct: -2}
+
+paper_light 8 | harp:plucked_ground keys:ground_a prog=subject dyn=pp<p
+first_window 8 | lead:subject_a harp:plucked_ground low:low_cantus prog=subject dyn=p<mp
+second_window 8 | keys:subject_b harp:plucked_ground low:low_cantus prog=answer dyn=mp
+interlaced 8 | lead:subject_a keys:subject_b low:low_cantus prog=duet dyn=mp<mf
+answering_arch 8 | lead:answer_line keys:ground_b harp:plucked_ground low:low_cantus prog=answer dyn=mf
+brighter_glass 8 | lead:develop_reed keys:develop_keys harp:plucked_ground low:low_cantus prog=middle key="G golden10_63" dyn=mp<mf
+different_shadow 8 | keys:develop_reed harp:develop_keys low:low_cantus prog=middle key="G golden10_63" dyn=mf>mp
+unwritten_space 8 | keys:ground_a harp:hold(voices=3, range=[55,72]) prog=subject dyn=p>pp
+mirror_stairs 8 | lead:mirror_line keys:ground_a low:low_cantus prog=subject dyn=p<mp
+crossed_hands 8 | keys:answer_line harp:plucked_ground low:low_cantus prog=answer dyn=mp<mf
+both_windows 12 | lead:reunion_line keys:reunion_ground harp:plucked_ground low:low_cantus prog=reunion dyn=f>mf
+folded_paper 8 | lead:coda_line keys:hold(voices=3, range=[48,68]) harp:plucked_ground prog=close dyn=p>pp
+
+mix keys 10.5 hall=.18 pan=-.18 | lead 18.3 hall=.2 pan=.15 | harp 5.5 hall=.22 pan=.28 | low 7.9 hall=.08
+master standard lufs=-18 glue=none

@@ -7,8 +7,13 @@ key: "C major"
 tuning: 12edo
 seed: 13
 tail_seconds: 1.5
-instruments: {lead: clean/lead}
-mix: {lead: {gain_db: -4, send: {hall: 0.2}}}
+instruments:
+  lead: sampler/flute
+mix:
+  lead:
+    gain_db: 9.4
+    send:
+      hall: 0.2
 returns: {hall: {type: reverb, seconds: 1.8, predelay: 0.02, damping: 0.5}}
 sections:
   - {name: arch,    bars: 2, parts: {lead: {notes: "=mf c4 e g a | g e c2"}}}

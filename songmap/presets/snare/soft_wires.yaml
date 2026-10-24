@@ -1,0 +1,13 @@
+instrument: snare
+description: Dark soft electronic wires with a small shell.
+tags:
+- electronic
+- snare
+params:
+  tone: 165
+  tone_mix: 0.3
+  noise_hp: 800
+  noise_lp: 5500
+  noise_decay: 0.14
+  snap: 0.12
+  drive: 1

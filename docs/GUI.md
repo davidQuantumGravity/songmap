@@ -4,6 +4,13 @@ A local app in which songs, instruments, mixes and videos are made **both as tex
 edit is written back to the same text files the language and the LLM use. It replaces the v1 plan, which predated
 the language, the sampler, 36-ET, the performance stage, moods and the video renderer.
 
+[AI songwriting through listening and comparison](AI_SONGWRITING_VISION.md) describes the proposed next product
+direction: develop an entire song from a blank project through AI proposals, A/B choices, selective merges,
+delegated writing, and contextual feedback. It distinguishes this vision from the GUI's existing capabilities.
+
+[AI Lab](AI_LAB.md) implements saved-score instrument mapping, explicit improvement priorities,
+durable A/B audio, text feedback, Codex-generated challengers, and previewed application or undo across selected scores.
+
 ## 1. Goals
 
 1. **One model, two views.** The `.sm` program and the visual editors are views of one song tree. Typing in the code
@@ -61,8 +68,10 @@ only the sampler loads its structure from data.
 - **Mix today:** per part gain, pan, sends to reverb returns, sidechain from a kit piece; master `standard`, `clean`
   or `legacy`. **Gaps:** no per-part insert effects (EQ, compressor, delay, chorus, saturation, filter), no automation
   lanes, no meters.
-- **Video today** (`visual/`): one fixed layout (header, letter names, grand staff, piano roll) with a theme, size,
-  page length and part list. **Gaps:** no layout control, layers, colours per part, or images.
+- **Video today** (`visual/`): positioned view layers, themes, part colours, and the classic shared-staff layout.
+  Instrument panels select parts independently, with their own register and clef, exact bar pages or sounding
+  notes only. Studio offers an instrument-grid preset and panel controls. See [VIDEO.md](VIDEO.md).
+  Cartoon performers and notation-bubble animation remain deferred.
 - **Exports today:** WAV 24-bit, MP3, stems (float WAV), `cues.json`, `qa.json` + `qa.png`, MP4 + poster.
   **Gap:** MIDI.
 
@@ -208,6 +217,7 @@ everywhere (rack, mixer strip, piano-roll lane, code line).
 - **S5 is built, except native instruments as templates.** Starter patches stand in for them: "Build a patch" starts a
   snare from snare808, a bass from acid, and so on.
 - **S6 is built:** the view spec (`visual/view.py`, `<song>.view.yaml`), the designer and exports that use it.
+  Instrument windows now add independent part filters and one-bar or active-note views.
 - **Added beyond the plan:**
   - a theory **Teacher** tab (`gui/teach.py`: numerals, functions, cadences, voice-leading, each sounding note
     against its chord, and the automated ear's findings explained);

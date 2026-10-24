@@ -10,11 +10,26 @@ key: "C major"
 tuning: 12edo
 seed: 15
 tail_seconds: 2.5
-instruments: {s: clean/organ, a: clean/organ, b: clean/organ}
+instruments:
+  s: sampler/grand_piano
+  a: sampler/grand_piano
+  b: sampler/grand_piano
 mix:
-  s: {gain_db: -6, pan: 0.35, send: {hall: 0.25}}
-  a: {gain_db: -6, pan: 0.0, send: {hall: 0.25}}
-  b: {gain_db: -5, pan: -0.35, send: {hall: 0.25}}
+  s:
+    gain_db: 10.4
+    pan: 0.35
+    send:
+      hall: 0.25
+  a:
+    gain_db: 12.9
+    pan: 0.0
+    send:
+      hall: 0.25
+  b:
+    gain_db: 11.2
+    pan: -0.35
+    send:
+      hall: 0.25
 returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
 sections:
   - name: exposition

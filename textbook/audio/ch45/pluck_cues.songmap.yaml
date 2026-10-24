@@ -10,9 +10,17 @@ tuning: 36edo
 seed: 9
 fps: 30
 tail_seconds: 3
-instruments: {gtr: string_pluck/still, low: clean/bass}
+instruments:
+  gtr: sampler/folk_harp
+  low: clean/bass
 sections:
   - {name: a, bars: 4, harmony: "C:0.75 ~g:0.25 F:1 G:0.75 ~g:0.25 C:1", parts: {gtr: {style: gentle8, role: arp}, low: bassline}}
   - {name: b, bars: 4, harmony: "C:0.75 ~g:0.25 F:1 G:0.75 ~g:0.25 C:1", parts: {gtr: {style: roll16, role: arp}, low: bassline}}
-mix: {gtr: {gain_db: -5, send: {hall: 0.25}}, low: {gain_db: -6}}
+mix:
+  gtr:
+    gain_db: 0.8
+    send:
+      hall: 0.25
+  low:
+    gain_db: -6
 master: clean

@@ -8,13 +8,16 @@ key: "C major"
 tuning: 36edo
 seed: 1
 tail_seconds: 2.5
-instruments: {organ: clean/organ}
+instruments:
+  organ: sampler/grand_piano
 motifs:
   hold:  {notes: "=mf c4 c c c"}
   fall:  {notes: "=mf e4 ve ^eb eb"}
   rise:  {notes: "=mf g4 ^g vab ab"}
   all:   {notes: "=mf [c,e,g]2 [c,ve,^g]4 [c,^eb,vab] | [c,eb,ab]1"}
-mix: {organ: {gain_db: -6}}
+mix:
+  organ:
+    gain_db: 13.8
 sections:
   - {name: hold, bars: 1, parts: {organ: {motifs: [hold]}}}
   - {name: gap1, bars: 1, parts: {}}

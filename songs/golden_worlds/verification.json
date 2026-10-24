@@ -1,0 +1,883 @@
+{
+  "date": "2026-10-23",
+  "collection": "Golden Worlds",
+  "revision": 2,
+  "tuning": "36edo",
+  "scope": "All composed pitches and chord tones belong to the local golden collection; unpitched kit voices excluded.",
+  "listening_status": "Melodies rewritten after the user's rework verdict. New listening review pending; measurements do not establish aesthetic quality.",
+  "original_archive": "archives/golden_worlds/v1_before_melody_rewrite",
+  "checks": [
+    "score parsing and expansion",
+    "unchanged bass, harmony, groove and accompaniment events",
+    "actual sample ranges",
+    "local pitch and chord membership",
+    "sustained sixth-step rubs",
+    "render digest matches score",
+    "zero clipped samples",
+    "24-bit stereo 48 kHz WAV",
+    "lead range, phrasing and measured level against the original render"
+  ],
+  "accepted_findings": {
+    "register": "Flute/short electric-piano comping, low mallets/plucked replies, and atmospheric harp/pad deliberately share registers. Rests, timbre and stereo placement separate their roles. Retaining the liked backing and avoiding shrill octaves takes priority over blanket octave separation.",
+    "range": "Pocket Algebra's vibraphone uses F3 (MIDI 53), inside its published 53-89 sample range. The generic lead-role warning assumes a minimum of MIDI 55.",
+    "contrast": "The groove pieces keep related sections near one another in level; no added lead boost is used merely to satisfy a single-peak loudness rule.",
+    "balance": "Parallax's marimba sits below the drums by design; its melody and the organ remain comparable in stem level."
+  },
+  "tracks": [
+    {
+      "file": "01_sideways_sun.sm",
+      "title": "Sideways Sun",
+      "revision": 2,
+      "score_sha256": "e7ab626c567aaf6f66fc8f50887c4639ba57cffd8bff22ba0402160e7d879c34",
+      "event_digest": "17a72cf84c564c0a4882284fc1a941ed3c3b1c712cc5b84c174f7c78755b5653",
+      "mp3_sha256": "00399e15b9a708751c30b2a85f27fc54119483c2411dfae47e9ae272b4981751",
+      "bars": 88.0,
+      "duration_seconds": 200.55555555555554,
+      "wav_format": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width_bytes": 3,
+        "frames": 9626667,
+        "seconds": 200.5555625
+      },
+      "lufs": -16.56,
+      "true_peak_db": -1.0,
+      "clipped_samples": 0,
+      "sampled_voices": {
+        "lead": "sampler/flute",
+        "reply": "sampler/folk_harp"
+      },
+      "preserved_backing_parts": [
+        "keys",
+        "bass",
+        "drums",
+        "pad",
+        "bell"
+      ],
+      "harmony_and_timing_unchanged": true,
+      "original_lead": {
+        "notes": 267,
+        "range": [
+          "^G4",
+          "vF6"
+        ],
+        "midi_range": [
+          67.3333,
+          88.6667
+        ],
+        "span_semitones": 21.333,
+        "notes_at_or_above_C6": 58,
+        "median_successive_interval_semitones": 3.667,
+        "sounding_beats": 193.35
+      },
+      "revised_lead": {
+        "notes": 205,
+        "range": [
+          "C4",
+          "^A♭4"
+        ],
+        "midi_range": [
+          60.0,
+          68.3333
+        ],
+        "span_semitones": 8.333,
+        "notes_at_or_above_C6": 0,
+        "median_successive_interval_semitones": 3.667,
+        "sounding_beats": 190.45
+      },
+      "lead_stem_change_db": -8.14,
+      "golden_pitch_audit": {
+        "off_scale_notes": 0,
+        "off_scale_chords": 0,
+        "microtonal_rubs_at_least_quarter_beat": 0
+      },
+      "review_counts": {
+        "problem": 0,
+        "warning": 7,
+        "note": 0
+      },
+      "review_findings": [
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "head_one",
+          "message": "keys and lead sit in the same register (around MIDI 64)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "head_reply",
+          "message": "keys and lead sit in the same register (around MIDI 64)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "ten_windows",
+          "message": "keys and lead sit in the same register (around MIDI 64)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "return_call",
+          "message": "keys and lead sit in the same register (around MIDI 64)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "return_answer",
+          "message": "keys and lead sit in the same register (around MIDI 64)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "sunburst_reply",
+          "message": "keys and lead sit in the same register (around MIDI 64)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "contrast",
+          "where": "sunburst",
+          "message": "the loudest section (sunburst, -14.0 LUFS) is only 1.5 dB above return_answer",
+          "fix": "make the peak bigger by arrangement (more parts, octave doubling) and quieten the bar before it (!drop:1@-1)"
+        }
+      ],
+      "sections": [
+        {
+          "name": "slivers",
+          "seconds": 0.0,
+          "key": "C golden7"
+        },
+        {
+          "name": "head_one",
+          "seconds": 8.889,
+          "key": "C golden7"
+        },
+        {
+          "name": "head_reply",
+          "seconds": 26.667,
+          "key": "C golden7"
+        },
+        {
+          "name": "streetlights",
+          "seconds": 44.444,
+          "key": "C golden7"
+        },
+        {
+          "name": "ten_windows",
+          "seconds": 62.222,
+          "key": "C golden10_36"
+        },
+        {
+          "name": "side_door",
+          "seconds": 80.0,
+          "key": "vE golden7"
+        },
+        {
+          "name": "return_call",
+          "seconds": 97.778,
+          "key": "C golden7"
+        },
+        {
+          "name": "return_answer",
+          "seconds": 115.556,
+          "key": "C golden7"
+        },
+        {
+          "name": "held_breath",
+          "seconds": 133.333,
+          "key": "C golden7"
+        },
+        {
+          "name": "sunburst",
+          "seconds": 151.111,
+          "key": "C golden7"
+        },
+        {
+          "name": "sunburst_reply",
+          "seconds": 168.889,
+          "key": "C golden7"
+        },
+        {
+          "name": "afterimage",
+          "seconds": 186.667,
+          "key": "C golden7"
+        }
+      ]
+    },
+    {
+      "file": "02_pocket_algebra.sm",
+      "title": "Pocket Algebra",
+      "revision": 2,
+      "score_sha256": "290a07cabe764be9ce6290ec38a6c2aa5b051c7b54d3be5c2a74fab1dd0c0195",
+      "event_digest": "47c41d5c93f2db39734ab8de297d4b35d11f88e3b5d1768389ddb972de9793b3",
+      "mp3_sha256": "626f8f523afe05af809f8a7210710fcf54fc05316ab562319ebd8e905671a3bf",
+      "bars": 96.0,
+      "duration_seconds": 209.71428571428572,
+      "wav_format": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width_bytes": 3,
+        "frames": 10066286,
+        "seconds": 209.71429166666667
+      },
+      "lufs": -16.76,
+      "true_peak_db": -1.0,
+      "clipped_samples": 0,
+      "sampled_voices": {
+        "lead": "sampler/vibraphone",
+        "reply": "sampler/marimba"
+      },
+      "preserved_backing_parts": [
+        "bass",
+        "drums",
+        "gtr",
+        "keys"
+      ],
+      "harmony_and_timing_unchanged": true,
+      "original_lead": {
+        "notes": 254,
+        "range": [
+          "vA♭4",
+          "F6"
+        ],
+        "midi_range": [
+          67.6667,
+          89.0
+        ],
+        "span_semitones": 21.333,
+        "notes_at_or_above_C6": 65,
+        "median_successive_interval_semitones": 3.667,
+        "sounding_beats": 201.013
+      },
+      "revised_lead": {
+        "notes": 205,
+        "range": [
+          "F3",
+          "E4"
+        ],
+        "midi_range": [
+          53.0,
+          64.0
+        ],
+        "span_semitones": 11.0,
+        "notes_at_or_above_C6": 0,
+        "median_successive_interval_semitones": 1.0,
+        "sounding_beats": 179.55
+      },
+      "lead_stem_change_db": -7.12,
+      "golden_pitch_audit": {
+        "off_scale_notes": 0,
+        "off_scale_chords": 0,
+        "microtonal_rubs_at_least_quarter_beat": 0
+      },
+      "review_counts": {
+        "problem": 0,
+        "warning": 6,
+        "note": 2
+      },
+      "review_findings": [
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "dialogue_call",
+          "message": "gtr and lead sit in the same register (around MIDI 56)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "limma_room",
+          "message": "keys and lead sit in the same register (around MIDI 56)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "trading_keys",
+          "message": "gtr and keys sit in the same register (around MIDI 56)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "whole_room",
+          "message": "gtr and lead sit in the same register (around MIDI 56)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "range",
+          "where": "head_left bar 1",
+          "message": "lead goes outside its comfortable range (49 notes outside MIDI 55-91)",
+          "fix": "move it with oct: or transpose the line"
+        },
+        {
+          "severity": "warning",
+          "kind": "contrast",
+          "where": "whole_room",
+          "message": "the loudest section (whole_room, -13.7 LUFS) is only 1.8 dB above trading_reed",
+          "fix": "make the peak bigger by arrangement (more parts, octave doubling) and quieten the bar before it (!drop:1@-1)"
+        },
+        {
+          "severity": "note",
+          "kind": "contrast",
+          "where": "trading_keys",
+          "message": "trading_keys is within 1 dB of both neighbours",
+          "fix": "contrast neighbouring sections by texture, register or density"
+        },
+        {
+          "severity": "note",
+          "kind": "balance",
+          "where": "trading_keys",
+          "message": "trading_keys is very bass-heavy (low 0.91)",
+          "fix": "lighten the sub or kick, or add mid/high parts"
+        }
+      ],
+      "sections": [
+        {
+          "name": "count_in",
+          "seconds": 0.0,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "head_left",
+          "seconds": 8.571,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "head_right",
+          "seconds": 25.714,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "dialogue_call",
+          "seconds": 42.857,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "limma_room",
+          "seconds": 60.0,
+          "key": "F golden10_54"
+        },
+        {
+          "name": "solo_first",
+          "seconds": 77.143,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "trading_keys",
+          "seconds": 111.429,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "trading_reed",
+          "seconds": 128.571,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "one_table",
+          "seconds": 145.714,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "whole_room",
+          "seconds": 154.286,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "answer_back",
+          "seconds": 171.429,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "last_word",
+          "seconds": 188.571,
+          "key": "F golden10_63"
+        }
+      ]
+    },
+    {
+      "file": "03_parallax_arcade.sm",
+      "title": "Parallax Arcade",
+      "revision": 2,
+      "score_sha256": "c14969351c670323b882925a1ef4b921038f01bf8eb80c87947773e867423647",
+      "event_digest": "69fdb7829a39689856da948c0623f2a815802be621dcfda97cbd0152a9e2f47d",
+      "mp3_sha256": "f2b09cc4ed9d5c0b83cd1c00d0ba3cf8b63a63edca7465e8fdb7879dec94817a",
+      "bars": 104.0,
+      "duration_seconds": 206.29032258064515,
+      "wav_format": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width_bytes": 3,
+        "frames": 9901935,
+        "seconds": 206.2903125
+      },
+      "lufs": -16.18,
+      "true_peak_db": -1.0,
+      "clipped_samples": 0,
+      "sampled_voices": {
+        "lead": "sampler/marimba"
+      },
+      "preserved_backing_parts": [
+        "keys",
+        "arp",
+        "bass",
+        "drums",
+        "pad"
+      ],
+      "harmony_and_timing_unchanged": true,
+      "original_lead": {
+        "notes": 376,
+        "range": [
+          "vA♭4",
+          "F♯6"
+        ],
+        "midi_range": [
+          67.6667,
+          90.0
+        ],
+        "span_semitones": 22.333,
+        "notes_at_or_above_C6": 47,
+        "median_successive_interval_semitones": 3.667,
+        "sounding_beats": 269.85
+      },
+      "revised_lead": {
+        "notes": 273,
+        "range": [
+          "D4",
+          "vC5"
+        ],
+        "midi_range": [
+          62.0,
+          71.6667
+        ],
+        "span_semitones": 9.667,
+        "notes_at_or_above_C6": 0,
+        "median_successive_interval_semitones": 1.0,
+        "sounding_beats": 247.95
+      },
+      "lead_stem_change_db": -8.23,
+      "golden_pitch_audit": {
+        "off_scale_notes": 0,
+        "off_scale_chords": 0,
+        "microtonal_rubs_at_least_quarter_beat": 0
+      },
+      "review_counts": {
+        "problem": 0,
+        "warning": 4,
+        "note": 2
+      },
+      "review_findings": [
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "crossing_lights",
+          "message": "arp and lead sit in the same register (around MIDI 69)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "new_horizon",
+          "message": "arp and lead sit in the same register (around MIDI 67)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "contrast",
+          "where": "arcade_summit",
+          "message": "the loudest section (arcade_summit, -13.8 LUFS) is only 1.2 dB above crossing_lights",
+          "fix": "make the peak bigger by arrangement (more parts, octave doubling) and quieten the bar before it (!drop:1@-1)"
+        },
+        {
+          "severity": "note",
+          "kind": "contrast",
+          "where": "open_road",
+          "message": "open_road is within 1 dB of both neighbours",
+          "fix": "contrast neighbouring sections by texture, register or density"
+        },
+        {
+          "severity": "note",
+          "kind": "balance",
+          "where": "neon_seed",
+          "message": "neon_seed is very bass-heavy (low 0.99)",
+          "fix": "lighten the sub or kick, or add mid/high parts"
+        },
+        {
+          "severity": "warning",
+          "kind": "balance",
+          "where": "song",
+          "message": "the melody (lead) is 7.2 dB under drums",
+          "fix": "raise it (mix lead +3) or lower drums"
+        }
+      ],
+      "sections": [
+        {
+          "name": "neon_seed",
+          "seconds": 0.0,
+          "key": "D golden7_42"
+        },
+        {
+          "name": "sign_one",
+          "seconds": 15.484,
+          "key": "D golden7_42"
+        },
+        {
+          "name": "sign_two",
+          "seconds": 30.968,
+          "key": "D golden7_42"
+        },
+        {
+          "name": "open_road",
+          "seconds": 46.452,
+          "key": "D golden7_42"
+        },
+        {
+          "name": "decatonic_drive",
+          "seconds": 61.935,
+          "key": "D golden10_36"
+        },
+        {
+          "name": "crossing_lights",
+          "seconds": 77.419,
+          "key": "D golden10_36"
+        },
+        {
+          "name": "empty_lane",
+          "seconds": 92.903,
+          "key": "D golden10_36"
+        },
+        {
+          "name": "comma_crossing",
+          "seconds": 108.387,
+          "key": "^D golden10_36"
+        },
+        {
+          "name": "new_horizon",
+          "seconds": 123.871,
+          "key": "^D golden10_36"
+        },
+        {
+          "name": "overpass",
+          "seconds": 139.355,
+          "key": "^D golden10_36"
+        },
+        {
+          "name": "arcade_summit",
+          "seconds": 154.839,
+          "key": "^D golden10_36"
+        },
+        {
+          "name": "city_below",
+          "seconds": 170.323,
+          "key": "^D golden10_36"
+        },
+        {
+          "name": "last_pixel",
+          "seconds": 185.806,
+          "key": "^D golden10_36"
+        }
+      ]
+    },
+    {
+      "file": "04_two_windows.sm",
+      "title": "Two Windows",
+      "revision": 2,
+      "score_sha256": "de78c416007f0d69a00126fd7aef2172d9da8f97eaa5654d7a7173a165ffb18a",
+      "event_digest": "66c2b7397b50c1f0ea9568aa9570079d35f3f6a4d17076ed516eeec9426589a4",
+      "mp3_sha256": "18ae6eaf97435819c23f79c8299c971ca09a50b72d7e8dcbe4b7e0bea11e1f2e",
+      "bars": 100.0,
+      "duration_seconds": 192.5,
+      "wav_format": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width_bytes": 3,
+        "frames": 9240000,
+        "seconds": 192.5
+      },
+      "lufs": -18.18,
+      "true_peak_db": -1.47,
+      "clipped_samples": 0,
+      "sampled_voices": {
+        "harp": "sampler/folk_harp",
+        "keys": "sampler/grand_piano",
+        "lead": "sampler/cello"
+      },
+      "preserved_backing_parts": [
+        "harp",
+        "low"
+      ],
+      "harmony_and_timing_unchanged": true,
+      "original_lead": {
+        "notes": 176,
+        "range": [
+          "G4",
+          "G6"
+        ],
+        "midi_range": [
+          67.0,
+          91.0
+        ],
+        "span_semitones": 24.0,
+        "notes_at_or_above_C6": 41,
+        "median_successive_interval_semitones": 3.667,
+        "sounding_beats": 143.7
+      },
+      "revised_lead": {
+        "notes": 165,
+        "range": [
+          "G3",
+          "^E4"
+        ],
+        "midi_range": [
+          55.0,
+          64.3333
+        ],
+        "span_semitones": 9.333,
+        "notes_at_or_above_C6": 0,
+        "median_successive_interval_semitones": 2.0,
+        "sounding_beats": 145.8
+      },
+      "lead_stem_change_db": -9.48,
+      "golden_pitch_audit": {
+        "off_scale_notes": 0,
+        "off_scale_chords": 0,
+        "microtonal_rubs_at_least_quarter_beat": 0
+      },
+      "review_counts": {
+        "problem": 0,
+        "warning": 0,
+        "note": 1
+      },
+      "review_findings": [
+        {
+          "severity": "note",
+          "kind": "balance",
+          "where": "mirror_stairs",
+          "message": "mirror_stairs is very bass-heavy (low 0.93)",
+          "fix": "lighten the sub or kick, or add mid/high parts"
+        }
+      ],
+      "sections": [
+        {
+          "name": "paper_light",
+          "seconds": 0.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "first_window",
+          "seconds": 15.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "second_window",
+          "seconds": 30.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "interlaced",
+          "seconds": 45.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "answering_arch",
+          "seconds": 60.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "brighter_glass",
+          "seconds": 75.0,
+          "key": "G golden10_63"
+        },
+        {
+          "name": "different_shadow",
+          "seconds": 90.0,
+          "key": "G golden10_63"
+        },
+        {
+          "name": "unwritten_space",
+          "seconds": 105.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "mirror_stairs",
+          "seconds": 120.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "crossed_hands",
+          "seconds": 135.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "both_windows",
+          "seconds": 150.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "folded_paper",
+          "seconds": 172.5,
+          "key": "G golden10_36"
+        }
+      ]
+    },
+    {
+      "file": "05_night_orchard.sm",
+      "title": "Night Orchard",
+      "revision": 2,
+      "score_sha256": "51437a41ff2c623e99f7cabe1b15f950920e3fc2477c4de464fef1a38e8851b5",
+      "event_digest": "14b4948164064311df24354d4ebad20673a2340c62088a87f53a25e0ec51c37b",
+      "mp3_sha256": "ecdb6f002d2fd3f6e9043db2a4a6e998de9614f1e563e07d61148154325027d7",
+      "bars": 64.0,
+      "duration_seconds": 200.0,
+      "wav_format": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width_bytes": 3,
+        "frames": 9600000,
+        "seconds": 200.0
+      },
+      "lufs": -20.0,
+      "true_peak_db": -2.32,
+      "clipped_samples": 0,
+      "sampled_voices": {
+        "keys": "sampler/folk_harp",
+        "lead": "sampler/horn"
+      },
+      "preserved_backing_parts": [
+        "pad",
+        "bell",
+        "low"
+      ],
+      "harmony_and_timing_unchanged": true,
+      "original_lead": {
+        "notes": 62,
+        "range": [
+          "A4",
+          "^F6"
+        ],
+        "midi_range": [
+          69.0,
+          89.3333
+        ],
+        "span_semitones": 20.333,
+        "notes_at_or_above_C6": 16,
+        "median_successive_interval_semitones": 3.667,
+        "sounding_beats": 68.075
+      },
+      "revised_lead": {
+        "notes": 41,
+        "range": [
+          "A3",
+          "^F4"
+        ],
+        "midi_range": [
+          57.0,
+          65.3333
+        ],
+        "span_semitones": 8.333,
+        "notes_at_or_above_C6": 0,
+        "median_successive_interval_semitones": 1.0,
+        "sounding_beats": 57.6
+      },
+      "lead_stem_change_db": -9.18,
+      "golden_pitch_audit": {
+        "off_scale_notes": 0,
+        "off_scale_chords": 0,
+        "microtonal_rubs_at_least_quarter_beat": 0
+      },
+      "review_counts": {
+        "problem": 0,
+        "warning": 3,
+        "note": 0
+      },
+      "review_findings": [
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "first_branches",
+          "message": "keys and pad sit in the same register (around MIDI 59)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "unlit_leaves",
+          "message": "keys and pad sit in the same register (around MIDI 60)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        },
+        {
+          "severity": "warning",
+          "kind": "register",
+          "where": "lantern_bloom",
+          "message": "keys and lead sit in the same register (around MIDI 63)",
+          "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+        }
+      ],
+      "sections": [
+        {
+          "name": "seed_in_darkness",
+          "seconds": 0.0,
+          "key": "A golden7_51"
+        },
+        {
+          "name": "first_branches",
+          "seconds": 15.0,
+          "key": "A golden7_51"
+        },
+        {
+          "name": "orchard_path",
+          "seconds": 39.0,
+          "key": "A golden7"
+        },
+        {
+          "name": "unlit_leaves",
+          "seconds": 63.0,
+          "key": "A golden7_15"
+        },
+        {
+          "name": "lantern_bloom",
+          "seconds": 84.0,
+          "key": "A golden10_45"
+        },
+        {
+          "name": "elsewhere_river",
+          "seconds": 108.0,
+          "key": "vC# golden7"
+        },
+        {
+          "name": "familiar_stone",
+          "seconds": 147.0,
+          "key": "A golden7"
+        },
+        {
+          "name": "roots_and_stars",
+          "seconds": 168.0,
+          "key": "A golden7"
+        }
+      ]
+    }
+  ],
+  "delivery_checks": {
+    "audio_players": 15,
+    "phrase_seek_buttons": 5,
+    "chapter_videos": 6,
+    "current_songbook_entries": 5,
+    "mobile_overflow": false,
+    "browser_errors": 0,
+    "http_byte_range_seeking": true,
+    "visual_qa": "All five QA plots, encoded video contact sheet, desktop/mobile listening page and chapter inspected.",
+    "song_video_resolution": [
+      1920,
+      1080
+    ],
+    "visual_verification": "textbook/audio/ch51/performance_verification.json"
+  },
+  "visual_revision": 3
+}

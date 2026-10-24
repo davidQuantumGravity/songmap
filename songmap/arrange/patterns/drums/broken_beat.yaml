@@ -1,0 +1,17 @@
+# Two-bar electronic pocket with restrained offbeat open hats.
+style: broken_beat
+role: drums
+bars: 2
+steps:
+  kick: X.....x...x.....|X..x....x.....x.
+  snare: '....X.......X..o|....X..o....X...'
+  hat:
+    steps: x.x...x.x.x...x.
+    vel:
+    - 0.5
+    - 0.25
+    - 0.44
+    - 0.3
+    - 0.52
+    - 0.24
+  ohat: '......x.......x.'

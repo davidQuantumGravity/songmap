@@ -8,10 +8,14 @@ key: "C major"
 tuning: 36edo
 seed: 36
 tail_seconds: 3
-instruments: {keys: clean/keys, low: clean/bass}
+instruments:
+  keys: sampler/grand_piano
+  low: sampler/double_bass
 mix:
-  keys: {gain_db: -4}
-  low: {gain_db: -10}
+  keys:
+    gain_db: 8.6
+  low:
+    gain_db: 6.8
 sections:
   - {name: golden7, bars: 3, harmony: "N.C.:3", parts: {keys: {notes: "c8 c#8 ve8 vf8 ^g8 ^ab8 b8 c+8 | c+8 b8 ^ab8 ^g8 vf8 ve8 c#8 c8 | [c,ve,^g]1"}, low: {notes: "c-1 | c-1 | c-1"}}}
   - {name: s35, bars: 4, harmony: "N.C.:4", parts: {keys: {notes: "c8 c#8 d8 ve8 vf8 vf#8 ^g8 ^ab8 | ^a8 b8 c+2. | c+8 b8 ^a8 ^ab8 ^g8 vf#8 vf8 ve8 | d8 c#8 c2."}, low: {notes: "c-1 | c-1 | c-1 | c-1"}}}

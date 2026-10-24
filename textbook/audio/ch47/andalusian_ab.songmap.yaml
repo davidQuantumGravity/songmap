@@ -9,14 +9,18 @@ seed: 24
 tail_seconds: 3
 
 instruments:
-  gtr: {use: string_pluck/still, brightness: 0.8}
+  gtr: sampler/folk_harp
 
 sections:
   - {name: plain, bars: 4, parts: {gtr: {rel: "[R,5,R+,3+]/4 [R,5,R+,3+]/8 [R,5,R+,3+] r/8 [R,5,R+,3+] [R,5,R+,3+]/4"}, bass: {rel: "R/4 R R R", oct: -2}}, harmony: "Am:1 G:1 F:1 E:1", dyn: mf}
   - {name: golden, bars: 4, parts: {gtr: {rel: "[R,5,R+,3+]/4 [R,5,R+,3+]/8 [R,5,R+,3+] r/8 [R,5,R+,3+] [R,5,R+,3+]/4"}, bass: {rel: "R/4 R R R", oct: -2}}, harmony: "Am:0.5 ~g:0.25 ~g:0.25 G:0.5 ~g:0.25 ~g:0.25 F:0.5 vF:0.25 ^E:0.25 E:1", dyn: mf}
 
 mix:
-  gtr: {gain_db: -6, send: {hall: 0.2}}
-  bass: {gain_db: -2}
+  gtr:
+    gain_db: 0.4
+    send:
+      hall: 0.2
+  bass:
+    gain_db: -2
 
 master: clean

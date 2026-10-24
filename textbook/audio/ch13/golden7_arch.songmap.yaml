@@ -8,10 +8,18 @@ key: "C major"
 tuning: 36edo
 seed: 13
 tail_seconds: 2.5
-instruments: {lead: clean/lead, pad: clean/organ}
+instruments:
+  lead: sampler/flute
+  pad: sampler/grand_piano
 mix:
-  lead: {gain_db: -3, send: {hall: 0.2}}
-  pad:  {gain_db: -12, send: {hall: 0.25}}
+  lead:
+    gain_db: 3.6
+    send:
+      hall: 0.2
+  pad:
+    gain_db: 12.0
+    send:
+      hall: 0.25
 returns: {hall: {type: reverb, seconds: 2.0, predelay: 0.02, damping: 0.5}}
 sections:
   - {name: major,  bars: 2, key: "C major",   harmony: "C:2",  parts: {lead: {deg: "0/4 2 4 5 | 4 2 0/2", oct: 1}, pad: hold}}

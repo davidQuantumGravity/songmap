@@ -1,0 +1,10 @@
+instrument: hat
+description: Bright metallic electronic hat for house.
+tags:
+- electronic
+- hat
+params:
+  decay: 0.065
+  metal: 0.85
+  hp: 7500
+  color: 13500

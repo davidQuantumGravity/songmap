@@ -213,6 +213,14 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
   const guide: Guide | undefined = voice && !isPatch ? catalog?.guides?.[voice.instrument] : undefined;
   const presets = (voice && catalog?.presets[voice.instrument]) ?? [];
   const preset = presets.find((p) => p.name === voice?.preset);
+  const sampleVoice = catalog?.samplers.find((s) => s.ref === voice?.use);
+  const sampleFamily = isKit ? "drum" : sampleVoice?.family ?? spec?.family;
+  const pieceKind = piece?.includes("tom") ? "tom" : piece?.includes("hat") ? "hat"
+    : ["fill", "rim", "ghost"].includes(piece ?? "") ? "snare" : piece;
+  const preferredSample = catalog?.samplers.find((s) => s.installed && s.family === sampleFamily &&
+    (!isKit || s.category === `Acoustic drums: ${pieceKind}`))
+    ?? catalog?.samplers.find((s) => s.installed && s.family === sampleFamily)
+    ?? catalog?.samplers.find((s) => s.installed);
   const patchName = isPatch ? voice!.patch ?? voice!.use.split("/")[1] : null;
   const patchSpec: PatchSpec | null = patchName ? (summary.patches?.[patchName] ?? catalog?.patch_library?.[patchName] ?? null) as PatchSpec | null : null;
   const secNow = summary.sections.find((s) => time >= s.start && time < s.end) ?? summary.sections[0];
@@ -351,9 +359,9 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
                 <button className={view === "wiring" ? "on" : ""} onClick={() => setView("wiring")}>Wiring</button>
               </span>
               <label className="field"><span>instrument</span>
-                <select value={isPatch ? "patch" : voice.instrument} onChange={(e) => switchTo(e.target.value === "sampler" ? "sampler/salamander" : e.target.value, true)}>
+                <select value={isPatch ? "patch" : voice.instrument} onChange={(e) => switchTo(e.target.value === "sampler" ? (preferredSample?.ref ?? voice.use) : e.target.value, true)}>
                   {families.map(([fam, list]) => (
-                    <optgroup key={fam} label={fam}>{list.map((i) => <option key={i.name} value={i.name}>{i.name}</option>)}</optgroup>
+                    <optgroup key={fam} label={fam}>{list.map((i) => <option key={i.name} value={i.name} disabled={i.name === "sampler" && !catalog?.samplers.some((s) => s.installed)}>{i.name}{i.name === "sampler" && !catalog?.samplers.some((s) => s.installed) ? " (run songmap samples install)" : ""}</option>)}</optgroup>
                   ))}
                   {isPatch && <option value="patch">patch</option>}
                 </select>
@@ -366,9 +374,14 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
                   </select>
                 </label>
               ) : voice.instrument === "sampler" ? (
-                <label className="field"><span>library</span>
-                  <select value={voice.use.split("/").slice(1).join("/")} onChange={(e) => switchTo(`sampler/${e.target.value}`, false)}>
-                    {(catalog?.samplers ?? []).map((s) => <option key={s.name} value={s.name}>{s.title}</option>)}
+                <label className="field"><span>sampled instrument</span>
+                  <select value={voice.use.split("/").slice(1).join("/")} onChange={(e) => switchTo(`sampler/${e.target.value}`, true)}>
+                    {!catalog?.samplers.some((s) => s.ref === voice.use) && <option value={voice.use.split("/").slice(1).join("/")}>{voice.use}</option>}
+                    {[...new Set((catalog?.samplers ?? []).map((s) => s.category ?? s.family))].map((category) =>
+                      <optgroup key={category} label={category}>
+                        {(catalog?.samplers ?? []).filter((s) => (s.category ?? s.family) === category).map((s) =>
+                          <option key={s.name} value={s.name} disabled={!s.installed}>{s.title}{s.installed ? "" : " (not installed)"}</option>)}
+                      </optgroup>)}
                   </select>
                 </label>
               ) : (
@@ -381,6 +394,7 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
               )}
               <button disabled={!modified.length} onClick={() => switchTo(voice.use, true)} title="Remove this voice's knob changes">Reset knobs</button>
             </div>
+            {sampleVoice && <p className="rack-desc">{sampleVoice.description} <span className="muted">{sampleVoice.license} · MIDI {sampleVoice.range[0]}–{sampleVoice.range[1]}{!sampleVoice.installed && <> · Install: <code>{sampleVoice.install}</code></>}</span></p>}
 
             {view === "learn" && guide && (
               <div className="learn">
@@ -414,12 +428,12 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
                   ))}
                 </div>
                 <p className="small muted"><b>Next:</b> {guide.try_next}</p>
-                <div className="build-own">
+                {voice.instrument !== "sampler" && <div className="build-own">
                   <b>Build your own</b>
                   <p className="small">Every instrument here is a recipe of oscillators, noise, filters and envelopes. Rebuild this one as a
                     patch you can rewire module by module{starterFor(voice.instrument) !== "blank" ? ` (starting from the ${starterFor(voice.instrument)} sketch)` : ""}.</p>
                   <button onClick={buildOwn}>Build a patch…</button>
-                </div>
+                </div>}
               </div>
             )}
             {view === "learn" && !guide && <p className="pad muted">No guide for {voice.instrument} yet; the Knobs view shows its params.</p>}

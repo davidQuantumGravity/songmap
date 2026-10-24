@@ -1,0 +1,18 @@
+# Half-time backbeat; space around the snare and a two-bar kick.
+style: half_time
+role: drums
+bars: 2
+steps:
+  kick: X.........x.....|X.....x.......x.
+  snare: '........X.....o.|......o.X.......'
+  hat:
+    steps: x.x.x.x.x.x.x.x.
+    vel:
+    - 0.5
+    - 0.2
+    - 0.39
+    - 0.22
+    - 0.55
+    - 0.21
+    - 0.41
+    - 0.24

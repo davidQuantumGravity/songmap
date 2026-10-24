@@ -107,16 +107,20 @@ def inst_key(inst) -> tuple:
     """An instrument's identity for the note cache: its class, params and (samplers) its program."""
     src = getattr(inst, "source", None)
     return (type(inst).__name__, getattr(inst, "name", ""), tuple(sorted((k, repr(v)) for k, v in inst.p.items())),
-            src.get("program") if isinstance(src, dict) else None)
+            src.get("program") if isinstance(src, dict) else None,
+            getattr(inst, "fixed_pitch", None))
 
 
-def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: dict | None = None) -> RenderResult:
+def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: dict | None = None,
+           preview_end: float | None = None) -> RenderResult:
     """`note_cache`: a dict kept across renders (the Studio's) so notes that didn't change aren't synthesized
     again; keys are (instrument identity, pitch, velocity, gate, seed, params)."""
     t0 = time.time()
     arr = expand(song)
     tl, ens = arr.timeline, arr.ensemble
-    n = n_samples(tl.seconds)
+    # Preview from the original beginning so note seeds, expression, effect history and
+    # section-relative patterns remain intact. The caller crops the desired excerpt afterward.
+    n = n_samples(min(tl.seconds, max(.1, preview_end)) if preview_end is not None else tl.seconds)
     buses: dict[str, np.ndarray] = {}
     triggers: dict[str, list[float]] = {}
     cache: dict = {} if note_cache is None else note_cache
@@ -129,6 +133,8 @@ def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: 
         slot: dict = {}
         placed: list = []
         for e in evs:
+            if preview_end is not None and tl.beat_to_sec(e.beat) >= preview_end:
+                continue
             inst = ens.instrument(part, e.piece, e.patch)
             voice = ens.voice(part, e.piece)
             t = tl.beat_to_sec(e.beat)
@@ -136,15 +142,18 @@ def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: 
             k = slot.get(e.piece, 0)
             slot[e.piece] = k + 1
             seed = seed_for(song.seed, part, e.piece or "", k % RR_SLOTS)
+            # SFZ sequences may have 3, 5 or more than 8 takes. Keep the full counter;
+            # native synths retain their original eight seeded variations.
+            rr = k if getattr(inst, "program", None) is not None else k % RR_SLOTS
             gain = float(undb(voice.gain_db + e.gain_db))
             pan = float(np.clip(voice.pan + e.pan, -1, 1))
             for p in e.pitches or (60.0,):
                 ik = ikeys.get(id(inst))
                 if ik is None:
                     ik = ikeys[id(inst)] = inst_key(inst) if note_cache is not None else (id(inst),)
-                key = (ik, round(float(p), 4), round(e.vel, 5), round(gate, 5), seed,
+                key = (ik, round(float(p), 4), round(e.vel, 5), round(gate, 5), seed, rr,
                        tuple(sorted(e.params.items())))
-                note = Note(float(p), float(e.vel), gate, seed=seed, rr=k % RR_SLOTS, params=dict(e.params))
+                note = Note(float(p), float(e.vel), gate, seed=seed, rr=rr, params=dict(e.params))
                 y = cache.get(key)
                 if y is None:
                     y = declick(inst.render(note))

@@ -100,6 +100,13 @@ master: clean
 - `clean/golden_pad` (golden spectrum, sustained);
 - `keys/still` (modal piano), `epiano/still`, `pad/still`, `string_pluck/still`.
 
+For musical examples, prefer installed recorded voices such as `sampler/grand_piano`,
+`sampler/fm_piano`, `sampler/flute`, `sampler/folk_harp` and `sampler/double_bass` when their
+range and articulation fit. Run `songmap samples list` and see `docs/SFZ_LIBRARY.md`.
+Keep generated tones for exact-frequency, beating, roughness, spectrum and synthesis comparisons;
+recorded tuning and vibrato are part of the sampled sound. The textbook's complete instrument
+decisions are in `textbook/audio_refresh.json`. Rebalance changed parts from rendered measurements.
+
 Always `master: clean`. For dry demonstrations omit sends; for musical examples a hall send of 0.2–0.4 is fine.
 
 **Worked examples:** `examples/golden/etude1_passing_light.songmap.yaml`; generated examples in `examples/golden/suite/*.songmap.yaml`. Validate with `--test-audio`.

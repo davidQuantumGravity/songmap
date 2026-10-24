@@ -7,11 +7,17 @@ key: "C major"
 tuning: 36edo
 seed: 23
 tail_seconds: 2
-instruments: {keys: clean/keys, pad: clean/organ}
+instruments:
+  keys: sampler/grand_piano
+  pad: sampler/grand_piano
 motifs:
   diat: {deg: "0/8 1 2 3 4 5 6 7 | 7/8 6 5 4 3 2 1 0", octave: 4, key: "C major"}
   gold: {deg: "0/8 1 2 3 4 5 6 7 | 7/8 6 5 4 3 2 1 0", octave: 4, key: "C golden7"}
-mix: {keys: {gain_db: -3}, pad: {gain_db: -8}}
+mix:
+  keys:
+    gain_db: 9.8
+  pad:
+    gain_db: 14.9
 sections:
   - {name: diatonic, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [diat]}}}
   - {name: golden, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [gold]}}}

@@ -1,0 +1,17 @@
+# Soul pocket: editable sixteen-bar arrangement, with an opening, reply, lift and landing.
+# Listen for accents, ghost pickups, a bass rest before the reply, and a change of orchestration.
+song "Template: Soul pocket" 96 4/4 Dm fps=30 seed=180 tail=3 mood=balanced
+inst bass=sampler/flatwound_bass(gain_db=0) keys=sampler/fm_piano
+kit kick=sampler/black_pearl_kick(gain_db=0,pan=0) snare=sampler/black_pearl_snare(gain_db=0,pan=0) rim=sampler/black_pearl_sidestick(gain_db=0,pan=0) fill=sampler/black_pearl_snare_edge(gain_db=0,pan=0) hat=sampler/black_pearl_hat(gain_db=0,pan=0) hat16=sampler/black_pearl_hat(gain_db=0,pan=0) ohat=sampler/black_pearl_hat_open(gain_db=0,pan=0) pedal=sampler/black_pearl_hat_pedal(gain_db=0,pan=0) semi=sampler/black_pearl_hat_semi(gain_db=0,pan=0) tom_high=sampler/black_pearl_tom(gain_db=0,pan=0) tom_low=sampler/black_pearl_floor_tom(gain_db=0,pan=0) tom_edge=sampler/black_pearl_tom_edge(gain_db=0,pan=0) crash=sampler/black_pearl_crash(gain_db=0,pan=0) ride=sampler/black_pearl_ride(gain_db=0,pan=0) bell=sampler/black_pearl_ride_bell(gain_db=0,pan=0) splash=sampler/black_pearl_splash(gain_db=0,pan=0) china=sampler/black_pearl_china(gain_db=0,pan=0)
+chords Dm7 Bbmaj7 Fmaj7 C7
+groove swing=.54/16
+feel snare offset=7
+feel bass hum=2,3,.018 gate=.9
+opening 4 | drums:soul bass:pocket dyn=p<mp
+reply 4 | drums:soul bass:{rel: "R/4. r/8 5/4 R+/8 r/8 | R/4 r/4 5/8 R/8 r/4", oct: -2} keys:{rel: "r/4 [3,7]/4 r/4 [3,7]/8 r/8", oct: 0} dyn=mp
+lift 3 | drums:soul bass:pocket keys:{rel: "[3,7]/2 r/4 [3,7]/4", oct: 0} dyn=mp<mf
+turn 1 | drums:{kick: "X...............", tom_high: "....x.x.........", tom_low: "........x.x.....", tom_edge: "............x.x."} bass:{rel: "R/2 r/2", oct: -2} dyn=mf
+landing 3 | drums:soul bass:{rel: "R/2 r/4 5/8 R/8", oct: -2} keys:{rel: "[3,7]/2 r/2", oct: 0} dyn=mf>mp
+last 1 | drums:{kick: "X...............", snare: "....o..........."} bass:{rel: "R/2. r/4", oct: -2} keys:{rel: "[R,3,5]/2. r/4", oct: 0} chords="Dm7:1" dyn=p
+mix bass 6 sc=0 | drums -7 hall=.035 | keys -2 hall=.12
+master standard lufs=-16 glue=none

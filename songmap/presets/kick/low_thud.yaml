@@ -1,0 +1,12 @@
+instrument: kick
+description: Low dry thud with little high-frequency content.
+tags:
+- electronic
+- kick
+params:
+  tune: 39
+  decay: 0.38
+  click: 0.08
+  click_tone: 1600
+  sweep: 12
+  drive: 1.3

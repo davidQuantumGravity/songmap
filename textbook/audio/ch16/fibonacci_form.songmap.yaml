@@ -9,8 +9,21 @@ key: "C major"
 tuning: 12edo
 seed: 16
 tail_seconds: 3
-instruments: {lead: clean/lead, keys: clean/keys, bass: clean/bass}
-mix: {lead: {gain_db: -2, send: {hall: 0.25}}, keys: {gain_db: -8, send: {hall: 0.25}}, bass: {gain_db: -6}}
+instruments:
+  lead: sampler/grand_piano
+  keys: sampler/grand_piano
+  bass: sampler/double_bass
+mix:
+  lead:
+    gain_db: 7.2
+    send:
+      hall: 0.25
+  keys:
+    gain_db: 3.6
+    send:
+      hall: 0.25
+  bass:
+    gain_db: 5.3
 returns: {hall: {type: reverb, seconds: 2.2, predelay: 0.02, damping: 0.5}}
 sections:
   - name: arc

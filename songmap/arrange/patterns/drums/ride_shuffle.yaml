@@ -1,0 +1,18 @@
+# Triplet shuffle; swap the hat lane for a ride in the kit.
+style: ride_shuffle
+role: drums
+bars: 2
+steps:
+  kick: x.....x..x..|x.....x.....
+  snare: '...X.....X.o|...X...o.X..'
+  hat:
+    steps: x.xx.xx.xx.x
+    vel:
+    - 0.52
+    - 0.24
+    - 0.4
+    - 0.2
+    - 0.54
+    - 0.25
+    - 0.43
+    - 0.2

@@ -12,8 +12,11 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass
+from functools import lru_cache
+from pathlib import Path
 
 import numpy as np
+import yaml
 
 from ...parse.errors import SongError
 
@@ -45,6 +48,40 @@ CATALOG = {
 }
 
 
+@lru_cache(maxsize=1)
+def manifest() -> dict:
+    with open(Path(__file__).with_name("voices.yaml"), encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
+def voice_path(root: str | Path, name: str) -> Path:
+    v = manifest()["voices"][name]
+    return Path(root) / "_packs" / v["source"] / v["program"]
+
+
+def voices() -> list[dict]:
+    """Curated programs, including missing ones so people can discover and install them."""
+    out = []
+    for name, v in manifest()["voices"].items():
+        source = manifest()["sources"][v["source"]]
+        path = next((voice_path(root, name) for root in roots() if voice_path(root, name).is_file()), None)
+        installed = False
+        if path:
+            try:
+                from .sfz import parse
+                installed = all(Path(r.sample).is_file() for r in parse(str(path)).regions)
+            except (SongError, OSError):
+                pass
+        out.append({"name": name, "ref": f"sampler/{name}", "title": v["title"],
+                    "family": v["family"], "category": v.get("category", v["family"]),
+                    "description": v["description"], "range": v["range"],
+                    "license": source["license"], "credit": source["credit"], "url": source["url"],
+                    "revision": source["revision"], "installed": installed,
+                    "install": f"songmap samples install {name}", "params": v.get("params", {}),
+                    "audition_pitch": v.get("audition_pitch", sum(v["range"]) / 2)})
+    return out
+
+
 def roots() -> list[str]:
     env = [p for p in os.environ.get(ENV, "").split(os.pathsep) if p]
     return [os.path.abspath(p) for p in env] + [os.path.abspath("samples"),
@@ -66,6 +103,13 @@ def _stem(p: str) -> str:
 
 def find(name: str) -> str:
     """'salamander' or 'vsco2/Cello Sus' -> path of the .sfz program."""
+    if name in manifest()["voices"]:
+        for root in roots():
+            p = voice_path(root, name)
+            if p.is_file():
+                return str(p)
+        raise SongError(f"sampler/{name}: sample voice is not installed",
+                        suggestion=f"run songmap samples install {name}; or install every voice with songmap samples install")
     known = CATALOG.get(name.partition("/")[0])
     for root in roots():
         p = os.path.join(root, *name.split("/"))
@@ -112,6 +156,15 @@ def library_dir(sfz_path: str) -> str:
 
 
 def license_entry(name: str, sfz_path: str) -> dict:
+    voice = manifest()["voices"].get(name)
+    if voice:
+        source = manifest()["sources"][voice["source"]]
+        base = Path(sfz_path)
+        for _ in Path(voice["program"]).parts:
+            base = base.parent
+        return {"name": f"sampler/{name}", "title": voice["title"], "program": sfz_path,
+                **source, "files": [str(p) for p in base.glob("*") if p.is_file() and
+                                    p.name.lower().startswith(("license", "readme", "copying"))]}
     known = CATALOG.get(name.partition("/")[0])
     d = library_dir(sfz_path)
     files = sorted(f for f in os.listdir(d) if f.lower().startswith(("license", "licence", "readme", "copying")))
@@ -133,6 +186,8 @@ def licenses_md(entries: list[dict]) -> str:
             lines.append(f"- Credit: {e['credit']}")
         if e["url"]:
             lines.append(f"- Source: {e['url']}")
+        if e.get("revision"):
+            lines.append(f"- Source revision: `{e['revision']}`")
         lines.append(f"- Program: `{e['program']}`")
         lines += [f"- See also: `{f}`" for f in e["files"]]
         lines.append("")
@@ -156,11 +211,11 @@ class Samples:
 
     def get(self, path: str, frames: int) -> tuple[np.ndarray, int]:
         have = self._data.get(path)
-        if have and (have[2] or len(have[0]) >= frames):
+        if have and (have[2] or (frames > 0 and len(have[0]) >= frames)):
             return have[0], have[1]
         try:
             with soundfile().SoundFile(path) as f:
-                want = max(frames, 2 * len(have[0]) if have else 0)
+                want = max(frames, 2 * len(have[0]) if have else 0) if frames else 0
                 x = f.read(frames=min(want, f.frames) if want else -1, dtype="float32", always_2d=True)
                 whole = len(x) >= f.frames
                 sr = f.samplerate

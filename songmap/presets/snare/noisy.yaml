@@ -1,0 +1,13 @@
+instrument: snare
+description: Long noise-led electronic accent for half-time grooves.
+tags:
+- electronic
+- snare
+params:
+  tone: 190
+  tone_mix: 0.18
+  noise_decay: 0.42
+  noise_hp: 1200
+  noise_lp: 11000
+  snap: 0.3
+  drive: 1.3

@@ -1,0 +1,48 @@
+# Sideways Sun
+# review: pending - Revision 2 awaiting listening review. Original verdict: bass, chords and comping liked; melodies needed rework; leads too loud and shrill.
+# Pure golden harmony in 36-ET; ordinary and golden-spectrum timbres are both intentional.
+# Broken-beat pocket; C golden7 opens into 35 decatonic, visits vE golden7, and returns with a changed head. Listen for bass answers and the drumless breath.
+# Revision 2: Flute and sampled harp carry compact repeated-note phrases in C4-Ab4; bass, chords and groove retained.
+# Listening draft: rewritten after the original rework verdict; awaiting a new listening review.
+song "Sideways Sun" 108 4/4 "C golden7" fps=30 seed=701 tail=5 tuning=36edo mood=balanced
+inst keys=epiano/still(index=.6) lead=sampler/flute(attack=.025, release_mul=.18) reply=sampler/folk_harp bell=clean/glass(decay=1.3, release=.15) bass=clean/bass(release=.09) pad=pad/still(release=.25)
+kit kick=kick/v0(tune=46, decay=.26, drive=1.15, click=.24) snare=snare/v0(tone=185, noise_decay=.13, snap=.3) hat=hat/v0(decay=.035, metal=.18) ohat=hat/v0_open(decay=.16) rim=clap/v0
+groove swing=.55/16 tpl=laid_back
+
+prog shards "Cg7:1 ^Abg7:1 vFg7:1 vEg:1"
+prog head "Cg7:1 ^Abg7:1 vFg7:1 Cg7:1 C#g7:1 vFg7:1 ^Abg7:1 vEg:1"
+prog answer "Cg7:1 vEg:1 ^Abg7:1 vFg7:1 C#g7:1 ^Abg7:1 vEg:1 Cg7:1"
+prog wide "Cg7:1 Dg7:1 ^Ag7:1 vFg7:1 C#g7:1 vF#g7:1 ^Abg7:1 vEg:1"
+prog side "vEg7:1 ^Abg7:1 Cg7:1 ^Gg:1 vEg7:1 vFg7:1 ^Abg7:1 vEg7:1"
+prog close "vFg7:1 ^Abg7:1 vEg:1 Cg7:1"
+
+head_a = {deg: "=p r/8 2/8_ 2/4 0/4 r/4 | =mp 0/4. 2/8 2/4 r/4 | =p r/4 2/8 3/8 3/4 2/4 | =p 2/2 r/2 | =mp r/8 3/8 3/4 1/4 r/4 | =p 0/4. 2/8 3/4 2/4 | =mp 4/4. 2/8 0/4 r/4 | =p 2/2. r/4", oct: 0}
+head_b = {deg: "=p r/4 2/8 2/8 4/4 2/4 | =mp 2/4. 4/8 2/4 r/4 | =p 0/4 0/8 2/8 4/4 r/4 | =p 3/2 2/4 r/4 | =mp 3/4. 1/8 0/4 r/4 | =p 0/4. 2/8 4/4 2/4 | =mp 2/2 4/4 r/4 | =p 2/4 2/8 0/8 0/2", oct: 0}
+deca_line = {deg: "=p r/8 3/8 3/4 0/4 r/4 | =mp 2/4. 1/8 2/4 r/4 | =p 4/4 4/8 5/8 7/4 4/4 | =p 3/2 0/4 r/4 | =mp 1/4. 2/8 4/4 r/4 | =p 5/4 4/8 5/8 4/4 r/4 | =mp 3/4. 6/8 6/4 3/4 | =p 3/2. r/4", oct: 0}
+side_line = {deg: "=p r/8 0/8 0/4 2/4 r/4 | =mp 2/4. 0/8 0/4 r/4 | =p 0/4 2/8 3/8 2/4 0/4 | =p 2/2 r/2 | =mp 0/4. 2/8 2/4 0/4 | =p 1/4 1/8 0/8 1/4 r/4 | =mp 0/4 2/8 0/8 -2/4 r/4 | =p 0/2. r/4", oct: 0}
+last_head = {deg: "=mp r/8 2/8 2/4 0/8 2/8 r/4 | =p 0/4. 2/8 4/4 2/4 | =mp 3/4 3/8 5/8 5/4 3/4 | =p 2/2 r/2 | =mp 3/4. 1/8 0/4 r/4 | =p 2/4 3/8 2/8 0/4 r/4 | =mp 4/4. 2/8 0/4 2/4 | =p 2/2. r/4", oct: 0}
+last_answer = {deg: "=mp r/4 2/8 2/8 4/4 2/4 | =p 4/4. 2/8 2/4 r/4 | =mp 2/4 4/8 5/8 4/4 2/4 | =p 3/2 r/2 | =mp 3/4 1/8 0/8 0/4 r/4 | =p 0/4. 2/8 2/4 r/4 | =mp 4/4 2/4 2/4 r/4 | =p 2/4 0/4 0/2", oct: 0}
+tail_line = {deg: "=p 3/2 2/4 r/4 | =pp 0/2. 2/8 0/8 | =p 2/2 r/2 | =pp 0/1", oct: 0}
+bass_a = {rel: "=mp R/4.^ r/8 5/8 R/8^ r/8 3/8 | =p R/4^ r/8 R/8^ 5/4 r/4 | =mp R/8^ r/8 3/4 5/8 r/8 R/4^ | =p R/2^ r/8 5/8 R/4^", oct: -2}
+bass_b = {rel: "=mp R/8^ r/8 5/4 r/8 R+/8 3/4 | =p r/8 R/8^ R/4^ 5/4 R/4^ | =mp R/4.^ 3/8 5/8 r/8 R/4^ | =p R/2^ r/2", oct: -2}
+chops = {rel: "=mp r/8 [3,5]/8^' r/4 [R,3,5]/8^' r/8 r/4 | =p [3,5]/4^' r/4 r/8 [R,3]/8^' r/4"}
+ripple = {rel: "=mp R/8^ 5 3+ 5 R+ 3+ r/4 | =p r/4 3/8 5 R+/4 r/4"}
+beat_a = {kick: "X.....x...x.....|X..x......x.....|X.....x..x....x.|X.......x..x....", snare: "....X..o....X...|....X.......X.o.|....X.o.....X...|....X......oX...", hat: {steps: "x.x..x.x.x.x..x.|x..x.x.x..x.x.x.", vel: [.38,.16,.3,.21,.42,.2]}}
+beat_b = {kick: "X..x......x...x.|X.....x..x......|X.......x.x...x.|X..x....x.......", snare: "....X.......X..o|....X..o....X...|....X......oX...|....X.......X.xx", hat: {steps: "x.x.x..x.x..x.x.|x..x.x.x..x.x.x.", vel: [.4,.18,.32,.15,.28]}}
+beat_peak = {kick: "X.....x...x...x.|X..x......x.....|X.....x..x....x.|X...x...x..x....", snare: "....X..o....X...|....X.......X.o.|....X.o.....X...|....X......oX.xx", hat: {steps: "x.x..x.x.x.x..x.", vel: [.45,.18,.32,.21]}, ohat: "..........x....."}
+
+slivers 4 | keys:chops bell:ripple prog=shards dyn=pp<p
+head_one 8 | keys:chops bass:bass_a lead:head_a drums:beat_a prog=head dyn=p<mp
+head_reply 8 | keys:chops bass:bass_b lead:head_b drums:beat_b prog=answer dyn=mp
+streetlights 8 | keys:ripple bass:bass_a reply:head_a drums:beat_b prog=head dyn=mp<mf
+ten_windows 8 | keys:chops bass:bass_b lead:deca_line pad:hold(voices=3, range=[48,65]) drums:beat_a prog=wide key="C golden10_36" dyn=mf
+side_door 8 | keys:ripple bass:bass_b lead:side_line drums:beat_b prog=side key="vE golden7" dyn=mp
+return_call 8 | keys:chops bass:bass_a lead:head_a bell:ripple drums:beat_a prog=head dyn=mp<mf
+return_answer 8 | keys:chops bass:bass_b lead:head_b drums:beat_b prog=answer dyn=mf
+held_breath 8 | keys:hold(voices=3, range=[48,65]) reply:head_b prog=answer dyn=p>pp
+sunburst 8 | keys:ripple bass:bass_a lead:last_head pad:hold(range=[48,65]) drums:beat_peak prog=head dyn=f
+sunburst_reply 8 | keys:chops bass:bass_b lead:last_answer bell:ripple drums:beat_peak prog=answer dyn=mf>mp
+afterimage 4 | keys:hold(voices=3, range=[48,65]) lead:tail_line prog=close dyn=p>pp
+
+mix keys -14 hall=.14 | lead 29 hall=.15 pan=-.08 | reply 5 hall=.18 pan=.2 | bass -5 | bell -15 hall=.2 pan=.25 | pad -28 hall=.2 | drums -8
+master standard lufs=-16 glue=none

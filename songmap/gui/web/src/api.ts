@@ -38,7 +38,8 @@ export type ModuleSpec = { name: string; kind: string; doc: string; audio_in: bo
 export type PatchData = { modules: Record<string, Record<string, number | string>>; wires: string[]; description?: string;
   macros?: Record<string, { default: number; map: Record<string, [number, number]> }> };
 export type Catalog = {
-  instruments: InstrumentSpec[]; presets: Record<string, Preset[]>; samplers: { name: string; title: string; license: string; family: string }[];
+  instruments: InstrumentSpec[]; presets: Record<string, Preset[]>;
+  samplers: { name: string; ref: string; title: string; license: string; family: string; category?: string; description: string; installed: boolean; install: string; range: number[] }[];
   inserts: UnitSpec[]; guides: Record<string, Guide>; modules: ModuleSpec[]; sources: string[]; patch_library: Record<string, PatchData>;
 };
 export type AuditionNote = { t: number; pitch: number; vel: number; gate: number };

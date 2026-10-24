@@ -1,6 +1,6 @@
 """`songmap describe [--compact]`: everything an LLM needs to write a song map, built from the live
 registries (styles, mods, instruments, presets, kit pieces, events), plus the note-language and `.sm`
-cheat sheets. `--compact` stays under ~500 tokens (tests/test_describe.py checks the size)."""
+cheat sheets. The compact form includes the curated sample names (tests/test_describe.py bounds its size)."""
 from __future__ import annotations
 
 NOTES = """notes   c d e f g a b, #/b, +/- octave (c=C4) | deg: 0 1 -3 #4 b7 | [c,e,g] chord | r rest | bars checked
@@ -47,12 +47,19 @@ def catalog(compact: bool = True) -> str:
     lines.append(f"kit     {' '.join(dict.fromkeys(pieces))}")
     presets = list_presets()
     lines.append("inst    " + " ".join(n + (f"/{','.join(presets[n])}" if n in presets else "") for n in REGISTRY))
+    from .instruments.sampler.library import manifest, voices
+    lines.append("sfz     " + " ".join(f"sampler/{name}" for name in manifest()["voices"]))
+    lines.append("        install/status: songmap samples install | songmap samples list")
     lines.append(f"events  {' '.join(RENDERED)}; cue-only until P3/P4: "
                  + " ".join(t for t in EVENT_TYPES if t not in RENDERED))
     lines.append("roles   drums bass pad arp lead fx; any other role plays the instrument of its name (inst to set)")
     lines += NOTES.splitlines() + SM.splitlines()
     if not compact:
         lines += ["", "instrument params (defaults):"] + ["  " + x for x in describe().splitlines()]
+        lines += ["", "sampled instruments (exact float pitch; recorded vibrato remains in the samples):"]
+        lines += [f"  {v['ref']} ({v['family']}, {'installed' if v['installed'] else 'not installed'}): "
+                  f"{v['description']} Range MIDI {v['range'][0]}..{v['range'][1]}; {v['license']}."
+                  for v in voices()]
     return "\n".join(lines) + "\n"
 
 

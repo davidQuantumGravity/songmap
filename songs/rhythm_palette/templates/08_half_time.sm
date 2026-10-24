@@ -1,0 +1,17 @@
+# Half-time room: editable sixteen-bar arrangement, with an opening, reply, lift and landing.
+# Listen for accents, ghost pickups, a bass rest before the reply, and a change of orchestration.
+song "Template: Half-time room" 120 4/4 Dm fps=30 seed=187 tail=3 mood=balanced
+inst bass=sampler/bass_vi_roundwound(gain_db=0) keys=sampler/fm_piano
+kit kick=sampler/red_zeppelin_kick(gain_db=0,pan=0) snare=sampler/red_zeppelin_snare(gain_db=0,pan=0) rim=sampler/red_zeppelin_sidestick(gain_db=0,pan=0) fill=sampler/red_zeppelin_snare_edge(gain_db=0,pan=0) hat=sampler/red_zeppelin_hat(gain_db=0,pan=0) hat16=sampler/red_zeppelin_hat(gain_db=0,pan=0) ohat=sampler/red_zeppelin_hat_open(gain_db=0,pan=0) pedal=sampler/red_zeppelin_hat_pedal(gain_db=0,pan=0) semi=sampler/red_zeppelin_hat_semi(gain_db=0,pan=0) tom_high=sampler/red_zeppelin_tom(gain_db=0,pan=0) tom_low=sampler/red_zeppelin_floor_tom(gain_db=0,pan=0) tom_edge=sampler/red_zeppelin_tom_edge(gain_db=0,pan=0) crash=sampler/red_zeppelin_crash(gain_db=0,pan=0) ride=sampler/red_zeppelin_ride(gain_db=0,pan=0) bell=sampler/red_zeppelin_ride_bell(gain_db=0,pan=0) splash=sampler/red_zeppelin_splash(gain_db=0,pan=0) china=sampler/red_zeppelin_china(gain_db=0,pan=0)
+chords Dm Bb F C
+groove swing=.54/16
+feel snare offset=7
+feel bass hum=2,3,.018 gate=.9
+opening 4 | drums:half_time bass:half_time dyn=p<mp
+reply 4 | drums:half_time bass:{rel: "R/4. r/8 5/4 R+/8 r/8 | R/4 r/4 5/8 R/8 r/4", oct: -2} keys:{rel: "r/4 [3,7]/4 r/4 [3,7]/8 r/8", oct: 0} dyn=mp
+lift 3 | drums:half_time bass:half_time keys:{rel: "[3,7]/2 r/4 [3,7]/4", oct: 0} dyn=mp<mf
+turn 1 | drums:{kick: "X...............", tom_high: "....x.x.........", tom_low: "........x.x.....", tom_edge: "............x.x."} bass:{rel: "R/2 r/2", oct: -2} dyn=mf
+landing 3 | drums:half_time bass:{rel: "R/2 r/4 5/8 R/8", oct: -2} keys:{rel: "[3,7]/2 r/2", oct: 0} dyn=mf>mp
+last 1 | drums:{kick: "X...............", snare: "....o..........."} bass:{rel: "R/2. r/4", oct: -2} keys:{rel: "[R,3,5]/2. r/4", oct: 0} chords="Dm7:1" dyn=p
+mix bass -5 sc=0 | drums -7 hall=.035 | keys -2 hall=.12
+master standard lufs=-16 glue=none

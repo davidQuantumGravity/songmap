@@ -1,0 +1,20 @@
+# What this song's video shows (songmap/visual/view.py). Edited in SongMap Studio's video designer.
+theme: dark
+color_by: part
+part_colors: {lead: '#e9bb61', keys: '#79b7d8', arp: '#73d5bf', gtr: '#d3a2cc', harp: '#73d5bf',
+  bell: '#d3a2cc', bass: '#a1c58e', low: '#a1c58e', pad: '#b2a0d2'}
+layers:
+- type: header
+  box: [0.02, 0.025, 0.96, 0.095]
+- type: instrument
+  box: [0.02, 0.16, 0.47, 0.7]
+  parts: [lead]
+  label: 'Defining note: E-flat then ^D'
+  mode: active
+- type: instrument
+  box: [0.51, 0.16, 0.47, 0.7]
+  parts: [low]
+  label: Shared F reference
+  mode: active
+- type: sections
+  box: [0.02, 0.92, 0.96, 0.05]

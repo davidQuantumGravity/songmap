@@ -7,8 +7,18 @@ key: "C major"
 tuning: 12edo
 seed: 22
 tail_seconds: 3
-instruments: {lead: keys/still, drone: clean/organ}
-mix: {lead: {gain_db: -3, send: {hall: 0.3}}, drone: {gain_db: -10, send: {hall: 0.3}}}
+instruments:
+  lead: sampler/grand_piano
+  drone: clean/organ
+mix:
+  lead:
+    gain_db: 3.2
+    send:
+      hall: 0.3
+  drone:
+    gain_db: -10
+    send:
+      hall: 0.3
 sections:
   - {name: a, bars: 4, parts: {lead: {notes: "=mp f#4 g#8 a# c#+4 a#8 g# | f#4 d#8 f# g#2 | a#4 c#+8 d#+ c#+4 a#8 g# | f#1"}, drone: {notes: "[f#--,c#-]1"}}}
 master: clean

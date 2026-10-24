@@ -10,13 +10,23 @@ key: "C major"
 tuning: 36edo
 seed: 346
 tail_seconds: 4
-instruments: {organ: clean/organ, low: clean/bass, keys: clean/keys}
+instruments:
+  organ: sampler/grand_piano
+  low: sampler/double_bass
+  keys: sampler/grand_piano
 motifs:
   pairs: {notes: "c+1 c+2 bb4 ^bb ^f# vg veb eb b ^b ^g vab ve e c+ ^c+ ^ab va vf f c#+ ^c#+ ^a vbb vf# f# d+2 ^d+ ^g ^e ^c+1.", octave: 4}
 mix:
-  organ: {gain_db: -8, send: {hall: 0.25}}
-  low: {gain_db: -7}
-  keys: {gain_db: -4, send: {hall: 0.2}}
+  organ:
+    gain_db: 14.1
+    send:
+      hall: 0.25
+  low:
+    gain_db: 11.4
+  keys:
+    gain_db: 8.4
+    send:
+      hall: 0.2
 sections:
   - {name: pump, bars: 11, harmony: "C:1 Cg:0.5 ^Abg:0.5 vFg:0.5 C#g:0.5 ^Ag:0.5 vF#g:0.5 Dg:0.5 ^Bbg:0.5 vGg:0.5 Ebg:0.5 ^Bg:0.5 vAbg:0.5 Eg:0.5 ^Cg:1 ^C:2.5", parts: {organ: hold, low: {style: roots, role: bass}, keys: {motifs: [pairs]}}}
 master: clean

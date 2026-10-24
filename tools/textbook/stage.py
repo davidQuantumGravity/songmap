@@ -1,6 +1,6 @@
 """Copy the built textbook site into a web project for deployment (no PDF, no print intermediates).
 
-    python tools/textbook/stage.py "C:/Users/chest/Documents/Business/Deeper Research/website/landing/public/music_theory_of_golden_harmony"
+    python tools/textbook/stage.py "path/to/site/public/music_theory_of_golden_harmony"
 
 The destination becomes a mirror of textbook_site/: changed files are copied, files that no longer exist in the
 site are removed (only inside the destination folder), unchanged files are left alone. Every link in the site is

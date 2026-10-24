@@ -1,0 +1,23 @@
+songmap: 0.2
+title: "The defining note: 53 and 5|4"
+tempo: 80
+meter: "4/4"
+key: "F golden10_63"
+tuning: "36edo"
+fps: 30
+seed: 751
+tail_seconds: 2
+
+instruments:
+  lead: clean/sine
+  low: clean/sine
+
+sections:
+  - {name: first, bars: 2, parts: {lead: {notes: "=mp eb+1 | eb+1"}, low: {notes: "=p f-1 | f-1"}}, harmony: "N.C.:2"}
+  - {name: second, bars: 2, parts: {lead: {notes: "=mp ^d+1 | ^d+1"}, low: {notes: "=p f-1 | f-1"}}, harmony: "N.C.:2", key: "F golden10_54"}
+
+mix:
+  lead: {gain_db: -8}
+  low: {gain_db: -14}
+
+master: clean

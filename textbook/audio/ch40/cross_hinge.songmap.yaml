@@ -8,12 +8,26 @@ key: "C major"
 tuning: 36edo
 seed: 40
 tail_seconds: 3
-instruments: {lead: clean/lead, pluck: string_pluck/still, pad: clean/organ, low: clean/bass}
+instruments:
+  lead: sampler/grand_piano
+  pluck: sampler/folk_harp
+  pad: sampler/grand_piano
+  low: sampler/double_bass
 mix:
-  lead: {gain_db: -6, send: {hall: 0.25}}
-  pluck: {gain_db: -3, send: {hall: 0.25}}
-  pad: {gain_db: -12, send: {hall: 0.25}}
-  low: {gain_db: -10}
+  lead:
+    gain_db: 5.5
+    send:
+      hall: 0.25
+  pluck:
+    gain_db: 3.5
+    send:
+      hall: 0.25
+  pad:
+    gain_db: 9.8
+    send:
+      hall: 0.25
+  low:
+    gain_db: 10.3
 sections:
   - {name: call1, bars: 2, harmony: "C:1 G:0.5 C:0.5", parts: {lead: {notes: "e4 g8 f8 e4 d4 | d4 b-4 c2"}, pad: hold, low: {style: roots, role: bass}}}
   - {name: answer1, bars: 2, harmony: "Cg:1 vEg:0.5 Cg:0.5", parts: {pluck: {notes: "ve4 ^g8 vf8 ve4 c#4 | c#4 b-4 c2"}, pad: hold, low: {style: roots, role: bass}}}

@@ -1,0 +1,18 @@
+{
+  "song": "04_two_windows",
+  "musical_revision": 2,
+  "visual_revision": 3,
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "crf": 18,
+  "score_sha256": "de78c416007f0d69a00126fd7aef2172d9da8f97eaa5654d7a7173a165ffb18a",
+  "wav_sha256": "df37691984ecc823e571736f46a47cc1dddd5eee2c32e407072374a28b52c268",
+  "source_sha256": "a250fed077b8d09931c848aea218b95bce42e3c4ff8426afac9f6cdf412a3d65",
+  "view_sha256": "17d8f8efb19b5c6a15c1dc94621e0d3806e6b88c74de451ee7c84fbd49dfb65d",
+  "video_sha256": "94bd6fa52277a942e12a1a40376ab00fa738b562fc9820a1790d659e67bca718",
+  "poster_sha256": "9dfdc47112ba68ffe31da3f73cf59b0bb1607fe82a3538bca4920edf38f9a882",
+  "audio_reused_without_changes": true
+}

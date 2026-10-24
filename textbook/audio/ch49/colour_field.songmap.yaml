@@ -17,12 +17,47 @@ tail_seconds: 4
 
 mood: techno
 instruments:
-  keys: {use: keys/still, hardness: 0.45}
-  organ: {use: clean/organ, partials: 6, rolloff: 1.5, attack: 0.004, release: 0.1}
-  bass: {use: bass/v0, cutoff: 520, drive: 1.8, env_amt: 1.4, sub: 0.6}
-  pad: {voices: 3, detune: 3, drift: 0, cutoff: 1500, attack: 0.5, release: 1.2}
+  keys: sampler/grand_piano
+  organ:
+    use: clean/organ
+    partials: 6
+    rolloff: 1.5
+    attack: 0.004
+    release: 0.1
+  bass:
+    use: bass/v0
+    cutoff: 520
+    drive: 1.8
+    env_amt: 1.4
+    sub: 0.6
+  pad:
+    voices: 3
+    detune: 3
+    drift: 0
+    cutoff: 1500
+    attack: 0.5
+    release: 1.2
   bell: clean/glass
-  drums: {kit: {kick: {use: kick/v0, tune: 50, sweep: 28, decay: 0.42, click: 0.25, drive: 1.8}, clap: clap/v0, hat: hat/v0, ohat: hat/v0_open, rim: {use: kick/v0, tune: 88, sweep: 8, sweep_time: 0.04, decay: 0.45, click: 0.18, drive: 1.2}}}
+  drums:
+    kit:
+      kick:
+        use: kick/v0
+        tune: 50
+        sweep: 28
+        decay: 0.42
+        click: 0.25
+        drive: 1.8
+      clap: clap/v0
+      hat: hat/v0
+      ohat: hat/v0_open
+      rim:
+        use: kick/v0
+        tune: 88
+        sweep: 8
+        sweep_time: 0.04
+        decay: 0.45
+        click: 0.18
+        drive: 1.2
 
 groove:
   swing: 0.54
@@ -44,13 +79,42 @@ events:
   - {at: peak-1, type: drop, bars: 1, keep: [pad, keys]}
   - {at: peak, type: impact}
 mix:
-  keys: {gain_db: 1, send: {hall: 0.2}}
-  organ: {gain_db: -12, sidechain: {from: kick, depth: 0.3}, send: {hall: 0.15}}
-  bass: {gain_db: -3, sidechain: {from: kick, depth: 0.45, release: 0.214, attack: 0.0005}}
-  pad: {gain_db: -5, sidechain: {from: kick, depth: 0.6, release: 0.214, attack: 0.0005}, send: {hall: 0.25}}
-  bell: {gain_db: -11, send: {hall: 0.4}, pan: 0.2}
-  drums: {gain_db: -6}
-  fx: {gain_db: -8}
+  keys:
+    gain_db: 5.4
+    send:
+      hall: 0.2
+  organ:
+    gain_db: -12
+    sidechain:
+      from: kick
+      depth: 0.3
+    send:
+      hall: 0.15
+  bass:
+    gain_db: -3
+    sidechain:
+      from: kick
+      depth: 0.45
+      release: 0.214
+      attack: 0.0005
+  pad:
+    gain_db: -5
+    sidechain:
+      from: kick
+      depth: 0.6
+      release: 0.214
+      attack: 0.0005
+    send:
+      hall: 0.25
+  bell:
+    gain_db: -11
+    send:
+      hall: 0.4
+    pan: 0.2
+  drums:
+    gain_db: -6
+  fx:
+    gain_db: -8
 
 master:
   glue: none

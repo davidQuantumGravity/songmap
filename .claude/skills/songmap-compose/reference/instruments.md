@@ -21,6 +21,12 @@ Instrument names only appear in `inst` lines. A part always names its role, e.g.
 
 ## Combinations that work
 
+The free recorded palette is available as `sampler/grand_piano`, `sampler/fm_piano`, `sampler/folk_harp`,
+`sampler/marimba`, `sampler/vibraphone`, `sampler/kalimba`, `sampler/double_bass`, `sampler/cello`, `sampler/violins`,
+`sampler/solo_violin`, `sampler/flute` and `sampler/horn`, plus short string articulations and acoustic kit pieces.
+Check `songmap samples list` for installation and `songmap describe` for ranges. Voices with recorded vibrato retain it.
+For example, `inst lead=sampler/flute keys=sampler/grand_piano` sets the instruments; section parts still name the roles.
+
 | Mood | Palette |
 |---|---|
 | warm explainer | keys melody, gtr ripples, pad:warm, pocket drums, rel bass |
@@ -57,3 +63,19 @@ There are no field recordings. Suggest the world with musical gestures, kept qui
   - `qa.json`: `stems` holds per-part LUFS over the whole song (a part that plays less reads lower), and `sections` holds the contrast.
   - **Melody.** A featured melody belongs within a few dB of the loudest accompaniment: `mix keys 0` to `2` for a piano tune, `mix lead 9` to lift the lead further.
   - **Soft pieces.** For a soft or reflective piece, go further: `mix drums -9`.
+
+## Expanded bass and drum palette
+
+See [the palette guide](../../../../docs/BASS_DRUM_PALETTE.md) and `songs/rhythm_palette/`.
+Choose among eight recorded electric basses, four acoustic bass voices (two plucked, two bowed),
+eight synth bass presets, four AVL kit setups, a studio alternate-take hybrid, and hand percussion.
+Studio groups individual sampled pieces by drum type; `songmap describe` lists every valid name.
+Copy a complete kit line from an example before mixing pieces from several kits.
+
+Recordings need idiomatic gates and rests. Electric basses have dynamic layers and alternate takes but no
+connected slide/hammer-on engine. The AVL kits have five dynamic layers and center/edge/hat articulations,
+without recorded round robins; VCSL studio snares and toms add real alternate takes. Several kits share cymbals.
+Use sampled open/pedal hats together so their choke groups work; stop hats during two-hand tom fills.
+Set `mix bass -3 sc=0` as a starting point for acoustic/electric recorded bass, then rebalance from stems.
+New drum patterns: `pocket dry_funk soul ride_shuffle light_rods half_time broken_beat dub_space`.
+New bass patterns: `pocket syncopated half_time dub`. Develop their phrases every four or eight bars.

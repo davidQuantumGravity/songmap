@@ -1,0 +1,12 @@
+instrument: snare
+description: Short shell-led electronic rim accent; not a recorded sidestick.
+tags:
+- electronic
+- snare
+params:
+  tone: 300
+  tone_decay: 0.035
+  tone_mix: 0.88
+  noise_decay: 0.045
+  snap: 0.55
+  drive: 1.1

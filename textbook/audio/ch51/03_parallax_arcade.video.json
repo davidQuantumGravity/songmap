@@ -1,0 +1,18 @@
+{
+  "song": "03_parallax_arcade",
+  "musical_revision": 2,
+  "visual_revision": 3,
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "crf": 18,
+  "score_sha256": "c14969351c670323b882925a1ef4b921038f01bf8eb80c87947773e867423647",
+  "wav_sha256": "41c9e04f836b844dbc00ea4f7c62fc21c56f8ee684d1031e6fd565dc6862f5e3",
+  "source_sha256": "3ae9e17e929b9130fcbb83380562cd8510a505de51528f9ef50d42f74de0512c",
+  "view_sha256": "bbd906c91709dc5992779c25208b9232888b0990012f6a1c199a5d58279585ce",
+  "video_sha256": "59ffe01f550835a0036e0cfa54e7a10d3e5a0d6bfc76838ffc18ee6a105f3fa1",
+  "poster_sha256": "309266a0794ddfc87d760bc3578ee97d7d0814267e6549cda4db0ec85dace682",
+  "audio_reused_without_changes": true
+}

@@ -8,10 +8,16 @@ key: "C major"
 tuning: 36edo
 seed: 1
 tail_seconds: 2.5
-instruments: {organ: clean/organ, low: clean/bass}
+instruments:
+  organ: sampler/grand_piano
+  low: clean/bass
 motifs:
   bassline: {notes: "=mf g--1 | g--1 | c-1 | c-1 | r1 | g--1 | g--1 | c-1 | c-1"}
-mix: {organ: {gain_db: -6}, low: {gain_db: -5}}
+mix:
+  organ:
+    gain_db: 16.5
+  low:
+    gain_db: -5
 sections:
   - {name: cad, bars: 9, harmony: "G:1 ~:1 C:2 N.C.:1 G:1 ~:0.5 ~:0.5 C:2",
      parts: {organ: {style: hold, voices: 3, range: [55, 77]}, low: {motifs: [bassline]}}}

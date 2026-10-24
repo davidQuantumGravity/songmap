@@ -1,0 +1,14 @@
+# Sparse kick, rim-friendly backbeat and space for long bass notes.
+style: dub_space
+role: drums
+bars: 2
+steps:
+  kick: X...............|X.........x.....
+  snare: '....x.......x...'
+  hat:
+    steps: x...x...x...x...
+    vel:
+    - 0.44
+    - 0.27
+    - 0.37
+    - 0.25

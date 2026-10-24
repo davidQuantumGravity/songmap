@@ -1,0 +1,46 @@
+# Cinematic build (1:40). Dark, tense electronic: a pulse that grows over three waves, a full drop,
+# a held-breath caveat, and a bigger final drop. Written with definitions and a form block.
+# Shows: a loop whose index changes the dynamics and the hat density (euclid), a riser timed into
+# each drop, per-bar edits (a fill every 4 bars, the lead resting in the last bar), a minor
+# progression with a borrowed major IV, and named events.
+song "Example: Rising Signal" 120 4/4 Em fps=30 seed=23 tail=4
+inst bass(cutoff=520) keys=sampler/grand_piano
+chords Em C G D /2
+mix keys 7.2
+
+# deg 0 = E. A falling 2-bar call, built from chord tones on the strong beats.
+signal = {deg: "=mf 4/8 4 3/4 2/8 0 2/4 | 0/2. r/4", oct: 1}
+
+dim = dark(order=[0, 2, 4, 2])
+lit = up(order=[0, 2, 4, 2, 1, 3, 2, 4], oct=-1)   # an octave down: room for the lead
+lift = !riser:2 !impact(size=xl)
+
+intro = {pad: dark, arp: dim}
+wave = intro with {drums: half_kick, bass: sub}
+drop = {drums: full, bass: eighths, arp: lit, pad: warm(oct=-1), lead: signal, dyn: "mp<mf"}
+held = {pad: dark, keys: {rel: "[R,5,9]/1"}}
+
+form:
+  intro 4:
+    dyn = "pp<p"
+  for i in 1..3:
+    wave 4:
+      dyn = ["pp<p", "p<mp", "mp<mf"][i - 1]
+      drums.hat = euclid(i + 3, 16)
+      if i == last: !riser:1@+3
+  drop 8 !impact
+  drop 8 as drop_b:
+    dyn = "mf>mp"
+    every 4 bars: drums.snare += "............xxxx"
+    bar -1: lead = none
+  held 4 !stop:2b@-1:3:
+    chords = "C:2 Am:1 B7:1"
+    dyn = "pp"
+  drop 8 as finale !lift:
+    chords = "Em:2 C:2 G:2 A:2"
+    dyn = "f<ff"
+    drums += {hat16: "..x...x...x...x.", ohat: "..x...x...x...x."}
+  intro 4 as coda:
+    chords = "C:2 Em:2"
+    dyn = "mp>pp"
+    !impact(size=s)

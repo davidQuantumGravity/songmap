@@ -8,8 +8,18 @@ key: "C major"
 tuning: 12edo
 seed: 22
 tail_seconds: 3
-instruments: {hi: clean/keys, lo: clean/keys}
-mix: {hi: {gain_db: -5, send: {hall: 0.2}}, lo: {gain_db: -5, send: {hall: 0.2}}}
+instruments:
+  hi: sampler/grand_piano
+  lo: sampler/grand_piano
+mix:
+  hi:
+    gain_db: 9.1
+    send:
+      hall: 0.2
+  lo:
+    gain_db: 10.2
+    send:
+      hall: 0.2
 sections:
   - {name: together, bars: 2, parts: {hi: {notes: "c8 e g c+ g e c e"}, lo: {notes: "f#-8 a#- c# f# c# a#- f#- a#-"}}}
   - {name: octatonic, bars: 2, parts: {hi: {notes: "c8 c# d# e f# g a a# | c+2"}}}

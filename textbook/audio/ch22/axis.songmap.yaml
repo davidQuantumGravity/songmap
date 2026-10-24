@@ -8,8 +8,13 @@ key: "C major"
 tuning: 12edo
 seed: 22
 tail_seconds: 3
-instruments: {organ: clean/organ}
-mix: {organ: {gain_db: -5, send: {hall: 0.25}}}
+instruments:
+  organ: sampler/grand_piano
+mix:
+  organ:
+    gain_db: 14.4
+    send:
+      hall: 0.25
 sections:
   - {name: tonic_axis, bars: 2, parts: {organ: {notes: "[c-,g-,e,c+]2 [a--,e-,c#,a]2 | [f#--,c#-,a#-,f#]2 [eb-,bb-,g,eb+]2"}}}
   - {name: cadences, bars: 4, parts: {organ: {notes: "[g--,f,g,b]2 [c-,e,g,c+]2 | [c#-,f,g#,b]2 [c-,e,g,c+]2 | [bb--,f,ab,d+]2 [c-,e,g,c+]2 | [e--,d,g#,b]2 [c-,e,g,c+]2"}}}

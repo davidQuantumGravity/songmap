@@ -1,6 +1,8 @@
 build/
 out/
 *.wav
+*.mp3
+*.mp4
 !tests/golden/*.wav
 __pycache__/
 .venv/
@@ -19,6 +21,11 @@ golden_audio/
 
 # agents' scratch work (never commit)
 scratchpad/
+.songmap/
+.claude/worktrees/
+.env
+.env.*
+!.env.example
 
 # built textbook site (rebuild: python tools/textbook/build.py)
 textbook_site/

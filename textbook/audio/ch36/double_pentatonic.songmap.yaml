@@ -9,10 +9,14 @@ key: "C major"
 tuning: 36edo
 seed: 36
 tail_seconds: 3
-instruments: {keys: clean/keys, pluck: string_pluck/still}
+instruments:
+  keys: sampler/grand_piano
+  pluck: sampler/folk_harp
 mix:
-  keys: {gain_db: -4}
-  pluck: {gain_db: -4}
+  keys:
+    gain_db: 9.6
+  pluck:
+    gain_db: 2.8
 sections:
   - {name: pentA, bars: 2, harmony: "N.C.:2", parts: {keys: {notes: "c8 d8 vf8 ^g8 ^a8 c+8 ^a8 ^g8 | vf8 d8 c2."}}}
   - {name: pentB, bars: 2, harmony: "N.C.:2", parts: {pluck: {notes: "c#8 ve8 vf#8 ^ab8 b8 c#+8 b8 ^ab8 | vf#8 ve8 c#2."}}}

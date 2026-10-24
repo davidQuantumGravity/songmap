@@ -1,0 +1,10 @@
+instrument: hat
+description: Ringing metallic open electronic hat.
+tags:
+- electronic
+- hat
+params:
+  decay: 0.5
+  metal: 0.95
+  hp: 5500
+  color: 9000

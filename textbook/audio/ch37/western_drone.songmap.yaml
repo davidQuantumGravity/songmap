@@ -11,10 +11,20 @@ key: "C major"
 tuning: 36edo
 seed: 373
 tail_seconds: 3
-instruments: {organ: clean/organ, drone: clean/organ}
+instruments:
+  organ: sampler/grand_piano
+  drone: clean/organ
 mix:
-  organ: {gain_db: -6, pan: 0.2, send: {hall: 0.2}}
-  drone: {gain_db: -9, pan: -0.2, send: {hall: 0.2}}
+  organ:
+    gain_db: 16.8
+    pan: 0.2
+    send:
+      hall: 0.2
+  drone:
+    gain_db: -9
+    pan: -0.2
+    send:
+      hall: 0.2
 sections:
   - name: over_c
     bars: 5

@@ -9,10 +9,20 @@ key: "D dorian"
 tuning: 12edo
 seed: 15
 tail_seconds: 2.5
-instruments: {cf: clean/organ, cp: clean/organ}
+instruments:
+  cf: sampler/grand_piano
+  cp: sampler/grand_piano
 mix:
-  cf: {gain_db: -5, pan: -0.3, send: {hall: 0.25}}
-  cp: {gain_db: -5, pan: 0.3, send: {hall: 0.25}}
+  cf:
+    gain_db: 14.6
+    pan: -0.3
+    send:
+      hall: 0.25
+  cp:
+    gain_db: 13.0
+    pan: 0.3
+    send:
+      hall: 0.25
 returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
 sections:
   - name: cantus

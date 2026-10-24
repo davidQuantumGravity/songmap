@@ -10,11 +10,17 @@ key: "C major"
 tuning: 36edo
 seed: 72
 tail_seconds: 2
-instruments: {keys: clean/keys, pad: clean/organ}
+instruments:
+  keys: sampler/grand_piano
+  pad: sampler/grand_piano
 motifs:
   onC: {notes: "c8 c# d veb ve vf vf# ^f# | ^g ^ab ^a bb b c+4.", octave: 4}
   onE: {notes: "c8 c# vd veb ve vf vf# ^f# | ^g ^ab ^a bb b c+4.", octave: 4}
-mix: {keys: {gain_db: -3}, pad: {gain_db: -8}}
+mix:
+  keys:
+    gain_db: 10.1
+  pad:
+    gain_db: 14.9
 sections:
   - {name: c, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [onC]}}}
   - {name: e, bars: 2, harmony: "N.C.:2", parts: {keys: {motifs: [onE]}}}

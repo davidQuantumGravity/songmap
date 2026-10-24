@@ -1,0 +1,18 @@
+{
+ "title": "Pocket Algebra",
+ "facts": {
+  "bars": 96.0,
+  "seconds": 209.7,
+  "sections": 12,
+  "parts": 5,
+  "impacts": 0,
+  "melody notes checked against chords": 279,
+  "lufs": -16.64
+ },
+ "counts": {
+  "problem": 0,
+  "warning": 0,
+  "note": 0
+ },
+ "findings": []
+}

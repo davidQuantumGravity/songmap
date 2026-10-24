@@ -1,0 +1,42 @@
+# SFZ edition of songs/golden_house/01_colour_field.sm. Original score and renders preserved.
+# Instrumentation and faders revised; written notes, tuning, form, timing and binaural settings retained.
+# Listening candidate: automated measurements are not a human listening verdict.
+# 1. Colour Field. Golden House, song 1 of 5 (textbook Chapter 49). Deep house in A minor, 122 BPM, lightly swung.
+# Golden technique: colour chords by projection (Chapter 38). The four-bar loop is Am7 - Dm9 - Fmaj7 - E7, and on
+# beat 3 of bars 3 and 4 the chord bends into its golden projection: Fmaj7 -> Fg7 (A sinks to vA, C rises to ^C, F
+# and E stay) and E7 -> Eg (the dominant's third sinks, its fifth rises). The organ stabs strike on beat 3, so the
+# bend is heard; the piano hook holds E, the one note both chords keep. The breakdown bends Am into vAg, and the
+# song ends on the golden Picardy third: Am - Am(^3) - Ag - A, the third climbing C - ^C - vC# - C#.
+# Form (72 bars): intro 8, groove 16, riff 16 (the hook replaces the stabs), breakdown 8, peak 16 (both), turn 4, home 4.
+song "Colour Field" 122 4/4 Am fps=30 seed=61 tail=4 tuning=36edo mood=techno
+groove swing=.54/16
+inst keys=sampler/grand_piano organ=clean/organ(partials=6, rolloff=1.5, attack=.004, release=.1) bass=bass/v0(cutoff=520, drive=1.8, env_amt=1.4, sub=.6) pad(voices=3, detune=3, drift=0, cutoff=1500, attack=.5, release=1.2) bell=clean/glass
+kit kick=kick/v0(tune=50, sweep=28, decay=.42, click=.25, drive=1.8) clap=clap/v0 hat=hat/v0 ohat=hat/v0_open rim=kick/v0(tune=88, sweep=8, sweep_time=.04, decay=.45, click=.18, drive=1.2)
+
+prog loop    "Am7:1 Dm9:1 Fmaj7:0.5 Fg7:0.5 E7:0.5 Eg:0.5"
+prog lift    "Fmaj7:1 G:1 Em7:1 Am7:0.5 vAg:0.5"
+prog picardy "Fmaj7:1 E7:1 Am:0.5 Am(^3):0.5 Ag:0.5 A:0.5"
+
+# the hook (A minor, 0 = A): one rhythm per bar; over each golden bend it holds E, the tone both chords keep
+hook_text = "=mf r/8 4/8^ r/16 (4/16) r/8 6/8. 4/16 r/4 | r/8 5/8^ r/16 (5/16) r/8 4/8. 3/16 r/4 | r/8 2/8^ r/16 (2/16) r/8 4/2 | r/8 1/8^ r/16 (1/16) r/8 4/2"
+hook = {deg: hook_text, oct: 1}
+slow_hook = {deg: "=p 4/2 2/2 | 1/2. 3/4 | 4/2 6/2 | 4/1 | =mp 4/2^ 2/2 | 1/2. 3/4 | 4/2 6/2 | 4/1", oct: 1}
+home_tune = {deg: "=mp 2/2. 0/4 | 1/1 | 0/1 | 0/1", oct: 1}
+stabs = {rel: "r/8 [3,5,7]/8'^ r/4 [3,5,7]/4 r/8 ([3,5,7]/8')", oct: 1}
+bassline = {rel: "R/8^ r/8 R/8 R+/16 (R/16) r/8 R/8^ 5/8 R/8", oct: -2}
+bells = {deg: "=p r/1 | r/1 | r/2 4/2 | 4/1", oct: 2}
+
+intro_beat = {kick: "X...X...X...X...", hat: {steps: "..x...x...x...x.", vel: [0.4, 0.32, 0.42, 0.3]}, rim: {steps: "......x.....x..x|...x......x.....", vel: [0.3, 0.22]}}
+beat = intro_beat + {clap: "....X.......X..."}
+peak_beat = beat with {ohat: {steps: "..x...x...x...x.", vel: [0.45, 0.38]}, hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.35, 0.22, 0.42, 0.22]}}
+
+intro      8 | drums:intro_beat pad:hold(range=[45,62]) prog=loop dyn=p<mp
+groove    16 | drums:beat(gain_db=-2.5) pad:hold(range=[45,62]) bass:bassline organ:stabs prog=loop dyn=p<mp
+riff      16 | like=groove keys:hook -organ pad:hold(range=[45,62]):dyn=mp>p dyn=mp
+breakdown  8 | pad:hold(range=[45,62]) keys:slow_hook bell:bells prog=lift dyn=p | !riser:2@+8
+peak      16 | drums:peak_beat pad:hold(range=[45,62]):dyn=mp>p bass:bassline organ:stabs keys:hook bell:bells prog=loop dyn=f | !drop:1@-1(keep=[pad, keys]) !impact
+turn       4 | drums:intro_beat(gain_db=-3) pad:hold(range=[45,62]) bass:bassline organ:stabs prog=loop dyn=mp>p
+home       4 | drums:intro_beat pad:hold(range=[45,62]) bass:bassline organ:stabs keys:home_tune prog=picardy dyn=mp>p
+
+mix keys 5.4 hall=.2 | organ -12 sc=.3 hall=.15 | bass -3 sc=.45 | pad -5 sc=.6 hall=.25 | bell -11 hall=.4 pan=.2 | drums -6 | fx -8
+master standard lufs=-14 glue=none

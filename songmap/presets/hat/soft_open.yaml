@@ -1,0 +1,10 @@
+instrument: hat
+description: Soft noise-led open hat; closed hits choke its tail.
+tags:
+- electronic
+- hat
+params:
+  decay: 0.36
+  metal: 0.25
+  hp: 6500
+  color: 11000

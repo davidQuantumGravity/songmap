@@ -10,8 +10,17 @@ key: "C major"
 tuning: 12edo
 seed: 5
 tail_seconds: 3
-instruments: {organ: clean/organ, lead: clean/lead, low: clean/bass}
-mix: {organ: {gain_db: -9}, lead: {gain_db: -5}, low: {gain_db: -8}}
+instruments:
+  organ: sampler/grand_piano
+  lead: sampler/flute
+  low: sampler/double_bass
+mix:
+  organ:
+    gain_db: 10.1
+  lead:
+    gain_db: 7.4
+  low:
+    gain_db: 9.9
 sections:
   - {name: cmaj, bars: 2, key: "C major", harmony: "C:0.5 F:0.5 G:0.5 C:0.5",     parts: {organ: hold, low: {style: roots, role: bass}, lead: {deg: "4/4 2 3 5 | 4/8 3 1/4 0/2"}}}
   - {name: amin, bars: 2, key: "A minor", harmony: "Am:0.5 Dm:0.5 E:0.5 Am:0.5",  parts: {organ: hold, low: {style: roots, role: bass}, lead: {deg: "4/4 2 3 5 | 4/8 3 1/4 0/2"}}}

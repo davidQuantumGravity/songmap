@@ -31,8 +31,8 @@ def catalog() -> dict:
                                                  "tags": data.get("tags") or [], "params": resolve(f"{inst}/{name}")[1]})
     samplers = []
     try:
-        from ..instruments.sampler.library import CATALOG
-        samplers = [{"name": k, "title": v.title, "license": v.license, "family": v.family} for k, v in CATALOG.items()]
+        from ..instruments.sampler.library import voices
+        samplers = voices()
     except Exception:                                    # noqa: BLE001  (the sampler backend is optional)
         pass
     from ..instruments import Sampler
@@ -88,7 +88,11 @@ def voice_info(ens, part: str, piece: str | None = None) -> dict:
             cls = None
     if cls is not None:
         try:
-            base = {} if cls is Sampler else resolve(v.use)[1]
+            if cls is Sampler:
+                from ..instruments.sampler.library import manifest
+                base = manifest()["voices"].get(v.use.partition("/")[2], {}).get("params", {})
+            else:
+                base = resolve(v.use)[1]
         except Exception:                                # noqa: BLE001  (shown as a check error elsewhere)
             base = {}
         if inst == "patch":
@@ -194,6 +198,7 @@ def audition(song, part: str, notes: list[dict], piece: str | None = None, overr
     from ..arrange.ensemble import Ensemble
     from ..instruments import Note, make
     from ..instruments.dsp import SR, as_stereo
+    from ..render import _apply_chokes
     ens = Ensemble(song)
     v = ens.voice(part, piece)
     if v.use.startswith("patch/"):
@@ -204,12 +209,13 @@ def audition(song, part: str, notes: list[dict], piece: str | None = None, overr
         inst = make(v.use, **{**v.params, **(overrides or {})})
     rendered = []
     for k, n in enumerate(notes):
-        y = as_stereo(inst.render(Note(float(n.get("pitch", 60)), float(n.get("vel", 0.7)), float(n.get("gate", 0.5)),
-                                       seed=k + 1, rr=k)))
-        rendered.append((int(float(n.get("t", 0)) * SR), y))
-    length = max((s + len(y) for s, y in rendered), default=SR // 10) + SR // 20
+        note = Note(float(n.get("pitch", 60)), float(n.get("vel", 0.7)), float(n.get("gate", 0.5)), seed=k + 1, rr=k)
+        y = as_stereo(inst.render(note))
+        rendered.append([int(float(n.get("t", 0)) * SR), y, 1.0, 0.0, *inst.choke(note)])
+    _apply_chokes(rendered)
+    length = max((s + len(y) for s, y, *_ in rendered), default=SR // 10) + SR // 20
     out = np.zeros((length, 2))
-    for s, y in rendered:
+    for s, y, *_ in rendered:
         out[s:s + len(y)] += y
     peak = float(np.abs(out).max()) if len(out) else 0.0
     if peak > 0.89:

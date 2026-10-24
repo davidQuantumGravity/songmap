@@ -1,0 +1,14 @@
+instrument: snare
+description: Driven low shell and rough wires.
+tags:
+- electronic
+- snare
+params:
+  tone: 135
+  tone_decay: 0.3
+  tone_mix: 0.6
+  noise_decay: 0.3
+  noise_hp: 500
+  noise_lp: 7500
+  snap: 0.65
+  drive: 3.8

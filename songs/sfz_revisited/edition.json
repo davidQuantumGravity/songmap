@@ -1,0 +1,4563 @@
+{
+  "revised": [
+    {
+      "key": "golden/01_golden_hour_lullaby",
+      "title": "Golden Hour Lullaby",
+      "source_sha256": "b18fecd039f174f081c2c5ce31d31541ccf11b8104d52866eb947d74c6741c8c",
+      "score": "songs/sfz_revisited/golden/01_golden_hour_lullaby.sm",
+      "note_digest": "2a15934ae5c23e324b4f1dc0985a1cd5387adde72a914223a505702cc5b758a0",
+      "frames": 4520,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 5.5,
+          "initial_energy_adjustment_db": 10.53,
+          "final_gain_db": 4.9
+        },
+        {
+          "part": "mel",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 13.0,
+          "initial_energy_adjustment_db": 9.02,
+          "final_gain_db": 12
+        },
+        {
+          "part": "gtr",
+          "before": "string_pluck/still",
+          "after": "sampler/folk_harp",
+          "gain_db": 1.1,
+          "initial_energy_adjustment_db": 7.09,
+          "final_gain_db": 4
+        },
+        {
+          "part": "flute",
+          "before": "clean/lead",
+          "after": "sampler/flute",
+          "gain_db": 13.1,
+          "initial_energy_adjustment_db": 13.06,
+          "final_gain_db": 11.1
+        }
+      ],
+      "before_render": "songs/golden/renders/01_golden_hour_lullaby",
+      "after_render": "songs/sfz_revisited/golden/renders/01_golden_hour_lullaby",
+      "score_sha256": "ba07db97361c43ffd8574decea801377c059469ec6e8346873ed081bf4b194b9",
+      "qa": {
+        "lufs": -21.91,
+        "true_peak_db": -0.99,
+        "clipped_samples": 0,
+        "seconds": 150.667,
+        "sections": [
+          {
+            "name": "intro",
+            "start": 0.0,
+            "loudness": -32.8,
+            "low": 0.482,
+            "mid": 0.516,
+            "high": 0.001,
+            "silent": false
+          },
+          {
+            "name": "verse",
+            "start": 13.333333333333334,
+            "loudness": -28.8,
+            "low": 0.414,
+            "mid": 0.586,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "verse2",
+            "start": 40.0,
+            "loudness": -23.6,
+            "low": 0.512,
+            "mid": 0.488,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "bridge",
+            "start": 66.66666666666667,
+            "loudness": -21.1,
+            "low": 0.484,
+            "mid": 0.512,
+            "high": 0.004,
+            "silent": false
+          },
+          {
+            "name": "interlude",
+            "start": 93.33333333333333,
+            "loudness": -21.4,
+            "low": 0.541,
+            "mid": 0.459,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "finale",
+            "start": 106.66666666666667,
+            "loudness": -18.8,
+            "low": 0.458,
+            "mid": 0.541,
+            "high": 0.001,
+            "silent": false
+          },
+          {
+            "name": "coda",
+            "start": 133.33333333333334,
+            "loudness": -30.7,
+            "low": 0.687,
+            "mid": 0.312,
+            "high": 0.001,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "keys": -24.25,
+          "bell": -28.58,
+          "mel": -24.86,
+          "gtr": -26.18,
+          "low": -24.36,
+          "flute": -24.8,
+          "wash": -27.98,
+          "drums": -32.86,
+          "return_hall": -31.03
+        },
+        "render": {
+          "seconds": 17.63,
+          "notes_rendered": 1094,
+          "cache_hits": 0,
+          "audio_seconds": 150.667,
+          "master": "clean",
+          "digest": "2a15934ae5c23e324b4f1dc0985a1cd5387adde72a914223a505702cc5b758a0",
+          "performed": true,
+          "played_digest": "ed944acf360120970db80f33b44b3d85c96319a5f369f528ef6d262729e0d6fb",
+          "samples": [
+            "sampler/flute",
+            "sampler/folk_harp",
+            "sampler/grand_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "Golden Hour Lullaby",
+        "facts": {
+          "bars": 44.0,
+          "seconds": 150.7,
+          "sections": 7,
+          "parts": 8,
+          "impacts": 0,
+          "melody notes checked against chords": 159,
+          "lufs": -21.91
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 1,
+          "note": 0
+        },
+        "findings": [
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "finale bar 1",
+            "message": "8 parts play at once (bell, drums, flute, gtr, keys, low, mel, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [
+        "sections/intro/beats_per_bar",
+        "sections/verse/beats_per_bar",
+        "sections/verse2/beats_per_bar",
+        "sections/bridge/beats_per_bar",
+        "sections/interlude/beats_per_bar",
+        "sections/finale/beats_per_bar",
+        "sections/coda/beats_per_bar"
+      ],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Golden Hour Lullaby",
+        "facts": {
+          "bars": 44.0,
+          "seconds": 150.7,
+          "sections": 7,
+          "parts": 8,
+          "impacts": 0,
+          "melody notes checked against chords": 159,
+          "lufs": -21.94
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 1,
+          "note": 0
+        },
+        "findings": [
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "finale bar 1",
+            "message": "8 parts play at once (bell, drums, flute, gtr, keys, low, mel, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          }
+        ]
+      },
+      "wav_sha256": "b7064e5b6d5cbf1f66e17a177bed3ce9962882e5dcce292dccc5f81c51cae259",
+      "mp3_sha256": "8ce3940700cc664515fac526a8b275bb169491ccfdc460778dd4ced67a508fc3",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden/02_deceptive_light",
+      "title": "Deceptive Light",
+      "source_sha256": "66396e2b36b1ef5a4d6b2188fbd652352ea9236e130012f59b276f1eefdb81ce",
+      "score": "songs/sfz_revisited/golden/02_deceptive_light.sm",
+      "note_digest": "68125db4af8ebe9e5776ab5c31f0ca55d39a0d48f4e701679ca3aa35a8ca8783",
+      "frames": 4710,
+      "changes": [
+        {
+          "part": "ep",
+          "before": "epiano/still",
+          "after": "sampler/fm_piano",
+          "gain_db": -5.5,
+          "initial_energy_adjustment_db": 10.54,
+          "final_gain_db": -5.5
+        },
+        {
+          "part": "lead",
+          "before": "clean/lead",
+          "after": "sampler/flute",
+          "gain_db": 18.8,
+          "initial_energy_adjustment_db": 2.84,
+          "final_gain_db": 18.8
+        }
+      ],
+      "before_render": "songs/golden/renders/02_deceptive_light",
+      "after_render": "songs/sfz_revisited/golden/renders/02_deceptive_light",
+      "score_sha256": "315c36c4e931381135ff1ffcc24e580096e0c59037df769f1ebb4b2ebc668d1c",
+      "qa": {
+        "lufs": -17.57,
+        "true_peak_db": -0.99,
+        "clipped_samples": 0,
+        "seconds": 157.0,
+        "sections": [
+          {
+            "name": "intro",
+            "start": 0.0,
+            "loudness": -26.5,
+            "low": 0.358,
+            "mid": 0.64,
+            "high": 0.001,
+            "silent": false
+          },
+          {
+            "name": "intro_b",
+            "start": 8.0,
+            "loudness": -22.2,
+            "low": 0.827,
+            "mid": 0.172,
+            "high": 0.001,
+            "silent": false
+          },
+          {
+            "name": "verse",
+            "start": 16.0,
+            "loudness": -21.6,
+            "low": 0.93,
+            "mid": 0.06,
+            "high": 0.01,
+            "silent": false
+          },
+          {
+            "name": "pre",
+            "start": 32.0,
+            "loudness": -18.5,
+            "low": 0.896,
+            "mid": 0.094,
+            "high": 0.01,
+            "silent": false
+          },
+          {
+            "name": "chorus",
+            "start": 40.0,
+            "loudness": -16.3,
+            "low": 0.762,
+            "mid": 0.226,
+            "high": 0.012,
+            "silent": false
+          },
+          {
+            "name": "post",
+            "start": 56.0,
+            "loudness": -17.5,
+            "low": 0.809,
+            "mid": 0.179,
+            "high": 0.012,
+            "silent": false
+          },
+          {
+            "name": "verse_2",
+            "start": 64.0,
+            "loudness": -21.3,
+            "low": 0.889,
+            "mid": 0.098,
+            "high": 0.013,
+            "silent": false
+          },
+          {
+            "name": "pre_2",
+            "start": 80.0,
+            "loudness": -18.1,
+            "low": 0.861,
+            "mid": 0.128,
+            "high": 0.011,
+            "silent": false
+          },
+          {
+            "name": "chorus_2",
+            "start": 88.0,
+            "loudness": -16.4,
+            "low": 0.764,
+            "mid": 0.224,
+            "high": 0.012,
+            "silent": false
+          },
+          {
+            "name": "bridge",
+            "start": 104.0,
+            "loudness": -23.5,
+            "low": 0.892,
+            "mid": 0.107,
+            "high": 0.001,
+            "silent": false
+          },
+          {
+            "name": "build",
+            "start": 120.0,
+            "loudness": -17.7,
+            "low": 0.877,
+            "mid": 0.111,
+            "high": 0.011,
+            "silent": false
+          },
+          {
+            "name": "chorus_3",
+            "start": 128.0,
+            "loudness": -12.2,
+            "low": 0.662,
+            "mid": 0.32,
+            "high": 0.018,
+            "silent": false
+          },
+          {
+            "name": "outro",
+            "start": 144.0,
+            "loudness": -21.7,
+            "low": 0.789,
+            "mid": 0.205,
+            "high": 0.006,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "ep": -22.55,
+          "wash": -26.65,
+          "arp": -28.53,
+          "bell": -21.84,
+          "drums": -17.91,
+          "bass": -20.9,
+          "lead": -17.97,
+          "gtr": -26.16,
+          "fx": -23.25,
+          "return_hall": -27.44
+        },
+        "render": {
+          "seconds": 28.41,
+          "notes_rendered": 5061,
+          "cache_hits": 0,
+          "audio_seconds": 157.0,
+          "master": "clean",
+          "digest": "68125db4af8ebe9e5776ab5c31f0ca55d39a0d48f4e701679ca3aa35a8ca8783",
+          "performed": true,
+          "played_digest": "a366621bb3e0c366d169d900d001d799286d0bebf35788e4ee32f86e3da915a3",
+          "samples": [
+            "sampler/flute",
+            "sampler/fm_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "Deceptive Light",
+        "facts": {
+          "bars": 77.0,
+          "seconds": 157.0,
+          "sections": 13,
+          "parts": 9,
+          "impacts": 5,
+          "melody notes checked against chords": 212,
+          "lufs": -17.57
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 14,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "warning",
+            "kind": "clash",
+            "where": "verse bar 2",
+            "message": "lead holds G over D, a half step above a chord tone (a minor-9th rub) (and 1 more)",
+            "fix": "move the note to a chord tone on strong beats, make it a short passing note, or change the chord"
+          },
+          {
+            "severity": "warning",
+            "kind": "register",
+            "where": "pre",
+            "message": "arp and lead sit in the same register (around MIDI 76)",
+            "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+          },
+          {
+            "severity": "warning",
+            "kind": "register",
+            "where": "pre_2",
+            "message": "arp and lead sit in the same register (around MIDI 76)",
+            "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+          },
+          {
+            "severity": "warning",
+            "kind": "register",
+            "where": "build",
+            "message": "arp and lead sit in the same register (around MIDI 76)",
+            "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "chorus_2, chorus_3",
+            "message": "every wash note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "chorus, post, chorus_2",
+            "message": "every arp note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "post, chorus_2, chorus_3",
+            "message": "every bell note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "verse, chorus, post",
+            "message": "every bass note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "verse, chorus, verse_2",
+            "message": "every lead note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "verse_2, chorus_3",
+            "message": "every gtr note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "pre_2 bar 1",
+            "message": "7 parts play at once (arp, bass, drums, ep, gtr, lead, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "chorus_2 bar 1",
+            "message": "7 parts play at once (arp, bass, bell, drums, ep, lead, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "chorus_3 bar 1",
+            "message": "8 parts play at once (arp, bass, bell, drums, ep, gtr, lead, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "range",
+            "where": "intro_b bar 2",
+            "message": "bass goes outside its comfortable range (86 notes outside MIDI 28-60)",
+            "fix": "move it with oct: or transpose the line"
+          },
+          {
+            "severity": "note",
+            "kind": "balance",
+            "where": "verse",
+            "message": "verse is very bass-heavy (low 0.93)",
+            "fix": "lighten the sub or kick, or add mid/high parts"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [
+        "sections/intro/beats_per_bar",
+        "sections/intro_b/beats_per_bar",
+        "sections/verse/beats_per_bar",
+        "sections/pre/beats_per_bar",
+        "sections/chorus/beats_per_bar",
+        "sections/post/beats_per_bar",
+        "sections/verse_2/beats_per_bar",
+        "sections/pre_2/beats_per_bar",
+        "sections/chorus_2/beats_per_bar",
+        "sections/bridge/beats_per_bar",
+        "sections/build/beats_per_bar",
+        "sections/chorus_3/beats_per_bar",
+        "sections/outro/beats_per_bar"
+      ],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Deceptive Light",
+        "facts": {
+          "bars": 77.0,
+          "seconds": 157.0,
+          "sections": 13,
+          "parts": 9,
+          "impacts": 5,
+          "melody notes checked against chords": 212,
+          "lufs": -17.87
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 14,
+          "note": 0
+        },
+        "findings": [
+          {
+            "severity": "warning",
+            "kind": "clash",
+            "where": "verse bar 2",
+            "message": "lead holds G over D, a half step above a chord tone (a minor-9th rub) (and 1 more)",
+            "fix": "move the note to a chord tone on strong beats, make it a short passing note, or change the chord"
+          },
+          {
+            "severity": "warning",
+            "kind": "register",
+            "where": "pre",
+            "message": "arp and lead sit in the same register (around MIDI 76)",
+            "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+          },
+          {
+            "severity": "warning",
+            "kind": "register",
+            "where": "pre_2",
+            "message": "arp and lead sit in the same register (around MIDI 76)",
+            "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+          },
+          {
+            "severity": "warning",
+            "kind": "register",
+            "where": "build",
+            "message": "arp and lead sit in the same register (around MIDI 76)",
+            "fix": "move one an octave (oct: 1 / oct: -1), or give one of them rests here"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "chorus_2, chorus_3",
+            "message": "every wash note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "chorus, post, chorus_2",
+            "message": "every arp note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "post, chorus_2, chorus_3",
+            "message": "every bell note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "verse, chorus, post",
+            "message": "every bass note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "verse, chorus, verse_2",
+            "message": "every lead note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "verse_2, chorus_3",
+            "message": "every gtr note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "pre_2 bar 1",
+            "message": "7 parts play at once (arp, bass, drums, ep, gtr, lead, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "chorus_2 bar 1",
+            "message": "7 parts play at once (arp, bass, bell, drums, ep, lead, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "chorus_3 bar 1",
+            "message": "8 parts play at once (arp, bass, bell, drums, ep, gtr, lead, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "range",
+            "where": "intro_b bar 2",
+            "message": "bass goes outside its comfortable range (86 notes outside MIDI 28-60)",
+            "fix": "move it with oct: or transpose the line"
+          }
+        ]
+      },
+      "wav_sha256": "3cc2e6b363cc48c55d927560dfd5e612f916431a1b41161cde13675cfdd81c67",
+      "mp3_sha256": "de9a872f9a9fb16f960cccacf9b852854b329758a22c8f6fb159e1bd064cf0a0",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden/03_tape_bloom",
+      "title": "Tape Bloom",
+      "source_sha256": "57b13ed88b8f53bfff0029378fccc9747ed2f78494e96cdc97a4d43354ad23a9",
+      "score": "songs/sfz_revisited/golden/03_tape_bloom.sm",
+      "note_digest": "9681d5e93796a0a7f3d4324ec808714b273b47d6af8ee763f43de1ff8c403f9e",
+      "frames": 4280,
+      "changes": [
+        {
+          "part": "ep",
+          "before": "epiano/still",
+          "after": "sampler/fm_piano",
+          "gain_db": -0.9,
+          "initial_energy_adjustment_db": 10.15,
+          "final_gain_db": -0.9
+        },
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 11.2,
+          "initial_energy_adjustment_db": 6.24,
+          "final_gain_db": 11.2
+        },
+        {
+          "part": "flute",
+          "before": "clean/lead",
+          "after": "sampler/flute",
+          "gain_db": 3.9,
+          "initial_energy_adjustment_db": 4.94,
+          "final_gain_db": 3.9
+        }
+      ],
+      "before_render": "songs/golden/renders/03_tape_bloom",
+      "after_render": "songs/sfz_revisited/golden/renders/03_tape_bloom",
+      "score_sha256": "bec5bace85cdb40b1e5b298b3d06c716c3e806790ad6cab3517c65be828f74ae",
+      "qa": {
+        "lufs": -24.08,
+        "true_peak_db": -0.98,
+        "clipped_samples": 0,
+        "seconds": 142.667,
+        "sections": [
+          {
+            "name": "dusk",
+            "start": 0.0,
+            "loudness": -33.5,
+            "low": 0.47,
+            "mid": 0.529,
+            "high": 0.001,
+            "silent": false
+          },
+          {
+            "name": "walk",
+            "start": 10.666666666666666,
+            "loudness": -29.4,
+            "low": 0.932,
+            "mid": 0.061,
+            "high": 0.007,
+            "silent": false
+          },
+          {
+            "name": "theme_a",
+            "start": 21.333333333333332,
+            "loudness": -26.4,
+            "low": 0.873,
+            "mid": 0.112,
+            "high": 0.015,
+            "silent": false
+          },
+          {
+            "name": "bloom",
+            "start": 42.666666666666664,
+            "loudness": -23.8,
+            "low": 0.795,
+            "mid": 0.189,
+            "high": 0.016,
+            "silent": false
+          },
+          {
+            "name": "shade",
+            "start": 64.0,
+            "loudness": -32.7,
+            "low": 0.436,
+            "mid": 0.564,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "solo",
+            "start": 85.33333333333333,
+            "loudness": -24.7,
+            "low": 0.834,
+            "mid": 0.146,
+            "high": 0.019,
+            "silent": false
+          },
+          {
+            "name": "reprise",
+            "start": 106.66666666666667,
+            "loudness": -19.6,
+            "low": 0.676,
+            "mid": 0.308,
+            "high": 0.017,
+            "silent": false
+          },
+          {
+            "name": "picardy",
+            "start": 128.0,
+            "loudness": -29.5,
+            "low": 0.891,
+            "mid": 0.109,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "ep": -20.95,
+          "wash": -26.98,
+          "fx": -36.17,
+          "drums": -17.6,
+          "bass": -20.09,
+          "keys": -16.48,
+          "bell": -32.53,
+          "gtr": -24.42,
+          "flute": -19.87,
+          "return_hall": -29.22
+        },
+        "render": {
+          "seconds": 17.45,
+          "notes_rendered": 1966,
+          "cache_hits": 5,
+          "audio_seconds": 142.667,
+          "master": "clean",
+          "digest": "9681d5e93796a0a7f3d4324ec808714b273b47d6af8ee763f43de1ff8c403f9e",
+          "performed": true,
+          "played_digest": "d992adc45b8437c621e3d2e26945e4a753c3ff3c7a65f4d6bf0739bb6047732b",
+          "samples": [
+            "sampler/flute",
+            "sampler/fm_piano",
+            "sampler/grand_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "Tape Bloom",
+        "facts": {
+          "bars": 52.0,
+          "seconds": 142.7,
+          "sections": 8,
+          "parts": 9,
+          "impacts": 1,
+          "melody notes checked against chords": 151,
+          "lufs": -24.08
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 1,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "reprise bar 1",
+            "message": "8 parts play at once (bass, bell, drums, ep, flute, gtr, keys, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "note",
+            "kind": "balance",
+            "where": "walk",
+            "message": "walk is very bass-heavy (low 0.93)",
+            "fix": "lighten the sub or kick, or add mid/high parts"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [
+        "sections/dusk/beats_per_bar",
+        "sections/walk/beats_per_bar",
+        "sections/theme_a/beats_per_bar",
+        "sections/bloom/beats_per_bar",
+        "sections/shade/beats_per_bar",
+        "sections/solo/beats_per_bar",
+        "sections/reprise/beats_per_bar",
+        "sections/picardy/beats_per_bar"
+      ],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Tape Bloom",
+        "facts": {
+          "bars": 52.0,
+          "seconds": 142.7,
+          "sections": 8,
+          "parts": 9,
+          "impacts": 1,
+          "melody notes checked against chords": 151,
+          "lufs": -21.4
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 1,
+          "note": 0
+        },
+        "findings": [
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "reprise bar 1",
+            "message": "8 parts play at once (bass, bell, drums, ep, flute, gtr, keys, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          }
+        ]
+      },
+      "wav_sha256": "d6076ce685ef59a313240c606a179773f1d6ee113a9321ddaa344af4a675975b",
+      "mp3_sha256": "7b084bb73806ea41b484f588124da4940bf25459d3c79e74227e9dc457de7213",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden/04_andalusian_gold",
+      "title": "Andalusian Gold",
+      "source_sha256": "fba3206c9064ba14bb373da9798db21972d53e06f89234e6492bd9d99b43c248",
+      "score": "songs/sfz_revisited/golden/04_andalusian_gold.sm",
+      "note_digest": "479b21e87bf20dcc908c07cc32302a9672e0361c333b907cd805583161fd66ec",
+      "frames": 4008,
+      "changes": [
+        {
+          "part": "strings",
+          "before": "pad/still",
+          "after": "sampler/cello",
+          "gain_db": -9.7,
+          "initial_energy_adjustment_db": 10.35,
+          "final_gain_db": -9.7
+        },
+        {
+          "part": "vln",
+          "before": "clean/organ",
+          "after": "sampler/solo_violin",
+          "gain_db": 0.7,
+          "initial_energy_adjustment_db": 13.66,
+          "final_gain_db": 0.7
+        }
+      ],
+      "before_render": "songs/golden/renders/04_andalusian_gold",
+      "after_render": "songs/sfz_revisited/golden/renders/04_andalusian_gold",
+      "score_sha256": "63fd6d40c0dd57ca32577b41dfdc224b672f652508eeb191dce3eee7d74c6c59",
+      "qa": {
+        "lufs": -17.6,
+        "true_peak_db": -0.93,
+        "clipped_samples": 0,
+        "seconds": 133.6,
+        "sections": [
+          {
+            "name": "intro",
+            "start": 0.0,
+            "loudness": -24.7,
+            "low": 0.055,
+            "mid": 0.847,
+            "high": 0.098,
+            "silent": false
+          },
+          {
+            "name": "verse",
+            "start": 19.2,
+            "loudness": -20.1,
+            "low": 0.736,
+            "mid": 0.249,
+            "high": 0.014,
+            "silent": false
+          },
+          {
+            "name": "gold",
+            "start": 38.4,
+            "loudness": -16.5,
+            "low": 0.709,
+            "mid": 0.26,
+            "high": 0.031,
+            "silent": false
+          },
+          {
+            "name": "falseta",
+            "start": 57.6,
+            "loudness": -23.2,
+            "low": 0.038,
+            "mid": 0.826,
+            "high": 0.136,
+            "silent": false
+          },
+          {
+            "name": "build",
+            "start": 76.8,
+            "loudness": -17.3,
+            "low": 0.737,
+            "mid": 0.232,
+            "high": 0.031,
+            "silent": false
+          },
+          {
+            "name": "climax",
+            "start": 96.0,
+            "loudness": -13.5,
+            "low": 0.704,
+            "mid": 0.255,
+            "high": 0.042,
+            "silent": false
+          },
+          {
+            "name": "coda",
+            "start": 115.2,
+            "loudness": -19.4,
+            "low": 0.717,
+            "mid": 0.266,
+            "high": 0.017,
+            "silent": false
+          },
+          {
+            "name": "fin",
+            "start": 124.8,
+            "loudness": -20.7,
+            "low": 0.848,
+            "mid": 0.117,
+            "high": 0.035,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "gtr": -20.59,
+          "req": -20.56,
+          "drums": -16.89,
+          "bass": -20.39,
+          "lead": -18.35,
+          "strings": -21.33,
+          "vln": -22.9,
+          "bell": -25.81,
+          "fx": -21.71,
+          "return_hall": -28.21
+        },
+        "render": {
+          "seconds": 11.04,
+          "notes_rendered": 3133,
+          "cache_hits": 33,
+          "audio_seconds": 133.6,
+          "master": "clean",
+          "digest": "479b21e87bf20dcc908c07cc32302a9672e0361c333b907cd805583161fd66ec",
+          "performed": true,
+          "played_digest": "8d1ed06c6604686ce05f3b9cfa4daff224fc7f6694453394c36827a15fedbfbc",
+          "samples": [
+            "sampler/cello",
+            "sampler/solo_violin"
+          ]
+        }
+      },
+      "review": {
+        "title": "Andalusian Gold",
+        "facts": {
+          "bars": 54.0,
+          "seconds": 133.6,
+          "sections": 8,
+          "parts": 9,
+          "impacts": 3,
+          "melody notes checked against chords": 151,
+          "lufs": -17.6
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 4,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "gold, climax",
+            "message": "every req note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "verse, gold, climax",
+            "message": "every bass note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "gold, climax",
+            "message": "every strings note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "climax bar 1",
+            "message": "8 parts play at once (bass, bell, drums, gtr, lead, req, strings, vln)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "note",
+            "kind": "ending",
+            "where": "fin",
+            "message": "the song ends on E, not on the home chord",
+            "fix": "end on I (or i, or its Picardy major) unless the hang is deliberate"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [
+        "sections/intro/beats_per_bar",
+        "sections/verse/beats_per_bar",
+        "sections/gold/beats_per_bar",
+        "sections/falseta/beats_per_bar",
+        "sections/build/beats_per_bar",
+        "sections/climax/beats_per_bar",
+        "sections/coda/beats_per_bar",
+        "sections/fin/beats_per_bar"
+      ],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Andalusian Gold",
+        "facts": {
+          "bars": 54.0,
+          "seconds": 133.6,
+          "sections": 8,
+          "parts": 9,
+          "impacts": 3,
+          "melody notes checked against chords": 151,
+          "lufs": -17.78
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 4,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "gold, climax",
+            "message": "every req note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "verse, gold, climax",
+            "message": "every bass note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "gold, climax",
+            "message": "every strings note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "climax bar 1",
+            "message": "8 parts play at once (bass, bell, drums, gtr, lead, req, strings, vln)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "note",
+            "kind": "ending",
+            "where": "fin",
+            "message": "the song ends on E, not on the home chord",
+            "fix": "end on I (or i, or its Picardy major) unless the hang is deliberate"
+          }
+        ]
+      },
+      "wav_sha256": "687b79fdaa6b2e39c7b6333446e408324f42258388e33a323681e4aee1dacf47",
+      "mp3_sha256": "ed6549985f110842c04e4c459f50638e20082ea3af7af238bb1b3e8887f0ced5",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden/05_silver_third",
+      "title": "The Silver Third",
+      "source_sha256": "05b00584ad204f99e145e3ae07528cf4b8c027da9fa8d220c40d0dc7d2f06a0a",
+      "score": "songs/sfz_revisited/golden/05_silver_third.sm",
+      "note_digest": "cf84dbd88c090775b754722a7ee09484d8925faf3286813e239b977c2267154b",
+      "frames": 4760,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 2.6,
+          "initial_energy_adjustment_db": 10.62,
+          "final_gain_db": 2.6
+        },
+        {
+          "part": "harp",
+          "before": "string_pluck/still",
+          "after": "sampler/folk_harp",
+          "gain_db": 0.3,
+          "initial_energy_adjustment_db": 5.31,
+          "final_gain_db": 0.3
+        },
+        {
+          "part": "horn",
+          "before": "clean/organ",
+          "after": "sampler/horn",
+          "gain_db": -1.6,
+          "initial_energy_adjustment_db": 9.36,
+          "final_gain_db": -1.6
+        }
+      ],
+      "before_render": "songs/golden/renders/05_silver_third",
+      "after_render": "songs/sfz_revisited/golden/renders/05_silver_third",
+      "score_sha256": "a924c0de114a7105bd09f3a0abefa8b7c2cdcd9f50bdbce6c87b2d1bea63629e",
+      "qa": {
+        "lufs": -19.74,
+        "true_peak_db": -0.98,
+        "clipped_samples": 0,
+        "seconds": 158.667,
+        "sections": [
+          {
+            "name": "dawn",
+            "start": 0.0,
+            "loudness": -29.3,
+            "low": 0.175,
+            "mid": 0.824,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "theme",
+            "start": 10.666666666666666,
+            "loudness": -23.8,
+            "low": 0.281,
+            "mid": 0.718,
+            "high": 0.002,
+            "silent": false
+          },
+          {
+            "name": "build",
+            "start": 32.0,
+            "loudness": -20.7,
+            "low": 0.466,
+            "mid": 0.532,
+            "high": 0.002,
+            "silent": false
+          },
+          {
+            "name": "pivot",
+            "start": 53.333333333333336,
+            "loudness": -27.9,
+            "low": 0.516,
+            "mid": 0.484,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "silver",
+            "start": 64.0,
+            "loudness": -19.0,
+            "low": 0.444,
+            "mid": 0.554,
+            "high": 0.002,
+            "silent": false
+          },
+          {
+            "name": "golden_home",
+            "start": 85.33333333333333,
+            "loudness": -25.9,
+            "low": 0.315,
+            "mid": 0.685,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "visitor",
+            "start": 104.0,
+            "loudness": -28.8,
+            "low": 0.436,
+            "mid": 0.552,
+            "high": 0.012,
+            "silent": false
+          },
+          {
+            "name": "homecoming",
+            "start": 106.66666666666667,
+            "loudness": -15.4,
+            "low": 0.423,
+            "mid": 0.568,
+            "high": 0.009,
+            "silent": false
+          },
+          {
+            "name": "giant",
+            "start": 128.0,
+            "loudness": -19.0,
+            "low": 0.403,
+            "mid": 0.592,
+            "high": 0.004,
+            "silent": false
+          },
+          {
+            "name": "coda",
+            "start": 144.0,
+            "loudness": -27.2,
+            "low": 0.301,
+            "mid": 0.699,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "keys": -22.61,
+          "wash": -26.78,
+          "bell": -23.44,
+          "low": -23.28,
+          "lead": -17.71,
+          "harp": -26.08,
+          "horn": -22.46,
+          "drums": -21.04,
+          "gold": -22.78,
+          "deep": -28.0,
+          "choir": -23.36,
+          "fx": -22.56,
+          "return_hall": -28.1
+        },
+        "render": {
+          "seconds": 36.63,
+          "notes_rendered": 1691,
+          "cache_hits": 9,
+          "audio_seconds": 158.667,
+          "master": "clean",
+          "digest": "cf84dbd88c090775b754722a7ee09484d8925faf3286813e239b977c2267154b",
+          "performed": true,
+          "played_digest": "c423f7ac10d15d7600e732e07f8c9940039f29624a1fc42fbcdc69850792d7ef",
+          "samples": [
+            "sampler/folk_harp",
+            "sampler/grand_piano",
+            "sampler/horn"
+          ]
+        }
+      },
+      "review": {
+        "title": "The Silver Third",
+        "facts": {
+          "bars": 58.0,
+          "seconds": 158.7,
+          "sections": 10,
+          "parts": 12,
+          "impacts": 3,
+          "melody notes checked against chords": 221,
+          "lufs": -19.74
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 8,
+          "note": 0
+        },
+        "findings": [
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "silver, homecoming",
+            "message": "every low note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "theme, silver",
+            "message": "every lead note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "silver, homecoming",
+            "message": "every harp note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "silver, homecoming",
+            "message": "every horn note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "build bar 5",
+            "message": "7 parts play at once (drums, harp, horn, keys, lead, low, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "silver bar 1",
+            "message": "7 parts play at once (drums, harp, horn, keys, lead, low, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "homecoming bar 1",
+            "message": "9 parts play at once (bell, choir, drums, harp, horn, keys, lead, low, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "giant bar 1",
+            "message": "7 parts play at once (bell, choir, drums, keys, lead, low, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [
+        "sections/dawn/beats_per_bar",
+        "sections/theme/beats_per_bar",
+        "sections/build/beats_per_bar",
+        "sections/pivot/beats_per_bar",
+        "sections/silver/beats_per_bar",
+        "sections/golden_home/beats_per_bar",
+        "sections/visitor/beats_per_bar",
+        "sections/homecoming/beats_per_bar",
+        "sections/giant/beats_per_bar",
+        "sections/coda/beats_per_bar"
+      ],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "The Silver Third",
+        "facts": {
+          "bars": 58.0,
+          "seconds": 158.7,
+          "sections": 10,
+          "parts": 12,
+          "impacts": 3,
+          "melody notes checked against chords": 221,
+          "lufs": -19.05
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 8,
+          "note": 0
+        },
+        "findings": [
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "silver, homecoming",
+            "message": "every low note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "theme, silver",
+            "message": "every lead note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "silver, homecoming",
+            "message": "every harp note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "dynamics",
+            "where": "silver, homecoming",
+            "message": "every horn note has the same velocity",
+            "fix": "shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "build bar 5",
+            "message": "7 parts play at once (drums, harp, horn, keys, lead, low, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "silver bar 1",
+            "message": "7 parts play at once (drums, harp, horn, keys, lead, low, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "homecoming bar 1",
+            "message": "9 parts play at once (bell, choir, drums, harp, horn, keys, lead, low, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          },
+          {
+            "severity": "warning",
+            "kind": "density",
+            "where": "giant bar 1",
+            "message": "7 parts play at once (bell, choir, drums, keys, lead, low, wash)",
+            "fix": "keep 5-6 at most; drop a doubling or give a part rests"
+          }
+        ]
+      },
+      "wav_sha256": "31d52782eea5af223084cd74e4d768fb6ad28b0dcc8b2bbd35f74a126c6718ba",
+      "mp3_sha256": "1ad1a4b69b97370c30322bfea57ccbe9f57f86cdc3c4a7f524f954c1f0705d50",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden_worlds/01_sideways_sun",
+      "title": "Sideways Sun",
+      "source_sha256": "057115321ef01dd77b360a2d63eff0c457b7f887f31af647c60189d2a7e00ea3",
+      "score": "songs/sfz_revisited/golden_worlds/01_sideways_sun.sm",
+      "note_digest": "367f4b8ffe89015da8c0dae2e9b9082db428e07152f0de05b1d84f0f5b4cd00d",
+      "frames": 6017,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "epiano/still",
+          "after": "sampler/fm_piano",
+          "gain_db": -1.5,
+          "initial_energy_adjustment_db": 12.52,
+          "final_gain_db": -1.5
+        },
+        {
+          "part": "lead",
+          "before": "clean/lead",
+          "after": "sampler/flute",
+          "gain_db": 22.4,
+          "initial_energy_adjustment_db": 8.37,
+          "final_gain_db": 22.4
+        },
+        {
+          "part": "bass",
+          "before": "clean/bass",
+          "after": "sampler/double_bass",
+          "gain_db": 9.9,
+          "initial_energy_adjustment_db": 14.94,
+          "final_gain_db": 9.9
+        },
+        {
+          "part": "bell",
+          "before": "clean/glass",
+          "after": "sampler/marimba",
+          "gain_db": -9.9,
+          "initial_energy_adjustment_db": 5.05,
+          "final_gain_db": -9.9
+        }
+      ],
+      "before_render": "songs/golden_worlds/renders/01_sideways_sun",
+      "after_render": "songs/sfz_revisited/golden_worlds/renders/01_sideways_sun",
+      "score_sha256": "bd42820b002ecea222643110025950cf3eed3cca612ab04068d2110ba742a740",
+      "qa": {
+        "lufs": -16.15,
+        "true_peak_db": -1.0,
+        "clipped_samples": 0,
+        "seconds": 200.556,
+        "sections": [
+          {
+            "name": "slivers",
+            "start": 0.0,
+            "loudness": -36.1,
+            "low": 0.477,
+            "mid": 0.521,
+            "high": 0.002,
+            "silent": false
+          },
+          {
+            "name": "head_one",
+            "start": 8.88888888888889,
+            "loudness": -21.3,
+            "low": 0.793,
+            "mid": 0.194,
+            "high": 0.013,
+            "silent": false
+          },
+          {
+            "name": "head_reply",
+            "start": 26.666666666666668,
+            "loudness": -18.6,
+            "low": 0.682,
+            "mid": 0.3,
+            "high": 0.017,
+            "silent": false
+          },
+          {
+            "name": "streetlights",
+            "start": 44.44444444444444,
+            "loudness": -19.6,
+            "low": 0.856,
+            "mid": 0.121,
+            "high": 0.022,
+            "silent": false
+          },
+          {
+            "name": "ten_windows",
+            "start": 62.22222222222222,
+            "loudness": -15.9,
+            "low": 0.609,
+            "mid": 0.37,
+            "high": 0.021,
+            "silent": false
+          },
+          {
+            "name": "side_door",
+            "start": 80.0,
+            "loudness": -18.6,
+            "low": 0.668,
+            "mid": 0.317,
+            "high": 0.016,
+            "silent": false
+          },
+          {
+            "name": "return_call",
+            "start": 97.77777777777777,
+            "loudness": -17.4,
+            "low": 0.72,
+            "mid": 0.261,
+            "high": 0.019,
+            "silent": false
+          },
+          {
+            "name": "return_answer",
+            "start": 115.55555555555556,
+            "loudness": -15.2,
+            "low": 0.581,
+            "mid": 0.399,
+            "high": 0.02,
+            "silent": false
+          },
+          {
+            "name": "held_breath",
+            "start": 133.33333333333334,
+            "loudness": -32.0,
+            "low": 0.877,
+            "mid": 0.123,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "sunburst",
+            "start": 151.11111111111111,
+            "loudness": -11.9,
+            "low": 0.465,
+            "mid": 0.522,
+            "high": 0.013,
+            "silent": false
+          },
+          {
+            "name": "sunburst_reply",
+            "start": 168.88888888888889,
+            "loudness": -15.2,
+            "low": 0.536,
+            "mid": 0.447,
+            "high": 0.017,
+            "silent": false
+          },
+          {
+            "name": "afterimage",
+            "start": 186.66666666666666,
+            "loudness": -29.4,
+            "low": 0.761,
+            "mid": 0.239,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "keys": -26.96,
+          "bell": -38.34,
+          "bass": -29.47,
+          "lead": -20.13,
+          "drums": -22.78,
+          "pad": -48.0,
+          "return_hall": -39.8
+        },
+        "render": {
+          "seconds": 21.69,
+          "notes_rendered": 2070,
+          "cache_hits": 30,
+          "audio_seconds": 200.556,
+          "master": "standard",
+          "digest": "367f4b8ffe89015da8c0dae2e9b9082db428e07152f0de05b1d84f0f5b4cd00d",
+          "performed": true,
+          "played_digest": "f5a80e3d89f0f79608aa6a45523f02245d0629332e2f5a00235dda55e52ba324",
+          "samples": [
+            "sampler/double_bass",
+            "sampler/flute",
+            "sampler/fm_piano",
+            "sampler/marimba"
+          ]
+        }
+      },
+      "review": {
+        "title": "Sideways Sun",
+        "facts": {
+          "bars": 88.0,
+          "seconds": 200.6,
+          "sections": 12,
+          "parts": 6,
+          "impacts": 0,
+          "melody notes checked against chords": 170,
+          "lufs": -16.15
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 0
+        },
+        "findings": []
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Sideways Sun",
+        "facts": {
+          "bars": 88.0,
+          "seconds": 200.6,
+          "sections": 12,
+          "parts": 6,
+          "impacts": 0,
+          "melody notes checked against chords": 170,
+          "lufs": -16.11
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 0
+        },
+        "findings": []
+      },
+      "wav_sha256": "f522218f0924f4f7f2ed3024dcac336c51cd755b163c631d7c2875e82327f869",
+      "mp3_sha256": "76640c93ccb0daae9858695027a26179c1269824d8696efb305e59401e08a860",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden_worlds/02_pocket_algebra",
+      "title": "Pocket Algebra",
+      "source_sha256": "e542af99ea9736b036c5f8bbb531b80ce1abc2decc54a50c88c8e74af25324b6",
+      "score": "songs/sfz_revisited/golden_worlds/02_pocket_algebra.sm",
+      "note_digest": "f6b984691207c00ea4ee0e30562995674cc7ed6047260bdcb009710134266c14",
+      "frames": 6291,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "epiano/still",
+          "after": "sampler/grand_piano",
+          "gain_db": -0.4,
+          "initial_energy_adjustment_db": 14.61,
+          "final_gain_db": -1.9
+        },
+        {
+          "part": "lead",
+          "before": "clean/lead",
+          "after": "sampler/vibraphone",
+          "gain_db": 19.9,
+          "initial_energy_adjustment_db": 5.87,
+          "final_gain_db": 17.4
+        },
+        {
+          "part": "gtr",
+          "before": "string_pluck/still",
+          "after": "sampler/folk_harp",
+          "gain_db": 2.2,
+          "initial_energy_adjustment_db": 9.2,
+          "final_gain_db": 3.5
+        },
+        {
+          "part": "bass",
+          "before": "clean/bass",
+          "after": "sampler/double_bass",
+          "gain_db": 9.6,
+          "initial_energy_adjustment_db": 14.55,
+          "final_gain_db": 9.9
+        }
+      ],
+      "before_render": "songs/golden_worlds/renders/02_pocket_algebra",
+      "after_render": "songs/sfz_revisited/golden_worlds/renders/02_pocket_algebra",
+      "score_sha256": "4cda159e7c95cef462f4bb099d249b8ea1416e5515064a3ae6a3a1700a31feb7",
+      "qa": {
+        "lufs": -16.66,
+        "true_peak_db": -1.0,
+        "clipped_samples": 0,
+        "seconds": 209.714,
+        "sections": [
+          {
+            "name": "count_in",
+            "start": 0.0,
+            "loudness": -30.8,
+            "low": 0.696,
+            "mid": 0.304,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "head_left",
+            "start": 8.571428571428571,
+            "loudness": -19.1,
+            "low": 0.713,
+            "mid": 0.272,
+            "high": 0.014,
+            "silent": false
+          },
+          {
+            "name": "head_right",
+            "start": 25.714285714285715,
+            "loudness": -18.9,
+            "low": 0.846,
+            "mid": 0.125,
+            "high": 0.029,
+            "silent": false
+          },
+          {
+            "name": "dialogue_call",
+            "start": 42.857142857142854,
+            "loudness": -16.2,
+            "low": 0.742,
+            "mid": 0.235,
+            "high": 0.023,
+            "silent": false
+          },
+          {
+            "name": "limma_room",
+            "start": 60.0,
+            "loudness": -24.9,
+            "low": 0.385,
+            "mid": 0.615,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "solo_first",
+            "start": 77.14285714285714,
+            "loudness": -17.3,
+            "low": 0.682,
+            "mid": 0.299,
+            "high": 0.018,
+            "silent": false
+          },
+          {
+            "name": "trading_keys",
+            "start": 111.42857142857143,
+            "loudness": -17.8,
+            "low": 0.895,
+            "mid": 0.078,
+            "high": 0.027,
+            "silent": false
+          },
+          {
+            "name": "trading_reed",
+            "start": 128.57142857142858,
+            "loudness": -16.1,
+            "low": 0.737,
+            "mid": 0.238,
+            "high": 0.024,
+            "silent": false
+          },
+          {
+            "name": "one_table",
+            "start": 145.71428571428572,
+            "loudness": -29.6,
+            "low": 0.374,
+            "mid": 0.626,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "whole_room",
+            "start": 154.28571428571428,
+            "loudness": -11.8,
+            "low": 0.516,
+            "mid": 0.469,
+            "high": 0.015,
+            "silent": false
+          },
+          {
+            "name": "answer_back",
+            "start": 171.42857142857142,
+            "loudness": -18.6,
+            "low": 0.871,
+            "mid": 0.107,
+            "high": 0.022,
+            "silent": false
+          },
+          {
+            "name": "last_word",
+            "start": 188.57142857142858,
+            "loudness": -29.6,
+            "low": 0.727,
+            "mid": 0.273,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "keys": -27.23,
+          "bass": -28.03,
+          "lead": -22.41,
+          "drums": -21.97,
+          "gtr": -31.19,
+          "return_hall": -42.91
+        },
+        "render": {
+          "seconds": 26.65,
+          "notes_rendered": 2850,
+          "cache_hits": 52,
+          "audio_seconds": 209.714,
+          "master": "standard",
+          "digest": "f6b984691207c00ea4ee0e30562995674cc7ed6047260bdcb009710134266c14",
+          "performed": true,
+          "played_digest": "e99cbcfb3cf3d6244e8e3847a8e486d0bb94ad5236423e67725addde3d14e651",
+          "samples": [
+            "sampler/double_bass",
+            "sampler/folk_harp",
+            "sampler/grand_piano",
+            "sampler/vibraphone"
+          ]
+        }
+      },
+      "review": {
+        "title": "Pocket Algebra",
+        "facts": {
+          "bars": 96.0,
+          "seconds": 209.7,
+          "sections": 12,
+          "parts": 5,
+          "impacts": 0,
+          "melody notes checked against chords": 279,
+          "lufs": -16.66
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 0
+        },
+        "findings": []
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Pocket Algebra",
+        "facts": {
+          "bars": 96.0,
+          "seconds": 209.7,
+          "sections": 12,
+          "parts": 5,
+          "impacts": 0,
+          "melody notes checked against chords": 279,
+          "lufs": -16.64
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 0
+        },
+        "findings": []
+      },
+      "wav_sha256": "96a2ad3cd25374edbe7cf67e1b6936c4d46f7b8ed6c125cd2f95ae7e3d417bc5",
+      "mp3_sha256": "791f39ca005888363bd8c847080a91992aab14eed39ca9146af8eb39b5f4977c",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden_worlds/03_parallax_arcade",
+      "title": "Parallax Arcade",
+      "source_sha256": "320b03ac6df042dcb2904792bba172f13c0b9bd0f1daaa6a7941d25aa628a315",
+      "score": "songs/sfz_revisited/golden_worlds/03_parallax_arcade.sm",
+      "note_digest": "2c6463b11ece55371e90c5f4d6a3cd6db11421808a45a3b198e1b8b41d533dc3",
+      "frames": 6189,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "clean/organ",
+          "after": "sampler/fm_piano",
+          "gain_db": -6.2,
+          "initial_energy_adjustment_db": 8.77,
+          "final_gain_db": -5.3
+        },
+        {
+          "part": "arp",
+          "before": "string_pluck/still",
+          "after": "sampler/marimba",
+          "gain_db": -9.3,
+          "initial_energy_adjustment_db": -0.3,
+          "final_gain_db": -7.9
+        },
+        {
+          "part": "lead",
+          "before": "clean/lead",
+          "after": "sampler/flute",
+          "gain_db": 26.0,
+          "initial_energy_adjustment_db": 9.05,
+          "final_gain_db": 22
+        }
+      ],
+      "before_render": "songs/golden_worlds/renders/03_parallax_arcade",
+      "after_render": "songs/sfz_revisited/golden_worlds/renders/03_parallax_arcade",
+      "score_sha256": "2f51113d0a8f45f350c16d7ee8b2d866b0356f576ac3c8e62a00c674061abeb3",
+      "qa": {
+        "lufs": -16.63,
+        "true_peak_db": -1.0,
+        "clipped_samples": 0,
+        "seconds": 206.29,
+        "sections": [
+          {
+            "name": "neon_seed",
+            "start": 0.0,
+            "loudness": -27.5,
+            "low": 0.992,
+            "mid": 0.008,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "sign_one",
+            "start": 15.483870967741936,
+            "loudness": -21.3,
+            "low": 0.877,
+            "mid": 0.11,
+            "high": 0.012,
+            "silent": false
+          },
+          {
+            "name": "sign_two",
+            "start": 30.967741935483872,
+            "loudness": -18.8,
+            "low": 0.804,
+            "mid": 0.183,
+            "high": 0.013,
+            "silent": false
+          },
+          {
+            "name": "open_road",
+            "start": 46.45161290322581,
+            "loudness": -17.8,
+            "low": 0.846,
+            "mid": 0.137,
+            "high": 0.017,
+            "silent": false
+          },
+          {
+            "name": "decatonic_drive",
+            "start": 61.935483870967744,
+            "loudness": -16.8,
+            "low": 0.831,
+            "mid": 0.149,
+            "high": 0.019,
+            "silent": false
+          },
+          {
+            "name": "crossing_lights",
+            "start": 77.41935483870968,
+            "loudness": -16.5,
+            "low": 0.809,
+            "mid": 0.172,
+            "high": 0.019,
+            "silent": false
+          },
+          {
+            "name": "empty_lane",
+            "start": 92.90322580645162,
+            "loudness": -32.1,
+            "low": 0.021,
+            "mid": 0.979,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "comma_crossing",
+            "start": 108.38709677419355,
+            "loudness": -22.2,
+            "low": 0.918,
+            "mid": 0.082,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "new_horizon",
+            "start": 123.87096774193549,
+            "loudness": -18.0,
+            "low": 0.848,
+            "mid": 0.135,
+            "high": 0.018,
+            "silent": false
+          },
+          {
+            "name": "overpass",
+            "start": 139.3548387096774,
+            "loudness": -19.3,
+            "low": 0.865,
+            "mid": 0.119,
+            "high": 0.016,
+            "silent": false
+          },
+          {
+            "name": "arcade_summit",
+            "start": 154.83870967741936,
+            "loudness": -10.2,
+            "low": 0.305,
+            "mid": 0.682,
+            "high": 0.012,
+            "silent": false
+          },
+          {
+            "name": "city_below",
+            "start": 170.32258064516128,
+            "loudness": -17.7,
+            "low": 0.834,
+            "mid": 0.147,
+            "high": 0.019,
+            "silent": false
+          },
+          {
+            "name": "last_pixel",
+            "start": 185.80645161290323,
+            "loudness": -33.5,
+            "low": 0.039,
+            "mid": 0.961,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "arp": -43.29,
+          "bass": -30.01,
+          "drums": -20.57,
+          "keys": -28.91,
+          "lead": -19.04,
+          "pad": -50.09,
+          "return_hall": -34.91
+        },
+        "render": {
+          "seconds": 49.15,
+          "notes_rendered": 3956,
+          "cache_hits": 184,
+          "audio_seconds": 206.29,
+          "master": "standard",
+          "digest": "2c6463b11ece55371e90c5f4d6a3cd6db11421808a45a3b198e1b8b41d533dc3",
+          "performed": true,
+          "played_digest": "16efb5cb2af999f5d8910b654b3576907012b0743a78bb0fba7e19eb4124839b",
+          "samples": [
+            "sampler/flute",
+            "sampler/fm_piano",
+            "sampler/marimba"
+          ]
+        }
+      },
+      "review": {
+        "title": "Parallax Arcade",
+        "facts": {
+          "bars": 104.0,
+          "seconds": 206.3,
+          "sections": 13,
+          "parts": 6,
+          "impacts": 0,
+          "melody notes checked against chords": 141,
+          "lufs": -16.63
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "balance",
+            "where": "neon_seed",
+            "message": "neon_seed is very bass-heavy (low 0.99)",
+            "fix": "lighten the sub or kick, or add mid/high parts"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Parallax Arcade",
+        "facts": {
+          "bars": 104.0,
+          "seconds": 206.3,
+          "sections": 13,
+          "parts": 6,
+          "impacts": 0,
+          "melody notes checked against chords": 141,
+          "lufs": -16.83
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 2
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "contrast",
+            "where": "decatonic_drive",
+            "message": "decatonic_drive is within 1 dB of both neighbours",
+            "fix": "contrast neighbouring sections by texture, register or density"
+          },
+          {
+            "severity": "note",
+            "kind": "balance",
+            "where": "neon_seed",
+            "message": "neon_seed is very bass-heavy (low 0.99)",
+            "fix": "lighten the sub or kick, or add mid/high parts"
+          }
+        ]
+      },
+      "wav_sha256": "28e202cad856995905536de05d1d93c40979d7c222ea725af0e07a4fcefb638d",
+      "mp3_sha256": "a3a64ebff58296f5c9c1bbc823424805665472d5af1bed5bfb35b27b6f9cc6e0",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden_worlds/04_two_windows",
+      "title": "Two Windows",
+      "source_sha256": "26e22e75461ec002221a55fb31c4d5dc84c97a62abb90e044b6ccd8278ac6144",
+      "score": "songs/sfz_revisited/golden_worlds/04_two_windows.sm",
+      "note_digest": "624ef4380da883f22da1669994f972bf34ef855d77f2636fff11ddfe20163dd2",
+      "frames": 5775,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 2.5,
+          "initial_energy_adjustment_db": 7.53,
+          "final_gain_db": 10.5
+        },
+        {
+          "part": "lead",
+          "before": "clean/lead",
+          "after": "sampler/flute",
+          "gain_db": 24.3,
+          "initial_energy_adjustment_db": 12.33,
+          "final_gain_db": 18.3
+        },
+        {
+          "part": "harp",
+          "before": "string_pluck/still",
+          "after": "sampler/folk_harp",
+          "gain_db": 4.0,
+          "initial_energy_adjustment_db": 7.05,
+          "final_gain_db": 5.5
+        },
+        {
+          "part": "low",
+          "before": "clean/bass",
+          "after": "sampler/double_bass",
+          "gain_db": 7.9,
+          "initial_energy_adjustment_db": 17.86,
+          "final_gain_db": 7.9
+        }
+      ],
+      "before_render": "songs/golden_worlds/renders/04_two_windows",
+      "after_render": "songs/sfz_revisited/golden_worlds/renders/04_two_windows",
+      "score_sha256": "3c0ae19b7851e37d59bc8729d99af21b6a8753b7e48f1941abe6d6ddcc7d878a",
+      "qa": {
+        "lufs": -18.18,
+        "true_peak_db": -1.49,
+        "clipped_samples": 0,
+        "seconds": 192.5,
+        "sections": [
+          {
+            "name": "paper_light",
+            "start": 0.0,
+            "loudness": -31.1,
+            "low": 0.136,
+            "mid": 0.864,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "first_window",
+            "start": 15.0,
+            "loudness": -25.5,
+            "low": 0.77,
+            "mid": 0.23,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "second_window",
+            "start": 30.0,
+            "loudness": -20.6,
+            "low": 0.526,
+            "mid": 0.474,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "interlaced",
+            "start": 45.0,
+            "loudness": -18.9,
+            "low": 0.252,
+            "mid": 0.748,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "answering_arch",
+            "start": 60.0,
+            "loudness": -17.0,
+            "low": 0.313,
+            "mid": 0.687,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "brighter_glass",
+            "start": 75.0,
+            "loudness": -19.3,
+            "low": 0.377,
+            "mid": 0.623,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "different_shadow",
+            "start": 90.0,
+            "loudness": -18.2,
+            "low": 0.343,
+            "mid": 0.657,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "unwritten_space",
+            "start": 105.0,
+            "loudness": -28.4,
+            "low": 0.041,
+            "mid": 0.958,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "mirror_stairs",
+            "start": 120.0,
+            "loudness": -21.7,
+            "low": 0.357,
+            "mid": 0.643,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "crossed_hands",
+            "start": 135.0,
+            "loudness": -18.8,
+            "low": 0.271,
+            "mid": 0.728,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "both_windows",
+            "start": 150.0,
+            "loudness": -15.0,
+            "low": 0.173,
+            "mid": 0.827,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "folded_paper",
+            "start": 172.5,
+            "loudness": -24.6,
+            "low": 0.266,
+            "mid": 0.734,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "harp": -29.18,
+          "keys": -21.77,
+          "lead": -23.75,
+          "low": -28.47,
+          "return_hall": -35.56
+        },
+        "render": {
+          "seconds": 12.35,
+          "notes_rendered": 730,
+          "cache_hits": 1,
+          "audio_seconds": 192.5,
+          "master": "standard",
+          "digest": "624ef4380da883f22da1669994f972bf34ef855d77f2636fff11ddfe20163dd2",
+          "performed": true,
+          "played_digest": "7f93cb7005133a7ae4336588852b1b7a6b91dc82c36d3f87955f4bf58f783f99",
+          "samples": [
+            "sampler/double_bass",
+            "sampler/flute",
+            "sampler/folk_harp",
+            "sampler/grand_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "Two Windows",
+        "facts": {
+          "bars": 100.0,
+          "seconds": 192.5,
+          "sections": 12,
+          "parts": 4,
+          "impacts": 0,
+          "melody notes checked against chords": 274,
+          "lufs": -18.18
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 0
+        },
+        "findings": []
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Two Windows",
+        "facts": {
+          "bars": 100.0,
+          "seconds": 192.5,
+          "sections": 12,
+          "parts": 4,
+          "impacts": 0,
+          "melody notes checked against chords": 274,
+          "lufs": -18.04
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 0
+        },
+        "findings": []
+      },
+      "wav_sha256": "fa0fe91fb14ad45d55ca060b4e82fb8a187492321a0fcb6bf7ab59195274ed92",
+      "mp3_sha256": "2c543c270300849f53929a70514f1d30fe6f73c2fda5dadfb5c2c36a7d652230",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden_worlds/05_night_orchard",
+      "title": "Night Orchard",
+      "source_sha256": "1416e38b4198f81b7fd60add828adbefd8c0734d415b8196c41937c51564bb85",
+      "score": "songs/sfz_revisited/golden_worlds/05_night_orchard.sm",
+      "note_digest": "2f90d52e736d1d9aa2229d20e0bc38e4634ef110a7f68ea944c45c7d2699ffca",
+      "frames": 6000,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 6.1,
+          "initial_energy_adjustment_db": 6.13,
+          "final_gain_db": 6.1
+        },
+        {
+          "part": "lead",
+          "before": "clean/lead",
+          "after": "sampler/flute",
+          "gain_db": 20.5,
+          "initial_energy_adjustment_db": 8.52,
+          "final_gain_db": 20.5
+        },
+        {
+          "part": "bell",
+          "before": "clean/glass",
+          "after": "sampler/marimba",
+          "gain_db": -0.8,
+          "initial_energy_adjustment_db": 7.23,
+          "final_gain_db": -0.8
+        }
+      ],
+      "before_render": "songs/golden_worlds/renders/05_night_orchard",
+      "after_render": "songs/sfz_revisited/golden_worlds/renders/05_night_orchard",
+      "score_sha256": "f9b3b700bdfb2846bbcbd40bed9204b45c993888d156019674000833cab5c883",
+      "qa": {
+        "lufs": -20.07,
+        "true_peak_db": -1.49,
+        "clipped_samples": 0,
+        "seconds": 200.0,
+        "sections": [
+          {
+            "name": "seed_in_darkness",
+            "start": 0.0,
+            "loudness": -26.8,
+            "low": 0.625,
+            "mid": 0.375,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "first_branches",
+            "start": 15.0,
+            "loudness": -24.2,
+            "low": 0.701,
+            "mid": 0.299,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "orchard_path",
+            "start": 39.0,
+            "loudness": -20.9,
+            "low": 0.663,
+            "mid": 0.337,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "unlit_leaves",
+            "start": 63.0,
+            "loudness": -27.2,
+            "low": 0.679,
+            "mid": 0.321,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "lantern_bloom",
+            "start": 84.0,
+            "loudness": -13.6,
+            "low": 0.454,
+            "mid": 0.546,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "elsewhere_river",
+            "start": 108.0,
+            "loudness": -21.8,
+            "low": 0.672,
+            "mid": 0.328,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "familiar_stone",
+            "start": 147.0,
+            "loudness": -23.8,
+            "low": 0.478,
+            "mid": 0.522,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "roots_and_stars",
+            "start": 168.0,
+            "loudness": -26.6,
+            "low": 0.548,
+            "mid": 0.452,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "pad": -30.73,
+          "bell": -33.13,
+          "keys": -28.96,
+          "low": -31.83,
+          "lead": -25.01,
+          "return_hall": -35.03
+        },
+        "render": {
+          "seconds": 16.55,
+          "notes_rendered": 466,
+          "cache_hits": 0,
+          "audio_seconds": 200.0,
+          "master": "standard",
+          "digest": "2f90d52e736d1d9aa2229d20e0bc38e4634ef110a7f68ea944c45c7d2699ffca",
+          "performed": true,
+          "played_digest": "97ae9ff7801e753fedc449223f4bbf72e14c38fe26c5a252b73da7c6ae032b13",
+          "samples": [
+            "sampler/flute",
+            "sampler/grand_piano",
+            "sampler/marimba"
+          ]
+        }
+      },
+      "review": {
+        "title": "Night Orchard",
+        "facts": {
+          "bars": 64.0,
+          "seconds": 200.0,
+          "sections": 8,
+          "parts": 5,
+          "impacts": 0,
+          "melody notes checked against chords": 144,
+          "lufs": -20.07
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 0
+        },
+        "findings": []
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Night Orchard",
+        "facts": {
+          "bars": 64.0,
+          "seconds": 200.0,
+          "sections": 8,
+          "parts": 5,
+          "impacts": 0,
+          "melody notes checked against chords": 144,
+          "lufs": -20.07
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 0
+        },
+        "findings": []
+      },
+      "wav_sha256": "633d49a5a465c3729801c8b3dba489a2bd2119d2e94e0208ee9df5177b64ecc2",
+      "mp3_sha256": "5e7e13f2bee4a884d024bb356b2e0e937f9a2ba6117a6239acdab5235fdc226c",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden_house/01_colour_field",
+      "title": "Colour Field",
+      "source_sha256": "b2f4ed9a392cfa4f39d401fc7fa05e3e207a18ecf3fe5f3e958c2e358c376140",
+      "score": "songs/sfz_revisited/golden_house/01_colour_field.sm",
+      "note_digest": "be081f530b75ad7968e5773362c434635488a4090fd97eb441231f1e52c8a3d8",
+      "frames": 4369,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 5.4,
+          "initial_energy_adjustment_db": 4.38,
+          "final_gain_db": 5.4
+        }
+      ],
+      "before_render": "songs/sfz_revisited/golden_house/renders/before_01_colour_field",
+      "after_render": "songs/sfz_revisited/golden_house/renders/01_colour_field",
+      "score_sha256": "9cf4cb67e013f7bcd903b7740b0a353a2d93323a106162c10d37903af014f45c",
+      "qa": {
+        "lufs": -14.51,
+        "true_peak_db": -1.0,
+        "clipped_samples": 0,
+        "seconds": 145.639,
+        "sections": [
+          {
+            "name": "intro",
+            "start": 0.0,
+            "loudness": -17.0,
+            "low": 0.95,
+            "mid": 0.05,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "groove",
+            "start": 15.737704918032787,
+            "loudness": -16.3,
+            "low": 0.752,
+            "mid": 0.239,
+            "high": 0.01,
+            "silent": false
+          },
+          {
+            "name": "riff",
+            "start": 47.21311475409836,
+            "loudness": -15.4,
+            "low": 0.892,
+            "mid": 0.095,
+            "high": 0.013,
+            "silent": false
+          },
+          {
+            "name": "breakdown",
+            "start": 78.68852459016394,
+            "loudness": -25.1,
+            "low": 0.478,
+            "mid": 0.519,
+            "high": 0.003,
+            "silent": false
+          },
+          {
+            "name": "peak",
+            "start": 94.42622950819673,
+            "loudness": -11.5,
+            "low": 0.732,
+            "mid": 0.253,
+            "high": 0.016,
+            "silent": false
+          },
+          {
+            "name": "turn",
+            "start": 125.90163934426229,
+            "loudness": -16.5,
+            "low": 0.733,
+            "mid": 0.266,
+            "high": 0.001,
+            "silent": false
+          },
+          {
+            "name": "home",
+            "start": 133.7704918032787,
+            "loudness": -15.2,
+            "low": 0.818,
+            "mid": 0.182,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "drums": -17.22,
+          "pad": -28.51,
+          "bass": -21.58,
+          "organ": -20.5,
+          "keys": -19.24,
+          "bell": -29.13,
+          "fx": -20.91,
+          "return_hall": -34.49
+        },
+        "render": {
+          "seconds": 27.1,
+          "notes_rendered": 2075,
+          "cache_hits": 141,
+          "audio_seconds": 145.639,
+          "master": "standard",
+          "digest": "be081f530b75ad7968e5773362c434635488a4090fd97eb441231f1e52c8a3d8",
+          "performed": true,
+          "played_digest": "fb57ef990eb2115913fe6c42aa8fd727a0ae6fa64c1624cef8be67c532e9921a",
+          "samples": [
+            "sampler/grand_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "Colour Field",
+        "facts": {
+          "bars": 72.0,
+          "seconds": 145.6,
+          "sections": 7,
+          "parts": 7,
+          "impacts": 1,
+          "melody notes checked against chords": 59,
+          "lufs": -14.51
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 2
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "contrast",
+            "where": "groove",
+            "message": "groove is within 1 dB of both neighbours",
+            "fix": "contrast neighbouring sections by texture, register or density"
+          },
+          {
+            "severity": "note",
+            "kind": "balance",
+            "where": "intro",
+            "message": "intro is very bass-heavy (low 0.95)",
+            "fix": "lighten the sub or kick, or add mid/high parts"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Colour Field",
+        "facts": {
+          "bars": 72.0,
+          "seconds": 145.6,
+          "sections": 7,
+          "parts": 7,
+          "impacts": 1,
+          "melody notes checked against chords": 59,
+          "lufs": -14.51
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "balance",
+            "where": "intro",
+            "message": "intro is very bass-heavy (low 0.95)",
+            "fix": "lighten the sub or kick, or add mid/high parts"
+          }
+        ]
+      },
+      "wav_sha256": "b3cfb0e8bc2b76a9f6fd17f7767198bb7907410e4e73bf193618640830b4ccb1",
+      "mp3_sha256": "9932f0c81bc08fe0a1b26a398695ee262791738b52f617836294550947bd2d5b",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden_house/02_two_step_gold",
+      "title": "Two-Step Gold",
+      "source_sha256": "b27d7fcb123178ee2e466d20833758ae08ad53b0df570081ae4126b1404d3297",
+      "score": "songs/sfz_revisited/golden_house/02_two_step_gold.sm",
+      "note_digest": "7bb951f309aac6852c4f04e95c0964e9a6314d82bbf43e1fb7041859949620ea",
+      "frames": 4047,
+      "changes": [
+        {
+          "part": "epiano",
+          "before": "epiano/still",
+          "after": "sampler/fm_piano",
+          "gain_db": -2.0,
+          "initial_energy_adjustment_db": 11.01,
+          "final_gain_db": -2
+        }
+      ],
+      "before_render": "songs/sfz_revisited/golden_house/renders/before_02_two_step_gold",
+      "after_render": "songs/sfz_revisited/golden_house/renders/02_two_step_gold",
+      "score_sha256": "8da134eebd523ffa4d830340c1273713f7fb041f9c919b468d857d546b613dfb",
+      "qa": {
+        "lufs": -14.31,
+        "true_peak_db": -1.0,
+        "clipped_samples": 0,
+        "seconds": 134.909,
+        "sections": [
+          {
+            "name": "intro",
+            "start": 0.0,
+            "loudness": -16.1,
+            "low": 0.948,
+            "mid": 0.052,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "verse",
+            "start": 14.545454545454545,
+            "loudness": -16.9,
+            "low": 0.901,
+            "mid": 0.09,
+            "high": 0.009,
+            "silent": false
+          },
+          {
+            "name": "chorus",
+            "start": 43.63636363636363,
+            "loudness": -14.2,
+            "low": 0.731,
+            "mid": 0.26,
+            "high": 0.009,
+            "silent": false
+          },
+          {
+            "name": "break",
+            "start": 72.72727272727273,
+            "loudness": -21.4,
+            "low": 0.868,
+            "mid": 0.132,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "chorus_2",
+            "start": 87.27272727272727,
+            "loudness": -11.2,
+            "low": 0.702,
+            "mid": 0.28,
+            "high": 0.018,
+            "silent": false
+          },
+          {
+            "name": "outro",
+            "start": 116.36363636363636,
+            "loudness": -15.0,
+            "low": 0.889,
+            "mid": 0.101,
+            "high": 0.01,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "drums": -15.93,
+          "bass": -19.85,
+          "pad": -29.34,
+          "epiano": -22.44,
+          "lead": -19.34,
+          "gold": -33.15,
+          "fx": -21.02,
+          "return_hall": -35.35
+        },
+        "render": {
+          "seconds": 22.23,
+          "notes_rendered": 2681,
+          "cache_hits": 64,
+          "audio_seconds": 134.909,
+          "master": "standard",
+          "digest": "7bb951f309aac6852c4f04e95c0964e9a6314d82bbf43e1fb7041859949620ea",
+          "performed": true,
+          "played_digest": "057a137233d7b05225be6656f39fe2d8de06d6909812b2d092af7f5c2fe04c8b",
+          "samples": [
+            "sampler/fm_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "Two-Step Gold",
+        "facts": {
+          "bars": 72.0,
+          "seconds": 134.9,
+          "sections": 6,
+          "parts": 7,
+          "impacts": 2,
+          "melody notes checked against chords": 36,
+          "lufs": -14.31
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "balance",
+            "where": "intro",
+            "message": "intro is very bass-heavy (low 0.95)",
+            "fix": "lighten the sub or kick, or add mid/high parts"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Two-Step Gold",
+        "facts": {
+          "bars": 72.0,
+          "seconds": 134.9,
+          "sections": 6,
+          "parts": 7,
+          "impacts": 2,
+          "melody notes checked against chords": 36,
+          "lufs": -14.35
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "balance",
+            "where": "intro",
+            "message": "intro is very bass-heavy (low 0.95)",
+            "fix": "lighten the sub or kick, or add mid/high parts"
+          }
+        ]
+      },
+      "wav_sha256": "8fbc2d675131bcd5bb8cd9f5f405d149ea4dc4c3d63a82d5b913dc7d5542c09f",
+      "mp3_sha256": "e49578507a4aeb7e7e70085a9368edc9de7a691d6b5222158f1722d475de826a",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "golden_house/05_silver_lift",
+      "title": "Silver Lift",
+      "source_sha256": "b8182a4eb17ad1c80d16efabc9d47ab32d4c43ce16039a1bae97e8896434a9a7",
+      "score": "songs/sfz_revisited/golden_house/05_silver_lift.sm",
+      "note_digest": "55ef0bcb8d1938e8aada7378e5668b130a6c89fa86d920a5c7482b81ab9f09c4",
+      "frames": 4282,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 6.5,
+          "initial_energy_adjustment_db": 8.46,
+          "final_gain_db": 6.5
+        }
+      ],
+      "before_render": "songs/sfz_revisited/golden_house/renders/before_05_silver_lift",
+      "after_render": "songs/sfz_revisited/golden_house/renders/05_silver_lift",
+      "score_sha256": "1d4ce4ba215b2a1278487a40ac115f85566abe92ab2ac3fe82fe8d564260225d",
+      "qa": {
+        "lufs": -14.3,
+        "true_peak_db": -1.0,
+        "clipped_samples": 0,
+        "seconds": 142.75,
+        "sections": [
+          {
+            "name": "intro",
+            "start": 0.0,
+            "loudness": -18.1,
+            "low": 0.955,
+            "mid": 0.045,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "drop_1",
+            "start": 15.0,
+            "loudness": -14.7,
+            "low": 0.758,
+            "mid": 0.228,
+            "high": 0.014,
+            "silent": false
+          },
+          {
+            "name": "breakdown",
+            "start": 45.0,
+            "loudness": -28.5,
+            "low": 0.369,
+            "mid": 0.631,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "giant",
+            "start": 75.0,
+            "loudness": -16.1,
+            "low": 0.783,
+            "mid": 0.215,
+            "high": 0.002,
+            "silent": false
+          },
+          {
+            "name": "pivot",
+            "start": 86.25,
+            "loudness": -19.6,
+            "low": 0.456,
+            "mid": 0.525,
+            "high": 0.019,
+            "silent": false
+          },
+          {
+            "name": "drop_2",
+            "start": 93.75,
+            "loudness": -11.4,
+            "low": 0.756,
+            "mid": 0.229,
+            "high": 0.015,
+            "silent": false
+          },
+          {
+            "name": "outro",
+            "start": 123.75,
+            "loudness": -16.8,
+            "low": 0.908,
+            "mid": 0.078,
+            "high": 0.014,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "drums": -12.45,
+          "pad": -25.72,
+          "arp": -29.01,
+          "bass": -18.51,
+          "lead": -16.18,
+          "keys": -30.39,
+          "bell": -32.14,
+          "fx": -19.55,
+          "return_hall": -29.75
+        },
+        "render": {
+          "seconds": 18.5,
+          "notes_rendered": 2455,
+          "cache_hits": 73,
+          "audio_seconds": 142.75,
+          "master": "standard",
+          "digest": "55ef0bcb8d1938e8aada7378e5668b130a6c89fa86d920a5c7482b81ab9f09c4",
+          "performed": true,
+          "played_digest": "46830b0ff3a56c5814a1fd31878852bd197167550a97b5bc1fcbef595f7ec909",
+          "samples": [
+            "sampler/grand_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "Silver Lift",
+        "facts": {
+          "bars": 74.0,
+          "seconds": 142.8,
+          "sections": 7,
+          "parts": 8,
+          "impacts": 2,
+          "melody notes checked against chords": 89,
+          "lufs": -14.3
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "balance",
+            "where": "intro",
+            "message": "intro is very bass-heavy (low 0.95)",
+            "fix": "lighten the sub or kick, or add mid/high parts"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Silver Lift",
+        "facts": {
+          "bars": 74.0,
+          "seconds": 142.8,
+          "sections": 7,
+          "parts": 8,
+          "impacts": 2,
+          "melody notes checked against chords": 89,
+          "lufs": -14.3
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "balance",
+            "where": "intro",
+            "message": "intro is very bass-heavy (low 0.95)",
+            "fix": "lighten the sub or kick, or add mid/high parts"
+          }
+        ]
+      },
+      "wav_sha256": "714828dbf864381fff598e53e2532c893a20a684b6c6c8d9e8ee518a9551f7cd",
+      "mp3_sha256": "7e56c19a38286c80a81220105509b41da54416a73eea9e697216df2b0287dd46",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "still_water/01_dusk_on_the_water",
+      "title": "Dusk on the Water",
+      "source_sha256": "19be13e2bb3da9a0653e21411594cb8f25092c0722c8b40331fd84fd19509fb2",
+      "score": "songs/sfz_revisited/still_water/01_dusk_on_the_water.sm",
+      "note_digest": "2d86f41551cadc9e0d03ca34ae0ffee9cd73ea87cb38084a1a7139e7fd100c82",
+      "frames": 6390,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 3.6,
+          "initial_energy_adjustment_db": 12.59,
+          "final_gain_db": 3.6
+        },
+        {
+          "part": "mel",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 10.6,
+          "initial_energy_adjustment_db": 7.62,
+          "final_gain_db": 10.6
+        },
+        {
+          "part": "harp",
+          "before": "string_pluck/still",
+          "after": "sampler/folk_harp",
+          "gain_db": 0.8,
+          "initial_energy_adjustment_db": 8.76,
+          "final_gain_db": 0.8
+        },
+        {
+          "part": "flute",
+          "before": "clean/lead",
+          "after": "sampler/flute",
+          "gain_db": -1.1,
+          "initial_energy_adjustment_db": 2.92,
+          "final_gain_db": -1.1
+        }
+      ],
+      "before_render": "songs/sfz_revisited/still_water/renders/before_01_dusk_on_the_water",
+      "after_render": "songs/sfz_revisited/still_water/renders/01_dusk_on_the_water",
+      "score_sha256": "a02b52d8d50d2b5df85fdda944b4e5b16890760db00c588bba8a1d578e3b3f46",
+      "qa": {
+        "lufs": -23.04,
+        "true_peak_db": -1.47,
+        "clipped_samples": 0,
+        "seconds": 213.013,
+        "sections": [
+          {
+            "name": "dusk",
+            "start": 0.0,
+            "loudness": -27.1,
+            "low": 0.1,
+            "mid": 0.899,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "theme",
+            "start": 20.0,
+            "loudness": -25.1,
+            "low": 0.311,
+            "mid": 0.689,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "answer",
+            "start": 52.0,
+            "loudness": -23.8,
+            "low": 0.374,
+            "mid": 0.625,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "reflection",
+            "start": 84.0,
+            "loudness": -24.8,
+            "low": 0.331,
+            "mid": 0.669,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "homeward",
+            "start": 137.8144397598221,
+            "loudness": -18.3,
+            "low": 0.228,
+            "mid": 0.772,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "settle",
+            "start": 172.10015404553639,
+            "loudness": -26.7,
+            "low": 0.389,
+            "mid": 0.611,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "keys": -32.83,
+          "strings": -28.03,
+          "harp": -35.03,
+          "bell": -39.36,
+          "host": -34.35,
+          "mel": -25.9,
+          "low": -29.37,
+          "flute": -27.42,
+          "return_hall": -34.31,
+          "binaural": -29.56
+        },
+        "render": {
+          "seconds": 42.39,
+          "notes_rendered": 821,
+          "cache_hits": 0,
+          "audio_seconds": 213.013,
+          "master": "standard",
+          "digest": "2d86f41551cadc9e0d03ca34ae0ffee9cd73ea87cb38084a1a7139e7fd100c82",
+          "performed": true,
+          "played_digest": "b24e2a6681574050bf7563336b24d958b25bd5ae055f526facdf0f81e832c1ce",
+          "binaural": [
+            {
+              "section": "dusk",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  16.18,
+                  16.18
+                ],
+                [
+                  10.0,
+                  10.0
+                ]
+              ]
+            },
+            {
+              "section": "theme",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  16.18,
+                  13.0
+                ],
+                [
+                  10.0,
+                  8.034
+                ]
+              ]
+            },
+            {
+              "section": "answer",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  13.0,
+                  11.5
+                ],
+                [
+                  8.034,
+                  7.107
+                ]
+              ]
+            },
+            {
+              "section": "reflection",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  11.5,
+                  10.0
+                ],
+                [
+                  7.107,
+                  6.18
+                ]
+              ]
+            },
+            {
+              "section": "homeward",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  10.0,
+                  10.0
+                ],
+                [
+                  6.18,
+                  6.18
+                ]
+              ]
+            },
+            {
+              "section": "settle",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  10.0,
+                  10.0
+                ],
+                [
+                  6.18,
+                  6.18
+                ]
+              ]
+            }
+          ],
+          "samples": [
+            "sampler/flute",
+            "sampler/folk_harp",
+            "sampler/grand_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "Dusk on the Water",
+        "facts": {
+          "bars": 50.0,
+          "seconds": 213.0,
+          "sections": 6,
+          "parts": 8,
+          "impacts": 0,
+          "melody notes checked against chords": 202,
+          "binaural beats (Hz)": "6.18 7.107 8.034 10 11.5 13 16.18",
+          "lufs": -23.04
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "binaural",
+            "where": "theme bar 2",
+            "message": "the binaural carrier A3 is a half step from a tone of C#m (and 12 more): a pedal point's tension",
+            "fix": "fine if it resolves; otherwise move the carrier to a common tone"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "Dusk on the Water",
+        "facts": {
+          "bars": 50.0,
+          "seconds": 213.0,
+          "sections": 6,
+          "parts": 8,
+          "impacts": 0,
+          "melody notes checked against chords": 202,
+          "binaural beats (Hz)": "6.18 7.107 8.034 10 11.5 13 16.18",
+          "lufs": -23.03
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "binaural",
+            "where": "theme bar 2",
+            "message": "the binaural carrier A3 is a half step from a tone of C#m (and 12 more): a pedal point's tension",
+            "fix": "fine if it resolves; otherwise move the carrier to a common tone"
+          }
+        ]
+      },
+      "wav_sha256": "d334a304f869e6dcc22308e00cd1ad2d6bc14605f05e14f30e38beda77daccfb",
+      "mp3_sha256": "921ee6454b2dcba5ca7bdae8395b98784fc53f11e2f5416c9eab4fef264135dd",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "still_water/02_the_slow_tide",
+      "title": "The Slow Tide",
+      "source_sha256": "387962c2cf826f8f9a8612dcfee1115d8c0c83d81914ff49b58bb3ed95f2f92f",
+      "score": "songs/sfz_revisited/still_water/02_the_slow_tide.sm",
+      "note_digest": "ca6b87a706f0aba937a313a19a3bf21b7ed7a506bb9ce45983dd32526dfe875f",
+      "frames": 6703,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 3.7,
+          "initial_energy_adjustment_db": 12.71,
+          "final_gain_db": 4.8
+        },
+        {
+          "part": "mel",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 11.9,
+          "initial_energy_adjustment_db": 8.86,
+          "final_gain_db": 13.3
+        },
+        {
+          "part": "harp",
+          "before": "string_pluck/still",
+          "after": "sampler/folk_harp",
+          "gain_db": 1.2,
+          "initial_energy_adjustment_db": 9.17,
+          "final_gain_db": 3
+        }
+      ],
+      "before_render": "songs/sfz_revisited/still_water/renders/before_02_the_slow_tide",
+      "after_render": "songs/sfz_revisited/still_water/renders/02_the_slow_tide",
+      "score_sha256": "5bc686bc2382b4269eafac644ba28e2ddba2278deb7b2432fe8a290986677599",
+      "qa": {
+        "lufs": -23.0,
+        "true_peak_db": -6.82,
+        "clipped_samples": 0,
+        "seconds": 223.446,
+        "sections": [
+          {
+            "name": "drift",
+            "start": 0.0,
+            "loudness": -28.2,
+            "low": 0.148,
+            "mid": 0.852,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "tide",
+            "start": 22.22222222222222,
+            "loudness": -25.3,
+            "low": 0.249,
+            "mid": 0.751,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "ebb",
+            "start": 57.77777777777778,
+            "loudness": -25.3,
+            "low": 0.372,
+            "mid": 0.628,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "turning",
+            "start": 93.33333333333333,
+            "loudness": -27.2,
+            "low": 0.421,
+            "mid": 0.579,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "undertow",
+            "start": 116.88994046461004,
+            "loudness": -20.0,
+            "low": 0.218,
+            "mid": 0.782,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "slack_water",
+            "start": 181.88994046461005,
+            "loudness": -23.5,
+            "low": 0.38,
+            "mid": 0.62,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "keys": -30.87,
+          "strings": -27.82,
+          "harp": -34.05,
+          "host": -36.01,
+          "mel": -31.25,
+          "low": -29.03,
+          "gold": -20.79,
+          "bell": -36.95,
+          "gong": -32.09,
+          "return_hall": -29.98,
+          "binaural": -26.97
+        },
+        "render": {
+          "seconds": 27.36,
+          "notes_rendered": 358,
+          "cache_hits": 0,
+          "audio_seconds": 223.446,
+          "master": "standard",
+          "digest": "ca6b87a706f0aba937a313a19a3bf21b7ed7a506bb9ce45983dd32526dfe875f",
+          "performed": true,
+          "played_digest": "4af2e68fed42ab870f4c85bb5ac32912f71786ce9c637a41350c754d38b4adb8",
+          "binaural": [
+            {
+              "section": "drift",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  10.0,
+                  10.0
+                ],
+                [
+                  6.18,
+                  6.18
+                ]
+              ]
+            },
+            {
+              "section": "tide",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  10.0,
+                  8.6
+                ],
+                [
+                  6.18,
+                  5.315
+                ]
+              ]
+            },
+            {
+              "section": "ebb",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  8.6,
+                  7.6
+                ],
+                [
+                  5.315,
+                  4.697
+                ]
+              ]
+            },
+            {
+              "section": "turning",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  7.6,
+                  7.1
+                ],
+                [
+                  4.697,
+                  4.388
+                ]
+              ]
+            },
+            {
+              "section": "undertow",
+              "carriers_hz": [
+                220.0,
+                355.967
+              ],
+              "beats_hz": [
+                [
+                  7.1,
+                  6.18
+                ],
+                [
+                  4.388,
+                  3.819
+                ]
+              ]
+            },
+            {
+              "section": "slack_water",
+              "carriers_hz": [
+                220.0,
+                355.967
+              ],
+              "beats_hz": [
+                [
+                  6.18,
+                  6.18
+                ],
+                [
+                  3.819,
+                  3.819
+                ]
+              ]
+            }
+          ],
+          "samples": [
+            "sampler/folk_harp",
+            "sampler/grand_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "The Slow Tide",
+        "facts": {
+          "bars": 47.0,
+          "seconds": 223.4,
+          "sections": 6,
+          "parts": 9,
+          "impacts": 0,
+          "melody notes checked against chords": 126,
+          "binaural beats (Hz)": "3.819 4.388 4.697 5.315 6.18 7.1 7.6 8.6 10",
+          "lufs": -23.0
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 1,
+          "note": 2
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "ending",
+            "where": "slack_water",
+            "message": "the song ends on vDg, not on the home chord",
+            "fix": "end on I (or i, or its Picardy major) unless the hang is deliberate"
+          },
+          {
+            "severity": "note",
+            "kind": "binaural",
+            "where": "tide bar 3",
+            "message": "the binaural carrier A3 is a half step from a tone of C#m (and 2 more): a pedal point's tension",
+            "fix": "fine if it resolves; otherwise move the carrier to a common tone"
+          },
+          {
+            "severity": "warning",
+            "kind": "balance",
+            "where": "song",
+            "message": "the melody (keys) is 10.1 dB under gold",
+            "fix": "raise it (mix keys +3) or lower gold"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "The Slow Tide",
+        "facts": {
+          "bars": 47.0,
+          "seconds": 223.4,
+          "sections": 6,
+          "parts": 9,
+          "impacts": 0,
+          "melody notes checked against chords": 126,
+          "binaural beats (Hz)": "3.819 4.388 4.697 5.315 6.18 7.1 7.6 8.6 10",
+          "lufs": -23.0
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 1,
+          "note": 2
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "ending",
+            "where": "slack_water",
+            "message": "the song ends on vDg, not on the home chord",
+            "fix": "end on I (or i, or its Picardy major) unless the hang is deliberate"
+          },
+          {
+            "severity": "note",
+            "kind": "binaural",
+            "where": "tide bar 3",
+            "message": "the binaural carrier A3 is a half step from a tone of C#m (and 2 more): a pedal point's tension",
+            "fix": "fine if it resolves; otherwise move the carrier to a common tone"
+          },
+          {
+            "severity": "warning",
+            "kind": "balance",
+            "where": "song",
+            "message": "the melody (keys) is 10.1 dB under gold",
+            "fix": "raise it (mix keys +3) or lower gold"
+          }
+        ]
+      },
+      "wav_sha256": "8f1f7504188acf5f68c68b2f037d1d0df609ccf8a1ef08096a0c8c7ecb3dc403",
+      "mp3_sha256": "a6dffce16f5c8f8b9e53418d46e40a286f8ba3abd2158a2ddb87b2163b54e5e4",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "still_water/05_first_light",
+      "title": "First Light",
+      "source_sha256": "a308926b52e18445eff6c617dc070d3626fcae6ea840c3887a981b5b7ae7a6df",
+      "score": "songs/sfz_revisited/still_water/05_first_light.sm",
+      "note_digest": "0d31dd0cd1df1ec9738ea1728c36739bab839c7541f4f850d34ab7bfab4b79ef",
+      "frames": 5541,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 2.8,
+          "initial_energy_adjustment_db": 11.79,
+          "final_gain_db": 2.8
+        },
+        {
+          "part": "mel",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 8.5,
+          "initial_energy_adjustment_db": 5.52,
+          "final_gain_db": 7.7
+        },
+        {
+          "part": "harp",
+          "before": "string_pluck/still",
+          "after": "sampler/folk_harp",
+          "gain_db": -3.1,
+          "initial_energy_adjustment_db": 4.85,
+          "final_gain_db": 0
+        },
+        {
+          "part": "flute",
+          "before": "clean/lead",
+          "after": "sampler/flute",
+          "gain_db": -6.8,
+          "initial_energy_adjustment_db": -0.82,
+          "final_gain_db": -5.2
+        }
+      ],
+      "before_render": "songs/sfz_revisited/still_water/renders/before_05_first_light",
+      "after_render": "songs/sfz_revisited/still_water/renders/05_first_light",
+      "score_sha256": "bff63c6b95ceacd854588032c9b8344390870f84b453b8903b10669bdb99b350",
+      "qa": {
+        "lufs": -23.07,
+        "true_peak_db": -1.47,
+        "clipped_samples": 0,
+        "seconds": 184.716,
+        "sections": [
+          {
+            "name": "before_dawn",
+            "start": 0.0,
+            "loudness": -25.6,
+            "low": 0.052,
+            "mid": 0.948,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "dawn",
+            "start": 40.0,
+            "loudness": -22.7,
+            "low": 0.023,
+            "mid": 0.977,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "sunrise",
+            "start": 45.0,
+            "loudness": -24.7,
+            "low": 0.184,
+            "mid": 0.816,
+            "high": 0.0,
+            "silent": false
+          },
+          {
+            "name": "morning",
+            "start": 106.2471785413194,
+            "loudness": -18.9,
+            "low": 0.114,
+            "mid": 0.885,
+            "high": 0.001,
+            "silent": false
+          },
+          {
+            "name": "awake",
+            "start": 141.80273409687496,
+            "loudness": -27.3,
+            "low": 0.246,
+            "mid": 0.754,
+            "high": 0.0,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "gold": -19.72,
+          "bell": -40.2,
+          "mel": -20.16,
+          "ghost": -33.75,
+          "keys": -29.0,
+          "strings": -25.35,
+          "choir": -26.54,
+          "low": -26.01,
+          "host": -29.29,
+          "flute": -24.49,
+          "harp": -30.1,
+          "return_hall": -28.25,
+          "binaural": -22.98
+        },
+        "render": {
+          "seconds": 32.82,
+          "notes_rendered": 478,
+          "cache_hits": 0,
+          "audio_seconds": 184.716,
+          "master": "standard",
+          "digest": "0d31dd0cd1df1ec9738ea1728c36739bab839c7541f4f850d34ab7bfab4b79ef",
+          "performed": true,
+          "played_digest": "e12cc395ef8f8b550db0c41c115ac35b34a8a8e47f5568503eed9004b98ef8cc",
+          "binaural": [
+            {
+              "section": "before_dawn",
+              "carriers_hz": [
+                220.0,
+                271.935,
+                336.13
+              ],
+              "beats_hz": [
+                [
+                  10.0,
+                  10.0
+                ],
+                [
+                  6.18,
+                  6.18
+                ],
+                [
+                  3.82,
+                  3.82
+                ]
+              ]
+            },
+            {
+              "section": "dawn",
+              "carriers_hz": [
+                220.0
+              ],
+              "beats_hz": [
+                [
+                  10.0,
+                  10.0
+                ]
+              ]
+            },
+            {
+              "section": "sunrise",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  10.0,
+                  10.0
+                ],
+                [
+                  6.18,
+                  6.18
+                ]
+              ]
+            },
+            {
+              "section": "morning",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  10.0,
+                  10.0
+                ],
+                [
+                  6.18,
+                  6.18
+                ]
+              ]
+            },
+            {
+              "section": "awake",
+              "carriers_hz": [
+                220.0,
+                329.628
+              ],
+              "beats_hz": [
+                [
+                  10.0,
+                  16.18
+                ],
+                [
+                  6.18,
+                  10.0
+                ]
+              ]
+            }
+          ],
+          "samples": [
+            "sampler/flute",
+            "sampler/folk_harp",
+            "sampler/grand_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "First Light",
+        "facts": {
+          "bars": 38.0,
+          "seconds": 184.7,
+          "sections": 5,
+          "parts": 11,
+          "impacts": 0,
+          "melody notes checked against chords": 119,
+          "binaural beats (Hz)": "3.82 6.18 10 16.18",
+          "lufs": -23.07
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 2
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "binaural",
+            "where": "before_dawn bar 4",
+            "message": "the binaural carrier A5*phi^-2 is a half step from a tone of ^Fg: a pedal point's tension",
+            "fix": "fine if it resolves; otherwise move the carrier to a common tone"
+          },
+          {
+            "severity": "note",
+            "kind": "binaural",
+            "where": "sunrise bar 7",
+            "message": "the binaural carrier A3 is a half step from a tone of E (and 5 more): a pedal point's tension",
+            "fix": "fine if it resolves; otherwise move the carrier to a common tone"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "First Light",
+        "facts": {
+          "bars": 38.0,
+          "seconds": 184.7,
+          "sections": 5,
+          "parts": 11,
+          "impacts": 0,
+          "melody notes checked against chords": 119,
+          "binaural beats (Hz)": "3.82 6.18 10 16.18",
+          "lufs": -23.01
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 2
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "binaural",
+            "where": "before_dawn bar 4",
+            "message": "the binaural carrier A5*phi^-2 is a half step from a tone of ^Fg: a pedal point's tension",
+            "fix": "fine if it resolves; otherwise move the carrier to a common tone"
+          },
+          {
+            "severity": "note",
+            "kind": "binaural",
+            "where": "sunrise bar 7",
+            "message": "the binaural carrier A3 is a half step from a tone of E (and 5 more): a pedal point's tension",
+            "fix": "fine if it resolves; otherwise move the carrier to a common tone"
+          }
+        ]
+      },
+      "wav_sha256": "1f31386d2e0e053407067be190b2711178256e8d17b44846ae1eb639f4886de1",
+      "mp3_sha256": "d7bdfa039fc972b61ba4c195bc8898ac0481018ada2501467d51d1cec1f904d5",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    },
+    {
+      "key": "epic/a_comma_higher",
+      "title": "A Comma Higher",
+      "source_sha256": "491302a20d27802f621d7fd61fd10e062fc4aa1bc2bd65e2f9073db8bbfa622f",
+      "score": "songs/sfz_revisited/epic/a_comma_higher.sm",
+      "note_digest": "b3ebd4aaec55fedccb398acb539ccc001d49f789238c1fb807df0505ea21b787",
+      "frames": 17631,
+      "changes": [
+        {
+          "part": "keys",
+          "before": "keys/still",
+          "after": "sampler/grand_piano",
+          "gain_db": 9.0,
+          "initial_energy_adjustment_db": 9.01,
+          "final_gain_db": 9
+        },
+        {
+          "part": "epiano",
+          "before": "epiano/still",
+          "after": "sampler/fm_piano",
+          "gain_db": 0.0,
+          "initial_energy_adjustment_db": 10.04,
+          "final_gain_db": 0
+        }
+      ],
+      "before_render": "songs/sfz_revisited/epic/renders/before_a_comma_higher",
+      "after_render": "songs/sfz_revisited/epic/renders/a_comma_higher",
+      "score_sha256": "8c41f61aeb082ed7b45f4d82dfdad5349f2940799392545f1a7ae45a0ac46e7a",
+      "qa": {
+        "lufs": -14.48,
+        "true_peak_db": -1.0,
+        "clipped_samples": 0,
+        "seconds": 587.698,
+        "sections": [
+          {
+            "name": "veil",
+            "start": 0.0,
+            "loudness": -22.5,
+            "low": 0.146,
+            "mid": 0.848,
+            "high": 0.006,
+            "silent": false
+          },
+          {
+            "name": "door",
+            "start": 40.0,
+            "loudness": -19.9,
+            "low": 0.139,
+            "mid": 0.846,
+            "high": 0.015,
+            "silent": false
+          },
+          {
+            "name": "riff_1",
+            "start": 46.666666666666664,
+            "loudness": -14.0,
+            "low": 0.827,
+            "mid": 0.127,
+            "high": 0.047,
+            "silent": false
+          },
+          {
+            "name": "riff_2",
+            "start": 58.84057971014492,
+            "loudness": -12.7,
+            "low": 0.652,
+            "mid": 0.305,
+            "high": 0.043,
+            "silent": false
+          },
+          {
+            "name": "verse_1",
+            "start": 71.01449275362319,
+            "loudness": -13.2,
+            "low": 0.591,
+            "mid": 0.35,
+            "high": 0.059,
+            "silent": false
+          },
+          {
+            "name": "pre_1",
+            "start": 98.84057971014492,
+            "loudness": -12.4,
+            "low": 0.495,
+            "mid": 0.464,
+            "high": 0.041,
+            "silent": false
+          },
+          {
+            "name": "chorus_1",
+            "start": 107.53623188405797,
+            "loudness": -12.6,
+            "low": 0.305,
+            "mid": 0.614,
+            "high": 0.081,
+            "silent": false
+          },
+          {
+            "name": "riff_3",
+            "start": 121.44927536231884,
+            "loudness": -14.1,
+            "low": 0.843,
+            "mid": 0.114,
+            "high": 0.043,
+            "silent": false
+          },
+          {
+            "name": "verse_2",
+            "start": 127.53623188405797,
+            "loudness": -12.5,
+            "low": 0.667,
+            "mid": 0.282,
+            "high": 0.051,
+            "silent": false
+          },
+          {
+            "name": "pre_2",
+            "start": 141.44927536231884,
+            "loudness": -12.0,
+            "low": 0.486,
+            "mid": 0.471,
+            "high": 0.043,
+            "silent": false
+          },
+          {
+            "name": "chorus_2",
+            "start": 150.14492753623188,
+            "loudness": -11.9,
+            "low": 0.343,
+            "mid": 0.588,
+            "high": 0.069,
+            "silent": false
+          },
+          {
+            "name": "riff_out",
+            "start": 164.05797101449275,
+            "loudness": -14.9,
+            "low": 0.838,
+            "mid": 0.115,
+            "high": 0.047,
+            "silent": false
+          },
+          {
+            "name": "head_dorian",
+            "start": 170.14492753623188,
+            "loudness": -21.8,
+            "low": 0.461,
+            "mid": 0.535,
+            "high": 0.004,
+            "silent": false
+          },
+          {
+            "name": "head_golden",
+            "start": 181.5734989648033,
+            "loudness": -20.4,
+            "low": 0.47,
+            "mid": 0.526,
+            "high": 0.004,
+            "silent": false
+          },
+          {
+            "name": "head_lift",
+            "start": 193.00207039337474,
+            "loudness": -19.0,
+            "low": 0.443,
+            "mid": 0.552,
+            "high": 0.006,
+            "silent": false
+          },
+          {
+            "name": "head_home",
+            "start": 204.43064182194615,
+            "loudness": -19.7,
+            "low": 0.539,
+            "mid": 0.458,
+            "high": 0.004,
+            "silent": false
+          },
+          {
+            "name": "mode_60",
+            "start": 215.8592132505176,
+            "loudness": -17.0,
+            "low": 0.349,
+            "mid": 0.601,
+            "high": 0.05,
+            "silent": false
+          },
+          {
+            "name": "mode_51",
+            "start": 227.28778467908901,
+            "loudness": -17.3,
+            "low": 0.361,
+            "mid": 0.582,
+            "high": 0.056,
+            "silent": false
+          },
+          {
+            "name": "mode_42",
+            "start": 238.71635610766043,
+            "loudness": -17.3,
+            "low": 0.347,
+            "mid": 0.59,
+            "high": 0.063,
+            "silent": false
+          },
+          {
+            "name": "mode_33",
+            "start": 250.14492753623188,
+            "loudness": -16.7,
+            "low": 0.365,
+            "mid": 0.586,
+            "high": 0.049,
+            "silent": false
+          },
+          {
+            "name": "mode_24",
+            "start": 261.5734989648033,
+            "loudness": -17.0,
+            "low": 0.339,
+            "mid": 0.592,
+            "high": 0.069,
+            "silent": false
+          },
+          {
+            "name": "mode_15",
+            "start": 273.00207039337477,
+            "loudness": -17.8,
+            "low": 0.295,
+            "mid": 0.64,
+            "high": 0.065,
+            "silent": false
+          },
+          {
+            "name": "mode_06",
+            "start": 284.43064182194615,
+            "loudness": -18.3,
+            "low": 0.296,
+            "mid": 0.632,
+            "high": 0.072,
+            "silent": false
+          },
+          {
+            "name": "cadence",
+            "start": 295.8592132505176,
+            "loudness": -20.0,
+            "low": 0.452,
+            "mid": 0.545,
+            "high": 0.003,
+            "silent": false
+          },
+          {
+            "name": "giant",
+            "start": 301.5734989648033,
+            "loudness": -16.7,
+            "low": 0.423,
+            "mid": 0.569,
+            "high": 0.008,
+            "silent": false
+          },
+          {
+            "name": "deca_1",
+            "start": 313.00207039337477,
+            "loudness": -13.0,
+            "low": 0.681,
+            "mid": 0.26,
+            "high": 0.059,
+            "silent": false
+          },
+          {
+            "name": "deca_2",
+            "start": 325.175983436853,
+            "loudness": -12.6,
+            "low": 0.469,
+            "mid": 0.477,
+            "high": 0.054,
+            "silent": false
+          },
+          {
+            "name": "planing",
+            "start": 337.34989648033127,
+            "loudness": -12.9,
+            "low": 0.375,
+            "mid": 0.531,
+            "high": 0.094,
+            "silent": false
+          },
+          {
+            "name": "deca_13",
+            "start": 349.5238095238095,
+            "loudness": -13.1,
+            "low": 0.655,
+            "mid": 0.282,
+            "high": 0.064,
+            "silent": false
+          },
+          {
+            "name": "axe_solo",
+            "start": 360.8281573498965,
+            "loudness": -12.8,
+            "low": 0.502,
+            "mid": 0.433,
+            "high": 0.065,
+            "silent": false
+          },
+          {
+            "name": "still",
+            "start": 385.175983436853,
+            "loudness": -21.7,
+            "low": 0.229,
+            "mid": 0.766,
+            "high": 0.005,
+            "silent": false
+          },
+          {
+            "name": "pump_a",
+            "start": 440.8281573498965,
+            "loudness": -15.5,
+            "low": 0.268,
+            "mid": 0.691,
+            "high": 0.041,
+            "silent": false
+          },
+          {
+            "name": "pump_b",
+            "start": 451.26293995859214,
+            "loudness": -12.6,
+            "low": 0.217,
+            "mid": 0.708,
+            "high": 0.075,
+            "silent": false
+          },
+          {
+            "name": "pump_c",
+            "start": 465.175983436853,
+            "loudness": -12.4,
+            "low": 0.638,
+            "mid": 0.333,
+            "high": 0.029,
+            "silent": false
+          },
+          {
+            "name": "pump_d",
+            "start": 475.6107660455487,
+            "loudness": -13.5,
+            "low": 0.242,
+            "mid": 0.661,
+            "high": 0.097,
+            "silent": false
+          },
+          {
+            "name": "summit_riff",
+            "start": 479.0890269151139,
+            "loudness": -12.7,
+            "low": 0.65,
+            "mid": 0.306,
+            "high": 0.043,
+            "silent": false
+          },
+          {
+            "name": "summit_verse",
+            "start": 491.26293995859214,
+            "loudness": -13.1,
+            "low": 0.636,
+            "mid": 0.308,
+            "high": 0.056,
+            "silent": false
+          },
+          {
+            "name": "summit_pre",
+            "start": 505.175983436853,
+            "loudness": -12.1,
+            "low": 0.459,
+            "mid": 0.501,
+            "high": 0.04,
+            "silent": false
+          },
+          {
+            "name": "summit_chorus",
+            "start": 513.8716356107661,
+            "loudness": -12.2,
+            "low": 0.409,
+            "mid": 0.526,
+            "high": 0.065,
+            "silent": false
+          },
+          {
+            "name": "last_chorus",
+            "start": 527.7846790890269,
+            "loudness": -9.1,
+            "low": 0.475,
+            "mid": 0.472,
+            "high": 0.052,
+            "silent": false
+          },
+          {
+            "name": "coda",
+            "start": 541.6977225672878,
+            "loudness": -24.6,
+            "low": 0.336,
+            "mid": 0.659,
+            "high": 0.006,
+            "silent": false
+          }
+        ],
+        "stems": {
+          "gold": -18.01,
+          "gtr": -26.85,
+          "bell": -22.49,
+          "low": -28.17,
+          "axe": -10.13,
+          "bass": -22.41,
+          "drums": -10.84,
+          "lead": -14.6,
+          "organ": -20.18,
+          "horn": -16.39,
+          "epiano": -18.56,
+          "keys": -29.52,
+          "fx": -19.22,
+          "return_hall": -26.5
+        },
+        "render": {
+          "seconds": 79.12,
+          "notes_rendered": 11019,
+          "cache_hits": 583,
+          "audio_seconds": 587.698,
+          "master": "standard",
+          "digest": "b3ebd4aaec55fedccb398acb539ccc001d49f789238c1fb807df0505ea21b787",
+          "performed": true,
+          "played_digest": "02cd2401aafd096302b52dcf884a9b2226d7d1da85cce5f16fd73bcbe7b62d37",
+          "samples": [
+            "sampler/fm_piano",
+            "sampler/grand_piano"
+          ]
+        }
+      },
+      "review": {
+        "title": "A Comma Higher",
+        "facts": {
+          "bars": 320.0,
+          "seconds": 587.7,
+          "sections": 41,
+          "parts": 13,
+          "impacts": 8,
+          "melody notes checked against chords": 668,
+          "lufs": -14.48
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "contrast",
+            "where": "verse_1",
+            "message": "verse_1 is within 1 dB of both neighbours",
+            "fix": "contrast neighbouring sections by texture, register or density"
+          }
+        ]
+      },
+      "historical_cue_schema_additions": [],
+      "new_audio_warnings": [],
+      "original_review": {
+        "title": "A Comma Higher",
+        "facts": {
+          "bars": 320.0,
+          "seconds": 587.7,
+          "sections": 41,
+          "parts": 13,
+          "impacts": 8,
+          "melody notes checked against chords": 668,
+          "lufs": -14.47
+        },
+        "counts": {
+          "problem": 0,
+          "warning": 0,
+          "note": 1
+        },
+        "findings": [
+          {
+            "severity": "note",
+            "kind": "contrast",
+            "where": "verse_1",
+            "message": "verse_1 is within 1 dB of both neighbours",
+            "fix": "contrast neighbouring sections by texture, register or density"
+          }
+        ]
+      },
+      "wav_sha256": "88689f287fe0f6f43fdc15c595ae005a8bc2bd5bd7bff54b340617d0f4edcbb4",
+      "mp3_sha256": "aac09e8c12f40eeaa754ee0490fba90e6cad7f892533dce7fb90f05b76f40e46",
+      "written_notes_unchanged": true,
+      "frames_unchanged": true,
+      "cues_unchanged": true,
+      "binaural_settings_unchanged": true,
+      "note_findings_unchanged": true
+    }
+  ],
+  "retained": {
+    "golden_house/03_escalator": "The synthesized bass, lead and arpeggio are the electronic identity of this piece.",
+    "golden_house/04_quasicrystal": "Its organ stabs, shimmer and golden-spectrum pad are deliberate sound design.",
+    "still_water/03_deep_water": "Golden-spectrum glass and pads are the musical material; an acoustic substitution would change that purpose.",
+    "still_water/04_moon_on_the_water": "The golden-spectrum voices and sustained harmonic layers are intentional; retained for comparison."
+  },
+  "validation": {
+    "sample_installation": {
+      "ok": true,
+      "voices": 17,
+      "files": 749,
+      "errors": []
+    },
+    "revised": 17,
+    "retained": 4,
+    "all_written_events_and_cues_preserved": true,
+    "clipped_samples": 0,
+    "new_audio_warnings": 0,
+    "human_auditory_approval": false
+  }
+}

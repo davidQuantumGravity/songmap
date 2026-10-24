@@ -9,16 +9,25 @@ seed: 23
 tail_seconds: 3
 
 instruments:
-  ep: epiano/still
-  keys: {use: keys/still, hardness: 0.3}
-  bass: {cutoff: 480, glide: 0.08}
+  ep: sampler/fm_piano
+  keys: sampler/grand_piano
+  bass:
+    cutoff: 480
+    glide: 0.08
 
 sections:
   - {name: x, bars: 4, parts: {ep: {rel: "[3,7,9]/2 [3,7,9]"}, bass: {rel: "R/2 R", oct: -2}, keys: {deg: "=mp 5/1 | 5/1 | 4/1 | 0/1"}}, harmony: "Fmaj7:1 Fmaj7:0.5 Fg:0.5 E7:0.5 Eg:0.5 Am9:1"}
 
 mix:
-  bass: {gain_db: -2}
-  ep: {gain_db: -11, send: {hall: 0.2}}
-  keys: {gain_db: 3, send: {hall: 0.25}}
+  bass:
+    gain_db: -2
+  ep:
+    gain_db: -1.3
+    send:
+      hall: 0.2
+  keys:
+    gain_db: 10.4
+    send:
+      hall: 0.25
 
 master: clean

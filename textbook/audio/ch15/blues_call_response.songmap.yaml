@@ -9,12 +9,28 @@ key: "C major"
 tuning: 12edo
 seed: 15
 tail_seconds: 2
-instruments: {lead: clean/lead, keys: clean/keys, organ: clean/organ, bass: clean/bass}
+instruments:
+  lead: sampler/grand_piano
+  keys: sampler/grand_piano
+  organ: sampler/grand_piano
+  bass: sampler/double_bass
 mix:
-  lead:  {gain_db: -2, pan: -0.3, send: {hall: 0.15}}
-  keys:  {gain_db: -3, pan: 0.3, send: {hall: 0.15}}
-  organ: {gain_db: -16, send: {hall: 0.2}}
-  bass:  {gain_db: -6}
+  lead:
+    gain_db: 8.5
+    pan: -0.3
+    send:
+      hall: 0.15
+  keys:
+    gain_db: 9.9
+    pan: 0.3
+    send:
+      hall: 0.15
+  organ:
+    gain_db: 8.0
+    send:
+      hall: 0.2
+  bass:
+    gain_db: 14.5
 returns: {hall: {type: reverb, seconds: 1.6, predelay: 0.02, damping: 0.5}}
 sections:
   - name: blues

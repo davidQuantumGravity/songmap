@@ -57,3 +57,47 @@ def test_resolve_explains_and_files_round_trip(tmp_path):
     v["theme"] = "dark"
     p = view_mod.save(str(song), v)
     assert p.endswith("s.view.yaml") and view_mod.load(str(song)) == {"theme": "dark"}
+
+
+def test_instrument_panels_filter_parts_and_both_render(score):
+    v = {"size": [800, 400], "theme": "dark", "color_by": "part",
+         "part_colors": {"keys": "#0077ff", "lead": "#ff3300"},
+         "layers": [{"type": "instrument", "box": [0, 0, .5, 1], "parts": ["keys"]},
+                    {"type": "instrument", "box": [.5, 0, .5, 1], "parts": ["lead"]}]}
+    r = Renderer(score, view=v)
+    assert {n.part for n in r.instrument_panels[0].score.notes} == {"keys"}
+    assert {n.part for n in r.instrument_panels[1].score.notes} == {"lead"}
+    t = next(n.start for n in score.notes if n.part == "lead") + .04
+    im = np.asarray(r.frame(t))
+    assert ((im[:, :400, 2] > 200) & (im[:, :400, 0] < 50)).sum() > 20
+    assert ((im[:, 400:, 0] > 200) & (im[:, 400:, 2] < 50)).sum() > 20
+
+
+def test_panel_windows_follow_actual_bars_and_active_mode_has_no_future_notes(score):
+    from dataclasses import replace
+    changed = replace(score, bars=[0., 2., 5., 6.])
+    v = {"layers": [{"type": "instrument", "box": [0, 0, 1, 1], "parts": ["lead"]}]}
+    p = Renderer(changed, view=v).instrument_panels[0]
+    assert p.window_at(4.99) == (2., 5.)
+    assert p.window_at(5.) == (5., 6.)
+    assert p.window_at(8.) == (5., 6.)
+    v["layers"][0]["mode"] = "active"
+    active = Renderer(score, view=v).instrument_panels[0]
+    assert active.visible_notes(0.) == []
+    t = next(n.start for n in score.notes if n.part == "lead") + .04
+    assert active.visible_notes(t)
+    assert all(n.start <= t < n.end for n in active.visible_notes(t))
+    assert not np.array_equal(np.asarray(active.frame(0.)), np.asarray(active.frame(t)))
+
+
+def test_empty_part_selection_and_panel_validation(score):
+    assert not score_of(expand(parse_text(SONG, "v.sm")), []).notes
+    v = {"layers": [{"type": "instrument", "box": [.25, .25, .5, .5], "parts": []}]}
+    r = Renderer(score, view=v)
+    assert not r.instrument_panels[0].score.notes
+    im = np.asarray(r.frame(5.))
+    assert np.all(im[:180] == np.array([247, 244, 238]))  # panels never draw outside their subwindow
+    for patch, msg in (({"mode": "typo"}, "mode"), ({"bars": 0}, "positive integer"),
+                       ({"bars": 1.5}, "positive integer"), ({"parts": "keys"}, "list of part names")):
+        with pytest.raises(ValueError, match=msg):
+            view_mod.resolve({"layers": [{**v["layers"][0], **patch}]})

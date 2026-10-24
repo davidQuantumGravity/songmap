@@ -10,10 +10,20 @@ key: "C major"
 tuning: 12edo
 seed: 15
 tail_seconds: 2.5
-instruments: {lo: clean/organ, hi: clean/organ}
+instruments:
+  lo: sampler/grand_piano
+  hi: sampler/grand_piano
 mix:
-  lo: {gain_db: -5, pan: -0.3, send: {hall: 0.25}}
-  hi: {gain_db: -5, pan: 0.3, send: {hall: 0.25}}
+  lo:
+    gain_db: 16.4
+    pan: -0.3
+    send:
+      hall: 0.25
+  hi:
+    gain_db: 17.4
+    pan: 0.3
+    send:
+      hall: 0.25
 returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
 sections:
   - name: chain

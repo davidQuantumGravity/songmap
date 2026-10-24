@@ -1,0 +1,14 @@
+instrument: snare
+description: Bright electronic snare with crisp wires.
+tags:
+- electronic
+- snare
+params:
+  tone: 205
+  tone_decay: 0.11
+  tone_mix: 0.38
+  noise_decay: 0.2
+  noise_hp: 2100
+  noise_lp: 12000
+  snap: 0.55
+  drive: 1.65

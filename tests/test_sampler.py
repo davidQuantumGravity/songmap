@@ -26,7 +26,7 @@ SFZ = r"""
 <group> key=72 seq_length=2
 <region> sample=rr1.wav seq_position=1
 <region> sample=rr2.wav seq_position=2
-<group> trigger=release lokey=48 hikey=72 pitch_keytrack=0 rt_decay=0 xfin_lovel=1
+<group> trigger=release lokey=48 hikey=72 pitch_keytrack=0 rt_decay=0 xfin_lovel=1 cutoff=4000
 <region> sample=rel.wav
 <group> amp_veltrack=0
 <region> sample=open.wav key=84 group=1 off_by=2 ampeg_release=1
@@ -85,7 +85,7 @@ def test_parser_subset(lib):
     rr = [r for r in p.regions if r.seq_length == 2]
     assert [(r.lokey, r.hikey, r.seq_position) for r in rr] == [(72, 72, 1), (72, 72, 2)]
     assert [r.is_release for r in p.regions].count(True) == 1
-    assert "xfin_lovel" in p.unsupported                                  # reported, not silently wrong
+    assert "cutoff" in p.unsupported                                     # reported, not silently wrong
 
 
 def test_region_selection_by_key_and_float_pitch(inst):
@@ -189,7 +189,7 @@ def test_song_swaps_in_the_sampler(lib, monkeypatch, make_song, tmp_path):
     r = render(make_song(song))
     assert np.all(np.isfinite(r.audio)) and np.max(np.abs(r.stems["lead"])) > 0.01
     assert r.stats["samples"] == ["sampler/testlib"]
-    assert any("xfin_lovel" in w for w in r.song.warnings)
+    assert any("cutoff" in w for w in r.song.warnings)
     paths = write_outputs(r, str(tmp_path / "out"), stems=False)
     text = open(paths["licenses"], encoding="utf-8").read()
     assert "sampler/testlib" in text and "LICENSE.txt" in text and "unknown" in text

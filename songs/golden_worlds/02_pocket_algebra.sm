@@ -1,0 +1,44 @@
+# Pocket Algebra
+# review: pending - Revision 2 awaiting listening review. Original verdict: bass, chords and comping liked; melodies needed rework; leads too loud and shrill.
+# Pure golden harmony in 36-ET; ordinary and golden-spectrum timbres are both intentional.
+# Jazz/funk in the 53 decatonic; low vibraphone and marimba trade the head. Eb sounds in the head and ^D appears as a brief bridge inflection in 5|4. A spacious sixteen-bar written solo follows.
+# Revision 2: Soft sampled vibraphone and marimba trade a repeated-note hook; a spacious solo and an actual Eb-to-^D modal distinction replace the high arpeggio lines.
+# Listening draft: rewritten after the original rework verdict; awaiting a new listening review.
+song "Pocket Algebra" 112 4/4 "F golden10_63" fps=30 seed=702 tail=4 tuning=36edo mood=lofi
+inst keys=epiano/still(index=.55) lead=sampler/vibraphone(attack=.012, release_mul=.06) reply=sampler/marimba(attack=.01, release_mul=.1) gtr=string_pluck/still(brightness=.6, t60=1.4) bass=clean/bass(release=.08)
+kit kick=kick/v0(tune=46, decay=.26, drive=1.15, click=.24) snare=snare/v0(tone=185, noise_decay=.13, snap=.3) hat=hat/v0(decay=.035, metal=.18) ohat=hat/v0_open(decay=.16) rim=clap/v0
+groove swing=.57/16 tpl=laid_back
+
+prog head "Fg7:1 ^C#g7:1 vBbg7:1 F#g7:1 Fg7:1 vAg7:1 ^Cg7:1 Eg7:1"
+prog turn "vAg7:1 Fg7:1 F#g7:1 vBbg7:1 ^C#g7:1 ^Cg7:1 Eg7:1 Fg7:1"
+prog solo_changes "Fg7:1 ^C#g7:1 vBbg7:1 F#g7:1 Fg7:1 vAg7:1 ^Cg7:1 Eg7:1 vAg7:1 Fg7:1 F#g7:1 vBbg7:1 ^C#g7:1 ^Cg7:1 Eg7:1 Fg7:1"
+prog bridge "Fg7:1 vAg7:1 ^C#g7:1 vBbg7:1 F#g7:1 vAg7:1 ^C#g7:1 Fg7:1"
+prog last "^C#g7:1 vBbg7:1 vAg7:1 Fg7:1"
+
+head_call = {deg: "=mp r/8 3/8 3/4 0/8 0/8 r/4 | =p 0/4. 3/8 3/4 r/4 | =mp 4/4 3/8 4/8 3/4 r/4 | =p 1/2 r/4 0/4 | =mp 3/4 3/8 0/8 r/2 | =p 2/4. 3/8 3/4 r/4 | =mp 5/4 6/8 5/8 2/4 r/4 | =p 8/4 9/4 r/2", oct: -1}
+head_answer = {deg: "=p 3/4 2/8 3/8 6/4 r/4 | =mp 6/4. 3/8 0/4 r/4 | =p 1/4 1/8 0/8 1/4 r/4 | =p 3/2 r/4 4/4 | =mp 3/4 3/8 0/8 0/4 r/4 | =p 2/4. 5/8 6/4 5/4 | =mp 5/4 5/8 8/8 9/4 r/4 | =p 6/4 3/4 0/2", oct: -1}
+modal_bridge = {deg: "=p 3/2 0/4 r/4 | =pp 6/4 7/8 8/8 9/4 r/4 | =p 6/2 3/4 r/4 | =pp 4/2 r/2 | =p 1/4. 0/8 1/4 r/4 | =pp 2/2 3/4 r/4 | =p 3/2 0/4 r/4 | =pp 0/2. r/4", oct: -1}
+solo = {deg: "=mp r/4 3/8 3/8 0/4 r/4 | =p 0/8 2/8 3/4 r/4 3/4 | =mp 4/4. 3/8 3/4 r/4 | =p 1/2 r/2 | =mp r/8 0/8 3/4 3/8 2/8 0/4 | =p 2/4 3/8 2/8 r/4 3/4 | =mp 5/4 6/8 5/8 2/4 r/4 | =p 8/8 9/8 9/4 r/2 | =mp 3/4 2/8 3/8 6/4 r/4 | =p 6/8 5/16 4/16 3/4 0/4 r/4 | =mp 1/4. 0/8 1/4 r/4 | =p 3/2 r/4 4/4 | =mp 3/8 3/8 6/4 7/8 6/8 3/4 | =p 2/4 5/8 6/8 5/4 r/4 | =mp 8/4 9/8 8/8 5/4 2/4 | =p 3/4 0/4 r/2", oct: -1}
+head_peak = {deg: "=mp r/8 3/8 3/4 0/8 3/8 r/4 | =p 6/4. 3/8 0/4 r/4 | =mp 4/4 3/8 4/8 7/4 r/4 | =p 7/4 4/4 1/4 r/4 | =mp 3/4 3/8 0/8 0/4 r/4 | =p 2/4. 3/8 6/4 3/4 | =mp 6/4 5/8 6/8 9/4 r/4 | =p 8/4 9/4 r/2", oct: -1}
+closing = {deg: "=p 3/2 0/4 r/4 | =pp 3/2 r/2 | =p 2/4. 3/8 3/4 r/4 | =pp 0/2. r/4", oct: -1}
+comping = {rel: "=mp [3,5]/8^' r/8 r/4 r/8 [R,3,5]/8^' r/4 | =p r/4 [R,3]/8^' r/8 [3,5]/4^' r/4 | =mp [R,3,5]/4^' r/8 [3,5]/8^' r/4 [R,3]/8^' r/8 | =p r/8 [3,5]/8^' r/2 [R,3,5]/4^'"}
+pluck_answer = {rel: "=mp r/2 5/8 3/8 R/4^ | =p r/1 | =mp r/4 R/8^ 3/8 5/4 r/4 | =p 3/2 r/2", oct: -1}
+bass_walk = {rel: "=mp R/4^ r/8 R/8^ 3/4 5/8 R/8^ | =p R/4^ 5/8 3/8 R/4^ r/4 | =mp R/8^ R/8^ r/4 5/4 3/8 R/8^ | =p R/4.^ 5/8 R+/4 r/4", oct: -2}
+beat_funk = {kick: "X......x..x...x.|X..x......x.....|X.....x...x..x..|X.......x.x.....", snare: "....X..o....X...|....X.o.....X..o|....X.......X.o.|....X..o....X...", hat: {steps: "x-x-x-xx-x-x-x-x|x-x-xx-x-x-x-x-x", vel: [.42,.14,.31,.17,.37,.12,.29,.18]}}
+beat_push = {kick: "X..x...x..x...x.|X.....x...x..x..", snare: "....X..o....X...|....X.o.....X.xx", hat: {steps: "x-xxx-x-x-xx-x-x", vel: [.48,.14,.26,.18,.38,.17]}, ohat: "..............x."}
+
+count_in 4 | keys:comping bass:bass_walk prog=last dyn=p
+head_left 8 | keys:comping bass:bass_walk lead:head_call drums:beat_funk prog=head dyn=mp
+head_right 8 | keys:comping bass:bass_walk reply:head_answer drums:beat_funk prog=turn dyn=mp<mf
+dialogue_call 8 | keys:comping bass:bass_walk lead:head_answer gtr:pluck_answer drums:beat_funk prog=turn dyn=mf
+limma_room 8 | keys:hold(range=[48,66]) lead:modal_bridge bass:bass_walk prog=bridge key="F golden10_54" dyn=p<mp
+solo_first 16 | keys:comping bass:bass_walk lead:solo drums:beat_funk prog=solo_changes dyn=mp<mf
+trading_keys 8 | keys:head_call bass:bass_walk gtr:pluck_answer drums:beat_funk prog=head dyn=mf
+trading_reed 8 | keys:comping bass:bass_walk lead:head_answer drums:beat_push prog=turn dyn=mf
+one_table 4 | keys:hold(range=[48,66]) lead:closing prog=last dyn=p>pp
+whole_room 8 | keys:comping bass:bass_walk lead:head_peak gtr:pluck_answer drums:beat_push prog=head dyn=f
+answer_back 8 | keys:comping bass:bass_walk reply:head_answer drums:beat_funk prog=turn dyn=mf>mp
+last_word 8 | keys:hold(range=[48,66]) bass:bass_walk lead:closing prog=last dyn=p>pp
+
+mix keys -15 hall=.12 | lead 22.5 hall=.14 pan=-.1 | reply -2 hall=.14 pan=.2 | gtr -7 hall=.15 pan=.23 | bass -5 | drums -8
+master standard lufs=-16 glue=none

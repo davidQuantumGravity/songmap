@@ -7,8 +7,13 @@ key: "C major"
 tuning: 12edo
 seed: 20
 tail_seconds: 2
-instruments: {lead: clean/lead}
-mix: {lead: {gain_db: -4, send: {hall: 0.25}}}
+instruments:
+  lead: sampler/grand_piano
+mix:
+  lead:
+    gain_db: 7.2
+    send:
+      hall: 0.25
 sections:
   - {name: prime, bars: 2, parts: {lead: {notes: "c4 eb8 d g4 f#2."}}}
   - {name: inverted, bars: 2, parts: {lead: {notes: "c4 a-8 bb- f-4 f#-2."}}}

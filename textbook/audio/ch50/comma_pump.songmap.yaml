@@ -12,18 +12,27 @@ seed: 1301
 tail_seconds: 3
 
 instruments:
-  gold: {use: clean/golden_pad, release: 1.5}
-  organ: {use: clean/organ, partials: 9, rolloff: 1.25, attack: 0.02, release: 0.25}
+  gold:
+    use: clean/golden_pad
+    release: 1.5
+  organ: sampler/grand_piano
   bell: clean/glass
-  low: clean/bass
+  low: sampler/double_bass
 
 sections:
   - {name: pump, bars: 16, parts: {organ: {style: hold, range: [55, 76]}, low: {rel: "=mp R/1", oct: -2}, bell: {notes: "=mf g1 | ^g1 | ^ab1 | ^ab1 | ^ab1 | ^a1 | ^a1 | ^a1 | ^bb1 | ^bb1 | ^bb1 | ^b1 | ^b1 | ^b1 | ^c+1 | ^c+1"}}, harmony: "C:1 Cg:1 ^Abg:1 vFg:1 C#g:1 ^Ag:1 vF#g:1 Dg:1 ^Bbg:1 vGg:1 Ebg:1 ^Bg:1 vAbg:1 Eg:1 ^Cg:1 ^C:1", dyn: "p<mf"}
 
 mix:
-  organ: {gain_db: -10, send: {hall: 0.25}}
-  bell: {gain_db: -6, send: {hall: 0.35}}
-  low: {gain_db: -2}
+  organ:
+    gain_db: 11.9
+    send:
+      hall: 0.25
+  bell:
+    gain_db: -6
+    send:
+      hall: 0.35
+  low:
+    gain_db: 11.6
 
 master:
   glue: none

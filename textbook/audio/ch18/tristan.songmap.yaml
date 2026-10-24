@@ -8,8 +8,18 @@ key: "A minor"
 tuning: 12edo
 seed: 18
 tail_seconds: 3
-instruments: {winds: clean/organ, top: clean/lead}
-mix: {winds: {gain_db: -6, send: {hall: 0.3}}, top: {gain_db: -5, send: {hall: 0.3}}}
+instruments:
+  winds: sampler/grand_piano
+  top: sampler/flute
+mix:
+  winds:
+    gain_db: 16.2
+    send:
+      hall: 0.3
+  top:
+    gain_db: -2.1
+    send:
+      hall: 0.3
 sections:
   - {name: alone, bars: 1, parts: {winds: {notes: "[f-,b-,d#]2. r4"}, top: {notes: "g#2. r4"}}}
   - {name: motion, bars: 2, parts: {winds: {notes: "[f-,b-,d#]2. [e-,g#-,d]4 | [e-,g#-,d]1"}, top: {notes: "g#2 a4 a#4 | b1"}}}

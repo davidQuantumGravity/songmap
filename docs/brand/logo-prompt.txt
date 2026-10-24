@@ -1,0 +1,10 @@
+Use case: logo-brand
+Asset type: finished primary logo for SongMap, a text-based music language and audio engine, for a GitHub README and desktop music software.
+Primary request: an original, elegant logo inspired by exactly THREE musical notes on a map. A simple folded map silhouette and a flowing route connect three clearly legible musical note symbols, suggesting composition as a journey. Integrate the symbols into one distinctive, compact mark rather than a pile of clip art.
+Style: crisp flat graphic design, minimal geometric forms, precise clean edges, strong silhouette, confident contemporary music-software identity. Restrained high-contrast colors, no textures or 3D effects. Map folds remain subtle and subordinate to the three notes. The mark should still be recognizable at small sizes.
+Composition: one finished horizontal logo lockup only, icon on the left and carefully spaced wordmark on the right, generous transparent padding, no surrounding presentation board. Balanced proportions and optical alignment.
+Text verbatim: "SongMap" with exactly this capitalization, one word, humanist sans-serif typography, clear and refined.
+Background: genuine transparency.
+Constraints: exactly three note symbols, no extra musical notes; no musical staff, no treble clef, no compass, no slogan, no mockups, no watermarks, no bevels, no shadows. The result must feel like a deliberate original logo rather than a generic navigation-app icon.
+
+Generated with the built-in image_gen tool. The original transparent PNG is retained without image transformations.

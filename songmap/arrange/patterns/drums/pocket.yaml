@@ -1,0 +1,18 @@
+# Two-bar backbeat with soft snare pickups and alternating hats.
+style: pocket
+role: drums
+bars: 2
+steps:
+  kick: X.....x...x.....|X.......x.x...x.
+  snare: '....X..o....X.o.|....X.......X.o.'
+  hat:
+    steps: x.x.x.x.x.x.x.x.
+    vel:
+    - 0.62
+    - 0.28
+    - 0.5
+    - 0.32
+    - 0.58
+    - 0.27
+    - 0.46
+    - 0.34

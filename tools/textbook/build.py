@@ -34,6 +34,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from contextlib import nullcontext
 
 import numpy as np
 import yaml
@@ -215,32 +216,66 @@ def _visual_hash() -> str:
     return h.hexdigest()[:12]
 
 
-def render_song_media(src: str, mp3: str, mp4: str | None) -> None:
+def render_song_media(src: str, mp3: str, mp4: str | None, reuse_notation: bool = False) -> None:
     """One SongMap example: render the audio once; write the MP3 and (optionally) the video and its poster."""
     from songmap.parse import yaml_form
     from songmap.render import render
     song = yaml_form.load(src)
     r = render(song)
     _write_mp3(r.audio, mp3, normalize=song.master.mode == "clean")
+    from songmap.export import qa as qa_mod
+    from songmap.listen import listen
+    from songmap.export.qa_plot import write_png
+    report = qa_mod.qa(r.audio, r.section_spans())
+    report["stems"] = {k: round(qa_mod.lufs(v), 2) for k, v in r.stems.items()}
+    report["render"] = r.stats
+    from audio_editions import audio_engine_hash
+    report["source"] = os.path.relpath(src, ROOT).replace(os.sep, "/")
+    report["source_sha256"] = hashlib.sha256(open(src, "rb").read()).hexdigest()
+    report["audio_engine_hash"] = audio_engine_hash()
+    with open(mp3[:-4] + ".qa.json", "w", encoding="utf-8") as f:
+        json.dump(report, f, indent=2)
+    with open(mp3[:-4] + ".review.json", "w", encoding="utf-8") as f:
+        json.dump(listen(r.arrangement, report).to_dict(), f, indent=2)
+    write_png(mp3[:-4] + ".qa.png", r.audio, r.section_spans(), [],
+              {s["name"]: s.get("loudness") for s in report.get("sections", [])}, title=song.title)
+    if r.sources:
+        from songmap.render import licenses_md
+        with open(mp3[:-4] + ".LICENSES.md", "w", encoding="utf-8") as f:
+            f.write(licenses_md(r.sources))
     if mp4:
         from songmap.export.wav import write_wav24
-        from songmap.visual import write_poster, write_video
+        from songmap.visual import write_poster, write_video, view as view_mod
+        view = view_mod.load(src) if not reuse_notation else None
         os.makedirs(os.path.dirname(mp4), exist_ok=True)
         with tempfile.TemporaryDirectory() as td:
             wav = os.path.join(td, "song.wav")
             write_wav24(wav, r.audio)
-            write_video(song, mp4, size=VIDEO_SIZE, audio_wav=wav, crf=23)
+            if reuse_notation:
+                remuxed = os.path.join(td, "updated.mp4")
+                subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp4, "-i", wav,
+                                "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy", "-c:a", "aac",
+                                "-b:a", "192k", "-shortest", "-movflags", "+faststart", remuxed], check=True)
+                os.replace(remuxed, mp4)
+            else:
+                write_video(song, mp4, size=VIDEO_SIZE, audio_wav=wav, crf=23, view=view)
         im_path = mp4[:-4] + ".jpg"
-        write_poster(song, im_path, size=VIDEO_SIZE)
+        if not reuse_notation or not os.path.isfile(im_path):
+            write_poster(song, im_path, size=VIDEO_SIZE, view=view)
 
 
 def _media_job(job):
-    src, mp3, mp4 = job
+    src, mp3, mp4, reuse_notation = job
     try:
-        render_song_media(src, mp3, mp4)
+        render_song_media(src, mp3, mp4, reuse_notation)
         return job, None
     except Exception as e:                                           # noqa: BLE001
         return job, f"{type(e).__name__}: {e}"
+    finally:
+        import gc
+        from songmap.instruments.sampler.library import SAMPLES
+        SAMPLES._data.clear()
+        gc.collect()
 
 
 def render_audio(src: str, dst: str):
@@ -263,6 +298,13 @@ def file_hash(p):
     h = hashlib.sha1()
     with open(p, "rb") as f:
         h.update(f.read())
+    if str(p).endswith(".songmap.yaml"):
+        from songmap.visual.view import path_for
+        vp = path_for(str(p))
+        if os.path.isfile(vp):
+            h.update(b"\0view\0")
+            with open(vp, "rb") as f:
+                h.update(f.read())
     return h.hexdigest()
 
 
@@ -289,25 +331,32 @@ def process(chid, frag, ids, sec_ids, problems, audio_jobs, audio_list):
                 if not src:
                     problems.append(f"{chid}: audio-ex '{name}' has no source (textbook/audio/{chid}/{name}.songmap.yaml or .py)")
                 rel = f"audio/{chid}/{name}.mp3"
+                from audio_editions import versioned
+                media_rel = versioned(rel, src)
                 audio_jobs.append((src, os.path.join(OUT, rel)))
-                audio_list.append((chid, name, attrs.get("caption", ""), rel))
-                cap = attrs.get("caption", "")
+                audio_list.append((chid, name, attrs.get("caption", ""), media_rel))
+                from audio_editions import caption
+                cap = attrs.get("caption", "") + caption(chid, name)
                 if VIDEO and src and src.endswith(".songmap.yaml"):
                     v = f"video/{chid}/{name}"
                     return (f'<figure class="audio video"><video controls preload="none" playsinline '
-                            f'poster="../{v}.jpg" src="../{v}.mp4"></video>'
-                            f'<figcaption>{cap} <a class="mp3" href="../{rel}">MP3</a></figcaption></figure>')
+                            f'poster="../{versioned(v + ".jpg", src)}" src="../{versioned(v + ".mp4", src)}"></video>'
+                            f'<figcaption>{cap} <a class="mp3" href="../{media_rel}">MP3</a></figcaption></figure>')
                 return (f'<figure class="audio"><div class="player"><span class="ico">♪</span>'
-                        f'<audio controls preload="none" src="../{rel}"></audio></div><figcaption>{cap}</figcaption></figure>')
+                        f'<audio controls preload="none" src="../{media_rel}"></audio></div><figcaption>{cap}</figcaption></figure>')
             if tag == "audio-ref":
                 f = attrs.get("file", "")
                 if not os.path.exists(os.path.join(GOLDEN_AUDIO, f)):
                     problems.append(f"{chid}: audio-ref '{f}' not found in golden_audio/")
                 rel = f"audio/suite/{f}"
-                audio_jobs.append(("copy:" + os.path.join(GOLDEN_AUDIO, f), os.path.join(OUT, rel)))
-                audio_list.append((chid, f, attrs.get("caption", ""), rel))
+                from audio_editions import suite_source
+                updated = suite_source(f)
+                audio_jobs.append((updated or "copy:" + os.path.join(GOLDEN_AUDIO, f), os.path.join(OUT, rel)))
+                from audio_editions import versioned
+                media_rel = versioned(rel, updated or os.path.join(GOLDEN_AUDIO, f))
+                audio_list.append((chid, f, attrs.get("caption", ""), media_rel))
                 return (f'<figure class="audio suite"><div class="player"><span class="ico">♫</span>'
-                        f'<audio controls preload="none" src="../{rel}"></audio></div>'
+                        f'<audio controls preload="none" src="../{media_rel}"></audio></div>'
                         f'<figcaption>{attrs.get("caption", "")}</figcaption></figure>')
             if tag == "pianoroll":
                 return f'<figure class="svgfig">{svg_pianoroll(attrs)}{figcap(attrs)}</figure>'
@@ -665,7 +714,8 @@ def front_pages(toc) -> str:
             f'<p>{pub}. No ISBN has been assigned to this edition.</p>'
             f'<p>{html.escape(toc.get("note", ""))}</p>'
             f'<p>Every audio and video example was generated from text with SongMap, the engine described in Part X: '
-            f'clean additive instruments, exact 36-ET or exact-ratio tuning, no compression. Set for the web in Fraunces, '
+            f'recorded instruments for musical examples and generated tones for tuning, spectrum and synthesis demonstrations. '
+            f'<a href="audio-credits.html">Audio edition and instrument credits</a>. Set for the web in Fraunces, '
             f'Source Serif 4 and Inter; mathematics typeset with KaTeX.</p>'
             f'<p>Built {_build_stamp()}.</p>'
             f'<p>Cite as: {au}, <i>{t}</i>, {ed.lower()} ({year}).</p></div></section>')
@@ -708,7 +758,9 @@ def main():
     ap.add_argument("--chapters", nargs="*", help="limit to these chapter ids")
     ap.add_argument("--no-audio", action="store_true")
     ap.add_argument("--no-video", action="store_true", help="SongMap examples as audio players, no videos")
-    ap.add_argument("--jobs", type=int, default=min(12, max(1, (os.cpu_count() or 2) - 1)), help="parallel renders")
+    ap.add_argument("--reuse-notation", action="store_true", help="preserve existing video design when cached source and unchanged notation prove reuse is safe")
+    ap.add_argument("--jobs", type=int, default=min(2, max(1, (os.cpu_count() or 2) - 1)),
+                    help="parallel renders (default: 2; use 1 to reduce sample-library memory use)")
     ap.add_argument("--test-audio", action="store_true",
                     help="with --chapters: render those chapters' audio into build/tbtest/<id>/ and report errors")
     args = ap.parse_args()
@@ -769,6 +821,8 @@ def main():
         sys.exit(1 if problems else 0)
 
     os.makedirs(os.path.join(OUT, "chapters"), exist_ok=True)
+    from audio_editions import publish_credits
+    publish_credits(OUT)
     shutil.copytree(ASSETS, os.path.join(OUT, "assets"), dirs_exist_ok=True)
     if os.path.isdir(KATEX_DIST):
         kdst = os.path.join(OUT, "assets", "katex")
@@ -791,9 +845,15 @@ def main():
         f.write(page(toc["title"], index_body(toc, chapters), toc, chapters, None, "", layers=False))
     if not args.no_audio:
         cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
+        from audio_editions import audio_engine_hash
+        audio_hash = audio_engine_hash()
         vhash = _visual_hash() if VIDEO else ""
-        done, songs = 0, []
+        done, songs, failed = 0, [], 0
+        seen = set()
         for src, dst in audio_jobs:
+            if dst in seen:
+                continue
+            seen.add(dst)
             if not src:
                 continue
             if src.startswith("copy:"):
@@ -805,38 +865,61 @@ def main():
             key = os.path.relpath(dst, OUT)
             hsh = file_hash(src)
             if src.endswith(".songmap.yaml"):
-                mp4 = os.path.join(OUT, "video", os.path.relpath(dst, os.path.join(OUT, "audio")))[:-4] + ".mp4" if VIDEO else None
-                want = hsh + ("|" + vhash if mp4 else "")
-                if cache.get(key) == want and os.path.exists(dst) and (not mp4 or os.path.exists(mp4)):
+                is_suite = os.path.basename(os.path.dirname(dst)) == "suite"
+                mp4 = os.path.join(OUT, "video", os.path.relpath(dst, os.path.join(OUT, "audio")))[:-4] + ".mp4" if VIDEO and not is_suite else None
+                want = hsh + "|audio:" + audio_hash + ("|" + vhash if mp4 else "")
+                qp = dst[:-4] + ".qa.json"
+                prior_qa = json.load(open(qp, encoding="utf-8")) if os.path.isfile(qp) else {}
+                source_sha = hashlib.sha256(open(src, "rb").read()).hexdigest()
+                audio_current = bool(cache.get(key + "#source") == source_sha
+                                     and (cache.get(key) or "").split("|")[1:2] == ["audio:" + audio_hash]
+                                     and prior_qa.get("source_sha256") == source_sha
+                                     and prior_qa.get("audio_engine_hash") == audio_hash)
+                if (cache.get(key) == want or args.reuse_notation and audio_current) and os.path.exists(dst) and os.path.exists(dst[:-4] + ".qa.json") and (not mp4 or os.path.exists(mp4)):
                     continue
-                songs.append(((src, dst, mp4), key, want))
+                from audio_editions import reusable_notation
+                reuse = bool(args.reuse_notation and mp4 and os.path.isfile(mp4) and reusable_notation(src, cache.get(key), qp))
+                if reuse:
+                    old_visual = cache[key].rsplit("|", 1)[-1].removeprefix("preserved:")
+                    want = hsh + "|audio:" + audio_hash + "|preserved:" + old_visual
+                songs.append(((src, dst, mp4, reuse), key, want))
                 continue
-            if cache.get(key) == hsh and os.path.exists(dst):
+            want = hsh + "|audio:" + audio_hash
+            if cache.get(key) == want and os.path.exists(dst):
                 continue
             try:
                 render_audio(src, dst)
-                cache[key] = hsh
+                cache[key] = want
+                cache[key + "#source"] = hashlib.sha256(open(src, "rb").read()).hexdigest()
                 done += 1
                 print("  audio", key)
             except Exception as e:                                   # noqa: BLE001
                 print(f"PROBLEM audio {key}: {e}")
+                failed += 1
             os.makedirs(os.path.dirname(CACHE), exist_ok=True)
             json.dump(cache, open(CACHE, "w"), indent=0)
         if songs:
             from concurrent.futures import ProcessPoolExecutor
             by_job = {job: (key, want) for job, key, want in songs}
-            with ProcessPoolExecutor(max_workers=args.jobs) as pool:
-                for job, err in pool.map(_media_job, list(by_job)):
+            with (ProcessPoolExecutor(max_workers=args.jobs) if args.jobs > 1 else nullcontext(None)) as pool:
+                results = pool.map(_media_job, list(by_job)) if pool else map(_media_job, list(by_job))
+                for job, err in results:
                     key, want = by_job[job]
                     if err:
                         print(f"PROBLEM media {key}: {err}")
+                        failed += 1
                         continue
                     cache[key] = want
+                    cache[key + "#source"] = hashlib.sha256(open(job[0], "rb").read()).hexdigest()
                     done += 1
                     print("  " + ("video" if job[2] else "audio"), key)
                     os.makedirs(os.path.dirname(CACHE), exist_ok=True)
                     json.dump(cache, open(CACHE, "w"), indent=0)
         print(f"rendered {done} examples" + (" (SongMap examples with video)" if VIDEO else ""))
+        if failed:
+            sys.exit(f"{failed} media renders failed; website is not ready to publish")
+    from audio_editions import stamp_media_urls
+    stamp_media_urls(OUT)
     print(f"wrote {OUT}")
 
 

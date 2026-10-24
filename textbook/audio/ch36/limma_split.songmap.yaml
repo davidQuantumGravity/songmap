@@ -10,11 +10,17 @@ key: "C major"
 tuning: 36edo
 seed: 37
 tail_seconds: 3
-instruments: {keys: clean/keys, pluck: string_pluck/still, organ: clean/organ}
+instruments:
+  keys: sampler/grand_piano
+  pluck: sampler/folk_harp
+  organ: sampler/grand_piano
 mix:
-  keys: {gain_db: -4}
-  pluck: {gain_db: -4}
-  organ: {gain_db: -8}
+  keys:
+    gain_db: 9.0
+  pluck:
+    gain_db: 2.3
+  organ:
+    gain_db: 12.6
 sections:
   - {name: white_keys, bars: 1, harmony: "N.C.:1", parts: {keys: {notes: "c8 d8 e8 f8 g8 a8 b8 c+8"}}}
   - {name: black_keys, bars: 1, harmony: "N.C.:1", parts: {pluck: {notes: "c#8 d#8 f#8 g#8 a#8 c#+4."}}}

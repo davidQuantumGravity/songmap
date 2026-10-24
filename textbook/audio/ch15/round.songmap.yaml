@@ -9,12 +9,32 @@ key: "C major"
 tuning: 12edo
 seed: 15
 tail_seconds: 2
-instruments: {v1: clean/lead, v2: clean/keys, v3: clean/organ, v4: string_pluck/still}
+instruments:
+  v1: sampler/flute
+  v2: sampler/grand_piano
+  v3: sampler/grand_piano
+  v4: sampler/folk_harp
 mix:
-  v1: {gain_db: -5, pan: -0.45, send: {hall: 0.2}}
-  v2: {gain_db: -5, pan: -0.15, send: {hall: 0.2}}
-  v3: {gain_db: -8, pan: 0.15, send: {hall: 0.2}}
-  v4: {gain_db: -4, pan: 0.45, send: {hall: 0.2}}
+  v1:
+    gain_db: 5.3
+    pan: -0.45
+    send:
+      hall: 0.2
+  v2:
+    gain_db: 9.7
+    pan: -0.15
+    send:
+      hall: 0.2
+  v3:
+    gain_db: 6.2
+    pan: 0.15
+    send:
+      hall: 0.2
+  v4:
+    gain_db: 4.9
+    pan: 0.45
+    send:
+      hall: 0.2
 returns: {hall: {type: reverb, seconds: 2.0, predelay: 0.02, damping: 0.5}}
 sections:
   - name: round

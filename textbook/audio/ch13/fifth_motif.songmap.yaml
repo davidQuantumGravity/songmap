@@ -8,8 +8,18 @@ key: "C minor"
 tuning: 12edo
 seed: 13
 tail_seconds: 1.5
-instruments: {lead: clean/organ, low: clean/bass}
-mix: {lead: {gain_db: -3, send: {hall: 0.2}}, low: {gain_db: -6, send: {hall: 0.1}}}
+instruments:
+  lead: sampler/grand_piano
+  low: sampler/double_bass
+mix:
+  lead:
+    gain_db: 11.6
+    send:
+      hall: 0.2
+  low:
+    gain_db: 6.0
+    send:
+      hall: 0.1
 returns: {hall: {type: reverb, seconds: 1.8, predelay: 0.02, damping: 0.5}}
 sections:
   - name: motif

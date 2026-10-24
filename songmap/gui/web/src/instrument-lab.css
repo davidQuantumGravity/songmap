@@ -1,0 +1,52 @@
+.app.lab-mode > .files, .app.lab-mode > .arr, .app.lab-mode > .inspector, .app.lab-mode > .transport { display: none; }
+.app.lab-mode > header { overflow: hidden; }
+.app.lab-mode .dock-tabs { overflow-x: auto; flex-shrink: 0; }
+.app.lab-mode .dock-tabs button { flex-shrink: 0; }
+.instrument-lab { display: grid; grid-template-columns: minmax(330px, .9fr) minmax(420px, 1.3fr); height: 100%; overflow: hidden; background: var(--bg); }
+.lab-library, .lab-workspace { padding: 18px 22px; overflow: auto; min-width: 0; }
+.lab-workspace { background: var(--panel); border-left: 1px solid var(--line); }
+.instrument-lab h2 { margin: 0 0 8px; font-size: 20px; }
+.instrument-lab h3 { margin: 16px 0 10px; }
+.instrument-lab p { line-height: 1.5; overflow-wrap: anywhere; }
+.lab-heading { display: flex; align-items: start; gap: 14px; justify-content: space-between; }
+.lab-heading p { margin: 0; }
+.lab-heading select { max-width: 55%; }
+.lab-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.lab-filters input { flex: 1 1 100%; }
+.instrument-lab input:not([type=checkbox]):not([type=range]), .instrument-lab select, .instrument-lab textarea { color: var(--ink); background: var(--panel); border: 1px solid var(--line2); border-radius: 5px; padding: 8px; max-width: 100%; }
+.instrument-lab textarea { display: block; width: 100%; min-height: 70px; resize: vertical; margin: 9px 0; font: inherit; }
+.instrument-lab button { white-space: normal; }
+.instrument-lab label { display: block; margin: 8px 0; }
+.instrument-lab label select, .instrument-lab label input:not([type=checkbox]) { display: block; width: 100%; margin-top: 5px; }
+.lab-list { max-height: 34vh; overflow: auto; border: 1px solid var(--line); border-radius: 5px; }
+.lab-list table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.lab-list th { position: sticky; top: 0; background: var(--panel2); text-align: left; }
+.lab-list td, .lab-list th { padding: 7px; border-bottom: 1px solid var(--line); }
+.lab-list tr.selected { background: var(--accent-soft); }
+.lab-list td:first-child button { border: 0; background: transparent; text-align: left; padding: 0; font: inherit; overflow-wrap: anywhere; }
+.lab-time { display: flex; gap: 12px; }
+.lab-time label { flex: 1; min-width: 0; }
+.lab-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
+.lab-actions label { display: flex; align-items: center; gap: 5px; }
+.lab-listening { padding: 9px 12px; background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; }
+.lab-listening label { margin: 0; }
+.lab-listening p { margin: 7px 0 0; }
+.lab-progress { padding: 9px 12px; background: var(--accent-soft); border-radius: 5px; }
+.lab-progress span { margin-left: 8px; }
+.lab-changes { padding-left: 18px; font-size: 12px; overflow-wrap: anywhere; }
+.lab-candidates { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+.lab-candidates article { border: 1px solid var(--line); padding: 12px; border-radius: 8px; min-width: 0; }
+.lab-candidates article.active { border-color: var(--accent); background: var(--accent-soft); }
+.lab-candidates article p { margin: 8px 0; }
+.lab-candidates article p.small { max-height: 100px; overflow: auto; }
+.lab-player { display: flex; align-items: center; gap: 12px; }
+.lab-player input { flex: 1; min-width: 60px; }
+.instrument-lab details { margin: 14px 0; }
+.instrument-lab summary { cursor: pointer; line-height: 1.5; }
+.instrument-lab pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 260px; overflow: auto; font-size: 12px; background: var(--panel2); padding: 9px; }
+.lab-targets { max-height: 160px; overflow: auto; }
+.lab-targets label { font-size: 12px; overflow-wrap: anywhere; }
+.lab-diff { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.lab-error { color: var(--bad); background: var(--panel2); padding: 10px; border: 1px solid var(--bad); border-radius: 5px; }
+.lab-empty { margin-top: 40px; max-width: 500px; }
+@media(max-width: 820px) { .instrument-lab { grid-template-columns: 1fr; overflow: auto; height: 100%; } .lab-library,.lab-workspace { overflow: visible; padding: 14px; } .lab-workspace { border-left: 0; border-top: 1px solid var(--line); } .lab-list { max-height: 260px; } }

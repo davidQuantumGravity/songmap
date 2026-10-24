@@ -1,0 +1,18 @@
+{
+ "title": "Sideways Sun",
+ "facts": {
+  "bars": 88.0,
+  "seconds": 200.6,
+  "sections": 12,
+  "parts": 6,
+  "impacts": 0,
+  "melody notes checked against chords": 170,
+  "lufs": -16.11
+ },
+ "counts": {
+  "problem": 0,
+  "warning": 0,
+  "note": 0
+ },
+ "findings": []
+}

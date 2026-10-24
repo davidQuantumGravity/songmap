@@ -1,0 +1,14 @@
+instrument: bass
+description: Midrange square bass with little sub; leaves room for a deep kick.
+tags:
+- electronic
+- bass
+params:
+  saw: 0.08
+  square: 0.8
+  sub: 0.08
+  cutoff: 1400
+  res: 1.1
+  env_amt: 0.5
+  drive: 1.2
+  release: 0.045

@@ -10,8 +10,14 @@ key: "C major"
 tuning: 12edo
 seed: 1
 tail_seconds: 2
-instruments: {lead: clean/organ, drone: clean/bass}
-mix: {lead: {gain_db: -6}, drone: {gain_db: -9}}
+instruments:
+  lead: sampler/grand_piano
+  drone: clean/bass
+mix:
+  lead:
+    gain_db: 8.5
+  drone:
+    gain_db: -9
 sections:
   - {name: lydian,     bars: 2, harmony: "N.C.:2", parts: {lead: {notes: "c8 d e f# g a b c+ | c+2 r2"}, drone: {notes: "c-1 | c-1"}}}
   - {name: ionian,     bars: 2, harmony: "N.C.:2", parts: {lead: {notes: "c8 d e f g a b c+ | c+2 r2"}, drone: {notes: "c-1 | c-1"}}}

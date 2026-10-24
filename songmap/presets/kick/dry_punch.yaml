@@ -1,0 +1,12 @@
+instrument: kick
+description: Short dry body and soft beater for broken beat.
+tags:
+- electronic
+- kick
+params:
+  tune: 60
+  decay: 0.22
+  click: 0.25
+  click_tone: 2400
+  sweep: 17
+  drive: 1.25

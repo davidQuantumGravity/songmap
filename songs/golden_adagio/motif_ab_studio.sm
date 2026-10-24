@@ -1,0 +1,45 @@
+# Motif A/B: a listening decision before the five-minute Western/golden adagio.
+# review: pending - Choose the melody that is most memorable and moving; neither is approved yet.
+# A and B use the same recorded violin section, accompaniment, harmony and faders.
+# A (0:00-0:24): a broad, stepwise D-E-F arch, an answering rise, and an unhurried homecoming.
+# B (0:27-0:51): an A-D-F pickup, a more active answer, and a clearer golden leaning-note resolution.
+# The three-second reset separates their reverb tails. Loop either A or B in Studio; use melody Solo to hear the tune alone.
+# Western harmony lasts six of each eight bars (75%); two golden sevenths make the remaining 25%.
+# Golden vDg7 prepares ^F -> F into Dm9. Ag7's ^E resolves to E in the final Dm9.
+# This is a motif audition, not the completed five-minute arrangement; key changes and the full headphone layer follow the motif decision.
+song "Adagio Motif Lab - A / B" 80 4/4 Dm fps=30 seed=241025 tail=3 tuning=36edo mood=balanced
+inst melody=sampler/violins(attack=.065,release_mul=.15) piano=sampler/grand_piano(release_mul=.14) cello=sampler/cello(attack=.065,release_mul=.14) basslow=sampler/double_bass_arco(attack=.08,release_mul=.14) harp=sampler/folk_harp(release_mul=.18)
+groove hum=0,0,0 metric=0
+feel melody gate=.94 hum=0,0,0 arch=0
+feel piano gate=.9 hum=0,0,0 arch=0
+feel cello gate=.9 hum=0,0,0 arch=0
+feel basslow gate=.91 hum=0,0,0 arch=0
+feel harp gate=.85 hum=0,0,0 arch=0
+set returns={hall: {type: reverb, seconds: 1.9, predelay: .03, damping: .65, early: 8, width: 1.05}}
+prog test_harmony "Dm9:1 Bbmaj9:1 Gm9:1 vDg7:1 Dm9:1 Bbmaj9:1 Ag7:1 Dm9:1"
+
+# VIOLINS, note pass: A uses a stepwise rising third and an arch; B uses a fourth pickup and dotted momentum.
+# Expression pass: peaks are brief, the gold notes are leaned on gently, and each eight-bar tune leaves a final breath.
+melody_a = {notes: "=mp d+4. e+8 f+2_ | =mf a+2 g+4 f+4 | =mp g+4. f+8 d+4 c+4 | =p vc#+2 a4 =mp ^f+4_ | =mp f+2_ e+4 d+4 | =mf f+4 g+8 a+8 =mp f+2 | =mp ^e+2 vc#+4 a4 | =p d+2. r4"}
+melody_b = {notes: "=mp a4 d+4 f+4. e+8 | =p d+2 c+4 d+4 | =mp f+4 g+4 =mf a+4. =mp g+8 | =p ^f+2 a4 vc#+4 | =mp d+4 e+4 f+2_ | =mf a+4. =mp g+8 f+4 d+4 | =mp vc#+4 ^e+4 =mf g#+4. =mp ^e+8 | =p e+4 d+2_ r4"}
+
+# PIANO, note pass: rootless minor ninths and open major ninths; the altered third is never doubled in its Western form.
+# Expression pass: half-bar bellows, lighter replies, and a quiet final chord give both themes the same breathing frame.
+common_piano = {notes: "=p [f-,a-,c,e]2 =pp [f-,a-,c,e]2 | =p [bb--,f-,a-,c,d]2 =pp [f-,a-,c,d]2 | =p [g-,bb-,d,f,a]2 =pp [bb-,d,f,a]2 | =pp [vd-,^f-,a-,vc#]2 =p [vd-,^f-,a-,vc#]2 | =p [f-,a-,c,e]2 =pp [a-,c,e]2 | =p [bb--,f-,a-,c,d]2 =pp [f-,a-,c,d]2 | =pp [a--,vc#-,^e-,g#-]2 =p [vc#-,^e-,g#-]2 | =p [f-,a-,c,e]2 =pp [f-,a-,d]2"}
+
+# CELLO, note pass: a restrained contrary voice, with the final ^E -> E resolution written explicitly.
+# Expression pass: it answers violin breaths, softens the golden bar, and never takes over the upper melody.
+common_cello = {notes: "=p d-2 a-2 | =pp f-2 d-2 | =p g-2 d4 bb-4 | =pp vd-2 ^f-2 | =p f-2 e-4 d-4 | =pp d-2 f-2 | =p a-2 vc#4 ^e4 | =pp e2 d-4 r4"}
+
+# DOUBLE BASS, note and expression passes: bowed roots, one measured fifth reply, silence at the final cadence's end.
+common_bass = {notes: "=p d--2 a--2 | =pp bb---1 | =p g--2 d--2 | =pp vd--1 | =p d--2 a--2 | =pp bb---1 | =p a--1 | =pp d--2. r4"}
+
+# HARP, note and expression passes: sparse answers, rests over both golden suspensions, and an echo after the last landing.
+common_harp = {notes: "=pp r2 a8 =p c+8 =pp a4 | r1 | r2 =p d+8 =pp f+8 =p a+4 | r1 | =pp r2 e4 =p a4 | =pp r2 f4 =p c+4 | r1 | =pp a2 =p d+4 r4"}
+
+A_long_arch 8 | melody:melody_a piano:common_piano cello:common_cello basslow:common_bass harp:common_harp prog=test_harmony dyn=mp
+reset 1 | chords="N.C.:1" dyn=pp
+B_forward_lilt 8 | melody:melody_b piano:common_piano cello:common_cello basslow:common_bass harp:common_harp prog=test_harmony dyn=mp
+
+mix melody -3 hall=.26 pan=-.1 | piano -9 hall=.2 pan=.1 | cello -6 hall=.24 pan=.2 | basslow -18 hall=.12 | harp -7 hall=.25 pan=-.3
+master clean ceiling=-2

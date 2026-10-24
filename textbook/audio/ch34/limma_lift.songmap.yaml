@@ -8,11 +8,21 @@ key: "C major"
 tuning: 36edo
 seed: 343
 tail_seconds: 3
-instruments: {organ: clean/organ, low: clean/bass, keys: clean/keys}
+instruments:
+  organ: sampler/grand_piano
+  low: sampler/double_bass
+  keys: sampler/grand_piano
 mix:
-  organ: {gain_db: -7, send: {hall: 0.2}}
-  low: {gain_db: -6}
-  keys: {gain_db: -6, send: {hall: 0.25}}
+  organ:
+    gain_db: 15.7
+    send:
+      hall: 0.2
+  low:
+    gain_db: 7.9
+  keys:
+    gain_db: 11.5
+    send:
+      hall: 0.25
 sections:
   - {name: lift, bars: 8, harmony: "C:1 F:0.5 G7:0.5 C:1 ^Cg:1 vC#:1 vF#:0.5 vG#7:0.5 vC#:2", parts: {organ: hold, low: {style: roots, role: bass}, keys: top}}
 master: clean

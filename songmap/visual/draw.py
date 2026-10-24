@@ -140,6 +140,11 @@ class Renderer:
         self.roll_lo, self.roll_hi = lo - 2 * self.step, hi + 2 * self.step
         roll = first.get("roll", {})
         self.window = (-float(roll.get("before", 2.0)), float(roll.get("after", 6.0)))   # seconds around the playhead
+        from .performance import PerformancePanel
+        self.performance = any(ly.get("style") == "performance" for ly in self.layers)
+        self.instrument_panels = {
+            i: (PerformancePanel if ly.get("style") == "performance" else InstrumentPanel)(score, ly, self.th, self.color_of)
+            for i, ly in enumerate(self.layers) if ly["type"] == "instrument"}
 
     def color_of(self, n, light: float = 0.0):
         """A note's colour: its 36-EDO layer (spelling) or its part, mixed toward the panel by `light`."""
@@ -258,7 +263,11 @@ class Renderer:
         if page in self._base:
             return self._base[page]
         th, k, sc = self.th, self.k, self.sc
-        im = Image.new("RGB", (self.W, self.H), th["bg"])
+        if self.performance:
+            from .performance import stage_background
+            im = stage_background(self.W, self.H, th)
+        else:
+            im = Image.new("RGB", (self.W, self.H), th["bg"])
         dr = ImageDraw.Draw(im)
         for ly in self.layers:
             if ly.get("panel", ly["type"] not in ("progress", "text")):
@@ -305,9 +314,12 @@ class Renderer:
         im = self._base_page(page).copy()
         dr = ImageDraw.Draw(im)
         now = self.sc.sounding(t)
-        for ly in self.layers:
+        for i, ly in enumerate(self.layers):
             typ = ly["type"]
-            if typ == "staff" and ly is self.first["staff"]:
+            if typ == "instrument":
+                im.paste(self.instrument_panels[i].frame(t), ly["_px"][:2])
+                dr = ImageDraw.Draw(im)
+            elif typ == "staff" and ly is self.first["staff"]:
                 im = self._staff_now(im, t, page, now)
                 dr = ImageDraw.Draw(im)
             elif typ == "header" and ly is self.first["header"]:
@@ -378,8 +390,9 @@ class Renderer:
             col = th["gold"] if on else _mix(th["muted"], th["panel"], 0.55)
             dr.rounded_rectangle([X(a) + 1, y0 + pad, max(X(a) + 2, X(b) - 1), y1 - pad], radius=round((y1 - y0) / 4),
                                  fill=col)
-            if X(b) - X(a) > dr.textlength(name, font=f) + 6:
-                dr.text(((X(a) + X(b)) / 2, (y0 + y1) / 2), name, font=f, fill=WHITE if on else th["panel"], anchor="mm")
+            label = name.replace("_", " ") if ly.get("humanize", False) else name
+            if X(b) - X(a) > dr.textlength(label, font=f) + 6:
+                dr.text(((X(a) + X(b)) / 2, (y0 + y1) / 2), label, font=f, fill=WHITE if on else th["panel"], anchor="mm")
         px = X(min(t, total))
         dr.line([(px, y0), (px, y1)], fill=th["ink"], width=max(2, round(2 * self.k)))
 
@@ -414,6 +427,10 @@ class Renderer:
     def _header(self, dr, t):
         th, k, sc = self.th, self.kh, self.sc          # kh: the header box's own scale
         hd = self.first["header"]
+        if hd.get("style") == "performance":
+            from .performance import draw_header
+            draw_header(self, dr, t)
+            return
         x0, y0, x1, y1 = self.r_header
         if hd.get("title", True):
             dr.text((x0 + 18 * k, y0 + 20 * k), hd.get("text") or sc.title, font=self.f_title, fill=th["ink"], anchor="lm")
@@ -494,3 +511,142 @@ class Renderer:
                                  outline=th["ink"] if on else None)
         px = xo(t)
         dr.line([(px, y0 + 4 * k), (px, y1 - 4 * k)], fill=th["cursor"], width=max(2, round(2.2 * k)))
+
+
+class InstrumentPanel:
+    """A clipped, independently filtered staff: bar-aligned pages or only currently held notes.
+
+    Each panel keeps its own register and clef, so a bass and a lead do not share a pitch axis.
+    Note timing is the score's held-note timing; instrument release/reverb tails are not notation.
+    """
+
+    def __init__(self, score, layer, theme, color_of):
+        parts = layer.get("parts")
+        notes = [n for n in score.notes if parts is None or n.part in parts]
+        self.score = Score(score.title, score.seconds, notes, score.chords, score.bars, score.sections, score.edo)
+        self.layer, self.th, self.color_of = layer, theme, color_of
+        x0, y0, x1, y1 = layer["_px"]
+        self.W, self.H = max(1, x1 - x0), max(1, y1 - y0)
+        self.mode, self.bars = layer.get("mode", "bar"), layer.get("bars", 1)
+        self.label = layer.get("label") or ", ".join(parts or sorted({n.part for n in notes})) or "Instrument"
+        self.scale = min(self.W / 600, self.H / 190)
+        self.pad = max(8, round(13 * self.scale))
+        self.f_label = _font(_BOLD, max(13, 17 * self.scale))
+        self.f_names = _font(_BOLD_SYM, max(11, 15 * self.scale))
+        self.f_info = _font(_TEXT, max(10, 12 * self.scale))
+        pitches = sorted(n.pitch for n in notes)
+        self.treble = not pitches or pitches[len(pitches) // 2] >= 60
+        self.lines = (30, 32, 34, 36, 38) if self.treble else (16, 18, 20, 22, 24)
+        ds = [spell(n.pitch).diatonic for n in notes]
+        self.lo = min(min(ds, default=self.lines[0]), self.lines[0]) - 2
+        self.hi = max(max(ds, default=self.lines[-1]), self.lines[-1]) + 2
+        self.top, self.bottom = max(35, self.H * .24), self.H - max(21, self.H * .12)
+        self.unit = min(7 * max(.7, self.scale), max(1, (self.bottom - self.top) / (self.hi - self.lo)))
+        self.ytop = (self.top + self.bottom - (self.hi - self.lo) * self.unit) / 2
+        self.x0, self.x1 = self.pad + max(30, 36 * self.scale), self.W - self.pad - 9
+        self._base = {}
+
+    def window_at(self, t):
+        """Actual bar boundaries, including changes of tempo and meter. The tail holds the last page."""
+        bars = self.score.bars
+        if len(bars) < 2:
+            return 0., max(self.score.seconds, .001)
+        i = min(self.score.bar_at(t), len(bars) - 2)
+        i = (i // self.bars) * self.bars
+        return bars[i], bars[min(i + self.bars, len(bars) - 1)]
+
+    def visible_notes(self, t):
+        if self.mode == "active":
+            return self.score.sounding(t)
+        a, b = self.window_at(t)
+        return [n for n in self.score.between(a, b) if n.start < b - 1e-8]
+
+    def y(self, d):
+        return self.ytop + (self.hi - d) * self.unit
+
+    def x(self, sec, window):
+        a, b = window
+        return self.x0 + 9 + (min(max(sec, a), b) - a) / max(b - a, .001) * (self.x1 - self.x0 - 18)
+
+    def note_x(self, n, window):
+        sp, u = spell(n.pitch), self.unit
+        x = (self.x0 + self.x1) / 2 if self.mode == "active" else self.x(n.start, window)
+        # Displace chromatic seconds within chords; preserve each instrument's separate panel.
+        if any(abs(n.start - m.start) < .001 and spell(m.pitch).diatonic == sp.diatonic - 1
+               for m in self.score.between(n.start, n.start + .001) if m.pitch < n.pitch):
+            x += 1.2 * u
+        return x
+
+    def _note(self, dr, n, window, color, *, now=None):
+        sp, u = spell(n.pitch), self.unit
+        x = self.note_x(n, window)
+        y = self.y(sp.diatonic)
+        for d in range(self.lines[-1] + 2, sp.diatonic + 1, 2):
+            dr.line((x - 1.3*u, self.y(d), x + 1.3*u, self.y(d)), fill=self.th["line"], width=1)
+        for d in range(self.lines[0] - 2, sp.diatonic - 1, -2):
+            dr.line((x - 1.3*u, self.y(d), x + 1.3*u, self.y(d)), fill=self.th["line"], width=1)
+        if self.mode != "active":
+            end = n.end if now is None else min(n.end, now)
+            xe = self.x(end, window)
+            if xe > x:
+                dr.line((x, y, xe, y), fill=color, width=max(2, round(u*.45)))
+        pop = 1.0 if now is None else 1 + .25 * math.exp(-max(0, now - n.start) / .1)
+        dr.ellipse((x-u*pop, y-.7*u*pop, x+u*pop, y+.7*u*pop), fill=color)
+        if sp.acc:
+            f = _font(_SYM, max(11, u*3))
+            dr.text((x - 1.3*u, y), "♯" if sp.acc > 0 else "♭", font=f, fill=color, anchor="rm")
+        if sp.ud:
+            sx = x - (3.6 if sp.acc else 2.3)*u
+            flip = -1 if sp.ud > 0 else 1
+            dr.line(((sx-.45*u, y-flip*.4*u), (sx, y+flip*.4*u), (sx+.45*u, y-flip*.4*u)),
+                    fill=color, width=max(1, round(u*.25)))
+
+    def _background(self, window):
+        key = window if self.mode == "bar" else None
+        if key in self._base:
+            return self._base[key].copy()
+        th = self.th
+        im = Image.new("RGB", (self.W, self.H), th["bg"])
+        dr = ImageDraw.Draw(im)
+        if self.layer.get("panel", True):
+            dr.rounded_rectangle((0, 0, self.W-1, self.H-1), radius=max(5, round(12*self.scale)), fill=th["panel"])
+        dr.text((self.pad, self.pad), self.label, font=self.f_label, fill=th["ink"])
+        for d in self.lines:
+            dr.line((self.pad, self.y(d), self.x1, self.y(d)), fill=th["line"], width=1)
+        f = _font(_SYM, max(18, self.unit*7))
+        dr.text((self.pad+2, self.y(sum(self.lines)/5)), "𝄞" if self.treble else "𝄢", font=f,
+                fill=th["muted"], anchor="lm")
+        if self.mode == "bar":
+            for n in self.visible_notes(window[0]):
+                self._note(dr, n, window, self.color_of(n, .6))
+        self._base[key] = im.copy()
+        if len(self._base) > 2:
+            self._base.pop(next(iter(self._base)))
+        return im
+
+    def frame(self, t):
+        window = self.window_at(t)
+        im = self._background(window)
+        dr = ImageDraw.Draw(im)
+        now = self.score.sounding(t)
+        names = "  ".join(dict.fromkeys(spell(n.pitch).text for n in sorted(now, key=lambda n:n.pitch))) or "rest"
+        # Keep sounding-note text inside the panel, even with dense voicings or a narrow box.
+        font = self.f_names
+        room = max(30, self.W*.57 - self.pad)
+        size = font.size
+        while dr.textlength(names, font=font) > room and size > 8:
+            size -= 1
+            font = _font(_BOLD_SYM, size)
+        dr.text((self.W-self.pad, self.pad+2), names, font=font, fill=self.th["gold"] if now else self.th["muted"], anchor="ra")
+        for n in now:
+            self._note(dr, n, window, self.color_of(n), now=t)
+        if not now and self.mode == "active":
+            dr.text(((self.x0+self.x1)/2, (self.top+self.bottom)/2), "rest", font=self.f_label,
+                    fill=self.th["muted"], anchor="mm")
+        if self.mode == "bar":
+            x = self.x(t, window)
+            dr.line((x, self.top, x, self.bottom), fill=self.th["cursor"], width=max(1, round(1.5*self.scale)))
+        caption = f"bar {min(self.score.bar_at(t)+1, max(1,len(self.score.bars)-1))}"
+        caption += " · sounding notes" if self.mode == "active" else f" · {self.bars}-bar view"
+        dr.text((self.pad, self.H-self.pad), caption, font=self.f_info, fill=self.th["muted"], anchor="ld")
+        return im

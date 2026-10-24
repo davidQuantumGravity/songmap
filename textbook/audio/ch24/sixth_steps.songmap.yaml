@@ -8,10 +8,16 @@ key: "C major"
 tuning: 36edo
 seed: 36
 tail_seconds: 2
-instruments: {lead: clean/lead, organ: clean/organ}
+instruments:
+  lead: sampler/flute
+  organ: sampler/grand_piano
 motifs:
   climb: {notes: "c8 ^c vc# c# ^c# vd d4 | d8 vd ^c# c# vc# ^c c4", octave: 4}
-mix: {lead: {gain_db: -4}, organ: {gain_db: -6}}
+mix:
+  lead:
+    gain_db: 20.0
+  organ:
+    gain_db: 17.5
 sections:
   - {name: steps, bars: 2, harmony: "N.C.:2", parts: {lead: {motifs: [climb]}}}
   - {name: chords, bars: 4, harmony: "C:1 ^C:1 vC#:1 C#:1", parts: {organ: hold}}

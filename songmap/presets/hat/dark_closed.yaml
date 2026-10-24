@@ -1,0 +1,10 @@
+instrument: hat
+description: Dark compact electronic hat.
+tags:
+- electronic
+- hat
+params:
+  decay: 0.055
+  metal: 0.55
+  hp: 4800
+  color: 7300

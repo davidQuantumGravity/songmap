@@ -1,0 +1,16 @@
+instrument: bass
+description: Resonant saw bass; use short notes and selected slurs.
+tags:
+- electronic
+- bass
+params:
+  saw: 1
+  square: 0
+  sub: 0
+  cutoff: 450
+  res: 4.5
+  env_amt: 3
+  env_decay: 0.17
+  drive: 2
+  sustain: 0.65
+  glide: 0.08

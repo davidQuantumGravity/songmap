@@ -1,0 +1,1661 @@
+# Pinned free sources; recordings install locally and never enter Git.
+sources:
+  vcsl:
+    repo: sgossner/VCSL
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    license: CC0 1.0
+    credit: Versilian Studios and VCSL contributors
+    url: https://github.com/sgossner/VCSL
+  vsco2:
+    repo: sgossner/VSCO-2-CE
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    license: CC0 1.0
+    credit: Sam Gossner, Simon Dalzell, and Elan Hickler / Versilian Studios
+    url: https://github.com/sgossner/VSCO-2-CE
+  growly:
+    repo: sfzinstruments/karoryfer.growlybass
+    revision: 4f483268fc66b5a6d5781d421c0d11b8d08d3fc6
+    license: CC0 1.0
+    credit: Karoryfer Samples / D. Smolken
+    url: https://shop.karoryfer.com/pages/free-samples
+  swag:
+    repo: sfzinstruments/karoryfer.swagbass
+    revision: 9d10fcae71af1975988ddecd5af1c95d372c7355
+    license: CC0 1.0
+    credit: Karoryfer Samples / D. Smolken
+    url: https://shop.karoryfer.com/pages/free-samples
+  fashion:
+    repo: sfzinstruments/karoryfer.fashionbass
+    revision: 0703973b300a6bacb837602be9b588ab64732a72
+    license: CC0 1.0
+    credit: Karoryfer Samples / D. Smolken
+    url: https://shop.karoryfer.com/pages/free-samples
+  pasta:
+    repo: sfzinstruments/karoryfer.pastabass
+    revision: 90135cd026db5d4fa0fe538240b4203f085f5244
+    license: CC0 1.0
+    credit: Karoryfer Samples / D. Smolken and Space Coyote
+    url: https://shop.karoryfer.com/pages/free-samples
+  black_pearl:
+    archive: https://www.bandshed.net/sounds/AVLDrumkits_SFZ/BLACK_PEARL_2023_repack.zip
+    sha256: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    license: CC BY-SA 3.0 (AVL music-use exception)
+    credit: Glen MacArthur / AVL Drumkits
+    url: https://www.bandshed.net/avldrumkits/
+  red_zeppelin:
+    archive: https://www.bandshed.net/sounds/AVLDrumkits_SFZ/RED_ZEPPELIN_2023_repack.zip
+    sha256: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    license: CC BY-SA 3.0 (AVL music-use exception)
+    credit: Glen MacArthur / AVL Drumkits
+    url: https://www.bandshed.net/avldrumkits/
+  blonde_bop:
+    archive: https://www.bandshed.net/sounds/AVLDrumkits_SFZ/BLONDE_BOP_SFZ.zip
+    sha256: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    license: CC BY-SA 3.0 (AVL music-use exception)
+    credit: Glen MacArthur / AVL Drumkits
+    url: https://www.bandshed.net/avldrumkits/
+  blonde_bop_rods:
+    archive: https://www.bandshed.net/sounds/AVLDrumkits_SFZ/BLONDE_BOP_HR_SFZ.zip
+    sha256: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    license: CC BY-SA 3.0 (AVL music-use exception)
+    credit: Glen MacArthur / AVL Drumkits
+    url: https://www.bandshed.net/avldrumkits/
+  busk:
+    archive: https://www.bandshed.net/sounds/AVLDrumkits_SFZ/BUSKMANS_HOLIDAY_SFZ.zip
+    sha256: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    license: CC BY-SA 3.0 (AVL music-use exception)
+    credit: Glen MacArthur / AVL Drumkits
+    url: https://www.bandshed.net/avldrumkits/
+  rubner:
+    repo: sfzinstruments/dsmolken.double-bass
+    revision: c2985eb647109d2a8f30a70071e3e163339d7396
+    license: CC0 1.0
+    credit: D. Smolken / Karoryfer Samples
+    url: https://shop.karoryfer.com/pages/free-samples
+voices:
+  grand_piano:
+    title: Kawai grand piano
+    source: vcsl
+    program: Chordophones/Zithers/Grand Piano, Kawai.sfz
+    family: keys
+    description: Acoustic grand with velocity layers and release noises; melody and chord accompaniment.
+    range:
+    - 21
+    - 108
+    params:
+      release_mul: 0.7
+  fm_piano:
+    title: TX81Z FM piano
+    source: vcsl
+    program: Electrophones/TX81Z - FM Piano.sfz
+    family: keys
+    description: Recorded FM keyboard; bright attack and rounded decay for funk, broken beat, and lo-fi chords.
+    range:
+    - 36
+    - 96
+  folk_harp:
+    title: Folk harp
+    source: vcsl
+    program: Chordophones/Composite Chordophones/Folk Harp.sfz
+    family: string
+    description: Warm plucked strings; ripples, arpeggios, and intimate counterpoint.
+    range:
+    - 36
+    - 93
+    params:
+      release_mul: 0.05
+      level: -6
+  marimba:
+    title: Marimba
+    source: vcsl
+    program: Idiophones/Struck Idiophones/Marimba.sfz
+    family: keys
+    description: Rounded wooden mallet attack; rhythmic hooks and clear interlocking lines.
+    range:
+    - 48
+    - 96
+    params:
+      release_mul: 0.15
+  vibraphone:
+    title: Soft mallet vibraphone
+    source: vcsl
+    program: Idiophones/Struck Idiophones/Vibraphone - Soft Mallets.sfz
+    family: keys
+    description: Soft metallic mallets; spacious jazz harmony and melodic replies, without added motor tremolo.
+    range:
+    - 53
+    - 89
+    params:
+      release_mul: 0.08
+  kalimba:
+    title: Kenyan kalimba
+    source: vcsl
+    program: Idiophones/Plucked Idiophones/Kalimba, Kenya.sfz
+    family: keys
+    description: Small plucked tines with a woody attack; sparse ostinatos and high answering phrases.
+    range:
+    - 60
+    - 84
+    params:
+      release_mul: 0.15
+  double_bass:
+    title: Pizzicato double bass
+    source: vsco2
+    program: ContrabassPizz.sfz
+    family: bass
+    description: Plucked acoustic bass with alternate takes; jazz and chamber bass lines, no synth glide.
+    range:
+    - 24
+    - 60
+    params:
+      release_mul: 0.2
+    category: Acoustic bass
+  cello:
+    title: Bowed cello section
+    source: vsco2
+    program: CelloEnsSusVib.sfz
+    family: string
+    description: Sustained bowed cellos with recorded vibrato; expressive middle and low lines. Vibrato is part of the
+      recording.
+    range:
+    - 36
+    - 77
+    params:
+      attack: 0.025
+      release_mul: 0.35
+  violins:
+    title: Bowed violin section
+    source: vsco2
+    program: ViolinEnsSusVib.sfz
+    family: string
+    description: Small sustained violin section with recorded vibrato; lyrical lines and orchestral support.
+    range:
+    - 55
+    - 86
+    params:
+      attack: 0.02
+      release_mul: 0.35
+  flute:
+    title: Flute without vibrato
+    source: vsco2
+    program: FluteSusNV.sfz
+    family: wind
+    description: Airy recorded flute without vibrato; exposed melodies, including fractional-pitch harmony.
+    range:
+    - 60
+    - 96
+    params:
+      attack: 0.008
+      release_mul: 0.25
+  solo_violin:
+    title: Solo violin
+    source: vsco2
+    program: SViolinVib.sfz
+    family: string
+    description: Solo bowed violin with recorded vibrato; exposed high string melodies.
+    range:
+    - 55
+    - 96
+    params:
+      attack: 0.01
+      release_mul: 0.3
+  horn:
+    title: French horn
+    source: vsco2
+    program: FHornSus.sfz
+    family: brass
+    description: Rounded sustained horn; cinematic calls and warm inner voices, with natural recorded pitch variation.
+    range:
+    - 34
+    - 77
+    params:
+      attack: 0.02
+      release_mul: 0.3
+  cello_spiccato:
+    title: Spiccato cellos
+    source: vsco2
+    program: CelloEnsSpic.sfz
+    family: string
+    description: Short bowed cello attacks with alternate takes; rhythmic ostinatos and replies.
+    range:
+    - 36
+    - 77
+    params:
+      release_mul: 0.2
+  violins_spiccato:
+    title: Spiccato violins
+    source: vsco2
+    program: ViolinEnsSpic.sfz
+    family: string
+    description: Short bowed violin attacks with alternate takes; rhythmic upper strings.
+    range:
+    - 55
+    - 86
+    params:
+      release_mul: 0.2
+  bass_drum:
+    title: Acoustic bass drum
+    source: vcsl
+    program: Membranophones/Struck Membranophones/Bass Drum 1.sfz
+    family: drum
+    description: Recorded concert bass drum; use as a kit piece, not a pitched bass instrument.
+    range:
+    - 60
+    - 60
+    audition_pitch: 60
+    params:
+      release_mul: 0.1
+  snare_drum:
+    title: Acoustic snare drum
+    source: vcsl
+    program: Membranophones/Struck Membranophones/Snare Drum, Modern 1.sfz
+    family: drum
+    description: Recorded modern snare with velocity layers and alternate takes; acoustic backbeats.
+    range:
+    - 60
+    - 60
+    audition_pitch: 60
+    params:
+      release_mul: 0.1
+  hi_hat:
+    title: Acoustic closed hi-hat
+    source: vcsl
+    program: Idiophones/Struck Idiophones/Hi-Hat Cymbal.sfz
+    family: drum
+    description: Recorded hi-hat with alternate takes; an acoustic kit's short timekeeping voice.
+    range:
+    - 42
+    - 42
+    audition_pitch: 42
+    params:
+      release_mul: 0.05
+  jazz_bass:
+    title: Jazz bass, roundwound
+    source: growly
+    program: growlybass_clean.sfz
+    family: bass
+    category: Electric bass
+    description: Direct recorded Squier Jazz Bass; sustained notes, four velocity layers and four alternate takes. No
+      scripted slides or live keyswitches.
+    range:
+    - 25
+    - 76
+    params:
+      xfade: 0
+      release_mul: 0.35
+  jazz_bass_staccato:
+    title: Jazz bass, staccato
+    source: growly
+    program: growlybass_vicious.sfz
+    family: bass
+    category: Electric bass
+    description: Separately recorded short Jazz Bass notes; five alternate takes. Use for clipped funk replies. No scripted
+      slides or live keyswitches.
+    range:
+    - 25
+    - 76
+    params:
+      xfade: 0
+      release_mul: 0.35
+  flatwound_bass:
+    title: Dead flatwound bass
+    source: swag
+    program: swagbass_clean.sfz
+    family: bass
+    category: Electric bass
+    description: Dark Ibanez neck-pickup bass; three dynamic layers, four alternate takes. Soul and dub. No scripted
+      slides or live keyswitches.
+    range:
+    - 21
+    - 76
+    params:
+      xfade: 0
+      release_mul: 0.35
+  roundwound_bass:
+    title: Roundwound neck bass
+    source: fashion
+    program: fashionbass_clean.sfz
+    family: bass
+    category: Electric bass
+    description: Killer KB-Simmony neck pickup; five dynamic layers and three alternate takes. Warm electric bass. No
+      scripted slides or live keyswitches.
+    range:
+    - 18
+    - 76
+    params:
+      xfade: 0
+      release_mul: 0.35
+  bass_vi_roundwound:
+    title: Bass VI, roundwound
+    source: pasta
+    program: spaghetti.sfz
+    family: bass
+    category: Electric bass
+    description: Squier Bass VI roundwounds; three dynamic layers and three alternate takes; clear melodic low lines.
+      No scripted slides or live keyswitches.
+    range:
+    - 33
+    - 72
+    params:
+      xfade: 0
+      release_mul: 0.35
+  bass_vi_pick:
+    title: Bass VI, picked flatwound
+    source: pasta
+    program: linguine.sfz
+    family: bass
+    category: Electric bass
+    description: Bridge pickup and picked flatwounds; three dynamic layers and four alternate takes; defined attack.
+      No scripted slides or live keyswitches.
+    range:
+    - 33
+    - 72
+    params:
+      xfade: 0
+      release_mul: 0.35
+  bass_vi_muted:
+    title: Bass VI, muted pick
+    source: pasta
+    program: tagliatelle.sfz
+    family: bass
+    category: Electric bass
+    description: Muted flatwounds with combined pickups; three dynamic layers and three alternate takes; tight funk and
+      pop. No scripted slides or live keyswitches.
+    range:
+    - 33
+    - 72
+    params:
+      xfade: 0
+      release_mul: 0.35
+  bass_vi_finger:
+    title: Bass VI, fingered flatwound
+    source: pasta
+    program: fetuccine.sfz
+    family: bass
+    category: Electric bass
+    description: Neck pickup, fingered flatwounds; three dynamic layers and four alternate takes; intimate round bass.
+      No scripted slides or live keyswitches.
+    range:
+    - 33
+    - 72
+    params:
+      xfade: 0
+      release_mul: 0.35
+  black_pearl_kick:
+    title: Black Pearl / Pearl 22 Kick
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: kick'
+    description: Pearl 22 Kick; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 36
+    - 36
+    audition_pitch: 36
+    params:
+      xfade: 0
+  black_pearl_sidestick:
+    title: Black Pearl / Pearl 14 SideStick
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: Pearl 14 SideStick; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 37
+    - 37
+    audition_pitch: 37
+    params:
+      xfade: 0
+  black_pearl_snare:
+    title: Black Pearl / Pearl 14 Snare
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: Pearl 14 Snare; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 38
+    - 38
+    audition_pitch: 38
+    params:
+      xfade: 0
+  black_pearl_snare_edge:
+    title: Black Pearl / Pearl 14 SnareEdge
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: Pearl 14 SnareEdge; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 40
+    - 40
+    audition_pitch: 40
+    params:
+      xfade: 0
+  black_pearl_floor_tom:
+    title: Black Pearl / Pearl 16 FloorTom
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: Pearl 16 FloorTom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 41
+    - 41
+    audition_pitch: 41
+    params:
+      xfade: 0
+  black_pearl_floor_tom_edge:
+    title: Black Pearl / Pearl 16 FloorTomEdge
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: Pearl 16 FloorTomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 43
+    - 43
+    audition_pitch: 43
+    params:
+      xfade: 0
+  black_pearl_tom:
+    title: Black Pearl / Pearl 12 Tom
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: Pearl 12 Tom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 45
+    - 45
+    audition_pitch: 45
+    params:
+      xfade: 0
+  black_pearl_tom_edge:
+    title: Black Pearl / Pearl 12 TomEdge
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: Pearl 12 TomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 47
+    - 47
+    audition_pitch: 47
+    params:
+      xfade: 0
+  black_pearl_hat:
+    title: Black Pearl / Sabian 13 HatClosed
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Sabian 13 HatClosed; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 42
+    - 42
+    audition_pitch: 42
+    params:
+      xfade: 0
+  black_pearl_hat_pedal:
+    title: Black Pearl / Sabian 13 HatPedal
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Sabian 13 HatPedal; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 44
+    - 44
+    audition_pitch: 44
+    params:
+      xfade: 0
+  black_pearl_hat_semi:
+    title: Black Pearl / Sabian 13 HatSemi
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Sabian 13 HatSemi; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 46
+    - 46
+    audition_pitch: 46
+    params:
+      xfade: 0
+  black_pearl_hat_open:
+    title: Black Pearl / Sabian 13 HatSwish
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Sabian 13 HatSwish; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 48
+    - 48
+    audition_pitch: 48
+    params:
+      xfade: 0
+  black_pearl_crash:
+    title: Black Pearl / SabianAA 16 Crash
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: SabianAA 16 Crash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 49
+    - 49
+    audition_pitch: 49
+    params:
+      xfade: 0
+  black_pearl_ride:
+    title: Black Pearl / SabianAAX 20 Ride
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: SabianAAX 20 Ride; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 51
+    - 51
+    audition_pitch: 51
+    params:
+      xfade: 0
+  black_pearl_ride_bell:
+    title: Black Pearl / SabianAAX 20 RideBell
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: SabianAAX 20 RideBell; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 53
+    - 53
+    audition_pitch: 53
+    params:
+      xfade: 0
+  black_pearl_splash:
+    title: Black Pearl / Zildjian 10 Splash
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Zildjian 10 Splash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 55
+    - 55
+    audition_pitch: 55
+    params:
+      xfade: 0
+  black_pearl_china:
+    title: Black Pearl / Paiste 22 Crash
+    source: black_pearl
+    program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Paiste 22 Crash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 60
+    - 60
+    audition_pitch: 60
+    params:
+      xfade: 0
+  red_zeppelin_kick:
+    title: Red Zeppelin / Ludwig 26 Kick
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: kick'
+    description: Ludwig 26 Kick; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 36
+    - 36
+    audition_pitch: 36
+    params:
+      xfade: 0
+  red_zeppelin_sidestick:
+    title: Red Zeppelin / Ludwig 14 SideStick
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: Ludwig 14 SideStick; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 37
+    - 37
+    audition_pitch: 37
+    params:
+      xfade: 0
+  red_zeppelin_snare:
+    title: Red Zeppelin / Ludwig 14 Snare
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: Ludwig 14 Snare; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 38
+    - 38
+    audition_pitch: 38
+    params:
+      xfade: 0
+  red_zeppelin_snare_edge:
+    title: Red Zeppelin / Ludwig 14 SnareEdge
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: Ludwig 14 SnareEdge; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 40
+    - 40
+    audition_pitch: 40
+    params:
+      xfade: 0
+  red_zeppelin_floor_tom:
+    title: Red Zeppelin / Ludwig 16 FloorTom
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: Ludwig 16 FloorTom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 41
+    - 41
+    audition_pitch: 41
+    params:
+      xfade: 0
+  red_zeppelin_floor_tom_edge:
+    title: Red Zeppelin / Ludwig 16 FloorTomEdge
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: Ludwig 16 FloorTomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 43
+    - 43
+    audition_pitch: 43
+    params:
+      xfade: 0
+  red_zeppelin_tom:
+    title: Red Zeppelin / Ludwig 14 Tom
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: Ludwig 14 Tom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 45
+    - 45
+    audition_pitch: 45
+    params:
+      xfade: 0
+  red_zeppelin_tom_edge:
+    title: Red Zeppelin / Ludwig 14 TomEdge
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: Ludwig 14 TomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 47
+    - 47
+    audition_pitch: 47
+    params:
+      xfade: 0
+  red_zeppelin_hat:
+    title: Red Zeppelin / Sabian 13 HatClosed
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Sabian 13 HatClosed; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 42
+    - 42
+    audition_pitch: 42
+    params:
+      xfade: 0
+  red_zeppelin_hat_pedal:
+    title: Red Zeppelin / Sabian 13 HatPedal
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Sabian 13 HatPedal; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 44
+    - 44
+    audition_pitch: 44
+    params:
+      xfade: 0
+  red_zeppelin_hat_semi:
+    title: Red Zeppelin / Sabian 13 HatSemi
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Sabian 13 HatSemi; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 46
+    - 46
+    audition_pitch: 46
+    params:
+      xfade: 0
+  red_zeppelin_hat_open:
+    title: Red Zeppelin / Sabian 13 HatSwish
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Sabian 13 HatSwish; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 48
+    - 48
+    audition_pitch: 48
+    params:
+      xfade: 0
+  red_zeppelin_crash:
+    title: Red Zeppelin / Zildjian 20 Crash
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Zildjian 20 Crash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 49
+    - 49
+    audition_pitch: 49
+    params:
+      xfade: 0
+  red_zeppelin_ride:
+    title: Red Zeppelin / Zildjian 24 Ride
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Zildjian 24 Ride; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 51
+    - 51
+    audition_pitch: 51
+    params:
+      xfade: 0
+  red_zeppelin_ride_bell:
+    title: Red Zeppelin / Zildjian 24 RideBell
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Zildjian 24 RideBell; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 53
+    - 53
+    audition_pitch: 53
+    params:
+      xfade: 0
+  red_zeppelin_splash:
+    title: Red Zeppelin / Zildjian 10 Splash
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Zildjian 10 Splash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 55
+    - 55
+    audition_pitch: 55
+    params:
+      xfade: 0
+  red_zeppelin_china:
+    title: Red Zeppelin / Paiste 22 Crash
+    source: red_zeppelin
+    program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Paiste 22 Crash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 60
+    - 60
+    audition_pitch: 60
+    params:
+      xfade: 0
+  blonde_bop_kick:
+    title: Blonde Bop / TAMA 18 Kick
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: kick'
+    description: TAMA 18 Kick; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 36
+    - 36
+    audition_pitch: 36
+    params:
+      xfade: 0
+  blonde_bop_sidestick:
+    title: Blonde Bop / TAMA 13 SideStick
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: TAMA 13 SideStick; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 37
+    - 37
+    audition_pitch: 37
+    params:
+      xfade: 0
+  blonde_bop_snare:
+    title: Blonde Bop / TAMA 13 Snare
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: TAMA 13 Snare; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 38
+    - 38
+    audition_pitch: 38
+    params:
+      xfade: 0
+  blonde_bop_snare_edge:
+    title: Blonde Bop / TAMA 13 SnareEdge
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: TAMA 13 SnareEdge; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 40
+    - 40
+    audition_pitch: 40
+    params:
+      xfade: 0
+  blonde_bop_floor_tom:
+    title: Blonde Bop / TAMA 14 FloorTom
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: TAMA 14 FloorTom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 41
+    - 41
+    audition_pitch: 41
+    params:
+      xfade: 0
+  blonde_bop_floor_tom_edge:
+    title: Blonde Bop / TAMA 14 FloorTomEdge
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: TAMA 14 FloorTomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 43
+    - 43
+    audition_pitch: 43
+    params:
+      xfade: 0
+  blonde_bop_tom:
+    title: Blonde Bop / TAMA 10 Tom
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: TAMA 10 Tom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 45
+    - 45
+    audition_pitch: 45
+    params:
+      xfade: 0
+  blonde_bop_tom_edge:
+    title: Blonde Bop / TAMA 10 TomEdge
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: TAMA 10 TomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 47
+    - 47
+    audition_pitch: 47
+    params:
+      xfade: 0
+  blonde_bop_hat:
+    title: Blonde Bop / Zildjian 13 HatClosed
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Zildjian 13 HatClosed; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 42
+    - 42
+    audition_pitch: 42
+    params:
+      xfade: 0
+  blonde_bop_hat_pedal:
+    title: Blonde Bop / Zildjian 13 HatPedal
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Zildjian 13 HatPedal; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 44
+    - 44
+    audition_pitch: 44
+    params:
+      xfade: 0
+  blonde_bop_hat_semi:
+    title: Blonde Bop / Zildjian 13 HatSemi
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Zildjian 13 HatSemi; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 46
+    - 46
+    audition_pitch: 46
+    params:
+      xfade: 0
+  blonde_bop_hat_open:
+    title: Blonde Bop / Zildjian 13 HatSwish
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Zildjian 13 HatSwish; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 48
+    - 48
+    audition_pitch: 48
+    params:
+      xfade: 0
+  blonde_bop_crash:
+    title: Blonde Bop / Paiste2002 16 Crash
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Paiste2002 16 Crash; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 49
+    - 49
+    audition_pitch: 49
+    params:
+      xfade: 0
+  blonde_bop_ride:
+    title: Blonde Bop / SabianAAX 20 RideTip
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: SabianAAX 20 RideTip; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 51
+    - 51
+    audition_pitch: 51
+    params:
+      xfade: 0
+  blonde_bop_ride_bell:
+    title: Blonde Bop / SabianAAX 20 RideBell
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: SabianAAX 20 RideBell; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 53
+    - 53
+    audition_pitch: 53
+    params:
+      xfade: 0
+  blonde_bop_splash:
+    title: Blonde Bop / Zildjian 10 Splash
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Zildjian 10 Splash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 55
+    - 55
+    audition_pitch: 55
+    params:
+      xfade: 0
+  blonde_bop_china:
+    title: Blonde Bop / Wuhan 18 ChinaCrash
+    source: blonde_bop
+    program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Wuhan 18 ChinaCrash; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 60
+    - 60
+    audition_pitch: 60
+    params:
+      xfade: 0
+  blonde_bop_rods_kick:
+    title: Blonde Bop hot rods / TAMA 18 Kick HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: kick'
+    description: TAMA 18 Kick HR; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 36
+    - 36
+    audition_pitch: 36
+    params:
+      xfade: 0
+  blonde_bop_rods_sidestick:
+    title: Blonde Bop hot rods / TAMA 13 SnareSidestick HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: TAMA 13 SnareSidestick HR; recorded velocity layers. Five layers; alternate center/edge articulations
+      are separate voices, no recorded round robins.
+    range:
+    - 37
+    - 37
+    audition_pitch: 37
+    params:
+      xfade: 0
+  blonde_bop_rods_snare:
+    title: Blonde Bop hot rods / TAMA 13 SnareCenter HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: TAMA 13 SnareCenter HR; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 38
+    - 38
+    audition_pitch: 38
+    params:
+      xfade: 0
+  blonde_bop_rods_snare_edge:
+    title: Blonde Bop hot rods / TAMA 13 SnareEdge HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: TAMA 13 SnareEdge HR; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 40
+    - 40
+    audition_pitch: 40
+    params:
+      xfade: 0
+  blonde_bop_rods_floor_tom:
+    title: Blonde Bop hot rods / TAMA 14 FloorTomCenter HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: TAMA 14 FloorTomCenter HR; recorded velocity layers. Five layers; alternate center/edge articulations
+      are separate voices, no recorded round robins.
+    range:
+    - 41
+    - 41
+    audition_pitch: 41
+    params:
+      xfade: 0
+  blonde_bop_rods_floor_tom_edge:
+    title: Blonde Bop hot rods / TAMA 14 FloorTomEdge HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: TAMA 14 FloorTomEdge HR; recorded velocity layers. Five layers; alternate center/edge articulations
+      are separate voices, no recorded round robins.
+    range:
+    - 43
+    - 43
+    audition_pitch: 43
+    params:
+      xfade: 0
+  blonde_bop_rods_tom:
+    title: Blonde Bop hot rods / TAMA 10 TomCenter HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: TAMA 10 TomCenter HR; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 45
+    - 45
+    audition_pitch: 45
+    params:
+      xfade: 0
+  blonde_bop_rods_tom_edge:
+    title: Blonde Bop hot rods / TAMA 10 TomEdge HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: TAMA 10 TomEdge HR; recorded velocity layers. Five layers; alternate center/edge articulations are separate
+      voices, no recorded round robins.
+    range:
+    - 47
+    - 47
+    audition_pitch: 47
+    params:
+      xfade: 0
+  blonde_bop_rods_hat:
+    title: Blonde Bop hot rods / Zildjian 13 HatClosed HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Zildjian 13 HatClosed HR; recorded velocity layers. Five layers; alternate center/edge articulations
+      are separate voices, no recorded round robins.
+    range:
+    - 42
+    - 42
+    audition_pitch: 42
+    params:
+      xfade: 0
+  blonde_bop_rods_hat_pedal:
+    title: Blonde Bop hot rods / Zildjian 13 HatPedal HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Zildjian 13 HatPedal HR; recorded velocity layers. Five layers; alternate center/edge articulations
+      are separate voices, no recorded round robins.
+    range:
+    - 44
+    - 44
+    audition_pitch: 44
+    params:
+      xfade: 0
+  blonde_bop_rods_hat_semi:
+    title: Blonde Bop hot rods / Zildjian 12 HatSemi HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Zildjian 12 HatSemi HR; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 46
+    - 46
+    audition_pitch: 46
+    params:
+      xfade: 0
+  blonde_bop_rods_hat_open:
+    title: Blonde Bop hot rods / Zildjian 13 HatSwish HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: hat'
+    description: Zildjian 13 HatSwish HR; recorded velocity layers. Five layers; alternate center/edge articulations
+      are separate voices, no recorded round robins.
+    range:
+    - 48
+    - 48
+    audition_pitch: 48
+    params:
+      xfade: 0
+  blonde_bop_rods_crash:
+    title: Blonde Bop hot rods / Paiste2002 16 Crash HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Paiste2002 16 Crash HR; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 49
+    - 49
+    audition_pitch: 49
+    params:
+      xfade: 0
+  blonde_bop_rods_ride:
+    title: Blonde Bop hot rods / SabianAAX 20 RideTip HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: SabianAAX 20 RideTip HR; recorded velocity layers. Five layers; alternate center/edge articulations
+      are separate voices, no recorded round robins.
+    range:
+    - 51
+    - 51
+    audition_pitch: 51
+    params:
+      xfade: 0
+  blonde_bop_rods_ride_bell:
+    title: Blonde Bop hot rods / SabianAAX 20 RideBell HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: SabianAAX 20 RideBell HR; recorded velocity layers. Five layers; alternate center/edge articulations
+      are separate voices, no recorded round robins.
+    range:
+    - 53
+    - 53
+    audition_pitch: 53
+    params:
+      xfade: 0
+  blonde_bop_rods_splash:
+    title: Blonde Bop hot rods / Zildjian 10 Splash HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Zildjian 10 Splash HR; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 55
+    - 55
+    audition_pitch: 55
+    params:
+      xfade: 0
+  blonde_bop_rods_china:
+    title: Blonde Bop hot rods / Wuhan 18 ChinaCrash HR
+    source: blonde_bop_rods
+    program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Wuhan 18 ChinaCrash HR; recorded velocity layers. Five layers; alternate center/edge articulations are
+      separate voices, no recorded round robins.
+    range:
+    - 60
+    - 60
+    audition_pitch: 60
+    params:
+      xfade: 0
+  busk_cajon_bass:
+    title: Buskman percussion / Meinl Cajon Thump
+    source: busk
+    program: BUSKMANS_HOLIDAY_SFZ/Buskmans_Holiday.sfz
+    family: drum
+    category: 'Acoustic drums: cajon_bass'
+    description: Meinl Cajon Thump; recorded velocity layers. Ten layers.
+    range:
+    - 36
+    - 36
+    audition_pitch: 36
+    params:
+      xfade: 0
+  busk_cajon_left:
+    title: Buskman percussion / Meinl Cajon Slap LH
+    source: busk
+    program: BUSKMANS_HOLIDAY_SFZ/Buskmans_Holiday.sfz
+    family: drum
+    category: 'Acoustic drums: cajon_left'
+    description: Meinl Cajon Slap LH; recorded velocity layers. Ten layers.
+    range:
+    - 38
+    - 38
+    audition_pitch: 38
+    params:
+      xfade: 0
+  busk_cajon_right:
+    title: Buskman percussion / Meinl Cajon Slap RH
+    source: busk
+    program: BUSKMANS_HOLIDAY_SFZ/Buskmans_Holiday.sfz
+    family: drum
+    category: 'Acoustic drums: cajon_right'
+    description: Meinl Cajon Slap RH; recorded velocity layers. Ten layers.
+    range:
+    - 40
+    - 40
+    audition_pitch: 40
+    params:
+      xfade: 0
+  busk_conga_low_left:
+    title: Buskman percussion / Meinl Conga Large LH
+    source: busk
+    program: BUSKMANS_HOLIDAY_SFZ/Buskmans_Holiday.sfz
+    family: drum
+    category: 'Acoustic drums: conga_low_left'
+    description: Meinl Conga Large LH; recorded velocity layers. Ten layers.
+    range:
+    - 41
+    - 41
+    audition_pitch: 41
+    params:
+      xfade: 0
+  busk_conga_low_right:
+    title: Buskman percussion / Meinl Conga Large RH
+    source: busk
+    program: BUSKMANS_HOLIDAY_SFZ/Buskmans_Holiday.sfz
+    family: drum
+    category: 'Acoustic drums: conga_low_right'
+    description: Meinl Conga Large RH; recorded velocity layers. Ten layers.
+    range:
+    - 43
+    - 43
+    audition_pitch: 43
+    params:
+      xfade: 0
+  busk_conga_high_left:
+    title: Buskman percussion / Meinl Conga Small LH
+    source: busk
+    program: BUSKMANS_HOLIDAY_SFZ/Buskmans_Holiday.sfz
+    family: drum
+    category: 'Acoustic drums: conga_high_left'
+    description: Meinl Conga Small LH; recorded velocity layers. Ten layers.
+    range:
+    - 45
+    - 45
+    audition_pitch: 45
+    params:
+      xfade: 0
+  busk_conga_high_right:
+    title: Buskman percussion / Meinl Conga Small RH
+    source: busk
+    program: BUSKMANS_HOLIDAY_SFZ/Buskmans_Holiday.sfz
+    family: drum
+    category: 'Acoustic drums: conga_high_right'
+    description: Meinl Conga Small RH; recorded velocity layers. Ten layers.
+    range:
+    - 47
+    - 47
+    audition_pitch: 47
+    params:
+      xfade: 0
+  busk_shaker:
+    title: Buskman percussion / GonBops Triple Shaker
+    source: busk
+    program: BUSKMANS_HOLIDAY_SFZ/Buskmans_Holiday.sfz
+    family: drum
+    category: 'Acoustic drums: shaker'
+    description: GonBops Triple Shaker; recorded velocity layers. Ten layers.
+    range:
+    - 42
+    - 42
+    audition_pitch: 42
+    params:
+      xfade: 0
+  busk_tambourine:
+    title: Buskman percussion / Shake Tambourine
+    source: busk
+    program: BUSKMANS_HOLIDAY_SFZ/Buskmans_Holiday.sfz
+    family: drum
+    category: 'Acoustic drums: tambourine'
+    description: Shake Tambourine; recorded velocity layers. Ten layers.
+    range:
+    - 44
+    - 44
+    audition_pitch: 44
+    params:
+      xfade: 0
+  busk_cowbell:
+    title: Buskman percussion / LP Cowbell
+    source: busk
+    program: BUSKMANS_HOLIDAY_SFZ/Buskmans_Holiday.sfz
+    family: drum
+    category: 'Acoustic drums: cowbell'
+    description: LP Cowbell; recorded velocity layers. Ten layers.
+    range:
+    - 51
+    - 51
+    audition_pitch: 51
+    params:
+      xfade: 0
+  studio_snare_2:
+    title: Modern snare 2, wires on
+    source: vcsl
+    program: Membranophones/Struck Membranophones/Snare Drum, Modern 2.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: Modern snare 2, wires on; recorded alternate takes and dynamics.
+    range:
+    - 61
+    - 61
+    audition_pitch: 61
+    params:
+      xfade: 0
+      release_mul: 0.1
+      level: -10
+  studio_snare_2_rim:
+    title: Modern snare 2, cross stick
+    source: vcsl
+    program: Membranophones/Struck Membranophones/Snare Drum, Modern 2.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: Modern snare 2, cross stick; recorded alternate takes and dynamics.
+    range:
+    - 62
+    - 62
+    audition_pitch: 62
+    params:
+      xfade: 0
+      release_mul: 0.1
+      level: -10
+  studio_snare_3:
+    title: Modern snare 3, wires on
+    source: vcsl
+    program: Membranophones/Struck Membranophones/Snare Drum, Modern 3.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: Modern snare 3, wires on; recorded alternate takes and dynamics.
+    range:
+    - 60
+    - 60
+    audition_pitch: 60
+    params:
+      xfade: 0
+      release_mul: 0.1
+      level: -10
+  studio_snare_3_rim:
+    title: Modern snare 3, rimshot
+    source: vcsl
+    program: Membranophones/Struck Membranophones/Snare Drum, Modern 3.sfz
+    family: drum
+    category: 'Acoustic drums: snare'
+    description: Modern snare 3, rimshot; recorded alternate takes and dynamics.
+    range:
+    - 62
+    - 62
+    audition_pitch: 62
+    params:
+      xfade: 0
+      release_mul: 0.1
+      level: -10
+  studio_tom_high_stick:
+    title: High tom, stick
+    source: vcsl
+    program: Membranophones/Struck Membranophones/Tom 1.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: High tom, stick; recorded alternate takes and dynamics.
+    range:
+    - 64
+    - 64
+    audition_pitch: 64
+    params:
+      xfade: 0
+      release_mul: 0.1
+      level: -10
+  studio_tom_high_mallet:
+    title: High tom, mallet
+    source: vcsl
+    program: Membranophones/Struck Membranophones/Tom 1.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: High tom, mallet; recorded alternate takes and dynamics.
+    range:
+    - 62
+    - 62
+    audition_pitch: 62
+    params:
+      xfade: 0
+      release_mul: 0.1
+      level: -10
+  studio_tom_low_stick:
+    title: Low tom, stick
+    source: vcsl
+    program: Membranophones/Struck Membranophones/Tom 2.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: Low tom, stick; recorded alternate takes and dynamics.
+    range:
+    - 64
+    - 64
+    audition_pitch: 64
+    params:
+      xfade: 0
+      release_mul: 0.1
+      level: -10
+  studio_tom_low_mallet:
+    title: Low tom, mallet
+    source: vcsl
+    program: Membranophones/Struck Membranophones/Tom 2.sfz
+    family: drum
+    category: 'Acoustic drums: tom'
+    description: Low tom, mallet; recorded alternate takes and dynamics.
+    range:
+    - 62
+    - 62
+    audition_pitch: 62
+    params:
+      xfade: 0
+      release_mul: 0.1
+      level: -10
+  suspended_crash_1:
+    title: Suspended crash 1
+    source: vcsl
+    program: Idiophones/Struck Idiophones/Suspended Cymbal 1.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Suspended crash 1; recorded cymbal hits at multiple dynamics.
+    range:
+    - 68
+    - 68
+    audition_pitch: 68
+    params:
+      xfade: 0
+      release_mul: 0.1
+      level: -10
+  suspended_crash_2:
+    title: Suspended crash 2
+    source: vcsl
+    program: Idiophones/Struck Idiophones/Suspended Cymbal 2.sfz
+    family: drum
+    category: 'Acoustic drums: cymbal'
+    description: Suspended crash 2; recorded cymbal hits at multiple dynamics.
+    range:
+    - 66
+    - 66
+    audition_pitch: 66
+    params:
+      xfade: 0
+      release_mul: 0.1
+      level: -10
+  upright_bass:
+    title: Rubner double bass, pizzicato
+    source: rubner
+    program: d_smolken_rubner_bass_pizz.sfz
+    family: bass
+    category: Acoustic bass
+    description: Recorded upright plucks with dynamic layers and sequential alternate takes; folk, jazz and intimate
+      pop.
+    range:
+    - 28
+    - 60
+    params:
+      xfade: 0
+      release_mul: 0.35
+  upright_bass_arco:
+    title: Rubner double bass, bowed
+    source: rubner
+    program: d_smolken_rubner_bass_arco.sfz
+    family: bass
+    category: Acoustic bass
+    description: Recorded bowed upright with dynamic layers and alternate takes; long orchestral notes, not a plucked
+      groove bass.
+    range:
+    - 28
+    - 60
+    params:
+      xfade: 0
+      release_mul: 0.35
+  double_bass_arco:
+    title: VSCO double bass, bowed
+    source: vsco2
+    program: ContrabassSusNV.sfz
+    family: bass
+    category: Acoustic bass
+    description: Recorded sustained double bass without vibrato; orchestral low lines, not a plucked groove bass.
+    range:
+    - 28
+    - 60
+    params:
+      xfade: 0
+      release_mul: 0.35

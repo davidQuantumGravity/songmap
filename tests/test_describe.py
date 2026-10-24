@@ -15,7 +15,7 @@ def test_compact_catalog_names_everything_and_stays_small():
         assert f"{role}:" in c and all(n in c for n in names)
     assert all(n in c for n in REGISTRY) and all(t in c for t in EVENT_TYPES)
     assert "+hats16" in c and "8ths" in c and "STICKY" in c
-    assert len(c) < 2000                     # ~500 tokens at ~3.5 chars per token
+    assert len(c) < 6000                     # grammar, synthesis presets and the expanded sample voice names
 
 
 def test_full_catalog_has_descriptions_and_params():

@@ -1,0 +1,10 @@
+instrument: hat
+description: Looser electronic hat with an audible tail.
+tags:
+- electronic
+- hat
+params:
+  decay: 0.14
+  metal: 0.6
+  hp: 5600
+  color: 9500

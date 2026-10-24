@@ -1,0 +1,15 @@
+instrument: bass
+description: Dark square bass with rounded sustain; dub and downtempo.
+tags:
+- electronic
+- bass
+params:
+  saw: 0
+  square: 0.7
+  sub: 0.5
+  cutoff: 290
+  res: 0.75
+  env_amt: 0.6
+  attack: 0.007
+  sustain: 0.75
+  drive: 1.15

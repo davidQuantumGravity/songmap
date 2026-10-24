@@ -1,0 +1,122 @@
+# 1080p performance cards: individual pitches, staff and 36-ET strip.
+theme: dark
+color_by: part
+part_colors:
+  lead: '#e9bb61'
+  keys: '#79b7d8'
+  arp: '#73d5bf'
+  gtr: '#d3a2cc'
+  harp: '#73d5bf'
+  bell: '#d3a2cc'
+  bass: '#a1c58e'
+  low: '#a1c58e'
+  pad: '#b2a0d2'
+  reply: '#73d5bf'
+layers:
+- type: header
+  box:
+  - 0.02
+  - 0.018
+  - 0.96
+  - 0.125
+  style: performance
+  subtitle: GOLDEN WORLDS  /  124 BPM  /  4/4  /  36-ET
+- type: instrument
+  box:
+  - 0.02
+  - 0.15
+  - 0.475
+  - 0.24533333333333332
+  parts:
+  - lead
+  label: Marimba
+  mode: bar
+  bars: 1
+  style: performance
+  note_chips: true
+  pitch_strip: true
+  glow: true
+- type: instrument
+  box:
+  - 0.505
+  - 0.15
+  - 0.475
+  - 0.24533333333333332
+  parts:
+  - keys
+  label: Organ comping
+  mode: bar
+  bars: 1
+  style: performance
+  note_chips: true
+  pitch_strip: true
+  glow: true
+- type: instrument
+  box:
+  - 0.02
+  - 0.4073333333333333
+  - 0.475
+  - 0.24533333333333332
+  parts:
+  - arp
+  label: Plucked sequencer
+  mode: bar
+  bars: 1
+  style: performance
+  note_chips: true
+  pitch_strip: true
+  glow: true
+- type: instrument
+  box:
+  - 0.505
+  - 0.4073333333333333
+  - 0.475
+  - 0.24533333333333332
+  parts:
+  - bass
+  label: Bass
+  mode: bar
+  bars: 1
+  style: performance
+  note_chips: true
+  pitch_strip: true
+  glow: true
+- type: instrument
+  box:
+  - 0.02
+  - 0.6646666666666666
+  - 0.475
+  - 0.24533333333333332
+  parts:
+  - pad
+  label: Pad
+  mode: bar
+  bars: 1
+  style: performance
+  note_chips: true
+  pitch_strip: true
+  glow: true
+- type: sections
+  box:
+  - 0.02
+  - 0.935
+  - 0.96
+  - 0.035
+  humanize: true
+- type: progress
+  box:
+  - 0.02
+  - 0.985
+  - 0.96
+  - 0.008
+size:
+- 1920
+- 1080
+colors:
+  bg: '#0a101c'
+  panel: '#121e30'
+  ink: '#eff4fc'
+  muted: '#9baec9'
+  line: '#3b4a61'
+  grid: '#1c2d44'
+  gold: '#f0c66b'

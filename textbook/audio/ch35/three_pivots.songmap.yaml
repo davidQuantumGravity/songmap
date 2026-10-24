@@ -9,10 +9,14 @@ key: "C major"
 tuning: 36edo
 seed: 354
 tail_seconds: 3
-instruments: {organ: clean/organ, low: clean/bass}
+instruments:
+  organ: sampler/grand_piano
+  low: clean/bass
 mix:
-  organ: {gain_db: -6}
-  low: {gain_db: -6}
+  organ:
+    gain_db: 16.4
+  low:
+    gain_db: -6
 sections:
   - {name: pivots, bars: 6, harmony: "C:0.5 Cg:0.5 ^Cm:1 F:0.5 Fg:0.5 ^Fm:1 G:0.5 Gg:0.5 ^Gm:1", parts: {organ: {style: hold, range: [48, 76]}}}
   - {name: home, bars: 2, harmony: "^Bb7:1 ^Eb:1", parts: {organ: {style: hold, range: [48, 76]}}}

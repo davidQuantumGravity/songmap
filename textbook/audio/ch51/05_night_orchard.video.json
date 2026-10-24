@@ -1,0 +1,18 @@
+{
+  "song": "05_night_orchard",
+  "musical_revision": 2,
+  "visual_revision": 3,
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "crf": 18,
+  "score_sha256": "51437a41ff2c623e99f7cabe1b15f950920e3fc2477c4de464fef1a38e8851b5",
+  "wav_sha256": "0928c95301d6372b3c496c16203883b0ba32082a38ab7a6adf4a2b5e1742a098",
+  "source_sha256": "c7a6d18addadac66cef7d8ff260f70861f34871fe8eb1f99afe3a4d0dc14b8f2",
+  "view_sha256": "599723c35343440da60e29117a94be576b4c689c7378bbd125c7dcb4dc69d9d9",
+  "video_sha256": "602bdf4aa474694b837dbf2ece44df155a7f1bec0c50ae66a45f037f9a25cb7d",
+  "poster_sha256": "996c0b2f697ad62e2ab0ef50d3618a244467caed0cb48eb581345c0550f4e157",
+  "audio_reused_without_changes": true
+}

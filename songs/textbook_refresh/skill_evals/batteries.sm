@@ -1,0 +1,43 @@
+# How Batteries Remember - 70 s explainer score. A minor, 120 BPM (60 frames per bar), 33 bars + 4 s tail = 2100 frames.
+song "How Batteries Remember" 120 4/4 Am fps=30 seed=5 tail=4 video=Batteries:2100
+inst keys=sampler/grand_piano gtr=sampler/folk_harp bass(cutoff=600)
+chords Am F C G /2
+
+cue landed=f1230
+
+# --- material ---
+beep    = {deg: "=pp 4/8' r/8 4/8' r/8 r/2 | 3/2. r/4", oct: 1}
+sting   = {deg: "=mf 0/8' 2' 4' 7/8 9/4 7/4 | 4/4.^ 6/8 8/2", oct: 1}
+shuA    = {deg: "=mp 0/8' 2' 4' 2' 0/8' 2' 4/4 | 4/8 5 4 2 0/4 2/4 | 5/8' 7' 9' 7' 5/4 7/4 | 9/4. 7/8 5/4 7/4"}
+shuB    = {deg: "=mf 4/8' 6' 9' 6' 4/4 2/4 | 9/4. 6/8 4/4 6/4 | 8/8' 10' 8' 6' 8/4 6/4 | 8/4. 6/8 7/2"}
+creep   = {deg: "=p 4/2 2/4 0 | 2/2. 0/4 | 3/2 5/4 3/4 | b1/2. 0/4"}
+creep2  = {deg: "=mp 7/2 5/4 3/4 | 4/2 #6/4 8/4"}
+count   = {deg: "=p 9/4 7 4 2 | 7/4 5 2 0 | r/2 -7/2^"}
+hopeA   = {deg: "=mp 3/4 5 7/2 | 9/4. 7/8 4/2"}
+hopeB   = {deg: "=mf 4/4 6 8/2 | 9/4. 7/8 5/2"}
+hopeC   = {deg: "=f 7/4. 5/8 7/4 10/4 | 11/2^ 8/4 6/4"}
+fall    = {deg: "=pp 7/2 5/4 4 | 4/2. 1/4 | 1/1", oct: 1}
+glow    = {deg: "=mp 5/4. 3/8 5/4 7/4 | 6/4. 4/8 6/4 8/4 | 9/2 7/2"}
+
+pocket  = {kick: "X.....x...x.....", snare: "....X..o....X.o.", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.55, 0.3, 0.45, 0.3, 0.55, 0.3, 0.45, 0.35]}}
+tickhat = {hat: {steps: "x-x-x-x-x-x-x-x-", vel: [0.4, 0.2, 0.3, 0.2]}}
+walk    = {rel: "R/4. R/8 r/8 5/8 R+/4", oct: -2}
+drone   = {rel: "R/1", oct: -2}
+broken  = {rel: "[R,3,5]/2 [3,5,R+]/4 [5,R+,3+]"}
+ripple  = {rel: "R/8^ 5 R+ 3+ 5+ 3+ R+ 5"}
+spark   = !zaps(count=3, every=8)
+
+# name    bars | parts and settings                                                              | events
+cold        2 | keys:beep pad:dark bass:drone fx:ticks dyn=pp                                     | !riser:1@2
+title       2 | lead:sting keys:{rel: "[R,3,5]/2 [3,5,R+]/2"} bass:{rel: "R/2 5/2", oct: -2} drums:{kick: "X.......x.......", clap: "........X......."} chords="C:1 G:1" key=C dyn=mp | !impact(size=s)
+ions_a      4 | keys:shuA arp:up bass:walk drums:tickhat chords="Am:2 F:2" dyn=p<mp
+ions_b      4 | like=ions_a keys:shuB pad:warm drums:pocket chords="C:2 G:2" dyn=p<mp
+dend_a      4 | keys:creep pad:dark bass:sub arp:dark chords="Am:2 Bb:2" dyn=p
+dend_b      2 | like=dend_a keys:creep2 drums:half_kick chords="Dm:1 E7:1" dyn=p<mp                | !riser:1@+1
+counter     3 | keys:count pad:dark bass:{rel: "R/1 | R/1 | r/2 R/2", oct: -2} fx:ticks chords="Am:1 F:1 Am:1" dyn=p | !stop:2b@20:1 !impact@cue:landed(size=m)
+heal_a      2 | keys:hopeA gtr:ripple pad:warm chords="F:1 C:1" key=C dyn=p<mp                       | !spark
+heal_b      2 | like=heal_a keys:hopeB drums:tickhat bass:walk chords="G:1 Am:1" dyn=p<mp          | !spark
+heal_c      2 | like=heal_b keys:hopeC lead:hopeC arp:up bass:eighths drums:pocket+{ohat: "..x...x...x...x."} chords="F:1 G:1" dyn=f<ff                    | !spark !impact(size=m)
+caveat      3 | keys:fall pad:dark chords="Fmaj7:1 Asus2:2" dyn=pp
+home        3 | keys:glow gtr:ripple pad:warm bass:{rel: "R/2 5/2 | R/2 5/2 | R/1", oct: -2} chords="D:1 E:1 A:1" key=A dyn=p | !impact(size=s)
+mix drums -7 | fx -7 | keys 3.1 | lead 6 | gtr 4.7

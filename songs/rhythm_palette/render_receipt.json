@@ -1,0 +1,464 @@
+[
+  {
+    "source": "bass/jazz_bass.sm",
+    "source_sha256": "01a76a0fbd86e8094774a574bfe95edcc7685fc850dfaff3d4027e080f5a60e7",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/jazz_bass_staccato.sm",
+    "source_sha256": "67cb79b7c6907064f1c66141752d424c2b3ffad3d56072f3c59d2afb697366fe",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/flatwound_bass.sm",
+    "source_sha256": "a5869d060af45b181a1cb9a81975858e8cf7a37433a5827fcc23bd06f18a2aaf",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/roundwound_bass.sm",
+    "source_sha256": "3154cbc23296db5377b1dbfb556c181ee48ac06ee27a24cf93237a4d38f2cb57",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/bass_vi_roundwound.sm",
+    "source_sha256": "a0de732827cf378741c1694dd0ab2a450edada3609acb5471e505c55e0a65c0e",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/bass_vi_pick.sm",
+    "source_sha256": "3dd95124f31a548da261821ddfa6ea04a954b5d36f7be323458373d28359bdc0",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/bass_vi_muted.sm",
+    "source_sha256": "5ebbcc277041cf6738660d6d9afb7439025d872500c84efba43dba1a7e440046",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/bass_vi_finger.sm",
+    "source_sha256": "e2f26e3d9f4568567421e47e5e4ee219301a394a2d5858aa1850f40d8c6a2734",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/synth_round_sub.sm",
+    "source_sha256": "a4a066ffa585062c5c69cda16c808c291c25ec2d76f2eb2e4f6734341e4097e7",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/synth_rubber.sm",
+    "source_sha256": "749bfdc70062d044226c27ccaeab0a48ed3e85128243ffceb4395380f42a65e7",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/synth_acid.sm",
+    "source_sha256": "10a7c62088b81922434c47cb289a8960fcb17b73b7630ed8cccf45d1230b090f",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/synth_mellow_square.sm",
+    "source_sha256": "c85346303461430c278f5379b565bf7fbb8c69d7c91e8eba0fde8dcabc3a9443",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/synth_disco_pluck.sm",
+    "source_sha256": "31eafaa38484b1b4ab1024e05cb605d21ff1b2aed0615bef31fcf6e7b1e98359",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/synth_warm_saw.sm",
+    "source_sha256": "7b3265848b87f8d37c7dacffe04064088e18f6cfc5b62b1025970facf5d9f78a",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/synth_reedy.sm",
+    "source_sha256": "603d1bc300c0658234e51607d0885c171b3d90b3585961db19f44c18fed403ff",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/synth_growl.sm",
+    "source_sha256": "d12888ad42365303023475b9634cdeaafeadf40d1c53120cfe1ad01ff793e6a5",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "kits/black_pearl.sm",
+    "source_sha256": "4e8ec4e918400fb017ded79bf7af8f2cc33d9cac38b96816cf96c0fc9126868a",
+    "digest": "8b6b2c67b153d9757baa16ad21218b80716a3cc8057f144fa5ba727fa942755b",
+    "frames": 666,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "kits/red_zeppelin.sm",
+    "source_sha256": "b7ed7e71e1176206d4306f2f75d623baf6e07b64cd84c89b8846952626bd0c52",
+    "digest": "8b6b2c67b153d9757baa16ad21218b80716a3cc8057f144fa5ba727fa942755b",
+    "frames": 666,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "kits/blonde_bop.sm",
+    "source_sha256": "c835701ae4e40431ec5525e078f189ce84a4b62424cf2ef48074bbaae158fdf7",
+    "digest": "8b6b2c67b153d9757baa16ad21218b80716a3cc8057f144fa5ba727fa942755b",
+    "frames": 666,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "kits/blonde_bop_rods.sm",
+    "source_sha256": "3c88e556ce10c53dc52aa504f0fb26ef2dd8e4a0bfa00917eda8baa9b0104431",
+    "digest": "8b6b2c67b153d9757baa16ad21218b80716a3cc8057f144fa5ba727fa942755b",
+    "frames": 666,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "kits/busk.sm",
+    "source_sha256": "a35c67eeeb18e5cc376f51dae819180fef030245632d9e054a57cb37bac27a35",
+    "digest": "541c0b465e74ed243755ddac8065e68fe3f7c46aaf234bc784a509708f253163",
+    "frames": 492,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "electronic/set_01.sm",
+    "source_sha256": "709fce5c4af06140a22f8b08ad6f0a335c70ddb76d273247a4a0fc7b7befcf9d",
+    "digest": "d36e26718d7aa8a113412dc533ecfd7600e40f888d42d039d28daed494483247",
+    "frames": 300,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "electronic/set_02.sm",
+    "source_sha256": "f5891e002a2d5772a09f9689a79c0f0bfa3456d83bb6a2113f8ae2dcf4328133",
+    "digest": "d36e26718d7aa8a113412dc533ecfd7600e40f888d42d039d28daed494483247",
+    "frames": 300,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "electronic/set_03.sm",
+    "source_sha256": "16548c7192e082865bc498b953bc8d136f6831ce34c85672882ab1f2f1d99e56",
+    "digest": "d36e26718d7aa8a113412dc533ecfd7600e40f888d42d039d28daed494483247",
+    "frames": 300,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "electronic/set_04.sm",
+    "source_sha256": "1c3c4e3f65d4210e51993f3fc3bdfd986328622d9807ddff8869c932a88c7f5e",
+    "digest": "d36e26718d7aa8a113412dc533ecfd7600e40f888d42d039d28daed494483247",
+    "frames": 300,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "electronic/set_05.sm",
+    "source_sha256": "ac608b20be459b3a7885a733c0967294c311555edbb076387e23f8954c24b8c2",
+    "digest": "d36e26718d7aa8a113412dc533ecfd7600e40f888d42d039d28daed494483247",
+    "frames": 300,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "electronic/set_06.sm",
+    "source_sha256": "35066dd6b9c118cf3130e0a71c8eb7aa29eecb9570371a3484cb8bf2467a9bc3",
+    "digest": "d36e26718d7aa8a113412dc533ecfd7600e40f888d42d039d28daed494483247",
+    "frames": 300,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "electronic/set_07.sm",
+    "source_sha256": "2bccc8e67b28f6a7461005695420316f359f0417c04b9f15db33c075424d9b0a",
+    "digest": "d36e26718d7aa8a113412dc533ecfd7600e40f888d42d039d28daed494483247",
+    "frames": 300,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "electronic/set_08.sm",
+    "source_sha256": "1b7a20eaf9a8eda20f22943cd70c1cfe8e582a02573ea1a2a4893f3730ab25df",
+    "digest": "d36e26718d7aa8a113412dc533ecfd7600e40f888d42d039d28daed494483247",
+    "frames": 300,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/01_soul_pocket.sm",
+    "source_sha256": "9bc65553c0d75a4cd2000d65a42e84897085905ee3987d31738392e8128b4224",
+    "digest": "e9db9f478ea2eec98b8a2053424f23de5b65e971f068eb1c820379c073e1bb6f",
+    "frames": 1290,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "templates/02_dry_funk.sm",
+    "source_sha256": "83b3fb6549586da5213cf9f989f99341f54c3245c354f251d0559b39449103f4",
+    "digest": "0b2052d4e7ec388c75f2fb3ed6404a037e8c41685298801a9844d7d405a39ff9",
+    "frames": 1157,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "templates/03_big_rock.sm",
+    "source_sha256": "137003801170bd9ee8d7ba642054de8fac6ec61a1c279e65c33338b102824df9",
+    "digest": "676b83f2c69ffa470e51502889b2ebf4d4ebdc2798af0e3a0bbeb63bc60891e4",
+    "frames": 1119,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "templates/04_ride_shuffle.sm",
+    "source_sha256": "331d47e4c8511f6cbb8c1a862fbaec6da607dd804d6166b303e45637cbdf6353",
+    "digest": "556e85593faddd88ed0e7d3d56109eb6b70a9116622625c6a56cabeb8aabbf95",
+    "frames": 1290,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "templates/05_quiet_rods.sm",
+    "source_sha256": "004f003df13c8c1f2fb0a9ff3a0f5253591308067161290e338471f580210c75",
+    "digest": "e50d289b30c6f92411e52b347f2d1b7332e4bfedc8cb2e1096abb6714e82887e",
+    "frames": 1461,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "templates/06_broken_electric.sm",
+    "source_sha256": "34da844963fa4a141103f8a0587c8cbf3e2535dd13965c733537dfd6570c7ac6",
+    "digest": "ffb9cc7cd949470373f993d2c2959663da059dff3ca75b643b6a347f02d35b83",
+    "frames": 1083,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "templates/07_dub_space.sm",
+    "source_sha256": "af406fc510fe724180ba7b88371102e2e75cd050bd609a314f8484cf9fc52619",
+    "digest": "daa8d185c5f60bb887facb39db7589ab8f64ec9357716fbaa22503e2fc55aee3",
+    "frames": 1530,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "templates/08_half_time.sm",
+    "source_sha256": "466b4dad3053955247656b27a137fa72888cb30ef45d24296076194d6e81156d",
+    "digest": "8d19a07979e3019140a0fee106fc1afba40a71568199a790a27ae59aa21816c7",
+    "frames": 1050,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "kits/studio_takes.sm",
+    "source_sha256": "fdde0efd2140b91e5022338a075d9087990b64c262fc417d6157bce257950cc1",
+    "digest": "8b6b2c67b153d9757baa16ad21218b80716a3cc8057f144fa5ba727fa942755b",
+    "frames": 666,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/double_bass.sm",
+    "source_sha256": "2af985ad34763a14b06721b37517f2131acda0f72ec570630a086d69c0b17e5a",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/upright_bass.sm",
+    "source_sha256": "89e6a659f54ac1843df32560dd0bdda763440b618be7abf0b62af0f090a310f2",
+    "digest": "324a8d009fd610a2f429812c674a72a7474d415a2930b1fb12cf661d5e7034c9",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/upright_bass_arco.sm",
+    "source_sha256": "775fe4e7c158b0230a085014fc4e4cbabc8e041a78d0fd709ad1498997b219f4",
+    "digest": "4569c19588fdde7a8fed0fbc6a0df8f266efc5cf2e696b95a2d0eae9f28372b0",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "bass/double_bass_arco.sm",
+    "source_sha256": "7f3bccb07a4df08f3752815aa52a4635a112a04164c3227a378d046aa146d135",
+    "digest": "4569c19588fdde7a8fed0fbc6a0df8f266efc5cf2e696b95a2d0eae9f28372b0",
+    "frames": 348,
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  }
+]

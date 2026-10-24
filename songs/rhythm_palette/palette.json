@@ -1,0 +1,296 @@
+[
+  {
+    "source": "bass/jazz_bass.sm",
+    "id": "jazz_bass",
+    "group": "Recorded bass",
+    "title": "Jazz bass, roundwound",
+    "description": "Direct recorded Squier Jazz Bass; sustained notes, four velocity layers and four alternate takes. No scripted slides or live keyswitches."
+  },
+  {
+    "source": "bass/jazz_bass_staccato.sm",
+    "id": "jazz_bass_staccato",
+    "group": "Recorded bass",
+    "title": "Jazz bass, staccato",
+    "description": "Separately recorded short Jazz Bass notes; five alternate takes. Use for clipped funk replies. No scripted slides or live keyswitches."
+  },
+  {
+    "source": "bass/flatwound_bass.sm",
+    "id": "flatwound_bass",
+    "group": "Recorded bass",
+    "title": "Dead flatwound bass",
+    "description": "Dark Ibanez neck-pickup bass; three dynamic layers, four alternate takes. Soul and dub. No scripted slides or live keyswitches."
+  },
+  {
+    "source": "bass/roundwound_bass.sm",
+    "id": "roundwound_bass",
+    "group": "Recorded bass",
+    "title": "Roundwound neck bass",
+    "description": "Killer KB-Simmony neck pickup; five dynamic layers and three alternate takes. Warm electric bass. No scripted slides or live keyswitches."
+  },
+  {
+    "source": "bass/bass_vi_roundwound.sm",
+    "id": "bass_vi_roundwound",
+    "group": "Recorded bass",
+    "title": "Bass VI, roundwound",
+    "description": "Squier Bass VI roundwounds; three dynamic layers and three alternate takes; clear melodic low lines. No scripted slides or live keyswitches."
+  },
+  {
+    "source": "bass/bass_vi_pick.sm",
+    "id": "bass_vi_pick",
+    "group": "Recorded bass",
+    "title": "Bass VI, picked flatwound",
+    "description": "Bridge pickup and picked flatwounds; three dynamic layers and four alternate takes; defined attack. No scripted slides or live keyswitches."
+  },
+  {
+    "source": "bass/bass_vi_muted.sm",
+    "id": "bass_vi_muted",
+    "group": "Recorded bass",
+    "title": "Bass VI, muted pick",
+    "description": "Muted flatwounds with combined pickups; three dynamic layers and three alternate takes; tight funk and pop. No scripted slides or live keyswitches."
+  },
+  {
+    "source": "bass/bass_vi_finger.sm",
+    "id": "bass_vi_finger",
+    "group": "Recorded bass",
+    "title": "Bass VI, fingered flatwound",
+    "description": "Neck pickup, fingered flatwounds; three dynamic layers and four alternate takes; intimate round bass. No scripted slides or live keyswitches."
+  },
+  {
+    "source": "bass/double_bass.sm",
+    "id": "double_bass",
+    "group": "Acoustic bass",
+    "title": "Pizzicato double bass",
+    "description": "Plucked acoustic bass with alternate takes; jazz and chamber bass lines, no synth glide."
+  },
+  {
+    "source": "bass/upright_bass.sm",
+    "id": "upright_bass",
+    "group": "Acoustic bass",
+    "title": "Rubner double bass, pizzicato",
+    "description": "Recorded upright plucks with dynamic layers and sequential alternate takes; folk, jazz and intimate pop."
+  },
+  {
+    "source": "bass/upright_bass_arco.sm",
+    "id": "upright_bass_arco",
+    "group": "Acoustic bass",
+    "title": "Rubner double bass, bowed",
+    "description": "Recorded bowed upright with dynamic layers and alternate takes; long orchestral notes, not a plucked groove bass."
+  },
+  {
+    "source": "bass/double_bass_arco.sm",
+    "id": "double_bass_arco",
+    "group": "Acoustic bass",
+    "title": "VSCO double bass, bowed",
+    "description": "Recorded sustained double bass without vibrato; orchestral low lines, not a plucked groove bass."
+  },
+  {
+    "source": "bass/synth_round_sub.sm",
+    "id": "synth_round_sub",
+    "group": "Synth bass",
+    "title": "Round Sub",
+    "description": "Synthesized bass; compare its envelope and harmonic colour on the same phrase."
+  },
+  {
+    "source": "bass/synth_rubber.sm",
+    "id": "synth_rubber",
+    "group": "Synth bass",
+    "title": "Rubber",
+    "description": "Synthesized bass; compare its envelope and harmonic colour on the same phrase."
+  },
+  {
+    "source": "bass/synth_acid.sm",
+    "id": "synth_acid",
+    "group": "Synth bass",
+    "title": "Acid",
+    "description": "Synthesized bass; compare its envelope and harmonic colour on the same phrase."
+  },
+  {
+    "source": "bass/synth_mellow_square.sm",
+    "id": "synth_mellow_square",
+    "group": "Synth bass",
+    "title": "Mellow Square",
+    "description": "Synthesized bass; compare its envelope and harmonic colour on the same phrase."
+  },
+  {
+    "source": "bass/synth_disco_pluck.sm",
+    "id": "synth_disco_pluck",
+    "group": "Synth bass",
+    "title": "Disco Pluck",
+    "description": "Synthesized bass; compare its envelope and harmonic colour on the same phrase."
+  },
+  {
+    "source": "bass/synth_warm_saw.sm",
+    "id": "synth_warm_saw",
+    "group": "Synth bass",
+    "title": "Warm Saw",
+    "description": "Synthesized bass; compare its envelope and harmonic colour on the same phrase."
+  },
+  {
+    "source": "bass/synth_reedy.sm",
+    "id": "synth_reedy",
+    "group": "Synth bass",
+    "title": "Reedy",
+    "description": "Synthesized bass; compare its envelope and harmonic colour on the same phrase."
+  },
+  {
+    "source": "bass/synth_growl.sm",
+    "id": "synth_growl",
+    "group": "Synth bass",
+    "title": "Growl",
+    "description": "Synthesized bass; compare its envelope and harmonic colour on the same phrase."
+  },
+  {
+    "source": "kits/black_pearl.sm",
+    "id": "black_pearl",
+    "group": "Acoustic kits",
+    "title": "Black Pearl",
+    "description": "Five recorded dynamic layers per piece. Center/edge hits, pedal/open hats, toms and cymbals. No recorded round robins."
+  },
+  {
+    "source": "kits/red_zeppelin.sm",
+    "id": "red_zeppelin",
+    "group": "Acoustic kits",
+    "title": "Red Zeppelin",
+    "description": "Five recorded dynamic layers per piece. Center/edge hits, pedal/open hats, toms and cymbals. No recorded round robins."
+  },
+  {
+    "source": "kits/blonde_bop.sm",
+    "id": "blonde_bop",
+    "group": "Acoustic kits",
+    "title": "Blonde Bop",
+    "description": "Five recorded dynamic layers per piece. Center/edge hits, pedal/open hats, toms and cymbals. No recorded round robins."
+  },
+  {
+    "source": "kits/blonde_bop_rods.sm",
+    "id": "blonde_bop_rods",
+    "group": "Acoustic kits",
+    "title": "Blonde Bop Rods",
+    "description": "Five recorded dynamic layers per piece. Center/edge hits, pedal/open hats, toms and cymbals. No recorded round robins."
+  },
+  {
+    "source": "kits/studio_takes.sm",
+    "id": "studio_takes",
+    "group": "Acoustic kits",
+    "title": "Studio alternate takes",
+    "description": "VCSL snares and stick/mallet toms with recorded alternate takes, over Black Pearl kick and cymbals."
+  },
+  {
+    "source": "kits/busk.sm",
+    "id": "busk",
+    "group": "Acoustic kits",
+    "title": "Buskman hand percussion",
+    "description": "Cajon, alternating-hand congas, shaker and cowbell; ten recorded velocity layers."
+  },
+  {
+    "source": "electronic/set_01.sm",
+    "id": "set_01",
+    "group": "Electronic kits",
+    "title": "Electronic set 1: deep_808 / soft_wires",
+    "description": "Distinct kick/snare/closed/open-hat presets and synth bass on a broken groove."
+  },
+  {
+    "source": "electronic/set_02.sm",
+    "id": "set_02",
+    "group": "Electronic kits",
+    "title": "Electronic set 2: tight_808 / tight_pop",
+    "description": "Distinct kick/snare/closed/open-hat presets and synth bass on a broken groove."
+  },
+  {
+    "source": "electronic/set_03.sm",
+    "id": "set_03",
+    "group": "Electronic kits",
+    "title": "Electronic set 3: club_909 / fat_808",
+    "description": "Distinct kick/snare/closed/open-hat presets and synth bass on a broken groove."
+  },
+  {
+    "source": "electronic/set_04.sm",
+    "id": "set_04",
+    "group": "Electronic kits",
+    "title": "Electronic set 4: dry_punch / bright_909",
+    "description": "Distinct kick/snare/closed/open-hat presets and synth bass on a broken groove."
+  },
+  {
+    "source": "electronic/set_05.sm",
+    "id": "set_05",
+    "group": "Electronic kits",
+    "title": "Electronic set 5: soft_sine / dry_rim",
+    "description": "Distinct kick/snare/closed/open-hat presets and synth bass on a broken groove."
+  },
+  {
+    "source": "electronic/set_06.sm",
+    "id": "set_06",
+    "group": "Electronic kits",
+    "title": "Electronic set 6: hard_click / dusty",
+    "description": "Distinct kick/snare/closed/open-hat presets and synth bass on a broken groove."
+  },
+  {
+    "source": "electronic/set_07.sm",
+    "id": "set_07",
+    "group": "Electronic kits",
+    "title": "Electronic set 7: low_thud / noisy",
+    "description": "Distinct kick/snare/closed/open-hat presets and synth bass on a broken groove."
+  },
+  {
+    "source": "electronic/set_08.sm",
+    "id": "set_08",
+    "group": "Electronic kits",
+    "title": "Electronic set 8: distorted / industrial",
+    "description": "Distinct kick/snare/closed/open-hat presets and synth bass on a broken groove."
+  },
+  {
+    "source": "templates/01_soul_pocket.sm",
+    "id": "01_soul_pocket",
+    "group": "Groove templates",
+    "title": "Soul pocket",
+    "description": "16-bar starter: soul drums, pocket bass, sparse FM chords and a resolved stop."
+  },
+  {
+    "source": "templates/02_dry_funk.sm",
+    "id": "02_dry_funk",
+    "group": "Groove templates",
+    "title": "Dry funk",
+    "description": "16-bar starter: dry_funk drums, syncopated bass, sparse FM chords and a resolved stop."
+  },
+  {
+    "source": "templates/03_big_rock.sm",
+    "id": "03_big_rock",
+    "group": "Groove templates",
+    "title": "Big rock",
+    "description": "16-bar starter: pocket drums, root5 bass, sparse FM chords and a resolved stop."
+  },
+  {
+    "source": "templates/04_ride_shuffle.sm",
+    "id": "04_ride_shuffle",
+    "group": "Groove templates",
+    "title": "Ride shuffle",
+    "description": "16-bar starter: ride_shuffle drums, root5 bass, sparse FM chords and a resolved stop."
+  },
+  {
+    "source": "templates/05_quiet_rods.sm",
+    "id": "05_quiet_rods",
+    "group": "Groove templates",
+    "title": "Quiet hot rods",
+    "description": "16-bar starter: light_rods drums, half_time bass, sparse FM chords and a resolved stop."
+  },
+  {
+    "source": "templates/06_broken_electric.sm",
+    "id": "06_broken_electric",
+    "group": "Groove templates",
+    "title": "Broken electric",
+    "description": "16-bar starter: broken_beat drums, syncopated bass, sparse FM chords and a resolved stop."
+  },
+  {
+    "source": "templates/07_dub_space.sm",
+    "id": "07_dub_space",
+    "group": "Groove templates",
+    "title": "Dub space",
+    "description": "16-bar starter: dub_space drums, dub bass, sparse FM chords and a resolved stop."
+  },
+  {
+    "source": "templates/08_half_time.sm",
+    "id": "08_half_time",
+    "group": "Groove templates",
+    "title": "Half-time room",
+    "description": "16-bar starter: half_time drums, half_time bass, sparse FM chords and a resolved stop."
+  }
+]

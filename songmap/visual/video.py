@@ -74,11 +74,13 @@ def write_video(song, out: str, *, fps: int = 30, size=(1280, 720), theme: str =
 
 def write_poster(song, out: str, *, t: float | None = None, size=(1280, 720), theme: str = "light",
                  page_seconds: float = 6.0, parts: list[str] | None = None, view: dict | None = None) -> str:
-    """One frame as a PNG (video poster / still). Default time: just after the second chord (or the first note)."""
+    """One frame as an image (video poster / still). Default: just after the second chord or first note."""
     score = score_of(_arrangement(song), parts if parts is not None or not view else view.get("parts"))
     if t is None:
         first = score.notes[0].start if score.notes else 0.0
         t = score.chords[1].start + 0.05 if len(score.chords) > 1 else min(first + 0.25, score.seconds / 2)
     os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
-    Renderer(score, size, theme, page_seconds, view=view).frame(t).save(out)
+    image = Renderer(score, size, theme, page_seconds, view=view).frame(t)
+    options = {"quality": 95, "subsampling": 0} if os.path.splitext(out)[1].lower() in (".jpg", ".jpeg") else {}
+    image.save(out, **options)
     return out

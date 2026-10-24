@@ -11,7 +11,7 @@ tail_seconds: 4
 instruments:
   gold: clean/golden_pad
   bell: clean/glass
-  keys: keys/still
+  keys: sampler/grand_piano
   low: clean/bass
 
 sections:
@@ -19,9 +19,19 @@ sections:
   - {name: end, bars: 1, parts: {keys: hold, low: bassline}, harmony: "C:1", dyn: mp}
 
 mix:
-  gold: {gain_db: -12, send: {hall: 0.35}}
-  bell: {gain_db: -9, send: {hall: 0.4}}
-  keys: {gain_db: -9, send: {hall: 0.2}}
-  low: {gain_db: -4}
+  gold:
+    gain_db: -12
+    send:
+      hall: 0.35
+  bell:
+    gain_db: -9
+    send:
+      hall: 0.4
+  keys:
+    gain_db: 2.5
+    send:
+      hall: 0.2
+  low:
+    gain_db: -4
 
 master: clean

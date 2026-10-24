@@ -8,10 +8,16 @@ key: "C major"
 tuning: 36edo
 seed: 359
 tail_seconds: 3
-instruments: {organ: clean/organ, low: clean/bass}
+instruments:
+  organ: sampler/grand_piano
+  low: clean/bass
 mix:
-  organ: {gain_db: -6, send: {hall: 0.2}}
-  low: {gain_db: -6}
+  organ:
+    gain_db: 17.9
+    send:
+      hall: 0.2
+  low:
+    gain_db: -6
 sections:
   - {name: layer0, bars: 2.5, harmony: "Cg:1 C:1 N.C.:0.5", parts: {organ: hold, low: bassline}}
   - {name: layer1, bars: 4.5, harmony: "Cg:1 ^Cm:1 ^Bb7:1 ^Eb:1 N.C.:0.5", parts: {organ: hold, low: bassline}}

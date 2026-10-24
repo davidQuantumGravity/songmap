@@ -8,8 +8,19 @@ key: "C major"
 tuning: 12edo
 seed: 16
 tail_seconds: 1.5
-instruments: {lead: clean/lead, keys: clean/keys, bass: clean/bass}
-mix: {lead: {gain_db: -2, send: {hall: 0.15}}, keys: {gain_db: -12}, bass: {gain_db: -7}}
+instruments:
+  lead: sampler/flute
+  keys: sampler/grand_piano
+  bass: sampler/double_bass
+mix:
+  lead:
+    gain_db: 6.0
+    send:
+      hall: 0.15
+  keys:
+    gain_db: 4.0
+  bass:
+    gain_db: 14.0
 returns: {hall: {type: reverb, seconds: 1.4, predelay: 0.02, damping: 0.5}}
 sections:
   - name: straight

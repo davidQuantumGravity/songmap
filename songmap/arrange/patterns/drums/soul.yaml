@@ -1,0 +1,18 @@
+# Relaxed backbeat with a sparse kick and restrained hats.
+style: soul
+role: drums
+bars: 2
+steps:
+  kick: X.......x.....x.|X.....x.x.......
+  snare: '....X.......X.o.|....X..o....X...'
+  hat:
+    steps: x.x.x.x.x.x.x.x.
+    vel:
+    - 0.58
+    - 0.26
+    - 0.43
+    - 0.29
+    - 0.55
+    - 0.25
+    - 0.45
+    - 0.32

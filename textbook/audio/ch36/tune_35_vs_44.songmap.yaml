@@ -9,10 +9,14 @@ key: "C major"
 tuning: 36edo
 seed: 36
 tail_seconds: 3
-instruments: {keys: clean/keys, pad: clean/organ}
+instruments:
+  keys: sampler/grand_piano
+  pad: sampler/grand_piano
 mix:
-  keys: {gain_db: -4}
-  pad: {gain_db: -11}
+  keys:
+    gain_db: 9.6
+  pad:
+    gain_db: 12.2
 sections:
   - {name: scale35, bars: 2, harmony: "Cg:2", parts: {keys: {notes: "c8 c#8 d8 ve8 vf8 vf#8 ^g8 ^ab8 | ^a8 b8 c+2."}, pad: hold}}
   - {name: tune35, bars: 4, harmony: "Cg:1 C#g:1 Cg:1 vEg:0.5 Cg:0.5", parts: {keys: {notes: "c4 d8 ve8 ^g4 ^ab8 ^g8 | vf#8 vf8 ve8 d8 ve2 | ^g4 ^a8 ^ab8 ^g4 ve8 vf8 | d8 c#8 b-8 c#8 c2"}, pad: hold}}

@@ -8,13 +8,16 @@ key: "C major"
 tuning: 36edo
 seed: 1
 tail_seconds: 2.5
-instruments: {organ: clean/organ}
+instruments:
+  organ: sampler/grand_piano
 motifs:
   p1: {notes: "=mf [c,e,g#]2 [c,ve,^g]4 [c,^eb,vg] | [c,eb,f#]2 r2"}
   p2: {notes: "=mf [c,e,g]2 [c,ve,^g]4 [c,^eb,vab] | [c,eb,ab]2 r2"}
   p3: {notes: "=mf [c,eb,g]2 [c,ve,^g]4 [c,^e,vab] | [c,f,ab]2 r2"}
   p4: {notes: "=mf [c,eb,ab]2 [c,ve,^g]4 [c,^e,vg] | [c,f,f#]2 r2"}
-mix: {organ: {gain_db: -6}}
+mix:
+  organ:
+    gain_db: 12.8
 sections:
   - {name: augdim, bars: 2, parts: {organ: {motifs: [p1]}}}
   - {name: major, bars: 2, parts: {organ: {motifs: [p2]}}}

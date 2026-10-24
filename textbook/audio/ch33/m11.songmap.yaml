@@ -9,11 +9,15 @@ key: "C major"
 tuning: 36edo
 seed: 331
 tail_seconds: 3
-instruments: {organ: clean/organ}
+instruments:
+  organ: sampler/grand_piano
 motifs:
   maps: {notes: "[c,c#,d]1 | [c,d,g]1 | [c,^c,vc#]1 | [c,ve,^g]1 | [c,^e,va]1 | [^b-,vc,c]1", octave: 4}
 mix:
-  organ: {gain_db: -5, send: {hall: 0.15}}
+  organ:
+    gain_db: 18.9
+    send:
+      hall: 0.15
 sections:
   - {name: maps, bars: 6, harmony: "N.C.:6", parts: {organ: {motifs: [maps]}}}
 master: clean

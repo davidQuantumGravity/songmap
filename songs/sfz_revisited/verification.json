@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-23",
+  "tests": {
+    "command": ".venv/Scripts/python -m pytest -q",
+    "passed": 652,
+    "seconds": 76.7
+  },
+  "gui_build": {
+    "command": "npm run build",
+    "cwd": "songmap/gui/web",
+    "passed": true
+  },
+  "browser": {
+    "sampled_voice_options": 17,
+    "library_defaults_verified": true,
+    "comparison_cards": 17,
+    "audio_players": 51,
+    "ab_switch_verified": true,
+    "sample_media_errors": [],
+    "console_errors": []
+  },
+  "artifacts": {
+    "sample_installation": {
+      "ok": true,
+      "voices": 17,
+      "files": 749,
+      "errors": []
+    },
+    "revised": 17,
+    "retained": 4,
+    "all_written_events_and_cues_preserved": true,
+    "clipped_samples": 0,
+    "new_audio_warnings": 0,
+    "human_auditory_approval": false
+  },
+  "implementation_sha256": {
+    "songmap/instruments/sampler/__init__.py": "87e7afe7e20ddd0becca038166ea658b64e776e543400c491915539cce8ee2ab",
+    "songmap/instruments/sampler/sfz.py": "84ee4059ff15e0a868513e763dd7ef0ee00fc89103c3954e5390fe02d8bc5c3d",
+    "songmap/instruments/sampler/library.py": "66d5108b5cce820660417d8016bd44c056dda3b7c64c746908249dde4dbe8430",
+    "songmap/instruments/sampler/install.py": "c0409ebf9cdda8eda1dcc351b52627df78c20d4efba5076bb57ecc0efbef29b8",
+    "songmap/instruments/sampler/voices.yaml": "9a351d7a3c1c6ed132e32b174a31780608b25a98844711806bf43af85cae165c",
+    "songmap/gui/rack.py": "7afcb66e66367e050c4ca66c231867806341420871b9cfeb590d0d93ad66f2e0",
+    "songmap/gui/web/src/Rack.tsx": "f694890981faa69b4a8ed55d3864d4032941e305f341088db8330cf2cc501e2c",
+    "songmap/describe.py": "e0355286f71065dec3896559af2fcef64064ad0be3838f23b9c4309b0bd31772"
+  }
+}

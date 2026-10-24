@@ -8,8 +8,21 @@ key: "C major"
 tuning: 36edo
 seed: 39
 tail_seconds: 2.5
-instruments: {up: clean/organ, keys: keys/still, low: clean/bass}
-mix: {up: {gain_db: -6, send: {hall: 0.15}}, keys: {gain_db: -5, send: {hall: 0.35}}, low: {gain_db: -5}}
+instruments:
+  up: sampler/grand_piano
+  keys: sampler/grand_piano
+  low: clean/bass
+mix:
+  up:
+    gain_db: 16.7
+    send:
+      hall: 0.15
+  keys:
+    gain_db: 3.7
+    send:
+      hall: 0.35
+  low:
+    gain_db: -5
 returns: {hall: {type: reverb, seconds: 2.4, predelay: 0.02, damping: 0.5}}
 sections:
   - name: backdoor

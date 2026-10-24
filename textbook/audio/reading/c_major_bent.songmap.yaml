@@ -7,8 +7,11 @@ key: "C major"
 tuning: 36edo
 seed: 1
 tail_seconds: 2
-instruments: {organ: clean/organ}
-mix: {organ: {gain_db: -6}}
+instruments:
+  organ: sampler/grand_piano
+mix:
+  organ:
+    gain_db: 15.6
 sections:
   - name: compare
     bars: 4

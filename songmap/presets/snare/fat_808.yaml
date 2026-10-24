@@ -1,0 +1,13 @@
+instrument: snare
+description: Low ringing electronic shell and longer wire wash.
+tags:
+- electronic
+- snare
+params:
+  tone: 155
+  tone_decay: 0.22
+  tone_mix: 0.62
+  noise_decay: 0.28
+  noise_hp: 1200
+  snap: 0.15
+  drive: 1.2

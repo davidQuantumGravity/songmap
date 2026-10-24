@@ -9,14 +9,18 @@ seed: 21
 tail_seconds: 3
 
 instruments:
-  keys: keys/still
+  keys: sampler/grand_piano
   low: clean/bass
 
 sections:
   - {name: x, bars: 3, parts: {keys: hold, low: bassline}, harmony: "F:1 G:0.5 vEbT13/G:0.25 vCg/G:0.25 C:1"}
 
 mix:
-  keys: {gain_db: -4, send: {hall: 0.2}}
-  low: {gain_db: -4}
+  keys:
+    gain_db: 5.3
+    send:
+      hall: 0.2
+  low:
+    gain_db: -4
 
 master: clean

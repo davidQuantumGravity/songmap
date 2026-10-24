@@ -1,0 +1,44 @@
+# SFZ edition of songs/golden_house/02_two_step_gold.sm. Original score and renders preserved.
+# Instrumentation and faders revised; written notes, tuning, form, timing and binaural settings retained.
+# Listening candidate: automated measurements are not a human listening verdict.
+# 2. Two-Step Gold. Golden House, song 2 of 5 (textbook Chapter 49). UK garage in E minor, 132 BPM, a swung 2-step
+# beat (the kick skips beat 3; swing .62 on 16ths) under an electric piano, a pad, a sub bass and a chopped lead.
+# Golden technique: the golden deceptive cadence (Chapter 29). In the loop Cmaj7 - D - Em7 - Bm7, the D slides up
+# into Em through two golden chords on the last two swung 8ths of its bar, D - vEbg - Ebg - Em, and the bass walks
+# with them: D - vEb - Eb - E (up two sixth-steps, one, then three). Everything that sounds on those beats changes chord with
+# them: the pad is voice-led, the bass is chord-relative, and the stabs and the lead rest. The break slows the
+# cadence down to a beat per golden chord, with a golden-spectrum pad striking each one.
+# Form (72 bars): intro 8, verse 16, chorus 16, break 8, chorus_2 16, outro 8.
+song "Two-Step Gold" 132 4/4 Em fps=30 seed=62 tail=4 tuning=36edo mood=techno
+groove swing=.62/16
+inst epiano=sampler/fm_piano lead=clean/lead bass=bass/v0(cutoff=450, drive=2, env_amt=1.8, env_decay=.12, sub=.7, glide=.05) pad(voices=3, detune=3, drift=0, cutoff=1300, attack=.4, release=.9) gold=clean/golden_pad(release=1.5)
+kit kick=kick/v0(tune=52, sweep=26, decay=.32, click=.35, drive=2) clap=clap/v0(decay=.18) hat=hat/v0(decay=.04) ohat=hat/v0_open snare=snare/v0(tone=210, snap=.6, noise_decay=.15) rim=kick/v0(tune=90, sweep=8, sweep_time=.04, decay=.4, click=.2, drive=1.2)
+
+prog loop  "Cmaj7:1 D:0.75 vEbg:0.125 Ebg:0.125 Em7:1 Bm7:1"
+prog slow  "Cmaj7:2 D:1.5 vEbg:0.25 Ebg:0.25 Em7:2 Bm7:2"
+prog final "Cmaj7:1 D:0.75 vEbg:0.125 Ebg:0.125 Em7:2"
+
+# the chopped lead (E minor, 0 = E): it rests on every golden chord (beat 4 of the D and Bm7 bars)
+chop = {deg: "=mf r/8 4/16^ (4/16) r/8 2/8 r/8 4/8. 2/16 r/8 | r/8 3/16^ (3/16) r/8 1/8 r/8 3/8. 1/16 r/8 | r/8 2/16^ (2/16) r/8 0/8 r/8 2/8. 4/16 r/8 | r/8 1/16^ (1/16) r/8 3/8 r/8 1/8 r/4", oct: 1}
+chop_hi = {deg: "=mp r/8 4/16 (4/16) r/8 2/8 r/8 4/8. 2/16 r/8 | r/8 3/16 (3/16) r/8 1/8 r/8 3/8. 1/16 r/8 | r/8 2/16 (2/16) r/8 0/8 r/8 2/8. 4/16 r/8 | r/8 1/16 (1/16) r/8 3/8 r/8 1/8 r/4", oct: 2}
+break_tune = {deg: "=p 4/1 | 2/2. r/4 | 3/1 | 1/2 r/2 | 0/1 | 2/2. r/4 | 1/1 | 3/2. r/4", oct: 1}
+# electric-piano stabs on the off-beats, all finished before beat 4 (where the golden chords fall)
+stabs = {rel: "r/8 [3,5,7]/16'^ r/16 r/8 [3,5,7]/8' r/8 ([3,5,7]/16') r/16 r/4"}
+# the bass: its last two 8ths of each bar are the golden roots on the D bar, D - vEb - Eb - E
+walk = {rel: "R/8^ r/16 R/16 r/8 R+/8 r/8 R/8 R/8 R/8", oct: -2}
+slow_walk = {rel: "R/2 R/4 R/4", oct: -2}
+
+two_step = {kick: "X.........X.....|X.......x.X.....", clap: "....X.......X...", hat: {steps: "x.xx.xx.x.xx.xx.", vel: [0.45, 0.2, 0.32, 0.22, 0.4, 0.2, 0.3, 0.24]}, rim: {steps: "..x.....x.....x.|......x.....x..x", vel: [0.28, 0.2]}}
+intro_beat = {kick: "X.........X.....|X.......x.X.....", hat: {steps: "x.xx.xx.x.xx.xx.", vel: [0.35, 0.16, 0.25, 0.18]}}
+full_step = two_step with {ohat: {steps: "..x...x...x...x.", vel: [0.42, 0.34]}, snare: {steps: "...........o..o.|.o.........o....", vel: [0.25, 0.18]}}
+
+intro      8 | drums:intro_beat bass:walk pad:hold(range=[48,64]) prog=loop dyn=p<mp
+verse     16 | drums:two_step(gain_db=-2) bass:walk pad:hold(range=[48,64]) epiano:stabs prog=loop dyn=p<mp
+chorus    16 | drums:two_step(gain_db=-2.5) bass:walk pad:hold(range=[48,64]):dyn=mp>p epiano:stabs lead:chop prog=loop dyn=mp | !impact(size=m)
+break      8 | pad:hold(range=[48,64]) gold:{rel: "=p R/2 R/4 R/4", oct: 1} bass:slow_walk lead:break_tune prog=slow dyn=p | !riser:2@+8
+chorus_2  16 | drums:full_step bass:walk pad:hold(range=[48,64]):dyn=mp>p epiano:stabs lead:chop gold:chop_hi prog=loop dyn=f | !drop:1@-1(keep=[pad, lead]) !impact
+outro      8 | drums:two_step(gain_db=-2) bass:walk pad:hold(range=[48,64]) epiano:stabs prog=final dyn=mf>p
+
+mix epiano -2 sc=.3 hall=.15 | lead 15 hall=.2 | bass -2 sc=.4 | pad -6 sc=.55 hall=.2 | gold -14 hall=.3 | drums -3 | fx -8
+inserts lead delay(time=0.75, feedback=.3, mix=.15)
+master standard lufs=-14 glue=none

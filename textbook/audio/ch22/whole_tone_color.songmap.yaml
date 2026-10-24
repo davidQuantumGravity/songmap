@@ -8,8 +8,18 @@ key: "C major"
 tuning: 12edo
 seed: 22
 tail_seconds: 3
-instruments: {keys: keys/still, low: clean/organ}
-mix: {keys: {gain_db: -4, send: {hall: 0.35}}, low: {gain_db: -9, send: {hall: 0.3}}}
+instruments:
+  keys: sampler/grand_piano
+  low: sampler/grand_piano
+mix:
+  keys:
+    gain_db: 6.1
+    send:
+      hall: 0.35
+  low:
+    gain_db: 11.0
+    send:
+      hall: 0.3
 sections:
   - {name: a, bars: 4, parts: {keys: {notes: "=p [e,g#]8 [d,f#] [c,e] [a#-,d] [c,e]4 [d,f#] | [e,g#]2 [c,e]2 | [f#,a#]4 [e,g#] [d,f#] [c,e] | [a#-,d]1"}, low: {notes: "bb--1"}}}
 master: clean

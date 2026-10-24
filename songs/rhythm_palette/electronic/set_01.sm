@@ -1,0 +1,10 @@
+# Electronic set 1: deep_808 / soft_wires. These are synthesis recipes, not sampled hardware clones.
+song "Electronic set 1: deep_808 / soft_wires" 120 4/4 Dm fps=30 seed=82 tail=2 mood=balanced
+inst bass=bass/round_sub(gain_db=0)
+kit kick=kick/deep_808(gain_db=0) snare=snare/soft_wires(gain_db=-3) fill=snare/soft_wires(gain_db=-3) rim=snare/dry_rim(gain_db=-6) hat=hat/fine_closed(gain_db=-8) ohat=hat/soft_open(gain_db=-10)
+chords Dm Bb F C
+groove swing=.53/16
+setup 2 | drums:broken_beat bass:syncopated dyn=mp
+answer 2 | drums:{kick: "X.......x.x.....", snare: "....X..o....X...", hat: "x.x.x.x.x.x.x.x.", ohat: "..............x."} bass:pocket dyn=mf>mp
+mix bass -6 sc=.15 | drums -5 hall=.02
+master standard lufs=-18 glue=none

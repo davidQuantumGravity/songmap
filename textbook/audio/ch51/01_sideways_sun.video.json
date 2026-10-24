@@ -1,0 +1,18 @@
+{
+  "song": "01_sideways_sun",
+  "musical_revision": 2,
+  "visual_revision": 3,
+  "size": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "crf": 18,
+  "score_sha256": "e7ab626c567aaf6f66fc8f50887c4639ba57cffd8bff22ba0402160e7d879c34",
+  "wav_sha256": "2c31259f4969d393bf6b016bd720f87091d619d9a998e6a640c86df208fc851c",
+  "source_sha256": "808c1ca986d3e5f55aa526757ec9fc5db6a613fe744af0f529a99af6e7c205aa",
+  "view_sha256": "cdfd5b2d8304e3a10e94cffc17a753572f598dc5a9f5dabe7fcdc26c3aa19d08",
+  "video_sha256": "579dcac457cfc28a55a080acecc0ad76dbb1069013971ba240e2bfb9d751139d",
+  "poster_sha256": "e6b72650582a924df6c71a7fdc4c6aa29d5985a5fb6f93bb9b96a2f29996fed6",
+  "audio_reused_without_changes": true
+}

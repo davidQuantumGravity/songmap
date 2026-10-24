@@ -1,0 +1,206 @@
+ok: Golden Hour Lullaby
+  7 sections, 44 bars at 72 BPM 4/4, 2:30.67 (4520 frames @ 30 fps)
+  parts: keys 140, bell 53, mel 86, gtr 224, low 52, flute 51, wash 31, drums 136
+  events: 0   digest 2a15934ae5c23e32
+listen: Golden Hour Lullaby
+  bars 44.0, seconds 150.7, sections 7, parts 8, impacts 0, melody notes checked against chords 159, lufs -21.91
+  0 problems, 1 warnings, 0 notes
+  warning finale bar 1: 8 parts play at once (bell, drums, flute, gtr, keys, low, mel, wash)  -> keep 5-6 at most; drop a doubling or give a part rests
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Deceptive Light
+  13 sections, 77 bars at 120 BPM 4/4, 2:37.00 (4710 frames @ 30 fps)
+  parts: ep 402, wash 91, arp 752, bell 92, drums 1131, bass 422, lead 204, gtr 120, fx 8
+  events: 9   digest 68125db4af8ebe9e
+listen: Deceptive Light
+  bars 77.0, seconds 157.0, sections 13, parts 9, impacts 5, melody notes checked against chords 212, lufs -17.57
+  0 problems, 14 warnings, 1 notes
+  warning verse bar 2: lead holds G over D, a half step above a chord tone (a minor-9th rub) (and 1 more)  -> move the note to a chord tone on strong beats, make it a short passing note, or change the chord
+  warning pre: arp and lead sit in the same register (around MIDI 76)  -> move one an octave (oct: 1 / oct: -1), or give one of them rests here
+  warning pre_2: arp and lead sit in the same register (around MIDI 76)  -> move one an octave (oct: 1 / oct: -1), or give one of them rests here
+  warning build: arp and lead sit in the same register (around MIDI 76)  -> move one an octave (oct: 1 / oct: -1), or give one of them rests here
+  warning chorus_2, chorus_3: every wash note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning chorus, post, chorus_2: every arp note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning post, chorus_2, chorus_3: every bell note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning verse, chorus, post: every bass note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning verse, chorus, verse_2: every lead note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning verse_2, chorus_3: every gtr note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning pre_2 bar 1: 7 parts play at once (arp, bass, drums, ep, gtr, lead, wash)  -> keep 5-6 at most; drop a doubling or give a part rests
+  warning chorus_2 bar 1: 7 parts play at once (arp, bass, bell, drums, ep, lead, wash)  -> keep 5-6 at most; drop a doubling or give a part rests
+  warning chorus_3 bar 1: 8 parts play at once (arp, bass, bell, drums, ep, gtr, lead, wash)  -> keep 5-6 at most; drop a doubling or give a part rests
+  warning intro_b bar 2: bass goes outside its comfortable range (86 notes outside MIDI 28-60)  -> move it with oct: or transpose the line
+  note    verse: verse is very bass-heavy (low 0.93)  -> lighten the sub or kick, or add mid/high parts
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Tape Bloom
+  8 sections, 52 bars at 90 BPM 4/4, 2:22.67 (4280 frames @ 30 fps)
+  parts: ep 144, wash 42, fx 419, drums 525, bass 133, keys 102, bell 16, gtr 121, flute 52
+  events: 2   digest 9681d5e93796a0a7
+listen: Tape Bloom
+  bars 52.0, seconds 142.7, sections 8, parts 9, impacts 1, melody notes checked against chords 151, lufs -24.08
+  0 problems, 1 warnings, 1 notes
+  warning reprise bar 1: 8 parts play at once (bass, bell, drums, ep, flute, gtr, keys, wash)  -> keep 5-6 at most; drop a doubling or give a part rests
+  note    walk: walk is very bass-heavy (low 0.93)  -> lighten the sub or kick, or add mid/high parts
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Andalusian Gold
+  8 sections, 54 bars at 100 BPM 4/4, 2:13.60 (4008 frames @ 30 fps)
+  parts: gtr 329, req 247, drums 796, bass 151, lead 94, strings 53, vln 23, bell 18, fx 4
+  events: 5   digest 479b21e87bf20dcc
+listen: Andalusian Gold
+  bars 54.0, seconds 133.6, sections 8, parts 9, impacts 3, melody notes checked against chords 151, lufs -17.6
+  0 problems, 4 warnings, 1 notes
+  warning gold, climax: every req note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning verse, gold, climax: every bass note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning gold, climax: every strings note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning climax bar 1: 8 parts play at once (bass, bell, drums, gtr, lead, req, strings, vln)  -> keep 5-6 at most; drop a doubling or give a part rests
+  note    fin: the song ends on E, not on the home chord  -> end on I (or i, or its Picardy major) unless the hang is deliberate
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: The Silver Third
+  10 sections, 58 bars at 90 BPM 4/4, 2:38.67 (4760 frames @ 30 fps)
+  parts: keys 237, wash 51, bell 43, low 73, lead 83, harp 256, horn 41, drums 338, gold 7, deep 7, choir 18, fx 5
+  events: 5   digest cf84dbd88c090775
+listen: The Silver Third
+  bars 58.0, seconds 158.7, sections 10, parts 12, impacts 3, melody notes checked against chords 221, lufs -19.74
+  0 problems, 8 warnings, 0 notes
+  warning silver, homecoming: every low note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning theme, silver: every lead note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning silver, homecoming: every harp note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning silver, homecoming: every horn note has the same velocity  -> shape it: dyn= arcs, accents (^ or X), ghosts (o), velocity lists
+  warning build bar 5: 7 parts play at once (drums, harp, horn, keys, lead, low, wash)  -> keep 5-6 at most; drop a doubling or give a part rests
+  warning silver bar 1: 7 parts play at once (drums, harp, horn, keys, lead, low, wash)  -> keep 5-6 at most; drop a doubling or give a part rests
+  warning homecoming bar 1: 9 parts play at once (bell, choir, drums, harp, horn, keys, lead, low, wash)  -> keep 5-6 at most; drop a doubling or give a part rests
+  warning giant bar 1: 7 parts play at once (bell, choir, drums, keys, lead, low, wash)  -> keep 5-6 at most; drop a doubling or give a part rests
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Sideways Sun
+  12 sections, 88 bars at 108 BPM 4/4, 3:20.56 (6017 frames @ 30 fps)
+  parts: keys 224, bell 155, bass 242, lead 267, drums 1002, pad 16
+  events: 0   digest 367f4b8ffe89015d
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: Sideways Sun
+  bars 88.0, seconds 200.6, sections 12, parts 6, impacts 0, melody notes checked against chords 170, lufs -16.15
+  0 problems, 0 warnings, 0 notes
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Pocket Algebra
+  12 sections, 96 bars at 112 BPM 4/4, 3:29.71 (6291 frames @ 30 fps)
+  parts: keys 207, bass 391, lead 254, drums 1682, gtr 104
+  events: 0   digest f6b984691207c00e
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: Pocket Algebra
+  bars 96.0, seconds 209.7, sections 12, parts 5, impacts 0, melody notes checked against chords 279, lufs -16.66
+  0 problems, 0 warnings, 0 notes
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Parallax Arcade
+  13 sections, 104 bars at 124 BPM 4/4, 3:26.29 (6189 frames @ 30 fps)
+  parts: arp 864, bass 396, drums 1964, keys 180, lead 376, pad 48
+  events: 0   digest 2c6463b11ece5537
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: Parallax Arcade
+  bars 104.0, seconds 206.3, sections 13, parts 6, impacts 0, melody notes checked against chords 141, lufs -16.63
+  0 problems, 0 warnings, 1 notes
+  note    neon_seed: neon_seed is very bass-heavy (low 0.99)  -> lighten the sub or kick, or add mid/high parts
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Two Windows
+  12 sections, 100 bars at 96 BPM 3/4, 3:12.50 (5775 frames @ 30 fps)
+  parts: harp 224, keys 185, lead 176, low 114
+  events: 0   digest 624ef4380da883f2
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: Two Windows
+  bars 100.0, seconds 192.5, sections 12, parts 4, impacts 0, melody notes checked against chords 274, lufs -18.18
+  0 problems, 0 warnings, 0 notes
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Night Orchard
+  8 sections, 64 bars at 80 BPM 4/4, 3:20.00 (6000 frames @ 30 fps)
+  parts: pad 64, bell 83, keys 93, low 28, lead 62
+  events: 0   digest 2f90d52e736d1d9a
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: Night Orchard
+  bars 64.0, seconds 200.0, sections 8, parts 5, impacts 0, melody notes checked against chords 144, lufs -20.07
+  0 problems, 0 warnings, 0 notes
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Colour Field
+  7 sections, 72 bars at 122 BPM 4/4, 2:25.64 (4369 frames @ 30 fps)
+  parts: drums 896, pad 106, bass 392, organ 120, keys 131, bell 11, fx 2
+  events: 3   digest be081f530b75ad79
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: Colour Field
+  bars 72.0, seconds 145.6, sections 7, parts 7, impacts 1, melody notes checked against chords 59, lufs -14.51
+  0 problems, 0 warnings, 2 notes
+  note    groove: groove is within 1 dB of both neighbours  -> contrast neighbouring sections by texture, register or density
+  note    intro: intro is very bass-heavy (low 0.95)  -> lighten the sub or kick, or add mid/high parts
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Two-Step Gold
+  6 sections, 72 bars at 132 BPM 4/4, 2:14.91 (4047 frames @ 30 fps)
+  parts: drums 1176, bass 405, pad 100, epiano 168, lead 160, gold 97, fx 3
+  events: 4   digest 7bb951f309aac685
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: Two-Step Gold
+  bars 72.0, seconds 134.9, sections 6, parts 7, impacts 2, melody notes checked against chords 36, lufs -14.31
+  0 problems, 0 warnings, 1 notes
+  note    intro: intro is very bass-heavy (low 0.95)  -> lighten the sub or kick, or add mid/high parts
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Silver Lift
+  7 sections, 74 bars at 128 BPM 4/4, 2:22.75 (4282 frames @ 30 fps)
+  parts: drums 852, pad 64, arp 864, bass 316, lead 197, keys 24, bell 16, fx 3
+  events: 3   digest 55ef0bcb8d1938e8
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: Silver Lift
+  bars 74.0, seconds 142.8, sections 7, parts 8, impacts 2, melody notes checked against chords 89, lufs -14.3
+  0 problems, 0 warnings, 1 notes
+  note    intro: intro is very bass-heavy (low 0.95)  -> lighten the sub or kick, or add mid/high parts
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: Dusk on the Water
+  6 sections, 50 bars at 60 BPM 4/4, 3:33.01 (6390 frames @ 30 fps)
+  parts: keys 27, strings 45, harp 264, bell 6, host 50, mel 94, low 41, flute 28
+  events: 0   digest 2d86f41551cadc9e
+  binaural (headphones): dusk: A3 220.00 Hz @ 16.18, E4 329.63 Hz @ 10.00
+                          theme: A3 220.00 Hz @ 16.18>13.00, E4 329.63 Hz @ 10.00>8.03
+                          answer: A3 220.00 Hz @ 13.00>11.50, E4 329.63 Hz @ 8.03>7.11
+                          reflection: A3 220.00 Hz @ 11.50>10.00, E4 329.63 Hz @ 7.11>6.18
+                          homeward: A3 220.00 Hz @ 10.00, E4 329.63 Hz @ 6.18
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: Dusk on the Water
+  bars 50.0, seconds 213.0, sections 6, parts 8, impacts 0, melody notes checked against chords 202, binaural beats (Hz) 6.18 7.107 8.034 10 11.5 13 16.18, lufs -23.04
+  0 problems, 0 warnings, 1 notes
+  note    theme bar 2: the binaural carrier A3 is a half step from a tone of C#m (and 12 more): a pedal point's tension  -> fine if it resolves; otherwise move the carrier to a common tone
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: The Slow Tide
+  6 sections, 47 bars at 54 BPM 4/4, 3:43.45 (6703 frames @ 30 fps)
+  parts: keys 7, strings 16, harp 84, host 47, mel 27, low 13, gold 10, bell 18, gong 11
+  events: 0   digest ca6b87a706f0aba9
+  binaural (headphones): drift: A3 220.00 Hz @ 10.00, E4 329.63 Hz @ 6.18
+                          tide: A3 220.00 Hz @ 10.00>8.60, E4 329.63 Hz @ 6.18>5.32
+                          ebb: A3 220.00 Hz @ 8.60>7.60, E4 329.63 Hz @ 5.32>4.70
+                          turning: A3 220.00 Hz @ 7.60>7.10, E4 329.63 Hz @ 4.70>4.39
+                          undertow: A3 220.00 Hz @ 7.10>6.18, A3*phi 355.97 Hz @ 4.39>3.82
+                          slack_water: A3 220.00 Hz @ 6.18, A3*phi 355.97 Hz @ 3.82
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: The Slow Tide
+  bars 47.0, seconds 223.4, sections 6, parts 9, impacts 0, melody notes checked against chords 126, binaural beats (Hz) 3.819 4.388 4.697 5.315 6.18 7.1 7.6 8.6 10, lufs -23.0
+  0 problems, 1 warnings, 2 notes
+  warning song: the melody (keys) is 10.1 dB under gold  -> raise it (mix keys +3) or lower gold
+  note    slack_water: the song ends on vDg, not on the home chord  -> end on I (or i, or its Picardy major) unless the hang is deliberate
+  note    tide bar 3: the binaural carrier A3 is a half step from a tone of C#m (and 2 more): a pedal point's tension  -> fine if it resolves; otherwise move the carrier to a common tone
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: First Light
+  5 sections, 38 bars at 48 BPM 4/4, 3:04.72 (5541 frames @ 30 fps)
+  parts: gold 4, bell 18, mel 63, ghost 9, keys 9, strings 22, choir 9, low 22, host 29, flute 20, harp 96
+  events: 0   digest 0d31dd0cd1df1ec9
+  binaural (headphones): before_dawn: A3 220.00 Hz @ 10.00, A4*phi^-1 271.93 Hz @ 6.18, A5*phi^-2 336.13 Hz @ 3.82
+                          dawn: A3 220.00 Hz @ 10.00
+                          sunrise: A3 220.00 Hz @ 10.00, E4 329.63 Hz @ 6.18
+                          awake: A3 220.00 Hz @ 10.00>16.18, E4 329.63 Hz @ 6.18>10.00
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: First Light
+  bars 38.0, seconds 184.7, sections 5, parts 11, impacts 0, melody notes checked against chords 119, binaural beats (Hz) 3.82 6.18 10 16.18, lufs -23.07
+  0 problems, 0 warnings, 2 notes
+  note    before_dawn bar 4: the binaural carrier A5*phi^-2 is a half step from a tone of ^Fg: a pedal point's tension  -> fine if it resolves; otherwise move the carrier to a common tone
+  note    sunrise bar 7: the binaural carrier A3 is a half step from a tone of E (and 5 more): a pedal point's tension  -> fine if it resolves; otherwise move the carrier to a common tone
+  (an automated ear: it catches common faults; whether the music is good still needs listening)
+ok: A Comma Higher
+  41 sections, 320 bars at 138 BPM 4/4 (also 13/16, 5/4, 7/8), 9:47.70 (17631 frames @ 30 fps)
+  parts: gold 47, gtr 336, bell 94, low 42, axe 1608, bass 1734, drums 4708, lead 297, organ 81, horn 272, epiano 277, keys 54, fx 11
+  events: 15   digest b3ebd4aaec55fedc
+  warning: 60*fps/tempo is not an integer: beats do not land on whole video frames
+listen: A Comma Higher
+  bars 320.0, seconds 587.7, sections 41, parts 13, impacts 8, melody notes checked against chords 668, lufs -14.48
+  0 problems, 0 warnings, 1 notes
+  note    verse_1: verse_1 is within 1 dB of both neighbours  -> contrast neighbouring sections by texture, register or density
+  (an automated ear: it catches common faults; whether the music is good still needs listening)

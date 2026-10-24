@@ -1,0 +1,17 @@
+# Broken electric: editable sixteen-bar arrangement, with an opening, reply, lift and landing.
+# Listen for accents, ghost pickups, a bass rest before the reply, and a change of orchestration.
+song "Template: Broken electric" 116 4/4 Dm fps=30 seed=185 tail=3 mood=balanced
+inst bass=sampler/bass_vi_pick(gain_db=0) keys=sampler/fm_piano
+kit kick=kick/club_909(gain_db=0) snare=snare/fat_808(gain_db=-3) fill=snare/fat_808(gain_db=-3) rim=snare/dry_rim(gain_db=-6) hat=hat/bright_closed(gain_db=-8) ohat=hat/metal_open(gain_db=-10)
+chords Dm7 Bbmaj7 Fmaj7 C7
+groove swing=.55/16
+feel snare offset=7
+feel bass hum=2,3,.018 gate=.9
+opening 4 | drums:broken_beat bass:syncopated dyn=p<mp
+reply 4 | drums:broken_beat bass:{rel: "R/4. r/8 5/4 R+/8 r/8 | R/4 r/4 5/8 R/8 r/4", oct: -2} keys:{rel: "r/4 [3,7]/4 r/4 [3,7]/8 r/8", oct: 0} dyn=mp
+lift 3 | drums:broken_beat bass:syncopated keys:{rel: "[3,7]/2 r/4 [3,7]/4", oct: 0} dyn=mp<mf
+turn 1 | drums:{kick: "X...............", snare: "....x..o..x.o.X."} bass:{rel: "R/2 r/2", oct: -2} dyn=mf
+landing 3 | drums:broken_beat bass:{rel: "R/2 r/4 5/8 R/8", oct: -2} keys:{rel: "[3,7]/2 r/2", oct: 0} dyn=mf>mp
+last 1 | drums:{kick: "X...............", snare: "....o..........."} bass:{rel: "R/2. r/4", oct: -2} keys:{rel: "[R,3,5]/2. r/4", oct: 0} chords="Dm7:1" dyn=p
+mix bass -0.5 sc=0 | drums -7 hall=.035 | keys -2 hall=.12
+master standard lufs=-16 glue=none

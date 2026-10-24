@@ -129,7 +129,7 @@ def score_of(arr, parts: list[str] | None = None) -> Score:
     tl, song = arr.timeline, arr.song
     notes = []
     for part, evs in arr.parts.items():
-        if parts and part not in parts:
+        if parts is not None and part not in parts:
             continue
         for e in evs:
             if e.piece or not e.pitches or e.vel <= 0:

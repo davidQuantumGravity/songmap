@@ -9,8 +9,11 @@ key: "C major"
 tuning: 12edo
 seed: 1
 tail_seconds: 2
-instruments: {lead: clean/organ}
-mix: {lead: {gain_db: -6}}
+instruments:
+  lead: sampler/grand_piano
+mix:
+  lead:
+    gain_db: 8.7
 sections:
   - {name: by1, bars: 2, harmony: "N.C.:2", parts: {lead: {notes: "c8 c# d eb e f f# g | ab a bb b c+2"}}}
   - {name: by7, bars: 2, harmony: "N.C.:2", parts: {lead: {notes: "c8 g d a- e b- f# c# | ab eb bb- f c2"}}}

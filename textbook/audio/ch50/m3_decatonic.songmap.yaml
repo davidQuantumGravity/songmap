@@ -12,17 +12,102 @@ tail_seconds: 3
 
 instruments:
   axe: patch/axe
-  bass: {use: bass/v0, cutoff: 850, drive: 2.2, env_amt: 1.6, env_decay: 0.12, sub: 0.4, glide: 0.03}
-  lead: {voices: 3, detune: 2, vib_depth: 6, vib_delay: 0.35, cutoff: 3800, release: 0.2}
-  horn: {use: clean/organ, partials: 7, rolloff: 1.5, even: 0.6, attack: 0.035, release: 0.18, vel_bright: 0.8}
+  bass:
+    use: bass/v0
+    cutoff: 850
+    drive: 2.2
+    env_amt: 1.6
+    env_decay: 0.12
+    sub: 0.4
+    glide: 0.03
+  lead:
+    voices: 3
+    detune: 2
+    vib_depth: 6
+    vib_delay: 0.35
+    cutoff: 3800
+    release: 0.2
+  horn:
+    use: clean/organ
+    partials: 7
+    rolloff: 1.5
+    even: 0.6
+    attack: 0.035
+    release: 0.18
+    vel_bright: 0.8
   epiano: epiano/still
-  keys: {use: keys/still, hardness: 0.4}
-  organ: {use: clean/organ, partials: 9, rolloff: 1.25, attack: 0.02, release: 0.25}
-  gold: {use: clean/golden_pad, release: 2}
+  keys: sampler/grand_piano
+  organ:
+    use: clean/organ
+    partials: 9
+    rolloff: 1.25
+    attack: 0.02
+    release: 0.25
+  gold:
+    use: clean/golden_pad
+    release: 2
   bell: clean/glass
-  gtr: {use: string_pluck/still, brightness: 0.8, t60: 2.4}
+  gtr:
+    use: string_pluck/still
+    brightness: 0.8
+    t60: 2.4
   low: clean/bass
-  drums: {kit: {kick: {use: kick/v0, tune: 55, sweep: 26, decay: 0.28, click: 0.65, click_tone: 4500, drive: 2}, snare: {use: snare/v0, tone: 205, tone_mix: 0.5, snap: 0.65, noise_decay: 0.2, drive: 1.5}, hat: {use: hat/v0, decay: 0.045}, ride: {use: hat/v0, decay: 0.3, hp: 3500, color: 6500, metal: 0.85, tune: 0.8}, cym: {use: hat/v0_open, decay: 1.4, hp: 3200, metal: 0.75}, tom1: {use: kick/v0, tune: 150, sweep: 7, sweep_time: 0.05, decay: 0.35, click: 0.15, drive: 1.2}, tom2: {use: kick/v0, tune: 105, sweep: 7, sweep_time: 0.05, decay: 0.42, click: 0.15, drive: 1.2}, tom3: {use: kick/v0, tune: 78, sweep: 8, sweep_time: 0.05, decay: 0.5, click: 0.15, drive: 1.2}}}
+  drums:
+    kit:
+      kick:
+        use: kick/v0
+        tune: 55
+        sweep: 26
+        decay: 0.28
+        click: 0.65
+        click_tone: 4500
+        drive: 2
+      snare:
+        use: snare/v0
+        tone: 205
+        tone_mix: 0.5
+        snap: 0.65
+        noise_decay: 0.2
+        drive: 1.5
+      hat:
+        use: hat/v0
+        decay: 0.045
+      ride:
+        use: hat/v0
+        decay: 0.3
+        hp: 3500
+        color: 6500
+        metal: 0.85
+        tune: 0.8
+      cym:
+        use: hat/v0_open
+        decay: 1.4
+        hp: 3200
+        metal: 0.75
+      tom1:
+        use: kick/v0
+        tune: 150
+        sweep: 7
+        sweep_time: 0.05
+        decay: 0.35
+        click: 0.15
+        drive: 1.2
+      tom2:
+        use: kick/v0
+        tune: 105
+        sweep: 7
+        sweep_time: 0.05
+        decay: 0.42
+        click: 0.15
+        drive: 1.2
+      tom3:
+        use: kick/v0
+        tune: 78
+        sweep: 8
+        sweep_time: 0.05
+        decay: 0.5
+        click: 0.15
+        drive: 1.2
 
 harmony:
   progressions: {veil_p: "Cg:2 ^Abg:1 vFg:1 Cg:2 ^Abg:1 ^Abg7:1 Cg:1 vFg:1 ^Abg:1 Cg:1", door_p: "Cg:1 C:1", verse_p: "Fm:1 Db:1 C:1 Fm:1 Fm:1 Db:1 Bbm:1 C:1", pre_p: "Db:1 Eb:1 Fm:1 Eb:1", chorus_p: "Ab:1 Fm:1 Db:1 Eb:1 Db:1 Eb:1 Fm:1 Ab:1", chorus2_p: "Ab:1 Fm:1 Db:1 Eb:1 Db:1 Eb:0.5 vEg:0.25 Eg:0.25 Fm:1 Ab:0.75 Cg:0.25", dorian_p: "Cm7:2 F7:2 Cm7:2 F7:1 Cm7:1", goldor_p: "Cg7:2 vFg7:2 Cg7:2 vFg7:1 Cg7:1", lift_p: "^Cg7:2 Fg7:2 ^Cg7:2 Fg7:1 ^Cg7:1", m60: "Cg7:3 Bg:1 Cg7:3 Bg:1", m51: "Cg7:3 ^Gg:1 Cg7:3 ^Abg:1", m42: "Cg7:3 vFg:1 Cg7:3 vFg7:1", m33: "Cg7:3 C#g:1 Cg7:3 C#g7:1", m24: "Cg:3 ^Ag:1 Cg:3 C#g7:1", m15: "Cdim(^^3,v5):3 vF#g:1 Cdim(^^3,v5):3 ^Abg:1", m06: "Csus2(vvvv5):3 vFg:1 Csus2(vvvv5):3 Dg7:1", cadence_p: "vGg/D:1 G7:1 Baug(v3)/G:0.5 ^Ebg(^5)/G:0.5 Cmaj7:1", giant_p: "Cmaj7:1 C:1 Cg:0.5 Ab:1 Abg:0.5 E:1 Eg:0.5 C:2.5", circle_p: "Cg:1 ^Abg:1 vFg:1 C#g:1 ^Ag:1 vF#g:1 Dg:1 Dg7:1", thirteen_p: "vEg:2 Cg:2 C#g:2 Cg:2", solo_p: "Cg:1 ^Abg:1 vFg:1 C#g:1 ^Ag:1 vF#g:1 Dg:2 vF#g:1 ^Ag:1 C#g:1 vFg:1 ^Abg:1 Cg:1 C#g:1 Cg:1", still_p: "Cg:2 ^Abg7:1 Cg:1 ^Abg:1 Cg:0.5 C#g:0.5 ^Abg7:1 Cg:1 vEg:1 Cg:1 ^Abg:1 vFg:1 C#g:1 C#g7:1 Bg:1 Cg:1", pump_ap: "Cg:2 ^Abg:2 vFg:2", pump_bp: "C#g:2 ^Ag:2 vF#g:2 Dg:2", pump_cp: "^Bbg:1 vGg:1 Ebg:1 ^Bg:1 vAbg:1 Eg:1", verse3_p: "^Fm:1 ^Db:1 ^C:1 ^Fm:1 ^Fm:1 ^Db:1 ^Bbm:1 ^C:1", pre3_p: "^Db:1 ^Eb:1 ^Fm:1 ^Eb:1", chorus3_p: "^Ab:1 ^Fm:1 ^Db:1 ^Eb:1 ^Db:1 ^Eb:1 ^Fm:1 ^Ab:1", chorus4_p: "^Ab:1 ^Fm:1 ^Db:1 ^Eb:1 ^Db:1 ^Eb:0.5 Eg:0.25 ^Eg:0.25 ^Fm:1 ^Ab:1", coda_p: "^Cg:2 vAg7:1 ^Cg:1 vAg:1 ^Cg:0.5 ^C#g:0.5 vAg7:1 ^Cg:1 ^Cm:1 ^Cm(^3):1 ^Cg:1 ^C:1"}
@@ -40,19 +125,52 @@ events:
   - {at: axe_solo+16, type: riser, bars: 2}
   - {at: still, type: impact, size: s}
 mix:
-  axe: {gain_db: -6, send: {hall: 0.08}}
-  bass: {gain_db: -8}
-  lead: {gain_db: 13, send: {hall: 0.2}}
-  horn: {gain_db: -7, send: {hall: 0.25}}
-  epiano: {gain_db: -10, send: {hall: 0.2}}
-  keys: {gain_db: 0, send: {hall: 0.3}}
-  organ: {gain_db: -16, send: {hall: 0.2}}
-  gold: {gain_db: -9, send: {hall: 0.35}}
-  bell: {gain_db: -8, send: {hall: 0.4}, pan: 0.15}
-  gtr: {gain_db: -3, send: {hall: 0.3}, pan: -0.2}
-  low: {gain_db: 0}
-  drums: {gain_db: -4}
-  fx: {gain_db: -6}
+  axe:
+    gain_db: -6
+    send:
+      hall: 0.08
+  bass:
+    gain_db: -8
+  lead:
+    gain_db: 13
+    send:
+      hall: 0.2
+  horn:
+    gain_db: -7
+    send:
+      hall: 0.25
+  epiano:
+    gain_db: -10
+    send:
+      hall: 0.2
+  keys:
+    gain_db: 8.7
+    send:
+      hall: 0.3
+  organ:
+    gain_db: -16
+    send:
+      hall: 0.2
+  gold:
+    gain_db: -9
+    send:
+      hall: 0.35
+  bell:
+    gain_db: -8
+    send:
+      hall: 0.4
+    pan: 0.15
+  gtr:
+    gain_db: -3
+    send:
+      hall: 0.3
+    pan: -0.2
+  low:
+    gain_db: 0
+  drums:
+    gain_db: -4
+  fx:
+    gain_db: -6
 
 patches:
   axe: {modules: {str: {type: string, t60: 1.6, brightness: 0.93, pick: 0.003}, sh: {type: shaper, drive: 0.8}, cab: {type: filter, mode: lp, cutoff: 4200.0, q: 1.2, keytrack: 0.0}, env: {type: env, a: 0.002, d: 0.4, s: 0.85, r: 0.07}, amp: {type: vca}, out: {type: out, level: 0.6}}, wires: ["str>sh", "sh>cab", "cab>amp", "env>amp.gain", "amp>out", "vel>sh.drive*.3"]}

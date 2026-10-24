@@ -1,0 +1,12 @@
+instrument: snare
+description: Compact, bright electronic backbeat.
+tags:
+- electronic
+- snare
+params:
+  tone: 220
+  tone_decay: 0.07
+  noise_decay: 0.12
+  tone_mix: 0.45
+  snap: 0.45
+  drive: 1.3

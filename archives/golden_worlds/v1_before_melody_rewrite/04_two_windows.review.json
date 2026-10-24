@@ -1,0 +1,18 @@
+{
+ "title": "Two Windows",
+ "facts": {
+  "bars": 100.0,
+  "seconds": 192.5,
+  "sections": 12,
+  "parts": 4,
+  "impacts": 0,
+  "melody notes checked against chords": 274,
+  "lufs": -18.04
+ },
+ "counts": {
+  "problem": 0,
+  "warning": 0,
+  "note": 0
+ },
+ "findings": []
+}

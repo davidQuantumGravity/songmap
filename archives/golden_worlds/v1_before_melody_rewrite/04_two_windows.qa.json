@@ -1,0 +1,133 @@
+{
+ "lufs": -18.04,
+ "true_peak_db": -1.44,
+ "clipped_samples": 0,
+ "seconds": 192.5,
+ "sections": [
+  {
+   "name": "paper_light",
+   "start": 0.0,
+   "loudness": -30.3,
+   "low": 0.058,
+   "mid": 0.894,
+   "high": 0.047,
+   "silent": false
+  },
+  {
+   "name": "first_window",
+   "start": 15.0,
+   "loudness": -21.5,
+   "low": 0.23,
+   "mid": 0.753,
+   "high": 0.017,
+   "silent": false
+  },
+  {
+   "name": "second_window",
+   "start": 30.0,
+   "loudness": -23.4,
+   "low": 0.504,
+   "mid": 0.465,
+   "high": 0.031,
+   "silent": false
+  },
+  {
+   "name": "interlaced",
+   "start": 45.0,
+   "loudness": -19.4,
+   "low": 0.245,
+   "mid": 0.754,
+   "high": 0.001,
+   "silent": false
+  },
+  {
+   "name": "answering_arch",
+   "start": 60.0,
+   "loudness": -16.1,
+   "low": 0.21,
+   "mid": 0.773,
+   "high": 0.017,
+   "silent": false
+  },
+  {
+   "name": "brighter_glass",
+   "start": 75.0,
+   "loudness": -17.7,
+   "low": 0.157,
+   "mid": 0.834,
+   "high": 0.009,
+   "silent": false
+  },
+  {
+   "name": "different_shadow",
+   "start": 90.0,
+   "loudness": -23.2,
+   "low": 0.513,
+   "mid": 0.475,
+   "high": 0.012,
+   "silent": false
+  },
+  {
+   "name": "unwritten_space",
+   "start": 105.0,
+   "loudness": -28.1,
+   "low": 0.006,
+   "mid": 0.955,
+   "high": 0.039,
+   "silent": false
+  },
+  {
+   "name": "mirror_stairs",
+   "start": 120.0,
+   "loudness": -20.2,
+   "low": 0.167,
+   "mid": 0.832,
+   "high": 0.001,
+   "silent": false
+  },
+  {
+   "name": "crossed_hands",
+   "start": 135.0,
+   "loudness": -21.6,
+   "low": 0.48,
+   "mid": 0.487,
+   "high": 0.033,
+   "silent": false
+  },
+  {
+   "name": "both_windows",
+   "start": 150.0,
+   "loudness": -14.1,
+   "low": 0.124,
+   "mid": 0.867,
+   "high": 0.009,
+   "silent": false
+  },
+  {
+   "name": "folded_paper",
+   "start": 172.5,
+   "loudness": -25.0,
+   "low": 0.124,
+   "mid": 0.865,
+   "high": 0.011,
+   "silent": false
+  }
+ ],
+ "stems": {
+  "harp": -28.5,
+  "keys": -30.62,
+  "lead": -21.73,
+  "low": -30.32,
+  "return_hall": -38.26
+ },
+ "render": {
+  "seconds": 14.07,
+  "notes_rendered": 730,
+  "cache_hits": 1,
+  "audio_seconds": 192.5,
+  "master": "standard",
+  "digest": "624ef4380da883f22da1669994f972bf34ef855d77f2636fff11ddfe20163dd2",
+  "performed": true,
+  "played_digest": "7f93cb7005133a7ae4336588852b1b7a6b91dc82c36d3f87955f4bf58f783f99"
+ }
+}

@@ -8,8 +8,13 @@ key: "C major"
 tuning: 36edo
 seed: 21
 tail_seconds: 2
-instruments: {keys: clean/keys}
-mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+instruments:
+  keys: sampler/grand_piano
+mix:
+  keys:
+    gain_db: 9.6
+    send:
+      hall: 0.2
 sections:
   - {name: row, bars: 3, parts: {keys: {notes: "c16 ^ab vf c# ^a vf# d ^bb vg eb ^b vab e ^c va f ^c# vbb f# ^d vb g ^eb vc ab ^e vc# a ^f vd bb ^f# veb b ^g ve c+2"}}}
 master: clean

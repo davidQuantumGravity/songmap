@@ -1,0 +1,157 @@
+# As Above, So Below - a golden cathedral fantasia, 5:00 including the final decay.
+# review: approved - User: "That was great"; requested a second, more Western and melodic five-minute piece.
+# Renaissance-inspired imitative writing for an instrumental choir, not a historical reconstruction or sampled human choir.
+# Listen at 0:32 for the answering voices; 1:20 for the ninth; 2:08 for the distant choir;
+# 2:56 for the still point; 3:12 for the vault opening; 4:00 for the peak; 4:32 for the final release.
+# Above: open golden-spectrum organ voicings. Below: pure-tone pairs centered one or two octaves below those notes.
+# The midpoint is the exact octave reduction in 36-ET; the two ears are deliberately offset from it.
+# Ninth = four golden thirds: 0,11,22,33,44 sixth-steps. maj9(v3,^5,^^9) encodes it exactly, without a Western ninth.
+# Carrier order is high to low: the faster rung sits on the higher carrier, keeping low fundamentals gently detuned.
+# No claim of brain entrainment, induced bliss, or a physiological optimum is made by this score.
+song "As Above, So Below" 60 4/4 "C golden7_42" fps=30 seed=241024 tail=12 tuning=36edo mood=ambient
+inst pedal=clean/organ(partials=5,rolloff=2.1,attack=.12,release=.35,vel_bright=.05) nave=clean/golden_pad(partials=14,rolloff=1.85,attack=.9,release=.65,vel_bright=.08) tenor=sampler/cello(attack=.06,release_mul=.18) alto=sampler/horn(attack=.08,release_mul=.18) cantus=sampler/flute(attack=.055,release_mul=.2) halo=clean/glass(partials=14,rolloff=2.1,attack=.08,decay=4.8,damp=.35,release=.7,vel_bright=.08)
+groove hum=5,3,.015 metric=.08
+feel pedal gate=.96 hum=1,1,.008 arch=.12
+feel nave gate=.98 hum=2,2,.012 arch=.18
+feel tenor gate=.91 hum=6,4,.02 arch=.3
+feel alto gate=.92 hum=7,3,.018 arch=.3
+feel cantus gate=.91 hum=6,3,.018 arch=.35
+feel halo gate=.85 hum=3,2,.012 arch=.15
+set returns={hall: {type: reverb, seconds: 5.8, predelay: .055, damping: .68, early: 16, width: 1.25}}
+binaural ^G3 vE3 C3 beat=6.1803398875 ladder=golden level=-13.5 fade=10 glide=.8 breathe=2 breath=2.5 carve=true
+
+# PEDAL: written first through the entire form, with root pillars and quiet fifth/third replies.
+# Expression pass: restrained long attacks, late breaths, a stronger 3:12 entry and one 4:00 apex.
+p00 = {notes: "=pp c--1 | r1 | =p c--2 ^g--2 | =pp c--1"}
+p01 = {notes: "=p c--1 | c--2 ^g--2 | =mp ve-1 | =p c--2 r2"}
+p02 = {notes: "=p ^ab--1 | =mp ve-2 c-2 | =p ^ab--1 | ^g--2 r2"}
+p03 = {notes: "=mp vf--1 | =p c-1 | =mp vf--2 ^ab--2 | =p c-2 r2"}
+p04 = {notes: "=mp c--1 | ^g--1 | =p ve-2 ^g--2 | =mp c--1"}
+p05 = {notes: "=mp c--1 | ^g--2 b--2 | =p ve-1 | c--2 r2"}
+p06 = {notes: "=mp ve--1 | =p b--1 | ^g--2 b--2 | ve--2 r2"}
+p07 = {notes: "=mp ^g--1 | =p veb--1 | b--2 ^f#--2 | =mp ^g--1"}
+p08 = {notes: "=p ve--1 | ^g--2 b--2 | =mp ve--1 | =pp r2 b--2"}
+p09 = {notes: "=p b--1 | ^f#--2 bb--2 | =mp veb--1 | =p b--2 r2"}
+p10 = {notes: "=p ^g--1 | veb--2 b--2 | =pp ^f#--1 | ^g--2 r2"}
+p11 = {notes: "=pp c--1 | r1 | =ppp ^g--1 | =pp c--2 r2"}
+p12 = {notes: "=mf c--1_ | =mp ^g--2 c-2 | =mf ve-1 | =mp c--2 r2"}
+p13 = {notes: "=mf ^ab--1 | =mp ve-2 ^g--2 | =mf c-1 | =mp ^ab--2 r2"}
+p14 = {notes: "=mf vf--1 | ^ab--2 c-2 | =f ve--1 | =mf vf--2 r2"}
+p15 = {notes: "=f c#--1_ | =mf ^ab--2 vf--2 | =f c--1 | =mf c#--2 r2"}
+p16 = {notes: "=mf c--1 | =mp ^g--2 ^g--2 | =p ve-1 | c--2 ^g--2"}
+p17 = {notes: "=p c--1 | =pp ^g--1 | c--1 | =ppp c--1"}
+
+# NAVE: upper organ is a written, open-voiced harmonic part, not a generic pad preset progression.
+# Binaural midpoints below duplicate each pitch class at explicit octave distances.
+# Each 8-beat organ breath has an independent velocity; wide thirds/ninths avoid close semitone piles.
+n00 = {notes: "=pp [c,^g,ve+]1*2 =p [c,^g,ve+]1*2"}
+n01 = {notes: "=p [c+,^g,ve+,b+]1*2 =mp [c+,^g,ve+,b+]1*2"}
+n02 = {notes: "=p [^ab+,ve+,^g,c++]1*2 =mp [^ab+,ve+,^g,c++]1*2"}
+n03 = {notes: "=mp [vf-,c+,ve+,^ab+]1*2 =p [vf-,c+,ve+,^ab+]1*2"}
+n04 = {notes: "=mp [c-,^g,ve+,b+]1*2 =p [c-,^g,ve+,b+]1*2"}
+n05 = {notes: "=p [c+,^g,ve-,b+,veb++]1*2 =mp [c+,^g,ve-,b+,veb++]1*2"}
+n06 = {notes: "=mp [ve,b,^g,veb++,^f#++]1*2 =p [ve,b,^g,veb++,^f#++]1*2"}
+n07 = {notes: "=mp [^g-,veb+,^f#++,b-,bb+]1*2 =mf [^g-,veb+,^f#++,b-,bb+]1*2"}
+n08 = {notes: "=p [ve,^g,b+,veb++,^f#++]1*2 =mp [ve,^g,b+,veb++,^f#++]1*2"}
+n09 = {notes: "=mp [b-,^f#,bb+,veb-,vd++]1*2 =p [b-,^f#,bb+,veb-,vd++]1*2"}
+n10 = {notes: "=p [^g-,veb,^f#++,b+]1*2 =pp [^g-,veb,^f#++,b+]1*2"}
+n12 = {notes: "=mp [c-,^g,b+,ve-,veb++]1*2 =mp [c-,^g,b+,ve-,veb++]1*2"}
+n13 = {notes: "=mf [^ab-,ve+,^g++,c-,b+]1*2 =f [^ab-,ve+,^g++,c-,b+]1*2"}
+n14 = {notes: "=f [vf-,c+,ve,^ab,^g-]1*2 =mf [vf-,c+,ve,^ab,^g-]1*2"}
+n15 = {notes: "=f [c#-,^ab,vf-,c++,ve++]1*2 =mf [c#-,^ab,vf-,c++,ve++]1*2"}
+n16 = {notes: "=mp [c-,^g,ve-,b+,veb++]1*2 =p [c-,^g,ve-,b+,veb++]1*2"}
+n17 = {notes: "=p [c,^g,ve+,c++]1 | =pp [c,^g,ve+]1 | =pp [c,^g,ve+]1 | =ppp [c,^g,ve+]1"}
+
+# TENOR / CELLO: the first singing voice; a rising golden-third call, then falling replies.
+# Each cell has its own continuation. Breath lengths and soft pickups are written, not randomized into existence.
+t01 = {notes: "=p c-2 ^g-4 ve-4 | =mp ^g-2 b-2 | =p ve-2 ^g-2 | c-2. r4"}
+t02 = {notes: "=p ^ab-2 c4 ve4 | =mp ^g2 ve2 | =p c2 ^ab-4 ^g-4 | ve-2. r4"}
+t03 = {notes: "=mp vf-2 ^ab-2 | c2 ve4 c4 | =p ^ab-2 vf-2 | c-2. r4"}
+t04 = {notes: "=mp c-2 ve-4 ^g-4 | b-2 ^g-2 | =p ve-4 ^g-4 c2 | b-2. r4"}
+t05 = {notes: "=p c-2 ^g-2 | =mp b-2 veb2 | =p ve-2 ^g-4 b-4 | c2 r2"}
+t06 = {notes: "=mp ve-2 ^g-4 b-4 | veb-2 b-2 | =p ^f#-2 ^g-4 b-4 | ve-2. r4"}
+t07 = {notes: "=mp ^g-2 b-2 | veb2 ^f#2 | =mf bb2 ^f#4 veb4 | =p b-2. r4"}
+t08 = {notes: "=p r2 ve-4 ^g-4 | =mp b-2 veb-2 | =p ^f#-2 veb-4 b-4 | ^g-2. r4"}
+t09 = {notes: "=mp b-2 veb2 | ^f#2 bb4 ^f#4 | =p veb2 vd2 | b-2 r2"}
+t10 = {notes: "=p ^g-2 b-4 veb4 | ^f#2 veb2 | =pp b-2 ^g-2 | ^g-2. r4"}
+t11 = {notes: "=pp c-2. r4 | ve-1 | =ppp ^g-2 ve-2 | c-2 r2"}
+t12 = {notes: "=mp c-2 ve-4 ^g-4 | =mf b-2 veb2 | =mp ^g-4 b-4 c2 | ve-2. r4"}
+t13 = {notes: "=mf ^ab-2 c2 | ve2 ^g4 ve4 | =mp c2 b-2 | =mf ^ab-2. r4"}
+t14 = {notes: "=mf vf-2 c4 c4 | ve2 ^g-2 | =f ^ab2 ^g-4 ve4 | =mf c2. r4"}
+t15 = {notes: "=mf c#-2 vf-4 ^ab-4 | =f c2 ve2 | =mf vf4 ^ab4 c+2 | =mp ve2 r2"}
+t16 = {notes: "=mp c2 b-4 ^g-4 | =p ve-2 ^g-2 | b-2 veb4 b-4 | =pp ^g-2. r4"}
+t17 = {notes: "=p ve-2 ^g-2 | =pp c2 ^g-2 | ve-1 | =ppp c-1"}
+
+# ALTO / HORN: enters after the cello, answering across the stereo field; never a blaring brass lead.
+# Horn stays within the recorded voice's F5 ceiling. Quieter ends leave the cantus room. The half-beat decorations are deliberate late ornaments.
+a02 = {notes: "=p r2 c2 | ve2 ^g4 ve4 | =mp c2 ^ab-2 | =p ^g-2 r2"}
+a03 = {notes: "=p r4 vf4 ^ab2 | c+2 ^ab2 | =mp ve2 c4 ^ab-4 | =p vf-2 r2"}
+a04 = {notes: "=mp ^g2 ve4 c4 | b-2 c2 | =p ve2 ^g2 | b-2 r2"}
+a05 = {notes: "=mp ve2 ^g2 | =p b-2 ^g4 c4 | c2 b-2 | =pp ^g-2 r2"}
+a06 = {notes: "=p r2 ^g2 | =mp b2 veb+2 | =p b2 veb+4 b4 | ^g2 r2"}
+a07 = {notes: "=mp b2 veb+4 b4 | =p bb2 ^f#2 | =mp veb2 b-2 | =p ^g-2 r2"}
+a08 = {notes: "=p ^g2 b2 | r2 veb+2 | =mp b2 b2 | =p ^g2. r4"}
+a09 = {notes: "=p r2 veb2 | =mp ^f#2 bb4 ^f#4 | =p vd+2 veb+2 | b2 r2"}
+a10 = {notes: "=p b2 ^f#2 | veb2 b-2 | =pp ^g-2 b-2 | r1"}
+a12 = {notes: "=mp ve2 ^g4 b4 | =mf veb+2 b2 | =mp ^g2 ve2 | b-2 r2"}
+a13 = {notes: "=mf ve2 ^g2 | =mp c+2 b2 | =mf ^ab2 ^g4 ve4 | =mp c2 r2"}
+a14 = {notes: "=mf ^ab2 c+2 | ve+2 c+4 ve+4 | =f c+2 ^ab2 | =mf ve2 r2"}
+a15 = {notes: "=mf vf2 ^ab4 c+4 | =f ve+2 c+2 | =mf ^ab2 vf4 ^ab8 c+8 | =mp ^ab2 r2"}
+a16 = {notes: "=mp ^g2 ve2 | =p b-2 c2 | ^g1 | =pp c2 r2"}
+a17 = {notes: "=pp ^g2 ve2 | c2 r2 | =ppp ve1 | r1"}
+
+# CANTUS / FLUTE: the late arriving upper voice; a modest arch and long breaths, no incessant solo.
+# The ninth receives its own melody; the high C6 occurs only at the late C# golden-ninth apex.
+c03 = {notes: "=p r1 | r2 c+2 | =mp ve+2 c+4 ^ab4 | =p vf2. r4"}
+c04 = {notes: "=p c+2 ve+4 ^g+4 | =mp ^g+2 ve+2 | =p c+2 c+4 ^g4 | c+2. r4"}
+c05 = {notes: "=p c+2 veb+4 ^g+4 | =mp ^g+2 b+4 ^g+4 | =p veb+1 | c+2. r4"}
+c06 = {notes: "=p r2 b2 | =mp veb+2 ^f#+4 ^g+4 | =p b+2 ^f#+2 | veb+2. r4"}
+c07 = {notes: "=mp ^g+2 bb+4 ^f#+4 | =p ^f#+2 veb+2 | =mp bb+2 veb+4 ^f#+4 | =p ^g+2. r4"}
+c08 = {notes: "=p r1 | =pp ^g+2 ^f#+4 veb+4 | =p b2 veb+2 | ^g+2 r2"}
+c09 = {notes: "=p b2 veb+4 ^f#+4 | =mp bb+2 ^f#+2 | =p vd+2 veb+2 | b2. r4"}
+c10 = {notes: "=p ^f#+2 veb+2 | =pp b2 ^g2 | veb+2 b2 | ^g2 r2"}
+c11 = {notes: "=pp c+2. r4 | =ppp b2 ^g2 | =pp ve2 ^g4 b4 | =ppp c+2 r2"}
+c12 = {notes: "=mp c+2 veb+4 ^g+4 | =mf b+2 ^g+4 veb+4 | =mp c+2 veb+4 b4 | ^g+2. r4"}
+c13 = {notes: "=mp ve+2 ^g+2 | =mf b+2 ^ab+4 ^g+4 | =mp ve+2 ^g+4 b+4 | ^ab+2. r4"}
+c14 = {notes: "=mf vf+2 ^ab+4 ^g+4 | =mp ve+2 c+2 | =mf ^g+2 ^ab+4 ve+4 | =mp ve+2. r4"}
+c15 = {notes: "=mf vf+2 ^ab+2 | =f c++2_ ^ab+4 vf+4 | =mf ve+2 c+4 ^ab4 | =mp vf+2 r2"}
+c16 = {notes: "=mp ^g+2 veb+4 c+4 | =p b2 ^g2 | veb+2 b4 ^g4 | =pp c+2. r4"}
+c17 = {notes: "=pp ve+2 c+2 | =ppp ^g2 r2 | c+1 | r1"}
+
+# HALO: sparse golden-spectrum chimes at phrase hinges, not another continuous top melody.
+# The brightest registers are soft, separated from nearby held pitches, and absent in the still point.
+h00 = {notes: "r1 | =pp ^g+2 r2 | r1 | =pp ve+2 r2"}
+h02 = {notes: "r1 | =pp ve++4 r2. | r1 | =pp c++4 r2."}
+h04 = {notes: "r1 | r1 | =pp ^g++2 r2 | r1"}
+h05 = {notes: "=pp veb++2 r2 | r1 | =pp b++4 r2. | r1"}
+h07 = {notes: "r1 | =pp ^f#++2 r2 | r1 | =pp bb++4 r2."}
+h09 = {notes: "r1 | =pp vd++2 r2 | r1 | =pp ^f#++4 r2."}
+h12 = {notes: "=p veb++2 r2 | r1 | =pp ^g++4 r2. | r1"}
+h13 = {notes: "r1 | =pp b++2 r2 | r1 | =p ve++4 r2."}
+h14 = {notes: "r1 | =pp ^g++2 r2 | r1 | =pp ^ab++4 r2."}
+h15 = {notes: "=p [ve++,c#]2 r2 | r1 | =pp c+++4 r2. | r1"}
+h17 = {notes: "r1 | r1 | =ppp ^g++2 r2 | r1"}
+
+# Ensemble pass: upper chimes are intermittent, entries are staggered, and the 2:56 chamber is deliberately bare.
+# All binaural centers are chord tones. Changes crossfade for .8 s; they are not glissandi through foreign notes.
+threshold 4 | pedal:p00 nave:n00 halo:h00 chords="Cg:4" dyn=pp<p binaural={carriers: ["^G3", "vE3", C3], beat: 6.1803398875, gain_db: -2}
+first_voice 4 | pedal:p01 nave:n01 tenor:t01 chords="Cg7:4" dyn=p<mp binaural={carriers: [B3, "^G3", "vE3", C3], beat: "6.1803398875>8", gain_db: -1}
+invocation 4 | pedal:p02 nave:n02 tenor:t02 alto:a02 halo:h02 chords="^Abg7:4" dyn=p<mp binaural={carriers: [C4, "^Ab3", "^G3", "vE3"], beat: "8>10", gain_db: 0}
+woven_light 4 | pedal:p03 nave:n03 tenor:t03 alto:a03 cantus:c03 chords="vFg7:4" dyn=mp binaural={carriers: ["^Ab3", "vF3", "vE3", C3], beat: 10, gain_db: 0}
+answering_arch 4 | pedal:p04 nave:n04 tenor:t04 alto:a04 cantus:c04 halo:h04 chords="Cg7:4" dyn=mp binaural={carriers: [B3, "^G3", "vE3", C3], beat: 10, gain_db: 0}
+first_ninth 4 | pedal:p05 nave:n05 tenor:t05 alto:a05 cantus:c05 halo:h05 chords="Cmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=p<mp binaural={carriers: ["vEb4", B3, "^G3", "vE3", C3], beat: 10, gain_db: 1}
+mirror_procession 4 | pedal:p06 nave:n06 tenor:t06 alto:a06 cantus:c06 chords="vEmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mp binaural={carriers: ["^F#4", "vEb4", B3, "^G3", "vE3"], beat: 10, gain_db: 1}
+ascending_stairs 4 | pedal:p07 nave:n07 tenor:t07 alto:a07 cantus:c07 halo:h07 chords="^Gmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mp<mf binaural={carriers: [B3, Bb3, "^G3", "^F#3", "vEb3"], beat: "10>12.360679775", gain_db: 0}
+distant_choir 4 | pedal:p08 nave:n08 tenor:t08 alto:a08 cantus:c08 chords="vEmaj9(v3,^5,^^9):4" key="vE golden10_63" dyn=p binaural={carriers: ["^F#4", "vEb4", B3, "^G3", "vE3"], beat: 10, gain_db: -1}
+other_window 4 | pedal:p09 nave:n09 tenor:t09 alto:a09 cantus:c09 halo:h09 chords="Bmaj9(v3,^5,^^9):4" key="vE golden10_63" dyn=p<mp binaural={carriers: ["vD4", B3, Bb3, "^F#3", "vEb3"], beat: 10, gain_db: -1}
+turning_home 4 | pedal:p10 nave:n10 tenor:t10 alto:a10 cantus:c10 chords="^Gg7:4" key="vE golden10_63" dyn=p>pp binaural={carriers: [B3, "^G3", "^F#3", "vEb3"], beat: "10>6.1803398875", gain_db: -2}
+still_point 4 | pedal:p11 tenor:t11 cantus:c11 chords="Cg7:4" key="C golden7_42" dyn=pp binaural={carriers: [B3, "^G3", "vE3", C3], beat: 6.1803398875, gain_db: -4}
+vaults_open 4 | pedal:p12 nave:n12 tenor:t12 alto:a12 cantus:c12 halo:h12 chords="Cmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=p<mf binaural={carriers: ["vEb4", B3, "^G3", "vE3", C3], beat: "10>12.360679775", gain_db: 1}
+radiance 4 | pedal:p13 nave:n13 tenor:t13 alto:a13 cantus:c13 halo:h13 chords="^Abmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mf<f binaural={carriers: [B3, "^Ab3", "^G3", "vE3", C3], beat: "12.360679775>16.1803398875", gain_db: 1.5}
+golden_vault 4 | pedal:p14 nave:n14 tenor:t14 alto:a14 cantus:c14 halo:h14 chords="vFmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mf<f binaural={carriers: ["^Ab3", "^G3", "vF3", "vE3", C3], beat: 16.1803398875, gain_db: 2}
+empyrean 4 | pedal:p15 nave:n15 tenor:t15 alto:a15 cantus:c15 halo:h15 chords="C#maj9(v3,^5,^^9):4" key="C golden10_63" dyn=f binaural={carriers: ["vE4", C4, "^Ab3", "vF3", "C#3"], beat: 16.1803398875, gain_db: 2}
+benediction 4 | pedal:p16 nave:n16 tenor:t16 alto:a16 cantus:c16 chords="Cmaj9(v3,^5,^^9):4" key="C golden7_42" dyn=mp>p binaural={carriers: ["vEb4", B3, "^G3", "vE3", C3], beat: "10>6.1803398875", gain_db: 0}
+return_to_silence 4 | pedal:p17 nave:n17 tenor:t17 alto:a17 cantus:c17 halo:h17 chords="Cg:4" key="C golden7" dyn=p>ppp binaural={carriers: ["^G3", "vE3", C3], beat: 6.1803398875, gain_db: "-4>-14"}
+
+mix pedal -7 hall=.16 | nave -15 hall=.5 | tenor 0 hall=.35 pan=-.3 | alto -5 hall=.4 pan=.25 | cantus 2 hall=.4 pan=-.12 | halo -15 hall=.55 pan=.35
+master clean ceiling=-2

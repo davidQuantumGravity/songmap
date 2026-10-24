@@ -7,10 +7,16 @@ key: "C major"
 tuning: 36edo
 seed: 1
 tail_seconds: 2.5
-instruments: {organ: clean/organ, low: clean/bass}
+instruments:
+  organ: sampler/grand_piano
+  low: clean/bass
 motifs:
   bassline: {notes: "=mf c-1 | c-1 | f--1 | f--1 | f--1 | c-1 | c-1"}
-mix: {organ: {gain_db: -6}, low: {gain_db: -5}}
+mix:
+  organ:
+    gain_db: 18.0
+  low:
+    gain_db: -5
 sections:
   - {name: glow, bars: 7, harmony: "C:1 ~:1 F:2 ~:1 C:2",
      parts: {organ: {style: hold, voices: 3, range: [55, 77]}, low: {motifs: [bassline]}}}

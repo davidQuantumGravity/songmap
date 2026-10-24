@@ -10,12 +10,30 @@ key: "C major"
 tuning: 36edo
 seed: 15
 tail_seconds: 4
-instruments: {keys: clean/keys, bell: clean/glass, pad: clean/organ, gpad: clean/golden_pad}
+instruments:
+  keys: sampler/grand_piano
+  bell: clean/glass
+  pad: sampler/grand_piano
+  gpad: clean/golden_pad
 mix:
-  keys: {gain_db: -3, pan: -0.25, send: {hall: 0.25}}
-  bell: {gain_db: -4, pan: 0.25, send: {hall: 0.35}}
-  pad:  {gain_db: -14, send: {hall: 0.25}}
-  gpad: {gain_db: -10, send: {hall: 0.3}}
+  keys:
+    gain_db: 10.6
+    pan: -0.25
+    send:
+      hall: 0.25
+  bell:
+    gain_db: -4
+    pan: 0.25
+    send:
+      hall: 0.35
+  pad:
+    gain_db: 10.0
+    send:
+      hall: 0.25
+  gpad:
+    gain_db: -10
+    send:
+      hall: 0.3
 returns: {hall: {type: reverb, seconds: 2.6, predelay: 0.02, damping: 0.5}}
 sections:
   - {name: call1, bars: 2, key: "C major",   harmony: "C:2",  parts: {keys: {deg: "=mf 0/4 2 4 2 | 1/2 0", oct: 1}, pad: hold}}

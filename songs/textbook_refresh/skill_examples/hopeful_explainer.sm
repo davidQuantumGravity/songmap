@@ -1,0 +1,29 @@
+# Hopeful explainer (1:15). Piano-led, warm and curious; builds, breathes for a caveat, resolves home.
+# Shows: a question/answer melody kept in variables, a bass that locks with the kick, a velocity-shaped
+# groove with ghost notes, a colour change (the synth lead takes the tune), dynamics arcs, a sparse
+# caveat section with unresolved harmony, and a plagal (IV-I) ending.
+song "Example: Hopeful Explainer" 120 4/4 D fps=30 seed=11 tail=3
+inst keys=sampler/grand_piano gtr=sampler/folk_harp
+chords D A Bm G
+
+# deg 0 = D. Each bar adds up to 4 beats. The question ends on a pickup (A B) that leans into the answer.
+q = "=mp 4/4 2/8 4 5/4 4 | 7/2 6/4 4 | 5/4. 4/8 2/4 1 | 2/2 r/4 4/8 5"
+a = "=mf 7/4. 6/8 5/4 4 | 4/4 6 5/2 | 5/8 4 2/4 4 2 | 0/1"
+theme = {deg: q + " | " + a, oct: 1}           # inline notes start with their section
+theme_low = {deg: q + " | " + a}               # an octave down, to double the lead at the climax
+
+pocket = {kick: "X.....x...x.....", snare: "....X..o....X.o.", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.55, 0.3, 0.45, 0.3, 0.55, 0.3, 0.45, 0.35]}}
+walk = {rel: "R/4. R/8 r/8 5/8 R+/4", oct: -2}  # lands with the kick: beats 1, 2&, 3&
+light = {kick: "X.......x.......", hat: {steps: "x.x.x.x.x.x.x.x.", vel: [0.45, 0.25, 0.35, 0.25]}}   # the build: no backbeat yet
+broken = {rel: "[R,3,5]/2 [3,5,R+]/4 [5,R+,3+]"}
+ripple = {rel: "R/8^ 5 R+ 3+ 5+ 3+ R+ 5"}
+spark = !riser:1 !impact
+
+# name   bars | parts and settings                                         | events
+intro      4 | keys:broken dyn=pp<p
+verse      8 | gtr:ripple bass:walk keys:theme dyn=p<mp
+lift       8 | like=verse -gtr drums:light pad:warm keys:broken lead:theme dyn=p<mp | !spark
+breath     4 | keys:{rel: "[R,5,9]/1"} pad:dark chords="Bm:2 Gmaj7:2" dyn=pp
+home       8 | like=lift keys:theme_low gtr:ripple drums:pocket+{ohat: "..x...x...x...x."} dyn=f | !spark
+outro      4 | keys:broken gtr:ripple chords="G:2 D:2" dyn=mp>pp           | !impact@+2(size=s)
+mix keys 7.3 | gtr 4.6  # the piano carries the tune: lift it a little

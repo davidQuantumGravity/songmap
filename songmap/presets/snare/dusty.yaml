@@ -1,0 +1,14 @@
+instrument: snare
+description: Dark short wires and a low shell for hip-hop.
+tags:
+- electronic
+- snare
+params:
+  tone: 178
+  tone_decay: 0.12
+  tone_mix: 0.55
+  noise_hp: 650
+  noise_lp: 4200
+  noise_decay: 0.17
+  snap: 0.18
+  drive: 1.8

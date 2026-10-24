@@ -12,12 +12,52 @@ tail_seconds: 2
 
 instruments:
   axe: patch/axe
-  bass: {use: bass/v0, cutoff: 850, drive: 2.2, env_amt: 1.6, env_decay: 0.12, sub: 0.4, glide: 0.03}
-  gold: {use: clean/golden_pad, release: 2}
-  gtr: {use: string_pluck/still, brightness: 0.8, t60: 2.4}
+  bass:
+    use: bass/v0
+    cutoff: 850
+    drive: 2.2
+    env_amt: 1.6
+    env_decay: 0.12
+    sub: 0.4
+    glide: 0.03
+  gold:
+    use: clean/golden_pad
+    release: 2
+  gtr: sampler/folk_harp
   low: clean/bass
   bell: clean/glass
-  drums: {kit: {kick: {use: kick/v0, tune: 55, sweep: 26, decay: 0.28, click: 0.65, click_tone: 4500, drive: 2}, snare: {use: snare/v0, tone: 205, tone_mix: 0.5, snap: 0.65, noise_decay: 0.2, drive: 1.5}, hat: {use: hat/v0, decay: 0.045}, ride: {use: hat/v0, decay: 0.3, hp: 3500, color: 6500, metal: 0.85, tune: 0.8}, cym: {use: hat/v0_open, decay: 1.4, hp: 3200, metal: 0.75}}}
+  drums:
+    kit:
+      kick:
+        use: kick/v0
+        tune: 55
+        sweep: 26
+        decay: 0.28
+        click: 0.65
+        click_tone: 4500
+        drive: 2
+      snare:
+        use: snare/v0
+        tone: 205
+        tone_mix: 0.5
+        snap: 0.65
+        noise_decay: 0.2
+        drive: 1.5
+      hat:
+        use: hat/v0
+        decay: 0.045
+      ride:
+        use: hat/v0
+        decay: 0.3
+        hp: 3500
+        color: 6500
+        metal: 0.85
+        tune: 0.8
+      cym:
+        use: hat/v0_open
+        decay: 1.4
+        hp: 3200
+        metal: 0.75
 
 sections:
   - {name: pedal, bars: 4, parts: {gold: hold, gtr: {rel: "R/8 5 3+ 5 R+ 5 3+ 5", oct: -1}, low: {notes: "=p c1", oct: -2}}, harmony: "Cg:1 ^Abg:1 vFg:1 ^Abg:1", dyn: "p<mp"}
@@ -28,14 +68,28 @@ events:
   - {at: bend+2, type: riser, bars: 2}
   - {at: riffing, type: impact}
 mix:
-  axe: {gain_db: -6}
-  bass: {gain_db: -8}
-  gold: {gain_db: -9, send: {hall: 0.35}}
-  gtr: {gain_db: -3, send: {hall: 0.3}}
-  low: {gain_db: 0}
-  bell: {gain_db: -8, send: {hall: 0.4}}
-  drums: {gain_db: -4}
-  fx: {gain_db: -6}
+  axe:
+    gain_db: -6
+  bass:
+    gain_db: -8
+  gold:
+    gain_db: -9
+    send:
+      hall: 0.35
+  gtr:
+    gain_db: 6.0
+    send:
+      hall: 0.3
+  low:
+    gain_db: 0
+  bell:
+    gain_db: -8
+    send:
+      hall: 0.4
+  drums:
+    gain_db: -4
+  fx:
+    gain_db: -6
 
 patches:
   axe: {modules: {str: {type: string, t60: 1.6, brightness: 0.93, pick: 0.003}, sh: {type: shaper, drive: 0.8}, cab: {type: filter, mode: lp, cutoff: 4200.0, q: 1.2, keytrack: 0.0}, env: {type: env, a: 0.002, d: 0.4, s: 0.85, r: 0.07}, amp: {type: vca}, out: {type: out, level: 0.6}}, wires: ["str>sh", "sh>cab", "cab>amp", "env>amp.gain", "amp>out", "vel>sh.drive*.3"]}

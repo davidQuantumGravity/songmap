@@ -7,8 +7,13 @@ key: "C major"
 tuning: 12edo
 seed: 13
 tail_seconds: 1.5
-instruments: {lead: clean/lead}
-mix: {lead: {gain_db: -4, send: {hall: 0.2}}}
+instruments:
+  lead: sampler/grand_piano
+mix:
+  lead:
+    gain_db: 7.7
+    send:
+      hall: 0.2
 returns: {hall: {type: reverb, seconds: 1.8, predelay: 0.02, damping: 0.5}}
 sections:
   # 1. all steps; 2. all leaps; 3. a leap up a major sixth, then the gap filled by steps down

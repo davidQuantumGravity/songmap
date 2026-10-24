@@ -1,0 +1,98 @@
+{
+ "lufs": -20.07,
+ "true_peak_db": -1.49,
+ "clipped_samples": 0,
+ "seconds": 200.0,
+ "sections": [
+  {
+   "name": "seed_in_darkness",
+   "start": 0.0,
+   "loudness": -26.3,
+   "low": 0.568,
+   "mid": 0.432,
+   "high": 0.0,
+   "silent": false
+  },
+  {
+   "name": "first_branches",
+   "start": 15.0,
+   "loudness": -23.9,
+   "low": 0.672,
+   "mid": 0.327,
+   "high": 0.001,
+   "silent": false
+  },
+  {
+   "name": "orchard_path",
+   "start": 39.0,
+   "loudness": -20.9,
+   "low": 0.476,
+   "mid": 0.524,
+   "high": 0.0,
+   "silent": false
+  },
+  {
+   "name": "unlit_leaves",
+   "start": 63.0,
+   "loudness": -26.5,
+   "low": 0.569,
+   "mid": 0.43,
+   "high": 0.001,
+   "silent": false
+  },
+  {
+   "name": "lantern_bloom",
+   "start": 84.0,
+   "loudness": -13.8,
+   "low": 0.385,
+   "mid": 0.615,
+   "high": 0.0,
+   "silent": false
+  },
+  {
+   "name": "elsewhere_river",
+   "start": 108.0,
+   "loudness": -21.4,
+   "low": 0.586,
+   "mid": 0.413,
+   "high": 0.001,
+   "silent": false
+  },
+  {
+   "name": "familiar_stone",
+   "start": 147.0,
+   "loudness": -23.2,
+   "low": 0.312,
+   "mid": 0.688,
+   "high": 0.0,
+   "silent": false
+  },
+  {
+   "name": "roots_and_stars",
+   "start": 168.0,
+   "loudness": -26.0,
+   "low": 0.47,
+   "mid": 0.528,
+   "high": 0.001,
+   "silent": false
+  }
+ ],
+ "stems": {
+  "pad": -30.73,
+  "bell": -32.56,
+  "keys": -28.43,
+  "low": -31.83,
+  "lead": -24.78,
+  "return_hall": -35.27
+ },
+ "render": {
+  "seconds": 15.31,
+  "notes_rendered": 466,
+  "cache_hits": 0,
+  "audio_seconds": 200.0,
+  "master": "standard",
+  "digest": "2f90d52e736d1d9aa2229d20e0bc38e4634ef110a7f68ea944c45c7d2699ffca",
+  "performed": true,
+  "played_digest": "97ae9ff7801e753fedc449223f4bbf72e14c38fe26c5a252b73da7c6ae032b13"
+ }
+}

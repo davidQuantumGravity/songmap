@@ -9,10 +9,11 @@ import { VideoDesigner } from "./VideoDesigner";
 import { Rack, type VoiceEdit } from "./Rack";
 import { PianoRoll } from "./PianoRoll";
 import { Teacher } from "./Teacher";
+import { AILab } from "./InstrumentLab";
 import { Splitter, useStored } from "./ui";
 
 type Tab = "teacher" | "problems" | "qa" | "export";
-type Dock = "code" | "mixer" | "rack" | "roll" | "video";
+type Dock = "code" | "mixer" | "rack" | "roll" | "video" | "lab";
 const fmt = (t: number) => `${Math.floor(t / 60)}:${(t % 60).toFixed(1).padStart(4, "0")}`;
 const css = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 const baseName = (s: string) => s.replace(/[_\s-]*\d+$/, "");
@@ -71,7 +72,7 @@ export function App() {
   const [check, setCheck] = useState<Check | null>(null);
   const [summary, setSummary] = useState<Summary | null>(null);   // the last good one: panes stay up while you type
   const [tab, setTab] = useState<Tab>("teacher");
-  const [dock, setDock] = useState<Dock>("code");
+  const [dock, setDock] = useState<Dock>(new URLSearchParams(location.search).get("lab") === "1" ? "lab" : "code");
   const [goto, setGoto] = useState<{ line: number; n: number } | null>(null);
   const [rendering, setRendering] = useState<"" | "render" | "remix">("");
   const [rendered, setRendered] = useState<{ text: string; listen: string; audio: string } | null>(null);
@@ -274,6 +275,7 @@ export function App() {
   // ------------------------------------------------------------------ keys
   useEffect(() => {
     const k = (e: KeyboardEvent) => {
+      if (dock === "lab") return;
       const mod = e.ctrlKey || e.metaKey;
       const typing = !!(e.target as HTMLElement).closest(".cm-editor, input, select, textarea");
       if (mod && e.key === "s") { e.preventDefault(); save(); }
@@ -301,10 +303,10 @@ export function App() {
   const nErr = check?.diagnostics.filter((d) => d.severity === "error").length ?? 0;
   const nWarn = check?.diagnostics.filter((d) => d.severity === "warning").length ?? 0;
   const tabs: [Tab, string, number][] = [["teacher", "Teacher", 0], ["problems", "Problems", nErr || nWarn], ["qa", "QA", 0], ["export", "Export", 0]];
-  const cols = `${filesOpen ? filesW : 0}px ${filesOpen ? 4 : 0}px minmax(0, 1fr) 4px ${inspW}px`;
+  const cols = dock === "lab" ? "0px 0px minmax(0, 1fr) 0px 0px" : `${filesOpen ? filesW : 0}px ${filesOpen ? 4 : 0}px minmax(0, 1fr) 4px ${inspW}px`;
 
   return (
-    <div className="app" style={{ gridTemplateColumns: cols, gridTemplateRows: `46px ${arrH}px 4px minmax(0, 1fr) 58px` }}>
+    <div className={`app${dock === "lab" ? " lab-mode" : ""}`} style={{ gridTemplateColumns: cols, gridTemplateRows: dock === "lab" ? "46px 0px 0px minmax(0, 1fr) 0px" : `46px ${arrH}px 4px minmax(0, 1fr) 58px` }}>
       <header>
         <button className="ghost icon" title="Show or hide the file list" onClick={() => setFilesOpen((o) => !o)}>☰</button>
         <span className="logo"><Logo /> SongMap <em>Studio</em></span>
@@ -340,6 +342,7 @@ export function App() {
         <div className="dock">
           <nav className="dock-tabs">
             <button className={dock === "code" ? "on" : ""} onClick={() => setDock("code")}>Code</button>
+            <button className={dock === "lab" ? "on" : ""} onClick={() => { audio.current.pause(); setDock("lab"); }}>AI Lab</button>
             <button className={dock === "roll" ? "on" : ""} onClick={() => setDock("roll")} disabled={!summary}>Piano roll <kbd>P</kbd></button>
             <button className={dock === "rack" ? "on" : ""} onClick={() => setDock("rack")} disabled={!summary}>Instruments <kbd>I</kbd></button>
             <button className={dock === "mixer" ? "on" : ""} onClick={() => setDock("mixer")} disabled={!summary}>Mixer <kbd>M</kbd></button>
@@ -348,6 +351,12 @@ export function App() {
             {dock === "code" && <span className="muted small">Ctrl+S save · Ctrl+Enter render · Space play · [ ] sections · L loop</span>}
           </nav>
           <div className="dock-body">
+            {dock === "lab" && <AILab currentPath={path} dirty={dirty} onApplied={(paths) => {
+              if (path && paths.includes(path)) api.project(path).then(r => {
+                setText(r.text); setSaved(r.text); setCheck(r.check); setSummary(r.check.summary); setRendered(null); setQA(null);
+              }).catch(e => setStatus(String(e)));
+              setStatus(`Applied instrument edits to ${paths.length} score(s)`);
+            }} />}
             {path && <div className="code-wrap" style={{ display: dock === "code" ? "block" : "none" }}>
               <CodeEditor value={text} onChange={setText} diagnostics={check?.diagnostics ?? []} gotoLine={goto} />
             </div>}

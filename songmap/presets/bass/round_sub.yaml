@@ -1,0 +1,14 @@
+instrument: bass
+description: Round sine-led sub, soft attack and little resonance.
+tags:
+- electronic
+- bass
+params:
+  saw: 0.12
+  square: 0
+  sub: 1
+  cutoff: 180
+  env_amt: 0.5
+  drive: 1
+  attack: 0.008
+  release: 0.12

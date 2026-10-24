@@ -1,0 +1,504 @@
+{
+  "date": "2026-10-23",
+  "collection": "Golden Worlds",
+  "tuning": "36edo",
+  "scope": "All composed pitched notes and chord tones belong to the declared local golden scale. Unpitched drum-kit voices are excluded from pitch membership.",
+  "listening_status": "User listening review: rework. User liked bass lines, chords and comping; melodies need rework, with quieter leads, calmer timbres and less shrill writing. Existing audio and note events are unchanged.",
+  "checks": [
+    "songmap check",
+    "songmap listen",
+    "songmap render with WAV/stems/MP3",
+    "render-aware songmap listen",
+    "tools/rubs.py --min 0.25",
+    "local note and chord scale membership audit",
+    "24-bit stereo 48 kHz WAV headers",
+    "visual inspection of all five qa.png plots"
+  ],
+  "tracks": [
+    {
+      "file": "01_sideways_sun.sm",
+      "title": "Sideways Sun",
+      "style": "Broken-beat",
+      "duration_seconds": 200.55555555555554,
+      "bars": 88.0,
+      "sections": [
+        {
+          "name": "slivers",
+          "seconds": 0.0,
+          "key": "C golden7"
+        },
+        {
+          "name": "head_one",
+          "seconds": 8.889,
+          "key": "C golden7"
+        },
+        {
+          "name": "head_reply",
+          "seconds": 26.667,
+          "key": "C golden7"
+        },
+        {
+          "name": "streetlights",
+          "seconds": 44.444,
+          "key": "C golden7"
+        },
+        {
+          "name": "ten_windows",
+          "seconds": 62.222,
+          "key": "C golden10_36"
+        },
+        {
+          "name": "side_door",
+          "seconds": 80.0,
+          "key": "vE golden7"
+        },
+        {
+          "name": "return_call",
+          "seconds": 97.778,
+          "key": "C golden7"
+        },
+        {
+          "name": "return_answer",
+          "seconds": 115.556,
+          "key": "C golden7"
+        },
+        {
+          "name": "held_breath",
+          "seconds": 133.333,
+          "key": "C golden7"
+        },
+        {
+          "name": "sunburst",
+          "seconds": 151.111,
+          "key": "C golden7"
+        },
+        {
+          "name": "sunburst_reply",
+          "seconds": 168.889,
+          "key": "C golden7"
+        },
+        {
+          "name": "afterimage",
+          "seconds": 186.667,
+          "key": "C golden7"
+        }
+      ],
+      "score_sha256": "0fefb6961698c0146e2fe726be63abaa55f81f69cb2e9784f0dc3df7650c8218",
+      "event_digest": "367f4b8ffe89015da8c0dae2e9b9082db428e07152f0de05b1d84f0f5b4cd00d",
+      "mp3_sha256": "387ad526d0cbbeecd30d9a883663f4ab387bf433b0a2e5dff105e216a56bad28",
+      "wav_format": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width_bytes": 3,
+        "frames": 9626667,
+        "seconds": 200.5555625
+      },
+      "golden_pitch_audit": {
+        "off_scale_notes": 0,
+        "off_scale_chords": 0,
+        "microtonal_rubs_at_least_quarter_beat": 0
+      },
+      "audio_qa": {
+        "lufs": -16.11,
+        "true_peak_db": -1.0,
+        "clipped_samples": 0,
+        "peak_section": "sunburst",
+        "peak_margin_db": 2.0
+      },
+      "review_counts": {
+        "problem": 0,
+        "warning": 0,
+        "note": 0
+      },
+      "review_findings": []
+    },
+    {
+      "file": "02_pocket_algebra.sm",
+      "title": "Pocket Algebra",
+      "style": "Jazz / funk",
+      "duration_seconds": 209.71428571428572,
+      "bars": 96.0,
+      "sections": [
+        {
+          "name": "count_in",
+          "seconds": 0.0,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "head_left",
+          "seconds": 8.571,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "head_right",
+          "seconds": 25.714,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "dialogue_call",
+          "seconds": 42.857,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "limma_room",
+          "seconds": 60.0,
+          "key": "F golden10_54"
+        },
+        {
+          "name": "solo_first",
+          "seconds": 77.143,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "trading_keys",
+          "seconds": 111.429,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "trading_reed",
+          "seconds": 128.571,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "one_table",
+          "seconds": 145.714,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "whole_room",
+          "seconds": 154.286,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "answer_back",
+          "seconds": 171.429,
+          "key": "F golden10_63"
+        },
+        {
+          "name": "last_word",
+          "seconds": 188.571,
+          "key": "F golden10_63"
+        }
+      ],
+      "score_sha256": "4ca03a7f9cac1d6502c91d4eed23ad1f2c1281f20b43769e0af5ee76caead1c3",
+      "event_digest": "f6b984691207c00ea4ee0e30562995674cc7ed6047260bdcb009710134266c14",
+      "mp3_sha256": "f44853c0f683d998e47219cd73de80ec6f2f84b5d86e099545401a72e80a4ee9",
+      "wav_format": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width_bytes": 3,
+        "frames": 10066286,
+        "seconds": 209.71429166666667
+      },
+      "golden_pitch_audit": {
+        "off_scale_notes": 0,
+        "off_scale_chords": 0,
+        "microtonal_rubs_at_least_quarter_beat": 0
+      },
+      "audio_qa": {
+        "lufs": -16.64,
+        "true_peak_db": -1.0,
+        "clipped_samples": 0,
+        "peak_section": "whole_room",
+        "peak_margin_db": 2.3
+      },
+      "review_counts": {
+        "problem": 0,
+        "warning": 0,
+        "note": 0
+      },
+      "review_findings": []
+    },
+    {
+      "file": "03_parallax_arcade.sm",
+      "title": "Parallax Arcade",
+      "style": "Progressive electronic",
+      "duration_seconds": 206.29032258064515,
+      "bars": 104.0,
+      "sections": [
+        {
+          "name": "neon_seed",
+          "seconds": 0.0,
+          "key": "D golden7_42"
+        },
+        {
+          "name": "sign_one",
+          "seconds": 15.484,
+          "key": "D golden7_42"
+        },
+        {
+          "name": "sign_two",
+          "seconds": 30.968,
+          "key": "D golden7_42"
+        },
+        {
+          "name": "open_road",
+          "seconds": 46.452,
+          "key": "D golden7_42"
+        },
+        {
+          "name": "decatonic_drive",
+          "seconds": 61.935,
+          "key": "D golden10_36"
+        },
+        {
+          "name": "crossing_lights",
+          "seconds": 77.419,
+          "key": "D golden10_36"
+        },
+        {
+          "name": "empty_lane",
+          "seconds": 92.903,
+          "key": "D golden10_36"
+        },
+        {
+          "name": "comma_crossing",
+          "seconds": 108.387,
+          "key": "^D golden10_36"
+        },
+        {
+          "name": "new_horizon",
+          "seconds": 123.871,
+          "key": "^D golden10_36"
+        },
+        {
+          "name": "overpass",
+          "seconds": 139.355,
+          "key": "^D golden10_36"
+        },
+        {
+          "name": "arcade_summit",
+          "seconds": 154.839,
+          "key": "^D golden10_36"
+        },
+        {
+          "name": "city_below",
+          "seconds": 170.323,
+          "key": "^D golden10_36"
+        },
+        {
+          "name": "last_pixel",
+          "seconds": 185.806,
+          "key": "^D golden10_36"
+        }
+      ],
+      "score_sha256": "310a8c8f4fdd1e5fadc5d57d85a9717e53003c7d287c87f3111f2e7d43fe569a",
+      "event_digest": "2c6463b11ece55371e90c5f4d6a3cd6db11421808a45a3b198e1b8b41d533dc3",
+      "mp3_sha256": "7c12c3b6c13265b8f26a4ceb5b589d5438c5c2a1f147da3ee95deadf46aa9cd2",
+      "wav_format": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width_bytes": 3,
+        "frames": 9901935,
+        "seconds": 206.2903125
+      },
+      "golden_pitch_audit": {
+        "off_scale_notes": 0,
+        "off_scale_chords": 0,
+        "microtonal_rubs_at_least_quarter_beat": 0
+      },
+      "audio_qa": {
+        "lufs": -16.83,
+        "true_peak_db": -1.0,
+        "clipped_samples": 0,
+        "peak_section": "arcade_summit",
+        "peak_margin_db": 4.3
+      },
+      "review_counts": {
+        "problem": 0,
+        "warning": 0,
+        "note": 2
+      },
+      "review_findings": [
+        {
+          "severity": "note",
+          "kind": "contrast",
+          "where": "decatonic_drive",
+          "message": "decatonic_drive is within 1 dB of both neighbours",
+          "fix": "contrast neighbouring sections by texture, register or density"
+        },
+        {
+          "severity": "note",
+          "kind": "balance",
+          "where": "neon_seed",
+          "message": "neon_seed is very bass-heavy (low 0.99)",
+          "fix": "lighten the sub or kick, or add mid/high parts"
+        }
+      ]
+    },
+    {
+      "file": "04_two_windows.sm",
+      "title": "Two Windows",
+      "style": "Chamber counterpoint",
+      "duration_seconds": 192.5,
+      "bars": 100.0,
+      "sections": [
+        {
+          "name": "paper_light",
+          "seconds": 0.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "first_window",
+          "seconds": 15.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "second_window",
+          "seconds": 30.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "interlaced",
+          "seconds": 45.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "answering_arch",
+          "seconds": 60.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "brighter_glass",
+          "seconds": 75.0,
+          "key": "G golden10_63"
+        },
+        {
+          "name": "different_shadow",
+          "seconds": 90.0,
+          "key": "G golden10_63"
+        },
+        {
+          "name": "unwritten_space",
+          "seconds": 105.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "mirror_stairs",
+          "seconds": 120.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "crossed_hands",
+          "seconds": 135.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "both_windows",
+          "seconds": 150.0,
+          "key": "G golden10_36"
+        },
+        {
+          "name": "folded_paper",
+          "seconds": 172.5,
+          "key": "G golden10_36"
+        }
+      ],
+      "score_sha256": "42fdb4839bcc8dbd1611f3ee9d0d0e6ec39ed398fed7232551816b64a1f246fd",
+      "event_digest": "624ef4380da883f22da1669994f972bf34ef855d77f2636fff11ddfe20163dd2",
+      "mp3_sha256": "1dca412c1f209bdf605873c5bbb2c1ff4146477e9d97f2dd4230ce5d2332b6aa",
+      "wav_format": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width_bytes": 3,
+        "frames": 9240000,
+        "seconds": 192.5
+      },
+      "golden_pitch_audit": {
+        "off_scale_notes": 0,
+        "off_scale_chords": 0,
+        "microtonal_rubs_at_least_quarter_beat": 0
+      },
+      "audio_qa": {
+        "lufs": -18.04,
+        "true_peak_db": -1.44,
+        "clipped_samples": 0,
+        "peak_section": "both_windows",
+        "peak_margin_db": 2.0
+      },
+      "review_counts": {
+        "problem": 0,
+        "warning": 0,
+        "note": 0
+      },
+      "review_findings": []
+    },
+    {
+      "file": "05_night_orchard.sm",
+      "title": "Night Orchard",
+      "style": "Atmospheric",
+      "duration_seconds": 200.0,
+      "bars": 64.0,
+      "sections": [
+        {
+          "name": "seed_in_darkness",
+          "seconds": 0.0,
+          "key": "A golden7_51"
+        },
+        {
+          "name": "first_branches",
+          "seconds": 15.0,
+          "key": "A golden7_51"
+        },
+        {
+          "name": "orchard_path",
+          "seconds": 39.0,
+          "key": "A golden7"
+        },
+        {
+          "name": "unlit_leaves",
+          "seconds": 63.0,
+          "key": "A golden7_15"
+        },
+        {
+          "name": "lantern_bloom",
+          "seconds": 84.0,
+          "key": "A golden10_45"
+        },
+        {
+          "name": "elsewhere_river",
+          "seconds": 108.0,
+          "key": "vC# golden7"
+        },
+        {
+          "name": "familiar_stone",
+          "seconds": 147.0,
+          "key": "A golden7"
+        },
+        {
+          "name": "roots_and_stars",
+          "seconds": 168.0,
+          "key": "A golden7"
+        }
+      ],
+      "score_sha256": "2de4e70b4ee3691d23e5020924362844271ea3ca758efcbf7183146c846e6a8b",
+      "event_digest": "2f90d52e736d1d9aa2229d20e0bc38e4634ef110a7f68ea944c45c7d2699ffca",
+      "mp3_sha256": "92b22b653e4f6ae949f788efca8862dac420fe1903cb0ec8d3f35cc5c514b24b",
+      "wav_format": {
+        "sample_rate": 48000,
+        "channels": 2,
+        "sample_width_bytes": 3,
+        "frames": 9600000,
+        "seconds": 200.0
+      },
+      "golden_pitch_audit": {
+        "off_scale_notes": 0,
+        "off_scale_chords": 0,
+        "microtonal_rubs_at_least_quarter_beat": 0
+      },
+      "audio_qa": {
+        "lufs": -20.07,
+        "true_peak_db": -1.49,
+        "clipped_samples": 0,
+        "peak_section": "lantern_bloom",
+        "peak_margin_db": 7.1
+      },
+      "review_counts": {
+        "problem": 0,
+        "warning": 0,
+        "note": 0
+      },
+      "review_findings": []
+    }
+  ]
+}

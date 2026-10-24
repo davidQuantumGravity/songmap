@@ -1,0 +1,65 @@
+# Source: songs/golden_worlds/05_night_orchard.sm
+songmap: 0.2
+title: "Night Orchard"
+tempo: 80
+meter: "4/4"
+key: "A golden7_51"
+tuning: "36edo"
+fps: 30
+seed: 705
+tail_seconds: 8
+
+mood: ambient
+instruments:
+  keys: sampler/grand_piano
+  lead: sampler/flute
+  pad:
+    use: clean/golden_pad
+    attack: 0.6
+    release: 0.6
+    partials: 7
+    rolloff: 1.8
+  bell: sampler/marimba
+  low:
+    use: clean/sine
+    release: 0.3
+
+harmony:
+  progressions: {opening: "Ag7:1 ^Fg7:1 vC#g7:1 ^Eg7:1 Ag7:1", first: "Ag7:1 ^Fg7:1 vC#g7:1 ^Eg7:1 ^Fg7:1 Ag7:1 ^Eg7:1 Ag7:1", center: "Ag7:1 ^Fg7:1 vDg7:1 Bbg7:1 vDg7:1 ^Fg7:1 vC#g:1 Ag7:1", shadow: "Bbg7:1 ^Fg:1 vDg7:1 vEbg7:1 ^F#g7:1 vDg7:1 Bbg7:1", bloom: "Ag7:1 ^Fg7:1 vDg7:1 Bbg7:1 ^F#g7:1 vEbg7:1 vC#g7:1 Ag7:1", wander: "vC#g7:1 ^Fg7:1 Ag7:1 vDg7:1 ^Fg7:1 vC#g7:1 ^Eg:1 Ag7:1 ^Fg7:1 vC#g7:1 vDg7:1 ^Fg7:1 vC#g7:1", return: "vDg7:1 ^Fg7:1 vC#g:1 Ag7:1 Bbg7:1 vC#g:1 Ag7:1", home: "Ag7:1 ^Fg7:1 vDg7:1 Ag7:1 vDg7:1 ^Fg7:1 vC#g:1 Ag7:1"}
+
+sections:
+  - {name: seed_in_darkness, bars: 5, parts: {pad: {style: hold, voices: 3, range: [48, 68]}, bell: {rel: "=mp r/2 5/8 3+/8 r/4 | =p r/1 | =mp R+/4 r/2 3/4 | =p r/1 | =mp r/4 3/8 5/8 r/2"}}, harmony: opening, dyn: "pp<p"}
+  - {name: first_branches, bars: 8, parts: {pad: {style: hold, voices: 3, range: [48, 68]}, keys: {deg: "=p =p 0/2^ 2/4 r/4 | =mp 2/2. r/4 | =p 4/4^ -1/4 1/2 | =p 4/2 r/2 | =p 2/4.^ 0/8 -2/2 | =mp 2/2 4/4 r/4 | =p 3/2^ 1/4 -1/4 | =p 0/1", oct: 1}, low: {rel: "=mp R/2.^ r/4 | =p r/2 R/2^ | =mp R/1^ | =p r/1", oct: -2}}, harmony: first, dyn: p}
+  - {name: orchard_path, bars: 8, parts: {pad: {style: hold, voices: 3, range: [48, 68]}, lead: {deg: "=p =p 0/2^ 2/4 r/4 | =mp 2/2. r/4 | =p 5/4^ 0/4 2/2 | =p 1/2 r/2 | =p 0/4.^ -2/8 -4/2 | =mp 0/2 2/4 r/4 | =p -1/2^ -1/4 -3/4 | =p 0/1", oct: 1}, bell: {rel: "=mp r/2 5/8 3+/8 r/4 | =p r/1 | =mp R+/4 r/2 3/4 | =p r/1 | =mp r/4 3/8 5/8 r/2"}, low: {rel: "=mp R/2.^ r/4 | =p r/2 R/2^ | =mp R/1^ | =p r/1", oct: -2}}, harmony: center, dyn: "p<mp", key: "A golden7"}
+  - {name: unlit_leaves, bars: 7, parts: {pad: {style: hold, voices: 3, range: [48, 68]}, keys: {deg: "=p =p 1/2^ 3/4 r/4 | =mp 2/2. r/4 | =p 5/4^ 0/4 2/2 | =p 4/2 r/2 | =p 3/4.^ 1/8 -1/2 | =mp -2/2 0/4 r/4 | =p 0/2^ -2/4 -4/4", oct: 1}, bell: {rel: "=mp r/2 5/8 3+/8 r/4 | =p r/1 | =mp R+/4 r/2 3/4 | =p r/1 | =mp r/4 3/8 5/8 r/2"}}, harmony: shadow, dyn: "p>pp", key: "A golden7_15"}
+  - {name: lantern_bloom, bars: 8, parts: {pad: {style: hold, range: [48, 68]}, lead: {deg: "=mp =mp 0/8^ 3/8 6/4 4/8 3/8 r/4 | =mf 0/4. 3/8 6/4 r/4 | =mp 0/8^ -3/8 -6/4 r/8 -6/8 -3/4 | =p 0/2 -3/4 r/4 | =mp -2/4^ 1/8 2/8 4/4 1/4 | =mf 1/4. -2/8 -5/4 r/4 | =mp -4/8^ -1/8 2/4 -1/8 -4/8 -7/4 | =p -7/2 r/4 -10/4", oct: 1}, keys: {rel: "=mp R/4^ 5/8 3+/8 r/2 | =p r/2 3/8 5/8 R+/4 | =mp R/2^ r/2", oct: 0}, bell: {rel: "=mp r/2 5/8 3+/8 r/4 | =p r/1 | =mp R+/4 r/2 3/4 | =p r/1 | =mp r/4 3/8 5/8 r/2"}, low: {rel: "=mp R/2.^ r/4 | =p r/2 R/2^ | =mp R/1^ | =p r/1", oct: -2}}, harmony: bloom, dyn: mf, key: "A golden10_45"}
+  - {name: elsewhere_river, bars: 13, parts: {pad: {style: hold, voices: 3, range: [48, 68]}, keys: {deg: "=p =p 7/2^ 9/4 r/4 | =mp 7/2. r/4 | =p 7/4^ 9/4 4/2 | =p 1/2 r/2 | =p 0/4.^ -2/8 3/2 | =mp 2/2 4/4 r/4 | =p 6/2^ 6/4 4/4 | =p 5/1 | =p 3/2^ 5/4 r/4 | =mp 4/2. r/4 | =p 3/4^ 5/4 7/2 | =p 3/2 r/2 | =p 4/4.^ 2/8 0/2", oct: 1}, bell: {rel: "=mp R/4^ 5/8 3+/8 r/2 | =p r/2 3/8 5/8 R+/4 | =mp R/2^ r/2", oct: 0}, low: {rel: "=mp R/2.^ r/4 | =p r/2 R/2^ | =mp R/1^ | =p r/1", oct: -2}}, harmony: wander, dyn: "mp>p", key: "vC# golden7"}
+  - {name: familiar_stone, bars: 7, parts: {pad: {style: hold, voices: 3, range: [48, 68]}, lead: {deg: "=p =p 3/2^ 5/4 r/4 | =mp 2/2. r/4 | =p 4/4^ -1/4 -1/2 | =p 0/2 r/2 | =p -2/4.^ -4/8 -6/2 | =mp -3/2 -1/4 r/4 | =p -1/2^ -3/4 -5/4", oct: 1}, bell: {rel: "=mp r/2 5/8 3+/8 r/4 | =p r/1 | =mp R+/4 r/2 3/4 | =p r/1 | =mp r/4 3/8 5/8 r/2"}}, harmony: return, dyn: p, key: "A golden7"}
+  - {name: roots_and_stars, bars: 8, parts: {pad: {style: hold, voices: 3, range: [48, 68]}, keys: {deg: "=p =p 0/2^ 2/4 r/4 | =mp 2/2. r/4 | =p 5/4^ 0/4 2/2 | =p 0/2 r/2 | =p 0/4.^ -2/8 -4/2 | =mp 0/2 2/4 r/4 | =p -1/2^ -1/4 -3/4 | =p 0/1", oct: 1}, bell: {rel: "=mp r/2 5/8 3+/8 r/4 | =p r/1 | =mp R+/4 r/2 3/4 | =p r/1 | =mp r/4 3/8 5/8 r/2"}}, harmony: home, dyn: "p>pp", key: "A golden7"}
+
+mix:
+  keys:
+    gain_db: 6.1
+    send:
+      hall: 0.25
+  lead:
+    gain_db: 20.5
+    send:
+      hall: 0.28
+  pad:
+    gain_db: -5
+    send:
+      hall: 0.28
+  bell:
+    gain_db: -0.8
+    send:
+      hall: 0.3
+    pan: 0.25
+  low:
+    gain_db: -20
+    send:
+      hall: 0.08
+
+master:
+  target_lufs: -20
+  glue: none

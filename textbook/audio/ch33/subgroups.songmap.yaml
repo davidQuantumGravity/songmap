@@ -9,13 +9,17 @@ key: "C major"
 tuning: 36edo
 seed: 330
 tail_seconds: 3
-instruments: {lead: clean/keys}
+instruments:
+  lead: sampler/grand_piano
 motifs:
   o12: {notes: "c8 c# d eb e f f# g | ab8 a bb b c+2", octave: 4}
   o9:  {notes: "c8 ^c# veb e ^f vg ab ^a | vb8 c+2. r8", octave: 4}
   o18: {notes: "c16 vc# ^c# d veb ^eb e vf ^f f# vg ^g ab va ^a bb | vb16 ^b c+2. r8", octave: 4}
 mix:
-  lead: {gain_db: -4, send: {hall: 0.15}}
+  lead:
+    gain_db: 8.9
+    send:
+      hall: 0.15
 sections:
   - {name: order12, bars: 2, harmony: "N.C.:2", parts: {lead: {motifs: [o12]}}}
   - {name: order9, bars: 2, harmony: "N.C.:2", parts: {lead: {motifs: [o9]}}}

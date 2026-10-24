@@ -1,0 +1,12 @@
+instrument: kick
+description: Compact low sine kick; short enough for busy bass lines.
+tags:
+- electronic
+- kick
+params:
+  tune: 51
+  decay: 0.28
+  sub: 0.1
+  click: 0.11
+  sweep: 19
+  drive: 1.1

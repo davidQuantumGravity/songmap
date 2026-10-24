@@ -9,11 +9,21 @@ key: "C major"
 tuning: 36edo
 seed: 350
 tail_seconds: 3
-instruments: {organ: clean/organ, low: clean/bass, keys: clean/keys}
+instruments:
+  organ: sampler/grand_piano
+  low: sampler/double_bass
+  keys: sampler/grand_piano
 mix:
-  organ: {gain_db: -7, send: {hall: 0.2}}
-  low: {gain_db: -6}
-  keys: {gain_db: -6, send: {hall: 0.25}}
+  organ:
+    gain_db: 16.2
+    send:
+      hall: 0.2
+  low:
+    gain_db: 12.4
+  keys:
+    gain_db: 10.9
+    send:
+      hall: 0.25
 sections:
   - {name: common_tones, bars: 3, harmony: "C:1 D7:0.5 G:1.5", parts: {organ: hold, low: {style: roots, role: bass}, keys: top}}
   - {name: voice_leading, bars: 3, harmony: "C:1 ^C:2", parts: {organ: hold, low: {style: roots, role: bass}, keys: top}}

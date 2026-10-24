@@ -10,6 +10,7 @@ const LAYER_DOC: Record<string, string> = {
   letters: "the names of the notes sounding now",
   staff: "a grand staff, page by page, with the played part veiled",
   roll: "a scrolling piano roll around the playhead",
+  instrument: "one instrument's staff, live note names and optional fractional-pitch strip",
   progress: "a bar filling up over the song",
   sections: "the song's sections as a strip, the current one lit",
   text: "a caption, optionally only between two times",
@@ -17,6 +18,7 @@ const LAYER_DOC: Record<string, string> = {
 const NEW_BOX: Record<string, Layer["box"]> = {
   header: [0.02, 0.03, 0.96, 0.09], letters: [0.02, 0.13, 0.96, 0.11], staff: [0.02, 0.26, 0.96, 0.46],
   roll: [0.02, 0.74, 0.96, 0.2], progress: [0.02, 0.975, 0.96, 0.017], sections: [0.02, 0.9, 0.96, 0.05], text: [0.1, 0.42, 0.8, 0.16],
+  instrument: [0.02, 0.16, 0.47, 0.34],
 };
 const COLOR_KEYS: [string, string][] = [["bg", "background"], ["panel", "panels"], ["ink", "text"], ["muted", "secondary"], ["gold", "accent / playhead"]];
 const r3 = (x: number) => Math.round(x * 1000) / 1000;
@@ -64,7 +66,8 @@ export function VideoDesigner({ path, text, time, summary, view, setView, ok, on
     commit({ ...live, layers: ls }); setSel(j);
   };
   const add = (type: string) => {
-    const layer: Layer = { type, box: NEW_BOX[type], ...(type === "text" ? { text: summary?.title ?? "Title", size: 0.06, from: r3(time), to: r3(time + 4) } : {}) };
+    const layer: Layer = { type, box: NEW_BOX[type], ...(type === "text" ? { text: summary?.title ?? "Title", size: 0.06, from: r3(time), to: r3(time + 4) } : {}),
+      ...(type === "instrument" ? { parts: summary?.parts.filter((p) => !p.kit).slice(0, 1).map((p) => p.name) ?? [], mode: "bar", bars: 1 } : {}) };
     commit({ ...live, layers: [...live.layers, layer] }); setSel(live.layers.length);
   };
 
@@ -93,6 +96,25 @@ export function VideoDesigner({ path, text, time, summary, view, setView, ok, on
   };
   const pitched = summary?.parts.filter((p) => !p.kit).map((p) => p.name) ?? [];
   const shown = live.parts ?? pitched;
+  const instrumentGrid = (performance = false) => {
+    const parts = shown;
+    if (!parts.length) return;
+    const cols = parts.length === 1 ? 1 : 2, rows = Math.ceil(parts.length / cols);
+    const instrumentLabel = (part: string) => {
+      const instrument = summary?.parts.find((p) => p.name === part)?.instrument;
+      return performance && instrument?.startsWith("sampler/")
+        ? instrument.slice(8).replace(/_/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase()) : part;
+    };
+    const panels: Layer[] = parts.map((part, i) => ({ type: "instrument", parts: [part], label: instrumentLabel(part), mode: "bar", bars: 1,
+      ...(performance ? { style: "performance", note_chips: true, pitch_strip: true, glow: true } : {}),
+      box: [r3(.02 + (i % cols) * (.96 / cols)), r3(.15 + Math.floor(i / cols) * (.77 / rows)), r3(.96 / cols - .012), r3(.77 / rows - .014)] }));
+    commit({ ...live, ...(performance ? { size: [1920, 1080] as [number, number], theme: "dark" as const,
+      colors: { bg: "#0a101c", panel: "#121e30", ink: "#eff4fc", muted: "#9baec9", line: "#3b4a61", grid: "#1c2d44", gold: "#f0c66b" } } : {}), color_by: "part",
+      layers: [{ type: "header", box: NEW_BOX.header, ...(performance ? { style: "performance",
+        subtitle: `${summary?.tempo ?? ""} BPM / ${summary?.meter ?? ""} / ${summary?.tuning ?? ""}` } : {}) }, ...panels,
+      { type: "sections", box: [.02, .94, .96, .035], humanize: performance }, { type: "progress", box: NEW_BOX.progress }] });
+    setSel(1);
+  };
   const L = sel !== null ? live.layers[sel] : null;
   const num = (k: string, v: unknown, d: number) => (typeof v === "number" ? v : d);
 
@@ -175,6 +197,9 @@ export function VideoDesigner({ path, text, time, summary, view, setView, ok, on
             </div>
             {L.type === "header" && (
               <div className="vd-grid">
+                <label className="wide">presentation<select value={String(L.style ?? "score")}
+                  onChange={(e) => setLayer(sel, { style: e.target.value })}>
+                  <option value="score">classic header</option><option value="performance">chord and individual tones</option></select></label>
                 {(["title", "info", "chord"] as const).map((k) => (
                   <label key={k} className="cb"><input type="checkbox" checked={L[k] !== false} onChange={(e) => setLayer(sel, { [k]: e.target.checked })} /> {k}</label>
                 ))}
@@ -192,6 +217,26 @@ export function VideoDesigner({ path, text, time, summary, view, setView, ok, on
               <div className="vd-grid">
                 <label>before (s)<input type="number" step={0.5} min={0} value={num("before", L.before, 2)} onChange={(e) => setLayer(sel, { before: +e.target.value })} /></label>
                 <label>after (s)<input type="number" step={0.5} min={0.5} value={num("after", L.after, 6)} onChange={(e) => setLayer(sel, { after: +e.target.value })} /></label>
+              </div>
+            )}
+            {L.type === "instrument" && (
+              <div className="vd-grid">
+                <label className="wide">presentation<select value={String(L.style ?? "score")}
+                  onChange={(e) => setLayer(sel, { style: e.target.value })}>
+                  <option value="score">compact score</option><option value="performance">performance card</option></select></label>
+                <label className="wide">label<input value={String(L.label ?? "")} placeholder="Instrument name" onChange={(e) => setLayer(sel, { label: e.target.value })} /></label>
+                <label className="wide">instrument<select value={(L.parts as string[] | undefined)?.[0] ?? ""}
+                  onChange={(e) => setLayer(sel, { parts: e.target.value ? [e.target.value] : [], label: e.target.value })}>
+                  <option value="">none</option>{pitched.map((p) => <option key={p}>{p}</option>)}</select></label>
+                <label>show<select value={String(L.mode ?? "bar")} onChange={(e) => setLayer(sel, { mode: e.target.value })}>
+                  <option value="bar">bar at a time</option><option value="active">sounding notes only</option></select></label>
+                <label>bars per page<input type="number" min={1} step={1} value={Number(L.bars ?? 1)} disabled={L.mode === "active"}
+                  onChange={(e) => setLayer(sel, { bars: Math.max(1, Math.round(+e.target.value)) })} /></label>
+                {L.style === "performance" && (["note_chips", "pitch_strip", "glow"] as const).map((key) => (
+                  <label key={key} className="cb"><input type="checkbox" checked={L[key] !== false}
+                    onChange={(e) => setLayer(sel, { [key]: e.target.checked })} />
+                    {key === "note_chips" ? "individual note names" : key === "pitch_strip" ? "pitch strip" : "note glow"}</label>
+                ))}
               </div>
             )}
             {L.type === "progress" && (
@@ -219,6 +264,8 @@ export function VideoDesigner({ path, text, time, summary, view, setView, ok, on
         <div className="vd-save">
           <button className="primary" onClick={save}>Save view</button>
           {defaults && <button onClick={() => { commit(defaults); setSel(null); }}>Classic layout</button>}
+          <button disabled={!shown.length} onClick={() => instrumentGrid(false)}>Instrument grid</button>
+          <button disabled={!shown.length} onClick={() => instrumentGrid(true)}>Performance grid</button>
           <span className="muted small">{saved ? `${saved.file}${saved.at ? " · saved" : ""}` : "not saved yet (exports use what you see)"}</span>
         </div>
       </aside>

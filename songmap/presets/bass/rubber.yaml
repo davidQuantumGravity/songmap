@@ -1,0 +1,15 @@
+instrument: bass
+description: Springy square bass with a short, deep filter envelope.
+tags:
+- electronic
+- bass
+params:
+  saw: 0.1
+  square: 0.9
+  sub: 0.35
+  cutoff: 340
+  res: 1.8
+  env_amt: 3.2
+  env_decay: 0.11
+  sustain: 0.35
+  release: 0.045

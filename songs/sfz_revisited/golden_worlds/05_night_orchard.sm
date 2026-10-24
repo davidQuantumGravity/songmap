@@ -1,0 +1,41 @@
+# SFZ edition of songs/golden_worlds/05_night_orchard.sm. Original score and renders preserved.
+# Instrumentation and faders revised; written notes, tuning, form, timing and binaural settings retained.
+# Listening candidate: automated measurements are not a human listening verdict.
+# Night Orchard
+# Pure golden harmony in 36-ET; ordinary and golden-spectrum timbres are both intentional.
+# Atmospheric song with an audible melodic thread: 5|1, centered 3|3, dark 1|5, decatonic bloom and a neighboring-key detour. Asymmetric sections are 5,8,8,7,8,13,7,8 bars; no binaural layer.
+# Listening draft: automated checks are not an auditory approval.
+song "Night Orchard" 80 4/4 "A golden7_51" fps=30 seed=705 tail=8 tuning=36edo mood=ambient
+inst keys=sampler/grand_piano lead=sampler/flute pad=clean/golden_pad(attack=.6, release=.6, partials=7, rolloff=1.8) bell=sampler/marimba low=clean/sine(release=.3)
+
+prog opening "Ag7:1 ^Fg7:1 vC#g7:1 ^Eg7:1 Ag7:1"
+prog first "Ag7:1 ^Fg7:1 vC#g7:1 ^Eg7:1 ^Fg7:1 Ag7:1 ^Eg7:1 Ag7:1"
+prog center "Ag7:1 ^Fg7:1 vDg7:1 Bbg7:1 vDg7:1 ^Fg7:1 vC#g:1 Ag7:1"
+prog shadow "Bbg7:1 ^Fg:1 vDg7:1 vEbg7:1 ^F#g7:1 vDg7:1 Bbg7:1"
+prog bloom "Ag7:1 ^Fg7:1 vDg7:1 Bbg7:1 ^F#g7:1 vEbg7:1 vC#g7:1 Ag7:1"
+prog wander "vC#g7:1 ^Fg7:1 Ag7:1 vDg7:1 ^Fg7:1 vC#g7:1 ^Eg:1 Ag7:1 ^Fg7:1 vC#g7:1 vDg7:1 ^Fg7:1 vC#g7:1"
+prog return "vDg7:1 ^Fg7:1 vC#g:1 Ag7:1 Bbg7:1 vC#g:1 Ag7:1"
+prog home "Ag7:1 ^Fg7:1 vDg7:1 Ag7:1 vDg7:1 ^Fg7:1 vC#g:1 Ag7:1"
+
+first_line = {deg: "=p =p 0/2^ 2/4 r/4 | =mp 2/2. r/4 | =p 4/4^ -1/4 1/2 | =p 4/2 r/2 | =p 2/4.^ 0/8 -2/2 | =mp 2/2 4/4 r/4 | =p 3/2^ 1/4 -1/4 | =p 0/1", oct: 1}
+center_line = {deg: "=p =p 0/2^ 2/4 r/4 | =mp 2/2. r/4 | =p 5/4^ 0/4 2/2 | =p 1/2 r/2 | =p 0/4.^ -2/8 -4/2 | =mp 0/2 2/4 r/4 | =p -1/2^ -1/4 -3/4 | =p 0/1", oct: 1}
+shadow_line = {deg: "=p =p 1/2^ 3/4 r/4 | =mp 2/2. r/4 | =p 5/4^ 0/4 2/2 | =p 4/2 r/2 | =p 3/4.^ 1/8 -1/2 | =mp -2/2 0/4 r/4 | =p 0/2^ -2/4 -4/4", oct: 1}
+bloom_line = {deg: "=mp =mp 0/8^ 3/8 6/4 4/8 3/8 r/4 | =mf 0/4. 3/8 6/4 r/4 | =mp 0/8^ -3/8 -6/4 r/8 -6/8 -3/4 | =p 0/2 -3/4 r/4 | =mp -2/4^ 1/8 2/8 4/4 1/4 | =mf 1/4. -2/8 -5/4 r/4 | =mp -4/8^ -1/8 2/4 -1/8 -4/8 -7/4 | =p -7/2 r/4 -10/4", oct: 1}
+wandering_line = {deg: "=p =p 7/2^ 9/4 r/4 | =mp 7/2. r/4 | =p 7/4^ 9/4 4/2 | =p 1/2 r/2 | =p 0/4.^ -2/8 3/2 | =mp 2/2 4/4 r/4 | =p 6/2^ 6/4 4/4 | =p 5/1 | =p 3/2^ 5/4 r/4 | =mp 4/2. r/4 | =p 3/4^ 5/4 7/2 | =p 3/2 r/2 | =p 4/4.^ 2/8 0/2", oct: 1}
+return_line = {deg: "=p =p 3/2^ 5/4 r/4 | =mp 2/2. r/4 | =p 4/4^ -1/4 -1/2 | =p 0/2 r/2 | =p -2/4.^ -4/8 -6/2 | =mp -3/2 -1/4 r/4 | =p -1/2^ -3/4 -5/4", oct: 1}
+home_line = {deg: "=p =p 0/2^ 2/4 r/4 | =mp 2/2. r/4 | =p 5/4^ 0/4 2/2 | =p 0/2 r/2 | =p 0/4.^ -2/8 -4/2 | =mp 0/2 2/4 r/4 | =p -1/2^ -1/4 -3/4 | =p 0/1", oct: 1}
+droplets = {rel: "=mp r/2 5/8 3+/8 r/4 | =p r/1 | =mp R+/4 r/2 3/4 | =p r/1 | =mp r/4 3/8 5/8 r/2"}
+breath_bass = {rel: "=mp R/2.^ r/4 | =p r/2 R/2^ | =mp R/1^ | =p r/1", oct: -2}
+slow_thread = {rel: "=mp R/4^ 5/8 3+/8 r/2 | =p r/2 3/8 5/8 R+/4 | =mp R/2^ r/2", oct: 0}
+
+seed_in_darkness 5 | pad:hold(voices=3, range=[48,68]) bell:droplets prog=opening dyn=pp<p
+first_branches 8 | pad:hold(voices=3, range=[48,68]) keys:first_line low:breath_bass prog=first dyn=p
+orchard_path 8 | pad:hold(voices=3, range=[48,68]) lead:center_line bell:droplets low:breath_bass prog=center key="A golden7" dyn=p<mp
+unlit_leaves 7 | pad:hold(voices=3, range=[48,68]) keys:shadow_line bell:droplets prog=shadow key="A golden7_15" dyn=p>pp
+lantern_bloom 8 | pad:hold(range=[48,68]) lead:bloom_line keys:slow_thread bell:droplets low:breath_bass prog=bloom key="A golden10_45" dyn=mf
+elsewhere_river 13 | pad:hold(voices=3, range=[48,68]) keys:wandering_line bell:slow_thread low:breath_bass prog=wander key="vC# golden7" dyn=mp>p
+familiar_stone 7 | pad:hold(voices=3, range=[48,68]) lead:return_line bell:droplets prog=return key="A golden7" dyn=p
+roots_and_stars 8 | pad:hold(voices=3, range=[48,68]) keys:home_line bell:droplets prog=home key="A golden7" dyn=p>pp
+
+mix keys 6.1 hall=.25 | lead 20.5 hall=.28 | pad -5 hall=.28 | bell -0.8 hall=.3 pan=.25 | low -20 hall=.08
+master standard lufs=-20 glue=none

@@ -17,7 +17,10 @@ from ...parse.errors import SongError
 SUPPORTED = {"sample", "lokey", "hikey", "key", "pitch_keycenter", "lovel", "hivel",
              "seq_length", "seq_position", "trigger", "ampeg_attack", "ampeg_release",
              "tune", "volume", "group", "off_by", "amp_veltrack", "pitch_keytrack", "rt_decay",
-             "default_path"}
+             "default_path", "offset", "ampeg_decay", "ampeg_sustain", "xfin_lovel", "xfin_hivel",
+             "xfout_lovel", "xfout_hivel", "lorand", "hirand", "loop_mode", "loop_start", "loop_end",
+             "group_label", "ampeg_dynamic", "pan", "lochan", "hichan", "bend_up", "bend_down",
+             "off_mode", "offby"}
 LEVELS = ("control", "global", "master", "group", "region")
 
 # SFZ note names are MIDI key numbers by the format's spec (c4 = 60), not tuning math.
@@ -55,9 +58,23 @@ class Region:
     volume: float = 0.0              # dB
     group: int = 0
     off_by: int = 0                  # 0 = never choked
+    pan: float = 0.0                # -100..100, SFZ stereo position
+    amp_velcurve: dict[int, float] = field(default_factory=dict)
     amp_veltrack: float = 100.0      # %
     pitch_keytrack: float = 100.0    # cents per key
     rt_decay: float = 0.0            # dB per second the key was held (release samples)
+    offset: int = 0                 # source frames, before repitching
+    ampeg_decay: float = 0.0
+    ampeg_sustain: float = 100.0     # percent
+    xfin_lovel: float = 0.0
+    xfin_hivel: float = 0.0
+    xfout_lovel: float = 127.0
+    xfout_hivel: float = 127.0
+    lorand: float = 0.0
+    hirand: float = 1.0
+    loop_mode: str = "no_loop"
+    loop_start: int = 0
+    loop_end: int = -1              # inclusive, per SFZ
     extra: dict = field(default_factory=dict)
 
     @property
@@ -164,16 +181,39 @@ def _region(ops: dict, root: str, path: str, unsupported: set) -> Region:
         for k in ("lokey", "hikey", "pitch_keycenter"):
             if k in ops:
                 setattr(r, k, note_number(ops[k]))
-        for k in ("lovel", "hivel", "seq_length", "seq_position", "group", "off_by"):
+        for k in ("lovel", "hivel", "seq_length", "seq_position", "group", "off_by", "offset", "loop_start", "loop_end"):
             if k in ops:
                 setattr(r, k, int(float(ops[k])))
         for k in ("ampeg_attack", "ampeg_release", "tune", "volume", "amp_veltrack",
-                  "pitch_keytrack", "rt_decay"):
+                  "pitch_keytrack", "rt_decay", "ampeg_decay", "ampeg_sustain", "xfin_lovel", "xfin_hivel",
+                  "xfout_lovel", "xfout_hivel", "lorand", "hirand", "pan"):
             if k in ops:
                 setattr(r, k, float(ops[k]))
     except ValueError as e:
         raise SongError(f"sfz {path}: region {ops.get('sample')}: {e}") from None
+    if "off_by" not in ops and "offby" in ops:
+        r.off_by = int(ops["offby"])
+    for k, value in ops.items():
+        if re.fullmatch(r"amp_velcurve_\d+", k):
+            index = int(k.rsplit("_", 1)[1])
+            point = float(value)
+            if not 0 <= index <= 127 or not 0 <= point <= 1:
+                raise SongError(f"sfz {path}: invalid {k}={value}")
+            r.amp_velcurve[index] = point
+    if ops.get("off_mode", "fast") != "fast":
+        unsupported.add("off_mode=" + ops["off_mode"])
+    if int(ops.get("lochan", 1)) > 1 or int(ops.get("hichan", 16)) < 1:
+        unsupported.add("channel selection outside channel 1")
     r.trigger = ops.get("trigger", "attack").lower()
-    r.extra = {k: v for k, v in ops.items() if k not in SUPPORTED}
+    r.loop_mode = ops.get("loop_mode", "no_loop")
+    if r.loop_mode not in ("no_loop", "one_shot", "loop_sustain", "loop_continuous"):
+        raise SongError(f"sfz {path}: unsupported loop_mode={r.loop_mode}")
+    if r.offset < 0 or r.loop_start < 0 or (r.loop_mode.startswith("loop_") and r.loop_end < r.loop_start):
+        raise SongError(f"sfz {path}: invalid sample offset or loop points")
+    # ampeg_dynamic only changes behavior during live envelope modulation, which static notes don't send.
+    # group_label is descriptive metadata, not an audio operation.
+    # Static notes arrive on channel 1 with their final float pitch: channel bounds and
+    # MIDI bend ranges do not alter their sound. No live bend events are accepted.
+    r.extra = {k: v for k, v in ops.items() if k not in SUPPORTED and not re.fullmatch(r"amp_velcurve_\d+", k)}
     unsupported.update(r.extra)
     return r

@@ -20,6 +20,8 @@ from .project import ROOT, SONG_EXTS, Project, list_files
 
 STATIC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
 app = FastAPI(title="SongMap Studio")
+from .lab_api import router as lab_router
+app.include_router(lab_router)
 _projects: dict[str, Project] = {}
 _plock = threading.Lock()
 

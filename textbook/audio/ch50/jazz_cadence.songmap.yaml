@@ -11,18 +11,61 @@ seed: 1301
 tail_seconds: 3
 
 instruments:
-  epiano: epiano/still
-  horn: {use: clean/organ, partials: 7, rolloff: 1.5, even: 0.6, attack: 0.035, release: 0.18, vel_bright: 0.8}
-  drums: {kit: {kick: {use: kick/v0, tune: 55, sweep: 26, decay: 0.28, click: 0.65, click_tone: 4500, drive: 2}, snare: {use: snare/v0, tone: 205, tone_mix: 0.5, snap: 0.65, noise_decay: 0.2, drive: 1.5}, hat: {use: hat/v0, decay: 0.045}, ride: {use: hat/v0, decay: 0.3, hp: 3500, color: 6500, metal: 0.85, tune: 0.8}, cym: {use: hat/v0_open, decay: 1.4, hp: 3200, metal: 0.75}}}
+  epiano: sampler/fm_piano
+  horn:
+    use: clean/organ
+    partials: 7
+    rolloff: 1.5
+    even: 0.6
+    attack: 0.035
+    release: 0.18
+    vel_bright: 0.8
+  drums:
+    kit:
+      kick:
+        use: kick/v0
+        tune: 55
+        sweep: 26
+        decay: 0.28
+        click: 0.65
+        click_tone: 4500
+        drive: 2
+      snare:
+        use: snare/v0
+        tone: 205
+        tone_mix: 0.5
+        snap: 0.65
+        noise_decay: 0.2
+        drive: 1.5
+      hat:
+        use: hat/v0
+        decay: 0.045
+      ride:
+        use: hat/v0
+        decay: 0.3
+        hp: 3500
+        color: 6500
+        metal: 0.85
+        tune: 0.8
+      cym:
+        use: hat/v0_open
+        decay: 1.4
+        hp: 3200
+        metal: 0.75
 
 sections:
   - {name: plain, bars: 4, parts: {epiano: {style: hold, voices: 4, range: [52, 72]}, bass: bassline, drums: {steps: {ride: {steps: x..x.xx..x.x, vel: [0.4, 0.25, 0.18, 0.35, 0.25, 0.18]}}}}, harmony: "Dm7:1 G7:1 Cmaj7:2", dyn: mp}
   - {name: golden, bars: 4, parts: {epiano: {style: hold, voices: 4, range: [52, 72]}, bass: bassline, drums: {steps: {ride: {steps: x..x.xx..x.x, vel: [0.4, 0.25, 0.18, 0.35, 0.25, 0.18]}}}}, harmony: "Dm7:1 Dg7:0.5 vGg/D:0.5 G7:0.5 Baug(v3)/G:0.25 ^Ebg(^5)/G:0.25 Cmaj7:1", dyn: mp}
 
 mix:
-  epiano: {gain_db: -8, send: {hall: 0.2}}
-  bass: {gain_db: -8}
-  drums: {gain_db: -8}
+  epiano:
+    gain_db: 0.8
+    send:
+      hall: 0.2
+  bass:
+    gain_db: -8
+  drums:
+    gain_db: -8
 
 master:
   glue: none

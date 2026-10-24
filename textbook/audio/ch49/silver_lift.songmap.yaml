@@ -19,13 +19,49 @@ tail_seconds: 4
 
 mood: techno
 instruments:
-  lead: {voices: 3, detune: 3, vib_depth: 3, cutoff: 4200, release: 0.2}
-  arp: {use: pluck/v0, cutoff: 2800, decay: 0.3}
-  pad: {voices: 3, detune: 3, drift: 0, cutoff: 2000, attack: 0.1, release: 0.6}
-  keys: {use: keys/still, hardness: 0.35}
-  bass: {use: bass/v0, cutoff: 650, drive: 2, env_amt: 2, env_decay: 0.1, sub: 0.5}
+  lead:
+    voices: 3
+    detune: 3
+    vib_depth: 3
+    cutoff: 4200
+    release: 0.2
+  arp:
+    use: pluck/v0
+    cutoff: 2800
+    decay: 0.3
+  pad:
+    voices: 3
+    detune: 3
+    drift: 0
+    cutoff: 2000
+    attack: 0.1
+    release: 0.6
+  keys: sampler/grand_piano
+  bass:
+    use: bass/v0
+    cutoff: 650
+    drive: 2
+    env_amt: 2
+    env_decay: 0.1
+    sub: 0.5
   bell: clean/glass
-  drums: {kit: {kick: {use: kick/v0, tune: 49, sweep: 30, decay: 0.48, click: 0.3, drive: 2}, clap: clap/v0, hat: hat/v0, ohat: hat/v0_open, snare: {use: snare/v0, tone: 200, snap: 0.5, noise_decay: 0.25}}}
+  drums:
+    kit:
+      kick:
+        use: kick/v0
+        tune: 49
+        sweep: 30
+        decay: 0.48
+        click: 0.3
+        drive: 2
+      clap: clap/v0
+      hat: hat/v0
+      ohat: hat/v0_open
+      snare:
+        use: snare/v0
+        tone: 200
+        snap: 0.5
+        noise_decay: 0.25
 
 harmony:
   progressions: {anthem: "C:1 G:1 Am:1 F:1", slow: "Am:2 F:2 C:2 G:2", giant: "C:1 ~:0.5 Ab:1 ~:0.5 E:1 ~:0.5 C:1.5", pivot: "F:0.5 Fg:0.5 ^Fm:1 ^Bb7:2", anthem2: "^Eb:1 ^Bb:1 ^Cm:1 ^Ab:1", close: "^Eb:1 ^Bb:1 ^Cm:1 ^Ab:1 ^Eb:4"}
@@ -44,14 +80,57 @@ events:
   - {at: pivot+4, type: riser, bars: 4}
   - {at: drop_2, type: impact, size: xl}
 mix:
-  lead: {gain_db: 12, send: {hall: 0.25}, inserts: [{fx: delay, time: 0.75, feedback: 0.3, mix: 0.12}]}
-  arp: {gain_db: -4, sidechain: {from: kick, depth: 0.3, release: 0.214, attack: 0.0005}, send: {hall: 0.15}, inserts: [{fx: delay, time: 0.75, feedback: 0.35, mix: 0.22}]}
-  pad: {gain_db: -4, sidechain: {from: kick, depth: 0.7, release: 0.214, attack: 0.0005}, send: {hall: 0.25}}
-  keys: {gain_db: -2, send: {hall: 0.3}}
-  bass: {gain_db: -2, sidechain: {from: kick, depth: 0.5, release: 0.214, attack: 0.0005}}
-  bell: {gain_db: -12, send: {hall: 0.4}}
-  drums: {gain_db: -3}
-  fx: {gain_db: -6}
+  lead:
+    gain_db: 12
+    send:
+      hall: 0.25
+    inserts:
+    - fx: delay
+      time: 0.75
+      feedback: 0.3
+      mix: 0.12
+  arp:
+    gain_db: -4
+    sidechain:
+      from: kick
+      depth: 0.3
+      release: 0.214
+      attack: 0.0005
+    send:
+      hall: 0.15
+    inserts:
+    - fx: delay
+      time: 0.75
+      feedback: 0.35
+      mix: 0.22
+  pad:
+    gain_db: -4
+    sidechain:
+      from: kick
+      depth: 0.7
+      release: 0.214
+      attack: 0.0005
+    send:
+      hall: 0.25
+  keys:
+    gain_db: 6.5
+    send:
+      hall: 0.3
+  bass:
+    gain_db: -2
+    sidechain:
+      from: kick
+      depth: 0.5
+      release: 0.214
+      attack: 0.0005
+  bell:
+    gain_db: -12
+    send:
+      hall: 0.4
+  drums:
+    gain_db: -3
+  fx:
+    gain_db: -6
 
 master:
   glue: none

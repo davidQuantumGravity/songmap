@@ -9,8 +9,13 @@ key: "C major"
 tuning: 12edo
 seed: 14
 tail_seconds: 2.5
-instruments: {keys: clean/keys}
-mix: {keys: {gain_db: -4, send: {hall: 0.2}}}
+instruments:
+  keys: sampler/grand_piano
+mix:
+  keys:
+    gain_db: 10.1
+    send:
+      hall: 0.2
 returns: {hall: {type: reverb, seconds: 2.0, predelay: 0.02, damping: 0.5}}
 sections:
   - name: jumpy

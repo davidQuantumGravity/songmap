@@ -1,0 +1,86 @@
+[
+  {
+    "score": "songs/sfz_revisited/golden/01_golden_hour_lullaby.sm",
+    "part": "flute",
+    "instrument": "sampler/flute",
+    "notes": 51,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/golden/02_deceptive_light.sm",
+    "part": "lead",
+    "instrument": "sampler/flute",
+    "notes": 204,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/golden/03_tape_bloom.sm",
+    "part": "flute",
+    "instrument": "sampler/flute",
+    "notes": 52,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/golden/04_andalusian_gold.sm",
+    "part": "strings",
+    "instrument": "sampler/cello",
+    "notes": 53,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/golden/04_andalusian_gold.sm",
+    "part": "vln",
+    "instrument": "sampler/solo_violin",
+    "notes": 23,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/golden/05_silver_third.sm",
+    "part": "horn",
+    "instrument": "sampler/horn",
+    "notes": 41,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/golden_worlds/01_sideways_sun.sm",
+    "part": "lead",
+    "instrument": "sampler/flute",
+    "notes": 267,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/golden_worlds/03_parallax_arcade.sm",
+    "part": "lead",
+    "instrument": "sampler/flute",
+    "notes": 376,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/golden_worlds/04_two_windows.sm",
+    "part": "lead",
+    "instrument": "sampler/flute",
+    "notes": 176,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/golden_worlds/05_night_orchard.sm",
+    "part": "lead",
+    "instrument": "sampler/flute",
+    "notes": 62,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/still_water/01_dusk_on_the_water.sm",
+    "part": "flute",
+    "instrument": "sampler/flute",
+    "notes": 28,
+    "short_samples": []
+  },
+  {
+    "score": "songs/sfz_revisited/still_water/05_first_light.sm",
+    "part": "flute",
+    "instrument": "sampler/flute",
+    "notes": 20,
+    "short_samples": []
+  }
+]

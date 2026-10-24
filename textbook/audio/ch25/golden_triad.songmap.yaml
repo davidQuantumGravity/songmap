@@ -8,8 +8,11 @@ key: "C major"
 tuning: 36edo
 seed: 25
 tail_seconds: 2.5
-instruments: {organ: clean/organ}
-mix: {organ: {gain_db: -5}}
+instruments:
+  organ: sampler/grand_piano
+mix:
+  organ:
+    gain_db: 18.6
 sections:
   - {name: alternate, bars: 4, harmony: "C:1 Cg:1 C:1 Cg:1", parts: {organ: hold}}
   - {name: resolve, bars: 6, harmony: "Cg:0.5 C:1 Cg:0.5 Cm:1 Cg:0.5 Caug:1 Cg:1.5", parts: {organ: hold}}

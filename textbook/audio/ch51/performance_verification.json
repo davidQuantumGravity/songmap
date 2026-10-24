@@ -1,0 +1,83 @@
+{
+  "visual_revision": 3,
+  "tracks": [
+    {
+      "song": "01_sideways_sun",
+      "frame_seconds": 10,
+      "note_name_checks": 401,
+      "decoded_audio_correlation": 0.998362,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "video_sha256": "579dcac457cfc28a55a080acecc0ad76dbb1069013971ba240e2bfb9d751139d"
+    },
+    {
+      "song": "02_pocket_algebra",
+      "frame_seconds": 10,
+      "note_name_checks": 421,
+      "decoded_audio_correlation": 0.99939,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "video_sha256": "1cbd68daab9dfb6f4d7b3908e00cc459674adafcf35c87b5b71eb141fd30aa40"
+    },
+    {
+      "song": "03_parallax_arcade",
+      "frame_seconds": 18,
+      "note_name_checks": 659,
+      "decoded_audio_correlation": 0.998859,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "video_sha256": "59ffe01f550835a0036e0cfa54e7a10d3e5a0d6bfc76838ffc18ee6a105f3fa1"
+    },
+    {
+      "song": "04_two_windows",
+      "frame_seconds": 151.4,
+      "note_name_checks": 277,
+      "decoded_audio_correlation": 0.999839,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "video_sha256": "94bd6fa52277a942e12a1a40376ab00fa738b562fc9820a1790d659e67bca718"
+    },
+    {
+      "song": "05_night_orchard",
+      "frame_seconds": 43,
+      "note_name_checks": 200,
+      "decoded_audio_correlation": 0.999984,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "video_sha256": "602bdf4aa474694b837dbf2ece44df155a7f1bec0c50ae66a45f037f9a25cb7d"
+    }
+  ],
+  "python_tests": "674 passed, 5 skipped, 3 deselected (pytest -m not port)",
+  "studio_build": "TypeScript and Vite build passed",
+  "studio_controls": {
+    "performance_grid": true,
+    "panels": 4,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "individual_note_names_toggle": true,
+    "pitch_strip_toggle": true,
+    "active_mode": true,
+    "browser_errors": []
+  },
+  "browser_checks": {
+    "song_videos_1080p": 5,
+    "teaching_comparison_720p": 1,
+    "audio_players": 15,
+    "mobile_overflow": false,
+    "page_errors": 0
+  },
+  "visual_inspection": "All five decoded video frames and the Studio preview inspected.",
+  "music_and_mix_unchanged": true
+}

@@ -1,0 +1,50 @@
+# Parallax Arcade
+# review: pending - Revision 2 awaiting listening review. Original verdict: bass, chords and comping liked; melodies needed rework; leads too loud and shrill.
+# Pure golden harmony in 36-ET; ordinary and golden-spectrum timbres are both intentional.
+# Progressive electronic arc; golden7 4|2 changes to 35 decatonic (six shared pitch classes), then every pitched player moves to ^D by one 36-ET step for the transformed return.
+# Revision 2: Sampled marimba in D4-C5 answers the sequencer with rests and repeated notes; the summit lead boost is removed and later returns have different endings.
+# Listening draft: rewritten after the original rework verdict; awaiting a new listening review.
+song "Parallax Arcade" 124 4/4 "D golden7_42" fps=30 seed=703 tail=5 tuning=36edo mood=techno
+inst keys=clean/organ(partials=6, rolloff=1.5, attack=.006, release=.1) lead=sampler/marimba(attack=.018, release_mul=.1) arp=string_pluck/still(brightness=.7, t60=.8) bass=clean/bass(release=.08) pad=pad/still(release=.22)
+kit kick=kick/v0(tune=46, decay=.26, drive=1.15, click=.24) snare=snare/v0(tone=185, noise_decay=.13, snap=.3) hat=hat/v0(decay=.035, metal=.18) ohat=hat/v0_open(decay=.16) rim=clap/v0
+
+shift_reply = {deg: "=p 3/2 0/4 r/4 | =mp 2/4 2/8 5/8 5/4 r/4 | =p 7/2 4/4 r/4 | =p 4/4. 3/8 0/4 r/4 | =mp r/4 1/8 1/8 4/4 1/4 | =p 4/2 r/2 | =mp 6/4 3/8 0/8 3/4 r/4 | =p 3/2. r/4", oct: 0}
+
+prog head "Dg7:1 ^Bbg7:1 vGg7:1 vF#g7:1 Dg7:1 ^Ag:1 vF#g7:1 Dg7:1"
+prog air "Dg7:1 vGg7:1 ^Bbg7:1 vF#g7:1"
+prog wide "Dg7:1 Eg7:1 ^Bg7:1 vGg7:1 Ebg7:1 vAbg7:1 ^Bbg7:1 vF#g:1"
+prog ramp "Dg7:1 Ebg7:1 vGg7:1 ^Bbg7:1 ^Bg7:1 vAbg7:1 vF#g:1 Dg7:1"
+prog shift "^Dg7:1 ^Eg7:1 vCg7:1 Gg7:1 ^Ebg7:1 Abg7:1 vBg7:1 F#g:1"
+prog summit "^Dg7:1 ^Ebg7:1 Gg7:1 vBg7:1 vCg7:1 Abg7:1 F#g:1 ^Dg7:1"
+prog landing "Gg7:1 vBg7:1 F#g:1 ^Dg7:1"
+
+hook = {deg: "=p r/4 2/4 2/8 0/8 r/4 | =mp 0/4. 2/8 2/4 r/4 | =p 2/4 3/8 2/8 0/4 r/4 | =p 2/2 1/4 r/4 | =mp 0/4 0/8 2/8 4/4 r/4 | =p 4/4. 4/8 1/4 r/4 | =mp 2/4 1/8 2/8 4/4 2/4 | =p 0/2 r/2", oct: 0}
+hook_long = {deg: "=p 2/2 0/4 r/4 | =mp 0/4 2/4 4/4 r/4 | =p 3/2 2/4 r/4 | =p 2/4. 1/8 1/4 r/4 | =mp r/4 2/8 2/8 4/4 2/4 | =p 4/2 r/2 | =mp 2/4 1/8 2/8 2/4 r/4 | =p 0/2. r/4", oct: 0}
+long_ten = {deg: "=p r/4 3/4 3/8 0/8 r/4 | =mp 2/4. 1/8 2/4 r/4 | =p 4/4 5/8 7/8 7/4 r/4 | =p 4/2 3/4 r/4 | =mp 1/4 1/8 0/8 4/4 r/4 | =p 5/4. 4/8 4/4 r/4 | =mp 3/4 6/8 7/8 6/4 3/4 | =p 3/2 r/2", oct: 0}
+rising_ten = {deg: "=p 3/4 3/8 0/8 r/2 | =mp 1/4. 4/8 4/4 r/4 | =p 3/4 4/8 3/8 0/4 r/4 | =p 3/2 6/4 r/4 | =mp 7/4. 8/8 7/4 4/4 | =p 5/4 4/8 5/8 4/4 r/4 | =mp 6/4 3/4 3/4 r/4 | =p 0/2 r/2", oct: 0}
+shift_hook = {deg: "=p r/4 3/4 3/8 0/8 r/4 | =mp 2/4. 1/8 2/4 r/4 | =p 4/4 5/8 7/8 7/4 r/4 | =p 4/2 3/4 r/4 | =mp 1/4 1/8 0/8 4/4 r/4 | =p 5/4. 4/8 4/4 r/4 | =mp 3/4 6/8 7/8 6/4 3/4 | =p 3/2 r/2", oct: 0}
+summit_hook = {deg: "=mp r/8 3/8 3/4 0/8 3/8 r/4 | =p 4/4. 1/8 0/4 r/4 | =mp 3/4 4/8 3/8 7/4 r/4 | =p 6/2 3/4 r/4 | =mp 7/4 8/8 7/8 4/4 r/4 | =p 5/4. 4/8 4/4 r/4 | =mp 6/4 3/8 3/8 3/4 r/4 | =p 0/2. r/4", oct: 0}
+landing_line = {deg: "=p 3/2 4/4 r/4 | =pp 3/2 r/2 | =p 3/2 6/4 r/4 | =pp 0/2. r/4", oct: 0}
+pulse_bass = {rel: "=mp R/8^' r/8 R/8^' r/8 5/8' r/8 R/8^' 3/8' | =p R/4^' r/8 R/8^' R+/8' 5/8' r/4", oct: -2}
+arp_a = {rel: "=mp R/16^ 5 3+ 5 R+ 5 3 5 R 3 5 3 R+ 5 3 r | =p R/16^ 3 5 R+ 3+ 5 R+ 5 R 5 3 R r/4"}
+stabs = {rel: "=mp r/8 [3,5]/8^' r/4 [R,3,5]/8^' r/8 [3,5]/4^' | =p r/4 [R,3]/8^' r/8 r/4 [3,5]/8^' r/8", oct: -1}
+floor = {kick: "X...X...X...X...", hat: {steps: "..x...x...x...x.", vel: [.3,.23,.35,.2]}}
+moving = {kick: "X...X...X...X...|X...X...X...X..x|X...X...X...X...|X...X...X..xX...", snare: "....X.......X...|....X..o....X...|....X.......X...|....X.......X.xx", hat: {steps: "x-x-x-x-x-x-x-x-|x-x-xxx-x-x-x-x-", vel: [.32,.14,.26,.16]}, ohat: "......x.......x.|..x.......x....."}
+peak_beat = {kick: "X...X...X...X...|X...X...X...X..x", snare: "....X.......X...|....X.......X.xx", hat: {steps: "x-xxx-x-x-xxx-x-", vel: [.42,.15,.3,.16]}, ohat: "..x...x...x...x."}
+
+neon_seed 8 | arp:arp_a bass:pulse_bass drums:floor prog=head dyn=pp<p
+sign_one 8 | arp:arp_a keys:stabs bass:pulse_bass lead:hook drums:moving prog=head dyn=p<mp
+sign_two 8 | keys:stabs bass:pulse_bass lead:hook_long pad:hold(voices=3, range=[43,57]) drums:moving prog=head dyn=mp
+open_road 8 | arp:arp_a keys:stabs bass:pulse_bass lead:hook drums:moving prog=head dyn=mp<mf
+decatonic_drive 8 | arp:arp_a bass:pulse_bass lead:long_ten pad:hold(voices=3, range=[43,57]) drums:moving prog=wide key="D golden10_36" dyn=mf
+crossing_lights 8 | keys:stabs bass:pulse_bass lead:rising_ten arp:arp_a drums:moving prog=ramp key="D golden10_36" dyn=mf
+empty_lane 8 | pad:hold(voices=3, range=[43,57]) lead:long_ten prog=wide key="D golden10_36" dyn=p>pp
+comma_crossing 8 | keys:stabs bass:pulse_bass lead:shift_hook drums:floor prog=shift key="^D golden10_36" dyn=p<mp
+new_horizon 8 | arp:arp_a keys:stabs bass:pulse_bass lead:shift_hook drums:moving prog=shift key="^D golden10_36" dyn=mp<mf
+overpass 8 | keys:stabs bass:pulse_bass lead:shift_reply pad:hold(voices=3, range=[43,57]) drums:moving prog=shift key="^D golden10_36" dyn=mp
+arcade_summit 8 | arp:arp_a keys:stabs bass:pulse_bass lead:summit_hook pad:hold(voices=3, range=[43,57]) drums:peak_beat prog=summit key="^D golden10_36" dyn=f
+city_below 8 | keys:stabs bass:pulse_bass lead:shift_reply drums:moving prog=shift key="^D golden10_36" dyn=mf>mp
+last_pixel 8 | arp:arp_a pad:hold(voices=3, range=[43,57]) lead:landing_line prog=landing key="^D golden10_36" dyn=p>pp
+
+mix keys -15 sc=.25 hall=.1 | lead 20 hall=.2 | arp -9 sc=.18 hall=.15 pan=.2 | bass -5 sc=.25 | pad -27 sc=.2 hall=.25 | drums -8
+master standard lufs=-16 glue=none

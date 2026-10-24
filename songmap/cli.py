@@ -165,6 +165,24 @@ def cmd_describe(args) -> int:
     return 0
 
 
+def cmd_samples(args) -> int:
+    from .instruments.sampler import library
+    from .instruments.sampler.install import install, verify
+    if args.action == "list":
+        for v in library.voices():
+            print(f"{'installed' if v['installed'] else 'available':9} {v['ref']:26} {v['title']} ({v['license']})")
+            print(f"          {v['description']}")
+        return 0
+    if args.action == "install":
+        install(args.names, args.root)
+        return 0
+    result = verify(args.root)
+    print(f"{'ok' if result['ok'] else 'FAILED'}: {result['voices']} voices, {result['files']} files")
+    for error in result["errors"]:
+        print(error)
+    return 0 if result["ok"] else 1
+
+
 def cmd_gui(args) -> int:
     from .gui.server import serve
     serve(args.song, port=args.port, open_browser=not args.no_browser)
@@ -181,6 +199,11 @@ def main(argv=None) -> int:
                ".sml is an alias) or YAML (.yaml, docs/SONGMAP_SPEC.md). Exit codes: 0 ok, 1 song error, 2 usage.")
     ap.add_argument("--version", action="version", version=f"songmap {__version__}")
     sub = ap.add_subparsers(dest="cmd", required=True)
+    p = sub.add_parser("samples", help="list, install, or verify the free curated SFZ library")
+    p.add_argument("action", choices=["list", "install", "verify"])
+    p.add_argument("names", nargs="*", help="voice names for install (default: all)")
+    p.add_argument("--root", default="samples", help="sample installation folder (default: ./samples)")
+    p.set_defaults(fn=cmd_samples)
     p = sub.add_parser("check", help="parse, validate and expand a song map (fast, no audio)")
     p.add_argument("song", help="a .sm (.sml) or .yaml song map")
     p.set_defaults(fn=cmd_check)

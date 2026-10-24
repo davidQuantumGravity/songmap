@@ -9,8 +9,16 @@ key: "C major"
 tuning: 12edo
 seed: 3
 tail_seconds: 3
-instruments: {keys: keys/still, low: clean/bass}
-mix: {keys: {gain_db: -5, send: {hall: 0.25}}, low: {gain_db: -8}}
+instruments:
+  keys: sampler/grand_piano
+  low: sampler/double_bass
+mix:
+  keys:
+    gain_db: 3.0
+    send:
+      hall: 0.25
+  low:
+    gain_db: 6.2
 sections:
   - {name: c,  bars: 4, harmony: "C:1 F:1 G7:1 C:1",     parts: {keys: {style: gentle8, role: arp}, low: bassline}}
   - {name: e,  bars: 4, harmony: "E:1 A:1 B7:1 E:1",     parts: {keys: {style: gentle8, role: arp}, low: bassline}}

@@ -1,0 +1,33 @@
+{
+ "title": "Parallax Arcade",
+ "facts": {
+  "bars": 104.0,
+  "seconds": 206.3,
+  "sections": 13,
+  "parts": 6,
+  "impacts": 0,
+  "melody notes checked against chords": 141,
+  "lufs": -16.83
+ },
+ "counts": {
+  "problem": 0,
+  "warning": 0,
+  "note": 2
+ },
+ "findings": [
+  {
+   "severity": "note",
+   "kind": "contrast",
+   "where": "decatonic_drive",
+   "message": "decatonic_drive is within 1 dB of both neighbours",
+   "fix": "contrast neighbouring sections by texture, register or density"
+  },
+  {
+   "severity": "note",
+   "kind": "balance",
+   "where": "neon_seed",
+   "message": "neon_seed is very bass-heavy (low 0.99)",
+   "fix": "lighten the sub or kick, or add mid/high parts"
+  }
+ ]
+}

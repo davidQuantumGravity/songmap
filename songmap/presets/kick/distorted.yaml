@@ -1,0 +1,11 @@
+instrument: kick
+description: Saturated electronic kick; keep its bass arrangement sparse.
+tags:
+- electronic
+- kick
+params:
+  tune: 48
+  decay: 0.5
+  click: 0.34
+  sweep: 35
+  drive: 4
