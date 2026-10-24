@@ -1,177 +1,181 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/brand/songmap-logo-dark.png">
-    <img src="docs/brand/songmap-logo.png" width="640" alt="SongMap: three musical notes connected across a folded map">
+    <img src="docs/brand/songmap-logo.png" width="560" alt="SongMap: three musical notes connected across a folded map">
   </picture>
 </p>
 
-# SongMap
+<h1 align="center">SongMap</h1>
 
-Write music as editable text. SongMap compiles `.sm` and YAML scores into audio, stems, QA reports, and frame-accurate video cues. It supports conventional tuning and 36-tone equal temperament, synthesized and sampled instruments, and note-synchronized video.
+<p align="center">
+  Write music as text, hear it come to life, and see how the parts fit together.
+</p>
 
-SongMap Studio edits the same score files through a browser interface. [AI Lab](docs/AI_LAB.md) adds saved instrument comparisons, listening feedback, and previewed application or undo of selected changes. The broader [AI songwriting vision](docs/AI_SONGWRITING_VISION.md) describes future work.
+<p align="center">
+  <a href="https://github.com/davidQuantumGravity/songmap/actions/workflows/ci.yml"><img src="https://github.com/davidQuantumGravity/songmap/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <a href="pyproject.toml"><img src="https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white" alt="Python 3.12 or newer"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license"></a>
+</p>
 
-The repository includes the Python engine, Studio, composition guides, song scores, and textbook sources. Downloaded sample libraries and rendered media stay outside Git. Automated QA checks technical properties; musical quality still needs listening review.
+<p align="center">
+  <a href="https://deeperresearch.ai/music_theory_of_golden_harmony/"><b>📖 Read the interactive textbook</b></a>
+  · <a href="#try-songmap">Get started</a>
+  · <a href="#songmap-studio">Explore Studio</a>
+  · <a href="songs/">Browse scores</a>
+</p>
 
-## The idea
+SongMap turns editable `.sm` or YAML scores into music. Describe your chords, melodies, instruments and sections, then render a complete mix, individual stems, or a video that follows the notes. Work in familiar tuning or explore the smaller pitch steps of **36-tone equal temperament (36-ET)** and golden harmony.
 
-1. A **fixed engine** synthesizes instruments from scratch (drums, bass, synths, modal piano, Karplus-Strong guitar, FM e-piano, organ, with more planned), *performs* the notes with human dynamics and timing, mixes and masters. It is written once and improves over time.
-2. Each song is a **short text file**: about 15–40 lines in the compact `.sm` form. It covers tempo, key, chords, themes, orchestration, dynamics, articulation, groove, and the video's cue points.
-3. The **same file drives the video timing:** sections and hits export as a frame-accurate `cues.json`.
-4. Every render emits **QA numbers**, so an LLM can check its own work without ears. A **GUI** (Studio) lets a person tune every instrument with knobs.
+## What can you make?
 
-```
-song.sm ─► parse ─► arrange (styles, motifs, harmony) ─► perform (dynamics, groove, humanize, articulation)
-                                                              │
-                     instruments (velocity → timbre, round-robin, physical models, sampler, plugins)
-                                                              │
-                     mix (buses, sidechain, sends) ─► master (selected mood and loudness settings)
-                                                              │
-               song.wav · stems/ · cues.json · qa.json/png  ──►  Remotion video / ffmpeg mux
-```
-
-## A taste of the format
-
-```
-song "The Swarm" 120 4/4 Em fps=30 mood=techno seed=7 video=WeekSwarm:3690
-motif m1 deg oct=5 "=mf 0 -3 0 2 | 1/2 0"
-cue big=f3005
-goals     10 | drums:full+fill bass:8ths(art=staccato) arp:up pad:warm dyn=mf<f
-who        2 | pad:dark -drums                                  | !stop:2b@+1:3
-cumulative 3 | like=goals lead:m1:aug dyn=ff                    | !riser:2@cue:big !impact@cue:big(size=xl)
-```
-
-Melodies use LilyPond-style sticky durations plus marks:
-- `^` accent, `!` marcato, `'` staccato, `_` tenuto, `~` slur or glide
-- `(e8)` ghost note, `{d}e4` grace note, `@96` explicit velocity
-- dynamics `=p` … `=ff`, hairpins `<` and `>`
-
-Drums can be step strings: `"X..x..x.|X.ox.x.r"`.
-
-## Documents
-
-| Doc | What it covers |
+| | What SongMap does |
 |---|---|
-| [ROADMAP.md](ROADMAP.md) | **The build plan.** Phases with tasks, files, how-to and done-when |
-| [docs/DESIGN.md](docs/DESIGN.md) | Architecture, renderer strategy, efficiency measurements, decisions log |
-| [docs/SONGMAP_SPEC.md](docs/SONGMAP_SPEC.md) | The format v0.2 (YAML form): instruments, harmony, note language, transforms, groove, sections, events, positions and cues, mix, master, QA |
-| [docs/COMPACT_FORMAT.md](docs/COMPACT_FORMAT.md) | The `.sm` LLM encoding: grammar, measured savings, the LLM authoring loop, scoring rules of thumb |
-| [AGENTS.md](AGENTS.md) · [songmap-compose skill](.claude/skills/songmap-compose/SKILL.md) | How Claude Code, Codex and other agents compose with SongMap: the authoring loop, the `.sm` format, scoring rules, the catalog |
-| [docs/LANGUAGE.md](docs/LANGUAGE.md) | The SongMap language behind `.sm`: named sections and beats, `with`, the form block, loops, per-bar conditions, named events, functions, decisions |
-| [docs/PERFORMANCE.md](docs/PERFORMANCE.md) | How annotations become played notes: velocity scale, groove templates, humanize tables, voicing, MIDI mapping |
-| [docs/INSTRUMENTS.md](docs/INSTRUMENTS.md) | The instrument contract, the full suite catalog, realism recipes, sampler and plugin backends, presets, YAML patch instruments |
-| [docs/ENGINE.md](docs/ENGINE.md) | Package layout, data flow, styles-as-data, timing math, contrast-preserving mastering, test strategy, what code exists now |
-| [docs/GUI.md](docs/GUI.md) | SongMap Studio: auto-generated knobs, audition, presets, steps and feel, video-synced song view, patch editor, API, milestones |
-| [docs/AI_SONGWRITING_VISION.md](docs/AI_SONGWRITING_VISION.md) | Product vision for AI songwriting from a blank project through audible choices, selective merges, delegated writing, feedback, and editable song history |
-| [docs/AI_LAB.md](docs/AI_LAB.md) | Implemented instrument usage map, improvement priorities, saved A/B comparisons, text feedback, AI challengers, and applying or undoing selected changes |
-| [docs/SCENE_TIMELINES.md](docs/SCENE_TIMELINES.md) | Frame-by-frame spotting of the three Oct-13 videos |
-| [docs/RESCORE_PLAN.md](docs/RESCORE_PLAN.md) | Through-composed re-scores of those videos: shared motifs, per-scene treatment, production steps |
-| [docs/GOLDEN_HARMONY.md](docs/GOLDEN_HARMONY.md) | Golden-ratio harmony in 36-ET: golden intervals, chords and scales, notation, stability measurements, infrastructure plan (P10) |
-| [docs/GOLDEN_THEORY.md](docs/GOLDEN_THEORY.md) | Rigorous classification of golden passing harmony (theorems), the inverted golden-home and drone theory, the general theory and new progressions |
-| [docs/GOLDEN_PROGRESSIONS.md](docs/GOLDEN_PROGRESSIONS.md) | Generated dictionary: all 870 chord pairs, 3- and 4-chord golden forms, golden versions of common progressions, with SATB voice lines |
-| [docs/GOLDEN_MATH.md](docs/GOLDEN_MATH.md) | The math and history: golden comma, golden limma and apotome, well-formed scales (golden7 = the golden diatonic), the averaging principle, the metallic triads (silver, golden, bronze), Pythagorean and tuning history |
+| 🎼 **Write and arrange** | Combine melodies, chord progressions, reusable motifs, drum patterns and named sections. Shape phrasing with dynamics, articulation, groove and timing. |
+| 🎹 **Choose your sound** | Use built-in synthesizers, piano, organ, plucked strings, bass and drums. Add recorded orchestral and acoustic instruments with the optional sample library. |
+| 🖥️ **Work in Studio** | Edit score text, follow the arrangement and piano roll, audition instruments, adjust the mix and design video layouts in your browser. |
+| 🎬 **See the music** | Export videos with moving notation, note names and separate instrument panels. Place soundtrack cues on exact video frames. |
+| 🧪 **Compare ideas** | Use AI Lab to save instrument A/B comparisons, listen in context or solo, record preferences, and preview, apply or undo selected score changes. |
+| 🌀 **Explore harmony** | Write ordinary major and minor music, or try golden chords, microtonal scales, voice leading and modulation in 36-ET. |
 
-## Layout
+## Hear it, then follow the notes
 
-```
-SongMap/
-├── README.md · ROADMAP.md · pyproject.toml
-├── docs/                         ← the documents above
-├── songmap/                      ← the engine (layout in docs/ENGINE.md §2)
-│   ├── cli.py  model.py  render.py
-│   ├── parse/                    ← lang (the .sm language), yaml_form (v0.2 + v0.1 migration), notes, steps, positions
-│   ├── theory/                   ← keys, harmony (progressions, harmony timeline), voicing
-│   ├── arrange/                  ← timeline, styles + patterns/*.yaml, expand, events, ensemble + defaults.yaml
-│   ├── instruments/              ← contract, registry, presets loader, dsp/ and 16 instruments
-│   ├── presets/                  ← <instrument>/<name>.yaml (the synth_v0 voices: kick/v0, pad/warm, ...)
-│   ├── perform/  mix/  export/   ← performance layer (play.py: swing, humanize, rolled chords), mixing/mastering, wav/cues/qa/qa.png
-├── tests/                        ← pytest; golden/ holds event-list hashes of every example
-├── songs/                        ← editable scores, listening-page sources and review receipts
-├── textbook/                     ← chapter sources, example scores and build metadata
-├── tools/                        ← port_check, v0_oracle (synth_v0's own notes), calibrate_v0, update_golden, demo
-├── examples/
-│   ├── v0.2_yaml/                ← faithful v0.2 ports of the three Oct-13 tracks (render these)
-│   ├── v0.1_yaml/                ← the original v0.1 YAML ports (still load, with a deprecation warning)
-│   ├── *.sm                      ← the same ports in compact form (same notes as the YAML ports)
-│   └── lang/                     ← The Swarm written with definitions and a form block (.sml)
-├── assets/oct13/                 ← recovered Oct-13 sources: Remotion project, synth.py, original audio (P0)
-└── reference/
-    └── synth_v0.py               ← the original prototype (made the Oct-13 tracks)
-```
+[![A SongMap performance video showing cello, grand piano, harp and bass playing Two Windows, with notation, live note names and a section timeline](docs/images/performance.png)](docs/VIDEO.md)
 
-The optional Oct-13 comparison tests use original audio in `assets/oct13/`. Those recordings and videos are omitted from Git. Run the portable suite with `python -m pytest -q -m "not port"`; the full suite also runs the original-audio comparisons when those files are available.
+**[Listen to complete songs →](https://deeperresearch.ai/music_theory_of_golden_harmony/chapters/ch47.html)** The textbook pairs full pieces with listening guides and explanations of the musical choices. Try [five golden-harmony songs](https://deeperresearch.ai/music_theory_of_golden_harmony/chapters/ch47.html) or the [Golden House electronic collection](https://deeperresearch.ai/music_theory_of_golden_harmony/chapters/ch49.html).
 
-## Try it
+The image above is a frame from *Two Windows*, an editable score in [Golden Worlds](songs/golden_worlds/). Each instrument has its own staff, sounding note names and pitch strip, with the current harmony and section shown alongside.
 
-For the free recorded instrument pack, run `songmap samples install` and `songmap samples verify`.
-Studio and `songmap describe` expose its individual voices. [Library instructions](docs/SFZ_LIBRARY.md) cover the
-the voice catalog, pinned sources and playback limits; [the SFZ listening edition](songs/sfz_revisited/index.html) compares
-revised songs with their original masters and includes an instrument gallery.
+## Learn with the interactive textbook
 
-Listening pages need their locally rendered media. The HTML, editable scores, and verification records are versioned; audio and video exports are omitted from Git.
+**[Music Theory of Golden Harmony](https://deeperresearch.ai/music_theory_of_golden_harmony/)** starts with sound and the harmonic series, builds up Western harmony, then explores golden intervals, chords and scales. Listen to the examples as you read, follow the notation in videos, and switch between **Hear it**, **Understand it** and **Derive it** for different levels of detail.
 
-Use Python 3.12 or newer. On Windows PowerShell:
+[![The live textbook's golden spiral cover and chapter navigation, from sound and number to making music](docs/images/textbook.png)](https://deeperresearch.ai/music_theory_of_golden_harmony/)
 
-```powershell
+- **[Start with sound and waves](https://deeperresearch.ai/music_theory_of_golden_harmony/chapters/ch01.html)** if you are learning music theory from the beginning.
+- **[Meet 36-ET](https://deeperresearch.ai/music_theory_of_golden_harmony/chapters/ch24.html)** to see how the tuning extends the familiar twelve notes.
+- **[Hear complete songs](https://deeperresearch.ai/music_theory_of_golden_harmony/chapters/ch47.html)** to explore golden harmony in an ensemble.
+- **[Browse the textbook sources](textbook/)** to study or change the chapters and their editable example scores. The online book is a draft edition.
+
+## SongMap Studio
+
+[![SongMap Studio showing the song browser, colored arrangement, harmony teacher and editable instrument video panels](docs/images/studio.png)](docs/GUI.md)
+
+Studio runs locally in your browser and opens the same score files you can edit by hand. The arrangement shows where each part enters, the harmony teacher explains the current chord, and the instrument, mixer and video views let you shape the result.
+
+Open the **AI Lab** dock for saved instrument comparisons and listening feedback. AI proposals use an installed, signed-in Codex CLI; manual comparisons work without it. Your listening choices guide the next proposal. See the [AI Lab guide](docs/AI_LAB.md) for setup and the [songwriting vision](docs/AI_SONGWRITING_VISION.md) for planned extensions.
+
+## Try SongMap
+
+You need **Python 3.12 or newer** and Git. In a terminal:
+
+```bash
 git clone https://github.com/davidQuantumGravity/songmap.git
 cd songmap
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+```
+
+Activate the environment:
+
+| Windows PowerShell | macOS / Linux |
+|---|---|
+| `.\.venv\Scripts\Activate.ps1` | `source .venv/bin/activate` |
+
+Install SongMap and open a score in Studio:
+
+```bash
+python -m pip install -e ".[gui,sampler]"
+songmap gui examples/week_oct13_swarm.sm
+```
+
+Studio opens in your browser. The built frontend is included, so Node.js is only needed if you want to develop Studio itself.
+
+Prefer the command line? Check and render the same score:
+
+```bash
+songmap check examples/week_oct13_swarm.sm
+songmap render examples/week_oct13_swarm.sm -o build/swarm
+```
+
+The render folder contains `song.wav`, a `stems/` folder, frame-accurate `cues.json`, and technical and arrangement reports (`qa.json`, `qa.png`, `review.json`). Automated checks help find problems; listening remains part of the process.
+
+<details>
+<summary><b>Add recorded instruments or export MP3 / video</b></summary>
+
+Install just the sample voices you want:
+
+```bash
+songmap samples install grand_piano flute
+songmap samples verify
+```
+
+The full library is optional. See the [sample library guide](docs/SFZ_LIBRARY.md) for its catalog, sources and playback limits, or the [bass and drum palette](docs/BASS_DRUM_PALETTE.md) for grooves and rhythm-section examples.
+
+Install [FFmpeg](https://ffmpeg.org/download.html) and put it on your `PATH` for MP3 and video exports:
+
+```bash
+songmap render examples/week_oct13_swarm.sm -o build/swarm --mp3
+songmap video examples/week_oct13_swarm.sm -o build/swarm/swarm.mp4
+```
+
+Downloaded samples, rendered audio and videos stay outside Git. Listening-page HTML in `songs/` needs its rendered media locally; the public textbook includes hosted listening examples.
+
+</details>
+
+## A small score you can change
+
+Save this as `first_steps.sm`. It uses the built-in instruments, so no sample download is needed.
+
+```text
+song "First steps" 120 4/4 C seed=7
+chords C Am F G /1
+motif tune rel "=mp R4 3@72 5@88 3@76 | R2@80 5@68"
+intro 4 | pad:warm(oct=-1) bass:sub dyn=p
+theme 8 | like=intro drums:four_floor lead:tune:oct=1 dyn=mf
+outro 4 | pad:warm(oct=-1) chords="C:4" dyn=p
+```
+
+The header sets the tempo, meter and key. Each section gives its length in bars and the parts that play. The melody follows the current chord's root, third and fifth, with `@` marks shaping note velocities. `like=intro` reuses the intro's parts, then adds drums and a melody at a louder dynamic.
+
+```bash
+songmap check first_steps.sm
+songmap render first_steps.sm -o build/first_steps
+songmap gui first_steps.sm
+```
+
+Try changing `120` to another tempo, replacing a chord, or muting a part in Studio. For the full notation, open the [compact format guide](docs/COMPACT_FORMAT.md) or run `songmap describe --compact` to see the available instruments and styles. YAML scores work too, and `songmap fmt` converts between the formats.
+
+## Where to go next
+
+| I want to… | Start here |
+|---|---|
+| Write a score or soundtrack | [Score format](docs/COMPACT_FORMAT.md) · [Language reference](docs/LANGUAGE.md) · [Performance and expression](docs/PERFORMANCE.md) |
+| Explore sounds and grooves | [Instruments](docs/INSTRUMENTS.md) · [Recorded sample library](docs/SFZ_LIBRARY.md) · [Bass and drums](docs/BASS_DRUM_PALETTE.md) |
+| Make visual performances | [Video guide](docs/VIDEO.md) · [Studio guide](docs/GUI.md) |
+| Explore golden harmony | [Golden harmony](docs/GOLDEN_HARMONY.md) · [Theory](docs/GOLDEN_THEORY.md) · [Progressions](docs/GOLDEN_PROGRESSIONS.md) · [Math and history](docs/GOLDEN_MATH.md) |
+| Compose with a coding agent | [Agent instructions](AGENTS.md) · [Composition skill](.claude/skills/songmap-compose/SKILL.md) |
+| Understand or extend the engine | [Architecture](docs/ENGINE.md) · [Design](docs/DESIGN.md) · [YAML specification](docs/SONGMAP_SPEC.md) · [Roadmap](ROADMAP.md) |
+
+<details>
+<summary><b>Developing SongMap</b></summary>
+
+The Python engine lives in `songmap/`, Studio's React source in `songmap/gui/web/`, editable music in `songs/` and `examples/`, and textbook sources in `textbook/`.
+
+```bash
 python -m pip install -e ".[dev,gui,sampler]"
+python -m pytest -q -m "not port"
 ```
 
-On macOS or Linux, activate the environment with `source .venv/bin/activate`. Install FFmpeg and put it on `PATH` for MP3 export and video rendering. Sample recordings install separately; `songmap samples install grand_piano flute` installs just those two voices.
+The portable suite runs without the private Oct-13 reference recordings. With those files available in `assets/oct13/`, `python -m pytest -q` also runs the original-audio comparison tests. The original prototype is preserved in `reference/synth_v0.py`; [scene timelines](docs/SCENE_TIMELINES.md) and the [rescore plan](docs/RESCORE_PLAN.md) document those soundtracks.
+
+To work on Studio, install Node.js 24, then run:
 
 ```bash
-songmap check  examples/week_oct13_swarm.sm                       # the compact form (same notes as the YAML)
-songmap check  examples/v0.2_yaml/week_oct13_swarm.songmap.yaml
-songmap render examples/v0.2_yaml/week_oct13_swarm.songmap.yaml -o build/swarm   # ~4 s
-songmap migrate examples/v0.1_yaml/week_oct13_swarm.songmap.yaml                 # v0.1 -> v0.2 on stdout
-songmap fmt examples/v0.2_yaml/week_oct13_swarm.songmap.yaml --to sm             # YAML -> .sm (lossless)
-songmap describe --compact                # the ~450-token catalog an LLM composes from
-python -m pytest -q -m "not port"         # portable suite; no original recordings needed
-python tools/port_check.py --stems        # notes vs synth_v0, loudness vs the original audio, per-part levels
-python tools/demo.py                      # out/demo.wav + out/gallery.wav (every instrument at p, mf, ff)
+npm --prefix songmap/gui/web ci
+npm --prefix songmap/gui/web run build
 ```
 
-## Development workflow
+`main` holds the engine, Studio, guides and scores in one project. Use branches or linked worktrees for changes. GitHub Actions tests Python 3.12 and 3.14 and builds Studio with Node.js 24. Sample libraries, renders, AI Lab sessions and scratch files remain local.
 
-`main` is the shared branch for the engine, Studio, guides, and scores. Develop changes on branches or temporary linked worktrees, run the relevant checks, then merge them into `main`. Tags identify tested releases of the same project.
+</details>
 
-GitHub Actions runs the portable Python suite on Python 3.12 and 3.14 and builds Studio with Node.js 24. The original-recording comparisons remain available locally through the full test suite. Downloaded sample libraries, render folders, AI Lab sessions, and agent scratch files stay local.
-
-**Running the original prototype:**
-
-```bash
-NBARS=74 python reference/synth_v0.py A
-```
-
-Use `$env:NBARS=74; python …` in PowerShell. The script's output path is hard-coded. `tools/v0_oracle.py` runs its `build()` with the instruments stubbed out to list every note it plays.
-
-## Golden harmony (36-ET)
-
-SongMap songs can use `tuning: 36edo`:
-- sixth-step accidentals: `^c4`, `vE`, `v3` in motifs;
-- golden, silver and bronze chords: `Cg`, `Cg7`, `Cs`, `CT13`, plus alteration lists like `C(v3,^5)`;
-- golden scales: `key: C golden7`, `golden13`, `silver13`;
-- passing-chord placeholders: `~` (System 1, strict) and `~g` (System 2, natural);
-- `voiced` styles (`hold`, `comp`, `pulse`, `top`, `bassline`) that voice-lead in sixth-steps;
-- the stable `clean/*` instruments, `master: clean`, and `songmap render --mp3`.
-- note-synchronized video: `songmap video song.sm -o song.mp4` (letter names, a grand staff and a 36-row piano roll,
-  sounding notes lit; `songmap.visual`, needs ffmpeg).
-
-Try it:
-
-```bash
-songmap render examples/golden/etude1_passing_light.songmap.yaml --mp3
-```
-
-```bash
-python tools/golden_suite.py
-```
-
-The second command writes every suite song to `examples/golden/suite/` and renders them to `golden_audio/`. Open `golden_audio/index.html` to browse the technique portfolios, the Well-Tempered Golden Clavier, and the System 1 and System 2 dictionaries.
-
-For the expanded bass and drum palette, open [the listening page](songs/rhythm_palette/index.html) or
-[the palette guide](docs/BASS_DRUM_PALETTE.md): recorded basses and acoustic kits, electronic presets,
-42 editable examples and eight groove templates.
+SongMap is available under the [MIT license](LICENSE).
