@@ -1,0 +1,4 @@
+songmap/gui/web/index.html text eol=lf
+songmap/gui/static/*.html text eol=lf
+songmap/gui/static/assets/*.js text eol=lf
+songmap/gui/static/assets/*.css text eol=lf
