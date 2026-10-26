@@ -17,6 +17,9 @@ Sources besides modules: `vel` (the note's velocity, 0..1), `key` (octaves above
 key is held), `rand` (a per-note random value in -1..1, from the note's seed). Wiring `vel` into a filter or a
 shaper is how a patch makes velocity change the timbre, not just the loudness (instruments/base.py).
 
+A knob may be a **formula** of the note instead of a number: `f1=filter(cutoff="800*2**(2*vel+key)")`,
+`o=osc(pw="0.5+0.3*sin(2*pi*3*t)")` (see `Expr` for the names and functions). Formula knobs are not params.
+
 Every module knob becomes an instrument param named `<module>.<knob>` (`f1.cutoff`), so songs, presets and the
 Studio's knobs set it like any other instrument's. A **macro** is one 0..1 knob that moves several:
 `@bright(default=.5, f1.cutoff=200..4000, drive.drive=0..0.8)` (YAML: `macros: {bright: {default: .5, map:
@@ -25,9 +28,11 @@ in the library (songmap/patches/<name>.yaml), and are used as `patch/<name>`.
 """
 from __future__ import annotations
 
+import ast
 import difflib
 import hashlib
 import json
+import math
 import os
 import re
 from dataclasses import dataclass
@@ -40,6 +45,7 @@ from .dsp import SR, mtof, n_samples, pan_mono, svf, t_axis
 from .dsp.osc import pink, saw, sine, square, supersaw, triangle, white
 from .dsp.env import adsr
 from .dsp.physical import ks_string, modal
+from .dsp.waveguide import waveguide, wavetable
 
 LIB_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "patches")
 SOURCES = ("vel", "key", "gate", "rand")
@@ -115,6 +121,35 @@ MODULES: dict[str, ModuleType] = {m.name: m for m in (
         Knob("pick", 0.01, 0.001, 0.05, "s", "log", "lin", "length of the pluck burst (when nothing is wired in)"),
         Knob("level", 0.8, 0, 1, "", "lin", "lin", "output level"),
     ), audio_in=True),
+    ModuleType("waveguide", "physical", "a waveguide (STK-style physical model): a bowed string, a reed or a flute, "
+               "a delay line tuned to the note kept sounding by its exciter for as long as the note is held", (
+        Knob("mode", 0, 0, 2, "", "lin", "lin", "0 bowed string (stick-slip friction), 1 reed (clarinet), 2 flute (air jet)",
+             ("bow", "reed", "flute")),
+        Knob("pressure", 0.6, 0, 1, "", "lin", "lin", "bow pressure or breath: low is airy and soft (a bow barely "
+             "touching), the middle is the clean tone, very high turns raucous or cracks to another note; for the "
+             "reed and flute, more breath is louder and brighter"),
+        Knob("position", 0.12, 0.04, 0.5, "", "lin", "lin", "bow: where it touches the string (small = near the "
+             "bridge, glassy; large = over the fingerboard, soft); flute: the jet length (lower overblows higher; "
+             "the default speaks the note)"),
+        Knob("bright", 0.6, 0.05, 0.99, "", "lin", "lin", "loss in the loop: low is dark and soft, high rings bright"),
+        Knob("attack", 0.06, 0.002, 2, "s", "log", "lin", "how fast the bow or breath comes up to strength"),
+        Knob("release", 0.12, 0.005, 3, "s", "log", "lin", "how fast it stops after the note is let go"),
+        Knob("noise", 0.02, 0, 0.3, "", "lin", "lin", "breath or bow-hair noise in the excitation"),
+        Knob("tune", 0, -24, 24, "st", "lin", "semi", "semitones off the note (modulate it for vibrato)"),
+        Knob("level", 0.8, 0, 1, "", "lin", "lin", "output level"),
+    ), audio_in=True),
+    ModuleType("wavetable", "osc", "a wavetable oscillator: single-cycle waves you scan through with `position` "
+               "(sweep it with an envelope or LFO for evolving tones)", (
+        Knob("table", 0, 0, 4, "", "lin", "lin", "basic (sine, triangle, saw, square), bright (dark to bright), "
+             "pwm (pulse width), vowel (a e i o u formants), organ (drawbar registrations)",
+             ("basic", "bright", "pwm", "vowel", "organ")),
+        Knob("position", 0, 0, 1, "", "lin", "lin", "where in the table: 0 the first wave, 1 the last"),
+        Knob("octave", 0, -3, 3, "oct", "lin", "lin", "octaves above or below the note"),
+        Knob("detune", 0, -24, 24, "st", "lin", "semi", "semitones off the note"),
+        Knob("fine", 0, -50, 50, "cents", "lin", "lin", "fine tuning"),
+        Knob("fm", 1, 0, 12, "", "lin", "lin", "FM depth for audio wired in"),
+        Knob("level", 0.8, 0, 1, "", "lin", "lin", "output level"),
+    ), audio_in=True),
     ModuleType("modal", "modal", "a resonator bank: decaying partials at fixed ratios (bells, bars, glass, plates)", (
         Knob("body", 0, 0, 3, "", "lin", "lin", "partial ratios: 0 bell, 1 bar (marimba), 2 glass, 3 plate",
              ("bell", "bar", "glass", "plate")),
@@ -149,6 +184,87 @@ MODULES: dict[str, ModuleType] = {m.name: m for m in (
 BODIES = {0: ([1, 2.0, 2.4, 3.0, 4.5, 5.4, 6.8], "bell"), 1: ([1, 3.93, 9.54, 17.6], "bar"),
           2: ([1, 2.32, 4.25, 6.63, 9.38], "glass"), 3: ([1, 1.59, 2.14, 2.3, 2.65, 2.92, 3.16, 3.5], "plate")}
 
+# ---------------------------------------------------------------------------------------------- expressions
+EXPR_VARS = ("vel", "key", "pitch", "freq", "gate", "rand", "t")
+EXPR_CONSTS = {"pi": math.pi, "e": math.e}
+EXPR_FUNCS = {"sin": np.sin, "cos": np.cos, "tan": np.tan, "tanh": np.tanh, "exp": np.exp, "log": np.log,
+              "log2": np.log2, "log10": np.log10, "sqrt": np.sqrt, "abs": np.abs, "floor": np.floor,
+              "min": np.minimum, "max": np.maximum, "clip": np.clip}
+_BIN = {ast.Add: np.add, ast.Sub: np.subtract, ast.Mult: np.multiply, ast.Div: np.divide, ast.Pow: np.power,
+        ast.Mod: np.mod}
+
+
+class Expr:
+    """A knob value written as a formula of the note: `cutoff="800*2**(2*vel+key)"`. Names: vel (0..1), key
+    (octaves above middle C), pitch (MIDI), freq (Hz), gate (seconds held), rand (-1..1 per note), t (seconds,
+    an array: the knob then moves over the note), pi, e, the patch's macros; functions sin cos tan tanh exp log
+    log2 log10 sqrt abs floor min max clip. Parsed into a syntax tree and evaluated with numpy; nothing else
+    runs (no attribute access, no imports, no eval)."""
+
+    def __init__(self, text: str, extra: tuple = (), where: str = "expression"):
+        self.text = text.strip()
+        self.where = where
+        try:
+            self.tree = ast.parse(self.text, mode="eval").body
+        except SyntaxError as e:
+            raise ParamError(f"{where}: '{self.text}' is not a formula ({e.msg})") from None
+        self.names = set()
+        self._check(self.tree, set(EXPR_VARS) | set(EXPR_CONSTS) | set(extra))
+
+    def _check(self, node, ok):
+        if isinstance(node, ast.BinOp) and type(node.op) in _BIN:
+            self._check(node.left, ok), self._check(node.right, ok)
+        elif isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.USub, ast.UAdd)):
+            self._check(node.operand, ok)
+        elif isinstance(node, ast.Constant) and isinstance(node.value, (int, float)) and not isinstance(node.value, bool):
+            pass
+        elif isinstance(node, ast.Name):
+            if node.id not in ok:
+                raise ParamError(f"{self.where}: unknown name '{node.id}' in '{self.text}'; "
+                                 + _dym(node.id, sorted(ok)) + f" (names: {', '.join(sorted(ok))})")
+            self.names.add(node.id)
+        elif isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and not node.keywords:
+            if node.func.id not in EXPR_FUNCS:
+                raise ParamError(f"{self.where}: unknown function '{node.func.id}' in '{self.text}'; "
+                                 + _dym(node.func.id, EXPR_FUNCS) + f" (functions: {', '.join(EXPR_FUNCS)})")
+            for a in node.args:
+                self._check(a, ok)
+        else:
+            raise ParamError(f"{self.where}: '{self.text}' uses something a knob formula can't "
+                             f"({type(node).__name__}); use numbers, + - * / ** %, names and functions")
+
+    def __call__(self, env: dict):
+        with np.errstate(all="ignore"):
+            return self._eval(self.tree, env)
+
+    def _eval(self, node, env):
+        if isinstance(node, ast.BinOp):
+            return _BIN[type(node.op)](self._eval(node.left, env), self._eval(node.right, env))
+        if isinstance(node, ast.UnaryOp):
+            v = self._eval(node.operand, env)
+            return -v if isinstance(node.op, ast.USub) else v
+        if isinstance(node, ast.Constant):
+            return float(node.value)
+        if isinstance(node, ast.Name):
+            return EXPR_CONSTS[node.id] if node.id in EXPR_CONSTS else env[node.id]
+        f = EXPR_FUNCS[node.func.id]
+        return f(*[self._eval(a, env) for a in node.args])
+
+
+def is_expr(k: Knob, v) -> bool:
+    """A knob value that is a formula: text that is neither a number nor one of the knob's named choices."""
+    if not isinstance(v, str):
+        return False
+    t = v.strip().strip('"').strip("'")
+    if k.choices and t in k.choices:
+        return False
+    try:
+        float(t)
+        return False
+    except ValueError:
+        return True
+
+
 _WIRE = re.compile(r"^\s*([A-Za-z_]\w*)\s*>\s*([A-Za-z_]\w*)(?:\.([A-Za-z_]\w*))?\s*(?:\*\s*(-?[\d.]+))?\s*$")
 
 
@@ -176,7 +292,12 @@ def parse_wire(text: str) -> Wire:
     return Wire(m[1], m[2], m[3], float(m[4]) if m[4] else 1.0)
 
 
-def knob_value(t: ModuleType, k: Knob, v) -> float:
+def knob_value(t: ModuleType, k: Knob, v, macros: tuple = ()) -> float:
+    """A knob's value as a number; a formula (`Expr`) is checked and returned as its text."""
+    if is_expr(k, v):
+        if k.choices:
+            raise ParamError(f"{t.name}.{k.name}: '{v}' is not one of {', '.join(k.choices)}")
+        return Expr(v.strip().strip('"').strip("'"), macros, f"{t.name}.{k.name}").text
     if isinstance(v, str) and k.choices:
         if v not in k.choices:
             raise ParamError(f"{t.name}.{k.name}: '{v}' is not one of {', '.join(k.choices)}")
@@ -192,6 +313,7 @@ def validate(spec: dict, name: str = "patch") -> dict:
     """Check a patch spec ({modules: {id: {type, knob: value}}, wires: ["a>b", ...]}) and return it normalized:
     knob values as numbers, wires as Wire objects, plus the evaluation order. Raises ParamError."""
     mods = spec.get("modules") or {}
+    macro_names = tuple(str(m) for m in (spec.get("macros") or {}))
     if not isinstance(mods, dict) or not mods:
         raise ParamError(f"{name}: a patch needs modules, e.g. osc1=osc(wave=saw) amp=vca out=out")
     norm: dict[str, dict] = {}
@@ -210,7 +332,8 @@ def validate(spec: dict, name: str = "patch") -> dict:
             if k not in knobs:
                 raise ParamError(f"{name}.{mid} ({typ}): unknown knob '{k}'; " + _dym(k, knobs)
                                  + f" (knobs: {', '.join(knobs)})")
-            vals[k] = min(max(knob_value(t, knobs[k], v), knobs[k].lo), knobs[k].hi)
+            x = knob_value(t, knobs[k], v, macro_names)
+            vals[k] = x if isinstance(x, str) else min(max(x, knobs[k].lo), knobs[k].hi)
         norm[mid] = {"type": typ, **vals}
     if not any(m["type"] == "out" for m in norm.values()):
         raise ParamError(f"{name}: a patch needs an out module (out=out) and a wire into it")
@@ -280,8 +403,10 @@ def to_text(name: str, spec: dict) -> list[str]:
         t = MODULES[m["type"]]
         args = []
         for k in t.knobs:
-            if k.name in m and abs(float(m[k.name]) - k.default) > 1e-9:
-                v = m[k.name]
+            v = m.get(k.name)
+            if isinstance(v, str):
+                args.append(f'{k.name}="{v}"')
+            elif v is not None and abs(float(v) - k.default) > 1e-9:
                 args.append(f"{k.name}={k.choices[int(round(v))] if k.choices else _num(v)}")
         mods.append(f"{mid}={m['type']}" + (f"({', '.join(args)})" if args else ""))
     wires = [w.text() if isinstance(w, Wire) else parse_wire(w).text() for w in spec.get("wires") or []]
@@ -322,6 +447,8 @@ def build(name: str, spec: dict, **params) -> Instrument:
     for mid in v["modules"]:
         m = v["modules"][mid]
         for k in MODULES[m["type"]].knobs:
+            if isinstance(m.get(k.name), str):         # a formula sets this knob
+                continue
             d = float(m.get(k.name, k.default))
             doc = f"{mid} ({m['type']}): {k.doc}"
             knobs.append(Param(f"{mid}.{k.name}", d, k.lo, k.hi, k.unit, k.curve, mid, doc))
@@ -339,10 +466,33 @@ class PatchInstrument(Instrument):
     family = "synth"
     SPEC: dict = {}
 
+    def __init__(self, **values):
+        self._exprs: dict = {}
+        super().__init__(**values)
+
     def tail(self, note: Note) -> float:
-        rel = max((self.p[f"{m}.r"] for m, x in self.SPEC["modules"].items() if x["type"] == "env"), default=0.05)
-        out = next(m for m, x in self.SPEC["modules"].items() if x["type"] == "out")
-        return rel + self.p[f"{out}.tail"]
+        mods = self.SPEC["modules"]
+        rel = [self._static(f"{m}.r", 0.2, note) for m, x in mods.items() if x["type"] == "env"]
+        rel += [self._static(f"{m}.release", 0.12, note) for m, x in mods.items() if x["type"] == "waveguide"]
+        out = next(m for m, x in mods.items() if x["type"] == "out")
+        return max(rel, default=0.05) + self._static(f"{out}.tail", 0.3, note)
+
+    def _static(self, key: str, default: float, note: Note) -> float:
+        """A knob's value for this note as one number (a formula over `t` is averaged)."""
+        if key in self.p:
+            return float(self.p[key])
+        mid, _, kname = key.partition(".")
+        v = self.SPEC["modules"].get(mid, {}).get(kname)
+        if isinstance(v, str):
+            return float(np.mean(Expr(v, tuple(self.SPEC.get("macros", {})))(self._env(note, np.zeros(1)))))
+        return default
+
+    def _env(self, note: Note, t: np.ndarray) -> dict:
+        env = {"vel": note.vel, "key": (note.pitch - 60) / 12, "pitch": note.pitch, "freq": float(mtof(note.pitch)),
+               "gate": note.gate, "rand": float(self.rng(note).uniform(-1, 1)), "t": t}
+        for mname in self.SPEC.get("macros", {}):
+            env[mname] = float(self.p_(note, mname))
+        return env
 
     def render(self, note: Note) -> np.ndarray:
         spec = self.SPEC
@@ -350,6 +500,7 @@ class PatchInstrument(Instrument):
         rng = self.rng(note)
         t = t_axis(n)
         gate_n = min(n, n_samples(note.gate))
+        xenv = self._env(note, t)
         src = {"vel": np.full(n, note.vel), "key": np.full(n, (note.pitch - 60) / 12),
                "gate": np.concatenate([np.ones(gate_n), np.zeros(n - gate_n)]), "rand": np.full(n, rng.uniform(-1, 1))}
         outs: dict[str, np.ndarray] = {}
@@ -361,7 +512,7 @@ class PatchInstrument(Instrument):
                 if any(w.knob is None for w in ins) else None
             k = {}
             for kn in mt.knobs:
-                base = self._macro(note, f"{mid}.{kn.name}", kn)
+                base = self._macro(note, f"{mid}.{kn.name}", kn, xenv)
                 mods = [(outs[w.src] if w.src in outs else src[w.src]) * w.amount for w in ins if w.knob == kn.name]
                 if not mods:
                     k[kn.name] = base
@@ -384,8 +535,9 @@ class PatchInstrument(Instrument):
         y[-fade:] *= np.linspace(1, 0, fade)
         return pan_mono(y, pan) if abs(pan) > 1e-6 else y
 
-    def _macro(self, note: Note, key: str, kn: Knob) -> float:
-        """A knob's value: set by the macro that maps it (the last one, if several), else its own param."""
+    def _macro(self, note: Note, key: str, kn: Knob, xenv: dict | None = None):
+        """A knob's value: set by the macro that maps it (the last one, if several), else its formula, else its
+        own param."""
         for mname, mac in reversed(list(self.SPEC.get("macros", {}).items())):
             if key in mac["map"]:
                 a, b = mac["map"][key]
@@ -393,6 +545,13 @@ class PatchInstrument(Instrument):
                 if kn.curve == "log" and a > 0 and b > 0:
                     return float(a * (b / a) ** x)
                 return a + (b - a) * x
+        mid, _, kname = key.partition(".")
+        f = self.SPEC["modules"].get(mid, {}).get(kname)
+        if isinstance(f, str):
+            ex = self._exprs.get(key)
+            if ex is None:
+                ex = self._exprs[key] = Expr(f, tuple(self.SPEC.get("macros", {})), key)
+            return np.clip(ex(xenv if xenv is not None else self._env(note, np.zeros(1))), kn.lo, kn.hi)
         return self.p_(note, key)
 
     # one module, one note: knob values may be arrays (modulated) or numbers
@@ -417,6 +576,19 @@ class PatchInstrument(Instrument):
             if y.ndim == 2:                                # supersaw is stereo; a patch is mono until `out`
                 y = y.mean(1)
             return y * arr(k["level"])
+        if typ == "wavetable":
+            f = mtof(note.pitch + 12 * np.round(k["octave"]) + np.asarray(k["detune"]) + np.asarray(k["fine"]) / 100)
+            fm = None if audio is None else arr(k["fm"]) * np.asarray(audio, float)
+            return wavetable(int(round(float(np.mean(k["table"])))), arr(f), arr(k["position"]), rng.random(), fm) \
+                * arr(k["level"])
+        if typ == "waveguide":
+            f = arr(mtof(note.pitch + np.asarray(k["tune"])))
+            a, r = float(np.mean(k["attack"])), float(np.mean(k["release"]))
+            env = adsr(n, a, 0.05, 1.0, r, gate=gate_n / SR)
+            exc = float(np.mean(k["noise"])) * white(n, rng) + (0 if audio is None else np.asarray(audio, float))
+            y = waveguide(int(round(float(np.mean(k["mode"])))), f, arr(k["pressure"]), env,
+                          float(np.mean(k["position"])), float(np.mean(k["bright"])), exc)
+            return y * env * arr(k["level"])
         if typ == "noise":
             c = float(np.mean(k["color"]))
             y = (1 - c) * white(n, rng) * 0.5 + c * pink(n, rng)

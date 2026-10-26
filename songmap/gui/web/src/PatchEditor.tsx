@@ -33,6 +33,22 @@ const fmt = (v: number, unit: string) => {
   return unit ? `${n} ${unit}` : n;
 };
 
+function FormulaField({ name, unit, text, editable, onSave, onNumber }: {
+  name: string; unit: string; text: string; editable: boolean; onSave: (t: string) => void; onNumber: () => void;
+}) {
+  const [v, setV] = useState(text);
+  useEffect(() => setV(text), [text]);
+  const commit = () => { if (v.trim() && v.trim() !== text) onSave(v.trim()); };
+  return (
+    <label className="formula-field" title="A formula of the note; Enter saves">
+      <span>ƒ {name}{unit ? ` (${unit})` : ""}</span>
+      <input value={v} disabled={!editable} spellCheck={false} onChange={(e) => setV(e.target.value)} onBlur={commit}
+             onKeyDown={(e) => { if (e.key === "Enter") commit(); if (e.key === "Escape") setV(text); }} />
+      {editable && <button className="ghost small" onClick={onNumber} title="Back to a plain knob (its default)">number</button>}
+    </label>
+  );
+}
+
 export function PatchEditor({ name, spec, editable, catalog, onSave, onCopy, posKey }: {
   name: string; spec: PatchSpec; editable: boolean; catalog: Catalog; posKey: string;
   onSave: (spec: PatchSpec) => Promise<void>; onCopy: () => void;
@@ -169,8 +185,18 @@ export function PatchEditor({ name, spec, editable, catalog, onSave, onCopy, pos
   };
   const knobVal = (id: string, k: ModType["knobs"][number]) => {
     const v = live[`${id}.${k.name}`] ?? spec.modules[id][k.name];
-    if (typeof v === "string") return Math.max(0, k.choices.indexOf(v));
+    if (typeof v === "string") return k.choices.includes(v) ? k.choices.indexOf(v) : k.default;
     return typeof v === "number" ? v : k.default;
+  };
+  // a knob written as a formula of the note (instruments/patch.py Expr): text that is no number and no choice
+  const formula = (id: string, k: ModType["knobs"][number]): string | null => {
+    const v = spec.modules[id]?.[k.name];
+    return typeof v === "string" && !k.choices.includes(v) && isNaN(+v) ? v : null;
+  };
+  const setFormula = (id: string, knob: string, text: string | null) => {
+    const m = { ...spec.modules[id] };
+    if (text === null || !text.trim()) delete m[knob]; else m[knob] = text.trim();
+    save({ ...spec, modules: { ...spec.modules, [id]: m } });
   };
 
   const selNode = sel?.kind === "node" ? sel.id : null;
@@ -228,7 +254,9 @@ export function PatchEditor({ name, spec, editable, catalog, onSave, onCopy, pos
                       <rect x={x + 1} y={ky} width={W - 2} height={ROW} className="knob-row" />
                       <circle cx={x} cy={ky + ROW / 2} r={4} className="port knobport" />
                       <text x={x + 9} y={ky + 12} className="knob-name">{k.name}</text>
-                      <text x={x + W - 8} y={ky + 12} className="knob-val" textAnchor="end">{k.choices.length ? k.choices[Math.round(v)] : fmt(v, k.unit)}</text>
+                      <text x={x + W - 8} y={ky + 12} className={"knob-val" + (formula(id, k) ? " formula" : "")} textAnchor="end">
+                        {formula(id, k) ? `ƒ ${formula(id, k)!.length > 14 ? formula(id, k)!.slice(0, 13) + "…" : formula(id, k)}`
+                          : k.choices.length ? k.choices[Math.round(v)] : fmt(v, k.unit)}</text>
                       <title>{k.doc}</title>
                     </g>;
                   })}
@@ -244,14 +272,28 @@ export function PatchEditor({ name, spec, editable, catalog, onSave, onCopy, pos
               <h4>{selNode} <span className="muted">· {t.name}</span></h4>
               <p className="small">{t.doc}.</p>
               <div className="knobs">
-                {t.knobs.map((k) => (
-                  <Knob key={k.name} label={k.name} value={knobVal(selNode, k)} min={k.lo} max={k.hi} step={k.choices.length ? 1 : 0} def={k.default}
-                        curve={k.curve as "lin" | "log"} modified={k.name in spec.modules[selNode]}
-                        format={(v) => (k.choices.length ? k.choices[Math.round(v)] : fmt(v, k.unit))} title={k.doc}
-                        onChange={(v) => setLive((l) => ({ ...l, [`${selNode}.${k.name}`]: v }))}
-                        onCommit={(v) => editable && setKnob(selNode, k.name, v)} />
+                {t.knobs.filter((k) => !formula(selNode, k)).map((k) => (
+                  <div key={k.name} className="knob-f">
+                    <Knob label={k.name} value={knobVal(selNode, k)} min={k.lo} max={k.hi} step={k.choices.length ? 1 : 0} def={k.default}
+                          curve={k.curve as "lin" | "log"} modified={k.name in spec.modules[selNode]}
+                          format={(v) => (k.choices.length ? k.choices[Math.round(v)] : fmt(v, k.unit))} title={k.doc}
+                          onChange={(v) => setLive((l) => ({ ...l, [`${selNode}.${k.name}`]: v }))}
+                          onCommit={(v) => editable && setKnob(selNode, k.name, v)} />
+                    {editable && !k.choices.length && (
+                      <button className="ghost small f-btn" title="Write this knob as a formula of the note (velocity, pitch, time...)"
+                              onClick={() => setFormula(selNode, k.name, `${+knobVal(selNode, k).toPrecision(4)}*(0.5+vel)`)}>ƒ</button>)}
+                  </div>
                 ))}
               </div>
+              {t.knobs.filter((k) => formula(selNode, k)).map((k) => (
+                <FormulaField key={k.name} name={k.name} unit={k.unit} text={formula(selNode, k)!} editable={editable}
+                              onSave={(x) => setFormula(selNode, k.name, x)} onNumber={() => setFormula(selNode, k.name, null)} />
+              ))}
+              {t.knobs.some((k) => formula(selNode, k)) && (
+                <p className="small muted">Formulas use vel (0..1), key (octaves above middle C), pitch, freq (Hz), gate (s),
+                  rand (-1..1 per note), t (seconds: the knob moves over the note), pi, e, the patch's macros, and sin cos tan
+                  tanh exp log log2 log10 sqrt abs floor min max clip.</p>
+              )}
               <ul className="small knob-docs">{t.knobs.map((k) => <li key={k.name}><b>{k.name}</b>: {k.doc}</li>)}</ul>
               <p className="small muted">Wired in: {wires.filter((w) => w.dst === selNode).map(wireText).join(", ") || "nothing"}.
                 Out to: {wires.filter((w) => w.src === selNode).map(wireText).join(", ") || "nothing"}.</p>

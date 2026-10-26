@@ -13,7 +13,7 @@ from numba import njit
 
 from .core import SR
 
-BOW_FIXED, REED_FIXED, JET_FIXED = 3.0, 1.5, 2.0       # loop delays besides the tuned lines (calibrated)
+BOW_FIXED, REED_FIXED, JET_FIXED = 1.85, 0.97, 2.0     # loop delays besides the tuned lines (measured)
 
 
 @njit(cache=True)
@@ -22,12 +22,9 @@ def _frac_read(buf, w, d, size):
     pos = w - d
     while pos < 0:
         pos += size
-    i0 = int(pos)
-    fr = pos - i0
-    i1 = i0 - 1
-    if i1 < 0:
-        i1 += size
-    return (1.0 - fr) * buf[i0 % size] + fr * buf[i1 % size]
+    i0 = int(pos)                                      # the older sample
+    fr = pos - i0                                      # how far toward the newer one
+    return (1.0 - fr) * buf[i0 % size] + fr * buf[(i0 + 1) % size]
 
 
 @njit(cache=True)
@@ -57,7 +54,7 @@ def _bowed(period, pressure, bowvel, beta, bright, exc, n):
         bridge_out = _frac_read(bridge, wb, db, size)
         neck_out = _frac_read(neck, wn, dn, size)
         lp = (1.0 - a) * bridge_out + a * lp           # string loss at the bridge
-        bridge_refl = -0.995 * lp
+        bridge_refl = -0.95 * lp                       # STK: string filter gain 0.95
         nut_refl = -neck_out
         string_vel = bridge_refl + nut_refl
         dv = bowvel[i] - string_vel + exc[i]
@@ -90,7 +87,7 @@ def _reed(period, breath, stiffness, bright, exc, n):
         back = _frac_read(bore, w, d, size)
         lp = (1.0 - a) * back + a * lp
         pdiff = -0.95 * lp - breath[i] - exc[i]
-        r = 0.7 + (-0.3 - 0.4 * stiffness[i]) * pdiff  # reed table: offset + slope * pressure difference
+        r = 0.7 + (-0.2 - 0.2 * stiffness[i]) * pdiff  # reed table: offset + slope (STK -0.3) * pressure difference
         if r > 1.0:
             r = 1.0
         if r < -1.0:
@@ -140,21 +137,54 @@ def _jet(period, breath, ratio, bright, exc, n):
     return out
 
 
-# measured residual loop delay (samples, averaged over brightness) at 110 220 440 880 1320 Hz: the friction,
-# reed and jet nonlinearities add phase delay the delay lengths can't predict; it is removed from the period
-_CAL_HZ = np.array([110.0, 220.0, 440.0, 880.0, 1320.0])
-_CAL = {0: (0.44, 0.83, 1.01, 2.07, 0.43), 1: (2.22, 1.2, -0.39, 1.45, 1.64), 2: (-7.26, -5.0, -1.16, -0.25, -0.32)}
-
-
 def waveguide(mode: int, freq, pressure, env, position: float, bright: float, exc) -> np.ndarray:
     """mode 0 bowed string, 1 reed, 2 flute. `freq` and `pressure` are per-sample; `env` shapes the
-    excitation (bow speed or breath), `position` is the bow position (0.05..0.5 from the bridge) or the
-    flute's jet length ratio, `exc` is extra excitation (e.g. breath noise). Below about 500 Hz the pitch is
-    within about 10 cents; higher up, pressure and brightness bend it more (tens of cents), as on real bowed and
-    blown instruments. The flute model speaks from about 200 Hz up; lower, it overblows."""
-    f = np.clip(np.asarray(freq, float), 20.0, 0.45 * SR)
-    extra = np.interp(np.log2(f), np.log2(_CAL_HZ), _CAL[int(mode)])
-    return _raw(mode, SR / np.maximum(SR / f - extra, 2.0), pressure, env, position, bright, exc)
+    excitation (bow speed or breath), `position` is the bow position (0.04..0.5 from the bridge) or, for
+    the flute, sets the jet length (0.2 + position of the bore; the default 0.12 gives 0.32), `exc` is extra excitation (e.g. breath noise). Notes long enough to sustain
+    are measured and re-rendered in tune. The flute speaks cleanly from about 300 Hz up (a real flute starts at 262 Hz); lower,
+    breath noise makes it overblow."""
+    f = np.clip(np.asarray(freq, float), 20.0, 0.45 * SR) * np.ones(len(env))
+    target = float(np.median(f))
+    tuned = f
+    y = _raw(mode, tuned, pressure, env, position, bright, exc)
+    # the loop filter and the nonlinear exciter (bow friction, reed, jet) add phase delay that depends on the
+    # note and the settings; the pitch is steady within a note, so measure it on the sustained part and
+    # render again with the frequency corrected (twice: the correction itself moves the loop a little)
+    for _ in range(2):
+        got = _sustained_pitch(y, env, target)
+        if not got or abs(1200 * np.log2(got / target)) < 2:
+            break
+        tuned = tuned * (target / got)
+        y = _raw(mode, tuned, pressure, env, position, bright, exc)
+    return y
+
+
+def _sustained_pitch(y: np.ndarray, env: np.ndarray, target: float) -> float | None:
+    """The pitch (Hz) over the note's sustained part, from the autocorrelation peak near the target period
+    (robust to which partial is loudest), or None when the note is too short or doesn't speak."""
+    on = np.nonzero(env > 0.9 * float(np.max(env)))[0] if len(env) else []
+    if len(on) < int(0.12 * SR):
+        return None
+    seg = y[on[0] + int(0.04 * SR):on[-1]][: int(0.5 * SR)]
+    if len(seg) < int(0.08 * SR) or float(np.sqrt(np.mean(seg ** 2))) < 1e-3:
+        return None
+    seg = seg - seg.mean()
+    m = len(seg)
+    spec = np.fft.rfft(seg, 2 * m)
+    ac = np.fft.irfft(spec * np.conj(spec))[:m]
+    if ac[0] <= 0:
+        return None
+    p0 = SR / target
+    lo, hi = max(2, int(p0 * 0.85)), min(m - 2, int(p0 * 1.18) + 1)
+    if hi <= lo:
+        return None
+    k = lo + int(np.argmax(ac[lo:hi]))
+    if ac[k] < 0.3 * ac[0]:                            # not periodic at this pitch (noise, overblown)
+        return None
+    a_, b_, c_ = ac[k - 1], ac[k], ac[k + 1]           # parabolic interpolation of the peak
+    den = a_ - 2 * b_ + c_
+    period = k + (0.5 * (a_ - c_) / den if den < 0 else 0.0)
+    return float(SR / period)
 
 
 def _raw(mode: int, freq: np.ndarray, pressure: np.ndarray, env: np.ndarray, position: float,
@@ -167,12 +197,15 @@ def _raw(mode: int, freq: np.ndarray, pressure: np.ndarray, env: np.ndarray, pos
     e = np.ascontiguousarray(env, dtype=np.float64)
     x = np.ascontiguousarray(exc, dtype=np.float64)
     b = float(np.clip(bright, 0.05, 0.99))
+    if mode == 2:
+        b *= 0.6                                       # the flute's bore is darker (STK pole ~0.65): bright 0.6 -> 0.36
     if mode == 0:
         y = _bowed(period, pr, 0.03 + 0.25 * pr * e, float(np.clip(position, 0.03, 0.5)), b, x, n)
     elif mode == 1:
         y = _reed(period, 0.55 + 0.45 * pr * e - (1 - e) * 0.55, np.full(n, 0.5), b, x * e, n)
     else:
-        y = _jet(period, (0.8 + 0.5 * pr) * e, np.full(n, float(np.clip(position, 0.1, 0.6))), b, x * e, n)
+        ratio = float(np.clip(0.2 + position, 0.1, 0.6))   # the default position (0.12) gives STK's jet ratio 0.32
+        y = _jet(period, (0.8 + 0.5 * pr) * e, np.full(n, ratio), b, x * e, n)
     peak = float(np.max(np.abs(y))) if n else 0.0
     return y / peak * 0.8 if peak > 1e-9 else y
 
@@ -237,9 +270,19 @@ def wavetable(table: int, freq: np.ndarray, position: np.ndarray, phase0: float 
     ph = phase0 + np.cumsum(freq) / SR
     if fm is not None:
         ph = ph + fm / (2 * np.pi)
-    y = np.zeros(n)
-    for k in range(H):
-        a = frames[i0, k] * (1 - fr) + (frames[np.minimum(i0 + 1, F - 1), k] * fr if F > 1 else 0)
-        if np.any(a):
-            y += a * np.sin(2 * np.pi * (k + 1) * ph)
-    return y
+    # each frame as one band-limited cycle (N samples, from its harmonics), read by phase with linear
+    # interpolation, frames cross-faded by position: O(n) instead of a sine per harmonic per sample
+    N = 2048
+    spec = np.zeros((F, N // 2 + 1), dtype=complex)
+    spec[:, 1:H + 1] = -0.5j * N * frames               # sin(2 pi h x) for each harmonic h
+    cycles = np.fft.irfft(spec, N, axis=1)
+    cycles /= np.maximum(1.0, np.abs(cycles).max(1, keepdims=True))   # equal loudness, but never above 1
+    x = (ph % 1.0) * N
+    j0 = x.astype(int) % N
+    jf = x - np.floor(x)
+    j1 = (j0 + 1) % N
+    a = cycles[i0, j0] * (1 - jf) + cycles[i0, j1] * jf
+    if F > 1:
+        b = cycles[np.minimum(i0 + 1, F - 1), j0] * (1 - jf) + cycles[np.minimum(i0 + 1, F - 1), j1] * jf
+        return a * (1 - fr) + b * fr
+    return a

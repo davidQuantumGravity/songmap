@@ -1,0 +1,10 @@
+# A singing pad: a vowel wavetable whose position drifts from "a" to "u" and back, two voices a few cents apart.
+description: "Wavetables: each note scans the vowel table (a e i o u formants) with a slow sine written as a formula of time, so the pad seems to sing; a second voice, detuned by a few cents and started elsewhere in the table, widens it. Velocity opens the low-pass."
+modules:
+  v1: {type: wavetable, table: vowel, position: "0.5+0.45*sin(2*pi*0.2*t)", level: 0.55}
+  v2: {type: wavetable, table: vowel, position: "0.5+0.45*sin(2*pi*0.2*t+2)", fine: 7, level: 0.55}
+  f1: {type: filter, mode: lp, cutoff: "1500*2**(1.5*vel)", q: 0.7, keytrack: 0.4}
+  env: {type: env, a: 0.6, d: 0.8, s: 0.8, r: 1.2}
+  amp: {type: vca}
+  out: {type: out, level: 0.6, tail: 0.3}
+wires: [v1>f1, v2>f1, f1>amp, env>amp.gain, amp>out]

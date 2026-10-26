@@ -203,13 +203,23 @@ inst bass=patch/acid(f1.cutoff=400)
 ```
 
 - **Modules** (`describe()` in patch.py lists their knobs):
-  - Sources: `osc` (sine, saw, square with pulse width, triangle, supersaw), `noise` (white to pink), `string`
-    (Karplus-Strong, plucked internally or excited by what is wired in), `modal` (a resonator bank with bell, bar,
-    glass or plate ratios).
+  - Sources: `osc` (sine, saw, square with pulse width, triangle, supersaw), `wavetable` (single cycles scanned by
+    `position`: basic sine-triangle-saw-square, bright, pwm, vowel a-e-i-o-u formants, organ registrations;
+    band-limited for each note's pitch, every frame equally loud), `noise` (white to pink), `string` (Karplus-Strong,
+    plucked internally or excited by what is wired in), `waveguide` (see below), `modal` (a resonator bank with bell,
+    bar, glass or plate ratios).
   - Processing: `filter` (low-, band- or high-pass, resonance, key tracking), `shaper` (tanh drive, wavefolding),
     `comb` (tuned to the note), `delay`, `vca`, `mix`.
   - Control: `env` (ADSR), `lfo` (sine, triangle, square, saw, random steps; with a fade-in delay).
   - `out`: the level, the pan and the tail after the release.
+- **Waveguides** (`dsp/waveguide.py`, after the STK instruments of Cook and Scavone): a delay line tuned to the note,
+  kept sounding by a nonlinear exciter for as long as the note is held: `mode=bow` (a bow sticking and slipping on a
+  string: `pressure` from airy through clean to raucous, `position` from glassy near the bridge to soft over the
+  fingerboard), `mode=reed` (a clarinet reed on a closed-open bore: mostly odd harmonics) and `mode=flute` (an air jet
+  over a bore; it speaks from about 220 Hz up, as a real flute's range starts at middle C). The loop filter and the
+  exciter add a little delay that depends on the note and the settings, so each sustained note is measured and
+  rendered once more with its frequency corrected: notes land within a few cents at any pitch, pressure or
+  brightness (`tests/test_patch.py`). `tune` takes vibrato (an LFO wired in), `noise` adds breath or bow hair.
 - **Wires.** `a>b` sends audio from a into b's input; into an oscillator it is **FM**: it bends the oscillator's phase
   by its `fm` depth (a sine into a sine at 1:1 is the electric piano, at an inharmonic ratio a bell).
   `a>b.knob*amount` moves a knob:
@@ -221,6 +231,13 @@ inst bass=patch/acid(f1.cutoff=400)
   into a filter or shaper so velocity changes the timbre, not just the level (§1).
 - **Params:** every knob becomes an instrument param named `<module>.<knob>`, so `inst`/`kit` lines, presets and the
   Studio's knobs set it like any other param. Values may name choices: `wave=saw`, `mode=hp`, `body=bell`.
+- **Formulas:** a knob may be a formula of the note instead of a number, in quotes: `cutoff="800*2**(2*vel+key)"`
+  (brighter for harder and higher notes), `pressure="0.35+0.5*vel"`, `pw="0.5+0.3*sin(2*pi*3*t)"` (a knob that moves
+  over the note). Names: `vel` (0..1), `key` (octaves above middle C), `pitch` (MIDI), `freq` (Hz), `gate` (seconds
+  held), `rand` (-1..1 per note), `t` (seconds), `pi`, `e`, and the patch's macros; functions `sin cos tan tanh exp
+  log log2 log10 sqrt abs floor min max clip`. The formula is parsed into a syntax tree and evaluated with numpy (no
+  attribute access, no calls but those functions, never `eval`); the result is kept inside the knob's range. A formula
+  knob is not a param (the formula sets it); wires still move it.
 - **Checks:** unknown modules, knobs and sources, audio wired out of an envelope, and loops are SongErrors with
   suggestions, at the line that wrote them.
 - **Macros:** one 0..1 knob that moves several, `@punch(default=.5, drop.d=.03..0.2, drive.drive=.1..0.7)` on a
@@ -230,10 +247,10 @@ inst bass=patch/acid(f1.cutoff=400)
   a patch sketch of the same name (`snare808` for the snare): its signal chain rebuilt from modules, so the Studio's
   "Build a patch" starts from the instrument you are on and you can rewire it. The sketches are simplifications (the
   hat has three metal squares, not six; the piano is a string, not 24 modal partials; the organ has three drawbars),
-  and each says so in its description. Also: acid, bell, glass_pad, wobble. A song's own patch of the same name wins.
+  and each says so in its description. Also: acid, bell, glass_pad, wobble, and for the new modules cello (a bowed
+  waveguide), clarinet, flute, vowel_pad and scan_bass (wavetables). A song's own patch of the same name wins.
 - **Evaluation:** notes render offline, so the graph is evaluated module by module as whole numpy arrays in
-  topological order. Feedback exists only inside modules (`string`, `comb`, `delay`), never between them.
-- **Not built yet:** expressions as knob values, `waveguide` (bowed or blown) and wavetables.
+  topological order. Feedback exists only inside modules (`string`, `waveguide`, `comb`, `delay`), never between them.
 
 ### Instrument guides
 

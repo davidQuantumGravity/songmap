@@ -1,0 +1,10 @@
+# A bowed cello: a waveguide string kept sounding by bow friction, a delayed vibrato and a body filter.
+description: "A bowed string (waveguide): the bow sticks and slips on a string tuned to the note, which keeps it sounding while the note is held. Harder notes press the bow harder (grittier); the vibrato arrives after the bow settles; the low-pass is the wooden body. Formulas set the pressure and the body brightness from velocity and pitch."
+modules:
+  string: {type: waveguide, mode: bow, pressure: "0.35+0.5*vel", position: 0.11, bright: 0.55, attack: 0.12, release: 0.25, noise: 0.015}
+  vib: {type: lfo, rate: 5.2, shape: sine, depth: 0.12, delay: 0.35}
+  body: {type: filter, mode: lp, cutoff: "clip(900*2**(1.5*vel+0.5*key), 300, 9000)", q: 0.8, keytrack: 0}
+  out: {type: out, level: 0.9, tail: 0.3}
+wires: [vib>string.tune, string>body, body>out]
+macros:
+  bow: {default: 0.5, map: {string.position: [0.2, 0.06], string.noise: [0.005, 0.05]}}

@@ -1,0 +1,7 @@
+# A flute: an air jet over a bore (waveguide), breath noise, a vibrato that grows into the note.
+description: "An air jet and a bore (waveguide): the jet flips in and out of the mouthpiece in step with the wave in the bore. Breath noise is part of the sound; the vibrato fades in. It speaks cleanly from about 220 Hz up (a flute's range starts at middle C); lower notes may overblow."
+modules:
+  jet: {type: waveguide, mode: flute, pressure: "0.45+0.4*vel", bright: 0.55, attack: 0.08, release: 0.1, noise: 0.03}
+  vib: {type: lfo, rate: 5, shape: sine, depth: 0.1, delay: 0.4}
+  out: {type: out, level: 0.8, tail: 0.15}
+wires: [vib>jet.tune, jet>out]

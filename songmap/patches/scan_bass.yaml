@@ -1,0 +1,10 @@
+# A scanning bass: an envelope sweeps a wavetable from sine to square at each note (the attack bites, the tail rounds).
+description: "Wavetables: an envelope scans the basic table (sine, triangle, saw, square) at every note: harder notes start further along (brighter), then the tone settles back toward the sine. A sub sine underneath holds the low end."
+modules:
+  wt: {type: wavetable, table: basic, position: 0, level: 0.7}
+  scan: {type: env, a: 0.002, d: 0.25, s: 0.15, r: 0.1}
+  sub: {type: osc, wave: sine, octave: -1, level: 0.45}
+  env: {type: env, a: 0.003, d: 0.3, s: 0.75, r: 0.08}
+  amp: {type: vca}
+  out: {type: out, level: 0.8}
+wires: [scan>wt.position, vel>wt.position*0.4, wt>amp, sub>amp, env>amp.gain, amp>out]

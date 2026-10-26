@@ -64,6 +64,8 @@ set <key>[.<key>...]=<value>                               set returns={hall: {t
 
 `set` writes any field of the YAML form that has no directive, such as `returns`, `harmony.voicing` or an `fx` kit. Each other directive maps onto a field of the song: `instruments`, `groove`, `parts_feel`, `harmony`, `motifs`, `cues`, `mix`, `master` or `qa` ([SONGMAP_SPEC.md](SONGMAP_SPEC.md)). In `mix`, `sc=` and the sends change only the depth or send they name; the rest of the part's default sidechain and sends is kept. `inserts` names a part, `master` (before mastering) or a return such as `hall` or `room` (its wet output, after the reverb and before it joins the mix): `inserts hall eq(lp=6000, low=-4) | master comp(ratio=2)`. `groove` and `feel` are played by the performance layer, on top of the song's mood. `qa` rules are evaluated from P2.
 
+A `patch` builds an instrument from modules and wires (docs/INSTRUMENTS.md §7): oscillators, wavetables, noise, plucked strings, waveguides (bowed strings, reeds, flutes), resonators, filters, shapers, echoes, envelopes and LFOs. Several lines with one name add to the same patch, and a voice plays it as `patch/<name>` (`inst bass=patch/acid(f1.cutoff=500)`). A knob value may be a quoted formula of the note: `f1=filter(cutoff="800*2**(2*vel+key)")`. Patches in `songmap/patches/` (a sketch of every built-in instrument, plus acid, bell, glass_pad, snare808, wobble, cello, clarinet, flute, vowel_pad and scan_bass) need no `patch` line.
+
 **Values:**
 
 | Value | Written | Notes |

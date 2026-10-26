@@ -1,0 +1,7 @@
+# A clarinet: a reed driving a bore tuned to the note (a closed-open tube: strong odd harmonics, hollow).
+description: "A reed and a bore (waveguide): breath pressure opens and closes the reed, which feeds the bore; a tube closed at one end has mostly odd harmonics, the clarinet's hollow sound. Harder notes blow harder and brighter; a little breath noise and a slow vibrato keep it alive."
+modules:
+  reed: {type: waveguide, mode: reed, pressure: "0.4+0.45*vel", bright: 0.65, attack: 0.05, release: 0.08, noise: 0.02}
+  vib: {type: lfo, rate: 4.8, shape: sine, depth: 0.06, delay: 0.5}
+  out: {type: out, level: 0.9, tail: 0.15}
+wires: [vib>reed.tune, reed>out]
