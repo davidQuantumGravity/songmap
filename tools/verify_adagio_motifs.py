@@ -53,7 +53,9 @@ receipt = {
     "western_harmonic_duration_percent": 75, "golden_harmonic_duration_percent": 25,
     "same_clean_master_gain": True, "section_loudness_delta_db": round(delta, 2),
     "sampled_ranges": ranges, "qa": {k: qa[k] for k in ("lufs", "true_peak_db", "clipped_samples")},
-    "listening_status": "Awaiting the user's A/B preference; technical checks do not establish likeability.",
+    "listening_status": "User selected B - more forward motion. A remains an alternative, not an approved theme.",
+    "chosen_motif": "B - Forward Lilt",
+    "user_verdict": "B - more forward motion",
 }
 (FOLDER / "verification.json").write_text(json.dumps(receipt, indent=2) + "\n")
 print(json.dumps(receipt))

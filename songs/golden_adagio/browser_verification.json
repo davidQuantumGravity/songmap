@@ -1,0 +1,18 @@
+{
+  "url": "http://127.0.0.1:56855/songs/golden_adagio/",
+  "seconds": 300,
+  "instrument_cards": 8,
+  "instrument_portraits_loaded": 8,
+  "individual_notes_and_bar_timelines": true,
+  "western_and_golden_chord_display": true,
+  "displayed_difference_is_center_divided_by_32": true,
+  "versions": 3,
+  "switch_preserves_time_and_transport": true,
+  "mp3_byte_ranges": true,
+  "landmark_seeking": true,
+  "mobile_overflow": false,
+  "page_errors": [],
+  "songbook_entry": true,
+  "score_sha256": "677a151fabb2e3cb163bdf13a0f718b86b5b382092a5529c4e6432b489d08bd0",
+  "page_sha256": "e98325c6ad6ddaf93cd70937a85fa15f5ed2e839b4e57d748ef9de6f069dab06"
+}

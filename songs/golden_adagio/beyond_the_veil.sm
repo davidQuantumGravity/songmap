@@ -1,0 +1,173 @@
+# Beyond the Veil - five-minute Western/golden adagio developed from the user's chosen motif B.
+# review: pending - Full arrangement awaiting listening review; B was selected in the Studio A/B test.
+# 96 bars at 80 BPM = 4:48, then a twelve-second resonance tail. No quoted melody from an existing work.
+# Harmonic duration: 72 Western bars / 24 golden bars (75% / 25%), excluding the final decay.
+# The opening eight-bar violin melody preserves the chosen B. Later phrases develop its pickup, rhythm and answer.
+# Keys: D minor, relative F, distant Ab, D minor memory, A major threshold, and a D-major orchestral return.
+# Golden shadows replace the Western thirds/other altered tones, then resolve at the next Western arrival.
+# All eight parts have separate full-form note/expression passes in tools/compose_beyond_the_veil.py.
+# Melodies use phrase breaths and register separation; golden notes are not piled against their unaltered doubles.
+# Binaural pairs follow every chord, Western or golden. Their centers use the score's tempered pitch classes.
+# Every beat difference is its own carrier frequency / 32: a five-octave reduction that stays proportional.
+song "Beyond the Veil" 80 4/4 Dm fps=30 seed=241026 tail=12 tuning=36edo mood=ambient
+inst melody=sampler/violins(attack=.065,release_mul=.13) cello=sampler/cello(attack=.065,release_mul=.13) basslow=sampler/double_bass_arco(attack=.08,release_mul=.12) flute=sampler/flute(attack=.06,release_mul=.15) horn=sampler/horn(attack=.08,release_mul=.15) harp=sampler/folk_harp(release_mul=.16) piano=sampler/grand_piano(release_mul=.13) organ=clean/organ(partials=8,rolloff=1.85,attack=.3,release=.16,vel_bright=.08)
+groove hum=4,3,.012 metric=.06
+feel melody gate=.94 hum=5,3,.014 arch=.2
+feel cello gate=.91 hum=5,3,.014 arch=.18
+feel basslow gate=.91 hum=2,2,.01 arch=.12
+feel flute gate=.91 hum=5,3,.012 arch=.22
+feel horn gate=.92 hum=5,3,.014 arch=.18
+feel harp gate=.86 hum=3,2,.012 arch=.12
+feel piano gate=.9 hum=3,2,.01 arch=.12
+feel organ gate=.94 hum=1,1,.008 arch=.1
+set returns={hall: {type: reverb, seconds: 3.8, predelay: .045, damping: .7, early: 12, width: 1.12}}
+binaural E4 C4 A3 F3 D3 beat=octave octaves=5 level=-15 fade=8 glide=.28 breathe=2 breath=2 carve=true
+
+
+# Phrase 1: The chosen theme - 0:00; local key Dm.
+p01_1 1 | melody:{notes: "=mp a4 d+4 f+4. e+8"} cello:{notes: "=p d-2 a-2"} basslow:{notes: "=p d--2 a--2"} harp:{notes: "=pp r2 a8 =p c+8 =pp a4"} piano:{notes: "=p [f-,a-,c,e]2 =pp [f-,a-,c,e]2"} chords="Dm9:1" key="Dm" dyn=mp binaural={carriers: [64, 57, 53, 50, 48], gain_db: -1}
+p01_2 1 | melody:{notes: "=p d+2 c+4 d+4"} cello:{notes: "=pp f-2 d-2"} basslow:{notes: "=pp bb---1"} piano:{notes: "=p [d-,f-,a-,c]2 =pp [d-,f-,a-,c]2"} chords="Bbmaj9:1" key="Dm" dyn=mp binaural={carriers: [60, 58, 57, 53, 50], gain_db: -1}
+p01_3 1 | melody:{notes: "=mp f+4 g+4 =mf a+4. =mp g+8"} cello:{notes: "=p g-2 d4 bb-4"} basslow:{notes: "=p g--2 d--2"} harp:{notes: "r2 =p d+8 =pp f+8 =p a+4"} piano:{notes: "=p [bb-,d,f,a]2 =pp [bb-,d,f,a]2"} chords="Gm9:1" key="Dm" dyn=mp binaural={carriers: [69, 58, 55, 53, 50], gain_db: -1}
+p01_4 1 | melody:{notes: "=p ^f+2 a4 vc#+4"} cello:{notes: "=pp vd-2 ^f-2"} basslow:{notes: "=pp vd--1"} piano:{notes: "=pp [vd-,^f-,a-,vc#]2 =p [vd-,^f-,a-,vc#]2"} chords="vDg7:1" key="Dm" dyn=mp binaural={carriers: [57.0, 53.333333333, 49.666666667, 48.666666667], gain_db: -1}
+
+# Phrase 2: The first answer - 0:12; local key Dm.
+p02_1 1 | melody:{notes: "=mp d+4 e+4 f+2_"} cello:{notes: "=p f-2 e-4 d-4"} basslow:{notes: "=p d--2 a--2"} harp:{notes: "=pp r2 e4 =p a4"} piano:{notes: "=p [f-,a-,c,e]2 =pp [f-,a-,c,e]2"} chords="Dm9:1" key="Dm" dyn=mp binaural={carriers: [64, 57, 53, 50, 48], gain_db: -1}
+p02_2 1 | melody:{notes: "=mf a+4. =mp g+8 f+4 d+4"} cello:{notes: "=pp d-2 f-2"} basslow:{notes: "=pp bb---1"} harp:{notes: "=pp r2 f4 =p c+4"} piano:{notes: "=p [d-,f-,a-,c]2 =pp [d-,f-,a-,c]2"} chords="Bbmaj9:1" key="Dm" dyn=mp binaural={carriers: [60, 58, 57, 53, 50], gain_db: -1}
+p02_3 1 | melody:{notes: "=mp vc#+4 ^e+4 =mf g#+4. =mp ^e+8"} cello:{notes: "=p a-2 vc#4 ^e4"} basslow:{notes: "=p a--1"} piano:{notes: "=pp [g#-,vc#,^e,a]2 =p [g#-,vc#,^e,a]2"} chords="Ag7:1" key="Dm" dyn=mp binaural={carriers: [57, 56, 52.333333333, 48.666666667], gain_db: -1}
+p02_4 1 | melody:{notes: "=p e+4 d+2_ r4"} cello:{notes: "=pp e2 d-4 r4"} basslow:{notes: "=pp d--2. r4"} flute:{notes: "=pp e+4 d+2 r4"} harp:{notes: "=pp a2 =p d+4 r4"} piano:{notes: "=p [f-,a-,c,e]2 =pp [f-,a-,c,e]2"} chords="Dm9:1" key="Dm" dyn=mp binaural={carriers: [64, 57, 53, 50, 48], gain_db: -1}
+
+# Phrase 3: A wider window - 0:24; local key F.
+p03_1 1 | melody:{notes: "=mp c+4 f+4 a+4. g+8"} cello:{notes: "=p f-2 c2"} basslow:{notes: "=p f--1"} horn:{notes: "=p a-2 c4 e4"} harp:{notes: "=pp r2 c+8 e+8 =p a+4"} piano:{notes: "=p [a-,c,e,g]2 r2"} chords="Fmaj9:1" key="F" dyn=mp binaural={carriers: [67, 57, 53, 52, 48], gain_db: -1}
+p03_2 1 | melody:{notes: "=p g+2 e+4 d+4"} cello:{notes: "=mp e-2 bb-2"} basslow:{notes: "=mp c--2 g--2"} horn:{notes: "=pp bb-2 g-2"} harp:{notes: "=pp r2 bb8 d+8 =p g+4"} piano:{notes: "=pp [e-,bb-,d,g]1"} chords="C9:1" key="F" dyn=mp binaural={carriers: [62, 58, 55, 52, 48], gain_db: -1}
+p03_3 1 | melody:{notes: "=mp ^ab+2 c+4 ve+4_"} cello:{notes: "=p vf-2 ^ab-2"} basslow:{notes: "=p vf--1"} flute:{notes: "=pp r2 c+2"} horn:{notes: "=p c1"} harp:{notes: "=pp r2 c+8 ve+8 =p ^ab+4"} piano:{notes: "=p [vf-,^ab-,c,ve]2 r2"} chords="vFg7:1" key="F" dyn=mp binaural={carriers: [56.333333333, 52.666666667, 51.666666667, 48.0], gain_db: -1}
+p03_4 1 | melody:{notes: "=p e+4 f+4 g+4 a+4"} cello:{notes: "=pp a-2 g-4 f-4"} basslow:{notes: "=pp f--2 c--2"} flute:{notes: "=p a+2 g+4 f+4"} horn:{notes: "=pp e2 c2"} piano:{notes: "=pp [a-,c,e,g]1"} chords="Fmaj9:1" key="F" dyn=mp binaural={carriers: [67, 57, 53, 52, 48], gain_db: -1}
+
+# Phrase 4: A question left open - 0:36; local key Dm.
+p04_1 1 | melody:{notes: "=mp bb4 d+4 f+4. e+8"} cello:{notes: "=p g-2 bb-4 d4"} basslow:{notes: "=p g--1"} horn:{notes: "=p bb-2 d4 f4"} harp:{notes: "=pp r2 d+8 f+8 =p a+4"} piano:{notes: "=p [bb-,d,f,a]2 r2"} chords="Gm9:1" key="Dm" dyn=mp binaural={carriers: [69, 58, 55, 53, 50], gain_db: -1}
+p04_2 1 | melody:{notes: "=p f+2 e+4 d+4"} cello:{notes: "=mp a-2 f-2"} basslow:{notes: "=mp d--2 a--2"} horn:{notes: "=mp a-2 c4 e4"} piano:{notes: "=pp [f-,a-,c,e]2 r2"} chords="Dm9:1" key="Dm" dyn=mp binaural={carriers: [64, 57, 53, 50, 48], gain_db: -1}
+p04_3 1 | melody:{notes: "=mp ^c+2 e+4 vg#+4_"} cello:{notes: "=p va-2 ^c2"} basslow:{notes: "=p va--1"} horn:{notes: "=p e2 vg#-4 ^c4"} harp:{notes: "=pp r2 e+8 ^c+8 =p vg#+4"} piano:{notes: "=p [^c,e,vg#-,va]1"} chords="vAg7:1" key="Dm" dyn=mp binaural={carriers: [56.666666667, 55.666666667, 52.0, 48.333333333], gain_db: -1}
+p04_4 1 | melody:{notes: "=p g+2 e+4 c#+4"} cello:{notes: "=pp e2 c#4 a-4"} basslow:{notes: "=pp a--2 e--2"} horn:{notes: "=pp c#2 e4 g-4"} harp:{notes: "=pp r2 e+4 c#+4"} piano:{notes: "=pp [g-,c#,e,a]2 r2"} chords="A7:1" key="Dm" dyn=mp binaural={carriers: [57, 55, 52, 49], gain_db: -1}
+
+# Phrase 5: Into the sunlight - 0:48; local key F.
+p05_1 1 | melody:{notes: "=mp a4 c+4 f+4. e+8"} cello:{notes: "=p f-2 a-2"} basslow:{notes: "=p f--1"} flute:{notes: "=pp c+2 r2"} piano:{notes: "=p [a-,c,e,g]2 =pp [a-,c,e,g]2"} chords="Fmaj9:1" key="F" dyn=mp binaural={carriers: [67, 57, 53, 52, 48], gain_db: -1}
+p05_2 1 | melody:{notes: "=p g+2 e+4 c+4"} cello:{notes: "=mp c2 e2"} basslow:{notes: "=mp a--1"} flute:{notes: "=p e+2 g+2"} piano:{notes: "=pp [c,e,g,a]2 r2"} chords="Am7:1" key="F" dyn=mp binaural={carriers: [57, 55, 52, 48], gain_db: -1}
+p05_3 1 | melody:{notes: "=mp f+2 va+4 ^c#+4_"} cello:{notes: "=p vbb-2 ^c#2"} basslow:{notes: "=p vbb---1"} flute:{notes: "=pp f+2 r2"} harp:{notes: "=pp r2 f+8 va+8 =p ^c#++4"} piano:{notes: "=p [vbb--,^c#-,f-,va-,^c]1"} chords="vBbmaj9(v3,^5,^^9):1" key="F" dyn=mp binaural={carriers: [60.333333333, 57.666666667, 56.666666667, 53.0, 49.333333333], gain_db: -1}
+p05_4 1 | melody:{notes: "=p d+2 f+4 a+4"} cello:{notes: "=pp d2 c2"} basslow:{notes: "=pp bb---1"} flute:{notes: "=p a+2 f+4 r4"} harp:{notes: "=pp r2 c+8 d+8 =p f+4"} piano:{notes: "=pp [d-,f-,a-,c]2 r2"} chords="Bbmaj9:1" key="F" dyn=mp binaural={carriers: [60, 58, 57, 53, 50], gain_db: -1}
+
+# Phrase 6: The golden plagal glow - 1:00; local key F.
+p06_1 1 | melody:{notes: "=mp d+4 f+4 g+4 a+4"} cello:{notes: "=mp g-2 d2"} basslow:{notes: "=mp g--1"} horn:{notes: "=p bb-2 d2"} harp:{notes: "=pp bb4 d+4 =p f+4 r4"} piano:{notes: "=p [bb-,d,f,a]2 r2"} chords="Gm9:1" key="F" dyn=mp binaural={carriers: [69, 58, 55, 53, 50], gain_db: -1}
+p06_2 1 | melody:{notes: "=mf g+4 bb+4 a+4 g+4"} cello:{notes: "=p bb-2 e-2"} basslow:{notes: "=p c--2 g--2"} horn:{notes: "=mp e2 bb-2"} harp:{notes: "=pp r2 g8 bb8 =p d+4"} piano:{notes: "=pp [e-,bb-,d,g]2 r2"} chords="C9:1" key="F" dyn=mp binaural={carriers: [62, 58, 55, 52, 48], gain_db: -1}
+p06_3 1 | melody:{notes: "=mp ve+2 ^ab+4 c+4"} cello:{notes: "=mp c2 ve2"} basslow:{notes: "=mp vf--1"} horn:{notes: "=p ve2 c2"} piano:{notes: "=p [vf-,^ab-,c,ve]1"} chords="vFg7:1" key="F" dyn=mp binaural={carriers: [56.333333333, 52.666666667, 51.666666667, 48.0], gain_db: -1}
+p06_4 1 | melody:{notes: "=p c+4 f+4 a+4. g+8"} cello:{notes: "=p a-2 c2"} basslow:{notes: "=p f--1"} horn:{notes: "=pp c2 a-2"} harp:{notes: "=pp r2 c+8 e+8 =p a+4"} piano:{notes: "=pp [a-,c,e,g]1"} chords="Fmaj9:1" key="F" dyn=mp binaural={carriers: [67, 57, 53, 52, 48], gain_db: -1}
+
+# Phrase 7: The long ascent - 1:12; local key F.
+p07_1 1 | melody:{notes: "=mp f+2 e+4 d+4"} cello:{notes: "=mp d2 c4 a-4"} basslow:{notes: "=mp d--1"} harp:{notes: "=pp r2 a4 c+4"} piano:{notes: "=p [f-,a-,c,e]2 r2"} chords="Dm9:1" key="F" dyn=mp binaural={carriers: [64, 57, 53, 50, 48], gain_db: -1}
+p07_2 1 | melody:{notes: "=p bb4 d+4 f+4 g+4"} cello:{notes: "=p g-2 bb-2"} basslow:{notes: "=p g--1"} piano:{notes: "=pp [bb-,d,f,a]2 r2"} chords="Gm9:1" key="F" dyn=mp binaural={carriers: [69, 58, 55, 53, 50], gain_db: -1}
+p07_3 1 | melody:{notes: "=mp ^d+2 ^eb+4 g+4"} cello:{notes: "=mp vc2 ^eb2"} basslow:{notes: "=mp vc--1"} flute:{notes: "=pp g+2 r2"} harp:{notes: "=pp r2 g8 vb8 =p ^d+4"} piano:{notes: "=p [vc-,^eb-,g-,vb-,^d]1"} chords="vCmaj9(v3,^5,^^9):1" key="F" dyn=mp binaural={carriers: [62.333333333, 59.666666667, 58.666666667, 55.0, 51.333333333], gain_db: -1}
+p07_4 1 | melody:{notes: "=p e+2 d+4 c+8 bb8"} cello:{notes: "=p e2 d4 bb-4"} basslow:{notes: "=p c--2 g--2"} flute:{notes: "=p e+2 d+4 r4"} harp:{notes: "=pp r2 g4 d+4"} piano:{notes: "=pp [e-,bb-,d,g]2 r2"} chords="C9:1" key="F" dyn=mp binaural={carriers: [62, 58, 55, 52, 48], gain_db: -1}
+
+# Phrase 8: Beyond the veil - 1:24; local key Ab.
+p08_1 1 | melody:{notes: "=mp a+4 g+4 f+4 e+4"} cello:{notes: "=mp f-2 a-4 c4"} basslow:{notes: "=mp f--1"} horn:{notes: "=p a-2 c2"} organ:{notes: "=p [a-,c,e,g]1"} chords="Fmaj9:1" key="Ab" dyn=mp binaural={carriers: [67, 57, 53, 52, 48], gain_db: -2}
+p08_2 1 | melody:{notes: "=p g+2 f+4 eb+4"} cello:{notes: "=p g-2 bb-2"} basslow:{notes: "=p eb--1"} horn:{notes: "=mp g-2 bb-2"} harp:{notes: "=pp r2 bb8 d+8 =p f+4"} organ:{notes: "=pp [g-,bb-,d,f]1"} chords="Ebmaj9:1" key="Ab" dyn=mp binaural={carriers: [65, 58, 55, 51, 50], gain_db: -2}
+p08_3 1 | melody:{notes: "=mp ^bb+2 vg+4 ^b4_"} cello:{notes: "=mp vab-2 ^b-2"} basslow:{notes: "=mp vab--1"} horn:{notes: "=p eb2 vg2"} organ:{notes: "=p [vab-,^bb-,eb,vg,^b]1"} chords="vAbmaj9(v3,^5,^^9):1" key="Ab" dyn=mp binaural={carriers: [70.333333333, 59.333333333, 55.666666667, 54.666666667, 51.0], gain_db: -2}
+p08_4 1 | melody:{notes: "=p c+4 eb+4 g+4 ab+4"} cello:{notes: "=pp c2 eb2"} basslow:{notes: "=pp ab--1"} flute:{notes: "=pp eb+1"} harp:{notes: "=pp r2 eb+8 g+8 =p bb+4"} organ:{notes: "=pp [c-,g-,bb-,eb]1"} chords="Abmaj9:1" key="Ab" dyn=mp binaural={carriers: [70, 56, 55, 51, 48], gain_db: -2}
+
+# Phrase 9: The far choir - 1:36; local key Ab.
+p09_1 1 | melody:{notes: "=p eb+4 g+4 ab+4. g+8"} cello:{notes: "=p ab-2 eb2"} basslow:{notes: "=p ab--1"} flute:{notes: "=pp eb+2 r2"} harp:{notes: "=pp r2 eb4 g4"} organ:{notes: "=pp [c-,g-,bb-,eb]1"} chords="Abmaj9:1" key="Ab" dyn=mp binaural={carriers: [70, 56, 55, 51, 48], gain_db: -2}
+p09_2 1 | melody:{notes: "=mp eb+4 g+4 bb+4. ab+8"} cello:{notes: "=mp g-2 bb-2"} basslow:{notes: "=mp c--1"} flute:{notes: "=p g+2 eb+4 r4"} harp:{notes: "r2 =p g4 =pp bb4"} organ:{notes: "=p [eb-,g-,bb-,c]1"} chords="Cm7:1" key="Ab" dyn=mp binaural={carriers: [58, 55, 51, 48], gain_db: -2}
+p09_3 1 | melody:{notes: "=p ^e+2 ab+4 vc+4_"} cello:{notes: "=p vdb2 ^e2"} basslow:{notes: "=p vdb--1"} flute:{notes: "=pp ab+2 r2"} harp:{notes: "r2 ab4 =p vc+4"} organ:{notes: "=pp [vdb-,^e-,ab-,vc]1"} chords="vDbg7:1" key="Ab" dyn=mp binaural={carriers: [59.666666667, 56.0, 52.333333333, 48.666666667], gain_db: -2}
+p09_4 1 | melody:{notes: "=mp f+2 eb+4 db+4"} cello:{notes: "=pp f2 eb4 db4"} basslow:{notes: "=pp db--1"} flute:{notes: "=p f+2 eb+4 db+4"} organ:{notes: "=p [f-,ab-,c,eb]1"} chords="Dbmaj9:1" key="Ab" dyn=mp binaural={carriers: [63, 56, 53, 49, 48], gain_db: -2}
+
+# Phrase 10: Answer from the chapel - 1:48; local key Ab.
+p10_1 1 | melody:{notes: "=p db+4 f+4 ab+4. g+8"} cello:{notes: "=p bb-2 db2"} basslow:{notes: "=p bb---1"} horn:{notes: "=p db2 f2"} organ:{notes: "=pp [db-,f-,ab-,c]1"} chords="Bbm9:1" key="Ab" dyn=mp binaural={carriers: [60, 58, 56, 53, 49], gain_db: -2}
+p10_2 1 | melody:{notes: "=mp g+2 f+4 eb+4"} cello:{notes: "=mp g-2 db2"} basslow:{notes: "=mp eb--2 bb---2"} horn:{notes: "=mp g-2 db2"} harp:{notes: "=pp r2 bb4 db+4"} organ:{notes: "=p [g-,db,f,bb]1"} chords="Eb9:1" key="Ab" dyn=mp binaural={carriers: [65, 58, 55, 51, 49], gain_db: -2}
+p10_3 1 | melody:{notes: "=p ^b2_ eb+4 vg+4"} cello:{notes: "=p vab-2 ^b-2"} basslow:{notes: "=p vab--1"} horn:{notes: "=p eb2 ^b-2"} organ:{notes: "=pp [vab-,^b-,eb,vg]1"} chords="vAbg7:1" key="Ab" dyn=mp binaural={carriers: [59.333333333, 55.666666667, 54.666666667, 51.0], gain_db: -2}
+p10_4 1 | melody:{notes: "=mp g+4 ab+4 bb+4 ab+4"} cello:{notes: "=pp c2 bb-4 ab-4"} basslow:{notes: "=pp ab--1"} horn:{notes: "=pp g-2 c2"} harp:{notes: "=p r2 eb+4 =pp c+4"} organ:{notes: "=p [c-,g-,bb-,eb]1"} chords="Abmaj9:1" key="Ab" dyn=mp binaural={carriers: [70, 56, 55, 51, 48], gain_db: -2}
+
+# Phrase 11: A darker current - 2:00; local key Ab.
+p11_1 1 | melody:{notes: "=mp ab+4 g+4 f+4 c+4"} cello:{notes: "=mp f-2 c2"} basslow:{notes: "=mp f--1"} organ:{notes: "=p [ab-,c,eb,g]1"} chords="Fm9:1" key="Ab" dyn=mp binaural={carriers: [67, 56, 53, 51, 48], gain_db: -2}
+p11_2 1 | melody:{notes: "=p db+4 f+4 ab+4 f+4"} cello:{notes: "=p db2 f2"} basslow:{notes: "=p bb---1"} harp:{notes: "=pp r2 db+8 f+8 =p ab+4"} organ:{notes: "=pp [db-,f-,ab-,c]1"} chords="Bbm9:1" key="Ab" dyn=mp binaural={carriers: [60, 58, 56, 53, 49], gain_db: -2}
+p11_3 1 | melody:{notes: "=mp ^f+2 vd+4 bb4"} cello:{notes: "=mp veb2 ^f#2"} basslow:{notes: "=mp veb--1"} flute:{notes: "=pp bb+2 r2"} organ:{notes: "=p [veb-,^f#-,bb-,vd,^f]1"} chords="vEbmaj9(v3,^5,^^9):1" key="Ab" dyn=mp binaural={carriers: [65.333333333, 58.0, 54.333333333, 50.666666667, 49.666666667], gain_db: -2}
+p11_4 1 | melody:{notes: "=p g+2 f+4 eb+8 db+8"} cello:{notes: "=p g2 f4 eb4"} basslow:{notes: "=p eb--1"} flute:{notes: "=p bb+2 f+4 r4"} harp:{notes: "=pp r2 bb4 =p f+4"} organ:{notes: "=pp [g-,db,f,bb]1"} chords="Eb9:1" key="Ab" dyn=mp binaural={carriers: [65, 58, 55, 51, 49], gain_db: -2}
+
+# Phrase 12: Remembering home - 2:12; local key Ab.
+p12_1 1 | melody:{notes: "=mp c+4 eb+4 g+4 ab+4"} cello:{notes: "=mp eb2 c2"} basslow:{notes: "=mp ab--1"} horn:{notes: "=p eb2 c2"} harp:{notes: "=pp r2 c+4 eb+4"} organ:{notes: "=p [c-,g-,bb-,eb]1"} chords="Abmaj9:1" key="Ab" dyn=mp binaural={carriers: [70, 56, 55, 51, 48], gain_db: -2}
+p12_2 1 | melody:{notes: "=mf bb+2 g+4 e+4"} cello:{notes: "=p bb-2 e2"} basslow:{notes: "=p c--1"} horn:{notes: "=mp e2 bb-2"} organ:{notes: "=pp [e-,bb-,c,g]1"} chords="C7:1" key="Ab" dyn=mp binaural={carriers: [58, 55, 52, 48], gain_db: -2}
+p12_3 1 | melody:{notes: "=p ^f+2 a+4 vc#+4"} cello:{notes: "=pp vd2 ^f2"} basslow:{notes: "=pp vd--1"} horn:{notes: "=pp ^f2 a-2"} organ:{notes: "=pp [vd-,^f-,a-,vc#]1"} chords="vDg7:1" key="Ab" dyn=mp binaural={carriers: [57.0, 53.333333333, 49.666666667, 48.666666667], gain_db: -2}
+p12_4 1 | melody:{notes: "=pp d+4 e+4 f+4 e+4"} cello:{notes: "=pp f2 e4 d4"} basslow:{notes: "=pp d--2 r2"} horn:{notes: "=pp d2 a-2"} organ:{notes: "=pp [f-,a-,c,e]1"} chords="Dm9:1" key="Ab" dyn=mp binaural={carriers: [64, 57, 53, 50, 48], gain_db: -2}
+
+# Phrase 13: The still heart - 2:24; local key Dm.
+p13_1 1 | cello:{notes: "=p a-4 d4 f4. e8"} basslow:{notes: "=pp d--1"} flute:{notes: "=pp e+2 d+2"} piano:{notes: "=pp [f-,a-,c,e]1"} chords="Dm9:1" key="Dm" dyn=mp binaural={carriers: [64, 57, 53, 50, 48], gain_db: -4}
+p13_2 1 | cello:{notes: "=pp d2 c4 d4"} basslow:{notes: "=pp bb---1"} flute:{notes: "=p f+2 d+2"} piano:{notes: "=pp [d-,f-,a-,c]2 r2"} chords="Bbmaj9:1" key="Dm" dyn=mp binaural={carriers: [60, 58, 57, 53, 50], gain_db: -4}
+p13_3 1 | cello:{notes: "=p ^bb-2 d4 vf#4"} basslow:{notes: "=pp vg--1"} flute:{notes: "=pp d+1"} piano:{notes: "=p [vg-,^bb-,d,vf#]1"} chords="vGg7:1" key="Dm" dyn=mp binaural={carriers: [58.333333333, 54.666666667, 53.666666667, 50.0], gain_db: -4}
+p13_4 1 | melody:{notes: "=pp d+2 r2"} cello:{notes: "=pp f2 bb-4 g-4"} basslow:{notes: "=pp g--2 r2"} flute:{notes: "=pp d+2 r2"} piano:{notes: "=pp [bb-,d,f,a]2 r2"} chords="Gm9:1" key="Dm" dyn=mp binaural={carriers: [69, 58, 55, 53, 50], gain_db: -4}
+
+# Phrase 14: The returning pulse - 2:36; local key Dm.
+p14_1 1 | cello:{notes: "=p bb-4 d4 e4 g4"} basslow:{notes: "=p e--1"} harp:{notes: "=pp r2 bb4 g4"} piano:{notes: "=p [g-,bb-,d,e]2 r2"} chords="Em7b5:1" key="Dm" dyn=mp binaural={carriers: [58, 55, 52, 50], gain_db: -4}
+p14_2 1 | cello:{notes: "=mp e2 c#4 a-4"} basslow:{notes: "=mp a--2 e--2"} harp:{notes: "=p r2 e+4 =pp c#+4"} piano:{notes: "=pp [g-,c#,e,a]2 r2"} chords="A7:1" key="Dm" dyn=mp binaural={carriers: [57, 55, 52, 49], gain_db: -4}
+p14_3 1 | cello:{notes: "=p ^f2 a-4 vc#4"} basslow:{notes: "=p vd--1"} piano:{notes: "=p [vd-,^f-,a-,vc#]1"} chords="vDg7:1" key="Dm" dyn=mp binaural={carriers: [57.0, 53.333333333, 49.666666667, 48.666666667], gain_db: -4}
+p14_4 1 | melody:{notes: "=p r2 a4 c+4"} cello:{notes: "=pp e4 d2 r4"} basslow:{notes: "=pp d--2 r2"} piano:{notes: "=pp [f-,a-,c,e]2 r2"} chords="Dm9:1" key="Dm" dyn=mp binaural={carriers: [64, 57, 53, 50, 48], gain_db: -4}
+
+# Phrase 15: A door in A - 2:48; local key A.
+p15_1 1 | melody:{notes: "=p d+4 e+4 f+4. e+8"} cello:{notes: "=p d2 f2"} basslow:{notes: "=p d--1"} harp:{notes: "=pp r2 a4 c+4"} piano:{notes: "=p [f-,a-,c,e]2 =pp [f-,a-,c,e]2"} chords="Dm9:1" key="A" dyn=mp binaural={carriers: [64, 57, 53, 50, 48], gain_db: 0}
+p15_2 1 | melody:{notes: "=mp f#+2 e+4 d+4"} cello:{notes: "=mp g#-2 b-2"} basslow:{notes: "=mp e--2 b---2"} flute:{notes: "=p b+2 g#+2"} harp:{notes: "=p r2 b4 =pp d+4"} piano:{notes: "=p [g#-,d,f#,b]2 r2"} chords="E9:1" key="A" dyn=mp binaural={carriers: [66, 59, 56, 52, 50], gain_db: 0}
+p15_3 1 | melody:{notes: "=p ^b+2 vg#+4 e+4"} cello:{notes: "=p va-2 ^c2"} basslow:{notes: "=p va--1"} flute:{notes: "=pp e+2 r2"} harp:{notes: "r2 e+8 vg#+8 =p ^b+4"} piano:{notes: "=mp [^c,e,vg#-,^b]1"} chords="vAmaj9(v3,^5,^^9):1" key="A" dyn=mp binaural={carriers: [71.333333333, 56.666666667, 55.666666667, 52.0, 48.333333333], gain_db: 0}
+p15_4 1 | melody:{notes: "=mp c#+4 e+4 g#+4 a+4"} cello:{notes: "=mp c#2 e2"} basslow:{notes: "=mp a--1"} flute:{notes: "=p e+2 c#+4 r4"} piano:{notes: "=p [c#-,g#-,b-,e]2 r2"} chords="Amaj9:1" key="A" dyn=mp binaural={carriers: [71, 57, 56, 52, 49], gain_db: 0}
+
+# Phrase 16: A brighter horizon - 3:00; local key A.
+p16_1 1 | melody:{notes: "=mp f#+4 b+4 a+4 f#+4"} cello:{notes: "=mp b-2 f#2"} basslow:{notes: "=mp b---1"} horn:{notes: "=p f#2 d2"} harp:{notes: "=pp r2 f#+8 a+8 =p c#++4"} piano:{notes: "=mp [d-,a-,c#,f#]2 r2"} chords="Bm9:1" key="A" dyn=mp binaural={carriers: [61, 59, 57, 54, 50], gain_db: 0}
+p16_2 1 | melody:{notes: "=mf g#+2 f#+4 e+4"} cello:{notes: "=p g#2 f#4 e4"} basslow:{notes: "=p e--2 b---2"} horn:{notes: "=mp d2 g#-2"} piano:{notes: "=p [g#-,d,f#,b]2 r2"} chords="E9:1" key="A" dyn=mp binaural={carriers: [66, 59, 56, 52, 50], gain_db: 0}
+p16_3 1 | melody:{notes: "=p ^c+4 e+4 vg#+4 e+4"} cello:{notes: "=mp e2 vg#-2"} basslow:{notes: "=mp va--1"} horn:{notes: "=p vg#-2 e2"} harp:{notes: "=pp r2 e+4 ^c+4"} piano:{notes: "=mp [^c,e,vg#-,va]1"} chords="vAg7:1" key="A" dyn=mp binaural={carriers: [56.666666667, 55.666666667, 52.0, 48.333333333], gain_db: 0}
+p16_4 1 | melody:{notes: "=mp b+4 a+4 g#+4 e+4"} cello:{notes: "=p c#2 b-4 a-4"} basslow:{notes: "=p a--2 e--2"} horn:{notes: "=pp c#2 e2"} harp:{notes: "r2 b4 =p e+4"} piano:{notes: "=p [c#-,g#-,b-,e]2 r2"} chords="Amaj9:1" key="A" dyn=mp binaural={carriers: [71, 57, 56, 52, 49], gain_db: 0}
+
+# Phrase 17: The major return - 3:12; local key D.
+p17_1 1 | melody:{notes: "=mf a4 d+4 f#+4. e+8"} cello:{notes: "=mp d2 f#4 a4"} basslow:{notes: "=mf d--1"} horn:{notes: "=mp f#2 a-2"} harp:{notes: "=pp r2 a8 c#+8 =p e+4"} organ:{notes: "=mp [f#-,c#,e,a]1"} chords="Dmaj9:1" key="D" dyn=mp binaural={carriers: [64, 57, 54, 50, 49], gain_db: 0}
+p17_2 1 | melody:{notes: "=mp f#+2 e+4 d+4"} cello:{notes: "=mf f#2 d2"} basslow:{notes: "=mp b---1"} horn:{notes: "=mf d2 f#2"} harp:{notes: "=pp r2 f#4 a4"} organ:{notes: "=p [d-,a-,c#,f#]1"} chords="Bm9:1" key="D" dyn=mp binaural={carriers: [61, 59, 57, 54, 50], gain_db: 0}
+p17_3 1 | melody:{notes: "=mf b4 veb+4 ^g+2_"} cello:{notes: "=mp ve2 ^g2"} basslow:{notes: "=mf ve--1"} horn:{notes: "=mp ^g-2 b-2"} harp:{notes: "=p r2 b4 =pp ^g4"} organ:{notes: "=mp [ve-,^g-,b-,veb]1"} chords="vEg7:1" key="D" dyn=mp binaural={carriers: [59.0, 55.333333333, 51.666666667, 50.666666667], gain_db: 0}
+p17_4 1 | melody:{notes: "=mp g+4 f#+4 e+2"} cello:{notes: "=p b-2 d2"} basslow:{notes: "=mp e--2 b---2"} horn:{notes: "=p g-2 b-2"} organ:{notes: "=p [g-,d,f#,b]1"} chords="Em9:1" key="D" dyn=mp binaural={carriers: [66, 59, 55, 52, 50], gain_db: 0}
+
+# Phrase 18: Vaults opening - 3:24; local key D.
+p18_1 1 | melody:{notes: "=mf b4 d+4 g+4. f#+8"} cello:{notes: "=mf g-2 b-4 d4"} basslow:{notes: "=mf g--1"} flute:{notes: "=p d+2 r2"} organ:{notes: "=mp [b-,d,f#,a]1"} chords="Gmaj9:1" key="D" dyn=mp binaural={carriers: [69, 59, 55, 54, 50], gain_db: 0}
+p18_2 1 | melody:{notes: "=mp e+4 g+4 b+4 a+4"} cello:{notes: "=mp e2 g2"} basslow:{notes: "=mp a--2 e--2"} organ:{notes: "=p [c#,g,b,e+]1"} chords="A9:1" key="D" dyn=mp binaural={carriers: [71, 57, 55, 52, 49], gain_db: 0}
+p18_3 1 | melody:{notes: "=mf ^e+2 a+4 ^f+4_"} cello:{notes: "=mf vd2 ^f2"} basslow:{notes: "=mf vd--1"} flute:{notes: "=pp a+2 r2"} organ:{notes: "=mp [vd-,^f-,a-,vc#,^e]1"} chords="vDmaj9(v3,^5,^^9):1" key="D" dyn=mp binaural={carriers: [64.333333333, 57.0, 53.333333333, 49.666666667, 48.666666667], gain_db: 0}
+p18_4 1 | melody:{notes: "=mp f#+2 e+4 d+4"} cello:{notes: "=mp f#2 e4 d4"} basslow:{notes: "=mp d--1"} flute:{notes: "=p a+2 f#+4 r4"} organ:{notes: "=p [f#-,c#,e,a]1"} chords="Dmaj9:1" key="D" dyn=mp binaural={carriers: [64, 57, 54, 50, 49], gain_db: 0}
+
+# Phrase 19: The ascending choir - 3:36; local key D.
+p19_1 1 | melody:{notes: "=mf c#+4 f#+4 a+4. g#+8"} cello:{notes: "=mf f#2 a4 c#+4"} basslow:{notes: "=mf f#--1"} horn:{notes: "=mp c#2 e2"} harp:{notes: "=pp r2 c#+8 e+8 =p g#+4"} organ:{notes: "=mp [a-,e,g#,c#+]1"} chords="F#m9:1" key="D" dyn=mp binaural={carriers: [68, 57, 54, 52, 49], gain_db: 0}
+p19_2 1 | melody:{notes: "=mp f#+4 a+4 c#++4 b+4"} cello:{notes: "=mp b-2 d2"} basslow:{notes: "=mp b---1"} horn:{notes: "=mf f#2 d2"} harp:{notes: "=pp r2 a4 c#+4"} organ:{notes: "=mf [d-,a-,c#,f#]1"} chords="Bm9:1" key="D" dyn=mp binaural={carriers: [61, 59, 57, 54, 50], gain_db: 0}
+p19_3 1 | melody:{notes: "=mf ^a+2 d+4 ^bb+4_"} cello:{notes: "=mf vg-2 ^bb-2"} basslow:{notes: "=mf vg--1"} horn:{notes: "=mp vf#2 d2"} organ:{notes: "=mp [vg-,^bb-,d,vf#,^a]1"} chords="vGmaj9(v3,^5,^^9):1" key="D" dyn=mp binaural={carriers: [69.333333333, 58.333333333, 54.666666667, 53.666666667, 50.0], gain_db: 0}
+p19_4 1 | melody:{notes: "=mp b+2 a+4 g+4"} cello:{notes: "=mp d2 f#2"} basslow:{notes: "=mp g--2 d--2"} horn:{notes: "=p f#2 d2"} harp:{notes: "=p r2 a4 =pp d+4"} organ:{notes: "=p [b-,d,f#,a]1"} chords="Gmaj9:1" key="D" dyn=mp binaural={carriers: [69, 59, 55, 54, 50], gain_db: 0}
+
+# Phrase 20: Gathering light - 3:48; local key D.
+p20_1 1 | melody:{notes: "=mf g+4 f#+4 e+4 b4"} cello:{notes: "=mf e2 g4 b4"} basslow:{notes: "=mf e--1"} flute:{notes: "=mp b+2 g+2"} horn:{notes: "=mp g-2 b-2"} organ:{notes: "=mf [g-,d,f#,b]1"} chords="Em9:1" key="D" dyn=mp binaural={carriers: [66, 59, 55, 52, 50], gain_db: 1}
+p20_2 1 | melody:{notes: "=mp e+4 g+4 b+4 a+4"} cello:{notes: "=mp a2 g4 e4"} basslow:{notes: "=mp a--1"} flute:{notes: "=p e+2 r2"} horn:{notes: "=mf g-2 c#2"} organ:{notes: "=mp [c#,g,b,e+]1"} chords="A9:1" key="D" dyn=mp binaural={carriers: [71, 57, 55, 52, 49], gain_db: 1}
+p20_3 1 | melody:{notes: "=mf vc#++2 a+4 ^f+4_"} cello:{notes: "=mf vc#2 a-4 ^f4"} basslow:{notes: "=mf vd--1"} flute:{notes: "=pp a+2 ^f+2"} horn:{notes: "=mp ^f2 vc#2"} organ:{notes: "=mf [vd-,^f-,a-,vc#]1"} chords="vDg7:1" key="D" dyn=mp binaural={carriers: [57.0, 53.333333333, 49.666666667, 48.666666667], gain_db: 1}
+p20_4 1 | melody:{notes: "=mp f#+4 d+4 f#+4 a+4"} cello:{notes: "=mp f#2 e4 d4"} basslow:{notes: "=mp d--1"} flute:{notes: "=p f#+1"} horn:{notes: "=p f#2 e2"} organ:{notes: "=mp [f#-,c#,e,a]1"} chords="Dmaj9:1" key="D" dyn=mp binaural={carriers: [64, 57, 54, 50, 49], gain_db: 1}
+
+# Phrase 21: The great arch - 4:00; local key D.
+p21_1 1 | melody:{notes: "=f a+4 d++2_ c#++4"} cello:{notes: "=f d2 a4 f#4"} basslow:{notes: "=f d--2 a--2"} flute:{notes: "=mp d+1"} horn:{notes: "=mf a-2 d2"} piano:{notes: "=mf [f#-,c#,e,a]2 r2"} organ:{notes: "=f [f#-,c#,e,a]1"} chords="Dmaj9:1" key="D" dyn=mp binaural={carriers: [64, 57, 54, 50, 49], gain_db: 1}
+p21_2 1 | melody:{notes: "=mf c#++2 b+4 a+4"} cello:{notes: "=mf c#2 e2"} basslow:{notes: "=mf f#--1"} flute:{notes: "=p c#+2 r2"} horn:{notes: "=mp e2 c#2"} organ:{notes: "=mf [a-,e,g#,c#+]1"} chords="F#m9:1" key="D" dyn=mp binaural={carriers: [68, 57, 54, 52, 49], gain_db: 1}
+p21_3 1 | melody:{notes: "=mf ^bb+2 d++4 vf#+4_"} cello:{notes: "=mf vg-2 ^bb-4 d4"} basslow:{notes: "=mf vg--1"} flute:{notes: "=pp d+1"} horn:{notes: "=mf d2 ^bb-2"} organ:{notes: "=mf [vg-,^bb-,d,vf#]1"} chords="vGg7:1" key="D" dyn=mp binaural={carriers: [58.333333333, 54.666666667, 53.666666667, 50.0], gain_db: 1}
+p21_4 1 | melody:{notes: "=mp f#+2 g+4 b+4"} cello:{notes: "=mp g2 f#4 d4"} basslow:{notes: "=mp g--2 d--2"} flute:{notes: "=p d+2 r2"} horn:{notes: "=p b-2 d2"} organ:{notes: "=mp [b-,d,f#,a]1"} chords="Gmaj9:1" key="D" dyn=mp binaural={carriers: [69, 59, 55, 54, 50], gain_db: 1}
+
+# Phrase 22: The last question - 4:12; local key D.
+p22_1 1 | melody:{notes: "=mf b+4 a+4 f#+4 d+4"} cello:{notes: "=mf b-2 d4 f#4"} basslow:{notes: "=mf b---1"} horn:{notes: "=mp a-2 f#2"} harp:{notes: "=pp r2 a4 c#+4"} organ:{notes: "=mf [d-,a-,c#,f#]1"} chords="Bm9:1" key="D" dyn=mp binaural={carriers: [61, 59, 57, 54, 50], gain_db: 1}
+p22_2 1 | melody:{notes: "=mp e+4 g+4 b+4 a+4"} cello:{notes: "=mp e2 g2"} basslow:{notes: "=mp e--1"} horn:{notes: "=mf g-2 b-2"} harp:{notes: "=p r2 b4 =pp f#+4"} organ:{notes: "=mp [g-,d,f#,b]1"} chords="Em9:1" key="D" dyn=mp binaural={carriers: [66, 59, 55, 52, 50], gain_db: 1}
+p22_3 1 | melody:{notes: "=mf ^b+2 vg#+4 ^c+4_"} cello:{notes: "=mf va-2 ^c2"} basslow:{notes: "=mf va--1"} horn:{notes: "=mp vg#-2 e2"} harp:{notes: "r2 e+8 vg#+8 =p ^b+4"} organ:{notes: "=mf [^c,e,vg#-,^b]1"} chords="vAmaj9(v3,^5,^^9):1" key="D" dyn=mp binaural={carriers: [71.333333333, 56.666666667, 55.666666667, 52.0, 48.333333333], gain_db: 1}
+p22_4 1 | melody:{notes: "=mp c#+4 e+4 g+4 e+4"} cello:{notes: "=mp c#2 g-2"} basslow:{notes: "=mp a--1"} horn:{notes: "=p c#2 g-2"} organ:{notes: "=mp [c#,g,b,e+]1"} chords="A9:1" key="D" dyn=mp binaural={carriers: [71, 57, 55, 52, 49], gain_db: 1}
+
+# Phrase 23: Benediction - 4:24; local key D.
+p23_1 1 | melody:{notes: "=mp f#+2 e+4 d+4"} cello:{notes: "=mp f#2 a-2"} basslow:{notes: "=mp d--1"} flute:{notes: "=p a+2 r2"} harp:{notes: "=pp r2 a8 c#+8 =p e+4"} piano:{notes: "=p [f#-,c#,e,a]2 r2"} organ:{notes: "=mp [f#-,c#,e,a]1"} chords="Dmaj9:1" key="D" dyn=mp binaural={carriers: [64, 57, 54, 50, 49], gain_db: -2}
+p23_2 1 | melody:{notes: "=p b4 d+4 f#+4 g+4"} cello:{notes: "=p b-2 d2"} basslow:{notes: "=p g--1"} flute:{notes: "=pp d+2 r2"} harp:{notes: "=pp r2 b8 d+8 =p f#+4"} organ:{notes: "=p [b-,d,f#,a]1"} chords="Gmaj9:1" key="D" dyn=mp binaural={carriers: [69, 59, 55, 54, 50], gain_db: -2}
+p23_3 1 | melody:{notes: "=mp ^e+2 a4 ^f+4_"} cello:{notes: "=mp vd2 ^f2"} basslow:{notes: "=mp vd--1"} flute:{notes: "=p a+2 r2"} piano:{notes: "=pp [vd-,^f-,a-,vc#,^e]1"} organ:{notes: "=mp [vd-,^f-,a-,vc#,^e]1"} chords="vDmaj9(v3,^5,^^9):1" key="D" dyn=mp binaural={carriers: [64.333333333, 57.0, 53.333333333, 49.666666667, 48.666666667], gain_db: -2}
+p23_4 1 | melody:{notes: "=p f#+4 e+4 d+2"} cello:{notes: "=p f#2 e4 d4"} basslow:{notes: "=p d--1"} flute:{notes: "=pp f#+2 e+4 r4"} harp:{notes: "=pp r2 e+4 c#+4"} piano:{notes: "=pp [f#-,c#,e,a]2 r2"} organ:{notes: "=p [f#-,c#,e,a]1"} chords="Dmaj9:1" key="D" dyn=mp binaural={carriers: [64, 57, 54, 50, 49], gain_db: -2}
+
+# Phrase 24: The final answer - 4:36; local key D.
+p24_1 1 | melody:{notes: "=p d+4 c#+4 b4 f#4"} cello:{notes: "=p b-2 d2"} basslow:{notes: "=p b---1"} piano:{notes: "=pp [d-,a-,c#,f#]2 r2"} organ:{notes: "=p [d-,a-,c#,f#]1"} chords="Bm9:1" key="D" dyn=mp binaural={carriers: [61, 59, 57, 54, 50], gain_db: -2}
+p24_2 1 | melody:{notes: "=pp g4 b4 d+4 e+4"} cello:{notes: "=pp e2 b-2"} basslow:{notes: "=pp e--1"} organ:{notes: "=pp [g-,d,f#,b]1"} chords="Em9:1" key="D" dyn=mp binaural={carriers: [66, 59, 55, 52, 50], gain_db: -2}
+p24_3 1 | melody:{notes: "=p ^f+2 vc#+4 a4"} cello:{notes: "=p vd2 ^f2"} basslow:{notes: "=p vd--1"} piano:{notes: "=pp [vd-,^f-,a-,vc#]1"} organ:{notes: "=p [vd-,^f-,a-,vc#]1"} chords="vDg7:1" key="D" dyn=mp binaural={carriers: [57.0, 53.333333333, 49.666666667, 48.666666667], gain_db: -2}
+p24_4 1 | melody:{notes: "=pp e+4 d+2_ r4"} cello:{notes: "=pp f#-2 d-2_"} basslow:{notes: "=pp d--1_"} harp:{notes: "=pp a4 e+4 =p d+2_"} piano:{notes: "=pp [f#-,c#,e,a]2 r2"} organ:{notes: "=pp [f#-,c#,e,a]1"} chords="Dmaj9:1" key="D" dyn=mp binaural={carriers: [64, 57, 54, 50, 49], gain_db: "-4>-18"}
+
+# Ensemble balance: melody first; horn and bass stay beneath it. The broad apex is phrase 21.
+mix melody -3 hall=.28 pan=-.12 | cello -9 hall=.27 pan=.17 | basslow -18 hall=.13 | flute -7 hall=.3 pan=-.28 | horn -13 hall=.3 pan=.28 | harp -4 hall=.32 pan=-.32 | piano -9 hall=.24 pan=.14 | organ -31 hall=.4
+master clean ceiling=-2

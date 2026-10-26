@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Beyond the Veil · Golden Adagio</title>
+<style>
+:root{color-scheme:dark;--ink:#eee9db;--muted:#b0b5b8;--gold:#e3bf75;--aqua:#8ccbbf;--panel:#141f29;--line:#344049}
+*{box-sizing:border-box}body{margin:0;background:#0a131b;color:var(--ink);font:16px/1.65 system-ui,sans-serif}main{max-width:1180px;margin:auto;padding:40px 30px 60px}a{color:var(--gold);text-underline-offset:4px}header{position:relative;padding:22px 0 30px;border-bottom:1px solid var(--line);overflow:hidden}.eyebrow{font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}h1{font:clamp(43px,6vw,76px)/1.06 Georgia,serif;letter-spacing:-2px;margin:18px 0}h1 em{font-weight:400;color:var(--gold)}.intro{max-width:720px;color:#c5c9c8;font-size:18px}h2{font:28px/1.2 Georgia,serif;margin:0 0 18px}p{margin:12px 0}.meta{font-size:11px;color:var(--muted);letter-spacing:1px}header svg{position:absolute;right:-20px;top:-60px;width:330px;height:340px;opacity:.15;pointer-events:none}.player{padding:24px 0 5px}audio{display:block;width:100%;margin:16px 0 12px}.versions,.landmarks{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;font-size:12px;border:1px solid #536069;background:transparent;color:var(--ink);padding:9px 14px;border-radius:24px;cursor:pointer}button:hover{border-color:var(--gold);background:#e3bf7510}button:focus-visible,a:focus-visible{outline:2px solid var(--aqua);outline-offset:4px}button[aria-pressed=true]{color:#0a131b;background:var(--gold);border-color:var(--gold)}.small{color:var(--muted);font-size:12px}.board{border:1px solid #59616a;border-radius:16px;background:linear-gradient(140deg,#182734,#101923);padding:24px;margin:16px 0 34px}.board-head{display:flex;justify-content:space-between;gap:20px;align-items:start}.section-name{font:30px Georgia,serif;margin:6px 0}.chord{color:var(--gold);font-size:18px}.clock{font:20px ui-monospace,monospace;color:var(--aqua);white-space:nowrap}.progress{height:3px;background:#35414b;margin:18px 0}.progress span{display:block;height:100%;background:var(--gold);width:0}.label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:18px 0 10px}.instruments{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.card{min-width:0;overflow:hidden;border:1px solid #35434f;border-radius:10px;transition:background .25s,border-color .25s,box-shadow .25s;background:#0e1922}.card.sounding{border-color:#b69c60;background:#233039;box-shadow:inset 0 0 24px #e3bf7510}.portrait{display:block;width:100%;height:116px;object-fit:contain;background:#101b25;opacity:.57;transition:opacity .25s}.sounding .portrait{opacity:1}.voice-body{padding:10px 12px 12px}.voice-name{font-size:11px;color:var(--muted);margin-bottom:6px}.role{font-size:9px;letter-spacing:1px;color:#849098;margin-bottom:6px;text-transform:uppercase}.notes{font:20px Georgia,serif;min-height:27px;color:#efe1bd;display:flex;gap:7px;flex-wrap:wrap}.note{display:inline-block}.quiet{font:15px Georgia,serif;color:#71808b}.mini-bar{position:relative;height:34px;margin-top:7px;border-top:1px solid #344049;background:repeating-linear-gradient(to right,transparent 0,transparent calc(25% - 1px),#48535c50 calc(25% - 1px),#48535c50 25%);overflow:hidden}.mini-note{position:absolute;top:8px;height:16px;border-radius:3px;background:#e3bf7530;border:1px solid #a58e5860;min-width:2px}.mini-note.active{background:#e3bf75;box-shadow:0 0 8px #e3bf7550}.cursor{position:absolute;top:0;bottom:0;width:1px;background:#8ccbbf}.pairs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.pair{border:1px solid #34645e;border-radius:9px;padding:10px;background:#8ccbbf06;min-width:0}.pair strong{font:19px Georgia,serif;color:var(--aqua)}.hz{font:11px/1.9 ui-monospace,monospace;color:#c6d4cf}.rate{font-size:11px;margin-top:4px;color:var(--aqua)}.explain{display:grid;grid-template-columns:1fr 1fr;gap:38px;margin:34px 0}.explain p{font-size:15px;color:#c2c8c9}.formula{border-left:2px solid var(--gold);padding:10px 18px;color:var(--gold);font:17px/1.8 Georgia,serif}details{border-top:1px solid var(--line);padding:18px 0}summary{cursor:pointer;color:var(--gold)}.downloads{display:flex;flex-wrap:wrap;gap:20px;font-size:13px;margin-top:26px}.spectrum{display:block;width:100%;border-radius:8px;margin-top:16px}footer{border-top:1px solid var(--line);margin-top:35px;padding-top:22px;color:var(--muted);font-size:12px}.error{color:#ffbcad}#status{min-height:20px}.badge{display:inline-block;font:10px system-ui,sans-serif;letter-spacing:1px;border:1px solid var(--aqua);color:var(--aqua);border-radius:20px;padding:3px 8px;vertical-align:middle;margin-left:8px}.badge.golden{border-color:var(--gold);color:var(--gold)}
+@media(max-width:750px){main{padding:20px 14px 40px}.intro{font-size:16px}header svg{right:-180px}h1{letter-spacing:-1px}.board{padding:14px}.instruments{grid-template-columns:repeat(2,minmax(0,1fr))}.portrait{height:107px}.pairs{grid-template-columns:repeat(2,minmax(0,1fr))}.board-head{display:block}.clock{font-size:15px;margin-top:12px}.explain{grid-template-columns:1fr;gap:25px}.section-name{font-size:25px}.chord{font-size:15px}.notes{font-size:18px}.voice-body{padding:8px 9px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<main>
+<header>
+<svg viewBox="0 0 320 340" aria-hidden="true" fill="none" stroke="#e3bf75"><path d="M20 340V180Q20 72 160 10Q300 72 300 180V340M50 340V185Q50 100 160 40Q270 100 270 185V340M80 340V190Q80 130 160 75Q240 130 240 190V340M110 340V198Q110 158 160 115Q210 158 210 198V340M140 340V205Q140 185 160 165Q180 185 180 205V340"/><circle cx="160" cy="210" r="50"/></svg>
+<div class="eyebrow">Golden Adagio · The chosen melody, unfolded</div>
+<h1>Beyond<br><em>the Veil</em></h1>
+<p class="intro">A forward-moving string melody, a distant chapel, and a homecoming in light. Familiar sevenths and ninths hold the center; golden suspensions bend the path between them.</p>
+<div class="meta">5:00 &nbsp; / &nbsp; 75% WESTERN · 25% GOLDEN HARMONY &nbsp; / &nbsp; EIGHT INSTRUMENTS · 36-ET</div>
+</header>
+<section class="player" aria-label="Audio player">
+<div class="versions" aria-label="Playback version"><button data-version="song" aria-pressed="true">Full piece</button><button data-version="music_only" aria-pressed="false">Music only</button><button data-version="binaural_pairs" aria-pressed="false">Binaural pairs</button></div>
+<audio id="player" controls preload="metadata" src="renders/beyond_the_veil/song.mp3?v=octave5"></audio>
+<p class="small">Stereo headphones, comfortable volume. The opening is quiet; leave room for the final arch. All three versions retain the same master gain and playback position.</p>
+<div class="landmarks" aria-label="Listening landmarks"><button data-time="0">0:00 · Your B theme</button><button data-time="48">0:48 · F major</button><button data-time="84">1:24 · Distant chapel</button><button data-time="144">2:24 · Cello memory</button><button data-time="168">2:48 · A major threshold</button><button data-time="192">3:12 · D major return</button><button data-time="240">4:00 · The great arch</button><button data-time="264">4:24 · Benediction</button></div>
+<div id="status" class="small" role="status">Loading the scored performance…</div>
+</section>
+<section class="board" aria-label="Synchronized harmony and instrument notes">
+<div class="board-head"><div><div class="eyebrow">Now sounding</div><div class="section-name" id="section">The chosen theme</div><span class="chord" id="chord">D · Western ninth</span><span class="badge" id="kind">WESTERN</span><div class="small" id="key">D minor</div></div><div class="clock" id="clock">0:00 / 5:00</div></div>
+<div class="progress" aria-hidden="true"><span id="bar-progress"></span></div>
+<div class="label">Above · each instrument, its played notes, and the current bar</div>
+<div class="instruments" id="instruments"></div>
+<p class="small" id="bar">Bar 1 of 96 · one bar is three seconds</p>
+<div class="label">Below · chord-following pure-tone pairs</div><div class="pairs" id="pairs"></div>
+<p class="small">Note names follow the performed score. ^ raises a note by 33⅓ cents; v lowers it. Gold blocks mark sounding events in the current bar; the aqua line follows time.</p>
+</section>
+<section class="explain">
+<div><h2>A melody you chose</h2><p>You chose <strong>B · Forward Lilt</strong> in the Studio audition. Its eight-bar violin line opens this piece intact. Later phrases stretch its dotted pickup, change the answer, lift it into new registers and finally turn its minor third into a major third.</p><p>At 2:24, the violin steps away and cello recalls the theme. At 3:12, the violin returns in D major. The highest string note is saved for the great arch at 4:00; the last minute releases that energy into a quiet D-major ninth.</p><p>This is an original melody. The broad string lines and long climax respond to your reference to Samuel Barber’s <em>Adagio for Strings</em>, without quoting its theme.</p></div>
+<div><h2>Golden tension, familiar arrival</h2><p>Of the 96 scored bars, 72 use Western harmony and 24 use golden harmony: <strong>75% / 25% by duration</strong>, before the twelve-second decay. One golden bar in each four-bar phrase keeps that color present throughout.</p><p>The route is D minor → F major → A-flat major → D minor → A major → D major. Western minor ninths, major ninths, dominant ninths and sevenths provide recognizable arrivals. Golden chords usually lead directly into those arrivals.</p><div class="formula">vD golden seventh → D minor ninth<br>^F → F: a small downward release<br>vD golden ninth → D major ninth<br>^F → F♯ and ^E → E: tension opens into light</div></div>
+</section>
+<details><summary>Eight voices, with space around the melody</summary><p>Sampled violins carry the principal line. Cello answers and becomes the soloist at the still point; bowed double bass supplies a restrained foundation. Flute appears in breaths, horn supplies an inner choral voice, harp gives isolated ripples, and grand piano supports the opening. A soft organ gradually replaces the piano in the distant chapel and final wave.</p><p>Each part has its own notes, rests and expression through the full form. The flute and organ sit behind the violin rather than competing for the lead. Sustained acoustic timbres soften the unusual pitch changes. The portraits are AI-generated illustrations; the sound uses the instruments credited below.</p></details>
+<details><summary>Sevenths, ninths and the headphone harmony</summary><p>Golden sevenths stack three golden thirds; golden ninths stack four. In 36-ET their intervals are <strong>0, 11, 22, 33</strong> and <strong>0, 11, 22, 33, 44</strong> sixth-steps. The score writes the ninth as <code>maj9(v3,^5,^^9)</code>. These tempered approximations coexist with Western intervals on the same pitch grid.</p><p>Every headphone center matches a pitch class actually played in that bar and belongs to its current chord, Western or golden. Most shadow an upper note at a lower octave; a low bass root may instead be represented in a higher harmonic octave. Four or five pairs follow each chord, crossfading over 0.28 seconds. Each beat difference is its own center reduced by five more octaves.</p><div class="formula">Difference = each center / 32<br>Left = center − difference / 2<br>Right = center + difference / 2</div><p>A3 at 220 Hz gives 6.875 Hz; E4 gives about 10.301 Hz. All differences stay proportional to their notes through the key changes, spanning about 4.09–15.73 Hz. There are no independent section-rate ramps or arbitrary beat ladders. This is a spatial musical effect; the display describes the signal.</p></details>
+<details><summary>Compare the same moment with and without the pairs</summary><p>Switch versions while playing to compare the same passage. “Music only” is the original instrumental bed before the narrow carrier bands are carved out. “Binaural pairs” contains only the positive pure-tone pairs. Both use the full mix’s master gain. The full version combines the carved bed and the pairs, so the comparison files are not an exact additive decomposition.</p><p>The portraits and note labels always show the scored instrumental performance, including while auditioning the isolated pairs. The pair cards show frequencies from the renderer’s actual transition curves.</p></details>
+<details><summary>Score and audio checks</summary><p>The opening melody matches your selected B. Duration is exactly 300 seconds. All seven sampled parts stay within their recorded ranges. No overlapping notes a third or two-thirds of a semitone apart were found at the quarter-beat threshold. Ordinary semitone suspensions and the close intervals within seventh/ninth harmony remain intentional.</p><p>The complete render has no clipped samples and peaks at about −2 dBTP. The isolated audio was checked directly for the expected left and right frequencies in both a Western ninth and a golden ninth. A few fuller seven-part arrivals are intentional orchestral expansions. These checks do not replace your listening judgment of the complete piece.</p><img class="spectrum" src="renders/beyond_the_veil/qa.png" alt="Spectrogram and loudness plot of the five-minute piece"></details>
+<div class="downloads"><a href="renders/beyond_the_veil/song.wav" download>24-bit WAV</a><a href="renders/beyond_the_veil/song.mp3" download>MP3</a><a href="beyond_the_veil.sm" download>Editable .sm score</a><a href="full_verification.json">Verification</a><a href="renders/beyond_the_veil/LICENSES.md">Sample credits</a><a href="http://127.0.0.1:8865/?song=songs%2Fgolden_adagio%2Fbeyond_the_veil.sm">Open in SongMap Studio</a></div>
+<footer><a href="../../textbook_site/chapters/songbook.html#songs-golden-adagio">Songbook</a> &nbsp; · &nbsp; <a href="../golden_cathedral/">As Above, So Below</a> &nbsp; · &nbsp; <a href="http://127.0.0.1:8865/?song=songs%2Fgolden_adagio%2Fmotif_ab_studio.sm">Original A/B audition</a></footer>
+</main>
+<script>
+'use strict';
+const audio=document.querySelector('#player'),status=document.querySelector('#status');
+const voices={melody:['Violins','The chosen melody','violin'],cello:['Cello','Answer and memory','cello'],basslow:['Double bass','Bowed foundation','double_bass'],flute:['Flute','An answering breath','flute'],horn:['French horn','The inner choir','horn'],harp:['Harp','Ripples of light','harp'],piano:['Grand piano','Intimate harmony','piano'],organ:['Organ','The distant chapel','organ']};
+const cards={};
+for(const [id,[label,role,asset]] of Object.entries(voices)){
+ const card=document.createElement('div');card.className='card';card.dataset.part=id;
+ const portrait=document.createElement('img');portrait.className='portrait';portrait.dataset.source=`assets/${asset}.png`;portrait.alt=`Illustration of ${label.toLowerCase()}`;portrait.width=116;portrait.height=116;
+ const body=document.createElement('div');body.className='voice-body';
+ const name=document.createElement('div');name.className='voice-name';name.textContent=label;
+ const caption=document.createElement('div');caption.className='role';caption.textContent=role;
+ const notes=document.createElement('div');notes.className='notes';notes.textContent='Rest';
+ const bar=document.createElement('div');bar.className='mini-bar';bar.setAttribute('aria-hidden','true');
+ body.append(name,caption,notes,bar);card.append(portrait,body);document.querySelector('#instruments').append(card);cards[id]={card,notes,bar,previous:null,barIndex:-1};
+}
+let data=null,lastFrame=0,version='song',switchGeneration=0;
+const clock=t=>`${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+function interp(curve,t){const [ts,vs]=curve;let i=0;while(i<ts.length-2&&ts[i+1]<=t)i++;if(t<=ts[0])return vs[0];if(t>=ts.at(-1))return vs.at(-1);const d=ts[i+1]-ts[i];return d===0?vs[i+1]:vs[i]+(vs[i+1]-vs[i])*(t-ts[i])/d;}
+function update(){
+ if(!data)return;
+ const t=audio.currentTime||0,sec=data.sections.find(s=>s.start<=t&&s.end>t)||data.sections.at(-1),barIndex=Math.min(95,Math.floor(t/3)),barStart=barIndex*3;
+ document.querySelector('#section').textContent=t>=288?'Afterglow':sec.name;
+ document.querySelector('#chord').textContent=`${sec.root} · ${sec.quality}`;
+ const badge=document.querySelector('#kind');badge.textContent=sec.kind.toUpperCase();badge.className=`badge ${sec.kind}`;
+ document.querySelector('#key').textContent=`Local key · ${sec.key} · phrase ${sec.phrase+1} of 24`;
+ document.querySelector('#clock').textContent=`${clock(t)} / 5:00`;
+ document.querySelector('#bar').textContent=t>=288?'Final resonance · twelve-second decay':`Bar ${barIndex+1} of 96 · beat ${Math.min(4,Math.floor((t%3)/.75)+1)} · ${version==='song'?'full piece':version==='music_only'?'instrumental bed':'isolated pairs'}`;
+ document.querySelector('#bar-progress').style.width=`${t>=288?100:(t%3)/3*100}%`;
+ for(const [part,item] of Object.entries(cards)){
+  const played=data.notes.filter(e=>e.part===part),notes=[...new Set(played.filter(e=>e.start<=t&&e.end>t).flatMap(e=>e.names))],value=notes.join(' ');
+  if(value!==item.previous){item.notes.replaceChildren();
+   if(!notes.length){const rest=document.createElement('span');rest.className='quiet';rest.textContent=t>=288?'Decay':'Rest';item.notes.append(rest);}
+   for(const n of notes){const span=document.createElement('span');span.className='note';span.textContent=n;item.notes.append(span);}
+   item.card.classList.toggle('sounding',!!notes.length);item.previous=value;
+  }
+  if(item.barIndex!==barIndex){item.bar.replaceChildren();for(const e of played.filter(e=>e.start<barStart+3&&e.end>barStart)){const block=document.createElement('span');block.className='mini-note';block.style.left=`${Math.max(0,(e.start-barStart)/3)*100}%`;block.style.width=`${(Math.min(barStart+3,e.end)-Math.max(barStart,e.start))/3*100}%`;block.dataset.start=e.start;block.dataset.end=e.end;item.bar.append(block);}const cursor=document.createElement('span');cursor.className='cursor';item.bar.append(cursor);item.barIndex=barIndex;}
+  for(const block of item.bar.querySelectorAll('.mini-note'))block.classList.toggle('active',+block.dataset.start<=t&&+block.dataset.end>t);
+  item.bar.querySelector('.cursor').style.left=`${Math.min(100,(t-barStart)/3*100)}%`;
+ }
+ const pairs=document.querySelector('#pairs');pairs.replaceChildren();const B=Math.exp(interp(data.beat_curve,t));
+ for(const o of (t>=300?[]:data.oscillators.filter(o=>interp(o.amp,t)>.05).sort((a,b)=>b.hz-a.hz))){const d=B*interp(o.mul,t),p=document.createElement('div');p.className='pair';p.dataset.center=o.hz;p.dataset.difference=d;p.style.opacity=.4+.6*interp(o.amp,t);
+  const title=document.createElement('strong');title.textContent=o.label;const hz=document.createElement('div');hz.className='hz';hz.textContent=`L ${(o.hz-d/2).toFixed(2)} Hz`;const right=document.createElement('div');right.className='hz';right.textContent=`R ${(o.hz+d/2).toFixed(2)} Hz`;const rate=document.createElement('div');rate.className='rate';rate.textContent=`Δ ${d.toFixed(3)} Hz · ÷${data.rate_divisor}`;p.append(title,hz,right,rate);pairs.append(p);
+ }
+}
+async function play(){try{await audio.play();status.textContent='';}catch(e){status.textContent='Press the audio play button to begin.';}}
+document.querySelectorAll('[data-time]').forEach(button=>button.addEventListener('click',()=>{audio.currentTime=+button.dataset.time;update();play();}));
+document.querySelectorAll('[data-version]').forEach(button=>button.addEventListener('click',()=>{
+ if(button.dataset.version===version)return;
+ const t=audio.currentTime,wasPlaying=!audio.paused,gen=++switchGeneration;audio.pause();version=button.dataset.version;
+ document.querySelectorAll('[data-version]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));status.textContent='Loading comparison…';
+ audio.addEventListener('loadedmetadata',()=>{if(gen!==switchGeneration)return;audio.currentTime=Math.min(t,audio.duration);status.textContent='';update();if(wasPlaying)play();},{once:true});
+ audio.src=`renders/beyond_the_veil/${version}.mp3?v=octave5`;audio.load();
+}));
+audio.addEventListener('seeked',update);audio.addEventListener('timeupdate',update);
+audio.addEventListener('error',()=>{status.classList.add('error');status.textContent='Audio could not be loaded. Check that the local textbook server is running.';});
+async function loadPortraits(){for(const portrait of document.querySelectorAll('.portrait')){portrait.src=portrait.dataset.source;try{await portrait.decode();}catch(e){portrait.alt+=' · image unavailable';}}}
+fetch('performance.json?v=octave5').then(r=>{if(!r.ok)throw Error(r.status);return r.json();}).then(d=>{data=d;status.textContent='Ready · your chosen B opens the piece; each beat difference follows its note.';update();loadPortraits();}).catch(()=>{status.classList.add('error');status.textContent='Score display unavailable. The audio player remains usable.';});
+function frame(now){if(now-lastFrame>90){if(!audio.paused)update();lastFrame=now;}requestAnimationFrame(frame);}requestAnimationFrame(frame);
+</script>
+</html>

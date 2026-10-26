@@ -3,6 +3,7 @@
   "seconds": 300,
   "instrument_cards": 6,
   "ninth_pairs": 5,
+  "displayed_difference_is_center_divided_by_32": true,
   "versions": 3,
   "version_switch_preserves_time_and_pause": true,
   "mp3_byte_ranges": true,
@@ -10,6 +11,6 @@
   "mobile_overflow": false,
   "page_errors": [],
   "songbook_entry": true,
-  "score_sha256": "2c141818b72e4cb61ddbe9a3b64ceea0a7a5a7fd5e8acc1a8dfd5b1912a11cc0",
-  "page_sha256": "e467e62579aa24b8619ae36255955ccab6002eb4d280498f1c345178530bfcdc"
+  "score_sha256": "a482dc47e88f4632e8f8ccbd2758a2e3b69a387435bf06d5df32b7c354fc96c8",
+  "page_sha256": "2d25b6a43ec12f4d3925c499d3da2453e4e49c9da071bdd46b0aa832ea0e815b"
 }

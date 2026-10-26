@@ -23,7 +23,7 @@ from songmap.instruments.sampler.library import manifest
 from songmap.mix import binaural as bn
 from songmap.parse import load
 from songmap.perform.play import play
-from songmap.render import held_beats
+from songmap.render import held_beats, render, write_outputs
 from songmap.theory.keys import parse_key
 from songmap.visual.score import spell
 
@@ -48,12 +48,20 @@ def peak(x, target):
 
 def main():
     song = load(str(SCORE))
+    rendered = None
+    if "--render" in sys.argv:
+        rendered = render(song, log=print)
+        write_outputs(rendered, str(OUT), stems=False, mp3=True)
     arr = expand(song)
     tl = arr.timeline
     plan = bn.plan(song, tl)
     report = json.loads((OUT / "qa.json").read_text())
     assert tl.seconds == 300 and tl.total_bars == 72
     assert report["render"]["digest"] == arr.digest(), "Render is stale"
+    assert report["render"]["binaural"] == plan.summary, "Binaural render is stale"
+    assert plan.octaves == 5
+    assert all(abs(rate * 32 - carrier.hz) < 1e-10 for state in plan.states
+               for carrier, rate in zip(state.carriers, plan.rates(state)))
     assert report["clipped_samples"] == 0 and report["true_peak_db"] <= -1.9
     sections, outside, rubs, close = [], [], [], []
     named_notes = []
@@ -111,14 +119,20 @@ def main():
                                     "names": [spell(p).text for p in e.pitches]})
     # Sum exported pre-master stems; the binaural difference stem includes the
     # notches as well as the positive pure-tone layer, and is NOT a solo-pairs file.
-    stems = sorted((OUT / "stems").glob("*.wav"))
     music = np.zeros((round(tl.seconds * SR), 2))
-    for path in stems:
-        if path.stem != "binaural":
-            sr, data = wavfile.read(path)
-            assert sr == SR and data.shape == music.shape
-            music += data
-    sr, difference = wavfile.read(OUT / "stems/binaural.wav")
+    if rendered is not None:
+        for name, data in rendered.stems.items():
+            if name != "binaural":
+                music += data
+        difference = rendered.stems["binaural"]
+        del rendered
+    else:
+        for path in sorted((OUT / "stems").glob("*.wav")):
+            if path.stem != "binaural":
+                sr, data = wavfile.read(path)
+                assert sr == SR and data.shape == music.shape
+                music += data
+        sr, difference = wavfile.read(OUT / "stems/binaural.wav")
     full = music + difference
     gain = 10 ** (song.master.ceiling_db / 20) / (np.max(np.abs(full)) + 1e-12)
     sr, written = read_wav(str(OUT / "song.wav"))
@@ -151,6 +165,7 @@ def main():
                             "amp": [x.tolist() for x in amp], "mul": [x.tolist() for x in mul]})
     beat_curve = bn._ramped(plan.states, lambda s: s.beat, plan.glide, True)
     page_data = {"sections": sections, "notes": named_notes, "oscillators": oscillators,
+                 "rate_mode": "octave", "octaves": plan.octaves, "rate_divisor": 2 ** plan.octaves,
                  "beat_curve": [x.tolist() for x in bn._curve(beat_curve, log=True)]}
     (COLLECTION / "performance.json").write_text(json.dumps(page_data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     receipt = {"title": song.title, "seconds": tl.seconds, "bars": tl.total_bars, "tuning": song.tuning,
@@ -160,10 +175,12 @@ def main():
                "golden_ninth_steps": [0, 11, 22, 33, 44], "sampled_ranges": sampled,
                "pair_frequency_measurements": measured, "comparison_renders": versions,
                "pair_relative_lufs": plan.level_db, "master_gain_db": round(20 * math.log10(gain), 4),
+               "rate_mode": "octave", "beat_octaves": plan.octaves, "octave_rate_ratios_verified": True,
+               "difference_range_hz": [min(r for s in plan.states for r in plan.rates(s)), max(r for s in plan.states for r in plan.rates(s))],
                "qa": {k: report[k] for k in ("seconds", "lufs", "true_peak_db", "clipped_samples")},
                "intentional_advisories": ["The 32-second golden-vault/empyrean span is one broad climax, with a final crest rather than a separate jump.",
                                           "The still point is intentionally bass-heavy: most of the upper ensemble falls silent."],
-               "listening_status": "Automated and visual checks only; awaiting human listening review."}
+               "listening_status": "User approved the instrumental composition. The corrected octave-derived headphone layer awaits a new listening verdict."}
     (COLLECTION / "verification.json").write_text(json.dumps(receipt, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Verified {len(named_notes)} performed events, {len(sections)} harmonic states, {len(measured)} measured ear frequencies; wrote comparisons and player data.")
 

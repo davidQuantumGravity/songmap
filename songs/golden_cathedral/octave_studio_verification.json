@@ -1,0 +1,105 @@
+{
+  "url": "http://127.0.0.1:8865/?song=songs/golden_cathedral/as_above_so_below.sm",
+  "render_ok": true,
+  "seconds": 300.0,
+  "score_sha256": "a482dc47e88f4632e8f8ccbd2758a2e3b69a387435bf06d5df32b7c354fc96c8",
+  "range_requests": true,
+  "key": "3ca920d60e1d3cb260454a54afd95a5ed0ceaff2",
+  "elapsed_seconds": 40.85,
+  "qa": {
+    "lufs": -20.67,
+    "true_peak_db": -1.99,
+    "clipped": 0,
+    "sections": [
+      {
+        "name": "threshold",
+        "loudness": -33.5
+      },
+      {
+        "name": "first_voice",
+        "loudness": -27.5
+      },
+      {
+        "name": "invocation",
+        "loudness": -26.5
+      },
+      {
+        "name": "woven_light",
+        "loudness": -25.6
+      },
+      {
+        "name": "answering_arch",
+        "loudness": -24.1
+      },
+      {
+        "name": "first_ninth",
+        "loudness": -25.4
+      },
+      {
+        "name": "mirror_procession",
+        "loudness": -23.1
+      },
+      {
+        "name": "ascending_stairs",
+        "loudness": -21.1
+      },
+      {
+        "name": "distant_choir",
+        "loudness": -25.9
+      },
+      {
+        "name": "other_window",
+        "loudness": -26.1
+      },
+      {
+        "name": "turning_home",
+        "loudness": -30.1
+      },
+      {
+        "name": "still_point",
+        "loudness": -36.5
+      },
+      {
+        "name": "vaults_open",
+        "loudness": -22.9
+      },
+      {
+        "name": "radiance",
+        "loudness": -16.9
+      },
+      {
+        "name": "golden_vault",
+        "loudness": -15.5
+      },
+      {
+        "name": "empyrean",
+        "loudness": -14.3
+      },
+      {
+        "name": "benediction",
+        "loudness": -24.3
+      },
+      {
+        "name": "return_to_silence",
+        "loudness": -34.1
+      }
+    ],
+    "stems": {
+      "pedal": -20.4,
+      "nave": -20.3,
+      "halo": -38.9,
+      "tenor": -21.9,
+      "alto": -21.0,
+      "cantus": -22.6,
+      "return_hall": -22.3,
+      "binaural": -19.5
+    }
+  },
+  "submitted_text_sha256": "f29eac5f9e0110d75dadda7a0083c13a36f1c139d81621cd3388fc49339d0a20",
+  "studio_matches_verified_offline_audio": true,
+  "matched_window_seconds": [
+    84,
+    86
+  ],
+  "max_pcm_quantization_difference": 3.516674041748047e-05
+}

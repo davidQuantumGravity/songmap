@@ -1,0 +1,1032 @@
+{
+  "title": "Beyond the Veil",
+  "seconds": 300.0,
+  "bars": 96.0,
+  "tuning": "36edo",
+  "score_sha256": "677a151fabb2e3cb163bdf13a0f718b86b5b382092a5529c4e6432b489d08bd0",
+  "audio_sha256": "3ac961ea1a28258e5a59f17cfa8dc9d348a63770bed9b52f7e04de27a625e2cb",
+  "event_digest": "dd8f61dc27513b90740b983148f32149f55d0dfc39faf245cc53534a49e32855",
+  "chosen_motif": "B - Forward Lilt",
+  "opening_matches_chosen_B": true,
+  "harmonic_duration": {
+    "western_bars": 72,
+    "golden_bars": 24,
+    "western_percent": 75,
+    "golden_percent": 25
+  },
+  "microtonal_rubs": [],
+  "close_semitone_voicings": [
+    {
+      "section": "p02_1",
+      "time": 13.5,
+      "parts": [
+        "cello",
+        "piano"
+      ],
+      "notes": [
+        "E3",
+        "F3"
+      ],
+      "beats": 0.8999999999999986
+    },
+    {
+      "section": "p02_3",
+      "time": 18.0,
+      "parts": [
+        "piano",
+        "cello"
+      ],
+      "notes": [
+        "A♭3",
+        "A3"
+      ],
+      "beats": 1.8000000000000007
+    },
+    {
+      "section": "p04_1",
+      "time": 36.0,
+      "parts": [
+        "melody",
+        "piano"
+      ],
+      "notes": [
+        "B♭4",
+        "A4"
+      ],
+      "beats": 0.8999999999999986
+    },
+    {
+      "section": "p04_3",
+      "time": 42.0,
+      "parts": [
+        "cello",
+        "piano"
+      ],
+      "notes": [
+        "vA3",
+        "vA♭3"
+      ],
+      "beats": 1.7999999999999972
+    },
+    {
+      "section": "p05_3",
+      "time": 54.0,
+      "parts": [
+        "cello",
+        "piano"
+      ],
+      "notes": [
+        "vB♭3",
+        "vA3"
+      ],
+      "beats": 1.7999999999999972
+    },
+    {
+      "section": "p05_3",
+      "time": 55.5,
+      "parts": [
+        "piano",
+        "cello"
+      ],
+      "notes": [
+        "^C4",
+        "^C♯4"
+      ],
+      "beats": 1.5999999999999943
+    },
+    {
+      "section": "p06_1",
+      "time": 60.0,
+      "parts": [
+        "harp",
+        "piano"
+      ],
+      "notes": [
+        "B♭4",
+        "A4"
+      ],
+      "beats": 0.9000000000000057
+    },
+    {
+      "section": "p07_2",
+      "time": 75.0,
+      "parts": [
+        "melody",
+        "piano"
+      ],
+      "notes": [
+        "B♭4",
+        "A4"
+      ],
+      "beats": 0.9000000000000057
+    },
+    {
+      "section": "p07_3",
+      "time": 78.0,
+      "parts": [
+        "cello",
+        "piano"
+      ],
+      "notes": [
+        "vC4",
+        "vB3"
+      ],
+      "beats": 1.7999999999999972
+    },
+    {
+      "section": "p07_3",
+      "time": 79.5,
+      "parts": [
+        "piano",
+        "cello"
+      ],
+      "notes": [
+        "^D4",
+        "^E♭4"
+      ],
+      "beats": 1.5999999999999943
+    },
+    {
+      "section": "p08_3",
+      "time": 91.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "^B♭3",
+        "^B3"
+      ],
+      "beats": 1.5999999999999943
+    },
+    {
+      "section": "p09_1",
+      "time": 96.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "A♭3",
+        "G3"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p09_3",
+      "time": 102.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "vC♯4",
+        "vC4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p09_4",
+      "time": 107.25,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "C4",
+        "C♯4"
+      ],
+      "beats": 0.5999999999999943
+    },
+    {
+      "section": "p10_1",
+      "time": 108.0,
+      "parts": [
+        "horn",
+        "organ"
+      ],
+      "notes": [
+        "C♯4",
+        "C4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p10_1",
+      "time": 109.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "C4",
+        "C♯4"
+      ],
+      "beats": 1.5999999999999943
+    },
+    {
+      "section": "p10_4",
+      "time": 119.25,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "G3",
+        "A♭3"
+      ],
+      "beats": 0.5999999999999943
+    },
+    {
+      "section": "p11_2",
+      "time": 123.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "C♯4",
+        "C4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p11_3",
+      "time": 126.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "vE♭4",
+        "vD4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p11_3",
+      "time": 127.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "^F4",
+        "^F♯4"
+      ],
+      "beats": 1.5999999999999943
+    },
+    {
+      "section": "p12_3",
+      "time": 138.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "vD4",
+        "vC♯4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p12_4",
+      "time": 141.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "F4",
+        "E4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p13_1",
+      "time": 145.5,
+      "parts": [
+        "piano",
+        "cello"
+      ],
+      "notes": [
+        "E4",
+        "F4"
+      ],
+      "beats": 1.3499999999999943
+    },
+    {
+      "section": "p15_1",
+      "time": 169.5,
+      "parts": [
+        "piano",
+        "cello"
+      ],
+      "notes": [
+        "E4",
+        "F4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p15_3",
+      "time": 174.0,
+      "parts": [
+        "cello",
+        "piano"
+      ],
+      "notes": [
+        "vA3",
+        "vA♭3"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p17_1",
+      "time": 192.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "D4",
+        "C♯4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p17_2",
+      "time": 195.0,
+      "parts": [
+        "horn",
+        "organ"
+      ],
+      "notes": [
+        "D4",
+        "C♯4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p17_2",
+      "time": 196.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "C♯4",
+        "D4"
+      ],
+      "beats": 1.6000000000000227
+    },
+    {
+      "section": "p17_3",
+      "time": 198.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "vE4",
+        "vE♭4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p18_3",
+      "time": 210.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "vD4",
+        "vC♯4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p18_3",
+      "time": 211.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "^E4",
+        "^F4"
+      ],
+      "beats": 1.6000000000000227
+    },
+    {
+      "section": "p18_4",
+      "time": 215.25,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "C♯4",
+        "D4"
+      ],
+      "beats": 0.6000000000000227
+    },
+    {
+      "section": "p19_1",
+      "time": 217.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "A♭4",
+        "A4"
+      ],
+      "beats": 0.8999999999999773
+    },
+    {
+      "section": "p19_2",
+      "time": 220.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "C♯4",
+        "D4"
+      ],
+      "beats": 1.6000000000000227
+    },
+    {
+      "section": "p19_2",
+      "time": 220.5,
+      "parts": [
+        "organ",
+        "horn"
+      ],
+      "notes": [
+        "C♯4",
+        "D4"
+      ],
+      "beats": 1.6000000000000227
+    },
+    {
+      "section": "p20_1",
+      "time": 229.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "F♯4",
+        "G4"
+      ],
+      "beats": 0.8999999999999773
+    },
+    {
+      "section": "p20_4",
+      "time": 239.25,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "C♯4",
+        "D4"
+      ],
+      "beats": 0.6000000000000227
+    },
+    {
+      "section": "p21_1",
+      "time": 240.0,
+      "parts": [
+        "piano",
+        "cello"
+      ],
+      "notes": [
+        "C♯4",
+        "D4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p21_1",
+      "time": 240.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "D4",
+        "C♯4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p21_1",
+      "time": 241.5,
+      "parts": [
+        "organ",
+        "horn"
+      ],
+      "notes": [
+        "C♯4",
+        "D4"
+      ],
+      "beats": 1.6000000000000227
+    },
+    {
+      "section": "p21_4",
+      "time": 249.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "G4",
+        "F♯4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p22_1",
+      "time": 253.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "C♯4",
+        "D4"
+      ],
+      "beats": 0.8999999999999773
+    },
+    {
+      "section": "p22_1",
+      "time": 254.25,
+      "parts": [
+        "harp",
+        "melody"
+      ],
+      "notes": [
+        "C♯5",
+        "D5"
+      ],
+      "beats": 0.8999999999999773
+    },
+    {
+      "section": "p22_2",
+      "time": 256.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "F♯4",
+        "G4"
+      ],
+      "beats": 1.6000000000000227
+    },
+    {
+      "section": "p22_3",
+      "time": 258.0,
+      "parts": [
+        "horn",
+        "cello"
+      ],
+      "notes": [
+        "vA♭3",
+        "vA3"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p22_3",
+      "time": 258.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "vA3",
+        "vA♭3"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p22_3",
+      "time": 260.25,
+      "parts": [
+        "organ",
+        "melody"
+      ],
+      "notes": [
+        "^B4",
+        "^C5"
+      ],
+      "beats": 0.6000000000000227
+    },
+    {
+      "section": "p23_2",
+      "time": 269.25,
+      "parts": [
+        "harp",
+        "melody"
+      ],
+      "notes": [
+        "F♯5",
+        "G5"
+      ],
+      "beats": 0.8999999999999773
+    },
+    {
+      "section": "p23_3",
+      "time": 270.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "vD4",
+        "vC♯4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p23_3",
+      "time": 270.0,
+      "parts": [
+        "cello",
+        "piano"
+      ],
+      "notes": [
+        "vD4",
+        "vC♯4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p23_3",
+      "time": 271.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "^E4",
+        "^F4"
+      ],
+      "beats": 1.6000000000000227
+    },
+    {
+      "section": "p23_3",
+      "time": 271.5,
+      "parts": [
+        "piano",
+        "cello"
+      ],
+      "notes": [
+        "^E4",
+        "^F4"
+      ],
+      "beats": 1.6000000000000227
+    },
+    {
+      "section": "p23_4",
+      "time": 275.25,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "C♯4",
+        "D4"
+      ],
+      "beats": 0.6000000000000227
+    },
+    {
+      "section": "p23_4",
+      "time": 275.25,
+      "parts": [
+        "melody",
+        "harp"
+      ],
+      "notes": [
+        "D5",
+        "C♯5"
+      ],
+      "beats": 0.8000000000000114
+    },
+    {
+      "section": "p24_1",
+      "time": 277.5,
+      "parts": [
+        "organ",
+        "cello"
+      ],
+      "notes": [
+        "C♯4",
+        "D4"
+      ],
+      "beats": 1.6000000000000227
+    },
+    {
+      "section": "p24_2",
+      "time": 279.0,
+      "parts": [
+        "melody",
+        "organ"
+      ],
+      "notes": [
+        "G4",
+        "F♯4"
+      ],
+      "beats": 0.8999999999999773
+    },
+    {
+      "section": "p24_3",
+      "time": 282.0,
+      "parts": [
+        "cello",
+        "organ"
+      ],
+      "notes": [
+        "vD4",
+        "vC♯4"
+      ],
+      "beats": 1.8000000000000114
+    },
+    {
+      "section": "p24_3",
+      "time": 282.0,
+      "parts": [
+        "cello",
+        "piano"
+      ],
+      "notes": [
+        "vD4",
+        "vC♯4"
+      ],
+      "beats": 1.8000000000000114
+    }
+  ],
+  "carrier_chord_and_scored_pitch_class_membership": true,
+  "carrier_register_note": "Octave-folded chord tones; a center may be above the lowest bass fundamental, in its harmonic octave class.",
+  "golden_ninth_steps": [
+    0,
+    11,
+    22,
+    33,
+    44
+  ],
+  "sampled_ranges": {
+    "melody": {
+      "voice": "violins",
+      "midi_range": [
+        66,
+        86
+      ],
+      "sample_range": [
+        55,
+        86
+      ]
+    },
+    "cello": {
+      "voice": "cello",
+      "midi_range": [
+        49.666666666666664,
+        73
+      ],
+      "sample_range": [
+        36,
+        77
+      ]
+    },
+    "basslow": {
+      "voice": "double_bass_arco",
+      "midi_range": [
+        33.666666666666664,
+        45
+      ],
+      "sample_range": [
+        28,
+        60
+      ]
+    },
+    "flute": {
+      "voice": "flute",
+      "midi_range": [
+        72,
+        83
+      ],
+      "sample_range": [
+        60,
+        96
+      ]
+    },
+    "horn": {
+      "voice": "horn",
+      "midi_range": [
+        55,
+        66.66666666666667
+      ],
+      "sample_range": [
+        34,
+        77
+      ]
+    },
+    "harp": {
+      "voice": "folk_harp",
+      "midi_range": [
+        63,
+        85.33333333333333
+      ],
+      "sample_range": [
+        36,
+        93
+      ]
+    },
+    "piano": {
+      "voice": "grand_piano",
+      "midi_range": [
+        45.666666666666664,
+        71.33333333333333
+      ],
+      "sample_range": [
+        21,
+        108
+      ]
+    }
+  },
+  "pair_frequency_measurements": [
+    {
+      "section": "p20_1",
+      "ear": "left",
+      "center_hz": 369.99442,
+      "expected_hz": 364.21326,
+      "measured_hz": 364.21053
+    },
+    {
+      "section": "p20_1",
+      "ear": "right",
+      "center_hz": 369.99442,
+      "expected_hz": 375.77559,
+      "measured_hz": 375.78947
+    },
+    {
+      "section": "p20_1",
+      "ear": "left",
+      "center_hz": 246.94165,
+      "expected_hz": 243.08319,
+      "measured_hz": 243.09211
+    },
+    {
+      "section": "p20_1",
+      "ear": "right",
+      "center_hz": 246.94165,
+      "expected_hz": 250.80011,
+      "measured_hz": 250.78947
+    },
+    {
+      "section": "p20_1",
+      "ear": "left",
+      "center_hz": 195.99772,
+      "expected_hz": 192.93525,
+      "measured_hz": 192.92763
+    },
+    {
+      "section": "p20_1",
+      "ear": "right",
+      "center_hz": 195.99772,
+      "expected_hz": 199.06018,
+      "measured_hz": 199.04605
+    },
+    {
+      "section": "p20_1",
+      "ear": "left",
+      "center_hz": 164.81378,
+      "expected_hz": 162.23856,
+      "measured_hz": 162.23684
+    },
+    {
+      "section": "p20_1",
+      "ear": "right",
+      "center_hz": 164.81378,
+      "expected_hz": 167.38899,
+      "measured_hz": 167.40132
+    },
+    {
+      "section": "p20_1",
+      "ear": "left",
+      "center_hz": 146.83238,
+      "expected_hz": 144.53813,
+      "measured_hz": 144.53947
+    },
+    {
+      "section": "p20_1",
+      "ear": "right",
+      "center_hz": 146.83238,
+      "expected_hz": 149.12664,
+      "measured_hz": 149.11184
+    },
+    {
+      "section": "p22_3",
+      "ear": "left",
+      "center_hz": 503.48471,
+      "expected_hz": 495.61776,
+      "measured_hz": 495.625
+    },
+    {
+      "section": "p22_3",
+      "ear": "right",
+      "center_hz": 503.48471,
+      "expected_hz": 511.35166,
+      "measured_hz": 511.34868
+    },
+    {
+      "section": "p22_3",
+      "ear": "left",
+      "center_hz": 215.80462,
+      "expected_hz": 212.43267,
+      "measured_hz": 212.43421
+    },
+    {
+      "section": "p22_3",
+      "ear": "right",
+      "center_hz": 215.80462,
+      "expected_hz": 219.17657,
+      "measured_hz": 219.17763
+    },
+    {
+      "section": "p22_3",
+      "ear": "left",
+      "center_hz": 203.69244,
+      "expected_hz": 200.50974,
+      "measured_hz": 200.49342
+    },
+    {
+      "section": "p22_3",
+      "ear": "right",
+      "center_hz": 203.69244,
+      "expected_hz": 206.87513,
+      "measured_hz": 206.875
+    },
+    {
+      "section": "p22_3",
+      "ear": "left",
+      "center_hz": 164.81378,
+      "expected_hz": 162.23856,
+      "measured_hz": 162.23684
+    },
+    {
+      "section": "p22_3",
+      "ear": "right",
+      "center_hz": 164.81378,
+      "expected_hz": 167.38899,
+      "measured_hz": 167.40132
+    },
+    {
+      "section": "p22_3",
+      "ear": "left",
+      "center_hz": 133.35587,
+      "expected_hz": 131.27218,
+      "measured_hz": 131.28289
+    },
+    {
+      "section": "p22_3",
+      "ear": "right",
+      "center_hz": 133.35587,
+      "expected_hz": 135.43955,
+      "measured_hz": 135.42763
+    }
+  ],
+  "comparison_renders": {
+    "music_only": {
+      "seconds": 300.0,
+      "lufs": -21.95,
+      "same_master_gain": true
+    },
+    "binaural_pairs": {
+      "seconds": 300.0,
+      "lufs": -36.95,
+      "same_master_gain": true
+    }
+  },
+  "pair_relative_lufs": -15.0,
+  "master_gain_db": 13.2661,
+  "rate_mode": "octave",
+  "beat_octaves": 5,
+  "octave_rate_ratios_verified": true,
+  "difference_range_hz": [
+    4.0878994578218535,
+    15.733897204268416
+  ],
+  "qa": {
+    "seconds": 300.0,
+    "lufs": -22.78,
+    "true_peak_db": -1.99,
+    "clipped_samples": 0
+  },
+  "listening_status": "User selected motif B. The complete arrangement awaits human listening review; technical QA is not a listening judgment."
+}

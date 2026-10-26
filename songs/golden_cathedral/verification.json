@@ -3,8 +3,8 @@
   "seconds": 300.0,
   "bars": 72.0,
   "tuning": "36edo",
-  "score_sha256": "2c141818b72e4cb61ddbe9a3b64ceea0a7a5a7fd5e8acc1a8dfd5b1912a11cc0",
-  "audio_sha256": "f801cd51b75345ae7d3d59eb0e7a6aab947f7d94605cfe7567f7dbdb30ba9220",
+  "score_sha256": "a482dc47e88f4632e8f8ccbd2758a2e3b69a387435bf06d5df32b7c354fc96c8",
+  "audio_sha256": "1fe24490573ac92fd322033eb0f1814daa1faf15c818c7c26c568244afeebded",
   "event_digest": "dc26b86f7a04b1bc91cb0c46d65a0e07e373e3a6b1dfeece047f40e140e1b08b",
   "outside_scale": [],
   "microtonal_rubs": [],
@@ -72,160 +72,167 @@
       "section": "first_ninth",
       "carrier": "vEb4",
       "ear": "left",
-      "expected_hz": 300.19382,
-      "measured_hz": 300.1875
+      "expected_hz": 300.42517,
+      "measured_hz": 300.4375
     },
     {
       "section": "first_ninth",
       "carrier": "vEb4",
       "ear": "right",
-      "expected_hz": 310.19382,
-      "measured_hz": 310.1875
+      "expected_hz": 309.96247,
+      "measured_hz": 309.96875
     },
     {
       "section": "first_ninth",
       "carrier": "B3",
       "ear": "left",
-      "expected_hz": 243.85148,
-      "measured_hz": 243.84375
+      "expected_hz": 243.08319,
+      "measured_hz": 243.09375
     },
     {
       "section": "first_ninth",
       "carrier": "B3",
       "ear": "right",
-      "expected_hz": 250.03182,
-      "measured_hz": 250.03125
+      "expected_hz": 250.80011,
+      "measured_hz": 250.8125
     },
     {
       "section": "first_ninth",
       "carrier": "^G3",
       "ear": "left",
-      "expected_hz": 197.89821,
-      "measured_hz": 197.90625
+      "expected_hz": 196.68604,
+      "measured_hz": 196.6875
     },
     {
       "section": "first_ninth",
       "carrier": "^G3",
       "ear": "right",
-      "expected_hz": 201.71787,
-      "measured_hz": 201.71875
+      "expected_hz": 202.93004,
+      "measured_hz": 202.9375
     },
     {
       "section": "first_ninth",
       "carrier": "vE3",
       "ear": "left",
-      "expected_hz": 160.49045,
-      "measured_hz": 160.5
+      "expected_hz": 159.14469,
+      "measured_hz": 159.15625
     },
     {
       "section": "first_ninth",
       "carrier": "vE3",
       "ear": "right",
-      "expected_hz": 162.85113,
-      "measured_hz": 162.84375
+      "expected_hz": 164.1969,
+      "measured_hz": 164.1875
     },
     {
       "section": "first_ninth",
       "carrier": "C3",
       "ear": "left",
-      "expected_hz": 130.08329,
-      "measured_hz": 130.09375
+      "expected_hz": 128.76883,
+      "measured_hz": 128.78125
     },
     {
       "section": "first_ninth",
       "carrier": "C3",
       "ear": "right",
-      "expected_hz": 131.54227,
-      "measured_hz": 131.53125
+      "expected_hz": 132.85673,
+      "measured_hz": 132.84375
     },
     {
       "section": "empyrean",
       "carrier": "vE4",
       "ear": "left",
-      "expected_hz": 315.25142,
-      "measured_hz": 315.25
+      "expected_hz": 318.28938,
+      "measured_hz": 318.28125
     },
     {
       "section": "empyrean",
       "carrier": "vE4",
       "ear": "right",
-      "expected_hz": 331.43176,
-      "measured_hz": 331.4375
+      "expected_hz": 328.3938,
+      "measured_hz": 328.40625
     },
     {
       "section": "empyrean",
       "carrier": "C4",
       "ear": "left",
-      "expected_hz": 256.62557,
-      "measured_hz": 256.625
+      "expected_hz": 257.53767,
+      "measured_hz": 257.53125
     },
     {
       "section": "empyrean",
       "carrier": "C4",
       "ear": "right",
-      "expected_hz": 266.62557,
-      "measured_hz": 266.625
+      "expected_hz": 265.71346,
+      "measured_hz": 265.71875
     },
     {
       "section": "empyrean",
       "carrier": "^Ab3",
       "ear": "left",
-      "expected_hz": 208.59907,
-      "measured_hz": 208.59375
+      "expected_hz": 208.3816,
+      "measured_hz": 208.375
     },
     {
       "section": "empyrean",
       "carrier": "^Ab3",
       "ear": "right",
-      "expected_hz": 214.77941,
-      "measured_hz": 214.78125
+      "expected_hz": 214.99689,
+      "measured_hz": 215.0
     },
     {
       "section": "empyrean",
       "carrier": "vF3",
       "ear": "left",
-      "expected_hz": 169.37441,
-      "measured_hz": 169.375
+      "expected_hz": 168.60792,
+      "measured_hz": 168.59375
     },
     {
       "section": "empyrean",
       "carrier": "vF3",
       "ear": "right",
-      "expected_hz": 173.19407,
-      "measured_hz": 173.1875
+      "expected_hz": 173.96056,
+      "measured_hz": 173.96875
     },
     {
       "section": "empyrean",
       "carrier": "C#3",
       "ear": "left",
-      "expected_hz": 137.41098,
-      "measured_hz": 137.40625
+      "expected_hz": 136.42583,
+      "measured_hz": 136.4375
     },
     {
       "section": "empyrean",
       "carrier": "C#3",
       "ear": "right",
-      "expected_hz": 139.77166,
-      "measured_hz": 139.78125
+      "expected_hz": 140.7568,
+      "measured_hz": 140.75
     }
   ],
   "comparison_renders": {
     "music_only": {
       "seconds": 300.0,
-      "lufs": -19.46,
+      "lufs": -19.26,
       "same_master_gain": true
     },
     "binaural_pairs": {
       "seconds": 300.0,
-      "lufs": -32.96,
+      "lufs": -32.77,
       "same_master_gain": true
     }
   },
   "pair_relative_lufs": -13.5,
-  "master_gain_db": -4.6887,
+  "master_gain_db": -4.4932,
+  "rate_mode": "octave",
+  "beat_octaves": 5,
+  "octave_rate_ratios_verified": true,
+  "difference_range_hz": [
+    4.0878994578218535,
+    11.787104764229747
+  ],
   "qa": {
     "seconds": 300.0,
-    "lufs": -20.86,
+    "lufs": -20.67,
     "true_peak_db": -1.99,
     "clipped_samples": 0
   },
@@ -233,5 +240,5 @@
     "The 32-second golden-vault/empyrean span is one broad climax, with a final crest rather than a separate jump.",
     "The still point is intentionally bass-heavy: most of the upper ensemble falls silent."
   ],
-  "listening_status": "Approved by the user: That was great. Technical checks retained; approval is the listening verdict."
+  "listening_status": "User approved the instrumental composition. The corrected octave-derived headphone layer awaits a new listening verdict."
 }

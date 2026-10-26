@@ -6,7 +6,8 @@
 # Above: open golden-spectrum organ voicings. Below: pure-tone pairs centered one or two octaves below those notes.
 # The midpoint is the exact octave reduction in 36-ET; the two ears are deliberately offset from it.
 # Ninth = four golden thirds: 0,11,22,33,44 sixth-steps. maj9(v3,^5,^^9) encodes it exactly, without a Western ninth.
-# Carrier order is high to low: the faster rung sits on the higher carrier, keeping low fundamentals gently detuned.
+# Each beat difference is its own carrier / 32, preserving the note relationships five octaves below.
+# The instrumental score retains its approved form; the corrected headphone layer awaits a new listening verdict.
 # No claim of brain entrainment, induced bliss, or a physiological optimum is made by this score.
 song "As Above, So Below" 60 4/4 "C golden7_42" fps=30 seed=241024 tail=12 tuning=36edo mood=ambient
 inst pedal=clean/organ(partials=5,rolloff=2.1,attack=.12,release=.35,vel_bright=.05) nave=clean/golden_pad(partials=14,rolloff=1.85,attack=.9,release=.65,vel_bright=.08) tenor=sampler/cello(attack=.06,release_mul=.18) alto=sampler/horn(attack=.08,release_mul=.18) cantus=sampler/flute(attack=.055,release_mul=.2) halo=clean/glass(partials=14,rolloff=2.1,attack=.08,decay=4.8,damp=.35,release=.7,vel_bright=.08)
@@ -18,7 +19,7 @@ feel alto gate=.92 hum=7,3,.018 arch=.3
 feel cantus gate=.91 hum=6,3,.018 arch=.35
 feel halo gate=.85 hum=3,2,.012 arch=.15
 set returns={hall: {type: reverb, seconds: 5.8, predelay: .055, damping: .68, early: 16, width: 1.25}}
-binaural ^G3 vE3 C3 beat=6.1803398875 ladder=golden level=-13.5 fade=10 glide=.8 breathe=2 breath=2.5 carve=true
+binaural ^G3 vE3 C3 beat=octave octaves=5 level=-13.5 fade=10 glide=.8 breathe=2 breath=2.5 carve=true
 
 # PEDAL: written first through the entire form, with root pillars and quiet fifth/third replies.
 # Expression pass: restrained long attacks, late breaths, a stronger 3:12 entry and one 4:00 apex.
@@ -134,24 +135,24 @@ h17 = {notes: "r1 | r1 | =ppp ^g++2 r2 | r1"}
 
 # Ensemble pass: upper chimes are intermittent, entries are staggered, and the 2:56 chamber is deliberately bare.
 # All binaural centers are chord tones. Changes crossfade for .8 s; they are not glissandi through foreign notes.
-threshold 4 | pedal:p00 nave:n00 halo:h00 chords="Cg:4" dyn=pp<p binaural={carriers: ["^G3", "vE3", C3], beat: 6.1803398875, gain_db: -2}
-first_voice 4 | pedal:p01 nave:n01 tenor:t01 chords="Cg7:4" dyn=p<mp binaural={carriers: [B3, "^G3", "vE3", C3], beat: "6.1803398875>8", gain_db: -1}
-invocation 4 | pedal:p02 nave:n02 tenor:t02 alto:a02 halo:h02 chords="^Abg7:4" dyn=p<mp binaural={carriers: [C4, "^Ab3", "^G3", "vE3"], beat: "8>10", gain_db: 0}
-woven_light 4 | pedal:p03 nave:n03 tenor:t03 alto:a03 cantus:c03 chords="vFg7:4" dyn=mp binaural={carriers: ["^Ab3", "vF3", "vE3", C3], beat: 10, gain_db: 0}
-answering_arch 4 | pedal:p04 nave:n04 tenor:t04 alto:a04 cantus:c04 halo:h04 chords="Cg7:4" dyn=mp binaural={carriers: [B3, "^G3", "vE3", C3], beat: 10, gain_db: 0}
-first_ninth 4 | pedal:p05 nave:n05 tenor:t05 alto:a05 cantus:c05 halo:h05 chords="Cmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=p<mp binaural={carriers: ["vEb4", B3, "^G3", "vE3", C3], beat: 10, gain_db: 1}
-mirror_procession 4 | pedal:p06 nave:n06 tenor:t06 alto:a06 cantus:c06 chords="vEmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mp binaural={carriers: ["^F#4", "vEb4", B3, "^G3", "vE3"], beat: 10, gain_db: 1}
-ascending_stairs 4 | pedal:p07 nave:n07 tenor:t07 alto:a07 cantus:c07 halo:h07 chords="^Gmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mp<mf binaural={carriers: [B3, Bb3, "^G3", "^F#3", "vEb3"], beat: "10>12.360679775", gain_db: 0}
-distant_choir 4 | pedal:p08 nave:n08 tenor:t08 alto:a08 cantus:c08 chords="vEmaj9(v3,^5,^^9):4" key="vE golden10_63" dyn=p binaural={carriers: ["^F#4", "vEb4", B3, "^G3", "vE3"], beat: 10, gain_db: -1}
-other_window 4 | pedal:p09 nave:n09 tenor:t09 alto:a09 cantus:c09 halo:h09 chords="Bmaj9(v3,^5,^^9):4" key="vE golden10_63" dyn=p<mp binaural={carriers: ["vD4", B3, Bb3, "^F#3", "vEb3"], beat: 10, gain_db: -1}
-turning_home 4 | pedal:p10 nave:n10 tenor:t10 alto:a10 cantus:c10 chords="^Gg7:4" key="vE golden10_63" dyn=p>pp binaural={carriers: [B3, "^G3", "^F#3", "vEb3"], beat: "10>6.1803398875", gain_db: -2}
-still_point 4 | pedal:p11 tenor:t11 cantus:c11 chords="Cg7:4" key="C golden7_42" dyn=pp binaural={carriers: [B3, "^G3", "vE3", C3], beat: 6.1803398875, gain_db: -4}
-vaults_open 4 | pedal:p12 nave:n12 tenor:t12 alto:a12 cantus:c12 halo:h12 chords="Cmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=p<mf binaural={carriers: ["vEb4", B3, "^G3", "vE3", C3], beat: "10>12.360679775", gain_db: 1}
-radiance 4 | pedal:p13 nave:n13 tenor:t13 alto:a13 cantus:c13 halo:h13 chords="^Abmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mf<f binaural={carriers: [B3, "^Ab3", "^G3", "vE3", C3], beat: "12.360679775>16.1803398875", gain_db: 1.5}
-golden_vault 4 | pedal:p14 nave:n14 tenor:t14 alto:a14 cantus:c14 halo:h14 chords="vFmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mf<f binaural={carriers: ["^Ab3", "^G3", "vF3", "vE3", C3], beat: 16.1803398875, gain_db: 2}
-empyrean 4 | pedal:p15 nave:n15 tenor:t15 alto:a15 cantus:c15 halo:h15 chords="C#maj9(v3,^5,^^9):4" key="C golden10_63" dyn=f binaural={carriers: ["vE4", C4, "^Ab3", "vF3", "C#3"], beat: 16.1803398875, gain_db: 2}
-benediction 4 | pedal:p16 nave:n16 tenor:t16 alto:a16 cantus:c16 chords="Cmaj9(v3,^5,^^9):4" key="C golden7_42" dyn=mp>p binaural={carriers: ["vEb4", B3, "^G3", "vE3", C3], beat: "10>6.1803398875", gain_db: 0}
-return_to_silence 4 | pedal:p17 nave:n17 tenor:t17 alto:a17 cantus:c17 halo:h17 chords="Cg:4" key="C golden7" dyn=p>ppp binaural={carriers: ["^G3", "vE3", C3], beat: 6.1803398875, gain_db: "-4>-14"}
+threshold 4 | pedal:p00 nave:n00 halo:h00 chords="Cg:4" dyn=pp<p binaural={carriers: ["^G3", "vE3", C3], gain_db: -2}
+first_voice 4 | pedal:p01 nave:n01 tenor:t01 chords="Cg7:4" dyn=p<mp binaural={carriers: [B3, "^G3", "vE3", C3], gain_db: -1}
+invocation 4 | pedal:p02 nave:n02 tenor:t02 alto:a02 halo:h02 chords="^Abg7:4" dyn=p<mp binaural={carriers: [C4, "^Ab3", "^G3", "vE3"], gain_db: 0}
+woven_light 4 | pedal:p03 nave:n03 tenor:t03 alto:a03 cantus:c03 chords="vFg7:4" dyn=mp binaural={carriers: ["^Ab3", "vF3", "vE3", C3], gain_db: 0}
+answering_arch 4 | pedal:p04 nave:n04 tenor:t04 alto:a04 cantus:c04 halo:h04 chords="Cg7:4" dyn=mp binaural={carriers: [B3, "^G3", "vE3", C3], gain_db: 0}
+first_ninth 4 | pedal:p05 nave:n05 tenor:t05 alto:a05 cantus:c05 halo:h05 chords="Cmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=p<mp binaural={carriers: ["vEb4", B3, "^G3", "vE3", C3], gain_db: 1}
+mirror_procession 4 | pedal:p06 nave:n06 tenor:t06 alto:a06 cantus:c06 chords="vEmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mp binaural={carriers: ["^F#4", "vEb4", B3, "^G3", "vE3"], gain_db: 1}
+ascending_stairs 4 | pedal:p07 nave:n07 tenor:t07 alto:a07 cantus:c07 halo:h07 chords="^Gmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mp<mf binaural={carriers: [B3, Bb3, "^G3", "^F#3", "vEb3"], gain_db: 0}
+distant_choir 4 | pedal:p08 nave:n08 tenor:t08 alto:a08 cantus:c08 chords="vEmaj9(v3,^5,^^9):4" key="vE golden10_63" dyn=p binaural={carriers: ["^F#4", "vEb4", B3, "^G3", "vE3"], gain_db: -1}
+other_window 4 | pedal:p09 nave:n09 tenor:t09 alto:a09 cantus:c09 halo:h09 chords="Bmaj9(v3,^5,^^9):4" key="vE golden10_63" dyn=p<mp binaural={carriers: ["vD4", B3, Bb3, "^F#3", "vEb3"], gain_db: -1}
+turning_home 4 | pedal:p10 nave:n10 tenor:t10 alto:a10 cantus:c10 chords="^Gg7:4" key="vE golden10_63" dyn=p>pp binaural={carriers: [B3, "^G3", "^F#3", "vEb3"], gain_db: -2}
+still_point 4 | pedal:p11 tenor:t11 cantus:c11 chords="Cg7:4" key="C golden7_42" dyn=pp binaural={carriers: [B3, "^G3", "vE3", C3], gain_db: -4}
+vaults_open 4 | pedal:p12 nave:n12 tenor:t12 alto:a12 cantus:c12 halo:h12 chords="Cmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=p<mf binaural={carriers: ["vEb4", B3, "^G3", "vE3", C3], gain_db: 1}
+radiance 4 | pedal:p13 nave:n13 tenor:t13 alto:a13 cantus:c13 halo:h13 chords="^Abmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mf<f binaural={carriers: [B3, "^Ab3", "^G3", "vE3", C3], gain_db: 1.5}
+golden_vault 4 | pedal:p14 nave:n14 tenor:t14 alto:a14 cantus:c14 halo:h14 chords="vFmaj9(v3,^5,^^9):4" key="C golden10_63" dyn=mf<f binaural={carriers: ["^Ab3", "^G3", "vF3", "vE3", C3], gain_db: 2}
+empyrean 4 | pedal:p15 nave:n15 tenor:t15 alto:a15 cantus:c15 halo:h15 chords="C#maj9(v3,^5,^^9):4" key="C golden10_63" dyn=f binaural={carriers: ["vE4", C4, "^Ab3", "vF3", "C#3"], gain_db: 2}
+benediction 4 | pedal:p16 nave:n16 tenor:t16 alto:a16 cantus:c16 chords="Cmaj9(v3,^5,^^9):4" key="C golden7_42" dyn=mp>p binaural={carriers: ["vEb4", B3, "^G3", "vE3", C3], gain_db: 0}
+return_to_silence 4 | pedal:p17 nave:n17 tenor:t17 alto:a17 cantus:c17 halo:h17 chords="Cg:4" key="C golden7" dyn=p>ppp binaural={carriers: ["^G3", "vE3", C3], gain_db: "-4>-14"}
 
 mix pedal -7 hall=.16 | nave -15 hall=.5 | tenor 0 hall=.35 pan=-.3 | alto -5 hall=.4 pan=.25 | cantus 2 hall=.4 pan=-.12 | halo -15 hall=.55 pan=.35
 master clean ceiling=-2

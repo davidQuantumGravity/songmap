@@ -29,11 +29,12 @@ with sync_playwright() as playwright:
     assert page.locator("#section").inner_text() == "First Ninth"
     assert "Golden ninth" in page.locator("#chord").inner_text()
     assert page.locator(".pair").count() == 5
+    assert page.locator(".pair").evaluate_all("pp=>pp.every(p=>Math.abs(+p.dataset.difference*32-+p.dataset.center)<1e-8)")
     assert page.locator(".card.sounding").count() >= 3
     before = audio.evaluate("a=>a.currentTime")
     for version in ("binaural_pairs", "music_only", "song"):
         page.locator(f'[data-version="{version}"]').click()
-        page.wait_for_function("([v,t])=>document.querySelector('audio').currentSrc.endsWith('/'+v+'.mp3') && Math.abs(document.querySelector('audio').currentTime-t)<.1", arg=[version, before])
+        page.wait_for_function("([v,t])=>document.querySelector('audio').currentSrc.split('?')[0].endsWith('/'+v+'.mp3') && Math.abs(document.querySelector('audio').currentTime-t)<.1", arg=[version, before])
         assert audio.evaluate("a=>a.paused")
     page.locator('[data-time="240"]').click()
     page.wait_for_function("document.querySelector('audio').currentTime>240")
@@ -42,6 +43,7 @@ with sync_playwright() as playwright:
     page.wait_for_function("!document.querySelector('audio').seeking")
     assert "C6" in page.locator("#instruments").inner_text()
     assert page.locator(".pair").count() == 5
+    assert page.locator(".pair").evaluate_all("pp=>pp.every(p=>Math.abs(+p.dataset.difference*32-+p.dataset.center)<1e-8)")
     page.locator(".board").scroll_into_view_if_needed()
     page.screenshot(path=str(OUT / "performance_desktop.png"))
     page.evaluate("scrollTo(0,0)")
@@ -65,6 +67,7 @@ with urlopen("http://127.0.0.1:56855/textbook_site/chapters/songbook.html") as r
     assert "Open the synchronized player" in songbook
 collection = ROOT / "songs/golden_cathedral"
 receipt = {"url": BASE, "seconds": 300, "instrument_cards": 6, "ninth_pairs": 5,
+           "displayed_difference_is_center_divided_by_32": True,
            "versions": 3, "version_switch_preserves_time_and_pause": True,
            "mp3_byte_ranges": True, "landmark_seeking": True,
            "mobile_overflow": False, "page_errors": errors, "songbook_entry": True,

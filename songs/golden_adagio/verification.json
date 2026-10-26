@@ -1,6 +1,6 @@
 {
   "title": "Adagio Motif Lab - A / B",
-  "score_sha256": "bd40ed5bb7da97945831fdfc1c0a81a19dca88e98603ac59d52115be92c2a749",
+  "score_sha256": "4c11d95b4da0dfbca0ae0ae4c4d6ae7097cea8e6991fff0e8f13ff850e604228",
   "event_digest": "1d7a52f8aff713b46afe380d017974cacbbbc92e2b2d81e93a8318c7118abe1f",
   "seconds": 54,
   "option_seconds": 24,
@@ -45,5 +45,7 @@
     "true_peak_db": -1.92,
     "clipped_samples": 0
   },
-  "listening_status": "Awaiting the user's A/B preference; technical checks do not establish likeability."
+  "listening_status": "User selected B - more forward motion. A remains an alternative, not an approved theme.",
+  "chosen_motif": "B - Forward Lilt",
+  "user_verdict": "B - more forward motion"
 }
