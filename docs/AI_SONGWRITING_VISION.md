@@ -1,12 +1,17 @@
 # AI songwriting through listening and comparison
 
-Product vision, 23 October 2026. The full songwriting workflows below are proposed behavior. On 24 October, [AI Lab](AI_LAB.md) implemented the instrument-focused slice: inventory, improvement priorities, durable A/B comparisons, text feedback, Codex challengers, and selective application or undo. The broader implementation boundaries and existing foundations are identified near the end.
+Product vision, 23 October 2026. The full songwriting workflows below are proposed behavior. On 24 October, [AI Lab](AI_LAB.md) implemented inventory and improvement priorities plus durable A/B comparisons for instruments, riffs, arrangements and saved snippets, scoped feedback, Codex challengers for musical edits, and explicit application or undo. These are bounded comparison tools; the complete blank-brief songwriting journey remains proposed. The broader implementation boundaries and existing foundations are identified near the end.
 
 **SongMap should let a creator develop an entire song through listening, choosing, and directing AI.** A blank project can become a finished piece without requiring the user to write notes, program instruments, or operate a full DAW. The creator can also intervene at any depth, from a short instruction to an individual note, and return control to AI immediately afterward.
 
 The central interaction is a musical proposal followed by an audible choice. The user describes an intention, SongMap generates alternatives, and the user selects, edits, combines, or delegates. The next proposal builds on the accepted material and the feedback. This applies to instrumentation, sound design, notes, expression, harmony, rhythm, structure, transitions, arrangement, and mixing.
 
 Creator control means retaining the score, instrument definitions, performance detail, stems, source assets, and revision history. The product should make that material portable and editable through documented formats. A strategic aim is to give creators and general language models a larger role in music production. Adoption and market-share effects are business hypotheses to evaluate.
+
+[Nested form and continuous composition](RECURSIVE_COMPOSITION.md) develops the proposed structural workflow:
+visible repeats within repeats, per-layer through-composed writing, occurrence-scoped edits and contextual pattern
+suggestions. Its [Markdown writing contexts](composition/README.md) are available now; the form editor and node-aware
+AI pipeline remain proposed.
 
 **A blank project should offer one prompt and several ways to begin.** The user can describe a mood, genre, scene, length, reference qualities, musical technique, or desired instruments. Partial instructions are enough. SongMap makes reasonable, visible assumptions and starts making music. It should request a decision only when that decision materially affects the direction, or when the user has chosen to supervise it.
 
@@ -125,7 +130,7 @@ Recording is a later DAW milestone covering device selection, latency handling, 
 
 **The current GUI supplies useful foundations, with substantial new work still required.** Verified foundations include text-based projects, instrument and patch editing, clip and step operations, rendering, stems, and technical QA. The Rack's existing recipe A/B plays the current sound followed by a recipe. See [Rack.tsx](../songmap/gui/web/src/Rack.tsx), [server.py](../songmap/gui/server.py), [project.py](../songmap/gui/project.py), and the existing API boundary tests in [test_gui.py](../tests/test_gui.py).
 
-The current audio endpoint serves the latest project render. Stable multi-candidate playback requires a durable render store and candidate-addressed audio. The current [Teacher](../songmap/gui/teach.py) performs deterministic theory analysis. It is not an LLM generation worker or a learned preference model. The new orchestration, comparison history, contextual feedback, branching application, and learning mechanisms require explicit implementation. The broader existing GUI plan remains in [GUI.md](GUI.md).
+The ordinary project audio endpoint serves the latest render. AI Lab now supplies a durable candidate render store and candidate-addressed audio for saved musical comparisons. The current [Teacher](../songmap/gui/teach.py) performs deterministic theory analysis. It is not an LLM generation worker or a learned preference model. AI Lab implements scoped challenger jobs, comparison history, session feedback and explicit reversible application. Selective merging, a full revision graph and cross-project preference learning still require implementation. The broader existing GUI plan remains in [GUI.md](GUI.md).
 
 The implementation should grow in useful increments:
 

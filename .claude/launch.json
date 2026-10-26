@@ -2,6 +2,15 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "music-listening-pages",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": [
+        "tools/serve_music.py",
+        "56855"
+      ],
+      "port": 56855
+    },
+    {
       "name": "songmap-gui",
       "runtimeExecutable": ".venv/Scripts/songmap.exe",
       "runtimeArgs": [

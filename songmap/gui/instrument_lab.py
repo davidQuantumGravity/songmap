@@ -249,7 +249,8 @@ class Lab:
         with self.db() as db:
             sessions = [json.loads(r[0]) for r in db.execute("SELECT data FROM sessions")]
             assessments = {r[0]: json.loads(r[1]) for r in db.execute("SELECT voice,data FROM assessments")}
-        return {"sessions": sorted([{k: s[k] for k in ("id", "path", "part", "piece", "use", "brief", "status", "updated")} for s in sessions],
+        return {"sessions": sorted([{**{k: s[k] for k in ("id", "path", "part", "piece", "use", "brief", "status", "updated")},
+                                     "scope": s.get("scope", "instrument")} for s in sessions],
                                    key=lambda s: -s["updated"]), "assessments": assessments}
 
     def assess(self, use, need, note):
@@ -321,7 +322,8 @@ class Lab:
                 raise ValueError("Choose A, B, tie, neither, or comment")
             if len(vote.get("text", "")) > 4000:
                 raise ValueError("Feedback must be at most 4000 characters")
-            s["feedback"].append({**vote, "created": time.time(), "provenance": "human", "scope": "this passage and instrument"})
+            s["feedback"].append({**vote, "created": time.time(), "provenance": "human",
+                                  "scope": "this passage and instrument" if s.get("scope", "instrument") == "instrument" else s["scope"]})
             if vote["choice"] in {"a", "b"}:
                 s["incumbent"] = s["pair"][vote["choice"] == "b"]
             return self.put(s)
@@ -356,11 +358,12 @@ class Lab:
             c = next(c for c in s["candidates"] if c["id"] == cid)
             if c["audio"] and all(self.audio_path(sid, cid, m).exists() for m in ("solo", "context")):
                 continue
-            song = parse_text(c["source"], str(self.root / s["path"]))
-            result = render(song, preview_end=None if song.binaural else s["start"] + s["seconds"] + .05)
-            a, b = int(s["start"] * 48000), int((s["start"] + s["seconds"]) * 48000)
+            song = parse_text(c["source"], str(self.root / c.get("path", s["path"])))
+            start = c.get("start", s["start"])
+            result = render(song, preview_end=None if song.binaural else start + s["seconds"] + .05)
+            a, b = int(start * 48000), int((start + s["seconds"]) * 48000)
             assets, levels = {}, {}
-            for mode, track in (("context", result.audio), ("solo", result.stems[s["part"]])):
+            for mode, track in (("context", result.audio), ("solo", result.stems.get(s["part"], result.audio))):
                 clip = np.array(track[a:b], copy=True)
                 level = float(lufs(clip))
                 levels[mode] = level if math.isfinite(level) else -99

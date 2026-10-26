@@ -25,7 +25,7 @@ include = ["songmap*"]
 
 [tool.setuptools.package-data]
 "*" = ["*.yaml"]
-"songmap.gui" = ["static/*", "static/assets/*"]   # the built Studio web app (songmap/gui/web: npm run build)
+"songmap.gui" = ["static/*", "static/assets/*", "data/*.yaml"]   # Studio build and versioned reference data
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

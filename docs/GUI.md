@@ -11,6 +11,10 @@ delegated writing, and contextual feedback. It distinguishes this vision from th
 [AI Lab](AI_LAB.md) implements saved-score instrument mapping, explicit improvement priorities,
 durable A/B audio, text feedback, Codex-generated challengers, and previewed application or undo across selected scores.
 
+[Harmony Library](HARMONY_LIBRARY.md) provides linked chord, directed-transition and progression databases:
+30 chord entries (including 36-ET golden stacks), 196 contextual pairs and 100 curated essential progressions.
+Open its dock tab to search, transpose, listen with note labels, copy an editable score or export the catalog.
+
 ## 1. Goals
 
 1. **One model, two views.** The `.sm` program and the visual editors are views of one song tree. Typing in the code

@@ -26,6 +26,72 @@ def test_inventory_counts_played_voices_and_reports_bad_sources(tmp_path):
     assert len(report["errors"]) == 1
 
 
+def test_inventory_reuses_snapshot_and_refreshes_live_feedback(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+    from songmap.gui import lab_api, project, server
+    from songmap.gui.instrument_lab import Lab
+    monkeypatch.setattr(project, "ROOT", str(tmp_path))
+    (tmp_path / "songs").mkdir()
+    (tmp_path / "songs/a.sm").write_text(SCORE)
+    scans = []
+    real_scan = lab_api.inventory
+    def counted(root):
+        scans.append(root)
+        return real_scan(root)
+    monkeypatch.setattr(lab_api, "inventory", counted)
+    client = TestClient(server.app)
+    first = client.get("/api/lab/inventory").json()
+    assert not first["cached"] and len(scans) == 1
+    store = Lab(tmp_path)
+    session = store.create("songs/a.sm", SCORE, "bass", None, 0, 2, "warmer")
+    store.assess("bass/sub", 3, "Needs work")
+    (tmp_path / "songs/b.sm").write_text(SCORE)
+    saved = client.get("/api/lab/inventory").json()
+    assert saved["cached"] and len(scans) == 1
+    assert saved["scanned_at"] == first["scanned_at"] and len(saved["sources"]) == 1
+    assert saved["sessions"][0]["id"] == session["id"]
+    assert saved["assessments"]["bass/sub"]["need"] == 3
+    fresh = client.get("/api/lab/inventory?refresh=true").json()
+    assert not fresh["cached"] and len(scans) == 2 and len(fresh["sources"]) == 2
+    assert fresh["scanned_at"] >= saved["scanned_at"]
+    assert "songs/b.sm" in client.get("/api/lab/inventory.csv").text
+    # A missing export is rebuilt even when the JSON snapshot exists.
+    (store.home / "instrument-usage.csv").unlink()
+    assert "songs/b.sm" in client.get("/api/lab/inventory.csv").text
+    assert len(scans) == 3
+    # An incomplete or corrupt snapshot cannot strand the library.
+    for contents in ('{"sources": []}', 'broken json'):
+        (store.home / "inventory.json").write_text(contents)
+        assert not client.get("/api/lab/inventory").json()["cached"]
+
+
+def test_slow_inventory_does_not_block_saved_comparisons(tmp_path, monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+    import threading
+    from fastapi.testclient import TestClient
+    from songmap.gui import lab_api, project, server
+    from songmap.gui.instrument_lab import Lab, inventory
+    monkeypatch.setattr(project, "ROOT", str(tmp_path))
+    store = Lab(tmp_path)
+    saved = store.create("songs/a.sm", SCORE, "bass", None, 0, 2, "warmer")
+    scanning, release = threading.Event(), threading.Event()
+    def slow(root):
+        scanning.set()
+        assert release.wait(5)
+        return inventory(root)
+    monkeypatch.setattr(lab_api, "inventory", slow)
+    client = TestClient(server.app)
+    with ThreadPoolExecutor() as pool:
+        future = pool.submit(client.get, "/api/lab/inventory?refresh=true")
+        try:
+            assert scanning.wait(2)
+            assert client.get("/api/lab/sessions").json()["sessions"][0]["id"] == saved["id"]
+            assert client.get(f"/api/lab/sessions/{saved['id']}").json()["id"] == saved["id"]
+        finally:
+            release.set()
+        assert future.result().status_code == 200
+
+
 def test_voice_edit_preserves_music_in_sm_and_yaml():
     from songmap.gui.instrument_lab import edit_voice
     from songmap.parse.fmt import song_to_raw, to_yaml
