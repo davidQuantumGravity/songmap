@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "proposed, not an implemented parser/API schema",
+  "musical_source_of_truth": ".sm",
+  "optional_annotation_sidecar": "<score>.compose.json",
+  "node_kinds": ["sequence", "parallel", "repeat", "passage", "reference"],
+  "writing_methods": ["pattern-based", "through-composed"],
+  "return_policies": ["reuse", "vary-allowed-properties", "new-written-occurrence"],
+  "edit_scopes": ["this-occurrence", "shared-definition"],
+  "occurrence_fields": ["occurrence_id", "definition_id", "binding_id", "parent_occurrence_id", "repeat_path", "source_span", "effective_overrides", "written_hash", "performed_hash", "start_beat", "end_beat"],
+  "invariants": [
+    "Legacy scores need no annotations and retain existing event digests.",
+    "Comments, definitions and control flow survive structural edits.",
+    "Variable rebinding and value-copy semantics are preserved.",
+    "Repeat references are finite, acyclic and within expansion budgets.",
+    "Duration follows resolved meter and tempo maps, including conditional children.",
+    "No implicit tiling of a part marked through-composed.",
+    "New written occurrences are authored and stored before playback.",
+    "Playback, seek and loop-count changes do not reroll accepted material.",
+    "Local edits do not alter other occurrences.",
+    "Ancestor locks cannot be weakened by child context or AI output.",
+    "Applied candidates must match their recorded source revision."
+  ],
+  "acceptance_fixtures": [
+    {"id":"RC-T01","case":"1-bar groove inside 8-bar verse inside a verse–chorus cycle repeated three times","proves":["RC01","RC02"]},
+    {"id":"RC-T02","case":"one-time 8-bar bridge after cycle two produces the documented 64-bar form","proves":["RC02"]},
+    {"id":"RC-T03","case":"continuous lead inside repeated accompaniment, with reused and separately authored returns","proves":["RC06","RC08"]},
+    {"id":"RC-T04","case":"entire piece is a single continuous passage with rehearsal markers","proves":["RC01","RC06"]},
+    {"id":"RC-T05","case":"edit one verse; shared edit lists other uses; detach and undo preserve provenance","proves":["RC03","RC04","RC05","RC09"]},
+    {"id":"RC-T06","case":"mixed meters/tempos, five-against-eight pattern span and cross-boundary pickup/tie","proves":["RC01","RC06","RC08"]},
+    {"id":"RC-T07","case":"name rebinding, copied definition and sibling insertion preserve correct binding/occurrence identity","proves":["RC04","RC10"]},
+    {"id":"RC-T08","case":"stale context association and conflicting inherited locks produce visible actionable states","proves":["RC07","RC10"]},
+    {"id":"RC-T09","case":"repeat seek and replay preserve frozen candidate content; blocked expansion fails before rendering","proves":["RC02","RC09"]}
+  ]
+}

@@ -1,5 +1,7 @@
 # Melody: writing motifs and lines that sing
 
+For revisions prompted by this user's listening feedback, read [listening-feedback.md](listening-feedback.md). Preserve accompaniment they liked, separate melodic decisions from timbre/level changes, and use a controlled motif audition when the main idea remains uncertain. A scale or mode supplies vocabulary; the phrase still needs hierarchy, direction and breathing space.
+
 ## Scale degrees
 
 | Degree | −3 | −1 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 9 |
@@ -31,7 +33,7 @@ bar 1: 4/8 (.5) + 2 (.5) + 0/4 (1) + 2/8 (.5) + 4 (.5) + 5/4 (1) = 4 ✓
 bar 2: 5/4. (1.5) + 4/8 (.5) + 2/2 (2)                       = 4 ✓
 ```
 
-**Expression inside the line.** Marks go **after** the note and its duration: `4/4^`, `0/8'`, `c4^`, `R/8^`. A `^` before a note is reserved for microtones and is an error. Marks belong to one note, while durations are sticky, so `0/8' 2' 4'` is three staccato 8ths.
+**Expression inside the line.** Marks go **after** the note and its duration: `4/4^`, `0/8'`, `c4^`, `R/8^`. A prefix `^` changes pitch by a sixth-step in 36-ET; it does not accent the note. Marks belong to one note, while durations are sticky, so `0/8' 2' 4'` is three staccato 8ths.
 
 | Mark | Meaning |
 |---|---|

@@ -56,6 +56,8 @@ The image above is a frame from *Two Windows*, an editable score in [Golden Worl
 - **[Hear complete songs](https://deeperresearch.ai/music_theory_of_golden_harmony/chapters/ch47.html)** to explore golden harmony in an ensemble.
 - **[Browse the textbook sources](textbook/)** to study or change the chapters and their editable example scores. The online book is a draft edition.
 
+A proposed two-volume set, **[Rational and Irrational Harmony](docs/RATIONAL_AND_IRRATIONAL_HARMONY.md)**, extends this direction into a history of music theory across cultures and a broader exploration of irrational harmonic systems.
+
 ## SongMap Studio
 
 [![SongMap Studio showing the song browser, colored arrangement, harmony teacher and editable instrument video panels](docs/images/studio.png)](docs/GUI.md)

@@ -9,6 +9,8 @@ You write **musical decisions as text**, in a `.sm` song map. The engine does th
 
 Good scores come from **composing first and typing second**. Every composition or musical revision requires deliberate musical decisions, **one instrument at a time: notes first, expression second, then review in the ensemble** (§2.1). Follow the method in §2, make it alive with §3, balance it with §4, and use the references for depth:
 
+For this user's melody revisions, golden compositions, motif auditions and listening presentations, read [listening-feedback.md](reference/listening-feedback.md). Preserve praised bass/harmony/comping, write a memorable line with breathing space, and keep unfamiliar pitches supported by calmer timbres and measured lead levels. Scale membership and technical QA do not establish that a melody sounds good. A/B auditioning is useful when it resolves a real melodic choice, not a required gate for every task.
+
 | Read | When |
 |---|---|
 | [reference/emotion.md](reference/emotion.md) | choosing key, harmony, rhythm and palette for a feeling; arcs for 1–3 minute videos |
@@ -17,6 +19,8 @@ Good scores come from **composing first and typing second**. Every composition o
 | [reference/rhythm.md](reference/rhythm.md) | grooves, swing, ghost notes, fills, builds, bass lines, arpeggios |
 | [reference/instruments.md](reference/instruments.md) | each instrument's sound and settings, ambience and sound-design moves, arrangement |
 | [reference/golden.md](reference/golden.md) | golden harmony in 36-ET inside a Western song: spelling, five techniques, rules that keep it tasteful, the rub check |
+| [reference/listening-feedback.md](reference/listening-feedback.md) | feedback-driven melody and balance, golden suspensions/ninths, motif A/B tests, chord-following binaural layers and compact synchronized presentation |
+| [composition contexts](../../../docs/composition/README.md) | recurring units, through-composed passages, mixed layers, transitions and concise node briefs; use current `.sm` grammar, with future editor behavior clearly marked in the linked design |
 | [examples/](examples/) | three complete, rendered and balanced scores to imitate (§8) |
 | [catalog.txt](catalog.txt) | every style, mod, instrument and event name (`songmap describe --compact`) |
 
@@ -146,7 +150,7 @@ These controls provide baseline variation. They cannot supply the instrument-spe
   build 2 | drums:full bass:eighths pad:warm arp:up dyn=mp<f
   peak  2 | like=build lead:theme dyn=f | !drop:1@-1(keep=[pad, arp]) !riser:1 !impact
   ```
-- **The master normalises the whole song** to −14 LUFS, so only the differences between sections count.
+- **Master mode matters.** `master standard` targets its configured loudness (usually −14 LUFS); `master clean` normalizes sample peak only, without loudness normalization or limiting. Inspect LUFS and true peak in the delivered render. Keep intentional dynamics, check that the quiet opening is usable, and preserve a common master gain across comparison tracks.
 - **`qa.json`, what to read:**
 
   | Field | Meaning | Target |
@@ -254,7 +258,7 @@ mix keys 0
   - **Reserved** (errors): `for in if elif else every def return form with and or not true false none as at bars`, and the builtins `euclid rot rev len min max`.
   - **Avoid:** style and motif names (`warm`, `dark`, `up`, `full`, `sub`, your motif names), because a section is also a variable and `pad:warm` would pick up a section called `warm`.
   - **Allowed:** directive words (`groove`, `mix`, `feel`, …) work as section names.
-- **Not available yet:** the re-harmonising transform `to=`, and instruments outside the catalog (strings, brass, bells, real field recordings). For ambience and nature sounds, see [instruments.md](reference/instruments.md).
+- **Availability:** the re-harmonising transform `to=` is not available. Recorded strings, brass, winds and other voices are available through installed `sampler/<voice>` entries; check the current catalog, sample manifest and supported ranges. Do not infer a voice name from an instrument family. For ambience and nature sounds, see [instruments.md](reference/instruments.md).
 - **Tempo ramps and video.** A ramp keeps cues and frames exact, but beats no longer land on whole frames inside it, so keep ramps to endings and transitions.
 
 ## 8. Examples (complete, checked, rendered and balanced)
