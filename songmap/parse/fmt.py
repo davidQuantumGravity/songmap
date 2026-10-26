@@ -369,7 +369,7 @@ class _Printer:
     @staticmethod
     def binaural_line(b: dict) -> str | None:
         names = {"beat": "beat", "ladder": "ladder", "level_db": "level", "fade": "fade", "glide": "glide",
-                 "gain_db": "gain", "breathe": "breathe", "breath_db": "breath", "carve": "carve"}
+                 "gain_db": "gain", "breathe": "breathe", "breath_db": "breath", "carve": "carve", "octaves": "octaves"}
         cs = b.get("carriers")
         if not isinstance(cs, list) or not cs or set(b) - {"carriers", *names}:
             return None

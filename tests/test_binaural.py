@@ -54,10 +54,50 @@ def test_golden_ladder_ramps_and_sticky_sections():
     assert bn.describe(p)[0].startswith("a: A3 220.00 Hz @ 10.00")
 
 
+def test_default_beats_are_octave_reductions_and_follow_transposition():
+    p = plan_of('binaural A3 E4\na 2 | pad:warm\n'
+                'b 2 | pad:warm binaural={carriers: [E4, A4]}\n')
+    a, b = p.states
+    assert p.rates(a) == pytest.approx([220 / 32, 329.62755691287 / 32])
+    assert p.rates(b) == pytest.approx([p.rates(a)[1], 2 * p.rates(a)[0]])
+    # A common note keeps its rate when it moves to a different list position.
+    for hz, amp, mul, widest in bn._oscillators(p, p.seconds):
+        times = np.linspace(0, p.seconds, 257)
+        base = bn._curve(bn._ramped(p.states, lambda s: s.beat, p.glide, True), log=True)
+        rates = np.exp(np.interp(times, *base)) * np.interp(times, *mul)
+        assert rates == pytest.approx(np.full_like(times, hz / 32))
+        assert widest == pytest.approx(hz / 32)
+
+
+def test_octave_mode_round_trips_and_has_no_independent_ladder():
+    s = song('binaural A3 ^F4 beat=octave octaves=6\nx 2 | pad:warm\n')
+    p = bn.plan(s, expand(s).timeline)
+    assert p.rates(p.states[0]) == pytest.approx([c.hz / 64 for c in p.states[0].carriers])
+    want = fmt.song_to_raw(s)
+    assert fmt.song_to_raw(lang.loads(fmt.to_sm(s), "p.sm")) == want
+    assert fmt.song_to_raw(yaml_form.from_raw(yaml_form.load_raw_text(fmt.to_yaml(s)), "p.yaml")) == want
+    for options in ('beat=octave ladder=golden', 'beat=octave octaves=2.5', 'beat=10 octaves=5',
+                    'beat=octave octaves=1', 'beat=octave octaves=0', 'beat=octave octaves=true'):
+        with pytest.raises(SongError):
+            plan_of(f'binaural A3 {options}\nx 2 | pad:warm\n')
+    with pytest.raises(SongError):
+        plan_of('binaural A3 beat=octave\nx 2 | pad:warm beat=10\n')
+
+
+def test_octave_rates_are_present_in_the_rendered_left_and_right_audio():
+    p, _, y = layer('binaural A3 E4 beat=octave octaves=5 fade=0\nx 4 | pad:warm\n')
+    segment = y[2 * SR:12 * SR]
+    for carrier, rate in zip(p.states[0].carriers, p.rates(p.states[0])):
+        for ch, sign in ((0, -1), (1, 1)):
+            expected = carrier.hz + sign * rate / 2
+            measured = peak(segment[:, ch], expected - .4, expected + .4)
+            assert measured == pytest.approx(expected, abs=.02)
+
+
 @pytest.mark.parametrize("body, msg, hint", [
     ("binaural A3 beat=60\n", "too fast", "theta 4-8"),
     ("binaural A3 ^E4\n", "sixth-step", "36edo"),
-    ("binaural A3 E4 ladder=[1]\n", "1 rungs for 2 carriers", "one multiplier per carrier"),
+    ("binaural A3 E4 beat=10 ladder=[1]\n", "1 rungs for 2 carriers", "one multiplier per carrier"),
     ("binaural H3\n", "carrier 'H3' not understood", "A3*phi^2"),
     ("binaural A1\n", "55.0 Hz", "200-500"),
     ("set binaural={carriers: [A3], beet: 4}\n", "unknown key 'beet'", "beat"),
@@ -153,7 +193,7 @@ def test_the_ear_hears_a_carrier_that_rubs_the_harmony():
     assert any(f.kind == "binaural" and f.severity == "problem" and "^E4" in f.message for f in rep.findings)
     rep = listen(expand(song("binaural A3 E4\nx 4 | pad:warm chords=\"A:4\"\n")))
     assert not any(f.kind == "binaural" for f in rep.findings)
-    assert rep.facts["binaural beats (Hz)"] == "6.18 10"
+    assert rep.facts["binaural beats (Hz)"] == "6.875 10.301"
 
 
 def test_cli_check_reports_the_layer(tmp_path, capsys):

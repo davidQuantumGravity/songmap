@@ -1,0 +1,10 @@
+{
+  "golden_cathedral": {
+    "event_digest": "dc26b86f7a04b1bc91cb0c46d65a0e07e373e3a6b1dfeece047f40e140e1b08b",
+    "source": "songs\\golden_cathedral\\as_above_so_below.sm"
+  },
+  "golden_adagio": {
+    "event_digest": "dd8f61dc27513b90740b983148f32149f55d0dfc39faf245cc53534a49e32855",
+    "source": "songs\\golden_adagio\\beyond_the_veil.sm"
+  }
+}

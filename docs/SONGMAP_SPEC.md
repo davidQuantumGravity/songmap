@@ -311,23 +311,31 @@ Full design in [GOLDEN_HARMONY.md](GOLDEN_HARMONY.md). Accent `^` stays a suffix
 
 `binaural:` adds exact pure-tone pairs, one frequency in each ear ([songmap/mix/binaural.py](../songmap/mix/binaural.py);
 the textbook's Chapters 41 and 48). Each carrier `f` is split into `f - d/2` (left) and `f + d/2` (right); carrier `i`
-beats at `beat * ladder[i]`.
+has difference `d = f / 2^octaves` by default. A shared octave reduction preserves the carrier-frequency ratios
+through chord changes and does not depend on the carrier's list position.
 
 ```yaml
 binaural:
   carriers: [A3, "A3*phi", "A4*phi^-1"]   # note names in the song's tuning, MIDI numbers, "220hz", "A3*phi^k"
-  beat: 10                                 # Hz; "16.18>10" ramps geometrically across a section
-  ladder: golden                           # 1, 1/phi, 1/phi^2, ...; or same; or [1, 0.5]
+  beat: octave                             # default mode; each difference derives from its own note
+  octaves: 5                               # default divisor 32: A3=220 Hz -> 6.875 Hz
   level_db: -12                            # integrated loudness relative to the music (LU)
   fade: 8                                  # s, in at the start and out at the end
   glide: 6                                 # s: carriers crossfade and beats glide at section starts
   breathe: 2                               # optional swell, one cycle per 2 bars; breath_db: 3 its depth
   carve: true                              # the music gives up a band of +-(widest beat/2 + 3 Hz) at each carrier
 sections:
-  - {name: deep, bars: 21, binaural: {beat: "10>6.18", carriers: [A3, "A3*phi"], gain_db: -2}}   # or binaural: 6.18
+  - {name: deep, bars: 21, binaural: {carriers: [A3, "A3*phi"], gain_db: -2}}
 ```
 
-Unset section values carry over (a ramp's end value holds). The layer is a dry stem (`binaural`: its tones minus the
+In octave mode, omit an independent `ladder` and numeric section `beat` overrides; they would break the frequency
+relationship. `octaves` is one positive integer shared throughout the song. Increase it if the derived differences
+exceed the engine's 45 Hz limit. For explicitly requested fixed-Hz experiments, set a numeric song-level `beat`
+instead (for example `beat: 10`, with optional `ladder: golden`, `same` or a list). Only that legacy mode accepts
+independent section ramps such as `beat: "10>6.18"`; a ramp's end value then carries over. The legacy golden ladder
+is an independent difference pattern and does not imply octave reduction of the notes.
+
+Other unset section values carry over. The layer is a dry stem (`binaural`: its tones minus the
 music it carves); `songmap check` prints its plan, and `songmap listen` flags a carrier a sixth-step from a chord tone
 (a problem) or a half step (a pedal point, a note). MP3s of songs with a layer are coded without joint stereo.
 

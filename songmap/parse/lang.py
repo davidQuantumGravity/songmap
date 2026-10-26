@@ -1996,10 +1996,10 @@ class _Interp:
         self.song["master"] = m["mode"] if list(m) == ["mode"] else m
 
     def d_binaural(self, args, raw, line):
-        """binaural A3 E4 beat=10 ladder=golden level=-12 fade=6 glide=4 breathe=2 breath=3 (mix/binaural.py)."""
+        """binaural A3 E4 beat=octave octaves=5 level=-12 fade=6 glide=4 (mix/binaural.py)."""
         keys = {"beat": "beat", "ladder": "ladder", "level": "level_db", "level_db": "level_db", "fade": "fade",
                 "glide": "glide", "gain": "gain_db", "gain_db": "gain_db", "breathe": "breathe", "breath": "breath_db",
-                "breath_db": "breath_db", "carve": "carve"}
+                "breath_db": "breath_db", "carve": "carve", "octaves": "octaves"}
         b, carriers = {}, []
         for a in split_top(self._rest(raw)):
             k, eq, v = a.partition("=")

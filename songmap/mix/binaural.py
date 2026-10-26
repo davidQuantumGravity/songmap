@@ -1,13 +1,14 @@
 """Binaural beats: a layer of exact pure-tone pairs, one frequency in each ear (textbook ch41, ch48).
 
-A song's `binaural:` block names carrier pitches and a beat rate B. Each carrier f is split into a left tone
+A song's `binaural:` block names carrier pitches. By default its difference d = f / 2**octaves (five octaves).
+Each carrier f is split into a left tone
 f - d/2 and a right tone f + d/2 (the mirrored detune of ch41: the pair is heard at f, and the ears differ by d).
 Neither ear receives a beat; the flutter at d per second is made by the brain, on headphones only.
 
     binaural:
       carriers: [A3, E4]         # note names in the song's tuning (^F4, vD5), MIDI numbers, "220hz", "A3*phi^2"
-      beat: 10                   # Hz, the first carrier's rate; "16.18>10" ramps (geometrically) over the section
-      ladder: golden             # carrier i beats at B * ladder[i]: golden = 1, 1/phi, 1/phi^2, ...; same; [1, .5]
+      beat: octave               # default: each difference follows its own carrier, independent of list position
+      octaves: 5                 # one shared divisor: A3=220 Hz -> 6.875 Hz; E4 -> 10.300861 Hz
       level_db: -12              # the layer's integrated loudness relative to the music's (LU)
       fade: 6                    # seconds in at the start and out at the end of the audio
       glide: 4                   # seconds: changes at a section start (beat, carriers) move smoothly
@@ -15,7 +16,9 @@ Neither ear receives a beat; the flutter at d per second is made by the brain, o
       breath_db: 3               # its depth
       carve: true                # the music gives up a narrow band around each carrier (see carve())
 
-Sections may set `binaural: {beat: "10>6.18", carriers: [...], gain_db: -3}` (`.sm`: `beat=10>6.18`); unset values
+Explicit numeric beat values retain the older fixed-Hz mode, with optional `ladder: golden`, `same`, or a list.
+Octave mode has no independent ladder or numeric section-rate overrides: the frequency ratio stays constant.
+Sections may set carriers and gain; fixed-Hz mode also accepts beat ramps such as "10>6.18". Unset values
 carry over from the previous section. A carrier that leaves or enters crossfades over `glide` seconds, so the pairs
 never jump in pitch; beat changes glide, so they never click. Phases are integrated sample by sample from the
 frequency curves. The layer is a stem (`binaural`), dry (never sent to a reverb, which would mix the ears).
@@ -30,7 +33,7 @@ import numpy as np
 from ..parse.errors import SongError, did_you_mean
 
 PHI = (1 + 5 ** 0.5) / 2
-SONG_KEYS = ("carriers", "beat", "ladder", "level_db", "fade", "glide", "gain_db", "breathe", "breath_db", "carve")
+SONG_KEYS = ("carriers", "beat", "octaves", "ladder", "level_db", "fade", "glide", "gain_db", "breathe", "breath_db", "carve")
 SECTION_KEYS = ("carriers", "beat", "gain_db")
 REF_HZ = 220.0          # carrier loudness weighting (f / 220)^-1/2: higher pairs a little softer
 BLOCK = 1 << 15
@@ -47,7 +50,7 @@ class Carrier:
 
 @dataclass
 class State:
-    """What the layer does in one section: carriers, the beat ramp (Hz) and the gain ramp (dB)."""
+    """Per-section carriers and gain; beat is a fixed-mode Hz ramp, or unity in octave mode."""
     name: str
     t0: float
     t1: float
@@ -59,7 +62,7 @@ class State:
 @dataclass
 class Plan:
     states: list[State]
-    ladder: list[float]
+    ladder: list[float]                    # independent multipliers in explicit fixed-Hz mode only
     level_db: float = -12.0
     fade: float = 4.0
     glide: float = 4.0
@@ -68,8 +71,11 @@ class Plan:
     carve: bool = True
     seconds: float = 0.0
     summary: list[dict] = field(default_factory=list)
+    octaves: int | None = None              # None: explicit legacy fixed-Hz mode; integer: d = carrier / 2**n
 
     def rates(self, st: State, which: int = 0) -> list[float]:
+        if self.octaves is not None:
+            return [c.hz / 2 ** self.octaves for c in st.carriers]
         b = st.beat[which]
         return [b * self.ladder[i] for i in range(len(st.carriers))]
 
@@ -170,7 +176,22 @@ def plan(song, tl) -> Plan | None:
         raise _err("the song's binaural block needs carriers", song,
                    suggestion="name chord tones that sound throughout, e.g. carriers: [A3, E4]")
     carriers = _carriers(spec["carriers"], song)
-    beat = _ramp(spec.get("beat", 10), "beat", song)
+    mode = spec.get("beat", "octave")
+    octaves = None
+    if mode == "octave":
+        octaves = spec.get("octaves", 5)
+        if isinstance(octaves, bool) or not isinstance(octaves, int) or not 1 <= octaves <= 24:
+            raise _err("octaves must be a positive integer from 1 to 24", song,
+                       suggestion="use beat: octave and octaves: 5 for difference = carrier frequency / 32")
+        if "ladder" in spec:
+            raise _err("octave-derived differences have no independent ladder", song,
+                       suggestion="omit ladder; each carrier supplies its own difference as f / 2**octaves")
+        beat = (1.0, 1.0)                 # unity base; the oscillator multiplier is its own octave-reduced Hz
+    else:
+        if "octaves" in spec:
+            raise _err("octaves cannot be combined with a fixed beat rate", song,
+                       suggestion="use beat: octave to derive rates from the notes, or remove octaves for fixed-Hz mode")
+        beat = _ramp(mode, "beat", song)
     gain = _ramp(spec.get("gain_db", 0), "gain_db", song, positive=False)
     width = len(carriers)
     states = []
@@ -180,7 +201,12 @@ def plan(song, tl) -> Plan | None:
         if "carriers" in d:
             carriers = _carriers(d["carriers"], song, sec.line, sec.name)
         if "beat" in d:
-            beat = _ramp(d["beat"], "beat", song, sec.line, sec.name)
+            if octaves is not None:
+                if d["beat"] != "octave":
+                    raise _err("a fixed section beat would break octave tracking", song, sec.line, sec.name,
+                               "omit the section beat; carrier changes automatically change the differences")
+            else:
+                beat = _ramp(d["beat"], "beat", song, sec.line, sec.name)
         elif states:
             beat = (states[-1].beat[1],) * 2          # a ramp ends where it ends: the next section holds it
         if "gain_db" in d:
@@ -190,14 +216,19 @@ def plan(song, tl) -> Plan | None:
         width = max(width, len(carriers))
         states.append(State(sec.name, tl.beat_to_sec(span.start), tl.beat_to_sec(span.end), carriers, beat, gain))
     num = lambda k, dflt: float(_ramp(spec.get(k, dflt), k, song, positive=False)[0])     # noqa: E731
-    p = Plan(states, _ladder(spec.get("ladder"), width, song), level_db=num("level_db", -12),
+    p = Plan(states, _ladder(spec.get("ladder"), width, song) if octaves is None else [1.0] * width, level_db=num("level_db", -12),
              fade=max(num("fade", 4), 0.0), glide=max(num("glide", 4), 0.05),
              breathe=float(spec["breathe"]) if spec.get("breathe") else None, breath_db=num("breath_db", 3),
-             carve=bool(spec.get("carve", True)))
+             carve=bool(spec.get("carve", True)), octaves=octaves)
     p.seconds = tl.seconds
     for st in states:
+        if octaves is not None and any(not np.isfinite(r) or r <= 0 or r > 45 for r in p.rates(st)):
+            raise _err("octave-derived beat rates must be positive and at most 45 Hz", song, section=st.name,
+                       suggestion="increase octaves to reduce the differences while preserving note-frequency ratios")
         p.summary.append({"section": st.name, "carriers_hz": [round(c.hz, 3) for c in st.carriers],
                           "beats_hz": [[round(a, 3), round(b, 3)] for a, b in zip(p.rates(st, 0), p.rates(st, 1))]})
+        if octaves is not None:
+            p.summary[-1].update(rate_mode="octave", octaves=octaves)
     return p
 
 
@@ -207,6 +238,8 @@ def describe(p: Plan) -> list[str]:
     for st, s in zip(p.states, p.summary):
         txt = ", ".join(f"{c.label} {c.hz:.2f} Hz @ " + (f"{a:.2f}" if abs(a - b) < 1e-9 else f"{a:.2f}>{b:.2f}")
                         for c, (a, b) in zip(st.carriers, s["beats_hz"]))
+        if p.octaves is not None:
+            txt += f" (each difference = its carrier / 2^{p.octaves})"
         if txt != last:
             out.append(f"{st.name}: {txt}")
         last = txt
@@ -255,7 +288,8 @@ def _oscillators(p: Plan, end: float):
         for st in p.states:
             idx = next((i for i, x in enumerate(st.carriers) if round(x.hz, 6) == k), None)
             a = 1.0 if idx is not None else 0.0
-            m = p.ladder[idx] if idx is not None else (cur_m if cur_m is not None else p.ladder[0])
+            m = (c.hz / 2 ** p.octaves if p.octaves is not None else
+                 p.ladder[idx] if idx is not None else (cur_m if cur_m is not None else p.ladder[0]))
             if idx is not None:
                 widest = max(widest, max(st.beat) * m)
             g = min(p.glide, (st.t1 - st.t0) / 2) if st.t1 > st.t0 else 0.0

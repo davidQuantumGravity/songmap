@@ -43,8 +43,9 @@ directive :=
   master [legacy|standard] [lufs=<x>] [ceiling=<x>] [glue=none|gentle|punchy] [contrast=<dB>]
   qa    [lufs=<x>|<a>..<b>] [contrast=<quiet><<loud>:<dB>,...] [silent!=<a>,<b>] [low<=<x>] [peak<=<dB>] [hits=true]
   set   <key>[.<key>...]=<value>                                 # any YAML field: set returns={hall: {type: reverb}}
-  binaural <carrier>... [beat=<Hz>|<a>><b>] [ladder=golden|same|[..]] [level=<LU>] [fade=<s>] [glide=<s>]
-           [breathe=<bars>] [breath=<dB>] [gain=<dB>] [carve=true|false]   # binaural A3 A3*phi beat=10 (headphones)
+  binaural <carrier>... [beat=octave] [octaves=<integer>] [level=<LU>] [fade=<s>] [glide=<s>]
+           [breathe=<bars>] [breath=<dB>] [gain=<dB>] [carve=true|false]   # default difference = each carrier / 32
+           # explicit fixed-Hz alternative: beat=<Hz>|<a>><b> [ladder=golden|same|[..]]; no octaves in this mode
 
 definition := <name> = <value>                                    # lit = up(order=[0,2,1,3]); see LANGUAGE.md
             | <name> = !<event> ...                               # a named event list: lift = !impact !riser:2

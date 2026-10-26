@@ -13,7 +13,7 @@ line    name bars | role:style+mod role:m1,m2 role:style(k=v) kick="X..." -role 
 event   !type[:bars|:Nb][@+bar:beat|@bar|@f123|@cue:x][(k=v)]; risers END at @; lift = !impact !riser:2 -> !lift
 more    lit = up(order=[0,2,1,3]); form: verse 8 x2 / for i in 1..4: / if i == last: / every 4 bars: bass = 8ths
         / bar -1: lead = [m2]; b = a with {pad: none}; euclid(3,8) rot rev &  (docs/LANGUAGE.md)
-        binaural A3 E4 beat=10 (headphones; section beat=10>6.18)"""
+        binaural A3 E4 beat=octave octaves=5 (headphones; each difference = its carrier / 32)"""
 
 
 def _styles() -> dict:
