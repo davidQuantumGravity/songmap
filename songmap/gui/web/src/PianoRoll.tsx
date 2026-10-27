@@ -4,6 +4,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { api, type Summary } from "./api";
 import { StepGrid } from "./StepGrid";
+import { localBeat, sectionTime } from "./musicTiming";
 
 type ClipJSON = {
   section: string; index: number; part: string; bars: number; beats_per_bar: number; start: number; end: number;
@@ -72,14 +73,11 @@ export function PianoRoll({ path, text, summary, time, partHint, onApply, colorO
   // seconds <-> beats within the section (tempo may change)
   const secOfBeat = (b: number) => {
     if (!clip) return 0;
-    const t = clip.tempo_spans, k = Math.min(Math.floor(b), t.length - 2);
-    return t[k] + (b - k) * ((t[k + 1] ?? t[k] + 0.5) - t[k]);
+    return sectionTime(summary.sections[clip.index], b);
   };
   const beatOfSec = (s: number) => {
     if (!clip) return 0;
-    const t = clip.tempo_spans;
-    for (let k = 0; k < t.length - 1; k++) if (s < t[k + 1]) return k + (s - t[k]) / (t[k + 1] - t[k]);
-    return t.length - 1;
+    return localBeat(summary.sections[clip.index], s);
   };
   const inSection = clip && time >= clip.start && time < clip.end;
 

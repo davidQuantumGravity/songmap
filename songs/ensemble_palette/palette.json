@@ -1,0 +1,860 @@
+[
+  {
+    "id": "folk_harp",
+    "use": "sampler/folk_harp",
+    "title": "Folk harp",
+    "group": "Core recordings",
+    "description": "Warm plucked strings; ripples, arpeggios, and intimate counterpoint.",
+    "benchmark": "Folk harp",
+    "source": "auditions/folk_harp.sm"
+  },
+  {
+    "id": "marimba",
+    "use": "sampler/marimba",
+    "title": "Marimba",
+    "group": "Core recordings",
+    "description": "Rounded wooden mallet attack; rhythmic hooks and clear interlocking lines.",
+    "benchmark": "Marimba",
+    "source": "auditions/marimba.sm"
+  },
+  {
+    "id": "vibraphone",
+    "use": "sampler/vibraphone",
+    "title": "Soft mallet vibraphone",
+    "group": "Core recordings",
+    "description": "Soft metallic mallets; spacious jazz harmony and melodic replies, without added motor tremolo.",
+    "benchmark": "Vibraphone",
+    "source": "auditions/vibraphone.sm"
+  },
+  {
+    "id": "double_bass",
+    "use": "sampler/double_bass",
+    "title": "Pizzicato double bass",
+    "group": "Acoustic bass",
+    "description": "Plucked acoustic bass with alternate takes; jazz and chamber bass lines, no synth glide.",
+    "benchmark": "Double bass",
+    "source": "auditions/double_bass.sm"
+  },
+  {
+    "id": "cello",
+    "use": "sampler/cello",
+    "title": "Bowed cello section",
+    "group": "Core recordings",
+    "description": "Sustained bowed cellos with recorded vibrato; expressive middle and low lines. Vibrato is part of the recording.",
+    "benchmark": "Cello section",
+    "source": "auditions/cello.sm"
+  },
+  {
+    "id": "violins",
+    "use": "sampler/violins",
+    "title": "Bowed violin section",
+    "group": "Core recordings",
+    "description": "Small sustained violin section with recorded vibrato; lyrical lines and orchestral support.",
+    "benchmark": "Violin section",
+    "source": "auditions/violins.sm"
+  },
+  {
+    "id": "flute",
+    "use": "sampler/flute",
+    "title": "Flute without vibrato",
+    "group": "Core recordings",
+    "description": "Airy recorded flute without vibrato; exposed melodies, including fractional-pitch harmony.",
+    "benchmark": "Flute",
+    "source": "auditions/flute.sm"
+  },
+  {
+    "id": "solo_violin",
+    "use": "sampler/solo_violin",
+    "title": "Solo violin",
+    "group": "Core recordings",
+    "description": "Solo bowed violin with recorded vibrato; exposed high string melodies.",
+    "benchmark": "Solo violin",
+    "source": "auditions/solo_violin.sm"
+  },
+  {
+    "id": "horn",
+    "use": "sampler/horn",
+    "title": "French horn",
+    "group": "Core recordings",
+    "description": "Rounded sustained horn; cinematic calls and warm inner voices, with natural recorded pitch variation.",
+    "benchmark": "French horn",
+    "source": "auditions/horn.sm"
+  },
+  {
+    "id": "cello_spiccato",
+    "use": "sampler/cello_spiccato",
+    "title": "Spiccato cellos",
+    "group": "Core recordings",
+    "description": "Short bowed cello attacks with alternate takes; rhythmic ostinatos and replies.",
+    "benchmark": "Cello section",
+    "source": "auditions/cello_spiccato.sm"
+  },
+  {
+    "id": "violins_spiccato",
+    "use": "sampler/violins_spiccato",
+    "title": "Spiccato violins",
+    "group": "Core recordings",
+    "description": "Short bowed violin attacks with alternate takes; rhythmic upper strings.",
+    "benchmark": "Violin section",
+    "source": "auditions/violins_spiccato.sm"
+  },
+  {
+    "id": "double_bass_arco",
+    "use": "sampler/double_bass_arco",
+    "title": "VSCO double bass, bowed",
+    "group": "Acoustic bass",
+    "description": "Recorded sustained double bass without vibrato; orchestral low lines, not a plucked groove bass.",
+    "benchmark": "Double bass",
+    "source": "auditions/double_bass_arco.sm"
+  },
+  {
+    "id": "solo_violin_pizzicato",
+    "use": "sampler/solo_violin_pizzicato",
+    "title": "Solo violin \u00b7 pizzicato",
+    "group": "Orchestral strings",
+    "description": "Recorded solo violin \u00b7 pizzicato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Solo violin",
+    "source": "auditions/solo_violin_pizzicato.sm"
+  },
+  {
+    "id": "solo_violin_spiccato",
+    "use": "sampler/solo_violin_spiccato",
+    "title": "Solo violin \u00b7 spiccato",
+    "group": "Orchestral strings",
+    "description": "Recorded solo violin \u00b7 spiccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Solo violin",
+    "source": "auditions/solo_violin_spiccato.sm"
+  },
+  {
+    "id": "solo_violin_tremolo",
+    "use": "sampler/solo_violin_tremolo",
+    "title": "Solo violin \u00b7 tremolo",
+    "group": "Orchestral strings",
+    "description": "Recorded solo violin \u00b7 tremolo. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Solo violin",
+    "source": "auditions/solo_violin_tremolo.sm"
+  },
+  {
+    "id": "solo_violin_soft",
+    "use": "sampler/solo_violin_soft",
+    "title": "Solo violin \u00b7 soft sustained vibrato",
+    "group": "Orchestral strings",
+    "description": "Recorded solo violin \u00b7 soft sustained vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Solo violin",
+    "source": "auditions/solo_violin_soft.sm"
+  },
+  {
+    "id": "violins_pizzicato",
+    "use": "sampler/violins_pizzicato",
+    "title": "Violin section \u00b7 pizzicato",
+    "group": "Orchestral strings",
+    "description": "Recorded violin section \u00b7 pizzicato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Violin section",
+    "source": "auditions/violins_pizzicato.sm"
+  },
+  {
+    "id": "violins_tremolo",
+    "use": "sampler/violins_tremolo",
+    "title": "Violin section \u00b7 tremolo",
+    "group": "Orchestral strings",
+    "description": "Recorded violin section \u00b7 tremolo. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Violin section",
+    "source": "auditions/violins_tremolo.sm"
+  },
+  {
+    "id": "violins_soft",
+    "use": "sampler/violins_soft",
+    "title": "Violin section \u00b7 soft sustained vibrato",
+    "group": "Orchestral strings",
+    "description": "Recorded violin section \u00b7 soft sustained vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Violin section",
+    "source": "auditions/violins_soft.sm"
+  },
+  {
+    "id": "violas_pizzicato",
+    "use": "sampler/violas_pizzicato",
+    "title": "Viola section \u00b7 pizzicato",
+    "group": "Orchestral strings",
+    "description": "Recorded viola section \u00b7 pizzicato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Viola section",
+    "source": "auditions/violas_pizzicato.sm"
+  },
+  {
+    "id": "violas_spiccato",
+    "use": "sampler/violas_spiccato",
+    "title": "Viola section \u00b7 spiccato",
+    "group": "Orchestral strings",
+    "description": "Recorded viola section \u00b7 spiccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Viola section",
+    "source": "auditions/violas_spiccato.sm"
+  },
+  {
+    "id": "violas_tremolo",
+    "use": "sampler/violas_tremolo",
+    "title": "Viola section \u00b7 tremolo",
+    "group": "Orchestral strings",
+    "description": "Recorded viola section \u00b7 tremolo. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Viola section",
+    "source": "auditions/violas_tremolo.sm"
+  },
+  {
+    "id": "violas_soft",
+    "use": "sampler/violas_soft",
+    "title": "Viola section \u00b7 soft sustained vibrato",
+    "group": "Orchestral strings",
+    "description": "Recorded viola section \u00b7 soft sustained vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Viola section",
+    "source": "auditions/violas_soft.sm"
+  },
+  {
+    "id": "cello_pizzicato",
+    "use": "sampler/cello_pizzicato",
+    "title": "Cello section \u00b7 pizzicato",
+    "group": "Orchestral strings",
+    "description": "Recorded cello section \u00b7 pizzicato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Cello section",
+    "source": "auditions/cello_pizzicato.sm"
+  },
+  {
+    "id": "cello_tremolo",
+    "use": "sampler/cello_tremolo",
+    "title": "Cello section \u00b7 tremolo",
+    "group": "Orchestral strings",
+    "description": "Recorded cello section \u00b7 tremolo. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Cello section",
+    "source": "auditions/cello_tremolo.sm"
+  },
+  {
+    "id": "cello_soft",
+    "use": "sampler/cello_soft",
+    "title": "Cello section \u00b7 soft sustained vibrato",
+    "group": "Orchestral strings",
+    "description": "Recorded cello section \u00b7 soft sustained vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Cello section",
+    "source": "auditions/cello_soft.sm"
+  },
+  {
+    "id": "double_bass_spiccato",
+    "use": "sampler/double_bass_spiccato",
+    "title": "Double bass \u00b7 spiccato",
+    "group": "Orchestral strings",
+    "description": "Recorded double bass \u00b7 spiccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Double bass",
+    "source": "auditions/double_bass_spiccato.sm"
+  },
+  {
+    "id": "double_bass_tremolo",
+    "use": "sampler/double_bass_tremolo",
+    "title": "Double bass \u00b7 tremolo",
+    "group": "Orchestral strings",
+    "description": "Recorded double bass \u00b7 tremolo. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Double bass",
+    "source": "auditions/double_bass_tremolo.sm"
+  },
+  {
+    "id": "double_bass_soft",
+    "use": "sampler/double_bass_soft",
+    "title": "Double bass \u00b7 soft sustained vibrato",
+    "group": "Orchestral strings",
+    "description": "Recorded double bass \u00b7 soft sustained vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Double bass",
+    "source": "auditions/double_bass_soft.sm"
+  },
+  {
+    "id": "violas",
+    "use": "sampler/violas",
+    "title": "Viola section \u00b7 sustained vibrato",
+    "group": "Orchestral strings",
+    "description": "Recorded viola section \u00b7 sustained vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Viola section",
+    "source": "auditions/violas.sm"
+  },
+  {
+    "id": "double_bass_vibrato",
+    "use": "sampler/double_bass_vibrato",
+    "title": "Double bass \u00b7 bowed vibrato",
+    "group": "Orchestral strings",
+    "description": "Recorded double bass \u00b7 bowed vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Double bass",
+    "source": "auditions/double_bass_vibrato.sm"
+  },
+  {
+    "id": "flute_vibrato",
+    "use": "sampler/flute_vibrato",
+    "title": "Flute \u00b7 vibrato",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded flute \u00b7 vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Flute",
+    "source": "auditions/flute_vibrato.sm"
+  },
+  {
+    "id": "flute_expressive",
+    "use": "sampler/flute_expressive",
+    "title": "Flute \u00b7 expressive vibrato",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded flute \u00b7 expressive vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Flute",
+    "source": "auditions/flute_expressive.sm"
+  },
+  {
+    "id": "flute_staccato",
+    "use": "sampler/flute_staccato",
+    "title": "Flute \u00b7 staccato",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded flute \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Flute",
+    "source": "auditions/flute_staccato.sm"
+  },
+  {
+    "id": "piccolo",
+    "use": "sampler/piccolo",
+    "title": "Piccolo \u00b7 sustain",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded piccolo \u00b7 sustain. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Piccolo",
+    "source": "auditions/piccolo.sm"
+  },
+  {
+    "id": "piccolo_staccato",
+    "use": "sampler/piccolo_staccato",
+    "title": "Piccolo \u00b7 staccato",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded piccolo \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Piccolo",
+    "source": "auditions/piccolo_staccato.sm"
+  },
+  {
+    "id": "oboe",
+    "use": "sampler/oboe",
+    "title": "Oboe \u00b7 non-vibrato",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded oboe \u00b7 non-vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Oboe",
+    "source": "auditions/oboe.sm"
+  },
+  {
+    "id": "oboe_vibrato",
+    "use": "sampler/oboe_vibrato",
+    "title": "Oboe \u00b7 vibrato",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded oboe \u00b7 vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Oboe",
+    "source": "auditions/oboe_vibrato.sm"
+  },
+  {
+    "id": "oboe_staccato",
+    "use": "sampler/oboe_staccato",
+    "title": "Oboe \u00b7 staccato",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded oboe \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Oboe",
+    "source": "auditions/oboe_staccato.sm"
+  },
+  {
+    "id": "clarinet",
+    "use": "sampler/clarinet",
+    "title": "Clarinet \u00b7 sustain",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded clarinet \u00b7 sustain. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Clarinet",
+    "source": "auditions/clarinet.sm"
+  },
+  {
+    "id": "clarinet_staccato",
+    "use": "sampler/clarinet_staccato",
+    "title": "Clarinet \u00b7 staccato",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded clarinet \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Clarinet",
+    "source": "auditions/clarinet_staccato.sm"
+  },
+  {
+    "id": "bassoon",
+    "use": "sampler/bassoon",
+    "title": "Bassoon \u00b7 sustain",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded bassoon \u00b7 sustain. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Bassoon",
+    "source": "auditions/bassoon.sm"
+  },
+  {
+    "id": "bassoon_vibrato",
+    "use": "sampler/bassoon_vibrato",
+    "title": "Bassoon \u00b7 vibrato",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded bassoon \u00b7 vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Bassoon",
+    "source": "auditions/bassoon_vibrato.sm"
+  },
+  {
+    "id": "bassoon_staccato",
+    "use": "sampler/bassoon_staccato",
+    "title": "Bassoon \u00b7 staccato",
+    "group": "Orchestral woodwinds",
+    "description": "Recorded bassoon \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Bassoon",
+    "source": "auditions/bassoon_staccato.sm"
+  },
+  {
+    "id": "horn_muted",
+    "use": "sampler/horn_muted",
+    "title": "French horn \u00b7 muted sustain",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded french horn \u00b7 muted sustain. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "French horn",
+    "source": "auditions/horn_muted.sm"
+  },
+  {
+    "id": "horn_staccato",
+    "use": "sampler/horn_staccato",
+    "title": "French horn \u00b7 staccato",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded french horn \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "French horn",
+    "source": "auditions/horn_staccato.sm"
+  },
+  {
+    "id": "trumpet",
+    "use": "sampler/trumpet",
+    "title": "Trumpet \u00b7 sustain",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded trumpet \u00b7 sustain. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Trumpet",
+    "source": "auditions/trumpet.sm"
+  },
+  {
+    "id": "trumpet_vibrato",
+    "use": "sampler/trumpet_vibrato",
+    "title": "Trumpet \u00b7 vibrato",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded trumpet \u00b7 vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Trumpet",
+    "source": "auditions/trumpet_vibrato.sm"
+  },
+  {
+    "id": "trumpet_staccato",
+    "use": "sampler/trumpet_staccato",
+    "title": "Trumpet \u00b7 staccato",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded trumpet \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Trumpet",
+    "source": "auditions/trumpet_staccato.sm"
+  },
+  {
+    "id": "trumpet_straight_mute",
+    "use": "sampler/trumpet_straight_mute",
+    "title": "Trumpet \u00b7 straight mute",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded trumpet \u00b7 straight mute. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Trumpet",
+    "source": "auditions/trumpet_straight_mute.sm"
+  },
+  {
+    "id": "trumpet_harmon_mute",
+    "use": "sampler/trumpet_harmon_mute",
+    "title": "Trumpet \u00b7 Harmon mute",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded trumpet \u00b7 harmon mute. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Trumpet",
+    "source": "auditions/trumpet_harmon_mute.sm"
+  },
+  {
+    "id": "trombone",
+    "use": "sampler/trombone",
+    "title": "Tenor trombone \u00b7 sustain",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded tenor trombone \u00b7 sustain. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Tenor trombone",
+    "source": "auditions/trombone.sm"
+  },
+  {
+    "id": "trombone_vibrato",
+    "use": "sampler/trombone_vibrato",
+    "title": "Tenor trombone \u00b7 vibrato",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded tenor trombone \u00b7 vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Tenor trombone",
+    "source": "auditions/trombone_vibrato.sm"
+  },
+  {
+    "id": "trombone_staccato",
+    "use": "sampler/trombone_staccato",
+    "title": "Tenor trombone \u00b7 staccato",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded tenor trombone \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Tenor trombone",
+    "source": "auditions/trombone_staccato.sm"
+  },
+  {
+    "id": "tuba",
+    "use": "sampler/tuba",
+    "title": "Tuba \u00b7 sustain",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded tuba \u00b7 sustain. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Tuba",
+    "source": "auditions/tuba.sm"
+  },
+  {
+    "id": "tuba_staccato",
+    "use": "sampler/tuba_staccato",
+    "title": "Tuba \u00b7 staccato",
+    "group": "Orchestral and jazz brass",
+    "description": "Recorded tuba \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Tuba",
+    "source": "auditions/tuba_staccato.sm"
+  },
+  {
+    "id": "tenor_sax",
+    "use": "sampler/tenor_sax",
+    "title": "Tenor saxophone \u00b7 non-vibrato",
+    "group": "Jazz reeds",
+    "description": "Recorded tenor saxophone \u00b7 non-vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Tenor saxophone",
+    "source": "auditions/tenor_sax.sm"
+  },
+  {
+    "id": "tenor_sax_vibrato",
+    "use": "sampler/tenor_sax_vibrato",
+    "title": "Tenor saxophone \u00b7 vibrato",
+    "group": "Jazz reeds",
+    "description": "Recorded tenor saxophone \u00b7 vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Tenor saxophone",
+    "source": "auditions/tenor_sax_vibrato.sm"
+  },
+  {
+    "id": "tenor_sax_staccato",
+    "use": "sampler/tenor_sax_staccato",
+    "title": "Tenor saxophone \u00b7 staccato",
+    "group": "Jazz reeds",
+    "description": "Recorded tenor saxophone \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Tenor saxophone",
+    "source": "auditions/tenor_sax_staccato.sm"
+  },
+  {
+    "id": "saxello",
+    "use": "sampler/saxello",
+    "title": "Saxello \u00b7 non-vibrato",
+    "group": "Jazz reeds",
+    "description": "Recorded saxello \u00b7 non-vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Saxello",
+    "source": "auditions/saxello.sm"
+  },
+  {
+    "id": "saxello_vibrato",
+    "use": "sampler/saxello_vibrato",
+    "title": "Saxello \u00b7 vibrato",
+    "group": "Jazz reeds",
+    "description": "Recorded saxello \u00b7 vibrato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Saxello",
+    "source": "auditions/saxello_vibrato.sm"
+  },
+  {
+    "id": "saxello_staccato",
+    "use": "sampler/saxello_staccato",
+    "title": "Saxello \u00b7 staccato",
+    "group": "Jazz reeds",
+    "description": "Recorded saxello \u00b7 staccato. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Saxello",
+    "source": "auditions/saxello_staccato.sm"
+  },
+  {
+    "id": "mtg_soprano_sax",
+    "use": "sampler/mtg_soprano_sax",
+    "title": "MTG soprano sax \u00b7 sustained",
+    "group": "Jazz reeds",
+    "description": "Real soprano sax, two velocity layers, three neighboring-key round-robin mappings. Fixed ordinary attacks and loops; scripted legato, noises, filter envelope and vibrato are omitted. Attribution required.",
+    "benchmark": "Soprano saxophone",
+    "source": "auditions/mtg_soprano_sax.sm"
+  },
+  {
+    "id": "mtg_alto_sax",
+    "use": "sampler/mtg_alto_sax",
+    "title": "MTG alto sax \u00b7 sustained",
+    "group": "Jazz reeds",
+    "description": "Real alto sax, two velocity layers, three neighboring-key round-robin mappings. Fixed ordinary attacks and loops; scripted legato, noises, filter envelope and vibrato are omitted. Attribution required.",
+    "benchmark": "Alto saxophone",
+    "source": "auditions/mtg_alto_sax.sm"
+  },
+  {
+    "id": "mtg_tenor_sax",
+    "use": "sampler/mtg_tenor_sax",
+    "title": "MTG tenor sax \u00b7 sustained",
+    "group": "Jazz reeds",
+    "description": "Real tenor sax, two velocity layers, three neighboring-key round-robin mappings. Fixed ordinary attacks and loops; scripted legato, noises, filter envelope and vibrato are omitted. Attribution required.",
+    "benchmark": "Tenor saxophone",
+    "source": "auditions/mtg_tenor_sax.sm"
+  },
+  {
+    "id": "mtg_baritone_sax",
+    "use": "sampler/mtg_baritone_sax",
+    "title": "MTG baritone sax \u00b7 sustained",
+    "group": "Jazz reeds",
+    "description": "Real baritone sax, three velocity layers, three neighboring-key round-robin mappings. Fixed ordinary attacks and loops; scripted legato, noises, filter envelope and vibrato are omitted. Attribution required.",
+    "benchmark": "Baritone saxophone",
+    "source": "auditions/mtg_baritone_sax.sm"
+  },
+  {
+    "id": "orchestral_harp",
+    "use": "sampler/orchestral_harp",
+    "title": "Orchestral harp",
+    "group": "Orchestral harp and mallets",
+    "description": "Recorded orchestral harp. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Orchestral harp",
+    "source": "auditions/orchestral_harp.sm"
+  },
+  {
+    "id": "glockenspiel",
+    "use": "sampler/glockenspiel",
+    "title": "Glockenspiel",
+    "group": "Orchestral harp and mallets",
+    "description": "Recorded glockenspiel. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Glockenspiel",
+    "source": "auditions/glockenspiel.sm"
+  },
+  {
+    "id": "tubular_bells",
+    "use": "sampler/tubular_bells",
+    "title": "Tubular bells",
+    "group": "Orchestral harp and mallets",
+    "description": "Recorded tubular bells. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Tubular bells",
+    "source": "auditions/tubular_bells.sm"
+  },
+  {
+    "id": "timpani",
+    "use": "sampler/timpani",
+    "title": "Timpani single hits",
+    "group": "Orchestral percussion",
+    "description": "Recorded timpani single hits. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Timpani",
+    "source": "auditions/timpani.sm"
+  },
+  {
+    "id": "timpani_roll",
+    "use": "sampler/timpani_roll",
+    "title": "Timpani recorded rolls",
+    "group": "Orchestral percussion",
+    "description": "Recorded timpani recorded rolls. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Timpani",
+    "source": "auditions/timpani_roll.sm"
+  },
+  {
+    "id": "xylophone_soft",
+    "use": "sampler/xylophone_soft",
+    "title": "Xylophone \u00b7 soft mallets",
+    "group": "Orchestral harp and mallets",
+    "description": "Recorded xylophone \u00b7 soft mallets. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Xylophone",
+    "source": "auditions/xylophone_soft.sm"
+  },
+  {
+    "id": "xylophone_medium",
+    "use": "sampler/xylophone_medium",
+    "title": "Xylophone \u00b7 medium mallets",
+    "group": "Orchestral harp and mallets",
+    "description": "Recorded xylophone \u00b7 medium mallets. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Xylophone",
+    "source": "auditions/xylophone_medium.sm"
+  },
+  {
+    "id": "xylophone_hard",
+    "use": "sampler/xylophone_hard",
+    "title": "Xylophone \u00b7 hard mallets",
+    "group": "Orchestral harp and mallets",
+    "description": "Recorded xylophone \u00b7 hard mallets. Fixed articulation; velocity and written note lengths shape the performance. No connected legato scripting.",
+    "benchmark": "Xylophone",
+    "source": "auditions/xylophone_hard.sm"
+  },
+  {
+    "id": "orchestral_gong_1",
+    "use": "sampler/orchestral_gong_1",
+    "title": "Orchestral gong 1",
+    "group": "Orchestral percussion",
+    "description": "Recorded gong 1; mapped keys select hit variations. Not a chromatic melodic instrument.",
+    "benchmark": "Gong",
+    "source": "auditions/orchestral_gong_1.sm"
+  },
+  {
+    "id": "orchestral_gong_2",
+    "use": "sampler/orchestral_gong_2",
+    "title": "Orchestral gong 2",
+    "group": "Orchestral percussion",
+    "description": "Recorded gong 2; mapped keys select hit variations. Not a chromatic melodic instrument.",
+    "benchmark": "Gong",
+    "source": "auditions/orchestral_gong_2.sm"
+  },
+  {
+    "id": "violin_palette",
+    "use": "sound/violin_palette",
+    "title": "Violin palette",
+    "group": "Continuous palettes",
+    "description": "A solo vibrato, B violin section vibrato, C solo tremolo, D section spiccato. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Solo violin",
+    "source": "auditions/violin_palette.sm"
+  },
+  {
+    "id": "viola_palette",
+    "use": "sound/viola_palette",
+    "title": "Viola palette",
+    "group": "Continuous palettes",
+    "description": "A sustained section, B soft sustain, C tremolo, D spiccato. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Viola section",
+    "source": "auditions/viola_palette.sm"
+  },
+  {
+    "id": "cello_palette",
+    "use": "sound/cello_palette",
+    "title": "Cello palette",
+    "group": "Continuous palettes",
+    "description": "A sustained section, B soft sustain, C tremolo, D spiccato. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Cello section",
+    "source": "auditions/cello_palette.sm"
+  },
+  {
+    "id": "double_bass_palette",
+    "use": "sound/double_bass_palette",
+    "title": "Double bass palette",
+    "group": "Continuous palettes",
+    "description": "A bowed non-vibrato, B bowed vibrato, C pizzicato, D spiccato. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Double bass",
+    "source": "auditions/double_bass_palette.sm"
+  },
+  {
+    "id": "flute_palette",
+    "use": "sound/flute_palette",
+    "title": "Flute palette",
+    "group": "Continuous palettes",
+    "description": "A non-vibrato, B vibrato, C expressive vibrato, D staccato. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Flute",
+    "source": "auditions/flute_palette.sm"
+  },
+  {
+    "id": "oboe_palette",
+    "use": "sound/oboe_palette",
+    "title": "Oboe palette",
+    "group": "Continuous palettes",
+    "description": "A non-vibrato, B recorded vibrato. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Oboe",
+    "source": "auditions/oboe_palette.sm"
+  },
+  {
+    "id": "clarinet_palette",
+    "use": "sound/clarinet_palette",
+    "title": "Clarinet palette",
+    "group": "Continuous palettes",
+    "description": "A sustained, B detached attacks; shorten written gates for short phrases. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Clarinet",
+    "source": "auditions/clarinet_palette.sm"
+  },
+  {
+    "id": "bassoon_palette",
+    "use": "sound/bassoon_palette",
+    "title": "Bassoon palette",
+    "group": "Continuous palettes",
+    "description": "A sustained, B recorded vibrato. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Bassoon",
+    "source": "auditions/bassoon_palette.sm"
+  },
+  {
+    "id": "horn_palette",
+    "use": "sound/horn_palette",
+    "title": "French horn palette",
+    "group": "Continuous palettes",
+    "description": "A open, B recorded muted horn; the muted source has a narrower range. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "French horn",
+    "source": "auditions/horn_palette.sm"
+  },
+  {
+    "id": "trumpet_palette",
+    "use": "sound/trumpet_palette",
+    "title": "Trumpet palette",
+    "group": "Continuous palettes",
+    "description": "A open, B vibrato, C straight mute, D Harmon mute. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Trumpet",
+    "source": "auditions/trumpet_palette.sm"
+  },
+  {
+    "id": "trombone_palette",
+    "use": "sound/trombone_palette",
+    "title": "Trombone palette",
+    "group": "Continuous palettes",
+    "description": "A straight sustained, B recorded vibrato. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Tenor trombone",
+    "source": "auditions/trombone_palette.sm"
+  },
+  {
+    "id": "tuba_palette",
+    "use": "sound/tuba_palette",
+    "title": "Tuba palette",
+    "group": "Continuous palettes",
+    "description": "A sustained, B detached attacks. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Tuba",
+    "source": "auditions/tuba_palette.sm"
+  },
+  {
+    "id": "tenor_sax_palette",
+    "use": "sound/tenor_sax_palette",
+    "title": "Tenor sax palette",
+    "group": "Continuous palettes",
+    "description": "A VCSL non-vibrato, B VCSL vibrato, C VCSL staccato, D MTG sustained. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Tenor saxophone",
+    "source": "auditions/tenor_sax_palette.sm"
+  },
+  {
+    "id": "xylophone_palette",
+    "use": "sound/xylophone_palette",
+    "title": "Xylophone mallets",
+    "group": "Continuous palettes",
+    "description": "A soft mallets, B medium mallets, C hard mallets, D VSCO marimba; D is a different instrument. Crossfade layers with complementary gains; this is a hybrid sound, not a physical model.",
+    "benchmark": "Xylophone",
+    "source": "auditions/xylophone_palette.sm"
+  },
+  {
+    "id": "01_string_conversation",
+    "title": "String conversation",
+    "group": "Authored ensemble starters",
+    "description": "Independent string voices; solo lead with recorded sections below.",
+    "benchmark": null,
+    "source": "templates/01_string_conversation.sm"
+  },
+  {
+    "id": "02_woodwind_replies",
+    "title": "Woodwind replies",
+    "group": "Authored ensemble starters",
+    "description": "Flute, oboe, clarinet and bassoon exchange questions with written breaths.",
+    "benchmark": null,
+    "source": "templates/02_woodwind_replies.sm"
+  },
+  {
+    "id": "03_brass_quintet",
+    "title": "Five brass voices",
+    "group": "Authored ensemble starters",
+    "description": "Two trumpets, French horn, trombone and tuba; real muted trumpet answers.",
+    "benchmark": null,
+    "source": "templates/03_brass_quintet.sm"
+  },
+  {
+    "id": "04_jazz_quintet",
+    "title": "Quintet after the rain",
+    "group": "Authored ensemble starters",
+    "description": "Tenor and Harmon-muted trumpet over piano, upright bass and restrained ride.",
+    "benchmark": null,
+    "source": "templates/04_jazz_quintet.sm"
+  },
+  {
+    "id": "05_sax_quartet",
+    "title": "Four reeds",
+    "group": "Authored ensemble starters",
+    "description": "Actual soprano, alto, tenor and baritone sax recordings with independent parts.",
+    "benchmark": null,
+    "source": "templates/05_sax_quartet.sm"
+  },
+  {
+    "id": "06_orchestral_handoff",
+    "title": "Orchestral handoff",
+    "group": "Authored ensemble starters",
+    "description": "Melody moves through woodwinds, strings and brass; harp and timpani punctuate.",
+    "benchmark": null,
+    "source": "templates/06_orchestral_handoff.sm"
+  }
+]

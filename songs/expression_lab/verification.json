@@ -1,0 +1,66 @@
+{
+  "ok": true,
+  "scores": 6,
+  "renders": [
+    {
+      "source": "baselines/01_bowed_swell.sm",
+      "source_sha256": "b473cff048fc122d81a825ee27360cac67e0b353542a2b6ff8258a5969912e90",
+      "clipped_samples": 0,
+      "listen": {
+        "problem": 0,
+        "warning": 0,
+        "note": 1
+      }
+    },
+    {
+      "source": "01_bowed_swell.sm",
+      "source_sha256": "691839ee005887a2016ca71d88cffc6791bb838005bf373cb09f90610e76d742",
+      "clipped_samples": 0,
+      "listen": {
+        "problem": 0,
+        "warning": 0,
+        "note": 1
+      }
+    },
+    {
+      "source": "baselines/02_technique_dialogue.sm",
+      "source_sha256": "cde8c030f638bcbf397290a8569ef8e386bdd89fe0d723df962544ff1e27a0a9",
+      "clipped_samples": 0,
+      "listen": {
+        "problem": 0,
+        "warning": 0,
+        "note": 0
+      }
+    },
+    {
+      "source": "02_technique_dialogue.sm",
+      "source_sha256": "986751a3e6acb899cc2e4b863b5539fe29ebb78533dce9d2efd0f7970ab7a652",
+      "clipped_samples": 0,
+      "listen": {
+        "problem": 0,
+        "warning": 0,
+        "note": 0
+      }
+    },
+    {
+      "source": "baselines/03_moving_brass.sm",
+      "source_sha256": "508b53d31cbac757053b397a0bb9bae8b1bacd50d81b16712ab0531ac2195d57",
+      "clipped_samples": 0,
+      "listen": {
+        "problem": 0,
+        "warning": 0,
+        "note": 0
+      }
+    },
+    {
+      "source": "03_moving_brass.sm",
+      "source_sha256": "17f7771e1e356a38dea5aad7afb5671ea96e2e14c4327dcdfd77d17a977c9fdd",
+      "clipped_samples": 0,
+      "listen": {
+        "problem": 0,
+        "warning": 0,
+        "note": 0
+      }
+    }
+  ]
+}

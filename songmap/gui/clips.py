@@ -28,7 +28,7 @@ def section_clip(arr, index: int, part: str) -> dict:
     notes = [{"beat": round(n.beat, 5), "dur": round(n.dur, 5), "pitches": list(n.pitches), "vel": round(n.vel, 6),
               "art": n.art, "slur": n.slur, "grace": "grace" in n.tags} for n in clip_of(arr.parts.get(part, []), sec.start, sec.end)]
     line = song.sections[index].line if index < len(song.sections) else None
-    return {"section": sec.name, "index": index, "part": part, "bars": sec.bars, "beats_per_bar": tl.bpb,
+    return {"section": sec.name, "index": index, "part": part, "bars": sec.bars, "beats_per_bar": sec.bpb,
             "start": round(tl.beat_to_sec(sec.start), 4), "end": round(tl.beat_to_sec(sec.end), 4),
             "start_beat": sec.start, "tempo_spans": _beat_times(tl, sec), "line": line, "written": written,
             "kit": arr.ensemble.is_kit(part), "notes": notes}
@@ -85,7 +85,7 @@ def write_clip(text: str, arr, index: int, part: str, notes: list[dict]) -> str:
     clip = [ClipNote(float(n["beat"]), float(n["dur"]), tuple(float(p) for p in n["pitches"]), float(n.get("vel", .62)),
                      n.get("art", "normal"), bool(n.get("slur", False)),
                      frozenset({"grace"}) if n.get("grace") else frozenset()) for n in notes]
-    body = write_notes(clip, bars=sec.bars, beats_per_bar=arr.timeline.bpb)
+    body = write_notes(clip, bars=sec.bars, beats_per_bar=sec.bpb)
     line = arr.song.sections[index].line if index < len(arr.song.sections) else None
     return set_section_part(text, line, part, f'"{body}"')
 
@@ -113,7 +113,7 @@ def section_hits(arr, index: int, part: str, text: str = "") -> dict:
         src = text.split("\n")
         raw = src[line - 1] if line <= len(src) else ""
         lanes = {m for m in re.findall(r"(?:^|\s)([A-Za-z_]\w*)=\"", raw) if m in pieces}
-    return {"section": sec.name, "index": index, "part": part, "bars": sec.bars, "beats_per_bar": arr.timeline.bpb,
+    return {"section": sec.name, "index": index, "part": part, "bars": sec.bars, "beats_per_bar": sec.bpb,
             "line": song.sections[index].line if index < len(song.sections) else None,
             "start": round(arr.timeline.beat_to_sec(sec.start), 4), "end": round(arr.timeline.beat_to_sec(sec.end), 4),
             "pieces": pieces, "written": sorted(lanes)}     # lanes written on the section line

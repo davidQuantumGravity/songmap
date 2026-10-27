@@ -9,6 +9,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { api, type AuditionNote, type Catalog, type Guide, type GuideBlock, type InstrumentSpec, type ParamSpec, type Summary, type Voice } from "./api";
 import { PatchEditor, type PatchSpec } from "./PatchEditor";
 import { Knob } from "./ui";
+import { ExpressionEditor } from "./ExpressionEditor";
 
 export type VoiceEdit = { part: string; piece: string | null; use?: string; params?: Record<string, number | null>; clear?: boolean; current_use: string };
 
@@ -185,7 +186,7 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
 }) {
   const parts = summary.parts;
   const [sel, setSel] = useState<{ part: string; piece: string | null }>(() => ({ part: parts.find((p) => !p.kit)?.name ?? parts[0]?.name, piece: null }));
-  const [view, setView] = useState<"learn" | "knobs" | "wiring">("learn");
+  const [view, setView] = useState<"learn" | "knobs" | "wiring" | "expression">("learn");
   const [block, setBlock] = useState<string | null>(null);
   const [live, setLive] = useState<Record<string, number>>({});
   const [vel, setVel] = useState(0.7);
@@ -207,7 +208,9 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
   const piece = isKit ? (sel.piece && pieces.includes(sel.piece) ? sel.piece : pieces[0]) : null;
   const voice: Voice | null = !pv || ("error" in pv && pv.error) ? null : isKit ? (pv as { pieces: Record<string, Voice> }).pieces[piece!] : (pv as Voice);
   const isPatch = voice?.instrument === "patch";
-  const spec: InstrumentSpec | undefined = isPatch
+  const isSound = voice?.instrument === "sound";
+  const isFamily = voice?.instrument === "family";
+  const spec: InstrumentSpec | undefined = isPatch || isSound || isFamily
     ? (voice?.schema ? { name: voice.use, family: "synth", mono: false, params: voice.schema } : undefined)
     : catalog?.instruments.find((i) => i.name === voice?.instrument);
   const guide: Guide | undefined = voice && !isPatch ? catalog?.guides?.[voice.instrument] : undefined;
@@ -225,7 +228,7 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
   const patchSpec: PatchSpec | null = patchName ? (summary.patches?.[patchName] ?? catalog?.patch_library?.[patchName] ?? null) as PatchSpec | null : null;
   const secNow = summary.sections.find((s) => time >= s.start && time < s.end) ?? summary.sections[0];
   useEffect(() => setLive({}), [summary, sel.part, piece]);
-  useEffect(() => { setBlock(null); if (isPatch) setView("wiring"); else if (view === "wiring") setView("learn"); }, [voice?.use]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { setBlock(null); if (isPatch) setView("wiring"); else if (isSound || isFamily) setView("knobs"); else if (view === "wiring") setView("learn"); }, [voice?.use]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (guide?.pattern) setPattern(guide.pattern); }, [guide]);
 
   const groups = useMemo(() => {
@@ -356,14 +359,17 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
               <span className="seg">
                 {!isPatch && <button className={view === "learn" ? "on" : ""} onClick={() => setView("learn")}>Learn</button>}
                 <button className={view === "knobs" ? "on" : ""} onClick={() => setView("knobs")}>Knobs</button>
+                <button className={view === "expression" ? "on" : ""} disabled={isKit} onClick={()=>setView("expression")}>Expression</button>
                 <button className={view === "wiring" ? "on" : ""} onClick={() => setView("wiring")}>Wiring</button>
               </span>
               <label className="field"><span>instrument</span>
-                <select value={isPatch ? "patch" : voice.instrument} onChange={(e) => switchTo(e.target.value === "sampler" ? (preferredSample?.ref ?? voice.use) : e.target.value, true)}>
+                <select aria-label="Instrument type" value={isPatch ? "patch" : voice.instrument} onChange={(e) => switchTo(e.target.value === "sampler" ? (preferredSample?.ref ?? voice.use) : e.target.value === "sound" ? `sound/${Object.keys(catalog?.sound_library ?? {}).find(n=>catalog!.sound_library[n].installed) ?? "violin_palette"}` : e.target.value === "family" ? `family/${Object.keys(catalog?.families ?? {}).find(n=>catalog!.families[n].installed) ?? "violin"}` : e.target.value, true)}>
                   {families.map(([fam, list]) => (
                     <optgroup key={fam} label={fam}>{list.map((i) => <option key={i.name} value={i.name} disabled={i.name === "sampler" && !catalog?.samplers.some((s) => s.installed)}>{i.name}{i.name === "sampler" && !catalog?.samplers.some((s) => s.installed) ? " (run songmap samples install)" : ""}</option>)}</optgroup>
                   ))}
                   {isPatch && <option value="patch">patch</option>}
+                  <option value="family" disabled={!Object.values(catalog?.families ?? {}).some(s=>s.installed)}>family · recorded techniques</option>
+                  <option value="sound" disabled={!Object.values(catalog?.sound_library ?? {}).some(s=>s.installed)}>sound · continuous palettes</option>
                 </select>
               </label>
               {isPatch ? (
@@ -373,6 +379,13 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
                       <option key={n} value={n}>{n}{summary.patches?.[n] ? " (song)" : ""}</option>)}
                   </select>
                 </label>
+              ) : isFamily ? (
+                <><label className="field"><span>instrument family</span><select aria-label="Instrument family" value={voice.use.split('/')[1]} onChange={e=>switchTo(`family/${e.target.value}`,true)}>{Object.entries(catalog?.families??{}).map(([n,f])=><option key={n} value={n} disabled={!f.installed}>{f.title}</option>)}</select></label>
+                <label className="field"><span>default technique</span><select aria-label="Default technique" value={Number(voice.values.technique??-1)} onChange={e=>onEdit({part:sel.part,piece,params:{technique:+e.target.value},current_use:voice.use})}><option value={-1}>Auto · follow written articulation</option>{voice.techniques?.map(t=><option key={t.name} value={t.index}>{t.name}</option>)}</select></label></>
+              ) : isSound ? (
+                <label className="field"><span>sound palette</span><select aria-label="Sound palette" value={voice.use.split('/')[1]} onChange={e=>switchTo(`sound/${e.target.value}`,true)}>
+                  {[...new Set([...Object.keys(voice.sounds ?? {}),...Object.keys(catalog?.sound_library ?? {})])].map(n=><option key={n} value={n} disabled={!voice.sounds?.[n]&&!catalog?.sound_library[n]?.installed}>{catalog?.sound_library[n]?.title ?? n}{voice.sounds?.[n]?" (song)":""}</option>)}
+                </select></label>
               ) : voice.instrument === "sampler" ? (
                 <label className="field"><span>sampled instrument</span>
                   <select value={voice.use.split("/").slice(1).join("/")} onChange={(e) => switchTo(`sampler/${e.target.value}`, true)}>
@@ -394,7 +407,11 @@ export function Rack({ path, text, summary, catalog, onEdit, onApply, colorOf, t
               )}
               <button disabled={!modified.length} onClick={() => switchTo(voice.use, true)} title="Remove this voice's knob changes">Reset knobs</button>
             </div>
+            {view==="expression"&&<ExpressionEditor summary={summary} catalog={catalog} part={sel.part} voice={voice} time={time} onApply={onApply}/>}
+            {voice.response_profile&&<p className="rack-desc">Measured reference gain: {voice.response_profile.gain_db.toFixed(1)} dB. Calibration blends between original and measured response; written dynamics stay intact. {voice.response_profile.flags.length>0&&<span>{voice.response_profile.flags.join("; ")}</span>}</p>}
+            {isFamily&&<p className="rack-desc">Named techniques select actual recordings at note onsets. Use Expression to draw continuous curves and schedule technique changes. Calibration is enabled by default for these families.</p>}
             {sampleVoice && <p className="rack-desc">{sampleVoice.description} <span className="muted">{sampleVoice.license} · MIDI {sampleVoice.range[0]}–{sampleVoice.range[1]}{!sampleVoice.installed && <> · Install: <code>{sampleVoice.install}</code></>}</span></p>}
+            {isSound&&<p className="rack-desc">{catalog?.sound_library[voice.use.split('/')[1]]?.description ?? 'Saved source layers and tone controls.'} Use the mix knobs to blend sources; each source also has independent controls below.</p>}
 
             {view === "learn" && guide && (
               <div className="learn">

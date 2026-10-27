@@ -1,0 +1,12 @@
+# Guitar notes: E-minor shapes use low E, G/B and high E without six simultaneous keyboard-style chord tones. Alternating bass notes make a second voice.
+# Guitar expression: stronger bass arrivals, soft upper answers, a single high note at the lift; source samples ring naturally and re-plucking the string damps it.
+# Acoustic bass notes: sparse first/third-beat roots; it rests for the exposed guitar reply and avoids doubling every picked bass note.
+song "Nylon fingerstyle" 92 4/4 Em seed=95 tail=3 mood=balanced
+inst gtr=sampler/nylon_finger bass=sampler/upright_bass
+chords Em:2 Am:2 B7:2 Em:2
+pick 2 | gtr:{deg: "=p -7/8^ -3/8 2/8 -3/8 0/8 2/8 4/8 r/8 | -7/4 [-3,0,2]/8 r/8 -3/4 r/4", oct: -1} bass:{rel: "=p R/2 r/2 | R/2 r/2", oct: -2}
+reply 2 | gtr:{deg: "=mp -4/8^ 0/8 5/8 0/8 3/8 5/8 7/8 r/8 | [-4,0,5]/4 7/8 5/8 3/4 r/4", oct: -1} bass:{mute: true}
+lift 2 | gtr:{deg: "=mf -3/8^ 1/8 #6/8 1/8 4/8 #6/8 8/8 r/8 | [-3,1,#6]/4_ 8/8 #6/8 4/4 r/4", oct: -1} bass:{rel: "=mp R/2 5/4 r/4 | R/2 r/2", oct: -2}
+rest 2 | gtr:{deg: "=mp -7/8 -3/8 2/8 4/8 2/4 0/4 | =p [-7,-3,0,2]/2_ r/2", oct: -1} bass:{rel: "=p R/2 r/2 | R/2_ r/2", oct: -2}
+mix gtr -3 hall=.08 | bass -8 sc=0 hall=.02
+master standard lufs=-18 glue=none

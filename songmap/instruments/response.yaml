@@ -1,0 +1,2997 @@
+version: 1
+method: fixed gain from three registers and three velocities; target reference RMS
+  -26 dBFS; peak/gain capped
+profiles:
+  sampler/grand_piano:
+    gain_db: 4.691
+    reference_rms_db: -30.691
+    measured_peak: 0.3149786
+    range:
+    - 21
+    - 108
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/fm_piano:
+    gain_db: -2.229
+    reference_rms_db: -23.771
+    measured_peak: 0.4571773
+    range:
+    - 36
+    - 96
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/folk_harp:
+    gain_db: 3.49
+    reference_rms_db: -29.49
+    measured_peak: 0.1842347
+    range:
+    - 36
+    - 93
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/marimba:
+    gain_db: 3.142
+    reference_rms_db: -29.142
+    measured_peak: 0.2843199
+    range:
+    - 48
+    - 96
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/vibraphone:
+    gain_db: 1.432
+    reference_rms_db: -27.432
+    measured_peak: 0.2381412
+    range:
+    - 53
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/kalimba:
+    gain_db: 1.7177
+    reference_rms_db: -33.968
+    measured_peak: 0.6564581
+    range:
+    - 60
+    - 84
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/double_bass:
+    gain_db: 8.65
+    reference_rms_db: -34.65
+    measured_peak: 0.1269237
+    range:
+    - 24
+    - 60
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/cello:
+    gain_db: -1.596
+    reference_rms_db: -24.404
+    measured_peak: 0.5203574
+    range:
+    - 36
+    - 77
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/violins:
+    gain_db: 12
+    reference_rms_db: -42.361
+    measured_peak: 0.0688836
+    range:
+    - 55
+    - 86
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/flute:
+    gain_db: 3.838
+    reference_rms_db: -29.838
+    measured_peak: 0.2527826
+    range:
+    - 60
+    - 96
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/solo_violin:
+    gain_db: 5.761
+    reference_rms_db: -31.761
+    measured_peak: 0.2525664
+    range:
+    - 55
+    - 96
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/horn:
+    gain_db: 1.024
+    reference_rms_db: -27.024
+    measured_peak: 0.2355958
+    range:
+    - 34
+    - 77
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/cello_spiccato:
+    gain_db: 3.133
+    reference_rms_db: -29.133
+    measured_peak: 0.2613125
+    range:
+    - 36
+    - 77
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/violins_spiccato:
+    gain_db: 3.314
+    reference_rms_db: -29.314
+    measured_peak: 0.3216665
+    range:
+    - 55
+    - 86
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/bass_drum:
+    gain_db: -9.43
+    reference_rms_db: -16.57
+    measured_peak: 1.30757
+    range:
+    - 60
+    - 60
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/snare_drum:
+    gain_db: -5.557
+    reference_rms_db: -20.443
+    measured_peak: 1.1108814
+    range:
+    - 60
+    - 60
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/hi_hat:
+    gain_db: 4.11
+    reference_rms_db: -30.11
+    measured_peak: 0.3148463
+    range:
+    - 42
+    - 42
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/jazz_bass:
+    gain_db: -3.631
+    reference_rms_db: -22.369
+    measured_peak: 0.7310949
+    range:
+    - 25
+    - 76
+    reference_velocity: 0.62
+    revision: 4f483268fc66b5a6d5781d421c0d11b8d08d3fc6
+    flags: []
+  sampler/jazz_bass_staccato:
+    gain_db: -0.376
+    reference_rms_db: -25.624
+    measured_peak: 0.7715312
+    range:
+    - 25
+    - 76
+    reference_velocity: 0.62
+    revision: 4f483268fc66b5a6d5781d421c0d11b8d08d3fc6
+    flags: []
+  sampler/flatwound_bass:
+    gain_db: 1.284
+    reference_rms_db: -27.284
+    measured_peak: 0.4039208
+    range:
+    - 21
+    - 76
+    reference_velocity: 0.62
+    revision: 9d10fcae71af1975988ddecd5af1c95d372c7355
+    flags: []
+  sampler/roundwound_bass:
+    gain_db: -2.641
+    reference_rms_db: -23.359
+    measured_peak: 0.648111
+    range:
+    - 18
+    - 76
+    reference_velocity: 0.62
+    revision: 0703973b300a6bacb837602be9b588ab64732a72
+    flags: []
+  sampler/bass_vi_roundwound:
+    gain_db: -9.398
+    reference_rms_db: -16.602
+    measured_peak: 0.6036838
+    range:
+    - 33
+    - 72
+    reference_velocity: 0.62
+    revision: 90135cd026db5d4fa0fe538240b4203f085f5244
+    flags: []
+  sampler/bass_vi_pick:
+    gain_db: -5.215
+    reference_rms_db: -20.785
+    measured_peak: 0.7580692
+    range:
+    - 33
+    - 72
+    reference_velocity: 0.62
+    revision: 90135cd026db5d4fa0fe538240b4203f085f5244
+    flags:
+    - non-monotonic measured dynamics at MIDI 62
+  sampler/bass_vi_muted:
+    gain_db: -8.155
+    reference_rms_db: -17.845
+    measured_peak: 0.6987073
+    range:
+    - 33
+    - 72
+    reference_velocity: 0.62
+    revision: 90135cd026db5d4fa0fe538240b4203f085f5244
+    flags:
+    - non-monotonic measured dynamics at MIDI 62
+  sampler/bass_vi_finger:
+    gain_db: -6.356
+    reference_rms_db: -19.644
+    measured_peak: 0.6254006
+    range:
+    - 33
+    - 72
+    reference_velocity: 0.62
+    revision: 90135cd026db5d4fa0fe538240b4203f085f5244
+    flags: []
+  sampler/black_pearl_kick:
+    gain_db: -5.981
+    reference_rms_db: -20.019
+    measured_peak: 0.756036
+    range:
+    - 36
+    - 36
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_sidestick:
+    gain_db: 0.53
+    reference_rms_db: -30.291
+    measured_peak: 0.7526422
+    range:
+    - 37
+    - 37
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_snare:
+    gain_db: -2.846
+    reference_rms_db: -23.154
+    measured_peak: 0.7455287
+    range:
+    - 38
+    - 38
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_snare_edge:
+    gain_db: 0.5315
+    reference_rms_db: -26.699
+    measured_peak: 0.7525163
+    range:
+    - 40
+    - 40
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_floor_tom:
+    gain_db: -6.14
+    reference_rms_db: -19.86
+    measured_peak: 0.6803159
+    range:
+    - 41
+    - 41
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_floor_tom_edge:
+    gain_db: -1.175
+    reference_rms_db: -24.825
+    measured_peak: 0.7192723
+    range:
+    - 43
+    - 43
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_tom:
+    gain_db: -8.72
+    reference_rms_db: -17.28
+    measured_peak: 0.751174
+    range:
+    - 45
+    - 45
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_tom_edge:
+    gain_db: -3.277
+    reference_rms_db: -22.723
+    measured_peak: 0.7602117
+    range:
+    - 47
+    - 47
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_hat:
+    gain_db: 4.9021
+    reference_rms_db: -31.069
+    measured_peak: 0.454974
+    range:
+    - 42
+    - 42
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_hat_pedal:
+    gain_db: 4.8124
+    reference_rms_db: -35.3
+    measured_peak: 0.4596926
+    range:
+    - 44
+    - 44
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_hat_semi:
+    gain_db: 2.379
+    reference_rms_db: -28.379
+    measured_peak: 0.5346949
+    range:
+    - 46
+    - 46
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_hat_open:
+    gain_db: 3.8015
+    reference_rms_db: -30.226
+    measured_peak: 0.5164342
+    range:
+    - 48
+    - 48
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_crash:
+    gain_db: -2.087
+    reference_rms_db: -23.913
+    measured_peak: 0.607703
+    range:
+    - 49
+    - 49
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_ride:
+    gain_db: 4.1272
+    reference_rms_db: -30.479
+    measured_peak: 0.4974252
+    range:
+    - 51
+    - 51
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_ride_bell:
+    gain_db: 2.4728
+    reference_rms_db: -29.156
+    measured_peak: 0.6017944
+    range:
+    - 53
+    - 53
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_splash:
+    gain_db: -0.311
+    reference_rms_db: -25.689
+    measured_peak: 0.5744764
+    range:
+    - 55
+    - 55
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/black_pearl_china:
+    gain_db: -1.165
+    reference_rms_db: -24.835
+    measured_peak: 0.6944974
+    range:
+    - 60
+    - 60
+    reference_velocity: 0.62
+    revision: 1ab43270ce4ea5d8794e98b158210a566e431d7e76646ef778ebabafba807609
+    flags: []
+  sampler/red_zeppelin_kick:
+    gain_db: -5.977
+    reference_rms_db: -20.023
+    measured_peak: 0.756408
+    range:
+    - 36
+    - 36
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_sidestick:
+    gain_db: 0.5669
+    reference_rms_db: -29.577
+    measured_peak: 0.7494549
+    range:
+    - 37
+    - 37
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_snare:
+    gain_db: 0.4457
+    reference_rms_db: -26.853
+    measured_peak: 0.7599817
+    range:
+    - 38
+    - 38
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_snare_edge:
+    gain_db: -0.337
+    reference_rms_db: -25.663
+    measured_peak: 0.773694
+    range:
+    - 40
+    - 40
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_floor_tom:
+    gain_db: -1.294
+    reference_rms_db: -24.706
+    measured_peak: 0.7196767
+    range:
+    - 41
+    - 41
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_floor_tom_edge:
+    gain_db: 0.9226
+    reference_rms_db: -28.14
+    measured_peak: 0.7193837
+    range:
+    - 43
+    - 43
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_tom:
+    gain_db: -4.076
+    reference_rms_db: -21.924
+    measured_peak: 0.7530323
+    range:
+    - 45
+    - 45
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_tom_edge:
+    gain_db: -1.616
+    reference_rms_db: -24.384
+    measured_peak: 0.7532425
+    range:
+    - 47
+    - 47
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_hat:
+    gain_db: 4.0553
+    reference_rms_db: -32.72
+    measured_peak: 0.5015628
+    range:
+    - 42
+    - 42
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_hat_pedal:
+    gain_db: 4.8124
+    reference_rms_db: -35.3
+    measured_peak: 0.4596926
+    range:
+    - 44
+    - 44
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_hat_semi:
+    gain_db: 2.379
+    reference_rms_db: -28.379
+    measured_peak: 0.5346949
+    range:
+    - 46
+    - 46
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_hat_open:
+    gain_db: 3.6454
+    reference_rms_db: -30.226
+    measured_peak: 0.5258014
+    range:
+    - 48
+    - 48
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_crash:
+    gain_db: -5.015
+    reference_rms_db: -20.985
+    measured_peak: 0.7158012
+    range:
+    - 49
+    - 49
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_ride:
+    gain_db: 1.4044
+    reference_rms_db: -33.039
+    measured_peak: 0.6805667
+    range:
+    - 51
+    - 51
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_ride_bell:
+    gain_db: 2.222
+    reference_rms_db: -28.222
+    measured_peak: 0.5453782
+    range:
+    - 53
+    - 53
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_splash:
+    gain_db: -0.312
+    reference_rms_db: -25.688
+    measured_peak: 0.502245
+    range:
+    - 55
+    - 55
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/red_zeppelin_china:
+    gain_db: -1.278
+    reference_rms_db: -24.722
+    measured_peak: 0.7035948
+    range:
+    - 60
+    - 60
+    reference_velocity: 0.62
+    revision: 9f5c5e5a76decae7eb63b2242f91a51210e91f7e5bb57587352c544721b1012f
+    flags: []
+  sampler/blonde_bop_kick:
+    gain_db: -4.432
+    reference_rms_db: -21.568
+    measured_peak: 0.674604
+    range:
+    - 36
+    - 36
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_sidestick:
+    gain_db: 1.3708
+    reference_rms_db: -33.703
+    measured_peak: 0.6832039
+    range:
+    - 37
+    - 37
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_snare:
+    gain_db: -1.184
+    reference_rms_db: -24.816
+    measured_peak: 0.6647463
+    range:
+    - 38
+    - 38
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_snare_edge:
+    gain_db: 0.371
+    reference_rms_db: -26.371
+    measured_peak: 0.6657
+    range:
+    - 40
+    - 40
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_floor_tom:
+    gain_db: -4.766
+    reference_rms_db: -21.234
+    measured_peak: 0.6429033
+    range:
+    - 41
+    - 41
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_floor_tom_edge:
+    gain_db: -4.103
+    reference_rms_db: -21.897
+    measured_peak: 0.6428273
+    range:
+    - 43
+    - 43
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_tom:
+    gain_db: -4.841
+    reference_rms_db: -21.159
+    measured_peak: 0.6722727
+    range:
+    - 45
+    - 45
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_tom_edge:
+    gain_db: -6.046
+    reference_rms_db: -19.954
+    measured_peak: 0.6729362
+    range:
+    - 47
+    - 47
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_hat:
+    gain_db: 2.0848
+    reference_rms_db: -29.333
+    measured_peak: 0.6292855
+    range:
+    - 42
+    - 42
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_hat_pedal:
+    gain_db: 2.0504
+    reference_rms_db: -33.679
+    measured_peak: 0.6317837
+    range:
+    - 44
+    - 44
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_hat_semi:
+    gain_db: 0.599
+    reference_rms_db: -26.599
+    measured_peak: 0.6610507
+    range:
+    - 46
+    - 46
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_hat_open:
+    gain_db: 0.857
+    reference_rms_db: -26.857
+    measured_peak: 0.6861791
+    range:
+    - 48
+    - 48
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_crash:
+    gain_db: -0.538
+    reference_rms_db: -25.462
+    measured_peak: 0.6290211
+    range:
+    - 49
+    - 49
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_ride:
+    gain_db: 5.3374
+    reference_rms_db: -40.595
+    measured_peak: 0.4327322
+    range:
+    - 51
+    - 51
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_ride_bell:
+    gain_db: 2.2687
+    reference_rms_db: -33.84
+    measured_peak: 0.6161033
+    range:
+    - 53
+    - 53
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_splash:
+    gain_db: 0.374
+    reference_rms_db: -26.374
+    measured_peak: 0.6652479
+    range:
+    - 55
+    - 55
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_china:
+    gain_db: 0.877
+    reference_rms_db: -26.877
+    measured_peak: 0.6229891
+    range:
+    - 60
+    - 60
+    reference_velocity: 0.62
+    revision: a89629acd89a888e628bc790e1d3406bb03f6b9ad9b7f634298b23d79c8c5d2d
+    flags: []
+  sampler/blonde_bop_rods_kick:
+    gain_db: -1.093
+    reference_rms_db: -24.907
+    measured_peak: 0.6482513
+    range:
+    - 36
+    - 36
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_sidestick:
+    gain_db: 0.6878
+    reference_rms_db: -33.228
+    measured_peak: 0.7390959
+    range:
+    - 37
+    - 37
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_snare:
+    gain_db: -4.01
+    reference_rms_db: -21.99
+    measured_peak: 0.6698907
+    range:
+    - 38
+    - 38
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_snare_edge:
+    gain_db: -3.43
+    reference_rms_db: -22.57
+    measured_peak: 0.702159
+    range:
+    - 40
+    - 40
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_floor_tom:
+    gain_db: -12.374
+    reference_rms_db: -13.626
+    measured_peak: 0.6508765
+    range:
+    - 41
+    - 41
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_floor_tom_edge:
+    gain_db: -9.098
+    reference_rms_db: -16.902
+    measured_peak: 0.6521945
+    range:
+    - 43
+    - 43
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_tom:
+    gain_db: -8.29
+    reference_rms_db: -17.71
+    measured_peak: 0.6953952
+    range:
+    - 45
+    - 45
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_tom_edge:
+    gain_db: -4.646
+    reference_rms_db: -21.354
+    measured_peak: 0.6729832
+    range:
+    - 47
+    - 47
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_hat:
+    gain_db: 0.618
+    reference_rms_db: -26.618
+    measured_peak: 0.6088007
+    range:
+    - 42
+    - 42
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_hat_pedal:
+    gain_db: 1.8432
+    reference_rms_db: -31.596
+    measured_peak: 0.6470378
+    range:
+    - 44
+    - 44
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_hat_semi:
+    gain_db: 0.267
+    reference_rms_db: -26.267
+    measured_peak: 0.6521834
+    range:
+    - 46
+    - 46
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_hat_open:
+    gain_db: -0.937
+    reference_rms_db: -25.063
+    measured_peak: 0.6602967
+    range:
+    - 48
+    - 48
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_crash:
+    gain_db: -2.327
+    reference_rms_db: -23.673
+    measured_peak: 0.6759839
+    range:
+    - 49
+    - 49
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_ride:
+    gain_db: 1.8988
+    reference_rms_db: -38.979
+    measured_peak: 0.6429075
+    range:
+    - 51
+    - 51
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_ride_bell:
+    gain_db: 2.9226
+    reference_rms_db: -36.944
+    measured_peak: 0.5714257
+    range:
+    - 53
+    - 53
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_splash:
+    gain_db: -2.227
+    reference_rms_db: -23.773
+    measured_peak: 0.6092857
+    range:
+    - 55
+    - 55
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/blonde_bop_rods_china:
+    gain_db: -0.083
+    reference_rms_db: -25.917
+    measured_peak: 0.6722077
+    range:
+    - 60
+    - 60
+    reference_velocity: 0.62
+    revision: 761c2b7492d2793662d76b6f2b89a72ac48fb547d6e5d4d0561bbdea28aa1468
+    flags: []
+  sampler/busk_cajon_bass:
+    gain_db: -0.58
+    reference_rms_db: -25.42
+    measured_peak: 0.7523969
+    range:
+    - 36
+    - 36
+    reference_velocity: 0.62
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    flags: []
+  sampler/busk_cajon_left:
+    gain_db: 1.9708
+    reference_rms_db: -30.56
+    measured_peak: 0.6376008
+    range:
+    - 38
+    - 38
+    reference_velocity: 0.62
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    flags: []
+  sampler/busk_cajon_right:
+    gain_db: 2.3405
+    reference_rms_db: -31.985
+    measured_peak: 0.6110351
+    range:
+    - 40
+    - 40
+    reference_velocity: 0.62
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    flags: []
+  sampler/busk_conga_low_left:
+    gain_db: 4.763
+    reference_rms_db: -30.763
+    measured_peak: 0.3613964
+    range:
+    - 41
+    - 41
+    reference_velocity: 0.62
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    flags: []
+  sampler/busk_conga_low_right:
+    gain_db: 0.179
+    reference_rms_db: -26.179
+    measured_peak: 0.3333241
+    range:
+    - 43
+    - 43
+    reference_velocity: 0.62
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    flags: []
+  sampler/busk_conga_high_left:
+    gain_db: 2.34
+    reference_rms_db: -28.34
+    measured_peak: 0.4441363
+    range:
+    - 45
+    - 45
+    reference_velocity: 0.62
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    flags: []
+  sampler/busk_conga_high_right:
+    gain_db: 3.783
+    reference_rms_db: -29.783
+    measured_peak: 0.4016027
+    range:
+    - 47
+    - 47
+    reference_velocity: 0.62
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    flags: []
+  sampler/busk_shaker:
+    gain_db: 3.5625
+    reference_rms_db: -37.816
+    measured_peak: 0.5308419
+    range:
+    - 42
+    - 42
+    reference_velocity: 0.62
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    flags: []
+  sampler/busk_tambourine:
+    gain_db: 2.8495
+    reference_rms_db: -32.034
+    measured_peak: 0.576258
+    range:
+    - 44
+    - 44
+    reference_velocity: 0.62
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    flags: []
+  sampler/busk_cowbell:
+    gain_db: 1.2214
+    reference_rms_db: -27.744
+    measured_peak: 0.6950562
+    range:
+    - 51
+    - 51
+    reference_velocity: 0.62
+    revision: ed0108935710e210df1b016229167045fc025212df40082f34bf5061d6b9be82
+    flags: []
+  sampler/studio_snare_2:
+    gain_db: 10.025
+    reference_rms_db: -36.025
+    measured_peak: 0.2227122
+    range:
+    - 61
+    - 61
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/studio_snare_2_rim:
+    gain_db: 12
+    reference_rms_db: -51.128
+    measured_peak: 0.0772316
+    range:
+    - 62
+    - 62
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/studio_snare_3:
+    gain_db: 12
+    reference_rms_db: -40.832
+    measured_peak: 0.183041
+    range:
+    - 60
+    - 60
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/studio_snare_3_rim:
+    gain_db: 10.5887
+    reference_rms_db: -45.634
+    measured_peak: 0.2364046
+    range:
+    - 62
+    - 62
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/studio_tom_high_stick:
+    gain_db: 9.1122
+    reference_rms_db: -36.725
+    measured_peak: 0.280207
+    range:
+    - 64
+    - 64
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/studio_tom_high_mallet:
+    gain_db: 7.7224
+    reference_rms_db: -36.951
+    measured_peak: 0.3288288
+    range:
+    - 62
+    - 62
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/studio_tom_low_stick:
+    gain_db: 9.1395
+    reference_rms_db: -35.497
+    measured_peak: 0.2793272
+    range:
+    - 64
+    - 64
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/studio_tom_low_mallet:
+    gain_db: 9.1049
+    reference_rms_db: -36.319
+    measured_peak: 0.2804428
+    range:
+    - 62
+    - 62
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/suspended_crash_1:
+    gain_db: 6.631
+    reference_rms_db: -32.631
+    measured_peak: 0.1976039
+    range:
+    - 68
+    - 68
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/suspended_crash_2:
+    gain_db: 8.027
+    reference_rms_db: -34.027
+    measured_peak: 0.1601098
+    range:
+    - 66
+    - 66
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/upright_bass:
+    gain_db: -2.554
+    reference_rms_db: -23.446
+    measured_peak: 0.2936127
+    range:
+    - 28
+    - 60
+    reference_velocity: 0.62
+    revision: c2985eb647109d2a8f30a70071e3e163339d7396
+    flags: []
+  sampler/upright_bass_arco:
+    gain_db: 9.852
+    reference_rms_db: -35.852
+    measured_peak: 0.1487158
+    range:
+    - 28
+    - 60
+    reference_velocity: 0.62
+    revision: c2985eb647109d2a8f30a70071e3e163339d7396
+    flags: []
+  sampler/double_bass_arco:
+    gain_db: 12
+    reference_rms_db: -39.837
+    measured_peak: 0.128774
+    range:
+    - 28
+    - 60
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/steinway_piano:
+    gain_db: -0.228
+    reference_rms_db: -25.772
+    measured_peak: 0.3554505
+    range:
+    - 21
+    - 108
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/knight_piano:
+    gain_db: -6.614
+    reference_rms_db: -19.386
+    measured_peak: 0.7404577
+    range:
+    - 21
+    - 108
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/yamaha_piano:
+    gain_db: 5.513
+    reference_rms_db: -31.513
+    measured_peak: 0.3753
+    range:
+    - 21
+    - 108
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/meta_piano:
+    gain_db: -9.129
+    reference_rms_db: -16.871
+    measured_peak: 0.7909876
+    range:
+    - 21
+    - 108
+    reference_velocity: 0.62
+    revision: 251c0be57d5d1b3242b91f53e0cde62ab1cb42d9
+    flags: []
+  sampler/tx_piano:
+    gain_db: -3.199
+    reference_rms_db: -22.801
+    measured_peak: 0.3633914
+    range:
+    - 36
+    - 96
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/clavisynth:
+    gain_db: 1.84
+    reference_rms_db: -27.84
+    measured_peak: 0.3239949
+    range:
+    - 36
+    - 96
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/english_harpsichord:
+    gain_db: -0.274
+    reference_rms_db: -25.726
+    measured_peak: 0.2421137
+    range:
+    - 36
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/lute_harpsichord:
+    gain_db: 1.729
+    reference_rms_db: -27.729
+    measured_peak: 0.2173547
+    range:
+    - 36
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/french_harpsichord:
+    gain_db: 2.437
+    reference_rms_db: -28.437
+    measured_peak: 0.1687224
+    range:
+    - 36
+    - 84
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/italian_harpsichord:
+    gain_db: -0.66
+    reference_rms_db: -25.34
+    measured_peak: 0.2896713
+    range:
+    - 36
+    - 84
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/flemish_harpsichord:
+    gain_db: 1.147
+    reference_rms_db: -27.147
+    measured_peak: 0.1742508
+    range:
+    - 36
+    - 84
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/flemish_full:
+    gain_db: -0.642
+    reference_rms_db: -25.358
+    measured_peak: 0.2143206
+    range:
+    - 36
+    - 84
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/renaissance_8:
+    gain_db: -9.335
+    reference_rms_db: -16.665
+    measured_peak: 0.4043436
+    range:
+    - 36
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/renaissance_4:
+    gain_db: -6.728
+    reference_rms_db: -19.272
+    measured_peak: 0.19304
+    range:
+    - 36
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/renaissance_4_8:
+    gain_db: -7.361
+    reference_rms_db: -18.639
+    measured_peak: 0.4104039
+    range:
+    - 36
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/renaissance_full:
+    gain_db: -8.823
+    reference_rms_db: -17.177
+    measured_peak: 0.4963013
+    range:
+    - 36
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/pipe_quiet:
+    gain_db: -9.826
+    reference_rms_db: -16.174
+    measured_peak: 0.3954897
+    range:
+    - 36
+    - 96
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/pipe_loud:
+    gain_db: -2.521
+    reference_rms_db: -23.479
+    measured_peak: 0.2957452
+    range:
+    - 36
+    - 96
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/rhodes_mono:
+    gain_db: -15.966
+    reference_rms_db: -10.034
+    measured_peak: 1.6230111
+    range:
+    - 28
+    - 100
+    reference_velocity: 0.62
+    revision: aea5b8d3e11e2f7102593789a4e0a0e41b30271a
+    flags: []
+  sampler/rhodes_stereo:
+    gain_db: -9.966
+    reference_rms_db: -16.034
+    measured_peak: 0.8133856
+    range:
+    - 28
+    - 100
+    reference_velocity: 0.62
+    revision: aea5b8d3e11e2f7102593789a4e0a0e41b30271a
+    flags: []
+  sampler/rhodes_vibrato:
+    gain_db: -10.031
+    reference_rms_db: -15.969
+    measured_peak: 0.8196139
+    range:
+    - 28
+    - 100
+    reference_velocity: 0.62
+    revision: aea5b8d3e11e2f7102593789a4e0a0e41b30271a
+    flags: []
+  sampler/nylon_guitar:
+    gain_db: 8.3372
+    reference_rms_db: -39.194
+    measured_peak: 0.3063569
+    range:
+    - 40
+    - 83
+    reference_velocity: 0.62
+    revision: 251c0be57d5d1b3242b91f53e0cde62ab1cb42d9
+    flags: []
+  sampler/nylon_finger:
+    gain_db: 12
+    reference_rms_db: -40.876
+    measured_peak: 0.0878916
+    range:
+    - 40
+    - 83
+    reference_velocity: 0.62
+    revision: 251c0be57d5d1b3242b91f53e0cde62ab1cb42d9
+    flags: []
+  sampler/nylon_pick:
+    gain_db: 7.344
+    reference_rms_db: -33.344
+    measured_peak: 0.3063569
+    range:
+    - 40
+    - 83
+    reference_velocity: 0.62
+    revision: 251c0be57d5d1b3242b91f53e0cde62ab1cb42d9
+    flags: []
+  sampler/steel_guitar:
+    gain_db: 5.433
+    reference_rms_db: -31.433
+    measured_peak: 0.2037992
+    range:
+    - 40
+    - 84
+    reference_velocity: 0.62
+    revision: 251c0be57d5d1b3242b91f53e0cde62ab1cb42d9
+    flags:
+    - non-monotonic measured dynamics at MIDI 51
+    - non-monotonic measured dynamics at MIDI 62
+  sampler/archtop_mic:
+    gain_db: -4.118
+    reference_rms_db: -21.882
+    measured_peak: 0.7421302
+    range:
+    - 33
+    - 88
+    reference_velocity: 0.62
+    revision: 57243cca85277dbcc120ce17c6178032f93c80f3
+    flags:
+    - non-monotonic measured dynamics at MIDI 60
+  sampler/archtop_pickup:
+    gain_db: -3.978
+    reference_rms_db: -22.022
+    measured_peak: 0.6777653
+    range:
+    - 33
+    - 88
+    reference_velocity: 0.62
+    revision: 57243cca85277dbcc120ce17c6178032f93c80f3
+    flags:
+    - non-monotonic measured dynamics at MIDI 74
+  sampler/emily_clean:
+    gain_db: -2.565
+    reference_rms_db: -23.435
+    measured_peak: 0.3922878
+    range:
+    - 37
+    - 88
+    reference_velocity: 0.62
+    revision: b4920dc662fd9cad6dcaccdeecffdd91c8725d8c
+    flags: []
+  sampler/emily_release:
+    gain_db: -2.481
+    reference_rms_db: -23.519
+    measured_peak: 0.3922878
+    range:
+    - 37
+    - 88
+    reference_velocity: 0.62
+    revision: b4920dc662fd9cad6dcaccdeecffdd91c8725d8c
+    flags: []
+  sampler/emily_ensemble:
+    gain_db: -8.93
+    reference_rms_db: -17.07
+    measured_peak: 0.7153395
+    range:
+    - 37
+    - 88
+    reference_velocity: 0.62
+    revision: b4920dc662fd9cad6dcaccdeecffdd91c8725d8c
+    flags:
+    - non-monotonic measured dynamics at MIDI 75
+  sampler/solo_violin_pizzicato:
+    gain_db: 9.0382
+    reference_rms_db: -38.19
+    measured_peak: 0.2826044
+    range:
+    - 55
+    - 96
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/solo_violin_spiccato:
+    gain_db: 10.451
+    reference_rms_db: -36.451
+    measured_peak: 0.1849433
+    range:
+    - 55
+    - 96
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags:
+    - non-monotonic measured dynamics at MIDI 86
+  sampler/solo_violin_tremolo:
+    gain_db: -2.281
+    reference_rms_db: -23.719
+    measured_peak: 0.4942322
+    range:
+    - 55
+    - 96
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/solo_violin_soft:
+    gain_db: 12
+    reference_rms_db: -46.129
+    measured_peak: 0.1611631
+    range:
+    - 55
+    - 96
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/violins_pizzicato:
+    gain_db: 5.2045
+    reference_rms_db: -32.506
+    measured_peak: 0.4394066
+    range:
+    - 55
+    - 86
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/violins_tremolo:
+    gain_db: 2.27
+    reference_rms_db: -28.27
+    measured_peak: 0.3105205
+    range:
+    - 55
+    - 86
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/violins_soft:
+    gain_db: 12
+    reference_rms_db: -47.037
+    measured_peak: 0.0409044
+    range:
+    - 55
+    - 86
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/violas_pizzicato:
+    gain_db: 1.073
+    reference_rms_db: -27.073
+    measured_peak: 0.5362946
+    range:
+    - 48
+    - 86
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags:
+    - non-monotonic measured dynamics at MIDI 76
+  sampler/violas_spiccato:
+    gain_db: 1.439
+    reference_rms_db: -27.439
+    measured_peak: 0.4119275
+    range:
+    - 48
+    - 86
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/violas_tremolo:
+    gain_db: -0.748
+    reference_rms_db: -25.252
+    measured_peak: 0.5437039
+    range:
+    - 48
+    - 86
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/violas_soft:
+    gain_db: 6.881
+    reference_rms_db: -32.881
+    measured_peak: 0.1838376
+    range:
+    - 48
+    - 86
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/cello_pizzicato:
+    gain_db: 2.777
+    reference_rms_db: -28.777
+    measured_peak: 0.2817174
+    range:
+    - 36
+    - 77
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/cello_tremolo:
+    gain_db: -3.289
+    reference_rms_db: -22.711
+    measured_peak: 0.5720897
+    range:
+    - 36
+    - 77
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/cello_soft:
+    gain_db: 12
+    reference_rms_db: -39.648
+    measured_peak: 0.1073647
+    range:
+    - 36
+    - 77
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/double_bass_spiccato:
+    gain_db: 7.296
+    reference_rms_db: -33.296
+    measured_peak: 0.1914203
+    range:
+    - 24
+    - 60
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/double_bass_tremolo:
+    gain_db: 3.461
+    reference_rms_db: -29.461
+    measured_peak: 0.4965821
+    range:
+    - 24
+    - 60
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/double_bass_soft:
+    gain_db: 9.53
+    reference_rms_db: -35.53
+    measured_peak: 0.140174
+    range:
+    - 24
+    - 60
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/violas:
+    gain_db: -1.666
+    reference_rms_db: -24.334
+    measured_peak: 0.7319684
+    range:
+    - 48
+    - 86
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/double_bass_vibrato:
+    gain_db: 12
+    reference_rms_db: -39.126
+    measured_peak: 0.1076533
+    range:
+    - 24
+    - 60
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/flute_vibrato:
+    gain_db: 7.12
+    reference_rms_db: -33.12
+    measured_peak: 0.2508175
+    range:
+    - 60
+    - 96
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/flute_expressive:
+    gain_db: 11.733
+    reference_rms_db: -37.733
+    measured_peak: 0.1091241
+    range:
+    - 60
+    - 96
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/flute_staccato:
+    gain_db: 10.945
+    reference_rms_db: -36.945
+    measured_peak: 0.1412293
+    range:
+    - 65
+    - 96
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/piccolo:
+    gain_db: 4.965
+    reference_rms_db: -30.965
+    measured_peak: 0.3165739
+    range:
+    - 67
+    - 91
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/piccolo_staccato:
+    gain_db: -3.834
+    reference_rms_db: -22.166
+    measured_peak: 0.4818675
+    range:
+    - 70
+    - 94
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/oboe:
+    gain_db: 9.448
+    reference_rms_db: -35.448
+    measured_peak: 0.0911737
+    range:
+    - 58
+    - 89
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/oboe_vibrato:
+    gain_db: 12
+    reference_rms_db: -38.884
+    measured_peak: 0.1217169
+    range:
+    - 58
+    - 89
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags:
+    - non-monotonic measured dynamics at MIDI 81
+  sampler/oboe_staccato:
+    gain_db: 0.645
+    reference_rms_db: -26.645
+    measured_peak: 0.2087424
+    range:
+    - 58
+    - 89
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags:
+    - non-monotonic measured dynamics at MIDI 81
+  sampler/clarinet:
+    gain_db: -2.521
+    reference_rms_db: -23.479
+    measured_peak: 0.205657
+    range:
+    - 50
+    - 90
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags:
+    - non-monotonic measured dynamics at MIDI 60
+    - non-monotonic measured dynamics at MIDI 70
+  sampler/clarinet_staccato:
+    gain_db: 0.913
+    reference_rms_db: -26.913
+    measured_peak: 0.3368129
+    range:
+    - 50
+    - 89
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/bassoon:
+    gain_db: -0.379
+    reference_rms_db: -25.621
+    measured_peak: 0.2956368
+    range:
+    - 34
+    - 75
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/bassoon_vibrato:
+    gain_db: -0.866
+    reference_rms_db: -25.134
+    measured_peak: 0.366718
+    range:
+    - 36
+    - 72
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/bassoon_staccato:
+    gain_db: 2.098
+    reference_rms_db: -28.098
+    measured_peak: 0.2264554
+    range:
+    - 34
+    - 72
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/horn_muted:
+    gain_db: 1.503
+    reference_rms_db: -27.503
+    measured_peak: 0.2819678
+    range:
+    - 46
+    - 77
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/horn_staccato:
+    gain_db: -2.41
+    reference_rms_db: -23.59
+    measured_peak: 0.4684542
+    range:
+    - 33
+    - 77
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/trumpet:
+    gain_db: -4.747
+    reference_rms_db: -21.253
+    measured_peak: 0.7182335
+    range:
+    - 52
+    - 84
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/trumpet_vibrato:
+    gain_db: 8.057
+    reference_rms_db: -34.057
+    measured_peak: 0.1787901
+    range:
+    - 52
+    - 84
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/trumpet_staccato:
+    gain_db: 6.8911
+    reference_rms_db: -34.751
+    measured_peak: 0.3618563
+    range:
+    - 52
+    - 84
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/trumpet_straight_mute:
+    gain_db: 1.523
+    reference_rms_db: -27.523
+    measured_peak: 0.6687277
+    range:
+    - 58
+    - 84
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/trumpet_harmon_mute:
+    gain_db: 5.781
+    reference_rms_db: -31.781
+    measured_peak: 0.3646191
+    range:
+    - 58
+    - 84
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/trombone:
+    gain_db: 12
+    reference_rms_db: -41.034
+    measured_peak: 0.0891791
+    range:
+    - 34
+    - 65
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/trombone_vibrato:
+    gain_db: 12
+    reference_rms_db: -47.175
+    measured_peak: 0.0405317
+    range:
+    - 41
+    - 67
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/trombone_staccato:
+    gain_db: 5.1794
+    reference_rms_db: -37.345
+    measured_peak: 0.4406743
+    range:
+    - 34
+    - 70
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/tuba:
+    gain_db: 7.3111
+    reference_rms_db: -33.691
+    measured_peak: 0.3447754
+    range:
+    - 29
+    - 62
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/tuba_staccato:
+    gain_db: 6.979
+    reference_rms_db: -32.979
+    measured_peak: 0.1872031
+    range:
+    - 29
+    - 62
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/tenor_sax:
+    gain_db: -2.95
+    reference_rms_db: -23.05
+    measured_peak: 0.4928598
+    range:
+    - 44
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/tenor_sax_vibrato:
+    gain_db: -1.671
+    reference_rms_db: -24.329
+    measured_peak: 0.383912
+    range:
+    - 44
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/tenor_sax_staccato:
+    gain_db: -4.132
+    reference_rms_db: -21.868
+    measured_peak: 0.6109454
+    range:
+    - 44
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/saxello:
+    gain_db: -5.596
+    reference_rms_db: -20.404
+    measured_peak: 0.6720723
+    range:
+    - 58
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/saxello_vibrato:
+    gain_db: -8.333
+    reference_rms_db: -17.667
+    measured_peak: 0.6201092
+    range:
+    - 58
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/saxello_staccato:
+    gain_db: -2.835
+    reference_rms_db: -23.165
+    measured_peak: 0.5914424
+    range:
+    - 58
+    - 89
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/mtg_soprano_sax:
+    gain_db: -0.652
+    reference_rms_db: -25.348
+    measured_peak: 0.3062059
+    range:
+    - 56
+    - 88
+    reference_velocity: 0.62
+    revision: b494d256549b3d088fdec176ce82867f8a1f58b2
+    flags: []
+  sampler/mtg_alto_sax:
+    gain_db: 3.823
+    reference_rms_db: -29.823
+    measured_peak: 0.2458463
+    range:
+    - 49
+    - 81
+    reference_velocity: 0.62
+    revision: b494d256549b3d088fdec176ce82867f8a1f58b2
+    flags: []
+  sampler/mtg_tenor_sax:
+    gain_db: 6.9
+    reference_rms_db: -32.9
+    measured_peak: 0.1998777
+    range:
+    - 44
+    - 76
+    reference_velocity: 0.62
+    revision: b494d256549b3d088fdec176ce82867f8a1f58b2
+    flags: []
+  sampler/mtg_baritone_sax:
+    gain_db: 8.554
+    reference_rms_db: -34.554
+    measured_peak: 0.2673327
+    range:
+    - 36
+    - 69
+    reference_velocity: 0.62
+    revision: b494d256549b3d088fdec176ce82867f8a1f58b2
+    flags: []
+  sampler/orchestral_harp:
+    gain_db: 9.322
+    reference_rms_db: -35.322
+    measured_peak: 0.1726919
+    range:
+    - 28
+    - 101
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/glockenspiel:
+    gain_db: 12
+    reference_rms_db: -43.5
+    measured_peak: 0.0846618
+    range:
+    - 67
+    - 96
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/tubular_bells:
+    gain_db: -6.301
+    reference_rms_db: -19.699
+    measured_peak: 0.8135594
+    range:
+    - 60
+    - 79
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/timpani:
+    gain_db: 12
+    reference_rms_db: -38.971
+    measured_peak: 0.1751618
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/timpani_roll:
+    gain_db: 9.3682
+    reference_rms_db: -36.523
+    measured_peak: 0.2720701
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: 6dd651d55dde97fd4028699be9d4481f26917891
+    flags: []
+  sampler/xylophone_soft:
+    gain_db: 7.574
+    reference_rms_db: -33.574
+    measured_peak: 0.1837082
+    range:
+    - 55
+    - 97
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/xylophone_medium:
+    gain_db: 6.4662
+    reference_rms_db: -33.048
+    measured_peak: 0.3799971
+    range:
+    - 55
+    - 97
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/xylophone_hard:
+    gain_db: 4.279
+    reference_rms_db: -30.279
+    measured_peak: 0.4621066
+    range:
+    - 55
+    - 97
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/orchestral_gong_1:
+    gain_db: 6.8244
+    reference_rms_db: -35.707
+    measured_peak: 0.3646457
+    range:
+    - 60
+    - 62
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  sampler/orchestral_gong_2:
+    gain_db: 1.6054
+    reference_rms_db: -33.546
+    measured_peak: 0.664995
+    range:
+    - 60
+    - 65
+    reference_velocity: 0.62
+    revision: dfcf4a4918771eee884b96ad4493de82ef84daf6
+    flags: []
+  kick:
+    gain_db: -10.022
+    reference_rms_db: -15.978
+    measured_peak: 0.8357794
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  kick/club_909:
+    gain_db: -10.558
+    reference_rms_db: -15.442
+    measured_peak: 0.8365811
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  kick/deep_808:
+    gain_db: -13.887
+    reference_rms_db: -12.113
+    measured_peak: 0.9296863
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  kick/distorted:
+    gain_db: -13.931
+    reference_rms_db: -12.069
+    measured_peak: 0.8230576
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  kick/dry_punch:
+    gain_db: -6.594
+    reference_rms_db: -19.406
+    measured_peak: 0.8347143
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  kick/hard_click:
+    gain_db: -10.091
+    reference_rms_db: -15.909
+    measured_peak: 0.83337
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  kick/low_thud:
+    gain_db: -8.598
+    reference_rms_db: -17.402
+    measured_peak: 0.8039355
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  kick/soft_sine:
+    gain_db: -5.168
+    reference_rms_db: -20.832
+    measured_peak: 0.6053064
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  kick/tight_808:
+    gain_db: -6.79
+    reference_rms_db: -19.21
+    measured_peak: 0.8253845
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  kick/v0:
+    gain_db: -13.417
+    reference_rms_db: -12.583
+    measured_peak: 0.8439985
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  snare:
+    gain_db: -0.358
+    reference_rms_db: -25.642
+    measured_peak: 0.8218958
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  snare/bright_909:
+    gain_db: -1.796
+    reference_rms_db: -24.204
+    measured_peak: 0.8422535
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  snare/dry_rim:
+    gain_db: -3.977
+    reference_rms_db: -22.023
+    measured_peak: 0.941046
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  snare/dusty:
+    gain_db: -2.526
+    reference_rms_db: -23.474
+    measured_peak: 0.7964764
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  snare/fat_808:
+    gain_db: -2.797
+    reference_rms_db: -23.203
+    measured_peak: 0.8616923
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  snare/industrial:
+    gain_db: -8.97
+    reference_rms_db: -17.03
+    measured_peak: 0.8009061
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  snare/noisy:
+    gain_db: -3.875
+    reference_rms_db: -22.125
+    measured_peak: 0.8875027
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  snare/soft_wires:
+    gain_db: 2.6695
+    reference_rms_db: -29.358
+    measured_peak: 0.5883243
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  snare/tight_pop:
+    gain_db: -0.7299
+    reference_rms_db: -25.504
+    measured_peak: 0.8701342
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  snare/v0:
+    gain_db: -0.289
+    reference_rms_db: -25.711
+    measured_peak: 0.6539045
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  clap:
+    gain_db: 0.0064
+    reference_rms_db: -27.225
+    measured_peak: 0.7994071
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  clap/v0:
+    gain_db: -7.216
+    reference_rms_db: -18.784
+    measured_peak: 1.818776
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat:
+    gain_db: 6.5735
+    reference_rms_db: -33.49
+    measured_peak: 0.3753324
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat/bright_closed:
+    gain_db: 12
+    reference_rms_db: -40.399
+    measured_peak: 0.1931003
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat/dark_closed:
+    gain_db: 4.731
+    reference_rms_db: -32.847
+    measured_peak: 0.4640243
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat/fine_closed:
+    gain_db: -1.0092
+    reference_rms_db: -27.464
+    measured_peak: 0.8985706
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat/grain:
+    gain_db: 11.0777
+    reference_rms_db: -39.666
+    measured_peak: 0.2234615
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat/loose_closed:
+    gain_db: 5.0297
+    reference_rms_db: -33.023
+    measured_peak: 0.4483385
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat/metal_open:
+    gain_db: 10.773
+    reference_rms_db: -36.773
+    measured_peak: 0.2223373
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat/sizzle:
+    gain_db: -2.01
+    reference_rms_db: -23.99
+    measured_peak: 0.6765309
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat/soft_open:
+    gain_db: -0.792
+    reference_rms_db: -25.208
+    measured_peak: 0.8412271
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat/v0:
+    gain_db: -0.5304
+    reference_rms_db: -27.062
+    measured_peak: 0.850374
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  hat/v0_open:
+    gain_db: -2.0667
+    reference_rms_db: -24.12
+    measured_peak: 1.0149039
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass:
+    gain_db: -16.112
+    reference_rms_db: -9.888
+    measured_peak: 0.9146627
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass/acid:
+    gain_db: -15.18
+    reference_rms_db: -10.82
+    measured_peak: 0.8716061
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass/disco_pluck:
+    gain_db: -6.807
+    reference_rms_db: -19.193
+    measured_peak: 0.838423
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass/growl:
+    gain_db: -17.451
+    reference_rms_db: -8.549
+    measured_peak: 0.8469148
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass/mellow_square:
+    gain_db: -16.134
+    reference_rms_db: -9.866
+    measured_peak: 0.9090785
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass/reedy:
+    gain_db: -17.97
+    reference_rms_db: -8.03
+    measured_peak: 0.8805457
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass/round_sub:
+    gain_db: -14.659
+    reference_rms_db: -11.341
+    measured_peak: 0.6700295
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass/rubber:
+    gain_db: -14.061
+    reference_rms_db: -11.939
+    measured_peak: 0.9047465
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass/sub:
+    gain_db: -15.376
+    reference_rms_db: -10.624
+    measured_peak: 0.9274903
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass/v0:
+    gain_db: -15.489
+    reference_rms_db: -10.511
+    measured_peak: 0.9315679
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  bass/warm_saw:
+    gain_db: -13.957
+    reference_rms_db: -12.043
+    measured_peak: 0.8320095
+    range:
+    - 36
+    - 60
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  pad:
+    gain_db: -9.998
+    reference_rms_db: -16.002
+    measured_peak: 0.8135278
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  pad/dark:
+    gain_db: -12.687
+    reference_rms_db: -13.313
+    measured_peak: 1.0054701
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  pad/still:
+    gain_db: -10.232
+    reference_rms_db: -15.768
+    measured_peak: 0.6396138
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  pad/warm:
+    gain_db: -13.209
+    reference_rms_db: -12.791
+    measured_peak: 1.089939
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  pluck:
+    gain_db: -5.02
+    reference_rms_db: -20.98
+    measured_peak: 0.8912036
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  pluck/dark:
+    gain_db: -7.641
+    reference_rms_db: -18.359
+    measured_peak: 0.7972202
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  pluck/v0:
+    gain_db: -7.837
+    reference_rms_db: -18.163
+    measured_peak: 0.807224
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  lead:
+    gain_db: -10.676
+    reference_rms_db: -15.324
+    measured_peak: 1.1850936
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  lead/v0:
+    gain_db: -12.678
+    reference_rms_db: -13.322
+    measured_peak: 1.1576226
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  string_pluck:
+    gain_db: -1.597
+    reference_rms_db: -24.403
+    measured_peak: 0.6675211
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  string_pluck/still:
+    gain_db: -1.605
+    reference_rms_db: -24.395
+    measured_peak: 0.6675211
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  keys:
+    gain_db: -5.997
+    reference_rms_db: -20.003
+    measured_peak: 0.5595597
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  keys/still:
+    gain_db: -6.174
+    reference_rms_db: -19.826
+    measured_peak: 0.5595597
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  epiano:
+    gain_db: -12.131
+    reference_rms_db: -13.869
+    measured_peak: 0.7967211
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  epiano/bell_keys:
+    gain_db: -14.105
+    reference_rms_db: -11.895
+    measured_peak: 0.8100897
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  epiano/bright_bark:
+    gain_db: -12.262
+    reference_rms_db: -13.738
+    measured_peak: 0.808579
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  epiano/dry_funk:
+    gain_db: -8.963
+    reference_rms_db: -17.037
+    measured_peak: 0.8061469
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  epiano/fm_chime:
+    gain_db: -13.795
+    reference_rms_db: -12.205
+    measured_peak: 0.8086691
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  epiano/round_tine:
+    gain_db: -13.68
+    reference_rms_db: -12.32
+    measured_peak: 0.8070935
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  epiano/soft_ballad:
+    gain_db: -14.554
+    reference_rms_db: -11.446
+    measured_peak: 0.8073896
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  epiano/still:
+    gain_db: -12.505
+    reference_rms_db: -13.495
+    measured_peak: 0.8083896
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  epiano/warm_suitcase:
+    gain_db: -13.66
+    reference_rms_db: -12.34
+    measured_peak: 0.7952424
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  epiano/wide_tremolo:
+    gain_db: -12.6
+    reference_rms_db: -13.4
+    measured_peak: 0.7370004
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  organ:
+    gain_db: -17.69
+    reference_rms_db: -8.31
+    measured_peak: 0.922226
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  organ/gospel:
+    gain_db: -18
+    reference_rms_db: -7.108
+    measured_peak: 0.9037561
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  organ/hollow_jazz:
+    gain_db: -15.95
+    reference_rms_db: -10.05
+    measured_peak: 0.6849866
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  organ/rock_rotary:
+    gain_db: -18
+    reference_rms_db: -6.05
+    measured_peak: 1.2263217
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  organ/soft_chorale:
+    gain_db: -13.833
+    reference_rms_db: -12.167
+    measured_peak: 0.4400108
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  riser:
+    gain_db: -4.641
+    reference_rms_db: -21.359
+    measured_peak: 1.0380985
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  riser/v0:
+    gain_db: -4.641
+    reference_rms_db: -21.359
+    measured_peak: 1.0380985
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  impact:
+    gain_db: -18
+    reference_rms_db: -7.261
+    measured_peak: 0.9518352
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  impact/v0:
+    gain_db: -18
+    reference_rms_db: -7.261
+    measured_peak: 0.9518352
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  zap:
+    gain_db: -7.667
+    reference_rms_db: -18.333
+    measured_peak: 0.4810322
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  zap/v0:
+    gain_db: -7.667
+    reference_rms_db: -18.333
+    measured_peak: 0.4810322
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  tick:
+    gain_db: -7.32
+    reference_rms_db: -18.68
+    measured_peak: 0.8441403
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  tick/v0:
+    gain_db: -7.32
+    reference_rms_db: -18.68
+    measured_peak: 0.8441403
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  clean:
+    gain_db: -11.151
+    reference_rms_db: -14.849
+    measured_peak: 0.5764003
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  clean/bass:
+    gain_db: -10.81
+    reference_rms_db: -15.19
+    measured_peak: 0.6598036
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  clean/glass:
+    gain_db: -10.359
+    reference_rms_db: -15.641
+    measured_peak: 0.5683674
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  clean/golden_pad:
+    gain_db: 9.825
+    reference_rms_db: -48.453
+    measured_peak: 0.2581313
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  clean/keys:
+    gain_db: -10.854
+    reference_rms_db: -15.146
+    measured_peak: 0.6187929
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  clean/lead:
+    gain_db: -8.893
+    reference_rms_db: -17.107
+    measured_peak: 0.5245899
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  clean/organ:
+    gain_db: -11.703
+    reference_rms_db: -14.297
+    measured_peak: 0.6221496
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []
+  clean/sine:
+    gain_db: -17.738
+    reference_rms_db: -8.262
+    measured_peak: 0.8461027
+    range:
+    - 48
+    - 84
+    reference_velocity: 0.62
+    revision: native
+    flags: []

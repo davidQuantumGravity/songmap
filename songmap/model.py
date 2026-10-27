@@ -48,7 +48,7 @@ class Section:
     harmony: str | None = None    # named progression or inline "Em:2 C:2"
     dyn: str | None = None
     feel: dict = field(default_factory=dict)
-    tempo: float | None = None
+    tempo: float | str | None = None         # BPM, or a beat-linear ramp such as "rit 120>96"
     key: str | None = None
     meter: tuple | None = None    # (num, den) or (num, den, (groups...)), e.g. (7, 8, (2, 2, 3)); None = the song's
     binaural: dict = field(default_factory=dict)   # {beat, carriers, gain_db} (mix/binaural.py); carries over
@@ -106,6 +106,9 @@ class Song:
     mix: dict = field(default_factory=dict)            # part -> {gain_db, pan, send, sidechain, ...}
     returns: dict = field(default_factory=dict)        # name -> {type, seconds, ...}
     patches: dict = field(default_factory=dict)        # name -> {modules: {...}, wires: [...]} (instruments/patch.py)
+    sounds: dict = field(default_factory=dict)         # name -> {a: {use, params}, b?: {...}} (instruments/sound.py)
+    expression: dict = field(default_factory=dict)     # section -> part -> continuous control -> beat/value points
+    techniques: dict = field(default_factory=dict)     # section -> part -> [beat, named technique] changes at note onsets
     master: MasterSpec = field(default_factory=MasterSpec)
     qa: dict = field(default_factory=dict)
     binaural: dict = field(default_factory=dict)       # a binaural-beat layer (mix/binaural.py); {} = none

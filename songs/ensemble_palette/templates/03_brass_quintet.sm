@@ -1,0 +1,14 @@
+# Trumpet one notes: short fanfare cell, space, then a higher return. Expression: accented first attack, tapered phrase ends; real mute used for the second trumpet only.
+# Trumpet two notes: answers in thirds below the lead; rests leave separate breaths. Expression: softer than the first trumpet, longer held answers.
+# Horn notes: warm inner fifths, moving to the dominant seventh late. Expression: broad tenuto notes, no imitation of trumpet attacks.
+# Trombone notes: middle-low chord movement, short replies under the trumpet rests. Expression: grounded downbeats and lifted repeated notes.
+# Tuba notes: root/fifth pillars with one passing ascent into the cadence. Expression: short supported attacks, rest before each new breath.
+song "Five brass voices" 104 4/4 C seed=203 tail=3 mood=balanced
+inst tp1=sampler/trumpet tp2=sampler/trumpet_straight_mute hn=sampler/horn tb=sampler/trombone tuba=sampler/tuba
+chords C:2 F:2 G7:2 C:2
+fanfare 2 | tp1:{deg: "=mp 0/8'^ 0/8' 4/4_ r/2 | 2/4 0/4 r/2", oct: 1} tp2:{deg: "=p r/2 4/4_ 2/4 | r/2 4/4 r/4"} hn:{deg: "=p 4/2_ r/4 2/4 | 0/2_ r/2"} tb:{deg: "=mp 2/2_ r/2 | 2/4' r/4 4/4' r/4", oct: -1} tuba:{deg: "=mp 0/4' r/4 -3/4' r/4 | 0/2_ r/2", oct: -2}
+answer 2 | tp1:{deg: "=mp r/2 5/4 4/4 | 3/2_ r/2", oct: 1} tp2:{deg: "=mp 3/4 5/8 4/8 3/4 r/4 | 5/2_ r/2"} hn:{deg: "=p 0/2_ 3/4 r/4 | 3/2_ r/2"} tb:{deg: "=mp 3/2_ r/2 | 3/4' r/4 5/4' r/4", oct: -1} tuba:{deg: "=mp 3/4' r/4 0/4' r/4 | 3/2_ r/2", oct: -2}
+rise 2 | tp1:{deg: "=mf 4/8'^ 4/8' 6/4_ 5/4 4/4 | 2/2_ r/2", oct: 1} tp2:{deg: "=mp 1/2_ r/4 3/4 | -1/2_ r/2"} hn:{deg: "=mp 1/2_ 3/2 | -1/2_ r/2"} tb:{deg: "=mp 4/2_ r/2 | 4/4' 3/4 1/4 r/4", oct: -1} tuba:{deg: "=mp 4/4' r/4 1/4' r/4 | 4/4 5/8 6/8 4/4 r/4", oct: -2}
+close 2 | tp1:{deg: "=mp 2/4 0/4 r/2 | =p 0/2_ r/2", oct: 1} tp2:{deg: "=p r/2 4/4 2/4 | 2/2_ r/2"} hn:{deg: "=p 4/1_ | 4/2_ r/2"} tb:{deg: "=p 2/2_ r/2 | 0/2_ r/2", oct: -1} tuba:{deg: "=p 0/4' r/4 -3/4' r/4 | 0/2_ r/2", oct: -2}
+mix tp1 -12 pan=-.2 hall=.1 | tp2 -11 pan=.15 hall=.1 | hn -6 pan=.3 hall=.12 | tb -7 pan=-.3 hall=.1 | tuba -4 pan=0 hall=.08
+master standard lufs=-18 glue=none

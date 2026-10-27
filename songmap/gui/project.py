@@ -270,9 +270,11 @@ def summarize(arr) -> dict:
     from ..render import held_beats
     from .rack import voices
     song, tl = arr.song, arr.timeline
+    from ..arrange.conductor import key_parts, section_metadata
     sections = [{"name": s.name, "index": s.index, "bar": s.start_bar, "bars": s.bars,
                  "start": round(tl.beat_to_sec(s.start), 4), "end": round(tl.beat_to_sec(s.end), 4),
-                 "line": song.sections[s.index].line if s.index < len(song.sections) else None}
+                 "line": song.sections[s.index].line if s.index < len(song.sections) else None,
+                 **section_metadata(song,tl,s)}
                 for s in tl.sections]
     parts = []
     for name, evs in arr.parts.items():
@@ -303,6 +305,7 @@ def summarize(arr) -> dict:
             chords.append([a, b, sp.chord.symbol])
     return {
         "title": song.title, "tempo": song.tempo, "meter": f"{song.meter[0]}/{song.meter[1]}", "key": song.key,
+        "tonic":key_parts(song.key)[0],"scale":key_parts(song.key)[1],
         "tuning": getattr(song, "tuning", "12edo"), "mood": song.mood, "fps": song.fps,
         "bars": tl.total_bars, "seconds": round(tl.seconds, 4), "music_seconds": round(tl.music_seconds, 4),
         "frames": tl.frames, "length": _mmss(tl.seconds), "digest": arr.digest()[:16],
@@ -311,7 +314,8 @@ def summarize(arr) -> dict:
         "master_inserts": list((arr.ensemble.mix.get("master") or {}).get("inserts") or []),
         "return_inserts": {r: list((arr.ensemble.mix.get(r) or {}).get("inserts") or []) for r in arr.ensemble.returns},
         "patches": _patches(song),
-        "bar_times": [round(tl.beat_to_sec(b * tl.bpb), 4) for b in range(int(tl.total_bars) + 1)],
+        "expression": song.expression,"techniques":song.techniques,
+        "bar_times": [round(tl.beat_to_sec(tl.bar_to_beat(b)), 4) for b in range(int(tl.total_bars) + 1)],
     }
 
 

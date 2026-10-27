@@ -1,0 +1,542 @@
+[
+  {
+    "source": "auditions/grand_piano.sm",
+    "source_sha256": "b6ce9762c184002b61767c8fa45f8faa3dffec8b5673dadfb5f8f9fecbf00efa",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/steinway_piano.sm",
+    "source_sha256": "ccb43cf379b0dd8e17fd5df41006b1fbe7067dd3119ccae96d1bc68d1f18d838",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/knight_piano.sm",
+    "source_sha256": "fc800e17fb93948d97463a31f887766339e6116b69a7dc388b99e8f5b23e2ec9",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/yamaha_piano.sm",
+    "source_sha256": "8c512b4d4b9f903bae7b1d20fc028b56a9b809506a73fc6724746a2814d0a801",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/meta_piano.sm",
+    "source_sha256": "1eb2510994d53f971ca13381f078c2de41fa1bc611cdcb9082f00a4fbc0e3043",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/fm_piano.sm",
+    "source_sha256": "30f6078d64a22ca47a9147d4b0c7561c6e982ce53d266f7639f79123d7a42c10",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/tx_piano.sm",
+    "source_sha256": "9327c1d8318fc723536a4c0b5610bb544cd1c8512995e7b473d8c30a819f085f",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/clavisynth.sm",
+    "source_sha256": "a3dc99205fbb6a19cf25c7e00f04d08f2c29d34434d388382ac6d08ba5866afb",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/rhodes_mono.sm",
+    "source_sha256": "5f5a2fcdf0a462f6f8aee6043d938170324866e7e5996ed2d9874749f33ea271",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/rhodes_stereo.sm",
+    "source_sha256": "7924a1d35bd4e06ccd30ba76efb300f53c9f39115bc7379f18975a5347a0e0b4",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/rhodes_vibrato.sm",
+    "source_sha256": "1fbc0f1ad8a2b4d09fef0cfb917236ce2f120e51583acfc31e7edaa1543eccb8",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/english_harpsichord.sm",
+    "source_sha256": "221f5be45360ab0b5d7c70fc18f4c395c23421dbef2f1dd3eda41026910702a8",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/lute_harpsichord.sm",
+    "source_sha256": "b67db5bb9eed865840067efc3a9293a5aaa1fd930f41756091bdfe6361f1627b",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/french_harpsichord.sm",
+    "source_sha256": "b43ee01b276200d580b3cd4fd5505dc3da02d27946776935cc0e07b2bcf9dc02",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/italian_harpsichord.sm",
+    "source_sha256": "ccb3e4a1a66fa2c5b014a3488684e555890f9e1fbf01eaf9375bb3934dc56ef5",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/flemish_harpsichord.sm",
+    "source_sha256": "5980bc4f16f244dd5b5d642fac30272d8152cacab12330dbe416762882da4beb",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/flemish_full.sm",
+    "source_sha256": "954fa8e6e6de1031edd02311b95d15ea06dbf3c51a4895f58c0540dc51377ecc",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/renaissance_8.sm",
+    "source_sha256": "2416bd88b8d1d271758850de8304c31b976d6dbfcfcd9f0f0881ce75eb894006",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/renaissance_4.sm",
+    "source_sha256": "e35ecfde087ffc0e1631c73991988f84e33e203ee8e169e23597f602731789d3",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/renaissance_4_8.sm",
+    "source_sha256": "1302c9a3572b65cdac2207f2c4f8f8719a3147fd006f873a60f7d24d7636447a",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/renaissance_full.sm",
+    "source_sha256": "6a5ca4a9cf955eae6cef6c55340c239c40fc5494ec25db68a141465e96c538bc",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/pipe_quiet.sm",
+    "source_sha256": "5f9e8e69b86d5e0d36aa4ca214174ad6aebab853812f70d52ca1f6a74c73d74d",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/pipe_loud.sm",
+    "source_sha256": "2a646f1e8f79c29fd1732676633bc31414a26ec19c21135a92d50abb0ae286ce",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/nylon_guitar.sm",
+    "source_sha256": "c8506cae3d25dfc9f9a69cd76baca7427770a3444d0af56cb771f7a128c4412e",
+    "digest": "8a0882e625644fc3121810a44ec8bfb54875068829bc4f003cf07401c352b1e2",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/nylon_finger.sm",
+    "source_sha256": "7e394b6c929e19a2a58cc0a5dbefde5da6d9d48cab6e5fab2bd9eb837943d33d",
+    "digest": "8a0882e625644fc3121810a44ec8bfb54875068829bc4f003cf07401c352b1e2",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/nylon_pick.sm",
+    "source_sha256": "0fde33a8e51ec2590f214170c18eec347be43ed57b8027888cc032271b00f1ea",
+    "digest": "8a0882e625644fc3121810a44ec8bfb54875068829bc4f003cf07401c352b1e2",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/steel_guitar.sm",
+    "source_sha256": "ddaab4c2a982829a221dfe7b1dbe96054069737773ca78a9504eacd5c5788e73",
+    "digest": "8a0882e625644fc3121810a44ec8bfb54875068829bc4f003cf07401c352b1e2",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/archtop_mic.sm",
+    "source_sha256": "78b86e7a345dda201a838cfe316801c8caa08016c1c0c12a5f587562c0329c39",
+    "digest": "8a0882e625644fc3121810a44ec8bfb54875068829bc4f003cf07401c352b1e2",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/archtop_pickup.sm",
+    "source_sha256": "d936dab27b95eccebb5285c972cd101efe96cc55f7e1f22f8148abbb573560c3",
+    "digest": "8a0882e625644fc3121810a44ec8bfb54875068829bc4f003cf07401c352b1e2",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/emily_clean.sm",
+    "source_sha256": "4659a86420e84ece6a5ee369d7fbbc70b17ede540a5418c6b40d0d9595d0b231",
+    "digest": "8a0882e625644fc3121810a44ec8bfb54875068829bc4f003cf07401c352b1e2",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/emily_release.sm",
+    "source_sha256": "a46ab2954d6d9a5b81456a0caff27b487a1fde9fb0eef19b3c14a13c57279a77",
+    "digest": "8a0882e625644fc3121810a44ec8bfb54875068829bc4f003cf07401c352b1e2",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/emily_ensemble.sm",
+    "source_sha256": "b13038b5867c8ebfd458a9e7b930b5ef2a6516635cd66bd8ac5f286ec315e8dd",
+    "digest": "8a0882e625644fc3121810a44ec8bfb54875068829bc4f003cf07401c352b1e2",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/epiano_round_tine.sm",
+    "source_sha256": "17c90c06b8c895f75b8811e84808f2357afc3efc2af847759ee8701cc0afc10d",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/epiano_warm_suitcase.sm",
+    "source_sha256": "a51f5b89ce0b4bbba4bbab594218fd9fb83c4beb1c11fc6e3b190880646c1242",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/epiano_bright_bark.sm",
+    "source_sha256": "4aab2474d02f8c24c8b4dc0bca807b36d1835052fd49324801bb3b837a45cb36",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/epiano_soft_ballad.sm",
+    "source_sha256": "fdc1b61401553c1f4e45fb9722db4381bfdb593c5278f2daa99a7e31affd4b18",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/epiano_bell_keys.sm",
+    "source_sha256": "3b9edeb8524485586d944cdc8fc39f1fc2ce202b6198b46cedc0f897bda04517",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/epiano_wide_tremolo.sm",
+    "source_sha256": "a5607ea32cf96b4be7b36ed31543fc15f5f2eb14fdc2ae9c352384345735ec87",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/epiano_dry_funk.sm",
+    "source_sha256": "2d92b653750edf70e4799b798382d16246c914b5fbc669e511b34a3457886498",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/epiano_fm_chime.sm",
+    "source_sha256": "020b2f9e59513136f714c2ee2b2691aa18a0af4a0723a46183fe823c212eeafb",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/organ_hollow_jazz.sm",
+    "source_sha256": "ac2337cc0b50572e33d5bcf9897a93beb1f25a78c37f480e989d93ce5e954450",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/organ_gospel.sm",
+    "source_sha256": "5ddd5b22e73a72f0b3f295e8d45d8662b566d6903f59469c866d4ffc0b457a59",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/organ_soft_chorale.sm",
+    "source_sha256": "d1e2b83d538bd5e92736d3a91b0388c021bcf350942797ae4e08d4e07ef68538",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/organ_rock_rotary.sm",
+    "source_sha256": "240db8cd5dafb6a9614a67505e248246fd443e111297e6b5f38cf54edb9ffaf4",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/native_piano.sm",
+    "source_sha256": "84e01595f354ce6fcb5a495b54d1173a535240645b39da040319aca218bb7012",
+    "digest": "446335b83b28dac7a42fa45867e176b83d191cc4e90074665d35c5bf0bcee1be",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/native_guitar.sm",
+    "source_sha256": "1e196e6a74b8cb5c799d1fdf8bca815f950b0981908f79583f71fd1d08f055d6",
+    "digest": "8a0882e625644fc3121810a44ec8bfb54875068829bc4f003cf07401c352b1e2",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/01_upright_conversation.sm",
+    "source_sha256": "eb57670daee21258ef6a550793dcf1c7ae73554afb1e59187bcdc0f960dafc19",
+    "digest": "49e3ed6592fc0555e5fa686514178d59beeb81b3a2051f1d07eb1a3d9e44c615",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/02_rhodes_pocket.sm",
+    "source_sha256": "7e90eff77e583fcd6f95cdc7ace2aeac063fc56b6ba83aa40bedf805529e3e57",
+    "digest": "9494eaf75a45e93f7cc0efa370892bfd923ca7872a4b9a540a5d628a213f26ce",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 2
+    }
+  },
+  {
+    "source": "templates/03_harpsichord_dialogue.sm",
+    "source_sha256": "256ad966a0e557a42446b0ae88bcbdd519757fdf94375b509956fd4265ee904a",
+    "digest": "0dbabf8697e7001fc7e58129bf937c9770abcb2b06471d9417308e6280849b6d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/04_six_eight_organ.sm",
+    "source_sha256": "a76470eac1c43a2333606e085f03867a4a441187926d749d712bef2f31b0d27c",
+    "digest": "da8340cc32c1f717eedd5c5eaca234141149df644705684cf1b6ba0b12007507",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/05_nylon_fingerstyle.sm",
+    "source_sha256": "93caac42d016dd9c61caac64a31b62a7b6b371751aeb6657a9938094a38ec874",
+    "digest": "6ebe04467ea872c191468b8f78d94d43155d2f3f766086ccad192a6fb880942b",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/06_steel_open_chords.sm",
+    "source_sha256": "86d77e65e327e09a6a383e50100f467d2dcf4d9ce8ce45e736f1b377d26a1e4c",
+    "digest": "efaac3a000a824712898104a7cf70df2f75c2e29e1ef0ceac37288663e421a40",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/07_electric_pocket.sm",
+    "source_sha256": "741aefc031af7cc96ceed451cea5516e5bdfb55a3243b95c9c059f9b5302695d",
+    "digest": "8add7136a5e272e3749fe5147159071bac18b635e1cf551547f72ddbff19632e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/08_archtop_after_hours.sm",
+    "source_sha256": "9345895fefd0e577842d1c652c534a891aa37ddef37d7820951ddc3f22b393d2",
+    "digest": "413f8d56cf32ff9577611fff46663f98a377826137cf65dd20806c05e42f28ab",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  }
+]

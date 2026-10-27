@@ -22,11 +22,11 @@ from .notes import _DEG_TOK, _PITCH_TOK, _REL_TOK
 VERSION = "0.2"
 TOP_KEYS = ("songmap", "title", "tempo", "meter", "key", "tuning", "fps", "seed", "tail_seconds", "mood", "video",
             "instruments", "groove", "parts_feel", "harmony", "motifs", "sections", "events", "cues", "mix",
-            "returns", "master", "qa", "binaural", "patches")
+            "returns", "master", "qa", "binaural", "patches", "sounds", "conductor", "expression", "techniques")
 SECTION_KEYS = ("name", "bars", "parts", "like", "add", "drop", "harmony", "dyn", "feel", "tempo", "key", "meter",
                 "binaural")
 PART_SOURCES = ("style", "motif", "motifs", "notes", "deg", "rel", "steps", "vary")
-PART_OPTS = ("mods", "dyn", "art", "oct", "transpose", "feel", "voicing", "auto", "mute", "gain_db", "gate",
+PART_OPTS = ("mods", "dyn", "art", "technique", "oct", "transpose", "feel", "voicing", "auto", "mute", "gain_db", "gate",
              "order", "octaves", "fills", "crash", "pan", "len", "role", "voices", "range", "rhythm", "voice", "vel",
              "octave", "transform")
 MOTIF_KEYS = ("notes", "deg", "rel", "octave", "key")
@@ -229,7 +229,8 @@ def _key_line(d, key) -> int | None:
 
 
 def _num(v, what, file, line=None, section=None, positive=True) -> float:
-    if isinstance(v, bool) or not isinstance(v, (int, float)):
+    import math
+    if isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v):
         raise SongError(f"{what} must be a number, got '{v}'", file=file, line=line, section=section)
     if positive and v <= 0:
         raise SongError(f"{what} must be > 0, got {v}", file=file, line=line, section=section)
@@ -296,6 +297,11 @@ def from_raw(raw: dict, file: str | None = None) -> Song:
     s.mix = _plain(raw.get("mix") or {})
     s.returns = _plain(raw.get("returns") or {})
     s.patches = _plain(raw.get("patches") or {})
+    s.sounds = _plain(raw.get("sounds") or {})
+    s.expression = _plain(raw.get("expression") or {})
+    s.techniques = _plain(raw.get("techniques") or {})
+    if not isinstance(s.sounds, dict):
+        raise SongError("sounds must be a mapping of named sound recipes", file=file)
     for pname, spec in s.patches.items():                 # check the wiring here, where the file is known
         from ..instruments.base import ParamError
         from ..instruments.patch import validate
@@ -310,6 +316,8 @@ def from_raw(raw: dict, file: str | None = None) -> Song:
     s.harmony = _harmony(raw.get("harmony") or {}, file)
     s.motifs = _motifs(raw.get("motifs") or {}, file)
     s.sections = _sections(raw.get("sections") or [], s, file)
+    from ..arrange.conductor import apply_overrides
+    apply_overrides(s,raw.get("conductor",{}))
     s.events = _events(raw.get("events") or [], file)
     if not s.sections:
         raise SongError("no sections", file=file, suggestion="add sections: [{name: intro, bars: 4, parts: {...}}]")
@@ -466,8 +474,8 @@ def _sections(secs, song: Song, file) -> list[Section]:
         sec.feel = {**sec.feel, **_plain(raw.get("feel") or {})}
         sec.tempo = raw.get("tempo")
         sec.key = raw.get("key")
-        if raw.get("meter") is not None:
-            sec.meter = parse_meter(raw["meter"], file=file, line=line, section=name)
+        if "meter" in raw:
+            sec.meter = parse_meter(raw["meter"], file=file, line=line, section=name) if raw["meter"] is not None else None
         sec.binaural = _binaural(raw.get("binaural"), f"section {name}: binaural", file, line, beat_only=True)
         seen[name] = sec
         out.append(sec)

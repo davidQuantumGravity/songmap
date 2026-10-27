@@ -1,0 +1,9 @@
+# Trumpet notes: a held G lets the source colors move, followed by D and G with a breath. Expression: a gentle swell, then a tapered tonic; no repeated attacks manufacture the change.
+# Source motion: open/vibrato colors move toward recorded straight/Harmon mutes during held notes. This is a deliberate hybrid audition, not a continuous physical mute model.
+song "Moving brass color" 96 4/4 G seed=403 tail=3 mood=balanced
+inst trumpet=sound/trumpet_palette
+chords G:2
+color 2 | trumpet:{deg: "=mp 0/1_ | 4/2_ 0/4 r/4"}
+set expression={color: {trumpet: {morph_x: [[0,0],[2,1],[4,0.25],[6,0.85],[8,0]], morph_y: [[0,0],[2,0.25],[4,0.8],[6,1],[8,0.3]], volume: [[0,0.5],[2,0.8],[4,0.7],[6,0.9],[8,0.25]]}}}
+mix trumpet -10 hall=.08
+master standard lufs=-18 glue=none

@@ -1,0 +1,10 @@
+# Controlled timbre benchmark: Trumpet palette.
+# Notes: a rising question, descending reply and two detached repeated attacks; all variants of this instrument share these notes.
+# Expression: soft beginning, firmer short notes, one held final note and a breath. This repeated benchmark is not a finished composition.
+song "Trumpet palette" 100 4/4 C seed=211 tail=2 mood=balanced
+inst voice=sound/trumpet_palette(morph_x=.35, morph_y=.3)
+chords F:2
+question 1 | voice:{deg: "=p 3/4_ 5/8 7/8 4/4 r/4", oct: 0}
+answer 1 | voice:{deg: "=mf 5/8'^ r/8 5/8' r/8 =p 3/4_ r/4", oct: 0}
+mix voice -6 hall=.025
+master standard lufs=-18 glue=none

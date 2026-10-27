@@ -1,0 +1,16 @@
+instrument: organ
+description: Flute-led quiet registration for sustained voices. Synthesis recipe,
+  not a recording or hardware emulation.
+tags:
+- keys-guitar-palette
+- organ
+params:
+  db1: 6
+  db2: 0
+  db3: 6
+  db4: 2
+  db5: 0
+  perc: 0
+  click: 0.06
+  rotor: 0.5
+  release: 0.14

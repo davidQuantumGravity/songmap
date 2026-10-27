@@ -1,0 +1,14 @@
+instrument: epiano
+description: Warm sustained FM keys with slow tremolo. Synthesis recipe, not a recording
+  or hardware emulation.
+tags:
+- keys-guitar-palette
+- epiano
+params:
+  index: 0.7
+  index_decay: 1.2
+  tine: 0.08
+  t60: 6
+  trem_rate: 2.2
+  trem_depth: 0.28
+  vel_index: 1.7

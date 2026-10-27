@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SongMap · Classical & jazz ensembles</title><style>
+*{box-sizing:border-box}body{margin:0;background:#10151b;color:#eef3f7;font:16px/1.6 system-ui}main{max-width:1240px;margin:auto;padding:30px 22px}h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.1}h2{line-height:1.2}a{color:#a5d9c9}p,.small{color:#bfccd7}nav,.actions{display:flex;gap:14px;flex-wrap:wrap}.panel,article{border:1px solid #455a6c;border-radius:12px;padding:22px;background:#19242e;margin:20px 0}button,select,input{font:inherit;max-width:100%}button,select{background:#293d4d;color:#fff;padding:8px;border:1px solid #738e9e;border-radius:5px}button{cursor:pointer}label{display:flex;flex-direction:column;gap:5px;margin:10px 0}.row{display:grid;grid-template-columns:1fr 1fr;gap:20px}audio,input[type=range]{width:100%;accent-color:#a5d9c9}#grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}article{margin:0}article h3{margin:0}article p{font-size:.9rem}article[hidden]{display:none}output{font-variant-numeric:tabular-nums}#corners{white-space:pre-line;font-size:.9rem}.tag{color:#a5d9c9;text-transform:uppercase;letter-spacing:.15em}@media(max-width:650px){.row{grid-template-columns:1fr}main{padding:20px 14px}.panel{padding:16px}}
+</style><main><div class="tag">SongMap · recorded instruments & continuous palettes</div><h1>Classical and jazz, with room to shape the sound.</h1>
+<p>Strings, woodwinds, brass, soprano through baritone saxophones, harp, mallets and orchestral percussion. Compare real articulations, explore layered tones, then edit independent ensemble parts in Studio.</p>
+<nav><a href="../expression_lab/index.html">New · expression & recorded techniques</a><a href="../keys_guitars/index.html">Keys & guitars</a><a href="../rhythm_palette/index.html">Bass & drums</a><a href="../../docs/ENSEMBLE_PALETTE.md">Ensemble coverage & limitations</a><a href="http://127.0.0.1:8867/?lab=1">AI Lab · saved preferences & text feedback</a></nav>
+<section class="panel" aria-label="Timbre comparison"><h2>Compare recorded sounds</h2><p>Each instrument's auditions use the same notes, timing and expression, targeting −18 LUFS. Compare attacks, dynamics and tails. These are controlled benchmarks, separate from the authored ensemble starters.</p>
+<label>Instrument <select id="phrase"></select></label><div class="row"><label>Sound A<select id="a" aria-label="Sound A"></select></label><label>Sound B<select id="b" aria-label="Sound B"></select></label></div>
+<div class="actions"><button id="play-a">Play A</button><button id="play-b">Play B</button><button id="stop">Stop</button></div><label>Position<input id="position" type="range" min="0" max="6.8" step=".01" value="0"></label><output id="now" aria-live="polite">Choose two sounds</output></section>
+<section class="panel" aria-label="Continuous sound palette"><h2>One instrument, many blended colors</h2><p>Start playback, then move X and Y continuously. Each corner is labeled with its actual recording. Studio's <b>Rack → sound → Knobs</b> also supplies brightness, body, attack, tightness, saturation, stereo width and added vibrato. Recorded vibrato remains in the source.</p>
+<label>Palette<select id="palette"></select></label><p id="corners"></p><div class="row"><label>Morph X · A/C ↔ B/D<input id="x" aria-label="Morph X" type="range" min="0" max="1" step=".01" value="0"></label><label>Morph Y · A/B ↔ C/D<input id="y" aria-label="Morph Y" type="range" min="0" max="1" step=".01" value="0"></label></div><output id="weights"></output><div class="actions"><button id="morph-play">Play palette loop</button><button id="morph-stop">Stop palette</button><a id="edit-palette">Edit palette in Studio</a></div><p id="morph-status" role="status"></p><p class="small">The player and saved recipes share raw source balance. Playback gain is shared across all sources. These are layered crossfades, not an acoustic simulation of bow position or mute movement. Browser blends move during held notes. Saved expression curves now move throughout held notes. Very different techniques may sound layered at the center.</p></section>
+<h2>Auditions and six authored ensemble starters</h2><p>The string starter uses small recorded sections below a solo violin. Jazz reeds use actual saxophone registers. English horn, bass clarinet, contrabassoon, bass trombone, solo viola and solo cello remain explicit gaps in this installed collection.</p><label>Show<select id="family"><option>Everything</option></select></label><section id="grid"><!-- CARDS --></section></main>
+<script>
+const data=/* DATA */,rows=data.rows,$=id=>document.getElementById(id),audio={a:new Audio(),b:new Audio()};let active=null,pos=0,graph=null,pending=null,request=0;
+function stopAB(){Object.values(audio).forEach(a=>a.pause());active=null}
+function stopMorph(){request++;if(pending){pending.controller.abort();pending.ctx.close().catch(()=>{});pending=null}$('morph-play').textContent='Play palette loop';if(graph){graph.sources.forEach(s=>{try{s.stop()}catch{}});graph.ctx.close();graph=null}$('morph-status').textContent='Stopped'}
+function stopAll(){stopAB();stopMorph();document.querySelectorAll('article audio').forEach(a=>a.pause())}
+function choices(){stopAll();pos=0;$('position').value=0;const list=rows.filter(r=>r.benchmark===$('phrase').value);for(const s of ['a','b'])$(s).replaceChildren(...list.map(r=>new Option(r.title,r.id)));$('b').selectedIndex=Math.min(1,list.length-1);$('now').textContent='Ready'}
+for(const inst of [...new Set(rows.filter(r=>r.benchmark).map(r=>r.benchmark))])$('phrase').add(new Option(inst,inst));$('phrase').onchange=choices;
+async function play(side){pos=active?audio[active].currentTime:pos;stopAll();active=side;const a=audio[side],r=rows.find(r=>r.id===$(side).value);const src=new URL('renders/'+r.id+'/song.mp3',location.href).href;const begin=()=>{if(active!==side)return;a.currentTime=Math.min(pos,a.duration||pos);a.play().catch(e=>$('now').textContent=e.message)};if(a.src!==src){a.src=src;a.onloadedmetadata=begin}else begin();$('now').textContent=side.toUpperCase()+' · '+r.title}
+for(const side of ['a','b']){$('play-'+side).onclick=()=>play(side);$(side).onchange=()=>{if(active===side)play(side)};audio[side].ontimeupdate=()=>{if(active===side){pos=audio[side].currentTime;$('position').max=audio[side].duration||6.8;$('position').value=pos}};audio[side].onended=()=>{stopAB();pos=0;$('now').textContent='Finished'}}
+$('stop').onclick=()=>{stopAB();pos=0;$('position').value=0;$('now').textContent='Stopped'};$('position').oninput=()=>{pos=+$('position').value;if(active)audio[active].currentTime=pos};
+for(const [key,p] of Object.entries(data.palettes))$('palette').add(new Option(p.title,key));
+function weights(){const x=+$('x').value,y=$('y').disabled?0:+$('y').value;return $('y').disabled?[1-x,x]:[(1-x)*(1-y),x*(1-y),(1-x)*y,x*y]}
+function update(){const w=weights();$('weights').textContent=w.map((v,i)=>'ABCD'[i]+': '+Math.round(v*100)+'%').join(' · ');if(graph)w.forEach((v,i)=>graph.gains[i].gain.setTargetAtTime(v,graph.ctx.currentTime,.015))}
+function palette(){stopMorph();const p=data.palettes[$('palette').value];$('x').value=$('y').value=0;$('y').disabled=Object.keys(p.sources).length===2;$('corners').textContent=Object.entries(p.sources).map(([k,s])=>k.toUpperCase()+' · '+rows.find(r=>r.use===s.use).title).join('\n');$('edit-palette').href='http://127.0.0.1:8867/?song=songs%2Fensemble_palette%2Fauditions%2F'+$('palette').value+'.sm';update()}
+$('palette').onchange=palette;$('x').oninput=$('y').oninput=update;
+async function sourceBytes(url,signal){
+ for(let attempt=0;attempt<3;attempt++){
+  try{const response=await fetch(url,{signal});if(!response.ok)throw Error('Source recording unavailable');return await response.arrayBuffer()}
+  catch(e){if(signal.aborted||attempt===2)throw e;await new Promise(resolve=>setTimeout(resolve,250*(attempt+1)))}
+ }
+}
+$('morph-play').onclick=async()=>{
+ stopAll();const token=request,p=data.palettes[$('palette').value],ctx=new AudioContext(),controller=new AbortController();
+ pending={ctx,controller};$('morph-status').textContent='Loading source recordings…';$('morph-play').textContent='Reload palette';
+ const timeout=setTimeout(()=>controller.abort(),20000);
+ try{
+  await ctx.resume();
+  const buffers=await Promise.all(Object.values(p.sources).map(async s=>{
+   const r=rows.find(r=>r.use===s.use);if(!r)throw Error('This source has no audition: '+s.use);
+   return ctx.decodeAudioData(await sourceBytes('renders/'+r.id+'/source.wav',controller.signal))
+  }));
+  if(token!==request){if(ctx.state!=='closed')await ctx.close();return}
+  const out=ctx.createGain();let peak=0;
+  buffers.forEach(b=>{for(let c=0;c<b.numberOfChannels;c++){const a=b.getChannelData(c);for(let i=0;i<a.length;i++)peak=Math.max(peak,Math.abs(a[i]))}});
+  out.gain.value=Math.min(1,.9/(peak||1));out.connect(ctx.destination);
+  const w=weights(),gains=buffers.map((_,i)=>{const g=ctx.createGain();g.gain.value=w[i];g.connect(out);return g});
+  const sources=buffers.map((b,i)=>{const s=ctx.createBufferSource();s.buffer=b;s.loop=true;s.loopEnd=Math.min(...buffers.map(b=>b.duration));s.connect(gains[i]);return s});
+  graph={ctx,gains,sources};pending=null;const when=ctx.currentTime+.04;sources.forEach(s=>s.start(when));$('morph-status').textContent='Playing · move the morph controls';
+ }catch(e){
+  controller.abort();if(ctx.state!=='closed')await ctx.close();
+  if(token===request){pending=null;$('morph-status').textContent=e.name==='AbortError'?'Loading timed out. Press Play to retry.':e.message}
+ }finally{clearTimeout(timeout);if(token===request)$('morph-play').textContent='Play palette loop'}
+};
+$('morph-stop').onclick=stopMorph;for(const g of [...new Set(rows.map(r=>r.group))])$('family').add(new Option(g,g));$('family').onchange=()=>document.querySelectorAll('article').forEach(a=>a.hidden=$('family').value!=='Everything'&&a.dataset.group!==$('family').value);document.addEventListener('play',e=>{if(e.target.tagName==='AUDIO'){stopAB();stopMorph();document.querySelectorAll('article audio').forEach(a=>{if(a!==e.target)a.pause()})}},true);window.addEventListener('pagehide',stopAll);choices();palette();
+</script></html>

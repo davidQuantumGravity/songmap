@@ -1,0 +1,14 @@
+# Soprano notes: an upper sustained question, then a falling answer. Expression: quiet entry, a late accent and two-beat breaths.
+# Alto notes: inner thirds answer rather than duplicate the soprano. Expression: detached pairs against long soprano notes, quieter resolution.
+# Tenor notes: contrary motion joins the harmony with occasional passing notes. Expression: slurred pairs are gate choices, not a sampled connected-legato claim.
+# Baritone notes: grounded roots and fifths leave space between pillars. Expression: shorter bass attacks and a broad tonic ending.
+# All four registers use actual MTG recordings; three round-robin mappings reuse neighboring keys.
+song "Four reeds" 98 4/4 C seed=205 tail=2 mood=balanced
+inst sop=sampler/mtg_soprano_sax alto=sampler/mtg_alto_sax ten=sampler/mtg_tenor_sax bari=sampler/mtg_baritone_sax
+chords Cmaj7:2 Fmaj7:2 G7:2 Cmaj7:2
+offer 2 | sop:{deg: "=p 4/2_ 2/4 r/4 | 0/2_ r/2", oct: 1} alto:{deg: "=p r/4 2/8' 4/8 2/4 r/4 | 4/2_ r/2"} ten:{deg: "=p 0/2_ -3/4 r/4 | 2/2_ r/2"} bari:{deg: "=mp 0/4' r/4 -3/4' r/4 | 0/2_ r/2", oct: -1}
+answer 2 | sop:{deg: "=mp r/2 5/4 4/4 | 3/2_ r/2", oct: 1} alto:{deg: "=mp 3/4 5/8 4/8 3/4 r/4 | 2/2_ r/2"} ten:{deg: "=p 0/4~ 1/4 3/2_ | 0/2_ r/2"} bari:{deg: "=mp 3/4' r/4 0/4' r/4 | 3/2_ r/2", oct: -1}
+lift 2 | sop:{deg: "=mf 6/4^ 5/8 4/8 2/4 r/4 | 4/2_ r/2", oct: 1} alto:{deg: "=mp 1/2_ 3/4 r/4 | -1/2_ r/2"} ten:{deg: "=mp -3/4 -1/4 1/4 r/4 | 3/2_ r/2"} bari:{deg: "=mp 4/4' r/4 1/4' r/4 | 4/2_ r/2", oct: -1}
+close 2 | sop:{deg: "=mp 2/4 0/4 r/2 | =p 0/2_ r/2", oct: 1} alto:{deg: "=p r/2 4/4 2/4 | 2/2_ r/2"} ten:{deg: "=p -3/2_ 2/4 r/4 | 0/2_ r/2"} bari:{deg: "=p 0/4' r/4 -3/4' r/4 | 0/2_ r/2", oct: -1}
+mix sop -8 pan=-.3 hall=.08 | alto -9 pan=-.1 hall=.08 | ten -7 pan=.15 hall=.08 | bari -5 pan=.3 hall=.08
+master standard lufs=-18 glue=none

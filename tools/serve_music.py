@@ -27,12 +27,17 @@ class MusicFiles(StaticFiles):
             return await StaticFiles(directory=ROOT.parent, html=True, follow_symlink=True).get_response(path, scope)
 
 
+def create_app(directory=ROOT):
+    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+    app.mount("/", MusicFiles(directory=directory, html=True, follow_symlink=True))
+    return app
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("port", type=int, nargs="?", default=56855)
     args = parser.parse_args()
-    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
-    app.mount("/", MusicFiles(directory=ROOT, html=True, follow_symlink=True))
+    app = create_app()
     (ROOT / "build").mkdir(exist_ok=True)
     (ROOT / "build/golden_worlds_server.json").write_text(json.dumps({"port": args.port, "pid": os.getpid(),
         "url": f"http://127.0.0.1:{args.port}/songs/golden_adagio/", "command": "tools/serve_music.py"}))

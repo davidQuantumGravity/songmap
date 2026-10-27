@@ -11,9 +11,34 @@ delegated writing, and contextual feedback. It distinguishes this vision from th
 [AI Lab](AI_LAB.md) implements saved-score instrument mapping, explicit improvement priorities,
 durable A/B audio, text feedback, Codex-generated challengers, and previewed application or undo across selected scores.
 
+**Expression and techniques (2026-10-26):** **Instruments → Expression** edits beat-based
+curves inside held notes and named recorded-technique schedules. The Rack adds 23 `family/`
+voices and a calibration control backed by 298 measured source profiles. Apply edits the
+unsaved score, Render updates audio, and Save persists the result. See
+[formats, controls, inheritance and limits](EXPRESSION_ARTICULATION_RESPONSE.md).
+
 [Harmony Library](HARMONY_LIBRARY.md) provides linked chord, directed-transition and progression databases:
 30 chord entries (including 36-ET golden stacks), 196 contextual pairs and 100 curated essential progressions.
 Open its dock tab to search, transpose, listen with note labels, copy an editable score or export the catalog.
+
+**Conductor (2026-10-26)** adds song defaults and section overrides for tempo, time signature, tonic and
+scale/mode. Open its dock tab or click a tempo, meter or key lane in the arrangement. The section table shows
+effective values and which ones inherit song defaults. Tempo supports constants and beat-linear ramps;
+section meters support additive groups such as `7/8 2+2+3`. The header follows the playhead, including BPM
+inside a ramp. The bar ruler, transport, piano roll and drum grid use the section's timing and meter.
+
+Apply updates the unsaved score buffer; **Save** persists it and **Render** produces updated audio. Invalid
+edits leave the buffer intact. Existing audio and loops are cleared after a conductor edit. Normal `.sm`
+section lines are edited in place, retaining note text and comments; structured forms use a final
+`set conductor={section_instance: {...}}` map, preserving variables, loops and repeated-section definitions.
+YAML songs use the same editor (their YAML formatting is regenerated). Song defaults use final `set` assignments
+in `.sm`, so the effective values may differ from the original header until the score is formatted.
+
+Changes begin at section boundaries; use shorter sections for more change points. Tempo ramps run within
+sections. Key and scale share the file's `key` value (`"D dorian"`). Unpinned scale-degree motifs follow section
+keys; motifs with an explicit key remain pinned. Letter pitches and chord symbols retain their written notes.
+Tuning remains a song-wide score setting; arbitrary automation points, custom scale construction and
+polymeter between simultaneous parts are outside this editor's current scope.
 
 ## 1. Goals
 
@@ -203,6 +228,12 @@ everywhere (rack, mixer strip, piano-roll lane, code line).
 | POST | `/api/export` | formats → files |
 | WS | `/ws` | progress, audio ready, diagnostics |
 
+Implemented conductor operation: `{"op":"conductor","args":{"index":1,"values":{"tempo":"rit 120>90",
+"meter":"7/8 2+2+3","key":"D dorian"}},"path":"songs/example.sm","text":"..."}`. `index:null` edits song
+defaults; `null` section field values clear overrides. The response is `{text,check}` and does not save a file.
+`/api/catalog` includes `scales`; section summaries include effective tempo endpoints, meter, tonic, scale,
+groups and beat spans alongside their written overrides.
+
 ## 8. Milestones
 
 | | Scope | Done when |
@@ -231,3 +262,11 @@ everywhere (rack, mixer strip, piano-roll lane, code line).
 
 **Testing:** API tests with FastAPI's TestClient (load/check/op/render/export); round-trip tests for every operation
 (tree → text → tree identical); patch templates against native renders; UI checks in the desktop app's browser pane.
+
+### Continuous ensemble palettes
+
+The Rack instrument selector includes **sound · continuous palettes**. Its palette selector
+offers library and score-owned recipes; the Knobs view uses each sound's dynamic schema,
+including `morph_x/y`, tone controls and independent source parameters. Missing sample
+dependencies disable a library recipe. These edits remain unsaved score changes until Save.
+See [ENSEMBLE_PALETTE.md](ENSEMBLE_PALETTE.md) for source labels and articulation limits.

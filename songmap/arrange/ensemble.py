@@ -149,7 +149,11 @@ class Ensemble:
         if key not in self._cache:
             where = f"instruments {part}{'.' + piece if piece else ''}"
             try:
-                if v.use.startswith("patch/"):                  # a patch instrument (instruments/patch.py)
+                if v.use.startswith("sound/"):
+                    from ..instruments.sound import build
+                    name = v.use.partition("/")[2]
+                    inst = build(name, self.sound_spec(name), self, **{**v.params, **dict(patch)})
+                elif v.use.startswith("patch/"):                  # a patch instrument (instruments/patch.py)
                     from ..instruments.patch import build
                     pname = v.use.partition("/")[2]
                     inst = build(pname, self.patch_spec(pname, where), **{**v.params, **dict(patch)})
@@ -162,6 +166,16 @@ class Ensemble:
             self.song.warnings += [w for w in getattr(inst, "warnings", ()) if w not in self.song.warnings]
             self._cache[key] = inst
         return self._cache[key]
+
+    def sound_spec(self, name):
+        from ..instruments.sound import library
+        definition = self.song.sounds.get(name)
+        if definition is None:
+            definition = library().get(name, {}).get("sources")
+        if definition is None:
+            raise SongError(f"No sound recipe '{name}'", file=self.song.file,
+                            suggestion="define it under sounds (or set sounds.<name>=...) before using sound/<name>")
+        return definition
 
     def patch_spec(self, name: str, where: str = "") -> dict:
         """A patch by name: the song's own (`patch` lines, `patches:`), else the library (songmap/patches)."""

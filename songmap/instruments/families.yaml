@@ -1,0 +1,242 @@
+# Real recorded techniques, named separately from articulation gate lengths.
+violin:
+  title: Solo violin
+  family: string
+  default: sustain
+  automatic:
+    staccato: spiccato
+    staccatissimo: spiccato
+  techniques:
+    sustain: sampler/solo_violin
+    soft: sampler/solo_violin_soft
+    pizzicato: sampler/solo_violin_pizzicato
+    spiccato: sampler/solo_violin_spiccato
+    tremolo: sampler/solo_violin_tremolo
+violins:
+  title: Violin section
+  family: string
+  default: sustain
+  automatic:
+    staccato: spiccato
+    staccatissimo: spiccato
+  techniques:
+    sustain: sampler/violins
+    soft: sampler/violins_soft
+    pizzicato: sampler/violins_pizzicato
+    spiccato: sampler/violins_spiccato
+    tremolo: sampler/violins_tremolo
+viola:
+  title: Viola section
+  family: string
+  default: sustain
+  automatic:
+    staccato: spiccato
+    staccatissimo: spiccato
+  techniques:
+    sustain: sampler/violas
+    soft: sampler/violas_soft
+    pizzicato: sampler/violas_pizzicato
+    spiccato: sampler/violas_spiccato
+    tremolo: sampler/violas_tremolo
+cello:
+  title: Cello section
+  family: string
+  default: sustain
+  automatic:
+    staccato: spiccato
+    staccatissimo: spiccato
+  techniques:
+    sustain: sampler/cello
+    soft: sampler/cello_soft
+    pizzicato: sampler/cello_pizzicato
+    spiccato: sampler/cello_spiccato
+    tremolo: sampler/cello_tremolo
+double_bass:
+  title: Double bass
+  family: bass
+  default: arco
+  automatic:
+    staccato: spiccato
+  techniques:
+    arco: sampler/double_bass_arco
+    vibrato: sampler/double_bass_vibrato
+    pizzicato: sampler/double_bass
+    spiccato: sampler/double_bass_spiccato
+    tremolo: sampler/double_bass_tremolo
+flute:
+  title: Flute
+  family: wind
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/flute
+    vibrato: sampler/flute_vibrato
+    expressive: sampler/flute_expressive
+    staccato: sampler/flute_staccato
+piccolo:
+  title: Piccolo
+  family: wind
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/piccolo
+    staccato: sampler/piccolo_staccato
+oboe:
+  title: Oboe
+  family: wind
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/oboe
+    vibrato: sampler/oboe_vibrato
+    staccato: sampler/oboe_staccato
+clarinet:
+  title: Clarinet
+  family: wind
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/clarinet
+    staccato: sampler/clarinet_staccato
+bassoon:
+  title: Bassoon
+  family: wind
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/bassoon
+    vibrato: sampler/bassoon_vibrato
+    staccato: sampler/bassoon_staccato
+tenor_sax:
+  title: Tenor sax
+  family: wind
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/tenor_sax
+    vibrato: sampler/tenor_sax_vibrato
+    staccato: sampler/tenor_sax_staccato
+    mtg: sampler/mtg_tenor_sax
+saxello:
+  title: Saxello
+  family: wind
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/saxello
+    vibrato: sampler/saxello_vibrato
+    staccato: sampler/saxello_staccato
+soprano_sax:
+  title: Soprano sax
+  family: wind
+  default: sustain
+  automatic: {}
+  techniques:
+    sustain: sampler/mtg_soprano_sax
+alto_sax:
+  title: Alto sax
+  family: wind
+  default: sustain
+  automatic: {}
+  techniques:
+    sustain: sampler/mtg_alto_sax
+baritone_sax:
+  title: Baritone sax
+  family: wind
+  default: sustain
+  automatic: {}
+  techniques:
+    sustain: sampler/mtg_baritone_sax
+horn:
+  title: French horn
+  family: brass
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/horn
+    muted: sampler/horn_muted
+    staccato: sampler/horn_staccato
+trumpet:
+  title: Trumpet
+  family: brass
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/trumpet
+    vibrato: sampler/trumpet_vibrato
+    staccato: sampler/trumpet_staccato
+    straight_mute: sampler/trumpet_straight_mute
+    harmon_mute: sampler/trumpet_harmon_mute
+trombone:
+  title: Tenor trombone
+  family: brass
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/trombone
+    vibrato: sampler/trombone_vibrato
+    staccato: sampler/trombone_staccato
+tuba:
+  title: Tuba
+  family: brass
+  default: sustain
+  automatic:
+    staccato: staccato
+    staccatissimo: staccato
+  techniques:
+    sustain: sampler/tuba
+    staccato: sampler/tuba_staccato
+nylon_guitar:
+  title: Nylon guitar
+  family: string
+  default: finger
+  automatic: {}
+  techniques:
+    finger: sampler/nylon_finger
+    pick: sampler/nylon_pick
+    velocity_selected: sampler/nylon_guitar
+upright_bass:
+  title: Rubner upright bass
+  family: bass
+  default: pizzicato
+  automatic: {}
+  techniques:
+    pizzicato: sampler/upright_bass
+    arco: sampler/upright_bass_arco
+timpani:
+  title: Timpani
+  family: keys
+  default: hit
+  automatic: {}
+  techniques:
+    hit: sampler/timpani
+    roll: sampler/timpani_roll
+xylophone:
+  title: Xylophone
+  family: keys
+  default: medium
+  automatic: {}
+  techniques:
+    soft: sampler/xylophone_soft
+    medium: sampler/xylophone_medium
+    hard: sampler/xylophone_hard

@@ -2,9 +2,10 @@
 // events, loop and playhead. Click to seek, drag on the ruler to set a loop, click a section to jump to its code.
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Part, Summary } from "./api";
+import { sectionTime, tempoText } from "./musicTiming";
 
-const SECT = 22, BARS = 16, CHORDS = 20, LANE = 40, LABEL = 150;
-const TOP = SECT + BARS + CHORDS;
+const SECT = 22, BARS = 16, CONDUCTOR = 22, CHORDS = 20, LANE = 40, LABEL = 150;
+const TOP = SECT + BARS + CONDUCTOR * 3 + CHORDS;
 
 type Props = {
   summary: Summary;
@@ -17,6 +18,7 @@ type Props = {
   onSeek: (t: number) => void;
   onLoop: (l: [number, number] | null) => void;
   onSection: (index: number) => void;
+  onConductor: (index: number | null) => void;
   onMute: (part: string) => void;
   onSolo: (part: string) => void;
 };
@@ -39,7 +41,7 @@ function roundRect(g: CanvasRenderingContext2D, x: number, y: number, w: number,
 }
 
 export function Arrangement(props: Props) {
-  const { summary, time, loop, mute, solo, colorOf, sectionColor, onSeek, onLoop, onSection, onMute, onSolo } = props;
+  const { summary, time, loop, mute, solo, colorOf, sectionColor, onSeek, onLoop, onSection, onConductor, onMute, onSolo } = props;
   const wrap = useRef<HTMLDivElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const [width, setWidth] = useState(800);
@@ -101,6 +103,31 @@ export function Arrangement(props: Props) {
       g.globalAlpha = 1;
       if (i % every === 0 && i < summary.bar_times.length - 1) { g.fillStyle = muted; g.fillText(String(i + 1), x + 3, SECT + BARS / 2 + 1); }
     });
+    // Three conductor lanes share section boundaries; the tempo curve uses beat-linear ramps.
+    const tempos = summary.sections.flatMap(s => [s.tempo_start, s.tempo_end]);
+    const lo = Math.min(...tempos), hi = Math.max(...tempos);
+    for (let lane = 0; lane < 3; lane++) {
+      const y = SECT + BARS + lane * CONDUCTOR;
+      g.strokeStyle = line; g.beginPath(); g.moveTo(0, y + .5); g.lineTo(W, y + .5); g.stroke();
+      for (const s of summary.sections) {
+        const x = X(s.start), w = (s.end - s.start) * pxs;
+        g.save(); g.beginPath(); g.rect(x + 1, y + 1, Math.max(0, w - 2), CONDUCTOR - 2); g.clip();
+        if (lane === 0) {
+          g.strokeStyle = accent; g.globalAlpha = .5; g.beginPath();
+          for (let k = 0; k <= 24; k++) {
+            const beat = (s.end_beat - s.start_beat) * k / 24, bpm = s.tempo_start + (s.tempo_end - s.tempo_start) * k / 24;
+            const cy = y + CONDUCTOR - 3 - (bpm - lo) / Math.max(hi - lo, 1) * (CONDUCTOR - 6);
+            if (k === 0) g.moveTo(X(s.start), cy); else g.lineTo(X(sectionTime(s, beat)), cy);
+          }
+          g.stroke(); g.globalAlpha = 1;
+        }
+        const label = lane === 0 ? tempoText(s) : lane === 1 ? s.meter : s.key;
+        g.font = "11px system-ui, sans-serif";
+        g.fillStyle = css("--panel"); g.globalAlpha = .85; g.fillRect(x + 3, y + 3, g.measureText(label).width + 8, CONDUCTOR - 6); g.globalAlpha = 1;
+        g.fillStyle = ink; g.fillText(label, x + 7, y + CONDUCTOR / 2);
+        g.restore();
+      }
+    }
     g.strokeStyle = line; g.beginPath(); g.moveTo(0, TOP - CHORDS + 0.5); g.lineTo(W, TOP - CHORDS + 0.5); g.stroke();
     // chords as pills
     g.font = "11px system-ui, sans-serif";
@@ -158,6 +185,11 @@ export function Arrangement(props: Props) {
       if (s) { onSection(s.index); onSeek(s.start); }
       return;
     }
+    if (y >= SECT + BARS && y < SECT + BARS + 3 * CONDUCTOR) {
+      const s = summary.sections.find(s => t >= s.start && t < s.end);
+      if (s) { onConductor(s.index); onSeek(s.start); }
+      return;
+    }
     (e.target as Element).setPointerCapture(e.pointerId);
     drag.current = { t0: t, moved: false };
   };
@@ -188,12 +220,13 @@ export function Arrangement(props: Props) {
     const lane = Math.floor((hover.y - TOP) / LANE);
     const part = lane >= 0 ? summary.parts[lane]?.name : undefined;
     return `${Math.floor(hover.t / 60)}:${(hover.t % 60).toFixed(2).padStart(5, "0")} · bar ${bar < 0 ? summary.bars : bar}` +
-      (sec ? ` · ${sec.name}` : "") + (ch ? ` · ${ch[2]}` : "") + (part ? ` · ${part}` : "");
+      (sec ? ` · ${sec.name} · ${tempoText(sec)} BPM · ${sec.meter} · ${sec.key}` : "") + (ch ? ` · ${ch[2]}` : "") + (part ? ` · ${part}` : "");
   })();
 
   return (
     <div className="arr">
       <div className="arr-tools">
+        <button className="ghost" onClick={() => onConductor(null)}>Conductor</button>
         <button className="ghost" onClick={() => setZoom(1)} disabled={zoom === 1}>fit</button>
         <span className="muted">zoom</span>
         <input type="range" min={0} max={6} step={0.01} value={Math.log2(zoom)} onChange={(e) => setZoom(2 ** +e.target.value)} />
@@ -206,6 +239,7 @@ export function Arrangement(props: Props) {
         <div className="arr-inner" style={{ height }}>
           <div className="labels" style={{ height, width: LABEL, marginRight: -LABEL }}>
             <div style={{ height: SECT + BARS }} className="lab-head">{summary.sections.length} sections · {summary.bars} bars</div>
+            {["tempo · BPM", "time signature", "key & scale"].map(label => <button key={label} style={{ height: CONDUCTOR }} className="lab-head conductor-lane-label" onClick={() => onConductor(null)}>{label}</button>)}
             <div style={{ height: CHORDS }} className="lab-head">chords</div>
             {summary.parts.map((p) => (
               <div key={p.name} className={"lab" + (heard(p.name) ? "" : " off")} style={{ height: LANE }}

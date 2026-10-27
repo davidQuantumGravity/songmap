@@ -10,8 +10,9 @@ from .base import make as _make
 from .presets import list_presets, resolve
 from .sampler import Sampler  # noqa: F401
 from .sampler import load as _load_sampler
+from .family import load as _load_family
 
-BACKENDS = {"sampler": _load_sampler}   # 'backend/<library>' names; not in REGISTRY (they need a library)
+BACKENDS = {"sampler": _load_sampler,"family":_load_family}
 
 
 def make(name: str, **params) -> Instrument:
@@ -19,6 +20,10 @@ def make(name: str, **params) -> Instrument:
     if backend in BACKENDS:
         if not lib:
             raise ParamError(f"'{backend}' needs a library: write {backend}/<library>, e.g. sampler/salamander")
-        return BACKENDS[backend](lib, **params)
+        voice=BACKENDS[backend](lib, **params)
+        voice.response_ref=name
+        return voice
     inst, preset = resolve(name)
-    return _make(inst, **{**preset, **params})
+    voice=_make(inst, **{**preset, **params})
+    voice.response_ref=name
+    return voice

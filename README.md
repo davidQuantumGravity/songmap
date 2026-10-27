@@ -31,10 +31,11 @@ SongMap turns editable `.sm` or YAML scores into music. Describe your chords, me
 | | What SongMap does |
 |---|---|
 | 🎼 **Write and arrange** | Combine melodies, chord progressions, reusable motifs, drum patterns and named sections. Shape phrasing with dynamics, articulation, groove and timing. |
-| 🎹 **Choose your sound** | Use built-in synthesizers, piano, organ, plucked strings, bass and drums. Add recorded orchestral and acoustic instruments with the optional sample library. |
+| 🎹 **Choose your sound** | Use built-in synthesizers or 210 optional recorded programs covering keys, guitars, bass, drums and classical/jazz ensembles. Blend sources and shape their tone. |
+| 🎻 **Shape a performance** | Draw continuous expression curves inside held notes, schedule real recorded techniques across 23 instrument families, and adjust measured source response. |
 | 🖥️ **Work in Studio** | Edit score text, follow the arrangement and piano roll, audition instruments, adjust the mix and design video layouts in your browser. |
 | 🎬 **See the music** | Export videos with moving notation, note names and separate instrument panels. Place soundtrack cues on exact video frames. |
-| 🧪 **Compare ideas** | Use AI Lab to save instrument A/B comparisons, listen in context or solo, record preferences, and preview, apply or undo selected score changes. |
+| 🧪 **Compare ideas** | Use AI Lab for instrument, riff, arrangement and song-excerpt A/B comparisons. Listen in context or solo, record text feedback and preferences, and preview, apply or undo selected score changes. |
 | 🌀 **Explore harmony** | Write ordinary major and minor music, or try golden chords, microtonal scales, voice leading and modulation in 36-ET. |
 
 ## Hear it, then follow the notes
@@ -63,6 +64,11 @@ A proposed two-volume set, **[Rational and Irrational Harmony](docs/RATIONAL_AND
 [![SongMap Studio showing the song browser, colored arrangement, harmony teacher and editable instrument video panels](docs/images/studio.png)](docs/GUI.md)
 
 Studio runs locally in your browser and opens the same score files you can edit by hand. The arrangement shows where each part enters, the harmony teacher explains the current chord, and the instrument, mixer and video views let you shape the result.
+
+The **Conductor** edits tempo ramps, time signatures, key and scale across sections.
+**Instruments → Expression** draws volume, tone, pitch/vibrato and source-blend curves
+inside held notes, and schedules recorded articulations. Apply changes to the score,
+Render to hear them, then Save. See the [expression and calibration guide](docs/EXPRESSION_ARTICULATION_RESPONSE.md).
 
 Open the **AI Lab** dock for saved instrument comparisons and listening feedback. AI proposals use an installed, signed-in Codex CLI; manual comparisons work without it. Your listening choices guide the next proposal. See the [AI Lab guide](docs/AI_LAB.md) for setup and the [songwriting vision](docs/AI_SONGWRITING_VISION.md) for planned extensions.
 
@@ -110,7 +116,7 @@ songmap samples install grand_piano flute
 songmap samples verify
 ```
 
-The full library is optional. See the [sample library guide](docs/SFZ_LIBRARY.md) for its catalog, sources and playback limits, or the [bass and drum palette](docs/BASS_DRUM_PALETTE.md) for grooves and rhythm-section examples.
+The full library is optional. See the [sample library guide](docs/SFZ_LIBRARY.md) for its catalog, sources and playback limits, the [bass and drum palette](docs/BASS_DRUM_PALETTE.md) for grooves, [keys and guitars](docs/KEYS_GUITAR_PALETTE.md), and [classical/jazz ensembles](docs/ENSEMBLE_PALETTE.md). The [expression examples](songs/expression_lab/) provide editable scores and a tool to rebuild their controlled A/B auditions locally.
 
 Install [FFmpeg](https://ffmpeg.org/download.html) and put it on your `PATH` for MP3 and video exports:
 

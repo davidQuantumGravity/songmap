@@ -49,6 +49,24 @@ tuning and vibrato; keep `clean/golden_pad` and `clean/glass` when their enginee
 See `docs/SFZ_LIBRARY.md` and the audition/comparison page `songs/sfz_revisited/index.html`.
 For bass and drums, use `docs/BASS_DRUM_PALETTE.md` and `songs/rhythm_palette/`: recorded bass techniques,
 complete kit lines, individual snares/toms/cymbals, electronic presets and eight editable groove templates.
+For piano, electric keys, organs and guitars, use `docs/KEYS_GUITAR_PALETTE.md` and `songs/keys_guitars/`:
+recorded pianos, fixed guitar techniques and pickup channels, twelve native keyboard recipes, controlled
+timbre auditions and eight authored starters. Pedals and keyswitches are fixed in these prepared programs;
+do not claim connected guitar legato, slides or sampled palm mutes. Check the selected voice's actual range.
+For classical and jazz ensembles, use `docs/ENSEMBLE_PALETTE.md` and `songs/ensemble_palette/`:
+recorded bowing styles, woodwinds, actual brass mutes, soprano/alto/tenor/baritone saxophones,
+orchestral percussion, fourteen continuous sound palettes and six authored ensemble starters.
+Choose actual articulations and write breaths/bows separately for each part. Hybrid fades do
+not create sampled connected legato, missing auxiliary instruments or independently recorded
+players. Use sounding pitch and overlapping source ranges. For deliberate held-note phrasing,
+use `expression` curves (volume, brightness/body, added pitch/vibrato, width and sound morphs).
+Use `family/<instrument>` and named `technique` options or beat schedules for real recorded
+articulations. Read [the feature guide](../../../docs/EXPRESSION_ARTICULATION_RESPONSE.md)
+and `songs/expression_lab/` before using them. Curves use quarter-note beats, follow tempo
+ramps and hold their final value; technique changes affect new notes only. Write these
+during each instrument's expression pass, in ensemble context; a generic swell on every
+part is not a completed expression pass. Calibration is enabled on new families and can
+be adjusted with `calibration=0..1`; preserve intentional old mix levels when revising.
 
 1. **Brief → concept.** In one sentence each, write:
    - what the viewer should *feel*, and how that changes scene by scene (the arc);

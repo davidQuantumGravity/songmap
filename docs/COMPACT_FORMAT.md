@@ -62,7 +62,7 @@ part      := <role>:<style>[+<mod>...][(k=v,...)]       drums:full+fill   bass:8
            | <piece>="<step string>"                     kick="X...x...|X..x...."   (a drums lane)
            | -<role>                                     remove an inherited part
 setting   := like=<section> | dyn=<shape> | prog=<name> | chords="<chord:bars ...>" | feel=<template>
-           | swing=<x> | tempo=<bpm>|rit<a>><b> | key=<key>
+           | swing=<x> | tempo=<bpm>|rit<a>><b>|accel<a>><b> | key=<key>
            | meter=<n>/<d> | meter="<n>/<d> <groups>"        meter=7/8   meter="13/16 3+3+3+2+2"   (this section's bars)
            | beat=<Hz>|<a>><b> | binaural={carriers: [A3, "^F4"], beat: 6.18, gain_db: -3}   (the binaural layer)
            | auto=<part>.<param>:<a>><b>                 auto="arp.cutoff:1500>4000 exp" (quote it with a space)
@@ -73,6 +73,13 @@ k=v       := a number, a word, "a string" or [a, list]   !drop:2@0(keep=[pad,bas
 ```
 
 Notes on the grammar:
+
+Conductor settings use quarter-note BPM and begin at section boundaries; a tempo ramp runs across its
+section. `key="D dorian"` specifies tonic and scale/mode. Unpinned degree motifs follow it, while written
+letter pitches and chord symbols keep their notes. `tempo=none`, `meter=none`, and `key=none` restore song
+defaults for a section. For forms and loops, `set conductor={verse_2: {tempo: 108, key: "D dorian"}}` overrides
+one expanded section instance without changing its shared definition. [SONGMAP_SPEC.md §9](SONGMAP_SPEC.md#9-tempo-meter-key-and-scale-changes)
+describes the resolved format; Studio's Conductor tab edits these values visually.
 - `like=` is applied first, wherever it appears on the line. The other items apply left to right.
 - `<value>` options in `(...)` may be lists or variables: `arp:up(order=[0,2,4,2])`.
 - A section line both defines the section, as a variable for later `like=` and `with`, and places it. `x<N>` places it N times; the repeats are named `<name>_2`, `<name>_3`, and so on.
@@ -86,6 +93,16 @@ Notes on the grammar:
 - Events land at the section start. A riser *ends* at its position.
 
 **Part roles** can be any name. A role without an instrument entry uses the instrument of the same name or the part fallback (`keys` → keys, `gtr` → string_pluck); `inst` sets it explicitly.
+
+## Continuous performance and recorded techniques
+
+Use a top-level `set expression={section: {part: {control: [[beat,value],...]}}}` map
+for volume, tone, added pitch/vibrato, width and compatible sound-source morphs inside
+held notes. Beats are quarter notes from the section start, beginning at 0 and ending
+at its length; final values hold until another lane changes them. Use
+`set techniques={section: {part: [[beat,"pizzicato"],...]}}` with `family/<instrument>`
+for actual recorded techniques on subsequent notes, or `technique: pizzicato` in a
+part specification for a phrase. See [complete ranges and examples](EXPRESSION_ARTICULATION_RESPONSE.md).
 
 ## A richer example (expression and orchestration)
 

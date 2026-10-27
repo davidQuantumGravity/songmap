@@ -56,7 +56,7 @@ def manifest() -> dict:
 
 def voice_path(root: str | Path, name: str) -> Path:
     v = manifest()["voices"][name]
-    return Path(root) / "_packs" / v["source"] / v["program"]
+    return Path(root) / "_packs" / v["source"] / (f"_songmap/{name}.sfz" if "adapt" in v else v["program"])
 
 
 def voices() -> list[dict]:
@@ -75,6 +75,7 @@ def voices() -> list[dict]:
         out.append({"name": name, "ref": f"sampler/{name}", "title": v["title"],
                     "family": v["family"], "category": v.get("category", v["family"]),
                     "description": v["description"], "range": v["range"],
+                    "instrument": v.get("instrument"), "articulation": v.get("articulation"),
                     "license": source["license"], "credit": source["credit"], "url": source["url"],
                     "revision": source["revision"], "installed": installed,
                     "install": f"songmap samples install {name}", "params": v.get("params", {}),
@@ -160,9 +161,10 @@ def license_entry(name: str, sfz_path: str) -> dict:
     if voice:
         source = manifest()["sources"][voice["source"]]
         base = Path(sfz_path)
-        for _ in Path(voice["program"]).parts:
+        for _ in (Path('_songmap')/base.name).parts if 'adapt' in voice else Path(voice["program"]).parts:
             base = base.parent
         return {"name": f"sampler/{name}", "title": voice["title"], "program": sfz_path,
+                "preparation":voice.get('adapt'),
                 **source, "files": [str(p) for p in base.glob("*") if p.is_file() and
                                     p.name.lower().startswith(("license", "readme", "copying"))]}
     known = CATALOG.get(name.partition("/")[0])
@@ -189,6 +191,8 @@ def licenses_md(entries: list[dict]) -> str:
         if e.get("revision"):
             lines.append(f"- Source revision: `{e['revision']}`")
         lines.append(f"- Program: `{e['program']}`")
+        if e.get('preparation') is not None:
+            lines.append('- Playback mode: prepared fixed selection; live controller switching is not included.')
         lines += [f"- See also: `{f}`" for f in e["files"]]
         lines.append("")
     return "\n".join(lines)

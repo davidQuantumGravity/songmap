@@ -135,7 +135,22 @@ def audio(request: Request, path: str = Query(...), key: str = Query(...)):
 def op(path: str = Body(...), text: str = Body(...), op: str = Body(...), args: dict = Body(default={})):
     """A GUI edit as a text operation: returns the new text (the client keeps it as its state)."""
     pr = project(path)
-    if op == "mix":
+    if op == "conductor":
+        from ..parse.errors import NotationError, SongError
+        from .conductor import edit
+        try:
+            new = edit(text, pr.path, index=args.get("index"), values=args.get("values"))
+        except (ValueError, NotationError, SongError) as e:
+            raise HTTPException(400, str(e)) from None
+    elif op in ('expression','techniques'):
+        from .expression import edit
+        from ..parse.errors import SongError
+        try:
+            new=edit(text,pr.path,index=args.get('index'),part=args.get('part'),
+                     control=args.get('control') if op=='expression' else None,
+                     points=args.get('points'),techniques=args.get('techniques'))
+        except (ValueError,SongError) as e:raise HTTPException(400,str(e)) from None
+    elif op == "mix":
         if not pr.path.endswith((".sm", ".sml")):
             raise HTTPException(400, "the mixer edits .sm songs (convert a YAML song with `songmap fmt --to sm`)")
         from .mixer import set_mix

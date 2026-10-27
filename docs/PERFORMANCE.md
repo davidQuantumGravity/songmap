@@ -81,7 +81,13 @@ Planned voicing styles (`voicing.style`):
 
 ## 6. Expression over time (automation)
 
-`auto:` lanes ramp any instrument parameter across a section: `"800>3000 exp"`, `"0.2>0.9>0.4"` (breakpoints evenly spaced), or `{0: 800, 4: 3000, 8:2: 1200}` (positions). The value is sampled at each note-on into `Note.params`, which suits filters, vibrato depth and brightness. Phase 5 adds per-sample control-rate lanes for continuous sweeps on sustained notes (CC11 expression in MIDI).
+`expression` lanes now change volume, brightness/body, added vibrato, pitch, width and
+sound-source balance **inside held notes**. Points use quarter-note beats and follow tempo
+ramps; terminal values hold until another lane changes them. Studio's **Instruments →
+Expression** tab edits these curves and schedules real named `family/` techniques.
+See [the syntax, ranges and response-calibration method](EXPRESSION_ARTICULATION_RESPONSE.md).
+The legacy `auto:` field is parsed, but its formerly described general parameter ramps
+are not implemented; use the explicit `expression` controls for working continuous lanes.
 
 ## 7. MIDI export mapping
 

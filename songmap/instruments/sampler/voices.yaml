@@ -77,13 +77,46 @@ sources:
     license: CC0 1.0
     credit: D. Smolken / Karoryfer Samples
     url: https://shop.karoryfer.com/pages/free-samples
+  meta_keys:
+    repo: facebookincubator/Meta-open-sound
+    revision: 251c0be57d5d1b3242b91f53e0cde62ab1cb42d9
+    license: CC0 1.0
+    credit: Meta Creative Audio team
+    url: https://github.com/facebookincubator/Meta-open-sound
+  emily:
+    repo: sfzinstruments/karoryfer.emilyguitar
+    revision: b4920dc662fd9cad6dcaccdeecffdd91c8725d8c
+    license: CC0 1.0
+    credit: D. Smolken / Karoryfer Samples
+    url: https://shop.karoryfer.com/pages/free-samples
+  shiny:
+    repo: sfzinstruments/karoryfer.shinyguitar
+    revision: 57243cca85277dbcc120ce17c6178032f93c80f3
+    license: CC0 1.0
+    credit: D. Smolken / Karoryfer Samples
+    url: https://shop.karoryfer.com/pages/free-samples
+  jrhodes:
+    repo: sfzinstruments/jlearman.jRhodes3d
+    revision: aea5b8d3e11e2f7102593789a4e0a0e41b30271a
+    license: CC BY-NC 4.0 (separate CC0 music-use grant)
+    credit: Jeffrey Learman
+    url: https://github.com/sfzinstruments/jlearman.jRhodes3d
+  mtg_sax:
+    repo: sfzinstruments/MTG.SoloSax
+    revision: b494d256549b3d088fdec176ce82867f8a1f58b2
+    license: CC BY 4.0
+    credit: Music Technology Group, Universitat Pompeu Fabra / samples; kinwie / SFZ
+      preparation
+    url: https://github.com/sfzinstruments/MTG.SoloSax
 voices:
   grand_piano:
     title: Kawai grand piano
+    category: Acoustic pianos
     source: vcsl
     program: Chordophones/Zithers/Grand Piano, Kawai.sfz
     family: keys
-    description: Acoustic grand with velocity layers and release noises; melody and chord accompaniment.
+    description: Acoustic grand with velocity layers and release noises; melody and
+      chord accompaniment.
     range:
     - 21
     - 108
@@ -91,10 +124,12 @@ voices:
       release_mul: 0.7
   fm_piano:
     title: TX81Z FM piano
+    category: Electric keyboards
     source: vcsl
     program: Electrophones/TX81Z - FM Piano.sfz
     family: keys
-    description: Recorded FM keyboard; bright attack and rounded decay for funk, broken beat, and lo-fi chords.
+    description: Recorded FM keyboard; bright attack and rounded decay for funk, broken
+      beat, and lo-fi chords.
     range:
     - 36
     - 96
@@ -115,7 +150,8 @@ voices:
     source: vcsl
     program: Idiophones/Struck Idiophones/Marimba.sfz
     family: keys
-    description: Rounded wooden mallet attack; rhythmic hooks and clear interlocking lines.
+    description: Rounded wooden mallet attack; rhythmic hooks and clear interlocking
+      lines.
     range:
     - 48
     - 96
@@ -126,7 +162,8 @@ voices:
     source: vcsl
     program: Idiophones/Struck Idiophones/Vibraphone - Soft Mallets.sfz
     family: keys
-    description: Soft metallic mallets; spacious jazz harmony and melodic replies, without added motor tremolo.
+    description: Soft metallic mallets; spacious jazz harmony and melodic replies,
+      without added motor tremolo.
     range:
     - 53
     - 89
@@ -137,7 +174,8 @@ voices:
     source: vcsl
     program: Idiophones/Plucked Idiophones/Kalimba, Kenya.sfz
     family: keys
-    description: Small plucked tines with a woody attack; sparse ostinatos and high answering phrases.
+    description: Small plucked tines with a woody attack; sparse ostinatos and high
+      answering phrases.
     range:
     - 60
     - 84
@@ -148,7 +186,8 @@ voices:
     source: vsco2
     program: ContrabassPizz.sfz
     family: bass
-    description: Plucked acoustic bass with alternate takes; jazz and chamber bass lines, no synth glide.
+    description: Plucked acoustic bass with alternate takes; jazz and chamber bass
+      lines, no synth glide.
     range:
     - 24
     - 60
@@ -160,8 +199,8 @@ voices:
     source: vsco2
     program: CelloEnsSusVib.sfz
     family: string
-    description: Sustained bowed cellos with recorded vibrato; expressive middle and low lines. Vibrato is part of the
-      recording.
+    description: Sustained bowed cellos with recorded vibrato; expressive middle and
+      low lines. Vibrato is part of the recording.
     range:
     - 36
     - 77
@@ -173,7 +212,8 @@ voices:
     source: vsco2
     program: ViolinEnsSusVib.sfz
     family: string
-    description: Small sustained violin section with recorded vibrato; lyrical lines and orchestral support.
+    description: Small sustained violin section with recorded vibrato; lyrical lines
+      and orchestral support.
     range:
     - 55
     - 86
@@ -185,7 +225,8 @@ voices:
     source: vsco2
     program: FluteSusNV.sfz
     family: wind
-    description: Airy recorded flute without vibrato; exposed melodies, including fractional-pitch harmony.
+    description: Airy recorded flute without vibrato; exposed melodies, including
+      fractional-pitch harmony.
     range:
     - 60
     - 96
@@ -209,7 +250,8 @@ voices:
     source: vsco2
     program: FHornSus.sfz
     family: brass
-    description: Rounded sustained horn; cinematic calls and warm inner voices, with natural recorded pitch variation.
+    description: Rounded sustained horn; cinematic calls and warm inner voices, with
+      natural recorded pitch variation.
     range:
     - 34
     - 77
@@ -221,7 +263,8 @@ voices:
     source: vsco2
     program: CelloEnsSpic.sfz
     family: string
-    description: Short bowed cello attacks with alternate takes; rhythmic ostinatos and replies.
+    description: Short bowed cello attacks with alternate takes; rhythmic ostinatos
+      and replies.
     range:
     - 36
     - 77
@@ -243,7 +286,8 @@ voices:
     source: vcsl
     program: Membranophones/Struck Membranophones/Bass Drum 1.sfz
     family: drum
-    description: Recorded concert bass drum; use as a kit piece, not a pitched bass instrument.
+    description: Recorded concert bass drum; use as a kit piece, not a pitched bass
+      instrument.
     range:
     - 60
     - 60
@@ -255,7 +299,8 @@ voices:
     source: vcsl
     program: Membranophones/Struck Membranophones/Snare Drum, Modern 1.sfz
     family: drum
-    description: Recorded modern snare with velocity layers and alternate takes; acoustic backbeats.
+    description: Recorded modern snare with velocity layers and alternate takes; acoustic
+      backbeats.
     range:
     - 60
     - 60
@@ -267,7 +312,8 @@ voices:
     source: vcsl
     program: Idiophones/Struck Idiophones/Hi-Hat Cymbal.sfz
     family: drum
-    description: Recorded hi-hat with alternate takes; an acoustic kit's short timekeeping voice.
+    description: Recorded hi-hat with alternate takes; an acoustic kit's short timekeeping
+      voice.
     range:
     - 42
     - 42
@@ -280,8 +326,8 @@ voices:
     program: growlybass_clean.sfz
     family: bass
     category: Electric bass
-    description: Direct recorded Squier Jazz Bass; sustained notes, four velocity layers and four alternate takes. No
-      scripted slides or live keyswitches.
+    description: Direct recorded Squier Jazz Bass; sustained notes, four velocity
+      layers and four alternate takes. No scripted slides or live keyswitches.
     range:
     - 25
     - 76
@@ -294,8 +340,8 @@ voices:
     program: growlybass_vicious.sfz
     family: bass
     category: Electric bass
-    description: Separately recorded short Jazz Bass notes; five alternate takes. Use for clipped funk replies. No scripted
-      slides or live keyswitches.
+    description: Separately recorded short Jazz Bass notes; five alternate takes.
+      Use for clipped funk replies. No scripted slides or live keyswitches.
     range:
     - 25
     - 76
@@ -308,8 +354,8 @@ voices:
     program: swagbass_clean.sfz
     family: bass
     category: Electric bass
-    description: Dark Ibanez neck-pickup bass; three dynamic layers, four alternate takes. Soul and dub. No scripted
-      slides or live keyswitches.
+    description: Dark Ibanez neck-pickup bass; three dynamic layers, four alternate
+      takes. Soul and dub. No scripted slides or live keyswitches.
     range:
     - 21
     - 76
@@ -322,8 +368,8 @@ voices:
     program: fashionbass_clean.sfz
     family: bass
     category: Electric bass
-    description: Killer KB-Simmony neck pickup; five dynamic layers and three alternate takes. Warm electric bass. No
-      scripted slides or live keyswitches.
+    description: Killer KB-Simmony neck pickup; five dynamic layers and three alternate
+      takes. Warm electric bass. No scripted slides or live keyswitches.
     range:
     - 18
     - 76
@@ -336,8 +382,8 @@ voices:
     program: spaghetti.sfz
     family: bass
     category: Electric bass
-    description: Squier Bass VI roundwounds; three dynamic layers and three alternate takes; clear melodic low lines.
-      No scripted slides or live keyswitches.
+    description: Squier Bass VI roundwounds; three dynamic layers and three alternate
+      takes; clear melodic low lines. No scripted slides or live keyswitches.
     range:
     - 33
     - 72
@@ -350,8 +396,8 @@ voices:
     program: linguine.sfz
     family: bass
     category: Electric bass
-    description: Bridge pickup and picked flatwounds; three dynamic layers and four alternate takes; defined attack.
-      No scripted slides or live keyswitches.
+    description: Bridge pickup and picked flatwounds; three dynamic layers and four
+      alternate takes; defined attack. No scripted slides or live keyswitches.
     range:
     - 33
     - 72
@@ -364,8 +410,8 @@ voices:
     program: tagliatelle.sfz
     family: bass
     category: Electric bass
-    description: Muted flatwounds with combined pickups; three dynamic layers and three alternate takes; tight funk and
-      pop. No scripted slides or live keyswitches.
+    description: Muted flatwounds with combined pickups; three dynamic layers and
+      three alternate takes; tight funk and pop. No scripted slides or live keyswitches.
     range:
     - 33
     - 72
@@ -378,8 +424,8 @@ voices:
     program: fetuccine.sfz
     family: bass
     category: Electric bass
-    description: Neck pickup, fingered flatwounds; three dynamic layers and four alternate takes; intimate round bass.
-      No scripted slides or live keyswitches.
+    description: Neck pickup, fingered flatwounds; three dynamic layers and four alternate
+      takes; intimate round bass. No scripted slides or live keyswitches.
     range:
     - 33
     - 72
@@ -392,8 +438,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: kick'
-    description: Pearl 22 Kick; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Pearl 22 Kick; recorded velocity layers. Five layers; alternate center/edge
+      articulations are separate voices, no recorded round robins.
     range:
     - 36
     - 36
@@ -406,8 +452,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: Pearl 14 SideStick; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Pearl 14 SideStick; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 37
     - 37
@@ -420,8 +466,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: Pearl 14 Snare; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Pearl 14 Snare; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 38
     - 38
@@ -434,8 +480,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: Pearl 14 SnareEdge; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Pearl 14 SnareEdge; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 40
     - 40
@@ -448,8 +494,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: Pearl 16 FloorTom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Pearl 16 FloorTom; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 41
     - 41
@@ -462,8 +508,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: Pearl 16 FloorTomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Pearl 16 FloorTomEdge; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 43
     - 43
@@ -476,8 +522,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: Pearl 12 Tom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Pearl 12 Tom; recorded velocity layers. Five layers; alternate center/edge
+      articulations are separate voices, no recorded round robins.
     range:
     - 45
     - 45
@@ -490,8 +536,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: Pearl 12 TomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Pearl 12 TomEdge; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 47
     - 47
@@ -504,8 +550,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Sabian 13 HatClosed; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Sabian 13 HatClosed; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 42
     - 42
@@ -518,8 +564,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Sabian 13 HatPedal; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Sabian 13 HatPedal; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 44
     - 44
@@ -532,8 +578,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Sabian 13 HatSemi; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Sabian 13 HatSemi; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 46
     - 46
@@ -546,8 +592,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Sabian 13 HatSwish; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Sabian 13 HatSwish; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 48
     - 48
@@ -560,8 +606,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: SabianAA 16 Crash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: SabianAA 16 Crash; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 49
     - 49
@@ -574,8 +620,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: SabianAAX 20 Ride; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: SabianAAX 20 Ride; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 51
     - 51
@@ -588,8 +634,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: SabianAAX 20 RideBell; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: SabianAAX 20 RideBell; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 53
     - 53
@@ -602,8 +648,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Zildjian 10 Splash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Zildjian 10 Splash; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 55
     - 55
@@ -616,8 +662,8 @@ voices:
     program: BLACK_PEARL_2023_repack/Black_Pearl_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Paiste 22 Crash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Paiste 22 Crash; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 60
     - 60
@@ -630,8 +676,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: kick'
-    description: Ludwig 26 Kick; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Ludwig 26 Kick; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 36
     - 36
@@ -644,8 +690,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: Ludwig 14 SideStick; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Ludwig 14 SideStick; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 37
     - 37
@@ -658,8 +704,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: Ludwig 14 Snare; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Ludwig 14 Snare; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 38
     - 38
@@ -672,8 +718,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: Ludwig 14 SnareEdge; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Ludwig 14 SnareEdge; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 40
     - 40
@@ -686,8 +732,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: Ludwig 16 FloorTom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Ludwig 16 FloorTom; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 41
     - 41
@@ -700,8 +746,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: Ludwig 16 FloorTomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Ludwig 16 FloorTomEdge; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 43
     - 43
@@ -714,8 +760,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: Ludwig 14 Tom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Ludwig 14 Tom; recorded velocity layers. Five layers; alternate center/edge
+      articulations are separate voices, no recorded round robins.
     range:
     - 45
     - 45
@@ -728,8 +774,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: Ludwig 14 TomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Ludwig 14 TomEdge; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 47
     - 47
@@ -742,8 +788,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Sabian 13 HatClosed; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Sabian 13 HatClosed; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 42
     - 42
@@ -756,8 +802,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Sabian 13 HatPedal; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Sabian 13 HatPedal; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 44
     - 44
@@ -770,8 +816,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Sabian 13 HatSemi; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Sabian 13 HatSemi; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 46
     - 46
@@ -784,8 +830,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Sabian 13 HatSwish; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Sabian 13 HatSwish; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 48
     - 48
@@ -798,8 +844,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Zildjian 20 Crash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Zildjian 20 Crash; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 49
     - 49
@@ -812,8 +858,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Zildjian 24 Ride; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Zildjian 24 Ride; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 51
     - 51
@@ -826,8 +872,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Zildjian 24 RideBell; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Zildjian 24 RideBell; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 53
     - 53
@@ -840,8 +886,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Zildjian 10 Splash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Zildjian 10 Splash; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 55
     - 55
@@ -854,8 +900,8 @@ voices:
     program: RED_ZEPPELIN_2023_repack/Red_Zeppelin_2023_repack.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Paiste 22 Crash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Paiste 22 Crash; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 60
     - 60
@@ -868,8 +914,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: kick'
-    description: TAMA 18 Kick; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: TAMA 18 Kick; recorded velocity layers. Five layers; alternate center/edge
+      articulations are separate voices, no recorded round robins.
     range:
     - 36
     - 36
@@ -882,8 +928,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: TAMA 13 SideStick; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: TAMA 13 SideStick; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 37
     - 37
@@ -896,8 +942,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: TAMA 13 Snare; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: TAMA 13 Snare; recorded velocity layers. Five layers; alternate center/edge
+      articulations are separate voices, no recorded round robins.
     range:
     - 38
     - 38
@@ -910,8 +956,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: TAMA 13 SnareEdge; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: TAMA 13 SnareEdge; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 40
     - 40
@@ -924,8 +970,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: TAMA 14 FloorTom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: TAMA 14 FloorTom; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 41
     - 41
@@ -938,8 +984,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: TAMA 14 FloorTomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: TAMA 14 FloorTomEdge; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 43
     - 43
@@ -952,8 +998,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: TAMA 10 Tom; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: TAMA 10 Tom; recorded velocity layers. Five layers; alternate center/edge
+      articulations are separate voices, no recorded round robins.
     range:
     - 45
     - 45
@@ -966,8 +1012,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: TAMA 10 TomEdge; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: TAMA 10 TomEdge; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 47
     - 47
@@ -980,8 +1026,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Zildjian 13 HatClosed; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Zildjian 13 HatClosed; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 42
     - 42
@@ -994,8 +1040,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Zildjian 13 HatPedal; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Zildjian 13 HatPedal; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 44
     - 44
@@ -1008,8 +1054,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Zildjian 13 HatSemi; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Zildjian 13 HatSemi; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 46
     - 46
@@ -1022,8 +1068,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Zildjian 13 HatSwish; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Zildjian 13 HatSwish; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 48
     - 48
@@ -1036,8 +1082,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Paiste2002 16 Crash; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Paiste2002 16 Crash; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 49
     - 49
@@ -1050,8 +1096,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: SabianAAX 20 RideTip; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: SabianAAX 20 RideTip; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 51
     - 51
@@ -1064,8 +1110,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: SabianAAX 20 RideBell; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: SabianAAX 20 RideBell; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 53
     - 53
@@ -1078,8 +1124,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Zildjian 10 Splash; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: Zildjian 10 Splash; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 55
     - 55
@@ -1092,8 +1138,8 @@ voices:
     program: BLONDE_BOP_SFZ/BLONDE_BOP.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Wuhan 18 ChinaCrash; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Wuhan 18 ChinaCrash; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 60
     - 60
@@ -1106,8 +1152,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: kick'
-    description: TAMA 18 Kick HR; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: TAMA 18 Kick HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 36
     - 36
@@ -1120,8 +1166,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: TAMA 13 SnareSidestick HR; recorded velocity layers. Five layers; alternate center/edge articulations
-      are separate voices, no recorded round robins.
+    description: TAMA 13 SnareSidestick HR; recorded velocity layers. Five layers;
+      alternate center/edge articulations are separate voices, no recorded round robins.
     range:
     - 37
     - 37
@@ -1134,8 +1180,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: TAMA 13 SnareCenter HR; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: TAMA 13 SnareCenter HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 38
     - 38
@@ -1148,8 +1194,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: snare'
-    description: TAMA 13 SnareEdge HR; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: TAMA 13 SnareEdge HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 40
     - 40
@@ -1162,8 +1208,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: TAMA 14 FloorTomCenter HR; recorded velocity layers. Five layers; alternate center/edge articulations
-      are separate voices, no recorded round robins.
+    description: TAMA 14 FloorTomCenter HR; recorded velocity layers. Five layers;
+      alternate center/edge articulations are separate voices, no recorded round robins.
     range:
     - 41
     - 41
@@ -1176,8 +1222,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: TAMA 14 FloorTomEdge HR; recorded velocity layers. Five layers; alternate center/edge articulations
-      are separate voices, no recorded round robins.
+    description: TAMA 14 FloorTomEdge HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 43
     - 43
@@ -1190,8 +1236,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: TAMA 10 TomCenter HR; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: TAMA 10 TomCenter HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 45
     - 45
@@ -1204,8 +1250,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: tom'
-    description: TAMA 10 TomEdge HR; recorded velocity layers. Five layers; alternate center/edge articulations are separate
-      voices, no recorded round robins.
+    description: TAMA 10 TomEdge HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 47
     - 47
@@ -1218,8 +1264,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Zildjian 13 HatClosed HR; recorded velocity layers. Five layers; alternate center/edge articulations
-      are separate voices, no recorded round robins.
+    description: Zildjian 13 HatClosed HR; recorded velocity layers. Five layers;
+      alternate center/edge articulations are separate voices, no recorded round robins.
     range:
     - 42
     - 42
@@ -1232,8 +1278,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Zildjian 13 HatPedal HR; recorded velocity layers. Five layers; alternate center/edge articulations
-      are separate voices, no recorded round robins.
+    description: Zildjian 13 HatPedal HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 44
     - 44
@@ -1246,8 +1292,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Zildjian 12 HatSemi HR; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Zildjian 12 HatSemi HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 46
     - 46
@@ -1260,8 +1306,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: hat'
-    description: Zildjian 13 HatSwish HR; recorded velocity layers. Five layers; alternate center/edge articulations
-      are separate voices, no recorded round robins.
+    description: Zildjian 13 HatSwish HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 48
     - 48
@@ -1274,8 +1320,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Paiste2002 16 Crash HR; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Paiste2002 16 Crash HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 49
     - 49
@@ -1288,8 +1334,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: SabianAAX 20 RideTip HR; recorded velocity layers. Five layers; alternate center/edge articulations
-      are separate voices, no recorded round robins.
+    description: SabianAAX 20 RideTip HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 51
     - 51
@@ -1302,8 +1348,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: SabianAAX 20 RideBell HR; recorded velocity layers. Five layers; alternate center/edge articulations
-      are separate voices, no recorded round robins.
+    description: SabianAAX 20 RideBell HR; recorded velocity layers. Five layers;
+      alternate center/edge articulations are separate voices, no recorded round robins.
     range:
     - 53
     - 53
@@ -1316,8 +1362,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Zildjian 10 Splash HR; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Zildjian 10 Splash HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 55
     - 55
@@ -1330,8 +1376,8 @@ voices:
     program: BLONDE_BOP_HR_SFZ/BLONDE_BOP_HR.sfz
     family: drum
     category: 'Acoustic drums: cymbal'
-    description: Wuhan 18 ChinaCrash HR; recorded velocity layers. Five layers; alternate center/edge articulations are
-      separate voices, no recorded round robins.
+    description: Wuhan 18 ChinaCrash HR; recorded velocity layers. Five layers; alternate
+      center/edge articulations are separate voices, no recorded round robins.
     range:
     - 60
     - 60
@@ -1624,8 +1670,8 @@ voices:
     program: d_smolken_rubner_bass_pizz.sfz
     family: bass
     category: Acoustic bass
-    description: Recorded upright plucks with dynamic layers and sequential alternate takes; folk, jazz and intimate
-      pop.
+    description: Recorded upright plucks with dynamic layers and sequential alternate
+      takes; folk, jazz and intimate pop.
     range:
     - 28
     - 60
@@ -1638,8 +1684,8 @@ voices:
     program: d_smolken_rubner_bass_arco.sfz
     family: bass
     category: Acoustic bass
-    description: Recorded bowed upright with dynamic layers and alternate takes; long orchestral notes, not a plucked
-      groove bass.
+    description: Recorded bowed upright with dynamic layers and alternate takes; long
+      orchestral notes, not a plucked groove bass.
     range:
     - 28
     - 60
@@ -1652,10 +1698,1718 @@ voices:
     program: ContrabassSusNV.sfz
     family: bass
     category: Acoustic bass
-    description: Recorded sustained double bass without vibrato; orchestral low lines, not a plucked groove bass.
+    description: Recorded sustained double bass without vibrato; orchestral low lines,
+      not a plucked groove bass.
     range:
     - 28
     - 60
     params:
       xfade: 0
       release_mul: 0.35
+  steinway_piano:
+    title: Steinway B grand · damper up
+    source: vcsl
+    program: Chordophones/Zithers/Grand Piano, Steinway B.sfz
+    family: keys
+    category: Acoustic pianos
+    description: Recorded Steinway B grand with three velocity layers; fixed damper-up
+      selection, no live pedal.
+    range:
+    - 21
+    - 108
+    params:
+      release_mul: 0.7
+      xfade: 0.2
+    adapt:
+      cc:
+        '64': 0
+  knight_piano:
+    title: Knight upright piano
+    source: vcsl
+    program: Chordophones/Zithers/Upright Piano, Knight.sfz
+    family: keys
+    category: Acoustic pianos
+    description: Character upright with two velocity layers and key-release samples.
+      Controller-triggered pedal noises excluded.
+    range:
+    - 21
+    - 108
+    params:
+      release_mul: 0.25
+      release_level: 0.35
+    adapt: {}
+  yamaha_piano:
+    title: Yamaha upright piano
+    source: vcsl
+    program: Chordophones/Zithers/Upright Piano, Yamaha.sfz
+    family: keys
+    category: Acoustic pianos
+    description: Recorded Yamaha upright; alternative to the Kawai and Steinway grand
+      recordings.
+    range:
+    - 21
+    - 108
+    params:
+      release_mul: 0.7
+  meta_piano:
+    title: Meta upright piano
+    source: meta_keys
+    program: systems/instruments/meta-piano/meta-piano.sfz
+    family: keys
+    category: Acoustic pianos
+    description: Full 88-key upright with four velocity layers. Original recorded
+      tuning retained; extra random pitch/level modulation disabled.
+    range:
+    - 21
+    - 108
+    params:
+      xfade: 0.15
+    adapt:
+      drop:
+      - amp_random
+      - pitch_random
+  tx_piano:
+    title: TX81Z Piano 1
+    source: vcsl
+    program: Electrophones/TX81Z - Piano 1.sfz
+    family: keys
+    category: Electric keyboards
+    description: Recorded Yamaha TX81Z FM preset, distinct from the FM Piano program.
+    range:
+    - 36
+    - 96
+    params:
+      release_mul: 0.7
+  clavisynth:
+    title: TX81Z Clavisynth
+    source: vcsl
+    program: Electrophones/TX81Z - Clavisynth.sfz
+    family: keys
+    category: Electric keyboards
+    description: Recorded Yamaha TX81Z FM preset, distinct from the FM Piano program.
+    range:
+    - 36
+    - 96
+    params:
+      release_mul: 0.7
+  english_harpsichord:
+    title: English Normal harpsichord
+    source: vcsl
+    program: Chordophones/Zithers/Harpsichord, English - Normal.sfz
+    family: keys
+    category: Harpsichords
+    description: Recorded plucked keyboard registration; naturally limited dynamic
+      response, with release character.
+    range:
+    - 36
+    - 89
+    params:
+      xfade: 0
+      release_mul: 0.35
+  lute_harpsichord:
+    title: English Lute harpsichord
+    source: vcsl
+    program: Chordophones/Zithers/Harpsichord, English - Lute.sfz
+    family: keys
+    category: Harpsichords
+    description: Recorded plucked keyboard registration; naturally limited dynamic
+      response, with release character.
+    range:
+    - 36
+    - 89
+    params:
+      xfade: 0
+      release_mul: 0.35
+  french_harpsichord:
+    title: French harpsichord
+    source: vcsl
+    program: Chordophones/Zithers/Harpsichord, French.sfz
+    family: keys
+    category: Harpsichords
+    description: Recorded plucked keyboard registration; naturally limited dynamic
+      response, with release character.
+    range:
+    - 36
+    - 84
+    params:
+      xfade: 0
+      release_mul: 0.35
+  italian_harpsichord:
+    title: Italian harpsichord
+    source: vcsl
+    program: Chordophones/Zithers/Harpsichord, Italian.sfz
+    family: keys
+    category: Harpsichords
+    description: Recorded plucked keyboard registration; naturally limited dynamic
+      response, with release character.
+    range:
+    - 36
+    - 84
+    params:
+      xfade: 0
+      release_mul: 0.35
+  flemish_harpsichord:
+    title: Flemish 8' harpsichord
+    source: vcsl
+    program: Chordophones/Zithers/Harpsichord, Flemish - 8'.sfz
+    family: keys
+    category: Harpsichords
+    description: Recorded plucked keyboard registration; naturally limited dynamic
+      response, with release character.
+    range:
+    - 36
+    - 84
+    params:
+      xfade: 0
+      release_mul: 0.35
+  flemish_full:
+    title: Flemish Full harpsichord
+    source: vcsl
+    program: Chordophones/Zithers/Harpsichord, Flemish - Full.sfz
+    family: keys
+    category: Harpsichords
+    description: Recorded plucked keyboard registration; naturally limited dynamic
+      response, with release character.
+    range:
+    - 36
+    - 84
+    params:
+      xfade: 0
+      release_mul: 0.35
+  renaissance_8:
+    title: Renaissance Organ - 8'
+    source: vcsl
+    program: Aerophones/Edge-blown Aerophones/Renaissance Organ - 8'.sfz
+    family: keys
+    category: Recorded organs
+    description: Fixed sampled organ registration; sustained accompaniment and contrapuntal
+      lines.
+    range:
+    - 36
+    - 89
+    params:
+      xfade: 0
+      release_mul: 0.5
+  renaissance_4:
+    title: Renaissance Organ - 4'
+    source: vcsl
+    program: Aerophones/Edge-blown Aerophones/Renaissance Organ - 4'.sfz
+    family: keys
+    category: Recorded organs
+    description: Fixed sampled organ registration; sustained accompaniment and contrapuntal
+      lines.
+    range:
+    - 36
+    - 89
+    params:
+      xfade: 0
+      release_mul: 0.5
+  renaissance_4_8:
+    title: Renaissance Organ - 4'+8'
+    source: vcsl
+    program: Aerophones/Edge-blown Aerophones/Renaissance Organ - 4'+8'.sfz
+    family: keys
+    category: Recorded organs
+    description: Fixed sampled organ registration; sustained accompaniment and contrapuntal
+      lines.
+    range:
+    - 36
+    - 89
+    params:
+      xfade: 0
+      release_mul: 0.5
+  renaissance_full:
+    title: Renaissance Organ - Full
+    source: vcsl
+    program: Aerophones/Edge-blown Aerophones/Renaissance Organ - Full.sfz
+    family: keys
+    category: Recorded organs
+    description: Fixed sampled organ registration; sustained accompaniment and contrapuntal
+      lines.
+    range:
+    - 36
+    - 89
+    params:
+      xfade: 0
+      release_mul: 0.5
+  pipe_quiet:
+    title: Pipe Organ - Quiet
+    source: vcsl
+    program: Aerophones/Edge-blown Aerophones/Pipe Organ - Quiet.sfz
+    family: keys
+    category: Recorded organs
+    description: Fixed sampled organ registration; sustained accompaniment and contrapuntal
+      lines.
+    range:
+    - 36
+    - 96
+    params:
+      xfade: 0
+      release_mul: 0.5
+  pipe_loud:
+    title: Pipe Organ - Loud
+    source: vcsl
+    program: Aerophones/Edge-blown Aerophones/Pipe Organ - Loud.sfz
+    family: keys
+    category: Recorded organs
+    description: Fixed sampled organ registration; sustained accompaniment and contrapuntal
+      lines.
+    range:
+    - 36
+    - 96
+    params:
+      xfade: 0
+      release_mul: 0.5
+  rhodes_mono:
+    title: Rhodes Mark I · dry mono
+    source: jrhodes
+    program: jRhodes3d-mono/_jRhodes3d-mono-no-xfade-flac.sfz
+    family: keys
+    category: Electric keyboards
+    description: 1977 Rhodes Mark I Stage 73, five sampled velocity layers and full
+      natural decays. Fixed rendered channel effect; no live pedal or modulation.
+    range:
+    - 28
+    - 100
+    params:
+      xfade: 0.15
+    adapt:
+      drop:
+      - label_cc1
+      - set_hdcc1
+      - width_oncc1
+      - width_curvecc1
+      drop_headers:
+      - <curve>
+  rhodes_stereo:
+    title: Rhodes Mark I · baked stereo chorus
+    source: jrhodes
+    program: jRhodes3d-st/_jRhodes3d-st-no-xfade-flac.sfz
+    family: keys
+    category: Electric keyboards
+    description: 1977 Rhodes Mark I Stage 73, five sampled velocity layers and full
+      natural decays. Fixed rendered channel effect; no live pedal or modulation.
+    range:
+    - 28
+    - 100
+    params:
+      xfade: 0.15
+    adapt:
+      drop:
+      - label_cc1
+      - set_hdcc1
+      - width_oncc1
+      - width_curvecc1
+      drop_headers:
+      - <curve>
+  rhodes_vibrato:
+    title: Rhodes Mark I · baked stereo vibrato
+    source: jrhodes
+    program: jRhodes3d-sv/_jRhodes3d-sv-no-xfade-flac.sfz
+    family: keys
+    category: Electric keyboards
+    description: 1977 Rhodes Mark I Stage 73, five sampled velocity layers and full
+      natural decays. Fixed rendered channel effect; no live pedal or modulation.
+    range:
+    - 28
+    - 100
+    params:
+      xfade: 0.15
+    adapt:
+      drop:
+      - label_cc1
+      - set_hdcc1
+      - width_oncc1
+      - width_curvecc1
+      drop_headers:
+      - <curve>
+  nylon_guitar:
+    title: Nylon guitar · velocity-selected technique
+    source: meta_keys
+    program: systems/instruments/meta-nylon-guitar/meta-nylon-guitar.sfz
+    family: string
+    category: Acoustic guitars
+    description: Recorded nylon strings; fixed first-position string map with one
+      sounding note per string. One-shot natural ring-out; new notes on the same string
+      damp the previous note.
+    range:
+    - 40
+    - 83
+    params:
+      xfade: 0
+    adapt:
+      drop: &id001
+      - amp_random
+      - pitch_random
+      set: &id002
+        off_mode: fast
+      channel: 1
+      keyswitch: 24
+  nylon_finger:
+    title: Nylon guitar · fingerstyle
+    source: meta_keys
+    program: systems/instruments/meta-nylon-guitar/meta-nylon-guitar.sfz
+    family: string
+    category: Acoustic guitars
+    description: Recorded nylon strings; fixed first-position string map with one
+      sounding note per string. One-shot natural ring-out; new notes on the same string
+      damp the previous note.
+    range:
+    - 40
+    - 83
+    params:
+      xfade: 0
+    adapt:
+      drop: *id001
+      set: *id002
+      channel: 1
+      keyswitch: 25
+  nylon_pick:
+    title: Nylon guitar · picked
+    source: meta_keys
+    program: systems/instruments/meta-nylon-guitar/meta-nylon-guitar.sfz
+    family: string
+    category: Acoustic guitars
+    description: Recorded nylon strings; fixed first-position string map with one
+      sounding note per string. One-shot natural ring-out; new notes on the same string
+      damp the previous note.
+    range:
+    - 40
+    - 83
+    params:
+      xfade: 0
+    adapt:
+      drop: *id001
+      set: *id002
+      channel: 1
+      keyswitch: 26
+  steel_guitar:
+    title: Steel-string acoustic guitar
+    source: meta_keys
+    program: systems/instruments/meta-steel-guitar/meta-steel-guitar.sfz
+    family: string
+    category: Acoustic guitars
+    description: Recorded steel strings with three velocity layers and first-position
+      string selection; notes on the same string damp each other.
+    range:
+    - 40
+    - 84
+    params:
+      xfade: 0
+    adapt:
+      drop: *id001
+      set: *id002
+      channel: 1
+  archtop_mic:
+    title: Shiny archtop · microphone
+    source: shiny
+    program: Programs/acoustic_one.sfz
+    family: string
+    category: Acoustic guitars
+    description: Single archtop guitar recorded through a microphone; four velocity
+      layers and four alternate takes. Fixed single voice; no scripted vibrato or
+      live pickup blend.
+    range:
+    - 33
+    - 88
+    params:
+      xfade: 0
+    adapt:
+      cc:
+        '100': 127
+        '107': 0
+        '106': 0
+      drop:
+      - xfin_hicc100
+      - xfout_locc100
+      - ampeg_releasecc106
+      set:
+        default_path: ../Samples/
+  archtop_pickup:
+    title: Shiny archtop · pickup
+    source: shiny
+    program: Programs/electric_one.sfz
+    family: string
+    category: Electric guitars
+    description: Single archtop guitar recorded through its magnetic pickup; four
+      velocity layers and four alternate takes. Fixed single voice; no scripted vibrato
+      or live pickup blend.
+    range:
+    - 33
+    - 88
+    params:
+      xfade: 0
+    adapt:
+      cc:
+        '100': 0
+        '107': 0
+        '106': 0
+      drop:
+      - xfin_hicc100
+      - xfout_locc100
+      - ampeg_releasecc106
+      set:
+        default_path: ../Samples/
+  emily_clean:
+    title: Emily electric · clean DI
+    source: emily
+    program: emily_clean.sfz
+    family: string
+    category: Electric guitars
+    description: Flatwound Epiphone guitar, both pickups, direct recording; four velocity
+      layers and three alternate takes. No amp simulation or scripted legato.
+    range:
+    - 37
+    - 88
+    params:
+      xfade: 0
+      release_level: 0.4
+  emily_release:
+    title: Emily electric · release noises
+    source: emily
+    program: emily_basic.sfz
+    family: string
+    category: Electric guitars
+    description: Flatwound Epiphone guitar, both pickups, direct recording; four velocity
+      layers and three alternate takes. No amp simulation or scripted legato.
+    range:
+    - 37
+    - 88
+    params:
+      xfade: 0
+      release_level: 0.4
+    adapt:
+      drop:
+      - amp_random
+  emily_ensemble:
+    title: Emily electric · three-voice layer
+    source: emily
+    program: emily_three_voice.sfz
+    family: string
+    category: Electric guitars
+    description: Flatwound Epiphone guitar, both pickups, direct recording; four velocity
+      layers and three alternate takes. Layered alternate takes from the same guitar,
+      not another physical instrument.
+    range:
+    - 37
+    - 88
+    params:
+      xfade: 0
+      release_level: 0.4
+  solo_violin_pizzicato:
+    title: Solo violin · pizzicato
+    source: vsco2
+    program: SViolinPizz.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Solo violin
+    articulation: pizzicato
+    description: Recorded solo violin · pizzicato. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 55
+    - 96
+    params:
+      xfade: 0
+  solo_violin_spiccato:
+    title: Solo violin · spiccato
+    source: vsco2
+    program: SViolinSpic.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Solo violin
+    articulation: spiccato
+    description: Recorded solo violin · spiccato. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 55
+    - 96
+    params:
+      xfade: 0
+  solo_violin_tremolo:
+    title: Solo violin · tremolo
+    source: vsco2
+    program: SViolinTrem.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Solo violin
+    articulation: tremolo
+    description: Recorded solo violin · tremolo. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 55
+    - 96
+    params:
+      xfade: 0
+  solo_violin_soft:
+    title: Solo violin · soft sustained vibrato
+    source: vsco2
+    program: SViolinVib-Quiet.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Solo violin
+    articulation: soft sustained vibrato
+    description: Recorded solo violin · soft sustained vibrato. Fixed articulation;
+      velocity and written note lengths shape the performance. No connected legato
+      scripting.
+    range:
+    - 55
+    - 96
+    params:
+      xfade: 0
+  violins_pizzicato:
+    title: Violin section · pizzicato
+    source: vsco2
+    program: ViolinEnsPizz.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Violin section
+    articulation: pizzicato
+    description: Recorded violin section · pizzicato. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 55
+    - 86
+    params:
+      xfade: 0
+  violins_tremolo:
+    title: Violin section · tremolo
+    source: vsco2
+    program: ViolinEnsTrem.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Violin section
+    articulation: tremolo
+    description: Recorded violin section · tremolo. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 55
+    - 86
+    params:
+      xfade: 0
+  violins_soft:
+    title: Violin section · soft sustained vibrato
+    source: vsco2
+    program: ViolinEnsSusVib-Quiet.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Violin section
+    articulation: soft sustained vibrato
+    description: Recorded violin section · soft sustained vibrato. Fixed articulation;
+      velocity and written note lengths shape the performance. No connected legato
+      scripting.
+    range:
+    - 55
+    - 86
+    params:
+      xfade: 0
+  violas_pizzicato:
+    title: Viola section · pizzicato
+    source: vsco2
+    program: ViolaEnsPizz.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Viola section
+    articulation: pizzicato
+    description: Recorded viola section · pizzicato. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 48
+    - 86
+    params:
+      xfade: 0
+  violas_spiccato:
+    title: Viola section · spiccato
+    source: vsco2
+    program: ViolaEnsSpic.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Viola section
+    articulation: spiccato
+    description: Recorded viola section · spiccato. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 48
+    - 86
+    params:
+      xfade: 0
+  violas_tremolo:
+    title: Viola section · tremolo
+    source: vsco2
+    program: ViolaEnsTrem.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Viola section
+    articulation: tremolo
+    description: Recorded viola section · tremolo. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 48
+    - 86
+    params:
+      xfade: 0
+  violas_soft:
+    title: Viola section · soft sustained vibrato
+    source: vsco2
+    program: ViolaEnsSusVib-Quiet.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Viola section
+    articulation: soft sustained vibrato
+    description: Recorded viola section · soft sustained vibrato. Fixed articulation;
+      velocity and written note lengths shape the performance. No connected legato
+      scripting.
+    range:
+    - 48
+    - 86
+    params:
+      xfade: 0
+  cello_pizzicato:
+    title: Cello section · pizzicato
+    source: vsco2
+    program: CelloEnsPizz.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Cello section
+    articulation: pizzicato
+    description: Recorded cello section · pizzicato. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 36
+    - 77
+    params:
+      xfade: 0
+  cello_tremolo:
+    title: Cello section · tremolo
+    source: vsco2
+    program: CelloEnsTrem.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Cello section
+    articulation: tremolo
+    description: Recorded cello section · tremolo. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 36
+    - 77
+    params:
+      xfade: 0
+  cello_soft:
+    title: Cello section · soft sustained vibrato
+    source: vsco2
+    program: CelloEnsSusVib-Quiet.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Cello section
+    articulation: soft sustained vibrato
+    description: Recorded cello section · soft sustained vibrato. Fixed articulation;
+      velocity and written note lengths shape the performance. No connected legato
+      scripting.
+    range:
+    - 36
+    - 77
+    params:
+      xfade: 0
+  double_bass_spiccato:
+    title: Double bass · spiccato
+    source: vsco2
+    program: ContrabassSpic.sfz
+    family: bass
+    category: Orchestral strings
+    instrument: Double bass
+    articulation: spiccato
+    description: Recorded double bass · spiccato. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 24
+    - 60
+    params:
+      xfade: 0
+  double_bass_tremolo:
+    title: Double bass · tremolo
+    source: vsco2
+    program: ContrabassTrem.sfz
+    family: bass
+    category: Orchestral strings
+    instrument: Double bass
+    articulation: tremolo
+    description: Recorded double bass · tremolo. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 24
+    - 60
+    params:
+      xfade: 0
+  double_bass_soft:
+    title: Double bass · soft sustained vibrato
+    source: vsco2
+    program: ContrabassSusVB-Quiet.sfz
+    family: bass
+    category: Orchestral strings
+    instrument: Double bass
+    articulation: soft sustained vibrato
+    description: Recorded double bass · soft sustained vibrato. Fixed articulation;
+      velocity and written note lengths shape the performance. No connected legato
+      scripting.
+    range:
+    - 24
+    - 60
+    params:
+      xfade: 0
+  violas:
+    title: Viola section · sustained vibrato
+    source: vsco2
+    program: ViolaEnsSusVib.sfz
+    family: string
+    category: Orchestral strings
+    instrument: Viola section
+    articulation: sustained vibrato
+    description: Recorded viola section · sustained vibrato. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 48
+    - 86
+    params:
+      xfade: 0
+  double_bass_vibrato:
+    title: Double bass · bowed vibrato
+    source: vsco2
+    program: ContrabassSusVB.sfz
+    family: bass
+    category: Orchestral strings
+    instrument: Double bass
+    articulation: sustained vibrato
+    description: Recorded double bass · bowed vibrato. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 24
+    - 60
+    params:
+      xfade: 0
+  flute_vibrato:
+    title: Flute · vibrato
+    source: vsco2
+    program: FluteSusVib.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Flute
+    articulation: vibrato
+    description: Recorded flute · vibrato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 60
+    - 96
+    params:
+      xfade: 0
+  flute_expressive:
+    title: Flute · expressive vibrato
+    source: vsco2
+    program: FluteExpVib.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Flute
+    articulation: expressive vibrato
+    description: Recorded flute · expressive vibrato. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 60
+    - 96
+    params:
+      xfade: 0
+  flute_staccato:
+    title: Flute · staccato
+    source: vsco2
+    program: FluteStac.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Flute
+    articulation: staccato
+    description: Recorded flute · staccato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 65
+    - 96
+    params:
+      xfade: 0
+  piccolo:
+    title: Piccolo · sustain
+    source: vsco2
+    program: PiccoloSus.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Piccolo
+    articulation: sustain
+    description: Recorded piccolo · sustain. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 67
+    - 91
+    params:
+      xfade: 0
+  piccolo_staccato:
+    title: Piccolo · staccato
+    source: vsco2
+    program: PiccoloStac.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Piccolo
+    articulation: staccato
+    description: Recorded piccolo · staccato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 70
+    - 94
+    params:
+      xfade: 0
+  oboe:
+    title: Oboe · non-vibrato
+    source: vsco2
+    program: OboeSusNV.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Oboe
+    articulation: non-vibrato
+    description: Recorded oboe · non-vibrato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 58
+    - 89
+    params:
+      xfade: 0
+  oboe_vibrato:
+    title: Oboe · vibrato
+    source: vsco2
+    program: OboeSusVib.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Oboe
+    articulation: vibrato
+    description: Recorded oboe · vibrato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 58
+    - 89
+    params:
+      xfade: 0
+  oboe_staccato:
+    title: Oboe · staccato
+    source: vsco2
+    program: OboeStac.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Oboe
+    articulation: staccato
+    description: Recorded oboe · staccato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 58
+    - 89
+    params:
+      xfade: 0
+  clarinet:
+    title: Clarinet · sustain
+    source: vsco2
+    program: ClarinetSus.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Clarinet
+    articulation: sustain
+    description: Recorded clarinet · sustain. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 50
+    - 90
+    params:
+      xfade: 0
+  clarinet_staccato:
+    title: Clarinet · staccato
+    source: vsco2
+    program: ClarinetStac.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Clarinet
+    articulation: staccato
+    description: Recorded clarinet · staccato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 50
+    - 89
+    params:
+      xfade: 0
+  bassoon:
+    title: Bassoon · sustain
+    source: vsco2
+    program: BassoonSus.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Bassoon
+    articulation: sustain
+    description: Recorded bassoon · sustain. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 34
+    - 75
+    params:
+      xfade: 0
+  bassoon_vibrato:
+    title: Bassoon · vibrato
+    source: vsco2
+    program: BassoonVib.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Bassoon
+    articulation: vibrato
+    description: Recorded bassoon · vibrato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 36
+    - 72
+    params:
+      xfade: 0
+  bassoon_staccato:
+    title: Bassoon · staccato
+    source: vsco2
+    program: BassoonStac.sfz
+    family: wind
+    category: Orchestral woodwinds
+    instrument: Bassoon
+    articulation: staccato
+    description: Recorded bassoon · staccato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 34
+    - 72
+    params:
+      xfade: 0
+  horn_muted:
+    title: French horn · muted sustain
+    source: vsco2
+    program: FHornMute.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: French horn
+    articulation: muted sustain
+    description: Recorded french horn · muted sustain. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 46
+    - 77
+    params:
+      xfade: 0
+  horn_staccato:
+    title: French horn · staccato
+    source: vsco2
+    program: FHornStac.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: French horn
+    articulation: staccato
+    description: Recorded french horn · staccato. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 33
+    - 77
+    params:
+      xfade: 0
+  trumpet:
+    title: Trumpet · sustain
+    source: vsco2
+    program: TrumpetSus.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: Trumpet
+    articulation: sustain
+    description: Recorded trumpet · sustain. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 52
+    - 84
+    params:
+      xfade: 0
+  trumpet_vibrato:
+    title: Trumpet · vibrato
+    source: vsco2
+    program: TrumpetSusVib.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: Trumpet
+    articulation: vibrato
+    description: Recorded trumpet · vibrato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 52
+    - 84
+    params:
+      xfade: 0
+  trumpet_staccato:
+    title: Trumpet · staccato
+    source: vsco2
+    program: TrumpetStac.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: Trumpet
+    articulation: staccato
+    description: Recorded trumpet · staccato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 52
+    - 84
+    params:
+      xfade: 0
+  trumpet_straight_mute:
+    title: Trumpet · straight mute
+    source: vsco2
+    program: TrumpetStraightMuteSus.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: Trumpet
+    articulation: straight mute
+    description: Recorded trumpet · straight mute. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 58
+    - 84
+    params:
+      xfade: 0
+  trumpet_harmon_mute:
+    title: Trumpet · Harmon mute
+    source: vsco2
+    program: TrumpetHarmonMuteSus.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: Trumpet
+    articulation: Harmon mute
+    description: Recorded trumpet · harmon mute. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 58
+    - 84
+    params:
+      xfade: 0
+  trombone:
+    title: Tenor trombone · sustain
+    source: vsco2
+    program: TromboneSus.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: Tenor trombone
+    articulation: sustain
+    description: Recorded tenor trombone · sustain. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 34
+    - 65
+    params:
+      xfade: 0
+  trombone_vibrato:
+    title: Tenor trombone · vibrato
+    source: vsco2
+    program: TromboneVib.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: Tenor trombone
+    articulation: vibrato
+    description: Recorded tenor trombone · vibrato. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 41
+    - 67
+    params:
+      xfade: 0
+  trombone_staccato:
+    title: Tenor trombone · staccato
+    source: vsco2
+    program: TromboneStac.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: Tenor trombone
+    articulation: staccato
+    description: Recorded tenor trombone · staccato. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 34
+    - 70
+    params:
+      xfade: 0
+  tuba:
+    title: Tuba · sustain
+    source: vsco2
+    program: TubaSus.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: Tuba
+    articulation: sustain
+    description: Recorded tuba · sustain. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 29
+    - 62
+    params:
+      xfade: 0
+  tuba_staccato:
+    title: Tuba · staccato
+    source: vsco2
+    program: TubaStac.sfz
+    family: brass
+    category: Orchestral and jazz brass
+    instrument: Tuba
+    articulation: staccato
+    description: Recorded tuba · staccato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 29
+    - 62
+    params:
+      xfade: 0
+  tenor_sax:
+    title: Tenor saxophone · non-vibrato
+    source: vcsl
+    program: Aerophones/Reed Aerophones/Tenor Saxophone - Non-Vibrato.sfz
+    family: wind
+    category: Jazz reeds
+    instrument: Tenor saxophone
+    articulation: non-vibrato
+    description: Recorded tenor saxophone · non-vibrato. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 44
+    - 89
+    params:
+      xfade: 0
+  tenor_sax_vibrato:
+    title: Tenor saxophone · vibrato
+    source: vcsl
+    program: Aerophones/Reed Aerophones/Tenor Saxophone - Vibrato.sfz
+    family: wind
+    category: Jazz reeds
+    instrument: Tenor saxophone
+    articulation: vibrato
+    description: Recorded tenor saxophone · vibrato. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 44
+    - 89
+    params:
+      xfade: 0
+  tenor_sax_staccato:
+    title: Tenor saxophone · staccato
+    source: vcsl
+    program: Aerophones/Reed Aerophones/Tenor Saxophone - Staccato.sfz
+    family: wind
+    category: Jazz reeds
+    instrument: Tenor saxophone
+    articulation: staccato
+    description: Recorded tenor saxophone · staccato. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 44
+    - 89
+    params:
+      xfade: 0
+  saxello:
+    title: Saxello · non-vibrato
+    source: vcsl
+    program: Aerophones/Reed Aerophones/Saxello - Non-Vibrato.sfz
+    family: wind
+    category: Jazz reeds
+    instrument: Saxello
+    articulation: non-vibrato
+    description: Recorded saxello · non-vibrato. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 58
+    - 89
+    params:
+      xfade: 0
+  saxello_vibrato:
+    title: Saxello · vibrato
+    source: vcsl
+    program: Aerophones/Reed Aerophones/Saxello - Vibrato.sfz
+    family: wind
+    category: Jazz reeds
+    instrument: Saxello
+    articulation: vibrato
+    description: Recorded saxello · vibrato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 58
+    - 89
+    params:
+      xfade: 0
+  saxello_staccato:
+    title: Saxello · staccato
+    source: vcsl
+    program: Aerophones/Reed Aerophones/Saxello - Staccato.sfz
+    family: wind
+    category: Jazz reeds
+    instrument: Saxello
+    articulation: staccato
+    description: Recorded saxello · staccato. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 58
+    - 89
+    params:
+      xfade: 0
+  mtg_soprano_sax:
+    title: MTG soprano sax · sustained
+    source: mtg_sax
+    program: MTG Solo Saxophones/MTG Soprano Sax.sfz
+    family: wind
+    category: Jazz reeds
+    instrument: Soprano saxophone
+    articulation: sustain
+    description: Real soprano sax, two velocity layers, three neighboring-key round-robin
+      mappings. Fixed ordinary attacks and loops; scripted legato, noises, filter
+      envelope and vibrato are omitted. Attribution required.
+    range:
+    - 56
+    - 88
+    params:
+      xfade: 0
+    adapt:
+      cc:
+        '64': 0
+        '80': 0
+      drop_headers:
+      - <curve>
+      drop:
+      - amp_veltrack_curvecc99
+      - amp_veltrack_oncc99
+      - ampeg_attack_curvecc131
+      - ampeg_attack_oncc131
+      - ampeg_attack_oncc71
+      - ampeg_attack_oncc98
+      - ampeg_release_oncc72
+      - amplitude_curvecc11
+      - amplitude_curvecc7
+      - amplitude_oncc11
+      - amplitude_oncc7
+      - cutoff
+      - cutoff_curvecc131
+      - cutoff_oncc131
+      - fil_type
+      - fileg_decay
+      - fileg_depth
+      - fileg_hold
+      - fileg_release
+      - fileg_sustain
+      - label_cc1
+      - label_cc10
+      - label_cc11
+      - label_cc3
+      - label_cc64
+      - label_cc7
+      - label_cc71
+      - label_cc72
+      - label_cc80
+      - label_cc98
+      - label_cc99
+      - master_label
+      - off_shape
+      - off_time
+      - offset_oncc98
+      - pan_curvecc10
+      - pan_oncc10
+      - pitchlfo_depth_oncc1
+      - pitchlfo_fade
+      - pitchlfo_freq_oncc3
+      - region_label
+      - set_cc7
+      - set_hdcc10
+      - set_hdcc11
+      - set_hdcc3
+      - set_hdcc72
+      - set_hdcc80
+      - set_hdcc99
+      - sostenuto_sw
+      - sustain_sw
+      set:
+        ampeg_attack: 0.003
+        ampeg_release: 0.18
+        amp_veltrack: 100
+        pan: 0
+  mtg_alto_sax:
+    title: MTG alto sax · sustained
+    source: mtg_sax
+    program: MTG Solo Saxophones/MTG Alto Sax.sfz
+    family: wind
+    category: Jazz reeds
+    instrument: Alto saxophone
+    articulation: sustain
+    description: Real alto sax, two velocity layers, three neighboring-key round-robin
+      mappings. Fixed ordinary attacks and loops; scripted legato, noises, filter
+      envelope and vibrato are omitted. Attribution required.
+    range:
+    - 49
+    - 81
+    params:
+      xfade: 0
+    adapt:
+      cc:
+        '64': 0
+        '80': 0
+      drop_headers:
+      - <curve>
+      drop:
+      - amp_veltrack_curvecc99
+      - amp_veltrack_oncc99
+      - ampeg_attack_curvecc131
+      - ampeg_attack_oncc131
+      - ampeg_attack_oncc71
+      - ampeg_attack_oncc98
+      - ampeg_release_oncc72
+      - amplitude_curvecc11
+      - amplitude_curvecc7
+      - amplitude_oncc11
+      - amplitude_oncc7
+      - cutoff
+      - cutoff_curvecc131
+      - cutoff_oncc131
+      - fil_type
+      - fileg_decay
+      - fileg_depth
+      - fileg_hold
+      - fileg_release
+      - fileg_sustain
+      - label_cc1
+      - label_cc10
+      - label_cc11
+      - label_cc3
+      - label_cc64
+      - label_cc7
+      - label_cc71
+      - label_cc72
+      - label_cc80
+      - label_cc98
+      - label_cc99
+      - master_label
+      - off_shape
+      - off_time
+      - offset_oncc98
+      - pan_curvecc10
+      - pan_oncc10
+      - pitchlfo_depth_oncc1
+      - pitchlfo_fade
+      - pitchlfo_freq_oncc3
+      - region_label
+      - set_cc7
+      - set_hdcc10
+      - set_hdcc11
+      - set_hdcc3
+      - set_hdcc72
+      - set_hdcc80
+      - set_hdcc99
+      - sostenuto_sw
+      - sustain_sw
+      set:
+        ampeg_attack: 0.003
+        ampeg_release: 0.18
+        amp_veltrack: 100
+        pan: 0
+  mtg_tenor_sax:
+    title: MTG tenor sax · sustained
+    source: mtg_sax
+    program: MTG Solo Saxophones/MTG Tenor Sax.sfz
+    family: wind
+    category: Jazz reeds
+    instrument: Tenor saxophone
+    articulation: sustain
+    description: Real tenor sax, two velocity layers, three neighboring-key round-robin
+      mappings. Fixed ordinary attacks and loops; scripted legato, noises, filter
+      envelope and vibrato are omitted. Attribution required.
+    range:
+    - 44
+    - 76
+    params:
+      xfade: 0
+    adapt:
+      cc:
+        '64': 0
+        '80': 0
+      drop_headers:
+      - <curve>
+      drop:
+      - amp_veltrack_curvecc99
+      - amp_veltrack_oncc99
+      - ampeg_attack_curvecc131
+      - ampeg_attack_oncc131
+      - ampeg_attack_oncc71
+      - ampeg_attack_oncc98
+      - ampeg_release_oncc72
+      - amplitude_curvecc11
+      - amplitude_curvecc7
+      - amplitude_oncc11
+      - amplitude_oncc7
+      - cutoff
+      - cutoff_curvecc131
+      - cutoff_oncc131
+      - fil_type
+      - fileg_decay
+      - fileg_depth
+      - fileg_hold
+      - fileg_release
+      - fileg_sustain
+      - label_cc1
+      - label_cc10
+      - label_cc11
+      - label_cc3
+      - label_cc64
+      - label_cc7
+      - label_cc71
+      - label_cc72
+      - label_cc80
+      - label_cc98
+      - label_cc99
+      - master_label
+      - off_shape
+      - off_time
+      - offset_oncc98
+      - pan_curvecc10
+      - pan_oncc10
+      - pitchlfo_depth_oncc1
+      - pitchlfo_fade
+      - pitchlfo_freq_oncc3
+      - region_label
+      - set_cc7
+      - set_hdcc10
+      - set_hdcc11
+      - set_hdcc3
+      - set_hdcc72
+      - set_hdcc80
+      - set_hdcc99
+      - sostenuto_sw
+      - sustain_sw
+      set:
+        ampeg_attack: 0.003
+        ampeg_release: 0.18
+        amp_veltrack: 100
+        pan: 0
+  mtg_baritone_sax:
+    title: MTG baritone sax · sustained
+    source: mtg_sax
+    program: MTG Solo Saxophones/MTG Baritone Sax.sfz
+    family: wind
+    category: Jazz reeds
+    instrument: Baritone saxophone
+    articulation: sustain
+    description: Real baritone sax, three velocity layers, three neighboring-key round-robin
+      mappings. Fixed ordinary attacks and loops; scripted legato, noises, filter
+      envelope and vibrato are omitted. Attribution required.
+    range:
+    - 36
+    - 69
+    params:
+      xfade: 0
+    adapt:
+      cc:
+        '64': 0
+        '80': 0
+      drop_headers:
+      - <curve>
+      drop:
+      - amp_veltrack_curvecc99
+      - amp_veltrack_oncc99
+      - ampeg_attack_curvecc131
+      - ampeg_attack_oncc131
+      - ampeg_attack_oncc71
+      - ampeg_attack_oncc98
+      - ampeg_release_oncc72
+      - amplitude_curvecc11
+      - amplitude_curvecc7
+      - amplitude_oncc11
+      - amplitude_oncc7
+      - cutoff
+      - cutoff_curvecc131
+      - cutoff_oncc131
+      - fil_type
+      - fileg_decay
+      - fileg_depth
+      - fileg_hold
+      - fileg_release
+      - fileg_sustain
+      - label_cc1
+      - label_cc10
+      - label_cc11
+      - label_cc3
+      - label_cc64
+      - label_cc7
+      - label_cc71
+      - label_cc72
+      - label_cc80
+      - label_cc98
+      - label_cc99
+      - master_label
+      - off_shape
+      - off_time
+      - offset_oncc98
+      - pan_curvecc10
+      - pan_oncc10
+      - pitchlfo_depth_oncc1
+      - pitchlfo_fade
+      - pitchlfo_freq_oncc3
+      - region_label
+      - set_cc7
+      - set_hdcc10
+      - set_hdcc11
+      - set_hdcc3
+      - set_hdcc72
+      - set_hdcc80
+      - set_hdcc99
+      - sostenuto_sw
+      - sustain_sw
+      set:
+        ampeg_attack: 0.003
+        ampeg_release: 0.18
+        amp_veltrack: 100
+        pan: 0
+  orchestral_harp:
+    title: Orchestral harp
+    source: vsco2
+    program: Harp.sfz
+    family: keys
+    category: Orchestral harp and mallets
+    instrument: Orchestral harp
+    articulation: hit/pluck
+    description: Recorded orchestral harp. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 28
+    - 101
+    params:
+      xfade: 0
+  glockenspiel:
+    title: Glockenspiel
+    source: vsco2
+    program: Glockenspiel.sfz
+    family: keys
+    category: Orchestral harp and mallets
+    instrument: Glockenspiel
+    articulation: hit/pluck
+    description: Recorded glockenspiel. Fixed articulation; velocity and written note
+      lengths shape the performance. No connected legato scripting.
+    range:
+    - 67
+    - 96
+    params:
+      xfade: 0
+  tubular_bells:
+    title: Tubular bells
+    source: vsco2
+    program: TubularBells.sfz
+    family: keys
+    category: Orchestral harp and mallets
+    instrument: Tubular bells
+    articulation: hit/pluck
+    description: Recorded tubular bells. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 60
+    - 79
+    params:
+      xfade: 0
+  timpani:
+    title: Timpani single hits
+    source: vsco2
+    program: Timpani.sfz
+    family: keys
+    category: Orchestral percussion
+    instrument: Timpani
+    articulation: hit/pluck
+    description: Recorded timpani single hits. Fixed articulation; velocity and written
+      note lengths shape the performance. No connected legato scripting.
+    range:
+    - 36
+    - 60
+    params:
+      xfade: 0
+  timpani_roll:
+    title: Timpani recorded rolls
+    source: vsco2
+    program: TimpaniRolls.sfz
+    family: keys
+    category: Orchestral percussion
+    instrument: Timpani
+    articulation: roll
+    description: Recorded timpani recorded rolls. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 36
+    - 60
+    params:
+      xfade: 0
+  xylophone_soft:
+    title: Xylophone · soft mallets
+    source: vcsl
+    program: Idiophones/Struck Idiophones/Xylophone - Soft Mallets.sfz
+    family: keys
+    category: Orchestral harp and mallets
+    instrument: Xylophone
+    articulation: soft mallets
+    description: Recorded xylophone · soft mallets. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 55
+    - 97
+    params:
+      xfade: 0
+  xylophone_medium:
+    title: Xylophone · medium mallets
+    source: vcsl
+    program: Idiophones/Struck Idiophones/Xylophone - Medium Mallets.sfz
+    family: keys
+    category: Orchestral harp and mallets
+    instrument: Xylophone
+    articulation: medium mallets
+    description: Recorded xylophone · medium mallets. Fixed articulation; velocity
+      and written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 55
+    - 97
+    params:
+      xfade: 0
+  xylophone_hard:
+    title: Xylophone · hard mallets
+    source: vcsl
+    program: Idiophones/Struck Idiophones/Xylophone - Hard Mallets.sfz
+    family: keys
+    category: Orchestral harp and mallets
+    instrument: Xylophone
+    articulation: hard mallets
+    description: Recorded xylophone · hard mallets. Fixed articulation; velocity and
+      written note lengths shape the performance. No connected legato scripting.
+    range:
+    - 55
+    - 97
+    params:
+      xfade: 0
+  orchestral_gong_1:
+    title: Orchestral gong 1
+    source: vcsl
+    program: Idiophones/Struck Idiophones/Gong 1.sfz
+    family: keys
+    category: Orchestral percussion
+    instrument: Gong
+    articulation: hit
+    description: Recorded gong 1; mapped keys select hit variations. Not a chromatic
+      melodic instrument.
+    range:
+    - 60
+    - 62
+    params:
+      xfade: 0
+  orchestral_gong_2:
+    title: Orchestral gong 2
+    source: vcsl
+    program: Idiophones/Struck Idiophones/Gong 2.sfz
+    family: keys
+    category: Orchestral percussion
+    instrument: Gong
+    articulation: hit
+    description: Recorded gong 2; mapped keys select hit variations. Not a chromatic
+      melodic instrument.
+    range:
+    - 60
+    - 65
+    params:
+      xfade: 0

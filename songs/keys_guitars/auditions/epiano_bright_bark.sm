@@ -1,0 +1,12 @@
+# Controlled keyboard timbre audition: Bright Bark.
+# Notes: soft call, answering voicing, firmer detached attacks, then a resting resolution.
+# Expression is written per phrase. This shared benchmark compares sounds; it is not a finished composition.
+song "Bright Bark" 100 4/4 C seed=83 tail=2 mood=balanced
+inst keys=epiano/bright_bark
+chords Cmaj7:1 Dm7:1 G7:1 Cmaj7:1
+call 1 | keys:{deg: "=p [0,2,4]/4 6/8 4/8 [0,2,4]/4 r/4", oct: 0}
+reply 1 | keys:{deg: "=mp [1,3,5]/4 7/8 5/8 [1,3,5]/4 r/4", oct: 0}
+firm 1 | keys:{deg: "=mf [1,3,6]/8'^ r/8 [1,3,6]/8' r/8 4/4 3/4", oct: 0}
+land 1 | keys:{deg: "=p [0,2,4,6]/2_ 2/4 r/4", oct: 0}
+mix keys -5 hall=.04
+master standard lufs=-18 glue=none

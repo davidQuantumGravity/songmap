@@ -36,7 +36,25 @@ events: [...]           # §8
 mix: {...}              # §10
 master: {...}           # §10
 qa: {...}               # §11
+expression: {...}       # beat curves inside held notes; see the guide below
+techniques: {...}       # named recorded techniques on subsequent notes
 ```
+
+Continuous curves use the same mapping in YAML and `.sm`:
+
+```yaml
+expression:
+  verse:
+    violin:
+      volume: [[0, 0.25], [4, 1], [8, 0.3]]
+techniques:
+  verse:
+    violin: [[0, sustain], [4, pizzicato]]
+```
+
+The part uses `family/violin` for these recorded techniques. Curves use quarter-note
+beats from section start, including at tempo ramps; endpoints must cover the section.
+See [the implemented controls, inheritance and calibration](EXPRESSION_ARTICULATION_RESPONSE.md).
 
 ## 2. Instruments (the ensemble)
 
@@ -246,18 +264,42 @@ events:
 
 Event types: `impact`, `riser`, `downlifter`, `hit` (stab, with `sound:`), `zaps`, `ticks`, `stop`, `drop` (mute parts), `fill`, `swell`, `crash`, `reverse` (reversed cymbal into `at`), `tape_stop`, `filter_sweep`, and `cloud`: `n` short notes scattered between `at` and `to`, drawn from a scale, with density following a curve, e.g. `{at: f1085, to: f1145, type: cloud, n: 135, part: blips, scale: minor_pent, density: "exp"}`. Use it to make a counter audible. Every event is also written to `cues.json`.
 
-## 9. Tempo
+## 9. Tempo, meter, key and scale changes
 
 ```yaml
 sections:
   - {name: outro, bars: 4, tempo: rit 120>96}       # ritardando across the section
   - {name: ballad, bars: 8, tempo: 90}
   - {name: odd, bars: 8, meter: "7/8 2+2+3"}         # its own meter; groups (eighths) accent the group starts
+  - {name: modal, bars: 4, key: "D dorian", tempo: "accel 90>120"}
 ```
 
 A section `meter` changes the length of its own bars: step strings have that many steps per bar (14 sixteenths in
 7/8), bar lines in notes are checked against it, `chords "X:1"` lasts one of its bars, and positions and event
-lengths count bars across meters as written (`@-1` is the bar before, in the meter it has). `like:` keeps it.
+lengths count bars across meters as written (`@-1` is the bar before, in the meter it has).
+
+Tempo is quarter-note BPM, independent of the denominator. Ramps are linear in beats, integrated exactly
+to seconds. Meter, tempo and key overrides affect their section only; an omitted or `null` value uses the
+song default independently of previous sections. `like:` copies parts, harmony, feel and dynamics, so
+write conductor values explicitly when needed on a repeated section.
+
+`key` encodes tonic and scale/mode together, e.g. `C`, `F# minor`, `D dorian` or `C golden7`. Scale-degree
+notes and named degree motifs without their own key follow the section key. A motif's explicit `key`
+pins it. Letter pitches and chord symbols remain as written; changing the key does not transpose them.
+Tuning stays song-wide and must accommodate any microtonal scale. Changes occur at section boundaries;
+shorter sections provide additional change points, while a tempo ramp runs within a section.
+
+An optional top-level `conductor` mapping overrides named section instances after section/form expansion:
+
+```yaml
+conductor:
+  verse_2: {tempo: 108, meter: "7/8 2+2+3", key: "D dorian"}
+  outro: {tempo: "rit 108>72", key: null} # null clears the section override
+```
+
+Targets must identify existing unique section names; fields are limited to `tempo`, `meter` and `key`.
+The canonical formatter resolves these values into section fields. Studio uses this map to edit one expanded
+instance while keeping the original structured `.sm` program. See [GUI.md](GUI.md) for the Conductor editor.
 
 Changing tempo breaks whole-frame beats. The engine still exports exact frame numbers in `cues.json`, but it warns when `60*fps/tempo` is not an integer. (Whole-frame tempos at 30 fps: 60, 72, 75, 90, 100, 120, 150, 180.)
 

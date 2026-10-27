@@ -48,8 +48,54 @@ def catalog(compact: bool = True) -> str:
     presets = list_presets()
     lines.append("inst    " + " ".join(n + (f"/{','.join(presets[n])}" if n in presets else "") for n in REGISTRY))
     from .instruments.sampler.library import manifest, voices
-    lines.append("sfz     " + " ".join(f"sampler/{name}" for name in manifest()["voices"]))
+    sample_names = list(manifest()['voices'])
+    if compact:
+        # Repeated kit prefixes otherwise crowd the model's compact context. Brace choices
+        # enumerate every exact suffix, while melodic references remain individually copyable.
+        grouped = {}
+        for name,v in manifest()['voices'].items():
+            prefix=v['source']+'_'
+            if v['family']=='drum' and name.startswith(prefix):
+                grouped.setdefault(prefix,[]).append(name)
+        for prefix,names in grouped.items():
+            if len(names)<4:
+                continue
+            first=sample_names.index(names[0])
+            sample_names=[n for n in sample_names if n not in names]
+            sample_names.insert(first,prefix+'{'+','.join(n[len(prefix):] for n in names)+'}')
+        grouped = {}
+        for name in sample_names:
+            if '{' not in name and '_' in name and manifest()['voices'][name].get('category','').startswith(('Orchestral','Jazz')):
+                prefix = name.split('_',1)[0]+'_'
+                grouped.setdefault(prefix,[]).append(name)
+        for prefix,names in grouped.items():
+            if len(names)<2:
+                continue
+            first=sample_names.index(names[0])
+            sample_names=[n for n in sample_names if n not in names]
+            sample_names.insert(first,prefix+'{'+','.join(n[len(prefix):] for n in names)+'}')
+        loose=[n for n in sample_names if '{' not in n and manifest()['voices'][n].get('category','').startswith(('Orchestral','Jazz'))]
+        if len(loose)>1:
+            first=sample_names.index(loose[0])
+            sample_names=[n for n in sample_names if n not in loose]
+            sample_names.insert(first,'{'+','.join(loose)+'}')
+    if compact:
+        keep={'grand_piano','steinway_piano','knight_piano','meta_piano','rhodes_mono','nylon_finger','nylon_pick','steel_guitar','archtop_mic','emily_clean'}
+        loose=[n for n in sample_names if '{' not in n and n not in keep]
+        if len(loose)>1:
+            first=sample_names.index(loose[0]);sample_names=[n for n in sample_names if n not in loose]
+            sample_names.insert(first,'{'+','.join(loose)+'}')
+    lines.append("sfz     " + " ".join(f"sampler/{name}" for name in sample_names))
+    if compact:
+        lines.append('        {a,b} = either suffix; expand to one exact reference')
     lines.append("        install/status: songmap samples install | songmap samples list")
+    from .instruments.sound import library as sound_library
+    lines.append("sound   " + 'sound/{'+','.join(n.removesuffix('_palette') for n in sound_library())+'}_palette')
+    lines.append("        score sounds override library; blend or morph_x/y=0..1; tone_brightness/body/width=-1..1; tone_attack/tightness/grit/vibrato=0..1")
+    from .instruments.family import library as families
+    lines.append('family  family/{'+','.join(families())+'}; technique: name or auto; calibration=0..1')
+    lines.append('expr    set expression={section:{part:{control:[[beat,value],...]}}}; continuous in held notes')
+    lines.append('        set techniques={section:{part:[[beat,name],...]}}; technique changes at note onsets')
     lines.append(f"events  {' '.join(RENDERED)}; cue-only until P3/P4: "
                  + " ".join(t for t in EVENT_TYPES if t not in RENDERED))
     lines.append("roles   drums bass pad arp lead fx; any other role plays the instrument of its name (inst to set)")

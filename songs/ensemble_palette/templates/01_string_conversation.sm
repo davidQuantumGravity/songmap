@@ -1,0 +1,14 @@
+# First violin notes: a rising question, a lower answer, a late high point and a tonic release. Expression: soft starts, one firm peak, short bows before rests.
+# Second violin notes: thirds and sixths below the lead, with contrary motion in the answer. Expression: sustain below the lead, lift the end of each phrase.
+# Viola notes: inner chord tones move by step without following every violin attack. Expression: fewer attacks, tenuto middle notes, soft ending.
+# Cello notes: root/fifth foundations and a connecting dominant turn. Expression: broad first beats, lighter fifths, silence after the final tonic.
+# Small recorded sections below the solo violin; this is not four separately sampled solo string players.
+song "String conversation" 94 4/4 C seed=201 tail=3 mood=balanced
+inst vln1=sampler/solo_violin vln2=sampler/violins viola=sampler/violas cello=sampler/cello
+chords C:2 F:2 G:2 C:2
+question 2 | vln1:{deg: "=p 4/4_ 5/8 4/8 2/4 r/4 | 0/2_ 2/4 r/4", oct: 1} vln2:{deg: "=p 2/2_ 0/2 | 2/4 1/4 0/2_"} viola:{deg: "=p 0/2_ 2/2 | -3/1_"} cello:{deg: "=p 0/2_ -3/4 r/4 | 0/2_ r/2", oct: -1}
+reply 2 | vln1:{deg: "=mp 5/4 4/8 3/8 2/4 r/4 | 1/2_ 0/4 r/4", oct: 1} vln2:{deg: "=p 3/2_ 5/2 | 4/4 3/4 2/2_"} viola:{deg: "=p 0/2 1/2_ | -4/1_"} cello:{deg: "=mp 3/2_ 0/4 r/4 | 3/2_ r/2", oct: -1}
+lift 2 | vln1:{deg: "=mf 4/4^ 6/4_ 5/4 4/4 | 2/2_ 1/4 r/4", oct: 1} vln2:{deg: "=mp 6/2_ 4/2 | 4/4 3/4 1/2_"} viola:{deg: "=mp 1/2 3/2_ | -3/2_ -1/2"} cello:{deg: "=mp 4/2_ 1/4 2/4 | 4/2_ 6/4 r/4", oct: -1}
+settle 2 | vln1:{deg: "=mp 2/4 1/4 0/2_ | =p 0/2_ r/2", oct: 1} vln2:{deg: "=p 4/2_ 2/2 | 2/2_ r/2"} viola:{deg: "=p 0/1_ | 0/2_ r/2"} cello:{deg: "=p 0/2_ -3/4 r/4 | 0/2_ r/2", oct: -1}
+mix vln1 -5 pan=-.25 hall=.12 | vln2 -9 pan=.18 hall=.12 | viola -9 pan=.3 hall=.1 | cello -7 pan=-.1 hall=.1
+master standard lufs=-18 glue=none

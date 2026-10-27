@@ -1,0 +1,962 @@
+[
+  {
+    "source": "auditions/folk_harp.sm",
+    "source_sha256": "941f77021994f3250d7a0febf3d05cf0883ec2c81f54c2e619463b37753de1ee",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/marimba.sm",
+    "source_sha256": "94fa9578f145147c02080ebf5ac86d7c9c5c3bcb137497dd054b329521894853",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/vibraphone.sm",
+    "source_sha256": "d7bc48382e1361cc2253d96698eb04c2444057931ec5f12dc28f29428ffdf2dc",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/double_bass.sm",
+    "source_sha256": "f1f95b85d289a7abec900999aa268526b12d3c8b851123033e9d9ccd3e0876c8",
+    "digest": "03661da4dbbbb9b5939a710ea06097d7257b5e5d568930cad7c69b5d0742fa0e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/cello.sm",
+    "source_sha256": "07b2ad215faebe2fa1de159742ddbb3fd1b6b41e764a260df464a067395e61cd",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violins.sm",
+    "source_sha256": "50870f26795f8ce5841a752d0e75f23d3e2d4d1eaeb7d76306401745cb87d9ba",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/flute.sm",
+    "source_sha256": "bbc585ae2f0789a22a9714c9302d714b618f9c36a474b4042324e3049278e289",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/solo_violin.sm",
+    "source_sha256": "cecb4e0ee6aaa22b16bb7030f3f117956090006fa2b51eb5a711623a7b638068",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/horn.sm",
+    "source_sha256": "e5e5b37eb73909271117b35b3881b45b2125171739afba1f6000cba68ec4b8f6",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/double_bass_arco.sm",
+    "source_sha256": "847d99324d0879e0897d2067bb6810362ac7394970206a9e2fe0e8fdc8b3aef9",
+    "digest": "03661da4dbbbb9b5939a710ea06097d7257b5e5d568930cad7c69b5d0742fa0e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/solo_violin_pizzicato.sm",
+    "source_sha256": "0279aee6d13dd0bca84f7b1d60db0af5ab80f0bb3bffbac5ad96307978bebe12",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/solo_violin_spiccato.sm",
+    "source_sha256": "cd4f27ee41bb0770800b5c3a54dd3bce324abed6fe0ce7e6f06ad4b061d93237",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/solo_violin_tremolo.sm",
+    "source_sha256": "a4af619909f4c5f126e1057378e207ef84e475db8b6185be092d315d69f1af78",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/solo_violin_soft.sm",
+    "source_sha256": "3213d6be9044aed82911a55c6881f7ec5ee68e65820e2a7fe3af0299d3f2871f",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violins_pizzicato.sm",
+    "source_sha256": "77d086babd57b6d976fc779210a346ccb9577621feed9fecc615f79a11cd0d2a",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violins_tremolo.sm",
+    "source_sha256": "491d1c9f9ca21856d6441d9dbfb99044694d0150b45f9e28a2bc9b02e3ac1b16",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violins_soft.sm",
+    "source_sha256": "ea999581043550dae73d076c055e65ac228ca21122298fadc68aa62f6cbc38e3",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violas_pizzicato.sm",
+    "source_sha256": "b931acac5ec8456cc6600263e33d1321689da6aa649e9de0d87d8fabae80481f",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violas_spiccato.sm",
+    "source_sha256": "805708aba75ea38fd4364bf30161b3bd40082da7f2ac195e164646d5b37b5832",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violas_tremolo.sm",
+    "source_sha256": "4b33808efef9d26a936cee84a34b583b8987a55a6f53fd44c9c1cec84ae990e2",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violas_soft.sm",
+    "source_sha256": "12386d22c8b7023d02d938b2040f64431c974f2aeb0670c67698ced148fb61f8",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/cello_pizzicato.sm",
+    "source_sha256": "db2462f6dfa881166efdbebb9ecc1c18f007b42e2474e1d32283d9830f9dd597",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/cello_tremolo.sm",
+    "source_sha256": "0efbc276b862f6c9d17fbc2b9bda68286b746bb0a01ca229a9bcbba9fedfe7e0",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/cello_soft.sm",
+    "source_sha256": "fa624c5776e8774158b1f85e03cd1b792d2e476ebe58221280e538287fa9fc13",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/double_bass_spiccato.sm",
+    "source_sha256": "412fdb13e3df3741a32884716caa2983c05a90dabedad53a94f1e88b370ea8c5",
+    "digest": "03661da4dbbbb9b5939a710ea06097d7257b5e5d568930cad7c69b5d0742fa0e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/double_bass_tremolo.sm",
+    "source_sha256": "880646f6f5a4db24befadd3bcf4c35a07f75b4cce9d47d9de2b70871ea058412",
+    "digest": "03661da4dbbbb9b5939a710ea06097d7257b5e5d568930cad7c69b5d0742fa0e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/double_bass_soft.sm",
+    "source_sha256": "67819675cee69e5115699f17cc4d1f07393131ae1abb4561f358cf92a58ac98d",
+    "digest": "03661da4dbbbb9b5939a710ea06097d7257b5e5d568930cad7c69b5d0742fa0e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violas.sm",
+    "source_sha256": "66be924aecc229e9d01e4415490e43344dd1f6886edb66f9f604ec69cb2487e3",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/double_bass_vibrato.sm",
+    "source_sha256": "09454f2783ae17c86a876e9a1d280096d2591cf1e44c1a319142a5ae01710299",
+    "digest": "03661da4dbbbb9b5939a710ea06097d7257b5e5d568930cad7c69b5d0742fa0e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/flute_vibrato.sm",
+    "source_sha256": "bc4abc261203348c1781931696afee72abce21adc6af4302eac541c5f8f1ad20",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/flute_expressive.sm",
+    "source_sha256": "44c39071208bdc9139c9ddf8f4335552ec661ee0c577c0b708f7e1dd075bac18",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/flute_staccato.sm",
+    "source_sha256": "b619a1715de6838185936c51cfb5dd602360002fd9d5ae99e16b1d8e28fc4bab",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/piccolo.sm",
+    "source_sha256": "95e1d14ae1d6345377249cbb220c93b0796ad2df6a1639fe2fd912656e60329f",
+    "digest": "5bc70d94579f62ff7b9b847b084e83d7006d97bb93d4baa076ae3ab53ed3d422",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/piccolo_staccato.sm",
+    "source_sha256": "69963c68c2f3e5d1289965454041c520a01ead864f638ce831f8586536b57556",
+    "digest": "5bc70d94579f62ff7b9b847b084e83d7006d97bb93d4baa076ae3ab53ed3d422",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/oboe.sm",
+    "source_sha256": "72da8f44223382876e5f338dbd2c13c3bea5f20d43210c2485470765b7097bfe",
+    "digest": "0a5aa4ff1a0555539cbc4cbb98cef41d9160f6756768d75d18b0ea02e33a3829",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/oboe_vibrato.sm",
+    "source_sha256": "8033f444b1f97fa8f2db5ef9d9051a815be709da1cc274571e5c70e0dc5e2049",
+    "digest": "0a5aa4ff1a0555539cbc4cbb98cef41d9160f6756768d75d18b0ea02e33a3829",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/oboe_staccato.sm",
+    "source_sha256": "ec494642bceec6043a1173ca8ac6031807a0c6ad95546ea51bf3f4922840d374",
+    "digest": "0a5aa4ff1a0555539cbc4cbb98cef41d9160f6756768d75d18b0ea02e33a3829",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/clarinet.sm",
+    "source_sha256": "a44cda27df09ac7870d8e33321852043b9101eeec691a1895a3bd1c298f57170",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/clarinet_staccato.sm",
+    "source_sha256": "27dc9ad52fe08b823c8ff34d4bf7e7742b0a24f60b5b3aec4692568859733650",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/bassoon.sm",
+    "source_sha256": "b6a856d76dcdec63f115d24000dd08bd3cf443bcf945ed790f84cd7e24d035f4",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/bassoon_vibrato.sm",
+    "source_sha256": "175b80787218c88d23df57cf63ec86b41364f76818ed9fa1530edd914ebccaab",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/bassoon_staccato.sm",
+    "source_sha256": "2a52636be3e022c08b20ad48533b01230ee0a2e4a2967e5a744c2e61a2c4f6dd",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/horn_muted.sm",
+    "source_sha256": "2e858ef689de921189fb6b476ad84d2e29f23feb8909a806bf58804241145011",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/horn_staccato.sm",
+    "source_sha256": "c3d1fe179ba576911f06f0fb094969f7eb938c1bb05588951d870b6f42ea5d2f",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/trumpet.sm",
+    "source_sha256": "01633bd6b9a2d7a5212b4dff20c3d4e6a8bdb496aad22a80e2c43a036122db31",
+    "digest": "0a5aa4ff1a0555539cbc4cbb98cef41d9160f6756768d75d18b0ea02e33a3829",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/trumpet_vibrato.sm",
+    "source_sha256": "c8d77d2874346cd546e66dd08c2402729705ddcf251cecc98a090f074ded038c",
+    "digest": "0a5aa4ff1a0555539cbc4cbb98cef41d9160f6756768d75d18b0ea02e33a3829",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/trumpet_staccato.sm",
+    "source_sha256": "31fb693350eaa3d137364cb614f2dd1b543631146606dc2b22a185295331a14c",
+    "digest": "0a5aa4ff1a0555539cbc4cbb98cef41d9160f6756768d75d18b0ea02e33a3829",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/trumpet_straight_mute.sm",
+    "source_sha256": "c6e00515b9b8da72c1faa276e9ffa3f330959473846350ecb8c1af5ec5fc85ff",
+    "digest": "0a5aa4ff1a0555539cbc4cbb98cef41d9160f6756768d75d18b0ea02e33a3829",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/trumpet_harmon_mute.sm",
+    "source_sha256": "b39a16ff8e03265e02d24fdd90d3ab969b748ad410e6c2e483c8828911fc3750",
+    "digest": "0a5aa4ff1a0555539cbc4cbb98cef41d9160f6756768d75d18b0ea02e33a3829",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/trombone.sm",
+    "source_sha256": "a1b9ae3ba6adfc1a58c6ac4f3a15e5963089eb490e098b0e6b77a6a42ad6f92c",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/trombone_vibrato.sm",
+    "source_sha256": "45d97fa159c228945b6ab4c294c9cbfc2a48c0291aec85d77720a8e9aca5bfa3",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/trombone_staccato.sm",
+    "source_sha256": "687b7394e7a73315590440e9eebd4b252e7225fbd64cc4bb08801baca82c0968",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/tuba.sm",
+    "source_sha256": "7c409c0e48a95c1d327aac9e7c167ed27a5c9fe3f9b179f410a47b4f92b4aaa3",
+    "digest": "03661da4dbbbb9b5939a710ea06097d7257b5e5d568930cad7c69b5d0742fa0e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/tuba_staccato.sm",
+    "source_sha256": "1fcb565c8951163953407a6c053201d5a72912216834d4560f832d494c1f887a",
+    "digest": "03661da4dbbbb9b5939a710ea06097d7257b5e5d568930cad7c69b5d0742fa0e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/tenor_sax.sm",
+    "source_sha256": "f2a48cfa043fabed9cbdcaf659786ba6ec7298e6252a7e4ee409485c9335f715",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/tenor_sax_vibrato.sm",
+    "source_sha256": "d4e43a116ac33b52f5c80b493a3ea0092705c80f103484eb369feeaec0e55d1d",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/tenor_sax_staccato.sm",
+    "source_sha256": "8f66c127eb5dea2f71a0303a5c8f949c4021fd21fc9e297cf7035cca0199c2d6",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/saxello.sm",
+    "source_sha256": "fa91353206baab4b4caf23ab0769ee1c59b34cf90bb15c2e6e2bb5cf7b4520d5",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/saxello_vibrato.sm",
+    "source_sha256": "6a988d2c899e69a77f0cf8260645cfa908f7c13ea70e31cae07bd915c8e6f83c",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/saxello_staccato.sm",
+    "source_sha256": "1a295030ccd2e5c0ea90d3b396b442eeda1e3627e2d07d05a0de1ee5929b8d15",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/mtg_soprano_sax.sm",
+    "source_sha256": "23b78c5898034dbf24cee9da830fab72e907d326cb957b26e3dc377159d6c71c",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/mtg_alto_sax.sm",
+    "source_sha256": "9dfcb61f44494b9081bc43c155ece10c89a6fb3f8a81d1606d852baaf30bc135",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/mtg_tenor_sax.sm",
+    "source_sha256": "be8c5e5d96ae738121a9d354723f252cab8ee5fadfbb300977d7e3a31198b348",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/mtg_baritone_sax.sm",
+    "source_sha256": "54060efe346b4c067db847c84e3622822d44cad7328239f3a007bdfdf31855f1",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/orchestral_harp.sm",
+    "source_sha256": "1cc1d1cb8c4cdfa569eb0183b1f764aa7b0f1cec1854187aa729ed2a7ee45a84",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/glockenspiel.sm",
+    "source_sha256": "ea52338a70f8d1f7f0c570d61c48f4d8eb2185aad6ef249f27688a873300bc8f",
+    "digest": "7b86dd0703f8be046f08fb599da40c715217482cb09a8a96e84a1bb9a3307ef9",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/tubular_bells.sm",
+    "source_sha256": "3e245179d3ee2474df648a564ffdbafd50f0c4b24df2ebcbb6fd506b5eb0f846",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/timpani.sm",
+    "source_sha256": "a259fd429a1c7cf57f2f9744734d62336dd74fa9401400209ecf4f684fbede9e",
+    "digest": "974f97c3f233bbb754efa36eaabe26d4681ff15e344db2e6089b2240a0abdf7d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/timpani_roll.sm",
+    "source_sha256": "9eab74e65ca97e2ee175d126e6193ba837c463d6ef349381b920904183902f0f",
+    "digest": "974f97c3f233bbb754efa36eaabe26d4681ff15e344db2e6089b2240a0abdf7d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/xylophone_soft.sm",
+    "source_sha256": "653cb1bae2e5e13fb537b2098605c01b429d452e80cd6e028b5482de57f81537",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/xylophone_medium.sm",
+    "source_sha256": "0acba3e6b9a4b96cb6ecfc9197e66a46c0c68dddb52a88a13ec6848d1c93c01d",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/xylophone_hard.sm",
+    "source_sha256": "ce319c1ae65fa9157536f0a376dee8d59d6a0d5f2c8aef82fa59b5a4228fddb7",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/orchestral_gong_1.sm",
+    "source_sha256": "89270f0780d6d79fd77b9584f70d99d3e44998628677f06e7f1a92a92e76c927",
+    "digest": "09626018e09cd1d2989ee5d038c43d548a948711304181f37a84fe073b45d45b",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/orchestral_gong_2.sm",
+    "source_sha256": "2eaba20733ad08161539ab0c2b33848c4e7d9b7ab8dd4003d9eb18979c546696",
+    "digest": "09626018e09cd1d2989ee5d038c43d548a948711304181f37a84fe073b45d45b",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violin_palette.sm",
+    "source_sha256": "0a5d559b218f082b550b1e36a88473dd2f703a9e0a673bc642fec2390963081d",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/viola_palette.sm",
+    "source_sha256": "dbc5c2575ff823db804127e4d30272ee231965b3c6e4b2ecae54697f37a68d54",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/cello_palette.sm",
+    "source_sha256": "575cd73e78ceec6afaf5fbbf63f446b51b20375bbe067b8b3e2a260ab91a090f",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/double_bass_palette.sm",
+    "source_sha256": "e14f0c4bb114f3c257a213ad96acdf803fdb630d99c30ed00369da92b0b657f7",
+    "digest": "03661da4dbbbb9b5939a710ea06097d7257b5e5d568930cad7c69b5d0742fa0e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/flute_palette.sm",
+    "source_sha256": "1867afad7c3205af34738af6f5be749cfa52f4f29b9b21eeb0299b82ee6d4e48",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/oboe_palette.sm",
+    "source_sha256": "ac199a16fc7f599109dd717126e94a0d22a8c5913ed2b0b9cf4f7a50af78b0b0",
+    "digest": "0a5aa4ff1a0555539cbc4cbb98cef41d9160f6756768d75d18b0ea02e33a3829",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/clarinet_palette.sm",
+    "source_sha256": "a8c6f920496213c6644eac46ed19afd9ca3dc299d5e80cf45e4f083ff490eee9",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/bassoon_palette.sm",
+    "source_sha256": "2665a23fb0d980f9824e3ab024305b99a7279c6b096eb0dc3cec19ed4581d547",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/horn_palette.sm",
+    "source_sha256": "c0273067ce2760615eab9eb5eb37b901be1e444db88a912da03eaa027feec65e",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/trumpet_palette.sm",
+    "source_sha256": "a42df83c93d1cbc2e297d8791a96a60f6452b5a9a41e24a8ffe017e58b65f672",
+    "digest": "0a5aa4ff1a0555539cbc4cbb98cef41d9160f6756768d75d18b0ea02e33a3829",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/trombone_palette.sm",
+    "source_sha256": "703f5f78c4bebf539c02c17644b477d764354c26952e3ec3d81241551021bc63",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/tuba_palette.sm",
+    "source_sha256": "8533be590662abde57e14f00aa1edf3e345ae100dcc8572e0b06f130b292b05d",
+    "digest": "03661da4dbbbb9b5939a710ea06097d7257b5e5d568930cad7c69b5d0742fa0e",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/tenor_sax_palette.sm",
+    "source_sha256": "983d2a1818b7c846192752052fef716499a22d7e7e4cad996935a0d4b862855f",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/xylophone_palette.sm",
+    "source_sha256": "fde22c51a14f2c6d383ad52442280b9e025064de44de1193de16a56aee55b072",
+    "digest": "ae852c7365d070e337f92857f471982dc8fe5a0dd3721ad56d90437d45037a85",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "templates/01_string_conversation.sm",
+    "source_sha256": "8bb36ed550658c4c513119e25e22fa1d224155b62cc4412cdb8a230d053b8c2b",
+    "digest": "ea72b5182c057e9d7f2c17df7e3b3c9bac8d50f3d4947425fca9f18161cdfd36",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/02_woodwind_replies.sm",
+    "source_sha256": "b75555c9ddd444ae07828c462b41f2ea5509f0421796e1433c8925c3594fe604",
+    "digest": "6a4389f6fa08277e294c6632e7cfbd43ebf9c92cdc26fdfbcfc3c35f2a81785f",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/03_brass_quintet.sm",
+    "source_sha256": "d9c80b4e7120be456cab78b4e26feb0a895cd589036f723efe2bb27a3d83e5d5",
+    "digest": "153f3164c24a8186ef1704fb503c52e7346eeed86ce4bedc8f1617874f3ef1fa",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/04_jazz_quintet.sm",
+    "source_sha256": "dc2544156703cb329dad288ae234721d447a9252f64a2c0f703a25f0c39ea60c",
+    "digest": "a0ce12106d0a15e59a98febd846f6fda05809af43e10f619c5dcb487c6b657ae",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/05_sax_quartet.sm",
+    "source_sha256": "91ae7687659119dcdd210d65f8669886b06ae6493766d45be89f7a1025bdfbcd",
+    "digest": "dd5606bedbbfd8bc2ece2f3f42b43a5053d137aa8d5845f75e12d218f512c009",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "templates/06_orchestral_handoff.sm",
+    "source_sha256": "045d366e96013770ff1f94ca4a127e1c6ccb0bdfa57e19bfcdfe2c4b8e465b75",
+    "digest": "be5d200493409853c64185112990f8509fd1260c77af0b483351031efc8674bc",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 1
+    }
+  },
+  {
+    "source": "auditions/cello_spiccato.sm",
+    "source_sha256": "332eae415d72ff01949c785d89d51d19dee4fa6f9c167443a385d73bb9191077",
+    "digest": "c6551e83a14485fcf290f799af2cc604277df96e40cebd791c05b42736556b55",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  },
+  {
+    "source": "auditions/violins_spiccato.sm",
+    "source_sha256": "91f8c37c06ae34e258b47046bca2c478c35add004e5ea540f72c8701623e6bdc",
+    "digest": "197d8578ca0417d6de5bb88c97a630afcab255dc03ad9a6e1ddeb2df3e728c1d",
+    "listen": {
+      "problem": 0,
+      "warning": 0,
+      "note": 0
+    }
+  }
+]

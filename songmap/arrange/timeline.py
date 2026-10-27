@@ -68,10 +68,10 @@ class _Seg:
 
 def parse_tempo(value, song, sec) -> tuple[float, float]:
     """A section tempo -> (start bpm, end bpm)."""
-    if isinstance(value, (int, float)) and not isinstance(value, bool) and value > 0:
+    if isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and value > 0:
         return float(value), float(value)
     m = _RAMP.fullmatch(str(value)) if isinstance(value, str) else None
-    if m and float(m[2]) > 0 and float(m[3]) > 0:
+    if m and all(math.isfinite(float(m[i])) and float(m[i]) > 0 for i in (2, 3)):
         a, b = float(m[2]), float(m[3])
         if (m[1] == "rit" and b > a) or (m[1] == "accel" and b < a):
             raise SongError(f"tempo '{value}': {m[1]} goes {'down' if m[1] == 'rit' else 'up'}", file=song.file,

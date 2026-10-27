@@ -5,6 +5,8 @@ from functools import lru_cache
 import json
 import math
 
+import numpy as np
+
 from .instrument_lab import safe_path, voice_name
 from .project import parse_text
 from ..arrange.expand import expand
@@ -64,6 +66,8 @@ def take_score(path, source, start, seconds):
     tl = arr.timeline
     data = structure(arr)
     raw = song_to_raw(arr.song)
+    from ..expression import Expression,SPECS
+    expression=Expression(arr)
     shared_mix = {key: raw.get(key) for key in ("returns", "master", "binaural")}
     data.update(start=start, seconds=seconds, parts=[])
     data["bars"] = [{**b, "start": max(0, b["start"] - start), "end": min(seconds, b["end"] - start)}
@@ -89,13 +93,20 @@ def take_score(path, source, start, seconds):
                               "micro": pitch is not None and abs(float(pitch) - round(float(pitch))) > 1e-6,
                               "velocity": event.vel, "piece": event.piece})
             fingerprint.append([float(a), float(b), list(event.pitches), float(event.vel), event.piece,
-                                event.art, event.pan, event.gain_db, event.params, list(event.patch)])
+                                event.art, event.pan, event.gain_db, event.params, list(event.patch),event.technique])
         if not notes:
             continue
         uses = list(dict.fromkeys(v["use"] for v in voices.values()))
+        continuous={}
+        for (p,key),segments in expression.tracks.items():
+            if p!=part:continue
+            times=sorted({start,start+seconds,*[tl.beat_to_sec(origin+b) for origin,points in segments for b,_ in points if start<tl.beat_to_sec(origin+b)<start+seconds]})
+            values=expression.values(part,key,np.array(times))
+            neutral=expression.defaults.get((part,key),SPECS[key].default)
+            if np.any(abs(values-neutral)>1e-10):continuous[key]=[[t-start,float(v)] for t,v in zip(times,values)]
         data["parts"].append({"part": part, "voice": ", ".join(voice_name(v) for v in uses),
                               "uses": uses, "kit": arr.ensemble.is_kit(part), "notes": notes,
-                              "fingerprint": json.dumps(fingerprint, sort_keys=True),
+                              "fingerprint": json.dumps({'notes':fingerprint,'continuous':continuous}, sort_keys=True),
                               "sound": json.dumps({"voices": voices, "patches": raw.get("patches") if any(v.startswith("patch/") for v in uses) else None}, sort_keys=True),
                               "mix": json.dumps({"part": arr.ensemble.mix.get(part, {}), "master_bus": arr.ensemble.mix.get("master", {}),
                                                  "shared": shared_mix}, sort_keys=True)})

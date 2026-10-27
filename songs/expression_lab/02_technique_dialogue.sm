@@ -1,0 +1,9 @@
+# Violin notes: a broad tonic question, two separated pizzicato replies, a three-note short-bow turn, then a trembling dominant resolves to the tonic.
+# Expression: mp sustain, softer plucks, firmer short-bow accent and quiet tremolo release. The same family selects real recordings per phrase, retaining independent note lengths.
+song "Four ways to play one violin" 100 4/4 C seed=402 tail=3 mood=balanced
+inst violin=family/violin
+chords C:4
+story 4 | violin:{deg: "=mp 0/2_ 2/4 4/4 | =p 0/4 r/4 2/4 r/4 | =mf 0/8'^ 2/8' 4/4' r/2 | =p 4/2_ 0/4 r/4"}
+set techniques={story: {violin: [[0,"sustain"],[4,"pizzicato"],[8,"spiccato"],[12,"tremolo"]]}}
+mix violin -6 hall=.08
+master standard lufs=-18 glue=none

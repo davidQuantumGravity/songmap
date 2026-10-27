@@ -1,0 +1,12 @@
+# Violin notes: one held tonic introduces the phrase, with an E/G reply; A/F answers resolve onto C. Written breaths separate the answers.
+# Violin expression: the first held note grows and recedes without another attack; delayed added vibrato is restrained because the recording already vibrates. The final tonic tapers.
+# Harp notes: a sparse C/E/G answer and F/A/C response leave space beneath the bowed line. Harp expression: quiet plucks, lighter second replies and a held final dyad.
+# Ending: C over F leaves a deliberate open plagal color rather than a final home-chord cadence.
+song "A bowed note that breathes" 92 4/4 C seed=401 tail=3 mood=balanced
+inst violin=family/violin harp=sampler/folk_harp(calibration=1)
+chords C:2 F:2
+call 2 | violin:{deg: "=mp 0/1_ | =mp 2/2_ 4/4 r/4"} harp:{deg: "=p r/2 0/8 2/8 4/4 | r/2 [0,2]/4 r/4"}
+answer 2 | violin:{deg: "=mp 5/2_ 3/4 3/4 | =p 0/2_ r/2"} harp:{deg: "=p r/4 3/8 5/8 7/4 r/4 | [0,3]/2_ r/2"}
+set expression={call: {violin: {volume: [[0,0.3],[1,0.55],[2.5,1],[4,0.55],[6,0.8],[8,0.25]], brightness: [[0,-0.15],[2.5,0.15],[8,-0.1]], vibrato_depth: [[0,0],[1.5,0],[3,14],[6,18],[8,0]]}}, answer: {violin: {volume: [[0,0.25],[2,0.9],[4,0.65],[6,0.2],[8,0]], vibrato_depth: [[0,0],[2,12],[5,8],[8,0]]}}}
+mix violin -5 pan=-.15 hall=.12 | harp -5 pan=.2 hall=.08
+master standard lufs=-18 glue=none

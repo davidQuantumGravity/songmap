@@ -36,10 +36,19 @@ def catalog() -> dict:
     except Exception:                                    # noqa: BLE001  (the sampler backend is optional)
         pass
     from ..instruments import Sampler
+    from ..instruments.sound import library as sound_library
+    installed = {v['ref'] for v in samplers if v['installed']}
+    hybrids = {n:{**v, 'installed':all(s['use'] in installed for s in v['sources'].values())}
+               for n,v in sound_library().items()}
+    from ..instruments.family import library as family_library
+    families={n:{**v,'installed':all(s in installed for s in v['techniques'].values())} for n,v in family_library().items()}
+    from ..expression import CONTROLS
+    from ..arrange.conductor import scale_catalog
     from ..mix.inserts import UNITS
     return {"instruments": [cls.schema() for cls in REGISTRY.values()] + [Sampler.schema()], "presets": presets,
             "samplers": samplers, "inserts": [u.schema() for u in UNITS.values()], **patch_catalog(),
-            "guides": guides()}
+            "guides": guides(), "scales": scale_catalog(), "sound_library": hybrids,
+            "families":families,"expression_controls":[asdict(q) for q in CONTROLS]}
 
 
 def guides() -> dict:
@@ -74,6 +83,8 @@ def voice_info(ens, part: str, piece: str | None = None) -> dict:
     inst = v.instrument
     info = {"use": v.use, "instrument": inst, "preset": v.use.partition("/")[2] or None,
             "params": {k: _jsonable(x) for k, x in v.params.items()}, "values": {}}
+    from ..instruments.response import profiles
+    info['response_profile']=profiles().get(v.use)
     cls = Sampler if inst == "sampler" else REGISTRY.get(inst)
     if inst == "patch":                                  # a patch instrument: its params are <module>.<knob>
         from ..instruments.patch import build
@@ -86,6 +97,24 @@ def voice_info(ens, part: str, piece: str | None = None) -> dict:
         except Exception as e:                           # noqa: BLE001  (shown as a check error elsewhere)
             info["error"] = str(e)
             cls = None
+    if inst in ("sound","family"):
+        built = ens.instrument(part, piece)
+        cls = type(built)
+        info["schema"] = [asdict(q) for q in built.PARAMS]
+        info["values"] = {k:_jsonable(x) for k,x in built.p.items()}
+        if inst=='family':
+            from ..instruments import make
+            default=make(v.use)
+            from ..instruments.sampler.library import manifest
+            info['techniques']=[{'name':n,'index':i,'ref':built.definition['techniques'][n],
+                'range':manifest()['voices'].get(built.definition['techniques'][n].removeprefix('sampler/'),{}).get('range')}
+                for i,n in enumerate(built.choices)]
+        else:
+            from ..instruments.sound import build
+            default = build(v.use.partition('/')[2], ens.sound_spec(v.use.partition('/')[2]), ens)
+        info["preset_values"] = dict(default.p)
+        info["sounds"] = ens.song.sounds
+        return info
     if cls is not None:
         try:
             if cls is Sampler:
@@ -97,9 +126,10 @@ def voice_info(ens, part: str, piece: str | None = None) -> dict:
             base = {}
         if inst == "patch":
             base = {}
-        for q in cls.PARAMS:
+        resolved=ens.instrument(part,piece)
+        for q in resolved.PARAMS:
             info["values"][q.name] = _jsonable(v.params.get(q.name, base.get(q.name, q.default)))
-        info["preset_values"] = {q.name: _jsonable(base.get(q.name, q.default)) for q in cls.PARAMS}
+        info["preset_values"] = {q.name: _jsonable(base.get(q.name, q.default)) for q in resolved.PARAMS}
     return info
 
 
@@ -201,7 +231,11 @@ def audition(song, part: str, notes: list[dict], piece: str | None = None, overr
     from ..render import _apply_chokes
     ens = Ensemble(song)
     v = ens.voice(part, piece)
-    if v.use.startswith("patch/"):
+    if v.use.startswith("sound/"):
+        from ..instruments.sound import build
+        name = v.use.partition("/")[2]
+        inst = build(name, ens.sound_spec(name), ens, **{**v.params, **(overrides or {})})
+    elif v.use.startswith("patch/"):
         from ..instruments.patch import build
         pname = v.use.partition("/")[2]
         inst = build(pname, ens.patch_spec(pname), **{**v.params, **(overrides or {})})

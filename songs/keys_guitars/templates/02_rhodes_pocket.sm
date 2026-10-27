@@ -1,0 +1,16 @@
+# Rhodes notes: rootless shell shapes leave the low register to bass; anticipations get answers, not constant sixteenths.
+# Rhodes expression: light detached comping, one firm upper answer, open release into the final tonic.
+# Bass notes: root/fifth and the occasional octave answer; strong arrivals agree with kick. Expression: short replies, heavier first notes.
+# Drums: closed hats with soft offbeats, dry snare behind the beat; no hat continues through the two-hand turnaround.
+song "Rhodes pocket" 96 4/4 C seed=92 tail=2 mood=balanced
+inst keys=sampler/rhodes_mono bass=sampler/flatwound_bass
+kit kick=sampler/blonde_bop_kick snare=sampler/blonde_bop_snare hat=sampler/blonde_bop_hat rim=sampler/blonde_bop_sidestick
+chords Dm7:2 G7:2 Cmaj7:2 Am7:1 G7:1
+groove swing=.54/16
+feel snare offset=6
+offer 2 | keys:{rel: "=mp r/8 [3,7,9]/8' r/4 [3,5,7]/4 r/4 | r/4 [3,7,9]/4_ r/8 [3,5,7]/8' r/4"} bass:{rel: "=mp R/4^ r/8 5/8 R+/4 r/4 | R/4 r/4 5/4 R/8 r/8", oct: -2} drums:{kick: "X.......x.......|X.....x.........", snare: "....X.......X...", hat: "x-x-x-x-x-x-x-x-"}
+reply 2 | keys:{rel: "=mp [3,7,9]/8' r/8 r/4 [3,5,7]/4 r/4 | r/8 [3,5,7]/8' r/4 [3,7,9]/4 r/4"} bass:{rel: "=mp R/4 r/8 5/8 R/4 r/4 | R/4 5/8 R+/8 r/4 5/4", oct: -2} drums:{kick: "X.....x...x.....", snare: "....X..o....X...", hat: "x-x-x-x-x-x-x-x-"}
+open 2 | keys:{rel: "=mf [3,5,7]/4_ r/8 9/8 7/4 5/4 | [3,7,9]/2_ r/4 [3,5,7]/8' r/8"} bass:{rel: "=mf R/4^ r/8 5/8 R+/4 r/4 | R/4 r/4 5/4 R/4", oct: -2} drums:{kick: "X.......x.......", snare: "....X.......X...", hat: "x-x-x-x-x-x-x-x-"}
+turn 2 | keys:{rel: "=mp [3,5,7]/4 r/4 [3,7,9]/4 r/4 | =p [3,5,7]/2_ r/2"} bass:{rel: "=mp R/4 r/4 5/4 r/4 | =p R/2_ r/2", oct: -2} drums:{kick: "X.......x.......|X...............", rim: "....x.......x...|................"}
+mix keys -14 hall=.08 | bass 4 sc=0 | drums -14 hall=.02
+master standard lufs=-17 glue=none

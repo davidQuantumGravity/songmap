@@ -1,0 +1,12 @@
+# Knight upright: a quiet three-note question opens into a chordal answer, then settles.
+# Piano notes: close Cmaj7/Am7 colours, one high arrival, room after each thought. Expression: quiet starts, firmer reply, long last chord.
+# Bass notes: two arrivals per bar, then a short approach into the lift. Expression: round sustained roots, lighter fifths; never fills the piano's rest.
+song "Upright conversation" 88 4/4 C seed=91 tail=3 mood=balanced
+inst keys=sampler/knight_piano bass=sampler/upright_bass
+chords Cmaj7:2 Am7:2 Fmaj7:1 G7:1 Cmaj7:2
+question 2 | keys:{deg: "=p 2/4 4/8 6/8 4/4 r/4 | [0,2,4]/2_ 2/4 r/4"} bass:{rel: "=p R/2_ 5/4 r/4 | R/2. r/4", oct: -2}
+answer 2 | keys:{deg: "=mp [0,2,5]/4 7/8 6/8 5/4 r/4 | 4/4 2/8 0/8 [0,2,5]/4 r/4"} bass:{rel: "=p R/2 5/4 r/4 | R/2 r/8 5/8 R+/4", oct: -2}
+lift 2 | keys:{deg: "=mf [0,3,5]/4 7/4^ 5/4 r/4 | [1,3,6]/2_ 4/4 3/4"} bass:{rel: "=mp R/2 5/4 r/4 | R/4 5/4 R/4 r/4", oct: -2}
+home 2 | keys:{deg: "=mp [0,2,4,6]/2_ 4/4 2/4 | =p [0,2,4]/2._ r/4"} bass:{rel: "=p R/2 5/4 r/4 | R/2._ r/4", oct: -2}
+mix keys -3 hall=.09 | bass 3 sc=0 hall=.02
+master standard lufs=-18 glue=none

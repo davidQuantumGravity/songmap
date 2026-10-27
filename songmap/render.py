@@ -106,9 +106,10 @@ def held_beats(e: XEv) -> float:
 def inst_key(inst) -> tuple:
     """An instrument's identity for the note cache: its class, params and (samplers) its program."""
     src = getattr(inst, "source", None)
+    from .instruments.response import fingerprint as response_fingerprint
     return (type(inst).__name__, getattr(inst, "name", ""), tuple(sorted((k, repr(v)) for k, v in inst.p.items())),
             src.get("program") if isinstance(src, dict) else None,
-            getattr(inst, "fixed_pitch", None))
+            getattr(inst, "fixed_pitch", None), getattr(inst, "fingerprint", None),response_fingerprint(inst))
 
 
 def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: dict | None = None,
@@ -128,6 +129,8 @@ def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: 
     rendered = hits = 0
     from .perform.play import play, played_digest
     played = play(arr)                     # the performance stage (mood v0: the written notes as they are)
+    from .expression import Expression, apply as apply_expression
+    expression = Expression(arr)
     for part, evs in played.items():
         buf = buses.setdefault(part, np.zeros((n, 2)))
         slot: dict = {}
@@ -144,7 +147,7 @@ def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: 
             seed = seed_for(song.seed, part, e.piece or "", k % RR_SLOTS)
             # SFZ sequences may have 3, 5 or more than 8 takes. Keep the full counter;
             # native synths retain their original eight seeded variations.
-            rr = k if getattr(inst, "program", None) is not None else k % RR_SLOTS
+            rr = k if getattr(inst, "program", None) is not None or getattr(inst, "full_rr", False) else k % RR_SLOTS
             gain = float(undb(voice.gain_db + e.gain_db))
             pan = float(np.clip(voice.pan + e.pan, -1, 1))
             for p in e.pitches or (60.0,):
@@ -154,14 +157,24 @@ def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: 
                 key = (ik, round(float(p), 4), round(e.vel, 5), round(gate, 5), seed, rr,
                        tuple(sorted(e.params.items())))
                 note = Note(float(p), float(e.vel), gate, seed=seed, rr=rr, params=dict(e.params))
+                if hasattr(inst,'select'):
+                    note.technique=inst.select(e.technique,'legato' if e.slur else e.art)
+                    key += (note.technique,)
+                note.curves = expression.bind(part,t,{**inst.p,**note.params})
+                if note.curves:
+                    key += (expression.fingerprint,part,round(t,8))
+                placed_by_instrument = hasattr(inst, "render_at_pan")
+                if placed_by_instrument:
+                    key += (pan,)
                 y = cache.get(key)
                 if y is None:
-                    y = declick(inst.render(note))
+                    y = inst.render_at_pan(note, pan, finish=declick) if placed_by_instrument else declick(inst.render(note))
+                    y = apply_expression(y,note)
                     cache[key] = y
                     rendered += 1
                 else:
                     hits += 1
-                placed.append([int(round(t * SR)), y, gain, pan, *inst.choke(note)])
+                placed.append([int(round(t * SR)), y, gain, 0 if placed_by_instrument else pan, *inst.choke(note)])
             for name in (e.piece, part):
                 if name:
                     triggers.setdefault(name, []).append(t)
@@ -225,7 +238,8 @@ def render(song: Song, *, master_mode: str | None = None, log=None, note_cache: 
         stats["binaural"] = layer.summary
     if log:
         log(f"rendered {n / SR:.1f}s of audio in {stats['seconds']}s ({rendered} notes synthesized, {hits} cached)")
-    sources = {s["program"]: s for s in (i.source for i in ens.instruments() if hasattr(i, "source"))}
+    sources = {s["program"]: s for i in ens.instruments()
+               for s in (i.sources if hasattr(i, "sources") else [i.source] if hasattr(i, "source") else [])}
     if sources:
         stats["samples"] = sorted(s["name"] for s in sources.values())
     return RenderResult(arr, as_stereo(out), mix, stems, stats, list(sources.values()))

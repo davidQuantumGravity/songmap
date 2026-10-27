@@ -1,0 +1,19 @@
+instrument: organ
+description: Upper harmonics and faster rotary motion. Synthesis recipe, not a recording
+  or hardware emulation.
+tags:
+- keys-guitar-palette
+- organ
+params:
+  db1: 8
+  db2: 8
+  db3: 8
+  db4: 7
+  db5: 6
+  db6: 5
+  db7: 3
+  db8: 2
+  db9: 4
+  perc: 0.3
+  click: 0.45
+  rotor: 6.1

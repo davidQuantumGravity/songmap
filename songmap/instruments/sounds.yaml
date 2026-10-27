@@ -1,0 +1,208 @@
+# Named continuous sound recipes. A/B form the top row; C/D the bottom row.
+violin_palette:
+  title: Violin palette
+  description: A solo vibrato, B violin section vibrato, C solo tremolo, D section
+    spiccato. Crossfade layers with complementary gains; this is a hybrid sound, not
+    a physical model.
+  sources:
+    a:
+      use: sampler/solo_violin
+      params: {}
+    b:
+      use: sampler/violins
+      params: {}
+    c:
+      use: sampler/solo_violin_tremolo
+      params: {}
+    d:
+      use: sampler/violins_spiccato
+      params: {}
+viola_palette:
+  title: Viola palette
+  description: A sustained section, B soft sustain, C tremolo, D spiccato. Crossfade
+    layers with complementary gains; this is a hybrid sound, not a physical model.
+  sources:
+    a:
+      use: sampler/violas
+      params: {}
+    b:
+      use: sampler/violas_soft
+      params: {}
+    c:
+      use: sampler/violas_tremolo
+      params: {}
+    d:
+      use: sampler/violas_spiccato
+      params: {}
+cello_palette:
+  title: Cello palette
+  description: A sustained section, B soft sustain, C tremolo, D spiccato. Crossfade
+    layers with complementary gains; this is a hybrid sound, not a physical model.
+  sources:
+    a:
+      use: sampler/cello
+      params: {}
+    b:
+      use: sampler/cello_soft
+      params: {}
+    c:
+      use: sampler/cello_tremolo
+      params: {}
+    d:
+      use: sampler/cello_spiccato
+      params: {}
+double_bass_palette:
+  title: Double bass palette
+  description: A bowed non-vibrato, B bowed vibrato, C pizzicato, D spiccato. Crossfade
+    layers with complementary gains; this is a hybrid sound, not a physical model.
+  sources:
+    a:
+      use: sampler/double_bass_arco
+      params: {}
+    b:
+      use: sampler/double_bass_vibrato
+      params: {}
+    c:
+      use: sampler/double_bass
+      params: {}
+    d:
+      use: sampler/double_bass_spiccato
+      params: {}
+flute_palette:
+  title: Flute palette
+  description: A non-vibrato, B vibrato, C expressive vibrato, D staccato. Crossfade
+    layers with complementary gains; this is a hybrid sound, not a physical model.
+  sources:
+    a:
+      use: sampler/flute
+      params: {}
+    b:
+      use: sampler/flute_vibrato
+      params: {}
+    c:
+      use: sampler/flute_expressive
+      params: {}
+    d:
+      use: sampler/flute_staccato
+      params: {}
+oboe_palette:
+  title: Oboe palette
+  description: A non-vibrato, B recorded vibrato. Crossfade layers with complementary
+    gains; this is a hybrid sound, not a physical model.
+  sources:
+    a:
+      use: sampler/oboe
+      params: {}
+    b:
+      use: sampler/oboe_vibrato
+      params: {}
+clarinet_palette:
+  title: Clarinet palette
+  description: A sustained, B detached attacks; shorten written gates for short phrases.
+    Crossfade layers with complementary gains; this is a hybrid sound, not a physical
+    model.
+  sources:
+    a:
+      use: sampler/clarinet
+      params: {}
+    b:
+      use: sampler/clarinet_staccato
+      params: {}
+bassoon_palette:
+  title: Bassoon palette
+  description: A sustained, B recorded vibrato. Crossfade layers with complementary
+    gains; this is a hybrid sound, not a physical model.
+  sources:
+    a:
+      use: sampler/bassoon
+      params: {}
+    b:
+      use: sampler/bassoon_vibrato
+      params: {}
+horn_palette:
+  title: French horn palette
+  description: A open, B recorded muted horn; the muted source has a narrower range.
+    Crossfade layers with complementary gains; this is a hybrid sound, not a physical
+    model.
+  sources:
+    a:
+      use: sampler/horn
+      params: {}
+    b:
+      use: sampler/horn_muted
+      params: {}
+trumpet_palette:
+  title: Trumpet palette
+  description: A open, B vibrato, C straight mute, D Harmon mute. Crossfade layers
+    with complementary gains; this is a hybrid sound, not a physical model.
+  sources:
+    a:
+      use: sampler/trumpet
+      params: {}
+    b:
+      use: sampler/trumpet_vibrato
+      params: {}
+    c:
+      use: sampler/trumpet_straight_mute
+      params: {}
+    d:
+      use: sampler/trumpet_harmon_mute
+      params: {}
+trombone_palette:
+  title: Trombone palette
+  description: A straight sustained, B recorded vibrato. Crossfade layers with complementary
+    gains; this is a hybrid sound, not a physical model.
+  sources:
+    a:
+      use: sampler/trombone
+      params: {}
+    b:
+      use: sampler/trombone_vibrato
+      params: {}
+tuba_palette:
+  title: Tuba palette
+  description: A sustained, B detached attacks. Crossfade layers with complementary
+    gains; this is a hybrid sound, not a physical model.
+  sources:
+    a:
+      use: sampler/tuba
+      params: {}
+    b:
+      use: sampler/tuba_staccato
+      params: {}
+tenor_sax_palette:
+  title: Tenor sax palette
+  description: A VCSL non-vibrato, B VCSL vibrato, C VCSL staccato, D MTG sustained.
+    Crossfade layers with complementary gains; this is a hybrid sound, not a physical
+    model.
+  sources:
+    a:
+      use: sampler/tenor_sax
+      params: {}
+    b:
+      use: sampler/tenor_sax_vibrato
+      params: {}
+    c:
+      use: sampler/tenor_sax_staccato
+      params: {}
+    d:
+      use: sampler/mtg_tenor_sax
+      params: {}
+xylophone_palette:
+  title: Xylophone mallets
+  description: A soft mallets, B medium mallets, C hard mallets, D VSCO marimba; D
+    is a different instrument. Crossfade layers with complementary gains; this is
+    a hybrid sound, not a physical model.
+  sources:
+    a:
+      use: sampler/xylophone_soft
+      params: {}
+    b:
+      use: sampler/xylophone_medium
+      params: {}
+    c:
+      use: sampler/xylophone_hard
+      params: {}
+    d:
+      use: sampler/marimba
+      params: {}

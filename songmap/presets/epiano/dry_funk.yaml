@@ -1,0 +1,14 @@
+instrument: epiano
+description: Short dry chords with room between attacks. Synthesis recipe, not a recording
+  or hardware emulation.
+tags:
+- keys-guitar-palette
+- epiano
+params:
+  index: 1.3
+  index_decay: 0.16
+  tine: 0.28
+  t60: 1.3
+  release: 0.06
+  trem_depth: 0
+  vel_index: 3.6

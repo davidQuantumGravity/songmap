@@ -59,6 +59,7 @@ class XEv:
     tags: frozenset = frozenset()
     section: str = ""
     explicit_vel: bool = False       # written @NN: section and part dynamics leave it alone
+    technique: str | None = None
 
     def key(self) -> str:
         f = lambda x: f"{x:.6f}"  # noqa: E731
@@ -66,7 +67,7 @@ class XEv:
                          ",".join(f(p) for p in self.pitches), f(self.vel), self.art,
                          "" if self.gate is None else f(self.gate), "" if self.length is None else f(self.length),
                          f(self.pan), f(self.gain_db), repr(sorted(self.params.items())), repr(self.patch),
-                         str(int(self.slur)), ",".join(sorted(self.tags)), self.section])
+                         str(int(self.slur)), ",".join(sorted(self.tags)), self.section]) + (f'|technique={self.technique}' if self.technique else '')
 
 
 @dataclass
@@ -176,9 +177,10 @@ class _Ctx:
             self._warned.add(key)
             self.warnings.append(msg)
 
-    def motif(self, ref: str, sec_name: str) -> list[Ev]:
-        if (ref, self.bpb) in self._motif_cache:
-            return self._motif_cache[(ref, self.bpb)]
+    def motif(self, ref: str, sec_name: str, section_key: str | None = None) -> list[Ev]:
+        cache_key = (ref,self.bpb,section_key or self.song.key)
+        if cache_key in self._motif_cache:
+            return self._motif_cache[cache_key]
         name, _, chain = ref.partition(":")
         if name not in self.song.motifs:
             raise SongError(f"unknown motif '{name}'", file=self.song.file, section=sec_name,
@@ -186,14 +188,14 @@ class _Ctx:
                             "define it under motifs:")
         m = self.song.motifs[name]
         try:
-            evs = parse_motif(m.text, deg=m.mode == "deg", rel=m.mode == "rel", key=m.key or self.song.key,
+            evs = parse_motif(m.text, deg=m.mode == "deg", rel=m.mode == "rel", key=m.key or section_key or self.song.key,
                               octave=m.octave, beats_per_bar=self.bpb, name=f"motif {name}")
             if chain:
-                evs = transforms.apply(evs, chain, key=m.key or self.song.key, deg=m.mode == "deg",
+                evs = transforms.apply(evs, chain, key=m.key or section_key or self.song.key, deg=m.mode == "deg",
                                        beats_per_bar=self.bpb, name=f"motif {ref}")
         except NotationError as e:
             raise SongError(str(e), file=self.song.file, line=m.line, section=sec_name) from None
-        self._motif_cache[(ref, self.bpb)] = evs
+        self._motif_cache[cache_key] = evs
         return evs
 
 
@@ -460,10 +462,10 @@ def _part_transform(ctx, sec, evs, spec, deg: bool, key: str):
 
 
 def _motifs(ctx, sec, span, role, refs, p_oct, spec=None) -> list[XEv]:
-    mots = [(r, ctx.motif(r, sec.name)) for r in refs]
+    mots = [(r, ctx.motif(r, sec.name, sec.key)) for r in refs]
     if spec is not None and spec.opts.get("transform"):
         mots = [(r, _part_transform(ctx, sec, evs, spec, ctx.song.motifs[r.split(":")[0]].mode == "deg",
-                                    ctx.song.motifs[r.split(":")[0]].key or ctx.song.key)) for r, evs in mots]
+                                    ctx.song.motifs[r.split(":")[0]].key or sec.key or ctx.song.key)) for r, evs in mots]
     lens = [_whole_bars(motif_length(evs), ctx.bpb) for _, evs in mots]
     out = []
     if len(set(lens)) == 1:            # synth_v0: blocks anchored at the song start
@@ -560,6 +562,7 @@ def _apply_opts(evs: list[XEv], spec, sec, span: SectionSpan):
     art = spec.opts.get("art")
     width = max(span.end - span.start, 1e-9)
     for e in evs:
+        if 'technique' in spec.opts:e.technique=spec.opts['technique']
         for sh in shapes if not e.explicit_vel else ():
             e.vel = float(min(1.0, e.vel * shape_at(sh, (e.beat - span.start) / width) / DYN["mf"]))
         if tr and e.pitches:
@@ -618,7 +621,25 @@ def expand(song: Song) -> Arrangement:
     for p in parts:
         parts[p].sort(key=lambda e: (e.beat, e.piece or "", e.pitches))
     _check_grid(song, ctx, parts)
-    return Arrangement(song, ctx.tl, ctx.harm, ctx.ens, dict(parts), resolved, ctx.warnings)
+    if song.techniques:
+        from ..instruments.family import assign
+        assign(song,ctx.tl,ctx.ens,parts)
+    for part,notes in parts.items():
+        for e in notes:
+            configured=ctx.ens.single.get(part) or ctx.ens.kits.get(part,{}).get(e.piece)
+            if e.technique or (configured and configured.use.startswith('family/')):
+                try:
+                    inst=ctx.ens.instrument(part,e.piece)
+                    if not hasattr(inst,'select'):raise ValueError(f'{part}: named techniques need a family/<instrument> voice')
+                    choice=inst.select(e.technique,'legato' if e.slur else e.art)
+                    from ..instruments.base import Note
+                    for pitch in e.pitches:inst._voice(Note(pitch,technique=choice))
+                except ValueError as error:raise SongError(str(error),file=song.file,section=e.section) from None
+    arr = Arrangement(song, ctx.tl, ctx.harm, ctx.ens, dict(parts), resolved, ctx.warnings)
+    if song.expression:
+        from ..expression import Expression
+        Expression(arr)  # invalid curves fail during check, before audio rendering
+    return arr
 
 
 def _check_grid(song: Song, ctx: "_Ctx", parts) -> None:

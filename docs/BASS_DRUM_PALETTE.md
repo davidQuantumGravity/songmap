@@ -2,7 +2,8 @@
 
 SongMap now has eight recorded electric-bass voices, four acoustic-bass voices, eight new synth-bass presets,
 four complete acoustic drum setups, a hybrid kit with recorded alternate takes, a hand-percussion set,
-and eight electronic kick/snare/hat combinations. The shared sample catalog contains 116 voices in total.
+and eight electronic kick/snare/hat combinations. With the later [keys and guitar expansion](KEYS_GUITAR_PALETTE.md),
+the shared sample catalog contains 146 recorded programs in total.
 
 Listen at [the bass and drum gallery](../songs/rhythm_palette/index.html). It contains 42 rendered, editable examples,
 including eight sixteen-bar templates. The [palette manifest](../songs/rhythm_palette/palette.json) lists their scores.

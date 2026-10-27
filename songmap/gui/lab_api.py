@@ -181,9 +181,20 @@ def propose(store, sid, token):
     ctx = store.context(sid)
     cat = catalog()
     # Supply the full installed voice list and declared schemas. The model decides what is useful.
-    ctx["available_samples"] = [{k: v.get(k) for k in ("ref", "family", "category", "description", "range")}
+    ctx["available_samples"] = [{k: v.get(k) for k in ("ref", "family", "category", "instrument", "articulation", "description", "range")}
                                 for v in cat["samplers"] if v["installed"]]
     ctx["instruments"] = cat["instruments"]
+    ctx["sound_library"] = {n:v for n,v in cat.get("sound_library", {}).items() if v["installed"]}
+    ctx['instrument_families']={n:v for n,v in cat.get('families',{}).items() if v['installed']}
+    ctx['continuous_expression']={'controls':cat.get('expression_controls',[]),'format':'expression: {section: {part: {control: [[beat,value],...]}}}; quarter-note beats from section start; first point 0, last point section length; terminal value holds until next curve. Works within held notes.'}
+    ctx['technique_changes']='family/<name> selects one coherent recorded instrument. Part technique: <name> selects a phrase; techniques: {section: {part: [[beat,name],...]}} selects later notes. Auto follows written staccato when available. No invented connected legato.'
+    from dataclasses import asdict
+    from ..instruments.sound import TONE_PARAMS, MORPH_PARAMS, BLEND
+    ctx["sound_controls"] = [asdict(q) for q in (*TONE_PARAMS,*MORPH_PARAMS,BLEND)]
+    ctx["ensemble_limits"] = ("Use sounding/concert pitch. Four-corner sound palettes use morph_x/y; two-source palettes use blend. "
+        "They layer recordings and cannot create unrecorded articulations or connected legato. Recorded vibrato remains. "
+        "Expression lanes evolve during held notes; technique changes select recordings at note onsets. English horn, bass clarinet, contrabassoon, bass trombone, solo viola/cello, celesta and sampled brush kits remain gaps. "
+        "MTG sax round-robin mappings reuse neighboring keys. Write each part's notes, expression, breathing/bowing and ensemble relationship deliberately.")
     ctx["presets"] = {k: [{"ref": p["ref"], "description": p["description"]} for p in ps] for k, ps in cat["presets"].items()}
     ctx["assessment"] = store.listing()["assessments"].get(store.get(sid)["use"])
     schema = {"type": "object", "additionalProperties": False, "required": ["label", "reason", "use", "params"],
@@ -202,6 +213,7 @@ def propose(store, sid, token):
               "Read its role, register, phrasing, ensemble context, and all human feedback. Propose ONE meaningful "
               "challenger to the current incumbent. Keep all notes, rhythm, expression, tuning, and other parts fixed. "
               "Choose a supported instrument/sample voice and/or declared numeric parameters. If changing backend, "
+              "For a current sound/<name> recipe, preserve its use reference to refine its declared tone, blend or prefixed source parameters; its definitions are already in the score. "
               "respect the supplied style and note overrides: they take precedence over voice parameters. "
               "use parameters supported by the new backend. Do not invent articulations or samples. Explain the "
               "specific musical reason and how the feedback shaped it. You have no audio input: do not claim to "
@@ -341,6 +353,54 @@ def stop(sid: str):
         s.update(status="cancelled", error="Stopped. Completed candidates and feedback are saved.")
         lab().put(s)
         return lab().present(sid, focus=False)
+
+
+@router.get("/sessions/{sid}/design")
+def design_controls(sid: str, candidate: str):
+    from .tone_lab import controls
+    return guarded(controls, lab(), sid, candidate)
+
+
+@router.post("/sessions/{sid}/design/preview")
+def design_preview(sid: str, recipe: dict = Body(...)):
+    from .tone_lab import preview
+    return guarded(preview, lab(), sid, recipe)
+
+
+@router.get("/sessions/{sid}/design/audio/{key}")
+def design_audio(sid: str, key: str):
+    import re
+    store = lab()
+    guarded(store.get, sid)
+    if not re.fullmatch(r"[0-9a-f]{64}", key):
+        raise HTTPException(400, "Invalid preview asset")
+    path = store.home / sid / "design-previews" / (key+".wav")
+    if not path.is_file():
+        raise HTTPException(404, "Preview is unavailable; render it again")
+    return FileResponse(path, media_type="audio/wav")
+
+
+@router.post("/sessions/{sid}/design")
+def save_design(sid: str, recipe: dict = Body(...)):
+    from .tone_lab import design_change
+    with LOCK:
+        store = lab()
+        s = guarded(store.get, sid)
+        if s["status"] in {"queued", "generating", "rendering"}:
+            raise HTTPException(409, "Wait for the current job or stop it before saving a sound")
+        change, reason = guarded(design_change, store, sid, recipe)
+        if "pair" in recipe:
+            if recipe["amount"] in (0, 1) and not any(recipe.get("tone", {}).values()):
+                raise HTTPException(400, "At a blend endpoint, choose the existing take")
+        else:
+            from .tone_lab import controls
+            original = guarded(controls, store, sid, recipe.get("base"))["values"]
+            if all(original[k] == v for k,v in recipe.get("tone", {}).items()):
+                raise HTTPException(400, "Change a tone control before saving a shaped take")
+        saved = guarded(store.add_candidate, sid, change, "Blended sound" if "pair" in recipe else "Shaped sound", "design", reason)
+        saved["candidates"][-1]["design"] = recipe
+        store.put(saved)
+        return guarded(launch, sid, False)
 
 
 @router.post("/sessions/{sid}/preview")

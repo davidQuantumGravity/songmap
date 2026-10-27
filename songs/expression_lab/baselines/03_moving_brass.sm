@@ -1,0 +1,7 @@
+# Controlled baseline: same notes and mix; continuous curves and technique changes removed.
+song "Moving brass color" 96 4/4 G fps=30 seed=403 mood=balanced tail=3
+inst trumpet=sound/trumpet_palette
+chords G:2
+color 2 | trumpet:{deg: "=mp 0/1_ | 4/2_ 0/4 r/4"}
+mix trumpet -10 send={hall: 0.08}
+master lufs=-18 glue="none"

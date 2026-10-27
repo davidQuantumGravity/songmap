@@ -1,0 +1,12 @@
+# Controlled guitar timbre audition: Steel-string acoustic guitar.
+# Notes: soft call, answering voicing, firmer detached attacks, then a resting resolution.
+# Expression is written per phrase. This shared benchmark compares sounds; it is not a finished composition.
+song "Steel-string acoustic guitar" 100 4/4 C seed=83 tail=2 mood=balanced
+inst gtr=sampler/steel_guitar
+chords Cmaj7:1 Dm7:1 G7:1 Cmaj7:1
+call 1 | gtr:{deg: "=p 0/8^ 4/8 9/8 4/8 7/4 9/8 r/8", oct: -1}
+reply 1 | gtr:{deg: "=mp [1,5,10]/4 8/8 5/8 3/4 r/4", oct: -1}
+firm 1 | gtr:{deg: "=mf [-3,3,6]/8'^ r/8 [-3,3,6]/8' r/8 4/4 3/4", oct: -1}
+land 1 | gtr:{deg: "=p [0,4,7,9]/2_ r/2", oct: -1}
+mix gtr -5 hall=.04
+master standard lufs=-18 glue=none

@@ -1,6 +1,11 @@
 # The free sampled instrument library
 
-SongMap includes a catalog of 116 recorded voices. Install their audio separately:
+SongMap includes a catalog of 210 recorded programs. Install their audio separately:
+
+The [expression and articulation layer](EXPRESSION_ARTICULATION_RESPONSE.md) groups
+available recordings into 23 named-technique families and provides continuous held-note
+curves. The bundled response profiles measure all 210 programs plus native models/presets;
+one fixed gain per source preserves its recorded dynamic differences.
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -e .[sampler,gui]
@@ -9,7 +14,7 @@ SongMap includes a catalog of 116 recorded voices. Install their audio separatel
 .\.venv\Scripts\python.exe -m songmap.cli samples verify
 ```
 
-The complete selection downloads about 3 GB of uncompressed audio and source programs. Individual voices can be
+The complete selection includes several GB of audio and source programs. Individual voices can be
 installed by name, for example `songmap samples install grand_piano flute folk_harp`. Installation resumes and verifies
 Git downloads against their pinned blobs and archive downloads against their pinned SHA-256. `samples/songmap-library.json` records SHA-256 hashes,
 source revisions and credits. `verify` detects missing or changed installed files. Keep the receipt with backups.
@@ -20,6 +25,10 @@ The source programs and recordings retain their upstream layout under `samples/_
 The bass/drum expansion adds recorded electric and acoustic basses, complete acoustic kits, and additional
 snare/tom/cymbal articulations. See [BASS_DRUM_PALETTE.md](BASS_DRUM_PALETTE.md) for all families,
 42 editable examples, eight groove templates and the performance limits.
+
+The [piano, keyboard and guitar expansion](KEYS_GUITAR_PALETTE.md) adds 30 recorded programs, twelve native keyboard
+recipes, 46 controlled auditions and eight authored musical starters. It includes fixed pedal/channel/technique
+selections prepared from the original source programs; live pedals and keyswitches are not implied.
 
 ## Original voices
 
@@ -85,3 +94,11 @@ Run `python tools/sfz_revisit.py --gallery` to rebuild the editable instrument d
 The song revisions and loudness-matched A/B players are in `songs/sfz_revisited/`; originals are preserved.
 Automated tests, scores and measurements establish operation, pitch handling and audio bounds. They do not establish
 that a revision is aesthetically preferable; the listening page is provided for that decision.
+
+## Classical and jazz ensembles
+
+See [ENSEMBLE_PALETTE.md](ENSEMBLE_PALETTE.md) for 64 additional recorded programs, actual
+string bowings, woodwind/brass articulations, four saxophone registers, orchestral percussion,
+14 continuous sound palettes and six editable ensemble starters. VSCO/VCSL sources are CC0;
+MTG saxophones require CC BY 4.0 attribution, included in render credits. The guide lists auxiliary
+instrument gaps and distinguishes recorded techniques from layered crossfades.

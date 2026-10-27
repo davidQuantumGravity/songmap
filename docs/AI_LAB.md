@@ -1,5 +1,11 @@
 # AI Lab
 
+Continuous expression curves, the 23 named recorded-technique families and their ranges
+are included in the AI's score-generation context. Riff edits may change the selected
+part's `expression` and `techniques` maps while backing curves stay protected. Use
+Studio's **Instruments → Expression** tab for manual edits, then compare rendered takes.
+See [the feature guide](EXPRESSION_ARTICULATION_RESPONSE.md).
+
 AI Lab is the workspace for comparing and refining music through AI proposals and human feedback. It compares instrument sounds, riffs, arrangements and saved song snippets. Choose the comparison type at the top left. See the [musical comparison contracts](MUSIC_COMPARISON_LAB.md) for scope and validation. Mastering workflows and the complete blank-brief songwriting journey remain future work in the [AI songwriting vision](AI_SONGWRITING_VISION.md).
 
 Start Studio with `songmap gui --no-browser --port 8866`, then open `http://127.0.0.1:8866/?lab=1`. The AI Lab dock also opens from an ordinary Studio project. Saved comparisons have direct links through the `comparison` query parameter.
@@ -7,6 +13,8 @@ Start Studio with `songmap gui --no-browser --port 8866`, then open `http://127.
 The main screen is a listening workspace. **Listening room** shows two compact take cards; **Score focus** shows the active bar for every instrument, actual held-note names, microtonal `^`/`v` labels, chord symbols and the shared playhead. Score data uses the renderer's performance stage, including groove, note offsets, gates and rolled chords. Changed notes/expression, instrument settings and mix are identified separately; unchanged backing is dimmed. Release tails are not presented as newly played notes.
 
 The shared transport stays visible while scrolling. Space plays/pauses outside editing controls; A/B switches takes; L toggles looping. Drag the bar strip under Loop, or choose first/last bars, to audition a smaller range. A/B switching keeps the relative position and the same loop range, although each take's source bar numbers may differ. The display distinguishes the selected audition, the saved favorite and a favorite applied to a score. Audition loudness and loop/view settings do not change the score.
+
+Instrument comparisons also offer **Shape this sound** and **Blend A ↔ B** below the take cards. Shape the selected audition's brightness, body, attack, tightness and grit, then use **Preview shape** to render the settings without creating a take. The blend preview starts both isolated parts together and changes their complementary gains smoothly while the slider moves. **Save shaped take** and **Save blended take** create editable challengers for voting, feedback and the normal review/apply flow. They do not pick a winner or write song files. A blend can then be shaped as another take. See [sound design](SOUND_DESIGN.md) for score recipes, controls and limits.
 
 **New comparison** opens setup in a drawer; section and bar pickers are the normal passage controls, with precise seconds available in a disclosure. **Details** opens manual challengers, source snapshots, feedback and take history. **Review & apply** opens the explicit source preview. Escape closes a drawer and restores focus. Saved audio remains usable while inventory or note-display data loads or fails.
 
@@ -41,7 +49,7 @@ The system does not give the model an audio input. Its explanation is score and 
 
 Each candidate retains its source, resolved instrument edit, parent, origin, reasoning, stable audio files, loudness measurements, and render metadata. Rendering a later candidate does not invalidate an earlier audition. Instrument, riff and arrangement challengers use the same source seed. Saved snippets retain each source's own seed; they compare musical material rather than isolating a single variable. Excerpts are rendered from the original song's beginning through the excerpt end to preserve note indices, section-relative expression, and effects history. The player then crops the requested passage. Preview mastering can differ from the final full-song master. Binaural songs currently use a full render before cropping.
 
-Dry solo is the entire selected part, including the whole kit when comparing one drum piece. It excludes shared effect returns. Loudness matching uses levelled solo previews or attenuates full-song auditions toward the quieter mix; it is not written into the score. A/B switching keeps position and uses a pause/seek/play handoff. A crossfade and blind label assignment are future enhancements.
+Dry solo is the entire selected part, including the whole kit when comparing one drum piece. It excludes shared effect returns. Loudness matching uses levelled solo previews or attenuates full-song auditions toward the quieter mix; it is not written into the score. A/B switching keeps position and uses a pause/seek/play handoff. The separate blend control mixes two synchronized sources continuously. Blind label assignment remains a future enhancement.
 
 Votes select the session's current favorite. They do not write song files. For instrument comparisons, the apply panel lets the user select the source and other scores that use the original voice, inspect before/after source previews, and apply the chosen favorite. It handles both compact and YAML scores. Applying a parameter tweak preserves unrelated overrides in other files. Changing backend replaces incompatible instrument parameters.
 
@@ -53,7 +61,7 @@ Application and undo update editable score files. They do not rebuild existing r
 
 Local persistence uses `.songmap/instrument-lab/lab.sqlite3` for sessions, assessments, feedback, and apply receipts. Audio, model requests, responses, and apply preimages live beside it. `.songmap/` is Git-ignored. Keep this directory to retain experiments across server restarts. Stop preserves completed candidates and feedback. A render already running finishes its current work before the single-worker queue can advance. An interrupted session is marked on reopening and can be retried.
 
-The HTTP boundary is under `/api/lab`: `inventory`, `inventory.csv`, `assessment`, `provider`, `source`, `sessions`, and candidate-addressed `audio`. Session operations include `score`, `develop`, `generate`, `render`, `candidate`, `feedback`, `context`, `preview`, `apply`, `undo`, and `stop`. The read-only score endpoints provide tempo/meter-aware bar maps and candidate-specific note lanes. The context endpoint lets a composing agent inspect exactly which source and feedback should guide its next scoped proposal.
+The HTTP boundary is under `/api/lab`: `inventory`, `inventory.csv`, `assessment`, `provider`, `source`, `sessions`, and candidate-addressed `audio`. Session operations include `score`, `develop`, `generate`, `render`, `candidate`, `design`, `design/preview`, `feedback`, `context`, `preview`, `apply`, `undo`, and `stop`. The read-only score endpoints provide tempo/meter-aware bar maps and candidate-specific note lanes. The context endpoint lets a composing agent inspect exactly which source and feedback should guide its next scoped proposal.
 
 Validation covers expanded-voice inventory, malformed sources, SM/YAML musical preservation, parameter validation, durable/idempotent feedback, incumbent continuity, stable audio, preview rendering, multi-score application, preservation of unrelated overrides, conflict rejection, undo, and the API generation/render/vote/apply sequence. The real Codex adapter and browser A/B playback were also exercised on a saved textbook bass passage. Technical tests establish behavior. They do not decide whether its challenger sounds better.
 
@@ -64,3 +72,12 @@ Stable take numbers identify candidates across rounds. A and B identify position
 The default audition isolates the selected part for instrument and riff comparisons; arrangement and snippet comparisons use the full mix. The full-song option lists the unchanged accompaniment explicitly. Levelled solo preview files aim for -20 LUFS with a peak ceiling of 0.94, making quiet parts audible. Original solo and full-song files remain intact. Disabling loudness matching uses the original-level audio. Audition gain never changes the score.
 
 Generation records the selected base take, included feedback IDs, request time, new take, and completion time. Retrying the same pending feedback event does not queue another job. New feedback records the listening mode; historical votes resolve to stable takes while preserving their original A/B labels and comments.
+
+## Classical/jazz sound palettes
+
+Installed ensemble sample programs and fourteen named continuous palettes are provided to
+the AI alongside instrument/articulation metadata, source ranges, tone/morph schemas and
+known ensemble gaps. In an instrument comparison, **Shape this sound** exposes X/Y for a
+four-source palette or source balance for a two-source sound. These controls create derived
+takes through the existing preview/save workflow. The feedback draft and favorite remain intact.
+See [ENSEMBLE_PALETTE.md](ENSEMBLE_PALETTE.md) for full ensemble coverage and listening examples.

@@ -1,0 +1,19 @@
+instrument: organ
+description: Broad drawbar registration with a moving rotary effect. Synthesis recipe,
+  not a recording or hardware emulation.
+tags:
+- keys-guitar-palette
+- organ
+params:
+  db1: 8
+  db2: 8
+  db3: 8
+  db4: 6
+  db5: 4
+  db6: 2
+  db7: 0
+  db8: 0
+  db9: 3
+  perc: 0.15
+  click: 0.25
+  rotor: 4.6

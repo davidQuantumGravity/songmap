@@ -1,0 +1,480 @@
+[
+  {
+    "source": "auditions/grand_piano.sm",
+    "id": "grand_piano",
+    "title": "Kawai grand piano",
+    "group": "Acoustic pianos",
+    "description": "Acoustic grand with velocity layers and release noises; melody and chord accompaniment.",
+    "benchmark": "keyboard",
+    "use": "sampler/grand_piano"
+  },
+  {
+    "source": "auditions/steinway_piano.sm",
+    "id": "steinway_piano",
+    "title": "Steinway B grand \u00b7 damper up",
+    "group": "Acoustic pianos",
+    "description": "Recorded Steinway B grand with three velocity layers; fixed damper-up selection, no live pedal.",
+    "benchmark": "keyboard",
+    "use": "sampler/steinway_piano"
+  },
+  {
+    "source": "auditions/knight_piano.sm",
+    "id": "knight_piano",
+    "title": "Knight upright piano",
+    "group": "Acoustic pianos",
+    "description": "Character upright with two velocity layers and key-release samples. Controller-triggered pedal noises excluded.",
+    "benchmark": "keyboard",
+    "use": "sampler/knight_piano"
+  },
+  {
+    "source": "auditions/yamaha_piano.sm",
+    "id": "yamaha_piano",
+    "title": "Yamaha upright piano",
+    "group": "Acoustic pianos",
+    "description": "Recorded Yamaha upright; alternative to the Kawai and Steinway grand recordings.",
+    "benchmark": "keyboard",
+    "use": "sampler/yamaha_piano"
+  },
+  {
+    "source": "auditions/meta_piano.sm",
+    "id": "meta_piano",
+    "title": "Meta upright piano",
+    "group": "Acoustic pianos",
+    "description": "Full 88-key upright with four velocity layers. Original recorded tuning retained; extra random pitch/level modulation disabled.",
+    "benchmark": "keyboard",
+    "use": "sampler/meta_piano"
+  },
+  {
+    "source": "auditions/fm_piano.sm",
+    "id": "fm_piano",
+    "title": "TX81Z FM piano",
+    "group": "Electric keyboards",
+    "description": "Recorded FM keyboard; bright attack and rounded decay for funk, broken beat, and lo-fi chords.",
+    "benchmark": "keyboard",
+    "use": "sampler/fm_piano"
+  },
+  {
+    "source": "auditions/tx_piano.sm",
+    "id": "tx_piano",
+    "title": "TX81Z Piano 1",
+    "group": "Electric keyboards",
+    "description": "Recorded Yamaha TX81Z FM preset, distinct from the FM Piano program.",
+    "benchmark": "keyboard",
+    "use": "sampler/tx_piano"
+  },
+  {
+    "source": "auditions/clavisynth.sm",
+    "id": "clavisynth",
+    "title": "TX81Z Clavisynth",
+    "group": "Electric keyboards",
+    "description": "Recorded Yamaha TX81Z FM preset, distinct from the FM Piano program.",
+    "benchmark": "keyboard",
+    "use": "sampler/clavisynth"
+  },
+  {
+    "source": "auditions/rhodes_mono.sm",
+    "id": "rhodes_mono",
+    "title": "Rhodes Mark I \u00b7 dry mono",
+    "group": "Electric keyboards",
+    "description": "1977 Rhodes Mark I Stage 73, five sampled velocity layers and full natural decays. Fixed rendered channel effect; no live pedal or modulation.",
+    "benchmark": "keyboard",
+    "use": "sampler/rhodes_mono"
+  },
+  {
+    "source": "auditions/rhodes_stereo.sm",
+    "id": "rhodes_stereo",
+    "title": "Rhodes Mark I \u00b7 baked stereo chorus",
+    "group": "Electric keyboards",
+    "description": "1977 Rhodes Mark I Stage 73, five sampled velocity layers and full natural decays. Fixed rendered channel effect; no live pedal or modulation.",
+    "benchmark": "keyboard",
+    "use": "sampler/rhodes_stereo"
+  },
+  {
+    "source": "auditions/rhodes_vibrato.sm",
+    "id": "rhodes_vibrato",
+    "title": "Rhodes Mark I \u00b7 baked stereo vibrato",
+    "group": "Electric keyboards",
+    "description": "1977 Rhodes Mark I Stage 73, five sampled velocity layers and full natural decays. Fixed rendered channel effect; no live pedal or modulation.",
+    "benchmark": "keyboard",
+    "use": "sampler/rhodes_vibrato"
+  },
+  {
+    "source": "auditions/english_harpsichord.sm",
+    "id": "english_harpsichord",
+    "title": "English Normal harpsichord",
+    "group": "Harpsichords",
+    "description": "Recorded plucked keyboard registration; naturally limited dynamic response, with release character.",
+    "benchmark": "keyboard",
+    "use": "sampler/english_harpsichord"
+  },
+  {
+    "source": "auditions/lute_harpsichord.sm",
+    "id": "lute_harpsichord",
+    "title": "English Lute harpsichord",
+    "group": "Harpsichords",
+    "description": "Recorded plucked keyboard registration; naturally limited dynamic response, with release character.",
+    "benchmark": "keyboard",
+    "use": "sampler/lute_harpsichord"
+  },
+  {
+    "source": "auditions/french_harpsichord.sm",
+    "id": "french_harpsichord",
+    "title": "French harpsichord",
+    "group": "Harpsichords",
+    "description": "Recorded plucked keyboard registration; naturally limited dynamic response, with release character.",
+    "benchmark": "keyboard",
+    "use": "sampler/french_harpsichord"
+  },
+  {
+    "source": "auditions/italian_harpsichord.sm",
+    "id": "italian_harpsichord",
+    "title": "Italian harpsichord",
+    "group": "Harpsichords",
+    "description": "Recorded plucked keyboard registration; naturally limited dynamic response, with release character.",
+    "benchmark": "keyboard",
+    "use": "sampler/italian_harpsichord"
+  },
+  {
+    "source": "auditions/flemish_harpsichord.sm",
+    "id": "flemish_harpsichord",
+    "title": "Flemish 8' harpsichord",
+    "group": "Harpsichords",
+    "description": "Recorded plucked keyboard registration; naturally limited dynamic response, with release character.",
+    "benchmark": "keyboard",
+    "use": "sampler/flemish_harpsichord"
+  },
+  {
+    "source": "auditions/flemish_full.sm",
+    "id": "flemish_full",
+    "title": "Flemish Full harpsichord",
+    "group": "Harpsichords",
+    "description": "Recorded plucked keyboard registration; naturally limited dynamic response, with release character.",
+    "benchmark": "keyboard",
+    "use": "sampler/flemish_full"
+  },
+  {
+    "source": "auditions/renaissance_8.sm",
+    "id": "renaissance_8",
+    "title": "Renaissance Organ - 8'",
+    "group": "Recorded organs",
+    "description": "Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.",
+    "benchmark": "keyboard",
+    "use": "sampler/renaissance_8"
+  },
+  {
+    "source": "auditions/renaissance_4.sm",
+    "id": "renaissance_4",
+    "title": "Renaissance Organ - 4'",
+    "group": "Recorded organs",
+    "description": "Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.",
+    "benchmark": "keyboard",
+    "use": "sampler/renaissance_4"
+  },
+  {
+    "source": "auditions/renaissance_4_8.sm",
+    "id": "renaissance_4_8",
+    "title": "Renaissance Organ - 4'+8'",
+    "group": "Recorded organs",
+    "description": "Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.",
+    "benchmark": "keyboard",
+    "use": "sampler/renaissance_4_8"
+  },
+  {
+    "source": "auditions/renaissance_full.sm",
+    "id": "renaissance_full",
+    "title": "Renaissance Organ - Full",
+    "group": "Recorded organs",
+    "description": "Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.",
+    "benchmark": "keyboard",
+    "use": "sampler/renaissance_full"
+  },
+  {
+    "source": "auditions/pipe_quiet.sm",
+    "id": "pipe_quiet",
+    "title": "Pipe Organ - Quiet",
+    "group": "Recorded organs",
+    "description": "Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.",
+    "benchmark": "keyboard",
+    "use": "sampler/pipe_quiet"
+  },
+  {
+    "source": "auditions/pipe_loud.sm",
+    "id": "pipe_loud",
+    "title": "Pipe Organ - Loud",
+    "group": "Recorded organs",
+    "description": "Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.",
+    "benchmark": "keyboard",
+    "use": "sampler/pipe_loud"
+  },
+  {
+    "source": "auditions/nylon_guitar.sm",
+    "id": "nylon_guitar",
+    "title": "Nylon guitar \u00b7 velocity-selected technique",
+    "group": "Acoustic guitars",
+    "description": "Recorded nylon strings; fixed first-position string map with one sounding note per string. One-shot natural ring-out; new notes on the same string damp the previous note.",
+    "benchmark": "guitar",
+    "use": "sampler/nylon_guitar"
+  },
+  {
+    "source": "auditions/nylon_finger.sm",
+    "id": "nylon_finger",
+    "title": "Nylon guitar \u00b7 fingerstyle",
+    "group": "Acoustic guitars",
+    "description": "Recorded nylon strings; fixed first-position string map with one sounding note per string. One-shot natural ring-out; new notes on the same string damp the previous note.",
+    "benchmark": "guitar",
+    "use": "sampler/nylon_finger"
+  },
+  {
+    "source": "auditions/nylon_pick.sm",
+    "id": "nylon_pick",
+    "title": "Nylon guitar \u00b7 picked",
+    "group": "Acoustic guitars",
+    "description": "Recorded nylon strings; fixed first-position string map with one sounding note per string. One-shot natural ring-out; new notes on the same string damp the previous note.",
+    "benchmark": "guitar",
+    "use": "sampler/nylon_pick"
+  },
+  {
+    "source": "auditions/steel_guitar.sm",
+    "id": "steel_guitar",
+    "title": "Steel-string acoustic guitar",
+    "group": "Acoustic guitars",
+    "description": "Recorded steel strings with three velocity layers and first-position string selection; notes on the same string damp each other.",
+    "benchmark": "guitar",
+    "use": "sampler/steel_guitar"
+  },
+  {
+    "source": "auditions/archtop_mic.sm",
+    "id": "archtop_mic",
+    "title": "Shiny archtop \u00b7 microphone",
+    "group": "Acoustic guitars",
+    "description": "Single archtop guitar recorded through a microphone; four velocity layers and four alternate takes. Fixed single voice; no scripted vibrato or live pickup blend.",
+    "benchmark": "guitar",
+    "use": "sampler/archtop_mic"
+  },
+  {
+    "source": "auditions/archtop_pickup.sm",
+    "id": "archtop_pickup",
+    "title": "Shiny archtop \u00b7 pickup",
+    "group": "Electric guitars",
+    "description": "Single archtop guitar recorded through its magnetic pickup; four velocity layers and four alternate takes. Fixed single voice; no scripted vibrato or live pickup blend.",
+    "benchmark": "guitar",
+    "use": "sampler/archtop_pickup"
+  },
+  {
+    "source": "auditions/emily_clean.sm",
+    "id": "emily_clean",
+    "title": "Emily electric \u00b7 clean DI",
+    "group": "Electric guitars",
+    "description": "Flatwound Epiphone guitar, both pickups, direct recording; four velocity layers and three alternate takes. No amp simulation or scripted legato.",
+    "benchmark": "guitar",
+    "use": "sampler/emily_clean"
+  },
+  {
+    "source": "auditions/emily_release.sm",
+    "id": "emily_release",
+    "title": "Emily electric \u00b7 release noises",
+    "group": "Electric guitars",
+    "description": "Flatwound Epiphone guitar, both pickups, direct recording; four velocity layers and three alternate takes. No amp simulation or scripted legato.",
+    "benchmark": "guitar",
+    "use": "sampler/emily_release"
+  },
+  {
+    "source": "auditions/emily_ensemble.sm",
+    "id": "emily_ensemble",
+    "title": "Emily electric \u00b7 three-voice layer",
+    "group": "Electric guitars",
+    "description": "Flatwound Epiphone guitar, both pickups, direct recording; four velocity layers and three alternate takes. Layered alternate takes from the same guitar, not another physical instrument.",
+    "benchmark": "guitar",
+    "use": "sampler/emily_ensemble"
+  },
+  {
+    "source": "auditions/epiano_round_tine.sm",
+    "id": "epiano_round_tine",
+    "title": "Round Tine",
+    "group": "Synthesized electric keys",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "epiano/round_tine"
+  },
+  {
+    "source": "auditions/epiano_warm_suitcase.sm",
+    "id": "epiano_warm_suitcase",
+    "title": "Warm Suitcase",
+    "group": "Synthesized electric keys",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "epiano/warm_suitcase"
+  },
+  {
+    "source": "auditions/epiano_bright_bark.sm",
+    "id": "epiano_bright_bark",
+    "title": "Bright Bark",
+    "group": "Synthesized electric keys",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "epiano/bright_bark"
+  },
+  {
+    "source": "auditions/epiano_soft_ballad.sm",
+    "id": "epiano_soft_ballad",
+    "title": "Soft Ballad",
+    "group": "Synthesized electric keys",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "epiano/soft_ballad"
+  },
+  {
+    "source": "auditions/epiano_bell_keys.sm",
+    "id": "epiano_bell_keys",
+    "title": "Bell Keys",
+    "group": "Synthesized electric keys",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "epiano/bell_keys"
+  },
+  {
+    "source": "auditions/epiano_wide_tremolo.sm",
+    "id": "epiano_wide_tremolo",
+    "title": "Wide Tremolo",
+    "group": "Synthesized electric keys",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "epiano/wide_tremolo"
+  },
+  {
+    "source": "auditions/epiano_dry_funk.sm",
+    "id": "epiano_dry_funk",
+    "title": "Dry Funk",
+    "group": "Synthesized electric keys",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "epiano/dry_funk"
+  },
+  {
+    "source": "auditions/epiano_fm_chime.sm",
+    "id": "epiano_fm_chime",
+    "title": "Fm Chime",
+    "group": "Synthesized electric keys",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "epiano/fm_chime"
+  },
+  {
+    "source": "auditions/organ_hollow_jazz.sm",
+    "id": "organ_hollow_jazz",
+    "title": "Hollow Jazz",
+    "group": "Tonewheel organ recipes",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "organ/hollow_jazz"
+  },
+  {
+    "source": "auditions/organ_gospel.sm",
+    "id": "organ_gospel",
+    "title": "Gospel",
+    "group": "Tonewheel organ recipes",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "organ/gospel"
+  },
+  {
+    "source": "auditions/organ_soft_chorale.sm",
+    "id": "organ_soft_chorale",
+    "title": "Soft Chorale",
+    "group": "Tonewheel organ recipes",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "organ/soft_chorale"
+  },
+  {
+    "source": "auditions/organ_rock_rotary.sm",
+    "id": "organ_rock_rotary",
+    "title": "Rock Rotary",
+    "group": "Tonewheel organ recipes",
+    "description": "Native synthesis recipe; compare the envelope, velocity response and modulation.",
+    "benchmark": "keyboard",
+    "use": "organ/rock_rotary"
+  },
+  {
+    "source": "auditions/native_piano.sm",
+    "id": "native_piano",
+    "title": "Original modeled piano",
+    "group": "Reference sounds",
+    "description": "Existing modeled piano, retained as an A/B reference.",
+    "benchmark": "keyboard",
+    "use": "keys"
+  },
+  {
+    "source": "auditions/native_guitar.sm",
+    "id": "native_guitar",
+    "title": "Original modeled guitar",
+    "group": "Reference sounds",
+    "description": "Existing plucked-string model, retained as an A/B reference.",
+    "benchmark": "guitar",
+    "use": "string_pluck"
+  },
+  {
+    "source": "templates/01_upright_conversation.sm",
+    "id": "01_upright_conversation",
+    "title": "Upright conversation",
+    "group": "Musical starters",
+    "description": "An intimate piano question and answer, with sparse upright bass.",
+    "benchmark": null
+  },
+  {
+    "source": "templates/02_rhodes_pocket.sm",
+    "id": "02_rhodes_pocket",
+    "title": "Rhodes pocket",
+    "group": "Musical starters",
+    "description": "Shell voicings, gaps in the comping and bass answers around the backbeat.",
+    "benchmark": null
+  },
+  {
+    "source": "templates/03_harpsichord_dialogue.sm",
+    "id": "03_harpsichord_dialogue",
+    "title": "Harpsichord dialogue",
+    "group": "Musical starters",
+    "description": "Two independent plucked-keyboard voices; articulation creates the contrast.",
+    "benchmark": null
+  },
+  {
+    "source": "templates/04_six_eight_organ.sm",
+    "id": "04_six_eight_organ",
+    "title": "Six-eight organ",
+    "group": "Musical starters",
+    "description": "A lilting organ registration, rooted bass and a restrained drum pulse.",
+    "benchmark": null
+  },
+  {
+    "source": "templates/05_nylon_fingerstyle.sm",
+    "id": "05_nylon_fingerstyle",
+    "title": "Nylon fingerstyle",
+    "group": "Musical starters",
+    "description": "Three-string shapes, alternating bass notes and a climbing reply.",
+    "benchmark": null
+  },
+  {
+    "source": "templates/06_steel_open_chords.sm",
+    "id": "06_steel_open_chords",
+    "title": "Steel open chords",
+    "group": "Musical starters",
+    "description": "Playable sparse chord shapes, spaces between strums and a quieter ending.",
+    "benchmark": null
+  },
+  {
+    "source": "templates/07_electric_pocket.sm",
+    "id": "07_electric_pocket",
+    "title": "Electric pocket",
+    "group": "Musical starters",
+    "description": "Short DI double-stops leave room for bass and dry snare.",
+    "benchmark": null
+  },
+  {
+    "source": "templates/08_archtop_after_hours.sm",
+    "id": "08_archtop_after_hours",
+    "title": "Archtop after hours",
+    "group": "Musical starters",
+    "description": "Small jazz voicings over walking fragments; room for the recorded attack.",
+    "benchmark": null
+  }
+]

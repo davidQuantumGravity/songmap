@@ -1,0 +1,7 @@
+# Controlled baseline: same notes and mix; continuous curves and technique changes removed.
+song "Four ways to play one violin" 100 4/4 C fps=30 seed=402 mood=balanced tail=3
+inst violin=family/violin(technique=0)
+chords C:4
+story 4 | violin:{deg: "=mp 0/2_ 2/4 4/4 | =p 0/4 r/4 2/4 r/4 | =mf 0/8'^ 2/8' 4/4' r/2 | =p 4/2_ 0/4 r/4"}
+mix violin -6 send={hall: 0.08}
+master lufs=-18 glue="none"

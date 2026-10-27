@@ -1,0 +1,15 @@
+# Archtop notes: three-note shells and an occasional ninth answer, kept above the acoustic bass. The microphone channel carries pick and body detail.
+# Archtop expression: laid-back isolated attacks, longer second answers, a held tonic and an empty final half-bar.
+# Bass notes: sparse walking fragments connect roots and fifths; drums use sidestick and a gentle ride with no busy fill under the last chord.
+song "Archtop after hours" 94 4/4 C seed=98 tail=3 mood=balanced
+inst gtr=sampler/archtop_mic bass=sampler/upright_bass
+kit kick=sampler/blonde_bop_kick rim=sampler/blonde_bop_sidestick ride=sampler/blonde_bop_ride
+chords Dm7:2 G7:2 Cmaj7:2 G7:1 Cmaj7:1
+groove swing=.58/8
+offer 2 | gtr:{rel: "=p [3,5,7]/4_ r/4 [3,7,9]/4 r/4 | r/4 [3,5,7]/2_ r/4"} bass:{rel: "=p R/2 5/4 r/4 | R/4 3/4 5/4 r/4", oct: -2} drums:{kick: "x...............", rim: "....x.......x...", ride: "x...-...x...-..."}
+answer 2 | gtr:{rel: "=mp r/4 [3,5,7]/4 [3,7,9]/4 r/4 | [3,5,7]/4_ 9/8 7/8 5/4 r/4"} bass:{rel: "=mp R/4 5/4 R+/4 5/4 | R/2 5/4 r/4", oct: -2} drums:{kick: "x.......x.......", rim: "....x.......x...", ride: "x...-...x...-..."}
+warm 2 | gtr:{rel: "=mf [3,5,7]/4_ r/4 [3,7,9]/4_ r/4 | 5/4 7/8 9/8 [3,5,7]/4 r/4"} bass:{rel: "=mp R/2 5/4 r/4 | R/4 3/4 5/4 r/4", oct: -2} drums:{kick: "x...............", rim: "....x.......x...", ride: "x...-...x...-..."}
+landing 2 | gtr:{rel: "=mp [3,5,7]/4 r/4 9/4 7/4 | =p [3,5,7]/2_ r/2"} bass:{rel: "=mp R/2 5/4 r/4 | =p R/2_ r/2", oct: -2} drums:{kick: "x...............|x...............", rim: "....x.......x...|................", ride: "x...-...x...-...|x..............."}
+feel gtr offset=8
+mix gtr -4 hall=.1 | bass 1 sc=0 hall=.03 | drums -14 hall=.04
+master standard lufs=-18 glue=none

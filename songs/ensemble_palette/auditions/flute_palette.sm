@@ -1,0 +1,10 @@
+# Controlled timbre benchmark: Flute palette.
+# Notes: a rising question, descending reply and two detached repeated attacks; all variants of this instrument share these notes.
+# Expression: soft beginning, firmer short notes, one held final note and a breath. This repeated benchmark is not a finished composition.
+song "Flute palette" 100 4/4 C seed=211 tail=2 mood=balanced
+inst voice=sound/flute_palette(morph_x=.35, morph_y=.3)
+chords C:2
+question 1 | voice:{deg: "=p 4/4_ 6/8 8/8 5/4 r/4", oct: 0}
+answer 1 | voice:{deg: "=mf 6/8'^ r/8 6/8' r/8 =p 4/4_ r/4", oct: 0}
+mix voice -6 hall=.025
+master standard lufs=-18 glue=none

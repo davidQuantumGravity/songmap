@@ -1,0 +1,13 @@
+instrument: epiano
+description: Bright digital FM chime with a quick index decay. Synthesis recipe, not
+  a recording or hardware emulation.
+tags:
+- keys-guitar-palette
+- epiano
+params:
+  index: 3.2
+  index_decay: 0.26
+  tine: 0.46
+  t60: 4.2
+  trem_depth: 0
+  vel_index: 2.8

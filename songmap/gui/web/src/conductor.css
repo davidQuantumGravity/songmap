@@ -1,0 +1,27 @@
+.conductor-panel { height: 100%; overflow: auto; padding: 14px 20px 24px; }
+.conductor-heading { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.conductor-heading h2 { margin: 0; font-size: 20px; font-weight: 600; }
+.conductor-heading p { margin: 2px 0 0; color: var(--muted); }
+.conductor-heading > label { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.conductor-panel fieldset { border: 1px solid var(--line2); border-radius: 8px; padding: 12px; margin: 0; }
+.conductor-panel legend { padding: 0 5px; font-weight: 600; }
+.conductor-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.conductor-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.conductor-field label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+.conductor-field input, .conductor-field select { width: 100%; min-width: 0; padding: 5px 8px; background: var(--panel); border: 1px solid var(--line2); border-radius: 5px; }
+.conductor-field small { color: var(--muted); }
+.conductor-field .conductor-check { flex-direction: row; align-items: center; }
+.conductor-check input { width: auto; }
+.conductor-inline { display: flex; gap: 8px; }
+.conductor-inline > label { flex: 1; min-width: 0; }
+.conductor-inline > label:first-child { max-width: 110px; }
+.conductor-actions { display: flex; gap: 12px; align-items: center; margin-top: 14px; }
+.conductor-note { color: var(--muted); max-width: 1000px; font-size: 12px; }
+.conductor-panel table { border-collapse: collapse; width: 100%; text-align: left; }
+.conductor-panel th { color: var(--muted); font-size: 11px; font-weight: 600; }
+.conductor-panel th, .conductor-panel td { padding: 7px 10px; border-bottom: 1px solid var(--line); }
+.conductor-panel td small { display: block; color: var(--muted); font-size: 10px; margin-top: 2px; }
+.conductor-panel tr.selected { background: var(--accent-soft); }
+.conductor-panel td button { padding: 3px 8px; }
+.conductor-lane-label { width: 100%; text-align: left; border: 0; border-radius: 0; background: transparent; border-top: 1px solid var(--line); cursor: pointer; }
+@media(max-width: 1000px) { .conductor-fields { grid-template-columns: 1fr; gap: 16px; } .conductor-heading > label { margin-left: 0; } }

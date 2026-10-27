@@ -60,13 +60,14 @@ export function Teacher({ path, text, summary, time, onSeek, ok }: {
   const [open, setOpen] = useState<number | null>(null);
 
   useEffect(() => {
+    let live = true;
+    setData(null); setErr(null);
     if (!ok) return;
     const id = window.setTimeout(() => {
-      api.teach(path, text).then((d: Teach) => { setData(d); setErr(null); }).catch((e) => setErr(String(e)));
+      api.teach(path, text).then((d: Teach) => { if (live) { setData(d); setErr(null); } }).catch((e) => live && setErr(String(e)));
     }, 400);
-    return () => window.clearTimeout(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [summary, ok]);
+    return () => { live = false; window.clearTimeout(id); };
+  }, [path, text, ok]);
 
   const ci = data ? data.chords.findIndex((c) => time >= c.start && time < c.end) : -1;
   const chord = ci >= 0 ? data!.chords[ci] : null;

@@ -142,11 +142,32 @@ def install(names: list[str] | None = None, root: str | Path = "samples", log=pr
                 raise SongError(f"missing upstream sample: {source_name}/{relative}")
             return relative, _fetch(source, relative, pack, entries[relative])
 
+        def program_files(relative, depth=0, base=None):
+            if depth > 8:
+                raise SongError('SFZ includes nested too deeply')
+            relative, metadata = fetch(relative)
+            base = base or (pack/relative).parent
+            receipt['files'][(pack/relative).relative_to(root).as_posix()] = metadata
+            import re
+            body = sfz._strip_comments((pack/relative).read_text(encoding='utf-8',errors='replace'))
+            for inc in re.findall(r'#include\s+"([^"$]+)"',body):
+                child = _within(pack,(pack/relative).parent/inc.replace('\\','/')).relative_to(pack).as_posix()
+                if child not in entries:
+                    child = _within(pack,base/inc.replace('\\','/')).relative_to(pack).as_posix()
+                program_files(child,depth+1,base)
+
         for name in selected:
             program = manifest["voices"][name]["program"]
-            relative, metadata = fetch(program)
-            receipt["files"][(pack / relative).relative_to(root).as_posix()] = metadata
-            parsed = sfz.parse(str(pack / program))
+            program_files(program)
+            path = pack/program
+            if 'adapt' in manifest['voices'][name]:
+                from .curate import prepare
+                path = library.voice_path(root,name)
+                prepare(pack/program,path,manifest['voices'][name]['adapt'])
+                data = path.read_bytes()
+                receipt['files'][path.relative_to(root).as_posix()] = {'sha256':hashlib.sha256(data).hexdigest(),
+                    'bytes':len(data),'derived_from':program,'profile':manifest['voices'][name]['adapt']}
+            parsed = sfz.parse(str(path))
             if parsed.unsupported:
                 raise SongError(f"{name}: unsupported SFZ features: {', '.join(sorted(parsed.unsupported))}")
             for region in parsed.regions:

@@ -3,6 +3,7 @@ import "./instrument-lab.css";
 import { MusicComparisonForm, comparisonNames, scopeDescription, type ComparisonType } from "./MusicComparisonForm";
 import { LabScore, NoteRoll, type ComparisonScore } from "./LabScore";
 import { BarRange, PassagePicker } from "./PassagePicker";
+import { SoundDesigner } from "./SoundDesigner";
 
 type Occurrence = { path: string; title: string; kind: string; part: string; piece: string | null; use: string; notes: number; sections: string[]; first_seconds: number };
 type Assessment = { need: number; note: string };
@@ -64,6 +65,8 @@ export function AILab({currentPath, dirty, onApplied}: {currentPath: string | nu
   const [mode, setMode] = useState("solo");
   const [side, setSide] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [soundAudition,setSoundAudition]=useState<"shape"|"blend"|null>(null);
+  const [soundStopSignal,setSoundStopSignal]=useState(0);
   const [position, setPosition] = useState(0);
   const [match, setMatch] = useState(true);
   const [loop, setLoop] = useState(true);
@@ -80,6 +83,7 @@ export function AILab({currentPath, dirty, onApplied}: {currentPath: string | nu
   const keyboardRef=useRef<((e:KeyboardEvent)=>void)|null>(null);
   const sessionRequest = useRef(0);
   const requestedSession = useRef("");
+  const currentSessionId=useRef(session?.id);currentSessionId.current=session?.id;
   const available = useMemo(() => {
     const groups = new Map<string, {use: string; occurrences: Occurrence[]; count: number; notes: number; priority: number}>();
     for (const o of inventory?.occurrences ?? []) {
@@ -248,6 +252,7 @@ export function AILab({currentPath, dirty, onApplied}: {currentPath: string | nu
     if(auto && !snippets && choice !== "comment" && provider?.available) {await request(`/sessions/${s.id}/generate`, {});setSession(await request<Session>(`/sessions/${s.id}`));}
   }
   async function switchSide(i: number) {
+    setSoundStopSignal(n=>n+1);
     if (!loadedPair) return;
     const old=players.current[sideRef.current], next=players.current[i];
     const wasPlaying=!old.paused, t=old.currentTime;
@@ -256,8 +261,8 @@ export function AILab({currentPath, dirty, onApplied}: {currentPath: string | nu
     next.currentTime=Math.min(t,Math.max(0,(next.duration || session!.seconds)-.01)); sideRef.current=i; setSide(i);
     if(wasPlaying) {await next.play(); setPlaying(true);} else setPlaying(false);
   }
-  async function play() {const p=players.current[sideRef.current]; if(p.paused) {if(p.ended||(loop&&(p.currentTime<loopRange[0]||p.currentTime>=loopRange[1])))p.currentTime=loopRange[0];await p.play();setPlaying(true);} else {p.pause();setPlaying(false);}}
-  function seek(t:number){const value=Math.max(0,Math.min(session?.seconds??0,t));players.current.forEach(p=>{if(p.readyState)p.currentTime=Math.min(value,p.duration||value);});setPosition(value);}
+  async function play() {setSoundStopSignal(n=>n+1);const p=players.current[sideRef.current]; if(p.paused) {if(p.ended||(loop&&(p.currentTime<loopRange[0]||p.currentTime>=loopRange[1])))p.currentTime=loopRange[0];await p.play();setPlaying(true);} else {p.pause();setPlaying(false);}}
+  function seek(t:number){setSoundStopSignal(n=>n+1);const value=Math.max(0,Math.min(session?.seconds??0,t));players.current.forEach(p=>{if(p.readyState)p.currentTime=Math.min(value,p.duration||value);});setPosition(value);}
   async function develop(){
     if(!session||!favorite)return;
     const s=await request<Session>(`/sessions/${session.id}/develop`,{candidate:favorite.id,scope:developScope,part:developPart,brief:[session.brief,feedbackText].filter(Boolean).join("\n")});
@@ -308,9 +313,10 @@ export function AILab({currentPath, dirty, onApplied}: {currentPath: string | nu
           <div className="lab-view-heading"><div className="lab-view-switch" aria-label="Comparison view"><button aria-pressed={view==="listening"} onClick={()=>setView("listening")}>Listening room</button><button aria-pressed={view==="score"} onClick={()=>setView("score")}>Score focus</button></div><span className="small muted">{mode==="solo"?`${session.part} isolated`:"Full mix"} · {snippets?"each take keeps its own source window":"aligned score timing"}</span></div>
           {scoreError&&<p role="status" className="small muted">Notes could not load. Audio is still available. {scoreError} <button onClick={()=>setScoreRetry(v=>v+1)}>Retry notes</button></p>}
           {view==="listening"?<div className="lab-candidates">{pair.map((c,i)=>{const score=scoreData?.takes.find(t=>t.id===c.id),part=score?.parts.find(p=>p.part===session.part)??score?.parts.find(p=>p.changes.length)??score?.parts[0];const excerptStart=c.excerpt?.start??session.start;return <article key={c.id} className={side===i?"active":""} aria-label={`${i===0?"A":"B"} take ${c.take}`}><div className="lab-take-heading"><span className="lab-take-letter">{i===0?"A":"B"}</span><span className="small muted">Take {c.take}</span>{session.incumbent===c.id&&<span className="lab-favorite-badge">Favorite</span>}</div><h3>{c.display_name}</h3>{!musical&&<span className="small muted">{c.verified_use}</span>}{part&&<NoteRoll part={part} start={0} end={session.seconds} position={position} compact onSeek={seek}/>}<p className="small muted lab-excerpt">Source {excerptStart.toFixed(1)}–{(excerptStart+session.seconds).toFixed(1)}s</p><p className="lab-take-change small">{side===i?"Audition selected":"Ready to audition"}{part?` · ${part.part}`:""}</p>{i===1&&!snippets&&c.changes?.length>0&&<p className="small muted">{c.changes.map(ch=>`${ch.field}: ${String(ch.after)}`).join(" · ")}</p>}</article>;})}</div>:selectedScore?<LabScore take={selectedScore} position={position} onSeek={seek} focusPart={session.part}/>:<p className="lab-loading">{scoreError?"Listening controls remain available above.":"Reading performed notes…"}</p>}
+          {!musical&&pair.length>0&&<SoundDesigner key={session.id} sessionId={session.id} pair={pair} selected={side} part={session.part+(session.piece?` / ${session.piece}`:"")} disabled={pending||busy(session)||session.candidates.length>=24} mainPlaying={playing} stopSignal={soundStopSignal} onPreview={setSoundAudition} loop={loop} range={loopRange} onAudition={()=>{players.current.forEach(p=>p.pause());setPlaying(false);setMode("solo");}} onBusy={setPending} onSaved={async()=>{const r=await request<Session>(`/sessions/${session.id}`);if(currentSessionId.current!==r.id)return;setSession(r);setStatus("Sound saved as a new take. Compare it, then vote or add feedback.");setPreview([]);}}/>}
           <section className="lab-feedback" aria-label="Listening decision">
             <div className="lab-feedback-heading"><h3>Which version works better?</h3><span className="small muted">A vote saves your favorite. Applying is separate.</span></div>
-            <div className="lab-votes">{[["a","Prefer A"],["b","Prefer B"],["tie","Tie"],["neither","Neither"]].map(([choice,label])=><button key={choice} className={(choice==="a"&&favoriteSide===0)||(choice==="b"&&favoriteSide===1)?"favorite-choice":""} disabled={pending||busy(session)||!loadedPair} onClick={()=>run(()=>vote(choice))}>{label}</button>)}</div>
+            <div className="lab-votes">{[["a","Prefer A"],["b","Prefer B"],["tie","Tie"],["neither","Neither"]].map(([choice,label])=><button key={choice} className={(choice==="a"&&favoriteSide===0)||(choice==="b"&&favoriteSide===1)?"favorite-choice":""} disabled={pending||busy(session)||!loadedPair||!!soundAudition} onClick={()=>run(()=>vote(choice))}>{label}</button>)}</div>
             <div className="lab-feedback-tags" aria-label="Quick feedback">{["Better phrasing","Too busy","Too bright","Better groove","Too loud"].map(tag=><button key={tag} aria-pressed={tags.includes(tag)} onClick={()=>setTags(prev=>prev.includes(tag)?prev.filter(t=>t!==tag):[...prev,tag])}>{tag}</button>)}</div>
             <textarea aria-label="Listening feedback" value={feedback} maxLength={4000} placeholder="What should the next version keep or change?" onChange={e=>setFeedback(e.target.value)}/>
             <div className="lab-next-actions"><button disabled={pending||busy(session)||!feedbackText} onClick={()=>run(()=>vote("comment"))}>Save comment</button><span className="spacer"/>{snippets?<><button className="primary" disabled={pending||busy(session)||!favorite} onClick={()=>setDrawer("revise")}>Develop favorite · Take {favorite?.take}</button><button onClick={()=>setDrawer("history")}>Compare another excerpt</button></>:<><button className="primary" disabled={pending||busy(session)||!provider?.available||session.candidates.length>=24} onClick={()=>setDrawer("revise")}>Revise favorite · Take {favorite?.take}</button><button disabled={pending||busy(session)||!provider?.available||session.candidates.length>=24} onClick={()=>run(generate)}>Try another</button><button disabled={pending||busy(session)} onClick={()=>{setPreview([]);setDrawer("apply");}}>Review &amp; apply</button></>}</div>

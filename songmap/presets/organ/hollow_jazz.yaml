@@ -1,0 +1,15 @@
+instrument: organ
+description: Lower drawbars with light percussion. Synthesis recipe, not a recording
+  or hardware emulation.
+tags:
+- keys-guitar-palette
+- organ
+params:
+  db1: 8
+  db2: 0
+  db3: 8
+  db4: 0
+  db5: 0
+  perc: 0.25
+  click: 0.15
+  rotor: 0.65

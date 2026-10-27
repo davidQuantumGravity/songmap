@@ -9,7 +9,10 @@ export type Diagnostic = {
   text: string;
 };
 
-export type Section = { name: string; index: number; bar: number; bars: number; start: number; end: number; line: number | null };
+export type Section = { name: string; index: number; bar: number; bars: number; start: number; end: number; line: number | null;
+  tempo_start: number; tempo_end: number; tempo_override: number | string | null;
+  meter: string; meter_override: string | null; key: string; key_override: string | null; tonic: string; scale: string;
+  beats_per_bar: number; start_beat: number; end_beat: number; groups: number[] };
 // [start s, length s, pitch (MIDI, float) | null for drums, velocity 0..1, kit piece]
 export type Note = [number, number, number | null, number, string];
 export type InsertSpec = { fx: string } & Record<string, number | string>;
@@ -18,6 +21,9 @@ export type Part = { name: string; kit: boolean; instrument: string | null; coun
 export type Voice = {
   use: string; instrument: string; preset: string | null; patch?: string; patch_source?: "song" | "library";
   schema?: ParamSpec[]; error?: string;
+  sounds?: Record<string, unknown>;
+  techniques?: {name:string;index:number;ref:string}[];
+  response_profile?: {gain_db:number;flags:string[]};
   params: Record<string, number | string>;              // the song's overrides
   values: Record<string, number | string>;              // every param, resolved (default < preset < song)
   preset_values?: Record<string, number | string>;
@@ -38,6 +44,10 @@ export type ModuleSpec = { name: string; kind: string; doc: string; audio_in: bo
 export type PatchData = { modules: Record<string, Record<string, number | string>>; wires: string[]; description?: string;
   macros?: Record<string, { default: number; map: Record<string, [number, number]> }> };
 export type Catalog = {
+  families: Record<string,{title:string;family:string;installed:boolean;default:string;techniques:Record<string,string>}>;
+  expression_controls: ParamSpec[];
+  scales: { name: string; intervals: number[]; microtonal: boolean }[];
+  sound_library: Record<string, {title:string; description:string; installed:boolean; sources:Record<string,{use:string;params:Record<string,number>}>}>;
   instruments: InstrumentSpec[]; presets: Record<string, Preset[]>;
   samplers: { name: string; ref: string; title: string; license: string; family: string; category?: string; description: string; installed: boolean; install: string; range: number[] }[];
   inserts: UnitSpec[]; guides: Record<string, Guide>; modules: ModuleSpec[]; sources: string[]; patch_library: Record<string, PatchData>;
@@ -47,7 +57,9 @@ export type AuditionNote = { t: number; pitch: number; vel: number; gate: number
 export type SongEvent = { type: string; at: string; time: number; start: number; section: string | null };
 
 export type Summary = {
-  title: string; tempo: number; meter: string; key: string; tuning: string; mood: string | null; fps: number;
+  expression: Record<string,Record<string,Record<string,number|[number,number][]>>>;
+  techniques: Record<string,Record<string,[number,string][]>>;
+  title: string; tempo: number; meter: string; key: string; tonic: string; scale: string; tuning: string; mood: string | null; fps: number;
   bars: number; seconds: number; music_seconds: number; frames: number; length: string; digest: string;
   sections: Section[]; parts: Part[]; events: SongEvent[]; bar_times: number[];
   chords: [number, number, string][]; returns: string[]; voices: Record<string, PartVoice>; master_inserts: InsertSpec[];

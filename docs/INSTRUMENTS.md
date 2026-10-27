@@ -37,7 +37,9 @@ From the single `PARAMS` schema you get:
 - **GUI knobs:** each param's group becomes a panel, `curve='log'` gives an exponential knob, and the unit is shown ([GUI.md](GUI.md)).
 - **Validation:** unknown names fail with "did you mean …?", and values are clamped to range.
 - **LLM context:** `describe()` prints one ~40-token line per instrument.
-- **Automation:** any param can be an automation lane, e.g. `auto: {cutoff: "800>3000 exp"}`.
+- **Continuous expression:** explicit `expression` curves control volume, tone, added pitch/vibrato,
+  width and compatible sound blends inside held notes. Legacy `auto` is parsed but not implemented
+  as general parameter automation. See [the feature guide](EXPRESSION_ARTICULATION_RESPONSE.md).
 - **MIDI CC mapping** when the GUI is played from a keyboard.
 
 **Conventions:**
@@ -160,17 +162,32 @@ Two optional backends plug into the same `Instrument` contract, so a song can sw
 
 For a library with several programs, write `sampler/<library>/<program stem>`. For example, VSCO-2 CE (CC0, <https://github.com/sgossner/VSCO-2-CE/releases/tag/1.1.0>) unpacked as `samples/vsco2/` is used as `sampler/vsco2/<stem>`. If a library is missing, the error says where it looked and where to download it.
 
-The curated free library offers 116 individual voices, including piano, FM keyboard, harp, mallets, orchestral
+The curated library offers 210 recorded programs, including piano, FM keyboard, harp, mallets, orchestral
 instruments, recorded bass techniques and acoustic kit pieces. `songmap samples install` downloads and verifies their pinned source files;
 `songmap samples list` shows availability, and `songmap samples verify` checks the installation. Studio and the AI
 catalog expose the individual names. See [SFZ_LIBRARY.md](SFZ_LIBRARY.md) for references, controls and limitations.
 See [BASS_DRUM_PALETTE.md](BASS_DRUM_PALETTE.md) for drum articulations, electronic presets and groove templates.
+See [KEYS_GUITAR_PALETTE.md](KEYS_GUITAR_PALETTE.md) for five acoustic pianos, electric keyboards, organs,
+harpsichords, recorded guitars, tone controls, fixed-program limits and source-specific redistribution rights.
 
-### 5.2 `plugin`: VST3 hosting via DawDreamer
+### 5.2 `sound/<name>`: saved tone and blend recipes
+
+AI Lab's shape and blend controls save score-owned `sounds:` definitions. Each combines one, two or four existing voices with complementary gains and per-note tone processing. It preserves pitch, expression, round-robin selection and sample provenance. See [SOUND_DESIGN.md](SOUND_DESIGN.md) for the recipe format, parameters and audition workflow.
+
+### 5.3 `plugin`: VST3 hosting via DawDreamer
 - **Status: planned.** No plugin host is implemented in the current engine.
 - `pip install dawdreamer`, then load a VST3 instrument, send it the Played notes as MIDI, and render offline. Parameters come from `get_parameters_description()`, and the GUI shows them like native knobs.
 - **Good free instruments:** Surge XT (GPL-3, superb synth), Dexed (DX7 FM), Vital (free tier), OB-Xd. Pianoteq (commercial) is the best non-sample piano.
 - **Caveat:** plugin renders are reproducible only if the plugin is deterministic. Pin plugin versions in `render.log`.
+
+### 5.4 `family/<name>`: named recorded techniques
+
+Twenty-three coherent instrument families expose real sustain/short/plucked/bowed/muted
+recordings through one voice. Auto follows written short articulations where a matching
+recording exists; phrase options and beat schedules override it. Shared tone controls,
+continuous performance curves and opt-in fixed response gains are documented in
+[EXPRESSION_ARTICULATION_RESPONSE.md](EXPRESSION_ARTICULATION_RESPONSE.md). New families
+default to calibrated response; existing source voices keep their previous levels.
 
 ## 6. Presets
 
@@ -273,3 +290,8 @@ every recipe rendering.
 4. Tests: renders finite at vel 0.3 and 1.0; centroid rises with velocity; pitch is accurate for pitched instruments (FFT peak within 5 cents); no clicks; render time under 50 ms per second of audio.
 5. Ship 2–4 presets and add a row to the catalog above.
 6. Run the gallery (`python demo.py`) and listen, or ask a human to.
+
+Fourteen named classical/jazz palettes also resolve from `songmap/instruments/sounds.yaml`.
+Studio's Rack selects them as `sound/<name>` and displays dynamic source/mix schemas.
+Four-source recipes use bilinear `morph_x/y`; stereo width and added delayed vibrato join
+the neutral tone controls. See [ENSEMBLE_PALETTE.md](ENSEMBLE_PALETTE.md) for coverage and limits.

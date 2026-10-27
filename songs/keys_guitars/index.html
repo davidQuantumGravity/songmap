@@ -1,0 +1,235 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SongMap · Keys & guitars</title><style>
+*{box-sizing:border-box}body{margin:0;background:#10151b;color:#edf1f6;font:16px/1.55 system-ui}main{max-width:1200px;margin:auto;padding:35px 24px}h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.1}h2{margin-top:30px}p{color:#becbd8}a{color:#9bd9c3}nav{display:flex;gap:18px;flex-wrap:wrap}.tag{color:#9bd9c3;text-transform:uppercase;letter-spacing:.14em}#grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:20px}article,.compare{border:1px solid #3e5062;border-radius:12px;padding:20px;background:#19222c}article h3{margin:0 0 8px}article p{font-size:.9rem}audio{width:100%}button,select{font:inherit;background:#263747;color:#fff;border:1px solid #698397;padding:8px;border-radius:6px;max-width:100%}button{cursor:pointer}.choices{display:grid;grid-template-columns:1fr 1fr;gap:15px}.choices label{display:flex;flex-direction:column;gap:7px}.choices audio{margin-top:10px}article[hidden]{display:none}.small{font-size:.9rem}#position{accent-color:#9bd9c3;width:100%}.controls{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}@media(max-width:600px){.choices{grid-template-columns:1fr}}</style>
+<main><div class="tag">SongMap sound library</div><h1>Keys & guitars, with a player's touch.</h1>
+<p>Five acoustic pianos, recorded Rhodes and FM keyboards, six harpsichord programs, six recorded organ registrations, nine guitar programs, eight new FM electric-piano recipes, four tonewheel recipes, and eight editable musical starters.</p>
+<nav><a href="../rhythm_palette/index.html">Bass & drums</a><a href="../sfz_revisited/index.html#comparisons">Earlier song comparisons</a><a href="../../docs/KEYS_GUITAR_PALETTE.md">Palette guide</a><a href="http://127.0.0.1:8867/?lab=1">AI Lab · saved A/B feedback</a></nav>
+<section class="compare" aria-label="Controlled A/B comparison"><h2>Compare the same phrase</h2>
+<p class="small">Auditions within each family share the exact score, tempo and written expression and target −18 LUFS. Switch A/B at the current position; different sample attacks and tails remain audible. These controls audition sounds. Save preferences and text feedback in AI Lab.</p>
+<label>Phrase family <select id="phrase"><option value="keyboard">Keyboard</option><option value="guitar">Guitar</option></select></label>
+<div class="choices"><label>A <select id="a" aria-label="Sound A"></select></label><label>B <select id="b" aria-label="Sound B"></select></label></div>
+<div class="controls"><button id="play-a">Play A</button><button id="play-b">Play B</button><button id="stop">Stop</button><span id="now" aria-live="polite">Choose two sounds</span></div>
+<label>Position <input id="position" type="range" min="0" max="11.6" value="0" step=".01"></label></section>
+<h2>Explore the palette and musical starters</h2><p class="small">Registrations, pickup channels, playing techniques and layered takes are labeled as such. They are not all different physical instruments. Guitar keyswitches and piano pedals are fixed during preparation; live pedals, connected legato, slides and amp modeling are not supplied by these programs.</p>
+<label>Show <select id="family"><option>Everything</option><option>Acoustic pianos</option><option>Electric keyboards</option><option>Harpsichords</option><option>Recorded organs</option><option>Acoustic guitars</option><option>Electric guitars</option><option>Synthesized electric keys</option><option>Tonewheel organ recipes</option><option>Reference sounds</option><option>Musical starters</option></select></label><section id="grid"><article data-group="Acoustic pianos"><h3>Kawai grand piano</h3><p>Acoustic grand with velocity layers and release noises; melody and chord accompaniment.</p>
+<audio controls preload="none" src="renders/grand_piano/song.mp3"></audio><p><a href="auditions/grand_piano.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fgrand_piano.sm">Open in Studio</a> ·
+<a href="renders/grand_piano/LICENSES.md">Credits</a> · <a href="renders/grand_piano/qa.png">Audio QA</a></p></article>
+<article data-group="Acoustic pianos"><h3>Steinway B grand · damper up</h3><p>Recorded Steinway B grand with three velocity layers; fixed damper-up selection, no live pedal.</p>
+<audio controls preload="none" src="renders/steinway_piano/song.mp3"></audio><p><a href="auditions/steinway_piano.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fsteinway_piano.sm">Open in Studio</a> ·
+<a href="renders/steinway_piano/LICENSES.md">Credits</a> · <a href="renders/steinway_piano/qa.png">Audio QA</a></p></article>
+<article data-group="Acoustic pianos"><h3>Knight upright piano</h3><p>Character upright with two velocity layers and key-release samples. Controller-triggered pedal noises excluded.</p>
+<audio controls preload="none" src="renders/knight_piano/song.mp3"></audio><p><a href="auditions/knight_piano.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fknight_piano.sm">Open in Studio</a> ·
+<a href="renders/knight_piano/LICENSES.md">Credits</a> · <a href="renders/knight_piano/qa.png">Audio QA</a></p></article>
+<article data-group="Acoustic pianos"><h3>Yamaha upright piano</h3><p>Recorded Yamaha upright; alternative to the Kawai and Steinway grand recordings.</p>
+<audio controls preload="none" src="renders/yamaha_piano/song.mp3"></audio><p><a href="auditions/yamaha_piano.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fyamaha_piano.sm">Open in Studio</a> ·
+<a href="renders/yamaha_piano/LICENSES.md">Credits</a> · <a href="renders/yamaha_piano/qa.png">Audio QA</a></p></article>
+<article data-group="Acoustic pianos"><h3>Meta upright piano</h3><p>Full 88-key upright with four velocity layers. Original recorded tuning retained; extra random pitch/level modulation disabled.</p>
+<audio controls preload="none" src="renders/meta_piano/song.mp3"></audio><p><a href="auditions/meta_piano.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fmeta_piano.sm">Open in Studio</a> ·
+<a href="renders/meta_piano/LICENSES.md">Credits</a> · <a href="renders/meta_piano/qa.png">Audio QA</a></p></article>
+<article data-group="Electric keyboards"><h3>TX81Z FM piano</h3><p>Recorded FM keyboard; bright attack and rounded decay for funk, broken beat, and lo-fi chords.</p>
+<audio controls preload="none" src="renders/fm_piano/song.mp3"></audio><p><a href="auditions/fm_piano.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Ffm_piano.sm">Open in Studio</a> ·
+<a href="renders/fm_piano/LICENSES.md">Credits</a> · <a href="renders/fm_piano/qa.png">Audio QA</a></p></article>
+<article data-group="Electric keyboards"><h3>TX81Z Piano 1</h3><p>Recorded Yamaha TX81Z FM preset, distinct from the FM Piano program.</p>
+<audio controls preload="none" src="renders/tx_piano/song.mp3"></audio><p><a href="auditions/tx_piano.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Ftx_piano.sm">Open in Studio</a> ·
+<a href="renders/tx_piano/LICENSES.md">Credits</a> · <a href="renders/tx_piano/qa.png">Audio QA</a></p></article>
+<article data-group="Electric keyboards"><h3>TX81Z Clavisynth</h3><p>Recorded Yamaha TX81Z FM preset, distinct from the FM Piano program.</p>
+<audio controls preload="none" src="renders/clavisynth/song.mp3"></audio><p><a href="auditions/clavisynth.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fclavisynth.sm">Open in Studio</a> ·
+<a href="renders/clavisynth/LICENSES.md">Credits</a> · <a href="renders/clavisynth/qa.png">Audio QA</a></p></article>
+<article data-group="Electric keyboards"><h3>Rhodes Mark I · dry mono</h3><p>1977 Rhodes Mark I Stage 73, five sampled velocity layers and full natural decays. Fixed rendered channel effect; no live pedal or modulation.</p>
+<audio controls preload="none" src="renders/rhodes_mono/song.mp3"></audio><p><a href="auditions/rhodes_mono.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Frhodes_mono.sm">Open in Studio</a> ·
+<a href="renders/rhodes_mono/LICENSES.md">Credits</a> · <a href="renders/rhodes_mono/qa.png">Audio QA</a></p></article>
+<article data-group="Electric keyboards"><h3>Rhodes Mark I · baked stereo chorus</h3><p>1977 Rhodes Mark I Stage 73, five sampled velocity layers and full natural decays. Fixed rendered channel effect; no live pedal or modulation.</p>
+<audio controls preload="none" src="renders/rhodes_stereo/song.mp3"></audio><p><a href="auditions/rhodes_stereo.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Frhodes_stereo.sm">Open in Studio</a> ·
+<a href="renders/rhodes_stereo/LICENSES.md">Credits</a> · <a href="renders/rhodes_stereo/qa.png">Audio QA</a></p></article>
+<article data-group="Electric keyboards"><h3>Rhodes Mark I · baked stereo vibrato</h3><p>1977 Rhodes Mark I Stage 73, five sampled velocity layers and full natural decays. Fixed rendered channel effect; no live pedal or modulation.</p>
+<audio controls preload="none" src="renders/rhodes_vibrato/song.mp3"></audio><p><a href="auditions/rhodes_vibrato.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Frhodes_vibrato.sm">Open in Studio</a> ·
+<a href="renders/rhodes_vibrato/LICENSES.md">Credits</a> · <a href="renders/rhodes_vibrato/qa.png">Audio QA</a></p></article>
+<article data-group="Harpsichords"><h3>English Normal harpsichord</h3><p>Recorded plucked keyboard registration; naturally limited dynamic response, with release character.</p>
+<audio controls preload="none" src="renders/english_harpsichord/song.mp3"></audio><p><a href="auditions/english_harpsichord.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fenglish_harpsichord.sm">Open in Studio</a> ·
+<a href="renders/english_harpsichord/LICENSES.md">Credits</a> · <a href="renders/english_harpsichord/qa.png">Audio QA</a></p></article>
+<article data-group="Harpsichords"><h3>English Lute harpsichord</h3><p>Recorded plucked keyboard registration; naturally limited dynamic response, with release character.</p>
+<audio controls preload="none" src="renders/lute_harpsichord/song.mp3"></audio><p><a href="auditions/lute_harpsichord.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Flute_harpsichord.sm">Open in Studio</a> ·
+<a href="renders/lute_harpsichord/LICENSES.md">Credits</a> · <a href="renders/lute_harpsichord/qa.png">Audio QA</a></p></article>
+<article data-group="Harpsichords"><h3>French harpsichord</h3><p>Recorded plucked keyboard registration; naturally limited dynamic response, with release character.</p>
+<audio controls preload="none" src="renders/french_harpsichord/song.mp3"></audio><p><a href="auditions/french_harpsichord.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Ffrench_harpsichord.sm">Open in Studio</a> ·
+<a href="renders/french_harpsichord/LICENSES.md">Credits</a> · <a href="renders/french_harpsichord/qa.png">Audio QA</a></p></article>
+<article data-group="Harpsichords"><h3>Italian harpsichord</h3><p>Recorded plucked keyboard registration; naturally limited dynamic response, with release character.</p>
+<audio controls preload="none" src="renders/italian_harpsichord/song.mp3"></audio><p><a href="auditions/italian_harpsichord.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fitalian_harpsichord.sm">Open in Studio</a> ·
+<a href="renders/italian_harpsichord/LICENSES.md">Credits</a> · <a href="renders/italian_harpsichord/qa.png">Audio QA</a></p></article>
+<article data-group="Harpsichords"><h3>Flemish 8&#x27; harpsichord</h3><p>Recorded plucked keyboard registration; naturally limited dynamic response, with release character.</p>
+<audio controls preload="none" src="renders/flemish_harpsichord/song.mp3"></audio><p><a href="auditions/flemish_harpsichord.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fflemish_harpsichord.sm">Open in Studio</a> ·
+<a href="renders/flemish_harpsichord/LICENSES.md">Credits</a> · <a href="renders/flemish_harpsichord/qa.png">Audio QA</a></p></article>
+<article data-group="Harpsichords"><h3>Flemish Full harpsichord</h3><p>Recorded plucked keyboard registration; naturally limited dynamic response, with release character.</p>
+<audio controls preload="none" src="renders/flemish_full/song.mp3"></audio><p><a href="auditions/flemish_full.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fflemish_full.sm">Open in Studio</a> ·
+<a href="renders/flemish_full/LICENSES.md">Credits</a> · <a href="renders/flemish_full/qa.png">Audio QA</a></p></article>
+<article data-group="Recorded organs"><h3>Renaissance Organ - 8&#x27;</h3><p>Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.</p>
+<audio controls preload="none" src="renders/renaissance_8/song.mp3"></audio><p><a href="auditions/renaissance_8.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Frenaissance_8.sm">Open in Studio</a> ·
+<a href="renders/renaissance_8/LICENSES.md">Credits</a> · <a href="renders/renaissance_8/qa.png">Audio QA</a></p></article>
+<article data-group="Recorded organs"><h3>Renaissance Organ - 4&#x27;</h3><p>Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.</p>
+<audio controls preload="none" src="renders/renaissance_4/song.mp3"></audio><p><a href="auditions/renaissance_4.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Frenaissance_4.sm">Open in Studio</a> ·
+<a href="renders/renaissance_4/LICENSES.md">Credits</a> · <a href="renders/renaissance_4/qa.png">Audio QA</a></p></article>
+<article data-group="Recorded organs"><h3>Renaissance Organ - 4&#x27;+8&#x27;</h3><p>Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.</p>
+<audio controls preload="none" src="renders/renaissance_4_8/song.mp3"></audio><p><a href="auditions/renaissance_4_8.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Frenaissance_4_8.sm">Open in Studio</a> ·
+<a href="renders/renaissance_4_8/LICENSES.md">Credits</a> · <a href="renders/renaissance_4_8/qa.png">Audio QA</a></p></article>
+<article data-group="Recorded organs"><h3>Renaissance Organ - Full</h3><p>Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.</p>
+<audio controls preload="none" src="renders/renaissance_full/song.mp3"></audio><p><a href="auditions/renaissance_full.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Frenaissance_full.sm">Open in Studio</a> ·
+<a href="renders/renaissance_full/LICENSES.md">Credits</a> · <a href="renders/renaissance_full/qa.png">Audio QA</a></p></article>
+<article data-group="Recorded organs"><h3>Pipe Organ - Quiet</h3><p>Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.</p>
+<audio controls preload="none" src="renders/pipe_quiet/song.mp3"></audio><p><a href="auditions/pipe_quiet.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fpipe_quiet.sm">Open in Studio</a> ·
+<a href="renders/pipe_quiet/LICENSES.md">Credits</a> · <a href="renders/pipe_quiet/qa.png">Audio QA</a></p></article>
+<article data-group="Recorded organs"><h3>Pipe Organ - Loud</h3><p>Fixed sampled organ registration; sustained accompaniment and contrapuntal lines.</p>
+<audio controls preload="none" src="renders/pipe_loud/song.mp3"></audio><p><a href="auditions/pipe_loud.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fpipe_loud.sm">Open in Studio</a> ·
+<a href="renders/pipe_loud/LICENSES.md">Credits</a> · <a href="renders/pipe_loud/qa.png">Audio QA</a></p></article>
+<article data-group="Acoustic guitars"><h3>Nylon guitar · velocity-selected technique</h3><p>Recorded nylon strings; fixed first-position string map with one sounding note per string. One-shot natural ring-out; new notes on the same string damp the previous note.</p>
+<audio controls preload="none" src="renders/nylon_guitar/song.mp3"></audio><p><a href="auditions/nylon_guitar.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fnylon_guitar.sm">Open in Studio</a> ·
+<a href="renders/nylon_guitar/LICENSES.md">Credits</a> · <a href="renders/nylon_guitar/qa.png">Audio QA</a></p></article>
+<article data-group="Acoustic guitars"><h3>Nylon guitar · fingerstyle</h3><p>Recorded nylon strings; fixed first-position string map with one sounding note per string. One-shot natural ring-out; new notes on the same string damp the previous note.</p>
+<audio controls preload="none" src="renders/nylon_finger/song.mp3"></audio><p><a href="auditions/nylon_finger.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fnylon_finger.sm">Open in Studio</a> ·
+<a href="renders/nylon_finger/LICENSES.md">Credits</a> · <a href="renders/nylon_finger/qa.png">Audio QA</a></p></article>
+<article data-group="Acoustic guitars"><h3>Nylon guitar · picked</h3><p>Recorded nylon strings; fixed first-position string map with one sounding note per string. One-shot natural ring-out; new notes on the same string damp the previous note.</p>
+<audio controls preload="none" src="renders/nylon_pick/song.mp3"></audio><p><a href="auditions/nylon_pick.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fnylon_pick.sm">Open in Studio</a> ·
+<a href="renders/nylon_pick/LICENSES.md">Credits</a> · <a href="renders/nylon_pick/qa.png">Audio QA</a></p></article>
+<article data-group="Acoustic guitars"><h3>Steel-string acoustic guitar</h3><p>Recorded steel strings with three velocity layers and first-position string selection; notes on the same string damp each other.</p>
+<audio controls preload="none" src="renders/steel_guitar/song.mp3"></audio><p><a href="auditions/steel_guitar.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fsteel_guitar.sm">Open in Studio</a> ·
+<a href="renders/steel_guitar/LICENSES.md">Credits</a> · <a href="renders/steel_guitar/qa.png">Audio QA</a></p></article>
+<article data-group="Acoustic guitars"><h3>Shiny archtop · microphone</h3><p>Single archtop guitar recorded through a microphone; four velocity layers and four alternate takes. Fixed single voice; no scripted vibrato or live pickup blend.</p>
+<audio controls preload="none" src="renders/archtop_mic/song.mp3"></audio><p><a href="auditions/archtop_mic.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Farchtop_mic.sm">Open in Studio</a> ·
+<a href="renders/archtop_mic/LICENSES.md">Credits</a> · <a href="renders/archtop_mic/qa.png">Audio QA</a></p></article>
+<article data-group="Electric guitars"><h3>Shiny archtop · pickup</h3><p>Single archtop guitar recorded through its magnetic pickup; four velocity layers and four alternate takes. Fixed single voice; no scripted vibrato or live pickup blend.</p>
+<audio controls preload="none" src="renders/archtop_pickup/song.mp3"></audio><p><a href="auditions/archtop_pickup.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Farchtop_pickup.sm">Open in Studio</a> ·
+<a href="renders/archtop_pickup/LICENSES.md">Credits</a> · <a href="renders/archtop_pickup/qa.png">Audio QA</a></p></article>
+<article data-group="Electric guitars"><h3>Emily electric · clean DI</h3><p>Flatwound Epiphone guitar, both pickups, direct recording; four velocity layers and three alternate takes. No amp simulation or scripted legato.</p>
+<audio controls preload="none" src="renders/emily_clean/song.mp3"></audio><p><a href="auditions/emily_clean.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Femily_clean.sm">Open in Studio</a> ·
+<a href="renders/emily_clean/LICENSES.md">Credits</a> · <a href="renders/emily_clean/qa.png">Audio QA</a></p></article>
+<article data-group="Electric guitars"><h3>Emily electric · release noises</h3><p>Flatwound Epiphone guitar, both pickups, direct recording; four velocity layers and three alternate takes. No amp simulation or scripted legato.</p>
+<audio controls preload="none" src="renders/emily_release/song.mp3"></audio><p><a href="auditions/emily_release.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Femily_release.sm">Open in Studio</a> ·
+<a href="renders/emily_release/LICENSES.md">Credits</a> · <a href="renders/emily_release/qa.png">Audio QA</a></p></article>
+<article data-group="Electric guitars"><h3>Emily electric · three-voice layer</h3><p>Flatwound Epiphone guitar, both pickups, direct recording; four velocity layers and three alternate takes. Layered alternate takes from the same guitar, not another physical instrument.</p>
+<audio controls preload="none" src="renders/emily_ensemble/song.mp3"></audio><p><a href="auditions/emily_ensemble.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Femily_ensemble.sm">Open in Studio</a> ·
+<a href="renders/emily_ensemble/LICENSES.md">Credits</a> · <a href="renders/emily_ensemble/qa.png">Audio QA</a></p></article>
+<article data-group="Synthesized electric keys"><h3>Round Tine</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/epiano_round_tine/song.mp3"></audio><p><a href="auditions/epiano_round_tine.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fepiano_round_tine.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/epiano_round_tine/qa.png">Audio QA</a></p></article>
+<article data-group="Synthesized electric keys"><h3>Warm Suitcase</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/epiano_warm_suitcase/song.mp3"></audio><p><a href="auditions/epiano_warm_suitcase.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fepiano_warm_suitcase.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/epiano_warm_suitcase/qa.png">Audio QA</a></p></article>
+<article data-group="Synthesized electric keys"><h3>Bright Bark</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/epiano_bright_bark/song.mp3"></audio><p><a href="auditions/epiano_bright_bark.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fepiano_bright_bark.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/epiano_bright_bark/qa.png">Audio QA</a></p></article>
+<article data-group="Synthesized electric keys"><h3>Soft Ballad</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/epiano_soft_ballad/song.mp3"></audio><p><a href="auditions/epiano_soft_ballad.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fepiano_soft_ballad.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/epiano_soft_ballad/qa.png">Audio QA</a></p></article>
+<article data-group="Synthesized electric keys"><h3>Bell Keys</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/epiano_bell_keys/song.mp3"></audio><p><a href="auditions/epiano_bell_keys.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fepiano_bell_keys.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/epiano_bell_keys/qa.png">Audio QA</a></p></article>
+<article data-group="Synthesized electric keys"><h3>Wide Tremolo</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/epiano_wide_tremolo/song.mp3"></audio><p><a href="auditions/epiano_wide_tremolo.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fepiano_wide_tremolo.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/epiano_wide_tremolo/qa.png">Audio QA</a></p></article>
+<article data-group="Synthesized electric keys"><h3>Dry Funk</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/epiano_dry_funk/song.mp3"></audio><p><a href="auditions/epiano_dry_funk.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fepiano_dry_funk.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/epiano_dry_funk/qa.png">Audio QA</a></p></article>
+<article data-group="Synthesized electric keys"><h3>Fm Chime</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/epiano_fm_chime/song.mp3"></audio><p><a href="auditions/epiano_fm_chime.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fepiano_fm_chime.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/epiano_fm_chime/qa.png">Audio QA</a></p></article>
+<article data-group="Tonewheel organ recipes"><h3>Hollow Jazz</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/organ_hollow_jazz/song.mp3"></audio><p><a href="auditions/organ_hollow_jazz.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Forgan_hollow_jazz.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/organ_hollow_jazz/qa.png">Audio QA</a></p></article>
+<article data-group="Tonewheel organ recipes"><h3>Gospel</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/organ_gospel/song.mp3"></audio><p><a href="auditions/organ_gospel.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Forgan_gospel.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/organ_gospel/qa.png">Audio QA</a></p></article>
+<article data-group="Tonewheel organ recipes"><h3>Soft Chorale</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/organ_soft_chorale/song.mp3"></audio><p><a href="auditions/organ_soft_chorale.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Forgan_soft_chorale.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/organ_soft_chorale/qa.png">Audio QA</a></p></article>
+<article data-group="Tonewheel organ recipes"><h3>Rock Rotary</h3><p>Native synthesis recipe; compare the envelope, velocity response and modulation.</p>
+<audio controls preload="none" src="renders/organ_rock_rotary/song.mp3"></audio><p><a href="auditions/organ_rock_rotary.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Forgan_rock_rotary.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/organ_rock_rotary/qa.png">Audio QA</a></p></article>
+<article data-group="Reference sounds"><h3>Original modeled piano</h3><p>Existing modeled piano, retained as an A/B reference.</p>
+<audio controls preload="none" src="renders/native_piano/song.mp3"></audio><p><a href="auditions/native_piano.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fnative_piano.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/native_piano/qa.png">Audio QA</a></p></article>
+<article data-group="Reference sounds"><h3>Original modeled guitar</h3><p>Existing plucked-string model, retained as an A/B reference.</p>
+<audio controls preload="none" src="renders/native_guitar/song.mp3"></audio><p><a href="auditions/native_guitar.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Fauditions%2Fnative_guitar.sm">Open in Studio</a> ·
+Native synthesis · <a href="renders/native_guitar/qa.png">Audio QA</a></p></article>
+<article data-group="Musical starters"><h3>Upright conversation</h3><p>An intimate piano question and answer, with sparse upright bass.</p>
+<audio controls preload="none" src="renders/01_upright_conversation/song.mp3"></audio><p><a href="templates/01_upright_conversation.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Ftemplates%2F01_upright_conversation.sm">Open in Studio</a> ·
+<a href="renders/01_upright_conversation/LICENSES.md">Credits</a> · <a href="renders/01_upright_conversation/qa.png">Audio QA</a></p></article>
+<article data-group="Musical starters"><h3>Rhodes pocket</h3><p>Shell voicings, gaps in the comping and bass answers around the backbeat.</p>
+<audio controls preload="none" src="renders/02_rhodes_pocket/song.mp3"></audio><p><a href="templates/02_rhodes_pocket.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Ftemplates%2F02_rhodes_pocket.sm">Open in Studio</a> ·
+<a href="renders/02_rhodes_pocket/LICENSES.md">Credits</a> · <a href="renders/02_rhodes_pocket/qa.png">Audio QA</a></p></article>
+<article data-group="Musical starters"><h3>Harpsichord dialogue</h3><p>Two independent plucked-keyboard voices; articulation creates the contrast.</p>
+<audio controls preload="none" src="renders/03_harpsichord_dialogue/song.mp3"></audio><p><a href="templates/03_harpsichord_dialogue.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Ftemplates%2F03_harpsichord_dialogue.sm">Open in Studio</a> ·
+<a href="renders/03_harpsichord_dialogue/LICENSES.md">Credits</a> · <a href="renders/03_harpsichord_dialogue/qa.png">Audio QA</a></p></article>
+<article data-group="Musical starters"><h3>Six-eight organ</h3><p>A lilting organ registration, rooted bass and a restrained drum pulse.</p>
+<audio controls preload="none" src="renders/04_six_eight_organ/song.mp3"></audio><p><a href="templates/04_six_eight_organ.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Ftemplates%2F04_six_eight_organ.sm">Open in Studio</a> ·
+<a href="renders/04_six_eight_organ/LICENSES.md">Credits</a> · <a href="renders/04_six_eight_organ/qa.png">Audio QA</a></p></article>
+<article data-group="Musical starters"><h3>Nylon fingerstyle</h3><p>Three-string shapes, alternating bass notes and a climbing reply.</p>
+<audio controls preload="none" src="renders/05_nylon_fingerstyle/song.mp3"></audio><p><a href="templates/05_nylon_fingerstyle.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Ftemplates%2F05_nylon_fingerstyle.sm">Open in Studio</a> ·
+<a href="renders/05_nylon_fingerstyle/LICENSES.md">Credits</a> · <a href="renders/05_nylon_fingerstyle/qa.png">Audio QA</a></p></article>
+<article data-group="Musical starters"><h3>Steel open chords</h3><p>Playable sparse chord shapes, spaces between strums and a quieter ending.</p>
+<audio controls preload="none" src="renders/06_steel_open_chords/song.mp3"></audio><p><a href="templates/06_steel_open_chords.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Ftemplates%2F06_steel_open_chords.sm">Open in Studio</a> ·
+<a href="renders/06_steel_open_chords/LICENSES.md">Credits</a> · <a href="renders/06_steel_open_chords/qa.png">Audio QA</a></p></article>
+<article data-group="Musical starters"><h3>Electric pocket</h3><p>Short DI double-stops leave room for bass and dry snare.</p>
+<audio controls preload="none" src="renders/07_electric_pocket/song.mp3"></audio><p><a href="templates/07_electric_pocket.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Ftemplates%2F07_electric_pocket.sm">Open in Studio</a> ·
+<a href="renders/07_electric_pocket/LICENSES.md">Credits</a> · <a href="renders/07_electric_pocket/qa.png">Audio QA</a></p></article>
+<article data-group="Musical starters"><h3>Archtop after hours</h3><p>Small jazz voicings over walking fragments; room for the recorded attack.</p>
+<audio controls preload="none" src="renders/08_archtop_after_hours/song.mp3"></audio><p><a href="templates/08_archtop_after_hours.sm">Editable score</a> ·
+<a href="http://127.0.0.1:8867/?song=songs%2Fkeys_guitars%2Ftemplates%2F08_archtop_after_hours.sm">Open in Studio</a> ·
+<a href="renders/08_archtop_after_hours/LICENSES.md">Credits</a> · <a href="renders/08_archtop_after_hours/qa.png">Audio QA</a></p></article></section></main>
+<script>const rows=[{"id": "grand_piano", "title": "Kawai grand piano", "benchmark": "keyboard"}, {"id": "steinway_piano", "title": "Steinway B grand \u00b7 damper up", "benchmark": "keyboard"}, {"id": "knight_piano", "title": "Knight upright piano", "benchmark": "keyboard"}, {"id": "yamaha_piano", "title": "Yamaha upright piano", "benchmark": "keyboard"}, {"id": "meta_piano", "title": "Meta upright piano", "benchmark": "keyboard"}, {"id": "fm_piano", "title": "TX81Z FM piano", "benchmark": "keyboard"}, {"id": "tx_piano", "title": "TX81Z Piano 1", "benchmark": "keyboard"}, {"id": "clavisynth", "title": "TX81Z Clavisynth", "benchmark": "keyboard"}, {"id": "rhodes_mono", "title": "Rhodes Mark I \u00b7 dry mono", "benchmark": "keyboard"}, {"id": "rhodes_stereo", "title": "Rhodes Mark I \u00b7 baked stereo chorus", "benchmark": "keyboard"}, {"id": "rhodes_vibrato", "title": "Rhodes Mark I \u00b7 baked stereo vibrato", "benchmark": "keyboard"}, {"id": "english_harpsichord", "title": "English Normal harpsichord", "benchmark": "keyboard"}, {"id": "lute_harpsichord", "title": "English Lute harpsichord", "benchmark": "keyboard"}, {"id": "french_harpsichord", "title": "French harpsichord", "benchmark": "keyboard"}, {"id": "italian_harpsichord", "title": "Italian harpsichord", "benchmark": "keyboard"}, {"id": "flemish_harpsichord", "title": "Flemish 8' harpsichord", "benchmark": "keyboard"}, {"id": "flemish_full", "title": "Flemish Full harpsichord", "benchmark": "keyboard"}, {"id": "renaissance_8", "title": "Renaissance Organ - 8'", "benchmark": "keyboard"}, {"id": "renaissance_4", "title": "Renaissance Organ - 4'", "benchmark": "keyboard"}, {"id": "renaissance_4_8", "title": "Renaissance Organ - 4'+8'", "benchmark": "keyboard"}, {"id": "renaissance_full", "title": "Renaissance Organ - Full", "benchmark": "keyboard"}, {"id": "pipe_quiet", "title": "Pipe Organ - Quiet", "benchmark": "keyboard"}, {"id": "pipe_loud", "title": "Pipe Organ - Loud", "benchmark": "keyboard"}, {"id": "nylon_guitar", "title": "Nylon guitar \u00b7 velocity-selected technique", "benchmark": "guitar"}, {"id": "nylon_finger", "title": "Nylon guitar \u00b7 fingerstyle", "benchmark": "guitar"}, {"id": "nylon_pick", "title": "Nylon guitar \u00b7 picked", "benchmark": "guitar"}, {"id": "steel_guitar", "title": "Steel-string acoustic guitar", "benchmark": "guitar"}, {"id": "archtop_mic", "title": "Shiny archtop \u00b7 microphone", "benchmark": "guitar"}, {"id": "archtop_pickup", "title": "Shiny archtop \u00b7 pickup", "benchmark": "guitar"}, {"id": "emily_clean", "title": "Emily electric \u00b7 clean DI", "benchmark": "guitar"}, {"id": "emily_release", "title": "Emily electric \u00b7 release noises", "benchmark": "guitar"}, {"id": "emily_ensemble", "title": "Emily electric \u00b7 three-voice layer", "benchmark": "guitar"}, {"id": "epiano_round_tine", "title": "Round Tine", "benchmark": "keyboard"}, {"id": "epiano_warm_suitcase", "title": "Warm Suitcase", "benchmark": "keyboard"}, {"id": "epiano_bright_bark", "title": "Bright Bark", "benchmark": "keyboard"}, {"id": "epiano_soft_ballad", "title": "Soft Ballad", "benchmark": "keyboard"}, {"id": "epiano_bell_keys", "title": "Bell Keys", "benchmark": "keyboard"}, {"id": "epiano_wide_tremolo", "title": "Wide Tremolo", "benchmark": "keyboard"}, {"id": "epiano_dry_funk", "title": "Dry Funk", "benchmark": "keyboard"}, {"id": "epiano_fm_chime", "title": "Fm Chime", "benchmark": "keyboard"}, {"id": "organ_hollow_jazz", "title": "Hollow Jazz", "benchmark": "keyboard"}, {"id": "organ_gospel", "title": "Gospel", "benchmark": "keyboard"}, {"id": "organ_soft_chorale", "title": "Soft Chorale", "benchmark": "keyboard"}, {"id": "organ_rock_rotary", "title": "Rock Rotary", "benchmark": "keyboard"}, {"id": "native_piano", "title": "Original modeled piano", "benchmark": "keyboard"}, {"id": "native_guitar", "title": "Original modeled guitar", "benchmark": "guitar"}];const $=id=>document.getElementById(id);const audio={a:new Audio(),b:new Audio()};let active=null,pos=0;
+function stop(){Object.values(audio).forEach(a=>a.pause());active=null}
+function choices(){stop();pos=0;$('position').value=0;const list=rows.filter(r=>r.benchmark===$('phrase').value);for(const side of ['a','b']){$(side).replaceChildren(...list.map(r=>new Option(r.title,r.id)));} $('b').selectedIndex=Math.min(1,list.length-1);$('now').textContent='Ready';}
+function play(side){pos=active?audio[active].currentTime:pos;stop();document.querySelectorAll('article audio').forEach(a=>a.pause());active=side;const a=audio[side];const src=new URL('renders/'+$(side).value+'/song.mp3',location.href).href;if(a.src!==src){a.src=src;a.onloadedmetadata=()=>{if(active!==side)return;a.currentTime=Math.min(pos,a.duration||pos);a.play().catch(e=>$('now').textContent=e.message)}}else{a.currentTime=pos;a.play().catch(e=>$('now').textContent=e.message)}$('now').textContent=side.toUpperCase()+' · '+$(side).selectedOptions[0].textContent;}
+for(const side of ['a','b']){$('play-'+side).onclick=()=>play(side);$(side).onchange=()=>{if(active===side)play(side)};audio[side].ontimeupdate=()=>{if(active===side){pos=audio[side].currentTime;$('position').max=audio[side].duration||11.6;$('position').value=pos}};audio[side].onended=()=>{stop();pos=0;$('now').textContent='Finished'};}
+$('phrase').onchange=choices;$('position').oninput=()=>{pos=+$('position').value;if(active)audio[active].currentTime=pos};$('stop').onclick=()=>{stop();pos=0;$('position').value=0;$('now').textContent='Stopped'};choices();$('family').onchange=e=>document.querySelectorAll('article').forEach(a=>a.hidden=e.target.value!=='Everything'&&a.dataset.group!==e.target.value);document.addEventListener('play',e=>{if(e.target.tagName==='AUDIO'){stop();document.querySelectorAll('article audio').forEach(a=>{if(a!==e.target)a.pause()})}},true);</script></html>

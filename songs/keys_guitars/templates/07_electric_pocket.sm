@@ -1,0 +1,16 @@
+# Guitar notes: small D-minor double-stops and single-note pickups; space is the groove. A firmer upper answer appears once.
+# Guitar expression: short gates and softer offbeats use the recorded DI attack and round robins. No recorded palm-mute or slide is claimed.
+# Bass notes: short root/octave answers around kick; drums keep a dry snare, soft hats and a deliberately empty fourth beat before landing.
+song "Electric pocket" 112 4/4 Dm seed=97 tail=2 mood=balanced
+inst gtr=sampler/emily_clean bass=sampler/jazz_bass_staccato
+kit kick=sampler/black_pearl_kick snare=sampler/black_pearl_snare hat=sampler/black_pearl_hat rim=sampler/black_pearl_sidestick
+chords Dm7:2 Gm7:2 A7:2 Dm7:2
+groove swing=.53/16
+feel snare offset=7
+cut 2 | gtr:{deg: "=mp r/8 [2,4]/8' r/4 [0,2]/8' r/8 4/8' r/8 | r/4 [2,4]/8' r/8 [0,2]/4' r/4"} bass:{rel: "=mp R/4^ r/8 5/8 R+/4 r/4 | R/4 r/4 5/8 R+/8 r/4", oct: -2} drums:{kick: "X.....x.x.......", snare: "....X.......X...", hat: "x-x-x-x-x-x-x-x-"}
+answer 2 | gtr:{deg: "=mp r/8 [3,5]/8' r/4 [5,7]/8' r/8 3/8' r/8 | [3,5]/4' r/4 r/8 [5,7]/8' r/4"} bass:{rel: "=mp R/4 r/8 5/8 R+/4 r/4 | R/4 5/8 R+/8 r/4 5/4", oct: -2} drums:{kick: "X.......x.x.....", snare: "....X..o....X...", hat: "x-x-x-x-x-x-x-x-"}
+spark 2 | gtr:{deg: "=mf [#6,8]/8'^ r/8 11/8 8/8 [4,#6]/4' r/4 | r/8 [#6,8]/8' r/4 4/4' r/4"} bass:{rel: "=mf R/4^ r/4 5/4 R+/8 r/8 | R/4 r/4 5/4 r/4", oct: -2} drums:{kick: "X.....x.x.......", snare: "....X.......X...", hat: "x-x-x-x-x-x-x-x-|x-x-x-x-x-x-...."}
+dry_stop 2 | gtr:{deg: "=mp r/8 [2,4]/8' r/4 [0,2]/4' r/4 | =p [0,2,4]/4_ r/2."} bass:{rel: "=mp R/4 r/4 5/4 r/4 | =p R/4 r/2.", oct: -2} drums:{kick: "X.......x.......|X...............", rim: "....x.......x...|................", hat: "x...x...x.......|................"}
+mix gtr -4 hall=.025 | bass -6 sc=0 | drums -18 hall=.02
+inserts gtr eq(hp=85,mid=1.5,mid_freq=1800,lp=6500) drive(amount=.1,tone=5500,output=-1.5,mix=.35)
+master standard lufs=-17 glue=none

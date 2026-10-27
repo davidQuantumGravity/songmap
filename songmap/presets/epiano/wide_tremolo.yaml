@@ -1,0 +1,13 @@
+instrument: epiano
+description: Tine keyboard with prominent stereo tremolo. Synthesis recipe, not a
+  recording or hardware emulation.
+tags:
+- keys-guitar-palette
+- epiano
+params:
+  index: 0.8
+  index_decay: 0.7
+  tine: 0.18
+  t60: 5
+  trem_rate: 4.1
+  trem_depth: 0.65

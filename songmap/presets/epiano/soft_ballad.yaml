@@ -1,0 +1,14 @@
+instrument: epiano
+description: Soft attack and long release for sparse ballads. Synthesis recipe, not
+  a recording or hardware emulation.
+tags:
+- keys-guitar-palette
+- epiano
+params:
+  index: 0.3
+  index_decay: 1.6
+  tine: 0.06
+  t60: 6.8
+  release: 0.65
+  trem_rate: 1.1
+  trem_depth: 0.12

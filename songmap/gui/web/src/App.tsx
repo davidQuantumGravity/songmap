@@ -11,10 +11,12 @@ import { PianoRoll } from "./PianoRoll";
 import { Teacher } from "./Teacher";
 import { AILab } from "./InstrumentLab";
 import { HarmonyLibrary } from "./HarmonyLibrary";
+import { Conductor } from "./Conductor";
+import { activeConductor, bpmText } from "./musicTiming";
 import { Splitter, useStored } from "./ui";
 
 type Tab = "teacher" | "problems" | "qa" | "export";
-type Dock = "code" | "mixer" | "rack" | "roll" | "video" | "lab" | "harmony";
+type Dock = "code" | "mixer" | "rack" | "roll" | "video" | "lab" | "harmony" | "conductor";
 const fmt = (t: number) => `${Math.floor(t / 60)}:${(t % 60).toFixed(1).padStart(4, "0")}`;
 const css = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 const baseName = (s: string) => s.replace(/[_\s-]*\d+$/, "");
@@ -73,7 +75,8 @@ export function App() {
   const [check, setCheck] = useState<Check | null>(null);
   const [summary, setSummary] = useState<Summary | null>(null);   // the last good one: panes stay up while you type
   const [tab, setTab] = useState<Tab>("teacher");
-  const [dock, setDock] = useState<Dock>(new URLSearchParams(location.search).get("harmony") === "1" ? "harmony" : new URLSearchParams(location.search).get("lab") === "1" ? "lab" : "code");
+  const [dock, setDock] = useState<Dock>(new URLSearchParams(location.search).get("conductor") === "1" ? "conductor" : new URLSearchParams(location.search).get("harmony") === "1" ? "harmony" : new URLSearchParams(location.search).get("lab") === "1" ? "lab" : "code");
+  const [conductorSection, setConductorSection] = useState<number | null>(null);
   useEffect(() => {
     const url = new URL(location.href);
     if (dock === "harmony") url.searchParams.set("harmony", "1");
@@ -133,6 +136,7 @@ export function App() {
     const r = await api.project(p);
     setPath(r.path); setText(r.text); setSaved(r.text); setCheck(r.check);
     setSummary(r.check.summary); setRendered(null); setQA(null); setTime(0); setLoop(null);
+    setConductorSection(null);
     setMute(new Set()); setSolo(new Set());
     api.getView(r.path).then((x) => setView(x.view)).catch(() => undefined);
     const url = new URL(location.href);
@@ -246,7 +250,10 @@ export function App() {
   const applyOp = async (op: string, args: object, remix: boolean) => {
     if (!path) return;
     try {
-      const r = await api.op(path, latest.current.text, op, args);
+      const before=latest.current.text,performance=op==="expression"||op==="techniques";
+      const r = await api.op(path, before, op, args);
+      if(performance&&latest.current.text!==before)throw new Error("The score changed while applying. Please retry.");
+      if(performance){++checkSeq.current;setStatus("Performance updated · unsaved · render to hear changes");}
       latest.current = { ...latest.current, text: r.text };
       setText(r.text); setCheck(r.check);
       if (r.check.summary) setSummary(r.check.summary);
@@ -257,6 +264,20 @@ export function App() {
     applyOp("mix", { part, ...edit, default_gain: defaultGain }, true).catch(() => undefined);
   const voiceEdit = (e: VoiceEdit) => applyOp("voice", e, false).catch(() => undefined);
   const insertsEdit = (part: string, chain: InsertSpec[]) => applyOp("inserts", { part, chain }, true).catch(() => undefined);
+  const conductorEdit = async (index: number | null, values: object) => {
+    if (!path) return;
+    const old = latest.current.text;
+    const r = await api.op(path, old, "conductor", { index, values });
+    if (latest.current.text !== old) throw new Error("The score changed while applying. Please retry.");
+    if (!r.check.ok || !r.check.summary) throw new Error(r.check.diagnostics.map(d => d.message).join("; "));
+    ++checkSeq.current;
+    audio.current.pause(); audio.current.removeAttribute("src"); audio.current.load();
+    latest.current = { ...latest.current, text: r.text };
+    setText(r.text); setCheck(r.check); setSummary(r.check.summary); setRendered(null); setQA(null); setLoop(null);
+    setTime(index === null ? 0 : r.check.summary.sections[index].start);
+    setStatus("Conductor updated · unsaved · render to hear changes");
+  };
+  const openConductor = (index: number | null) => { setConductorSection(index); setDock("conductor"); };
 
   const section = summary?.sections.find((s) => time >= s.start && time < s.end) ?? null;
   const jump = (dir: 1 | -1) => {
@@ -271,15 +292,8 @@ export function App() {
     const s = summary?.sections.find((x) => x.index === i);
     if (s?.line) { setDock("code"); setGoto({ line: s.line, n: Date.now() }); }
   };
-  const barBeat = (() => {
-    if (!summary) return "–";
-    const bt = summary.bar_times;
-    const i = Math.max(0, bt.findIndex((b) => b > time) - 1);
-    const len = (bt[i + 1] ?? bt[i] + 1) - bt[i];
-    const beats = +summary.meter.split("/")[0] || 4;
-    const beat = Math.floor(((time - bt[i]) / Math.max(len, 1e-6)) * beats) + 1;
-    return `${i + 1}.${Math.min(beat, beats)}`;
-  })();
+  const conductorNow = summary ? activeConductor(summary, time) : null;
+  const barBeat = conductorNow?.position ?? "–";
 
   // ------------------------------------------------------------------ keys
   useEffect(() => {
@@ -324,8 +338,9 @@ export function App() {
         {summary && (
           <span className="facts-bar">
             <b>{summary.title}</b>
-            <span className="pill">{summary.tempo} bpm</span><span className="pill">{summary.meter}</span>
-            <span className="pill">{summary.key}</span><span className={"pill" + (summary.tuning !== "12edo" ? " gold" : "")}>{summary.tuning}</span>
+            <button className="pill" aria-label="Current tempo" title="Tempo at playhead · open Conductor" onClick={() => openConductor(section?.index ?? null)}>{bpmText(conductorNow!.tempo)} bpm</button>
+            <button className="pill" aria-label="Current time signature" title="Meter at playhead · open Conductor" onClick={() => openConductor(section?.index ?? null)}>{conductorNow!.meter}</button>
+            <button className="pill" aria-label="Current key and scale" title="Key and scale at playhead · open Conductor" onClick={() => openConductor(section?.index ?? null)}>{conductorNow!.key}</button><span className={"pill" + (summary.tuning !== "12edo" ? " gold" : "")}>{summary.tuning}</span>
             <span className="pill">{summary.length}</span>
           </span>
         )}
@@ -338,7 +353,7 @@ export function App() {
       {filesOpen ? <Splitter area="s1" dir="x" value={filesW} set={setFilesW} min={160} max={480} /> : <div style={{ gridArea: "s1" }} />}
         {summary ? (
           <Arrangement summary={summary} time={time} loop={loop} mute={mute} solo={solo} colorOf={colorOf} sectionColor={sectionColor}
-                       onSeek={seek} onLoop={setLoop} onSection={gotoSection} onMute={toggle(setMute)} onSolo={toggle(setSolo)} />
+                       onSeek={seek} onLoop={setLoop} onSection={gotoSection} onConductor={openConductor} onMute={toggle(setMute)} onSolo={toggle(setSolo)} />
         ) : (
           <div className="arr empty">
             <div className="welcome">
@@ -352,6 +367,7 @@ export function App() {
         <div className="dock">
           <nav className="dock-tabs">
             <button className={dock === "code" ? "on" : ""} onClick={() => setDock("code")}>Code</button>
+            <button className={dock === "conductor" ? "on" : ""} onClick={() => openConductor(section?.index ?? null)} disabled={!summary}>Conductor</button>
             <button className={dock === "lab" ? "on" : ""} onClick={() => { audio.current.pause(); setDock("lab"); }}>AI Lab</button>
             <button className={dock === "harmony" ? "on" : ""} onClick={() => { audio.current.pause(); setDock("harmony"); }}>Harmony Library</button>
             <button className={dock === "roll" ? "on" : ""} onClick={() => setDock("roll")} disabled={!summary}>Piano roll <kbd>P</kbd></button>
@@ -362,6 +378,8 @@ export function App() {
             {dock === "code" && <span className="muted small">Ctrl+S save · Ctrl+Enter render · Space play · [ ] sections · L loop</span>}
           </nav>
           <div className="dock-body">
+            {dock === "conductor" && summary && <Conductor summary={summary} catalog={catalog} selected={conductorSection} onSelect={setConductorSection}
+              onSeek={seek} onApply={conductorEdit} disabled={!check?.ok || !!rendering} />}
             {dock === "harmony" && <HarmonyLibrary />}
             {dock === "lab" && <AILab currentPath={path} dirty={dirty} onApplied={(paths) => {
               if (path && paths.includes(path)) api.project(path).then(r => {

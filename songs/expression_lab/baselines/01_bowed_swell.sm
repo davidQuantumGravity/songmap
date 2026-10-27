@@ -1,0 +1,9 @@
+# Controlled baseline: same notes and mix; continuous curves and technique changes removed.
+song "A bowed note that breathes" 92 4/4 C fps=30 seed=401 mood=balanced tail=3
+inst violin=family/violin harp=sampler/folk_harp(calibration=1)
+chords C:2 F:2
+call   2 | violin:{deg: "=mp 0/1_ | =mp 2/2_ 4/4 r/4"} harp:{deg: "=p r/2 0/8 2/8 4/4 | r/2 [0,2]/4 r/4"}
+answer 2 | violin:{deg: "=mp 5/2_ 3/4 3/4 | =p 0/2_ r/2"} harp:{deg: "=p r/4 3/8 5/8 7/4 r/4 | [0,3]/2_ r/2"}
+mix violin -5 pan=-0.15 send={hall: 0.12}
+mix harp -5 pan=0.2 send={hall: 0.08}
+master lufs=-18 glue="none"

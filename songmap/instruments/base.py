@@ -45,6 +45,8 @@ class Note:
     rr: int = 0                         # round-robin slot (the part's note counter); samplers cycle layers by it
     glide_from: float | None = None     # previous pitch when slurred (mono instruments glide)
     params: dict = field(default_factory=dict)  # per-note automation snapshot
+    curves: dict = field(default_factory=dict)  # bound continuous controls, sampled over the sounding note
+    technique: str | None = None
 
 
 REGISTRY: dict[str, type["Instrument"]] = {}
@@ -65,7 +67,20 @@ class Instrument:
     mono = False            # mono instruments glide between slurred notes
     PARAMS: tuple[Param, ...] = ()
 
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        renderer=cls.__dict__.get('render')
+        if renderer is not None:
+            from functools import wraps
+            @wraps(renderer)
+            def calibrated(self,note):
+                from .response import apply
+                return apply(self,note,renderer(self,note))
+            cls.render=calibrated
+
     def __init__(self, **values):
+        from .response import CALIBRATION
+        if not any(q.name=='calibration' for q in self.PARAMS):self.PARAMS=(*self.PARAMS,CALIBRATION)
         self.spec = {q.name: q for q in self.PARAMS}
         self.p = {q.name: q.default for q in self.PARAMS}
         self.set(**values)
@@ -82,8 +97,9 @@ class Instrument:
 
     @classmethod
     def schema(cls) -> dict:
+        from .response import CALIBRATION
         return {"name": cls.name, "family": cls.family, "mono": cls.mono,
-                "params": [asdict(q) for q in cls.PARAMS]}
+                "params": [asdict(q) for q in (*cls.PARAMS,CALIBRATION) if q.name!='calibration' or q is CALIBRATION]}
 
     # --- helpers shared by all instruments ---------------------------------
     def rng(self, note: Note) -> np.random.Generator:

@@ -1530,7 +1530,9 @@ class _Interp:
         v = v.strip()
         if not v.startswith("{"):
             v = v.strip("\"'")
-        if key == "dyn":
+        if key in ("tempo","key","meter") and v=="none":
+            sec[key] = None
+        elif key == "dyn":
             sec["dyn"] = v
         elif key in ("prog", "chords"):
             if v not in ((self.song.get("harmony") or {}).get("progressions") or {}) and (":" in v or " " in v.strip()):

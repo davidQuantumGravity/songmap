@@ -1,7 +1,8 @@
 // The step grid: a kit part in one section, one row per piece. A click cycles a step (x → X → - → o → .);
 // an edited row is written as `piece="x...|...."` on the section's line, replacing that lane of the style.
 import { useEffect, useMemo, useState } from "react";
-import { api } from "./api";
+import { api, type Summary } from "./api";
+import { localBeat } from "./musicTiming";
 
 type Hits = {
   section: string; index: number; part: string; bars: number; beats_per_bar: number; line: number | null;
@@ -13,7 +14,7 @@ const LEVEL: Record<string, number> = { X: 1.0, x: 0.78, "-": 0.55, o: 0.38 };
 const charOf = (v: number) => (v >= 0.89 ? "X" : v >= 0.665 ? "x" : v >= 0.465 ? "-" : "o");
 
 export function StepGrid({ path, text, summary, index, part, time, onApply, color }: {
-  path: string; text: string; summary: unknown; index: number; part: string; time: number;
+  path: string; text: string; summary: Summary; index: number; part: string; time: number;
   onApply: (op: string, args: object) => Promise<void>; color: string;
 }) {
   const [hits, setHits] = useState<Hits | null>(null);
@@ -31,6 +32,10 @@ export function StepGrid({ path, text, summary, index, part, time, onApply, colo
 
   const n = hits ? Math.round(hits.bars * hits.beats_per_bar * res) : 0;
   const perBar = hits ? Math.round(hits.beats_per_bar * res) : 16;
+  const fits = (r: number) => !hits || Math.abs(hits.beats_per_bar * r - Math.round(hits.beats_per_bar * r)) < 1e-6;
+  useEffect(() => {
+    if (hits && Math.abs(hits.beats_per_bar * res - Math.round(hits.beats_per_bar * res)) > 1e-6) setRes(8);
+  }, [hits, res]);
   useEffect(() => {
     if (!hits) return;
     const g: Record<string, string[]> = {};
@@ -62,7 +67,7 @@ export function StepGrid({ path, text, summary, index, part, time, onApply, colo
     write(piece, row);
   };
   const playBeat = hits && time >= hits.start && time < hits.end
-    ? Math.floor(((time - hits.start) / (hits.end - hits.start)) * n) : -1;
+    ? Math.floor(localBeat(summary.sections[index], time) * res) : -1;
 
   if (!hits) return <p className="pad muted">{err ?? "loading…"}</p>;
   const pieces = Object.keys(hits.pieces).sort((a, b) => (hits.pieces[b].length > 0 ? 1 : 0) - (hits.pieces[a].length > 0 ? 1 : 0));
@@ -71,7 +76,7 @@ export function StepGrid({ path, text, summary, index, part, time, onApply, colo
       <div className="steps-tools">
         <label className="field-inline">grid
           <select value={res} onChange={(e) => setRes(+e.target.value)}>
-            <option value={4}>16ths</option><option value={3}>8th triplets</option><option value={2}>8ths</option><option value={6}>16th triplets</option>
+            <option value={4} disabled={!fits(4)}>16ths</option><option value={3} disabled={!fits(3)}>8th triplets</option><option value={2} disabled={!fits(2)}>8ths</option><option value={6} disabled={!fits(6)}>16th triplets</option><option value={8}>32nds</option>
           </select></label>
         <span className="muted small">click: . → x → X → - → o · shift-click clears · an edited row replaces that lane of the style</span>
         <span className="spacer" />

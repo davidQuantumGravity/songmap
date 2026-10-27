@@ -30,6 +30,11 @@ def protected_riff(raw, part):
     for section in raw["sections"]:
         section["parts"].pop(part, None)
     raw.get("parts_feel", {}).pop(part, None)
+    for key in ('expression','techniques'):
+        kept={s:{p:v for p,v in lanes.items() if p!=part} for s,lanes in raw.get(key,{}).items()}
+        kept={s:v for s,v in kept.items() if v}
+        if kept:raw[key]=kept
+        else:raw.pop(key,None)
     return raw
 
 
@@ -119,7 +124,8 @@ class MusicLab(Lab):
                 if scope == "riff":
                     if protected_riff(br, s["part"]) != protected_riff(ar, s["part"]):
                         raise ValueError("Riff mode changes only the selected part's notes and expression. Keep backing, instruments, harmony and form fixed; inline a changed motif in that part.")
-                    if repr(ba.parts.get(s["part"])) == repr(aa.parts.get(s["part"])):
+                    if (repr(ba.parts.get(s["part"])) == repr(aa.parts.get(s["part"]))
+                            and all(br.get(k)==ar.get(k) for k in ('expression','techniques'))):
                         raise ValueError("The selected part's performed notes and expression do not change")
                 c = self.take(source, s["path"], s["start"], label, origin, parent["id"], reason)
                 c["change"]["scope"] = scope

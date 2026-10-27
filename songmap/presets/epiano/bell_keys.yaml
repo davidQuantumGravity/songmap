@@ -1,0 +1,13 @@
+instrument: epiano
+description: Clear bell-like FM upper register. Synthesis recipe, not a recording
+  or hardware emulation.
+tags:
+- keys-guitar-palette
+- epiano
+params:
+  index: 2.3
+  index_decay: 1.8
+  tine: 0.62
+  t60: 5.5
+  trem_depth: 0.05
+  vel_index: 1.4

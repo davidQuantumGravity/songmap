@@ -5,6 +5,7 @@ No candidate is applied to a score until an explicit apply operation succeeds.
 """
 from __future__ import annotations
 
+from contextlib import contextmanager
 import hashlib
 import json
 import math
@@ -19,7 +20,7 @@ import wave
 from .project import SONG_EXTS, parse_text
 
 LOCK = threading.RLock()
-STUDIES = {"sfz_revisited", "textbook_refresh", "sfz_library", "rhythm_palette", "skill_evals", "skill_examples"}
+STUDIES = {"sfz_revisited", "textbook_refresh", "sfz_library", "rhythm_palette", "skill_evals", "skill_examples", "expression_lab"}
 
 
 def digest(text):
@@ -94,8 +95,24 @@ def current_voice(source, path, part, piece):
     return voice_info(Ensemble(parse_text(source, path)), part, piece)
 
 
-def voice_name(use):
+def voice_name(use, sounds=None, seen=()):
     """A catalog/source-derived name, never the model's proposed nickname."""
+    if use.startswith('family/'):
+        from ..instruments.family import library
+        return library().get(use.partition('/')[2],{}).get('title',use)
+    if use.startswith("sound/"):
+        name = use.partition("/")[2]
+        from ..instruments.sound import library
+        entry = library().get(name, {})
+        # A palette names a source layout, not a claim that every corner is audible.
+        # Its knobs may silence several sources. Custom definitions retain source names.
+        if name not in (sounds or {}) and entry:
+            return entry["title"]
+        spec = (sounds or {}).get(name) or entry.get("sources")
+        if not spec or name in seen:
+            return "Custom sound"
+        titles = [voice_name(spec[k]["use"], sounds, (*seen, name)) for k in ("a", "b", "c", "d") if k in spec]
+        return ("Blend: " + " + ".join(titles)) if len(titles)>1 else "Shaped " + titles[0]
     if use.startswith("sampler/"):
         from ..instruments.sampler.library import manifest
         item = manifest()["voices"].get(use.partition("/")[2], {})
@@ -109,9 +126,16 @@ def edit_voice(source, path, part, piece, change):
     from ..instruments import make
     from ..parse.fmt import to_yaml
     from .rack import set_voice
-    if set(change) - {"use", "params"}:
-        raise ValueError("An instrument candidate contains only use and params")
+    if set(change) - {"use", "params", "sounds"}:
+        raise ValueError("An instrument candidate contains only use, params and sound recipes")
     song = parse_text(source, path)
+    definitions = change.get("sounds") or {}
+    if not isinstance(definitions, dict):
+        raise ValueError("Sound recipes must be a mapping")
+    for name, definition in definitions.items():
+        if name in song.sounds and song.sounds[name] != definition:
+            raise ValueError(f"Sound recipe {name} changed; use a new recipe name")
+        song.sounds[name] = definition
     ens = Ensemble(song)
     v = ens.voice(part, piece)
     use = change.get("use") or v.use
@@ -119,7 +143,11 @@ def edit_voice(source, path, part, piece, change):
     if not isinstance(use, str) or not isinstance(params, dict):
         raise ValueError("Invalid instrument edit")
     merged = {**(v.params if use == v.use else {}), **params}
-    if use.startswith("patch/"):
+    if use.startswith("sound/"):
+        from ..instruments.sound import build
+        name = use.partition("/")[2]
+        inst = build(name, ens.sound_spec(name), ens, **merged)
+    elif use.startswith("patch/"):
         from ..instruments.patch import build
         inst = build(use.partition("/")[2], ens.patch_spec(use.partition("/")[2]), **merged)
     else:
@@ -131,7 +159,12 @@ def edit_voice(source, path, part, piece, change):
         if not spec[k].lo <= value <= spec[k].hi:
             raise ValueError(f"{k} must be between {spec[k].lo} and {spec[k].hi}")
     if path.lower().endswith((".sm", ".sml")) and (piece is None or part == "drums"):
-        result = set_voice(source, part, piece=piece, use=use, params=params, current_use=v.use, clear=use != v.use)
+        placement = {"gain_db":v.gain_db,"pan":v.pan} if use != v.use else {}
+        result = set_voice(source, part, piece=piece, use=use, params={**params,**placement}, current_use=v.use, clear=use != v.use)
+        # Plain set directives preserve the source's existing notes and comments.
+        for name, definition in definitions.items():
+            if name not in parse_text(source, path).sounds:
+                result += "\nset sounds." + name + "=" + json.dumps(definition, ensure_ascii=False)
     else:
         entry = {"use": use, **merged, "gain_db": v.gain_db, "pan": v.pan}
         if piece:
@@ -161,8 +194,14 @@ class Lab:
             db.execute("CREATE TABLE IF NOT EXISTS sessions (id TEXT PRIMARY KEY, data TEXT NOT NULL)")
             db.execute("CREATE TABLE IF NOT EXISTS assessments (voice TEXT PRIMARY KEY, data TEXT NOT NULL)")
 
+    @contextmanager
     def db(self):
-        return sqlite3.connect(self.home / "lab.sqlite3", timeout=30)
+        db = sqlite3.connect(self.home / "lab.sqlite3", timeout=30)
+        try:
+            with db:
+                yield db
+        finally:
+            db.close()
 
     def get(self, sid):
         with self.db() as db:
@@ -188,7 +227,7 @@ class Lab:
         takes = {}
         for i, c in enumerate(s["candidates"], 1):
             voice = current_voice(c["source"], s["path"], s["part"], s["piece"])
-            c.update(take=i, verified_use=voice["use"], display_name=voice_name(voice["use"]))
+            c.update(take=i, verified_use=voice["use"], display_name=voice_name(voice["use"], voice.get("sounds")))
             takes[c["id"]] = c
             parent = takes.get(c.get("parent"))
             c["changes"] = []
@@ -272,7 +311,7 @@ class Lab:
         voice = current_voice(source, path, part, piece)
         cid, sid = uuid.uuid4().hex, uuid.uuid4().hex
         c = {"id": cid, "source": source, "label": "Original", "origin": "source", "reason": "Saved baseline; notes and expression fixed",
-             "change": {"use": voice["use"], "params": dict(voice["params"])}, "parent": None, "audio": {}, "loudness": {}}
+                "change": {"use": voice["use"], "params": dict(voice["params"]), **({"sounds":voice["sounds"]} if voice.get("sounds") else {})}, "parent": None, "audio": {}, "loudness": {}}
         s = {"id": sid, "path": path, "part": part, "piece": piece, "use": voice["use"], "brief": brief[:4000],
              "start": start, "seconds": min(seconds, arr.timeline.seconds - start), "base_source": source,
              "base_hash": digest(source), "candidates": [c], "incumbent": cid, "pair": [cid], "feedback": [],
@@ -293,7 +332,7 @@ class Lab:
             if voice["use"] == before_voice["use"] and voice["values"] == before_voice["values"]:
                 raise ValueError("The challenger resolves to the same sound parameters")
             same_backend = voice["instrument"] == before_voice["instrument"]
-            comparable = voice["use"] == before_voice["use"] or (same_backend and voice["instrument"] not in {"sampler", "patch"})
+            comparable = voice["use"] == before_voice["use"] or (same_backend and voice["instrument"] not in {"sampler", "patch", "sound"})
             if comparable:
                 from ..arrange.expand import expand
                 from ..render import held_beats
@@ -305,7 +344,7 @@ class Lab:
                 if evs and not any(changed - set(dict(e.patch)) - set(e.params) for e in evs):
                     raise ValueError("Style or note overrides mask every changed parameter in this excerpt. Choose an unmasked parameter or another instrument.")
             c = {"id": uuid.uuid4().hex, "source": source, "label": label[:120], "origin": origin, "reason": reason[:4000],
-                 "change": {"use": voice["use"], "params": voice["params"]}, "parent": parent["id"], "audio": {}, "loudness": {}}
+                 "change": {"use": voice["use"], "params": voice["params"], **({"sounds":voice["sounds"]} if voice.get("sounds") else {})}, "parent": parent["id"], "audio": {}, "loudness": {}}
             s["candidates"].append(c)
             s["previous_pair"] = s["pair"]
             s["pair"] = [parent["id"], c["id"]]
