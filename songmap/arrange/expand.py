@@ -632,8 +632,7 @@ def expand(song: Song) -> Arrangement:
                     inst=ctx.ens.instrument(part,e.piece)
                     if not hasattr(inst,'select'):raise ValueError(f'{part}: named techniques need a family/<instrument> voice')
                     choice=inst.select(e.technique,'legato' if e.slur else e.art)
-                    from ..instruments.base import Note
-                    for pitch in e.pitches:inst._voice(Note(pitch,technique=choice))
+                    for pitch in e.pitches:inst.validate_pitch(pitch,choice)
                 except ValueError as error:raise SongError(str(error),file=song.file,section=e.section) from None
     arr = Arrangement(song, ctx.tl, ctx.harm, ctx.ens, dict(parts), resolved, ctx.warnings)
     if song.expression:

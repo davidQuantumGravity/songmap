@@ -82,6 +82,11 @@ carry into later sections. Continuous crossfades between techniques use a suitab
 `sound/` recipe instead. Connected recorded legato and extra round-robin recordings are
 not manufactured by these selectors.
 
+Score expansion checks technique names, published catalog ranges and curve/source layouts
+without opening optional audio packs. Rendering still requires the selected recordings
+and checks the installed SFZ's actual regions. Missing packs produce an installation
+instruction; they do not prevent inspecting the score's notes and timing.
+
 ## Measured response without flattening dynamics
 
 `calibration` is a 0–1 knob on each instrument: 0 retains its original level, 1 applies

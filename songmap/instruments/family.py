@@ -68,6 +68,17 @@ class Family(Instrument):
         if choice not in self.choices:raise ParamError(f'{self.recipe_name}: unknown technique {choice}; choices: '+', '.join(self.choices))
         return choice
 
+    def validate_pitch(self,pitch,technique):
+        """Check catalog ranges without opening optional recordings during expansion.
+
+        Rendering also checks the selected SFZ's actual regions in ``_voice``.
+        """
+        from .sampler.library import manifest
+        choice=self.select(technique);ref=self.definition['techniques'][choice]
+        voice=manifest()['voices'].get(ref.removeprefix('sampler/')) if ref.startswith('sampler/') else None
+        if voice and not voice['range'][0]<=round(pitch)<=voice['range'][1]:
+            raise ParamError(f'{self.recipe_name}/{choice}: MIDI {pitch:g} is outside the recorded range')
+
     def _voice(self,note):
         choice=self.select(note.technique)
         if choice not in self._voices:

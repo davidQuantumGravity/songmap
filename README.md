@@ -173,7 +173,7 @@ python -m pip install -e ".[dev,gui,sampler]"
 python -m pytest -q -m "not port"
 ```
 
-The portable suite runs without the private Oct-13 reference recordings. With those files available in `assets/oct13/`, `python -m pytest -q` also runs the original-audio comparison tests. The original prototype is preserved in `reference/synth_v0.py`; [scene timelines](docs/SCENE_TIMELINES.md) and the [rescore plan](docs/RESCORE_PLAN.md) document those soundtracks.
+The portable suite runs without optional sample downloads or the private Oct-13 reference recordings. Its score-expansion checks use an empty sample directory even when packs are installed locally. With the reference recordings available in `assets/oct13/`, `python -m pytest -q` also runs the original-audio comparison tests. The original prototype is preserved in `reference/synth_v0.py`; [scene timelines](docs/SCENE_TIMELINES.md) and the [rescore plan](docs/RESCORE_PLAN.md) document those soundtracks.
 
 To work on Studio, install Node.js 24, then run:
 

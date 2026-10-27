@@ -69,12 +69,22 @@ class Expression:
             sec=sections[name]
             for part,lanes in parts.items():
                 if part not in arr.parts or not isinstance(lanes,dict):raise SongError(f'Expression needs an existing played part: {part}')
-                if arr.ensemble.is_kit(part):schema={}
-                else:schema={q.name:q for q in arr.ensemble.instrument(part).PARAMS}
+                # Layout and static mix defaults are score metadata. Do not build
+                # sampled layers just to validate a curve on a fresh checkout.
+                layout=set();voice=None
+                if any(key in MIX for key in lanes) and not arr.ensemble.is_kit(part):
+                    voice=arr.ensemble.voice(part)
+                    if voice.use.startswith('sound/'):
+                        definition=arr.ensemble.sound_spec(voice.use.partition('/')[2])
+                        if isinstance(definition,dict):layout=set(definition)
+                supported={'blend'} if layout=={'a','b'} else {'morph_x','morph_y'} if layout=={'a','b','c','d'} else set()
                 for key,value in lanes.items():
                     if key not in SPECS:raise SongError(f'Unknown continuous expression control: {key}')
-                    if key in MIX and key not in schema:raise SongError(f'{part}: {key} needs a sound with that source layout')
-                    if key in MIX:self.defaults[part,key]=arr.ensemble.instrument(part).p[key]
+                    if key in MIX:
+                        if key not in supported:raise SongError(f'{part}: {key} needs a sound with that source layout')
+                        default=voice.params.get(key,SPECS[key].default)
+                        if isinstance(default,bool) or not isinstance(default,(int,float)) or not math.isfinite(default):raise SongError(f'{part}: {key} must be a finite number')
+                        self.defaults[part,key]=SPECS[key].clamp(default)
                     ps=points(value,sec.end-sec.start,SPECS[key])
                     self.tracks.setdefault((part,key),[]).append((sec.start,ps))
         for segments in self.tracks.values():segments.sort(key=lambda x:x[0])

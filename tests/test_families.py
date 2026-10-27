@@ -45,3 +45,22 @@ a 1 | voice:{deg: "0/4 2/4 4/4 0/4"}
     for lane in ['[[-.5,"sustain"]]','[[true,"sustain"]]','[[4,"sustain"]]','[[0,"missing"]]','[[0,1]]','[[1,"sustain"],[0,"auto"]]']:
         with pytest.raises(ValueError):expand(parse_text(score+f'set techniques={{a: {{voice: {lane}}}}}\n','bad.sm'))
     assert all(e.technique=='sustain' for e in expand(parse_text(score+'set techniques={a: {voice: [[0,"sustain"]]}}\n','ok.sm')).parts['voice'])
+
+
+def test_family_score_validates_without_audio_and_render_still_requires_it(tmp_path,monkeypatch):
+    from songmap.arrange.expand import expand
+    from songmap.gui.project import parse_text
+    from songmap.instruments.sampler import library
+    from songmap.render import render
+    monkeypatch.setattr(library,'roots',lambda:[str(tmp_path)])
+    text='''song "Uninstalled family" 120 4/4 C
+inst voice=family/violin
+a 1 | voice:{deg: "0/4 2/4 4/4 0/4", technique: pizzicato}
+'''
+    assert expand(parse_text(text,'test.sm')).parts['voice']
+    with pytest.raises(ValueError,match='recorded range'):
+        expand(parse_text(text.replace('"0/4 2/4 4/4 0/4"','"0/4 2/4 4/4 0/4", oct: -4'),'range.sm'))
+    with pytest.raises(ValueError,match='unknown technique'):
+        expand(parse_text(text.replace('technique: pizzicato','technique: absent'),'unknown.sm'))
+    with pytest.raises(ValueError,match='not installed'):
+        render(parse_text(text,'render.sm'))

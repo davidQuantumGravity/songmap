@@ -85,8 +85,11 @@ def test_good_harmony_still_parses():
 
 @pytest.mark.parametrize("path", sorted(glob.glob(os.path.join(ROOT, "songs", "**", "*.sm"), recursive=True)
                                         + glob.glob(os.path.join(ROOT, "songs", "**", "*.yaml"), recursive=True)))
-def test_every_song_still_parses(path):
+def test_every_song_still_parses(path, tmp_path, monkeypatch):
     from songmap.arrange.expand import expand
+    from songmap.instruments.sampler import library
+    # Score expansion must also work on a fresh checkout without optional audio packs.
+    monkeypatch.setattr(library, "roots", lambda: [str(tmp_path)])
     if path.endswith(".view.yaml"):
         pytest.skip("a video view, not a song")
     with open(path, encoding="utf-8") as f:
